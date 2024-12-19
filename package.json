@@ -38,6 +38,7 @@
     "@tanstack/react-virtual": "^3.5.1",
     "@use-gesture/react": "^10.3.1",
     "@vidstack/react": "^1.9.8",
+    "@welldone-software/why-did-you-render": "^8.0.3",
     "axios": "^1.6.2",
     "clsx": "^2.1.0",
     "cookies-next": "^4.1.1",

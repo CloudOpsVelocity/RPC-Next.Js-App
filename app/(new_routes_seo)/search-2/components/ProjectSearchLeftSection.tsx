@@ -2,14 +2,11 @@
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import { Loader } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
-import React, { useEffect, useRef, useState } from "react";
-import useSearchFilters from "@/app/hooks/search";
+import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useAtom } from "jotai";
-import { searachFilterAtom } from "@/app/store/search";
+
 import { useInfiniteQuery, useQuery } from "react-query";
-import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 
@@ -18,12 +15,8 @@ type Props = {
   serverData?: any;
 };
 
-interface SearchResponse {
-  pages: Array<any[]>;
-  pageParams: number[];
-}
-
-export default function LeftSection({ mutate, serverData }: Props) {
+function LeftSection({ mutate, serverData }: Props) {
+  console.log("LeftSection");
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
@@ -33,7 +26,6 @@ export default function LeftSection({ mutate, serverData }: Props) {
       queryKey: ["searchQuery"],
       queryFn: async ({ pageParam = 0 }) => {
         const response = await getSearchData(pageParam);
-
         return response;
       },
       getNextPageParam: (lastPage: any, allPages: any) => {
@@ -45,6 +37,7 @@ export default function LeftSection({ mutate, serverData }: Props) {
       },
       ...RTK_CONFIG,
     });
+
   const rowVirtualizer = useVirtualizer({
     count:
       data?.pages?.reduce((acc, page) => acc + (page?.length ?? 0), 0) ?? 0,
@@ -71,6 +64,54 @@ export default function LeftSection({ mutate, serverData }: Props) {
 
   const allItems = data?.pages?.flat() || [];
 
+  const renderProjectCard = useCallback(
+    (virtualRow: any, index: number) => {
+      const eachOne = allItems[virtualRow.index];
+      return (
+        <div
+          key={virtualRow.key}
+          data-index={virtualRow.index}
+          ref={rowVirtualizer.measureElement}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            transform: `translateY(${virtualRow.start ?? 0}px)`,
+          }}
+        >
+          <ProjectCard
+            key={eachOne.projIdEnc + eachOne.propType}
+            refetch={refetch}
+            data={{ ...eachOne, type: "proj" }}
+            index={virtualRow.index}
+            mutate={mutate}
+          />
+        </div>
+      );
+    },
+    [allItems, mutate, refetch, rowVirtualizer.measureElement]
+  );
+
+  const EmptyState = memo(function EmptyState() {
+    return (
+      <div className="flex w-full h-full justify-center items-center flex-col">
+        {emptyFilesIcon}
+        No Matching Results Found!
+        <span className="relative left-[10%]">{strikeIconIcon}</span>
+      </div>
+    );
+  });
+
+  const LoadingSpinner = memo(function LoadingSpinner() {
+    return (
+      <div className="flex items-center gap-2">
+        <div className="w-6 h-6 border-3 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <span>Loading more results...</span>
+      </div>
+    );
+  });
+
   return (
     <div
       className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[50%]"
@@ -86,50 +127,21 @@ export default function LeftSection({ mutate, serverData }: Props) {
             position: "relative",
           }}
         >
-          {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
-            const eachOne = allItems[virtualRow.index];
-            return (
-              <div
-                key={virtualRow.key}
-                data-index={virtualRow.index}
-                ref={rowVirtualizer.measureElement}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  transform: `translateY(${virtualRow.start ?? 0}px)`,
-                }}
-              >
-                <ProjectCard
-                  key={eachOne.projIdEnc + eachOne.propType}
-                  refetch={refetch}
-                  data={{ ...eachOne, type: "proj" }}
-                  index={virtualRow.index}
-                  mutate={mutate}
-                />
-              </div>
-            );
-          })}
+          {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
         </div>
       ) : (
-        <div className="flex w-full h-full justify-center items-center flex-col">
-          {emptyFilesIcon}
-          No Matching Results Found!
-          <span className="relative left-[10%]">{strikeIconIcon}</span>
-        </div>
+        <EmptyState />
       )}
       {hasNextPage && shouldFetchMore && (
         <div
           ref={ref}
           className="w-full py-8 flex justify-center items-center text-gray-600"
         >
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 border-3 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <span>Loading more results...</span>
-          </div>
+          <LoadingSpinner />
         </div>
       )}
     </div>
   );
 }
+LeftSection.whyDidYouRender = true;
+export default memo(LeftSection);

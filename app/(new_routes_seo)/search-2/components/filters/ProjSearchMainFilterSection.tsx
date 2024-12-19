@@ -1,11 +1,16 @@
-"use client";
-import React, { useState } from "react";
+import SearchCitySelectDropdown from "@/app/(dashboard)/search/components/_ui/CityDropDown/SearchCitySelectDropdown";
+import React, { memo } from "react";
+import ProjectFilters from "./ProjectHeaderFilter";
 
 type Props = {};
 
-export default function ProjSearchMainFilterSection({}: Props) {
-  const [state, setState] = useState({
-    name: "",
-  });
-  return <div></div>;
+function ProjSearchMainFilterSection({}: Props) {
+  return (
+    <div>
+      <SearchCitySelectDropdown />
+      <ProjectFilters />
+    </div>
+  );
 }
+
+export default memo(ProjSearchMainFilterSection);
