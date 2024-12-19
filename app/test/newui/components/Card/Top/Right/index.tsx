@@ -97,7 +97,7 @@ export default function TopRightSection({
             : "" + " " + propTypeName,
         });
   const [lat, lang] = location?.split(",") ?? [];
-  console.log("card 1: ", data);
+  console.log("card 1: ");
   return (
     <div
       onClick={(e) => e.stopPropagation()}

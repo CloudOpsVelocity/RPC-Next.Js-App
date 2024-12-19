@@ -4,12 +4,12 @@ const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
 const data = [
   {
     label: "My Profile",
-    url: `${baseUrl}/your-profile#step_B`,
+    url: `${baseUrl}/your-profile/user-profile`,
     svg: 'user-profile',
   },
   {
     label: "Dashboard",
-    url: `${baseUrl}/your-profile`,
+    url: `${baseUrl}/your-profile/dashboard`,
     svg: 'dashboard',
   },
   {
@@ -24,17 +24,17 @@ const data = [
   },
   {
     label:"Shortlist",
-    url: `${baseUrl}/your-profile#step_E`,
+    url: `${baseUrl}/your-profile/shortlisted`,
     svg: 'shortlist',
   },
   {
     label: "Compare", 
-    url: `${baseUrl}/your-profile#step_F`,
+    url: `${baseUrl}/your-profile/compare`,
     svg: 'compare',
   },
   {
     label: "Q&A",
-    url: `${baseUrl}/your-profile#step_G`,
+    url: `${baseUrl}/your-profile/question-and-answers`,
     svg: 'qna',
   },
 ];

@@ -13,6 +13,12 @@ export default function Message({slug}:{slug:string}) {
     (data?.shortListed && "Shortlisted") ||
     "Message"
   }`;
+
+  const url = `${
+    (data?.shortListed && data?.compareAdded && "/your-profile/shortlisted") ||
+    (data?.compareAdded && "/your-profile/compare") ||
+    (data?.shortListed && "/your-profile/shortlisted")
+  }`;
   return (
     (data?.compareAdded || data?.shortListed) && (
       <div
@@ -22,7 +28,7 @@ export default function Message({slug}:{slug:string}) {
         )}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns="http://www.w3.org/2000/svg" 
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -45,7 +51,7 @@ export default function Message({slug}:{slug:string}) {
         <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal] sm:text-nowrap">
           Please check your{" "}
           <a
-            href={"/your-profile"}
+            href={url}
             target="_blank"
             className="!text-[#0073C6] text-[12px] sm:text-base xl:text-lg  italic font-semibold leading-[normal] !underline"
           >

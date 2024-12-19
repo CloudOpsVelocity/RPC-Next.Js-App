@@ -47,8 +47,8 @@ export default function PropertyOverView({
         </div>
       </div>
 
-      <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col md:flex-row relative">
-        <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[78%] ">
+      <div className="pl-[2%] pr-[2%] flex justify-start xl:justify-between items-start xl:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col xl:flex-row relative">
+        <div className="flex justify-start items-start flex-wrap w-[100%] xl:w-[78%] ">
           {generatePropertyOverViewData(
             data,
             data.propTypeName,
@@ -73,7 +73,7 @@ export default function PropertyOverView({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
         </div>
-        <div className="flex justify-start md:justify-end items-start md:items-end md:flex-col mt-[3%] md:mt-0 pb-10 relative md:absolute md:right-0 md:bottom-0 flex-wrap">
+        <div className="flex justify-start xl:justify-end items-start xl:items-end xl:flex-col mt-[3%] xl:mt-0 pb-10 relative xl:absolute xl:right-0 xl:bottom-0 flex-wrap">
           <ReportSectionProperty issueData={issueData} />
           <ShortList {...data} />
           <CompareList {...data} />

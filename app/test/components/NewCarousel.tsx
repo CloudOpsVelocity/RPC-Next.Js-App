@@ -22,8 +22,10 @@ function NewCarousel<T>({
   renderViewMore,
 }: CarouselProps<T>) {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const isTab = useMediaQuery("(max-width: 1600px)");
-  slidesToShow = isMobile ? 1.10 : isTab ? slidesToShow - 1 : slidesToShow;
+  const isTab = useMediaQuery("(max-width: 1280px)");
+  const isLaptop = useMediaQuery("(max-width: 1600px)");
+
+  slidesToShow = isMobile ? 1.10 : isLaptop ? isTab ? slidesToShow - 2.3 : slidesToShow - 1 : slidesToShow;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -110,7 +112,7 @@ function NewCarousel<T>({
         style={{ margin: isMobile ? 0 : `0 ${gap / 2}px` }}
       >
         <div
-          className={`flex ${
+          className={`flex ml-[12px] md:ml-0 ${
             isMobile ? "" : "transition-transform duration-500 ease-out"
           }`}
           style={
