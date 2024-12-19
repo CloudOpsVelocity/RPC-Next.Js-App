@@ -16,10 +16,13 @@ import {
 } from "react-icons/md";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import PropTypeFilter from "@/app/(dashboard)/search/components/proptype";
+import { useAtom } from "jotai";
+import { projSearchStore } from "../../store/projSearchStore";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [state, dispatch] = useAtom(projSearchStore);
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: string[];
   }>({});
@@ -56,9 +59,7 @@ export default function HeaderFilters() {
   }, []);
 
   const toggleFilter = (category: string, value: string) => {
-   
-
-    if(category === "bhk"){
+    if (category === "bhk") {
       setSelectedFilters((prev) => {
         const current = prev[category] || [];
         const updated = current.includes(value)
@@ -69,12 +70,11 @@ export default function HeaderFilters() {
           [category]: updated,
         };
       });
-    }else{
+    } else {
       setSelectedFilters({
         [category]: [value],
       });
     }
-    
   };
 
   const removeFilter = (category: string, value: string) => {
@@ -91,7 +91,6 @@ export default function HeaderFilters() {
     Villament: <MdMapsHomeWork className="w-5 h-5" />,
     Plot: <MdLandscape className="w-5 h-5" />,
   };
-
   return (
     <>
       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
@@ -101,57 +100,50 @@ export default function HeaderFilters() {
             className="flex flex-wrap items-center gap-2 py-3"
             ref={dropdownRef}
           >
-          
-
             {/* Search Bar */}
             <div className="flex-1 max-w-[39%]  relative " ref={searchRef}>
-
-
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
-                  {/* Buy Dropdown */}
-                    <div className="relative m-1">
-                      <button
-                        className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
-                        onClick={() =>
-                          setActiveDropdown(activeDropdown === "buy" ? null : "buy")
-                        }
-                      >
-                        Buy
-                        <MdKeyboardArrowDown className="w-5 h-5" />
-                      </button>
-                      {activeDropdown === "buy" && (
-                        <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border p-2 z-50">
-                          <div className="space-y-2">
-                            {["Buy", "Rent", "PG/Co-living"].map((option) => (
-                              <button
-                                key={option}
-                                className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100"
-                              >
-                                {option}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
+                {/* Buy Dropdown */}
+                <div className="relative m-1">
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
+                    onClick={() =>
+                      setActiveDropdown(activeDropdown === "buy" ? null : "buy")
+                    }
+                  >
+                    Buy
+                    <MdKeyboardArrowDown className="w-5 h-5" />
+                  </button>
+                  {activeDropdown === "buy" && (
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border p-2 z-50">
+                      <div className="space-y-2">
+                        {["Buy", "Rent", "PG/Co-living"].map((option) => (
+                          <button
+                            key={option}
+                            className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100"
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-              <div className="flex w-full items-center overflow-hidden focus-within:ring-2 ring-[#0073C6]/20 ">
-                <input
-                  type="text"
-                  className="w-full py-2 px-4 outline-none"
-                  placeholder="Search By Locality, Projects or Listings"
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    setIsSearchOpen(true);
-                  }}
-                  onFocus={() => setIsSearchOpen(true)}
-                />
-                <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                  )}
+                </div>
+                <div className="flex w-full items-center overflow-hidden focus-within:ring-2 ring-[#0073C6]/20 ">
+                  <input
+                    type="text"
+                    className="w-full py-2 px-4 outline-none"
+                    placeholder="Search By Locality, Projects or Listings"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setIsSearchOpen(true);
+                    }}
+                    onFocus={() => setIsSearchOpen(true)}
+                  />
+                  <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                </div>
               </div>
-                </div>              
-
-              
-              
 
               {/* Search Suggestions */}
               {isSearchOpen && (
@@ -245,7 +237,20 @@ export default function HeaderFilters() {
                             checked={selectedFilters["bhk"]?.includes(
                               bhk.title
                             )}
-                            onChange={() => toggleFilter("bhk", bhk.title)}
+                            onChange={
+                              () =>
+                                dispatch({
+                                  type: "toggleArrayValue",
+                                  payload: {
+                                    key: "unitTypes",
+                                    value: bhk.value,
+                                  },
+                                })
+                              // dispatch({
+                              //   type: "toggleArrayValue",
+                              //   payload: { unitTypes: bhk.value },
+                              // })
+                            }
                           />
                           <span>{bhk.title}</span>
                         </label>
