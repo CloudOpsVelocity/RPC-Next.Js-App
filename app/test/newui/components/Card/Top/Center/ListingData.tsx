@@ -13,6 +13,7 @@ type Props = any;
 
 export default function ListingData({
   propTypes,
+  postedBy,
   landArea,
   type,
   ca,
@@ -45,6 +46,7 @@ export default function ListingData({
   projAuthority,
   approvedById,
 }: Props) {
+  console.log(postedBy, "posted by")
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
   const isRent = type === "Rent";
