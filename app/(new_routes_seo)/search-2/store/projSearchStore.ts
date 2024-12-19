@@ -1,47 +1,98 @@
-import { observable } from "@legendapp/state";
+import { SearchFilter } from "@/app/types/search";
+import { atomWithReducer } from "jotai/utils";
 
-// Type your Store interface
-interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
-}
+export const initialState: SearchFilter = {
+  current: null,
+  locality: [],
+  propTypes: null,
+  unitTypes: [],
+  bathRooms: [],
+  parkings: [],
+  amenities: [],
+  listedBy: null,
+  reraVerified: [],
+  areaValue: [0, 5000],
+  bugdetValue: [500000, 600000000],
+  builderIds: [],
+  city: null,
+  facings: [],
+  furnish: null,
+  propStatus: null,
+  pnb: null,
+  sortByfield: null,
+  sortType: null,
+  cg: null,
+  projIdEnc: null,
+  lat: null,
+  lng: null,
+  projName: null,
+};
 
-interface Store {
-  todos: Todo[];
-  total: () => number;
-  numCompleted: () => number;
-  addTodo: (params: { text: string; completed: boolean }) => void;
-}
+type Action =
+  | { type: "reset" }
+  | { type: "update"; payload: Partial<SearchFilter> }
+  | { type: "pushToArray"; payload: { key: keyof SearchFilter; value: any } }
+  | {
+      type: "removeFromArray";
+      payload: { key: keyof SearchFilter; value: any };
+    }
+  | { type: "updateAreaValue"; payload: { min?: number; max?: number } }
+  | { type: "updateBudgetValue"; payload: { min?: number; max?: number } };
 
-// Create a global observable for the Todos
-let nextId = 0;
-export const store$ = observable<Store>({
-  todos: [
-    { id: 0, text: "Search for properties", completed: false },
-    { id: 1, text: "Filter by price range", completed: false },
-    { id: 2, text: "Check available locations", completed: false },
-    { id: 3, text: "Compare different properties", completed: false },
-  ],
-  // Computeds
-  total: (): number => {
-    return store$.todos.length;
-  },
-  numCompleted: (): number => {
-    return store$.todos.get().filter((todo) => todo.completed).length;
-  },
-  addTodo: ({
-    completed,
-    text,
-  }: {
-    text: string;
-    completed: boolean;
-  }): void => {
-    const todo: Todo = {
-      id: nextId++,
-      text,
-      completed,
-    };
-    store$.todos.push(todo);
-  },
-});
+const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
+  switch (action.type) {
+    case "reset":
+      return initialState;
+    case "update":
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case "pushToArray": {
+      const { key, value } = action.payload;
+      if (Array.isArray(state[key])) {
+        return {
+          ...state,
+          [key]: [...(state[key] as any[]), value],
+        };
+      }
+      return state;
+    }
+    case "removeFromArray": {
+      const { key, value } = action.payload;
+      if (Array.isArray(state[key])) {
+        return {
+          ...state,
+          [key]: (state[key] as any[]).filter((item) => item !== value),
+        };
+      }
+      return state;
+    }
+    case "updateAreaValue": {
+      const { min, max } = action.payload;
+      const [currentMin, currentMax] = state.areaValue;
+      return {
+        ...state,
+        areaValue: [
+          min !== undefined ? min : currentMin,
+          max !== undefined ? max : currentMax,
+        ],
+      };
+    }
+    case "updateBudgetValue": {
+      const { min, max } = action.payload;
+      const [currentMin, currentMax] = state.bugdetValue;
+      return {
+        ...state,
+        bugdetValue: [
+          min !== undefined ? min : currentMin,
+          max !== undefined ? max : currentMax,
+        ],
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export const projSearchStore = atomWithReducer(initialState, mapReducer);
