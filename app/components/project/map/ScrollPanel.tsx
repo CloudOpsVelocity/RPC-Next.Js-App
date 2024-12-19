@@ -31,12 +31,12 @@ const CustomScrollArea: React.FC<{
         )}
         style={{ padding: isMobile ? "0" : "0 2rem" }}
       >
-        {visibleItems.map((key) => {
+        {items.map((key) => {
           const Icon = areasMap.get(key).Icon;
           const name = areasMap.get(key).name;
 
           return (
-            <div
+            <div  
               key={key}
               onClick={() => setSelected(key ?? "")}
               className={clsx(
@@ -55,20 +55,20 @@ const CustomScrollArea: React.FC<{
         })}
 
         {/* Gradient overlay for fade effect */}
-        {!isExpanded && hiddenCount > 0 && (
-          <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none" />
-        )}
+          {/* {!isExpanded && hiddenCount > 0 && (
+            <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+          )} */}
       </div>
 
       {/* Small "See More" Button */}
-      {hiddenCount > 0 && (
+     {/*  {hiddenCount > 0 && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="mt-2 text-[#0073C6] font-medium text-xs"
         >
           {isExpanded ? "See Less" : `See More (${hiddenCount} more)`}
         </button>
-      )}
+      )} */}
     </div>
   );
 };

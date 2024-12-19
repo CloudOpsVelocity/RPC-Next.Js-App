@@ -153,7 +153,7 @@ const FirstBlock: React.FC<Props> = ({
                 </p>
 
                 <p className="text-[#242424] sm:text-[16px] xl:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
-                  Posted By:{" "}
+                  Builder:{" "}
                   <a
                     href={generateBuilderUrl({
                       slug: data?.data?.userName,

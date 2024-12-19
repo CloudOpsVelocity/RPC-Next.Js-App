@@ -197,7 +197,7 @@ export default function ListingCard({ item, sl }: Props) {
                     ? `Builder : ${item.postedByName}`
                     : item.postedBy === "Agent"
                     ? `Agent : ${item.postedByName}`
-                    : "Individual" // Fallback to "Agent" for other values
+                    : "Owner" // Fallback to "Agent" for other values
                 }
               </p>
               <ListingReqBtn

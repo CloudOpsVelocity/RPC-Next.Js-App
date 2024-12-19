@@ -230,7 +230,7 @@ const URLToBuilder=generateBuilderUrl({
               </p>
             )}
 
-           { builderLinkActive && 
+           { true &&
            <p className="text-[#242424]  text-[14px] xl:text-base not-italic font-semibold leading-[normal] mt-[4px] mb-[4px]">Builder: <a href={URLToBuilder}      target="_blank"                
             className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline">{cardData.builderName}</a></p>}
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
