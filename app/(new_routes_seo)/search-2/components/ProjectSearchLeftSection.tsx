@@ -11,7 +11,7 @@ import { searachFilterAtom } from "@/app/store/search";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RTK_CONFIG from "@/app/config/rtk";
-import { getSearchData } from "../getSearchData";
+import { getSearchData } from "../utils/project-search-queryhelpers";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
