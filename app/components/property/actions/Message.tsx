@@ -20,15 +20,15 @@ export default function Message({ cg, propTypeName }: any) {
   }`;
 
   const url = `${
-    (data?.shortListed && data?.compareAdded && "/your-profile#step_E") ||
-    (data?.compareAdded && "/your-profile#step_F") ||
-    (data?.shortListed && "/your-profile#step_E")
+    (data?.shortListed && data?.compareAdded && "/your-profile/shortlisted") ||
+    (data?.compareAdded && "/your-profile/compare") ||
+    (data?.shortListed && "/your-profile/shortlisted")
   }`;
   return (
     (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
-          "flex items-center mt-4 gap-2 p-1.5 rounded-lg bg-[#fff5c3] sm:-bottom-5 sm:right-0 w-full md:min-w-fit sm:mt-2",
+          "flex items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] sm:bottom-5 sm:right-0 w-full md:min-w-fit mt-0 xl:mt-4 ",
           data?.compareAdded && data?.shortListed && "md:min-w-fit"
         )}
       >

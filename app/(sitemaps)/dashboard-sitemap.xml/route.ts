@@ -9,7 +9,7 @@ export async function GET(request: Request) {
       lastmod: new Date().toISOString(),
     },
     {
-      loc: `${process.env.NEXT_PUBLIC_URL}/your-profile`,
+      loc: `${process.env.NEXT_PUBLIC_URL}/your-profile/dashboard`,
       lastmod: new Date().toISOString(),
     },
     {

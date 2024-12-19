@@ -160,7 +160,7 @@ const URLToBuilder=generateBuilderUrl({
                     : cardData.projMedia.coverImageUrl.split(",")[1]
                 }
                 alt="Sobha Dream Acres"
-                className="w-full    "
+                className="w-full"
                 // width={300}
                 // height={212}
                 unoptimized
@@ -285,13 +285,6 @@ const ProjectCarousel = ({
   builderName,
   url
 }: Props) => {
-  // console.log(data);
-  console.log(builderName);
-
-  // let redirectUrl = ct == "builder" ? 
-  // `/search?builderIds=${slugify(builderName ?? "")}${urlData?.builderId}` 
-  // : `/search?lat=${urlData?.lat}&lng=${urlData?.lng}`;
-
   return (
     data?.length > 0 && (
       <div
