@@ -67,7 +67,7 @@ function Footer() {
       ],
       hrefs: [
         "/residential-projects/for-sale",
-        "/residential-projects/for-rent?listedBy=ALL",
+        "/residential-projects/for-rent?listedBy=ALL&cg=R",
         "/search?projStatus=108",
         "/search?projStatus=106",
         "/search?projStatus=107",
@@ -161,6 +161,8 @@ function Footer() {
     },
   ];
 
+  console.log("2: ", sections);
+
   return (
     <footer className="bg-[#253F59] text-white">
       <div className="max-w-[95%] mx-auto pt-2 sm:pt-12 pb-6 px-1 sm:px-6  lg:pt-16 lg:pb-8 lg:px-8">
@@ -211,26 +213,43 @@ function Footer() {
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(2, 4).map(({ title, links, hrefs, target }) => (
+              {sections.slice(2, 4).map(({ title, links, hrefs, target }) => {
+                return(
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
                   </h3>
                   <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link, index) => (
-                      <li key={link}>
-                        <a
-                          href={hrefs[index]}
-                          target={target}
-                          className="text-xs sm:text-base text-gray-300 hover:text-white"
-                        >
-                          {link}
-                        </a>
-                      </li>
-                    ))}
+                    {links.map((link, index) => {
+                      if(link == "Login/Signup"){
+                        return(
+                          <li key={link}>
+                            <a
+                              href={hrefs[index]}
+                              target="_self"
+                              className="text-xs sm:text-base text-gray-300 hover:text-white"
+                            >
+                              {link}
+                            </a>
+                          </li>
+                        )
+                          }else{
+                            return(
+                              <li key={link}>
+                                <a
+                                  href={hrefs[index]}
+                                  target={target}
+                                  className="text-xs sm:text-base text-gray-300 hover:text-white"
+                                >
+                                  {link}
+                                </a>
+                              </li>
+                            )
+                          }
+                      })}
                   </ul>
                 </div>
-              ))}
+              )})}
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               {sections.slice(4).map(({ title, links, hrefs, target }) => (

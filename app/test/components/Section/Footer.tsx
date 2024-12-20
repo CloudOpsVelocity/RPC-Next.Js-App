@@ -66,7 +66,7 @@ export default function EnhancedFooter() {
       ],
       hrefs: [
         "/residential-projects/for-sale",
-        "/residential-projects/for-rent?listedBy=ALL",
+        "/residential-projects/for-rent?listedBy=ALL&cg=R",
         "/search?projStatus=108",
         "/search?projStatus=106",
         "/search?projStatus=107",
@@ -159,6 +159,8 @@ export default function EnhancedFooter() {
       target: "_blank",
     },
   ];
+
+  console.log("1: ", sections);
 
   return (
     <footer className="bg-[#253F59] text-white">
