@@ -146,7 +146,13 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
 };
 export const ProjSearchAppliedFiltersStore = atom(
   null,
-  (get, set, setInQueryParams: any, type: "clear" | "add") => {
+  (
+    get,
+    set,
+    setInQueryParams: any,
+    type: "clear" | "add",
+    clearType?: "clearAll" | "bhk" | "area" | "budget" | "unitType"
+  ) => {
     const appliedFilters = get(projSearchStore);
     let queryString = "";
 
