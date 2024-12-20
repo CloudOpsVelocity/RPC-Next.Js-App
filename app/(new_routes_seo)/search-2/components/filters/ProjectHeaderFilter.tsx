@@ -29,12 +29,10 @@ export default function HeaderFilters() {
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: string[];
   }>({});
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showAllFilters, setShowAllFilters] = useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const searchRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const searchSuggestions = [
     "Whitefield, Bangalore",
@@ -50,12 +48,7 @@ export default function HeaderFilters() {
         !searchRef.current.contains(event.target as Node)
       ) {
         setIsSearchOpen(false);
-      }
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setActiveDropdown(null);
+        setOpenDropdown(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -76,6 +69,7 @@ export default function HeaderFilters() {
       });
     } else {
       setSelectedFilters({
+        ...selectedFilters,
         [category]: [value],
       });
     }
@@ -177,7 +171,6 @@ export default function HeaderFilters() {
               )}
             </div>
 
-            {/* Desktop Filters */}
             <div className="hidden md:flex items-center gap-2">
               {/* Property Type Dropdown */}
               <div className="relative">
@@ -346,7 +339,6 @@ export default function HeaderFilters() {
               </button>
             </div>
 
-            {/* Mobile Filter Button */}
             <button
               className="md:hidden flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full"
               onClick={() => setIsDrawerOpen(true)}
@@ -356,7 +348,6 @@ export default function HeaderFilters() {
             </button>
           </div>
 
-          {/* Applied Filters */}
           {Object.entries(selectedFilters).some(
             ([_, values]) => values.length > 0
           ) && (
@@ -384,7 +375,6 @@ export default function HeaderFilters() {
         </div>
       </div>
 
-      {/* Mobile Filter Drawer */}
       {isDrawerOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
           <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl">
@@ -398,196 +388,24 @@ export default function HeaderFilters() {
               </button>
             </div>
             <div className="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-5rem)]">
-              {/* Project Status */}
-              <div>
-                <h3 className="font-semibold mb-3">Project Status</h3>
-                <div className="space-y-2">
-                  {SEARCH_FILTER_DATA.projectstatus.map((status) => (
-                    <label key={status.cid} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#0073C6] focus:ring-[#0073C6]"
-                        checked={selectedFilters["status"]?.includes(
-                          status.Label
-                        )}
-                        onChange={() => toggleFilter("status", status.Label)}
-                      />
-                      <span>{status.Label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Property Type */}
-              <div>
-                <h3 className="font-semibold mb-3">Property Type</h3>
-                <div className="space-y-2">
-                  {Object.entries(propertyIcons).map(([type, icon]) => (
-                    <label key={type} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#0073C6] focus:ring-[#0073C6]"
-                        checked={selectedFilters["propertyType"]?.includes(
-                          type
-                        )}
-                        onChange={() => toggleFilter("propertyType", type)}
-                      />
-                      {icon}
-                      <span>{type}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* BHK Type */}
-              <div>
-                <h3 className="font-semibold mb-3">BHK Type</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {SEARCH_FILTER_DATA.bhkDetails.map((bhk) => (
-                    <label key={bhk.value} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
-                        checked={selectedFilters["bhk"]?.includes(bhk.title)}
-                        onChange={() => toggleFilter("bhk", bhk.title)}
-                      />
-                      <span>{bhk.title}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Budget Range */}
-              <div>
-                <h3 className="font-semibold mb-3">Budget Range</h3>
-                <div className="space-y-4">
-                  <button className="w-full py-2 bg-[#0073C6] text-white rounded-md hover:bg-[#0073C6]/90">
-                    Apply
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Show All Filters Section */}
-      {showAllFilters && (
-        <div className="fixed inset-0 bg-white z-40 overflow-y-auto">
-          <div className="max-w-7xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">All Filters</h2>
-              <button
-                onClick={() => setShowAllFilters(false)}
-                className="p-2 hover:bg-gray-100 rounded-full"
-              >
-                <MdClose className="w-6 h-6" />
-              </button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Project Status */}
-              <div>
-                <h3 className="font-semibold mb-4">Project Status</h3>
-                <div className="space-y-3">
-                  {SEARCH_FILTER_DATA.projectstatus.map((status) => (
-                    <label key={status.cid} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#0073C6] focus:ring-[#0073C6]"
-                        checked={selectedFilters["status"]?.includes(
-                          status.Label
-                        )}
-                        onChange={() => toggleFilter("status", status.Label)}
-                      />
-                      <span>{status.Label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Property Type */}
-              <div>
-                <h3 className="font-semibold mb-4">Property Type</h3>
-                <div className="space-y-3">
-                  {Object.entries(propertyIcons).map(([type, icon]) => (
-                    <label key={type} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#0073C6] focus:ring-[#0073C6]"
-                        checked={selectedFilters["propertyType"]?.includes(
-                          type
-                        )}
-                        onChange={() => toggleFilter("propertyType", type)}
-                      />
-                      {icon}
-                      <span>{type}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* BHK Type */}
-              <div>
-                <h3 className="font-semibold mb-4">BHK Type</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {SEARCH_FILTER_DATA.bhkDetails.map((bhk) => (
-                    <label key={bhk.value} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
-                        checked={selectedFilters["bhk"]?.includes(bhk.title)}
-                        onChange={() => toggleFilter("bhk", bhk.title)}
-                      />
-                      <span>{bhk.title}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Amenities */}
-              <div>
-                <h3 className="font-semibold mb-4">Amenities</h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {SEARCH_FILTER_DATA.amenities.map((amenity) => (
-                    <label
-                      key={amenity.cid}
-                      className="flex items-center gap-2"
-                    >
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#0073C6] focus:ring-[#0073C6]"
-                        checked={selectedFilters["amenities"]?.includes(
-                          amenity.constDesc
-                        )}
-                        onChange={() =>
-                          toggleFilter("amenities", amenity.constDesc)
-                        }
-                      />
-                      <span>{amenity.constDesc}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* RERA Status */}
-              <div>
-                <h3 className="font-semibold mb-4">RERA Status</h3>
-                <div className="space-y-3">
-                  {SEARCH_FILTER_DATA.rerastatus.map((status) => (
-                    <label key={status.cid} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-[#0073C6] focus:ring-[#0073C6]"
-                        checked={selectedFilters["rera"]?.includes(
-                          status.constDesc
-                        )}
-                        onChange={() => toggleFilter("rera", status.constDesc)}
-                      />
-                      <span>{status.constDesc}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+              <PropertyTypeDropdown
+                selectedFilters={selectedFilters}
+                toggleFilter={toggleFilter}
+                handleClear={handleClear}
+                isOpen={openDropdown === "propertyType"}
+                onToggle={() => handleDropdownToggle("propertyType")}
+              />
+              <BHKTypeDropdown
+                selectedFilters={selectedFilters}
+                toggleFilter={toggleFilter}
+                handleClear={handleClear}
+                isOpen={openDropdown === "bhkType"}
+                onToggle={() => handleDropdownToggle("bhkType")}
+              />
+              <BudgetDropdown
+                isOpen={openDropdown === "budget"}
+                onToggle={() => handleDropdownToggle("budget")}
+              />
             </div>
           </div>
         </div>
