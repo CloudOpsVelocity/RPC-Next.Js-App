@@ -22,7 +22,7 @@ const RightSection = ({ serverData }: any) => {
     useInfiniteQuery({
       queryKey: ["searchQuery"],
       queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(pageParam);
+        const response = await getSearchData(pageParam,'');
 
         return response;
       },

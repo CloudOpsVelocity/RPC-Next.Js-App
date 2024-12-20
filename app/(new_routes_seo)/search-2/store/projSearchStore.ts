@@ -1,8 +1,9 @@
 import { SearchFilter } from "@/app/types/search";
 import { filterParser } from "@/app/utils/search";
 import { atom } from "jotai";
-import { atomWithReducer } from "jotai/utils";
+import { atomWithReducer, selectAtom } from "jotai/utils";
 import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
+import { convertToQueryParams } from "@/app/utils/search/query";
 
 export const initialState: SearchFilter = {
   current: null,
@@ -176,9 +177,10 @@ export const ProjSearchAppliedFiltersStore = atom(
       }
     }
     setInQueryParams(queryString || null);
+    return appliedFilters;
   }
 );
-//
+
 export const projSearchStore = atomWithReducer(initialState, mapReducer);
 
 projSearchStore.onMount = (setAtom) => {

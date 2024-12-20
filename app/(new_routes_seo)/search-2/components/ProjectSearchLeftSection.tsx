@@ -9,6 +9,9 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
+import { useAtomValue } from "jotai";
+import { useSearchParams } from "next/navigation";
+import { useQueryState } from "nuqs";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -16,16 +19,18 @@ type Props = {
 };
 
 function LeftSection({ mutate, serverData }: Props) {
-  console.log("LeftSection");
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
-
+  const [apiFilterQueryParams] = useQueryState("sf");
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ["searchQuery"],
+      queryKey: ["searchQuery" + apiFilterQueryParams],
       queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(pageParam);
+        const response = await getSearchData(
+          pageParam,
+          apiFilterQueryParams ?? ""
+        );
         return response;
       },
       getNextPageParam: (lastPage: any, allPages: any) => {
