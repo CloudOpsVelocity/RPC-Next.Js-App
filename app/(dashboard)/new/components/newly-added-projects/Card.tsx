@@ -51,14 +51,14 @@ export default function Card({ item }: Props) {
             className="w-[45px] h-[45px] sm:w-[54px] sm:h-[54px] xl:w-[67px] xl:h-[67px] object-cover top-[12px] left-[12px] relative"
           />
         )} */}
-          {(item.reraStatus === "Recieved" ||
-            item.reraStatus === "Applied") && (
+          {(item.rerastatus === "Recieved" || item.rerastatus === "Applied") && (
             <Image src={"/r.svg"} alt="rera" width={100} height={100} />
           )}
 
           {/*  <p className="text-green-600">{item.rerastatus}</p> */}
 
           <div className="absolute right-0 top-0 w-full sm:w-[503xpx] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
+   
             <div>
               <div className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
                 <div className="absolute  sm:static top-[10px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6">

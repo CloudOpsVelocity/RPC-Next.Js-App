@@ -130,7 +130,7 @@ function Dropdown() {
             <Link
               className=""
               href={{
-                pathname: `/register`,
+                pathname: `/register`, 
                 search: redirectQueryParam,
               }}
               onClick={(e) => {

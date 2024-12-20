@@ -13,20 +13,20 @@ export default function BreadCrumbs({ params }: { params: any }) {
 
   return (
     <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-      <Link
+      <a
         href={`/`}
         target="_blank"
         className="hover:underline cursor-pointer capitalize"
       >
         Home
-      </Link>
+      </a>
       {" > "}
       {allParams.map((key, index) => {
         currentPath += `/${slugify(params[key])}`;
         return (
           <React.Fragment key={`${key[index]}`}>
             {index < Object.keys(params).length - 1 ? (
-              <Link
+              <a
                 href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
                 target="_blank"
                 className="hover:underline cursor-pointer capitalize"
@@ -35,7 +35,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
                   <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
                 )}
                 <span>{params[key].replace(/-/g, " ")}</span>
-              </Link>
+              </a>
             ) : (
               <>
                 {titleOfKeys[key as keyof typeof titleOfKeys] && (

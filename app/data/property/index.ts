@@ -69,7 +69,7 @@ export function generatePropertyDetails(
     case "Villa":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
+        // { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         {
           title: "Elevation",
@@ -209,7 +209,7 @@ export function generatePropertyDetails(
       break;
     case "Plot":
       propertyDetails = [
-        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
+        // { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
@@ -253,7 +253,7 @@ export function generatePropertyDetails(
     case "Row House":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
+        // { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         {
           title: "Elevation",

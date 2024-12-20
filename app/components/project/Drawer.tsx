@@ -62,7 +62,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         <Close close={handleReadMoreClick} />
       </div>
 
-      <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-1 pl-[10px] xl:pl-[57px] xl:pb-20 capitalize">
+      <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-1 pl-[10px] xl:pl-[57px] xl:pb-20">
         {type === "content" ? (
           <p
             className="prose-p:py-1 prose-no-break prose-li:list-disc  prose-li:pl-1"
