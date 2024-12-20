@@ -2,6 +2,7 @@ import { SearchFilter } from "@/app/types/search";
 import { filterParser } from "@/app/utils/search";
 import { atom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
+import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
 
 export const initialState: SearchFilter = {
   current: null,
@@ -155,7 +156,6 @@ export const ProjSearchAppliedFiltersStore = atom(
   ) => {
     const appliedFilters = get(projSearchStore);
     let queryString = "";
-
     for (const [key, value] of Object.entries(appliedFilters)) {
       // Skip areaValue and bugdetValue if they match initial values
       if (
@@ -180,3 +180,14 @@ export const ProjSearchAppliedFiltersStore = atom(
 );
 //
 export const projSearchStore = atomWithReducer(initialState, mapReducer);
+
+projSearchStore.onMount = (setAtom) => {
+  const path = window.location.pathname;
+  const searchParams = new URLSearchParams(window.location.search);
+  if (path.includes("search") || searchParams.size > 0) {
+    setAtom({
+      type: "SET_FILTERS",
+      payload: parseProjectSearchQueryParams(searchParams.get("sf") || ""),
+    });
+  }
+};

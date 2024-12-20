@@ -1,5 +1,8 @@
-import { SEARCH_FILTER_DATA } from '@/app/data/search';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { useAtom } from "jotai";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { projSearchStore } from "../../store/projSearchStore";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 interface BHKTypeDropdownProps {
   selectedFilters: { [key: string]: string[] };
@@ -10,12 +13,12 @@ interface BHKTypeDropdownProps {
 }
 
 export default function BHKTypeDropdown({
-  selectedFilters,
-  toggleFilter,
   handleClear,
   isOpen,
   onToggle,
 }: BHKTypeDropdownProps) {
+  const [state, dispatch] = useAtom(projSearchStore);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
   return (
     <div className="relative">
       <button
@@ -35,7 +38,7 @@ export default function BHKTypeDropdown({
               Clear Filter
             </button>
             <button
-              onClick={onToggle}
+              onClick={() => handleApplyFilters(() => onToggle())}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >
               Apply Filter
@@ -50,8 +53,16 @@ export default function BHKTypeDropdown({
                 <input
                   type="checkbox"
                   className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
-                  checked={selectedFilters["bhk"]?.includes(bhk.title) || false}
-                  onChange={() => toggleFilter("bhk", bhk.title)}
+                  checked={state.unitTypes.includes(bhk.value) || false}
+                  onChange={() =>
+                    dispatch({
+                      type: "toggleArrayValue",
+                      payload: {
+                        key: "unitTypes",
+                        value: bhk.value,
+                      },
+                    })
+                  }
                 />
                 <span>{bhk.title}</span>
               </label>

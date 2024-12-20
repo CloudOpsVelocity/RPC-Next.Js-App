@@ -1,4 +1,14 @@
-import { MdKeyboardArrowDown, MdApartment, MdHouse, MdVilla, MdMapsHomeWork, MdLandscape } from 'react-icons/md';
+import { useAtom } from "jotai";
+import {
+  MdKeyboardArrowDown,
+  MdApartment,
+  MdHouse,
+  MdVilla,
+  MdMapsHomeWork,
+  MdLandscape,
+} from "react-icons/md";
+import { projSearchStore } from "../../store/projSearchStore";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 interface PropertyTypeDropdownProps {
   selectedFilters: { [key: string]: string[] };
@@ -8,14 +18,31 @@ interface PropertyTypeDropdownProps {
   onToggle: () => void;
 }
 
-export default function PropertyTypeDropdown({ selectedFilters, toggleFilter, handleClear, isOpen, onToggle }: PropertyTypeDropdownProps) {
+export default function PropertyTypeDropdown({
+  selectedFilters,
+  toggleFilter,
+  handleClear,
+  isOpen,
+  onToggle,
+}: PropertyTypeDropdownProps) {
   const propertyIcons = {
-    Apartment: <MdApartment className="w-5 h-5 text-green-700" />,
-    "Row House": <MdHouse className="w-5 h-5 text-green-700" />,
-    Villa: <MdVilla className="w-5 h-5 text-green-700" />,
-    Villament: <MdMapsHomeWork className="w-5 h-5 text-green-700" />,
-    Plot: <MdLandscape className="w-5 h-5 text-green-700" />,
+    Apartment: {
+      id: 35,
+      icon: <MdApartment className="w-5 h-5 text-green-700" />,
+    },
+    "Row House": {
+      id: 33,
+      icon: <MdHouse className="w-5 h-5 text-green-700" />,
+    },
+    Villa: { id: 31, icon: <MdVilla className="w-5 h-5 text-green-700" /> },
+    Villament: {
+      id: 34,
+      icon: <MdMapsHomeWork className="w-5 h-5 text-green-700" />,
+    },
+    Plot: { id: 32, icon: <MdLandscape className="w-5 h-5 text-green-700" /> },
   };
+  const [state, dispatch] = useAtom(projSearchStore);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
 
   return (
     <div className="relative">
@@ -36,14 +63,14 @@ export default function PropertyTypeDropdown({ selectedFilters, toggleFilter, ha
               Clear Filter
             </button>
             <button
-              onClick={onToggle}
+              onClick={() => handleApplyFilters(() => onToggle())}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >
               Apply Filter
             </button>
           </div>
           <div className="space-y-2">
-            {Object.entries(propertyIcons).map(([type, icon]) => (
+            {Object.entries(propertyIcons).map(([type, data]) => (
               <label
                 key={type}
                 className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded cursor-pointer"
@@ -51,10 +78,17 @@ export default function PropertyTypeDropdown({ selectedFilters, toggleFilter, ha
                 <input
                   type="radio"
                   className="rounded-full border-gray-300 text-green-700 checked:bg-green-700 checked:border-green-700"
-                  checked={selectedFilters["propertyType"]?.includes(type) || false}
-                  onChange={() => toggleFilter("propertyType", type)}
+                  checked={state.propTypes === data.id}
+                  onChange={() =>
+                    dispatch({
+                      type: "update",
+                      payload: {
+                        propTypes: data.id,
+                      },
+                    })
+                  }
                 />
-                {icon}
+                {data.icon}
                 <span>{type}</span>
               </label>
             ))}
@@ -64,4 +98,3 @@ export default function PropertyTypeDropdown({ selectedFilters, toggleFilter, ha
     </div>
   );
 }
-

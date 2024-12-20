@@ -8,8 +8,9 @@ type Props = {};
 export default function useProjSearchAppliedFilters() {
   const setAppliedFilters = useSetAtom(ProjSearchAppliedFiltersStore);
   const [name, setName] = useQueryState("sf");
-  const handleApplyFilters = () => {
+  const handleApplyFilters = (callback?: () => void) => {
     setAppliedFilters(setName, "add");
+    callback?.();
   };
   const handleClearFilters = (
     type: "clearAll" | "bhk" | "area" | "budget" | "unitType"
