@@ -32,7 +32,7 @@ type Props = {
 
 type CardProps = {
   type: string;
-  projName?: string;
+  projName?: string; 
   cardData?: any;
   refetch?: () => Promise<any>;
 };
