@@ -20,6 +20,7 @@ import ClearAll from "@/app/(dashboard)/search/components/ClearAll";
 import BugdetFilter from "@/app/(dashboard)/search/components/buget";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -31,6 +32,7 @@ export default function HeaderFilters() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showAllFilters, setShowAllFilters] = useState(false);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
   const searchRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -259,7 +261,7 @@ export default function HeaderFilters() {
                         Clear Filter
                       </button>
                       <button
-                        onClick={() => alert("apply filete")}
+                        onClick={() => handleApplyFilters()}
                         className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
                       >
                         Apply Filter
@@ -274,9 +276,7 @@ export default function HeaderFilters() {
                           <input
                             type="checkbox"
                             className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
-                            checked={selectedFilters["bhk"]?.includes(
-                              bhk.title
-                            )}
+                            checked={state.unitTypes.includes(bhk.value)}
                             onChange={
                               () =>
                                 dispatch({

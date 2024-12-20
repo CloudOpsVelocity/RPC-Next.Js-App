@@ -296,6 +296,7 @@ export async function GET(request: Request) {
   }
   const filePath = getFilePath(typeMapping[type]);
   const data = fs.readFileSync(filePath, "utf-8");
+
   logger.info(
     `GET request successful. Request: ${request.method} ${request.url}`
   );

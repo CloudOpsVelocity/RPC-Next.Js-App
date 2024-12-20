@@ -15,7 +15,7 @@ export default function Page({}: Props) {
     }
     return array;
   };
-  console.log(getData([3, 5, 1, 58, 765, 4, 343, 23, 65]));
+  console.table([3, 5, 1, 58, 765, 4, 343, 23, 65]);
   return <CoverImage />;
 }
 
@@ -29,6 +29,7 @@ const coverImageUrl =
 const [defaultImg, smallImg, mediumImg, largeImg] = coverImageUrl.split(",");
 
 function CoverImage() {
+  console.group([3, 5, 1, 58, 765, 4, 343, 23, 65]);
   return (
     <>
       {/* // <picture>

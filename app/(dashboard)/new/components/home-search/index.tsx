@@ -14,7 +14,6 @@ import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
-import ShortListed from "./shortListed";
 
 const HomeSearch = ({
   count,
