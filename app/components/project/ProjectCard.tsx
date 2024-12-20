@@ -43,7 +43,7 @@ type CardProps = {
 
 export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive}: CardProps) {
   const [, { open }] = useReqCallPopup();
-  const { data: session } = useSession();
+  const { data: session } = useSession(); 
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
   const reqId = type === "proj" ? cardData.projIdEnc : cardData.propIdEnc;
