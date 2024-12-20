@@ -15,7 +15,6 @@ export const getData = async (city?: number | string, coordinates?: any) => {
     },
   });
   const data = await res.json();
-  console.log(data);
   return data;
 };
 

@@ -1,4 +1,5 @@
 import { SearchFilter } from "@/app/types/search";
+import { filterParser } from "@/app/utils/search";
 import { atom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
 
@@ -147,45 +148,19 @@ export const ProjSearchAppliedFiltersStore = atom(
   null,
   (get, set, setInQueryParams: any) => {
     const appliedFilters = get(projSearchStore);
-    const params = new URLSearchParams();
+    const params = [];
 
-    if (appliedFilters.unitTypes.length) {
-      params.set("unitTypes", appliedFilters.unitTypes.join(","));
+    for (const [key, value] of Object.entries(appliedFilters)) {
+      if (Array.isArray(value)) {
+        if (value.length > 0) {
+          params.push(`${key}=${btoa(value.join(","))}`);
+        }
+      } else if (value != null) {
+        params.push(`${key}=${btoa(String(value))}`);
+      }
     }
 
-    if (appliedFilters.bathRooms.length) {
-      params.set("bathRooms", appliedFilters.bathRooms.join(","));
-    }
-
-    if (appliedFilters.parkings.length) {
-      params.set("parkings", appliedFilters.parkings.join(","));
-    }
-
-    if (appliedFilters.amenities.length) {
-      params.set("amenities", appliedFilters.amenities.join(","));
-    }
-
-    if (appliedFilters.facings.length) {
-      params.set("facings", appliedFilters.facings.join(","));
-    }
-
-    if (appliedFilters.reraVerified.length) {
-      params.set("reraVerified", appliedFilters.reraVerified.join(","));
-    }
-
-    const [minArea, maxArea] = appliedFilters.areaValue;
-    if (minArea !== 0 || maxArea !== 5000) {
-      params.set("minArea", minArea.toString());
-      params.set("maxArea", maxArea.toString());
-    }
-
-    const [minBudget, maxBudget] = appliedFilters.bugdetValue;
-    if (minBudget !== 500000 || maxBudget !== 600000000) {
-      params.set("minPrice", minBudget.toString());
-      params.set("maxPrice", maxBudget.toString());
-    }
-
-    // setInQueryParams(params);
+    setInQueryParams(params.join("&"));
   }
 );
 //
