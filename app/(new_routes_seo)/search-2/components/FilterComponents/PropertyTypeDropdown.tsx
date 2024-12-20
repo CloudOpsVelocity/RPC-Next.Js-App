@@ -9,6 +9,7 @@ import {
 } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+import { propertyDetailsTypes } from "@/app/data/projectDetails";
 
 interface PropertyTypeDropdownProps {
   selectedFilters: { [key: string]: string[] };
@@ -44,13 +45,22 @@ export default function PropertyTypeDropdown({
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
 
+  console.log(state)
+
   return (
     <div className="relative">
       <button
-        className="flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full hover:bg-[#0073C6]/5"
-        onClick={onToggle}
-      >
-        Property Type
+        className={`flex items-center justify-between min-w-[160px] gap-2 px-4 py-2 border-2 ${state.propTypes ? 'border-[#148B16] text-[#148B16] font-bold' : 'border-[#0073C6] text-[#0073C6]'} rounded-full hover:bg-[#0073C6]/5`}
+            onClick={onToggle}
+          >
+            { state.propTypes? 
+          <div className="flex items-center gap-2">
+              {/* Green dot */}
+              <span className="w-2.5 h-2.5 bg-[#148B16] rounded-full inline-block"></span>
+              {/* Property Name */}
+            <span>{propertyDetailsTypes?.get(state.propTypes)?.name}</span>
+        </div>
+      :"Property Type"}
         <MdKeyboardArrowDown className="w-5 h-5" />
       </button>
       {isOpen && (

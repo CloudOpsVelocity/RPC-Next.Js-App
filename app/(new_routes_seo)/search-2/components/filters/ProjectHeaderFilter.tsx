@@ -500,7 +500,7 @@ export default function HeaderFilters() {
   return (
     <>
       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
-        <div className="max-w-full px-1">
+        <div ref={searchRef} className="max-w-full px-1 ">
           <div className="flex flex-wrap items-center gap-2 py-3">
             <div className="flex-1 max-w-[39%] relative">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
