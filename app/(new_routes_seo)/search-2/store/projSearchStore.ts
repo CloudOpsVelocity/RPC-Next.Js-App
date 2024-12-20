@@ -146,21 +146,30 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
 };
 export const ProjSearchAppliedFiltersStore = atom(
   null,
-  (get, set, setInQueryParams: any) => {
+  (get, set, setInQueryParams: any, type: "clear" | "add") => {
     const appliedFilters = get(projSearchStore);
-    const params = [];
+    let queryString = "";
 
     for (const [key, value] of Object.entries(appliedFilters)) {
+      // Skip areaValue and bugdetValue if they match initial values
+      if (
+        (key === "areaValue" || key === "bugdetValue") &&
+        Array.isArray(value) &&
+        value[0] === initialState[key][0] &&
+        value[1] === initialState[key][1]
+      ) {
+        continue;
+      }
+
       if (Array.isArray(value)) {
         if (value.length > 0) {
-          params.push(`${key}=${btoa(value.join(","))}`);
+          queryString += `${queryString ? "-" : ""}${key}=${value}`;
         }
       } else if (value != null) {
-        params.push(`${key}=${btoa(String(value))}`);
+        queryString += `${queryString ? "-" : ""}${key}=${value}`;
       }
     }
-
-    setInQueryParams(params.join("&"));
+    setInQueryParams(queryString || null);
   }
 );
 //
