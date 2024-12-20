@@ -52,9 +52,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] mt-1 ">
-            <span className="hover:underline cursor-pointer ">Home</span> {" > "}
+            <span className="hover:underline cursor-pointer ">Home</span>{" "}
+            {" > "}
             <Link href={"/project/banglore"} className="text-nowrap">
-              <span className="hover:underline cursor-pointer">Property In {data.ctName}</span>
+              <span className="hover:underline cursor-pointer">
+                Property In {data.ctName}
+              </span>
             </Link>{" "}
             {" > "}
             <span className="text-nowrap">
@@ -173,7 +176,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           />
         )}
 
-        <NearByCarouselProperty
+        {/* <NearByCarouselProperty
           projName={data.propName}
           lat={projData?.lat ?? data.lat}
           lng={projData?.lang ?? data.lang}
@@ -182,7 +185,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           propTypeName={data.propTypeName}
           bhkId={data.bhkId ?? 41}
           // query={""}
-        />
+        /> */}
         {/* {data.projIdEnc && data.postedById === projData.builderId && ( */}
         <NearByCarouselProjProperty
           projName={""}
@@ -208,11 +211,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     </div>
   );
 }
-
-
-
-
-
 
 // export async function generateStaticParams() {
 //   // const slugs = ["96ed572a1630741b975b7950bf0c2f99"];
