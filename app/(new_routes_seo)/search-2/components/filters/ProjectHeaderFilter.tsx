@@ -1,415 +1,415 @@
-"use client";
+// "use client";
 
-import { useState, useEffect, useRef } from "react";
-import {
-  MdSearch,
-  MdClose,
-  MdKeyboardArrowDown,
-  MdLocationOn,
-  MdApartment,
-  MdHouse,
-  MdVilla,
-  MdMapsHomeWork,
-  MdLandscape,
-  MdTune,
-  MdFilterList,
-} from "react-icons/md";
-import { SEARCH_FILTER_DATA } from "@/app/data/search";
-import PropTypeFilter from "@/app/(dashboard)/search/components/proptype";
-import ClearAll from "@/app/(dashboard)/search/components/ClearAll";
-import BugdetFilter from "@/app/(dashboard)/search/components/buget";
-import { useAtom } from "jotai";
-import { projSearchStore } from "../../store/projSearchStore";
-import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+// import { useState, useEffect, useRef } from "react";
+// import {
+//   MdSearch,
+//   MdClose,
+//   MdKeyboardArrowDown,
+//   MdLocationOn,
+//   MdApartment,
+//   MdHouse,
+//   MdVilla,
+//   MdMapsHomeWork,
+//   MdLandscape,
+//   MdTune,
+//   MdFilterList,
+// } from "react-icons/md";
+// import { SEARCH_FILTER_DATA } from "@/app/data/search";
+// import PropTypeFilter from "@/app/(dashboard)/search/components/proptype";
+// import ClearAll from "@/app/(dashboard)/search/components/ClearAll";
+// import BugdetFilter from "@/app/(dashboard)/search/components/buget";
+// import { useAtom } from "jotai";
+// import { projSearchStore } from "../../store/projSearchStore";
+// import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
-export default function HeaderFilters() {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [state, dispatch] = useAtom(projSearchStore);
-  const [selectedFilters, setSelectedFilters] = useState<{
-    [key: string]: string[];
-  }>({});
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [showAllFilters, setShowAllFilters] = useState(false);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
-  const searchRef = useRef<HTMLDivElement>(null);
+// export default function HeaderFilters() {
+//   const [isSearchOpen, setIsSearchOpen] = useState(false);
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [state, dispatch] = useAtom(projSearchStore);
+//   const [selectedFilters, setSelectedFilters] = useState<{
+//     [key: string]: string[];
+//   }>({});
+//   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+//   const [showAllFilters, setShowAllFilters] = useState(false);
+//   const { handleApplyFilters } = useProjSearchAppliedFilters();
+//   const searchRef = useRef<HTMLDivElement>(null);
 
-  const searchSuggestions = [
-    "Whitefield, Bangalore",
-    "Electronic City, Bangalore",
-    "HSR Layout, Bangalore",
-    "Indiranagar, Bangalore",
-  ];
+//   const searchSuggestions = [
+//     "Whitefield, Bangalore",
+//     "Electronic City, Bangalore",
+//     "HSR Layout, Bangalore",
+//     "Indiranagar, Bangalore",
+//   ];
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target as Node)
-      ) {
-        setIsSearchOpen(false);
-        setOpenDropdown(null);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+//   useEffect(() => {
+//     function handleClickOutside(event: MouseEvent) {
+//       if (
+//         searchRef.current &&
+//         !searchRef.current.contains(event.target as Node)
+//       ) {
+//         setIsSearchOpen(false);
+//         setOpenDropdown(null);
+//       }
+//     }
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, []);
 
-  const toggleFilter = (category: string, value: string) => {
-    if (category === "bhk") {
-      setSelectedFilters((prev) => {
-        const current = prev[category] || [];
-        const updated = current.includes(value)
-          ? current.filter((item) => item !== value)
-          : [...current, value];
-        return {
-          ...prev,
-          [category]: updated,
-        };
-      });
-    } else {
-      setSelectedFilters({
-        ...selectedFilters,
-        [category]: [value],
-      });
-    }
-  };
+//   const toggleFilter = (category: string, value: string) => {
+//     if (category === "bhk") {
+//       setSelectedFilters((prev) => {
+//         const current = prev[category] || [];
+//         const updated = current.includes(value)
+//           ? current.filter((item) => item !== value)
+//           : [...current, value];
+//         return {
+//           ...prev,
+//           [category]: updated,
+//         };
+//       });
+//     } else {
+//       setSelectedFilters({
+//         ...selectedFilters,
+//         [category]: [value],
+//       });
+//     }
+//   };
 
-  const removeFilter = (category: string, value: string) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [category]: prev[category].filter((item) => item !== value),
-    }));
-  };
+//   const removeFilter = (category: string, value: string) => {
+//     setSelectedFilters((prev) => ({
+//       ...prev,
+//       [category]: prev[category].filter((item) => item !== value),
+//     }));
+//   };
 
-  const propertyIcons = {
-    Apartment: <MdApartment className="w-5 h-5 text-green-700" />,
-    "Row House": <MdHouse className="w-5 h-5 text-green-700" />,
-    Villa: <MdVilla className="w-5 h-5 text-green-700" />,
-    Villament: <MdMapsHomeWork className="w-5 h-5 text-green-700" />,
-    Plot: <MdLandscape className="w-5 h-5 text-green-700" />,
-  };
-  const handleClear = (category: string) => {
-    setSelectedFilters((prev) => {
-      return {
-        ...prev,
-        [category]: [],
-      };
-    });
-  };
-  return (
-    <>
-      <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
-        <div className="max-w-full px-1">
-          {/* Header Filters */}
-          <div
-            className="flex flex-wrap items-center gap-2 py-3"
-            ref={dropdownRef}
-          >
-            {/* Search Bar */}
-            <div className="flex-1 max-w-[39%]  relative " ref={searchRef}>
-              <div className="flex items-center border-2 border-[#0073C6] rounded-full">
-                {/* Buy Dropdown */}
-                <div className="relative m-1">
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
-                    onClick={() =>
-                      setActiveDropdown(activeDropdown === "buy" ? null : "buy")
-                    }
-                  >
-                    Buy
-                    <MdKeyboardArrowDown className="w-5 h-5" />
-                  </button>
-                  {activeDropdown === "buy" && (
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border p-2 z-50">
-                      <div className="space-y-2">
-                        {["Buy", "Rent", "PG/Co-living"].map((option) => (
-                          <button
-                            key={option}
-                            className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100"
-                          >
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="flex w-full items-center overflow-hidden focus-within:ring-2 ring-[#0073C6]/20 ">
-                  <input
-                    type="text"
-                    className="w-full py-2 px-4 outline-none"
-                    placeholder="Search By Locality, Projects or Listings"
-                    value={searchQuery}
-                    onChange={(e) => {
-                      setSearchQuery(e.target.value);
-                      setIsSearchOpen(true);
-                    }}
-                    onFocus={() => setIsSearchOpen(true)}
-                  />
-                  <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
-                </div>
-              </div>
+//   const propertyIcons = {
+//     Apartment: <MdApartment className="w-5 h-5 text-green-700" />,
+//     "Row House": <MdHouse className="w-5 h-5 text-green-700" />,
+//     Villa: <MdVilla className="w-5 h-5 text-green-700" />,
+//     Villament: <MdMapsHomeWork className="w-5 h-5 text-green-700" />,
+//     Plot: <MdLandscape className="w-5 h-5 text-green-700" />,
+//   };
+//   const handleClear = (category: string) => {
+//     setSelectedFilters((prev) => {
+//       return {
+//         ...prev,
+//         [category]: [],
+//       };
+//     });
+//   };
+//   return (
+//     <>
+//       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
+//         <div className="max-w-full px-1">
+//           {/* Header Filters */}
+//           <div
+//             className="flex flex-wrap items-center gap-2 py-3"
+//             ref={dropdownRef}
+//           >
+//             {/* Search Bar */}
+//             <div className="flex-1 max-w-[39%]  relative " ref={searchRef}>
+//               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
+//                 {/* Buy Dropdown */}
+//                 <div className="relative m-1">
+//                   <button
+//                     className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
+//                     onClick={() =>
+//                       setActiveDropdown(activeDropdown === "buy" ? null : "buy")
+//                     }
+//                   >
+//                     Buy
+//                     <MdKeyboardArrowDown className="w-5 h-5" />
+//                   </button>
+//                   {activeDropdown === "buy" && (
+//                     <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border p-2 z-50">
+//                       <div className="space-y-2">
+//                         {["Buy", "Rent", "PG/Co-living"].map((option) => (
+//                           <button
+//                             key={option}
+//                             className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100"
+//                           >
+//                             {option}
+//                           </button>
+//                         ))}
+//                       </div>
+//                     </div>
+//                   )}
+//                 </div>
+//                 <div className="flex w-full items-center overflow-hidden focus-within:ring-2 ring-[#0073C6]/20 ">
+//                   <input
+//                     type="text"
+//                     className="w-full py-2 px-4 outline-none"
+//                     placeholder="Search By Locality, Projects or Listings"
+//                     value={searchQuery}
+//                     onChange={(e) => {
+//                       setSearchQuery(e.target.value);
+//                       setIsSearchOpen(true);
+//                     }}
+//                     onFocus={() => setIsSearchOpen(true)}
+//                   />
+//                   <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+//                 </div>
+//               </div>
 
-              {/* Search Suggestions */}
-              {isSearchOpen && (
-                <div className="absolute max-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50">
-                  {searchSuggestions.map((suggestion, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
-                      onClick={() => {
-                        setSearchQuery(suggestion);
-                        setIsSearchOpen(false);
-                      }}
-                    >
-                      <MdLocationOn className="w-5 h-5 text-[#148B16]" />
-                      <span>{suggestion}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+//               {/* Search Suggestions */}
+//               {isSearchOpen && (
+//                 <div className="absolute max-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50">
+//                   {searchSuggestions.map((suggestion, index) => (
+//                     <div
+//                       key={index}
+//                       className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
+//                       onClick={() => {
+//                         setSearchQuery(suggestion);
+//                         setIsSearchOpen(false);
+//                       }}
+//                     >
+//                       <MdLocationOn className="w-5 h-5 text-[#148B16]" />
+//                       <span>{suggestion}</span>
+//                     </div>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
 
-            <div className="hidden md:flex items-center gap-2">
-              {/* Property Type Dropdown */}
-              <div className="relative">
-                <button
-                  className="flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full hover:bg-[#0073C6]/5"
-                  onClick={() =>
-                    setActiveDropdown(
-                      activeDropdown === "property" ? null : "property"
-                    )
-                  }
-                >
-                  Property Type
-                  <MdKeyboardArrowDown className="w-5 h-5" />
-                </button>
-                {activeDropdown === "property" && (
-                  <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
-                    <div className="flex items-center justify-between gap-4 pb-4 border-b">
-                      <button
-                        onClick={() => handleClear("propertyType")}
-                        className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
-                      >
-                        Clear Filter
-                      </button>
-                      <button
-                        onClick={() => alert("apply filete")}
-                        className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
-                      >
-                        Apply Filter
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      {Object.entries(propertyIcons).map(([type, icon]) => (
-                        <label
-                          key={type}
-                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded cursor-pointer"
-                        >
-                          <input
-                            type="radio"
-                            className="rounded-full border-gray-300 text-green-700   checked:bg-green-700 checked:border-green-700"
-                            checked={
-                              selectedFilters["propertyType"]?.includes(type) ||
-                              false
-                            }
-                            onChange={() => toggleFilter("propertyType", type)}
-                          />
-                          {icon}
-                          <span>{type}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                )}
+//             <div className="hidden md:flex items-center gap-2">
+//               {/* Property Type Dropdown */}
+//               <div className="relative">
+//                 <button
+//                   className="flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full hover:bg-[#0073C6]/5"
+//                   onClick={() =>
+//                     setActiveDropdown(
+//                       activeDropdown === "property" ? null : "property"
+//                     )
+//                   }
+//                 >
+//                   Property Type
+//                   <MdKeyboardArrowDown className="w-5 h-5" />
+//                 </button>
+//                 {activeDropdown === "property" && (
+//                   <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
+//                     <div className="flex items-center justify-between gap-4 pb-4 border-b">
+//                       <button
+//                         onClick={() => handleClear("propertyType")}
+//                         className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+//                       >
+//                         Clear Filter
+//                       </button>
+//                       <button
+//                         onClick={() => alert("apply filete")}
+//                         className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
+//                       >
+//                         Apply Filter
+//                       </button>
+//                     </div>
+//                     <div className="space-y-2">
+//                       {Object.entries(propertyIcons).map(([type, icon]) => (
+//                         <label
+//                           key={type}
+//                           className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded cursor-pointer"
+//                         >
+//                           <input
+//                             type="radio"
+//                             className="rounded-full border-gray-300 text-green-700   checked:bg-green-700 checked:border-green-700"
+//                             checked={
+//                               selectedFilters["propertyType"]?.includes(type) ||
+//                               false
+//                             }
+//                             onChange={() => toggleFilter("propertyType", type)}
+//                           />
+//                           {icon}
+//                           <span>{type}</span>
+//                         </label>
+//                       ))}
+//                     </div>
+//                   </div>
+//                 )}
 
-                {/*  {activeDropdown === "property" && (
-                   <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
-                    <div className="space-y-2">
-                  
-                  </div>
-                  </div>
-                 )} */}
-              </div>
+//                 {/*  {activeDropdown === "property" && (
+//                    <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
+//                     <div className="space-y-2">
 
-              {/* BHK Type Dropdown */}
-              <div className="relative">
-                <button
-                  className="flex items-center gap-2 px-4 py-2 border-2 border-[#148B16] text-[#148B16] rounded-full hover:bg-[#148B16]/5"
-                  onClick={() =>
-                    setActiveDropdown(activeDropdown === "bhk" ? null : "bhk")
-                  }
-                >
-                  BHK Type
-                  <MdKeyboardArrowDown className="w-5 h-5 " />
-                </button>
-                {activeDropdown === "bhk" && (
-                  <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
-                    <div className="flex items-center justify-between gap-4 pb-4 border-b">
-                      <button
-                        onClick={() => handleClear("bhk")}
-                        className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
-                      >
-                        Clear Filter
-                      </button>
-                      <button
-                        onClick={() => handleApplyFilters()}
-                        className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
-                      >
-                        Apply Filter
-                      </button>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      {SEARCH_FILTER_DATA.bhkDetails.slice(0, 6).map((bhk) => (
-                        <label
-                          key={bhk.value}
-                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded cursor-pointer"
-                        >
-                          <input
-                            type="checkbox"
-                            className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
-                            checked={state.unitTypes.includes(bhk.value)}
-                            onChange={
-                              () =>
-                                dispatch({
-                                  type: "toggleArrayValue",
-                                  payload: {
-                                    key: "unitTypes",
-                                    value: bhk.value,
-                                  },
-                                })
-                              // dispatch({
-                              //   type: "toggleArrayValue",
-                              //   payload: { unitTypes: bhk.value },
-                              // })
-                            }
-                          />
-                          <span>{bhk.title}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+//                   </div>
+//                   </div>
+//                  )} */}
+//               </div>
 
-              {/* Budget Dropdown */}
-              <div className="relative">
-                <button
-                  className="flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full hover:bg-[#0073C6]/5"
-                  onClick={() =>
-                    setActiveDropdown(
-                      activeDropdown === "budget" ? null : "budget"
-                    )
-                  }
-                >
-                  Budget
-                  <MdKeyboardArrowDown className="w-5 h-5" />
-                </button>
-                {activeDropdown === "budget" && (
-                  <div className="absolute top-full right-0 mt-2 w-FULL bg-white rounded-lg shadow-lg border p-4 z-50">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between gap-4 pb-4 border-b">
-                        <button
-                          onClick={() => handleClear("bhk")}
-                          className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
-                        >
-                          Clear Filter
-                        </button>
-                        <button
-                          onClick={() => alert("apply filete")}
-                          className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
-                        >
-                          Apply Filter
-                        </button>
-                      </div>
-                      <BugdetFilter />
-                    </div>
-                  </div>
-                )}
-              </div>
+//               {/* BHK Type Dropdown */}
+//               <div className="relative">
+//                 <button
+//                   className="flex items-center gap-2 px-4 py-2 border-2 border-[#148B16] text-[#148B16] rounded-full hover:bg-[#148B16]/5"
+//                   onClick={() =>
+//                     setActiveDropdown(activeDropdown === "bhk" ? null : "bhk")
+//                   }
+//                 >
+//                   BHK Type
+//                   <MdKeyboardArrowDown className="w-5 h-5 " />
+//                 </button>
+//                 {activeDropdown === "bhk" && (
+//                   <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
+//                     <div className="flex items-center justify-between gap-4 pb-4 border-b">
+//                       <button
+//                         onClick={() => handleClear("bhk")}
+//                         className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+//                       >
+//                         Clear Filter
+//                       </button>
+//                       <button
+//                         onClick={() => handleApplyFilters()}
+//                         className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
+//                       >
+//                         Apply Filter
+//                       </button>
+//                     </div>
+//                     <div className="grid grid-cols-2 gap-2">
+//                       {SEARCH_FILTER_DATA.bhkDetails.slice(0, 6).map((bhk) => (
+//                         <label
+//                           key={bhk.value}
+//                           className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded cursor-pointer"
+//                         >
+//                           <input
+//                             type="checkbox"
+//                             className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
+//                             checked={state.unitTypes.includes(bhk.value)}
+//                             onChange={
+//                               () =>
+//                                 dispatch({
+//                                   type: "toggleArrayValue",
+//                                   payload: {
+//                                     key: "unitTypes",
+//                                     value: bhk.value,
+//                                   },
+//                                 })
+//                               // dispatch({
+//                               //   type: "toggleArrayValue",
+//                               //   payload: { unitTypes: bhk.value },
+//                               // })
+//                             }
+//                           />
+//                           <span>{bhk.title}</span>
+//                         </label>
+//                       ))}
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
 
-              {/* Show All Filters Button */}
-              <button
-                onClick={() => setShowAllFilters(!showAllFilters)}
-                className="flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-full hover:bg-gray-50"
-              >
-                <MdTune className="w-5 h-5" />
-                More Filters
-              </button>
-            </div>
+//               {/* Budget Dropdown */}
+//               <div className="relative">
+//                 <button
+//                   className="flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full hover:bg-[#0073C6]/5"
+//                   onClick={() =>
+//                     setActiveDropdown(
+//                       activeDropdown === "budget" ? null : "budget"
+//                     )
+//                   }
+//                 >
+//                   Budget
+//                   <MdKeyboardArrowDown className="w-5 h-5" />
+//                 </button>
+//                 {activeDropdown === "budget" && (
+//                   <div className="absolute top-full right-0 mt-2 w-FULL bg-white rounded-lg shadow-lg border p-4 z-50">
+//                     <div className="space-y-4">
+//                       <div className="flex items-center justify-between gap-4 pb-4 border-b">
+//                         <button
+//                           onClick={() => handleClear("bhk")}
+//                           className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+//                         >
+//                           Clear Filter
+//                         </button>
+//                         <button
+//                           onClick={() => alert("apply filete")}
+//                           className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
+//                         >
+//                           Apply Filter
+//                         </button>
+//                       </div>
+//                       <BugdetFilter />
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
 
-            <button
-              className="md:hidden flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full"
-              onClick={() => setIsDrawerOpen(true)}
-            >
-              <MdFilterList className="w-5 h-5" />
-              Filters
-            </button>
-          </div>
+//               {/* Show All Filters Button */}
+//               <button
+//                 onClick={() => setShowAllFilters(!showAllFilters)}
+//                 className="flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-full hover:bg-gray-50"
+//               >
+//                 <MdTune className="w-5 h-5" />
+//                 More Filters
+//               </button>
+//             </div>
 
-          {Object.entries(selectedFilters).some(
-            ([_, values]) => values.length > 0
-          ) && (
-            <div className="py-2 border-t">
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(selectedFilters).map(([category, values]) =>
-                  values.map((value) => (
-                    <div
-                      key={`${category}-${value}`}
-                      className="flex items-center gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
-                    >
-                      <span>{value}</span>
-                      <button
-                        onClick={() => removeFilter(category, value)}
-                        className="text-[#0073C6] hover:text-[#0073C6]/70"
-                      >
-                        <MdClose className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+//             <button
+//               className="md:hidden flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full"
+//               onClick={() => setIsDrawerOpen(true)}
+//             >
+//               <MdFilterList className="w-5 h-5" />
+//               Filters
+//             </button>
+//           </div>
 
-      {isDrawerOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-          <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl">
-            <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-lg font-semibold">Filters</h2>
-              <button
-                onClick={() => setIsDrawerOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-full"
-              >
-                <MdClose className="w-6 h-6" />
-              </button>
-            </div>
-            <div className="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-5rem)]">
-              <PropertyTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "propertyType"}
-                onToggle={() => handleDropdownToggle("propertyType")}
-              />
-              <BHKTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "bhkType"}
-                onToggle={() => handleDropdownToggle("bhkType")}
-              />
-              <BudgetDropdown
-                isOpen={openDropdown === "budget"}
-                onToggle={() => handleDropdownToggle("budget")}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
+//           {Object.entries(selectedFilters).some(
+//             ([_, values]) => values.length > 0
+//           ) && (
+//             <div className="py-2 border-t">
+//               <div className="flex flex-wrap gap-2">
+//                 {Object.entries(selectedFilters).map(([category, values]) =>
+//                   values.map((value) => (
+//                     <div
+//                       key={`${category}-${value}`}
+//                       className="flex items-center gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
+//                     >
+//                       <span>{value}</span>
+//                       <button
+//                         onClick={() => removeFilter(category, value)}
+//                         className="text-[#0073C6] hover:text-[#0073C6]/70"
+//                       >
+//                         <MdClose className="w-4 h-4" />
+//                       </button>
+//                     </div>
+//                   ))
+//                 )}
+//               </div>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+
+//       {isDrawerOpen && (
+//         <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+//           <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl">
+//             <div className="flex items-center justify-between p-4 border-b">
+//               <h2 className="text-lg font-semibold">Filters</h2>
+//               <button
+//                 onClick={() => setIsDrawerOpen(false)}
+//                 className="p-2 hover:bg-gray-100 rounded-full"
+//               >
+//                 <MdClose className="w-6 h-6" />
+//               </button>
+//             </div>
+//             <div className="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-5rem)]">
+//               <PropertyTypeDropdown
+//                 selectedFilters={selectedFilters}
+//                 toggleFilter={toggleFilter}
+//                 handleClear={handleClear}
+//                 isOpen={openDropdown === "propertyType"}
+//                 onToggle={() => handleDropdownToggle("propertyType")}
+//               />
+//               <BHKTypeDropdown
+//                 selectedFilters={selectedFilters}
+//                 toggleFilter={toggleFilter}
+//                 handleClear={handleClear}
+//                 isOpen={openDropdown === "bhkType"}
+//                 onToggle={() => handleDropdownToggle("bhkType")}
+//               />
+//               <BudgetDropdown
+//                 isOpen={openDropdown === "budget"}
+//                 onToggle={() => handleDropdownToggle("budget")}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </>
+//   );
+// }
