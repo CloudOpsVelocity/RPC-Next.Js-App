@@ -140,10 +140,10 @@ export default function SearchCitySelectDropdown() {
     }
   }, [activeIndex]);
   return (
-    <div className="relative inline-block" ref={dropdownRef}>
+    <div className="relative inline-block mt-3"  ref={dropdownRef}>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center text-gray-800 text-[14px] xl:text-[16px] font-semibold gap-x-2 p-2 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
+        className="flex items-center text-gray-800 text-[14px] xl:text-[16px] font-semibold gap-x-2 p-3 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
       >
         <IoLocationSharp className="text-blue-600 text-lg" />
         <span>
