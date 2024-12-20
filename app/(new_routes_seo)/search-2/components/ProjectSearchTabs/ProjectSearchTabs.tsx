@@ -44,7 +44,7 @@ export default function ProjectSearchTabs() {
 
   return (
     <div className="w-full bg-gradient-to-b from-gray-900 to-gray-800 sticky top-0 z-10 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-3 md:py-4">
+      <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div
             ref={scrollContainerRef}
