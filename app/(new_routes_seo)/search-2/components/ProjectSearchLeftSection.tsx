@@ -5,13 +5,11 @@ import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from "@tanstack/react-virtual";
-
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
-import { useAtomValue } from "jotai";
-import { useSearchParams } from "next/navigation";
 import { useQueryState } from "nuqs";
+import ProjectSearchTabs from "./ProjectSearchTabs/ProjectSearchTabs";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -25,7 +23,7 @@ function LeftSection({ mutate, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ["searchQuery" + apiFilterQueryParams],
+      queryKey: ["searchQuery" + apiFilterQueryParams ?? ''],
       queryFn: async ({ pageParam = 0 }) => {
         const response = await getSearchData(
           pageParam,
@@ -122,6 +120,7 @@ function LeftSection({ mutate, serverData }: Props) {
       className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[50%]"
       ref={containerRef}
     >
+      <ProjectSearchTabs />
       {isLoading ? (
         <Loader />
       ) : allItems.length > 0 ? (
@@ -148,5 +147,4 @@ function LeftSection({ mutate, serverData }: Props) {
     </div>
   );
 }
-LeftSection.whyDidYouRender = true;
 export default memo(LeftSection);

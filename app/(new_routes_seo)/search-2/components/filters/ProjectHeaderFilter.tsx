@@ -427,6 +427,7 @@ import PropertyTypeDropdown from "../FilterComponents/PropertyTypeDropdown";
 import BHKTypeDropdown from "../FilterComponents/BHKTypeDropdown";
 import BudgetDropdown from "../FilterComponents/BudgetDropdown";
 import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
+import BuyRent from "../FilterComponents/BuyRent";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -504,29 +505,10 @@ export default function HeaderFilters() {
           <div className="flex flex-wrap items-center gap-2 py-3">
             <div className="flex-1 max-w-[39%] relative">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
-                <div className="relative m-1">
-                  <button
-                    className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
-                    onClick={() => handleDropdownToggle("buy")}
-                  >
-                    Buy
-                    <MdKeyboardArrowDown className="w-5 h-5" />
-                  </button>
-                  {openDropdown === "buy" && (
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border p-2 z-50">
-                      <div className="space-y-2">
-                        {["Buy", "Rent", "PG/Co-living"].map((option) => (
-                          <button
-                            key={option}
-                            className="block w-full text-left px-3 py-2 rounded hover:bg-gray-100"
-                          >
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <BuyRent
+                  openDropdown={openDropdown}
+                  handleDropdownToggle={handleDropdownToggle}
+                />
                 <div className="flex w-full items-center overflow-hidden focus-within:ring-2 ring-[#0073C6]/20">
                   <input
                     type="text"

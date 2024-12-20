@@ -5,6 +5,8 @@ import MapSkeleton from "@/app/components/maps/Skeleton";
 import useSearchFilters from "@/app/hooks/search";
 import { useInfiniteQuery } from "react-query";
 import { getSearchData } from "../utils/project-search-queryhelpers";
+import { useQueryState } from "nuqs";
+import RTK_CONFIG from "@/app/config/rtk";
 
 const RightSection = ({ serverData }: any) => {
   const Map = useMemo(
@@ -18,11 +20,15 @@ const RightSection = ({ serverData }: any) => {
       ),
     []
   );
+  const [apiFilterQueryParams] = useQueryState("sf");
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ["searchQuery"],
+      queryKey: ["searchQuery" + apiFilterQueryParams],
       queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(pageParam,'');
+        const response = await getSearchData(
+          pageParam,
+          apiFilterQueryParams ?? ""
+        );
 
         return response;
       },
@@ -33,6 +39,7 @@ const RightSection = ({ serverData }: any) => {
         }
         return nextPage;
       },
+      ...RTK_CONFIG,
       enabled: false,
     });
   return (
