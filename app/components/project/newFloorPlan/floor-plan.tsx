@@ -156,6 +156,7 @@ export default function FloorPlans({
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h2
@@ -299,7 +300,7 @@ export default function FloorPlans({
                         </h3>
                       ) : (
                         <h3 className="text-xl font-semibold text-[#0073C6]">
-                          {unit.bhkName} | {unit.bhkName?.split(" ")[0][0]} Bed + Study -{" "}
+                          {unit.bhkName} | {unit.bhkName?.split(" ")[0][0]} {`Bed${unit.bhkName?.split(" ")[0][0] % 1 !== 0 ? " + Study" : ""}`} -{" "}
                           {unit.totalNumberofBathroom} Bath
                         </h3>
                       )}
