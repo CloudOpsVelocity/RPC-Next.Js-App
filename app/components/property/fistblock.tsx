@@ -193,7 +193,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%] h-full">
+            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%] max-h-full">
               <h2 className="iinline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
                 {`${
                   projectDetails.cg === "R"
@@ -252,7 +252,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   height={100}
                   src={"/abc/floorplan.png"}
                   alt="no of floors"
-                  className="xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
+                  className="xl:h-[24px] xl:w-[24px] w-[16px] h-[16px] sm:h-[16px] sm:w-[16px] !mt-auto "
                 />
                 Floor Plan
               </p>
