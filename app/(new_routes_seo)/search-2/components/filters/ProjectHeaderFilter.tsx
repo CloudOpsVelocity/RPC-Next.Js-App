@@ -433,17 +433,21 @@ import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
 import BuyRent from "../FilterComponents/BuyRent";
 import useNewsearch from "@/app/hooks/search/useNewSearch";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
+import { useAtom } from "jotai";
+import { projSearchStore } from "../../store/projSearchStore";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [state, dispatch] = useAtom(projSearchStore);
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: string[];
   }>({});
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
   const {
     data: searchData,
     isLoading,
@@ -510,31 +514,6 @@ export default function HeaderFilters() {
     onSearchChange(value);
   };
 
-  // Helper function to process redirection
-  const processRedirection = (url: string) => {
-    window.open(url, "_blank"); // Open the URL in a new tab
-  };
-
-  // Function to handle redirect logic based on the listing data
-  const handleListingRedirect = (listing: any) => {
-    const listingData = extractApiValues(listing.stringId); // assuming extractApiValues is implemented
-
-    // Build the URL based on the extracted data
-    const localityName = listing.name.split("-")[1].toLowerCase().trim();
-    let listingUrl =
-      `propTypes=${listingData.PT}${
-        listingData.BH ? `&unitTypes=${listingData.BH}` : ""
-      }&cg=${listingData.CG}&localities=${localityName}` +
-      "%2B" +
-      encodeURIComponent(listingData.LT);
-
-    // Redirect to the appropriate listing URL
-    processRedirection(
-      listingData.PJ && listingData.PJ !== "null"
-        ? `/search/listing?${listingUrl}`
-        : "/search?" + listingUrl
-    );
-  };
   const AgentOwnerBuilderMap = new Map([
     ["BuilderAgentListing", "A"],
     ["BuilderOwnerListing", "I"],
@@ -546,6 +525,14 @@ export default function HeaderFilters() {
   const handlePush = async (type: string, data: any) => {
     switch (type) {
       case "loc":
+        dispatch({
+          type: "pushToArray",
+          payload: {
+            key: "locality",
+            value: `${data.name}+${data.stringId}`,
+          },
+        });
+        handleApplyFilters();
         // handleAddSearch(`${data.name}+${data.stringId}`);
         break;
       case "projects":

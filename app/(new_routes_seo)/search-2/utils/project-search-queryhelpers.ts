@@ -40,6 +40,18 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string) => {
       );
     }
   }
+  // handle Locality
+  if (apiFilterQueryParams.includes("locality=")) {
+    const localityMatch = apiFilterQueryParams.match(/locality=(\d+)/);
+    if (localityMatch) {
+      const [_, locality] = localityMatch;
+      console.log(locality);
+      apiFilterQueryParams = apiFilterQueryParams.replace(
+        /locality=\d+/,
+        `locality=${locality}`
+      );
+    }
+  }
 
   return apiFilterQueryParams.replace(/-/g, "&").replace("listedBy=All", "");
 };
