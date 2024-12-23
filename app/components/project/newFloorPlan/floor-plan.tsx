@@ -299,7 +299,7 @@ export default function FloorPlans({
                         </h3>
                       ) : (
                         <h3 className="text-xl font-semibold text-[#0073C6]">
-                          {unit.bhkName} | {unit.bhkName?.split(" ")[0][0]} Bed -{" "}
+                          {unit.bhkName} | {unit.bhkName?.split(" ")[0][0]} Bed + Study -{" "}
                           {unit.totalNumberofBathroom} Bath
                         </h3>
                       )}
