@@ -36,7 +36,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   const setFloorsArray = useSetAtom(floorPlansArray);
   const mergedData = {
     bhk: data?.bhkName,
-    bedCount: data?.bhkName ? data?.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
+    bedCount: data?.bhkName ? data?.bhkName.split(" ")[0] : "", // Example value, adjust as needed
     bathCount: data?.totalNumberofBathroom,
     superBuildupArea: data?.superBuildUparea, // Example value, adjust as needed
     propertyFacing:

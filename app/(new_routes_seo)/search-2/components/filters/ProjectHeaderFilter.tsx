@@ -422,6 +422,8 @@ import {
   MdKeyboardArrowDown,
   MdLocationOn,
   MdFilterList,
+  MdWork,
+  MdBusiness,
 } from "react-icons/md";
 import PropertyTypeDropdown from "../FilterComponents/PropertyTypeDropdown";
 
@@ -442,7 +444,7 @@ export default function HeaderFilters() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const  {
+  const {
     data: searchData,
     isLoading,
     handleResetQuery,
@@ -500,29 +502,29 @@ export default function HeaderFilters() {
   const handleDropdownToggle = (dropdownName: string) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
-  const handleSearchChange = (e:any) => {
+  const handleSearchChange = (e: any) => {
     const value = e.target.value;
 
     setSearchQuery(value);
-  
 
     onSearchChange(value);
   };
 
-
   // Helper function to process redirection
   const processRedirection = (url: string) => {
-    window.open(url, "_blank");  // Open the URL in a new tab
+    window.open(url, "_blank"); // Open the URL in a new tab
   };
 
   // Function to handle redirect logic based on the listing data
   const handleListingRedirect = (listing: any) => {
     const listingData = extractApiValues(listing.stringId); // assuming extractApiValues is implemented
-    
+
     // Build the URL based on the extracted data
     const localityName = listing.name.split("-")[1].toLowerCase().trim();
     let listingUrl =
-      `propTypes=${listingData.PT}${listingData.BH ? `&unitTypes=${listingData.BH}` : ""}&cg=${listingData.CG}&localities=${localityName}` +
+      `propTypes=${listingData.PT}${
+        listingData.BH ? `&unitTypes=${listingData.BH}` : ""
+      }&cg=${listingData.CG}&localities=${localityName}` +
       "%2B" +
       encodeURIComponent(listingData.LT);
 
@@ -533,14 +535,94 @@ export default function HeaderFilters() {
         : "/search?" + listingUrl
     );
   };
-  
- 
+  const AgentOwnerBuilderMap = new Map([
+    ["BuilderAgentListing", "A"],
+    ["BuilderOwnerListing", "I"],
+    ["BuilderBuilderListing", "B"],
+    ["ProjectAgentListing", "A"],
+    ["ProjectOwnerListing", "I"],
+    ["ProjectBuilderListing", "B"],
+  ]);
+  const handlePush = async (type: string, data: any) => {
+    switch (type) {
+      case "loc":
+        // handleAddSearch(`${data.name}+${data.stringId}`);
+        break;
+      case "projects":
+        if (data.type === "Project") {
+          window.open(data.stringUrl);
+        } else {
+          window.open(
+            `/search/listing?projIdEnc=${data.stringId.split("_")[0]}&phaseId=${
+              data.stringId.split("_")[1]
+            }&projName=${data.name}`
+          );
+        }
+
+        break;
+      case "listing":
+        {
+          const paramsObject = extractApiValues(data.stringId);
+
+          let url;
+          let localityName = data.name.split(" in ")[1].toLowerCase().trim();
+          url =
+            `propTypes=${paramsObject.PT}${
+              paramsObject.BH ? `&unitTypes=${paramsObject.BH}` : ""
+            }&cg=${paramsObject.CG}&localities=${localityName}` +
+            "%2B" +
+            encodeURIComponent(paramsObject.LT);
+
+          window.open("/search/listing?" + url);
+        }
+        break;
+      case "Project Listings":
+        {
+          let projectName = data.name.split(" in ")[1].trim();
+          // console.log(projectName);
+          const url = `projIdEnc=${
+            data.stringId
+          }&listedBy=${AgentOwnerBuilderMap.get(
+            data.type
+          )}&projName=${projectName}`;
+          window.open("/search/listing?" + url);
+        }
+        break;
+      case "builders":
+        if (data.type === "BuilderDetail") {
+          window.open(data.stringUrl);
+        } else {
+          const url =
+            encodeURIComponent(data.name) +
+            "%2B" +
+            encodeURIComponent(data.stringId.split("_")[1]);
+          window.open(
+            `/search?builderIds=${url}&city=${data.stringId.split("_")[0]}${
+              data.type !== "BuilderProject"
+                ? `&listedBy=${AgentOwnerBuilderMap.get(data.type)}`
+                : ""
+            }`
+          );
+        }
+        // setFilters((prevFilters) => ({
+        //   ...prevFilters,
+        //   builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
+        // }));
+        // handleResetQuery();
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <>
       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
-        <div  className="max-w-full px-1 ">
-          <div  ref={searchRef} className="flex flex-wrap items-center gap-2 py-3">
-            <div  className="flex-1 max-w-[39%] relative">
+        <div className="max-w-full px-1 ">
+          <div
+            ref={searchRef}
+            className="flex flex-wrap items-center gap-2 py-3"
+          >
+            <div className="flex-1 max-w-[39%] relative">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
                   openDropdown={openDropdown}
@@ -553,105 +635,93 @@ export default function HeaderFilters() {
                     placeholder="Search By Locality, Projects or Listings"
                     value={searchQuery}
                     onChange={(e) => handleSearchChange(e)}
-                  
                     onFocus={() => setIsSearchOpen(true)}
                   />
                   <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                 </div>
               </div>
-
-              {isSearchOpen && (
-        <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50">
-          {/* Locations Section */}
-          {searchData.loc?.length > 0 && (
-            <div>
-              <div className="font-bold p-2">Locations</div>
-              {searchData.loc.map((loc:any, index:number) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => {
-                    setSearchQuery(loc.name);  // Set the location name as search query
-                    setIsSearchOpen(false);  // Close the dropdown
-                  }}
-                >
-                  <MdLocationOn className="w-5 h-5 text-[#148B16]" />
-                  <span>{loc.name}</span>
+              {isLoading ? (
+                <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">
+                  <div className="p-3 text-gray-500">Loading...</div>
                 </div>
-              ))}
+              ) : (
+                isSearchOpen && (
+                  <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">
+                    {searchData.loc?.length > 0 ||
+                    searchData.builders?.length > 0 ||
+                    searchData.projects?.length > 0 ||
+                    searchData.listing?.length > 0 ? (
+                      <>
+                        {["loc", "builders", "projects", "listing"].map(
+                          (type) =>
+                            searchData[type]?.length > 0 && (
+                              <div key={type}>
+                                <div className="font-bold p-2 capitalize">
+                                  {type === "loc"
+                                    ? "Locality"
+                                    : type === "listing"
+                                    ? "Listings"
+                                    : type}
+                                </div>
+                                {searchData[type].map(
+                                  (item: any, index: number) => (
+                                    <div
+                                      key={index}
+                                      className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
+                                      onClick={() => {
+                                        setSearchQuery(item.name); // Set the item name as search query
+                                        setIsSearchOpen(false); // Close the dropdown
+                                        handlePush(type, item);
+                                      }}
+                                    >
+                                      {type === "loc" || type === "listing" ? (
+                                        <MdLocationOn className="w-5 h-5 text-[#148B16]" />
+                                      ) : type === "builders" ? (
+                                        <MdBusiness className="w-5 h-5 text-[#148B16]" />
+                                      ) : type === "projects" ? (
+                                        <svg
+                                          version="1.1"
+                                          id="real_x5F_estate_1_"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          x={0}
+                                          y={0}
+                                          viewBox="0 0 128 128"
+                                          className="w-5"
+                                          xmlSpace="preserve"
+                                        >
+                                          <style
+                                            dangerouslySetInnerHTML={{
+                                              __html:
+                                                ".st0{display:none}.st1{display:inline}.st2{fill:#148B16}", // Changed fill color to #148B16
+                                            }}
+                                          />
+                                          <g id="building_1_">
+                                            <path
+                                              className="st2"
+                                              d="M88.6 11.5H75.5L0 47.6v69h128V31.2L88.6 11.5zm0 6.6 32.8 16.4V41L88.6 27.9v-9.8zm0 19.6 32.8 13.1V64l-32.8-9.8V37.7zm0 26.3 32.8 9.8v16.4l-32.8-9.8V64zm-13.1 0v16.4L6.6 96.8V87l68.9-23zM6.6 77.1v-9.8l68.9-29.5v16.4L6.6 77.1zm68.9-59v9.8L6.6 57.4v-6.6l68.9-32.7zm-.6 91.8H6.6v-6.6l68.9-13.1v19.7h-.6zm13.9 0h-.2V90.3l32.8 9.8v9.8H88.8z"
+                                              id="icon_7_"
+                                            />
+                                          </g>
+                                        </svg>
+                                      ) : null}
+                                      <span>{item.name}</span>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            )
+                        )}
+                      </>
+                    ) : (
+                      <div className="p-3 text-gray-500">
+                        No suggestions available
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
             </div>
-          )}
-
-          {/* Builders Section */}
-          {searchData.builders?.length > 0 && (
-            <div>
-              <div className="font-bold p-2">Builders</div>
-              {searchData.builders.map((builder:any, index:number) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => {
-                    setSearchQuery(builder.name);  // Set the builder name as search query
-                    setIsSearchOpen(false);  // Close the dropdown
-                  }}
-                >
-                  <span>{builder.name}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Projects Section */}
-          {searchData.projects?.length > 0 && (
-            <div>
-              <div className="font-bold p-2">Projects</div>
-              {searchData.projects.map((project:any, index:number) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => {
-                    setSearchQuery(project.name);  // Set the project name as search query
-                    setIsSearchOpen(false);  // Close the dropdown
-                  }}
-                >
-                  <span>{project.name}</span>
-                </div>
-              ))}
-            </div>
-          )}
-          {/* Listings Section */}
-          {searchData.listing?.length > 0 && (
-            <div>
-              <div className="font-bold p-2">Listings</div>
-              {searchData.listing.map((listing:any, index:number) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => {
-                    setSearchQuery(listing.name);  // Set the listing name as search query
-                    setIsSearchOpen(false);  // Close the dropdown
-                    handleListingRedirect(listing);  // Call the redirect function
-                  }}
-                >
-                  <MdLocationOn className="w-5 h-5 text-[#148B16]" />
-                  <span>{listing.name}</span>  {/* Display the name of the listing */}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* No Suggestions Available */}
-          {searchData.loc?.length === 0 && searchData.builders?.length === 0 && searchData.projects?.length === 0 && searchData.listing?.length === 0 && (
-            <div className="p-3 text-gray-500">No suggestions available</div>
-          )}
-        </div>
-      )}
-
-
-
-            </div>
-
-            <div   className="hidden md:flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2">
               <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
@@ -752,5 +822,3 @@ export default function HeaderFilters() {
     </>
   );
 }
-
-
