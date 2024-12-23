@@ -82,6 +82,8 @@ export function FloorPlanModal({
 
   if (!isOpen) return null;
 
+  console.log(currentUnit.bedrooms)
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
