@@ -2,7 +2,7 @@
 import "@mantine/carousel/styles.css";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
-import {
+import { 
   NextCarouselButton,
   PrevCarouselButton,
   quotesIcon,

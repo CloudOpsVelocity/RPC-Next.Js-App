@@ -16,7 +16,6 @@ export default function TooltipProp({ data }: Props) {
     postedByName,
     cityName,
   } = data;
-  console.log(data)
   return (
     <div className="p-[2px] xl:p-1 !rounded-2xl">
       <p className="text-[#001F35] text-[12px] xl:text-base not-italic font-semibold capitalize">

@@ -30,7 +30,7 @@ export const SEARCH_FILTER_DATA = {
   ],
   bhkDetails: [
     { title: "1 RK", value: 40 },
-    { title: "1 BHK", value: 41 },
+    { title: "1 BHK", value: 41 }, 
     { title: "1.5 BHK", value: 42 },
     { title: "2 BHK", value: 43 },
     { title: "2.5 BHK", value: 44 },

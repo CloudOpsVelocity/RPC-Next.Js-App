@@ -1,0 +1,50 @@
+import { atom } from "jotai";
+
+const dummyAllBlogData = [
+    {
+      id:0,
+      heading:"Investing 101",
+      text:"A Beginner’s Guide to Real Estate Investment Strategies...",
+      content:`It is a long established fact that a reader will be distracted by the readable content of a page 
+            when looking at its layout. The point of using  that it has amore-or-less normal distribution
+            It is a long established fact that a reader will be distracted by the readable content of a page when 
+            looking at its layout. The point of using  that it has amore-or-less normal distribution
+            `,
+      date:"May 20th 2024"
+    },
+    {
+      id:1,
+      heading:"Resale Value",
+      text:"How to Maximise your Property’s Resale Value",
+      content:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using  that it has amore-or-less normal distribution",
+      date:"May 20th 2024"
+    },
+    {
+      id:2,
+      heading:"Renting vs. Buying",
+      text:"Deciding What’s Right for You",
+      content:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using  that it has amore-or-less normal distribution",
+      date:"May 20th 2024"
+    },
+    {
+      id:3,
+      heading:"Legal Essentials",
+      text:"Understanding Contracts and Paperwork in Real Estate",
+      content:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using  that it has amore-or-less normal distribution",
+      date:"May 20th 2024"
+    },
+    {
+      id:4,
+      heading:"Real Estate & The Pandemic",
+      text:"Trends Shaping the New Normal",
+      content:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using  that it has amore-or-less normal distribution",
+      date:"May 20th 2024"
+    },
+  ]
+
+const initailBlogData = {
+    selectedBlog: null,
+    allBlogData: dummyAllBlogData
+}
+
+export const blogDetails = atom(initailBlogData);
