@@ -424,10 +424,13 @@ import {
   MdFilterList,
 } from "react-icons/md";
 import PropertyTypeDropdown from "../FilterComponents/PropertyTypeDropdown";
+
 import BHKTypeDropdown from "../FilterComponents/BHKTypeDropdown";
 import BudgetDropdown from "../FilterComponents/BudgetDropdown";
 import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
 import BuyRent from "../FilterComponents/BuyRent";
+import useNewsearch from "@/app/hooks/search/useNewSearch";
+import { extractApiValues } from "@/app/utils/dyanamic/projects";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -439,12 +442,12 @@ export default function HeaderFilters() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const searchSuggestions = [
-    "Whitefield, Bangalore",
-    "Electronic City, Bangalore",
-    "HSR Layout, Bangalore",
-    "Indiranagar, Bangalore",
-  ];
+  const  {
+    data: searchData,
+    isLoading,
+    handleResetQuery,
+    onSearchChange,
+  } = useNewsearch();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -497,7 +500,41 @@ export default function HeaderFilters() {
   const handleDropdownToggle = (dropdownName: string) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
+  const handleSearchChange = (e:any) => {
+    const value = e.target.value;
 
+    setSearchQuery(value);
+  
+
+    onSearchChange(value);
+  };
+
+
+  // Helper function to process redirection
+  const processRedirection = (url: string) => {
+    window.open(url, "_blank");  // Open the URL in a new tab
+  };
+
+  // Function to handle redirect logic based on the listing data
+  const handleListingRedirect = (listing: any) => {
+    const listingData = extractApiValues(listing.stringId); // assuming extractApiValues is implemented
+    
+    // Build the URL based on the extracted data
+    const localityName = listing.name.split("-")[1].toLowerCase().trim();
+    let listingUrl =
+      `propTypes=${listingData.PT}${listingData.BH ? `&unitTypes=${listingData.BH}` : ""}&cg=${listingData.CG}&localities=${localityName}` +
+      "%2B" +
+      encodeURIComponent(listingData.LT);
+
+    // Redirect to the appropriate listing URL
+    processRedirection(
+      listingData.PJ && listingData.PJ !== "null"
+        ? `/search/listing?${listingUrl}`
+        : "/search?" + listingUrl
+    );
+  };
+  
+ 
   return (
     <>
       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
@@ -509,16 +546,14 @@ export default function HeaderFilters() {
                   openDropdown={openDropdown}
                   handleDropdownToggle={handleDropdownToggle}
                 />
-                <div className="flex w-full items-center overflow-hidden focus-within:ring-2 ring-[#0073C6]/20">
+                <div className=" relative flex w-full items-center overflow-hidden ">
                   <input
                     type="text"
                     className="w-full py-2 px-4 outline-none"
                     placeholder="Search By Locality, Projects or Listings"
                     value={searchQuery}
-                    onChange={(e) => {
-                      setSearchQuery(e.target.value);
-                      setIsSearchOpen(true);
-                    }}
+                    onChange={(e) => handleSearchChange(e)}
+                  
                     onFocus={() => setIsSearchOpen(true)}
                   />
                   <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
@@ -526,22 +561,94 @@ export default function HeaderFilters() {
               </div>
 
               {isSearchOpen && (
-                <div className="absolute max-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50">
-                  {searchSuggestions.map((suggestion, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
-                      onClick={() => {
-                        setSearchQuery(suggestion);
-                        setIsSearchOpen(false);
-                      }}
-                    >
-                      <MdLocationOn className="w-5 h-5 text-[#148B16]" />
-                      <span>{suggestion}</span>
-                    </div>
-                  ))}
+        <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50">
+          {/* Locations Section */}
+          {searchData.loc?.length > 0 && (
+            <div>
+              <div className="font-bold p-2">Locations</div>
+              {searchData.loc.map((loc:any, index:number) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
+                  onClick={() => {
+                    setSearchQuery(loc.name);  // Set the location name as search query
+                    setIsSearchOpen(false);  // Close the dropdown
+                  }}
+                >
+                  <MdLocationOn className="w-5 h-5 text-[#148B16]" />
+                  <span>{loc.name}</span>
                 </div>
-              )}
+              ))}
+            </div>
+          )}
+
+          {/* Builders Section */}
+          {searchData.builders?.length > 0 && (
+            <div>
+              <div className="font-bold p-2">Builders</div>
+              {searchData.builders.map((builder:any, index:number) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
+                  onClick={() => {
+                    setSearchQuery(builder.name);  // Set the builder name as search query
+                    setIsSearchOpen(false);  // Close the dropdown
+                  }}
+                >
+                  <span>{builder.name}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Projects Section */}
+          {searchData.projects?.length > 0 && (
+            <div>
+              <div className="font-bold p-2">Projects</div>
+              {searchData.projects.map((project:any, index:number) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
+                  onClick={() => {
+                    setSearchQuery(project.name);  // Set the project name as search query
+                    setIsSearchOpen(false);  // Close the dropdown
+                  }}
+                >
+                  <span>{project.name}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {/* Listings Section */}
+          {searchData.listing?.length > 0 && (
+            <div>
+              <div className="font-bold p-2">Listings</div>
+              {searchData.listing.map((listing:any, index:number) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 p-3 hover:bg-gray-50 cursor-pointer"
+                  onClick={() => {
+                    setSearchQuery(listing.name);  // Set the listing name as search query
+                    setIsSearchOpen(false);  // Close the dropdown
+                    handleListingRedirect(listing);  // Call the redirect function
+                  }}
+                >
+                  <MdLocationOn className="w-5 h-5 text-[#148B16]" />
+                  <span>{listing.name}</span>  {/* Display the name of the listing */}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* No Suggestions Available */}
+          {searchData.loc?.length === 0 && searchData.builders?.length === 0 && searchData.projects?.length === 0 && searchData.listing?.length === 0 && (
+            <div className="p-3 text-gray-500">No suggestions available</div>
+          )}
+        </div>
+      )}
+
+
+
             </div>
 
             <div   className="hidden md:flex items-center gap-2">
@@ -584,12 +691,12 @@ export default function HeaderFilters() {
             ([_, values]) => values.length > 0
           ) && (
             <div className="py-2 border-t">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex overflow-x-auto gap-2">
                 {Object.entries(selectedFilters).map(([category, values]) =>
                   values.map((value) => (
                     <div
                       key={`${category}-${value}`}
-                      className="flex items-center gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
+                      className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
                     >
                       <span>{value}</span>
                       <button
@@ -645,3 +752,5 @@ export default function HeaderFilters() {
     </>
   );
 }
+
+
