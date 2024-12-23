@@ -1,29 +1,31 @@
 "use client";
 
+import { useAtom } from "jotai";
 import * as React from "react";
+import { projSearchStore } from "../../store/projSearchStore";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 const tabs = [
-  { id: "projects", label: "Projects" },
-  { id: "owner", label: "Owner Listings" },
-  { id: "agent", label: "Agent Listings" },
-  { id: "builder", label: "Builder Listings" },
-  { id: "all", label: "All Listings" },
+  { id: null, label: "Projects" },
+  { id: "I", label: "Owner Listings" },
+  { id: "A", label: "Agent Listings" },
+  { id: "B", label: "Builder Listings" },
+  { id: "All", label: "All Listings" },
 ];
 
 const sortOptions = [
   { value: "newest", label: "Newest First" },
   { value: "price-low-high", label: "Price: Low to High" },
   { value: "price-high-low", label: "Price: High to Low" },
-  { value: "sqft-low-high", label: "Price/sqft: Low to High" }, 
-  { value: "sqft-high-low", label: "Price/sqft: High to Low" }  
+  { value: "sqft-low-high", label: "Price/sqft: Low to High" },
+  { value: "sqft-high-low", label: "Price/sqft: High to Low" },
 ];
 
-
 export default function ProjectSearchTabs() {
-  const [activeTab, setActiveTab] = React.useState("projects");
+  const [state, dispath] = useAtom(projSearchStore);
   const [sortBy, setSortBy] = React.useState("newest");
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
   const handleWheel = (e: React.WheelEvent) => {
@@ -42,7 +44,15 @@ export default function ProjectSearchTabs() {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isDropdownOpen]);
-
+  const handleTabsChange = (value: string | null) => {
+    dispath({
+      payload: {
+        listedBy: value,
+      },
+      type: "update",
+    });
+    handleApplyFilters();
+  };
   return (
     <div className="w-full bg-gradient-to-b from-gray-900 to-gray-800 sticky top-0 z-10 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-2">
@@ -56,11 +66,11 @@ export default function ProjectSearchTabs() {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleTabsChange(tab.id)}
                   className={`
                     whitespace-nowrap rounded-full px-4 py-2 text-sm md:text-base font-medium transition-all
                     ${
-                      activeTab === tab.id
+                      state.listedBy === tab.id
                         ? "bg-[#0073C6] text-white shadow-md"
                         : "text-gray-300 hover:bg-gray-700 hover:text-white"
                     }
@@ -93,18 +103,18 @@ export default function ProjectSearchTabs() {
                   d="M7 16V4m0 0L3 8m4-4l4 4m-4 8v-4m10 4v-4m0 4l-4-4m4 4l4-4"
                 />
               </svg>
-              
+
               <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                 {sortOptions.find((option) => option.value === sortBy)?.label ||
-                  "Sort By"}  
-            </div>
-
-
+                  "Sort By"}
+              </div>
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white
-               rounded-lg shadow-lg py-1 z-20 border border-white">
+              <div
+                className="absolute right-0 mt-2 w-48 bg-white
+               rounded-lg shadow-lg py-1 z-20 border border-white"
+              >
                 {sortOptions.map((option) => (
                   <button
                     key={option.value}
