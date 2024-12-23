@@ -1,17 +1,13 @@
 import axios from "axios";
 
 export const getSearchData = async (page = 0, apiFilterQueryParams: string) => {
-  // let url =  `${
-  //   process.env.NEXT_PUBLIC_BACKEND_URL
-  // }/srp/searchproj?page=${page}&city=9&${parseApiFilterQueryParams(
-  //   apiFilterQueryParams
-  // )}`
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}&city=9`;
+  if (apiFilterQueryParams.includes("listedBy")) {
+    url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}&city=9`;
+  }
+  let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
   const res = await axios.get(
-    `${
-      process.env.NEXT_PUBLIC_BACKEND_URL
-    }/srp/searchproj?page=${page}&city=9&${parseApiFilterQueryParams(
-      apiFilterQueryParams
-    )}`
+    `${url}${queryparams ? `&${queryparams}` : ""}}`
   );
   return res.data;
 };
@@ -47,5 +43,5 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string) => {
     }
   }
 
-  return apiFilterQueryParams.replace(/-/g, "&");
+  return apiFilterQueryParams.replace(/-/g, "&").replace("listedBy=All", "");
 };

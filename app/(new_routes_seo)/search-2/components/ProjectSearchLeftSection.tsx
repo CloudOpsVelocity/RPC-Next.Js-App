@@ -10,6 +10,8 @@ import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import ProjectSearchTabs from "./ProjectSearchTabs/ProjectSearchTabs";
+import { useAtom, useAtomValue } from "jotai";
+import { projSearchStore } from "../store/projSearchStore";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -20,6 +22,7 @@ function LeftSection({ mutate, serverData }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
+  const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
@@ -86,7 +89,7 @@ function LeftSection({ mutate, serverData }: Props) {
           <ProjectCard
             key={eachOne.projIdEnc + eachOne.propType}
             refetch={refetch}
-            data={{ ...eachOne, type: "proj" }}
+            data={{ ...eachOne, type: state.listedBy ?? "proj" }}
             index={virtualRow.index}
             mutate={mutate}
           />
