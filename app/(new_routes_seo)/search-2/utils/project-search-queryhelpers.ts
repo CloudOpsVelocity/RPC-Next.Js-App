@@ -18,7 +18,9 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string) => {
     bathRooms: "bathroom",
     parkings: "parking",
     facings: "facing",
+    bugdetValue: "budget",
   };
+
   Object.keys(changedParams).forEach((key) => {
     if (apiFilterQueryParams.includes(key)) {
       apiFilterQueryParams = apiFilterQueryParams.replace(
@@ -27,5 +29,18 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string) => {
       );
     }
   });
+
+  // Handle budget value conversion
+  if (apiFilterQueryParams.includes("budget=")) {
+    const budgetMatch = apiFilterQueryParams.match(/budget=(\d+),(\d+)/);
+    if (budgetMatch) {
+      const [_, minPrice, maxPrice] = budgetMatch;
+      apiFilterQueryParams = apiFilterQueryParams.replace(
+        /budget=\d+,\d+/,
+        `minPrice=${minPrice}&maxPrice=${maxPrice}`
+      );
+    }
+  }
+
   return apiFilterQueryParams.replace(/-/g, "&");
 };

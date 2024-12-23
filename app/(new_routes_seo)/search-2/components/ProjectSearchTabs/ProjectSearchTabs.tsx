@@ -7,16 +7,17 @@ const tabs = [
   { id: "owner", label: "Owner Listings" },
   { id: "agent", label: "Agent Listings" },
   { id: "builder", label: "Builder Listings" },
-  { id: "all", label: "All" },
+  { id: "all", label: "All Listings" },
 ];
 
 const sortOptions = [
   { value: "newest", label: "Newest First" },
   { value: "price-low-high", label: "Price: Low to High" },
   { value: "price-high-low", label: "Price: High to Low" },
-  { value: "sqft-low-high", label: "Price/sq.ft.: Low to High" },
-  { value: "sqft-high-low", label: "Price/sq.ft.: High to Low" },
+  { value: "sqft-low-high", label: "Price/sqft: Low to High" }, 
+  { value: "sqft-high-low", label: "Price/sqft: High to Low" }  
 ];
+
 
 export default function ProjectSearchTabs() {
   const [activeTab, setActiveTab] = React.useState("projects");
@@ -92,12 +93,18 @@ export default function ProjectSearchTabs() {
                   d="M7 16V4m0 0L3 8m4-4l4 4m-4 8v-4m10 4v-4m0 4l-4-4m4 4l4-4"
                 />
               </svg>
-              {sortOptions.find((option) => option.value === sortBy)?.label ||
-                "Sort By"}
+              
+              <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
+                {sortOptions.find((option) => option.value === sortBy)?.label ||
+                  "Sort By"}  
+            </div>
+
+
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg py-1 z-20 border border-gray-700">
+              <div className="absolute right-0 mt-2 w-48 bg-white
+               rounded-lg shadow-lg py-1 z-20 border border-white">
                 {sortOptions.map((option) => (
                   <button
                     key={option.value}
@@ -110,8 +117,8 @@ export default function ProjectSearchTabs() {
                       block w-full text-left px-4 py-2 text-sm transition-colors
                       ${
                         sortBy === option.value
-                          ? "text-[#0073C6] bg-gray-700"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                          ? "text-white bg-[#0073C6]"
+                          : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
                       }
                     `}
                   >
