@@ -58,7 +58,7 @@ export default function ProjData({
   });
 
   const { filters } = useSearchFilters();
-console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
+// console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
