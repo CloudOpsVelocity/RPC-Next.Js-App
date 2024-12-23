@@ -70,6 +70,7 @@ export default function ShowAllFiltersButton({ selectedFilters, toggleFilter, is
 
   return (
     <div className="relative">
+      
       <button
         onClick={onToggle}
         className="flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-full hover:bg-gray-50"
@@ -80,21 +81,28 @@ export default function ShowAllFiltersButton({ selectedFilters, toggleFilter, is
       </button>
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 w-[600px] bg-white rounded-lg shadow-lg border z-50">
-          <div className="p-6 max-h-[80vh] overflow-y-auto">
+        <div className="flex items-center justify-between gap-4 pb-4 border-b">
+            <button
+             onClick={onToggle}
+              className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+            >
+              Clear Filter
+            </button>
+            <button
+               onClick={onToggle}
+              className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
+            >
+              Apply Filter
+            </button>
+          </div>
+          <div className="p-6 flex items-start  flex-wrap justify-between   max-h-[60vh] overflow-y-auto">
             {renderFilterSection('Project Status', SEARCH_FILTER_DATA.projectstatus, 'status')}
             {renderFilterSection('Property Type', Object.keys(propertyIcons), 'propertyType')}
             {renderFilterSection('BHK Type', SEARCH_FILTER_DATA.bhkDetails, 'bhk', 6)}
             {renderFilterSection('Amenities', SEARCH_FILTER_DATA.amenities, 'amenities', 8)}
             {renderFilterSection('RERA Status', SEARCH_FILTER_DATA.rerastatus, 'rera')}
           </div>
-          <div className="border-t p-4 flex justify-end">
-            <button
-              onClick={onToggle}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Apply Filters
-            </button>
-          </div>
+          
         </div>
       )}
     </div>
