@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export const getSearchData = async (page = 0, apiFilterQueryParams: string) => {
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}&city=9`;
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}`;
   if (apiFilterQueryParams.includes("listedBy")) {
-    url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}&city=9`;
+    url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}`;
   }
   let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
   const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
@@ -40,17 +40,39 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string) => {
       );
     }
   }
-  // handle Locality
   if (apiFilterQueryParams.includes("locality=")) {
-    const localityMatch = apiFilterQueryParams.match(/locality=(\d+)/);
+    // Extract the `locality=...` part
+    let localityMatch = apiFilterQueryParams.match(/locality=[^&-]*/);
+
     if (localityMatch) {
-      const [_, locality] = localityMatch;
-      console.log(locality);
+      let localityPart = localityMatch[0]; // Extracted `locality=...` string
+      let ids = localityPart
+        .split(",") // Split by commas
+        .map((part) => part.split("+")[1]) // Extract the part after `+`
+        .filter((id) => id) // Ensure non-empty IDs
+        .join(","); // Join the IDs with commas
       apiFilterQueryParams = apiFilterQueryParams.replace(
-        /locality=\d+/,
-        `locality=${locality}`
+        /locality=[^&-]*/,
+        `locality=${ids}`
       );
     }
+  }
+  // handle City
+  if (apiFilterQueryParams.includes("city=")) {
+    // Extract the numeric city value
+    const cityMatch = apiFilterQueryParams.match(/city=[^-\s]*\+?(\d+)/);
+    if (cityMatch) {
+      const city = cityMatch[0]; // Extracted numeric city value
+      const defaultCity = "9";
+      apiFilterQueryParams = apiFilterQueryParams.replace(
+        /city=[^-\s]*\+?\d+/,
+        `city=${city.split("+")[1] || defaultCity}`
+      );
+    } else {
+      console.log("City parameter not found");
+    }
+  } else {
+    apiFilterQueryParams += "&city=9";
   }
 
   return apiFilterQueryParams.replace(/-/g, "&").replace("listedBy=All", "");

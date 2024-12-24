@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import  React,{ useEffect} from "react";
+import React, { useEffect } from "react";
 import { projSearchStore } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import { update } from "lodash";
@@ -14,11 +14,9 @@ const tabs = [
   { id: "All", label: "All Listings" },
 ];
 
-
-
 export default function ProjectSearchTabs() {
   const [state, dispath] = useAtom(projSearchStore);
-  console.log(state)
+
   const [sortBy, setSortBy] = React.useState("newest");
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
@@ -30,11 +28,31 @@ export default function ProjectSearchTabs() {
     }
   };
   const sortOptions = [
-    {id:null, type:null,  value: "newest", label: "Newest First" },
-    {id:2,  type:state.listedBy == null? "minPrice"  : "price",  value: "price-low-high", label: "Price: Low to High" },
-    {id:1,  type:state.listedBy == null? "maxPrice"  : "price", value: "price-high-low", label: "Price: High to Low" },
-    {id:2, type:state.listedBy == null? "basePrice"  : "sqftPrice", value: "sqft-low-high", label: "Price/sqft: Low to High" },
-    {id:1,  type:state.listedBy == null? "basePrice"  : "sqftPrice",  value: "sqft-high-low", label: "Price/sqft: High to Low" },
+    { id: null, type: null, value: "newest", label: "Newest First" },
+    {
+      id: 2,
+      type: state.listedBy == null ? "minPrice" : "price",
+      value: "price-low-high",
+      label: "Price: Low to High",
+    },
+    {
+      id: 1,
+      type: state.listedBy == null ? "maxPrice" : "price",
+      value: "price-high-low",
+      label: "Price: High to Low",
+    },
+    {
+      id: 2,
+      type: state.listedBy == null ? "basePrice" : "sqftPrice",
+      value: "sqft-low-high",
+      label: "Price/sqft: Low to High",
+    },
+    {
+      id: 1,
+      type: state.listedBy == null ? "basePrice" : "sqftPrice",
+      value: "sqft-high-low",
+      label: "Price/sqft: High to Low",
+    },
   ];
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -55,16 +73,16 @@ export default function ProjectSearchTabs() {
     });
     handleApplyFilters();
   };
-  const handleSortBy=(option:any)=>{
+  const handleSortBy = (option: any) => {
     dispath({
-      payload:{
-        sortByfield:option.type,
-        sortType:option.id
+      payload: {
+        sortByfield: option.type,
+        sortType: option.id,
       },
-      type:"update"
-    })
+      type: "update",
+    });
     handleApplyFilters();
-  }
+  };
   const getSortyByValue = (state: any): string => {
     if (
       (state.sortType == 2 && state.sortByfield === "minPrice") ||
@@ -87,18 +105,16 @@ export default function ProjectSearchTabs() {
     ) {
       return "Price/sqft: Low to High";
     }
-  
-    return  "Newest First";
+
+    return "Newest First";
   };
-  
-  useEffect(()=>{
-  getSortyByValue(state)
-  },[state])
 
-// Default value if no conditions are met
+  useEffect(() => {
+    getSortyByValue(state);
+  }, [state]);
 
+  // Default value if no conditions are met
 
-  
   return (
     <div className="w-full bg-slate-50  sticky top-0 z-10 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-2">
@@ -151,9 +167,11 @@ export default function ProjectSearchTabs() {
               </svg>
 
               <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
-               {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
+                {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
                   "Sort By"} */}
-                {(state.sortByfield != null && state.sortType != null)?getSortyByValue(state):"New First"}
+                {state.sortByfield != null && state.sortType != null
+                  ? getSortyByValue(state)
+                  : "New First"}
               </div>
             </button>
 
@@ -167,8 +185,8 @@ export default function ProjectSearchTabs() {
                     key={option.value}
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSortBy(option.value);
-                      handleSortBy(option)
+                      // setSortBy(option.value);
+                      handleSortBy(option);
                       setIsDropdownOpen(false);
                     }}
                     className={`

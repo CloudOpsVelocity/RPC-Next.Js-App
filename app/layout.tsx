@@ -1,19 +1,17 @@
 /* eslint-disable no-undef */
 import type { Metadata } from "next";
 
-import { Montserrat,Playball } from "next/font/google";
+import { Montserrat, Playball } from "next/font/google";
 import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { GoogleTagManager, } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
 import { Provider } from "jotai";
 import montserrat from "@/font";
-
-
 
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
@@ -38,7 +36,7 @@ export default function RootLayout({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
         /> */}
-   {/* <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=0,maximum-scale=1"/> */}
+        {/* <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=0,maximum-scale=1"/> */}
         <link
           rel="apple-touch-icon"
           sizes="57x57"
@@ -105,14 +103,15 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="theme-color" content="#ffffff"/>
-       
+        <meta name="theme-color" content="#ffffff" />
       </head>
-      <GoogleTagManager gtmId="GTM-TGQ5TJV9"    />
+      {process.env.NODE_ENV !== "development" && (
+        <GoogleTagManager gtmId="GTM-TGQ5TJV9" />
+      )}
 
       <body className={`${montserrat.className}  `}>
         <MantineProvider theme={MantineTheme}>
-          <main >
+          <main>
             <SessionProvider>
               <ReactQueryProvider>
                 <Provider>

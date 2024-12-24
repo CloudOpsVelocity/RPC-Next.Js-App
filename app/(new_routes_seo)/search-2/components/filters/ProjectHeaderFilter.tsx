@@ -21,6 +21,7 @@ import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -39,7 +40,7 @@ export default function HeaderFilters() {
     handleResetQuery,
     onSearchChange,
     name,
-  } = useNewsearch();
+  } = useProjSearchMatcher();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
