@@ -58,7 +58,7 @@ export default function ProjData({
   });
 
   const { filters } = useSearchFilters();
-// console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
+  // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
@@ -175,8 +175,7 @@ export default function ProjData({
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(price))}{" "}
-        {(otherCharges?.otherCharge ||
-          Object.keys(otherCharges).length > 2) && (
+        {otherCharges?.otherCharge && Object.keys(otherCharges).length > 2 && (
           <span
             className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
             onClick={(e) => {

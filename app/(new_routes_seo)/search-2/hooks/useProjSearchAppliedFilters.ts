@@ -17,10 +17,13 @@ export default function useProjSearchAppliedFilters() {
   ) => {
     switch (type) {
       case "clearAll":
-        setAppliedFilters(setName, "clear");
+        setAppliedFilters(setName, "clear", type);
         break;
       case "bhk":
-        setAppliedFilters(setName, "clear");
+        setAppliedFilters(setName, "clear", type);
+        break;
+      case "unitType":
+        setAppliedFilters(setName, "clear", type);
         break;
     }
   };

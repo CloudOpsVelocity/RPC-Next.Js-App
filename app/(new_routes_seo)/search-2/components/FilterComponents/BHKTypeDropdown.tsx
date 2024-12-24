@@ -19,48 +19,46 @@ export default function BHKTypeDropdown({
   onToggle,
 }: BHKTypeDropdownProps) {
   const [state, dispatch] = useAtom(projSearchStore);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
-const bhkDetailsMap = new Map(
-  SEARCH_FILTER_DATA.bhkDetails.map((item) => [item.value, item.title])
-);
+  const { handleApplyFilters, handleClearFilters } =
+    useProjSearchAppliedFilters();
+  const bhkDetailsMap = new Map(
+    SEARCH_FILTER_DATA.bhkDetails.map((item) => [item.value, item.title])
+  );
 
-console.log(state)
-
-
-  
-  
   return (
     <div className="relative">
-     <button
-      className={`flex items-center justify-between gap-2 px-4 py-2 border-2 min-w-[160px] ${state.unitTypes.length >0? 'border-[#148B16] text-[#148B16] font-bold' : 'border-[#0073C6] text-[#0073C6]'} rounded-full hover:bg-[#148B16]/5`}
-      onClick={onToggle}
-    >
-      {/* Render BHK Types */}
-      {state.unitTypes.length > 0 ? (
-       <div className="flex items-center gap-0.5 max-w-[160px] overflow-hidden whitespace-nowrap">
-       {state.unitTypes.slice(0, 3).map((item, i) => (
-         <span key={item} className="mr-0.5">
-           {bhkDetailsMap.get(item)}
-           {/* Add a comma after each item except the last one */}
-           {i < 2 && ", "}
-         </span>
-       ))}
-       {state.unitTypes.length > 3 && <span>...</span>}
-     </div>
-     
+      <button
+        className={`flex items-center justify-between gap-2 px-4 py-2 border-2 min-w-[160px] ${
+          state.unitTypes.length > 0
+            ? "border-[#148B16] text-[#148B16] font-bold"
+            : "border-[#0073C6] text-[#0073C6]"
+        } rounded-full hover:bg-[#148B16]/5`}
+        onClick={onToggle}
+      >
+        {/* Render BHK Types */}
+        {state.unitTypes.length > 0 ? (
+          <div className="flex items-center gap-0.5 max-w-[160px] overflow-hidden whitespace-nowrap">
+            {state.unitTypes.slice(0, 3).map((item, i) => (
+              <span key={item} className="mr-0.5">
+                {bhkDetailsMap.get(item)}
+                {/* Add a comma after each item except the last one */}
+                {i < 2 && ", "}
+              </span>
+            ))}
+            {state.unitTypes.length > 3 && <span>...</span>}
+          </div>
+        ) : (
+          "Select BHK Type"
+        )}
 
-      ) : (
-        "Select BHK Type"
-      )}
-
-      <MdKeyboardArrowDown className="w-5 h-5" />
-</button>
+        <MdKeyboardArrowDown className="w-5 h-5" />
+      </button>
 
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 w-[300px] md:w-[600px] bg-white rounded-lg shadow-lg border p-2 z-50">
           <div className="flex items-center justify-between gap-4 pb-4 border-b">
             <button
-              onClick={() => handleClear("bhk")}
+              onClick={() => handleClearFilters("bhk")}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
               Clear Filter

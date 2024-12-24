@@ -157,23 +157,51 @@ export const ProjSearchAppliedFiltersStore = atom(
   ) => {
     const appliedFilters = get(projSearchStore);
     let queryString = "";
-    for (const [key, value] of Object.entries(appliedFilters)) {
-      // Skip areaValue and bugdetValue if they match initial values
-      if (
-        (key === "areaValue" || key === "bugdetValue") &&
-        Array.isArray(value) &&
-        value[0] === initialState[key][0] &&
-        value[1] === initialState[key][1]
-      ) {
-        continue;
-      }
+    if (type === "add") {
+      for (const [key, value] of Object.entries(appliedFilters)) {
+        // Skip areaValue and bugdetValue if they match initial values
+        if (
+          (key === "areaValue" || key === "bugdetValue") &&
+          Array.isArray(value) &&
+          value[0] === initialState[key][0] &&
+          value[1] === initialState[key][1]
+        ) {
+          continue;
+        }
 
-      if (Array.isArray(value)) {
-        if (value.length > 0) {
+        if (Array.isArray(value)) {
+          if (value.length > 0) {
+            queryString += `${queryString ? "-" : ""}${key}=${value}`;
+          }
+        } else if (value != null) {
           queryString += `${queryString ? "-" : ""}${key}=${value}`;
         }
-      } else if (value != null) {
-        queryString += `${queryString ? "-" : ""}${key}=${value}`;
+      }
+    }
+    if (type === "clear") {
+      if (clearType === "clearAll") {
+        queryString = "";
+        set(projSearchStore, { type: "reset" });
+      } else if (clearType === "bhk") {
+        queryString = queryString.replace(/-unitTypes=[^&]*/g, "");
+        set(projSearchStore, {
+          type: "update",
+          payload: { unitTypes: initialState.unitTypes },
+        });
+      } else if (clearType === "area") {
+        queryString = queryString.replace(/-area=[^&]*/g, "");
+      } else if (clearType === "budget") {
+        queryString = queryString.replace(/-bugdetValue=[^&]*/g, "");
+        set(projSearchStore, {
+          type: "update",
+          payload: { bugdetValue: initialState.bugdetValue },
+        });
+      } else if (clearType === "unitType") {
+        queryString = queryString.replace(/-unitTypes=[^&]*/g, "");
+        set(projSearchStore, {
+          payload: { propTypes: initialState.propTypes },
+          type: "update",
+        });
       }
     }
     setInQueryParams(queryString || null);

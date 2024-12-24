@@ -43,31 +43,35 @@ export default function PropertyTypeDropdown({
     Plot: { id: 32, icon: <MdLandscape className="w-5 h-5 text-green-700" /> },
   };
   const [state, dispatch] = useAtom(projSearchStore);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
-
-  console.log(state)
-
+  const { handleApplyFilters, handleClearFilters } =
+    useProjSearchAppliedFilters();
   return (
     <div className="relative">
       <button
-        className={`flex items-center justify-between min-w-[160px] gap-2 px-4 py-2 border-2 ${state.propTypes ? 'border-[#148B16] text-[#148B16] font-bold' : 'border-[#0073C6] text-[#0073C6]'} rounded-full hover:bg-[#0073C6]/5`}
-            onClick={onToggle}
-          >
-            { state.propTypes? 
+        className={`flex items-center justify-between min-w-[160px] gap-2 px-4 py-2 border-2 ${
+          state.propTypes
+            ? "border-[#148B16] text-[#148B16] font-bold"
+            : "border-[#0073C6] text-[#0073C6]"
+        } rounded-full hover:bg-[#0073C6]/5`}
+        onClick={onToggle}
+      >
+        {state.propTypes ? (
           <div className="flex items-center gap-2">
-              {/* Green dot */}
-              <span className="w-2.5 h-2.5 bg-[#148B16] rounded-full inline-block"></span>
-              {/* Property Name */}
+            {/* Green dot */}
+            <span className="w-2.5 h-2.5 bg-[#148B16] rounded-full inline-block" />
+            {/* Property Name */}
             <span>{propertyDetailsTypes?.get(state.propTypes)?.name}</span>
-        </div>
-      :"Property Type"}
+          </div>
+        ) : (
+          "Property Type"
+        )}
         <MdKeyboardArrowDown className="w-5 h-5" />
       </button>
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
           <div className="flex items-center justify-between gap-4 pb-4 border-b">
             <button
-              onClick={() => handleClear("propertyType")}
+              onClick={() => handleClearFilters("unitType")}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
               Clear Filter

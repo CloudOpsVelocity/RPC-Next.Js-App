@@ -26,7 +26,9 @@ function LeftSection({ mutate, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ["searchQuery" + apiFilterQueryParams ?? ""],
+      queryKey: [
+        "searchQuery" + apiFilterQueryParams ? apiFilterQueryParams : "",
+      ],
       queryFn: async ({ pageParam = 0 }) => {
         const response = await getSearchData(
           pageParam,
@@ -43,6 +45,7 @@ function LeftSection({ mutate, serverData }: Props) {
       },
       ...RTK_CONFIG,
     });
+  console.log(data);
 
   const rowVirtualizer = useVirtualizer({
     count:
@@ -73,6 +76,7 @@ function LeftSection({ mutate, serverData }: Props) {
   const renderProjectCard = useCallback(
     (virtualRow: any, index: number) => {
       const eachOne = allItems[virtualRow.index];
+
       return (
         <div
           key={virtualRow.key}
@@ -96,7 +100,13 @@ function LeftSection({ mutate, serverData }: Props) {
         </div>
       );
     },
-    [allItems, mutate, refetch, rowVirtualizer.measureElement]
+    [
+      allItems,
+      mutate,
+      refetch,
+      rowVirtualizer.measureElement,
+      apiFilterQueryParams,
+    ]
   );
 
   const EmptyState = memo(function EmptyState() {
