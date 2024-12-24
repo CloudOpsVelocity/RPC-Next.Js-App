@@ -17,6 +17,7 @@ export default function BuyRent({ openDropdown, handleDropdownToggle }: Props) {
       type: "update",
       payload: {
         cg: value,
+        bugdetValue: value === "R" ? [0, 100000] : [500000, 6000000000],
       },
     });
     handleApplyFilters(() => handleDropdownToggle("buy"));
