@@ -9,7 +9,7 @@ type Props = {
 
 function BlogCard({data}: Props) {
   return ( 
-    <div className='w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] bg-white '>
+    <div className='w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] bg-white min-w-[280px] '>
         <Image
             src={apartmentCardImg} 
             alt="blog Image" width={100} height={269} 

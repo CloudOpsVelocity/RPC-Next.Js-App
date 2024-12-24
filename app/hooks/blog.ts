@@ -40,11 +40,13 @@ const dummyAllBlogData = [
       content:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using  that it has amore-or-less normal distribution",
       date:"May 20th 2024"
     },
-  ]
+];
 
 const initailBlogData = {
-    selectedBlog: null,
-    allBlogData: dummyAllBlogData
+    selectedBlog: 0,
+    allBlogData: dummyAllBlogData,
+    blogPageData: null,
+    isBlogPageOpen: false,
 }
 
 export const blogDetails = atom(initailBlogData);

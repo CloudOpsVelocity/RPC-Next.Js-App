@@ -10,7 +10,7 @@ function BlogThirdBlock() {
     const data = allBlogData[0];
     
     return (
-        <div className='w-[80%] flex justify-between items-center border shadow-[0px_5px_4px_0px_rgba(221,221,221,0.25)] rounded-[5px] border-solid border-[#E2E2E2] bg-white mb-[3%]'>
+        <div className='w-[80%] md:w-[90%] flex justify-between items-center border shadow-[0px_5px_4px_0px_rgba(221,221,221,0.25)] rounded-[5px] border-solid border-[#E2E2E2] bg-white mb-[3%]'>
             <div className='mx-[20px] w-[50%] '>
                 <ContentBox
                     heading={data && data.heading ? data.heading : ""}

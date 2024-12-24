@@ -6,7 +6,7 @@ import BlogDetailRightSection from './BlogDetailRightSection';
 
 function BlogDetailsBox() {
   return (
-    <div className='flex justify-between items-center mb-[3%]  w-[80%]'>
+    <div className='flex justify-between items-start mb-[3%] w-[80%] md:w-[90%] md:gap-[20px] '>
       <BlogDetailLeftSection />
       <BlogDetailRightSection />
     </div>
