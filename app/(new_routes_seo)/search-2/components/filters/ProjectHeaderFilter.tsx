@@ -288,8 +288,8 @@ export default function HeaderFilters() {
                     ) : (
                       <div className="p-3 text-gray-500">
                         {name
-                          ? "No matching results found"
-                          : "Start typing to search"}
+                          ? "No suggestions available"
+                          : "Search or type something"}
                       </div>
                     )}
                   </div>
