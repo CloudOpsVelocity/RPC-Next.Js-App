@@ -470,7 +470,7 @@ export default function HeaderFilters() {
   }, []);
 
   const toggleFilter = (category: string, value: string) => {
-    if (category === "bhk") {
+    if (category === "bhk" || category === "amenities") {
       setSelectedFilters((prev) => {
         const current = prev[category] || [];
         const updated = current.includes(value)

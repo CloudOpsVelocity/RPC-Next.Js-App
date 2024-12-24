@@ -20,6 +20,33 @@ export default function ShowAllFiltersButton({ selectedFilters, toggleFilter, is
     Villament: <MdMapsHomeWork className="w-5 h-5 text-green-700" />,
     Plot: <MdLandscape className="w-5 h-5 text-green-700" />,
   };
+  const propertyiconss={
+    apt:{
+      id:35,
+      name:"Apartment",
+      icon:<MdApartment className="w-5 h-5 text-green-700" />
+    },
+    Rwh:{
+      id:33,
+      name:"RowHouse",
+      icon:<MdHouse className="w-5 h-5 text-green-700" />
+    },
+    vil:{
+      id:35,
+      name:"Villa",
+      icon:<MdVilla className="w-5 h-5 text-green-700" />
+    },
+    vlmt:{
+      id:35,
+      name:"Villament",
+      icon:<MdMapsHomeWork className="w-5 h-5 text-green-700" />
+    },
+    plt:{
+      id:35,
+      name:"Plot",
+      icon:<MdLandscape className="w-5 h-5 text-green-700" />
+    }
+  }
 
   const toggleExpand = (section: string) => {
     setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
@@ -28,7 +55,7 @@ export default function ShowAllFiltersButton({ selectedFilters, toggleFilter, is
   const renderFilterSection = (title: string, data: any[], category: string, initialDisplay: number = 5) => {
     const isExpanded = expandedSections[category] || false;
     const displayData = isExpanded ? data : data.slice(0, initialDisplay);
-
+    console.log(displayData, "we are defineding the result")
     return (
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-3">{title}</h3>
@@ -39,6 +66,7 @@ export default function ShowAllFiltersButton({ selectedFilters, toggleFilter, is
                 type="checkbox"
                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 checked={selectedFilters[category]?.includes(item.Label || item.title || item.constDesc)}
+
                 onChange={() => toggleFilter(category, item.Label || item.title || item.constDesc)}
               />
               {category === 'propertyType' && propertyIcons[item as keyof typeof propertyIcons]}
