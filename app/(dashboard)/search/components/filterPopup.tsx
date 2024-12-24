@@ -285,6 +285,37 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
           <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600] mb-[2%] ml-[14px] md:ml-0 ">
             {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
           </p>
+        {/*   <div className="mb-6">
+              
+              <h3
+              className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
+              id="Budget"
+            >
+              Budget
+            </h3>
+            <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600] mb-[2%] ml-[14px] md:ml-0  ">
+              ₹ {toFormattedString(state.bugdetValue[0])} - ₹{" "}
+              {toFormattedString(state.bugdetValue[1])}
+            </p>
+              <RangeSlider
+              color="green"
+              key="budgetSlider"
+              onChange={(value) => toggleFilter("bugdetValue", value)}
+              style={{ width: "80%" }}
+              defaultValue={[
+                state?.bugdetValue[0] ?? 500000,
+                state?.bugdetValue[1] ?? 600000000,
+              ]}
+              value={state.bugdetValue}
+              min={0}
+              max={state.cg === "R" ? 100000 : 600000000}
+              step={state.cg === "R" ? 1 : 100000}
+              label={(value) => toFormattedString(value)}
+              // size={isMobile ? "xs" : "md"}
+              className="ml-[14px] md:ml-0 "
+              // classNames={{markLabel: S.sliderMarkLable}}
+            />
+          </div> */}
           <RangeSlider
             color="green"
             marks={[

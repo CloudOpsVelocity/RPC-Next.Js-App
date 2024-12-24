@@ -62,6 +62,8 @@ export default function GalleryBlock({
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
+
+
   return (
     <div
       className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
@@ -193,26 +195,37 @@ export default function GalleryBlock({
             Photos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap relative">
-            {images?.map((img, ind) => (
-              <div
-                className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
-                key={`gallery_block_${ind}`}
-              >
-                <Image
-                  src={img.split(",")[1] as string}
-                  alt={`${projName} ${AltText(img)}`}
-                  className={clsx(
-                    `!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300`,
-                    selectedMedia?.split("?")[0] === img.split("?")[0] &&
-                      "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
-                  )}
-                  onClick={() => handleMediaClick(img as string, ind)}
-                  unoptimized
-                  fill
-                />
-              </div>
-            ))}
-          </div>
+            {images?.map((img, ind) => {
+              // Skip images that contain "masterplan" in the URL
+              if (img.includes("masterplan")) return null;
+
+              // Extract the image URL from the comma-separated string and split it to get the title and alt text
+              const imageUrl = img.split(",")[1];
+              const imageName = imageUrl.split("/")[6]?.split(".")[0];
+
+              return (
+                <div
+                  className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
+                  key={`gallery_block_${ind}`}
+                >
+                  <Image
+                    src={imageUrl}
+                    alt={imageName}
+                    title={imageName}
+                    className={clsx(
+                      `!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300`,
+                      selectedMedia?.split("?")[0] === img.split("?")[0] &&
+                        "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                    )}
+                    onClick={() => handleMediaClick(img, ind)}
+                    unoptimized
+                    fill
+                  />
+                </div>
+              );
+            })}
+        </div>
+
           {videos && videos.length > 0 && (
             <>
               <h3 className="text-[#737579] font-[600] text-[20px] sm:pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] scroll-mt-[400px]">
@@ -294,6 +307,10 @@ const AltText = (url: string) => {
     return `Image ${url.split("?")[0].split("/").pop()?.split(".")[0]}`;
   }
 };
+
+
+
+
 
 const VideoALText = (url: string) => {
   if (url.includes("walk-Through-video")) {

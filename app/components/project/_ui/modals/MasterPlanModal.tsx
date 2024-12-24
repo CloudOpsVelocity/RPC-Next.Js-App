@@ -79,6 +79,7 @@ export default function FullScreenMasterPlanModal({
           <source media="(min-width: 1200px)" srcSet={imageUrl.split(",")[3]} />
           <Image
             alt={`${title} Master Plan`}
+            title={imageUrl.split(",")[3].split("/")[6].split(".")[0]}
             src={imageUrl.split(",")[3]}
             fill
             className="cursor-pointer max-h-[600px] object-contain shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"

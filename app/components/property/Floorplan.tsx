@@ -89,6 +89,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                 <source media="(min-width: 1200px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[3]} />
                 <Image
                   alt="floor plan"
+                  title={data?.projMedia?.floorPlanUrl.split("/")[6].split(".")[0]}
                   src={data?.projMedia?.floorPlanUrl}
                   width={750}
                   height={750}
