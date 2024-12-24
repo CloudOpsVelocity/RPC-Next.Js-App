@@ -187,6 +187,7 @@ export default function HeaderFilters() {
         break;
     }
   };
+  console.log(selectedFilters)
   return (
     <>
       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
@@ -331,7 +332,6 @@ export default function HeaderFilters() {
               Filters
             </button>
           </div>
-
           {Object.entries(selectedFilters).some(
             ([_, values]) => values.length > 0
           ) && (
