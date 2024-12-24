@@ -23,7 +23,9 @@ const RightSection = ({ serverData }: any) => {
   const [apiFilterQueryParams] = useQueryState("sf");
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
-      queryKey: ["searchQuery" + apiFilterQueryParams ?? ""],
+      queryKey: [
+        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+      ],
       queryFn: async ({ pageParam = 0 }) => {
         const response = await getSearchData(
           pageParam,

@@ -24,10 +24,10 @@ function LeftSection({ mutate, serverData }: Props) {
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
       queryKey: [
-        "searchQuery" + apiFilterQueryParams ? apiFilterQueryParams : "",
+        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
         const response = await getSearchData(
@@ -43,13 +43,11 @@ function LeftSection({ mutate, serverData }: Props) {
         }
         return nextPage;
       },
-      ...RTK_CONFIG,
+      // ...RTK_CONFIG,
     });
-  console.log(data);
-
+  const allItems = data?.pages?.flat() || [];
   const rowVirtualizer = useVirtualizer({
-    count:
-      data?.pages?.reduce((acc, page) => acc + (page?.length ?? 0), 0) ?? 0,
+    count: allItems.length,
     getScrollElement: () => containerRef.current,
     estimateSize: () => 300,
     overscan: 1,
@@ -71,10 +69,8 @@ function LeftSection({ mutate, serverData }: Props) {
     }
   }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]);
 
-  const allItems = data?.pages?.flat() || [];
-
   const renderProjectCard = useCallback(
-    (virtualRow: any, index: number) => {
+    (virtualRow: any) => {
       const eachOne = allItems[virtualRow.index];
 
       return (
@@ -100,13 +96,7 @@ function LeftSection({ mutate, serverData }: Props) {
         </div>
       );
     },
-    [
-      allItems,
-      mutate,
-      refetch,
-      rowVirtualizer.measureElement,
-      apiFilterQueryParams,
-    ]
+    [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
   );
 
   const EmptyState = memo(function EmptyState() {
