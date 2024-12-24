@@ -2,18 +2,22 @@ import React, { useRef, useEffect } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import SearchProjBugdetFilter from "./buget";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+import { useAtom } from "jotai";
+import { projSearchStore } from "../../store/projSearchStore";
+import { toFormattedString } from "./buget/budget";
 
 interface BudgetDropdownProps {
   isOpen: boolean;
   onToggle: () => void;
 }
 
+
 export default function BudgetDropdown({
   isOpen,
   onToggle,
 }: BudgetDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+  const [state, dispath] = useAtom(projSearchStore);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -36,10 +40,13 @@ export default function BudgetDropdown({
   return (
     <div className="relative">
       <button
-        className="flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full hover:bg-[#0073C6]/5"
+        className={`flex items-center gap-2 px-4 py-2 border-2 
+          ${state.bugdetValue.length>1  ? "border-[#148B16] text-[#148B16] font-bold"
+            : "border-[#0073C6] text-[#0073C6]"}
+             rounded-full hover:bg-[#0073C6]/5`}
         onClick={onToggle}
       >
-        Budget
+        {state.bugdetValue.length>1  ?  `${toFormattedString(state.bugdetValue[0])} - ${toFormattedString(state.bugdetValue[1])}`:"Budget"}
         <MdKeyboardArrowDown
           className={`w-5 h-5 transition-transform ${
             isOpen ? "rotate-180" : ""
