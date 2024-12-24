@@ -42,7 +42,7 @@ console.log(state)
          <span key={item} className="mr-0.5">
            {bhkDetailsMap.get(item)}
            {/* Add a comma after each item except the last one */}
-           {i < 2 && ", "}
+           {i < state.unitTypes.slice(0, 3).length - 1 && ", "}
          </span>
        ))}
        {state.unitTypes.length > 3 && <span>...</span>}
