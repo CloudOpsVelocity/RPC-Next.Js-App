@@ -15,9 +15,11 @@ const nextConfig = {
   // typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+    // cpus
 
     // ppr: true,
   },
+
   images: {
     // unoptimized: true,
     // imageSizes: [
@@ -63,6 +65,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     return config;

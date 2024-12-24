@@ -43,6 +43,7 @@ function LeftSection({ mutate, serverData }: Props) {
         }
         return nextPage;
       },
+      cacheTime: 300000,
       // ...RTK_CONFIG,
     });
   const allItems = data?.pages?.flat() || [];
