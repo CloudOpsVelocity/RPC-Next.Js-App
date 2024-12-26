@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import {
   MdSearch,
   MdClose,
@@ -22,6 +22,7 @@ import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
+import { myClientLogger } from "@/app/utils/clientLogger";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -188,8 +189,38 @@ export default function HeaderFilters() {
         break;
     }
   };
-  const handleFormSubmit = async () => {
-    const formData = new FormData();
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_BACKEND_URL
+      }/matcher/string?word=${searchQuery}&cityId=${
+        state.city?.split("+")[1] || 9
+      }`
+    );
+    const data = await res.json();
+    const buffer = new ArrayBuffer(10);
+    console.log(data);
+    if (Object.hasOwn(data, "ids")) {
+      let ids = extractApiValues(data.ids);
+      if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+        dispatch({
+          type: "update",
+          payload: {
+            ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
+            ...(ids.PT && { propTypes: parseInt(ids.PT as string) }),
+            ...(ids.BH && { unitTypes: [parseInt(ids.BH as string)] }),
+            ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
+          },
+        });
+      }
+
+      handleApplyFilters();
+      handleResetQuery();
+      setIsSearchOpen(false);
+      myClientLogger("info", data);
+      return;
+    }
   };
   return (
     <>
@@ -205,7 +236,10 @@ export default function HeaderFilters() {
                   openDropdown={openDropdown}
                   handleDropdownToggle={handleDropdownToggle}
                 />
-                <div className=" relative flex w-full items-center overflow-hidden ">
+                <form
+                  onSubmit={handleFormSubmit}
+                  className=" relative flex w-full items-center overflow-hidden "
+                >
                   <input
                     type="text"
                     className="w-full py-2 px-4 outline-none"
@@ -215,7 +249,7 @@ export default function HeaderFilters() {
                     onFocus={() => setIsSearchOpen(true)}
                   />
                   <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
-                </div>
+                </form>
               </div>
               {isLoading ? (
                 <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">

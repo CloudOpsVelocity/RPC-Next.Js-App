@@ -1,30 +1,48 @@
-import { createLogger, format, transports } from 'winston';
-import 'winston-daily-rotate-file';
-const { combine, timestamp, json ,printf,align,prettyPrint,errors,label,logstash,cli,colorize,metadata,ms,padLevels,simple,splat} = format;
+import axios from "axios";
+import { createLogger, format, transports } from "winston";
+import "winston-daily-rotate-file";
+const {
+  combine,
+  timestamp,
+  json,
+  printf,
+  align,
+  prettyPrint,
+  errors,
+  label,
+  logstash,
+  cli,
+  colorize,
+  metadata,
+  ms,
+  padLevels,
+  simple,
+  splat,
+} = format;
 // Create the logger instance
 const logger = createLogger({
-  level: 'info',
+  level: "info",
   format: combine(
-    timestamp({ format: 'DD-MM-YYYY HH:mm:ss Z' }), // Indian Standard Time (IST) is +05:30
+    timestamp({ format: "DD-MM-YYYY HH:mm:ss Z" }), // Indian Standard Time (IST) is +05:30
     json(),
     prettyPrint(),
-    align(),
+    align()
   ),
   transports: [
     new transports.Console({
       format: combine(
-        timestamp({ format: 'DD-MM-YYYY HH:mm:ss Z' }), // Indian Standard Time (IST) is +05:30
+        timestamp({ format: "DD-MM-YYYY HH:mm:ss Z" }), // Indian Standard Time (IST) is +05:30
         json(),
         prettyPrint(),
-        align(),
+        align()
       ),
     }),
     new transports.DailyRotateFile({
-      dirname: 'logs',
-        filename: 'nextjs-app-logs-%DATE%.txt', // Save as .txt
+      dirname: "logs",
+      filename: "nextjs-app-logs-%DATE%.txt", // Save as .txt
       // datePattern: 'YYYY-MM-DD',
-      datePattern: 'DD-MM-YYYY',
-      maxFiles: '30d',
+      datePattern: "DD-MM-YYYY",
+      maxFiles: "30d",
     }),
   ],
 });
