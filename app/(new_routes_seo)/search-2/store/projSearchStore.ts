@@ -221,3 +221,24 @@ projSearchStore.onMount = (setAtom) => {
     });
   }
 };
+export const diffToProjFromListing = {
+  proj: [
+    "facings",
+    "furnish",
+    "propStatus",
+    "listedBy",
+    "sortByfield",
+    "sortType",
+  ],
+  A: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
+  I: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
+  B: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
+  All: [
+    "facings",
+    "furnish",
+    "propStatus",
+    "listedBy",
+    "sortByfield",
+    "sortType",
+  ],
+};

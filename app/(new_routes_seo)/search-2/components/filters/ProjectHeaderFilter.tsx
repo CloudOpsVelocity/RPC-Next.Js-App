@@ -188,7 +188,9 @@ export default function HeaderFilters() {
         break;
     }
   };
-  console.log(selectedFilters)
+  const handleFormSubmit = async () => {
+    const formData = new FormData();
+  };
   return (
     <>
       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">

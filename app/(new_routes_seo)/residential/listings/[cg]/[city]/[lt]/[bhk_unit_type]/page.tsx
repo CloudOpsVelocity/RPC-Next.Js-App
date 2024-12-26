@@ -13,6 +13,8 @@ import {
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import { getListingDetails } from "@/app/utils/api/property";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
@@ -32,26 +34,26 @@ export default async function Page({
   if (!values) return notFound();
   const { CG, BH, PT, LT } = extractListingParamsValues(values);
   let severData;
-   if(PT === '36'){
+  if (PT === "36") {
     severData = await getSearchData(
       `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
-  );
-   }
-   else{
+    );
+  } else {
     severData = await getProjSearchData(
       `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
-  );
-   }
-  return (
-    PT === '36' ?
-    <ListingSearchPage 
-    serverData={severData}
-    frontendFilters={{
-      locality: [`${lt}+${LT}`],
-      unitTypes: [parseInt(BH as string)],
-      propTypes: parseInt(PT as string),
-      cg: CG,
-    }} /> :
+    );
+  }
+  return PT === "36" ? (
+    <ListingSearchPage
+      serverData={severData}
+      frontendFilters={{
+        locality: [`${lt}+${LT}`],
+        unitTypes: [parseInt(BH as string)],
+        propTypes: parseInt(PT as string),
+        cg: CG,
+      }}
+    />
+  ) : (
     <ProjectSearchPage
       serverData={severData}
       frontendFilters={{
@@ -79,6 +81,33 @@ export async function generateStaticParams() {
   //   }
   // });
   // return slugs;
+}
+export async function generateMetadata(
+  { params }: any,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  if (!params.bhk_unit_type.includes("listing")) {
+    return {
+      title: "Listing Search Page",
+      description: "Listing Search Page",
+    };
+  }
+  const id = params.slug.split("-")[1];
+  const {
+    listing: data,
+    nearByLocations,
+    totalPrice,
+  } = await getListingDetails(id as string);
+  return {
+    title: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName} on getrightproperty`,
+    description: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${
+      data.ltName
+    } Get more details like availability price possession date posted by on ${
+      process.env.NEXT_PUBLIC_URL
+    }/`,
+  };
 }
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;

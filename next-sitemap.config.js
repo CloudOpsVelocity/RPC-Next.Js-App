@@ -10,14 +10,13 @@ module.exports = {
     "/test/*",
   ],
   generateIndexSitemap: false,
-  // generateRobotsTxt: true,
-
-  // robotsTxtOptions: {
-  //     policies: [
-  //         {
-  //             userAgent: '*',
-  //             allow: '/',
-  //         }
-  //     ]
-  // }
+  generateRobotsTxt: true,
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
+  },
 };

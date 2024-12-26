@@ -2,9 +2,14 @@
 
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
-import { projSearchStore } from "../../store/projSearchStore";
+import {
+  diffToProjFromListing,
+  initialState,
+  projSearchStore,
+} from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import { update } from "lodash";
+import { SearchFilter } from "@/app/types/search";
 
 const tabs = [
   { id: null, label: "Projects" },
@@ -16,8 +21,6 @@ const tabs = [
 
 export default function ProjectSearchTabs() {
   const [state, dispath] = useAtom(projSearchStore);
-
-  const [sortBy, setSortBy] = React.useState("newest");
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -65,11 +68,26 @@ export default function ProjectSearchTabs() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isDropdownOpen]);
   const handleTabsChange = (value: string | null) => {
+    const updatedFilters =
+      value === null
+        ? { ...state, listedBy: null, sortByfield: null, sortType: null }
+        : {
+            ...state,
+            ...Object.fromEntries(
+              (
+                diffToProjFromListing[
+                  value as keyof typeof diffToProjFromListing
+                ] ?? []
+              ).map((key: any) => [
+                key,
+                initialState[key as keyof SearchFilter] ?? null,
+              ])
+            ),
+            listedBy: value,
+          };
     dispath({
-      payload: {
-        listedBy: value,
-      },
       type: "update",
+      payload: updatedFilters,
     });
     handleApplyFilters();
   };
@@ -109,9 +127,9 @@ export default function ProjectSearchTabs() {
     return "Newest First";
   };
 
-  useEffect(() => {
-    getSortyByValue(state);
-  }, [state]);
+  // useEffect(() => {
+  //   getSortyByValue(state);
+  // }, [state]);
 
   // Default value if no conditions are met
 
