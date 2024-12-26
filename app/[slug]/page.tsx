@@ -63,4 +63,4 @@ export const generateStaticParams = async () => {
 };
 
 export const dynamic = "force-dynamic";
-export const dyamicParams = true;
+export const dynamicParams = true;

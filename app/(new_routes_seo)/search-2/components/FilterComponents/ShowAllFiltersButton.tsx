@@ -16,7 +16,7 @@ import { RangeSlider } from "@mantine/core";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import LocalitySearch from "./city/searchInputSearch";
-import dynamic from "next/dynamic";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
@@ -40,6 +40,7 @@ export default function ShowAllFiltersButton({
   const [expandedSections, setExpandedSections] = useState<{
     [key: string]: boolean;
   }>({});
+  const { handleClearFilters } = useProjSearchAppliedFilters();
   const locations: Location[] = [
     { name: "Whitefield", stringUrl: null, stringId: "563", type: "Locality" },
     {
@@ -138,7 +139,6 @@ export default function ShowAllFiltersButton({
   ) => {
     const isExpanded = expandedSections[category] || false;
     const displayData = isExpanded ? data : data.slice(0, initialDisplay);
-    console.log(displayData, "we are defining the result");
     const radioorChecked = [
       "status",
       "rera",
@@ -229,7 +229,10 @@ export default function ShowAllFiltersButton({
         <div className="absolute top-full flex flex-col right-0 mt-2 min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
           <div className="flex items-center justify-between gap-4 pb-4 border-b  ">
             <button
-              onClick={onToggle}
+              onClick={() => {
+                handleClearFilters("clearAll");
+                onToggle();
+              }}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
               Clear Filter
@@ -394,7 +397,7 @@ export default function ShowAllFiltersButton({
                 onChange={handleLocationChange}
                 placeholder="Search locations..."
                 label="Location"
-                multiple={true}
+                multiple
               />
               <LocalitySearch<Location>
                 data={builders}
@@ -403,7 +406,7 @@ export default function ShowAllFiltersButton({
                 onChange={handleLocationChange}
                 placeholder="Search Builders..."
                 label="Builder"
-                multiple={true}
+                multiple
               />
             </div>
           </div>

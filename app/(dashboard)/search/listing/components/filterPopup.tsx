@@ -37,9 +37,10 @@ const FilterPopup = ({ close }: { close: () => void }) => {
   const [current, setCurrent] = useState("Bhk");
   const propKeys = [35, 33, 31, 34, 32, 36];
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
-  const serverCity = useAtomValue(serverCityAtom)
+  const serverCity = useAtomValue(serverCityAtom);
   const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
+    queryFn: () =>
+      getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
   });
@@ -382,18 +383,18 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             Photos & Videos
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }) => {
+            {SEARCH_FILTER_DATA.photoAvail.map(({ value, title }) => {
               return (
                 <Radio
-                  key={id}
+                  key={value}
                   iconColor="dark.8"
                   color="green"
-                  label={label}
-                  value={id}
+                  label={title}
+                  value={value}
                   name="photo"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                  onClick={() => setSingleType("pnb", id)}
-                  checked={filters.pnb === id}
+                  onClick={() => setSingleType("pnb", value)}
+                  checked={filters.pnb === value}
                 />
               );
             })}
@@ -453,19 +454,19 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             Used or Not Used
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {SEARCH_FILTER_DATA.used.map(({ id, label }) => {
+            {SEARCH_FILTER_DATA.UsedorNotUsed.map(({ value, title }) => {
               return (
                 <Radio
-                  id={`used_${id}`}
-                  key={id}
+                  id={`used_${value}`}
+                  key={value}
                   iconColor="dark.8"
                   color="green"
-                  label={label}
-                  value={id}
+                  label={title}
+                  value={value}
                   name="photo"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                  onClick={() => setSingleType("pnb", id)}
-                  checked={filters.pnb === id}
+                  onClick={() => setSingleType("pnb", value)}
+                  checked={filters.pnb === value}
                 />
               );
             })}
