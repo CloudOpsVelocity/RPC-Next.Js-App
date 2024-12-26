@@ -165,7 +165,27 @@ const isproject=state.listedBy == null;
             </button>
           </div>
           <div className='flex flex-col justify-start max-h-[60vh] overflow-y-auto'>
-            <div className="p-6 flex  flex-col items-start  flex-wrap justify-between   ">
+          <div className='flex flex-col mb-6 ml-4 gap-6'>
+              <LocalitySearch<Location>
+                data={locations}
+                displayKey="name"
+                valueKey="stringId"
+                onChange={handleLocationChange}
+                placeholder="Search locations..."
+                label="Location"
+                multiple={true}
+            />
+              <LocalitySearch<Location>
+                data={builders}
+                displayKey="name"
+                valueKey="stringId"
+                onChange={handleLocationChange}
+                placeholder="Search Builders..."
+                label="Builder"
+                multiple={true}
+            />
+            </div>
+            <div className="p-6 flex  flex-col items-start  flex-wrap justify-between">
               {isproject&&renderFilterSection('Project Status', SEARCH_FILTER_DATA.projectstatus, 'status')}
               {renderFilterSection('Listing Status', SEARCH_FILTER_DATA.listingStatus, 'listingStatus')}
               {renderFilterSection('Property Type', Object.keys(propertyiconss), 'propertyType')}
@@ -201,7 +221,6 @@ const isproject=state.listedBy == null;
                           mb={"5%"}
                         />
             </div>
-  
             <div className="mb-6 ml-4">
                 
                 <h3
@@ -243,28 +262,7 @@ const isproject=state.listedBy == null;
             {!isproject&&renderFilterSection('Photos & Videos', SEARCH_FILTER_DATA.photoAvail, 'PhotosVedios')}
             {!isproject&&renderFilterSection('Furnishing', SEARCH_FILTER_DATA.furnish, 'furnish')}
             {renderFilterSection('Phases', SEARCH_FILTER_DATA.furnish, 'Phases')}
-            
             </div>
-            <div className='flex flex-col mb-6 ml-4 gap-6'>
-              <LocalitySearch<Location>
-                data={locations}
-                displayKey="name"
-                valueKey="stringId"
-                onChange={handleLocationChange}
-                placeholder="Search locations..."
-                label="Location"
-                multiple={true}
-            />
-              <LocalitySearch<Location>
-                data={builders}
-                displayKey="name"
-                valueKey="stringId"
-                onChange={handleLocationChange}
-                placeholder="Search Builders..."
-                label="Builder"
-                multiple={true}
-            />
-          </div>
             </div>
         </div>
       )}
