@@ -14,6 +14,7 @@ import {
   getProjectDetails,
   getReportConstData,
 } from "@/app/utils/api/property";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
@@ -68,6 +69,7 @@ export default async function Page({ params }: Props) {
       ? data.propName
       : `${data.bhkName ?? ""} ${data.propTypeName} For
     ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName}`;
+
     serverData = {
       TITLE_OF_PROP,
       data,
@@ -94,6 +96,33 @@ export default async function Page({ params }: Props) {
   ) : (
     <ListingDetailsPage params={params} {...serverData} />
   );
+}
+export async function generateMetadata(
+  { params }: any,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  if (!params.bhk_unit_type.includes("listing")) {
+    return {
+      title: "Listing Search Page",
+      description: "Listing Search Page",
+    };
+  }
+  const id = params.bhk_unit_type.split("-")[1];
+  const {
+    listing: data,
+    nearByLocations,
+    totalPrice,
+  } = await getListingDetails(id as string);
+  return {
+    title: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName} on getrightproperty`,
+    description: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${
+      data.ltName
+    } Get more details like availability price possession date posted by on ${
+      process.env.NEXT_PUBLIC_URL
+    }/`,
+  };
 }
 
 // export async function generateStaticParams() {

@@ -85,7 +85,9 @@ const FloorplanDetailsCard: React.FC<Props> = ({
               {mergedData?.bhk} |
               <span className="font-[500] ml-[4px] text-[12px] sm:text-[14px] xl:text-[20px] text-[#000]">
                 {" "}
-                {mergedData?.bedCount} {`Bed${mergedData?.bedCount % 1 !== 0 ? " + Study" : ""}`} - {mergedData?.bathCount} Bath
+                {parseInt(mergedData?.bedCount)}{" "}
+                {`Bed${mergedData?.bedCount % 1 !== 0 ? " + Study" : ""}`} -{" "}
+                {mergedData?.bathCount} Bath
               </span>
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
@@ -155,7 +157,9 @@ const FloorplanDetailsCard: React.FC<Props> = ({
               {mergedData.bhk} |
               <span className="font-[600] ml-[4px] text-[14px] sm:text-[14px] lg:text-[20px] text-[#000]">
                 {" "}
-                {mergedData.bedCount} {`Bed${mergedData?.bedCount % 1 !== 0 ? " + Study" : ""}`} - {mergedData.bathCount} Bath
+                {mergedData.bedCount}{" "}
+                {`Bed${mergedData?.bedCount % 1 !== 0 ? " + Study" : ""}`} -{" "}
+                {mergedData.bathCount} Bath
               </span>
             </p>
             <p className="gap-[4px] font-[500] text-[14px] lg:text-[16px] text-[#303A42] mb-[8px] flex justify-start items-start">

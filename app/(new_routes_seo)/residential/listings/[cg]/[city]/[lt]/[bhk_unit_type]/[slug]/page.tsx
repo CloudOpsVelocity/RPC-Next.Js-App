@@ -21,6 +21,7 @@ import {
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: {
     cg: string;
@@ -54,6 +55,7 @@ export default async function Page({ params }: Props) {
     ? data.propName
     : `${data.bhkName ?? ""} ${data.propTypeName} For
   ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName}`;
+
   if (!data.propIdEnc) {
     console.log("slug found data not coming for this listing" + pathname);
     notFound();
@@ -78,4 +80,25 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
   const slugs = generateSlugs("listing-search-seo", "solo-listing");
   return slugs;
+}
+export async function generateMetadata(
+  { params }: any,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const id = params.slug.split("-")[1];
+  const {
+    listing: data,
+    nearByLocations,
+    totalPrice,
+  } = await getListingDetails(id as string);
+  return {
+    title: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName} on getrightproperty`,
+    description: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${
+      data.ltName
+    } Get more details like availability price possession date posted by on ${
+      process.env.NEXT_PUBLIC_URL
+    }/`,
+  };
 }

@@ -1,127 +1,89 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+"use client";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
+import { IoLocationSharp } from "react-icons/io5";
 import { useQuery } from "react-query";
-import { FaSearch, FaCheck } from "react-icons/fa";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
-import { FaChevronDown, FaLocationDot, FaSpinner } from "react-icons/fa6";
-import { useAtom, useSetAtom } from "jotai";
-import { homeSearchFiltersAtom } from "@/app/store/home";
-import { CityData } from "@/app/(dashboard)/new/search";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import useSearchFilters from "@/app/hooks/search";
+import { useAtom, useAtomValue } from "jotai";
+import { serverCityAtom } from "@/app/store/search/serverCity";
 import { projSearchStore } from "../../../store/projSearchStore";
+import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
 
 interface City {
-  id: string;
+  id: number;
   name: string;
+  cityid: number;
+  isactive: string;
+  stateId: number;
+  parentId: number;
+  type: number;
+  createdate: string;
+  modidate: string;
 }
 
-interface DefaultCityResponse {
-  data: {
-    city: string;
-    cityId: string;
-  };
-  status: boolean;
-}
-
-export default function ProjectSearchCityDropDown({
-  isOpen,
-  setIsOpen,
-  cityData,
-}: {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  cityData?: CityData;
-}) {
+export default function ProjSearchCityDropDown() {
+  const [state, dispatch] = useAtom(projSearchStore);
+  let servercityData = `Bengaluru+9`;
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
-  const [focusedIndex, setFocusedIndex] = useState(-1);
-  const [cityError, setCityError] = useState<string | null>(null); // New state for city error
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const optionsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const [state, dispatch] = useAtom(projSearchStore);
-  const getUserCity = async (
-    cityData?: CityData
-  ): Promise<DefaultCityResponse> => {
-    if (cityData) {
-      return {
-        data: {
-          city: cityData.cityName,
-          cityId: cityData.cityId,
-        },
-        status: true,
-      };
-    }
-    try {
-      const res = await fetch(`/api/get-user-city`, {
-        cache: "no-store",
-      });
-      if (!res.ok) throw new Error("Failed to fetch default city");
-      return await res.json();
-    } catch (error) {
-      console.error("Error fetching default city:", error);
-      throw error;
-    }
-  };
-  const {
-    data: DefaultCity,
-    isLoading: defaultCityLoading,
-    error: defaultCityError,
-  } = useQuery<DefaultCityResponse, Error>({
-    queryKey: ["my-location"],
-    queryFn: async () => await getUserCity(cityData),
-    onSuccess: (data) => {
-      if (data.status) {
-        dispatch({
-          type: "update",
-          payload: {
-            city: `${data.data.city}+${data.data.cityId}`,
-          },
-        });
-        setCityError(null); // Clear error when city is set
-      }
-      if (!data.status) {
-        setIsOpen(true);
-        setCityError("City is required"); // Set error when city is not available
-      }
-    },
-    ...RTK_CONFIG,
-  });
-
-  const {
-    data: AllCities,
-    isLoading: citiesLoading,
-    error: citiesError,
-  } = useQuery<City[], Error>({
-    queryKey: ["all-cities"],
-    queryFn: getAllCitiesDetails,
-    ...RTK_CONFIG,
-    enabled: isOpen,
-  });
-
-  const filteredCities =
-    AllCities?.filter(
-      (city) =>
-        city.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        city.id !== selectedCity?.id
-    ) || [];
-  const handleCloseDropdown = useCallback(() => {
-    setIsOpen(false);
-    setSearchTerm("");
-    setFocusedIndex(-1);
-  }, [setIsOpen]);
+  const listRef = useRef<HTMLDivElement>(null);
+  const optionRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        handleCloseDropdown();
+        setIsOpen(false);
+        setSearchTerm("");
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [handleCloseDropdown]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const {
+    data: allCities = [],
+    isLoading,
+    error,
+  } = useQuery<City[]>({
+    queryKey: ["all-cities"],
+    queryFn: getAllCitiesDetails,
+    ...RTK_CONFIG,
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    retry: 3, // Retry failed requests 3 times
+  });
+
+  const filteredCities = useMemo(() => {
+    if (!isOpen) return [];
+    if (!searchTerm) return allCities;
+    return allCities.filter((city) =>
+      city.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [allCities, searchTerm, isOpen]);
+
+  const rowVirtualizer = useVirtualizer({
+    count: filteredCities.length,
+    getScrollElement: () => listRef.current,
+    estimateSize: () => 30,
+    overscan: 5,
+  });
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -129,160 +91,167 @@ export default function ProjectSearchCityDropDown({
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    setFocusedIndex(-1);
-  }, [searchTerm]);
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (!isOpen) return;
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Escape") {
-      handleCloseDropdown();
-    } else if (event.key === "ArrowDown") {
-      event.preventDefault();
-      setFocusedIndex((prevIndex) =>
-        prevIndex < filteredCities.length - 1 ? prevIndex + 1 : prevIndex
-      );
-    } else if (event.key === "ArrowUp") {
-      event.preventDefault();
-      setFocusedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : -1));
-    } else if (event.key === "Enter" && focusedIndex >= 0) {
-      handleCitySelect(filteredCities[focusedIndex]);
-    }
-  };
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          setActiveIndex(
+            (prevIndex) => (prevIndex + 1) % filteredCities.length
+          );
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          setActiveIndex(
+            (prevIndex) =>
+              (prevIndex - 1 + filteredCities.length) % filteredCities.length
+          );
+          break;
+        case "Enter":
+          if (filteredCities[activeIndex]) {
+            selectCity(filteredCities[activeIndex]);
+          }
+          break;
+        case "Escape":
+          setIsOpen(false);
+          setSearchTerm("");
+          break;
+        default:
+          break;
+      }
+    },
+    [isOpen, filteredCities, activeIndex]
+  );
 
-  useEffect(() => {
-    if (focusedIndex >= 0 && optionsRef.current[focusedIndex]) {
-      optionsRef.current[focusedIndex]?.focus();
-    }
-  }, [focusedIndex]);
-
-  const handleCitySelect = (city: City) => {
+  const selectCity = useCallback((city: City) => {
+    if (!city) return;
     setSelectedCity(city);
+    setSearchTerm("");
+    setIsOpen(false);
     dispatch({
       type: "update",
       payload: {
         city: `${city.name}+${city.id}`,
+        locality: [],
       },
     });
-    setCityError(null); // Clear error on city selection
-    handleCloseDropdown();
-  };
+    handleApplyFilters();
+  }, []);
 
-  const handleToggleDropdown = () => {
-    setIsOpen(!isOpen);
-    if (isOpen) {
-      setSearchTerm("");
-      setFocusedIndex(-1);
+  useEffect(() => {
+    if (optionRefs.current[activeIndex]) {
+      optionRefs.current[activeIndex]?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
     }
-  };
-
+  }, [activeIndex]);
   return (
-    <div className="relative  " ref={dropdownRef}>
+    <div className="relative inline-block mt-3" ref={dropdownRef}>
       <button
-        onClick={handleToggleDropdown}
-        className="w-full max-w-fit p-2 sm:p-3 text-left bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out flex items-center justify-between space-x-1 sm:space-x-2"
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex items-center text-gray-800 text-[14px] xl:text-[16px] font-semibold gap-x-2 p-3 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
       >
-        <span className="text-gray-700 font-medium  text-xs sm:text-base text-nowrap">
-          {selectedCity?.name || DefaultCity?.data?.city || "Select City"}
+        <IoLocationSharp className="text-blue-600 text-lg" />
+        <span>
+          {state.city
+            ? state.city.split("+")[0]
+            : servercityData
+            ? servercityData.split("+")[0]
+            : selectedCity
+            ? selectedCity.name
+            : "Select Location"}
         </span>
-        {selectedCity || DefaultCity?.data?.city ? (
-          <FaLocationDot
-            className=" min-w-5 h-4 w-4 sm:h-5 sm:w-5 text-blue-500"
-            aria-hidden="true"
-          />
-        ) : (
-          <FaChevronDown
-            className={`h-4 w-4 sm:h-5 sm:w-5 text-gray-400 transition-transform duration-200 ${
-              isOpen ? "transform rotate-180" : ""
-            }`}
-            aria-hidden="true"
-          />
-        )}
       </button>
 
       {isOpen && (
         <div
-          className="absolute right-[5%] z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-200 ease-in-out"
-          style={{ minWidth: cityError ? "300px" : "220px" }}
+          className="absolute z-50 w-[240px] mt-2 bg-white border border-gray-300  shadow-lg overflow-hidden transition-all duration-200"
           onKeyDown={handleKeyDown}
         >
-          {cityError && (
-            <p className="px-4 py-2 bg-red-50 text-red-600 text-sm font-semibold border-b border-red-100">
-              {cityError}
-            </p>
-          )}
-          <div className="p-3 bg-gray-50">
+          <div className="p-2 border-b border-gray-200">
             <div className="relative">
+              <IoLocationSharp className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search cities..."
+                placeholder="Search location..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-2 pl-10 pr-4 border focus:text-[16px] border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200"
-                aria-label="Search cities"
-              />
-              <FaSearch
-                className="absolute left-3 top-3 h-5 w-5 text-gray-400"
-                aria-hidden="true"
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setActiveIndex(0);
+                }}
+                className="w-full pl-10 p-2 text-sm bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
               />
             </div>
           </div>
-
-          {defaultCityError && (
-            <p className="p-2 text-center text-red-600 bg-red-50 border-t border-red-100">
-              Error loading default city
-            </p>
-          )}
-
-          {citiesError && (
-            <p className="p-2 text-center text-red-600 bg-red-50 border-t border-red-100">
-              Error loading cities
-            </p>
-          )}
-
-          <ul className="max-h-60 overflow-auto scrollUnique" role="listbox">
-            {citiesLoading ? (
-              <li className="p-4 text-center">
-                <FaSpinner
-                  className="animate-spin h-6 w-6 mx-auto text-blue-500"
-                  aria-label="Loading cities"
-                />
-              </li>
+          <div
+            ref={listRef}
+            className="max-h-[260px] overflow-y-auto scrollUnique"
+          >
+            {isLoading ? (
+              <div className="flex items-center justify-center p-4 text-gray-500">
+                <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-500 border-t-transparent" />
+              </div>
+            ) : error ? (
+              <p className="text-red-500 p-4 text-center">
+                Unable to load locations. Please try again.
+              </p>
             ) : filteredCities.length > 0 ? (
-              filteredCities.map((city, index) => (
-                <li
-                  key={city.id}
-                  ref={(el) => {
-                    if (el) optionsRef.current[index] = el;
-                  }}
-                  className={`p-3 hover:bg-blue-50 cursor-pointer transition-colors duration-150 ${
-                    index === focusedIndex ? "bg-blue-100" : ""
-                  }`}
-                  onClick={() => handleCitySelect(city)}
-                  onMouseEnter={() => setFocusedIndex(index)}
-                  role="option"
-                  aria-selected={index === focusedIndex}
-                  tabIndex={0}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-gray-800">
-                      {city.name}
-                    </span>
-                    {selectedCity?.id === city.id && (
-                      <FaCheck
-                        className="h-4 w-4 text-blue-500"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </div>
-                </li>
-              ))
+              <div
+                style={{
+                  height: `${rowVirtualizer.getTotalSize()}px`,
+                  width: "100%",
+                  position: "relative",
+                }}
+              >
+                {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                  const city = filteredCities[virtualRow.index];
+                  return (
+                    <div
+                      key={city.id}
+                      ref={(el) => {
+                        optionRefs.current[virtualRow.index] = el;
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: `${virtualRow.size}px`,
+                        transform: `translateY(${virtualRow.start}px)`,
+                      }}
+                    >
+                      <button
+                        className={`flex items-center w-full h-full px-2  text-left transition-colors ${
+                          activeIndex === virtualRow.index
+                            ? "bg-blue-500 text-white font-bold"
+                            : "text-gray-800 hover:bg-blue-100 hover:text-blue-700 "
+                        }`}
+                        onClick={() => selectCity(city)}
+                        onMouseEnter={() => setActiveIndex(virtualRow.index)}
+                      >
+                        <IoLocationSharp
+                          className={`mr-2 ${
+                            activeIndex === virtualRow.index
+                              ? "text-white"
+                              : "text-gray-400"
+                          }`}
+                        />
+                        {city.name}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
             ) : (
-              <li className="p-3 text-center text-gray-500">No cities found</li>
+              <p className="text-gray-500 p-4 text-center">
+                No locations found
+              </p>
             )}
-          </ul>
+          </div>
         </div>
       )}
     </div>

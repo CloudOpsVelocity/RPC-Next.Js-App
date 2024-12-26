@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import {
   MdSearch,
   MdClose,
@@ -21,6 +21,8 @@ import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
+import { myClientLogger } from "@/app/utils/clientLogger";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -39,7 +41,7 @@ export default function HeaderFilters() {
     handleResetQuery,
     onSearchChange,
     name,
-  } = useNewsearch();
+  } = useProjSearchMatcher();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -56,7 +58,13 @@ export default function HeaderFilters() {
   }, []);
 
   const toggleFilter = (category: string, value: string) => {
-    if (category === "bhk" || category === "amenities" || category == "bathrooms" ||  category == "prakings" || category == "Phases") {
+    if (
+      category === "bhk" ||
+      category === "amenities" ||
+      category == "bathrooms" ||
+      category == "prakings" ||
+      category == "Phases"
+    ) {
       setSelectedFilters((prev) => {
         const current = prev[category] || [];
         const updated = current.includes(value)
@@ -187,6 +195,39 @@ export default function HeaderFilters() {
         break;
     }
   };
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_BACKEND_URL
+      }/matcher/string?word=${searchQuery}&cityId=${
+        state.city?.split("+")[1] || 9
+      }`
+    );
+    const data = await res.json();
+    const buffer = new ArrayBuffer(10);
+    console.log(data);
+    if (Object.hasOwn(data, "ids")) {
+      let ids = extractApiValues(data.ids);
+      if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+        dispatch({
+          type: "update",
+          payload: {
+            ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
+            ...(ids.PT && { propTypes: parseInt(ids.PT as string) }),
+            ...(ids.BH && { unitTypes: [parseInt(ids.BH as string)] }),
+            ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
+          },
+        });
+      }
+
+      handleApplyFilters();
+      handleResetQuery();
+      setIsSearchOpen(false);
+      myClientLogger("info", data);
+      return;
+    }
+  };
   return (
     <>
       <div className="w-full max-w-[70%] max-h-[60vh] overflow- bg-white border-b sticky top-0 z-40">
@@ -201,7 +242,10 @@ export default function HeaderFilters() {
                   openDropdown={openDropdown}
                   handleDropdownToggle={handleDropdownToggle}
                 />
-                <div className=" relative flex w-full items-center overflow-hidden ">
+                <form
+                  onSubmit={handleFormSubmit}
+                  className=" relative flex w-full items-center overflow-hidden "
+                >
                   <input
                     type="text"
                     className="w-full py-2 px-4 outline-none"
@@ -211,7 +255,7 @@ export default function HeaderFilters() {
                     onFocus={() => setIsSearchOpen(true)}
                   />
                   <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
-                </div>
+                </form>
               </div>
               {isLoading ? (
                 <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">
@@ -288,8 +332,8 @@ export default function HeaderFilters() {
                     ) : (
                       <div className="p-3 text-gray-500">
                         {name
-                          ? "No matching results found"
-                          : "Start typing to search"}
+                          ? "No suggestions available"
+                          : "Search or type something"}
                       </div>
                     )}
                   </div>

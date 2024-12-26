@@ -17,6 +17,7 @@ import getListingSLugs, {
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
+import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: {
     cg: string;
@@ -28,6 +29,7 @@ type Props = {
     phase: string;
   };
 };
+
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.phase}/${params.bhk_unit_type}/${params.slug}`;
   const value = await findPathForProjectListing(pathname);
@@ -76,6 +78,27 @@ export default async function Page({ params }: Props) {
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
+export async function generateMetadata(
+  { params }: any,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const id = params.slug.split("-")[1];
+  const {
+    listing: data,
+    nearByLocations,
+    totalPrice,
+  } = await getListingDetails(id as string);
+  return {
+    title: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName} on getrightproperty`,
+    description: `${data.bhkName ?? ""} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sale" : " Rent"} In ${
+      data.ltName
+    } Get more details like availability price possession date posted by on ${
+      process.env.NEXT_PUBLIC_URL
+    }/`,
+  };
+}
 
 // export async function generateStaticParams() {
 //   // Get the data (mocked here, replace with your actual data fetching logic)

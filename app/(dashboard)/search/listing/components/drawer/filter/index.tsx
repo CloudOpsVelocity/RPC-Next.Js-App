@@ -51,19 +51,20 @@ const ListingMobileFilter = ({ close }: any) => {
     setSingleType,
     isFilterApplied,
   } = useSearchFilters();
-  const serverCity = useAtomValue(serverCityAtom)
+  const serverCity = useAtomValue(serverCityAtom);
   const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
+    queryFn: () =>
+      getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
   });
   const { isLoading: builderDataLoading, data: builderData } = useQuery({
-    queryFn: () => getData(builderSearch, "builders", filters.city ?? serverCity ?? ""),
+    queryFn: () =>
+      getData(builderSearch, "builders", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "builders" + builderSearch],
     enabled: builderSearch !== "",
   });
 
- 
   const path = usePathname();
   const viewport = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -162,7 +163,7 @@ const ListingMobileFilter = ({ close }: any) => {
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
                 <Radio
-                id={`propertyStatus_${index}`}
+                  id={`propertyStatus_${index}`}
                   key={eachStatus.cid}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
@@ -189,7 +190,7 @@ const ListingMobileFilter = ({ close }: any) => {
               }
               return (
                 <Radio
-                id={`propTypeRadio_${i}`}
+                  id={`propTypeRadio_${i}`}
                   key={"dark.8" + keyName}
                   iconColor="dark.8"
                   color="green"
@@ -220,7 +221,7 @@ const ListingMobileFilter = ({ close }: any) => {
               .filter(({ value }) => !(value === "B" && path === "/search"))
               .map(({ value, constDesc }, i) => (
                 <Radio
-                id={`listedByRadio_${value}`}
+                  id={`listedByRadio_${value}`}
                   key={`listedBy_${constDesc}`}
                   iconColor="dark.8"
                   color="green"
@@ -336,8 +337,8 @@ const ListingMobileFilter = ({ close }: any) => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
-          {toFormattedString(filters.bugdetValue[1])} Cr
+            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+            {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"
@@ -389,15 +390,15 @@ const ListingMobileFilter = ({ close }: any) => {
             Photos & Videos
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%] ">
-            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }, i) => {
+            {SEARCH_FILTER_DATA.photoAvail.map(({ title, value }, i) => {
               return (
                 <Radio
-                id={`mediaRadio_${id}`}
-                  key={label}
+                  id={`mediaRadio_${value}`}
+                  key={title}
                   iconColor="dark.8"
                   color="green"
-                  label={label}
-                  value={id}
+                  label={title}
+                  value={value}
                   name="propertyType"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   // onClick={() =>
@@ -423,7 +424,7 @@ const ListingMobileFilter = ({ close }: any) => {
               {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
                 return (
                   <Radio
-                  id={`furnishRadio_${cid}`}
+                    id={`furnishRadio_${cid}`}
                     key={`furnish_${cid}`}
                     iconColor="dark.8"
                     color="green"
