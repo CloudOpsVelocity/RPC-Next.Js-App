@@ -15,12 +15,20 @@ import { toFormattedString } from "./buget/budget";
 import { RangeSlider } from "@mantine/core";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
+import LocalitySearch from "./city/searchInputSearch";
+import dynamic from "next/dynamic";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
   toggleFilter: (category: string, value: string) => void;
   isOpen: boolean;
   onToggle: () => void;
+}
+interface Location {
+  name: string;
+  stringUrl: null | string;
+  stringId: string;
+  type: string;
 }
 
 export default function ShowAllFiltersButton({
@@ -32,6 +40,62 @@ export default function ShowAllFiltersButton({
   const [expandedSections, setExpandedSections] = useState<{
     [key: string]: boolean;
   }>({});
+  const locations: Location[] = [
+    { name: "Whitefield", stringUrl: null, stringId: "563", type: "Locality" },
+    {
+      name: "Whisdfasdftefasdffield",
+      stringUrl: null,
+      stringId: "563",
+      type: "Locality",
+    },
+    {
+      name: "Whitesafdssffield",
+      stringUrl: null,
+      stringId: "563",
+      type: "Locality",
+    },
+  ];
+  const Phases: Location[] = [
+    { name: "phase1", stringUrl: null, stringId: "563", type: "Locality" },
+    { name: "phase3", stringUrl: null, stringId: "563", type: "Locality" },
+    { name: "pahse4", stringUrl: null, stringId: "563", type: "Locality" },
+  ];
+  const builders: Location[] = [
+    {
+      name: "Projects of Mana Projects",
+      stringUrl: null,
+      stringId: "35",
+      type: "BuilderProject",
+    },
+
+    {
+      name: "Projects of Mana Projects",
+      stringUrl: null,
+      stringId: "35",
+      type: "BuilderProject",
+    },
+
+    {
+      name: "Mana Projects",
+      stringUrl: "/builders/bengaluru/mana-projects",
+      stringId: "9_35",
+      type: "BuilderProject",
+    },
+
+    {
+      name: "Projects of Mantri",
+      stringUrl: null,
+      stringId: "16",
+      type: "BuilderProject",
+    },
+
+    {
+      name: "Mantri",
+      stringUrl: "/builders/bengaluru/mantri",
+      stringId: "9_16",
+      type: "BuilderDetail",
+    },
+  ];
 
   const propertyiconss = {
     apt: {
@@ -64,6 +128,7 @@ export default function ShowAllFiltersButton({
   const toggleExpand = (section: string) => {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
+  console.log();
 
   const renderFilterSection = (
     title: string,
@@ -74,12 +139,21 @@ export default function ShowAllFiltersButton({
     const isExpanded = expandedSections[category] || false;
     const displayData = isExpanded ? data : data.slice(0, initialDisplay);
     console.log(displayData, "we are defining the result");
-    const radioorChecked = ["status", "rera", "propertyType", "listingStatus"];
+    const radioorChecked = [
+      "status",
+      "rera",
+      "propertyType",
+      "listingStatus",
+      "PostedBy",
+      "UsedorNotUsed",
+      "PhotosVedios",
+      "furnish",
+    ];
 
     return (
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-3">{title}</h3>
-        <div className="space-y-2">
+        <div className="flex flex-row flex-wrap gap-2 items-center">
           {displayData.map((item: any, index: number) => (
             <label key={item.cid || index} className="flex items-center gap-2">
               <input
@@ -133,7 +207,10 @@ export default function ShowAllFiltersButton({
       </div>
     );
   };
-
+  const handleLocationChange = (selected: Location[]) => {
+    console.log("Selected locations:", selected);
+  };
+  const isproject = state.listedBy == null;
   return (
     <div className="  relative">
       <button
@@ -149,7 +226,7 @@ export default function ShowAllFiltersButton({
         />
       </button>
       {isOpen && (
-        <div className="absolute top-full flex flex-col right-0 mt-2 w-[600px] bg-white rounded-lg shadow-lg border z-50 ">
+        <div className="absolute top-full flex flex-col right-0 mt-2 min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
           <div className="flex items-center justify-between gap-4 pb-4 border-b  ">
             <button
               onClick={onToggle}
@@ -164,13 +241,14 @@ export default function ShowAllFiltersButton({
               Apply Filter
             </button>
           </div>
-          <div className="flex flex-col justify-center">
-            <div className="p-6 flex items-start  flex-wrap justify-between   ">
-              {renderFilterSection(
-                "Project Status",
-                SEARCH_FILTER_DATA.projectstatus,
-                "status"
-              )}
+          <div className="flex flex-col justify-start max-h-[60vh] overflow-y-auto">
+            <div className="p-6 flex  flex-col items-start  flex-wrap justify-between   ">
+              {isproject &&
+                renderFilterSection(
+                  "Project Status",
+                  SEARCH_FILTER_DATA.projectstatus,
+                  "status"
+                )}
               {renderFilterSection(
                 "Listing Status",
                 SEARCH_FILTER_DATA.listingStatus,
@@ -188,18 +266,12 @@ export default function ShowAllFiltersButton({
                 6
               )}
               {renderFilterSection(
-                "Amenities",
-                SEARCH_FILTER_DATA.amenities,
-                "amenities",
-                8
-              )}
-              {renderFilterSection(
                 "RERA Status",
                 SEARCH_FILTER_DATA.rerastatus,
                 "rera"
               )}
             </div>
-            <div className="mb-6">
+            <div className="mb-6  ml-4">
               <h3
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Area (in Sq.ft)"
@@ -224,7 +296,114 @@ export default function ShowAllFiltersButton({
                 value={state.areaValue}
                 //  onChange={(value) => toggleFilter("areaValue", value)}
                 style={{ width: "80%" }}
+                className="ml-[14px] md:ml-4 "
                 mb={"5%"}
+              />
+            </div>
+
+            <div className="mb-6 ml-4">
+              <h3
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
+                id="Budget"
+              >
+                Budget
+              </h3>
+              <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600] mb-[2%] ml-[14px] md:ml-0  ">
+                ₹ {toFormattedString(state.bugdetValue[0])} - ₹{" "}
+                {toFormattedString(state.bugdetValue[1])}
+              </p>
+              <RangeSlider
+                color="green"
+                key="budgetSlider"
+                //onChange={(value) => toggleFilter("bugdetValue", value)}
+                style={{ width: "80%" }}
+                defaultValue={[
+                  state?.bugdetValue[0] ?? 500000,
+                  state?.bugdetValue[1] ?? 600000000,
+                ]}
+                value={state.bugdetValue}
+                min={0}
+                max={state.cg === "R" ? 100000 : 600000000}
+                step={state.cg === "R" ? 1 : 100000}
+                label={(value) => toFormattedString(value)}
+                // size={isMobile ? "xs" : "md"}
+                className="ml-[14px] md:ml-1 "
+                // classNames={{markLabel: S.sliderMarkLable}}
+              />
+            </div>
+            <div className="p-6 flex flex-col items-start  flex-wrap justify-between   ">
+              {renderFilterSection(
+                "Bathrooms",
+                SEARCH_FILTER_DATA.Bathrooms,
+                "bathrooms",
+                6
+              )}
+              {renderFilterSection(
+                "parking",
+                SEARCH_FILTER_DATA.Parkings,
+                "prakings",
+                6
+              )}
+              {renderFilterSection(
+                "Amenities",
+                SEARCH_FILTER_DATA.amenities,
+                "amenities",
+                8
+              )}
+              {renderFilterSection(
+                "facings",
+                SEARCH_FILTER_DATA.facing,
+                "facings",
+                9
+              )}
+              {!isproject &&
+                renderFilterSection(
+                  "UsedorNotUsed",
+                  SEARCH_FILTER_DATA.UsedorNotUsed,
+                  "UsedorNotUsed"
+                )}
+              {!isproject &&
+                renderFilterSection(
+                  "PostedBy",
+                  SEARCH_FILTER_DATA.PostedBy,
+                  "PostedBy"
+                )}
+              {!isproject &&
+                renderFilterSection(
+                  "Photos & Videos",
+                  SEARCH_FILTER_DATA.photoAvail,
+                  "PhotosVedios"
+                )}
+              {!isproject &&
+                renderFilterSection(
+                  "Furnishing",
+                  SEARCH_FILTER_DATA.furnish,
+                  "furnish"
+                )}
+              {renderFilterSection(
+                "Phases",
+                SEARCH_FILTER_DATA.furnish,
+                "Phases"
+              )}
+            </div>
+            <div className="flex flex-col mb-6 ml-4 gap-6">
+              <LocalitySearch<Location>
+                data={locations}
+                displayKey="name"
+                valueKey="stringId"
+                onChange={handleLocationChange}
+                placeholder="Search locations..."
+                label="Location"
+                multiple={true}
+              />
+              <LocalitySearch<Location>
+                data={builders}
+                displayKey="name"
+                valueKey="stringId"
+                onChange={handleLocationChange}
+                placeholder="Search Builders..."
+                label="Builder"
+                multiple={true}
               />
             </div>
           </div>
