@@ -68,6 +68,7 @@ type Props = {
   nearByLocations: any;
   TITLE_OF_PROP: string;
   params: any;
+  pathname: string;
 };
 
 export default function ListingDetailsPage({
@@ -79,6 +80,7 @@ export default function ListingDetailsPage({
   nearByLocations,
   TITLE_OF_PROP,
   params,
+  pathname,
 }: Props) {
   const title = `${data?.bhkName} ${data?.propTypeName} For
   ${data?.cg === "S" ? " Sale" : " Rent"} In
@@ -88,7 +90,7 @@ export default function ListingDetailsPage({
     <div className="w-full">
       <link
         rel="canonical"
-        href={`${process.env.NEXT_PUBLIC_URL}${data?.data?.pathname}`}
+        href={`${process.env.NEXT_PUBLIC_URL}${pathname}`}
       />
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">

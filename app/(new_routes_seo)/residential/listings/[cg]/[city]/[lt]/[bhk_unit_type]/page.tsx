@@ -99,14 +99,24 @@ export async function generateMetadata(
     totalPrice,
   } = await getListingDetails(id as string);
   return {
-    title: `${data.bhkName ?? ""} ${data.propTypeName} For
-  ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName} on getrightproperty`,
-    description: `${data.bhkName ?? ""} ${data.propTypeName} For
-  ${data.cg === "S" ? " Sale" : " Rent"} In ${
+    title: `${data.bhkName} ${data.propTypeName}, for ${
+      data.cg === "S" ? " Sale" : " Rent"
+    } in ${data.ltName} - Getrightproperty`,
+    description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
+      data.cg === "S" ? " Sale" : " Rent"
+    } in ${
       data.ltName
-    } Get more details like availability price possession date posted by on ${
-      process.env.NEXT_PUBLIC_URL
-    }/`,
+    }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+    openGraph: {
+      title: `${data.bhkName} ${data.propTypeName}, for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${data.ltName} - Getrightproperty`,
+      description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${
+        data.ltName
+      }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+    },
   };
 }
 export const dynamic = "force-dynamic";

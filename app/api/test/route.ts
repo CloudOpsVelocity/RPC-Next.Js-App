@@ -1,23 +1,31 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
-// import { Level } from "level";
-// import path from "path";
-// var dbPath = process.env.DB_PATH || path.join(__dirname, "mydb");
-// var options = {
-//   keyEncoding: "binary",
-//   valueEncoding: "json",
+
+// const Datastore = require("nedb");
+// const path = require("path");
+
+// Function to initialize the database
+// const createDb = (dbName) => {
+//   const dbPath = path.join(__dirname, "../static", dbName);
+//   const db = new Datastore({ filename: dbPath, autoload: true });
+
+//   return db;
 // };
-// var db = new Level(dbPath, options);
-// // Open the database
-// db.open((err) => {
-//   if (err) {
-//     console.error("Error opening the LevelDB database:", err);
-//   } else {
-//     console.log("LevelDB database opened successfully at", dbPath);
-//   }
-// });
-export async function GET(req: Request) {
+export async function GET(req: Request, res: NextResponse) {
   try {
+    // lib/dbConfig.js
+    // const db = createDb("slugs.db"); // Initialize the database
+
+    // // Insert the key-value pair
+    // db.insert({ key: slug, value: id }, function (err, newDoc) {
+    //   if (err) {
+    //     return NextResponse.json({ message: "Error inserting data" });
+    //   }
+    //   return NextResponse.json({ message: "Data inserted", data: newDoc });
+    // });
+
+    // Expose the function to initialize different databases
+
     // const data = await axios.get(`https://internal.getrightproperty.com/api/youtube/oauth2/callback?code=4%2F0AeanS0bv-uWP-r3f7BXQwHSr8f1U_NTtisN8HhVTmFzDvOxztLzjKwTxtyfFe6hWhfvUEg&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.upload+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly`)
     return NextResponse.json({ data: "test", status: true });
   } catch (error) {

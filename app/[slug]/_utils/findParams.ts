@@ -7,8 +7,6 @@ export async function findSeoParams(inputUrl: string) {
   const filePath = path.join(staticDir, "case-seo.json");
   const jsonData = fs.readFileSync(filePath, "utf8");
   const builderJsonData = JSON.parse(jsonData);
-  console.log(inputUrl);
-  console.log(builderJsonData);
   for (const path in builderJsonData) {
     if (path == inputUrl) {
       logger.info(`Found path: ${path} ${inputUrl}`);
