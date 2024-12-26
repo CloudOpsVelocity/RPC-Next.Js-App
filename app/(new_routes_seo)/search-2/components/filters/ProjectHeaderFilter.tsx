@@ -56,7 +56,7 @@ export default function HeaderFilters() {
   }, []);
 
   const toggleFilter = (category: string, value: string) => {
-    if (category === "bhk" || category === "amenities") {
+    if (category === "bhk" || category === "amenities" || category == "bathrooms" ||  category == "prakings" || category == "Phases") {
       setSelectedFilters((prev) => {
         const current = prev[category] || [];
         const updated = current.includes(value)
@@ -187,10 +187,9 @@ export default function HeaderFilters() {
         break;
     }
   };
-  console.log(selectedFilters)
   return (
     <>
-      <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
+      <div className="w-full max-w-[70%] max-h-[60vh] overflow- bg-white border-b sticky top-0 z-40">
         <div className="max-w-full px-1 ">
           <div
             ref={searchRef}

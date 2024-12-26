@@ -1,3 +1,6 @@
+import { Bathrooms } from "@/app/images/commonSvgs";
+import { title } from "process";
+
 export const SEARCH_FILTER_DATA = {
   projectstatus: [
     {
@@ -409,19 +412,19 @@ export const SEARCH_FILTER_DATA = {
   ],
   photoAvail: [
     {
-      id: 3,
-      label: "Both",
+      value: 3,
+      title: "Both",
     },
     {
-      id: 1,
-      label: "Photo Available",
+      value: 1,
+      title: "Photo Available",
     },
     {
-      id: 2,
-      label: "Video Available",
+      value: 2,
+      title: "Video Available",
     },
   ],
-
+/* 
   used: [
     {
       id: 1241,
@@ -431,5 +434,35 @@ export const SEARCH_FILTER_DATA = {
       id: 2122,
       label: "Un-Used",
     },
+  ], */
+
+
+  Bathrooms:[
+    {title: "1 Bath", value: 1 },
+    {title: "2 Bath", value: 2 },
+    {title: "3 Bath", value: 3 },
+    {title: "4 Bath", value: 4 },
+    {title: "5 Bath", value: 5 },
+    {title: "5+ Bath", value: 6 },
+/*     {title: "6", value: 6 },
+    {title: "6+", value: "1,7" }, */
   ],
+  Parkings:[
+    {title: "1", value: 1 },
+    {title: "2", value: 2 },
+    {title: "3", value: 3 },
+    {title: "4", value: 4 },
+    {title: "5", value: 5 },
+    {title: "6+", value: "1,7" },
+/*     {title: "6", value: 6 },
+    {title: "6+", value: "1,7" }, */
+  ],
+  UsedorNotUsed:[
+    {title:"Used", value:1241},
+    {title:"Un-Used", value:2122}
+  ],
+  PostedBy:[
+    {title:"Owner", value:"I"},
+    {title:"Agent", value:"A"}
+  ]
 };
