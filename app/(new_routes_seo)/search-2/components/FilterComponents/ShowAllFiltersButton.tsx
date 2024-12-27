@@ -46,61 +46,10 @@ export default function ShowAllFiltersButton({
   }>({});
   const { handleClearFilters, handleApplyFilters } =
     useProjSearchAppliedFilters();
-  const locations: Location[] = [
-    { name: "Whitefield", stringUrl: null, stringId: "563", type: "Locality" },
-    {
-      name: "Whisdfasdftefasdffield",
-      stringUrl: null,
-      stringId: "563",
-      type: "Locality",
-    },
-    {
-      name: "Whitesafdssffield",
-      stringUrl: null,
-      stringId: "563",
-      type: "Locality",
-    },
-  ];
   const Phases: Location[] = [
     { name: "phase1", stringUrl: null, stringId: "563", type: "Locality" },
     { name: "phase3", stringUrl: null, stringId: "563", type: "Locality" },
     { name: "pahse4", stringUrl: null, stringId: "563", type: "Locality" },
-  ];
-  const builders: Location[] = [
-    {
-      name: "Projects of Mana Projects",
-      stringUrl: null,
-      stringId: "35",
-      type: "BuilderProject",
-    },
-
-    {
-      name: "Projects of Mana Projects",
-      stringUrl: null,
-      stringId: "35",
-      type: "BuilderProject",
-    },
-
-    {
-      name: "Mana Projects",
-      stringUrl: "/builders/bengaluru/mana-projects",
-      stringId: "9_35",
-      type: "BuilderProject",
-    },
-
-    {
-      name: "Projects of Mantri",
-      stringUrl: null,
-      stringId: "16",
-      type: "BuilderProject",
-    },
-
-    {
-      name: "Mantri",
-      stringUrl: "/builders/bengaluru/mantri",
-      stringId: "9_16",
-      type: "BuilderDetail",
-    },
   ];
 
   const propertyiconss = {
@@ -313,7 +262,7 @@ export default function ShowAllFiltersButton({
                 multiple
               />
             </div>
-            <div className="p-6 flex  flex-col items-start  flex-wrap justify-between   ">
+            <div className="px-6 flex  flex-col items-start  flex-wrap justify-between   ">
               {isproject &&
                 renderFilterSection(
                   "Project Status",
@@ -346,9 +295,9 @@ export default function ShowAllFiltersButton({
                   "reraIds"
                 )}
             </div>
-            <div className="mb-6  ml-4">
+            <div className="  ml-4">
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
                 id="Area (in Sq.ft)"
               >
                 Area (In Sq.ft)
@@ -369,16 +318,21 @@ export default function ShowAllFiltersButton({
                 min={0}
                 max={5000}
                 value={state.areaValue}
-                //  onChange={(value) => toggleFilter("areaValue", value)}
+                onChange={(value) =>
+                  dispatch({
+                    type: "update",
+                    payload: { areaValue: value },
+                  })
+                }
                 style={{ width: "80%" }}
                 className="ml-[14px] md:ml-4 "
                 mb={"5%"}
               />
             </div>
 
-            <div className="mb-6 ml-4">
+            <div className="ml-4">
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[1%] "
                 id="Budget"
               >
                 Budget
@@ -390,7 +344,12 @@ export default function ShowAllFiltersButton({
               <RangeSlider
                 color="green"
                 key="budgetSlider"
-                //onChange={(value) => toggleFilter("bugdetValue", value)}
+                onChange={(value) => {
+                  dispatch({
+                    type: "update",
+                    payload: { bugdetValue: value },
+                  });
+                }}
                 style={{ width: "80%" }}
                 defaultValue={[
                   state?.bugdetValue[0] ?? 500000,
@@ -462,7 +421,7 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "Phases"
                 )}
-              {isproject && (
+              {/* {isproject && (
                 <LocalitySearch<Location>
                   data={builderData || []}
                   displayKey="name"
@@ -475,7 +434,7 @@ export default function ShowAllFiltersButton({
                   category="builderIds"
                   multiple
                 />
-              )}
+              )} */}
             </div>
           </div>
         </div>

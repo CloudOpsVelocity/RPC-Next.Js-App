@@ -51,7 +51,10 @@ type Action =
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
   switch (action.type) {
     case "reset":
-      return initialState;
+      return {
+        ...initialState,
+        listedBy: state.listedBy,
+      };
 
     case "update":
       return {
@@ -179,10 +182,9 @@ export const ProjSearchAppliedFiltersStore = atom(
     } else if (type === "clear") {
       const getParams = new URLSearchParams(window.location.search);
       queryString = getParams.get("sf") ?? "";
-      console.log(queryString);
       switch (clearType) {
         case "clearAll":
-          queryString = "";
+          queryString = queryString.replace(/-[^&]*listedBy=[^&]*/g, "");
           set(projSearchStore, { type: "reset" });
           break;
         case "bhk":
