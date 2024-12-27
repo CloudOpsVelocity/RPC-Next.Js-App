@@ -234,7 +234,7 @@ export default function HeaderFilters() {
             ref={searchRef}
             className="flex flex-wrap items-center gap-2 py-3"
           >
-            <div className="flex-1 max-w-[39%] relative">
+            <div className="flex-1 max-w-full sm:max-w-[39%] relative">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
                   openDropdown={openDropdown}
@@ -412,8 +412,8 @@ export default function HeaderFilters() {
                 <MdClose className="w-6 h-6" />
               </button>
             </div>
-            <div className="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-5rem)]">
-              <PropertyTypeDropdown
+            <div className="p-4 space-y-6  max-h-[100vh] p-4 space-y-6 overflow-y">
+              {/* <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
                 handleClear={handleClear}
@@ -430,7 +430,14 @@ export default function HeaderFilters() {
               <BudgetDropdown
                 isOpen={openDropdown === "budget"}
                 onToggle={() => handleDropdownToggle("budget")}
+              /> */}
+              <ShowAllFiltersButton
+                selectedFilters={selectedFilters}
+                toggleFilter={toggleFilter}
+                isOpen={true}
+                onToggle={() => handleDropdownToggle("allFilters")}
               />
+              
             </div>
           </div>
         </div>
