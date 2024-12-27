@@ -8,7 +8,7 @@ export default function Page({}: Props) {
   return (
     <main className="pt-[6%]">
       <ProjSearchMainFilterSection />
-      <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap ">
+      <div className="max-w-[98%] sm:w-[99%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap ">
         <LeftSection />
         <RightSection />
       </div>

@@ -134,21 +134,21 @@ export default function ProjectSearchTabs() {
   // Default value if no conditions are met
 
   return (
-    <div className="w-full bg-slate-50  sticky top-0 z-10 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-2">
+    <div className="sticky top-0   z-10 ">
+      <div className=" w-full bg-slate-50 shadow-mdmax-w-7xl  mx-auto px-4 py-2">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div
             ref={scrollContainerRef}
             onWheel={handleWheel}
             className="overflow-x-auto no-scrollbar"
           >
-            <div className="flex items-center gap-2 min-w-max">
+            <div className="flex items-center gap-1 xl:gap-2 min-w-max">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`
-                    whitespace-nowrap rounded-full px-4 py-2 text-sm md:text-base font-medium transition-all
+                    whitespace-nowrap rounded-full md:px-2  xl:px-4 md:py-1 xl:py-2 text-sm md:text-base font-medium transition-all
                     ${
                       state.listedBy === tab.id
                         ? "bg-[#0073C6] text-white shadow-md"
@@ -162,7 +162,7 @@ export default function ProjectSearchTabs() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden xl:flex">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -222,7 +222,70 @@ export default function ProjectSearchTabs() {
               </div>
             )}
           </div>
+          
         </div>
+        
+       
+      </div>
+      <div className=" relative xl:hidden flex justify-end self-end bg-slate-50 shadow-mdmax-w-7xl ">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDropdownOpen(!isDropdownOpen);
+              }}
+              className="flex items-center gap-2 px-4 py-2 text-sm md:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M7 16V4m0 0L3 8m4-4l4 4m-4 8v-4m10 4v-4m0 4l-4-4m4 4l4-4"
+                />
+              </svg>
+
+              <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
+                {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
+                  "Sort By"} */}
+                {state.sortByfield != null && state.sortType != null
+                  ? getSortyByValue(state)
+                  : "New First"}
+              </div>
+            </button>
+
+            {isDropdownOpen && (
+              <div
+                className="absolute right-0 mt-10 w-48 bg-white
+               rounded-lg shadow-lg py-1 z-20 border border-white"
+              >
+                {sortOptions.map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // setSortBy(option.value);
+                      handleSortBy(option);
+                      setIsDropdownOpen(false);
+                    }}
+                    className={`
+                      block w-full text-left px-4 py-2 text-sm transition-colors
+                      ${
+                        getSortyByValue(state) === option.label
+                          ? "text-white bg-[#0073C6]"
+                          : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
+                      }
+                    `}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            )}
       </div>
     </div>
   );

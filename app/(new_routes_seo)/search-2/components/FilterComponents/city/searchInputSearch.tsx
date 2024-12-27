@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 interface DynamicSearchProps<T> {
-  data: T[]
+  data: T[] 
   displayKey: keyof T
   valueKey: keyof T
   multiple?: boolean

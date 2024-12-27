@@ -230,7 +230,7 @@ export default function HeaderFilters() {
   };
   return (
     <>
-      <div className="w-full max-w-[70%] max-h-[60vh] overflow- bg-white border-b sticky top-0 z-40">
+      <div className="w-full max-w-[86%] xl:max-w-[70%] max-h-[60vh] overflow- bg-white border-b sticky top-0 z-40">
         <div className="max-w-full px-1 ">
           <div
             ref={searchRef}

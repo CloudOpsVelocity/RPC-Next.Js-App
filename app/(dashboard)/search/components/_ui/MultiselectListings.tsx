@@ -132,7 +132,8 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
       case "Builders":
         {
           let builderName = data.name.toLowerCase().split(" ").join("%2D");
-          let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
+          let builderCity=data.builderCity.toLowerCase().split(" ").join("%2D");
+          let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/${builderCity}/${builderName}`;
           window.open(urlBuilder);
 
           // setFilters((prevFilters) => ({
