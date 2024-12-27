@@ -2,11 +2,12 @@ import { useAtom } from "jotai";
 import React from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
+import { SelectedFiltersMap } from "@/app/data/search";
 
 type Props = {};
 
 export default function SelectedFilters({}: Props) {
-  const [state, dispath] = useAtom(projSearchStore);
+  const [state, dispatch] = useAtom(projSearchStore);
   return (
     Object.entries(state).some(
       ([_, value]) =>
@@ -24,11 +25,28 @@ export default function SelectedFilters({}: Props) {
                 values.map((value) => (
                   <div
                     key={`${category}-${value}`}
-                    className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
+                    className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
                   >
-                    <span>{value}</span>
+                    <span>
+                      {category === "parking" || category === "bathroom"
+                        ? `${value} ${category}`
+                        : SelectedFiltersMap.get(value)}
+                    </span>
                     <button
-                      //   onClick={() => removeFilter(category, value)}
+                      onClick={() => {
+                        dispatch({
+                          type: "update",
+                          payload: {
+                            [category]: Array.isArray(
+                              state[category as keyof typeof state]
+                            )
+                              ? (
+                                  state[category as keyof typeof state] as any[]
+                                ).filter((item: any) => item !== value)
+                              : null,
+                          },
+                        });
+                      }}
                       className="text-[#0073C6] hover:text-[#0073C6]/70"
                     >
                       <MdClose className="w-4 h-4" />
@@ -40,9 +58,20 @@ export default function SelectedFilters({}: Props) {
                   key={`${category}-${values}`}
                   className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
                 >
-                  <span>{values}</span>
+                  <span>
+                    {category === "parking" || category === "bathroom"
+                      ? `${values} ${category}`
+                      : SelectedFiltersMap.get(values)}
+                  </span>
                   <button
-                    // onClick={() => removeFilter(category, values)}
+                    onClick={() =>
+                      dispatch({
+                        type: "update",
+                        payload: {
+                          [category]: null,
+                        },
+                      })
+                    }
                     className="text-[#0073C6] hover:text-[#0073C6]/70"
                   >
                     <MdClose className="w-4 h-4" />

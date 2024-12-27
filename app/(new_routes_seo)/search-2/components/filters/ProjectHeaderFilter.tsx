@@ -22,6 +22,7 @@ import { projSearchStore } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 import { myClientLogger } from "@/app/utils/clientLogger";
+import SelectedFilters from "./SelectedFilters";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -372,6 +373,7 @@ export default function HeaderFilters() {
               Filters
             </button>
           </div>
+          <SelectedFilters />
           {/* Selected Filters */}
         </div>
       </div>
@@ -388,7 +390,7 @@ export default function HeaderFilters() {
                 <MdClose className="w-6 h-6" />
               </button>
             </div>
-            <div className="p-4 space-y-6  max-h-[100vh] p-4 space-y-6 overflow-y">
+            <div className=" max-h-[100vh] p-4 space-y-6 overflow-y">
               {/* <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
@@ -413,7 +415,6 @@ export default function HeaderFilters() {
                 isOpen={true}
                 onToggle={() => handleDropdownToggle("allFilters")}
               />
-              
             </div>
           </div>
         </div>

@@ -465,3 +465,41 @@ export const SEARCH_FILTER_DATA = {
     { title: "Agent", value: "A" },
   ],
 };
+type SearchFilterItem = {
+  cid?: number | string;
+  value?: number | string;
+  Label?: string;
+  constDesc?: string;
+  title?: string;
+  label?: string;
+};
+
+type SearchFilterData = Record<string, SearchFilterItem[]>;
+
+const createCombinedMap = (
+  data: SearchFilterData
+): Map<string | number, string> => {
+  const combinedMap = new Map<string | number, string>([
+    [35, "Apartment"],
+    [33, "Row House"],
+    [31, "Villa"],
+    [34, "Villament"],
+    [32, "Plot"],
+    [36, "Independent"],
+  ]);
+
+  Object.keys(data).forEach((category) => {
+    data[category].forEach((item) => {
+      const key = item.cid ?? item.value; // Use `cid` or `value` as the key
+      const value = item.Label ?? item.constDesc ?? item.title ?? item.label; // Use the most relevant value
+      if (key !== undefined && value !== undefined) {
+        combinedMap.set(key, value);
+      }
+    });
+  });
+
+  return combinedMap;
+};
+
+// Create the combined map
+export const SelectedFiltersMap = createCombinedMap(SEARCH_FILTER_DATA);

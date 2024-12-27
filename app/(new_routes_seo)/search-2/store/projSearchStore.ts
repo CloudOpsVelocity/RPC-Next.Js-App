@@ -51,11 +51,7 @@ type Action =
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
   switch (action.type) {
     case "reset":
-      return {
-        ...initialState,
-        listedBy: state.listedBy,
-      };
-
+      return initialState;
     case "update":
       return {
         ...state,
@@ -180,11 +176,12 @@ export const ProjSearchAppliedFiltersStore = atom(
         }
       }
     } else if (type === "clear") {
-      const getParams = new URLSearchParams(window.location.search);
-      queryString = getParams.get("sf") ?? "";
+      // const getParams = new URLSearchParams(window.location.search);
+      // queryString = getParams.get("sf") ?? "";
       switch (clearType) {
         case "clearAll":
-          queryString = queryString.replace(/-[^&]*listedBy=[^&]*/g, "");
+          // queryString = queryString.replace(/-[^&]*listedBy=[^&]*/g, "");
+          queryString = "";
           set(projSearchStore, { type: "reset" });
           break;
         case "bhk":
