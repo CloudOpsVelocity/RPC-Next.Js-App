@@ -1,7 +1,7 @@
-import { SearchFilter } from "@/app/types/search";
+import { SearchFilterOld } from "@/app/store/search";
 
-const convertToOriginalState = (data: any): SearchFilter => {
-  const convertedData: SearchFilter = {
+const convertToOriginalState = (data: any): SearchFilterOld => {
+  const convertedData: SearchFilterOld = {
     current: null,
     locality: [],
     propTypes: null,

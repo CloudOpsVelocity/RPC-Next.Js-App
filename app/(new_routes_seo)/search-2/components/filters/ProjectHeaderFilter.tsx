@@ -372,6 +372,7 @@ export default function HeaderFilters() {
               Filters
             </button>
           </div>
+          {/* Selected Filters */}
         </div>
       </div>
 

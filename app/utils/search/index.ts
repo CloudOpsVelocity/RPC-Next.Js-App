@@ -1,6 +1,6 @@
-import { SearchFilter } from "@/app/types/search";
+import { SearchFilterOld } from "@/app/store/search";
 
-export const filtersParserToQueryParams = (data: SearchFilter) => {
+export const filtersParserToQueryParams = (data: SearchFilterOld) => {
   const parsedData: any = {};
 
   parsedData.localities = data.locality;
@@ -50,7 +50,7 @@ export const propertiesToProcess: { [key: string]: string } = {
   maxPrice: "bugdetValue",
 };
 
-export const filterParser = (data: SearchFilter) => {
+export const filterParser = (data: SearchFilterOld) => {
   const parsedData: any = {};
 
   // Define the properties to be processed

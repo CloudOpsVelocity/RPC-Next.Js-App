@@ -1,9 +1,34 @@
-import { SearchFilter } from "@/app/types/search";
 import { filterParser } from "@/app/utils/search";
 import { convertToOriginalState } from "@/app/utils/search/transform";
 import { atom } from "jotai";
+export interface SearchFilterOld {
+  current: number | null;
+  locality: string[];
+  propTypes: number | null;
+  unitTypes: number[];
+  bathRooms: number[];
+  parkings: number[];
+  amenities: number[];
+  listedBy: null | string;
+  reraVerified: number[];
+  areaValue: [number, number];
+  bugdetValue: [number, number];
+  builderIds: string[];
+  city: string | null;
+  facings: number[];
+  furnish: number | null;
+  propStatus: string | null;
+  pnb: number | null;
+  sortByfield: string | null;
+  sortType: number | null;
+  cg: string | null;
+  projIdEnc: string | null;
+  lat: number | null;
+  lng: number | null;
+  projName?: string | null;
+}
 
-export const initialState: SearchFilter = {
+export const initialState: SearchFilterOld = {
   current: null,
   locality: [],
   propTypes: null,
@@ -51,7 +76,7 @@ export const diffToProjFromListing = {
   ],
 };
 
-export const searachFilterAtom = atom<SearchFilter>(initialState);
+export const searachFilterAtom = atom<SearchFilterOld>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
   const path = window.location.pathname;
   const searchParams = new URLSearchParams(window.location.search);
@@ -60,19 +85,18 @@ searachFilterAtom.onMount = (setAtom) => {
   }
 };
 
-
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
   const parsedData = filterParser(appliedFilters);
   t.runner(parsedData);
 });
 
-function getAppliedFilters(): SearchFilter {
+function getAppliedFilters(): SearchFilterOld {
   const searchParams = new URLSearchParams(window.location.search);
   let queryData: Record<string, string> = {};
   searchParams.forEach((value, key) => {
     queryData[key] = value;
   });
-  const data: SearchFilter = convertToOriginalState(queryData);
+  const data: SearchFilterOld = convertToOriginalState(queryData);
   return data;
 }
