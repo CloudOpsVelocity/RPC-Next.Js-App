@@ -10,6 +10,7 @@ module.exports = {
     "/test/*",
   ],
   generateIndexSitemap: false,
+
   // generateRobotsTxt: true,
   // robotsTxtOptions: {
   //   policies: [

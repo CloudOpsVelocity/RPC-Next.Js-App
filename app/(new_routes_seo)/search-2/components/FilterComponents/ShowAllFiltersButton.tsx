@@ -150,7 +150,7 @@ export default function ShowAllFiltersButton({
       "pnb",
       "furnish",
     ];
-    console.log(state);
+
     return (
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-3">{title}</h3>
