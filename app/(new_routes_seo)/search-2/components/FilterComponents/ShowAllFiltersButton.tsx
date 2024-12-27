@@ -13,10 +13,14 @@ import {
 } from "react-icons/md";
 import { toFormattedString } from "./buget/budget";
 import { RangeSlider } from "@mantine/core";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import LocalitySearch from "./city/searchInputSearch";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+import { useDebouncedState } from "@mantine/hooks";
+import { serverCityAtom } from "@/app/store/search/serverCity";
+import { useQuery } from "react-query";
+import { getData } from "@/app/utils/api/search";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
@@ -234,10 +238,28 @@ export default function ShowAllFiltersButton({
       </div>
     );
   };
+
+  const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
+  const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
+  const serverCity = useAtomValue(serverCityAtom);
+  const { data } = useQuery({
+    queryFn: () =>
+      getData(localitySearch, "loc", state.city ?? serverCity ?? ""),
+    queryKey: ["search" + "loc" + localitySearch],
+    enabled: localitySearch !== "",
+  });
+  console.log(data, "locatata");
+  const { isLoading: builderDataLoading, data: builderData } = useQuery({
+    queryFn: () =>
+      getData(builderSearch, "builders", state.city ?? serverCity ?? ""),
+    queryKey: ["search" + "builders" + builderSearch],
+    enabled: builderSearch !== "",
+  });
   const handleLocationChange = (selected: Location[]) => {
     console.log("Selected locations:", selected);
   };
   const isproject = state.listedBy == null;
+  console.log(state);
   return (
     <div className="  relative">
       <button
@@ -272,6 +294,28 @@ export default function ShowAllFiltersButton({
             </button>
           </div>
           <div className="flex flex-col justify-start max-h-[60vh] overflow-y-auto">
+            <div className="flex flex-col mb-6 ml-4 gap-6">
+              <LocalitySearch<Location>
+                data={locations}
+                displayKey="name"
+                valueKey="stringId"
+                onChange={handleLocationChange}
+                placeholder="Search locations..."
+                label="Location"
+                multiple
+              />
+              {isproject && (
+                <LocalitySearch<Location>
+                  data={builders}
+                  displayKey="name"
+                  valueKey="stringId"
+                  onChange={handleLocationChange}
+                  placeholder="Search Builders..."
+                  label="Builder"
+                  multiple
+                />
+              )}
+            </div>
             <div className="p-6 flex  flex-col items-start  flex-wrap justify-between   ">
               {isproject &&
                 renderFilterSection(
@@ -280,8 +324,9 @@ export default function ShowAllFiltersButton({
                   "projStatus"
                 )}
               {!isproject &&
+                !isproject &&
                 renderFilterSection(
-                  "Listing Status",
+                  "Property Status",
                   SEARCH_FILTER_DATA.listingStatus,
                   "propStatus"
                 )}
@@ -296,7 +341,8 @@ export default function ShowAllFiltersButton({
                 "bhk",
                 6
               )}
-              {!isproject &&
+              {isproject &&
+                !isproject &&
                 renderFilterSection(
                   "RERA Status",
                   SEARCH_FILTER_DATA.rerastatus,
@@ -413,11 +459,18 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "furnish"
                 )}
-              {/* {renderFilterSection(
-                "Phases",
-                SEARCH_FILTER_DATA.furnish,
-                "Phases"
-              )} */}
+              {isproject &&
+                renderFilterSection(
+                  "Phases",
+                  SEARCH_FILTER_DATA.furnish,
+                  "Phases"
+                )}
+              {renderFilterSection(
+                "Amenities",
+                SEARCH_FILTER_DATA.amenities,
+                "amenities",
+                8
+              )}
             </div>
           </div>
         </div>

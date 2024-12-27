@@ -23,8 +23,10 @@ export default function Card({ item }: Props) {
     slug: item.projName,
   });
   // let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builder/${item.builderId}`;
+
   let builderName = item?.postedByName?.toLowerCase().split(" ").join("%2D");
-  let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
+  let builderCity = item?.builderCity?.toLowerCase().split(" ").join("%2D");
+  let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/${builderCity}/${builderName}`;
 
   const builderiRedirect = (e: any) => {
     e.preventDefault();
