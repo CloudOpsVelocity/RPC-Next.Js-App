@@ -176,32 +176,41 @@ export const ProjSearchAppliedFiltersStore = atom(
           queryString += `${queryString ? "-" : ""}${key}=${value}`;
         }
       }
-    }
-    if (type === "clear") {
-      if (clearType === "clearAll") {
-        queryString = "";
-        set(projSearchStore, { type: "reset" });
-      } else if (clearType === "bhk") {
-        queryString = queryString.replace(/-unitTypes=[^&]*/g, "");
-        set(projSearchStore, {
-          type: "update",
-          payload: { bhk: initialState.bhk },
-        });
-      } else if (clearType === "area") {
-        queryString = queryString.replace(/-area=[^&]*/g, "");
-      } else if (clearType === "budget") {
-        queryString = queryString.replace(/-bugdetValue=[^&]*/g, "");
-        set(projSearchStore, {
-          type: "update",
-          payload: { bugdetValue: initialState.bugdetValue },
-        });
-      } else if (clearType === "unitType") {
-        set(projSearchStore, {
-          payload: { propType: initialState.propType },
-          type: "update",
-        });
+    } else if (type === "clear") {
+      const getParams = new URLSearchParams(window.location.search);
+      // getParams.get(clearType);
+
+      switch (clearType) {
+        case "clearAll":
+          queryString = "";
+          set(projSearchStore, { type: "reset" });
+          break;
+        case "bhk":
+          queryString = queryString.replace(/-unitTypes=[^&]*/g, "");
+          set(projSearchStore, {
+            type: "update",
+            payload: { bhk: initialState.bhk },
+          });
+          break;
+        case "area":
+          queryString = queryString.replace(/-area=[^&]*/g, "");
+          break;
+        case "budget":
+          queryString = queryString.replace(/-bugdetValue=[^&]*/g, "");
+          set(projSearchStore, {
+            type: "update",
+            payload: { bugdetValue: initialState.bugdetValue },
+          });
+          break;
+        case "unitType":
+          set(projSearchStore, {
+            payload: { propType: initialState.propType },
+            type: "update",
+          });
+          break;
       }
     }
+    console.log(queryString);
     setInQueryParams(queryString || null);
     return appliedFilters;
   }

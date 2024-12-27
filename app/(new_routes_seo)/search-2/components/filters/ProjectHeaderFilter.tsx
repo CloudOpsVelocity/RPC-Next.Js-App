@@ -205,8 +205,6 @@ export default function HeaderFilters() {
       }`
     );
     const data = await res.json();
-    const buffer = new ArrayBuffer(10);
-    console.log(data);
     if (Object.hasOwn(data, "ids")) {
       let ids = extractApiValues(data.ids);
       if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
@@ -214,8 +212,8 @@ export default function HeaderFilters() {
           type: "update",
           payload: {
             ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
-            ...(ids.PT && { propTypes: parseInt(ids.PT as string) }),
-            ...(ids.BH && { unitTypes: [parseInt(ids.BH as string)] }),
+            ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+            ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
             ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
           },
         });
@@ -224,7 +222,7 @@ export default function HeaderFilters() {
       handleApplyFilters();
       handleResetQuery();
       setIsSearchOpen(false);
-      myClientLogger("info", data);
+      // myClientLogger("info", data);
       return;
     }
   };

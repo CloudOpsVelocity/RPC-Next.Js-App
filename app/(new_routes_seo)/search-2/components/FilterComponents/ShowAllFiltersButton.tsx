@@ -162,7 +162,8 @@ export default function ShowAllFiltersButton({
                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 checked={
                   Array.isArray(state[category as keyof typeof state])
-                    ? state[category as keyof typeof state]?.includes(
+                    ? // @ts-ignore
+                      state[category as keyof typeof state]?.includes(
                         item.cid ||
                           item.value ||
                           item.constDesc ||

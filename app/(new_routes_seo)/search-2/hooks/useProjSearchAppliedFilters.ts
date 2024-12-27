@@ -25,6 +25,9 @@ export default function useProjSearchAppliedFilters() {
       case "unitType":
         setAppliedFilters(setName, "clear", type);
         break;
+      case "budget":
+        setAppliedFilters(setName, "clear", type);
+        break;
     }
   };
   return { handleApplyFilters, handleClearFilters };
