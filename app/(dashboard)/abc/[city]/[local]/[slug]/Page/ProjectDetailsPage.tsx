@@ -16,7 +16,7 @@ import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
 import MasterPlan from "@/app/components/project/masterplan";
-const  ProjectDetailsP = dynamic(
+const ProjectDetailsP = dynamic(
   () => import("@/app/components/project/projectDetailsP")
 );
 const FloorplansBlock = dynamic(
@@ -73,7 +73,7 @@ export default async function ProjectsDetailsPage({
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
-  const url = `${process.env.NEXT_PUBLIC_URL}${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`;
+  const url = `${process.env.NEXT_PUBLIC_URL}${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}/`;
   const title = `${data?.projectName} ${
     data.availableProperties && data?.availableProperties?.join(" ")
   } for sale in ${data.localityName} ${data.cityName}`;

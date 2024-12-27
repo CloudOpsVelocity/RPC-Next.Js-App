@@ -1,9 +1,15 @@
-export const getData = async (query: string | null, type: string,city:string) => {
+export const getData = async (
+  query: string | null,
+  type: string,
+  city: string
+) => {
   if (query === "") {
     return [];
   }
 
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher?word=${query}&cityId=${city?.split("+")[1]}`;
+  let url = `${
+    process.env.NEXT_PUBLIC_BACKEND_URL
+  }/matcher?word=${query}&cityId=${city?.split("+")[1]}`;
   if (type === "loc") {
     url += `&isLocality=Y`;
   } else if (type === "builders") {
@@ -17,7 +23,7 @@ export const getData = async (query: string | null, type: string,city:string) =>
   if (type === "loc" || type === "builders") {
     transformedData = responseData[type].map((location: any) => ({
       label: location.name,
-      value: `${location.name}+${String(location.id)}`,
+      value: `${location.name}+${location.stringId}`,
     }));
   }
 

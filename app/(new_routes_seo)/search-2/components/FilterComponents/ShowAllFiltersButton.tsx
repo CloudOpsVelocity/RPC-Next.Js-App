@@ -134,7 +134,6 @@ export default function ShowAllFiltersButton({
   const toggleExpand = (section: string) => {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
-  console.log();
 
   const renderFilterSection = (
     title: string,
@@ -195,12 +194,20 @@ export default function ShowAllFiltersButton({
                       [category]:
                         Array.isArray(state[category as keyof typeof state]) &&
                         state[category as keyof typeof state] !== null
-                          ? [
-                              ...(state[
-                                category as keyof typeof state
-                              ] as any[]),
-                              value,
-                            ]
+                          ? // @ts-ignore
+                            state[category as keyof typeof state]?.includes(
+                              value
+                            )
+                            ? // @ts-ignore
+                              state[category as keyof typeof state].filter(
+                                (item: any) => item !== value
+                              )
+                            : [
+                                ...(state[
+                                  category as keyof typeof state
+                                ] as any[]),
+                                value,
+                              ]
                           : value,
                     },
                   });
@@ -242,13 +249,12 @@ export default function ShowAllFiltersButton({
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
   const serverCity = useAtomValue(serverCityAtom);
-  const { data } = useQuery({
+  const { data: localitydata, isLoading } = useQuery({
     queryFn: () =>
       getData(localitySearch, "loc", state.city ?? serverCity ?? ""),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
   });
-  console.log(data, "locatata");
   const { isLoading: builderDataLoading, data: builderData } = useQuery({
     queryFn: () =>
       getData(builderSearch, "builders", state.city ?? serverCity ?? ""),
@@ -259,7 +265,6 @@ export default function ShowAllFiltersButton({
     console.log("Selected locations:", selected);
   };
   const isproject = state.listedBy == null;
-  console.log(state);
   return (
     <div className="  relative">
       <button
@@ -296,25 +301,17 @@ export default function ShowAllFiltersButton({
           <div className="flex flex-col justify-start max-h-[60vh] overflow-y-auto">
             <div className="flex flex-col mb-6 ml-4 gap-6">
               <LocalitySearch<Location>
-                data={locations}
+                data={localitydata || []}
                 displayKey="name"
+                loading={isLoading}
                 valueKey="stringId"
                 onChange={handleLocationChange}
                 placeholder="Search locations..."
                 label="Location"
+                setQuery={setSearchLocality}
+                category="locality"
                 multiple
               />
-              {isproject && (
-                <LocalitySearch<Location>
-                  data={builders}
-                  displayKey="name"
-                  valueKey="stringId"
-                  onChange={handleLocationChange}
-                  placeholder="Search Builders..."
-                  label="Builder"
-                  multiple
-                />
-              )}
             </div>
             <div className="p-6 flex  flex-col items-start  flex-wrap justify-between   ">
               {isproject &&
@@ -465,11 +462,19 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "Phases"
                 )}
-              {renderFilterSection(
-                "Amenities",
-                SEARCH_FILTER_DATA.amenities,
-                "amenities",
-                8
+              {isproject && (
+                <LocalitySearch<Location>
+                  data={builderData || []}
+                  displayKey="name"
+                  valueKey="stringId"
+                  onChange={handleLocationChange}
+                  placeholder="Search Builders..."
+                  loading={builderDataLoading}
+                  setQuery={setBuilderSearch}
+                  label="Builder"
+                  category="builderIds"
+                  multiple
+                />
               )}
             </div>
           </div>

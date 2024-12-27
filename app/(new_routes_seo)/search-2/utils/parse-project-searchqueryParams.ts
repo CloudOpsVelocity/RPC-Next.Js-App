@@ -36,37 +36,39 @@ export default function parseProjectSearchQueryParams(params: string) {
 
   for (let i = 0; i < pairsLength; i++) {
     const [key, value] = paramPairs[i].split("=");
-
     if (!key || !value) continue;
-
     // Check for special cases first to avoid multiple string operations
     if (key === "areaValue" || key === "bugdetValue") {
       const [min, max] = value.split(",");
       filters[key] = [+min, +max];
       continue;
     }
-
     const hasComma = value.indexOf(",") !== -1;
-    if (hasComma) {
-      // Convert array values based on key type
-      if (
-        key === "bathroom" ||
-        key === "amenities" ||
-        key === "parking" ||
-        key === "bhk"
-      ) {
-        filters[key] = value.split(",").map(Number);
-      } else if (key === "builderIds") {
-        filters[key] = value.split(",").map(Number);
-      } else {
-        filters[key] = value.split(",");
-      }
+    if (
+      hasComma ||
+      key === "bathroom" ||
+      key === "amenities" ||
+      key === "parking" ||
+      key === "bhk" ||
+      key === "builderIds" ||
+      key === "facings"
+    ) {
+      filters[key] = value.includes(",")
+        ? value.split(",").map(Number)
+        : [Number(value)];
     } else {
       // Convert single values based on key type
-      if (key === "propType") {
+      if (
+        key === "propType" ||
+        key === "lat" ||
+        key === "lng" ||
+        key === "projStatus" ||
+        key === "furnish" ||
+        key === "pnb"
+      ) {
         filters[key] = Number(value);
-      } else if (key === "lat" || key === "lng") {
-        filters[key] = Number(value);
+      } else if (key === "bhk") {
+        filters[key] = [Number(value)];
       } else {
         filters[key] = value;
       }

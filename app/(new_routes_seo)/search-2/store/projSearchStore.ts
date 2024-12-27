@@ -178,15 +178,15 @@ export const ProjSearchAppliedFiltersStore = atom(
       }
     } else if (type === "clear") {
       const getParams = new URLSearchParams(window.location.search);
-      // getParams.get(clearType);
-
+      queryString = getParams.get("sf") ?? "";
+      console.log(queryString);
       switch (clearType) {
         case "clearAll":
           queryString = "";
           set(projSearchStore, { type: "reset" });
           break;
         case "bhk":
-          queryString = queryString.replace(/-unitTypes=[^&]*/g, "");
+          queryString = queryString.replace(/-bhk=[^&]*/g, "");
           set(projSearchStore, {
             type: "update",
             payload: { bhk: initialState.bhk },
@@ -203,6 +203,7 @@ export const ProjSearchAppliedFiltersStore = atom(
           });
           break;
         case "unitType":
+          queryString = queryString.replace(/-propType=[^&]*/g, "");
           set(projSearchStore, {
             payload: { propType: initialState.propType },
             type: "update",
@@ -210,7 +211,6 @@ export const ProjSearchAppliedFiltersStore = atom(
           break;
       }
     }
-    console.log(queryString);
     setInQueryParams(queryString || null);
     return appliedFilters;
   }

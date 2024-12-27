@@ -70,7 +70,13 @@ export default function ProjectSearchTabs() {
   const handleTabsChange = (value: string | null) => {
     const updatedFilters =
       value === null
-        ? { ...state, listedBy: null, sortByfield: null, sortType: null }
+        ? {
+            ...state,
+            listedBy: null,
+            sortByfield: null,
+            sortType: null,
+            facings: null,
+          }
         : {
             ...state,
             ...Object.fromEntries(
@@ -222,57 +228,54 @@ export default function ProjectSearchTabs() {
               </div>
             )}
           </div>
-          
         </div>
-        
-       
       </div>
       <div className=" relative xl:hidden flex justify-end self-end bg-slate-50 shadow-mdmax-w-7xl ">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsDropdownOpen(!isDropdownOpen);
-              }}
-              className="flex items-center gap-2 px-4 py-2 text-sm md:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 16V4m0 0L3 8m4-4l4 4m-4 8v-4m10 4v-4m0 4l-4-4m4 4l4-4"
-                />
-              </svg>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsDropdownOpen(!isDropdownOpen);
+          }}
+          className="flex items-center gap-2 px-4 py-2 text-sm md:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M7 16V4m0 0L3 8m4-4l4 4m-4 8v-4m10 4v-4m0 4l-4-4m4 4l4-4"
+            />
+          </svg>
 
-              <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
-                {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
+          <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
+            {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
                   "Sort By"} */}
-                {state.sortByfield != null && state.sortType != null
-                  ? getSortyByValue(state)
-                  : "New First"}
-              </div>
-            </button>
+            {state.sortByfield != null && state.sortType != null
+              ? getSortyByValue(state)
+              : "New First"}
+          </div>
+        </button>
 
-            {isDropdownOpen && (
-              <div
-                className="absolute right-0 mt-10 w-48 bg-white
+        {isDropdownOpen && (
+          <div
+            className="absolute right-0 mt-10 w-48 bg-white
                rounded-lg shadow-lg py-1 z-20 border border-white"
-              >
-                {sortOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // setSortBy(option.value);
-                      handleSortBy(option);
-                      setIsDropdownOpen(false);
-                    }}
-                    className={`
+          >
+            {sortOptions.map((option) => (
+              <button
+                key={option.value}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // setSortBy(option.value);
+                  handleSortBy(option);
+                  setIsDropdownOpen(false);
+                }}
+                className={`
                       block w-full text-left px-4 py-2 text-sm transition-colors
                       ${
                         getSortyByValue(state) === option.label
@@ -280,12 +283,12 @@ export default function ProjectSearchTabs() {
                           : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
                       }
                     `}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            )}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -16,7 +16,6 @@ import BHKTypeDropdown from "../FilterComponents/BHKTypeDropdown";
 import BudgetDropdown from "../FilterComponents/BudgetDropdown";
 import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
 import BuyRent from "../FilterComponents/BuyRent";
-import useNewsearch from "@/app/hooks/search/useNewSearch";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
@@ -373,26 +372,47 @@ export default function HeaderFilters() {
               Filters
             </button>
           </div>
-          {Object.entries(selectedFilters).some(
-            ([_, values]) => values.length > 0
+          {Object.entries(state).some(
+            ([_, value]) =>
+              (Array.isArray(value) && value.length > 0) || value !== null
           ) && (
             <div className="py-2 border-t">
               <div className="flex overflow-x-auto gap-2">
-                {Object.entries(selectedFilters).map(([category, values]) =>
-                  values.map((value) => (
-                    <div
-                      key={`${category}-${value}`}
-                      className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
-                    >
-                      <span>{value}</span>
-                      <button
-                        onClick={() => removeFilter(category, value)}
-                        className="text-[#0073C6] hover:text-[#0073C6]/70"
+                {Object.entries(state).map(
+                  ([category, values]) =>
+                    values !== null &&
+                    values !== undefined &&
+                    category !== "bugdetValue" &&
+                    category !== "areaValue" &&
+                    (Array.isArray(values) ? (
+                      values.map((value) => (
+                        <div
+                          key={`${category}-${value}`}
+                          className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
+                        >
+                          <span>{value}</span>
+                          <button
+                            onClick={() => removeFilter(category, value)}
+                            className="text-[#0073C6] hover:text-[#0073C6]/70"
+                          >
+                            <MdClose className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <div
+                        key={`${category}-${values}`}
+                        className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
                       >
-                        <MdClose className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))
+                        <span>{values}</span>
+                        <button
+                          onClick={() => removeFilter(category, values)}
+                          className="text-[#0073C6] hover:text-[#0073C6]/70"
+                        >
+                          <MdClose className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))
                 )}
               </div>
             </div>
