@@ -29,23 +29,23 @@ export default function BHKTypeDropdown({
     <div className="relative">
       <button
         className={`flex items-center justify-between gap-2 px-4 py-2 border-2 min-w-[160px] ${
-          state.unitTypes.length > 0
+          state.bhk.length > 0
             ? "border-[#148B16] text-[#148B16] font-bold"
             : "border-[#0073C6] text-[#0073C6]"
         } rounded-full hover:bg-[#148B16]/5`}
         onClick={onToggle}
       >
         {/* Render BHK Types */}
-        {state.unitTypes.length > 0 ? (
+        {state.bhk.length > 0 ? (
           <div className="flex items-center gap-0.5 max-w-[160px] overflow-hidden whitespace-nowrap">
-            {state.unitTypes.slice(0, 3).map((item, i) => (
+            {state.bhk.slice(0, 3).map((item, i) => (
               <span key={item} className="mr-0.5">
                 {bhkDetailsMap.get(item)}
                 {/* Add a comma after each item except the last one */}
-                {i < state.unitTypes.slice(0, 3).length - 1 && ", "}
+                {i < state.bhk.slice(0, 3).length - 1 && ", "}
               </span>
             ))}
-            {state.unitTypes.length > 3 && <span>...</span>}
+            {state.bhk.length > 3 && <span>...</span>}
           </div>
         ) : (
           "Select BHK Type"
@@ -79,12 +79,12 @@ export default function BHKTypeDropdown({
                 <input
                   type="checkbox"
                   className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
-                  checked={state.unitTypes.includes(bhk.value) || false}
+                  checked={state.bhk.includes(bhk.value) || false}
                   onChange={() =>
                     dispatch({
                       type: "toggleArrayValue",
                       payload: {
-                        key: "unitTypes",
+                        key: "bhk",
                         value: bhk.value,
                       },
                     })

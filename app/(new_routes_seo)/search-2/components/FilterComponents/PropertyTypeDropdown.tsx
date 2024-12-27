@@ -49,18 +49,18 @@ export default function PropertyTypeDropdown({
     <div className="relative">
       <button
         className={`flex items-center justify-between min-w-[160px] gap-2 px-4 py-2 border-2 ${
-          state.propTypes
+          state.propType
             ? "border-[#148B16] text-[#148B16] font-bold"
             : "border-[#0073C6] text-[#0073C6]"
         } rounded-full hover:bg-[#0073C6]/5`}
         onClick={onToggle}
       >
-        {state.propTypes ? (
+        {state.propType ? (
           <div className="flex items-center gap-2">
             {/* Green dot */}
             <span className="w-2.5 h-2.5 bg-[#148B16] rounded-full inline-block" />
             {/* Property Name */}
-            <span>{propertyDetailsTypes?.get(state.propTypes)?.name}</span>
+            <span>{propertyDetailsTypes?.get(state.propType)?.name}</span>
           </div>
         ) : (
           "Property Type"
@@ -92,12 +92,12 @@ export default function PropertyTypeDropdown({
                 <input
                   type="radio"
                   className="rounded-full border-gray-300 text-green-700 checked:bg-green-700 checked:border-green-700"
-                  checked={state.propTypes === data.id}
+                  checked={state.propType === data.id}
                   onChange={() =>
                     dispatch({
                       type: "update",
                       payload: {
-                        propTypes: data.id,
+                        propType: data.id,
                       },
                     })
                   }

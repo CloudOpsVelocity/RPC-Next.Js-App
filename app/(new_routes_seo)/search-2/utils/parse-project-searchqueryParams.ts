@@ -3,10 +3,10 @@ import { SearchFilter } from "@/app/types/search";
 export const initialState: SearchFilter = {
   current: null,
   locality: [],
-  propTypes: null,
-  unitTypes: [],
-  bathRooms: [],
-  parkings: [],
+  propType: null,
+  bhk: [],
+  bathroom: [],
+  parking: [],
   amenities: [],
   listedBy: null,
   reraVerified: [],
@@ -50,10 +50,10 @@ export default function parseProjectSearchQueryParams(params: string) {
     if (hasComma) {
       // Convert array values based on key type
       if (
-        key === "bathRooms" ||
+        key === "bathroom" ||
         key === "amenities" ||
-        key === "parkings" ||
-        key === "unitTypes"
+        key === "parking" ||
+        key === "bhk"
       ) {
         filters[key] = value.split(",").map(Number);
       } else if (key === "builderIds") {
@@ -63,7 +63,7 @@ export default function parseProjectSearchQueryParams(params: string) {
       }
     } else {
       // Convert single values based on key type
-      if (key === "propTypes") {
+      if (key === "propType") {
         filters[key] = Number(value);
       } else if (key === "lat" || key === "lng") {
         filters[key] = Number(value);

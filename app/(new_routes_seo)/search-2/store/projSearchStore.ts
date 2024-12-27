@@ -3,15 +3,14 @@ import { filterParser } from "@/app/utils/search";
 import { atom } from "jotai";
 import { atomWithReducer, selectAtom } from "jotai/utils";
 import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
-import { convertToQueryParams } from "@/app/utils/search/query";
 
 export const initialState: SearchFilter = {
   current: null,
   locality: [],
-  propTypes: null,
-  unitTypes: [],
-  bathRooms: [],
-  parkings: [],
+  propType: null,
+  bhk: [],
+  bathroom: [],
+  parking: [],
   amenities: [],
   listedBy: null,
   reraVerified: [],
@@ -186,7 +185,7 @@ export const ProjSearchAppliedFiltersStore = atom(
         queryString = queryString.replace(/-unitTypes=[^&]*/g, "");
         set(projSearchStore, {
           type: "update",
-          payload: { unitTypes: initialState.unitTypes },
+          payload: { bhk: initialState.bhk },
         });
       } else if (clearType === "area") {
         queryString = queryString.replace(/-area=[^&]*/g, "");
@@ -197,9 +196,8 @@ export const ProjSearchAppliedFiltersStore = atom(
           payload: { bugdetValue: initialState.bugdetValue },
         });
       } else if (clearType === "unitType") {
-        queryString = queryString.replace(/-unitTypes=[^&]*/g, "");
         set(projSearchStore, {
-          payload: { propTypes: initialState.propTypes },
+          payload: { propType: initialState.propType },
           type: "update",
         });
       }

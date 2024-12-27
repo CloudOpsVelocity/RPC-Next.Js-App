@@ -33,7 +33,7 @@ export const SEARCH_FILTER_DATA = {
   ],
   bhkDetails: [
     { title: "1 RK", value: 40 },
-    { title: "1 BHK", value: 41 }, 
+    { title: "1 BHK", value: 41 },
     { title: "1.5 BHK", value: 42 },
     { title: "2 BHK", value: 43 },
     { title: "2.5 BHK", value: 44 },
@@ -51,7 +51,7 @@ export const SEARCH_FILTER_DATA = {
     { title: "5.5 BHK + Servant", value: 686 },
     // { title: "5+ BHK", value: 688 },
     // { title: "6 BHK", value: 689 },
-    { title: "6+ BHK", value: 690 }
+    { title: "6+ BHK", value: 690 },
   ],
   rerastatus: [
     {
@@ -424,7 +424,7 @@ export const SEARCH_FILTER_DATA = {
       title: "Video Available",
     },
   ],
-/* 
+  /* 
   used: [
     {
       id: 1241,
@@ -436,33 +436,32 @@ export const SEARCH_FILTER_DATA = {
     },
   ], */
 
-
-  Bathrooms:[
-    {title: "1 Bath", value: 1 },
-    {title: "2 Bath", value: 2 },
-    {title: "3 Bath", value: 3 },
-    {title: "4 Bath", value: 4 },
-    {title: "5 Bath", value: 5 },
-    {title: "5+ Bath", value: 6 },
-/*     {title: "6", value: 6 },
+  Bathrooms: [
+    { title: "1 Bath", value: 1 },
+    { title: "2 Bath", value: 2 },
+    { title: "3 Bath", value: 3 },
+    { title: "4 Bath", value: 4 },
+    { title: "5 Bath", value: 5 },
+    { title: "5+ Bath", value: 6 },
+    /*     {title: "6", value: 6 },
     {title: "6+", value: "1,7" }, */
   ],
-  Parkings:[
-    {title: "1", value: 1 },
-    {title: "2", value: 2 },
-    {title: "3", value: 3 },
-    {title: "4", value: 4 },
-    {title: "5", value: 5 },
-    {title: "6+", value: "1,7" },
-/*     {title: "6", value: 6 },
+  Parkings: [
+    { title: "1", value: 1 },
+    { title: "2", value: 2 },
+    { title: "3", value: 3 },
+    { title: "4", value: 4 },
+    { title: "5", value: 5 },
+    { title: "6+", value: "1,7" },
+    /*     {title: "6", value: 6 },
     {title: "6+", value: "1,7" }, */
   ],
-  UsedorNotUsed:[
-    {title:"Used", value:1241},
-    {title:"Un-Used", value:2122}
+  UsedorNotUsed: [
+    { title: "Used", value: "Y" },
+    { title: "Un-Used", value: "N" },
   ],
-  PostedBy:[
-    {title:"Owner", value:"I"},
-    {title:"Agent", value:"A"}
-  ]
+  PostedBy: [
+    { title: "Owner", value: "I" },
+    { title: "Agent", value: "A" },
+  ],
 };

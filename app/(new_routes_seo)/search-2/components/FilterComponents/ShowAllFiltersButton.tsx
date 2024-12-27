@@ -40,7 +40,8 @@ export default function ShowAllFiltersButton({
   const [expandedSections, setExpandedSections] = useState<{
     [key: string]: boolean;
   }>({});
-  const { handleClearFilters } = useProjSearchAppliedFilters();
+  const { handleClearFilters, handleApplyFilters } =
+    useProjSearchAppliedFilters();
   const locations: Location[] = [
     { name: "Whitefield", stringUrl: null, stringId: "563", type: "Locality" },
     {
@@ -140,16 +141,16 @@ export default function ShowAllFiltersButton({
     const isExpanded = expandedSections[category] || false;
     const displayData = isExpanded ? data : data.slice(0, initialDisplay);
     const radioorChecked = [
-      "status",
-      "rera",
-      "propertyType",
-      "listingStatus",
-      "PostedBy",
-      "UsedorNotUsed",
-      "PhotosVedios",
+      "projStatus",
+      // "reraIds",
+      "propType",
+      "propStatus",
+      "listedBy",
+      "isUsed",
+      "pnb",
       "furnish",
     ];
-
+    console.log(state);
     return (
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-3">{title}</h3>
@@ -159,23 +160,48 @@ export default function ShowAllFiltersButton({
               <input
                 type={radioorChecked.includes(category) ? "radio" : "checkbox"}
                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                checked={selectedFilters[category]?.includes(
-                  item.Label ||
-                    item.title ||
-                    item.constDesc ||
-                    item.cids ||
-                    propertyiconss[item as keyof typeof propertyiconss]?.id
-                )}
+                checked={
+                  Array.isArray(state[category as keyof typeof state])
+                    ? state[category as keyof typeof state]?.includes(
+                        item.cid ||
+                          item.value ||
+                          item.constDesc ||
+                          item.cids ||
+                          propertyiconss[item as keyof typeof propertyiconss]
+                            ?.id
+                      )
+                    : state[category as keyof typeof state] ===
+                      (item.cid ||
+                        item.value ||
+                        item.constDesc ||
+                        item.cids ||
+                        propertyiconss[item as keyof typeof propertyiconss]?.id)
+                }
                 onChange={() => {
                   const value =
-                    category === "propertyType"
+                    category === "propType"
                       ? propertyiconss[item as keyof typeof propertyiconss]
-                          ?.id || item.Label
-                      : item.Label || item.title || item.constDesc;
-                  toggleFilter(category, value);
+                          ?.id || item.cid
+                      : item.cid || item.value || item.cid;
+                  // toggleFilter(category, value);
+                  dispatch({
+                    type: "update",
+                    payload: {
+                      [category]:
+                        Array.isArray(state[category as keyof typeof state]) &&
+                        state[category as keyof typeof state] !== null
+                          ? [
+                              ...(state[
+                                category as keyof typeof state
+                              ] as any[]),
+                              value,
+                            ]
+                          : value,
+                    },
+                  });
                 }}
               />
-              {category === "propertyType" &&
+              {category === "propType" &&
                 propertyiconss[item as keyof typeof propertyiconss]?.icon}
               <span>
                 {propertyiconss[item as keyof typeof propertyiconss]?.name ||
@@ -238,7 +264,7 @@ export default function ShowAllFiltersButton({
               Clear Filter
             </button>
             <button
-              onClick={onToggle}
+              onClick={() => handleApplyFilters(() => onToggle())}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >
               Apply Filter
@@ -250,17 +276,18 @@ export default function ShowAllFiltersButton({
                 renderFilterSection(
                   "Project Status",
                   SEARCH_FILTER_DATA.projectstatus,
-                  "status"
+                  "projStatus"
                 )}
-              {renderFilterSection(
-                "Listing Status",
-                SEARCH_FILTER_DATA.listingStatus,
-                "listingStatus"
-              )}
+              {!isproject &&
+                renderFilterSection(
+                  "Listing Status",
+                  SEARCH_FILTER_DATA.listingStatus,
+                  "propStatus"
+                )}
               {renderFilterSection(
                 "Property Type",
                 Object.keys(propertyiconss),
-                "propertyType"
+                "propType"
               )}
               {renderFilterSection(
                 "BHK Type",
@@ -268,11 +295,12 @@ export default function ShowAllFiltersButton({
                 "bhk",
                 6
               )}
-              {renderFilterSection(
-                "RERA Status",
-                SEARCH_FILTER_DATA.rerastatus,
-                "rera"
-              )}
+              {!isproject &&
+                renderFilterSection(
+                  "RERA Status",
+                  SEARCH_FILTER_DATA.rerastatus,
+                  "reraIds"
+                )}
             </div>
             <div className="mb-6  ml-4">
               <h3
@@ -338,13 +366,13 @@ export default function ShowAllFiltersButton({
               {renderFilterSection(
                 "Bathrooms",
                 SEARCH_FILTER_DATA.Bathrooms,
-                "bathrooms",
+                "bathroom",
                 6
               )}
               {renderFilterSection(
                 "parking",
                 SEARCH_FILTER_DATA.Parkings,
-                "prakings",
+                "parking",
                 6
               )}
               {renderFilterSection(
@@ -353,29 +381,30 @@ export default function ShowAllFiltersButton({
                 "amenities",
                 8
               )}
-              {renderFilterSection(
-                "facings",
-                SEARCH_FILTER_DATA.facing,
-                "facings",
-                9
-              )}
+              {!isproject &&
+                renderFilterSection(
+                  "facings",
+                  SEARCH_FILTER_DATA.facing,
+                  "facings",
+                  9
+                )}
               {!isproject &&
                 renderFilterSection(
                   "UsedorNotUsed",
                   SEARCH_FILTER_DATA.UsedorNotUsed,
-                  "UsedorNotUsed"
+                  "isUsed"
                 )}
               {!isproject &&
                 renderFilterSection(
                   "PostedBy",
                   SEARCH_FILTER_DATA.PostedBy,
-                  "PostedBy"
+                  "listedBy"
                 )}
               {!isproject &&
                 renderFilterSection(
                   "Photos & Videos",
                   SEARCH_FILTER_DATA.photoAvail,
-                  "PhotosVedios"
+                  "pnb"
                 )}
               {!isproject &&
                 renderFilterSection(
@@ -383,11 +412,11 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "furnish"
                 )}
-              {renderFilterSection(
+              {/* {renderFilterSection(
                 "Phases",
                 SEARCH_FILTER_DATA.furnish,
                 "Phases"
-              )}
+              )} */}
             </div>
           </div>
         </div>

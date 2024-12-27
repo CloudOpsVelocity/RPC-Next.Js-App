@@ -1,10 +1,10 @@
 export interface SearchFilter {
   current: number | null;
   locality: string[];
-  propTypes: number | null;
-  unitTypes: number[];
-  bathRooms: number[];
-  parkings: number[];
+  propType: number | null;
+  bhk: number[];
+  bathroom: number[];
+  parking: number[];
   amenities: number[];
   listedBy: null | string;
   reraVerified: number[];
