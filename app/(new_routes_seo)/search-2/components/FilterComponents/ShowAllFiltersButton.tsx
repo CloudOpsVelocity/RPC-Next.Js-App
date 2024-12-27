@@ -218,7 +218,7 @@ export default function ShowAllFiltersButton({
     <div className="  relative">
       <button
         onClick={onToggle}
-        className="flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-full hover:bg-gray-50"
+        className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-full hover:bg-gray-50"
       >
         <MdTune className="w-5 h-5" />
         More Filters
@@ -229,7 +229,7 @@ export default function ShowAllFiltersButton({
         />
       </button>
       {isOpen && (
-        <div className="absolute top-full flex flex-col right-0 mt-2 min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
+        <div className="absolute top-full flex flex-col right-0 mt-2 max-w-md sm:min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
           <div className="flex items-center justify-between gap-4 pb-4 border-b  ">
             <button
               onClick={() => {
