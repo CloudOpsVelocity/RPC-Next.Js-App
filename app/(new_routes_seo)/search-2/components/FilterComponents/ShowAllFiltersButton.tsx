@@ -389,26 +389,6 @@ export default function ShowAllFiltersButton({
                 "Phases"
               )}
             </div>
-            <div className="flex flex-col mb-6 ml-4 gap-6">
-              <LocalitySearch<Location>
-                data={locations}
-                displayKey="name"
-                valueKey="stringId"
-                onChange={handleLocationChange}
-                placeholder="Search locations..."
-                label="Location"
-                multiple
-              />
-              <LocalitySearch<Location>
-                data={builders}
-                displayKey="name"
-                valueKey="stringId"
-                onChange={handleLocationChange}
-                placeholder="Search Builders..."
-                label="Builder"
-                multiple
-              />
-            </div>
           </div>
         </div>
       )}
