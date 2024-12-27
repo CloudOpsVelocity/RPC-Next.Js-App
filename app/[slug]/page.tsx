@@ -13,10 +13,35 @@ type Props = {
     slug: string;
   };
 };
+function xorEncrypt(text: string, key: string) {
+  let result = "";
+  for (let i = 0; i < text.length; i++) {
+    result += String.fromCharCode(
+      text.charCodeAt(i) ^ key.charCodeAt(i % key.length)
+    );
+  }
+  return result;
+}
 
-// const Loki = require("lokijs");
+function encode(text: string, key: string) {
+  const encrypted = xorEncrypt(text, key);
+  return btoa(encrypted); // Convert the XORed text to base64
+}
 
+// Decode function (Base64 and XOR decryption)
+function decode(base64String: string, key: string) {
+  const encrypted = atob(base64String); // Decode base64 to get encrypted text
+  return xorEncrypt(encrypted, key); // XOR decrypt using the same key
+}
+
+// Example usage
+const key = "mysecretkey"; // Your encryption key
 export default async function Page({ params: { slug } }: Props) {
+  // const ids = "WUpWJzxBVlE7OitIOjQ6UENdUSc6QEg6";
+  // const startTime = performance.now();
+  // console.log(decode(ids, key));
+  // const endTime = performance.now();
+  // console.log(`Decoding took ${endTime - startTime} milliseconds`);
   if (!slug.includes("-")) return notFound();
   const values = await findSeoParams(slug);
   if (!values) return notFound();
@@ -45,26 +70,26 @@ export default async function Page({ params: { slug } }: Props) {
   );
 }
 
-export const generateStaticParams = async () => {
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  const res = await getPagesSlugs("case-seo");
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "case-seo.json");
+// export const generateStaticParams = async () => {
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   const res = await getPagesSlugs("case-seo");
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "case-seo.json");
 
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
+//   // Ensure the 'static' directory exists
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
 
-  // Convert the data object into JSON
-  const jsonContent = JSON.stringify(res, null, 2);
+//   // Convert the data object into JSON
+//   const jsonContent = JSON.stringify(res, null, 2);
 
-  // Write the JSON data to the file
-  fs.writeFileSync(filePath, jsonContent);
-  console.log("case-seo.json file created successfully");
-  const slugs = Object.keys(res);
-  return slugs.map((slug) => ({ slug }));
-};
+//   // Write the JSON data to the file
+//   fs.writeFileSync(filePath, jsonContent);
+//   console.log("case-seo.json file created successfully");
+//   const slugs = Object.keys(res);
+//   return slugs.map((slug) => ({ slug }));
+// };
 export async function generateMetadata(
   { params }: any,
   parent: ResolvingMetadata
