@@ -447,7 +447,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             </React.Fragment>
           )}
 
-          <h3
+          {/* <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Used or Not Used"
           >
@@ -466,11 +466,11 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                   name="photo"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   onClick={() => setSingleType("pnb", value)}
-                  checked={filters.pnb === value}
+                  checked={filters.IS === value}
                 />
               );
             })}
-          </div>
+          </div> */}
         </ScrollArea>
       </div>
     </div>
