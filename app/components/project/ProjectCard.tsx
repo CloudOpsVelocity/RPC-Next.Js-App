@@ -42,6 +42,7 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive}: CardProps) {
+  console.log(cardData, "here is testing the card name")
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession(); 
   const { toggleShortlist } = useShortlistAndCompare();
