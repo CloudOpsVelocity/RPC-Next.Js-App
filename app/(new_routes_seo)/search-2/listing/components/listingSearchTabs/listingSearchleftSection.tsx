@@ -12,6 +12,7 @@ import { useQueryState } from "nuqs";
 import { useAtom, useAtomValue } from "jotai";
 /* import ListingSearchTabs from "../ListingSearchTabs"; */
 import { projSearchStore } from "../../../store/projSearchStore";
+import ListingSearchTabs from "../ListingSearchTabs";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -124,8 +125,8 @@ function LeftSection({ mutate, serverData }: Props) {
       className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]"
       ref={containerRef}
     >
-      {/* <ListingSearchTabs/>
- */}      {isLoading ? (
+      <ListingSearchTabs/>
+      {isLoading ? (
         <Loader />
       ) : allItems.length > 0 ? (
         <div
