@@ -1,9 +1,10 @@
 import path from "path";
 import fs from "fs";
 import logger from "@/app/utils/logger";
+import { headers } from "next/headers";
 
 export async function findSeoParams(inputUrl: string) {
-  console.time("dyanimic");
+  console.time("dynamic");
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "case-seo.json");
   const jsonData = fs.readFileSync(filePath, "utf8");
@@ -14,7 +15,7 @@ export async function findSeoParams(inputUrl: string) {
       return builderJsonData[path];
     }
   }
-  console.timeEnd("dyanimic");
+  console.timeEnd("dynamic" + headers().get("x-ip"));
   return null;
 }
 export const extractCaseSeoParams = (input: string) => {

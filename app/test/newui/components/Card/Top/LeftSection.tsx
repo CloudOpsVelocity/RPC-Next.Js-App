@@ -68,11 +68,12 @@ export default function LeftSection({
       {/* <div>
         
       </div> */}
-      {data.propTypeId && data.propTypeId !== projectprops.plot &&
-      <p className="bg-gray-700 rounded-full absolute top-1 xl:top-auto xl:bottom-7 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
-        {projstatus ?? propStatus}
-      </p>
-      }
+      {((data.propTypeId && data.propTypeId !== projectprops.plot) ||
+        data.propTypeName) && (
+        <p className="bg-gray-700 rounded-full absolute top-1 xl:top-auto xl:bottom-7 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
+          {projstatus ?? propStatus}
+        </p>
+      )}
 
       <p className="bg-gray-700 rounded-full absolute top-7 xl:top-auto xl:bottom-1 right-1 text-white text-[12px]  xl:text-sm px-1 xl:bg-gray-900">
         {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}

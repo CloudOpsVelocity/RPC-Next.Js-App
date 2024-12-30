@@ -155,12 +155,15 @@ export default function HeaderFilters() {
             dispatch({
               type: "update",
               payload: {
-                // propType: paramsObject.PT,
-                bhk: [parseInt(paramsObject.BH as string)],
-                // bhk: paramsObject.BH,
-                // locality: localityName + "%2B" + encodeURIComponent(paramsObject.LT),
+                propType: parseInt(paramsObject.PT as string),
+                ...(paramsObject.BH && {
+                  bhk: [parseInt(paramsObject.BH as string)],
+                }),
+                cg: paramsObject.CG as string,
+                locality: [`${localityName}+${paramsObject.LT}`],
               },
             });
+            handleApplyFilters();
           } else {
             const url = `/search/listing?propTypes=${paramsObject.PT}${
               paramsObject.BH ? `&unitTypes=${paramsObject.BH}` : ""

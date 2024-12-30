@@ -45,8 +45,7 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
 
   const updateScrollButtons = throttle(() => {
     if (tabContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } =
-        tabContainerRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } = tabContainerRef.current;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft + clientWidth < scrollWidth);
     }
@@ -74,7 +73,6 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
       );
     };
   }, [updateScrollButtons]);
-
 
   return (
     <div className="relative bg-white rounded-lg shadow-md overflow-hidden w-full">
@@ -122,7 +120,11 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
 
       {/* Content */}
       <div className="overflow-y-auto bg-gray-50 p-1">
-        {data && selectedCategory !== undefined && data[selectedCategory] !== undefined && data[selectedCategory].length !== undefined && data[selectedCategory].length  > 0 ? (
+        {data &&
+        selectedCategory !== undefined &&
+        data[selectedCategory] !== undefined &&
+        data[selectedCategory].length !== undefined &&
+        data[selectedCategory].length > 0 ? (
           <ul className="grid grid-cols-2 gap-1">
             {data[selectedCategory]?.map((item) => (
               <li
@@ -132,9 +134,9 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
                 <h3 className="text-sm font-bold text-blue-600 truncate">
                   {item.name}
                 </h3>
-                <p className="text-gray-700 text-xs mt-1 font-medium">
+                {/* <p className="text-gray-700 text-xs mt-1 font-medium">
                   Rating: {item.rating} ({item.totalRating} reviews)
-                </p>
+                </p> */}
                 <p className="text-gray-700 text-xs mt-1 font-medium">
                   Distance: {item.distance}
                 </p>

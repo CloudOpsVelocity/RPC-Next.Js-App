@@ -47,7 +47,9 @@ export default function ProjData({
   builderCity,
   sqftPrice,
   basePrice,
+  postedBy,
 }: Props) {
+  console.log(postedBy);
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
   const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
@@ -151,7 +153,7 @@ export default function ProjData({
         Address: {address}
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
-        Builder:{" "}
+        {postedBy ?? "Builder"}:{" "}
         <span
           className="font-bold underline cursor-pointer"
           onClick={(e) => {
@@ -207,13 +209,19 @@ export default function ProjData({
         Address: {address}
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
-        Builder:{" "}
+        {postedBy ?? "Builder"}:{" "}
         <span
-          className="font-bold underline cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation();
-            window.open(urlBuilder, "_blank");
-          }}
+          className={`font-bold ${
+            postedBy === "Builder" ? "underline cursor-pointer" : ""
+          }`}
+          onClick={
+            postedBy === "Builder"
+              ? (e) => {
+                  e.stopPropagation();
+                  window.open(urlBuilder, "_blank");
+                }
+              : undefined
+          }
         >
           {/* {getTypeText(type)} */}
           {postedByName}
