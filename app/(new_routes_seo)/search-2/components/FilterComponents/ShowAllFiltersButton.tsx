@@ -21,6 +21,7 @@ import { useDebouncedState } from "@mantine/hooks";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
+import { usePathname } from "next/navigation";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
@@ -41,6 +42,7 @@ export default function ShowAllFiltersButton({
   isOpen,
   onToggle,
 }: ShowAllFiltersButtonProps) {
+  const path = usePathname();
   const [expandedSections, setExpandedSections] = useState<{
     [key: string]: boolean;
   }>({});
@@ -208,7 +210,7 @@ export default function ShowAllFiltersButton({
   const handleLocationChange = (selected: Location[]) => {
     console.log("Selected locations:", selected);
   };
-  const isproject = state.listedBy == null;
+  const isproject = path !== "/search-2/listing" && state.listedBy == null;
   return (
     <div className="  relative">
       <button

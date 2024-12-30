@@ -9,6 +9,15 @@ export const getSearchData = async (page = 0, apiFilterQueryParams: string) => {
   const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
   return res.data;
 };
+export const getListingSearchData = async (
+  page = 0,
+  apiFilterQueryParams: string
+) => {
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}`;
+  let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
+  const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
+  return res.data;
+};
 
 const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
   const changedParams: Record<string, string> = {

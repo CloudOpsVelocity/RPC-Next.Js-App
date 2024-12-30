@@ -7,7 +7,10 @@ import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
-import { getSearchData } from "../../../utils/project-search-queryhelpers";
+import {
+  getListingSearchData,
+  getSearchData,
+} from "../../../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import { useAtom, useAtomValue } from "jotai";
 /* import ListingSearchTabs from "../ListingSearchTabs"; */
@@ -31,7 +34,7 @@ function LeftSection({ mutate, serverData }: Props) {
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(
+        const response = await getListingSearchData(
           pageParam,
           apiFilterQueryParams ?? ""
         );
@@ -91,7 +94,7 @@ function LeftSection({ mutate, serverData }: Props) {
           <ProjectCard
             key={eachOne.projIdEnc + eachOne.propType}
             refetch={refetch}
-            data={{ ...eachOne, type: state.listedBy ?? "proj" }}
+            data={{ ...eachOne, type: "A" ?? "B" }}
             index={virtualRow.index}
             mutate={mutate}
           />
@@ -125,7 +128,7 @@ function LeftSection({ mutate, serverData }: Props) {
       className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]"
       ref={containerRef}
     >
-      <ListingSearchTabs/>
+      <ListingSearchTabs />
       {isLoading ? (
         <Loader />
       ) : allItems.length > 0 ? (

@@ -12,11 +12,11 @@ import { update } from "lodash";
 import { SearchFilter } from "@/app/types/search";
 
 const tabs = [
- /*  { id: null, label: "Projects" }, */
+  /*  { id: null, label: "Projects" }, */
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
   { id: "B", label: "Builder Listings" },
-  { id: "All", label: "All Listings" },
+  { id: null, label: "All Listings" },
 ];
 
 export default function ListingSearchTabs() {
@@ -34,25 +34,25 @@ export default function ListingSearchTabs() {
     { id: null, type: null, value: "newest", label: "Newest First" },
     {
       id: 2,
-      type: state.listedBy == null ? "minPrice" : "price",
+      type: "price",
       value: "price-low-high",
       label: "Price: Low to High",
     },
     {
       id: 1,
-      type: state.listedBy == null ? "maxPrice" : "price",
+      type: "price",
       value: "price-high-low",
       label: "Price: High to Low",
     },
     {
       id: 2,
-      type: state.listedBy == null ? "basePrice" : "sqftPrice",
+      type: "sqftPrice",
       value: "sqft-low-high",
       label: "Price/sqft: Low to High",
     },
     {
       id: 1,
-      type: state.listedBy == null ? "basePrice" : "sqftPrice",
+      type: "sqftPrice",
       value: "sqft-high-low",
       label: "Price/sqft: High to Low",
     },
@@ -230,7 +230,6 @@ export default function ListingSearchTabs() {
           </div>
         </div>
       </div>
-     
     </div>
   );
 }
