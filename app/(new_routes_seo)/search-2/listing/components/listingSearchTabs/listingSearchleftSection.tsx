@@ -130,7 +130,6 @@ function LeftSection({ mutate, serverData }: Props) {
       ref={containerRef}
     >
       <ListingSearchTabs />
-      <ListingSearchTabs />
       {isLoading ? (
         <Loader />
       ) : allItems.length > 0 ? (
