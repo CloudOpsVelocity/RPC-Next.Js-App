@@ -12,6 +12,8 @@ import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
 import { Provider } from "jotai";
 import montserrat from "@/font";
+import Header from "./components/layouts/primary/header";
+import Footer from "./components/layouts/primary/footer";
 
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
@@ -115,7 +117,9 @@ export default function RootLayout({
             <SessionProvider>
               <ReactQueryProvider>
                 <Provider>
+                  <Header />
                   <Layout>{children}</Layout>
+                  <Footer />
                 </Provider>
               </ReactQueryProvider>
             </SessionProvider>

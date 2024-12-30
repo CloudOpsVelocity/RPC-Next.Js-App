@@ -16,9 +16,6 @@ import PostYourListing from "./(dashboard)/new/components/post-your-listing";
 import BlogsSection from "./(dashboard)/new/components/blogs";
 import Req from "./(dashboard)/new/components/Req";
 import SharePopup from "./(dashboard)/search/components/SharePopup";
-import Header from "./components/layouts/primary/header";
-import Footer from "./components/layouts/primary/footer";
-import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
 import { cookies, headers } from "next/headers";
 import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
@@ -39,7 +36,6 @@ export default async function Page() {
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
-      <Header />
       <HomeSearch
         count={shortIds?.total}
         cityData={{
@@ -118,7 +114,6 @@ export default async function Page() {
       />
       <PostYourListing />
       <BlogsSection />
-      <Footer />
       <LoginPopup />
       <SharePopup />
       <Req />

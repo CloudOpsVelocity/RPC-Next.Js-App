@@ -4,10 +4,8 @@ import { useState, useEffect, useRef, FormEvent } from "react";
 import {
   MdSearch,
   MdClose,
-  MdKeyboardArrowDown,
   MdLocationOn,
   MdFilterList,
-  MdWork,
   MdBusiness,
 } from "react-icons/md";
 import PropertyTypeDropdown from "../FilterComponents/PropertyTypeDropdown";
@@ -412,7 +410,7 @@ export default function HeaderFilters() {
               <ShowAllFiltersButton
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
-                isOpen={true}
+                isOpen
                 onToggle={() => handleDropdownToggle("allFilters")}
               />
             </div>

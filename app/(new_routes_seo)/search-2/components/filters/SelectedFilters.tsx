@@ -3,11 +3,13 @@ import React from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
 import { SelectedFiltersMap } from "@/app/data/search";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 type Props = {};
 
 export default function SelectedFilters({}: Props) {
   const [state, dispatch] = useAtom(projSearchStore);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
   return (
     Object.entries(state).some(
       ([_, value]) =>
@@ -64,14 +66,15 @@ export default function SelectedFilters({}: Props) {
                       : SelectedFiltersMap.get(values)}
                   </span>
                   <button
-                    onClick={() =>
+                    onClick={() => {
                       dispatch({
                         type: "update",
                         payload: {
                           [category]: null,
                         },
-                      })
-                    }
+                      });
+                      handleApplyFilters();
+                    }}
                     className="text-[#0073C6] hover:text-[#0073C6]/70"
                   >
                     <MdClose className="w-4 h-4" />

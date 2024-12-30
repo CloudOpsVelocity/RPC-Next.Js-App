@@ -46,11 +46,6 @@ export default function ShowAllFiltersButton({
   }>({});
   const { handleClearFilters, handleApplyFilters } =
     useProjSearchAppliedFilters();
-  const Phases: Location[] = [
-    { name: "phase1", stringUrl: null, stringId: "563", type: "Locality" },
-    { name: "phase3", stringUrl: null, stringId: "563", type: "Locality" },
-    { name: "pahse4", stringUrl: null, stringId: "563", type: "Locality" },
-  ];
 
   const propertyiconss = {
     apt: {
