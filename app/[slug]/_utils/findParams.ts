@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import logger from "@/app/utils/logger";
+
 export async function findSeoParams(inputUrl: string) {
   console.time("dyanimic");
   const staticDir = path.join(process.cwd(), "static");

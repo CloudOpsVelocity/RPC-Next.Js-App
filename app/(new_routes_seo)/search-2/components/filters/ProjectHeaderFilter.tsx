@@ -17,6 +17,7 @@ import BuyRent from "../FilterComponents/BuyRent";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
+import { usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 import { myClientLogger } from "@/app/utils/clientLogger";
@@ -26,6 +27,7 @@ export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
+  const path = usePathname();
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: string[];
   }>({});
@@ -81,13 +83,6 @@ export default function HeaderFilters() {
     }
   };
 
-  const removeFilter = (category: string, value: string) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [category]: prev[category].filter((item) => item !== value),
-    }));
-  };
-
   const handleClear = (category: string) => {
     setSelectedFilters((prev) => ({
       ...prev,
@@ -105,7 +100,7 @@ export default function HeaderFilters() {
 
     onSearchChange(value);
   };
-
+  const isListingSearch = path.includes("listing");
   const AgentOwnerBuilderMap = new Map([
     ["BuilderAgentListing", "A"],
     ["BuilderOwnerListing", "I"],
@@ -131,11 +126,22 @@ export default function HeaderFilters() {
         if (data.type === "Project") {
           window.open(data.stringUrl);
         } else {
-          window.open(
-            `/search/listing?projIdEnc=${data.stringId.split("_")[0]}&phaseId=${
-              data.stringId.split("_")[1]
-            }&projName=${data.name}`
-          );
+          if (isListingSearch) {
+            dispatch({
+              type: "update",
+              payload: {
+                projIdEnc: data.stringId.split("_")[0],
+                // phaseId: data.stringId.split("_")[1],
+                projName: data.name,
+              },
+            });
+          } else {
+            window.open(
+              `/search/listing?projIdEnc=${
+                data.stringId.split("_")[0]
+              }&phaseId=${data.stringId.split("_")[1]}&projName=${data.name}`
+            );
+          }
         }
 
         break;
