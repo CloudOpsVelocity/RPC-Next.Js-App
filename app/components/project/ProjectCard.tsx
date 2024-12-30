@@ -68,7 +68,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive
       });
     }
   };
-
+console.log(cardData, "ygkjgghjggkjgkgkgkg")
   const handleReqCall = (e: any) => {
     e.stopPropagation();
     e.preventDefault();
@@ -88,7 +88,7 @@ const URLRedirectionProj=createProjectLinkUrl({
   slug: cardData.projName,
 });
 const URLToBuilder=generateBuilderUrl({
-  city:cardData.city,
+  city:cardData.builderCity,
   slug:cardData.builderName
 })
   return (
