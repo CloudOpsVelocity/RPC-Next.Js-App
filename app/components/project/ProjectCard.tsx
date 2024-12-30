@@ -42,6 +42,7 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive}: CardProps) {
+  console.log(cardData, "here is testing the card name")
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession(); 
   const { toggleShortlist } = useShortlistAndCompare();
@@ -67,7 +68,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive
       });
     }
   };
-
+console.log(cardData, "ygkjgghjggkjgkgkgkg")
   const handleReqCall = (e: any) => {
     e.stopPropagation();
     e.preventDefault();
@@ -87,7 +88,7 @@ const URLRedirectionProj=createProjectLinkUrl({
   slug: cardData.projName,
 });
 const URLToBuilder=generateBuilderUrl({
-  city:cardData.city,
+  city:cardData.builderCity,
   slug:cardData.builderName
 })
   return (
