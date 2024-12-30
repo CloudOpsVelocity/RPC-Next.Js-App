@@ -149,16 +149,28 @@ export default function HeaderFilters() {
         {
           const paramsObject = extractApiValues(data.stringId);
 
-          let url;
           let localityName = data.name.split(" in ")[1].toLowerCase().trim();
-          url =
-            `propTypes=${paramsObject.PT}${
-              paramsObject.BH ? `&unitTypes=${paramsObject.BH}` : ""
-            }&cg=${paramsObject.CG}&localities=${localityName}` +
-            "%2B" +
-            encodeURIComponent(paramsObject.LT);
 
-          window.open("/search/listing?" + url);
+          if (isListingSearch) {
+            dispatch({
+              type: "update",
+              payload: {
+                // propType: paramsObject.PT,
+                bhk: [parseInt(paramsObject.BH as string)],
+                // bhk: paramsObject.BH,
+                // locality: localityName + "%2B" + encodeURIComponent(paramsObject.LT),
+              },
+            });
+          } else {
+            const url = `/search/listing?propTypes=${paramsObject.PT}${
+              paramsObject.BH ? `&unitTypes=${paramsObject.BH}` : ""
+            }&cg=${
+              paramsObject.CG
+            }&localities=${localityName}%2B${encodeURIComponent(
+              paramsObject.LT
+            )}`;
+            window.open(url);
+          }
         }
         break;
       case "Project Listings":
