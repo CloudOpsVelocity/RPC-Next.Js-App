@@ -23,7 +23,9 @@ export const getData = async (
   if (type === "loc" || type === "builders") {
     transformedData = responseData[type].map((location: any) => ({
       label: location.name,
-      value: `${location.name}+${location.stringId}`,
+      value: `${location.stringUrl ? "" : `${location.name}+`}${
+        location.stringUrl ? location.stringUrl : location.stringId
+      }`,
     }));
   }
 

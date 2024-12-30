@@ -3,6 +3,7 @@
 import { useAtom, useSetAtom } from "jotai";
 import React, { useState, useRef, useEffect } from "react";
 import { projSearchStore } from "../../../store/projSearchStore";
+import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
 
 interface DynamicSearchProps<T> {
   data: T[];
@@ -37,6 +38,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [state, dispatch] = useAtom(projSearchStore);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
   const filteredItems = loading
     ? []
     : data.filter(
@@ -70,28 +72,33 @@ export default function DynamicSearch<T extends Record<string, any>>({
   }, [focusedIndex, isOpen]);
 
   const handleSelect = (item: T) => {
-    console.log(item);
-    dispatch({
-      type: "pushToArray",
-      payload: {
-        key: "locality",
-        value: item.value,
-      },
-    });
-    setSearchTerm("");
-    setIsOpen(false);
-    setFocusedIndex(-1);
-    inputRef.current?.focus();
+    const isValidBuilderParams = !item.value.includes("/");
+    if (isValidBuilderParams || category === "locality") {
+      dispatch({
+        type: "pushToArray",
+        payload: {
+          key: category === "locality" ? "locality" : "builderIds",
+          value: isValidBuilderParams ? item.value : item.value,
+        },
+      });
+      setSearchTerm("");
+      setIsOpen(false);
+      setFocusedIndex(-1);
+      inputRef.current?.focus();
+    } else {
+      window.open(item.value, "_blank");
+    }
   };
 
   const handleRemove = (itemValue: string | number) => {
     dispatch({
       type: "removeFromArray",
       payload: {
-        key: "locality",
+        key: category === "locality" ? "locality" : "builderIds",
         value: itemValue,
       },
     });
+    handleApplyFilters();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

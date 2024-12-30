@@ -228,7 +228,7 @@ export default function ShowAllFiltersButton({
           <div className="flex items-center justify-between gap-4 pb-4 border-b  ">
             <button
               onClick={() => {
-                handleClearFilters("clearAll");
+                handleClearFilters(isproject ? "clearAll" : "listing");
                 onToggle();
               }}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
@@ -416,7 +416,7 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "Phases"
                 )}
-              {/* {isproject && (
+              {isproject && (
                 <LocalitySearch<Location>
                   data={builderData || []}
                   displayKey="name"
@@ -429,7 +429,7 @@ export default function ShowAllFiltersButton({
                   category="builderIds"
                   multiple
                 />
-              )} */}
+              )}
             </div>
           </div>
         </div>

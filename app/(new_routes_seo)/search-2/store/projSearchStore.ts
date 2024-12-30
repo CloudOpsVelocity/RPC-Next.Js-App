@@ -151,7 +151,7 @@ export const ProjSearchAppliedFiltersStore = atom(
     set,
     setInQueryParams: any,
     type: "clear" | "add",
-    clearType?: "clearAll" | "bhk" | "area" | "budget" | "unitType"
+    clearType?: "clearAll" | "bhk" | "area" | "budget" | "unitType" | "listing"
   ) => {
     const appliedFilters = get(projSearchStore);
     let queryString = "";
@@ -180,7 +180,6 @@ export const ProjSearchAppliedFiltersStore = atom(
       // queryString = getParams.get("sf") ?? "";
       switch (clearType) {
         case "clearAll":
-          // queryString = queryString.replace(/-[^&]*listedBy=[^&]*/g, "");
           queryString = "";
           set(projSearchStore, { type: "reset" });
           break;
@@ -207,6 +206,20 @@ export const ProjSearchAppliedFiltersStore = atom(
             payload: { propType: initialState.propType },
             type: "update",
           });
+          break;
+        case "listing":
+          {
+            const getParams = new URLSearchParams(window.location.search);
+
+            let listedBy =
+              getParams.get("sf")?.match(/listedBy=[^\s&]*\+?(\d+)?/)?.[0] ??
+              "";
+            queryString = listedBy;
+            set(projSearchStore, {
+              payload: { ...initialState, listedBy: listedBy.split("=")[1] },
+              type: "update",
+            });
+          }
           break;
       }
     }

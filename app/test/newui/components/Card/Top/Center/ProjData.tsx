@@ -44,7 +44,7 @@ export default function ProjData({
   otherCharges,
   phaseCount,
   phaseId,
-
+  builderCity,
   sqftPrice,
   basePrice,
 }: Props) {
@@ -54,7 +54,7 @@ export default function ProjData({
 
   let urlBuilder = generateBuilderUrl({
     slug: postedByName,
-    city: city ? city : cityName,
+    city: builderCity ? builderCity : cityName,
   });
 
   const { filters } = useSearchFilters();

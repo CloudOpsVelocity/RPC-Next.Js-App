@@ -51,11 +51,16 @@ export default function parseProjectSearchQueryParams(params: string) {
       key === "parking" ||
       key === "bhk" ||
       key === "builderIds" ||
-      key === "facings"
+      key === "facings" ||
+      key === "locality"
     ) {
-      filters[key] = value.includes(",")
-        ? value.split(",").map(Number)
-        : [Number(value)];
+      if (key === "locality" || key === "builderIds") {
+        filters[key] = value.split(",").map(String);
+      } else {
+        filters[key] = value.includes(",")
+          ? value.split(",").map(Number)
+          : [Number(value)];
+      }
     } else {
       // Convert single values based on key type
       if (

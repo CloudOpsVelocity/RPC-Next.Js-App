@@ -13,7 +13,7 @@ export default function useProjSearchAppliedFilters() {
     callback?.();
   };
   const handleClearFilters = (
-    type: "clearAll" | "bhk" | "area" | "budget" | "unitType"
+    type: "clearAll" | "bhk" | "area" | "budget" | "unitType" | "listing"
   ) => {
     switch (type) {
       case "clearAll":
@@ -26,6 +26,9 @@ export default function useProjSearchAppliedFilters() {
         setAppliedFilters(setName, "clear", type);
         break;
       case "budget":
+        setAppliedFilters(setName, "clear", type);
+        break;
+      case "listing":
         setAppliedFilters(setName, "clear", type);
         break;
     }

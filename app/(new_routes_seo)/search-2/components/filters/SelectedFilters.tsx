@@ -23,6 +23,8 @@ export default function SelectedFilters({}: Props) {
               values !== undefined &&
               category !== "bugdetValue" &&
               category !== "areaValue" &&
+              category !== "sortByfield" &&
+              category !== "sortType" &&
               (Array.isArray(values) ? (
                 values.map((value) => (
                   <div
@@ -30,7 +32,13 @@ export default function SelectedFilters({}: Props) {
                     className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
                   >
                     <span>
-                      {category === "parking" || category === "bathroom"
+                      {category === "locality" || category === "builderIds"
+                        ? `${value.split("+")[0]}${
+                            values.length - 1 === values.indexOf(value)
+                              ? ""
+                              : ", "
+                          }`
+                        : category === "parking" || category === "bathroom"
                         ? `${value} ${category}`
                         : SelectedFiltersMap.get(value)}
                     </span>
@@ -48,6 +56,7 @@ export default function SelectedFilters({}: Props) {
                               : null,
                           },
                         });
+                        handleApplyFilters();
                       }}
                       className="text-[#0073C6] hover:text-[#0073C6]/70"
                     >
