@@ -30,6 +30,7 @@ export default function ListingSearchTabs() {
       scrollContainerRef.current.scrollLeft += e.deltaY;
     }
   };
+
   const sortOptions = [
     { id: null, type: null, value: "newest", label: "Newest First" },
     {
@@ -57,16 +58,17 @@ export default function ListingSearchTabs() {
       label: "Price/sqft: High to Low",
     },
   ];
+
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (isDropdownOpen) {
         setIsDropdownOpen(false);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isDropdownOpen]);
+
   const handleTabsChange = (value: string | null) => {
     const updatedFilters =
       value === null
@@ -97,6 +99,7 @@ export default function ListingSearchTabs() {
     });
     handleApplyFilters();
   };
+
   const handleSortBy = (option: any) => {
     dispath({
       payload: {
@@ -107,6 +110,7 @@ export default function ListingSearchTabs() {
     });
     handleApplyFilters();
   };
+
   const getSortyByValue = (state: any): string => {
     if (
       (state.sortType == 2 && state.sortByfield === "minPrice") ||
@@ -133,15 +137,9 @@ export default function ListingSearchTabs() {
     return "Newest First";
   };
 
-  // useEffect(() => {
-  //   getSortyByValue(state);
-  // }, [state]);
-
-  // Default value if no conditions are met
-
   return (
-    <div className="sticky top-0   z-10 ">
-      <div className=" w-full bg-slate-50 shadow-md max-w-7xl  mx-auto px-4 py-2">
+    <div className="sticky top-0 z-10">
+      <div className="w-full bg-slate-50 shadow-md max-w-7xl mx-auto px-4 py-2">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div
             ref={scrollContainerRef}
@@ -154,7 +152,7 @@ export default function ListingSearchTabs() {
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`
-                    whitespace-nowrap rounded-full md:px-2  xl:px-4 md:py-1 xl:py-2 text-sm md:text-base font-medium transition-all
+                    whitespace-nowrap rounded-full md:px-2 xl:px-4 md:py-1 xl:py-2 text-sm md:text-base font-medium transition-all
                     ${
                       state.listedBy === tab.id
                         ? "bg-[#0073C6] text-white shadow-md"
@@ -168,7 +166,7 @@ export default function ListingSearchTabs() {
             </div>
           </div>
 
-          <div className="relative ">
+          <div className="relative">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -190,9 +188,10 @@ export default function ListingSearchTabs() {
                 />
               </svg>
 
-              <div className="max-w-[105px] ml-auto sm:ml-[0] overflow-hidden text-ellipsis whitespace-nowrap">
-                {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
-                  "Sort By"} */}
+              <div
+                className="max-w-[105px] ml-auto sm:ml-[0] 
+              overflow-hidden text-ellipsis whitespace-nowrap"
+              >
                 {state.sortByfield != null && state.sortType != null
                   ? getSortyByValue(state)
                   : "New First"}
@@ -200,10 +199,7 @@ export default function ListingSearchTabs() {
             </button>
 
             {isDropdownOpen && (
-              <div
-                className="absolute right-0 mt-2 w-48 bg-white
-               rounded-lg shadow-lg py-1 z-20 border border-white"
-              >
+              <div className="absolute right-0  rounded-lg shadow-lg py-1 z-20 mt-2 w-48 bg-white  border border-white">
                 {sortOptions.map((option) => (
                   <button
                     key={option.value}
@@ -214,7 +210,7 @@ export default function ListingSearchTabs() {
                       setIsDropdownOpen(false);
                     }}
                     className={`
-                      block w-full text-left px-4 py-2 text-sm transition-colors
+                      block w-full text-left text-sm transition-colors px-4 py-2 
                       ${
                         getSortyByValue(state) === option.label
                           ? "text-white bg-[#0073C6]"
