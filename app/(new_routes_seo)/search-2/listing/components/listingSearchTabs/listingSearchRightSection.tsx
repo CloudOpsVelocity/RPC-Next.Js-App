@@ -1,5 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
+
+// import useSearchFilters from "@/app/hooks/search";
 import React, { useMemo } from "react";
 import MapSkeleton from "@/app/components/maps/Skeleton";
 import useSearchFilters from "@/app/hooks/search";
@@ -24,6 +26,7 @@ const ListingSearchRightSection = ({ serverData }: any) => {
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [
+
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {

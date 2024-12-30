@@ -25,29 +25,31 @@ function LeftSection({ mutate, serverData }: Props) {
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(
-          pageParam,
-          apiFilterQueryParams ?? ""
-        );
-        return response;
-      },
-      getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
-        return nextPage;
-      },
-      cacheTime: 300000,
-      // ...RTK_CONFIG,
-    });
+
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getSearchData(
+        pageParam,
+        apiFilterQueryParams ?? ""
+      );
+      return response;
+    },
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      const nextPage = allPages.length;
+      if (lastPage.length < 20) {
+        return;
+      }
+      return nextPage;
+    },
+    cacheTime: 300000,
+    // ...RTK_CONFIG,
+  });
+
   const allItems = data?.pages?.flat() || [];
+
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
     getScrollElement: () => containerRef.current,
@@ -122,10 +124,10 @@ function LeftSection({ mutate, serverData }: Props) {
 
   return (
     <div
-      className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]"
+      className="p-[0%] sm:max-h-[500px] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] sm:max-w-[50%]"
       ref={containerRef}
     >
-      <ListingSearchTabs/>
+      <ListingSearchTabs />
       {isLoading ? (
         <Loader />
       ) : allItems.length > 0 ? (
@@ -152,4 +154,5 @@ function LeftSection({ mutate, serverData }: Props) {
     </div>
   );
 }
+
 export default memo(LeftSection);
