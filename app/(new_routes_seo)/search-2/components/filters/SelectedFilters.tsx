@@ -25,6 +25,7 @@ export default function SelectedFilters({}: Props) {
               category !== "areaValue" &&
               category !== "sortByfield" &&
               category !== "sortType" &&
+              category !== "cg" &&
               (Array.isArray(values) ? (
                 values.map((value) => (
                   <div
