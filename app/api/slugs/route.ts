@@ -105,6 +105,7 @@ export async function POST(request: Request, response: Response) {
         logger.info(
           `Slugs created successfully. Request: ${request.method} ${request.url}`
         );
+        type === "project" && revalidateTag("projectSlugs");
         return NextResponse.json(
           { message: "Slugs created successfully" },
           { status: 201 }
@@ -196,7 +197,7 @@ export async function POST(request: Request, response: Response) {
             }
           }
         });
-
+        type === "project" && revalidateTag("projectSlugs");
         return NextResponse.json(
           { message: "Slugs updated successfully" },
           { status: 200 }
@@ -300,7 +301,5 @@ export async function GET(request: Request) {
   logger.info(
     `GET request successful. Request: ${request.method} ${request.url}`
   );
-  return new Response(data, {
-    status: 200,
-  });
+  return NextResponse.json(JSON.parse(data), { status: 200 });
 }

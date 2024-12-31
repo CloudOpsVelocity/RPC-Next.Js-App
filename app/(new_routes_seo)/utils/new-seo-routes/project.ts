@@ -53,10 +53,13 @@ export const extractProjectParamsValues = (input: string) => {
 };
 export async function findPathForProjectDetails(inputUrl: string) {
   console.time("findPathForProjectDetails");
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
-  const jsonData = fs.readFileSync(filePath, "utf8");
-  const builderJsonData = JSON.parse(jsonData);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/slugs?type=P`,
+    {
+      next: { tags: ["projectSlugs"] },
+    }
+  );
+  const builderJsonData = await res.json();
   console.timeEnd("findPathForProjectDetails");
   if (builderJsonData[inputUrl]) {
     return builderJsonData[inputUrl];
