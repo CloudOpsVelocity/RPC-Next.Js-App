@@ -46,7 +46,7 @@ export default async function Page({ params: { slug } }: Props) {
   const values = await findSeoParams(slug);
 
   if (!values) return notFound();
-  const slugValues = extractCaseSeoParams(values);
+  const slugValues : any = extractCaseSeoParams(values) as any
   const severData = await getProjSearchData(
     `cg=${slugValues.CG}&city=${slugValues.C}&propType=${slugValues.P}&bhk=${slugValues.B}&localities=${slugValues.L}`
   );

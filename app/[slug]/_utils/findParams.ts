@@ -7,7 +7,7 @@ let seoLookup: Map<string, any> | null = null;
 
 export async function findSeoParams(inputUrl: string) {
   console.time("dynamic");
-   
+
   // Load the data into a Map if not already done
   if (!seoLookup) {
     const staticDir = path.join(process.cwd(), "static");
@@ -16,7 +16,7 @@ export async function findSeoParams(inputUrl: string) {
     // Read and parse the JSON file
     const jsonData = fs.readFileSync(filePath, "utf8");
     const builderJsonData = JSON.parse(jsonData);
- 
+
     if (!Array.isArray(builderJsonData)) {
       throw new Error("Invalid JSON format: Expected an array");
     }
@@ -83,31 +83,29 @@ export async function findSeoParams(inputUrl: string) {
 //   return result;
 // };
 
-
-export function extractCaseSeoParams(values) {
-  const result = {};
+export function extractCaseSeoParams(values: string) {
+  const result: any = {};
 
   // Split the string by hyphens to get parts like ['683B', 'RCG', '482L', '9C']
-  const parts = values.split('-');
+  const parts = values.split("-");
 
   // Iterate through each part to extract the numeric value and the corresponding letter
-  parts.forEach(part => {
-    const number = part.replace(/[A-Za-z]/g, ''); // Extract the numeric value
-    const letter = part.replace(/[0-9]/g, ''); // Extract the alphabetic part
+  parts.forEach((part) => {
+    const number = part.replace(/[A-Za-z]/g, ""); // Extract the numeric value
+    const letter = part.replace(/[0-9]/g, ""); // Extract the alphabetic part
 
-    if (letter === 'B') {
+    if (letter === "B") {
       result.B = number; // B for BHK
-    } else if (letter === 'RCG' || letter === 'R') {
+    } else if (letter === "RCG" || letter === "R") {
       result.CG = letter.charAt(0); // First character of RCG for CG
-    } else if (letter === 'C') {
+    } else if (letter === "C") {
       result.C = number; // C for City (numeric part)
-    } else if (letter === 'L') {
+    } else if (letter === "L") {
       result.L = number; // L for Locality
-    }
-    else if(letter === "P"){
-      result.P = number
+    } else if (letter === "P") {
+      result.P = number;
     }
   });
-  console.log(result)
+  console.log(result);
   return result;
 }
