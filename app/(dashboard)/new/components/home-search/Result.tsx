@@ -32,7 +32,6 @@ export default function Results() {
     listing: listings,
     projectListing,
   } = data;
-
   const handleAddSearch = (newItem: string) => {
     if (!filters.locality.includes(newItem)) {
       dispatch({ type: "ADD_LOCALITY", payload: newItem });

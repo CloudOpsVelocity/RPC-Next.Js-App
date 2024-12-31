@@ -91,6 +91,7 @@ export default function HeaderFilters() {
   };
 
   const handleDropdownToggle = (dropdownName: string) => {
+    setIsDrawerOpen(false)
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
   const handleSearchChange = (e: any) => {
@@ -409,7 +410,7 @@ export default function HeaderFilters() {
                 <MdClose className="w-6 h-6" />
               </button>
             </div>
-            <div className=" max-h-[100vh] p-4 space-y-6 overflow-y">
+            <div className=" max-h-[100vh] py-4 sm:p-4 space-y-6  overflow-y">
               {/* <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}

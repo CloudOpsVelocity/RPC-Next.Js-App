@@ -15,7 +15,7 @@ export default function SelectedFilters({}: Props) {
       ([_, value]) =>
         (Array.isArray(value) && value.length > 0) || value !== null
     ) && (
-      <div className="py-2 border-t">
+      <div className="py-2 border-t sm:max-w-[56%]">
         <div className="flex overflow-x-auto gap-2">
           {Object.entries(state).map(
             ([category, values]) =>

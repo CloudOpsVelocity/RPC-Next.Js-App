@@ -18,7 +18,7 @@ export default function Results() {
     listing: listings,
     projectListing,
   } = data;
-
+console.log(builders)
   const { filters, setFilters } = useSearchFilters();
 
   if (isLoading) {

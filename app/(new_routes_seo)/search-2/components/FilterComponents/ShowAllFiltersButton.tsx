@@ -226,7 +226,7 @@ export default function ShowAllFiltersButton({
         />
       </button>
       {isOpen && (
-        <div className="absolute top-full flex flex-col right-0 mt-2 max-w-md sm:min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
+        <div className="absolute top-full flex flex-col right-0 mt-2 mb-8 sm:mb-0 max-w-full sm:min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
           <div className="flex items-center justify-between gap-4 pb-4 border-b  ">
             <button
               onClick={() => {
@@ -244,7 +244,7 @@ export default function ShowAllFiltersButton({
               Apply Filter
             </button>
           </div>
-          <div className="flex flex-col justify-start max-h-[60vh] overflow-y-auto">
+          <div className="flex flex-col justify-start max-h-[100vh] mb-10 sm:mb-0 overflow-y-auto">
             <div className="flex flex-col mb-6 ml-4 gap-6">
               <LocalitySearch<Location>
                 data={localitydata || []}
