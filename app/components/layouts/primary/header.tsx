@@ -17,37 +17,47 @@ import { GrpLogoSvg } from "@/app/images/getrightLogo";
 import { usePathname } from "next/navigation";
 import { homePageSvgsMap } from "@/app/images/commongsSvgs2";
 
-
 type Props = {};
 
 export default function Header({}: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const pathname = usePathname();
   return (
-    <div className="flex  h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[50]">
-       <Link href={"/"}>
+    ![
+      "/login",
+      "/register",
+      "/register/individual",
+      "/register/agent",
+      "/register/builder",
+    ].includes(pathname) && (
+      <div className="flex  h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[50]">
+        <Link href={"/"}>
           <GrpLogoSvg className="h-[40px]   sm:h-[50px] w-auto" />
         </Link>
-      {isMobile ? (
-        <div className="flex  sm:hidden mr-4 gap-4">
-          <Btn />
-          <MobileDropDown />
-        </div>
-      ) : (
-        <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
-          <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
-          <ForBuilders />
-          <PostProjectBtn />
-          <Btn />
-          <Dropdown />
-        </div>
-      )}
-    </div>
+        {isMobile ? (
+          <div className="flex  sm:hidden mr-4 gap-4">
+            <Btn />
+            <MobileDropDown />
+          </div>
+        ) : (
+          <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
+            <p className="text-[#242424] text-xl not-italic font-medium">
+              Blogs
+            </p>
+            <ForBuilders />
+            <PostProjectBtn />
+            <Btn />
+            <Dropdown />
+          </div>
+        )}
+      </div>
+    )
   );
 }
 
 const ForBuilders = () => {
   const { data: session } = useSession();
-  const pathName = usePathname()
+  const pathName = usePathname();
   return (
     !session && (
       <Menu trigger="click-hover">
@@ -58,7 +68,9 @@ const ForBuilders = () => {
         </Menu.Target>
         <Menu.Dropdown
           className="!p-0 cursor-pointer"
-          onClick={() => window.open(`/login?cc=${encryptUrl(pathName)}`, "_blank")}
+          onClick={() =>
+            window.open(`/login?cc=${encryptUrl(pathName)}`, "_blank")
+          }
         >
           <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
             <div>
@@ -177,7 +189,8 @@ function Dropdown() {
                   target="_blank"
                 >
                   <div className="flex items-center gap-2">
-                    {homePageSvgsMap.get(item.svg ?? '')} <span>{item.label}</span>  
+                    {homePageSvgsMap.get(item.svg ?? "")}{" "}
+                    <span>{item.label}</span>
                   </div>
                 </Menu.Item>
               )
@@ -194,7 +207,7 @@ function Dropdown() {
             onClick={handleLogout}
           >
             <div className="flex items-center gap-2">
-              {homePageSvgsMap.get('logout')} <span>Log Out</span>
+              {homePageSvgsMap.get("logout")} <span>Log Out</span>
             </div>
           </Menu.Item>
         </Menu.Dropdown>
@@ -356,20 +369,21 @@ function MobileDropDown() {
                 </button>
               ) : (
                 <Menu.Item
-                key={`dataCrad_${item.label[index]}`}
-                classNames={{
-                  itemLabel: S.itemLabel,
-                  item: S.item,
-                }}
-                component="a"
-                className=" text-gray-700 hover:text-green-500 transition-colors flex"
-                href={item.url}
-                target="_blank"
-              >
-                <div className="flex items-center gap-2">
-                  {homePageSvgsMap.get(item.svg ?? '')} <span>{item.label}</span>  
-                </div>
-              </Menu.Item>
+                  key={`dataCrad_${item.label[index]}`}
+                  classNames={{
+                    itemLabel: S.itemLabel,
+                    item: S.item,
+                  }}
+                  component="a"
+                  className=" text-gray-700 hover:text-green-500 transition-colors flex"
+                  href={item.url}
+                  target="_blank"
+                >
+                  <div className="flex items-center gap-2">
+                    {homePageSvgsMap.get(item.svg ?? "")}{" "}
+                    <span>{item.label}</span>
+                  </div>
+                </Menu.Item>
               )
             )}
             <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
@@ -383,8 +397,8 @@ function MobileDropDown() {
             className="block text-gray-700 hover:text-green-500 transition-colors"
             onClick={handleLogout}
           >
-             <div className="flex items-center gap-2">
-              {homePageSvgsMap.get('logout')} <span>Log Out</span>
+            <div className="flex items-center gap-2">
+              {homePageSvgsMap.get("logout")} <span>Log Out</span>
             </div>
           </Menu.Item>
         </Menu.Dropdown>
