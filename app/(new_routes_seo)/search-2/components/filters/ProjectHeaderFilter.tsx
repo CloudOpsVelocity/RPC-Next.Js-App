@@ -22,6 +22,7 @@ import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 import { myClientLogger } from "@/app/utils/clientLogger";
 import SelectedFilters from "./SelectedFilters";
+import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -247,13 +248,13 @@ export default function HeaderFilters() {
   };
   return (
     <>
-      <div className="w-full max-w-[86%] xl:max-w-[70%] max-h-[60vh] overflow- bg-white border-b sticky top-0 z-40">
-        <div className="max-w-full px-1 ">
+      <div className="w-full  xl:max-w-[70%] max-h-[60vh] overflow- bg-white border-b sticky top-0 z-40">
+        <div className=" px-1 ">
           <div
             ref={searchRef}
             className="flex flex-wrap items-center gap-2 py-3"
           >
-            <div className="flex-1 max-w-full sm:max-w-[39%] relative">
+            <div className="flex-1 min-w-full sm:min-w-min sm:max-w-[39%] relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
                   openDropdown={openDropdown}
@@ -357,8 +358,11 @@ export default function HeaderFilters() {
                 )
               )}
             </div>
-            <div className="hidden md:flex items-center gap-2">
-             {/*  <PropertyTypeDropdown
+            <div className="order-2 sm:order-first">
+              <ProjSearchCityDropDown />
+            </div>
+            <div className="hidden md:flex items-center gap-2 order-2">
+              {/*  <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
                 handleClear={handleClear}
@@ -385,7 +389,7 @@ export default function HeaderFilters() {
             </div>
 
             <button
-              className="md:hidden flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full"
+              className="md:hidden flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
               onClick={() => setIsDrawerOpen(true)}
             >
               <MdFilterList className="w-5 h-5" />
