@@ -46,7 +46,7 @@ export default async function Page({ params: { slug } }: Props) {
   const values = await findSeoParams(slug);
 
   if (!values) return notFound();
-  const slugValues : any = extractCaseSeoParams(values) as any
+  const slugValues: any = extractCaseSeoParams(values) as any;
   const severData = await getProjSearchData(
     `cg=${slugValues.CG}&city=${slugValues.C}&propType=${slugValues.P}&bhk=${slugValues.B}&localities=${slugValues.L}`
   );
@@ -87,8 +87,9 @@ export const generateStaticParams = async () => {
     // Write the JSON data to the file
     fs.writeFileSync(filePath, jsonContent);
     console.log("case-seo.json file created successfully");
-    const slugs = Object.keys(res);
-    return slugs.map((slug) => ({ slug }));
+    return [];
+    // const slugs = Object.keys(res);
+    // return slugs.map((slug) => ({ slug }));
   }
   return [];
 };
