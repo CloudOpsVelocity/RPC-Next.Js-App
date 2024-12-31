@@ -70,29 +70,29 @@ export default async function Page({ params: { slug } }: Props) {
   );
 }
 
-// export const generateStaticParams = async () => {
-//   if (process.env.NODE_ENV === "production") {
-//     // Get the data (mocked here, replace with your actual data fetching logic)
-//     const res = await getPagesSlugs("case-seo");
-//     const staticDir = path.join(process.cwd(), "static");
-//     const filePath = path.join(staticDir, "case-seo.json");
+export const generateStaticParams = async () => {
+  if (process.env.NODE_ENV === "production") {
+    // Get the data (mocked here, replace with your actual data fetching logic)
+    const res = await getPagesSlugs("case-seo");
+    const staticDir = path.join(process.cwd(), "static");
+    const filePath = path.join(staticDir, "case-seo.json");
 
-//     // Ensure the 'static' directory exists
-//     if (!fs.existsSync(staticDir)) {
-//       fs.mkdirSync(staticDir);
-//     }
+    // Ensure the 'static' directory exists
+    if (!fs.existsSync(staticDir)) {
+      fs.mkdirSync(staticDir);
+    }
 
-//     // Convert the data object into JSON
-//     const jsonContent = JSON.stringify(res, null, 2);
+    // Convert the data object into JSON
+    const jsonContent = JSON.stringify(res, null, 2);
 
-//     // Write the JSON data to the file
-//     fs.writeFileSync(filePath, jsonContent);
-//     console.log("case-seo.json file created successfully");
-//     const slugs = Object.keys(res);
-//     return slugs.map((slug) => ({ slug }));
-//   }
-//   return [];
-// };
+    // Write the JSON data to the file
+    fs.writeFileSync(filePath, jsonContent);
+    console.log("case-seo.json file created successfully");
+    const slugs = Object.keys(res);
+    return slugs.map((slug) => ({ slug }));
+  }
+  return [];
+};
 export async function generateMetadata(
   { params }: any,
   parent: ResolvingMetadata
