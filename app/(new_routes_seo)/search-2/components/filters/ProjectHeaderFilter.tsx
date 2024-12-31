@@ -358,7 +358,7 @@ export default function HeaderFilters() {
               )}
             </div>
             <div className="hidden md:flex items-center gap-2">
-              <PropertyTypeDropdown
+             {/*  <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
                 handleClear={handleClear}
@@ -375,7 +375,7 @@ export default function HeaderFilters() {
               <BudgetDropdown
                 isOpen={openDropdown === "budget"}
                 onToggle={() => handleDropdownToggle("budget")}
-              />
+              /> */}
               <ShowAllFiltersButton
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
