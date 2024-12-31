@@ -84,6 +84,7 @@ export default function TopRightSection({
           city: cityName ? cityName : city ? city : "",
           locality: localityName ? localityName : locality ? locality : "",
           slug: projName ? projName : projName,
+          projIdEnc: projIdEnc,
         })
       : generateListingLinkUrl({
           city: cityName,

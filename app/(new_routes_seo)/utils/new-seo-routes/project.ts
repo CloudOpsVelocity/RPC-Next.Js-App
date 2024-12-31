@@ -57,13 +57,10 @@ export async function findPathForProjectDetails(inputUrl: string) {
   const filePath = path.join(staticDir, "projectSlugs.json");
   const jsonData = fs.readFileSync(filePath, "utf8");
   const builderJsonData = JSON.parse(jsonData);
-  for (const path in builderJsonData) {
-    if (path.startsWith(inputUrl)) {
-      console.timeEnd("findPathForProjectDetails");
-      return builderJsonData[path];
-    }
-  }
   console.timeEnd("findPathForProjectDetails");
-  notFound()
+  if (builderJsonData[inputUrl]) {
+    return builderJsonData[inputUrl];
+  }
+  notFound();
   return null;
 }

@@ -30,6 +30,7 @@ export default function PropertyBanner({
     city: cityName,
     locality: localityName,
     slug: projectName,
+    projIdEnc: projIdEnc,
   });
   return isMobile ? (
     <PropertyBannerForMobile
@@ -78,15 +79,14 @@ export default function PropertyBanner({
               </p>
             )}
             <div className="w-[350px] h-[185px] relative">
-            <Image
-              src={media?.coverImageUrl?.split(',')[1]}
-              alt="Sobha Dream Acres"
-              className="flex  items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
-            unoptimized
-            fill
-            />
+              <Image
+                src={media?.coverImageUrl?.split(",")[1]}
+                alt="Sobha Dream Acres"
+                className="flex  items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
+                unoptimized
+                fill
+              />
             </div>
-        
           </div>
 
           <div className="ml-5">
@@ -106,13 +106,15 @@ export default function PropertyBanner({
             </p>
           </div>
         </div>
-        {about &&
-        <div className="mt-6">
-          <div className="prose-p:py-1 prose-no-break text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words" 
-            dangerouslySetInnerHTML={{ __html  : about.slice(0,500) }} 
-          />
-          <ReadMore text={about} title={"About"} />
-        </div>}
+        {about && (
+          <div className="mt-6">
+            <div
+              className="prose-p:py-1 prose-no-break text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words"
+              dangerouslySetInnerHTML={{ __html: about.slice(0, 500) }}
+            />
+            <ReadMore text={about} title={"About"} />
+          </div>
+        )}
         <Link
           href={url}
           variant="blue"
@@ -173,12 +175,13 @@ function PropertyBannerForMobile({
               <span className="font-semibold">
                 {formatDate(startDate)} - {formatDate(endDate)}
               </span>
-            </div> 
+            </div>
           </div>
         </div>
         <div className="mt-2 ml-[4px]">
-          <div className="prose-no-break text-[12px] font-[500] text-[#233333] break-words" 
-            dangerouslySetInnerHTML={{ __html  : about.slice(0,200) }}
+          <div
+            className="prose-no-break text-[12px] font-[500] text-[#233333] break-words"
+            dangerouslySetInnerHTML={{ __html: about.slice(0, 200) }}
           />
           <ReadMore maxLines={2} text={about} title={"About"} />
         </div>

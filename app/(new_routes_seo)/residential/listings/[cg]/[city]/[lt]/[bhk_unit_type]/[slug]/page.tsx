@@ -34,10 +34,11 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.bhk_unit_type}/${params.slug}`;
-  const value = await findPathForProjectListing(pathname);
-  if (!value) return notFound();
-  const { id } = extractListingParamsValues(value);
-  console.log("hello form listing details page during builder");
+  // const value = await findPathForProjectListing(pathname);
+  // if (!value) return notFound();
+  // const { id } = extractListingParamsValues(value);
+  // console.log("hello form listing details page during builder");
+  const id = params.slug.split("-").at(-1);
   if (!id) {
     notFound();
   }
@@ -57,7 +58,7 @@ export default async function Page({ params }: Props) {
   ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName}`;
 
   if (!data.propIdEnc) {
-    console.log("slug found data not coming for this listing" + pathname);
+    console.log("slug found data not coming for this listing" + id);
     notFound();
   }
   return (

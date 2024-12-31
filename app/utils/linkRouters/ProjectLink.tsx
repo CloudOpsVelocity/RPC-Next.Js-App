@@ -16,6 +16,7 @@ type ProjectLinkProps = {
     city: string;
     slug: string;
     locality: string;
+    projIdEnc: string;
   };
   target?: "_blank" | "_self" | "_parent" | "_top";
   children: ReactNode;
@@ -27,7 +28,9 @@ export const createProjectLinkUrl = (
   routeParams: ProjectLinkProps["routeParams"]
 ): string => {
   const { city, slug, locality } = routeParams;
-  return `${BASE_PATH_PROJECT_DETAILS}/${city ? slugify(city) : ""}/${locality ? slugify(locality) : ""}/${slug ? slugify(slug) : ""}`;
+  return `${BASE_PATH_PROJECT_DETAILS}/${city ? slugify(city) : ""}/${
+    locality ? slugify(locality) : ""
+  }/${slug ? slugify(slug) : ""}-${routeParams.projIdEnc}`;
 };
 
 export default function ProjectLink({

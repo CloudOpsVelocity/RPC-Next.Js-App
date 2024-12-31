@@ -44,8 +44,6 @@ const PropertyFirstBlock: React.FC<Props> = ({
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
 
-
-
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -69,6 +67,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
     city: projectDetails?.ctName as string,
     locality: projectDetails?.ltName as string,
     slug: projName as string,
+    projIdEnc: projectDetails?.projIdEnc as string,
   });
   const builderUrl =
     data &&
@@ -161,8 +160,10 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   <h3 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     <span className="lowercase">
                       {projectDetails.propTypeName === "Plot"
-                        ? formatNumberWithSuffix(projectDetails.plotArea,false) +
-                          " sq.ft"
+                        ? formatNumberWithSuffix(
+                            projectDetails.plotArea,
+                            false
+                          ) + " sq.ft"
                         : ""}
                     </span>{" "}
                     {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
@@ -241,7 +242,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
               ) : ( */}
               <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px] mb-auto">
                 {get_posted_by(projectDetails.postedByType)}:{" "}
-                  <span className="">{projectDetails.postedByName}</span>
+                <span className="">{projectDetails.postedByName}</span>
               </p>
               <p
                 className="sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-auto self-end"

@@ -33,15 +33,18 @@ export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}${
     phase ? `/${phase}` : ""
   }/${bhk_unit_type}`;
+  let isProjectListing = bhk_unit_type.includes("listing");
+  console.log(bhk_unit_type);
   let serverData = null;
-  const values = await findPathForProjectListing(pathname);
-  if (!values) return notFound();
-  const filtersValues = extractListingParamsValues(values);
-  const isProjectListing =
-    filtersValues.PT == "32"
-      ? filtersValues.count === 7
-      : filtersValues.count === 8;
-  if (isProjectListing) {
+  let filtersValues: any = {};
+  // const isProjectListing =
+  // filtersValues.PT == "32"
+  //   ? filtersValues.count === 7
+  //   : filtersValues.count === 8;
+  if (!isProjectListing) {
+    const values = await findPathForProjectListing(pathname);
+    if (!values) return notFound();
+    filtersValues = extractListingParamsValues(values);
     serverData = await getSearchData(
       `${filtersValues.BH ? `bhk=${filtersValues.BH}&` : ""}propType=${
         filtersValues.PT
@@ -54,7 +57,9 @@ export default async function Page({ params }: Props) {
       listing: data,
       nearByLocations,
       totalPrice,
-    } = await getListingDetails((filtersValues.id as string) ?? "");
+    } = await getListingDetails(
+      (bhk_unit_type.split("-").at(-1) as string) ?? ""
+    );
 
     const [projData, issueData, amenities] = await Promise.all([
       getProjectDetails(data.projIdEnc),
@@ -81,7 +86,7 @@ export default async function Page({ params }: Props) {
     };
   }
 
-  return isProjectListing ? (
+  return !isProjectListing ? (
     <ListingSearchPage
       serverData={serverData}
       frontendFilters={{

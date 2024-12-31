@@ -21,6 +21,7 @@ export default function Card({ item }: Props) {
     city: item.city,
     locality: item.locality,
     slug: item.projName,
+    projIdEnc: item.projIdEnc,
   });
   // let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builder/${item.builderId}`;
 
@@ -32,7 +33,6 @@ export default function Card({ item }: Props) {
     e.preventDefault();
     e.stopPropagation();
     window.open(urlBuilder, "_blank");
- 
   };
 
   return (
@@ -42,6 +42,7 @@ export default function Card({ item }: Props) {
           city: item.city,
           locality: item.locality,
           slug: item.projName,
+          projIdEnc: item.projIdEnc,
         }}
         target="_blank"
       >
@@ -53,14 +54,14 @@ export default function Card({ item }: Props) {
             className="w-[45px] h-[45px] sm:w-[54px] sm:h-[54px] xl:w-[67px] xl:h-[67px] object-cover top-[12px] left-[12px] relative"
           />
         )} */}
-          {(item.rerastatus === "Recieved" || item.rerastatus === "Applied") && (
+          {(item.rerastatus === "Recieved" ||
+            item.rerastatus === "Applied") && (
             <Image src={"/r.svg"} alt="rera" width={100} height={100} />
           )}
 
           {/*  <p className="text-green-600">{item.rerastatus}</p> */}
 
           <div className="absolute right-0 top-0 w-full sm:w-[503xpx] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
-   
             <div>
               <div className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
                 <div className="absolute  sm:static top-[10px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6">
@@ -68,8 +69,8 @@ export default function Card({ item }: Props) {
                     reqId={item.projIdEnc}
                     shortListed={item.shortListed}
                   />
-                  
-                  <ShareBtn url={url} type="proj"   />
+
+                  <ShareBtn url={url} type="proj" />
                 </div>{" "}
                 {item.projName}
               </div>
@@ -89,9 +90,7 @@ export default function Card({ item }: Props) {
             </div>
             <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
               <div className="space-y-2">
-                <span className=" no-underline text-[#ffff]">
-                  Builder:{" "}
-                </span>
+                <span className=" no-underline text-[#ffff]">Builder: </span>
                 <button
                   onClick={(e) => builderiRedirect(e)}
                   className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"

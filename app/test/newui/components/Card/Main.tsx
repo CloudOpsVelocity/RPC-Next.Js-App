@@ -85,12 +85,13 @@ const MainBox = ({ data, refetch }: Props) => {
         city: data.city,
         locality: data.locality,
         slug: data.projName,
+        projIdEnc: projEncId,
       });
       window.open(url, "_blank");
     } else {
       url = generateListingLinkUrl({
         city: data.cityName,
-        locality: data.localityName, 
+        locality: data.localityName,
         projName: data.projIdEnc ? data.propName : null,
         category: data.category === "Sale" ? "for-sale" : "for-rent",
         phase: data.phaseName,

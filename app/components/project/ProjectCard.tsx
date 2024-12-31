@@ -10,10 +10,14 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import { GlobalPageType } from "@/app/validations/global";
-import ProjectLink, { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+import ProjectLink, {
+  createProjectLinkUrl,
+} from "@/app/utils/linkRouters/ProjectLink";
 import NewCarousel from "@/app/test/components/NewCarousel";
 import Link from "next/link";
-import BuilderLink, { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+import BuilderLink, {
+  generateBuilderUrl,
+} from "@/app/utils/linkRouters/Builder";
 import { slugify } from "../property/BreadCrumb/ListingBreadcrumb";
 
 type Props = {
@@ -25,7 +29,7 @@ type Props = {
   mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
   ct?: "builder" | "proj";
   builderName?: string;
-  builderLinkActive:boolean;
+  builderLinkActive: boolean;
   id?: string;
   url?: string;
 };
@@ -35,16 +39,22 @@ type CardProps = {
   projName?: string;
   cardData?: any;
   mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
-  ct: "builder" | "proj",
-  builderLinkActive:boolean,
+  ct: "builder" | "proj";
+  builderLinkActive: boolean;
   id?: string;
-  
 };
 
-export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive}: CardProps) {
-  console.log(cardData, "here is testing the card name")
+export function ProjectCard({
+  type,
+  cardData,
+  mutate,
+  ct,
+  id,
+  builderLinkActive,
+}: CardProps) {
+  console.log(cardData, "here is testing the card name");
   const [, { open }] = useReqCallPopup();
-  const { data: session } = useSession(); 
+  const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
   const reqId = type === "proj" ? cardData.projIdEnc : cardData.propIdEnc;
@@ -68,7 +78,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive
       });
     }
   };
-console.log(cardData, "ygkjgghjggkjgkgkgkg")
+  console.log(cardData, "ygkjgghjggkjgkgkgkg");
   const handleReqCall = (e: any) => {
     e.stopPropagation();
     e.preventDefault();
@@ -82,17 +92,18 @@ console.log(cardData, "ygkjgghjggkjgkgkgkg")
     });
   };
 
-const URLRedirectionProj=createProjectLinkUrl({
-  city: cardData.city,
-  locality: cardData.locality,
-  slug: cardData.projName,
-});
-const URLToBuilder=generateBuilderUrl({
-  city:cardData.builderCity,
-  slug:cardData.builderName
-})
+  const URLRedirectionProj = createProjectLinkUrl({
+    city: cardData.city,
+    locality: cardData.locality,
+    slug: cardData.projName,
+    projIdEnc: cardData.projIdEnc,
+  });
+  const URLToBuilder = generateBuilderUrl({
+    city: cardData.builderCity,
+    slug: cardData.builderName,
+  });
   return (
-   /*  <ProjectLink
+    /*  <ProjectLink
         routeParams={{
         city: cardData.city,
         locality: cardData.locality, 
@@ -101,60 +112,60 @@ const URLToBuilder=generateBuilderUrl({
       target="_blank"
       key={reqId}
     > */
-      <div
-        className={clsx(
-          "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[400px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
-          type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
-        )}
-      >
-        {type == "proj" && (
-          <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-            <Link target="_blank" href={URLRedirectionProj} className="tracking-tight sm:text-[18px] font-[600]  line-clamp-2 text-wrap min-w-0 text-[#0073C6] cursor-pointer">
-              {cardData.projName}
-            </Link>
-            <div className="text-xs font-semibold  ">
-              <span className="text-[#242424] text-[15px] font-[600]">
-                Price Range:
-              </span>{" "}
-              {cardData?.minPrice != 0 &&
-              cardData?.minPrice != "" &&
-              cardData?.maxPrice != 0 &&
-              cardData?.maxPrice != "" ? (
-                <>
-                  <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                    {formatCurrency(cardData.minPrice)}
-                  </span>{" "}
-                  -{" "}
-                  <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                    {formatCurrency(cardData.maxPrice)}
-                  </span>
-                </>
-              ) : (
-                <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                  Price Not Available
-                </span>
-              )}
-            </div>
-          </div>
-        )}
-
-        <div className="px-3 pb-3">
-          {type != "proj" && (
-            <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
-              {cardData.availablityStatus == "R"
-                ? "Ready to move"
-                : "Under Construction"}
-            </p>
-          )}
-
-          <div className="relative  max-h-[300px]">
-          <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
-            <Link
+    <div
+      className={clsx(
+        "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[400px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+        type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
+      )}
+    >
+      {type == "proj" && (
+        <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
+          <Link
             target="_blank"
-             href={URLRedirectionProj}
-            >
+            href={URLRedirectionProj}
+            className="tracking-tight sm:text-[18px] font-[600]  line-clamp-2 text-wrap min-w-0 text-[#0073C6] cursor-pointer"
+          >
+            {cardData.projName}
+          </Link>
+          <div className="text-xs font-semibold  ">
+            <span className="text-[#242424] text-[15px] font-[600]">
+              Price Range:
+            </span>{" "}
+            {cardData?.minPrice != 0 &&
+            cardData?.minPrice != "" &&
+            cardData?.maxPrice != 0 &&
+            cardData?.maxPrice != "" ? (
+              <>
+                <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                  {formatCurrency(cardData.minPrice)}
+                </span>{" "}
+                -{" "}
+                <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                  {formatCurrency(cardData.maxPrice)}
+                </span>
+              </>
+            ) : (
+              <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                Price Not Available
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div className="px-3 pb-3">
+        {type != "proj" && (
+          <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
+            {cardData.availablityStatus == "R"
+              ? "Ready to move"
+              : "Under Construction"}
+          </p>
+        )}
+
+        <div className="relative  max-h-[300px]">
+          <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
+            <Link target="_blank" href={URLRedirectionProj}>
               <Image
-             
                 src={
                   type === "proj"
                     ? cardData.coverUrl.split(",")[1]
@@ -167,116 +178,125 @@ const URLToBuilder=generateBuilderUrl({
                 unoptimized
                 fill
               />
-           </Link>
-           </div>
-
-            {type == "proj" &&
-              (cardData.rerastatus === "Recieved" ||
-                cardData.rerastatus === "Applied") && (
-                <p className="absolute top-[1px] left-[0.8px]">
-                  <Image src={"/r.svg"} alt="rera" width={100} height={100} />
-                </p>
-              )}
-
-            <div className=" right-2 absolute ">
-              <button
-                className={clsx(
-                  "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
-                  cardData.shortListed === "Y"
-                    ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
-                    : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
-                )}
-                onClick={(e) => {
-                  onAddingShortList(e, cardData.projIdEnc);
-                }}
-              >
-                {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
-                {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
-              </button>
-            </div>
+            </Link>
           </div>
 
-          <div className="text-sm">
-            {type != "proj" && (
-              <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
-                {cardData.bhkName} {cardData.propTypeName} for{" "}
-                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
-                <br />
-                <span className="text-[18px] font-[700] text-[#148B16] ">
-                  {" "}
-                  {formatCurrency(cardData.price)}
-                </span>{" "}
+          {type == "proj" &&
+            (cardData.rerastatus === "Recieved" ||
+              cardData.rerastatus === "Applied") && (
+              <p className="absolute top-[1px] left-[0.8px]">
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
             )}
 
-            {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
-                Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
-                  {formatDate(cardData.launchDate)} -{" "}
-                  {formatDate(cardData.possassionDate)}
-                </span>
-              </p>
-            )}
+          <div className=" right-2 absolute ">
+            <button
+              className={clsx(
+                "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
+                cardData.shortListed === "Y"
+                  ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                  : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
+              )}
+              onClick={(e) => {
+                onAddingShortList(e, cardData.projIdEnc);
+              }}
+            >
+              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
+              {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
+            </button>
+          </div>
+        </div>
 
-            {cardData.propTypes ? (
-              <p className="mb-[6px] text-[#242424] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
-                {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
-              </p>
-            ) : (
-              "No Property added yet"
-            )}
+        <div className="text-sm">
+          {type != "proj" && (
+            <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
+              {cardData.bhkName} {cardData.propTypeName} for{" "}
+              {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
+              <br />
+              <span className="text-[18px] font-[700] text-[#148B16] ">
+                {" "}
+                {formatCurrency(cardData.price)}
+              </span>{" "}
+            </p>
+          )}
 
-            {type != "proj" && (
-              <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
-                Available From: {formatDate(cardData.availableFrom)}
-              </p>
-            )}
+          {type == "proj" && (
+            <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
+              Start - End Date:
+              <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
+                {formatDate(cardData.launchDate)} -{" "}
+                {formatDate(cardData.possassionDate)}
+              </span>
+            </p>
+          )}
 
-           { true &&
-           <p className="text-[#242424]  text-[14px] xl:text-base not-italic font-semibold leading-[normal] mt-[4px] mb-[4px]">Builder: <a href={URLToBuilder}      target="_blank"                
-            className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline">{cardData.builderName}</a></p>}
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
-              {type === "proj" &&
-                `${cardData.locality}, ${cardData?.city}, ${cardData.pincode} `}
+          {cardData.propTypes ? (
+            <p className="mb-[6px] text-[#242424] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
+              {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
+            </p>
+          ) : (
+            "No Property added yet"
+          )}
 
-              {type === "prop " &&
-                `${cardData.ltName}   
+          {type != "proj" && (
+            <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
+              Available From: {formatDate(cardData.availableFrom)}
+            </p>
+          )}
+
+          {true && (
+            <p className="text-[#242424]  text-[14px] xl:text-base not-italic font-semibold leading-[normal] mt-[4px] mb-[4px]">
+              Builder:{" "}
+              <a
+                href={URLToBuilder}
+                target="_blank"
+                className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline"
+              >
+                {cardData.builderName}
+              </a>
+            </p>
+          )}
+          <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
+            {type === "proj" &&
+              `${cardData.locality}, ${cardData?.city}, ${cardData.pincode} `}
+
+            {type === "prop " &&
+              `${cardData.ltName}   
                 ${cardData.ctName} 
                 ${cardData.stateName ?? ""} 
                 ${cardData.pinCode}`}
+          </p>
+          {type === "proj" && (
+            <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] xl:mt-[16px]">
+              <span className="text-black text-right text-[14px] xl:text-base not-italic font-medium leading-[normal]">
+                Project Status:{" "}
+              </span>
+              <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
+                {cardData.projectStatusName}
+              </span>
+            </div>
+          )}
+          {type != "proj" && (
+            <p className="text-[16px] font-[500] text-[#4D6677]">
+              Posted by {cardData.postedByType === "B" ? "Builder" : "Agent"}
             </p>
-            {type === "proj" && (
-              <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] xl:mt-[16px]">
-                <span className="text-black text-right text-[14px] xl:text-base not-italic font-medium leading-[normal]">
-                  Project Status:{" "}
-                </span>
-                <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
-                  {cardData.projectStatusName}
-                </span>
-              </div>
-            )}
-            {type != "proj" && (
-              <p className="text-[16px] font-[500] text-[#4D6677]">
-                Posted by {cardData.postedByType === "B" ? "Builder" : "Agent"}
-              </p>
-            )}
-            <Button
-              title="Request  Callback"
-              buttonClass=" text-[#FFF] mt-[12px] text-[12px]  sm:text-[14px] xl:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
-              onChange={handleReqCall}
-            />
-          </div>
+          )}
+          <Button
+            title="Request  Callback"
+            buttonClass=" text-[#FFF] mt-[12px] text-[12px]  sm:text-[14px] xl:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
+            onChange={handleReqCall}
+          />
         </div>
       </div>
-   /*  </ProjectLink> */
+    </div>
+    /*  </ProjectLink> */
   );
 }
 
 const ProjectCarousel = ({
   type,
   content,
-  title, 
+  title,
   projName,
   data,
   mutate,
@@ -284,7 +304,7 @@ const ProjectCarousel = ({
   id,
   builderLinkActive,
   builderName,
-  url
+  url,
 }: Props) => {
   return (
     data?.length > 0 && (

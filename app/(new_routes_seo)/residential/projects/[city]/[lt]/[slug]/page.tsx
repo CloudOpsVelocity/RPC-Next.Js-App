@@ -21,14 +21,18 @@ type Props = {
 // let metadataCache: {title?: string, description?: string} = {};
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
-  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
-  const value = await findPathForProjectDetails(pathname);
-  const { PJ: slug } = await extractProjectParamsValues(value);
+  // const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
+  // const value = await findPathForProjectDetails(pathname);
+  // const { PJ: slug } = await extractProjectParamsValues(value);
+
+  let slug = name.split("-").at(-1);
+  if (!slug) return notFound();
+  console.time("project detaild api calling" + slug);
   let [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),
   ]);
-
+  console.timeEnd("project detaild api calling" + slug);
   if (projResponse.basicData.projAuthorityId) {
     const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
     projResponse = {
@@ -66,13 +70,25 @@ export async function generateStaticParams() {
   // Write the JSON data to the file
   fs.writeFileSync(filePath, jsonContent);
   console.log("projectSlugs.json file created successfully");
-  // Extract project names from the keys
   const projectRes = Object.keys(res);
-  const slugs = projectRes.map((data) => {
-    const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-    return { city, lt, slug };
-  });
+  const slugs = [];
+  for (let i = 0; i < projectRes.length; i++) {
+    const data = projectRes[i];
+    if ((data.match(/\//g) || []).length === 5) {
+      const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
+      slugs.push({ city, lt, slug });
+    }
+  }
+  console.log(slugs);
   return slugs;
+
+  // Extract project names from the keys
+  // const projectRes = Object.keys(res);
+  // const slugs = projectRes.map((data) => {
+  //   const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
+  //   return { city, lt, slug };
+  // });
+  // return slugs;
 }
 
 type SeoProps = {
@@ -84,9 +100,10 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`; //`${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
-  const value = await findPathForProjectDetails(pathname);
-  const { PJ: slug } = await extractProjectParamsValues(value);
+  // const pathname = `${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`; //`${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
+  // const value = await findPathForProjectDetails(pathname);
+  // const { PJ: slug } = await extractProjectParamsValues(value);
+  let slug = params.slug.split("-").at(-1);
   const { basicData: data } = await getProjectDetails(slug as string);
   return {
     title: `${data?.projectName} ${data.availableProperties?.join(

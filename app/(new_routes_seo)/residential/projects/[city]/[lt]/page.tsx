@@ -30,11 +30,20 @@ export default async function Page({ params: { city, lt } }: Props) {
 export async function generateStaticParams() {
   const res = await getPagesSlugs("project-list");
   const keys = Object.keys(res);
-  const slugs = keys.map((data) => {
-    const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-    return { city, lt };
-  });
+  const slugs = [];
+  for (let i = 0; i < keys.length; i++) {
+    const data = keys[i];
+    if ((data.match(/\//g) || []).length === 4) {
+      const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
+      slugs.push({ city, lt });
+    }
+  }
   return slugs;
+  // const slugs = keys.map((data) => {
+  //   const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
+  //   return { city, lt };
+  // });
+  // return slugs;
 }
 
 export const dynamic = "force-dynamic";
