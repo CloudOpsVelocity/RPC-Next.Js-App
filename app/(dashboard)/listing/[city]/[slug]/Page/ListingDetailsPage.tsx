@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import "@mantine/carousel/styles.css";
 const AboutBuilder = dynamic(
   () => import("@/app/components/project/aboutBuilder")
 );
