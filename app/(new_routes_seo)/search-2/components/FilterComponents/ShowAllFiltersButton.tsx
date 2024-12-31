@@ -215,10 +215,10 @@ export default function ShowAllFiltersButton({
     <div className="  relative">
       <button
         onClick={onToggle}
-        className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-full hover:bg-gray-50"
+        className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] rounded-full hover:bg-gray-50"
       >
         <MdTune className="w-5 h-5" />
-        More Filters
+          Add Filters
         <MdKeyboardArrowDown
           className={`w-5 h-5 transition-transform ${
             isOpen ? "rotate-180" : ""
