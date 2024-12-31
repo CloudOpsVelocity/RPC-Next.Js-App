@@ -7,8 +7,8 @@ export async function GET(request: Request) {
   logger.info(`Project Details Sitemap: Reading case-seo.json file`);
   const data = fs.readFileSync(filePath, "utf-8");
   const projectSlugs = JSON.parse(data);
-  const slugs = Object.keys(projectSlugs);
-  const generatedSitemap = slugs.map((slug) => ({
+  // const slugs = Object.keys(projectSlugs);
+  const generatedSitemap = projectSlugs.map((slug: any) => ({
     loc: `${process.env.NEXT_PUBLIC_URL}/${slug}`,
     lastmod: new Date().toISOString(),
   }));
