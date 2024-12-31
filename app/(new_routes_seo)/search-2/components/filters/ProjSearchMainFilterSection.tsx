@@ -7,7 +7,6 @@ type Props = {};
 function ProjSearchMainFilterSection({}: Props) {
   return (
     <div className="flex flex-row items-start gap-2 ">
-      <ProjSearchCityDropDown />
       <ProjectFilters />
     </div>
   );

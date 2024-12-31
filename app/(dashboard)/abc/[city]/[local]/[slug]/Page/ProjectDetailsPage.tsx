@@ -43,6 +43,7 @@ import PartialUnitData from "@/app/components/project/sections";
 import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 import Disclamer from "@/app/components/builder/Disclamer";
 import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
+import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
 // import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
 const ProjectGallery = dynamic(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
@@ -159,13 +160,13 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
           />
         )}
-        {/* <FloorPlans
+        <FloorPlans
           phases={data.phases}
           projName={data.projectName}
           partialUnitData={data.partialUnitData}
           phaseOverview={phaseOverview}
           slug={slug}
-        /> */}
+        />
         {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}

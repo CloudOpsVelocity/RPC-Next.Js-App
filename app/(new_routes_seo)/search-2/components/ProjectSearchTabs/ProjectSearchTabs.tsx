@@ -13,10 +13,10 @@ import { SearchFilter } from "@/app/types/search";
 
 const tabs = [
   { id: null, label: "Projects" },
+  { id: "All", label: "All Listings" },
+  { id: "B", label: "Builder Listings" },
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
-  { id: "B", label: "Builder Listings" },
-  { id: "All", label: "All Listings" },
 ];
 
 export default function ProjectSearchTabs() {
@@ -141,20 +141,20 @@ export default function ProjectSearchTabs() {
 
   return (
     <div className="sticky top-0   z-10 ">
-      <div className=" w-full bg-slate-50 shadow-mdmax-w-7xl  mx-auto px-4 py-2">
+      <div className=" w-full bg-slate-50 shadow-mdmax-w-7xl  mx-auto sm:px-4 py-2">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div
             ref={scrollContainerRef}
             onWheel={handleWheel}
             className="overflow-x-auto no-scrollbar"
           >
-            <div className="flex items-center gap-1 xl:gap-2 min-w-max">
+            <div className="flex items-center sm:gap-1 xl:gap-2 min-w-max">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`
-                    whitespace-nowrap rounded-full md:px-2  xl:px-4 md:py-1 xl:py-2 text-sm md:text-base font-medium transition-all
+                    whitespace-nowrap rounded-full px-2  xl:px-4 md:py-1 xl:py-2 text-sm md:text-base font-medium transition-all
                     ${
                       state.listedBy === tab.id
                         ? "bg-[#0073C6] text-white shadow-md"
