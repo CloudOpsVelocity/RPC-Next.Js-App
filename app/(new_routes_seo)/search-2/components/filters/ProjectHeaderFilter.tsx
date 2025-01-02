@@ -218,6 +218,7 @@ export default function HeaderFilters() {
   };
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(state)
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_BACKEND_URL
@@ -249,13 +250,13 @@ export default function HeaderFilters() {
   };
   return (
     <>
-      <div className="w-full  xl:max-w-[70%] max-h-[60vh] overflow- bg-white border-b sticky top-0 z-40">
+      <div className="w-full  md:max-w-[80%] xl:max-w-fit max-h-[60vh]  bg-white border-b sticky top-0 z-40">
         <div className=" px-1 ">
           <div
             ref={searchRef}
             className="flex flex-wrap items-center gap-2 py-3"
           >
-            <div className="flex-1 min-w-full sm:min-w-min sm:max-w-[39%] relative order-1">
+            <div className="flex-1 min-w-full sm:min-w-fit  xl:min-w-md xl:max-w-[69%] relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
                   openDropdown={openDropdown}
@@ -414,7 +415,7 @@ export default function HeaderFilters() {
                 <MdClose className="w-6 h-6" />
               </button>
             </div>
-            <div className=" max-h-[100vh] py-4 sm:p-4 space-y-6  overflow-y">
+            <div onClick={(e)=>e.stopPropagation()} className="  max-h-[100vh] py-4 sm:p-4 space-y-6   overflow-y">
               {/* <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}

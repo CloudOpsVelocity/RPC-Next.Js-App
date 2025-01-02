@@ -80,7 +80,7 @@ export default function ShowAllFiltersButton({
   const toggleExpand = (section: string) => {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
-
+console.log(state)
   const renderFilterSection = (
     title: string,
     data: any[],
@@ -227,7 +227,7 @@ export default function ShowAllFiltersButton({
       </button>
       {isOpen && (
         <div className="absolute top-full flex flex-col right-0 mt-2 mb-8 sm:mb-0 max-w-full sm:min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
-          <div className="flex items-center justify-between gap-4 pb-4 border-b  ">
+          <div className="flex items-center justify-between gap-4 pb-4 border-b  z-50 ">
             <button
               onClick={() => {
                 handleClearFilters(isproject ? "clearAll" : "listing");

@@ -76,6 +76,7 @@ export const MapIcon = L.icon({
   iconSize: [100, 100],
   iconAnchor: [19, 38],
   popupAnchor: [0, -38],
+  
 });
 
 export const MobileMapIcon = L.icon({
