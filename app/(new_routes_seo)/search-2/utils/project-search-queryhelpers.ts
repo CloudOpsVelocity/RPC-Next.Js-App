@@ -20,8 +20,6 @@ export const getListingSearchData = async (
 };
 
 const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
-  const changedParams: Record<string, string> = { bugdetValue: "budget" };
-
   // Directly process the input string in a single pass
   const transformedParams = apiFilterQueryParams
     .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern
@@ -42,8 +40,11 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
     .replace(/listedBy=All/g, "") // Remove 'listedBy=All'
     .replace(/-/g, "&"); // Replace dashes with ampersands
 
-  // Append 'cg=S' if not already present
-  return transformedParams.includes("cg=")
+  // Append 'cg=S' if not already present and 'city=9' if city is not present
+  let updatedParams = transformedParams.includes("cg=")
     ? transformedParams
     : `${transformedParams}&cg=S`;
+  return updatedParams.includes("city=")
+    ? updatedParams
+    : `${updatedParams}&city=9`;
 };
