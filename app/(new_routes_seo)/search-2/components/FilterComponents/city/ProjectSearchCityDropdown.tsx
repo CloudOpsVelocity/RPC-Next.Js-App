@@ -57,7 +57,7 @@ export default function ProjSearchCityDropDown() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+console.log(state)
   const {
     data: allCities = [],
     isLoading,
@@ -77,7 +77,6 @@ export default function ProjSearchCityDropDown() {
       city.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [allCities, searchTerm, isOpen]);
-
   const rowVirtualizer = useVirtualizer({
     count: filteredCities.length,
     getScrollElement: () => listRef.current,
