@@ -72,8 +72,8 @@ export default function ListingData({
 
   const formatter = new Intl.NumberFormat("en-in", {
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
+    maximumFractionDigits: 2,
+  });
 
   return (
     <>
@@ -128,7 +128,7 @@ export default function ListingData({
                 label={type == "proj" ? "Land Area" : "Property Age"}
                 value={
                   type == "proj"
-                    ? `${(formatter.format(sqftToAcres(landArea)))} Acres`
+                    ? `${formatter.format(sqftToAcres(landArea))} Acres`
                     : `${propertyAge ?? 0} Years`
                 }
               />

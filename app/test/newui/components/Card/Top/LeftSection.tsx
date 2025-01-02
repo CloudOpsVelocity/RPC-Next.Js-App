@@ -68,8 +68,7 @@ export default function LeftSection({
       {/* <div>
         
       </div> */}
-      {((data.propTypeId && data.propTypeId !== projectprops.plot) ||
-        data.propTypeName) && (
+      {(projstatus || data.propTypeName) && (
         <p className="bg-gray-700 rounded-full absolute top-1 xl:top-auto xl:bottom-7 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
           {projstatus ?? propStatus}
         </p>

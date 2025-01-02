@@ -134,7 +134,7 @@ export default function ProjSearchCityDropDown() {
       type: "update",
       payload: {
         city: `${city.name}+${city.id}`,
-        locality: [],
+        localities: [],
       },
     });
     handleApplyFilters();

@@ -6,7 +6,7 @@ import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryPar
 
 export const initialState: SearchFilter = {
   current: null,
-  locality: [],
+  localities: [],
   propType: null,
   bhk: [],
   bathroom: [],
@@ -30,6 +30,7 @@ export const initialState: SearchFilter = {
   lng: null,
   projName: null,
 };
+let RENT_BUGDET_VALUE = [0, 100000];
 
 type Action =
   | { type: "reset" }
@@ -159,10 +160,14 @@ export const ProjSearchAppliedFiltersStore = atom(
       for (const [key, value] of Object.entries(appliedFilters)) {
         // Skip areaValue and bugdetValue if they match initial values
         if (
-          (key === "areaValue" || key === "bugdetValue") &&
-          Array.isArray(value) &&
-          value[0] === initialState[key][0] &&
-          value[1] === initialState[key][1]
+          ((key === "areaValue" || key === "bugdetValue") &&
+            Array.isArray(value) &&
+            value[0] === initialState[key][0] &&
+            value[1] === initialState[key][1]) ||
+          (key === "bugdetValue" &&
+            appliedFilters.cg === "R" &&
+            value[0] == RENT_BUGDET_VALUE[0] &&
+            value[1] == RENT_BUGDET_VALUE[1])
         ) {
           continue;
         }

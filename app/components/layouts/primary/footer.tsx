@@ -107,6 +107,8 @@ function Footer() {
         "Post Property",
         "Builders",
         "Login/Signup",
+        "Listing Search",
+        "Project Search",
       ],
       hrefs: [
         "/",
@@ -116,6 +118,8 @@ function Footer() {
         "/post-your-listing",
         "/builders",
         "/login",
+        "/search/listing",
+        "/search",
       ],
       target: "_blank",
     },

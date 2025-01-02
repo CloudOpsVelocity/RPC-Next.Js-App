@@ -29,7 +29,13 @@ const coverImageUrl =
 const [defaultImg, smallImg, mediumImg, largeImg] = coverImageUrl.split(",");
 
 function CoverImage() {
-  console.group([3, 5, 1, 58, 765, 4, 343, 23, 65]);
+  // const array1 = ["a", "b", "c"];
+  // const iterator1 = array1[Symbol.iterator]();
+  // console.log(iterator1);
+  // console.log(iterator1);
+  // for (const value of iterator1) {
+  //   console.log(value);
+  // }
   return (
     <>
       {/* // <picture>

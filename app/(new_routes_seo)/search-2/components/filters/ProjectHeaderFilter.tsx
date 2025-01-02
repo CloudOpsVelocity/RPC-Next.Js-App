@@ -92,7 +92,7 @@ export default function HeaderFilters() {
   };
 
   const handleDropdownToggle = (dropdownName: string) => {
-    setIsDrawerOpen(false)
+    setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
   const handleSearchChange = (e: any) => {
@@ -117,7 +117,7 @@ export default function HeaderFilters() {
         dispatch({
           type: "pushToArray",
           payload: {
-            key: "locality",
+            key: "localities",
             value: `${data.name}+${data.stringId}`,
           },
         });
@@ -162,7 +162,7 @@ export default function HeaderFilters() {
                   bhk: [parseInt(paramsObject.BH as string)],
                 }),
                 cg: paramsObject.CG as string,
-                locality: [`${localityName}+${paramsObject.LT}`],
+                localities: [`${localityName}+${paramsObject.LT}`],
               },
             });
             handleApplyFilters();

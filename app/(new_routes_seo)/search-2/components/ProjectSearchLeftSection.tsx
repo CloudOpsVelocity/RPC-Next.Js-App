@@ -12,7 +12,8 @@ import { useQueryState } from "nuqs";
 import ProjectSearchTabs from "./ProjectSearchTabs/ProjectSearchTabs";
 import { useAtom, useAtomValue } from "jotai";
 import { projSearchStore } from "../store/projSearchStore";
-
+import RequestCallBackModal from "@/app/components/molecules/popups/req";
+import LoginPopup from "@/app/components/project/modals/LoginPop";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -148,6 +149,8 @@ function LeftSection({ mutate, serverData }: Props) {
           <LoadingSpinner />
         </div>
       )}
+      <LoginPopup />
+      <RequestCallBackModal />
     </div>
   );
 }

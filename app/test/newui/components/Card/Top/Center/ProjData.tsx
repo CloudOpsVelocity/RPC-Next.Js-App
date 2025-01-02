@@ -49,7 +49,6 @@ export default function ProjData({
   basePrice,
   postedBy,
 }: Props) {
-  console.log(postedBy);
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
   const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);

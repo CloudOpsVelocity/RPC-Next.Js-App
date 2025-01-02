@@ -486,6 +486,7 @@ const createCombinedMap = (
     [34, "Villament"],
     [32, "Plot"],
     [36, "Independent"],
+    ["ALL", "All Listings"],
   ]);
 
   Object.keys(data).forEach((category) => {

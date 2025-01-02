@@ -72,7 +72,7 @@ export default function Results() {
           const data = extractApiValues(apiData.stringId);
           {
             let url;
-            let localityName = apiData.name.split("-")[1].toLowerCase().trim();
+            let localityName = apiData.name.split("in")[1].toLowerCase().trim();
             url =
               `propTypes=${data.PT}${
                 data.BH ? `&unitTypes=${data.BH}` : ""

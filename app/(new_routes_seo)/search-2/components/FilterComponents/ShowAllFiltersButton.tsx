@@ -218,7 +218,7 @@ export default function ShowAllFiltersButton({
         className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] rounded-full hover:bg-gray-50"
       >
         <MdTune className="w-5 h-5" />
-          Add Filters
+        Add Filters
         <MdKeyboardArrowDown
           className={`w-5 h-5 transition-transform ${
             isOpen ? "rotate-180" : ""
@@ -255,7 +255,7 @@ export default function ShowAllFiltersButton({
                 placeholder="Search locations..."
                 label="Location"
                 setQuery={setSearchLocality}
-                category="locality"
+                category="localities"
                 multiple
               />
             </div>
@@ -278,12 +278,13 @@ export default function ShowAllFiltersButton({
                 Object.keys(propertyiconss),
                 "propType"
               )}
-              {renderFilterSection(
-                "BHK Type",
-                SEARCH_FILTER_DATA.bhkDetails,
-                "bhk",
-                6
-              )}
+              {state.propType !== 32 &&
+                renderFilterSection(
+                  "BHK Type",
+                  SEARCH_FILTER_DATA.bhkDetails,
+                  "bhk",
+                  6
+                )}
               {isproject &&
                 !isproject &&
                 renderFilterSection(
@@ -412,12 +413,12 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "furnish"
                 )}
-              {isproject &&
+              {/* {isproject &&
                 renderFilterSection(
                   "Phases",
                   SEARCH_FILTER_DATA.furnish,
                   "Phases"
-                )}
+                )} */}
               {isproject && (
                 <LocalitySearch<Location>
                   data={builderData || []}

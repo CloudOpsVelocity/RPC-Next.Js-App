@@ -2,7 +2,7 @@ import { SearchFilter } from "@/app/types/search";
 
 export const initialState: SearchFilter = {
   current: null,
-  locality: [],
+  localities: [],
   propType: null,
   bhk: [],
   bathroom: [],
@@ -52,9 +52,9 @@ export default function parseProjectSearchQueryParams(params: string) {
       key === "bhk" ||
       key === "builderIds" ||
       key === "facings" ||
-      key === "locality"
+      key === "localities"
     ) {
-      if (key === "locality" || key === "builderIds") {
+      if (key === "localities" || key === "builderIds") {
         filters[key] = value.split(",").map(String);
       } else {
         filters[key] = value.includes(",")

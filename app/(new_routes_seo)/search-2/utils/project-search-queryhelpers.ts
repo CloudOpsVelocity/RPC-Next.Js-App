@@ -21,11 +21,6 @@ export const getListingSearchData = async (
 
 const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
   const changedParams: Record<string, string> = {
-    propTypes: "propType",
-    unitTypes: "bhk",
-    bathRooms: "bathroom",
-    parkings: "parking",
-    facings: "facing",
     bugdetValue: "budget",
   };
 
@@ -35,7 +30,7 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
     "gi"
   );
   const budgetRegex = /budget=(\d+),(\d+)/;
-  const localityBuilderRegex = /(locality|builderIds)=([^&]+)/g;
+  const localityBuilderRegex = /(localities|builderIds)=([^&]+)/g;
   const cityRegex = /city=[^\s&]*\+?(\d+)?/;
   // Use a single pass to handle most transformations
   let transformedParams = apiFilterQueryParams

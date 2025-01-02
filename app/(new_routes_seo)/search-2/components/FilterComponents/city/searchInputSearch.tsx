@@ -15,7 +15,7 @@ interface DynamicSearchProps<T> {
   label?: string;
   setQuery: (query: string) => void;
   loading: boolean;
-  category: "locality" | "builderIds";
+  category: "localities" | "builderIds";
 }
 
 export default function DynamicSearch<T extends Record<string, any>>({
@@ -73,11 +73,11 @@ export default function DynamicSearch<T extends Record<string, any>>({
 
   const handleSelect = (item: T) => {
     const isValidBuilderParams = !item.value.includes("/");
-    if (isValidBuilderParams || category === "locality") {
+    if (isValidBuilderParams || category === "localities") {
       dispatch({
         type: "pushToArray",
         payload: {
-          key: category === "locality" ? "locality" : "builderIds",
+          key: category === "localities" ? "localities" : "builderIds",
           value: isValidBuilderParams ? item.value : item.value,
         },
       });
@@ -94,7 +94,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
     dispatch({
       type: "removeFromArray",
       payload: {
-        key: category === "locality" ? "locality" : "builderIds",
+        key: category === "localities" ? "localities" : "builderIds",
         value: itemValue,
       },
     });

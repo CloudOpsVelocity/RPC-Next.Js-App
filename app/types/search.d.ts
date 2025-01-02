@@ -1,6 +1,6 @@
 export interface SearchFilter {
   current: number | null;
-  locality: string[];
+  localities: string[];
   propType: number | null;
   bhk: number[];
   bathroom: number[];

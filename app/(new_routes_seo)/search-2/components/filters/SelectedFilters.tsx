@@ -33,7 +33,7 @@ export default function SelectedFilters({}: Props) {
                     className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
                   >
                     <span>
-                      {category === "locality" || category === "builderIds"
+                      {category === "localities" || category === "builderIds"
                         ? `${value.split("+")[0]}${
                             values.length - 1 === values.indexOf(value)
                               ? ""
@@ -71,7 +71,9 @@ export default function SelectedFilters({}: Props) {
                   className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
                 >
                   <span>
-                    {category === "parking" || category === "bathroom"
+                    {values === "ALL"
+                      ? "All Listings"
+                      : category === "parking" || category === "bathroom"
                       ? `${values} ${category}`
                       : SelectedFiltersMap.get(values)}
                   </span>

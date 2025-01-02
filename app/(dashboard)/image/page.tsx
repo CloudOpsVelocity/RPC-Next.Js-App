@@ -49,7 +49,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:items-start mt-6 m-4 w-h-[100vh] ">
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:items-start mt-6 m-4 h-[60vh] md:mt-[6%]">
       <Image
         radius="md"
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}${path}`}
@@ -60,7 +60,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
         alt="post"
         component={NextImage}
       />
-       <button
+      <button
         className="inline-flex flex-col items-center  justify-center gap-2.5 p-3 rounded-[10px] bg-[#0073C6] text-white text-lg not-italic font-bold leading-[normal] tracking-[0.96px]  top-[10%] right-[7%]"
         onClick={(e) => {
           e.preventDefault();
