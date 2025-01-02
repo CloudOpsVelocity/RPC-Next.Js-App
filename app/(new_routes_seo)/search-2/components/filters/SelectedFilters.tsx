@@ -26,6 +26,7 @@ export default function SelectedFilters({}: Props) {
               category !== "sortByfield" &&
               category !== "sortType" &&
               category !== "cg" &&
+              category !== "city" &&
               (Array.isArray(values) ? (
                 values.map((value) => (
                   <div
@@ -71,7 +72,7 @@ export default function SelectedFilters({}: Props) {
                   className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
                 >
                   <span>
-                    {values === "ALL"
+                    {values === "All"
                       ? "All Listings"
                       : category === "parking" || category === "bathroom"
                       ? `${values} ${category}`

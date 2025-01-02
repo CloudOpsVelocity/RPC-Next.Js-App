@@ -57,7 +57,7 @@ export default function ProjSearchCityDropDown() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-console.log(state)
+  console.log(state);
   const {
     data: allCities = [],
     isLoading,
@@ -147,6 +147,7 @@ console.log(state)
       });
     }
   }, [activeIndex]);
+  console.log(state);
   return (
     <div className="relative inline-block order-last" ref={dropdownRef}>
       <button

@@ -20,42 +20,30 @@ export const getListingSearchData = async (
 };
 
 const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
-  const changedParams: Record<string, string> = {
-    bugdetValue: "budget",
-  };
+  const changedParams: Record<string, string> = { bugdetValue: "budget" };
 
-  // Precompile regex patterns
-  const changedParamsRegex = new RegExp(
-    Object.keys(changedParams).join("|"),
-    "gi"
-  );
-  const budgetRegex = /budget=(\d+),(\d+)/;
-  const localityBuilderRegex = /(localities|builderIds)=([^&]+)/g;
-  const cityRegex = /city=[^\s&]*\+?(\d+)?/;
-  // Use a single pass to handle most transformations
-  let transformedParams = apiFilterQueryParams
-    .replace(changedParamsRegex, (match) => changedParams[match]) // Key replacements
-    .replace(budgetRegex, (_, min, max) => `minPrice=${min}&maxPrice=${max}`) // Budget transformation
-    .replace(localityBuilderRegex, (_, key, value) => {
-      // Locality and builderIds processing
-      const ids = value
-        .split(",")
-        .map((part: string) => part.split("+")[1])
-        .filter(Boolean)
-        .join(",");
-      return `${key}=${ids}`;
-    });
+  // Directly process the input string in a single pass
+  const transformedParams = apiFilterQueryParams
+    .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern
+    .replace(/budget=(\d+),(\d+)/, "minPrice=$1&maxPrice=$2") // Budget transformation
+    .replace(
+      /(localities|builderIds)=([^&]+)/g,
+      (_, key, value) =>
+        `${key}=${value
+          .split(",")
+          .map((part: any) => part.split("+")[1])
+          .filter(Boolean)
+          .join(",")}`
+    )
+    .replace(
+      /city=([^\s&]*)(\+(\d+))?/,
+      (_, baseCity, __, cityId) => `city=${baseCity.split("+")[1] ?? "9"}`
+    )
+    .replace(/listedBy=All/g, "") // Remove 'listedBy=All'
+    .replace(/-/g, "&"); // Replace dashes with ampersands
 
-  // Handle city transformation and default addition
-  if (cityRegex.test(transformedParams)) {
-    transformedParams = transformedParams.replace(
-      cityRegex,
-      (_, cityId) => `city=${cityId || "9"}`
-    );
-  } else {
-    transformedParams += "&city=9";
-  }
-
-  // Final cleanup
-  return transformedParams.replace(/-/g, "&").replace("listedBy=All", "");
+  // Append 'cg=S' if not already present
+  return transformedParams.includes("cg=")
+    ? transformedParams
+    : `${transformedParams}&cg=S`;
 };
