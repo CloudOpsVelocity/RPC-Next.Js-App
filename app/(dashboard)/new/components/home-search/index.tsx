@@ -30,7 +30,7 @@ const HomeSearch = ({
       return;
     }
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
-    window.open(`${whichPage}?${toQueryParams(f)}`, "_blank");
+    window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank");
   };
 
   const isMobileStarting = useMediaQuery("(max-width: 760px)");

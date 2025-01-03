@@ -1,9 +1,9 @@
 const keyConversionMap: { [oldKey: string]: string } = {
-  bhk: "unitTypes",
+  bhk: "bhk",
   propType: "propTypes",
   locality: "localities",
   city: "city",
-  bugdetValue: "min",
+  bugdetValue: "bugdet",
 };
 const DEFAULT_BUGDET_VALUE: [number, number] = [500000, 600000000];
 const DEFAULT_BUGDET_VALUE_RENT: [number, number] = [0, 100000];
@@ -15,6 +15,12 @@ function formatArray(value: any[]): string {
 function toQueryParams(params: QueryParams): string {
   const queryEntries: string[] = [];
 
+  // Handle 'sf' parameter separately
+  if (params.sf) {
+    queryEntries.push(`sf=${encodeURIComponent(params.sf)}`);
+    delete params.sf; // Remove 'sf' from params to avoid duplicate handling
+  }
+
   for (const [key, value] of Object.entries(params)) {
     // Convert keys if they are in the conversion map
     const newKey = keyConversionMap[key] || key;
@@ -22,23 +28,23 @@ function toQueryParams(params: QueryParams): string {
     // Handle 'showFilter' exclusion
     if (newKey === "showFilter") continue;
 
-    if (key === "bugdetValue") {
-      // Include bugdetValue only if it differs from the default
-      if (
-        Array.isArray(value) &&
-        value.length === 2 &&
-        !(
-          (value[0] === DEFAULT_BUGDET_VALUE[0] &&
-          value[1] === DEFAULT_BUGDET_VALUE[1]) ||
-          (value[0] === DEFAULT_BUGDET_VALUE_RENT[0] &&
-          value[1] === DEFAULT_BUGDET_VALUE_RENT[1])
-        )
-      ) {
-        queryEntries.push(`minPrice=${encodeURIComponent(String(value[0]))}`);
-        queryEntries.push(`maxPrice=${encodeURIComponent(String(value[1]))}`);
-      }
-      continue; // Skip the original bugdetValue entry
-    }
+    // if (key === "bugdetValue") {
+    //   // Include bugdetValue only if it differs from the default
+    //   if (
+    //     Array.isArray(value) &&
+    //     value.length === 2 &&
+    //     !(
+    //       (value[0] === DEFAULT_BUGDET_VALUE[0] &&
+    //         value[1] === DEFAULT_BUGDET_VALUE[1]) ||
+    //       (value[0] === DEFAULT_BUGDET_VALUE_RENT[0] &&
+    //         value[1] === DEFAULT_BUGDET_VALUE_RENT[1])
+    //     )
+    //   ) {
+    //     queryEntries.push(`minPrice=${encodeURIComponent(String(value[0]))}`);
+    //     queryEntries.push(`maxPrice=${encodeURIComponent(String(value[1]))}`);
+    //   }
+    //   continue; // Skip the original bugdetValue entry
+    // }
 
     if (value === null) {
       // Skip null values
@@ -63,10 +69,12 @@ function toQueryParams(params: QueryParams): string {
   }
 
   // Add listedBy=ALL if cg=R
-  if (params.cg === 'R') {
-    queryEntries.push('listedBy=ALL');
+  if (params.cg === "R") {
+    queryEntries.push("listedBy=ALL");
   }
 
-  return queryEntries.join("&");
+  // Join parameters with "-" instead of "&"
+  return queryEntries.join("-");
 }
+
 export { toQueryParams };
