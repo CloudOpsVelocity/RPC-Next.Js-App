@@ -43,14 +43,13 @@ export default async function Page({ params: { slug } }: Props) {
   // const endTime = performance.now();
   // console.log(`Decoding took ${endTime - startTime} milliseconds`);
   if (!slug.includes("-")) return notFound();
-  const values = await findSeoParams(slug);
+  // const values = await findSeoParams(slug);
+  // console.log(values)
 
-  if (!values) return notFound();
-  const slugValues: any = extractCaseSeoParams(values) as any;
+  const slugValues: any = extractCaseSeoParams(slug) as any;
   const severData = await getProjSearchData(
     `cg=${slugValues.CG}&city=${slugValues.C}&propType=${slugValues.P}&bhk=${slugValues.B}&localities=${slugValues.L}`
   );
-  let cityName = slug.split("-").at(-1) ?? "";
   let city = `Bengaluru`;
   return (
     <>
@@ -87,9 +86,9 @@ export const generateStaticParams = async () => {
     // Write the JSON data to the file
     fs.writeFileSync(filePath, jsonContent);
     console.log("case-seo.json file created successfully");
-    return [];
-    // const slugs = Object.keys(res);
-    // return slugs.map((slug) => ({ slug }));
+    // return [];
+    const slugs = Object.keys(res);
+    return slugs.map((slug) => ({ slug }));
   }
   return [];
 };

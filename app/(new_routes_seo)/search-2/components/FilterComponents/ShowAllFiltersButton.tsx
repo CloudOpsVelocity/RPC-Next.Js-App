@@ -80,7 +80,6 @@ export default function ShowAllFiltersButton({
   const toggleExpand = (section: string) => {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
-console.log(state)
   const renderFilterSection = (
     title: string,
     data: any[],
