@@ -1,24 +1,6 @@
-import axios from "axios";
 import { createLogger, format, transports } from "winston";
 import "winston-daily-rotate-file";
-const {
-  combine,
-  timestamp,
-  json,
-  printf,
-  align,
-  prettyPrint,
-  errors,
-  label,
-  logstash,
-  cli,
-  colorize,
-  metadata,
-  ms,
-  padLevels,
-  simple,
-  splat,
-} = format;
+const { combine, timestamp, json, align, prettyPrint } = format;
 // Create the logger instance
 const logger = createLogger({
   level: "info",
@@ -40,7 +22,6 @@ const logger = createLogger({
     new transports.DailyRotateFile({
       dirname: "logs",
       filename: "nextjs-app-logs-%DATE%.txt", // Save as .txt
-      // datePattern: 'YYYY-MM-DD',
       datePattern: "DD-MM-YYYY",
       maxFiles: "30d",
     }),
