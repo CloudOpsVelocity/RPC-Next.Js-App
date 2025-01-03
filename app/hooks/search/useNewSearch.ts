@@ -20,7 +20,7 @@ export default function useNewsearch() {
     let url = `${
       process.env.NEXT_PUBLIC_BACKEND_URL
     }/matcher?word=${debounced}&cityId=${allFilters.city ? allFilters.city.split("+")[1] : servercityData?.split("+")[1]}`;
-    const res = await fetch(url);
+    const res = await fetch(url); 
     const responseData = await res.json();
     return responseData;
   };
