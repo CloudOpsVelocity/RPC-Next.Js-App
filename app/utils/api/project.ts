@@ -5,6 +5,7 @@ import axios from "axios";
 import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/utils/partialUnitParser";
 import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.client";
 
+
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   try {
     const response = await fetch(
