@@ -76,6 +76,7 @@ function formatArray(value: any[]): string {
 //   // Join parameters with "-" instead of "&"
 //   return queryEntries.join("-");
 // }
+
 function toQueryParams(params: QueryParams): string {
   const queryEntries: string[] = [];
 
