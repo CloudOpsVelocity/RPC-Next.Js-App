@@ -29,6 +29,7 @@ export const initialState: SearchFilter = {
   lat: null,
   lng: null,
   projName: null,
+  phaseId:[],
 };
 let RENT_BUGDET_VALUE = [0, 100000];
 
@@ -50,6 +51,7 @@ type Action =
   | { type: "SET_FILTERS"; payload: SearchFilter };
 
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
+  console.log(action)
   switch (action.type) {
     case "reset":
       return initialState;
@@ -58,7 +60,6 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
         ...state,
         ...action.payload,
       };
-
     case "pushToArray": {
       const { key, value } = action.payload;
       if (Array.isArray(state[key])) {
@@ -72,7 +73,6 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
       }
       return state;
     }
-
     case "removeFromArray": {
       const { key, value } = action.payload;
       if (Array.isArray(state[key])) {
@@ -152,7 +152,7 @@ export const ProjSearchAppliedFiltersStore = atom(
     set,
     setInQueryParams: any,
     type: "clear" | "add",
-    clearType?: "clearAll" | "bhk" | "area" | "budget" | "unitType" | "listing"
+    clearType?: "clearAll" | "bhk" | "area" | "budget" | "unitType" | "listing" | "phaseId"
   ) => {
     const appliedFilters = get(projSearchStore);
     let queryString = "";
@@ -193,6 +193,13 @@ export const ProjSearchAppliedFiltersStore = atom(
           set(projSearchStore, {
             type: "update",
             payload: { bhk: initialState.bhk },
+          });
+          break;
+        case "phaseId":
+          queryString = queryString.replace(/-phaseId=[^&]*/g, "");
+          set(projSearchStore, {
+            type: "update",
+            payload: { phaseId: initialState.phaseId },
           });
           break;
         case "area":

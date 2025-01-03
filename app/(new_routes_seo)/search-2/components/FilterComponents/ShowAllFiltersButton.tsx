@@ -5,7 +5,7 @@ import {
   MdKeyboardArrowDown,
   MdApartment,
   MdHouse,
-  MdVilla,
+  MdVilla, 
   MdMapsHomeWork,
   MdLandscape,
   MdExpandMore,
@@ -22,6 +22,7 @@ import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
+import RTK_CONFIG from "@/app/config/rtk";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
@@ -80,6 +81,37 @@ export default function ShowAllFiltersButton({
   const toggleExpand = (section: string) => {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
+  const getPhasesData = async () => {
+    let url = `${
+      process.env.NEXT_PUBLIC_BACKEND_URL
+    }/post-project/phase-name-by-project?projIdEnc=${state?.projIdEnc}`;
+    const res = await fetch(url);
+    const responseData = await res.json();
+    return responseData;
+  };
+
+  const {data, isLoading:PHASElOADING} = useQuery({
+    queryKey:['phases'],
+    queryFn: ()=>getPhasesData(),
+    enabled: state.projIdEnc !== null,
+    ...RTK_CONFIG
+  })
+
+
+  let phaseObjList:any = [];
+
+  if(data && Object.keys(data).length > 0){
+    Object.keys(data).forEach(eachKey => {
+      if(eachKey === "status") return;
+      phaseObjList = [
+        ...phaseObjList, 
+        { cid: parseInt(eachKey), constDesc: data[eachKey] }
+      ]
+    })
+  }
+
+  console.log(state.phaseId);
+
   const renderFilterSection = (
     title: string,
     data: any[],
@@ -265,9 +297,13 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.projectstatus,
                   "projStatus"
                 )}
+                {!isproject && !isproject &&
+                renderFilterSection( 
+                  "Phases", phaseObjList, "phaseId"
+                )}
               {!isproject &&
                 !isproject &&
-                renderFilterSection(
+                renderFilterSection( 
                   "Property Status",
                   SEARCH_FILTER_DATA.listingStatus,
                   "propStatus"
