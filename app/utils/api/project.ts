@@ -6,34 +6,44 @@ import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/u
 import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.client";
 
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
-    {
-      next: { tags: [slug] },
-      cache: "no-store",
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
+      {
+        next: { tags: [slug] },
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch project details for slug: ${slug}`);
     }
-  );
-  const data = await response.json();
 
-  let isRera = false;
-  const phases = data?.phaseOverview?.map((el: any) => {
-    if (el.rerastatus === "Recieved" || el.rerastatus === "Applied") {
-      isRera = true;
-    }
-    return { phaseId: el.phaseId, phaseName: el.phaseName };
-  });
+    const data = await response.json();
 
-  const metaData = { phases, isRera };
+    let isRera = false;
+    const phases = data?.phaseOverview?.map((el: any) => {
+      if (el.rerastatus === "Recieved" || el.rerastatus === "Applied") {
+        isRera = true;
+      }
+      return { phaseId: el.phaseId, phaseName: el.phaseName };
+    });
 
-  return {
-    ...data,
-    basicData: {
-      ...data.basicData,
-      projectName: capitalizeWords(data.basicData?.projectName),
-      postedByName: capitalizeWords(data.basicData?.postedByName),
-      ...metaData,
-    },
-  } as MERGERPROJECT;
+    const metaData = { phases, isRera };
+
+    return {
+      ...data,
+      basicData: {
+        ...data.basicData,
+        projectName: capitalizeWords(data.basicData?.projectName),
+        postedByName: capitalizeWords(data.basicData?.postedByName),
+        ...metaData,
+      },
+    } as MERGERPROJECT;
+  } catch (error) {
+    console.error(`Error fetching project details for slug "${slug}":`, error);
+    throw error; // Re-throw the error to handle it upstream if needed
+  }
 };
 
 const getProjectWiseOverView = async (slug: string): Promise<any> => {
@@ -93,26 +103,39 @@ const getProjectUnits = async (
   }
   return data;
 };
-export const getAuthorityNames = async (stringIds: string) => {
-  const res = await axios.post(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/proj-authority`
-  );
-  // Single loop through res.data to find matching IDs
-  const authorityNames = [];
-  for (const item of res.data) {
-    if (stringIds.includes(item.cid.toString())) { 
-      authorityNames.push(item.constDesc);
-    }
-  }
+export const getAuthorityNames = async (
+  stringIds: string
+): Promise<string[]> => {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/proj-authority`
+    );
 
-  return authorityNames;
+    const authorityNames: string[] = [];
+
+    // Single loop through res.data to find matching IDs
+    for (const item of res.data) {
+      if (stringIds.includes(item.cid.toString())) {
+        authorityNames.push(item.constDesc);
+      }
+    }
+
+    return authorityNames;
+  } catch (error) {
+    console.error(
+      `Error fetching authority names for stringIds "${stringIds}":`,
+      error
+    );
+    throw error; // Re-throw to allow handling upstream
+  }
 };
+
 export const getAllAuthorityNames = async () => {
   const res = await axios.post(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/proj-authority`
   );
   // Single loop through res.data to find matching IDs
-return res.data
+  return res.data;
 };
 const getCachedUser = unstable_cache(
   async (id: string): Promise<Main> => getCachedUser(id),
@@ -130,11 +153,17 @@ const getNearByLocations = async (slug: string): Promise<any> => {
   return data;
 };
 const getAmenties = async () => {
-  const data = await axios.post(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all-proj-Amenities`
-  );
-  return data.data;
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all-proj-Amenities`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching amenities:", error);
+    throw error; // Re-throw to allow upstream handling if necessary
+  }
 };
+
 const getProjectAllUntis = async (slug: string) => {
   const res = await fetch(
     `https://test.getrightproperty.com/api/project/projectUnit?projIdEnc=${slug}`,
