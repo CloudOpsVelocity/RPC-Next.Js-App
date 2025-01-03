@@ -39,7 +39,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  let isTrue = serverData.length > 0 || apiFilterQueryParams !== null;
+  let isTrue = (serverData && serverData.length && serverData.length > 0) || apiFilterQueryParams !== null;
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
@@ -65,8 +65,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       // ...RTK_CONFIG,
     });
 
-  const allItems =
-    serverData && !isTrue ? serverData : data?.pages?.flat() || [];
+  const allItems = serverData && !isTrue ? serverData : data?.pages?.flat() || [];
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
     getScrollElement: () => containerRef.current,

@@ -59,6 +59,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
         fit="contain"
         alt="post"
         component={NextImage}
+        className="h-full"
       />
       <button
         className="inline-flex flex-col items-center  justify-center gap-2.5 p-3 rounded-[10px] bg-[#0073C6] text-white text-lg not-italic font-bold leading-[normal] tracking-[0.96px]  top-[10%] right-[7%]"
