@@ -42,7 +42,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
 
   const handleCardClick = (units: any, item: any) => {
     if (partialUnitData.type === "overview") {
-      console.log(partialUnitData.handlePricingFloorPlanClick)
+      // console.log(partialUnitData.handlePricingFloorPlanClick)
       partialUnitData.handlePricingFloorPlanClick &&
         partialUnitData.handlePricingFloorPlanClick({
           bhkName: item,

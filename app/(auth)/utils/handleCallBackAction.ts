@@ -4,7 +4,7 @@ import { addShortList } from "@/app/utils/api/actions/shortlist";
 export default function useCallBackAction(data:any){
   switch(data?.type){
     case 'master-plan':
-        console.log(data?.action)
+        // console.log(data?.action)
       return downloadFn(data?.action)
       case 'brochure':
         return window.open(data?.action,"_blank")

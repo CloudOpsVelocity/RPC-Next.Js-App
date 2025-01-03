@@ -94,7 +94,7 @@ export async function generateMetadata(
     totalPrice,
   } = await getListingDetails(id as string);
   return {
-    title: `${data.bhkName} ${data.propTypeName}, for ${
+    title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
       data.cg === "S" ? " Sale" : " Rent"
     } in ${data.ltName} - Getrightproperty`,
     description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
@@ -103,7 +103,7 @@ export async function generateMetadata(
       data.ltName
     }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
     openGraph: {
-      title: `${data.bhkName} ${data.propTypeName}, for ${
+      title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
       } in ${data.ltName} - Getrightproperty`,
       description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${

@@ -1,11 +1,9 @@
-import { modalAtom } from "@/app/test/newui/store/jotai";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
-import { getAuthorityNames } from "@/app/utils/api/project";
 import { sqftToAcres } from "@/app/utils/landarea";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import React from "react";
 import { useQuery } from "react-query";
 
@@ -40,7 +38,7 @@ export default function ListingData({
   projIdEnc,
   propStatus,
   towerData,
-  availableFor,
+  availableFor, 
   propIdEnc,
   phaseId,
   projAuthority,
@@ -58,11 +56,15 @@ export default function ListingData({
     enabled: false,
   });
 
-  const getApproveNames = (stringIds: string) => {
+  console.log(approvedData)
+
+  const getApproveNames = () => {
+
+    let idsString = approvedById ? approvedById.split(",") : [];
     if (!approvedData) return "N/A";
     const authorityNames = [];
     for (const item of approvedData as any) {
-      if (stringIds.includes(item.cid.toString())) {
+      if (idsString.includes(item.cid.toString())) {
         authorityNames.push(item.constDesc.split(" – ")[0]);
       }
     }
@@ -141,7 +143,7 @@ export default function ListingData({
             <DownSectionCard
               label={"Approved By"}
               value={
-                approvedById ? getApproveNames(approvedById.split(",")) : null
+                approvedById ? getApproveNames() : null
               }
             />
 
@@ -186,7 +188,7 @@ export default function ListingData({
               <DownSectionCard
                 label={"Approved By"}
                 value={
-                  approvedById ? getApproveNames(approvedById.split(",")) : null
+                  approvedById ? getApproveNames() : null
                 }
               />
 

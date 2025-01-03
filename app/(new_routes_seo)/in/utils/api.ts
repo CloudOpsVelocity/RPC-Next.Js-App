@@ -74,7 +74,7 @@ export const getSearchData = async (filters?: string): Promise<any> => {
 
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
 
-    console.log(url);
+    // console.log(url);
     const res = await fetch(url, {
       next: {
         revalidate: 60,

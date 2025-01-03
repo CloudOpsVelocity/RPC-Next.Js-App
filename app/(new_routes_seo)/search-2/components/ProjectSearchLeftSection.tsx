@@ -15,6 +15,7 @@ import { initialState, projSearchStore } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { useHydrateAtoms } from "jotai/utils";
+import { getAllAuthorityNames } from "@/app/utils/api/project";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -75,6 +76,13 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     measureElement: (element) => {
       return element?.getBoundingClientRect().height || 300;
     },
+  });
+
+  const { data: approvedData } = useQuery({
+    queryKey: ["projAuth"],
+    enabled: true,
+    queryFn: () => getAllAuthorityNames(),
+    ...RTK_CONFIG,
   });
 
   const { ref, entry } = useIntersection({

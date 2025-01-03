@@ -57,7 +57,6 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     compareAdded,
     shortListed,
   } = data;
-  console.log(data)
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
     shortListed: shortListed === "Y" ? true : false,

@@ -182,8 +182,6 @@ export default function PropertyTypeDetailsCrad({
     return str;
   };
 
-  console.log(cg)
-
   const maxElevation =
     propertyType === "rowHouse" || propertyType === "villa"
       ? `G+${cg.elevation}`

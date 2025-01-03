@@ -62,7 +62,7 @@ export default function ProjData({
   // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
-      <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
+      <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap w-full xl:w-[calc(100%-210px)]">
         {projName}{" "}
         {phaseName && phaseCount !== undefined && phaseCount > 1 && (
           <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
@@ -100,7 +100,7 @@ export default function ProjData({
       </p>
 
       {filters.cg == "S" ? (
-        <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
+        <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24 sm:top-0 sm:right-[65px] w-full xl:w-[calc(100%-220px)] ">
           Avg Price:{" "}
           <span className="font-bold ml-1">
             {" "}
@@ -113,7 +113,7 @@ export default function ProjData({
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
       </p>
 
-      <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold max-w-[550px]">
+      <p className={`text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold w-full xl:w-[calc(100%-100px)]`}>
         <span>
           {sortedBhks && sortedBhks.length > 5
             ? sortedBhks
@@ -148,7 +148,7 @@ export default function ProjData({
         {` ${propType} For Sale in ${locality}, ${city}`}
       </p>
 
-      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 max-w-[510px]">
+      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-100px)]">
         Address: {address}
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
@@ -169,7 +169,7 @@ export default function ProjData({
       <p
         className={`text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold ${
           category === "Sale" ? "max-w-[400px]" : "max-w-[550px]"
-        }`}
+        } w-[calc(100%-210px)]`}
       >
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
@@ -204,7 +204,7 @@ export default function ProjData({
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         {propName}{" "}
       </p>
-      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 max-w-[510px]">
+      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-110px)]">
         Address: {address}
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">

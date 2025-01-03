@@ -93,7 +93,9 @@ export default function HeaderFilters() {
 
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
-    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
+    console.log(dropdownName);
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName); 
+    setIsSearchOpen(false);
   };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
@@ -272,7 +274,10 @@ export default function HeaderFilters() {
                     placeholder="Search By Locality, Projects or Listings"
                     value={searchQuery}
                     onChange={(e) => handleSearchChange(e)}
-                    onFocus={() => setIsSearchOpen(true)}
+                    onFocus={() => {
+                      setIsSearchOpen(true);
+                      setOpenDropdown(null);
+                    }}
                   />
                   <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                 </form>

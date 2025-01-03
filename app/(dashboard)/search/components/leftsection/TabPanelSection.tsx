@@ -37,7 +37,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
       : data;
   const res = useQuery({
     queryKey: ["projAuth"],
-    queryFn: getAllAuthorityNames,
+    queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
   });
 
