@@ -37,7 +37,6 @@ export default async function Page({ params }: Props) {
   const filters = seoSlug.split("_");
   const serverData = await getSearchData(filters);
   const frontendFilters = mapFiltersToFrontEnd(filters);
-  console.log(frontendFilters);
   return (
     <ListingSearchPage
       serverData={serverData}

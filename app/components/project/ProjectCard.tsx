@@ -52,7 +52,6 @@ export function ProjectCard({
   id,
   builderLinkActive,
 }: CardProps) {
-  console.log(cardData, "here is testing the card name");
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
@@ -78,7 +77,6 @@ export function ProjectCard({
       });
     }
   };
-  console.log(cardData, "ygkjgghjggkjgkgkgkg");
   const handleReqCall = (e: any) => {
     e.stopPropagation();
     e.preventDefault();

@@ -40,7 +40,7 @@ interface Location {
 export default function ShowAllFiltersButton({
   selectedFilters,
   toggleFilter,
-  isOpen,
+  isOpen, 
   onToggle,
 }: ShowAllFiltersButtonProps) {
   const path = usePathname();
@@ -109,9 +109,7 @@ export default function ShowAllFiltersButton({
       ]
     })
   }
-
-  console.log(state.phaseId);
-
+  
   const renderFilterSection = (
     title: string,
     data: any[],

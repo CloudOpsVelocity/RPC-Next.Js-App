@@ -79,7 +79,7 @@ export function getHomePageParamvalues(
   const filePath = path.join(staticDir, `${type}SlugsHome.json`);
   const jsonData = fs.readFileSync(filePath, "utf8");
   const builderJsonData = JSON.parse(jsonData);
-  console.log(builderJsonData)
+  // console.log(builderJsonData)
   for (const path in builderJsonData) {
     if (path.startsWith(slug)) {
       if(builderJsonData[path].includes("_")){

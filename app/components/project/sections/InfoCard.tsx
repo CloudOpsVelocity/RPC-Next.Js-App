@@ -5,7 +5,6 @@ import React from "react";
 type Props = {};
 
 export default function InfoCard(data: any) {
-  console.log(data);
   return (
     <div
       className={clsx(
