@@ -5,8 +5,6 @@ import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
 import { RightSideBlock } from "../components/rightSideBlock";
 import { LeftSideBlock } from "../components/leftsection/leftSideBlock";
-import PropProjModal from "@/app/test/newui/components/modals/Proj_PropModal";
-import MapModal from "../listing/components/modals";
 
 type Props = {
   serverData: any;
@@ -22,7 +20,10 @@ export default function ProjectSearchPage({
       <Header />
       <SearchAndFilterCon frontendFilters={frontendFilters} />
       <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
-        <LeftSideBlock serverData={serverData} />
+        <LeftSideBlock
+          serverData={serverData}
+          frontendFilters={frontendFilters}
+        />
         <RightSideBlock serverData={serverData} />
       </div>
 

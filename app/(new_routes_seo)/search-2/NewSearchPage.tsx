@@ -5,9 +5,10 @@ import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilt
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
 type Props = {
   serverData: any;
+  frontendFilters: any;
 };
 
-export default function NewSearchPage({ serverData }: Props) {
+export default function NewSearchPage({ serverData, frontendFilters }: Props) {
   return (
     <main className="pt-[6%] mt-[10%] sm:mt-0 sm:pt-[3.7%]">
       <ProjectSearchBreadCrumbs
@@ -20,7 +21,10 @@ export default function NewSearchPage({ serverData }: Props) {
       />
       <ProjSearchMainFilterSection />
       <div className="max-w-[98%] sm:w-[99%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap ">
-        <LeftSection serverData={serverData} />
+        <LeftSection
+          serverData={serverData}
+          frontendFilters={frontendFilters}
+        />
         <RightSection serverData={serverData} />
       </div>
     </main>

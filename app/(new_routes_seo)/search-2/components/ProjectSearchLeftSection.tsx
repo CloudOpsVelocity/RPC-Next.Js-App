@@ -11,20 +11,35 @@ import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import ProjectSearchTabs from "./ProjectSearchTabs/ProjectSearchTabs";
 import { useAtom, useAtomValue } from "jotai";
-import { projSearchStore } from "../store/projSearchStore";
+import { initialState, projSearchStore } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
+import { useHydrateAtoms } from "jotai/utils";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
+  frontendFilters?: any;
 };
 
-function LeftSection({ mutate, serverData }: Props) {
+function LeftSection({ mutate, serverData, frontendFilters }: Props) {
+  useHydrateAtoms([
+    [
+      projSearchStore,
+      {
+        type: "update",
+        payload: {
+          ...frontendFilters,
+        },
+      },
+    ],
+  ]);
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
+  let isTrue = serverData.length > 0 || apiFilterQueryParams !== null;
+
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
       queryKey: [
@@ -45,9 +60,12 @@ function LeftSection({ mutate, serverData }: Props) {
         return nextPage;
       },
       cacheTime: 300000,
+      enabled: isTrue,
       // ...RTK_CONFIG,
     });
-  const allItems = data?.pages?.flat() || [];
+
+  const allItems =
+    serverData && !isTrue ? serverData : data?.pages?.flat() || [];
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
     getScrollElement: () => containerRef.current,

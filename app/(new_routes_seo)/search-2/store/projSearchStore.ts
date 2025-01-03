@@ -29,7 +29,7 @@ export const initialState: SearchFilter = {
   lat: null,
   lng: null,
   projName: null,
-  phaseId:[],
+  phaseId: [],
 };
 let RENT_BUGDET_VALUE = [0, 100000];
 
@@ -51,7 +51,7 @@ type Action =
   | { type: "SET_FILTERS"; payload: SearchFilter };
 
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
-  console.log(action)
+  console.log(action);
   switch (action.type) {
     case "reset":
       return initialState;
@@ -152,7 +152,14 @@ export const ProjSearchAppliedFiltersStore = atom(
     set,
     setInQueryParams: any,
     type: "clear" | "add",
-    clearType?: "clearAll" | "bhk" | "area" | "budget" | "unitType" | "listing" | "phaseId"
+    clearType?:
+      | "clearAll"
+      | "bhk"
+      | "area"
+      | "budget"
+      | "unitType"
+      | "listing"
+      | "phaseId"
   ) => {
     const appliedFilters = get(projSearchStore);
     let queryString = "";

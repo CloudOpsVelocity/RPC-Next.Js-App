@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 const builderSlugsMap = new Map<string, string>([
   ["B", "bhk"], //unitTypes
   ["L", "localities"], //localities
@@ -94,10 +96,27 @@ export const getProjSearchData = async (filters: string): Promise<any> => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error(`Error fetching data: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const getNewProjSearchData = async (filters: string): Promise<any> => {
+  try {
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0`;
+    const url = `${baseUrl}${filters ? `${filters}` : ""}`;
+    console.log(url);
     const res = await fetch(url, {
-      next: {
-        revalidate: 60,
-      },
+      cache: "no-cache",
     });
 
     if (!res.ok) {

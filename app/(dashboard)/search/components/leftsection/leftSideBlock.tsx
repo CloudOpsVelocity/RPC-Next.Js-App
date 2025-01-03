@@ -6,7 +6,7 @@ import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import NewTabCon from "./newtabCon";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
-const LeftSideBlock = ({ serverData }: any) => {
+const LeftSideBlock = ({ serverData, frontendFilters }: any) => {
   const {
     searchProps: { mutate },
     handleAppliedFilters,
@@ -66,3 +66,5 @@ import { diffToProjFromListing, initialState } from "@/app/store/search";
 import TabPanelSection from "./TabPanelSection";
 import SharePopup from "../SharePopup";
 import Dialog from "@/app/test/newui/components/modals/Proj_PropModal";
+import { projSearchStore } from "@/app/(new_routes_seo)/search-2/store/projSearchStore";
+import { useHydrateAtoms } from "jotai/utils";

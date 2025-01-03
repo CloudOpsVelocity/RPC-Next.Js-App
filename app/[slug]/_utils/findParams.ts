@@ -21,6 +21,7 @@ export async function findSeoParams(inputUrl: string) {
 }
 export function extractCaseSeoParams(values: string) {
   const result: any = {};
+  let count = 0;
 
   // Split the string by hyphens to get parts like ['683B', 'RCG', '482L', '9C']
   const parts = values.split("-");
@@ -32,16 +33,21 @@ export function extractCaseSeoParams(values: string) {
 
     if (letter === "B") {
       result.B = number; // B for BHK
+      count++;
     } else if (letter === "RCG" || letter === "R") {
       result.CG = letter.charAt(0); // First character of RCG for CG
+      count++;
     } else if (letter === "C") {
       result.C = number; // C for City (numeric part)
+      count++;
     } else if (letter === "L") {
       result.L = number; // L for Locality
+      count++;
     } else if (letter === "P") {
       result.P = number;
+      count++;
     }
   });
-  console.log(result);
-  return result;
+
+  return { ...result, count };
 }

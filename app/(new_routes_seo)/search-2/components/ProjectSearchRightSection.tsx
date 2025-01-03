@@ -27,6 +27,9 @@ const RightSection = ({ serverData }: any) => {
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
+        if (serverData) {
+          return serverData;
+        }
         const response = await getSearchData(
           pageParam,
           apiFilterQueryParams ? apiFilterQueryParams : ""

@@ -4,13 +4,20 @@ import path from "path";
 import { getPagesSlugs } from "../seo/api";
 import ProjectSearchPage from "../(dashboard)/search/Page/ProjectSearchPage";
 import { notFound } from "next/navigation";
-import { getProjSearchData } from "../(new_routes_seo)/in/utils/api";
+import {
+  getNewProjSearchData,
+  getProjSearchData,
+} from "../(new_routes_seo)/in/utils/api";
 import { findSeoParams, extractCaseSeoParams } from "./_utils/findParams";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
+import NewSearchPage from "../(new_routes_seo)/search-2/NewSearchPage";
 type Props = {
   params: {
     slug: string;
+  };
+  searchParams: {
+    sf: string;
   };
 };
 // function xorEncrypt(text: string, key: string) {
@@ -36,8 +43,7 @@ type Props = {
 
 // // Example usage
 // const key = "mysecretkey"; // Your encryption key
-export default async function Page({ params: { slug } }: Props) {
-  console.log('calling api for case seo', slug)
+export default async function Page({ params: { slug }, searchParams }: Props) {
   // const ids = "WUpWJzxBVlE7OitIOjQ6UENdUSc6QEg6";
   // const startTime = performance.now();
   // console.log(decode(ids, key));
@@ -46,23 +52,39 @@ export default async function Page({ params: { slug } }: Props) {
   if (!slug.includes("-")) return notFound();
   // const values = await findSeoParams(slug);
   // console.log(values)
+  //  YA WO BOLNE GYI HAI AMAR BHAIYA KO CAKE LIYE SIR BOLA HOGA USSE
 
   const slugValues: any = extractCaseSeoParams(slug) as any;
-  const severData = await getProjSearchData(
-    `cg=${slugValues.CG}&city=${slugValues.C}&propType=${slugValues.P}&bhk=${slugValues.B}&localities=${slugValues.L}`
-  );
+  let atMinusIndex = slugValues.count + 2;
+  let severData;
+  if (!searchParams.sf) {
+    let url = `&${slugValues.CG ? `cg=${slugValues.CG}` : ""}&${
+      slugValues.C ? `city=${slugValues.C}` : ""
+    }&${slugValues.P ? `propType=${slugValues.P}` : ""}&${
+      slugValues.B ? `bhk=${slugValues.B}` : ""
+    }&${slugValues.L ? `localities=${slugValues.L}` : ""}`;
+    severData = await getNewProjSearchData(url);
+  }
   let city = `Bengaluru`;
   return (
     <>
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
-      <ProjectSearchPage
+      <NewSearchPage
         serverData={severData}
         frontendFilters={{
-          cg: slugValues.CG,
-          city: `${city}+${slugValues.C}`,
-          propTypes: parseInt((slugValues.P as string) ?? "0") ?? 0,
-          unitTypes: [parseInt((slugValues.B as string) ?? "0")],
-          locality: [`${slug.split("-").at(-6)}+${slugValues.L}`],
+          ...(slugValues.CG ? { cg: slugValues.CG } : {}),
+          ...(slugValues.C ? { city: `${city}+${slugValues.C}` } : {}),
+          ...(slugValues.P ? { propTypes: parseInt(slugValues.P) } : {}),
+          ...(slugValues.B ? { unitTypes: [parseInt(slugValues.B)] } : {}),
+          ...(slugValues.L
+            ? {
+                localities: [
+                  `${slug.split("-").at(-Number(atMinusIndex))}+${
+                    slugValues.L
+                  }`,
+                ],
+              }
+            : {}),
         }}
       />
     </>
@@ -88,7 +110,7 @@ export const generateStaticParams = async () => {
     fs.writeFileSync(filePath, jsonContent);
     console.log("case-seo.json file created successfully");
 
-    return res.map((slug:string) => ({ slug }));
+    return res.map((slug: string) => ({ slug }));
   }
   return [];
 };
