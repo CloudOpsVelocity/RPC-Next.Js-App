@@ -77,12 +77,11 @@ export async function POST(request: Request, response: Response) {
           if (Object.prototype.hasOwnProperty.call(data, slug)) {
             errors.push(`Slug "${slug}" already exists`);
           } else {
-            console.log(type);
             if (type === "project") {
               const slugParts = slug.split("/");
               let base = "/residential/projects/";
-              for (let i = 2; i < slugParts.length; i++) {
-                base += slugParts[i];
+              for (let i = 3; i < slugParts.length; i++) {
+                base += slugParts[i] + (slugParts.length - 1 == i ? "" : "/");
                 if (!data[base]) {
                   data[base] = id;
                 }
