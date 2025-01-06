@@ -77,10 +77,22 @@ export async function POST(request: Request, response: Response) {
           if (Object.prototype.hasOwnProperty.call(data, slug)) {
             errors.push(`Slug "${slug}" already exists`);
           } else {
-            data[slug] = id;
-            logger.info(
-              `Slug "${slug}" added with ID: ${id}. Request: ${request.method} ${request.url}`
-            );
+            console.log(type);
+            if (type === "project") {
+              const slugParts = slug.split("/");
+              let base = "/residential/projects/";
+              for (let i = 2; i < slugParts.length; i++) {
+                base += slugParts[i];
+                if (!data[base]) {
+                  data[base] = id;
+                }
+              }
+            } else {
+              data[slug] = id;
+              logger.info(
+                `Slug "${slug}" added with ID: ${id}. Request: ${request.method} ${request.url}`
+              );
+            }
             revalidatePath(slug);
             revalidateTag(slug);
           }
