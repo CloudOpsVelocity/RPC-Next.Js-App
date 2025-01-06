@@ -25,7 +25,7 @@ type Props = {
 function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   useHydrateAtoms([
     [
-      projSearchStore,
+      projSearchStore, 
       {
         type: "update",
         payload: {

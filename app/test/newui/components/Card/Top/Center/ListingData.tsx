@@ -56,6 +56,8 @@ export default function ListingData({
     enabled: false,
   });
 
+  console.log(parking)
+
   const getApproveNames = () => {
 
     let idsString = approvedById ? approvedById.split(",") : [];
@@ -260,7 +262,7 @@ export default function ListingData({
 }
 const DownSectionCard = ({
   label,
-  value,
+  value, 
   Icon,
 }: {
   label: string;
