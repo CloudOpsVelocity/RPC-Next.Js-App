@@ -9,11 +9,6 @@ import {
 import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
 import { getPagesSlugs } from "@/app/seo/api";
-import {
-  extractProjectParamsValues,
-  findPathForProjectDetails,
-} from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
-import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: { city: string; lt: string; slug: string };
@@ -43,13 +38,42 @@ export default async function Page({ params }: Props) {
       },
     };
   }
+  const structuredData = {
+    "@context": "http://schema.org",
+    "@type": "RealEstateListing",
+    name: projResponse.basicData.projectName,
+    description: projResponse.basicData.about,
+    image: projResponse.basicData.media.coverImageUrl.split(",")[1] || "",
+
+    url: `${process.env.NEXTAUTH_URL}/${city}/${lt}/${slug}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: projResponse.basicData.localityName,
+      addressRegion: projResponse.basicData.cityName,
+      postalCode: projResponse.basicData.pinCode || "",
+      streetAddress: projResponse.basicData.address || "",
+    },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      price: projResponse.basicData.basePrice || "",
+      itemCondition: "http://schema.org/NewCondition",
+      availability: "http://schema.org/InStock",
+    },
+  };
   return (
-    <ProjectsDetailsPage
-      projResponse={projResponse}
-      amenitiesFromDB={amenitiesFromDB}
-      slug={slug as string}
-      params={params}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <ProjectsDetailsPage
+        projResponse={projResponse}
+        amenitiesFromDB={amenitiesFromDB}
+        slug={slug as string}
+        params={params}
+      />
+    </>
   );
 }
 
@@ -100,16 +124,50 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // const pathname = `${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`; //`${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
-  // const value = await findPathForProjectDetails(pathname);
-  // const { PJ: slug } = await extractProjectParamsValues(value);
   let slug = params.slug.split("-").at(-1);
   const { basicData: data } = await getProjectDetails(slug as string);
+
+  // Constructing SEO-friendly title
+  const title = `${data?.projectName} ${data.availableProperties?.join(
+    " "
+  )} for sale in ${data.localityName} ${data.cityName}`;
+
+  // Constructing detailed and keyword-rich description
+  const description = `${
+    data.projectName
+  } offers exclusive ${data.availableProperties?.join(", ")} in ${
+    data.localityName
+  }, ${
+    data.cityName
+  }. Explore Project Details, Pricing, Brochure PDF, Floor Plans, Reviews, Master Plan, Amenities, and Contact Information. Secure your future home now!`;
+
+  const ogTitle = title;
+  const ogDescription = description;
+  const ogImage =
+    data.media.coverImageUrl.split(",")[1] || "default-image-url.jpg";
+  const ogUrl = `${process.env.NEXTAUTH_URL}/${params.city}/${params.lt}/${params.slug}`;
+
+  const twitterCard = "summary_large_image";
+  const twitterTitle = title;
+  const twitterDescription = description;
+  const twitterImage = ogImage;
+
   return {
-    title: `${data?.projectName} ${data.availableProperties?.join(
-      " "
-    )} for sale in ${data.localityName} ${data.cityName}`,
-    description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`,
+    title,
+    description,
+    openGraph: {
+      title: ogTitle,
+      description: ogDescription,
+      url: ogUrl,
+      images: [ogImage],
+      type: "website",
+    },
+    twitter: {
+      card: twitterCard,
+      title: twitterTitle,
+      description: twitterDescription,
+      images: [twitterImage],
+    },
   };
 }
 

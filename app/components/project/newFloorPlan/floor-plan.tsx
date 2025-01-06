@@ -10,6 +10,8 @@ import {
   FaBuilding,
   FaArrowRight,
   FaExpandAlt,
+  FaParking,
+  FaBath,
 } from "react-icons/fa";
 import type { PropertyUnit } from "./types/floor-plan";
 import { BHKTabs } from "./components/bhk-tabs";
@@ -30,6 +32,10 @@ import Button from "@/app/elements/button";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import RTK_CONFIG from "@/app/config/rtk";
+import { BiBuildingHouse } from "react-icons/bi";
+import { LuBedDouble } from "react-icons/lu";
+import Image from "next/image";
+import { ImgNotAvail } from "@/app/data/project";
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 const propertyUnits: PropertyUnit[] = [
@@ -158,7 +164,7 @@ export default function FloorPlans({
   });
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="w-[90%] mx-auto px-4 py-8">
       <h2
         className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
         id="floorPlansdiv"
@@ -288,93 +294,160 @@ export default function FloorPlans({
             {projectUnitsData &&
               projectUnitsData.map((unit: any) => (
                 <button
-                  key={unit.id}
                   onClick={() => setModalState({ isOpen: true, unit })}
-                  className="w-full text-left p-6 rounded-lg transition-all bg-white border border-gray-200 hover:border-[#0073C6] hover:shadow-md"
+                  className="w-full bg-white rounded-xl border-2 border-gray-200 p-6 transition-all hover:border-[#0073C6] hover:shadow-lg group"
+                  key={unit.unitId}
                 >
-                  <div className="flex justify-between items-start">
-                    <div>
-                      {propCgId === projectprops.plot ? (
-                        <h3 className="text-xl font-semibold text-[#0073C6]">
-                          Plot Area: {unit.plotArea} sq ft
+                  {/* Header Section */}
+                  <div className="flex items-start justify-between gap-4  border-b border-gray-100">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-2xl font-bold text-[#0073C6] text-nowrap">
+                          {unit.bhkName}
                         </h3>
-                      ) : (
-                        <h3 className="text-xl font-semibold text-[#0073C6]">
-                          {unit.bhkName} | {unit.bhkName?.split(" ")[0][0]} {`Bed${unit.bhkName?.split(" ")[0][0] % 1 !== 0 ? " + Study" : ""}`} -{" "}
-                          {unit.totalNumberofBathroom} Bath
-                        </h3>
-                      )}
-                      <p className="text-gray-600 mt-1">
-                        {propCgId === projectprops.plot ? (
-                          `Plot Number ${unit.unitNumber}`
-                        ) : (propCgId === projectprops.apartment || propCgId === projectprops.villament) ? (
-                          `${unit.towerName} - Unit ${unit.unitNumber}`
-                        ) : (
-                          `Unit ${unit.unitNumber}`
-                        )}
-                      </p>
+                        <span className="px-3 py-1 text-sm font-semibold bg-blue-50 text-[#0073C6] rounded-full">
+                          {unit.aptTypeName}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600">
+                        <BiBuildingHouse className="text-lg" />
+                        <p className="text-sm font-medium">
+                          {unit.towerName} - Floor {unit.floor} - Unit{" "}
+                          {unit.unitNumber}
+                        </p>
+                      </div>
                     </div>
-                    <FaArrowRight className="text-[#0073C6] text-xl" />
+                    <div className="grid grid-cols-2 gap-6 mb-6">
+                      <div className="space-y-1">
+                        <p className="text-gray-500 text-sm font-medium">
+                          Super Built-up Area
+                        </p>
+                        <p className="text-gray-900 text-lg font-bold">
+                          {unit.superBuildUparea} sq.ft
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-1">
+                          <FaCompass className="text-[#0073C6] text-sm" />
+                          <p className="text-gray-500 text-sm font-medium">
+                            Facing
+                          </p>
+                        </div>
+                        <p className="text-gray-900 text-lg font-bold">
+                          {unit.facingName}
+                        </p>
+                      </div>
+                      {/* <div className="space-y-1">
+                        <div className="flex items-center gap-1">
+                          <FaParking className="text-[#0073C6] text-sm" />
+                          <p className="text-gray-500 text-sm font-medium">
+                            Car Parks
+                          </p>
+                        </div>
+                        <p className="text-gray-900 text-lg font-bold">
+                          {unit.noOfCarParking}
+                        </p>
+                      </div> */}
+                    </div>
+
+                    <FaArrowRight className="text-[#0073C6] text-xl opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                   </div>
-                  <div className="mt-4 grid grid-cols-2 gap-4">
-                    {propCgId === projectprops.plot ? (
-                      <>
-                        <div>
-                          <p className="text-gray-600">Unit Type</p>
-                          <p className="font-semibold">
-                            {unit.length} ft x {unit.width} ft
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-gray-600">Facing</p>
-                          <p className="font-semibold">
-                            {unit.facingName === "Don't Know" ? "N/A" : unit.facingName}
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div>
-                          <p className="text-gray-600">Super Builtup Area</p>
-                          <p className="font-semibold">
-                            {unit.superBuildUparea} sq ft
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-gray-600">Facing</p>
-                          <p className="font-semibold">
-                            {unit.facingName === "Don't Know" ? "N/A" : unit.facingName}
-                          </p>
-                        </div>
-                        {propCgId !== projectprops.plot && (
-                          <div>
-                            <p className="text-gray-600">Car Parking</p>
-                            <p className="font-semibold">
-                              {unit.noOfCarParking === 0 ? "N/A" : unit.noOfCarParking}
-                            </p>
-                          </div>
-                        )}
-                      </>
-                    )}
+
+                  {/* Main Stats Grid */}
+
+                  {/* Additional Details */}
+                  <div className="grid grid-cols-4 gap-4 mb-6 bg-gray-50 rounded-lg p-4">
+                    <div className="flex items-center gap-2">
+                      <LuBedDouble className="text-[#0073C6] text-lg" />
+                      <div>
+                        <p className="text-xs text-gray-500 font-medium">
+                          Bedrooms
+                        </p>
+                        <p className="text-sm font-bold">
+                          {unit?.bhkName?.split(" ")[0]}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <FaBath className="text-[#0073C6] text-lg" />
+                      <div>
+                        <p className="text-xs text-gray-500 font-medium">
+                          Bathrooms
+                        </p>
+                        <p className="text-sm font-bold">
+                          {unit.totalNumberofBathroom}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <BiBuildingHouse className="text-[#0073C6] text-lg" />
+                      <div>
+                        <p className="text-xs text-gray-500 font-medium">
+                          Balconies
+                        </p>
+                        <p className="text-sm font-bold">
+                          {unit.totalNumberOfBalcony}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <BiBuildingHouse className="text-[#0073C6] text-lg" />
+                      <div>
+                        <p className="text-xs text-gray-500 font-medium">
+                          Terrace Area
+                        </p>
+                        <p className="text-sm font-bold">
+                          {unit.terraceArea} sq.ft
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Footer Actions */}
+                  {/* <div className="flex items-center justify-between">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setFullScreenModalState({ isOpen: true, unit });
                       }}
+                      className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-all"
+                      aria-label="Expand view"
                     >
-                      <FaExpandAlt className="text-[#0073C6] text-xl" />
+                      <FaExpandAlt className="text-[#0073C6] text-lg" />
                     </button>
-                  </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setFullScreenModalState({ isOpen: true, unit });
+                      }}
+                      className="px-6 py-3 bg-[#0073C6] text-white font-semibold rounded-lg hover:bg-[#005A9C] transition-all flex items-center gap-2 group-hover:shadow-md"
+                    >
+                      View Details
+                      <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div> */}
                 </button>
-            ))}
+              ))}
           </div>
           <div className="hidden md:block">
             <div className="sticky top-4">
-              <img
-                src="https://picsum.photos/800/600?random=0"
-                alt="Default Floor Plan"
-                className="w-full h-auto rounded-lg shadow-md"
-              />
+              {isLoading ? (
+                <Image
+                  src="data:image/webp;base64,UklGRhQCAABXRUJQVlA4WAoAAAAgAAAABQAAAwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggJgAAALABAJ0BKgYABAAHQJYlAF2AIddgkAAA/pT5fFPr1JgkQfFzYAAA"
+                  alt="Loading Floor Plan"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto rounded-lg shadow-md blur-sm"
+                />
+              ) : (
+                <Image
+                  src={projectUnitsData[0].floorPlanUrl ?? ImgNotAvail}
+                  alt="Default Floor Plan"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
+              )}
               <p className="mt-4 text-center text-gray-600">
                 Click on a unit to view its floor plan
               </p>
