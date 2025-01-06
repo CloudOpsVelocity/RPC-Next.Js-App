@@ -133,7 +133,7 @@ export default function GalleryBlock({
                       alt="Preview"
                       className="cursor-pointer object-contain  "
                       onClick={() => {
-                        dispatch({
+                        dispatch({ 
                           type: "OPEN",
                           payload: {
                             items: images,

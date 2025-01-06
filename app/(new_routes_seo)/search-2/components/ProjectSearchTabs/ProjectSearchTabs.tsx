@@ -201,8 +201,8 @@ export default function ProjectSearchTabs() {
 
             {isDropdownOpen && (
               <div
-                className="absolute right-0 mt-2 w-48 bg-white
-               rounded-lg shadow-lg py-1 z-20 border border-white"
+                className="absolute right-0 w-48 bg-white
+               rounded-lg shadow-lg py-1 z-20 border border-white top-[40px]"
               >
                 {sortOptions.map((option) => (
                   <button
@@ -263,7 +263,7 @@ export default function ProjectSearchTabs() {
 
         {isDropdownOpen && (
           <div
-            className="absolute right-0 mt-10 w-48 bg-white
+            className="absolute top-[40px] right-0 w-48 bg-white
                rounded-lg shadow-lg py-1 z-20 border border-white"
           >
             {sortOptions.map((option) => (

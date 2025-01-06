@@ -137,7 +137,7 @@ export default function ShowAllFiltersButton({
             <label key={item.cid || index} className="flex items-center gap-2">
               <input
                 type={radioorChecked.includes(category) ? "radio" : "checkbox"}
-                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="rounded border-gray-300 !accent-green-600 "
                 checked={
                   Array.isArray(state[category as keyof typeof state])
                     ? // @ts-ignore

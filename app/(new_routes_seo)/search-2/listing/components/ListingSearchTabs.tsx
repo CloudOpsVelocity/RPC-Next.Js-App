@@ -199,7 +199,7 @@ export default function ListingSearchTabs() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0  rounded-lg shadow-lg py-1 z-20 mt-2 w-48 bg-white  border border-white">
+              <div className="absolute right-0 top-[40px] rounded-lg shadow-lg py-1 z-20 w-48 bg-white border border-white">
                 {sortOptions.map((option) => (
                   <button
                     key={option.value}
