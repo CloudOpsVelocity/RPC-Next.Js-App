@@ -273,7 +273,7 @@ export default function ShowAllFiltersButton({
               Apply Filter
             </button>
           </div>
-          <div className="flex flex-col justify-start max-h-[100vh] mb-10 sm:mb-0 overflow-y-auto">
+          <div className="flex flex-col justify-start max-h-[66vh] mb-10 sm:mb-0 overflow-y-auto">
             <div className="flex flex-col mb-6 ml-4 gap-6">
               <LocalitySearch<Location>
                 data={localitydata || []}
@@ -295,12 +295,11 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.projectstatus,
                   "projStatus"
                 )}
-                {!isproject && !isproject &&
+                {!isproject && phaseObjList && phaseObjList.length > 0 &&
                 renderFilterSection( 
                   "Phases", phaseObjList, "phaseId"
                 )}
               {!isproject &&
-                !isproject &&
                 renderFilterSection( 
                   "Property Status",
                   SEARCH_FILTER_DATA.listingStatus,

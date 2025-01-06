@@ -56,8 +56,6 @@ export default function ListingData({
     enabled: false,
   });
 
-  console.log(approvedData)
-
   const getApproveNames = () => {
 
     let idsString = approvedById ? approvedById.split(",") : [];
@@ -125,7 +123,7 @@ export default function ListingData({
             )}
 
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
-            {!isPlot && (
+            {landArea !== undefined && landArea !== 0 &&
               <DownSectionCard
                 label={type == "proj" ? "Land Area" : "Property Age"}
                 value={
@@ -134,7 +132,7 @@ export default function ListingData({
                     : `${propertyAge ?? 0} Years`
                 }
               />
-            )}
+            }
 
             <DownSectionCard
               label={"No. of Units"}
