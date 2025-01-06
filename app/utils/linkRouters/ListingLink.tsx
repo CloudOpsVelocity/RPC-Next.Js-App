@@ -8,10 +8,15 @@ import React, { ReactNode, useMemo } from "react";
 
 // Simple slugify function without memoization
 const slugify = (name: string): string => {
-  return name
+  if(!name){
+    return "";
+  } else{
+    return name
     .toLowerCase() 
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
+  }
+
 };
 
 type ListingLinkProps = {

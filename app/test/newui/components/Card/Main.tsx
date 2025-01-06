@@ -84,7 +84,7 @@ const MainBox = ({ data, refetch }: Props) => {
       url = createProjectLinkUrl({
         city: data.city,
         locality: data.locality,
-        slug: data.projName,
+        slug: data.projName, 
         projIdEnc: projEncId,
       });
       window.open(url, "_blank");

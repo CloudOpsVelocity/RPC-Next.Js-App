@@ -93,10 +93,9 @@ export default function HeaderFilters() {
 
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
-    console.log(dropdownName);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName); 
     setIsSearchOpen(false);
-  };
+  }; 
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
 
@@ -183,7 +182,6 @@ export default function HeaderFilters() {
       case "Project Listings":
         {
           let projectName = data.name.split(" in ")[1].trim();
-          // console.log(projectName);
           const url = `projIdEnc=${
             data.stringId
           }&listedBy=${AgentOwnerBuilderMap.get(
@@ -220,7 +218,6 @@ export default function HeaderFilters() {
   };
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(state);
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_BACKEND_URL

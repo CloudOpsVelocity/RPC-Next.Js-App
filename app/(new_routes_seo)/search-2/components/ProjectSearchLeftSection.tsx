@@ -61,11 +61,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         return nextPage;
       },
       cacheTime: 300000,
-      enabled: isTrue,
+      // enabled: isTrue,
+      enabled: true,
+
       // ...RTK_CONFIG,
     });
 
   const allItems = serverData && !isTrue ? serverData : data?.pages?.flat() || [];
+  console.log(allItems)
+
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
     getScrollElement: () => containerRef.current,
@@ -154,7 +158,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       {isLoading ? (
         <Loader />
       ) : allItems.length > 0 ? (
-        <div
+        <div 
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,
             width: "100%",

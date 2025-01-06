@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import React from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
-import { SelectedFiltersMap } from "@/app/data/search";
+import { SEARCH_FILTER_DATA, SelectedFiltersMap } from "@/app/data/search";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 type Props = {};
@@ -10,15 +10,15 @@ type Props = {};
 export default function SelectedFilters({}: Props) {
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
+  console.log(state)
   return (
     Object.entries(state).some(
       ([_, value]) =>
         (Array.isArray(value) && value.length > 0) || value !== null
     ) && (
       <div className="py-2 border-t sm:max-w-[56%]">
-        <div className="flex overflow-x-auto gap-2">
-          {Object.entries(state).map(
-            ([category, values]) =>
+        <div className="flex overflow-x-auto gap-2"> 
+          {Object.entries(state).map(([category, values]) =>
               values !== null &&
               values !== undefined &&
               category !== "bugdetValue" &&
@@ -76,7 +76,7 @@ export default function SelectedFilters({}: Props) {
                       ? "All Listings"
                       : category === "parking" || category === "bathroom"
                       ? `${values} ${category}`
-                      : SelectedFiltersMap.get(values)}
+                      : category === "pnb" ? SEARCH_FILTER_DATA.photoAvail?.filter(each=>each.value == values)[0]?.title : SelectedFiltersMap.get(values)}
                   </span>
                   <button
                     onClick={() => {

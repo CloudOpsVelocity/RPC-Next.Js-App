@@ -51,7 +51,6 @@ type Action =
   | { type: "SET_FILTERS"; payload: SearchFilter };
 
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
-  console.log(action);
   switch (action.type) {
     case "reset":
       return initialState;
@@ -233,9 +232,13 @@ export const ProjSearchAppliedFiltersStore = atom(
             let listedBy =
               getParams.get("sf")?.match(/listedBy=[^\s&]*\+?(\d+)?/)?.[0] ??
               "";
-            queryString = listedBy;
+              console.log("key name")
+            
+            let finalKey = listedBy.split("=")[1].split("-")[0];
+            queryString = finalKey;
+
             set(projSearchStore, {
-              payload: { ...initialState, listedBy: listedBy.split("=")[1] },
+              payload: { ...initialState, listedBy: finalKey },
               type: "update",
             });
           }
