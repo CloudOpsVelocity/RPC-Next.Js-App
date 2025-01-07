@@ -1,4 +1,8 @@
-export const getUniqueOptionsByKeys = (units: any[], keys: string[]) => {
+export const getUniqueOptionsByKeys = (
+  units: any[],
+  keys: string[],
+  selectedFilters: Record<string, any>
+) => {
   if (!units || units.length === 0) return {};
 
   return keys.reduce((result: Record<string, any>, key) => {

@@ -21,16 +21,13 @@ export default function ByUnitFilters({
   });
 
   const [focusedFilter, setFocusedFilter] = useState<string | null>(null);
-
+  console.log(filters);
   const memoOptions = useCallback(() => {
-    return getUniqueOptionsByKeys(units, [
-      "unitNumber",
-      "bhkName",
-      "towerName",
-      "floor",
-      "facingName",
-      "block",
-    ]);
+    return getUniqueOptionsByKeys(
+      units,
+      ["unitNumber", "bhkName", "towerName", "floor", "facingName", "block"],
+      filters
+    );
   }, [units]);
 
   const options = memoOptions();
@@ -54,7 +51,7 @@ export default function ByUnitFilters({
   }, []);
 
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: String(value) }));
     handleUnitFilterChange(key, value);
   };
 
@@ -77,7 +74,9 @@ export default function ByUnitFilters({
       <div
         key={key}
         className="relative"
-        ref={(el) => (dropdownRefs.current[key] = el)}
+        ref={(el) => {
+          if (el) dropdownRefs.current[key] = el;
+        }}
       >
         <div className="relative">
           <input
