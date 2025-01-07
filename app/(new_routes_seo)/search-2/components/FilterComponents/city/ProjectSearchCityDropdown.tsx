@@ -30,7 +30,7 @@ interface City {
 }
 
 type Props = {
-  handleDropdownToggle:any;
+  handleDropdownToggle: any;
 };
 
 export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
