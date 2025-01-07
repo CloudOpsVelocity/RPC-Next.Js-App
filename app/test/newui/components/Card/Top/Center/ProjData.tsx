@@ -167,9 +167,7 @@ export default function ProjData({
   ) : (
     <div>
       <p
-        className={`text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold ${
-          category === "Sale" ? "max-w-[400px]" : "max-w-[550px]"
-        } w-[calc(100%-210px)]`}
+        className={`text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold w-full xl:w-[calc(100%-210px)]`}
       >
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
