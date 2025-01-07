@@ -29,7 +29,11 @@ interface City {
   modidate: string;
 }
 
-export default function ProjSearchCityDropDown() {
+type Props = {
+  handleDropdownToggle:any;
+};
+
+export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
   const [state, dispatch] = useAtom(projSearchStore);
   let servercityData = `Bengaluru+9`;
   const [searchTerm, setSearchTerm] = useState("");
@@ -149,7 +153,10 @@ export default function ProjSearchCityDropDown() {
   return (
     <div className="relative inline-block order-last" ref={dropdownRef}>
       <button
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          setIsOpen((prev) => !prev);
+          handleDropdownToggle()
+        }}
         className="flex items-center text-gray-800 text-[14px] xl:text-[16px] font-semibold gap-x-2 p-3 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
       >
         <IoLocationSharp className="text-blue-600 text-lg" />
