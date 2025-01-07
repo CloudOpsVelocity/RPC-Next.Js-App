@@ -1,11 +1,5 @@
 'use client'
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { IoLocationSharp } from "react-icons/io5";
 import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
@@ -19,7 +13,7 @@ interface City {
   id: number;
   name: string;
   cityid: number;
-  isactive: string;
+  isactive: string; 
   stateId: number;
   parentId: number;
   type: number;

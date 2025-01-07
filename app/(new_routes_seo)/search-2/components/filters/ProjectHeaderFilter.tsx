@@ -43,7 +43,7 @@ export default function HeaderFilters() {
     onSearchChange,
     name,
   } = useProjSearchMatcher();
-
+ 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -363,7 +363,7 @@ export default function HeaderFilters() {
               )}
             </div>
             <div className="order-2 sm:order-first">
-              <ProjSearchCityDropDown />
+              <ProjSearchCityDropDown handleDropdownToggle={handleDropdownToggle} />
             </div>
             <div className="hidden md:flex items-center gap-2 order-2">
               {/*  <PropertyTypeDropdown
