@@ -7,7 +7,7 @@ import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { GrPowerReset } from 'react-icons/gr'
 import { useAtom, useSetAtom } from 'jotai'
 import { galleryStateAtom } from '@/app/store/project/gallery'
-import { searchShareAtom } from '@/app/(dashboard)/search/components/SharePopup'
+import { searchShareAtom } from '@/app/(dashboard)/searchOldPage/components/SharePopup'
 import { imageUrlParser } from '@/app/utils/image'
 import { newIcons } from '@/app/images/commonSvgs'
 

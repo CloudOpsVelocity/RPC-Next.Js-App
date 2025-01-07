@@ -1,5 +1,5 @@
 import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
-import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
+import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,

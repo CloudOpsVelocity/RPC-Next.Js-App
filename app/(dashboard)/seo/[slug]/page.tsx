@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
-import ListingSearchPage from "../../search/listing/Page/ListingSearchPage";
+import ListingSearchPage from "../../searchOldPage/listing/Page/ListingSearchPage";
 import { useHydrate } from "react-query";
 import { searachFilterAtom } from "@/app/store/search";
 import { useHydrateAtoms } from "jotai/utils";

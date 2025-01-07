@@ -1,5 +1,5 @@
-import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
-import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
+import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
+import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import {
   getProjSearchData,
   getSearchData,

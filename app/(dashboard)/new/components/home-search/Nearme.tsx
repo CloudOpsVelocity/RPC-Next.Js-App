@@ -17,7 +17,7 @@ export default function Nearme({}: Props) {
           let lat = position.coords.latitude;
           let lng = position.coords.longitude;
           window.open(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?lat=${lat}&lng=${lng}`
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=lat=${lat}&lng=${lng}`
           );
           const encryptedObject = encryptData(JSON.stringify({
             lt: position.coords.latitude,

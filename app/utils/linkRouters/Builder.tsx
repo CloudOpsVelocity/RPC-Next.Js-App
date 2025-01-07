@@ -25,14 +25,14 @@ export const generateBuilderUrl = (routeParams?: {
       return `/search`;
     }
     return (
-      "/search?builderIds=" +
+      "/search?sf=builderIds=" +
       encodeURIComponent(`${slug}+${id}`).replaceAll("%20", "+")
     );
   } else if (type === "projStatus") {
     if (!id) {
       return `/search`;
     }
-    return `/search?projStatus=${statusId}&builderIds=${encodeURIComponent(
+    return `/search?sf=projStatus=${statusId}-builderIds=${encodeURIComponent(
       `${slug}+${id}`
     ).replaceAll("%20", "+")}`;
   } else if (city && slug) {

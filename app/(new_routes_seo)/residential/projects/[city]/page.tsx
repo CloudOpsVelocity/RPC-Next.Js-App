@@ -2,7 +2,7 @@ import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import React from "react";
 import fs from "fs";
-import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
+import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 type Props = {
   params: { city: string; lt: string };
 };

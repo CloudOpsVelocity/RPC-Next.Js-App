@@ -187,7 +187,7 @@ type CountListProps = {
 const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
   const handleAgentOwner = (type: "A" | "I" | "B") => {
     window.open(
-      `/search/listing?projIdEnc=${projIdEnc}&listedBy=${type}&projName=${projName}`,
+      `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
       "_blank"
     );
   };

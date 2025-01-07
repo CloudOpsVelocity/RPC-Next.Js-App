@@ -1,4 +1,4 @@
-import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
+import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,

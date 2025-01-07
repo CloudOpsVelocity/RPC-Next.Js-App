@@ -1,5 +1,5 @@
 "use client";
-import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
+import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { ShareIcon } from "@/app/images/HomePageIcons";
 import { useAtom } from "jotai";
 import React from "react";

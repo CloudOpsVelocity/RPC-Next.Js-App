@@ -6,7 +6,7 @@ import HeartButton from "../Center/HeartButton";
 import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
-import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
+import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";

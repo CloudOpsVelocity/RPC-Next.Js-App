@@ -16,7 +16,7 @@ import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
 
 export function BasicMultiSelect() {
-  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom); 
   const isTab = useMediaQuery("(max-width: 1600px)");
   const [expanded, setExpanded] = useState(false); // State to track if the list is expanded
   const combobox = useCombobox({
