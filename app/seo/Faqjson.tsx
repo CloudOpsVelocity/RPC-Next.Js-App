@@ -4,14 +4,24 @@ const generateFAQJsonLd = (data: any) => {
   const jsonLd: WithContext<FAQPage> = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: data.faqs?.map((question: any) => ({
-      "@type": "Question",
-      name: question.faqQuestion,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: question.faqAnswer,
+    mainEntity: [
+      ...(data.faqs || []).map((question: any) => ({
+        "@type": "Question",
+        name: question.faqQuestion,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: question.faqAnswer,
+        },
+      })),
+      {
+        "@type": "Question",
+        name: "How can I contact you?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "You can contact cusotmer support via email at info@rpclan.com or by phone at 8884440963.",
+        },
       },
-    })),
+    ],
     headline: data.headline,
     description: data.description,
     author: {
