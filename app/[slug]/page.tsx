@@ -52,7 +52,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   if (!slug.includes("-")) return notFound();
   // const values = await findSeoParams(slug);
   // console.log(values)
-  //  YA WO BOLNE GYI HAI AMAR BHAIYA KO CAKE LIYE SIR BOLA HOGA USSE
+  
 
   const slugValues: any = extractCaseSeoParams(slug) as any;
   let atMinusIndex = slugValues.count + 2;
