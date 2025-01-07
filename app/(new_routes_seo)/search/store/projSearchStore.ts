@@ -3,6 +3,7 @@ import { filterParser } from "@/app/utils/search";
 import { atom } from "jotai";
 import { atomWithReducer, selectAtom } from "jotai/utils";
 import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
+import { projectprops } from "@/app/data/projectDetails";
 
 export const initialState: SearchFilter = {
   current: null,
@@ -21,6 +22,7 @@ export const initialState: SearchFilter = {
   facings: [],
   furnish: null,
   propStatus: null,
+  projStatus: null,
   pnb: null,
   sortByfield: null,
   sortType: null,
@@ -56,9 +58,12 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
     case "reset":
       return initialState;
     case "update":
+      var newData = action.payload.propType === projectprops.plot ? {...action.payload, bhk: []} : 
+        action.payload.bhk !== undefined && action.payload.bhk.length > 0  ? {...action.payload, propType: null} : 
+        {...action.payload}
       return {
         ...state,
-        ...action.payload,
+        ...newData,
       };
     case "pushToArray": {
       const { key, value } = action.payload;
@@ -199,7 +204,7 @@ export const ProjSearchAppliedFiltersStore = atom(
           queryString = queryString.replace(/-bhk=[^&]*/g, "");
           set(projSearchStore, {
             type: "update",
-            payload: { bhk: initialState.bhk },
+            payload: { bhk: initialState.bhk},
           });
           break;
         case "phaseId":

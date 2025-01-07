@@ -2,7 +2,7 @@ import React from "react";
 import fs from "fs";
 import path from "path";
 import { getPagesSlugs } from "../seo/api";
-import ProjectSearchPage from "../(dashboard)/search/Page/ProjectSearchPage";
+import ProjectSearchPage from "../(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import { notFound } from "next/navigation";
 import {
   getNewProjSearchData,
@@ -11,7 +11,7 @@ import {
 import { findSeoParams, extractCaseSeoParams } from "./_utils/findParams";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
-import NewSearchPage from "../(new_routes_seo)/search-2/NewSearchPage";
+import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 type Props = {
   params: {
     slug: string;

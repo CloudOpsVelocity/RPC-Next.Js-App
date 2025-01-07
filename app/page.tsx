@@ -15,7 +15,7 @@ import ListbySection from "./(dashboard)/new/components/ListedBy";
 import PostYourListing from "./(dashboard)/new/components/post-your-listing";
 import BlogsSection from "./(dashboard)/new/components/blogs";
 import Req from "./(dashboard)/new/components/Req";
-import SharePopup from "./(dashboard)/search/components/SharePopup";
+import SharePopup from "./(dashboard)/searchOldPage/components/SharePopup";
 import { cookies, headers } from "next/headers";
 import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {

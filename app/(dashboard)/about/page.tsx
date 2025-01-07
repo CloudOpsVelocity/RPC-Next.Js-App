@@ -228,7 +228,7 @@ export default function page({}: Props) {
                 home today.{" "}
               </p>
               <a
-                href="https://www.getrightproperty.com/search?projStatus=108"
+                href="https://www.getrightproperty.com/search?sf=projStatus=108"
                 target="_blank"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
               >
@@ -248,7 +248,7 @@ export default function page({}: Props) {
                 move-in-ready projects now.{" "}
               </p>
               <a
-                href="https://www.getrightproperty.com/search?projStatus=107"
+                href="https://www.getrightproperty.com/search?sf=projStatus=107"
                 target="_blank"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
               >
@@ -268,7 +268,7 @@ export default function page({}: Props) {
                 early.{" "}
               </p>
               <a
-                href="https://www.getrightproperty.com/search?projStatus=106"
+                href="https://www.getrightproperty.com/search?sf=projStatus=106"
                 target="_blank"
                 className="ursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
               >

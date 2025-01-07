@@ -8,7 +8,6 @@ import React from "react";
 import toast from "react-hot-toast";
 
 export default function Results() {
-  const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
   const {
     localities,
@@ -44,13 +43,13 @@ export default function Results() {
       case "listing":
         {
           const [ut, pt, cg, lt] = data.id.split("_");
-          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
+          const url = `propType=${pt}-bhk=${ut}-cgs=${cg}-localities=${data.name}%2B${lt}`;
           window.open("/search/listing?" + url);
         }
         break;
       case "projectListing":
         {
-          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
+          const url = `projIdEnc=${data.id}-listedBy=${data.type.split("")[0]}`; 
           window.open("/search/listing?" + url);
         }
         break;
@@ -82,7 +81,7 @@ export default function Results() {
           {" "}
           <div>
             {localities?.length > 0 && (
-              <h2 className="text-[#5F81B2] text-[14px] font-bold sm:text-xl flex space-x-2 items-center">
+              <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
                 <SearchLocationIcon /> <span>Location</span>
               </h2>
             )}
@@ -104,7 +103,7 @@ export default function Results() {
           </div>
           <div>
             {projects && projects.length > 0 && (
-              <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1 font-bold">
+              <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
                 {property} <span>Projects</span>
               </h2>
             )}
@@ -120,24 +119,21 @@ export default function Results() {
               ))}
             </ul>
             {listings?.length > 0 && <SubHeading text="Listings" />}
-
             <ul>
-              {listings?.map((listing: any) => {
-                return (
-                  <li
-                    onClick={() =>
-                      handlePush("listing", {
-                        id: listing.id,
-                        name: listing.name.split("in")[1],
-                      })
-                    }
-                    className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-                    key={listing.id}
-                  >
-                    {listing.name}
-                  </li>
-                );
-              })}
+              {listings?.map((listing: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("listing", {
+                      id: listing.id,
+                      name: listing.name.split("in")[1],
+                    })
+                  }
+                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={listing.id}
+                >
+                  {listing.name}
+                </li>
+              ))}
             </ul>
             {projectListing?.length > 0 && (
               <SubHeading text="Project Listings" />
@@ -184,7 +180,7 @@ export default function Results() {
 const SubHeading = ({ text }: { text: string }) => {
   return (
     <div className="flex  items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#4D6677] text-lg   font-bold">{text}</div>{" "}
+      <div className="text-[#4D6677] text-base  font-medium ">{text}</div>{" "}
       <hr className="w-full h-px  border-0 bg-[#98A5B8]" />
     </div>
   );

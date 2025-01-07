@@ -56,8 +56,6 @@ export default function ListingData({
     enabled: false,
   });
 
-  console.log(parking)
-
   const getApproveNames = () => {
 
     let idsString = approvedById ? approvedById.split(",") : [];

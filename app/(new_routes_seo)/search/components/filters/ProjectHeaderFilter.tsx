@@ -98,9 +98,7 @@ export default function HeaderFilters() {
   }; 
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
-
     setSearchQuery(value);
-
     onSearchChange(value);
   };
   const isListingSearch = path.includes("listing");
@@ -140,9 +138,9 @@ export default function HeaderFilters() {
             });
           } else {
             window.open(
-              `/search/listing?projIdEnc=${
+              `/search/listing?sf=projIdEnc=${
                 data.stringId.split("_")[0]
-              }&phaseId=${data.stringId.split("_")[1]}&projName=${data.name}`
+              }-phaseId=${data.stringId.split("_")[1]}-projName=${data.name}`
             );
           }
         }
@@ -168,11 +166,11 @@ export default function HeaderFilters() {
             });
             handleApplyFilters();
           } else {
-            const url = `/search/listing?propTypes=${paramsObject.PT}${
-              paramsObject.BH ? `&unitTypes=${paramsObject.BH}` : ""
-            }&cg=${
+            const url = `/search/listing?sf=propType=${paramsObject.PT}${
+              paramsObject.BH ? `-bhk=${paramsObject.BH}` : ""
+            }-cg=${
               paramsObject.CG
-            }&localities=${localityName}%2B${encodeURIComponent(
+            }-localities=${localityName}%2B${encodeURIComponent(
               paramsObject.LT
             )}`;
             window.open(url);
@@ -184,10 +182,10 @@ export default function HeaderFilters() {
           let projectName = data.name.split(" in ")[1].trim();
           const url = `projIdEnc=${
             data.stringId
-          }&listedBy=${AgentOwnerBuilderMap.get(
+          }-listedBy=${AgentOwnerBuilderMap.get(
             data.type
-          )}&projName=${projectName}`;
-          window.open("/search/listing?" + url);
+          )}-projName=${projectName}`;
+          window.open("/search/listing?sf=" + url);
         }
         break;
       case "builders":
@@ -199,9 +197,9 @@ export default function HeaderFilters() {
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
           window.open(
-            `/search?builderIds=${url}&city=${data.stringId.split("_")[0]}${
+            `/search?sf=builderIds=${url}-city=${data.stringId.split("_")[0]}${
               data.type !== "BuilderProject"
-                ? `&listedBy=${AgentOwnerBuilderMap.get(data.type)}`
+                ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
                 : ""
             }`
           );
@@ -249,13 +247,13 @@ export default function HeaderFilters() {
   };
   return (
     <>
-      <div className="w-full  sm:max-w-[70%] xl:max-w-[50%]  max-h-[60vh]  bg-white border-b sticky top-0 z-40">
+      <div className="w-full max-w-[100%]  max-h-[60vh]  bg-white border-b sticky top-0 z-40">
         <div className=" px-1 ">
           <div
             ref={searchRef}
-            className="flex flex-wrap items-center gap-2 py-3"
+            className="flex flex-wrap items-center gap-2 py-3 max-w-[820px]"
           >
-            <div className="flex-1 min-w-full sm:min-w-fit   relative order-1">
+            <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
                   openDropdown={openDropdown}

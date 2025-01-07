@@ -17,6 +17,7 @@ export const initialState: SearchFilter = {
   facings: [],
   furnish: null,
   propStatus: null,
+  projStatus: null,
   pnb: null,
   sortByfield: null,
   sortType: null,

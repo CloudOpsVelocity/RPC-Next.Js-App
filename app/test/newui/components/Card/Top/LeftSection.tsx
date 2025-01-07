@@ -1,4 +1,4 @@
-import { projectprops } from "@/app/(dashboard)/search/components/Card/Top/Center/ProjData";
+import { projectprops } from "@/app/(dashboard)/searchOldPage/components/Card/Top/Center/ProjData";
 import Button from "@/app/elements/button";
 import { CallIcon } from "@/app/images/commongsSvgs2";
 import { formatDateDDMMYYYY } from "@/app/utils/date";

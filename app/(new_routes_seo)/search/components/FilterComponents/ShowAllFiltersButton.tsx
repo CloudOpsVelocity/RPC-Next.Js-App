@@ -116,6 +116,7 @@ export default function ShowAllFiltersButton({
     category: string,
     initialDisplay: number = 5
   ) => {
+    console.log(data);
     const isExpanded = expandedSections[category] || false;
     const displayData = isExpanded ? data : data.slice(0, initialDisplay);
     const radioorChecked = [
@@ -137,7 +138,7 @@ export default function ShowAllFiltersButton({
             <label key={item.cid || index} className="flex items-center gap-2">
               <input
                 type={radioorChecked.includes(category) ? "radio" : "checkbox"}
-                className="rounded border-gray-300 !accent-green-600 "
+                className="rounded border-gray-300 !accent-green-600"
                 checked={
                   Array.isArray(state[category as keyof typeof state])
                     ? // @ts-ignore
@@ -239,7 +240,7 @@ export default function ShowAllFiltersButton({
   const handleLocationChange = (selected: Location[]) => {
     console.log("Selected locations:", selected);
   };
-  const isproject = path !== "/search-2/listing" && state.listedBy == null;
+  const isproject = path !== "/search/listing" && state.listedBy == null;
   return (
     <div className="  relative">
       <button
@@ -307,7 +308,7 @@ export default function ShowAllFiltersButton({
                 )}
               {renderFilterSection(
                 "Property Type",
-                Object.keys(propertyiconss),
+                 state.bhk.length > 0 ? [...Object.keys(propertyiconss).filter(each=>each != "plt")] : Object.keys(propertyiconss),
                 "propType"
               )}
               {state.propType !== 32 &&

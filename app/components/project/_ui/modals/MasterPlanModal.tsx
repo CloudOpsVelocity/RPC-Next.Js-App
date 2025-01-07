@@ -7,7 +7,7 @@ import { FiX, FiShare2, FiDownload, FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { newIcons, PopupOpenSvg } from "@/app/images/commonSvgs";
 import { useSetAtom } from "jotai";
-import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
+import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 
 interface ZoomableMasterplanModalProps {

@@ -18,19 +18,19 @@ const config = {
     {
       title: "Builder",
       content: "Check all the listings posted by builder",
-      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=B`,
+      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?sf=listedBy=B`,
       image: "/staticmedia-images-icons/homepage/Builder.png",
     },
     {
       title: "Agent",
       content: "Check all the listings posted by agent",
-      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=A`,
+      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?sf=listedBy=A`,
       image: "/staticmedia-images-icons/homepage/Agent.png",
     },
     {
       title: "Owner",
       content: "Check all the listings posted by Owner",
-      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=I`,
+      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?sf=listedBy=I`,
       image: "/staticmedia-images-icons/homepage/Individual.png",
     },
   ],

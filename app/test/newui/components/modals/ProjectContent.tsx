@@ -9,7 +9,7 @@ type Props = {
 export default function ProjectContent({ data }: Props) {
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/app/(dashboard)/search/listing/components/map"), {
+      dynamic(() => import("@/app/(dashboard)/searchOldPage/listing/components/map"), {
         loading: () => <MapSkeleton />,
         ssr: false,
       }),

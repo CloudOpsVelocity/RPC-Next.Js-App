@@ -68,7 +68,6 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     });
 
   const allItems = serverData && !isTrue ? serverData : data?.pages?.flat() || [];
-  console.log(allItems)
 
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
@@ -149,6 +148,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     );
   });
 
+  const LoadingBlock = () => (
+      <div className="flex items-center justify-center h-full w-full ">
+        <div className="text-center flex items-center justify-center flex-col ">
+          <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
+          <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">Loading...</h2>
+        </div>
+      </div>
+  );
+
   return (
     <div
       className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]"
@@ -156,7 +164,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     >
       <ProjectSearchTabs />
       {isLoading ? (
-        <Loader />
+        <LoadingBlock />
       ) : allItems.length > 0 ? (
         <div 
           style={{

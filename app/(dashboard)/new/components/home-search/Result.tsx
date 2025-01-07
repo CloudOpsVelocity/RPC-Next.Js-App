@@ -57,9 +57,9 @@ export default function Results() {
           window.open(apiData.stringUrl);
         } else {
           window.open(
-            `/search/listing?projIdEnc=${
+            `/search/listing?sf=projIdEnc=${
               apiData.stringId.split("_")[0]
-            }&phaseId=${apiData.stringId.split("_")[1]}&projName=${
+            }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
             }`
           );
@@ -74,15 +74,15 @@ export default function Results() {
             let url;
             let localityName = apiData.name.split("in")[1].toLowerCase().trim();
             url =
-              `propTypes=${data.PT}${
-                data.BH ? `&unitTypes=${data.BH}` : ""
-              }&cg=${data.CG}&localities=${localityName}` +
+              `propType=${data.PT}${
+                data.BH ? `-bhk=${data.BH}` : ""
+              }-cg=${data.CG}-localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
             window.open(
               data.PJ && data.PJ !== "null"
-                ? `/search/listing?${url}`
-                : "/search?" + url
+                ? `/search/listing?sf=${url}`
+                : "/search?sf=" + url
             );
           }
         }
@@ -97,7 +97,7 @@ export default function Results() {
           }&listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
           )}&projName=${projectName}`;
-          window.open("/search/listing?" + url);
+          window.open("/search/listing?sf=" + url);
         }
         break;
       case "builder":
@@ -111,11 +111,11 @@ export default function Results() {
               "%2B" +
               encodeURIComponent(apiData.stringId.split("_")[1]);
             window.open(
-              `/search?builderIds=${url}&city=${encodeURIComponent(
+              `/search?sf=builderIds=${url}-city=${encodeURIComponent(
                 filters?.city ?? ""
               )}${
                 apiData.type !== "BuilderProject"
-                  ? `&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
+                  ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
               }`
             );

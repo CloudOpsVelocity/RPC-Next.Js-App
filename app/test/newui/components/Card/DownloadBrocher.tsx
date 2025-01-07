@@ -1,4 +1,4 @@
-import downloadPDF from "@/app/(dashboard)/search/Page/utils";
+import downloadPDF from "@/app/(dashboard)/searchOldPage/Page/utils";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { DownLoadIcon } from "@/app/images/commongsSvgs2";
 import { useSession } from "next-auth/react";

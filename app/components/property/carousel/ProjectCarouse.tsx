@@ -57,7 +57,7 @@ export default function NearByCarouselProjProperty({
         mutate={mutate}
         // builderName={builderData?.data?.userName}
         ct="builder"
-        url={`/search?builderIds=${builderData?.data?.userName ?? ""}${builderId ?? ""}`}
+        url={`/search?sf=builderIds=${builderData?.data?.userName ?? ""}${builderId ?? ""}`}
       />
       <ProjectCarousel
         type="proj"
@@ -80,7 +80,7 @@ export default function NearByCarouselProjProperty({
         mutate={mutate}
         // builderName={builderData?.data?.userName}
         ct="builder"
-        url={`/search?lat=${lat}&lng=${lng}`}
+        url={`/search?sf=lat=${lat}-lng=${lng}`}
       />
     </div>
   );

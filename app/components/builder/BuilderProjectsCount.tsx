@@ -65,7 +65,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.newLaunch > 0 ? (
           <a
-            href={`/search?projStatus=108&builderIds=${builderQueryNameAndId}`}
+            href={`/search?sf=projStatus=108-builderIds=${builderQueryNameAndId}`}
             target="_blank"
             className="block"
           >
@@ -96,7 +96,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.onGoing > 0 ? (
           <a
-            href={`/search?projStatus=106&builderIds=${builderQueryNameAndId}`}
+            href={`/search?sf=projStatus=106-builderIds=${builderQueryNameAndId}`}
             target="_blank"
             className="block"
           >
@@ -128,7 +128,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
       <div className="w-[30%]">
         {data?.completed > 0 ? (
           <a
-            href={`/search?projStatus=107&builderIds=${builderQueryNameAndId}`}
+            href={`/search?sf=projStatus=107-builderIds=${builderQueryNameAndId}`}
             target="_blank"
             className="block"
           >

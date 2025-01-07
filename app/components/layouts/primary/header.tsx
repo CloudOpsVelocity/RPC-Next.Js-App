@@ -178,7 +178,7 @@ function Dropdown() {
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : (
                 <Menu.Item
-                  key={`dataCrad_${item.label[index]}`}
+                  key={`dataCrad_${item.label+(index+1)}`}
                   classNames={{
                     itemLabel: S.itemLabel,
                     item: S.item,

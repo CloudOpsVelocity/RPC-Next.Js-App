@@ -105,10 +105,10 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
             }));
           } else {
             const url =
-              `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` +
+              `propType=${pt}-bhk=${ut}-cgs=${cg}-localities=${data.name}` +
               "%2B" +
               encodeURIComponent(lt);
-            window.open("/search?" + url);
+            window.open("/search?sf=" + url);
           }
         }
         break;

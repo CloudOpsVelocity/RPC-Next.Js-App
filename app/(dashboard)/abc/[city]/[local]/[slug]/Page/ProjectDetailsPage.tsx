@@ -49,7 +49,7 @@ const ProjectGallery = dynamic(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
 const SharePopup = dynamic(
-  () => import("@/app/(dashboard)/search/components/SharePopup")
+  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup")
 );
 const ProjectBrouchersSection = dynamic(
   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),

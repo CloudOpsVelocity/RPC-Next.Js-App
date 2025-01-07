@@ -68,9 +68,9 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
           window.open(data.stringUrl);
         } else {
           window.open(
-            `/search/listing?projIdEnc=${
+            `/search/listing?sf=projIdEnc=${
               data.stringId.split("_")[0]
-            }&phaseId=${data.stringId.split("_")[1]}&projName=${
+            }-phaseId=${data.stringId.split("_")[1]}-projName=${
               data.name
             }`
           );
@@ -87,13 +87,13 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
               .toLowerCase()
               .trim();
             url =
-              `propTypes=${paramsObject.PT}${
-                paramsObject.BH ? `&unitTypes=${paramsObject.BH}` : ""
-              }&cg=${paramsObject.CG}&localities=${localityName}` +
+              `propType=${paramsObject.PT}${
+                paramsObject.BH ? `-bhk=${paramsObject.BH}` : ""
+              }-cg=${paramsObject.CG}-localities=${localityName}` +
               "%2B" +
               encodeURIComponent(paramsObject.LT);
 
-            window.open("/search/listing?" + url);
+            window.open("/search/listing?sf=" + url);
           
         }
         break;
@@ -103,10 +103,10 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
           // console.log(projectName);
           const url = `projIdEnc=${
             data.stringId
-          }&listedBy=${AgentOwnerBuilderMap.get(
+          }-listedBy=${AgentOwnerBuilderMap.get(
             data.type
-          )}&projName=${projectName}`;
-          window.open("/search/listing?" + url);
+          )}-projName=${projectName}`;
+          window.open("/search/listing?sf=" + url);
         }
         break;
       case "Builders":
@@ -118,11 +118,11 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
           window.open(
-            `/search?builderIds=${url}&city=${
+            `/search?sf=builderIds=${url}-city=${
               data.stringId.split("_")[0]
             }${
               data.type !== "BuilderProject"
-                ? `&listedBy=${AgentOwnerBuilderMap.get(data.type)}`
+                ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
                 : ""
             }`
           );

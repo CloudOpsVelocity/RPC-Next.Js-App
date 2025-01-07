@@ -26,8 +26,8 @@ import { getData } from "@/app/utils/api/search";
 import ClearAll from "../../ClearAll";
 import Heading from "./Heading";
 import { usePathname } from "next/navigation";
-import { formatBudgetValue } from "@/app/(dashboard)/search/components/buget";
-import { toFormattedString } from "@/app/(dashboard)/search/components/buget/budget";
+import { formatBudgetValue } from "@/app/(dashboard)/searchOldPage/components/buget";
+import { toFormattedString } from "@/app/(dashboard)/searchOldPage/components/buget/budget";
 import { useAtomValue } from "jotai";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 

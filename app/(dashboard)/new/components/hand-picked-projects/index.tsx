@@ -15,10 +15,10 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
   const [active, setActive] = React.useState(0);
   const url =
     active == 0
-      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=108`
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=projStatus=108`
       : active == 1
-      ? ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=106 `
-      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=107`;
+      ? ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=projStatus=106`
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=projStatus=107`;
 
   const globalState = useAtomValue(homeSearchFiltersAtom);
   const isEnabled =

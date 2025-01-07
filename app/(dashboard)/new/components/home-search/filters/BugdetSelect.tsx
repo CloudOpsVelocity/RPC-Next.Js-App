@@ -13,7 +13,7 @@ import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useFocusReturn, useMediaQuery } from "@mantine/hooks";
-import { toFormattedString } from "@/app/(dashboard)/search/components/buget/budget";
+import { toFormattedString } from "@/app/(dashboard)/searchOldPage/components/buget/budget";
 
 const MULTIPLIER = 100000;
 const THOUSANDMULTIPLIER = 1000;

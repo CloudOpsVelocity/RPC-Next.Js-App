@@ -2,9 +2,9 @@ import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 import fs from "fs";
 import path from "path";
-import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
+import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
-import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
+import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import {
   extractProjectParamsValues,

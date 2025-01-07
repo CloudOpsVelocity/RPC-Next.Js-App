@@ -8,11 +8,11 @@ import useSearchFilters from "@/app/hooks/search";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
-import Results from "@/app/(dashboard)/search/components/filter/results";
+import Results from "@/app/(dashboard)/searchOldPage/components/filter/results";
 import classes from "@/app/styles/search.module.css";
 import { filterParser } from "@/app/utils/search";
 import { createQueryString } from "@/app/utils/search/query";
-import { formatBudgetValue } from "@/app/(dashboard)/search/components/buget";
+import { formatBudgetValue } from "@/app/(dashboard)/searchOldPage/components/buget";
 
 interface filters {
   bhks: string[];

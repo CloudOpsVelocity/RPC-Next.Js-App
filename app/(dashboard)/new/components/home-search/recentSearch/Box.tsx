@@ -26,9 +26,9 @@ export default function Box({ item }: Props) {
           window.open(apiData.stringUrl);
         } else {
           window.open(
-            `/search/listing?projIdEnc=${
+            `/search/listing?sf=projIdEnc=${
               apiData.stringId.split("_")[0]
-            }&phaseId=${apiData.stringId.split("_")[1]}&projName=${
+            }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
             }`
           );
@@ -45,13 +45,13 @@ export default function Box({ item }: Props) {
               .toLowerCase()
               .trim();
             url =
-              `propTypes=${data.PT}${
-                data.BH ? `&unitTypes=${data.BH}` : ""
-              }&cg=${data.CG}&localities=${localityName}` +
+              `propType=${data.PT}${
+                data.BH ? `-unitTypes=${data.BH}` : ""
+              }-cg=${data.CG}-localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
 
-            window.open("/search/listing?" + url);
+            window.open("/search/listing?sf=" + url);
           }
         }
         break;
@@ -61,10 +61,10 @@ export default function Box({ item }: Props) {
           // console.log(projectName);
           const url = `projIdEnc=${
             apiData.stringId
-          }&listedBy=${AgentOwnerBuilderMap.get(
+          }-listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
-          )}&projName=${projectName}`;
-          window.open("/search/listing?" + url);
+          )}-projName=${projectName}`;
+          window.open("/search/listing?sf=" + url);
         }
         break;
       case "builder":
@@ -77,11 +77,11 @@ export default function Box({ item }: Props) {
               "%2B" +
               encodeURIComponent(apiData.stringId.split("_")[1]);
             window.open(
-              `/search?builderIds=${url}&city=${encodeURIComponent(
+              `/search?sf=builderIds=${url}-city=${encodeURIComponent(
                 filters?.city ?? ""
               )}${
                 apiData.type !== "BuilderProject"
-                  ? `&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
+                  ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
               }`
             );
