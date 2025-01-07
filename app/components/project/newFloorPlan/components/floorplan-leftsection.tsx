@@ -14,26 +14,22 @@ import { MdBalcony } from "react-icons/md";
 
 type Props = {
   setModalState: (state: any) => void;
+  units: any;
+  isLoading: boolean;
 };
 
-export default function FloorplanLeftsection({ setModalState }: Props) {
-  const [selectedPhase, setSelectedPhase] = useAtom(currentPhaseAtom);
-  const propCgId = useAtomValue(propCgIdAtom);
-  const slug = useParams<{ slug: string }>().slug.split("-").at(-1) ?? "";
-  const { data: projectUnitsData, isLoading } = useQuery({
-    queryKey: [`/${propCgId}/${selectedPhase}/${slug}`],
-    queryFn: () => getProjectUnits(slug, selectedPhase, propCgId),
-    enabled: !!propCgId,
-    ...RTK_CONFIG,
-  });
-  console.log(projectUnitsData);
+export default function FloorplanLeftsection({
+  setModalState,
+  units,
+  isLoading,
+}: Props) {
   return (
     <div className="space-y-4 max-h-[600px] overflow-y-auto">
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        projectUnitsData &&
-        projectUnitsData.map((unit: any) => (
+        units &&
+        units.map((unit: any) => (
           <button
             onClick={() => setModalState({ isOpen: true, unit })}
             className="w-full  rounded-xl border-2 border-gray-200 p-4 transition-all hover:border-[#0073C6] hover:shadow-xl group from-[#F8FAFC] to-white"

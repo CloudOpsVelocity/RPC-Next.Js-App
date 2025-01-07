@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { PropertyTabs } from "./components/property-tabs";
 import { ViewOptions } from "./components/view-options";
 import { FloorPlanModal } from "./components/floor-plan-modal";
@@ -41,6 +41,7 @@ import { MdBalcony } from "react-icons/md";
 import PropertyCard from "./components/property-card";
 import ByUnitFilters from "./components/by-unit-filters";
 import FloorplanLeftsection from "./components/floorplan-leftsection";
+import { getUniqueOptionsByKeys } from "./utils/generateuniqueoptions";
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 const propertyUnits: PropertyUnit[] = [
@@ -132,8 +133,12 @@ export default function FloorPlans({
     unit: null,
   });
   const [selectedBHK, setSelectedBHK] = useState("All");
+
   const [unitFilters, setUnitFilters] = useState({});
-  console.log(unitFilters);
+  const handleBhkClick = (bhk: string) => {
+    setSelectedBHK(bhk);
+    setUnitFilters((prev) => ({ ...prev, bhkName: bhk === "All" ? "" : bhk }));
+  };
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${propCgId}/${selectedPhase}/${slug}`],
     queryFn: () => getProjectUnits(slug, selectedPhase, propCgId),
@@ -144,7 +149,16 @@ export default function FloorPlans({
   const handleUnitFilterChange = (name: string, value: string | number) => {
     setUnitFilters((prev) => ({ ...prev, [name]: value }));
   };
+  const memoOptions = useCallback(() => {
+    if (!projectUnitsData) return {};
+    return getUniqueOptionsByKeys(
+      projectUnitsData,
+      ["unitNumber", "bhkName", "towerName", "floor", "facingName", "block"],
+      unitFilters
+    );
+  }, [projectUnitsData, unitFilters]);
 
+  const { options, filteredUnits } = memoOptions();
   return (
     <div className="w-[90%] mx-auto px-4 py-8">
       <h2
@@ -201,21 +215,25 @@ export default function FloorPlans({
         <PropertyTabs phaseOverview={phaseOverview} />
         <ViewOptions onSelect={setSelectedView} />
 
-        {selectedView === "type" && selectedPropertyType === "apartment" && (
+        {selectedView === "bhk" && selectedPropertyType === "apartment" && (
           <div className="mt-4">
-            <BHKTabs onSelect={setSelectedBHK} />
+            <BHKTabs onSelect={handleBhkClick} />
           </div>
         )}
         {selectedView === "unit" && (
           <ByUnitFilters
-            units={projectUnitsData}
+            options={options}
             handleUnitFilterChange={handleUnitFilterChange}
           />
         )}
 
         <div className="mt-6 grid md:grid-cols-2 gap-6">
           {/* FLOOR PLAN LEFT SECTION */}
-          <FloorplanLeftsection setModalState={setModalState} />
+          <FloorplanLeftsection
+            units={filteredUnits}
+            setModalState={setModalState}
+            isLoading={isLoading}
+          />
           <div className="hidden md:block">
             <div className="sticky top-4">
               <Image

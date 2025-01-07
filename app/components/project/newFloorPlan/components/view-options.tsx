@@ -6,6 +6,11 @@ import { FaBuilding, FaHashtag, FaTh } from "react-icons/fa";
 const viewOptions = [
   { id: "type", label: "By Type", icon: <FaTh className="w-4 h-4" /> },
   { id: "unit", label: "By Unit", icon: <FaHashtag className="w-4 h-4" /> },
+  {
+    id: "bhk",
+    label: "By BHk",
+    icon: <FaBuilding className="w-4 h-4" />,
+  },
 ];
 
 export function ViewOptions({ onSelect }: { onSelect: (id: string) => void }) {

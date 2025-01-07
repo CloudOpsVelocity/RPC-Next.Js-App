@@ -3,12 +3,12 @@ import { getUniqueOptionsByKeys } from "../utils/generateuniqueoptions";
 import { FaSearch, FaTimes } from "react-icons/fa";
 
 type Props = {
-  units: any;
+  options: any;
   handleUnitFilterChange: (name: string, value: string) => void;
 };
 
 export default function ByUnitFilters({
-  units,
+  options,
   handleUnitFilterChange,
 }: Props) {
   const [filters, setFilters] = useState({
@@ -21,16 +21,6 @@ export default function ByUnitFilters({
   });
 
   const [focusedFilter, setFocusedFilter] = useState<string | null>(null);
-  console.log(filters);
-  const memoOptions = useCallback(() => {
-    return getUniqueOptionsByKeys(
-      units,
-      ["unitNumber", "bhkName", "towerName", "floor", "facingName", "block"],
-      filters
-    );
-  }, [units]);
-
-  const options = memoOptions();
 
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -61,10 +51,13 @@ export default function ByUnitFilters({
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = filters[key].toLowerCase();
-    return options[key].filter((option: string | number) => {
-      const optionValue = String(option).toLowerCase();
-      return optionValue.includes(filterValue);
-    });
+    return (
+      options &&
+      options[key].filter((option: string | number) => {
+        const optionValue = String(option).toLowerCase();
+        return optionValue.includes(filterValue);
+      })
+    );
   };
 
   const renderFilter = (key: keyof typeof filters, placeholder: string) => {
@@ -121,12 +114,12 @@ export default function ByUnitFilters({
 
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {options.towerName && renderFilter("towerName", "Search Tower")}
-      {options.floor && renderFilter("floor", "Search Floor")}
-      {options.facingName && renderFilter("facingName", "Search Facing")}
-      {options.unitNumber && renderFilter("unitNumber", "Search Unit Number")}
-      {options.block && renderFilter("block", "Search Block")}
-      {options.bhkName && renderFilter("bhkName", "Search Unit Type")}
+      {options?.towerName && renderFilter("towerName", "Search Tower")}
+      {options?.floor && renderFilter("floor", "Search Floor")}
+      {options?.facingName && renderFilter("facingName", "Search Facing")}
+      {options?.unitNumber && renderFilter("unitNumber", "Search Unit Number")}
+      {options?.block && renderFilter("block", "Search Block")}
+      {options?.bhkName && renderFilter("bhkName", "Search Unit Type")}
     </div>
   );
 }

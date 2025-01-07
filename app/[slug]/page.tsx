@@ -109,8 +109,8 @@ export const generateStaticParams = async () => {
     fs.writeFileSync(filePath, jsonContent);
     console.log("case-seo.json file created successfully");
 
-    return res.map((slug: string) => ({ slug }));
-    // return [];
+    // return res.map((slug: string) => ({ slug }));
+    return [];
   }
   return [];
 };
