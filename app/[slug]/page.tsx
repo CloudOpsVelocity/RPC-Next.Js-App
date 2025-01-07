@@ -52,7 +52,6 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   if (!slug.includes("-")) return notFound();
   // const values = await findSeoParams(slug);
   // console.log(values)
-  
 
   const slugValues: any = extractCaseSeoParams(slug) as any;
   let atMinusIndex = slugValues.count + 2;
@@ -110,7 +109,8 @@ export const generateStaticParams = async () => {
     fs.writeFileSync(filePath, jsonContent);
     console.log("case-seo.json file created successfully");
 
-    return res.map((slug: string) => ({ slug }));
+    // return res.map((slug: string) => ({ slug }));
+    return [];
   }
   return [];
 };

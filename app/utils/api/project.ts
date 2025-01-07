@@ -5,7 +5,6 @@ import axios from "axios";
 import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/utils/partialUnitParser";
 import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.client";
 
-
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   try {
     const response = await fetch(
@@ -156,10 +155,23 @@ const getNearByLocations = async (slug: string): Promise<any> => {
 };
 const getAmenties = async () => {
   try {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all-proj-Amenities`
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all-proj-Amenities`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: {
+          revalidate: 120,
+        },
+      }
     );
-    return response.data;
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error fetching amenities:", error);
     throw error; // Re-throw to allow upstream handling if necessary
