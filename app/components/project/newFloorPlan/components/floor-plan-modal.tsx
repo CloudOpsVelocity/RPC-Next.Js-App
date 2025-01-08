@@ -122,22 +122,22 @@ export function FloorPlanModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative z-10 w-full h-full bg-white overflow-auto">
-        <div className="flex items-center justify-between p-4 border-b sticky top-0 bg-white">
-          <h3 className="text-2xl font-semibold text-[#0073C6]">
+        <div className="flex items-center justify-between p-2 sm:p-4 border-b sticky top-0 bg-white">
+          <h3 className="text-xl sm:text-2xl font-semibold text-[#0073C6]">
             {currentUnit.bhkName} - Unit {currentUnit.unitNumber}
           </h3>
           <button
             onClick={onClose}
             className="p-1 rounded-full hover:bg-gray-100 transition-colors"
           >
-            <FaTimes className="w-6 h-6 text-gray-600" />
+            <FaTimes className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
           </button>
         </div>
 
-        <div className="p-4 h-[calc(100vh-80px)] flex flex-col">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow overflow-auto">
+        <div className="p-2 sm:p-4 h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] flex flex-col">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 flex-grow overflow-auto">
             {/* Floor Plan Image Section */}
-            <div className="bg-white p-4 rounded-xl shadow-lg">
+            <div className="bg-white p-2 sm:p-4 rounded-xl shadow-lg">
               <div className="aspect-w-16 aspect-h-12">
                 <img
                   src={mainImageUrl}
@@ -145,77 +145,81 @@ export function FloorPlanModal({
                   className="w-full h-full object-contain rounded-lg"
                 />
               </div>
-              <div className="flex justify-between items-center mt-4">
+              <div className="flex justify-between items-center mt-2 sm:mt-4">
                 <button
                   onClick={handlePrevUnit}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg hover:bg-[#0073C6] hover:text-white transition-all"
+                  className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg hover:bg-[#0073C6] hover:text-white transition-all text-sm sm:text-base"
                 >
-                  <FaChevronLeft className="w-5 h-5" />
+                  <FaChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>Previous</span>
                 </button>
                 <button
                   onClick={handleNextUnit}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg hover:bg-[#0073C6] hover:text-white transition-all"
+                  className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg hover:bg-[#0073C6] hover:text-white transition-all text-sm sm:text-base"
                 >
                   <span>Next</span>
-                  <FaChevronRight className="w-5 h-5" />
+                  <FaChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>
 
             {/* Unit Details Section */}
-            <div className="bg-white p-6 rounded-xl shadow-lg space-y-6">
-              <h4 className="text-lg font-semibold text-[#303A42] border-b pb-2">
+            <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+              <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2">
                 Area Details
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaRuler className="text-[#0073C6] text-2xl" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
                       Carpet Area
                     </p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.caretarea} sq.ft
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaRuler className="text-[#0073C6] text-2xl" />
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
                       Super Built-up Area
                     </p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.superBuildUparea} sq.ft
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaHome className="text-[#0073C6] text-2xl" />
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">Tower</p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
+                      Tower
+                    </p>
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.towerName}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaBuilding className="text-[#0073C6] text-2xl" />
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaBuilding className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">Floor</p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
+                      Floor
+                    </p>
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.floor === 0
                         ? "Ground Floor"
                         : `${currentUnit.floor}${(() => {
@@ -232,73 +236,75 @@ export function FloorPlanModal({
                 </div>
               </div>
 
-              <h4 className="text-lg font-semibold text-[#303A42] border-b pb-2 mt-6">
+              <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6">
                 Unit Features
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaBuilding className="text-[#0073C6] text-2xl" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaBuilding className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
                       Unit Type
                     </p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.bhkName}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaCompass className="text-[#0073C6] text-2xl" />
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaCompass className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">Facing</p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
+                      Facing
+                    </p>
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.facingName}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaBath className="text-[#0073C6] text-2xl" />
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaBath className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
                       Bathrooms
                     </p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.totalNumberofBathroom}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaHome className="text-[#0073C6] text-2xl" />
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
                       Balconies
                     </p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.totalNumberOfBalcony}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                  <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                    <FaCar className="text-[#0073C6] text-2xl" />
+                <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                  <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                    <FaCar className="text-[#0073C6] text-xl sm:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-[#4D6677] text-sm font-medium">
+                    <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
                       Car Parking
                     </p>
-                    <p className="text-[#303A42] text-base font-semibold">
+                    <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                       {currentUnit.noOfCarParking} {currentUnit.parkingType}
                     </p>
                   </div>
@@ -306,15 +312,15 @@ export function FloorPlanModal({
 
                 {currentUnit.terraceArea &&
                   currentUnit.terraceArea !== "null" && (
-                    <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                      <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                        <FaTree className="text-[#0073C6] text-2xl" />
+                    <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
+                      <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       </div>
                       <div>
-                        <p className="text-[#4D6677] text-sm font-medium">
+                        <p className="text-[#4D6677] text-xs sm:text-sm font-medium">
                           Terrace Area
                         </p>
-                        <p className="text-[#303A42] text-base font-semibold">
+                        <p className="text-[#303A42] text-sm sm:text-base font-semibold">
                           {currentUnit.terraceArea} sq.ft
                         </p>
                       </div>
@@ -327,7 +333,7 @@ export function FloorPlanModal({
           {/* Compact Carousel at Bottom */}
           <div className="mt-2 border-t pt-2 bg-white sticky bottom-0 w-full">
             <div className="flex justify-between items-center mb-2">
-              <h4 className="font-semibold text-[#303A42]">
+              <h4 className="text-sm sm:text-base font-semibold text-[#303A42]">
                 Available Units ({filteredUnits.length})
               </h4>
               <div className="flex gap-1">
@@ -338,7 +344,7 @@ export function FloorPlanModal({
                   disabled={currentPage === 0}
                   className="p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50"
                 >
-                  <FaChevronLeft />
+                  <FaChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
                 <button
                   onClick={() =>
@@ -347,7 +353,7 @@ export function FloorPlanModal({
                   disabled={currentPage === totalPages - 1}
                   className="p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50"
                 >
-                  <FaChevronRight />
+                  <FaChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>
@@ -356,7 +362,7 @@ export function FloorPlanModal({
                 <button
                   key={unit.unitIdEnc}
                   onClick={() => setCurrentUnit(unit)}
-                  className={`w-full flex flex-col items-start p-2 border rounded-md transition-all ${
+                  className={`w-full flex flex-col items-start p-1.5 sm:p-2 border rounded-md transition-all ${
                     currentUnit.unitIdEnc === unit.unitIdEnc
                       ? "bg-[#0073C6] text-white"
                       : "bg-white hover:bg-gray-50"
@@ -367,8 +373,12 @@ export function FloorPlanModal({
                     alt={`Thumbnail for ${unit.bhkName}`}
                     className="w-full aspect-video object-cover rounded-md mb-1"
                   />
-                  <span className="text-xs font-semibold">{unit.bhkName}</span>
-                  <span className="text-xs">Unit {unit.unitNumber}</span>
+                  <span className="text-[10px] sm:text-xs font-semibold">
+                    {unit.bhkName}
+                  </span>
+                  <span className="text-[10px] sm:text-xs">
+                    Unit {unit.unitNumber}
+                  </span>
                 </button>
               ))}
             </div>
