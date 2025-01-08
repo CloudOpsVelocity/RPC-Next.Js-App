@@ -1,16 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { propCgIdAtom } from "@/app/store/vewfloor";
+import { useAtomValue } from "jotai";
+import { useEffect, useState } from "react";
 
 const bhkOptions = ["All", "1 BHK", "2 BHK", "3 BHK", "4 BHK"];
 
 export function BHKTabs({ onSelect }: { onSelect: (bhk: string) => void }) {
   const [activeBHK, setActiveBHK] = useState("All");
+  const propCgId = useAtomValue(propCgIdAtom);
 
   const handleBHKClick = (bhk: string) => {
     setActiveBHK(bhk);
     onSelect(bhk);
   };
+
+  useEffect(()=>{ 
+    handleBHKClick("All");
+  }, [propCgId]);
 
   return (
     <div className="w-full max-w-md  p-2 bg-white rounded-xl shadow-md overflow-hidden">

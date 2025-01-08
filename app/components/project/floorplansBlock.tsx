@@ -129,7 +129,7 @@ Props) {
     if (data.id === 32 && floorPlanType === "bhk") {
       setFloorPlanType("type");
     }
-    setPropCgId(data.id);
+    setPropCgId(data.id); 
   };
   const iconStyles: string =
     " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
