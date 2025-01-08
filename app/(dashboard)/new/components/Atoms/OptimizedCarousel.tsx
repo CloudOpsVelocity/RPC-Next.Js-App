@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useVirtualizer } from '@tanstack/react-virtual';
-import { useGesture } from '@use-gesture/react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import * as React from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { useGesture } from "@use-gesture/react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 type CarouselProps<T> = {
   items: T[];
@@ -22,7 +22,6 @@ export default function Carousel<T>({
 }: CarouselProps<T>) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = React.useState(0);
-
   const virtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => containerRef.current,
@@ -41,7 +40,10 @@ export default function Carousel<T>({
           let newIndex = Math.round(
             (currentIndex * (itemWidth + gap) - mx) / (itemWidth + gap)
           );
-          newIndex = Math.max(0, Math.min(newIndex, items.length - visibleItems));
+          newIndex = Math.max(
+            0,
+            Math.min(newIndex, items.length - visibleItems)
+          );
           if (newIndex !== currentIndex) setCurrentIndex(newIndex);
           else cancel();
         }
@@ -57,7 +59,7 @@ export default function Carousel<T>({
 
   const scrollTo = React.useCallback(
     (index: number) => {
-      virtualizer.scrollToIndex(index, { align: 'start', behavior: 'smooth' });
+      virtualizer.scrollToIndex(index, { align: "start", behavior: "smooth" });
       setCurrentIndex(index);
     },
     [virtualizer]
@@ -78,9 +80,9 @@ export default function Carousel<T>({
         <div
           style={{
             width: `${totalWidth}px`,
-            height: '100%',
-            display: 'flex',
-            position: 'relative',
+            height: "100%",
+            display: "flex",
+            position: "relative",
           }}
         >
           {virtualizer.getVirtualItems().map((virtualItem) => (
@@ -88,7 +90,7 @@ export default function Carousel<T>({
               key={virtualItem.key}
               style={{
                 flex: `0 0 ${itemWidth}px`,
-                height: '100%',
+                height: "100%",
                 transform: `translateX(${virtualItem.start}px)`,
               }}
             >
@@ -107,7 +109,9 @@ export default function Carousel<T>({
       </button>
       <button
         className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rounded-full bg-white border border-gray-300 p-2"
-        onClick={() => scrollTo(Math.min(items.length - visibleItems, currentIndex + 1))}
+        onClick={() =>
+          scrollTo(Math.min(items.length - visibleItems, currentIndex + 1))
+        }
         disabled={currentIndex >= items.length - visibleItems}
       >
         <FaChevronRight className="h-4 w-4" />

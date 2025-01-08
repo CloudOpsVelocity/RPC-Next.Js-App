@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { PropertyTabs } from "./components/property-tabs";
 import { ViewOptions } from "./components/view-options";
 import { FloorPlanModal } from "./components/floor-plan-modal";
@@ -42,8 +41,10 @@ import PropertyCard from "./components/property-card";
 import ByUnitFilters from "./components/by-unit-filters";
 import FloorplanLeftsection from "./components/floorplan-leftsection";
 import { getUniqueOptionsByKeys } from "./utils/generateuniqueoptions";
+
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
+
 const propertyUnits: PropertyUnit[] = [
   {
     id: "1",
@@ -139,6 +140,7 @@ export default function FloorPlans({
     setSelectedBHK(bhk);
     setUnitFilters((prev) => ({ ...prev, bhkName: bhk === "All" ? "" : bhk }));
   };
+
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${propCgId}/${selectedPhase}/${slug}`],
     queryFn: () => getProjectUnits(slug, selectedPhase, propCgId),
@@ -149,6 +151,8 @@ export default function FloorPlans({
   const handleUnitFilterChange = (name: string, value: string | number) => {
     setUnitFilters((prev) => ({ ...prev, [name]: value }));
   };
+
+  // Memoize the filtering options
   const memoOptions = useCallback(() => {
     if (!projectUnitsData) return {};
     return getUniqueOptionsByKeys(
@@ -158,7 +162,11 @@ export default function FloorPlans({
     );
   }, [projectUnitsData, unitFilters]);
 
-  const { options, filteredUnits } = memoOptions();
+  const { options, filteredUnits } =
+    selectedView === "unit" || selectedView === "bhk"
+      ? memoOptions()
+      : { options: {}, filteredUnits: projectUnitsData || [] };
+
   return (
     <div className="w-[90%] mx-auto px-4 py-8">
       <h2
@@ -171,7 +179,7 @@ export default function FloorPlans({
       <SubHeading text="See floor plans as per your selected property type" />
       <div className="space-y-6">
         <div
-          className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
+          className={`flex justify-start items-start md:items-center mb-[2%] flex-col md:flex-row ${
             phases?.length > 1 ? "mt-4" : "mt-[0%]"
           }`}
         >
@@ -180,34 +188,26 @@ export default function FloorPlans({
               <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
                 Select one of the phase to see Floor Plans
               </p>
-              <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-                {phases?.map((each: any, index: any) => {
-                  return (
-                    <Button
-                      key={each.phaseId}
-                      title={
-                        isSingleLetterOrNumber(each.phaseName)
-                          ? `Phase: ${each.phaseName}`
-                          : each.phaseName
-                      }
-                      onChange={() => {
-                        if (selectedPhase == each.phaseId) return;
-                        setSelectedPhase(each.phaseId);
-                        // setBhk("0");
-                        // resetFilters();
-                        // if (floorPlanType === "unit") {
-                        //   setSelectedFloor({});
-                        //   handleUnitFormClear();
-                        // }
-                      }}
-                      buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px] capitalize  whitespace-nowrap text-[#000] rounded-[8px]  ${
-                        selectedPhase == each.phaseId
-                          ? " font-[600] border-solid border-[1px] border-[#0073C6] "
-                          : " font-[400]"
-                      } `}
-                    />
-                  );
-                })}
+              <div className="flex justify-start items-start gap-[10px] flex-wrap ">
+                {phases?.map((each: any) => (
+                  <Button
+                    key={each.phaseId}
+                    title={
+                      isSingleLetterOrNumber(each.phaseName)
+                        ? `Phase: ${each.phaseName}`
+                        : each.phaseName
+                    }
+                    onChange={() => {
+                      if (selectedPhase == each.phaseId) return;
+                      setSelectedPhase(each.phaseId);
+                    }}
+                    buttonClass={`mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px] capitalize whitespace-nowrap text-[#000] rounded-[8px] ${
+                      selectedPhase == each.phaseId
+                        ? "font-[600] border-solid border-[1px] border-[#0073C6]"
+                        : "font-[400]"
+                    }`}
+                  />
+                ))}
               </div>
             </>
           )}
@@ -216,10 +216,11 @@ export default function FloorPlans({
         <ViewOptions onSelect={setSelectedView} />
 
         {selectedView === "bhk" && selectedPropertyType === "apartment" && (
-          <div className="mt-4">
+          <div className="">
             <BHKTabs onSelect={handleBhkClick} />
           </div>
         )}
+
         {selectedView === "unit" && (
           <ByUnitFilters
             options={options}
@@ -239,7 +240,7 @@ export default function FloorPlans({
               <Image
                 src={
                   isLoading
-                    ? "data:image/webp;base64,UklGRhQCAABXRUJQVlA4WAoAAAAgAAAABQAAAwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggJgAAALABAJ0BKgYABAAHQJYlAF2AIddgkAAA/pT5fFPr1JgkQfFzYAAA"
+                    ? "data:image/webp;base64,...(fallback image)"
                     : projectUnitsData[0]?.floorPlanUrl ?? ImgNotAvail
                 }
                 alt="Default Floor Plan"
@@ -247,7 +248,6 @@ export default function FloorPlans({
                 height={600}
                 className="w-full h-auto rounded-lg shadow-md"
               />
-              {/* )} */}
               <p className="mt-4 text-center text-gray-600">
                 Click on a unit to view its floor plan
               </p>
@@ -260,15 +260,17 @@ export default function FloorPlans({
         <FloorPlanModal
           isOpen={modalState.isOpen}
           onClose={() => setModalState({ isOpen: false, unit: null })}
-          units={propertyUnits}
-          initialUnit={modalState.unit!}
+          // unit={propertyUnits[0]}
+          initialUnit={projectUnitsData[0]}
+          units={projectUnitsData || []}
         />
       )}
+
       {fullScreenModalState.isOpen && (
         <FullScreenImageModal
           isOpen={fullScreenModalState.isOpen}
           onClose={() => setFullScreenModalState({ isOpen: false, unit: null })}
-          unit={fullScreenModalState.unit!}
+          unit={propertyUnits[0]}
         />
       )}
     </div>

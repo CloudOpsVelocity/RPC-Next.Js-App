@@ -80,6 +80,7 @@ export default async function ProjectsDetailsPage({
   } for sale in ${data.localityName} ${data.cityName}`;
   const imageUrl = data?.media?.coverImageUrl.split(",")[1];
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
+
   return (
     <section className="w-full relative break-words ">
       {/* <meta name="keywords" content={`${data.projectName}, ${data.localityName}, ${data.cityName}, real estate, property`} /> */}
@@ -160,13 +161,13 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
           />
         )}
-        {/* <FloorPlans
+        <FloorPlans
           phases={data.phases}
           projName={data.projectName}
           partialUnitData={data.partialUnitData}
           phaseOverview={phaseOverview}
           slug={slug}
-        /> */}
+        />
         {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}
