@@ -54,7 +54,17 @@ export function FloorPlanModal({
     floor: "",
   });
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 8; // Increased items per page for desktop
+  const itemsPerPage = 8;
+
+  // Get unique values for filter options
+  const uniqueBHKs = Array.from(new Set(units.map((unit) => unit.bhkName)));
+  const uniqueTowers = Array.from(new Set(units.map((unit) => unit.towerName)));
+  const uniqueFacings = Array.from(
+    new Set(units.map((unit) => unit.facingName))
+  );
+  const uniqueFloors = Array.from(
+    new Set(units.map((unit) => unit.floor))
+  ).sort((a, b) => a - b);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -132,6 +142,159 @@ export function FloorPlanModal({
           >
             <FaTimes className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
           </button>
+        </div>
+
+        {/* Filter Section */}
+        <div className="p-4 bg-[#F8FBFF] border-b">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div>
+              <label
+                htmlFor="tower-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Tower Name
+              </label>
+              <select
+                id="tower-select"
+                name="tower"
+                value={filters.tower}
+                onChange={handleFilterChange}
+                className="w-full p-2 border rounded-lg bg-white focus:ring-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
+              >
+                <option value="">All Towers</option>
+                <option value="A">Tower A</option>
+                <option value="B">Tower B</option>
+                <option value="C">Tower C</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="unit-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Unit Number
+              </label>
+              <select
+                id="unit-select"
+                name="unit"
+                value={filters.unit}
+                onChange={handleFilterChange}
+                className="w-full p-2 border rounded-lg bg-white focus:ring-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
+              >
+                <option value="">All Units</option>
+                <option value="101">101</option>
+                <option value="102">102</option>
+                <option value="103">103</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="block-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Block
+              </label>
+              <select
+                id="block-select"
+                name="block"
+                value={filters.block}
+                onChange={handleFilterChange}
+                className="w-full p-2 border rounded-lg bg-white focus:ring-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
+              >
+                <option value="">All Blocks</option>
+                <option value="East">East Block</option>
+                <option value="West">West Block</option>
+                <option value="North">North Block</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="floor-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Floor
+              </label>
+              <select
+                id="floor-select"
+                name="floor"
+                value={filters.floor}
+                onChange={handleFilterChange}
+                className="w-full p-2 border rounded-lg bg-white focus:ring-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
+              >
+                <option value="">All Floors</option>
+                <option value="0">Ground Floor</option>
+                <option value="1">1st Floor</option>
+                <option value="2">2nd Floor</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="bhk-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Unit Type
+              </label>
+              <select
+                id="bhk-select"
+                name="bhk"
+                value={filters.bhk}
+                onChange={handleFilterChange}
+                className="w-full p-2 border rounded-lg bg-white focus:ring-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
+              >
+                <option value="">All BHK Types</option>
+                <option value="1BHK">1 BHK</option>
+                <option value="2BHK">2 BHK</option>
+                <option value="3BHK">3 BHK</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="facing-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Facing
+              </label>
+              <select
+                id="facing-select"
+                name="facing"
+                value={filters.facing}
+                onChange={handleFilterChange}
+                className="w-full p-2 border rounded-lg bg-white focus:ring-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
+              >
+                <option value="">All Facings</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="sba-select"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Super Built-up Area
+              </label>
+              <select
+                id="sba-select"
+                name="sba"
+                value={filters.sba}
+                onChange={handleFilterChange}
+                className="w-full p-2 border rounded-lg bg-white focus:ring-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
+              >
+                <option value="">All SBA</option>
+                <option value="1000">1000 sq.ft</option>
+                <option value="1200">1200 sq.ft</option>
+                <option value="1500">1500 sq.ft</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <div className="p-2 sm:p-4 h-[calc(100vh-64px)] sm:h-[calc(100vh-80px)] flex flex-col">
