@@ -9,6 +9,7 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { MdBalcony } from "react-icons/md";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef } from "react";
+import { projectprops } from "@/app/data/projectDetails";
 
 type Props = {
   setModalState: (state: any) => void;
@@ -34,11 +35,14 @@ export default function FloorplanLeftsection({
     return <div>Loading...</div>;
   }
 
+  const dataList = rowVirtualizer.getVirtualItems();
+
   return (
     <div
       ref={parentRef}
       className="space-y-3 sm:space-y-4 max-h-[350px] sm:max-h-[500px] md:max-h-[600px] overflow-y-auto px-2 sm:px-4"
     >
+      {dataList && dataList.length > 0 ?
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
@@ -46,7 +50,7 @@ export default function FloorplanLeftsection({
           position: "relative",
         }}
       >
-        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+        {dataList.map((virtualRow) => {
           const unit = units[virtualRow.index];
           return (
             <div
@@ -65,30 +69,61 @@ export default function FloorplanLeftsection({
                 className="w-full rounded-lg sm:rounded-xl border border-gray-200 sm:border-2 p-2 sm:p-4 transition-all hover:border-[#0073C6] hover:shadow-xl group from-[#F8FAFC] to-white"
               >
                 {/* Header Section */}
-                <div className="flex flex-col sm:flex-row items-start justify-between gap-2 sm:gap-4 border-b border-gray-100 pb-2 sm:pb-4">
-                  <div className="flex-1 w-full sm:w-auto">
+                <div className="flex flex-col items-start justify-between border-b border-gray-100 pb-2 sm:pb-4">
+                  
+                  <div className=" flex justify-between items-start w-full  ">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <h3 className="text-xl sm:text-2xl font-bold text-[#232323]">
-                        {unit.bhkName}
-                      </h3>
-                      <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold bg-blue-50 text-[#0073C6] rounded-full">
-                        {unit.aptTypeName}
-                      </span>
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#232323]">
+                          {unit.propType === projectprops.plot ? `${unit.length}ftx${unit.width} ft` : unit.bhkName}
+                        </h3>
+                        {unit.aptTypeName  && unit.aptTypeName !== "" &&
+                        <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold bg-blue-50 text-[#0073C6] rounded-full">
+                          {unit.aptTypeName}
+                        </span>
+                        }
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 text-gray-600 text-sm sm:text-base">
-                      {unit.towerName && (
+
+                    <div className="flex flex-wrap justify-between w-full sm:w-auto gap-4 mt-2 sm:mt-0">
+                      {unit.superBuildUparea !== null && (
+                        <div className="space-y-1">
+                          <p className="text-gray-500 text-xs sm:text-sm font-medium">
+                            {unit.propType === projectprops.plot ? "Plot Area" : "Super Built-up Area"}
+                          </p>
+                          <p className="text-gray-900 text-lg sm:text-xl font-bold">
+                            {unit.propType === projectprops.plot ? `${unit.plotArea} sq.ft` : `${unit.superBuildUparea} sq.ft`}
+                          </p>
+                        </div>
+                      )}
+                      {unit.facingName !== null && (
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-1">
+                            <FaCompass className="text-[#0073C6] text-base sm:text-lg" />
+                            <p className="text-gray-500 text-xs sm:text-sm font-medium">
+                              Facing
+                            </p>
+                          </div>
+                          <p className="text-gray-900 text-lg sm:text-xl font-bold">
+                            {unit.facingName}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 w-full text-gray-600 text-sm sm:text-base">
+                      {unit.towerName !== null && unit.towerName !== "" && (unit.propType === projectprops.apartment || unit.propType === projectprops.villament) &&  (
                         <div className="flex items-center bg-gray-100 rounded-full px-2 sm:px-3 py-1">
                           <FaBuilding className="text-[#0073C6] mr-1 sm:mr-2" />
                           <p className="font-semibold">{unit.towerName}</p>
                         </div>
                       )}
-                      {unit.floor && (
+                      {unit.floor !== undefined && unit.floor !== 0 && unit.propType !== projectprops.plot &&  (
                         <div className="flex items-center bg-gray-100 rounded-full px-2 sm:px-3 py-1">
                           <BiBuildingHouse className="text-[#0073C6] mr-1 sm:mr-2" />
                           <p className="font-semibold">Floor {unit.floor}</p>
                         </div>
                       )}
-                      {unit.unitNumber && (
+                      {unit.unitNumber !== null && (
                         <div className="flex items-center bg-gray-100 rounded-full px-2 sm:px-3 py-1">
                           <FaBed className="text-[#0073C6] mr-1 sm:mr-2" />
                           <p className="font-semibold">
@@ -96,38 +131,12 @@ export default function FloorplanLeftsection({
                           </p>
                         </div>
                       )}
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap justify-between w-full sm:w-auto gap-4 mt-2 sm:mt-0">
-                    {unit.superBuildUparea && (
-                      <div className="space-y-1">
-                        <p className="text-gray-500 text-xs sm:text-sm font-medium">
-                          Super Built-up Area
-                        </p>
-                        <p className="text-gray-900 text-lg sm:text-xl font-bold">
-                          {unit.superBuildUparea} sq.ft
-                        </p>
-                      </div>
-                    )}
-                    {unit.facingName && (
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-1">
-                          <FaCompass className="text-[#0073C6] text-base sm:text-lg" />
-                          <p className="text-gray-500 text-xs sm:text-sm font-medium">
-                            Facing
-                          </p>
-                        </div>
-                        <p className="text-gray-900 text-lg sm:text-xl font-bold">
-                          {unit.facingName}
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </div>
 
                 {/* Additional Details */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 sm:gap-4 bg-gray-50 rounded-lg p-2 sm:p-4 mt-2 sm:mt-3">
-                  {unit.bhkName && (
+                <div className="flex justify-around gap-1 bg-gray-50 rounded-lg p-2">
+                  {unit && unit.bhkName !== undefined && unit.bhkName !== null && unit.bhkName !== "" && unit.propType !== projectprops.plot &&  (
                     <div className="flex items-center gap-2">
                       <FaBed className="text-[#0073C6] text-xl sm:text-2xl" />
                       <div>
@@ -140,7 +149,7 @@ export default function FloorplanLeftsection({
                       </div>
                     </div>
                   )}
-                  {unit.totalNumberofBathroom && (
+                  {unit.totalNumberofBathroom !== null && unit.propType !== projectprops.plot && (
                     <div className="flex items-center gap-2">
                       <FaBath className="text-[#0073C6] text-xl sm:text-2xl" />
                       <div>
@@ -153,7 +162,7 @@ export default function FloorplanLeftsection({
                       </div>
                     </div>
                   )}
-                  {unit.totalNumberOfBalcony && (
+                  {unit.totalNumberOfBalcony !== null && unit.propType !== projectprops.plot &&  (
                     <div className="flex items-center gap-2">
                       <MdBalcony className="text-[#0073C6] text-xl sm:text-2xl" />
                       <div>
@@ -161,12 +170,26 @@ export default function FloorplanLeftsection({
                           Balconies
                         </p>
                         <p className="text-base sm:text-lg font-bold">
-                          {unit.totalNumberOfBalcony}
+                          {unit.totalNumberOfBalcony} 
                         </p>
                       </div>
                     </div>
                   )}
-                  {unit.terraceArea && unit.terraceArea !== "null" && (
+                  {unit.caretarea !== null && unit.propType !== projectprops.plot &&  (
+                    <div className="flex items-center gap-2">
+                      <MdBalcony className="text-[#0073C6] text-xl sm:text-2xl" />
+                      <div>
+                        <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                        Carpet Area
+                        </p>
+                        <p className="text-base sm:text-lg font-bold">
+                          {unit.caretarea} sq.ft
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {unit.terraceArea !== null && unit.terraceArea !== "null" && unit.propType !== projectprops.plot &&  (
                     <div className="flex items-center gap-2">
                       <BiBuildingHouse className="text-[#0073C6] text-xl sm:text-2xl" />
                       <div>
@@ -175,6 +198,32 @@ export default function FloorplanLeftsection({
                         </p>
                         <p className="text-base sm:text-lg font-bold">
                           {unit.terraceArea} sq.ft
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  {unit.length && unit.propType === projectprops.plot &&  (
+                    <div className="flex items-center gap-2">
+                      <MdBalcony className="text-[#0073C6] text-xl sm:text-2xl" />
+                      <div>
+                        <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                          Length
+                        </p>
+                        <p className="text-base sm:text-lg font-bold">
+                          {unit.length}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  {unit.width && unit.propType === projectprops.plot &&  (
+                    <div className="flex items-center gap-2">
+                      <MdBalcony className="text-[#0073C6] text-xl sm:text-2xl" />
+                      <div>
+                        <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                          Width
+                        </p>
+                        <p className="text-base sm:text-lg font-bold">
+                          {unit.width}
                         </p>
                       </div>
                     </div>
@@ -202,6 +251,9 @@ export default function FloorplanLeftsection({
           );
         })}
       </div>
+      :
+      <div className=" flex justify-center items-center w-full h-[90%] bg-white rounded-xl shadow-md mt-[10px] border-solid border-t-[1px] ">No data Available</div>
+      }
     </div>
   );
 }

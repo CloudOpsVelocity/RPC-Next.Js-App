@@ -128,7 +128,7 @@ export default function FloorPlans({
   });
   const [fullScreenModalState, setFullScreenModalState] = useState<{
     isOpen: boolean;
-    unit: PropertyUnit | null;
+    unit: PropertyUnit | null; 
   }>({
     isOpen: false,
     unit: null,
@@ -139,6 +139,11 @@ export default function FloorPlans({
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
     setUnitFilters((prev) => ({ ...prev, bhkName: bhk === "All" ? "" : bhk }));
+  };
+
+  const handleViewClick = (type: string) => {
+    setSelectedView(type);
+    handleBhkClick("All");
   };
 
   const { data: projectUnitsData, isLoading } = useQuery({
@@ -157,7 +162,7 @@ export default function FloorPlans({
     if (!projectUnitsData) return {};
     return getUniqueOptionsByKeys(
       projectUnitsData,
-      ["unitNumber", "bhkName", "towerName", "floor", "facingName", "block"],
+      ["unitNumber", "bhkName", "towerName", "floor", "facingName", "block", "plotArea", "width", "length"],
       unitFilters
     );
   }, [projectUnitsData, unitFilters]);
@@ -173,7 +178,7 @@ export default function FloorPlans({
         className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
         id="floorPlansdiv"
       >
-        Floor Plans For{" "}
+        Floor Plans For{" "} 
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h2>
       <SubHeading text="See floor plans as per your selected property type" />
@@ -213,12 +218,10 @@ export default function FloorPlans({
           )}
         </div>
         <PropertyTabs phaseOverview={phaseOverview} />
-        <ViewOptions onSelect={setSelectedView} />
+        <ViewOptions onSelect={handleViewClick} propCgId={propCgId} />
 
-        {selectedView === "bhk" && selectedPropertyType === "apartment" && (
-          <div className="">
-            <BHKTabs onSelect={handleBhkClick} />
-          </div>
+        {selectedView === "bhk" && selectedPropertyType === "apartment" && propCgId !== projectprops.plot && (
+          <BHKTabs onSelect={handleBhkClick} />
         )}
 
         {selectedView === "unit" && (
@@ -241,7 +244,7 @@ export default function FloorPlans({
                 src={
                   isLoading
                     ? "data:image/webp;base64,...(fallback image)"
-                    : projectUnitsData[0]?.floorPlanUrl ?? ImgNotAvail
+                    : projectUnitsData[0] && projectUnitsData[0].floorPlanUrl ? projectUnitsData[0].floorPlanUrl.split(",")[0] : ImgNotAvail
                 }
                 alt="Default Floor Plan"
                 width={800}

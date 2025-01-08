@@ -1,6 +1,9 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { getUniqueOptionsByKeys } from "../utils/generateuniqueoptions";
 import { FaSearch, FaTimes } from "react-icons/fa";
+import { propCgIdAtom } from "@/app/store/vewfloor";
+import { useAtomValue } from "jotai";
+import { projectprops } from "@/app/data/projectDetails";
 
 type Props = {
   options: any;
@@ -18,11 +21,14 @@ export default function ByUnitFilters({
     floor: "",
     facingName: "",
     block: "",
+    plotArea: "",
+    length:"",
+    width: "",
   });
 
   const [focusedFilter, setFocusedFilter] = useState<string | null>(null);
-
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const propCgId = useAtomValue(propCgIdAtom);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -40,14 +46,7 @@ export default function ByUnitFilters({
     };
   }, []);
 
-  const handleFilterChange = (key: keyof typeof filters, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: String(value) }));
-    handleUnitFilterChange(key, value);
-  };
 
-  const clearFilter = (key: keyof typeof filters) => {
-    handleFilterChange(key, "");
-  };
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = filters[key].toLowerCase();
@@ -58,6 +57,16 @@ export default function ByUnitFilters({
         return optionValue.includes(filterValue);
       })
     );
+  };
+
+  const handleFilterChange = (key: keyof typeof filters, value: string) => {
+    setFilters((prev) => ({ ...prev, [key]: String(value) }));
+    handleUnitFilterChange(key, value);
+    
+  };
+
+  const clearFilter = (key: keyof typeof filters) => {
+    handleFilterChange(key, "");
   };
 
   const renderFilter = (key: keyof typeof filters, placeholder: string) => {
@@ -75,7 +84,7 @@ export default function ByUnitFilters({
           <input
             type="text"
             value={filters[key]}
-            onChange={(e) => handleFilterChange(key, e.target.value)}
+            // onChange={(e) => handleFilterChange(key, e.target.value)}
             onFocus={() => setFocusedFilter(key)}
             className="px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073C6] w-full"
             placeholder={placeholder}
@@ -112,14 +121,19 @@ export default function ByUnitFilters({
     );
   };
 
+  console.log(options);
+
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {options?.towerName && renderFilter("towerName", "Search Tower")}
-      {options?.floor && renderFilter("floor", "Search Floor")}
+      {options?.towerName && (propCgId === projectprops.apartment || propCgId === projectprops.villament) && renderFilter("towerName", "Search Tower")}
+      {options?.floor && propCgId !== projectprops.plot && renderFilter("floor", "Search Floor")}
       {options?.facingName && renderFilter("facingName", "Search Facing")}
       {options?.unitNumber && renderFilter("unitNumber", "Search Unit Number")}
-      {options?.block && renderFilter("block", "Search Block")}
-      {options?.bhkName && renderFilter("bhkName", "Search Unit Type")}
+      {options?.block && propCgId === projectprops.apartment && renderFilter("block", "Search Block")}
+      {options?.bhkName && propCgId !== projectprops.plot && renderFilter("bhkName", "Search Unit Type")}
+      {options?.plotArea && propCgId === projectprops.plot && renderFilter("plotArea", "Search Plot Area")}
+      {options?.length && propCgId === projectprops.plot && renderFilter("length", "Search Length")}
+      {options?.width && propCgId === projectprops.plot && renderFilter("width", "Search Width")}
     </div>
   );
 }
