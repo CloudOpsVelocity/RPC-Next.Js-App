@@ -210,7 +210,150 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     const options = Array.from(optionsSet);
     return options;
   };
+  {
+    /* Unit Details Section */
+  }
+  // <div className="bg-white p-6 rounded-xl shadow-lg space-y-6">
+  //   <h4 className="text-lg font-semibold text-[#303A42] border-b pb-2">
+  //     Area Details
+  //   </h4>
+  //   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaRuler className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Carpet Area</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.caretarea} sq.ft
+  //         </p>
+  //       </div>
+  //     </div>
 
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaRuler className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">
+  //           Super Built-up Area
+  //         </p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.superBuildUparea} sq.ft
+  //         </p>
+  //       </div>
+  //     </div>
+
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaHome className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Tower</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.towerName}
+  //         </p>
+  //       </div>
+  //     </div>
+
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaBuilding className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Floor</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.floor === 0
+  //             ? "Ground Floor"
+  //             : `${currentUnit.floor}${(() => {
+  //                 const suffixes = ["th", "st", "nd", "rd"];
+  //                 const v = currentUnit.floor % 100;
+  //                 return suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0];
+  //               })()} Floor`}
+  //         </p>
+  //       </div>
+  //     </div>
+  //   </div>
+
+  //   <h4 className="text-lg font-semibold text-[#303A42] border-b pb-2 mt-6">
+  //     Unit Features
+  //   </h4>
+  //   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaBuilding className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Unit Type</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.bhkName}
+  //         </p>
+  //       </div>
+  //     </div>
+
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaCompass className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Facing</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.facingName}
+  //         </p>
+  //       </div>
+  //     </div>
+
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaBath className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Bathrooms</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.totalNumberofBathroom}
+  //         </p>
+  //       </div>
+  //     </div>
+
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaHome className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Balconies</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.totalNumberOfBalcony}
+  //         </p>
+  //       </div>
+  //     </div>
+
+  //     <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //       <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //         <FaCar className="text-[#0073C6] text-2xl" />
+  //       </div>
+  //       <div>
+  //         <p className="text-[#4D6677] text-sm font-medium">Car Parking</p>
+  //         <p className="text-[#303A42] text-base font-semibold">
+  //           {currentUnit.noOfCarParking} {currentUnit.parkingType}
+  //         </p>
+  //       </div>
+  //     </div>
+
+  //     {currentUnit.terraceArea && currentUnit.terraceArea !== "null" && (
+  //       <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+  //         <div className="bg-[#ECF7FF] p-2 rounded-lg">
+  //           <FaTree className="text-[#0073C6] text-2xl" />
+  //         </div>
+  //         <div>
+  //           <p className="text-[#4D6677] text-sm font-medium">Terrace Area</p>
+  //           <p className="text-[#303A42] text-base font-semibold">
+  //             {currentUnit.terraceArea} sq.ft
+  //           </p>
+  //         </div>
+  //       </div>
+  //     )}
+  //   </div>
+  // </div>;
   const handleSearch = (key: string) => {
     const keysWithNonNullValues = Object.keys(values).filter(
       (key) => values[key] !== null
