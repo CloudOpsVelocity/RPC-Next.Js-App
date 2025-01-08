@@ -16,8 +16,8 @@ export default function SelectedFilters({}: Props) {
       ([_, value]) =>
         (Array.isArray(value) && value.length > 0) || value !== null
     ) && (
-      <div className="py-2 border-t w-full">
-        <div className="flex overflow-x-auto gap-2 pb-[6px] px-[10px] "> 
+      <div className="border-t w-full">
+        <div className="flex overflow-x-auto gap-2 px-[10px] "> 
           {Object.entries(state).map(([category, values]) =>
               values !== null &&
               values !== undefined && 
@@ -32,7 +32,7 @@ export default function SelectedFilters({}: Props) {
                 values.map((value) => (
                   <div
                     key={`${category}-${value}`}
-                    className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
+                    className="flex items-center text-nowrap gap-2 mb-[6px] mt-[6px] bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
                   >
                     <span>
                       {category === "localities" || category === "builderIds"
@@ -70,7 +70,7 @@ export default function SelectedFilters({}: Props) {
               ) : (
                 <div
                   key={`${category}-${values}`}
-                  className="flex items-center text-nowrap gap-2 bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm"
+                  className="flex items-center text-nowrap gap-2 mb-[6px] mt-[6px] bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
                 >
                   <span>
                     {values === "All"

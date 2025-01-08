@@ -167,7 +167,7 @@ export const ProjSearchAppliedFiltersStore = atom(
       | "phaseId"
   ) => {
     const appliedFilters = get(projSearchStore);
-    let queryString = "";
+    let queryString:string | null = "";
     if (type === "add") {
       for (const [key, value] of Object.entries(appliedFilters)) {
         // Skip areaValue and bugdetValue if they match initial values
@@ -240,7 +240,7 @@ export const ProjSearchAppliedFiltersStore = atom(
               "";
               console.log("key name")
             
-            let finalKey = listedBy.split("=")[1].split("-")[0];
+            let finalKey = listedBy !== "" ?  listedBy.split("=")[1].split("-")[0] : null;
             queryString = finalKey;
 
             set(projSearchStore, {
