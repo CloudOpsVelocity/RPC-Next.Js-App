@@ -39,7 +39,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  let isTrue = (serverData && serverData.length && serverData.length > 0) || apiFilterQueryParams !== null;
+  let isTrue = serverData !== null || apiFilterQueryParams !== null;
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
@@ -61,8 +61,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         return nextPage;
       },
       cacheTime: 300000,
-      // enabled: isTrue,
-      enabled: true,
+      enabled: isTrue,
+      // enabled: true,
 
       // ...RTK_CONFIG,
     });
@@ -156,6 +156,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         </div>
       </div>
   );
+
+  console.log(allItems);
 
   return (
     <div
