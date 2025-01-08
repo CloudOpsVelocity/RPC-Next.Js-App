@@ -4,13 +4,9 @@ import { useState } from "react";
 import { FaBuilding, FaHashtag, FaTh } from "react-icons/fa";
 
 const viewOptions = [
-  { id: "type", label: "By Type", icon: <FaTh className="w-4 h-4" /> },
-  { id: "unit", label: "By Unit", icon: <FaHashtag className="w-4 h-4" /> },
-  {
-    id: "bhk",
-    label: "By BHk",
-    icon: <FaBuilding className="w-4 h-4" />,
-  },
+  { id: "type", label: "By Type", icon: <FaTh className="w-5 h-5" /> },
+  { id: "unit", label: "By Unit", icon: <FaHashtag className="w-5 h-5" /> },
+  { id: "bhk", label: "By BHK", icon: <FaBuilding className="w-5 h-5" /> },
 ];
 
 export function ViewOptions({ onSelect }: { onSelect: (id: string) => void }) {
@@ -22,15 +18,16 @@ export function ViewOptions({ onSelect }: { onSelect: (id: string) => void }) {
   };
 
   return (
-    <div className="flex gap-4 border-b">
+    <div className="flex items-center gap-4 p-2 bg-gray-50 rounded-full shadow-lg">
       {viewOptions.map((option) => (
         <button
           key={option.id}
           onClick={() => handleViewClick(option.id)}
-          className={`flex items-center gap-2 px-4 py-2 border-b-2 transition-colors ${
+          className={`flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all
+          ${
             activeView === option.id
-              ? "border-[#0073C6] text-[#0073C6]"
-              : "border-transparent hover:border-gray-300 text-gray-600 hover:text-gray-900"
+              ? "bg-btnPrimary text-white shadow-lg"
+              : "bg-white text-gray-600 hover:bg-gray-100 hover:text-btnPrimary"
           }`}
         >
           {option.icon}

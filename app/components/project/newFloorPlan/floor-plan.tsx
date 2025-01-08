@@ -227,7 +227,7 @@ export default function FloorPlans({
           />
         )}
 
-        <div className="mt-6 grid md:grid-cols-2 gap-6">
+        <div className="mt-3 grid md:grid-cols-2 gap-6">
           {/* FLOOR PLAN LEFT SECTION */}
           <FloorplanLeftsection
             units={filteredUnits}
