@@ -1,5 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
+import path from "path";
+import fs from "fs";
 
 // const Datastore = require("nedb");
 // const path = require("path");
@@ -13,6 +15,9 @@ import { NextResponse } from "next/server";
 // };
 export async function GET(req: Request, res: NextResponse) {
   try {
+    const p = path.join(process.cwd(), "logs");
+    const fileName = path.join(p, "nextjs-app-logs-8-01-2025.log.txt");
+    const logs = fs.readFileSync(fileName, "utf-8");
     // lib/dbConfig.js
     // const db = createDb("slugs.db"); // Initialize the database
 
@@ -27,7 +32,7 @@ export async function GET(req: Request, res: NextResponse) {
     // Expose the function to initialize different databases
 
     // const data = await axios.get(`https://internal.getrightproperty.com/api/youtube/oauth2/callback?code=4%2F0AeanS0bv-uWP-r3f7BXQwHSr8f1U_NTtisN8HhVTmFzDvOxztLzjKwTxtyfFe6hWhfvUEg&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.upload+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly`)
-    return NextResponse.json({ data: "test", status: true });
+    return NextResponse.json({ data: "test", status: true, logs });
   } catch (error) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });
