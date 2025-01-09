@@ -134,6 +134,7 @@ export default function FloorPlans({
     unit: null,
   });
   const [selectedBHK, setSelectedBHK] = useState("All");
+  const [allBhkNames, setAllBhkNames] = useState(["All"]);
 
   const [unitFilters, setUnitFilters] = useState({});
   const handleBhkClick = (bhk: string) => {
@@ -144,6 +145,7 @@ export default function FloorPlans({
   const handleViewClick = (type: string) => {
     setSelectedView(type);
     handleBhkClick("All");
+    setAllBhkNames([]);
   };
 
   const { data: projectUnitsData, isLoading } = useQuery({
@@ -163,7 +165,7 @@ export default function FloorPlans({
     return getUniqueOptionsByKeys(
       projectUnitsData,
       ["unitNumber", "bhkName", "towerName", "floor", "facingName", "block", "plotArea", "width", "length"],
-      unitFilters
+      unitFilters 
     );
   }, [projectUnitsData, unitFilters]);
 
@@ -171,6 +173,15 @@ export default function FloorPlans({
     selectedView === "unit" || selectedView === "bhk"
       ? memoOptions()
       : { options: {}, filteredUnits: projectUnitsData || [] };
+
+  if(allBhkNames.length === 0 && selectedView === "bhk" && Array.isArray(options?.bhkName)){
+    let data = options && options.bhkName && options.bhkName.length > 0 ? ["All", ...options.bhkName] : ["All"];
+    setAllBhkNames(data);
+  }
+
+  useEffect(()=>{
+    setAllBhkNames([]);
+  }, [propCgId])
 
   return (
     <div className="w-[90%] mx-auto px-4 py-8">
@@ -182,7 +193,7 @@ export default function FloorPlans({
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h2>
       <SubHeading text="See floor plans as per your selected property type" />
-      <div className="space-y-6">
+      <div className="space-y-6 flex flex-col items-start justify-start">
         <div
           className={`flex justify-start items-start md:items-center mb-[2%] flex-col md:flex-row ${
             phases?.length > 1 ? "mt-4" : "mt-[0%]"
@@ -220,8 +231,8 @@ export default function FloorPlans({
         <PropertyTabs phaseOverview={phaseOverview} />
         <ViewOptions onSelect={handleViewClick} propCgId={propCgId} />
 
-        {selectedView === "bhk" && selectedPropertyType === "apartment" && propCgId !== projectprops.plot && (
-          <BHKTabs onSelect={handleBhkClick} />
+        {selectedView === "bhk" && selectedPropertyType === "apartment" && propCgId !== projectprops.plot && allBhkNames.length > 2 && (
+          <BHKTabs onSelect={handleBhkClick} bhkNames={allBhkNames} />
         )}
 
         {selectedView === "unit" && (

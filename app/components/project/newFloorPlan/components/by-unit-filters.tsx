@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { getUniqueOptionsByKeys } from "../utils/generateuniqueoptions";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
+import { Console } from "console";
 
 type Props = {
   options: any;
@@ -15,6 +17,18 @@ export default function ByUnitFilters({
   handleUnitFilterChange,
 }: Props) {
   const [filters, setFilters] = useState({
+    unitNumber: "",
+    bhkName: "",
+    towerName: "",
+    floor: "",
+    facingName: "",
+    block: "",
+    plotArea: "",
+    length:"",
+    width: "",
+  });
+
+  const [backupFilters, setBackupFilters] = useState({
     unitNumber: "",
     bhkName: "",
     towerName: "",
@@ -44,9 +58,7 @@ export default function ByUnitFilters({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
-
-
+  }, []); 
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = filters[key].toLowerCase();
@@ -61,7 +73,22 @@ export default function ByUnitFilters({
 
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: String(value) }));
+    setBackupFilters((prev) => ({ ...prev, [key]: String(value) }));
     handleUnitFilterChange(key, value);
+  };
+
+  const onSearchChange = (key: keyof typeof filters, value: string) => {
+    setFilters((prev) => ({ ...prev, [key]: String(value) }));
+  };
+
+  const onMouseOut = (key: keyof typeof filters, value: string) => {
+    console.log(filteredOptions(key))
+    let data = filteredOptions(key);
+    if(!data.includes(value)){
+      setFilters((prev) => ({ ...prev, [key]: backupFilters[key] }));
+    }else{
+      handleFilterChange(key, value);
+    }
   };
 
   const clearFilter = (key: keyof typeof filters) => {
@@ -83,10 +110,11 @@ export default function ByUnitFilters({
           <input
             type="text"
             value={filters[key]}
-            // onChange={(e) => handleFilterChange(key, e.target.value)}
+            onChange={(e) => onSearchChange(key, e.target.value)}
             onFocus={() => setFocusedFilter(key)}
             className="px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073C6] w-full"
             placeholder={placeholder}
+            onMouseOut={(e) => onMouseOut(key, e.target.value)}
           />
           {filters[key] ? (
             <button
@@ -119,8 +147,6 @@ export default function ByUnitFilters({
       </div>
     );
   };
-
-  console.log(options);
 
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
