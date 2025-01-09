@@ -9,27 +9,10 @@ import { useAtom, useAtomValue } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import Button from "@/app/elements/button";
 
-export function PropertyTabs({ phaseOverview }: { phaseOverview: any }) {
+export function PropertyTabs({ types }: { types:any }) {
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
-  const currentPhase = useAtomValue(currentPhaseAtom);
   const allKeys = [35, 33, 31, 34, 32];
-  const selectedPhase = phaseOverview?.find(
-    (phase: any) => phase.phaseId === currentPhase
-  );
-  const types =
-    selectedPhase?.propTypeOverview &&
-    Object?.keys(
-      selectedPhase?.propTypeOverview && selectedPhase.propTypeOverview
-    )
-      .map((v) => {
-        if (selectedPhase?.propTypeOverview[v].unitTypes) {
-          return v;
-        } else {
-          return null;
-        }
-      })
-      .sort()
-      .filter((v) => v !== null);
+
   const checkProperty = (key: any) => {
     if (
       key == projectprops.apartment &&
@@ -63,6 +46,8 @@ export function PropertyTabs({ phaseOverview }: { phaseOverview: any }) {
       return true;
     }
   };
+
+  console.log(types)
 
   return (
     <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[20px] ">

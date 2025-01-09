@@ -127,6 +127,25 @@ export default function FloorPlans({
   const [selectedBHK, setSelectedBHK] = useState("All");
   const [allBhkNames, setAllBhkNames] = useState(["All"]);
 
+  const selectedPhaseData = phaseOverview?.find(
+    (phase: any) => phase.phaseId === selectedPhase
+  );
+
+  const types =
+      selectedPhaseData?.propTypeOverview &&
+      Object?.keys(
+        selectedPhaseData?.propTypeOverview && selectedPhaseData.propTypeOverview
+      )
+        .map((v) => {
+          if (selectedPhaseData?.propTypeOverview[v].unitTypes) {
+            return v;
+          } else {
+            return null;
+          }
+        })
+        .sort()
+        .filter((v) => v !== null);
+
   const [unitFilters, setUnitFilters] = useState({});
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
@@ -189,7 +208,8 @@ export default function FloorPlans({
 
   useEffect(() => {
     setAllBhkNames([]);
-  }, [propCgId]);
+    setSelectedView("type");
+  }, [propCgId, phases]);
 
   return (
     <div className="w-[90%] mx-auto px-4 py-8">
@@ -236,22 +256,26 @@ export default function FloorPlans({
             </>
           )}
         </div>
-        <PropertyTabs phaseOverview={phaseOverview} />
-        <ViewOptions onSelect={handleViewClick} propCgId={propCgId} />
+        
+        {types && types.length > 0 &&
+        <>
+          <PropertyTabs types={types} />
+          <ViewOptions onSelect={handleViewClick} selectedView={selectedView} />
 
-        {selectedView === "bhk" &&
-          selectedPropertyType === "apartment" &&
-          propCgId !== projectprops.plot &&
-          allBhkNames.length > 2 && (
-            <BHKTabs onSelect={handleBhkClick} bhkNames={allBhkNames} />
+          {selectedView === "bhk" &&
+            selectedPropertyType === "apartment" &&
+            propCgId !== projectprops.plot &&(
+              <BHKTabs onSelect={handleBhkClick} bhkNames={allBhkNames} selectedBHK={selectedBHK} />
+            )}
+
+          {selectedView === "unit" && (
+            <ByUnitFilters
+              options={options}
+              handleUnitFilterChange={handleUnitFilterChange}
+            />
           )}
-
-        {selectedView === "unit" && (
-          <ByUnitFilters
-            options={options}
-            handleUnitFilterChange={handleUnitFilterChange}
-          />
-        )}
+        </>
+        }
 
         <div className="mt-3 grid md:grid-cols-2 gap-6">
           {/* FLOOR PLAN LEFT SECTION */}
