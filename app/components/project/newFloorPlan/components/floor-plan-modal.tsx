@@ -14,24 +14,8 @@ import {
 } from "react-icons/fa";
 import { FaExpand, FaRuler, FaTree } from "react-icons/fa6";
 import FilterInput from "./filter-input";
+import { PropertyUnit } from "../types/floor-plan";
 
-interface PropertyUnit {
-  unitIdEnc: string;
-  projIdEnc: string;
-  bhkName: string;
-  towerName: string;
-  floor: number;
-  unitNumber: string;
-  facingName: string;
-  caretarea: string;
-  superBuildUparea: string;
-  terraceArea: string;
-  parkingType: string;
-  totalNumberofBathroom: number;
-  totalNumberOfBalcony: number;
-  noOfCarParking: number;
-  floorPlanUrl: string;
-}
 interface FloorPlanModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -40,7 +24,7 @@ interface FloorPlanModalProps {
   filters: Partial<PropertyUnit>;
   setFilters: (filters: Partial<PropertyUnit>) => void;
   filteredUnits: PropertyUnit[];
-  options: Record<keyof PropertyUnit, string[]>;
+  options: Record<keyof PropertyUnit, string[]> | Record<string, never>;
   handleOpenFullScreenModal: (unit: PropertyUnit) => void;
 }
 
@@ -135,9 +119,8 @@ export function FloorPlanModal({
   useEffect(() => {
     ensureUnitVisible(currentUnit);
   }, [filteredUnits]);
-
   const handleFilterChange = (name: string, value: string | number) => {
-    setFilters((prev) => ({ ...prev, [name]: value }));
+    setFilters({ ...filters, [name]: value });
   };
 
   const handleRequestQuotation = () => {

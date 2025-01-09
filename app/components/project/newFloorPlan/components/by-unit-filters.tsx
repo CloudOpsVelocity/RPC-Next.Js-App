@@ -23,7 +23,7 @@ export default function ByUnitFilters({
     facingName: "",
     block: "",
     plotArea: "",
-    length:"",
+    length: "",
     width: "",
   });
 
@@ -35,7 +35,7 @@ export default function ByUnitFilters({
     facingName: "",
     block: "",
     plotArea: "",
-    length:"",
+    length: "",
     width: "",
   });
 
@@ -57,7 +57,7 @@ export default function ByUnitFilters({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []); 
+  }, []);
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = filters[key].toLowerCase();
@@ -82,9 +82,9 @@ export default function ByUnitFilters({
 
   const onMouseOut = (key: keyof typeof filters, value: string) => {
     let data = filteredOptions(key);
-    if(!data.includes(value)){
+    if (!data.includes(value)) {
       setFilters((prev) => ({ ...prev, [key]: backupFilters[key] }));
-    }else{
+    } else {
       handleFilterChange(key, value);
     }
   };
@@ -112,7 +112,7 @@ export default function ByUnitFilters({
             onFocus={() => setFocusedFilter(key)}
             className="px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073C6] w-full"
             placeholder={placeholder}
-            onMouseOut={(e) => onMouseOut(key, e.target.value)}
+            onBlur={(e) => onMouseOut(key, e.target.value)}
           />
           {filters[key] ? (
             <button
@@ -148,15 +148,30 @@ export default function ByUnitFilters({
 
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {options?.towerName && (propCgId === projectprops.apartment || propCgId === projectprops.villament) && renderFilter("towerName", "Search Tower")}
-      {options?.floor && propCgId !== projectprops.plot && renderFilter("floor", "Search Floor")}
+      {options?.towerName &&
+        (propCgId === projectprops.apartment ||
+          propCgId === projectprops.villament) &&
+        renderFilter("towerName", "Search Tower")}
+      {options?.floor &&
+        propCgId !== projectprops.plot &&
+        renderFilter("floor", "Search Floor")}
       {options?.facingName && renderFilter("facingName", "Search Facing")}
       {options?.unitNumber && renderFilter("unitNumber", "Search Unit Number")}
-      {options?.block && propCgId === projectprops.apartment && renderFilter("block", "Search Block")}
-      {options?.bhkName && propCgId !== projectprops.plot && renderFilter("bhkName", "Search Unit Type")}
-      {options?.plotArea && propCgId === projectprops.plot && renderFilter("plotArea", "Search Plot Area")}
-      {options?.length && propCgId === projectprops.plot && renderFilter("length", "Search Length")}
-      {options?.width && propCgId === projectprops.plot && renderFilter("width", "Search Width")}
+      {options?.block &&
+        propCgId === projectprops.apartment &&
+        renderFilter("block", "Search Block")}
+      {options?.bhkName &&
+        propCgId !== projectprops.plot &&
+        renderFilter("bhkName", "Search Unit Type")}
+      {options?.plotArea &&
+        propCgId === projectprops.plot &&
+        renderFilter("plotArea", "Search Plot Area")}
+      {options?.length &&
+        propCgId === projectprops.plot &&
+        renderFilter("length", "Search Length")}
+      {options?.width &&
+        propCgId === projectprops.plot &&
+        renderFilter("width", "Search Width")}
     </div>
   );
 }

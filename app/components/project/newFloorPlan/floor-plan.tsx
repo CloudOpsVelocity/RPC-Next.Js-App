@@ -268,7 +268,7 @@ export default function FloorPlans({
           filters={unitFilters}
           setFilters={setUnitFilters}
           filteredUnits={filteredUnits}
-          options={options}
+          options={options || {}}
           handleOpenFullScreenModal={handleOpenFullScreenModal}
         />
       )}
