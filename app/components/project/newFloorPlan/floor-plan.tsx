@@ -153,7 +153,9 @@ export default function FloorPlans({
     setAllBhkNames([]);
     setSelectedView("type");
   }, [propCgId, phases]);
-
+  const handleOpenFullScreenModal = (unit: PropertyUnit) => {
+    setFullScreenModalState({ isOpen: true, unit: unit });
+  };
   return (
     <div className="w-[90%] mx-auto px-4 py-8">
       <h2
@@ -267,16 +269,17 @@ export default function FloorPlans({
           setFilters={setUnitFilters}
           filteredUnits={filteredUnits}
           options={options}
+          handleOpenFullScreenModal={handleOpenFullScreenModal}
         />
       )}
 
-      {/* {fullScreenModalState.isOpen && (
+      {fullScreenModalState.isOpen && fullScreenModalState.unit && (
         <FullScreenImageModal
           isOpen={fullScreenModalState.isOpen}
           onClose={() => setFullScreenModalState({ isOpen: false, unit: null })}
-          unit={propertyUnits[0]}
+          unit={fullScreenModalState.unit}
         />
-      )} */}
+      )}
     </div>
   );
 }

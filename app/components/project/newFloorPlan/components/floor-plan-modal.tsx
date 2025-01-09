@@ -12,7 +12,7 @@ import {
   FaBath,
   FaHome,
 } from "react-icons/fa";
-import { FaRuler, FaTree } from "react-icons/fa6";
+import { FaExpand, FaRuler, FaTree } from "react-icons/fa6";
 import FilterInput from "./filter-input";
 
 interface PropertyUnit {
@@ -32,7 +32,6 @@ interface PropertyUnit {
   noOfCarParking: number;
   floorPlanUrl: string;
 }
-
 interface FloorPlanModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -41,7 +40,8 @@ interface FloorPlanModalProps {
   filters: Partial<PropertyUnit>;
   setFilters: (filters: Partial<PropertyUnit>) => void;
   filteredUnits: PropertyUnit[];
-  options?: Record<keyof PropertyUnit, string[]>;
+  options: Record<keyof PropertyUnit, string[]>;
+  handleOpenFullScreenModal: (unit: PropertyUnit) => void;
 }
 
 export function FloorPlanModal({
@@ -53,8 +53,8 @@ export function FloorPlanModal({
   setFilters,
   filteredUnits: propFilteredUnits,
   options,
+  handleOpenFullScreenModal,
 }: FloorPlanModalProps) {
-  console.log(options);
   const [currentUnit, setCurrentUnit] = useState(initialUnit);
   const [filteredUnits, setFilteredUnits] = useState(propFilteredUnits);
 
@@ -139,6 +139,12 @@ export function FloorPlanModal({
   const handleFilterChange = (name: string, value: string | number) => {
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleRequestQuotation = () => {
+    // Add your quotation request logic here
+    alert(`Requesting quotation for Unit ${currentUnit.unitNumber}`);
+  };
+
   if (!isOpen) return null;
   const mainImageUrl = currentUnit?.floorPlanUrl?.split(",")[0] || ImgNotAvail;
   const totalPages = Math.ceil(filteredUnits.length / getItemsPerPage());
@@ -158,6 +164,12 @@ export function FloorPlanModal({
             {currentUnit.bhkName} - Unit {currentUnit.unitNumber}
           </h3>
           <div className="flex gap-2">
+            <button
+              onClick={handleRequestQuotation}
+              className="px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
+            >
+              Request Quotation
+            </button>
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="md:hidden p-2 rounded-full bg-[#ECF7FF] text-[#0073C6]"
@@ -272,12 +284,21 @@ export function FloorPlanModal({
               {/* Floor Plan Image */}
               <div className="bg-white rounded-xl shadow-lg p-4">
                 <div className="h-full flex flex-col">
-                  <div className="flex-1">
+                  <div
+                    className="flex-1 relative"
+                    onClick={() => handleOpenFullScreenModal(currentUnit)}
+                  >
                     <img
                       src={mainImageUrl}
                       alt={`Floor Plan for ${currentUnit.bhkName}`}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain cursor-pointer"
                     />
+                    <button
+                      // onClick={() => handleOpenFullScreenModal(currentUnit)}
+                      className="absolute top-4 right-4 p-2 bg-white rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      <FaExpand className="w-5 h-5 text-gray-600" />
+                    </button>
                   </div>
                   <div className="flex justify-between mt-4">
                     <button
