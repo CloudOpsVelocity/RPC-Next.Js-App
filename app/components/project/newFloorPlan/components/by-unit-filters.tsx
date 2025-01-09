@@ -62,7 +62,6 @@ export default function ByUnitFilters({
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: String(value) }));
     handleUnitFilterChange(key, value);
-    
   };
 
   const clearFilter = (key: keyof typeof filters) => {
