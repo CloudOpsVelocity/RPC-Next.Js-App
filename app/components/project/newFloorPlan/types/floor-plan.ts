@@ -14,6 +14,10 @@ export interface PropertyUnit {
   totalNumberOfBalcony: number;
   noOfCarParking: number;
   floorPlanUrl: string;
+  block: string;
+  plotArea: string;
+  width: string;
+  length: string;
 }
 
 export interface TabItem {

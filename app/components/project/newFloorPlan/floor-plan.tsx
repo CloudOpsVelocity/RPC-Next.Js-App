@@ -36,61 +36,6 @@ import { getUniqueOptionsByKeys } from "./utils/generateuniqueoptions";
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 
-const propertyUnits: PropertyUnit[] = [
-  {
-    id: "1",
-    type: "apartment",
-    bhk: "2 BHK",
-    bedrooms: 2,
-    bathrooms: 2,
-    tower: "Tower B",
-    unitNumber: "121",
-    builtupArea: 1211,
-    facing: "North",
-    carParking: 2,
-    floorPlanImage: "https://picsum.photos/800/600?random=1",
-  },
-  {
-    id: "2",
-    type: "apartment",
-    bhk: "1 BHK",
-    bedrooms: 1,
-    bathrooms: 2,
-    tower: "Tower A",
-    unitNumber: "Unit-01",
-    builtupArea: 1231,
-    facing: "East",
-    carParking: 1,
-    floorPlanImage: "https://picsum.photos/800/600?random=2",
-  },
-  {
-    id: "3",
-    type: "apartment",
-    bhk: "3 BHK",
-    bedrooms: 3,
-    bathrooms: 3,
-    tower: "Tower C",
-    unitNumber: "301",
-    builtupArea: 1500,
-    facing: "West",
-    carParking: 2,
-    floorPlanImage: "https://picsum.photos/800/600?random=3",
-  },
-  {
-    id: "4",
-    type: "apartment",
-    bhk: "2 BHK",
-    bedrooms: 2,
-    bathrooms: 2,
-    tower: "Tower A",
-    unitNumber: "205",
-    builtupArea: 1250,
-    facing: "South",
-    carParking: 1,
-    floorPlanImage: "https://picsum.photos/800/600?random=4",
-  },
-];
-
 interface FloorPlansProps {
   phases: any;
   projName: string;
@@ -127,7 +72,7 @@ export default function FloorPlans({
   const [selectedBHK, setSelectedBHK] = useState("All");
   const [allBhkNames, setAllBhkNames] = useState(["All"]);
 
-  const [unitFilters, setUnitFilters] = useState({});
+  const [unitFilters, setUnitFilters] = useState<Partial<PropertyUnit>>({});
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
     setUnitFilters((prev) => ({ ...prev, bhkName: bhk === "All" ? "" : bhk }));
@@ -181,9 +126,7 @@ export default function FloorPlans({
     Array.isArray(options?.bhkName)
   ) {
     let data =
-      options && options.bhkName && options.bhkName.length > 0
-        ? ["All", ...options.bhkName]
-        : ["All"];
+      options?.bhkName?.length > 0 ? ["All", ...options.bhkName] : ["All"];
     setAllBhkNames(data);
   }
 
@@ -289,16 +232,20 @@ export default function FloorPlans({
           onClose={() => setModalState({ isOpen: false, unit: null })}
           initialUnit={projectUnitsData[0]}
           units={projectUnitsData || []}
+          filters={unitFilters}
+          setFilters={setUnitFilters}
+          filteredUnits={filteredUnits}
+          options={options}
         />
       )}
 
-      {fullScreenModalState.isOpen && (
+      {/* {fullScreenModalState.isOpen && (
         <FullScreenImageModal
           isOpen={fullScreenModalState.isOpen}
           onClose={() => setFullScreenModalState({ isOpen: false, unit: null })}
           unit={propertyUnits[0]}
         />
-      )}
+      )} */}
     </div>
   );
 }

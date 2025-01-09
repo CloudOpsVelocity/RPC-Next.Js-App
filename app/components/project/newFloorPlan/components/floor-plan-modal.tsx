@@ -38,6 +38,10 @@ interface FloorPlanModalProps {
   onClose: () => void;
   units: PropertyUnit[];
   initialUnit: PropertyUnit;
+  filters: Partial<PropertyUnit>;
+  setFilters: (filters: Partial<PropertyUnit>) => void;
+  filteredUnits: PropertyUnit[];
+  options?: Record<keyof PropertyUnit, string[]>;
 }
 
 export function FloorPlanModal({
@@ -45,15 +49,15 @@ export function FloorPlanModal({
   onClose,
   units,
   initialUnit,
+  filters,
+  setFilters,
+  filteredUnits: propFilteredUnits,
+  options,
 }: FloorPlanModalProps) {
+  console.log(options);
   const [currentUnit, setCurrentUnit] = useState(initialUnit);
-  const [filteredUnits, setFilteredUnits] = useState(units);
-  const [filters, setFilters] = useState({
-    bhk: "",
-    tower: "",
-    facing: "",
-    floor: "",
-  });
+  const [filteredUnits, setFilteredUnits] = useState(propFilteredUnits);
+
   const [currentPage, setCurrentPage] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
   const itemsPerPage = {
@@ -61,16 +65,6 @@ export function FloorPlanModal({
     md: 4,
     lg: 8,
   };
-
-  // Get unique values for filter options
-  const uniqueBHKs = Array.from(new Set(units.map((unit) => unit.bhkName)));
-  const uniqueTowers = Array.from(new Set(units.map((unit) => unit.towerName)));
-  const uniqueFacings = Array.from(
-    new Set(units.map((unit) => unit.facingName))
-  );
-  const uniqueFloors = Array.from(
-    new Set(units.map((unit) => unit.floor))
-  ).sort((a, b) => a - b);
 
   const getItemsPerPage = () => {
     if (typeof window !== "undefined") {
@@ -111,8 +105,6 @@ export function FloorPlanModal({
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
   };
-
-  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -133,33 +125,21 @@ export function FloorPlanModal({
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose, currentUnit]); // Added currentUnit as dependency
+  }, [isOpen, onClose, currentUnit]);
 
   useEffect(() => {
-    const filtered = units.filter((unit) => {
-      return (
-        (filters.bhk === "" || unit.bhkName === filters.bhk) &&
-        (filters.tower === "" || unit.towerName === filters.tower) &&
-        (filters.facing === "" || unit.facingName === filters.facing) &&
-        (filters.floor === "" || unit.floor.toString() === filters.floor)
-      );
-    });
-    setFilteredUnits(filtered);
+    setFilteredUnits(propFilteredUnits);
     setCurrentPage(0);
-  }, [filters, units]);
+  }, [propFilteredUnits]);
 
-  // Ensure current unit is visible when filtered units change
   useEffect(() => {
     ensureUnitVisible(currentUnit);
   }, [filteredUnits]);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  const handleFilterChange = (name: string, value: string | number) => {
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
-
   if (!isOpen) return null;
-
   const mainImageUrl = currentUnit?.floorPlanUrl?.split(",")[0] || ImgNotAvail;
   const totalPages = Math.ceil(filteredUnits.length / getItemsPerPage());
   const startIndex = currentPage * getItemsPerPage();
@@ -203,85 +183,77 @@ export function FloorPlanModal({
           >
             <div className="space-y-3">
               {/* Filter inputs */}
-              <div>
-                <label
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                  htmlFor="tower"
-                >
-                  Tower Name
-                </label>
-                <FilterInput
-                  value={filters.tower}
-                  onChange={(value) =>
-                    handleFilterChange({ target: { name: "tower", value } })
-                  }
-                  options={uniqueTowers}
-                  placeholder="Select Tower"
-                />
-              </div>
+              {options.towerName && options.towerName.length > 0 && (
+                <div>
+                  <label
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                    htmlFor="tower"
+                  >
+                    Tower Name
+                  </label>
+                  <FilterInput
+                    value={filters.towerName || ""}
+                    onChange={(value) => handleFilterChange("towerName", value)}
+                    options={options.towerName}
+                    placeholder="Select Tower"
+                  />
+                </div>
+              )}
 
-              <div>
-                <label
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                  htmlFor="bhk"
-                >
-                  BHK Type
-                </label>
-                <FilterInput
-                  value={filters.bhk}
-                  onChange={(value) =>
-                    handleFilterChange({ target: { name: "bhk", value } })
-                  }
-                  options={uniqueBHKs}
-                  placeholder="Select BHK Type"
-                />
-              </div>
+              {options.bhkName && options.bhkName.length > 0 && (
+                <div>
+                  <label
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                    htmlFor="bhk"
+                  >
+                    BHK Type
+                  </label>
+                  <FilterInput
+                    value={filters.bhkName || ""}
+                    onChange={(value) => handleFilterChange("bhkName", value)}
+                    options={options.bhkName}
+                    placeholder="Select BHK Type"
+                  />
+                </div>
+              )}
 
-              <div>
-                <label
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                  htmlFor="facing"
-                >
-                  Facing
-                </label>
-                <FilterInput
-                  value={filters.facing}
-                  onChange={(value) =>
-                    handleFilterChange({ target: { name: "facing", value } })
-                  }
-                  options={uniqueFacings}
-                  placeholder="Select Facing"
-                />
-              </div>
+              {options.facingName && options.facingName.length > 0 && (
+                <div>
+                  <label
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                    htmlFor="facing"
+                  >
+                    Facing
+                  </label>
+                  <FilterInput
+                    value={filters.facingName || ""}
+                    onChange={(value) =>
+                      handleFilterChange("facingName", value)
+                    }
+                    options={options.facingName}
+                    placeholder="Select Facing"
+                  />
+                </div>
+              )}
 
-              <div>
-                <label
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                  htmlFor="floor"
-                >
-                  Floor
-                </label>
-                <FilterInput
-                  value={filters.floor}
-                  onChange={(value) =>
-                    handleFilterChange({ target: { name: "floor", value } })
-                  }
-                  options={uniqueFloors.map((floor) =>
-                    floor === 0
-                      ? "Ground Floor"
-                      : `${floor}${
-                          floor === 1
-                            ? "st"
-                            : floor === 2
-                            ? "nd"
-                            : floor === 3
-                            ? "rd"
-                            : "th"
-                        } Floor`
-                  )}
-                  placeholder="Select Floor"
-                />
-              </div>
+              {options.floor && options.floor.length > 0 && (
+                <div>
+                  <label
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                    htmlFor="floor"
+                  >
+                    Floor
+                  </label>
+                  <FilterInput
+                    value={filters.floor?.toString() || ""}
+                    onChange={(value) =>
+                      handleFilterChange("floor", parseInt(value))
+                    }
+                    options={options.floor}
+                    placeholder="Select Floor"
+                  />
+                </div>
+              )}
 
               {showFilters && (
                 <button
