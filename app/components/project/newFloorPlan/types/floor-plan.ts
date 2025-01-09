@@ -1,15 +1,19 @@
 export interface PropertyUnit {
-  id: string;
-  type: string;
-  bhk: string;
-  bedrooms: number;
-  bathrooms: number;
-  tower: string;
+  unitIdEnc: string;
+  projIdEnc: string;
+  bhkName: string;
+  towerName: string;
+  floor: number;
   unitNumber: string;
-  builtupArea: number;
-  facing: string;
-  carParking: number;
-  floorPlanImage?: string;
+  facingName: string;
+  caretarea: string;
+  superBuildUparea: string;
+  terraceArea: string;
+  parkingType: string;
+  totalNumberofBathroom: number;
+  totalNumberOfBalcony: number;
+  noOfCarParking: number;
+  floorPlanUrl: string;
 }
 
 export interface TabItem {

@@ -72,21 +72,68 @@ export function FloorPlanModal({
     new Set(units.map((unit) => unit.floor))
   ).sort((a, b) => a - b);
 
+  const getItemsPerPage = () => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 640) return itemsPerPage.sm;
+      if (window.innerWidth < 1024) return itemsPerPage.md;
+      return itemsPerPage.lg;
+    }
+    return itemsPerPage.lg;
+  };
+
+  // Function to ensure the current unit is visible in the carousel
+  const ensureUnitVisible = (unit: PropertyUnit) => {
+    const unitIndex = filteredUnits.findIndex(
+      (u) => u.unitIdEnc === unit.unitIdEnc
+    );
+    const itemsPerPageCount = getItemsPerPage();
+    const targetPage = Math.floor(unitIndex / itemsPerPageCount);
+    setCurrentPage(targetPage);
+  };
+
+  const handlePrevUnit = () => {
+    const currentIndex = filteredUnits.findIndex(
+      (unit) => unit.unitIdEnc === currentUnit.unitIdEnc
+    );
+    const prevIndex =
+      (currentIndex - 1 + filteredUnits.length) % filteredUnits.length;
+    const nextUnit = filteredUnits[prevIndex];
+    setCurrentUnit(nextUnit);
+    ensureUnitVisible(nextUnit);
+  };
+
+  const handleNextUnit = () => {
+    const currentIndex = filteredUnits.findIndex(
+      (unit) => unit.unitIdEnc === currentUnit.unitIdEnc
+    );
+    const nextIndex = (currentIndex + 1) % filteredUnits.length;
+    const nextUnit = filteredUnits[nextIndex];
+    setCurrentUnit(nextUnit);
+    ensureUnitVisible(nextUnit);
+  };
+
+  // Handle keyboard navigation
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      } else if (e.key === "ArrowLeft") {
+        handlePrevUnit();
+      } else if (e.key === "ArrowRight") {
+        handleNextUnit();
+      }
     };
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
+      document.addEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, currentUnit]); // Added currentUnit as dependency
 
   useEffect(() => {
     const filtered = units.filter((unit) => {
@@ -101,41 +148,19 @@ export function FloorPlanModal({
     setCurrentPage(0);
   }, [filters, units]);
 
+  // Ensure current unit is visible when filtered units change
+  useEffect(() => {
+    ensureUnitVisible(currentUnit);
+  }, [filteredUnits]);
+
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePrevUnit = () => {
-    const currentIndex = filteredUnits.findIndex(
-      (unit) => unit.unitIdEnc === currentUnit.unitIdEnc
-    );
-    const prevIndex =
-      (currentIndex - 1 + filteredUnits.length) % filteredUnits.length;
-    setCurrentUnit(filteredUnits[prevIndex]);
-  };
-
-  const handleNextUnit = () => {
-    const currentIndex = filteredUnits.findIndex(
-      (unit) => unit.unitIdEnc === currentUnit.unitIdEnc
-    );
-    const nextIndex = (currentIndex + 1) % filteredUnits.length;
-    setCurrentUnit(filteredUnits[nextIndex]);
-  };
-
   if (!isOpen) return null;
 
   const mainImageUrl = currentUnit?.floorPlanUrl?.split(",")[0] || ImgNotAvail;
-
-  const getItemsPerPage = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 640) return itemsPerPage.sm;
-      if (window.innerWidth < 1024) return itemsPerPage.md;
-      return itemsPerPage.lg;
-    }
-    return itemsPerPage.lg;
-  };
-
   const totalPages = Math.ceil(filteredUnits.length / getItemsPerPage());
   const startIndex = currentPage * getItemsPerPage();
   const visibleUnits = filteredUnits.slice(
