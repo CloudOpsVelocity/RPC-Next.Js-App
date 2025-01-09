@@ -65,7 +65,7 @@ export function PropertyTabs({ phaseOverview }: { phaseOverview: any }) {
   };
 
   return (
-    <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[2%] ">
+    <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[20px] ">
       {propertyDetailsTypes != undefined &&
         propertyDetailsTypes != null &&
         allKeys.map((keyName) => {

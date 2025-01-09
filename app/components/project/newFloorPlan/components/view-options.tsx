@@ -31,7 +31,6 @@ export function ViewOptions({ onSelect, propCgId }: { onSelect: (id: string) => 
   };
 
   return (
-    <div className="flex items-center m-auto ">
       <div className="flex justify-around flex-nowrap overflow-x-auto gap-2 p-2 rounded-full shadow-lg bg-gray-50 scrollbar-hide">
         {viewOptions.map(option => {
         if(!(option.id === "bhk" && propCgId === projectprops.plot)){
@@ -51,6 +50,5 @@ export function ViewOptions({ onSelect, propCgId }: { onSelect: (id: string) => 
             </button>
           )}})}
       </div>
-    </div>
   );
 }
