@@ -5,7 +5,6 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
-import { Console } from "console";
 
 type Props = {
   options: any;
@@ -82,7 +81,6 @@ export default function ByUnitFilters({
   };
 
   const onMouseOut = (key: keyof typeof filters, value: string) => {
-    console.log(filteredOptions(key))
     let data = filteredOptions(key);
     if(!data.includes(value)){
       setFilters((prev) => ({ ...prev, [key]: backupFilters[key] }));
