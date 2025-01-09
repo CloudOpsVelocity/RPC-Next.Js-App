@@ -167,6 +167,7 @@ export default async function ProjectsDetailsPage({
           partialUnitData={data.partialUnitData}
           phaseOverview={phaseOverview}
           slug={slug}
+          postedById={data.builderId}
         /> */}
         {!data.partialUnitData ? (
           <FloorplansBlock

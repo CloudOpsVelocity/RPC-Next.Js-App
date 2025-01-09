@@ -32,6 +32,7 @@ import PropertyCard from "./components/property-card";
 import ByUnitFilters from "./components/by-unit-filters";
 import FloorplanLeftsection from "./components/floorplan-leftsection";
 import { getUniqueOptionsByKeys } from "./utils/generateuniqueoptions";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
@@ -42,6 +43,7 @@ interface FloorPlansProps {
   partialUnitData: any;
   phaseOverview: any;
   slug: string;
+  postedById: number;
 }
 
 export default function FloorPlans({
@@ -50,6 +52,7 @@ export default function FloorPlans({
   partialUnitData,
   phaseOverview,
   slug,
+  postedById
 }: FloorPlansProps): JSX.Element {
   const [selectedPhase, setSelectedPhase] = useAtom(currentPhaseAtom);
   const propCgId = useAtomValue(propCgIdAtom);
@@ -92,6 +95,7 @@ export default function FloorPlans({
       .filter((v) => v !== null);
 
   const [unitFilters, setUnitFilters] = useState({});
+  const [, { open }] = useReqCallPopup();
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
     setUnitFilters((prev) => ({ ...prev, bhkName: bhk === "All" ? "" : bhk }));
@@ -155,6 +159,16 @@ export default function FloorPlans({
   }, [propCgId, phases]);
   const handleOpenFullScreenModal = (unit: PropertyUnit) => {
     setFullScreenModalState({ isOpen: true, unit: unit });
+  };
+  const handleReqcallBack = (unit: PropertyUnit) => {
+    open({
+      modal_type: "REQ_QUOTE",
+      reqId: unit.unitIdEnc,
+      source: "projBanner",
+      postedByName: unit.bhkName,
+      title: unit.unitNumber,
+      postedId: postedById,
+    });
   };
   return (
     <div className="w-[90%] mx-auto px-4 py-8">
@@ -235,6 +249,7 @@ export default function FloorPlans({
             units={filteredUnits}
             setModalState={setModalState}
             isLoading={isLoading}
+            handleReqcallBack={handleReqcallBack}
           />
           <div className="hidden md:block">
             <div className="sticky top-4">

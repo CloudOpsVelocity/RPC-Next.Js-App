@@ -27,7 +27,7 @@ export default function SearchSec({}: Props) {
     dispatch({ type: "SHOW_FILTER", payload: true });
   };
 
-  const handleKeyDown = async (event:any) => {
+  const handleKeyDown = async (event: any) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const res = await fetch(
@@ -36,21 +36,21 @@ export default function SearchSec({}: Props) {
         }/matcher/string?word=${searchQuery}&cityId=${9}`
       );
       const data = await res.json();
-      if(data && data.ids){
+      if (data && data.ids) {
         let bhk = data.ids.split("*")[0];
         let oldBhks = f.bhk;
-        if(!oldBhks.includes(parseInt(bhk))){
+        if (!oldBhks.includes(parseInt(bhk))) {
           dispatch({ type: "ADD_BHK", payload: parseInt(bhk) });
-        }else{
+        } else {
           handleSearch();
         }
       }
     }
   };
 
-  useEffect(()=>{
-    handleSearch();
-  },[f.bhk]);
+  // useEffect(()=>{
+  //   handleSearch();
+  // },[f.bhk]);
 
   const handleSearch = () => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
@@ -91,7 +91,7 @@ export default function SearchSec({}: Props) {
             )}
             {f.locality?.length > (isTab ? 1 : 2) &&
               !showAllLocalities &&
-              f.locality?.length > (isTab ? 1 : 2) && ( 
+              f.locality?.length > (isTab ? 1 : 2) && (
                 <Pill
                   className="capitalize cursor-pointer"
                   classNames={{ root: classes.MultiSelectionPill }}
@@ -100,7 +100,7 @@ export default function SearchSec({}: Props) {
                   {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
                 </Pill>
               )}
-          </div> 
+          </div>
           <input
             placeholder={
               f.locality.length > 0
@@ -121,7 +121,7 @@ export default function SearchSec({}: Props) {
       </Combobox.Target>
       {name && (
         <Combobox.Dropdown className="min-w-[92%]  !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]">
-          <Results  />
+          <Results />
         </Combobox.Dropdown>
       )}
     </Combobox>
