@@ -45,7 +45,7 @@ const FilterInput: React.FC<FilterInputProps> = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073C6] w-full"
+          className="w-full p-2 border rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0073C6]"
           placeholder={placeholder}
         />
         {value ? (

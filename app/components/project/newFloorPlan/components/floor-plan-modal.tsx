@@ -13,6 +13,7 @@ import {
   FaHome,
 } from "react-icons/fa";
 import { FaRuler, FaTree } from "react-icons/fa6";
+import FilterInput from "./filter-input";
 
 interface PropertyUnit {
   unitIdEnc: string;
@@ -178,90 +179,83 @@ export function FloorPlanModal({
             <div className="space-y-3">
               {/* Filter inputs */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                  htmlFor="tower"
+                >
                   Tower Name
                 </label>
-                <select
-                  name="tower"
+                <FilterInput
                   value={filters.tower}
-                  onChange={handleFilterChange}
-                  className="w-full p-2 border rounded-lg bg-white text-sm"
-                >
-                  <option value="">All Towers</option>
-                  {uniqueTowers.map((tower) => (
-                    <option key={tower} value={tower}>
-                      {tower}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(value) =>
+                    handleFilterChange({ target: { name: "tower", value } })
+                  }
+                  options={uniqueTowers}
+                  placeholder="Select Tower"
+                />
               </div>
 
-              {/* Repeat similar structure for other filters */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                  htmlFor="bhk"
+                >
                   BHK Type
                 </label>
-                <select
-                  name="bhk"
+                <FilterInput
                   value={filters.bhk}
-                  onChange={handleFilterChange}
-                  className="w-full p-2 border rounded-lg bg-white text-sm"
-                >
-                  <option value="">All Types</option>
-                  {uniqueBHKs.map((bhk) => (
-                    <option key={bhk} value={bhk}>
-                      {bhk}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(value) =>
+                    handleFilterChange({ target: { name: "bhk", value } })
+                  }
+                  options={uniqueBHKs}
+                  placeholder="Select BHK Type"
+                />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                  htmlFor="facing"
+                >
                   Facing
                 </label>
-                <select
-                  name="facing"
+                <FilterInput
                   value={filters.facing}
-                  onChange={handleFilterChange}
-                  className="w-full p-2 border rounded-lg bg-white text-sm"
-                >
-                  <option value="">All Facings</option>
-                  {uniqueFacings.map((facing) => (
-                    <option key={facing} value={facing}>
-                      {facing}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(value) =>
+                    handleFilterChange({ target: { name: "facing", value } })
+                  }
+                  options={uniqueFacings}
+                  placeholder="Select Facing"
+                />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                  htmlFor="floor"
+                >
                   Floor
                 </label>
-                <select
-                  name="floor"
+                <FilterInput
                   value={filters.floor}
-                  onChange={handleFilterChange}
-                  className="w-full p-2 border rounded-lg bg-white text-sm"
-                >
-                  <option value="">All Floors</option>
-                  {uniqueFloors.map((floor) => (
-                    <option key={floor} value={floor.toString()}>
-                      {floor === 0
-                        ? "Ground Floor"
-                        : `${floor}${
-                            floor === 1
-                              ? "st"
-                              : floor === 2
-                              ? "nd"
-                              : floor === 3
-                              ? "rd"
-                              : "th"
-                          } Floor`}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(value) =>
+                    handleFilterChange({ target: { name: "floor", value } })
+                  }
+                  options={uniqueFloors.map((floor) =>
+                    floor === 0
+                      ? "Ground Floor"
+                      : `${floor}${
+                          floor === 1
+                            ? "st"
+                            : floor === 2
+                            ? "nd"
+                            : floor === 3
+                            ? "rd"
+                            : "th"
+                        } Floor`
+                  )}
+                  placeholder="Select Floor"
+                />
               </div>
 
               {showFilters && (
