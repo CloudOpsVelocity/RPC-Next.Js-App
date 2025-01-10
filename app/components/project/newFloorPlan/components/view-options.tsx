@@ -33,7 +33,7 @@ export function ViewOptions({ onSelect, selectedView }: Props) {
   const propCgId = useAtomValue(propCgIdAtom);
 
   return (
-      <div className="flex justify-around flex-nowrap overflow-x-auto gap-2 p-2 rounded-full shadow-lg bg-gray-50 scrollbar-hide">
+      <div className="flex !mt-0 md:!mt-[10px] justify-around flex-nowrap overflow-x-auto gap-2 p-2 rounded-full shadow-lg bg-gray-50 scrollbar-hide">
         {viewOptions.map(option => {
         if(!(option.id === "bhk" && propCgId === projectprops.plot)){
           return(

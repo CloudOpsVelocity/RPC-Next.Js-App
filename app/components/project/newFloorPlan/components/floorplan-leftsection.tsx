@@ -43,7 +43,7 @@ export default function FloorplanLeftsection({
   return (
     <div
       ref={parentRef}
-      className="space-y-3 sm:space-y-4 max-h-[350px] sm:max-h-[500px] md:max-h-[600px] overflow-y-auto px-2 sm:px-4"
+      className="space-y-3 w-full md:w-[50%] sm:space-y-4 max-h-[350px] sm:max-h-[500px] md:max-h-[600px] overflow-y-auto px-0 md:px-2 sm:px-4"
     >
       {dataList && dataList.length > 0 ? (
         <div
@@ -74,8 +74,8 @@ export default function FloorplanLeftsection({
                   {/* Header Section */}
                   <div className="flex flex-col items-start justify-between border-b border-gray-100 pb-2 sm:pb-4">
                     <div className=" flex justify-between items-start w-full  ">
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <h3 className="text-xl sm:text-2xl font-bold text-[#232323]">
+                      <div className="flex flex-wrap items-center gap-1 md:gap-2 mb-2">
+                        <h3 className="text-[18px] md:text-[20px] xl:text-[24px] font-bold text-[#232323]">
                           {unit.propType === projectprops.plot
                             ? `${unit.length}ftx${unit.width} ft`
                             : unit.bhkName}
@@ -87,7 +87,7 @@ export default function FloorplanLeftsection({
                         )}
                       </div>
 
-                      <div className="flex flex-wrap justify-between w-full sm:w-auto gap-4 mt-2 sm:mt-0">
+                      <div className="flex flex-wrap justify-between w-full sm:w-auto gap-4 md:mt-2 sm:mt-0">
                         {unit.superBuildUparea !== null && (
                           <div className="space-y-1">
                             <p className="text-gray-500 text-xs sm:text-sm font-medium">
@@ -149,7 +149,7 @@ export default function FloorplanLeftsection({
 
                   {/* Additional Details */}
                   <div className="flex justify-around gap-1 bg-gray-50 rounded-lg p-2">
-                    {unit &&
+                    {/* {unit &&
                       unit.bhkName !== undefined &&
                       unit.bhkName !== null &&
                       unit.bhkName !== "" &&
@@ -165,7 +165,7 @@ export default function FloorplanLeftsection({
                             </p>
                           </div>
                         </div>
-                      )}
+                      )} */}
                     {unit.totalNumberofBathroom !== null &&
                       unit.propType !== projectprops.plot && (
                         <div className="flex items-center gap-2">

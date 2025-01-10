@@ -73,30 +73,30 @@ export function FullScreenImageModal({
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b bg-white">
+        <div className="flex items-start md:items-center justify-between flex-col md:flex-row p-2 border-b bg-white relative">
           <h3 className="text-xl font-semibold text-[#0073C6]">
             {`${propCgId !== projectprops.plot ? unit.bhkName : `${unit.length}X${unit.width} ft`} - 
             ${propertyDetailsTypes && propertyDetailsTypes.get(propCgId) ? propertyDetailsTypes?.get(propCgId)?.name : "" } - 
             Unit ${unit.unitNumber}`}
           </h3>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-[6px] md:gap-4 mt-[10px] md:mt-0">
             
             <button  
               onClick={()=> unit.floorPlanUrl?.split(",")[0] ? downloadFn(unit.floorPlanUrl?.split(",")[0]) : ("")} 
-              className={`flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${unit.floorPlanUrl?.split(",")[0] ? "" : "cursor-not-allowed"} `}
+              className={`flex items-center gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${unit.floorPlanUrl?.split(",")[0] ? "" : "cursor-not-allowed"} `}
               disabled={unit.floorPlanUrl?.split(",")[0] ? false : true}
               title={unit.floorPlanUrl?.split(",")[0] ? "Click to Download Floorplan" : "Floorplan not Available"}
             >
               <FaDownload className="w-4 h-4" />
               <span>Download Floor Plan</span>
             </button>
-            <button onClick={()=>handleReqcallBack(unit)} className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors">
+            <button onClick={()=>handleReqcallBack(unit)} className="flex items-center gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors">
               <FaMessage className="w-4 h-4" />
               <span>Request Quotation</span>
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-1 rounded-full hover:bg-gray-100 transition-colors absolute md:relative right-[10px] top-[10px] md:right-0 md:top-0"
             >
               <FaTimes className="w-5 h-5 text-gray-600" />
             </button>
@@ -106,7 +106,7 @@ export function FullScreenImageModal({
         {/* Main Content */}
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
           {/* Left - Floor Plan Image */}
-          <div className="flex-1 p-6 flex items-center justify-center bg-[#F8FBFF]">
+          <div className="flex-1 p-[10px] md:p-6 flex items-center justify-center bg-[#F8FBFF]">
             <img
               src={unit.floorPlanUrl?.split(",")[0] ?? ImgNotAvail}
               alt={`Floor Plan for ${unit.bhkName}`}
@@ -115,7 +115,7 @@ export function FullScreenImageModal({
           </div>
 
           {/* Right - Unit Details */}
-          <div className="w-full lg:w-96 bg-white p-6 overflow-y-auto border-t lg:border-t-0 lg:border-l">
+          <div className="w-full lg:w-96 bg-white p-[10px] md:p-6 overflow-y-auto border-t lg:border-t-0 lg:border-l">
             <div className="space-y-6">
               {/* Area Details */}
               <div>

@@ -208,7 +208,7 @@ export default function FloorPlans({
   const rightSideUnit = modalState.unit !== null ? modalState.unit : projectUnitsData && projectUnitsData[0] ? projectUnitsData[0] : {};
 
   return (
-    <div className="w-[90%] mx-auto px-4 py-8">
+    <div className="w-full md:w-[90%] mx-auto px-3 md:px-4 py-8">
       <h2
         className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
         id="floorPlansdiv"
@@ -220,7 +220,7 @@ export default function FloorPlans({
       <div className="space-y-6 flex flex-col items-start justify-start">
         <div
           className={`flex justify-start items-start md:items-center mb-[2%] flex-col md:flex-row ${
-            phases?.length > 1 ? "mt-4" : "mt-[0%]"
+            phases?.length > 1 ? "mt-2 md:mt-4" : "mt-[0%]"
           }`}
         >
           {phases?.length > 1 && (
@@ -280,7 +280,7 @@ export default function FloorPlans({
           </>
         )}
 
-        <div className="mt-3 grid md:grid-cols-2 gap-6">
+        <div className="mt-3 gap-6 flex justify-between w-full ">
           {/* FLOOR PLAN LEFT SECTION */}
           <FloorplanLeftsection
             units={filteredUnits}
@@ -288,7 +288,7 @@ export default function FloorPlans({
             onSelectCard={onSelectCard}
             handleReqcallBack={handleReqcallBack}
           />
-          <div className="hidden md:block">
+          <div className="hidden md:block w-[50%] ">
             <div 
               className="sticky top-4" 
               onClick={()=> rightSideUnit ? onSelectCard(rightSideUnit) : ("")}
