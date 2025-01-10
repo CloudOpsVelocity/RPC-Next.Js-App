@@ -18,12 +18,13 @@ export default async function Page({ params: { city, lt } }: Props) {
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
+  console.log(filterValues);
   const serverData = await getSearchData(filterValues.LT as string);
   return (
     <NewSearchPage
       serverData={serverData}
       frontendFilters={{
-        locality: [`${lt}+${filterValues.LT}`],
+        localities: [`${lt}+${filterValues.LT}`],
       }}
     />
   );
