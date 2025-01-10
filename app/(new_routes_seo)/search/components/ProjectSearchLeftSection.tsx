@@ -16,6 +16,7 @@ import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
+import { usePathname } from "next/navigation";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -25,7 +26,7 @@ type Props = {
 function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   useHydrateAtoms([
     [
-      projSearchStore, 
+      projSearchStore,
       {
         type: "update",
         payload: {
@@ -37,9 +38,12 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
+  const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  let isTrue = serverData !== null || apiFilterQueryParams !== null;
+  let isTrue = pathname.includes("search")
+    ? true
+    : serverData !== null && apiFilterQueryParams !== null;
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
@@ -67,7 +71,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       // ...RTK_CONFIG,
     });
 
-  const allItems = serverData && !isTrue ? serverData : data?.pages?.flat() || [];
+  const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
 
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
@@ -149,15 +153,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   });
 
   const LoadingBlock = () => (
-      <div className="flex items-center justify-center h-full w-full ">
-        <div className="text-center flex items-center justify-center flex-col ">
-          <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
-          <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">Loading...</h2>
-        </div>
+    <div className="flex items-center justify-center h-full w-full ">
+      <div className="text-center flex items-center justify-center flex-col ">
+        <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
+        <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">
+          Loading...
+        </h2>
       </div>
+    </div>
   );
-
-  console.log(allItems);
 
   return (
     <div
@@ -168,7 +172,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       {isLoading ? (
         <LoadingBlock />
       ) : allItems.length > 0 ? (
-        <div 
+        <div
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,
             width: "100%",

@@ -22,14 +22,18 @@ const ListingSearchRightSection = ({ serverData }: any) => {
       ),
     []
   );
+
   const [apiFilterQueryParams] = useQueryState("sf");
+  let isTrue = serverData !== null || apiFilterQueryParams !== null;
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [
-
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
+        if (serverData && !isTrue) {
+          return serverData;
+        }
         const response = await getSearchData(
           pageParam,
           apiFilterQueryParams ? apiFilterQueryParams : ""

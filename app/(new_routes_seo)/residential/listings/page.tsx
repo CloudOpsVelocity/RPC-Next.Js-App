@@ -1,6 +1,7 @@
 import React from "react";
 import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import NewSearchPage from "../../search/NewSearchPage";
 
 type Props = {
   params: {
@@ -12,5 +13,5 @@ type Props = {
 
 export default async function Page({ params: { cg, city } }: Props) {
   const severData = await getProjSearchData(``);
-  return <ProjectSearchPage serverData={severData} frontendFilters={{}} />;
+  return <NewSearchPage serverData={severData} frontendFilters={{}} />;
 }

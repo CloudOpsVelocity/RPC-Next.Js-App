@@ -16,18 +16,36 @@ import { useAtom, useAtomValue } from "jotai";
 /* import ListingSearchTabs from "../ListingSearchTabs"; */
 import { projSearchStore } from "../../../store/projSearchStore";
 import ListingSearchTabs from "../ListingSearchTabs";
+import { usePathname } from "next/navigation";
+import { useHydrateAtoms } from "jotai/utils";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
+  frontendFilters?: any;
 };
 
-function LeftSection({ mutate, serverData }: Props) {
+function LeftSection({ mutate, serverData, frontendFilters }: Props) {
+  useHydrateAtoms([
+    [
+      projSearchStore,
+      {
+        type: "update",
+        payload: {
+          ...frontendFilters,
+        },
+      },
+    ],
+  ]);
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
+  const pathname = usePathname();
+  let isTrue = pathname.includes("search")
+    ? true
+    : serverData !== null && apiFilterQueryParams !== null;
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
       queryKey: [
@@ -48,9 +66,11 @@ function LeftSection({ mutate, serverData }: Props) {
         return nextPage;
       },
       cacheTime: 300000,
+      enabled: isTrue,
       // ...RTK_CONFIG,
     });
-  const allItems = data?.pages?.flat() || [];
+  const allItems =
+     !isTrue ? serverData : data?.pages?.flat() || [];
 
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
@@ -128,12 +148,12 @@ function LeftSection({ mutate, serverData }: Props) {
     <div className="flex items-center justify-center h-full w-full ">
       <div className="text-center flex items-center justify-center flex-col ">
         <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
-        <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">Loading...</h2>
+        <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">
+          Loading...
+        </h2>
       </div>
     </div>
   );
-
-
 
   return (
     <div

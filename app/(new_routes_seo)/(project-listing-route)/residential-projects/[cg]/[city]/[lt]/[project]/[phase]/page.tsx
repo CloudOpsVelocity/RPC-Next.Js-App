@@ -4,6 +4,7 @@ import {
   findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { notFound } from "next/navigation";
@@ -28,17 +29,17 @@ export default async function Page({ params }: Props) {
     `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
   );
   return (
-    <ListingSearchPage
+    <NewListingSearchpage
       serverData={severData}
       frontendFilters={{
-        locality: [`${lt}+${filtersValues.LT}`],
+        localities: [`${lt}+${filtersValues.LT}`],
         cg: filtersValues.CG,
         projName: project,
         projIdEnc: filtersValues.PJ,
         ...(filtersValues.count === 7
           ? {
-              unitTypes: [parseInt(filtersValues.BH as string)],
-              propTypes: parseInt(filtersValues.PT as string),
+              bhk: [parseInt(filtersValues.BH as string)],
+              propType: parseInt(filtersValues.PT as string),
             }
           : {}),
       }}
