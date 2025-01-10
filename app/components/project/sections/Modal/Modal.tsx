@@ -50,7 +50,6 @@ const Modal = ({
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
   const propId = useAtomValue(propCgIdAtom);
-  console.log(propId);
   const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
   const handleReset = () => {
