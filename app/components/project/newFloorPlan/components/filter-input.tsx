@@ -6,13 +6,17 @@ type FilterInputProps = {
   options: string[] | number[];
   placeholder: string;
   onChange: (value: string) => void;
+  onBlur?:any;
+  onSearchChange?:any;
 };
 
 const FilterInput: React.FC<FilterInputProps> = ({
   value,
   options,
   placeholder,
-  onChange,
+  onChange, 
+  onBlur,
+  onSearchChange
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -34,7 +38,7 @@ const FilterInput: React.FC<FilterInputProps> = ({
   }, []);
 
   const filteredOptions = options.filter((option) =>
-    String(option).toLowerCase().includes(value.toLowerCase())
+    String(option).toLowerCase().includes(value && value !== "" && typeof(value) !== "number" ? value.toLowerCase() : value)
   );
 
   return (
@@ -43,10 +47,11 @@ const FilterInput: React.FC<FilterInputProps> = ({
         <input
           type="text"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onSearchChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
           className="w-full p-2 border rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0073C6]"
           placeholder={placeholder}
+          onBlur={onBlur}
         />
         {value ? (
           <button

@@ -52,7 +52,7 @@ export default function FloorPlans({
   partialUnitData,
   phaseOverview,
   slug,
-  postedById
+  postedById,
 }: FloorPlansProps): JSX.Element {
   const [selectedPhase, setSelectedPhase] = useAtom(currentPhaseAtom);
   const propCgId = useAtomValue(propCgIdAtom);
@@ -65,6 +65,7 @@ export default function FloorPlans({
     isOpen: false,
     unit: null,
   });
+
   const [fullScreenModalState, setFullScreenModalState] = useState<{
     isOpen: boolean;
     unit: PropertyUnit | null;
@@ -102,9 +103,9 @@ export default function FloorPlans({
   };
 
   const handleViewClick = (type: string) => {
+    setAllBhks();
     setSelectedView(type);
     handleBhkClick("All");
-    setAllBhkNames([]);
   };
 
   const { data: projectUnitsData, isLoading } = useQuery({
@@ -143,20 +144,62 @@ export default function FloorPlans({
       ? memoOptions()
       : { options: {}, filteredUnits: projectUnitsData || [] };
 
-  if (
-    allBhkNames.length === 0 &&
-    selectedView === "bhk" &&
-    Array.isArray(options?.bhkName)
-  ) {
-    let data =
-      options?.bhkName?.length > 0 ? ["All", ...options.bhkName] : ["All"];
-    setAllBhkNames(data);
-  }
+  const setAllBhks = () => {
+    if (Array.isArray(options?.bhkName)) {
+      let data = ["All", ...options.bhkName];
+      setAllBhkNames(() => {
+        return [...data];
+      });
+    }
+  };
 
   useEffect(() => {
-    setAllBhkNames([]);
     setSelectedView("type");
+    setAllBhks();
   }, [propCgId, phases]);
+
+  const onSelectCard = (unit: any) => {
+    setModalState({ isOpen: true, unit });
+    setSelectedView("bhk");
+    handleBhkClick("All");
+
+    let allKeys = [
+      "unitNumber",
+      "bhkName",
+      "towerName",
+      "floor",
+      "facingName",
+      "block",
+      "length",
+      "width",
+      "plotArea",
+    ];
+    allKeys.forEach((eachKey) => {
+      if (unit[eachKey]) {
+        handleUnitFilterChange(eachKey, unit[eachKey]);
+      }
+    });
+  };
+
+  const onClosingPopup = () => {
+    handleBhkClick("All");
+    setAllBhks();
+    setModalState({ isOpen: false, unit: null });
+    let allKeys = [
+      "unitNumber",
+      "bhkName",
+      "towerName",
+      "floor",
+      "facingName",
+      "block",
+      "length",
+      "width",
+      "plotArea",
+    ];
+    allKeys.forEach((eachKey) => {
+      handleUnitFilterChange(eachKey, "");
+    });
+  };
   const handleOpenFullScreenModal = (unit: PropertyUnit) => {
     setFullScreenModalState({ isOpen: true, unit: unit });
   };
@@ -247,8 +290,8 @@ export default function FloorPlans({
           {/* FLOOR PLAN LEFT SECTION */}
           <FloorplanLeftsection
             units={filteredUnits}
-            setModalState={setModalState}
             isLoading={isLoading}
+            onSelectCard={onSelectCard}
             handleReqcallBack={handleReqcallBack}
           />
           <div className="hidden md:block">
@@ -277,7 +320,7 @@ export default function FloorPlans({
       {modalState.isOpen && (
         <FloorPlanModal
           isOpen={modalState.isOpen}
-          onClose={() => setModalState({ isOpen: false, unit: null })}
+          onClose={() => onClosingPopup()}
           initialUnit={projectUnitsData[0]}
           units={projectUnitsData || []}
           filters={unitFilters}

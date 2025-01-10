@@ -47,8 +47,6 @@ export function PropertyTabs({ types }: { types:any }) {
     }
   };
 
-  console.log(types)
-
   return (
     <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[20px] ">
       {propertyDetailsTypes != undefined &&

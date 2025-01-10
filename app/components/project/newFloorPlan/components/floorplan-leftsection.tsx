@@ -13,16 +13,16 @@ import { projectprops } from "@/app/data/projectDetails";
 import { PropertyUnit } from "../types/floor-plan";
 
 type Props = {
-  setModalState: (state: any) => void;
   units: any;
   isLoading: boolean;
+  onSelectCard: any;
   handleReqcallBack: (unit: PropertyUnit) => void;
 };
 
 export default function FloorplanLeftsection({
-  setModalState,
   units,
   isLoading,
+  onSelectCard,
   handleReqcallBack,
 }: Props) {
   const parentRef = useRef<HTMLDivElement>(null);
@@ -68,7 +68,7 @@ export default function FloorplanLeftsection({
                 }}
               >
                 <button
-                  onClick={() => setModalState({ isOpen: true, unit })}
+                  onClick={() => onSelectCard(unit)}
                   className="w-full rounded-lg sm:rounded-xl border border-gray-200 sm:border-2 p-2 sm:p-4 transition-all hover:border-[#0073C6] hover:shadow-xl group from-[#F8FAFC] to-white"
                 >
                   {/* Header Section */}
