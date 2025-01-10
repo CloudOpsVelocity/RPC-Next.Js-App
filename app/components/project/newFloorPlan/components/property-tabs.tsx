@@ -48,7 +48,7 @@ export function PropertyTabs({ types }: { types:any }) {
   };
 
   return (
-    <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[20px] ">
+    <div className=" flex justify-start items-start flex-wrap !mt-0 md:mt-[3%] gap-[10px] md:gap-[20px] ">
       {propertyDetailsTypes != undefined &&
         propertyDetailsTypes != null &&
         allKeys.map((keyName) => {

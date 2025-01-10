@@ -162,19 +162,6 @@ export function FloorPlanModal({
     ensureUnitVisible(currentUnit);
   }, [filteredUnits]);
 
-  function isActualNaN(value: any) {
-    return value !== value; // Only NaN is not equal to itself
-  }
-  const handleFilterChange = (name: string, value: string | number) => {
-    setFilters((filters: PropertyUnit) => ({
-      ...filters,
-      [name]: isActualNaN(value) ? "" : value,
-    }));
-  };
-  // const handleRequestQuotation = () => {
-  //   // Add your quotation request logic here
-  //   // alert(`Requesting quotation for Unit ${currentUnit.unitNumber}`);
-  // };
   if (!isOpen) return null;
   const mainImageUrl = currentUnit?.floorPlanUrl?.split(",")[0] || ImgNotAvail;
   const totalPages =
@@ -191,16 +178,16 @@ export function FloorPlanModal({
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-2 border-b bg-white">
+        <div className="flex items-start md:items-center justify-between flex-col md:flex-row p-2 border-b bg-white relative">
           <h3 className="text-lg md:text-xl font-semibold text-[#0073C6]">
             {`${propCgId !== projectprops.plot ? currentUnit.bhkName : `${currentUnit.length}X${currentUnit.width} ft`} - 
             ${propertyDetailsTypes && propertyDetailsTypes.get(propCgId) ? propertyDetailsTypes?.get(propCgId)?.name : "" } - 
             Unit ${currentUnit.unitNumber}`}
           </h3>
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-[10px] md:mt-0">
             <button
               onClick={()=>handleReqcallBack(unit)}
-              className="px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
+              className="px-[8px] py-[2px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
             >
               Request Quotation
             </button>
@@ -212,7 +199,7 @@ export function FloorPlanModal({
             </button>
             <button
               onClick={onClose}
-              className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-1 rounded-full hover:bg-gray-100 transition-colors absolute md:relative right-[10px] top-[10px] md:right-0 md:top-0 "
             >
               <FaTimes className="w-5 h-5 text-gray-600" />
             </button>
@@ -222,33 +209,22 @@ export function FloorPlanModal({
         {/* Main Content */}
         <div className="flex h-[calc(100vh-48px)]">
           {/* Left Side - Filters */}
-          <div
-            className={`${showFilters ? "absolute inset-0 z-20 bg-white" : "hidden"
-            } md:relative md:block w-full md:w-64 border-r bg-[#F8FBFF] p-3 overflow-y-auto`}
-          >
-            {/* Filter inputs */}
             <PopupFilters
-              handleUnitFilterChange={handleFilterChange}
+              // handleUnitFilterChange={handleFilterChange}
               options={options}
               dataFilters={filters}
-              // setFilters={setFilters}
+              setDataFilters={setFilters}
+              showFilters={showFilters}
+              setShowFilters={setShowFilters}
             />
 
-            {showFilters && (
-              <button
-                onClick={() => setShowFilters(false)}
-                className="w-full mt-4 p-2 bg-[#0073C6] text-white rounded-lg md:hidden"
-              >
-                Apply Filters
-              </button>
-            )}
-          </div>
+
 
           {/* Center - Floor Plan and Details */}
-          <div className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 overflow-y-auto">
+          <div className="flex-1 flex flex-col overflow-y-auto md:overflow-hidden pb-[50px]">
+            <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 p-[10px] md:p-4 overflow-y-auto">
               {/* Floor Plan Image */}
-              <div className="bg-white rounded-xl shadow-lg p-4">
+              <div className="bg-white rounded-xl shadow-lg p-[10px] md:p-4">
                 <div className="h-full flex flex-col">
                   <div
                     className="flex-1 relative"
@@ -266,6 +242,7 @@ export function FloorPlanModal({
                       <FaExpand className="w-5 h-5 text-gray-600" />
                     </button>
                   </div>
+                  {filteredUnits.length > 2 &&
                   <div className="flex justify-between mt-4"> 
                     <button
                       onClick={handlePrevUnit}
@@ -284,15 +261,16 @@ export function FloorPlanModal({
                       <FaChevronRight />
                     </button>
                   </div>
+                  }
                 </div>
               </div>
 
               {/* Unit Details */}
-              <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+              <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 max-h-[100%] overflow-y-auto ">
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2">
                   Area Details
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+                <div className="flex flex-wrap gap-2 sm:gap-4">
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Super Built-up Area"
@@ -380,7 +358,7 @@ export function FloorPlanModal({
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6">
                   Unit Features
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+                <div className="flex flex-wrap gap-2 sm:gap-4">
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Unit Type"
@@ -445,7 +423,7 @@ export function FloorPlanModal({
 
             {/* Bottom Carousel */}
             {visibleUnits && visibleUnits.length > 0 && (
-              <div className="border-t bg-white p-3">
+              <div className="border-t bg-white p-[10px] md:p-4">
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="text-sm font-semibold">
                     Available Units ({filteredUnits ? filteredUnits.length : 0})
