@@ -14,6 +14,7 @@ type Props = {
     cg: string;
     city: string;
     lt: string;
+    phase: string;
     bhk_unit_type: string;
     project: string;
   };
@@ -26,7 +27,7 @@ export default async function Page({ params }: Props) {
   if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
   const severData = await getSearchData(
-    `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
+    `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
   );
   console.log(filtersValues);
   return (
@@ -43,6 +44,9 @@ export default async function Page({ params }: Props) {
               propType: parseInt(filtersValues.PT as string),
             }
           : {}),
+          ...(filtersValues.PH && {
+            phaseId: [`${params.phase}+${filtersValues.PH}`],
+          }),
       }}
     />
   );

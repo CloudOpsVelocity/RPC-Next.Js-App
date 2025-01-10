@@ -41,8 +41,10 @@ export default async function Page({ params }: Props) {
   // filtersValues.PT == "32"
   //   ? filtersValues.count === 7
   //   : filtersValues.count === 8;
+
   if (!isProjectListing) {
     const values = await findPathForProjectListing(pathname);
+
     if (!values) return notFound();
     filtersValues = extractListingParamsValues(values);
     serverData = await getSearchData(
@@ -50,7 +52,7 @@ export default async function Page({ params }: Props) {
         filtersValues.PT
       }&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${
         filtersValues.PJ
-      }`
+      }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
     );
   } else {
     const {
@@ -85,6 +87,7 @@ export default async function Page({ params }: Props) {
       totalPrice,
     };
   }
+
   return !isProjectListing ? (
     <NewListingSearchpage
       serverData={serverData}
@@ -94,7 +97,10 @@ export default async function Page({ params }: Props) {
         propType: parseInt(filtersValues.PT as string),
         cg: filtersValues.CG,
         projName: project,
-        projIdEnc: filtersValues.PJ,
+        projIdEnc: filtersValues.PH,
+        ...(filtersValues.PH && {
+          phaseId: [`${params.phase}+${filtersValues.PH}`],
+        }),
       }}
     />
   ) : (
@@ -115,7 +121,6 @@ export async function generateMetadata(
   },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  console.log(params.bhk_unit_type);
   if (!params.bhk_unit_type.includes("listing")) {
     return {
       title: `${params.bhk_unit_type} ${params.lt}, for ${

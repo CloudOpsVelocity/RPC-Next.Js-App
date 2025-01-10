@@ -24,7 +24,7 @@ import { myClientLogger } from "@/app/utils/clientLogger";
 import SelectedFilters from "./SelectedFilters";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
 
-export default function HeaderFilters() {
+export default function HeaderFilters({ isListing }: { isListing: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
@@ -43,7 +43,7 @@ export default function HeaderFilters() {
     onSearchChange,
     name,
   } = useProjSearchMatcher();
- 
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -93,9 +93,9 @@ export default function HeaderFilters() {
 
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
-    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName); 
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
-  }; 
+  };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
     setSearchQuery(value);
@@ -361,7 +361,9 @@ export default function HeaderFilters() {
               )}
             </div>
             <div className="order-2 sm:order-first">
-              <ProjSearchCityDropDown handleDropdownToggle={handleDropdownToggle} />
+              <ProjSearchCityDropDown
+                handleDropdownToggle={handleDropdownToggle}
+              />
             </div>
             <div className="hidden md:flex items-center gap-2 order-2">
               {/*  <PropertyTypeDropdown
@@ -383,6 +385,7 @@ export default function HeaderFilters() {
                 onToggle={() => handleDropdownToggle("budget")}
               /> */}
               <ShowAllFiltersButton
+                isListing={isListing}
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
                 isOpen={openDropdown === "allFilters"}
@@ -438,6 +441,7 @@ export default function HeaderFilters() {
                 onToggle={() => handleDropdownToggle("budget")}
               /> */}
               <ShowAllFiltersButton
+                isListing={isListing}
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
                 isOpen

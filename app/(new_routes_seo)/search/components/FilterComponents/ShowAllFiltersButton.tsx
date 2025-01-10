@@ -29,6 +29,7 @@ interface ShowAllFiltersButtonProps {
   toggleFilter: (category: string, value: string) => void;
   isOpen: boolean;
   onToggle: () => void;
+  isListing: boolean;
 }
 interface Location {
   name: string;
@@ -42,6 +43,7 @@ export default function ShowAllFiltersButton({
   toggleFilter,
   isOpen,
   onToggle,
+  isListing,
 }: ShowAllFiltersButtonProps) {
   const path = usePathname();
   const [expandedSections, setExpandedSections] = useState<{
@@ -236,7 +238,9 @@ export default function ShowAllFiltersButton({
   const handleLocationChange = (selected: Location[]) => {
     console.log("Selected locations:", selected);
   };
-  const isproject = path !== "/search/listing" && state.listedBy == null;
+  const isproject = path.includes("search")
+    ? state.listedBy == null
+    : isListing;
   return (
     <div className="  relative">
       <button
