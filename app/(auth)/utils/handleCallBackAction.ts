@@ -42,8 +42,8 @@ export default function useCallBackAction(data:any){
 
   }
 }
-
-const downloadFn = async (link:string) => {
+ 
+export const downloadFn = async (link:string) => {
     try {
       const response = await fetch(link);
       const blob = await response.blob();

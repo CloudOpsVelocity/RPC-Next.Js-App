@@ -51,7 +51,7 @@ const FilterInput: React.FC<FilterInputProps> = ({
           onFocus={() => setIsFocused(true)}
           className="w-full p-2 border rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0073C6]"
           placeholder={placeholder}
-          onBlur={onBlur}
+          onBlur={(e) => onBlur(e.target.value)}
         />
         {value ? (
           <button
