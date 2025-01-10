@@ -35,7 +35,7 @@ const nextConfig = {
         hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
       },
       {
-        hostname: "https://d24ksaw8earfo7.cloudfront.net",
+        hostname: "d24ksaw8earfo7.cloudfront.net",
       },
     ],
   },
