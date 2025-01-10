@@ -85,7 +85,6 @@ export default async function Page({ params }: Props) {
       totalPrice,
     };
   }
-
   return !isProjectListing ? (
     <NewListingSearchpage
       serverData={serverData}
