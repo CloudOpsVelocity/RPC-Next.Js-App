@@ -15,6 +15,7 @@ import useDownload from "@/app/hooks/property/useDownload";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { FaDownload, FaTimes, FaShare } from "react-icons/fa";
 import { BiMessage } from "react-icons/bi";
+import { propCgIdAtom } from "@/app/store/vewfloor";
 
 const Modal = ({
   isOpen,
@@ -48,7 +49,8 @@ const Modal = ({
 
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
-  const projStaleData = useAtomValue(projectReqDataAtom);
+  const propId = useAtomValue(propCgIdAtom);
+  console.log(propId);
   const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
   const handleReset = () => {
