@@ -8,6 +8,8 @@ import {
   findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
+import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -44,22 +46,22 @@ export default async function Page({
     );
   }
   return PT === "36" ? (
-    <ListingSearchPage
+    <NewListingSearchpage
       serverData={severData}
       frontendFilters={{
-        locality: [`${lt}+${LT}`],
-        unitTypes: [parseInt(BH as string)],
-        propTypes: parseInt(PT as string),
+        localities: [`${lt}+${LT}`],
+        bhk: [parseInt(BH as string)],
+        propType: parseInt(PT as string),
         cg: CG,
       }}
     />
   ) : (
-    <ProjectSearchPage
+    <NewSearchPage
       serverData={severData}
       frontendFilters={{
-        locality: [`${lt}+${LT}`],
-        unitTypes: [parseInt(BH as string)],
-        propTypes: parseInt(PT as string),
+        localities: [`${lt}+${LT}`],
+        bhk: [parseInt(BH as string)],
+        propType: parseInt(PT as string),
         cg: CG,
       }}
     />

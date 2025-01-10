@@ -13,6 +13,7 @@ import {
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { notFound } from "next/navigation";
+import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 
 type Props = {
   params: {
@@ -29,7 +30,7 @@ export default async function Page({ params: { cg, city } }: Props) {
   const slugValues = extractListingParamsValues(values);
   const severData = await getProjSearchData(`cg=${slugValues.CG}`);
   return (
-    <ProjectSearchPage
+    <NewSearchPage
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,

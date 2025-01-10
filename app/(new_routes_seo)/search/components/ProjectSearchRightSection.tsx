@@ -7,6 +7,7 @@ import { useInfiniteQuery } from "react-query";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import RTK_CONFIG from "@/app/config/rtk";
+import { usePathname } from "next/navigation";
 
 const RightSection = ({ serverData }: any) => {
   const Map = useMemo(
@@ -21,13 +22,18 @@ const RightSection = ({ serverData }: any) => {
     []
   );
   const [apiFilterQueryParams] = useQueryState("sf");
+  const pathname = usePathname();
+  let isTrue = pathname.includes("search")
+    ? true
+    : serverData !== null && apiFilterQueryParams !== null;
+
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
-        if (serverData) {
+        if (!isTrue) {
           return serverData;
         }
         const response = await getSearchData(
@@ -47,6 +53,7 @@ const RightSection = ({ serverData }: any) => {
       ...RTK_CONFIG,
       enabled: false,
     });
+  const apidata = !isTrue ? serverData : data?.pages?.flat() || [];
   return (
     <div
       className="w-[100%] sm:w-[50%]  flex justify-start items-start z-[1] md:w-[50%] scroll-mt-[150px]"
@@ -54,9 +61,9 @@ const RightSection = ({ serverData }: any) => {
     >
       <Map
         projName={"Searched Location"}
-        lat={(data && data?.pages.flat()[0]?.lat) ?? 47.46489}
-        lang={(data && data?.pages.flat()[0]?.lang) ?? 15.34043}
-        data={data?.pages.flat()}
+        lat={(apidata && apidata[0]?.lat) ?? 47.46489}
+        lang={(apidata && apidata[0]?.lang) ?? 15.34043}
+        data={apidata}
         type={"proj"}
       />
     </div>

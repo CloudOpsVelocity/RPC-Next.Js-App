@@ -5,7 +5,7 @@ import {
   MdKeyboardArrowDown,
   MdApartment,
   MdHouse,
-  MdVilla, 
+  MdVilla,
   MdMapsHomeWork,
   MdLandscape,
   MdExpandMore,
@@ -40,7 +40,7 @@ interface Location {
 export default function ShowAllFiltersButton({
   selectedFilters,
   toggleFilter,
-  isOpen, 
+  isOpen,
   onToggle,
 }: ShowAllFiltersButtonProps) {
   const path = usePathname();
@@ -82,41 +82,37 @@ export default function ShowAllFiltersButton({
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
   const getPhasesData = async () => {
-    let url = `${
-      process.env.NEXT_PUBLIC_BACKEND_URL
-    }/post-project/phase-name-by-project?projIdEnc=${state?.projIdEnc}`;
+    let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/post-project/phase-name-by-project?projIdEnc=${state?.projIdEnc}`;
     const res = await fetch(url);
     const responseData = await res.json();
     return responseData;
   };
 
-  const {data, isLoading:PHASElOADING} = useQuery({
-    queryKey:['phases'],
-    queryFn: ()=>getPhasesData(),
+  const { data, isLoading: PHASElOADING } = useQuery({
+    queryKey: ["phases"],
+    queryFn: () => getPhasesData(),
     enabled: state.projIdEnc !== null,
-    ...RTK_CONFIG
-  })
+    ...RTK_CONFIG,
+  });
 
+  let phaseObjList: any = [];
 
-  let phaseObjList:any = [];
-
-  if(data && Object.keys(data).length > 0){
-    Object.keys(data).forEach(eachKey => {
-      if(eachKey === "status") return;
+  if (data && Object.keys(data).length > 0) {
+    Object.keys(data).forEach((eachKey) => {
+      if (eachKey === "status") return;
       phaseObjList = [
-        ...phaseObjList, 
-        { cid: parseInt(eachKey), constDesc: data[eachKey] }
-      ]
-    })
+        ...phaseObjList,
+        { cid: `${data[eachKey]}+${eachKey}`, constDesc: data[eachKey] },
+      ];
+    });
   }
-  
+
   const renderFilterSection = (
     title: string,
     data: any[],
     category: string,
     initialDisplay: number = 5
   ) => {
-    console.log(data);
     const isExpanded = expandedSections[category] || false;
     const displayData = isExpanded ? data : data.slice(0, initialDisplay);
     const radioorChecked = [
@@ -163,7 +159,7 @@ export default function ShowAllFiltersButton({
                       ? propertyiconss[item as keyof typeof propertyiconss]
                           ?.id || item.cid
                       : item.cid || item.value || item.cid;
-                  // toggleFilter(category, value);
+
                   dispatch({
                     type: "update",
                     payload: {
@@ -296,19 +292,25 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.projectstatus,
                   "projStatus"
                 )}
-                {!isproject && phaseObjList && phaseObjList.length > 0 &&
-                renderFilterSection( 
-                  "Phases", phaseObjList, "phaseId"
-                )}
               {!isproject &&
-                renderFilterSection( 
+                phaseObjList &&
+                phaseObjList.length > 0 &&
+                renderFilterSection("Phases", phaseObjList, "phaseId")}
+              {!isproject &&
+                renderFilterSection(
                   "Property Status",
                   SEARCH_FILTER_DATA.listingStatus,
                   "propStatus"
                 )}
               {renderFilterSection(
                 "Property Type",
-                 state.bhk.length > 0 ? [...Object.keys(propertyiconss).filter(each=>each != "plt")] : Object.keys(propertyiconss),
+                state.bhk.length > 0
+                  ? [
+                      ...Object.keys(propertyiconss).filter(
+                        (each) => each != "plt"
+                      ),
+                    ]
+                  : Object.keys(propertyiconss),
                 "propType"
               )}
               {state.propType !== 32 &&

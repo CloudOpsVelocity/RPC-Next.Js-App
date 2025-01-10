@@ -16,6 +16,7 @@ import {
   BASE_PATH_PROJECT_LISTING,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { notFound } from "next/navigation";
+import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 type Props = {
   params: {
     cg: string;
@@ -31,10 +32,10 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
   const slugValues = extractListingParamsValues(values);
   const severData = await getProjSearchData(`localities=${slugValues.LT}`);
   return (
-    <ProjectSearchPage
+    <NewSearchPage
       serverData={severData}
       frontendFilters={{
-        locality: [`${lt}+${slugValues.LT}`],
+        localities: [`${lt}+${slugValues.LT}`],
         cg: slugValues.CG,
       }}
     />

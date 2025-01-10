@@ -4,15 +4,24 @@ import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearc
 import RightSection from "../components/ProjectSearchRightSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 
-type Props = {};
+type Props = {
+  serverData: any;
+  frontendFilters: any;
+};
 
-export default function Page({}: Props) {
+export default function NewListingSearchpage({
+  serverData,
+  frontendFilters,
+}: Props) {
   return (
     <main className="pt-[6%] mt-[10%] sm:mt-0">
       <ProjSearchMainFilterSection />
       <div className="max-w-[98%] sm:w-[99%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap ">
-        <ListingSearhLeftSection />
-        <ListingSearchRightSection />
+        <ListingSearhLeftSection
+          serverData={serverData}
+          frontendFilters={frontendFilters}
+        />
+        <ListingSearchRightSection serverData={serverData} />
       </div>
     </main>
   );

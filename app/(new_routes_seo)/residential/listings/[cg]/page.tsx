@@ -4,6 +4,7 @@ import {
   findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -23,7 +24,7 @@ export default async function Page({ params: { cg } }: Props) {
   const slugValues = extractListingParamsValues(values);
   const severData = await getProjSearchData(`cg=${slugValues.CG}`);
   return (
-    <ProjectSearchPage
+    <NewSearchPage
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,

@@ -26,6 +26,7 @@ export const initialState: SearchFilter = {
   lat: null,
   lng: null,
   projName: null,
+  phaseId: [],
 };
 
 export default function parseProjectSearchQueryParams(params: string) {
@@ -53,9 +54,10 @@ export default function parseProjectSearchQueryParams(params: string) {
       key === "bhk" ||
       key === "builderIds" ||
       key === "facings" ||
-      key === "localities"
+      key === "localities" ||
+      key === "phaseId"
     ) {
-      if (key === "localities" || key === "builderIds") {
+      if (key === "localities" || key === "builderIds" || key === "phaseId") {
         filters[key] = value.split(",").map(String);
       } else {
         filters[key] = value.includes(",")

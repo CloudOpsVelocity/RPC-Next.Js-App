@@ -12,17 +12,41 @@ import {
 import { FaRuler, FaTree, FaDownload, FaMessage } from "react-icons/fa6";
 import { PropertyUnit } from "../types/floor-plan";
 import { ImgNotAvail } from "@/app/data/project";
+import { useAtomValue } from "jotai";
+import { propCgIdAtom } from "@/app/store/vewfloor";
+import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
+import { downloadFn } from "@/app/(auth)/utils/handleCallBackAction";
 
 interface FullScreenImageModalProps {
   isOpen: boolean;
   onClose: () => void;
   unit: PropertyUnit;
+  handleReqcallBack: any;
 }
+
+type Props = {
+  title: string;
+  value: any;
+  icon: any;
+};
+
+const DataItem = ({ title, value, icon }: Props) => {
+  return (
+    <div key={title} className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+      <div className="bg-[#ECF7FF] p-2 rounded-lg">{icon}</div>
+      <div>
+        <p className="text-[#4D6677] text-sm font-medium">{title}</p>
+        <p className="text-[#303A42] text-base font-semibold">{value}</p>
+      </div>
+    </div>
+  );
+};
 
 export function FullScreenImageModal({
   isOpen,
   onClose,
   unit,
+  handleReqcallBack
 }: FullScreenImageModalProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -40,6 +64,8 @@ export function FullScreenImageModal({
     };
   }, [isOpen, onClose]);
 
+  const propCgId = useAtomValue(propCgIdAtom);
+ 
   if (!isOpen) return null;
 
   return (
@@ -49,14 +75,22 @@ export function FullScreenImageModal({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b bg-white">
           <h3 className="text-xl font-semibold text-[#0073C6]">
-            {unit.bhkName} - Unit {unit.unitNumber}
+            {`${propCgId !== projectprops.plot ? unit.bhkName : `${unit.length}X${unit.width} ft`} - 
+            ${propertyDetailsTypes && propertyDetailsTypes.get(propCgId) ? propertyDetailsTypes?.get(propCgId)?.name : "" } - 
+            Unit ${unit.unitNumber}`}
           </h3>
           <div className="flex items-center gap-4">
-            <button className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors">
+            
+            <button  
+              onClick={()=> unit.floorPlanUrl?.split(",")[0] ? downloadFn(unit.floorPlanUrl?.split(",")[0]) : ("")} 
+              className={`flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${unit.floorPlanUrl?.split(",")[0] ? "" : "cursor-not-allowed"} `}
+              disabled={unit.floorPlanUrl?.split(",")[0] ? false : true}
+              title={unit.floorPlanUrl?.split(",")[0] ? "Click to Download Floorplan" : "Floorplan not Available"}
+            >
               <FaDownload className="w-4 h-4" />
               <span>Download Floor Plan</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors">
+            <button onClick={()=>handleReqcallBack(unit)} className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors">
               <FaMessage className="w-4 h-4" />
               <span>Request Quotation</span>
             </button>
@@ -85,73 +119,46 @@ export function FullScreenImageModal({
             <div className="space-y-6">
               {/* Area Details */}
               <div>
-                <h4 className="text-lg font-semibold text-[#303A42] border-b pb-2">
+                <h4 className="text-lg font-semibold text-[#303A42] mb-[20px] border-b pb-2">
                   Area Details
                 </h4>
-                <div className="grid gap-4 mt-4">
-                  <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                    <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                      <FaRuler className="text-[#0073C6] text-2xl" />
-                    </div>
-                    <div>
-                      <p className="text-[#4D6677] text-sm font-medium">
-                        Carpet Area
-                      </p>
-                      <p className="text-[#303A42] text-base font-semibold">
-                        {unit.caretarea} sq.ft
-                      </p>
-                    </div>
-                  </div>
+                <div className="flex gap-[10px] flex-wrap ">
 
-                  <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                    <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                      <FaRuler className="text-[#0073C6] text-2xl" />
-                    </div>
-                    <div>
-                      <p className="text-[#4D6677] text-sm font-medium">
-                        Super Built-up Area
-                      </p>
-                      <p className="text-[#303A42] text-base font-semibold">
-                        {unit.superBuildUparea} sq.ft
-                      </p>
-                    </div>
-                  </div>
-
-                  {unit.terraceArea && unit.terraceArea !== "null" && (
-                    <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                      <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                        <FaTree className="text-[#0073C6] text-2xl" />
-                      </div>
-                      <div>
-                        <p className="text-[#4D6677] text-sm font-medium">
-                          Terrace Area
-                        </p>
-                        <p className="text-[#303A42] text-base font-semibold">
-                          {unit.terraceArea} sq.ft
-                        </p>
-                      </div>
-                    </div>
+                  {propCgId !== projectprops.plot && (
+                    <DataItem
+                      title="Super Built-up Area"
+                      value={`${unit.superBuildUparea} sq.ft`}
+                      icon={
+                        <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
                   )}
-                </div>
-              </div>
-
-              {/* Unit Features */}
-              <div>
-                <h4 className="text-lg font-semibold text-[#303A42] border-b pb-2">
-                  Unit Features
-                </h4>
-                <div className="grid gap-4 mt-4">
-                  <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                    <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                      <FaHome className="text-[#0073C6] text-2xl" />
-                    </div>
-                    <div>
-                      <p className="text-[#4D6677] text-sm font-medium">
-                        Tower & Floor
-                      </p>
-                      <p className="text-[#303A42] text-base font-semibold">
-                        {unit.towerName} -{" "}
-                        {unit.floor === 0
+              
+                  {propCgId !== projectprops.plot && (
+                    <DataItem
+                      title="Carpet Area"
+                      value={`${unit.caretarea} sq.ft`}
+                      icon={
+                        <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+              
+                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+                    <DataItem
+                      title="Tower"
+                      value={unit.towerName}
+                      icon={
+                        <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+              
+                  {propCgId !== projectprops.plot && (
+                    <DataItem
+                      title="Floor"
+                      value={
+                        unit.floor === 0
                           ? "Ground Floor"
                           : `${unit.floor}${(() => {
                               const suffixes = ["th", "st", "nd", "rd"];
@@ -161,68 +168,112 @@ export function FullScreenImageModal({
                                 suffixes[v] ||
                                 suffixes[0]
                               );
-                            })()} Floor`}
-                      </p>
-                    </div>
-                  </div>
+                            })()} Floor`
+                      }
+                      icon={
+                        <FaBuilding className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+              
+                  {propCgId === projectprops.plot && (
+                    <DataItem
+                      title="Length"
+                      value={`${unit.length} ft`}
+                      icon={
+                        <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+              
+                  {propCgId === projectprops.plot && (
+                    <DataItem
+                      title="Width"
+                      value={`${unit.width} ft`}
+                      icon={
+                        <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+              
+                  {propCgId === projectprops.plot && (
+                    <DataItem
+                      title="Plot Area"
+                      value={`${unit.plotArea} ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+                </div>
+              </div>
 
-                  <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                    <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                      <FaCompass className="text-[#0073C6] text-2xl" />
-                    </div>
-                    <div>
-                      <p className="text-[#4D6677] text-sm font-medium">
-                        Facing
-                      </p>
-                      <p className="text-[#303A42] text-base font-semibold">
-                        {unit.facingName}
-                      </p>
-                    </div>
-                  </div>
+              {/* Unit Features */}
+              <div>
+                <h4 className="text-lg font-semibold mb-[20px] text-[#303A42] border-b pb-2">
+                  Unit Features
+                </h4>
+                <div className="flex gap-[10px] flex-wrap">
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                      <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                        <FaBath className="text-[#0073C6] text-2xl" />
-                      </div>
-                      <div>
-                        <p className="text-[#4D6677] text-sm font-medium">
-                          Bathrooms
-                        </p>
-                        <p className="text-[#303A42] text-base font-semibold">
-                          {unit.totalNumberofBathroom}
-                        </p>
-                      </div>
-                    </div>
+                  {propCgId !== projectprops.plot && (
+                  <DataItem
+                      title="Unit Type"
+                      value={unit.bhkName}
+                      icon={
+                        <FaBuilding className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+                
+                  <DataItem
+                    title="Facing"
+                    value={unit.facingName}
+                    icon={
+                      <FaCompass className="text-[#0073C6] text-xl sm:text-2xl" />
+                    }
+                  />
+                
+                  {propCgId !== projectprops.plot && (
+                    <DataItem
+                      title="Bathrooms"
+                      value={unit.totalNumberofBathroom}
+                      icon={
+                        <FaBath className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+                
+                  {propCgId !== projectprops.plot && (
+                    <DataItem
+                      title="Balconies"
+                      value={unit.totalNumberOfBalcony}
+                      icon={
+                        <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+                  
+                  {propCgId !== projectprops.plot && (
+                    <DataItem
+                      title="Car Parking"
+                      value={`${unit.noOfCarParking} ${unit.parkingType ? unit.parkingType : ""}`}
+                      icon={
+                        <FaCar className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+                
+                  {unit.terraceArea &&
+                    unit.terraceArea !== "null" && (
+                      <DataItem
+                        title="Terrace Area"
+                        value={`${unit.terraceArea} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                 )}
 
-                    <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                      <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                        <FaHome className="text-[#0073C6] text-2xl" />
-                      </div>
-                      <div>
-                        <p className="text-[#4D6677] text-sm font-medium">
-                          Balconies
-                        </p>
-                        <p className="text-[#303A42] text-base font-semibold">
-                          {unit.totalNumberOfBalcony}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
-                    <div className="bg-[#ECF7FF] p-2 rounded-lg">
-                      <FaCar className="text-[#0073C6] text-2xl" />
-                    </div>
-                    <div>
-                      <p className="text-[#4D6677] text-sm font-medium">
-                        Car Parking
-                      </p>
-                      <p className="text-[#303A42] text-base font-semibold">
-                        {unit.noOfCarParking} {unit.parkingType}
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

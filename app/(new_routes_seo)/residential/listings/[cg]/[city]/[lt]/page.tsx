@@ -6,13 +6,18 @@ import {
   findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { notFound } from "next/navigation";
+import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
+import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 type Props = {
   params: {
     cg: string;
@@ -27,24 +32,25 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
   let severData;
-  if(slugValues.PT === '36'){
-    severData = await getSearchData(`localities=${slugValues.LT}`);}
-    else{
+  if (slugValues.PT === "36") {
+    severData = await getSearchData(`localities=${slugValues.LT}`);
+  } else {
     severData = await getProjSearchData(`localities=${slugValues.LT}`);
-    }
+  }
 
-  return (
-    slugValues.PT === '36' ?
-    <ListingSearchPage 
-    serverData={severData}
-    frontendFilters={{
-      locality: [`${lt}+${slugValues.LT}`],
-      cg: slugValues.CG,
-    }} /> :
-    <ProjectSearchPage
+  return slugValues.PT === "36" ? (
+    <NewListingSearchpage
       serverData={severData}
       frontendFilters={{
-        locality: [`${lt}+${slugValues.LT}`],
+        localities: [`${lt}+${slugValues.LT}`],
+        cg: slugValues.CG,
+      }}
+    />
+  ) : (
+    <NewSearchPage
+      serverData={severData}
+      frontendFilters={{
+        localities: [`${lt}+${slugValues.LT}`],
         cg: slugValues.CG,
       }}
     />

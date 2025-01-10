@@ -5,6 +5,7 @@ import {
   findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { getPagesSlugs } from "@/app/seo/api";
@@ -84,14 +85,13 @@ export default async function Page({ params }: Props) {
       totalPrice,
     };
   }
-
   return !isProjectListing ? (
-    <ListingSearchPage
+    <NewListingSearchpage
       serverData={serverData}
       frontendFilters={{
-        locality: [`${lt}+${filtersValues.LT}`],
-        unitTypes: [parseInt(filtersValues.BH as string)],
-        propTypes: parseInt(filtersValues.PT as string),
+        localities: [`${lt}+${filtersValues.LT}`],
+        bhk: [parseInt(filtersValues.BH as string)],
+        propType: parseInt(filtersValues.PT as string),
         cg: filtersValues.CG,
         projName: project,
         projIdEnc: filtersValues.PJ,
@@ -102,9 +102,42 @@ export default async function Page({ params }: Props) {
   );
 }
 export async function generateMetadata(
-  { params }: any,
+  {
+    params,
+  }: {
+    params: {
+      cg: string;
+      city: string;
+      lt: string;
+      project: string;
+      bhk_unit_type: string;
+    };
+  },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  console.log(params.bhk_unit_type);
+  if (!params.bhk_unit_type.includes("listing")) {
+    return {
+      title: `${params.bhk_unit_type} ${params.lt}, for ${
+        params.cg === "S" ? "Sale" : "Rent"
+      } in ${params.project}, ${params.city} - Getrightproperty`,
+      description: `Looking for ${params.bhk_unit_type} properties for ${
+        params.cg === "S" ? "sale" : "rent"
+      } in ${params.project}, ${params.lt}, ${
+        params.city
+      }? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      openGraph: {
+        title: `${params.bhk_unit_type} ${params.lt}, for ${
+          params.cg === "S" ? "Sale" : "Rent"
+        } in ${params.project}, ${params.city} - Getrightproperty`,
+        description: `Looking for ${params.bhk_unit_type} properties for ${
+          params.cg === "S" ? "sale" : "rent"
+        } in ${params.project}, ${params.lt}, ${
+          params.city
+        }? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      },
+    };
+  }
   const id = params.bhk_unit_type.split("-")[1];
   const {
     listing: data,

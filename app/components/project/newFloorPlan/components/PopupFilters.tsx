@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-import React, { useState, useCallback, useRef, useEffect } from "react";
-import { getUniqueOptionsByKeys } from "../utils/generateuniqueoptions";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import React, { useState } from "react";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
@@ -10,16 +8,16 @@ import FilterInput from "./filter-input";
 type Props = {
   options: any;
   handleUnitFilterChange: (name: string, value: string) => void;
-  filters:any;
-  setFilters:any;
+  dataFilters:any;
 };
 
 export default function PopupFilters({
   options,
   handleUnitFilterChange,
-  filters,
-  setFilters
+  dataFilters,
 }: Props) {
+
+  const [filters, setFilters] = useState(dataFilters);
 
   const [backupFilters, setBackupFilters] = useState({
     unitNumber: "",
@@ -34,24 +32,7 @@ export default function PopupFilters({
   });
 
   const [focusedFilter, setFocusedFilter] = useState<string | null>(null);
-  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const propCgId = useAtomValue(propCgIdAtom);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      const isClickInside = Object.values(dropdownRefs.current).some(
-        (ref) => ref && ref.contains(event.target as Node)
-      );
-      if (!isClickInside) {
-        setFocusedFilter(null);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []); 
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = String(filters[key]).toLowerCase();
@@ -83,185 +64,80 @@ export default function PopupFilters({
     }
   };
 
+  const clearFilters = () => {
+    Object.keys(backupFilters).forEach((eachKey) => {
+      handleFilterChange(eachKey, "");
+    });
+  };
 
+    const renderFilter = (key: keyof typeof filters, placeholder: string, title: string) => {  
+      const isFocused = focusedFilter === key;
+
+      return (
+        <div key={key} className="relative mb-[10px]">
+          <label
+            className="block text-sm font-medium text-gray-700 mb-1"
+            htmlFor="tower"
+          >
+            {title}
+          </label>
+          <FilterInput
+            value={filters[key] || ""}
+            onChange={(value) => handleFilterChange(key, value)}
+            options={filteredOptions(key)}
+            placeholder={placeholder}
+            onBlur={(value) => onMouseOut(key, value)}
+            onSearchChange={(value:any) => onSearchChange(key, value)}
+          />
+        </div>
+      );
+  };
 
   return (
-    <div className="space-y-3">
+    <div className="flex flex-col ">
     {/* Filter inputs */}
     {options?.towerName && options?.towerName.length > 0 && (propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="tower"
-        >
-          Tower Name
-        </label>
-        <FilterInput
-          value={filters.towerName || ""}
-          onChange={(value) => handleFilterChange("towerName", value)}
-          options={filteredOptions("towerName")}
-          placeholder="Select Tower"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("towerName", value)}
-        />
-      </div> 
+      renderFilter("towerName", "Search Tower", "Tower Name")
     )}
 
     {options?.bhkName && options?.bhkName.length > 0 && propCgId !== projectprops.plot && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="bhk"
-        >
-          BHK Type
-        </label>
-        <FilterInput
-          value={filters.bhkName || ""}
-          onChange={(value) => handleFilterChange("bhkName", value)}
-          options={filteredOptions("bhkName")}
-          placeholder="Select BHK Type"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("bhkName", value)}
-        />
-      </div>
+      renderFilter("bhkName", "Select BHK Type", "BHK Type")
     )}
 
     {options?.facingName && options?.facingName.length > 0 && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="facing"
-        >
-          Facing
-        </label>
-        <FilterInput
-          value={filters.facingName || ""}
-          onChange={(value) =>
-            handleFilterChange("facingName", value)
-          }
-          options={filteredOptions("facingName")}
-          placeholder="Select Facing"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("facingName", value)}
-        />
-      </div>
+      renderFilter("facingName", "Select Facing", "Facing")
     )}
 
     {options?.floor && options?.floor.length > 0 && propCgId !== projectprops.plot && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="floor"
-        >
-          Floor
-        </label>
-        <FilterInput
-          value={filters.floor?.toString() || ""}
-          onChange={(value) =>
-            handleFilterChange("floor", parseInt(value))
-          }
-          options={filteredOptions("floor")}
-          placeholder="Select Floor"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("floor", value)}
-        />
-      </div>
+      renderFilter("floor", "Select Floor", "Floor")
     )}
 
     {options?.unitNumber && options?.unitNumber.length > 0 && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="unitNumber"
-        >
-          Unit Number
-        </label>
-        <FilterInput
-          value={filters.unitNumber || ""}
-          onChange={(value) => handleFilterChange("unitNumber", value)}
-          options={filteredOptions("unitNumber")}
-          placeholder="Select Tower"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("unitNumber", value)}
-        />
-      </div> 
+      renderFilter("unitNumber", "Select Unit Number", "Unit Number")
     )}
 
     {options?.block && options?.block.length > 0&& propCgId === projectprops.apartment && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="block"
-        >
-          Block
-        </label>
-        <FilterInput
-          value={filters.block || ""}
-          onChange={(value) => handleFilterChange("block", value)}
-          options={filteredOptions("block")}
-          placeholder="Select Tower"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("block", value)}
-        />
-      </div> 
+      renderFilter("block", "Select Block", "Block")
     )}
 
     {options?.plotArea && options?.plotArea.length > 0 && propCgId === projectprops.plot && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="plotArea"
-        >
-          plot Area
-        </label>
-        <FilterInput
-          value={filters.plotArea || ""}
-          onChange={(value) => handleFilterChange("plotArea", value)}
-          options={filteredOptions("plotArea")}
-          placeholder="Select Tower"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("plotArea", value)}
-        />
-      </div> 
+      renderFilter("plotArea", "Select Plot Area", "Plot Area")
     )}
 
     {options?.length && options?.length.length > 0 && propCgId === projectprops.plot && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="length"
-        >
-          Length
-        </label>
-        <FilterInput
-          value={filters.length || ""}
-          onChange={(value) => handleFilterChange("length", value)}
-          options={filteredOptions("length")}
-          placeholder="Select Tower"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("length", value)}
-        />
-      </div> 
+      renderFilter("length", "Select Length", "Length")
     )}
 
     {options?.width && options?.width.length > 0 && propCgId === projectprops.plot && (
-      <div>
-        <label
-          className="block text-sm font-medium text-gray-700 mb-1"
-          htmlFor="width"
-        >
-          Width
-        </label>
-        <FilterInput
-          value={filters.width || ""}
-          onChange={(value) => handleFilterChange("width", value)}
-          options={filteredOptions("width")}
-          placeholder="Select Tower"
-          onBlur={onMouseOut}
-          onSearchChange={(value) => onSearchChange("width", value)}
-        />
-      </div> 
+      renderFilter("width", "Select Width", "Width")
     )}
+
+    <button
+      onClick={() => clearFilters()}
+      className="ml-auto p-[4px] bg-[#0073C6] text-white text-[14px] rounded-lg "
+    >
+      Clear Filters
+    </button>
   </div>
   );
 }

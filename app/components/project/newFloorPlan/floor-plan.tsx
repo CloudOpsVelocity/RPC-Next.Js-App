@@ -96,7 +96,7 @@ export default function FloorPlans({
       .filter((v) => v !== null);
 
   const [unitFilters, setUnitFilters] = useState({});
-  const [, { open }] = useReqCallPopup();
+  const [, { open }] = useReqCallPopup(); 
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
     setUnitFilters((prev) => ({ ...prev, bhkName: bhk === "All" ? "" : bhk }));
@@ -158,22 +158,23 @@ export default function FloorPlans({
     setAllBhks();
   }, [propCgId, phases]);
 
+  const allKeys = [
+    "unitNumber",
+    "bhkName",
+    "towerName",
+    "floor",
+    "facingName",
+    "block",
+    "length",
+    "width",
+    "plotArea",
+  ];
+
   const onSelectCard = (unit: any) => {
+    if(!unit) return;
     setModalState({ isOpen: true, unit });
     setSelectedView("bhk");
     handleBhkClick("All");
-
-    let allKeys = [
-      "unitNumber",
-      "bhkName",
-      "towerName",
-      "floor",
-      "facingName",
-      "block",
-      "length",
-      "width",
-      "plotArea",
-    ];
     allKeys.forEach((eachKey) => {
       if (unit[eachKey]) {
         handleUnitFilterChange(eachKey, unit[eachKey]);
@@ -184,24 +185,14 @@ export default function FloorPlans({
   const onClosingPopup = () => {
     handleBhkClick("All");
     setAllBhks();
-    setModalState({ isOpen: false, unit: null });
-    let allKeys = [
-      "unitNumber",
-      "bhkName",
-      "towerName",
-      "floor",
-      "facingName",
-      "block",
-      "length",
-      "width",
-      "plotArea",
-    ];
+    setModalState(prev=>({ ...prev, isOpen: false }));
     allKeys.forEach((eachKey) => {
       handleUnitFilterChange(eachKey, "");
     });
   };
   const handleOpenFullScreenModal = (unit: PropertyUnit) => {
     setFullScreenModalState({ isOpen: true, unit: unit });
+
   };
   const handleReqcallBack = (unit: PropertyUnit) => {
     open({
@@ -213,6 +204,9 @@ export default function FloorPlans({
       postedId: postedById,
     });
   };
+
+  const rightSideUnit = modalState.unit !== null ? modalState.unit : projectUnitsData && projectUnitsData[0] ? projectUnitsData[0] : {};
+
   return (
     <div className="w-[90%] mx-auto px-4 py-8">
       <h2
@@ -295,13 +289,16 @@ export default function FloorPlans({
             handleReqcallBack={handleReqcallBack}
           />
           <div className="hidden md:block">
-            <div className="sticky top-4">
+            <div 
+              className="sticky top-4" 
+              onClick={()=> rightSideUnit ? onSelectCard(rightSideUnit) : ("")}
+            >
               <Image
                 src={
                   isLoading
                     ? "data:image/webp;base64,...(fallback image)"
-                    : projectUnitsData[0] && projectUnitsData[0].floorPlanUrl
-                    ? projectUnitsData[0].floorPlanUrl.split(",")[0]
+                    : rightSideUnit && rightSideUnit.floorPlanUrl
+                    ? rightSideUnit.floorPlanUrl.split(",")[0]
                     : ImgNotAvail
                 }
                 alt="Default Floor Plan"
@@ -319,15 +316,16 @@ export default function FloorPlans({
 
       {modalState.isOpen && (
         <FloorPlanModal
-          isOpen={modalState.isOpen}
+          modalState={modalState}
           onClose={() => onClosingPopup()}
-          initialUnit={projectUnitsData[0]}
+          initialUnit={rightSideUnit}
           units={projectUnitsData || []}
           filters={unitFilters}
           setFilters={setUnitFilters}
           filteredUnits={filteredUnits}
           options={options || {}}
           handleOpenFullScreenModal={handleOpenFullScreenModal}
+          handleReqcallBack={handleReqcallBack}
         />
       )}
 
@@ -336,6 +334,7 @@ export default function FloorPlans({
           isOpen={fullScreenModalState.isOpen}
           onClose={() => setFullScreenModalState({ isOpen: false, unit: null })}
           unit={fullScreenModalState.unit}
+          handleReqcallBack={handleReqcallBack}
         />
       )}
     </div>
