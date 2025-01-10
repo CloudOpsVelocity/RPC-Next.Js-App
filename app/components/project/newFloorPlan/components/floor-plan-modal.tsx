@@ -17,6 +17,8 @@ import FilterInput from "./filter-input";
 import { useAtomValue } from "jotai";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { projectprops } from "@/app/data/projectDetails";
+import ByUnitFilters from "./by-unit-filters";
+import PopupFilters from "./PopupFilters";
 
 interface PropertyUnit {
   unitIdEnc: string;
@@ -212,174 +214,19 @@ export function FloorPlanModal({
               showFilters ? "absolute inset-0 z-20 bg-white" : "hidden"
             } md:relative md:block w-full md:w-64 border-r bg-[#F8FBFF] p-3 overflow-y-auto`}
           >
-            <div className="space-y-3">
-              {/* Filter inputs */}
-              {options?.towerName && options?.towerName.length > 0 && (propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="tower"
-                  >
-                    Tower Name
-                  </label>
-                  <FilterInput
-                    value={filters.towerName || ""}
-                    onChange={(value) => handleFilterChange("towerName", value)}
-                    options={options.towerName}
-                    placeholder="Select Tower"
-                  />
-                </div> 
-              )}
+            {/* Filter inputs */}
+            <PopupFilters handleUnitFilterChange={handleFilterChange} options={options} filters={filters} setFilters={setFilters} />
 
-              {options?.bhkName && options?.bhkName.length > 0 && propCgId !== projectprops.plot && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="bhk"
-                  >
-                    BHK Type
-                  </label>
-                  <FilterInput
-                    value={filters.bhkName || ""}
-                    onChange={(value) => handleFilterChange("bhkName", value)}
-                    options={options.bhkName}
-                    placeholder="Select BHK Type"
-                  />
-                </div>
-              )}
+            {showFilters && (
+              <button
+                onClick={() => setShowFilters(false)}
+                className="w-full mt-4 p-2 bg-[#0073C6] text-white rounded-lg md:hidden"
+              >
+                Apply Filters
+              </button>
+            )}
 
-              {options?.facingName && options?.facingName.length > 0 && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="facing"
-                  >
-                    Facing
-                  </label>
-                  <FilterInput
-                    value={filters.facingName || ""}
-                    onChange={(value) =>
-                      handleFilterChange("facingName", value)
-                    }
-                    options={options?.facingName}
-                    placeholder="Select Facing"
-                  />
-                </div>
-              )}
-
-              {options?.floor && options?.floor.length > 0 && propCgId !== projectprops.plot && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="floor"
-                  >
-                    Floor
-                  </label>
-                  <FilterInput
-                    value={filters.floor?.toString() || ""}
-                    onChange={(value) =>
-                      handleFilterChange("floor", parseInt(value))
-                    }
-                    options={options.floor}
-                    placeholder="Select Floor"
-                  />
-                </div>
-              )}
-
-              {options?.unitNumber && options?.unitNumber.length > 0 && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="unitNumber"
-                  >
-                    Unit Number
-                  </label>
-                  <FilterInput
-                    value={filters.unitNumber || ""}
-                    onChange={(value) => handleFilterChange("unitNumber", value)}
-                    options={options.unitNumber}
-                    placeholder="Select Tower"
-                  />
-                </div> 
-              )}
-
-              {options?.block && options?.block.length > 0&& propCgId === projectprops.apartment && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="block"
-                  >
-                    Block
-                  </label>
-                  <FilterInput
-                    value={filters.block || ""}
-                    onChange={(value) => handleFilterChange("block", value)}
-                    options={options.block}
-                    placeholder="Select Tower"
-                  />
-                </div> 
-              )}
-
-              {options?.plotArea && options?.plotArea.length > 0 && propCgId === projectprops.plot && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="plotArea"
-                  >
-                    plot Area
-                  </label>
-                  <FilterInput
-                    value={filters.plotArea || ""}
-                    onChange={(value) => handleFilterChange("plotArea", value)}
-                    options={options.plotArea}
-                    placeholder="Select Tower"
-                  />
-                </div> 
-              )}
-
-              {options?.length && options?.length.length > 0 && propCgId === projectprops.plot && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="length"
-                  >
-                    Length
-                  </label>
-                  <FilterInput
-                    value={filters.length || ""}
-                    onChange={(value) => handleFilterChange("length", value)}
-                    options={options.length}
-                    placeholder="Select Tower"
-                  />
-                </div> 
-              )}
-
-              {options?.width && options?.width.length > 0 && propCgId === projectprops.plot && (
-                <div>
-                  <label
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                    htmlFor="width"
-                  >
-                    Width
-                  </label>
-                  <FilterInput
-                    value={filters.width || ""}
-                    onChange={(value) => handleFilterChange("width", value)}
-                    options={options.width}
-                    placeholder="Select Tower"
-                  />
-                </div> 
-              )}
-
-              {showFilters && (
-                <button
-                  onClick={() => setShowFilters(false)}
-                  className="w-full mt-4 p-2 bg-[#0073C6] text-white rounded-lg md:hidden"
-                >
-                  Apply Filters
-                </button>
-              )}
-            </div>
+           
           </div>
 
           {/* Center - Floor Plan and Details */}
@@ -591,3 +438,23 @@ export function FloorPlanModal({
     </div>
   );
 }
+
+
+
+
+
+
+// <div className="space-y-3">
+// <PopupFilters 
+//   options={options} handleFilterChange={handleFilterChange} filters={filters}
+// />
+
+// {showFilters && (
+//   <button
+//     onClick={() => setShowFilters(false)}
+//     className="w-full mt-4 p-2 bg-[#0073C6] text-white rounded-lg md:hidden"
+//   >
+//     Apply Filters
+//   </button>
+// )}
+// </div>

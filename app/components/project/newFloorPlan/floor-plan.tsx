@@ -293,13 +293,6 @@ export default function FloorPlans({
         />
       )}
 
-      {/* {fullScreenModalState.isOpen && (
-        <FullScreenImageModal
-          isOpen={fullScreenModalState.isOpen}
-          onClose={() => setFullScreenModalState({ isOpen: false, unit: null })}
-          unit={propertyUnits[0]}
-        />
-      )} */}
     </div>
   );
 }

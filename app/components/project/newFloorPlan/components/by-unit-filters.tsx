@@ -112,7 +112,7 @@ export default function ByUnitFilters({
             onFocus={() => setFocusedFilter(key)}
             className="px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073C6] w-full"
             placeholder={placeholder}
-            onMouseOut={(e) => onMouseOut(key, e.target.value)}
+            onBlur={(e) => onMouseOut(key, e.target.value)}
           />
           {filters[key] ? (
             <button
