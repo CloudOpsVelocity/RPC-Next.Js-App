@@ -29,7 +29,7 @@ interface ShowAllFiltersButtonProps {
   toggleFilter: (category: string, value: string) => void;
   isOpen: boolean;
   onToggle: () => void;
-  isListing: boolean;
+  isListing?: boolean;
 }
 interface Location {
   name: string;

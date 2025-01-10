@@ -3,7 +3,7 @@ import ProjectFilters from "./ProjectHeaderFilter";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
 
 type Props = {
-  isListing: boolean;
+  isListing?: boolean;
 };
 
 function ProjSearchMainFilterSection({ isListing }: Props) {

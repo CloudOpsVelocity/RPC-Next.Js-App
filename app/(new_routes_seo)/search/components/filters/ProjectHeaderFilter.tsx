@@ -24,7 +24,7 @@ import { myClientLogger } from "@/app/utils/clientLogger";
 import SelectedFilters from "./SelectedFilters";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
 
-export default function HeaderFilters({ isListing }: { isListing: boolean }) {
+export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);

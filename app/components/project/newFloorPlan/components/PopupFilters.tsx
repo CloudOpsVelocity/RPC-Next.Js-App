@@ -67,21 +67,21 @@ export default function PopupFilters({
   };
 
   const handleFilterChange = (key: keyof typeof filters, value: string, type?:string) => {
-    setFilters((prev) => ({ ...prev, [key]: String(value) }));
-    setBackupFilters((prev) => ({ ...prev, [key]: String(value) }));
+    setFilters((prev: any) => ({ ...prev, [key]: String(value) }));
+    setBackupFilters((prev: any) => ({ ...prev, [key]: String(value) }));
     // if(!isMobile || type === "C"){
       handleUnitFilterChange(key, value);
     // }
   };
 
   const onSearchChange = (key: keyof typeof filters, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: String(value) }));
+    setFilters((prev: any) => ({ ...prev, [key]: String(value) }));
   };
 
   const onMouseOut = (key: keyof typeof filters, value: string) => {
     let data = filteredOptions(key);
     if(data && !data.includes(value)){
-      setFilters((prev) => ({ ...prev, [key]: backupFilters[key] }));
+      setFilters((prev: any) => ({ ...prev, [key]: backupFilters[key] }));
     }else{
       handleFilterChange(key, value);
     }

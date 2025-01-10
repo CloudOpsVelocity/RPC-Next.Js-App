@@ -13,7 +13,13 @@ import { useQuery } from "react-query";
 import ZoomInOut from "../../actions/ZoomInOut";
 import useDownload from "@/app/hooks/property/useDownload";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { FaDownload, FaTimes, FaShare } from "react-icons/fa";
+import {
+  FaDownload,
+  FaTimes,
+  FaShare,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import { BiMessage } from "react-icons/bi";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
@@ -84,6 +90,14 @@ export default function PartialUnitModal({ data }: any) {
     }
   };
 
+  const handlePrevious = () => {
+    setActive((prev) => (prev > 0 ? prev - 1 : isData.others.length - 1));
+  };
+
+  const handleNext = () => {
+    setActive((prev) => (prev < isData.others.length - 1 ? prev + 1 : 0));
+  };
+
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
@@ -97,10 +111,14 @@ export default function PartialUnitModal({ data }: any) {
         {/* Header */}
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
           <h3 className="text-lg sm:text-xl font-semibold text-[#0073C6]">
-          {selectedOne? `${selectedOne.unitType} ${propertyDetailsTypes.get(propId)?.name}` : "Floor Plan"}
+            {selectedOne
+              ? `${selectedOne.unitType} ${
+                  propertyDetailsTypes.get(propId)?.name
+                }`
+              : "Floor Plan"}
           </h3>
           <div className="flex items-center gap-2 sm:gap-4">
-            {selectedOne?.floorPlan && (    
+            {selectedOne?.floorPlan && (
               <>
                 <button
                   onClick={() =>
@@ -120,30 +138,23 @@ export default function PartialUnitModal({ data }: any) {
                   <FaShare className="w-3 h-3" />
                 </button>
                 <button
-                      onClick={() => {
-                        const floorPlanUrl = selectedOne?.floorPlan?.split(",")[3] || "";
-                        if (floorPlanUrl) {
-                          navigator.share({
-                            title: "Share Floor Plan",
-                            url: floorPlanUrl,
-                          });
-                        }
-                      }}
-                      className="hidden sm:flex flex-nowrap justify-center items-center p-0.5 gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6] not-italic font-semibold leading-[normal] tracking-[0.4px]"
-                    >
-                      <ShearIcon className="sm:w-[24px] sm:h-[24px] xl:w-[26px] xl:h-[26px] h-[24px] w-[42px]" />
-                      <span className="hidden sm:h-auto sm:text-[14px] xl:text-[20px] sm:w-full sm:block">
-                        {"Share"}
-                      </span>
-              </button>
-
-                {/* <SharePopup
-                  titleText="Share Floor Plan"
-                  title=""
-                  url={selectedOne?.floorPlan?.split(",")[3] || ""}
-                  className=" text-[#0073C6] font-semibold hover:text-[#005a9e] hidden sm:block"
-                /> */}
-                
+                  onClick={() => {
+                    const floorPlanUrl =
+                      selectedOne?.floorPlan?.split(",")[3] || "";
+                    if (floorPlanUrl) {
+                      navigator.share({
+                        title: "Share Floor Plan",
+                        url: floorPlanUrl,
+                      });
+                    }
+                  }}
+                  className="hidden sm:flex flex-nowrap justify-center items-center p-0.5 gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6] not-italic font-semibold leading-[normal] tracking-[0.4px]"
+                >
+                  <ShearIcon className="sm:w-[24px] sm:h-[24px] xl:w-[26px] xl:h-[26px] h-[24px] w-[42px]" />
+                  <span className="hidden sm:h-auto sm:text-[14px] xl:text-[20px] sm:w-full sm:block">
+                    {"Share"}
+                  </span>
+                </button>
               </>
             )}
             <button
@@ -158,10 +169,37 @@ export default function PartialUnitModal({ data }: any) {
         {/* Main Content */}
         <div className="flex-1 flex flex-col max-h-full lg:flex-row overflow-hidden">
           {/* Left - Floor Plan Image */}
-          <div className="flex-1 p-3 sm:p-6 flex items-center justify-center bg-[#F8FBFF]">
+          <div className="flex-1 p-3 sm:p-6 flex items-center justify-center bg-[#F8FBFF] relative h-[calc(100vh-200px)] lg:h-auto">
+            {isData.others.length > 1 && (
+              <>
+                <button
+                  onClick={handlePrevious}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100]"
+                >
+                  <FaChevronLeft className="w-4 h-4 text-gray-600" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100]"
+                >
+                  <FaChevronRight className="w-4 h-4 text-gray-600" />
+                </button>
+              </>
+            )}
             <TransformWrapper>
-              <TransformComponent>
-                <div className="flex items-center justify-center w-full h-full">
+              <TransformComponent
+                wrapperStyle={{
+                  width: "100%",
+                  height: "100%",
+                  position: "relative",
+                }}
+                contentStyle={{
+                  width: "100%",
+                  height: "100%",
+                  position: "relative",
+                }}
+              >
+                <div className="flex items-center justify-center w-full h-full max-h-[calc(100vh-550px)] sm:max-h-[calc(100vh-250px)] lg:max-h-full">
                   <img
                     src={selectedOne?.floorPlan?.split(",")[3] ?? ImgNotAvail}
                     alt="Floor Plan"
@@ -169,7 +207,7 @@ export default function PartialUnitModal({ data }: any) {
                   />
                 </div>
               </TransformComponent>
-              <ZoomInOut className="bottom-80 sm:bottom-8 right-4 sm:right-8" />
+              <ZoomInOut className="bottom-4 right-4" />
             </TransformWrapper>
           </div>
 
@@ -256,19 +294,23 @@ export default function PartialUnitModal({ data }: any) {
           </div>
         </div>
 
-        {/* Carousel Navigation */}
+        {/* Thumbnail Carousel */}
         {isData.others.length > 1 && (
-          <div className="flex justify-center gap-2 sm:gap-3 py-3 sm:py-4 bg-white border-t">
+          <div className="flex justify-center gap-2 p-4 bg-white border-t overflow-x-auto">
             {isData.others.map((item: any, index: number) => (
               <button
                 key={index}
                 onClick={() => setActive(index)}
-                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${
-                  active === index
-                    ? "bg-[#0073C6]"
-                    : "bg-gray-300 hover:bg-gray-400"
+                className={`relative min-w-[80px] h-[60px] rounded-lg overflow-hidden border-2 transition-colors ${
+                  active === index ? "border-[#0073C6]" : "border-transparent"
                 }`}
-              />
+              >
+                <img
+                  src={item?.floorPlan?.split(",")[3] ?? ImgNotAvail}
+                  alt={`Floor Plan ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </button>
             ))}
           </div>
         )}
