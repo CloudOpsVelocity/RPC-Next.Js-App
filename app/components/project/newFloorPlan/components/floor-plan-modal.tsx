@@ -153,10 +153,9 @@ export function FloorPlanModal({
   function isActualNaN(value: any) {
     return value !== value; // Only NaN is not equal to itself
   }
-
   const handleFilterChange = (name: string, value: string | number) => {
-    setFilters((prev: any) => ({
-      ...prev,
+    setFilters((filters: PropertyUnit) => ({
+      ...filters,
       [name]: isActualNaN(value) ? "" : value,
     }));
   };

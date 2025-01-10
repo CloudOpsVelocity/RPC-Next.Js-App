@@ -9,6 +9,7 @@ import {
   findPathForProjectDetails,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { notFound } from "next/navigation";
+import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -19,7 +20,7 @@ export default async function Page({ params: { city, lt } }: Props) {
   const filterValues = extractProjectParamsValues(value);
   const serverData = await getSearchData(filterValues.LT as string);
   return (
-    <ProjectSearchPage
+    <NewSearchPage
       serverData={serverData}
       frontendFilters={{
         locality: [`${lt}+${filterValues.LT}`],
