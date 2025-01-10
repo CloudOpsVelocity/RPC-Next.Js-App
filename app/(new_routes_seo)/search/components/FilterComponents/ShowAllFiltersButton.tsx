@@ -102,11 +102,10 @@ export default function ShowAllFiltersButton({
       if (eachKey === "status") return;
       phaseObjList = [
         ...phaseObjList,
-        { cid: parseInt(eachKey), constDesc: data[eachKey] },
+        { cid: `${data[eachKey]}+${eachKey}`, constDesc: data[eachKey] },
       ];
     });
   }
-  console.log(phaseObjList);
 
   const renderFilterSection = (
     title: string,
@@ -160,7 +159,7 @@ export default function ShowAllFiltersButton({
                       ? propertyiconss[item as keyof typeof propertyiconss]
                           ?.id || item.cid
                       : item.cid || item.value || item.cid;
-                  // alert(value);
+
                   dispatch({
                     type: "update",
                     payload: {

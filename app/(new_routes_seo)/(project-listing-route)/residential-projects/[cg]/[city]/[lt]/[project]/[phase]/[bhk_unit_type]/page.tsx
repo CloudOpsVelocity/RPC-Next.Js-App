@@ -102,9 +102,42 @@ export default async function Page({ params }: Props) {
   );
 }
 export async function generateMetadata(
-  { params }: any,
+  {
+    params,
+  }: {
+    params: {
+      cg: string;
+      city: string;
+      lt: string;
+      project: string;
+      bhk_unit_type: string;
+    };
+  },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  console.log(params.bhk_unit_type);
+  if (!params.bhk_unit_type.includes("listing")) {
+    return {
+      title: `${params.bhk_unit_type} ${params.lt}, for ${
+        params.cg === "S" ? "Sale" : "Rent"
+      } in ${params.project}, ${params.city} - Getrightproperty`,
+      description: `Looking for ${params.bhk_unit_type} properties for ${
+        params.cg === "S" ? "sale" : "rent"
+      } in ${params.project}, ${params.lt}, ${
+        params.city
+      }? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      openGraph: {
+        title: `${params.bhk_unit_type} ${params.lt}, for ${
+          params.cg === "S" ? "Sale" : "Rent"
+        } in ${params.project}, ${params.city} - Getrightproperty`,
+        description: `Looking for ${params.bhk_unit_type} properties for ${
+          params.cg === "S" ? "sale" : "rent"
+        } in ${params.project}, ${params.lt}, ${
+          params.city
+        }? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      },
+    };
+  }
   const id = params.bhk_unit_type.split("-")[1];
   const {
     listing: data,

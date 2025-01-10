@@ -28,6 +28,7 @@ export default async function Page({ params }: Props) {
   const severData = await getSearchData(
     `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
   );
+  console.log(filtersValues);
   return (
     <NewListingSearchpage
       serverData={severData}

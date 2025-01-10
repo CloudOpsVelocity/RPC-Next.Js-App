@@ -35,7 +35,7 @@ export default function SelectedFilters({}: Props) {
                     className="flex items-center text-nowrap gap-2 mb-[6px] mt-[6px] bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
                   >
                     <span>
-                      {category === "localities" || category === "builderIds"
+                      {category === "localities" || category === "builderIds" || category === "phaseId"
                         ? `${value.split("+")[0]}${
                             values.length - 1 === values.indexOf(value)
                               ? "" : ", "
@@ -88,6 +88,10 @@ export default function SelectedFilters({}: Props) {
                         type: "update",
                         payload: {
                           [category]: null,
+                          ...(category === "projName" && {
+                            projIdEnc: null,
+                            phaseId: []
+                          })
                         },
                       });
                       handleApplyFilters();
