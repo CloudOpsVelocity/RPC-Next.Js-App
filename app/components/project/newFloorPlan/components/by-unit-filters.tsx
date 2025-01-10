@@ -148,10 +148,9 @@ export default function ByUnitFilters({
 
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {options?.towerName &&
-        (propCgId === projectprops.apartment ||
-          propCgId === projectprops.villament) &&
-        renderFilter("towerName", "Search Tower")}
+      {options?.towerName && (propCgId === projectprops.apartment || propCgId === projectprops.villament) && 
+          renderFilter("towerName", "Search Tower")
+      }
       {options?.floor &&
         propCgId !== projectprops.plot &&
         renderFilter("floor", "Search Floor")}

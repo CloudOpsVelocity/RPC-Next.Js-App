@@ -13,17 +13,15 @@ import {
   FaHome,
 } from "react-icons/fa";
 import { FaExpand, FaRuler, FaTree } from "react-icons/fa6";
-import FilterInput from "./filter-input";
 import { useAtomValue } from "jotai";
 import { propCgIdAtom } from "@/app/store/vewfloor";
-import { projectprops } from "@/app/data/projectDetails";
-import ByUnitFilters from "./by-unit-filters";
+import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import PopupFilters from "./PopupFilters";
 
 import { PropertyUnit } from "../types/floor-plan";
 
 interface FloorPlanModalProps {
-  isOpen: boolean;
+  modalState: any;
   onClose: () => void;
   units: PropertyUnit[];
   initialUnit: PropertyUnit;
@@ -32,6 +30,7 @@ interface FloorPlanModalProps {
   filteredUnits: PropertyUnit[];
   options: Record<keyof PropertyUnit, string[]> | Record<string, never>;
   handleOpenFullScreenModal: (unit: PropertyUnit) => void;
+  handleReqcallBack:any;
 }
 
 type Props = {
@@ -55,7 +54,7 @@ const DataItem = ({ title, value, icon }: Props) => {
 };
 
 export function FloorPlanModal({
-  isOpen,
+  modalState,
   onClose,
   units,
   initialUnit,
@@ -64,11 +63,14 @@ export function FloorPlanModal({
   filteredUnits: propFilteredUnits,
   options,
   handleOpenFullScreenModal,
+  handleReqcallBack
 }: FloorPlanModalProps) {
   const [currentUnit, setCurrentUnit] = useState(initialUnit);
   const [filteredUnits, setFilteredUnits] = useState(
     propFilteredUnits ? propFilteredUnits : []
   );
+
+  const {isOpen, unit} = modalState;
 
   const [currentPage, setCurrentPage] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
@@ -99,26 +101,36 @@ export function FloorPlanModal({
     setCurrentPage(targetPage);
   };
 
+  const [currentIndex, setCurrentIndex ] = useState(0);
+  
+
   const handlePrevUnit = () => {
-    const currentIndex = filteredUnits.findIndex(
+    let curIndex = filteredUnits.findIndex(
       (unit) => unit.unitIdEnc === currentUnit.unitIdEnc
     );
-    const prevIndex =
-      (currentIndex - 1 + filteredUnits.length) % filteredUnits.length;
+    const prevIndex = (curIndex - 1 + filteredUnits.length) % filteredUnits.length;
+
     const nextUnit = filteredUnits[prevIndex];
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
+    setCurrentIndex(curIndex-1);
+    console.log(curIndex-1, filteredUnits.length);
   };
 
   const handleNextUnit = () => {
-    const currentIndex = filteredUnits.findIndex(
+    let curIndex = filteredUnits.findIndex(
       (unit) => unit.unitIdEnc === currentUnit.unitIdEnc
     );
-    const nextIndex = (currentIndex + 1) % filteredUnits.length;
+    const nextIndex = (curIndex + 1) % filteredUnits.length;
+
     const nextUnit = filteredUnits[nextIndex];
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
+    setCurrentIndex(curIndex+1);
+    console.log(curIndex+1, filteredUnits.length);
+    
   };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -160,10 +172,10 @@ export function FloorPlanModal({
       [name]: isActualNaN(value) ? "" : value,
     }));
   };
-  const handleRequestQuotation = () => {
-    // Add your quotation request logic here
-    alert(`Requesting quotation for Unit ${currentUnit.unitNumber}`);
-  };
+  // const handleRequestQuotation = () => {
+  //   // Add your quotation request logic here
+  //   // alert(`Requesting quotation for Unit ${currentUnit.unitNumber}`);
+  // };
   if (!isOpen) return null;
   const mainImageUrl = currentUnit?.floorPlanUrl?.split(",")[0] || ImgNotAvail;
   const totalPages =
@@ -182,11 +194,13 @@ export function FloorPlanModal({
         {/* Header */}
         <div className="flex items-center justify-between p-2 border-b bg-white">
           <h3 className="text-lg md:text-xl font-semibold text-[#0073C6]">
-            {currentUnit.bhkName} - Unit {currentUnit.unitNumber}
+            {`${propCgId !== projectprops.plot ? currentUnit.bhkName : `${currentUnit.length}X${currentUnit.width} ft`} - 
+            ${propertyDetailsTypes && propertyDetailsTypes.get(propCgId) ? propertyDetailsTypes?.get(propCgId)?.name : "" } - 
+            Unit ${currentUnit.unitNumber}`}
           </h3>
           <div className="flex gap-2">
             <button
-              onClick={handleRequestQuotation}
+              onClick={()=>handleReqcallBack(unit)}
               className="px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
             >
               Request Quotation
@@ -210,16 +224,15 @@ export function FloorPlanModal({
         <div className="flex h-[calc(100vh-48px)]">
           {/* Left Side - Filters */}
           <div
-            className={`${
-              showFilters ? "absolute inset-0 z-20 bg-white" : "hidden"
+            className={`${showFilters ? "absolute inset-0 z-20 bg-white" : "hidden"
             } md:relative md:block w-full md:w-64 border-r bg-[#F8FBFF] p-3 overflow-y-auto`}
           >
             {/* Filter inputs */}
             <PopupFilters
               handleUnitFilterChange={handleFilterChange}
               options={options}
-              filters={filters}
-              setFilters={setFilters}
+              dataFilters={filters}
+              // setFilters={setFilters}
             />
 
             {showFilters && (
@@ -254,17 +267,19 @@ export function FloorPlanModal({
                       <FaExpand className="w-5 h-5 text-gray-600" />
                     </button>
                   </div>
-                  <div className="flex justify-between mt-4">
+                  <div className="flex justify-between mt-4"> 
                     <button
                       onClick={handlePrevUnit}
-                      className="flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg hover:bg-[#0073C6] hover:text-white"
+                      disabled={currentIndex === 0}
+                      className={`flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg ${currentIndex === 0 ? " cursor-not-allowed " : "hover:bg-[#0073C6] hover:text-white"}`}
                     >
                       <FaChevronLeft />
                       <span className="hidden sm:inline">Previous</span>
                     </button>
                     <button
                       onClick={handleNextUnit}
-                      className="flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg hover:bg-[#0073C6] hover:text-white"
+                      disabled={currentIndex === filteredUnits.length-1}
+                      className={`flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg ${currentIndex === filteredUnits.length-1 ? "cursor-not-allowed" : "hover:bg-[#0073C6] hover:text-white"}`}
                     >
                       <span className="hidden sm:inline">Next</span>
                       <FaChevronRight />
@@ -408,7 +423,7 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Car Parking"
-                      value={`${currentUnit.noOfCarParking} ${currentUnit.parkingType}`}
+                      value={`${currentUnit.noOfCarParking} ${currentUnit.parkingType ? currentUnit.parkingType : ""}`}
                       icon={
                         <FaCar className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -438,22 +453,26 @@ export function FloorPlanModal({
                   </h4>
                   <div className="flex gap-1">
                     <button
-                      onClick={() =>
-                        setCurrentPage((prev) => Math.max(prev - 1, 0))
-                      }
-                      disabled={currentPage === 0}
-                      className="p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50"
+                      // onClick={() =>
+                      //   // setCurrentPage((prev) => Math.max(prev - 1, 0))
+                      // }
+                      // disabled={currentPage === 0}
+                      onClick={handlePrevUnit}
+                      disabled={currentIndex === 0}
+                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${currentIndex === 0 ? "cursor-not-allowed " : ""}`}
                     >
                       <FaChevronLeft className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() =>
-                        setCurrentPage((prev) =>
-                          Math.min(prev + 1, totalPages - 1)
-                        )
-                      }
-                      disabled={currentPage === totalPages - 1}
-                      className="p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50"
+                      // onClick={() =>
+                      //   setCurrentPage((prev) =>
+                      //     Math.min(prev + 1, totalPages - 1)
+                      //   )
+                      // }
+                      // disabled={currentPage === totalPages - 1}
+                      onClick={handleNextUnit}
+                      disabled={currentIndex === filteredUnits.length-1}
+                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${currentIndex === filteredUnits.length-1 ? "cursor-not-allowed " : ""}`}
                     >
                       <FaChevronRight className="w-4 h-4" />
                     </button>
@@ -490,18 +509,3 @@ export function FloorPlanModal({
     </div>
   );
 }
-
-// <div className="space-y-3">
-// <PopupFilters
-//   options={options} handleFilterChange={handleFilterChange} filters={filters}
-// />
-
-// {showFilters && (
-//   <button
-//     onClick={() => setShowFilters(false)}
-//     className="w-full mt-4 p-2 bg-[#0073C6] text-white rounded-lg md:hidden"
-//   >
-//     Apply Filters
-//   </button>
-// )}
-// </div>
