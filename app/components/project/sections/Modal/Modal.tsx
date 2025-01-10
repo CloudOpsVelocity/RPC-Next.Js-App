@@ -7,7 +7,7 @@ import Image from "next/image";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { FloorPlanNotAvail, ImgNotAvail } from "@/app/data/project";
-import { propertyDetailsSvgs } from "@/app/images/commonSvgs";
+import { propertyDetailsSvgs, ShearIcon } from "@/app/images/commonSvgs";
 import SharePopup from "@/app/components/atoms/SharePopup";
 import { useQuery } from "react-query";
 import ZoomInOut from "../../actions/ZoomInOut";
@@ -16,6 +16,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { FaDownload, FaTimes, FaShare } from "react-icons/fa";
 import { BiMessage } from "react-icons/bi";
 import { propCgIdAtom } from "@/app/store/vewfloor";
+import { propertyDetailsTypes } from "@/app/data/projectDetails";
 
 const Modal = ({
   isOpen,
@@ -96,10 +97,10 @@ export default function PartialUnitModal({ data }: any) {
         {/* Header */}
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
           <h3 className="text-lg sm:text-xl font-semibold text-[#0073C6]">
-            {selectedOne?.unitType || "Floor Plan"}
+          {selectedOne? `${selectedOne.unitType} ${propertyDetailsTypes.get(propId)?.name}` : "Floor Plan"}
           </h3>
           <div className="flex items-center gap-2 sm:gap-4">
-            {selectedOne?.floorPlan && (
+            {selectedOne?.floorPlan && (    
               <>
                 <button
                   onClick={() =>
@@ -118,12 +119,31 @@ export default function PartialUnitModal({ data }: any) {
                 >
                   <FaShare className="w-3 h-3" />
                 </button>
-                <SharePopup
+                <button
+                      onClick={() => {
+                        const floorPlanUrl = selectedOne?.floorPlan?.split(",")[3] || "";
+                        if (floorPlanUrl) {
+                          navigator.share({
+                            title: "Share Floor Plan",
+                            url: floorPlanUrl,
+                          });
+                        }
+                      }}
+                      className="hidden sm:flex flex-nowrap justify-center items-center p-0.5 gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6] not-italic font-semibold leading-[normal] tracking-[0.4px]"
+                    >
+                      <ShearIcon className="sm:w-[24px] sm:h-[24px] xl:w-[26px] xl:h-[26px] h-[24px] w-[42px]" />
+                      <span className="hidden sm:h-auto sm:text-[14px] xl:text-[20px] sm:w-full sm:block">
+                        {"Share"}
+                      </span>
+              </button>
+
+                {/* <SharePopup
                   titleText="Share Floor Plan"
-                  title="Share"
+                  title=""
                   url={selectedOne?.floorPlan?.split(",")[3] || ""}
-                  className="text-[#0073C6] font-semibold hover:text-[#005a9e] hidden sm:block"
-                />
+                  className=" text-[#0073C6] font-semibold hover:text-[#005a9e] hidden sm:block"
+                /> */}
+                
               </>
             )}
             <button
@@ -136,7 +156,7 @@ export default function PartialUnitModal({ data }: any) {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        <div className="flex-1 flex flex-col max-h-full lg:flex-row overflow-hidden">
           {/* Left - Floor Plan Image */}
           <div className="flex-1 p-3 sm:p-6 flex items-center justify-center bg-[#F8FBFF]">
             <TransformWrapper>
@@ -149,7 +169,7 @@ export default function PartialUnitModal({ data }: any) {
                   />
                 </div>
               </TransformComponent>
-              <ZoomInOut className="bottom-20 sm:bottom-8 right-4 sm:right-8" />
+              <ZoomInOut className="bottom-80 sm:bottom-8 right-4 sm:right-8" />
             </TransformWrapper>
           </div>
 
