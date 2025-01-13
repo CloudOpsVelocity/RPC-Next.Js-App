@@ -1,4 +1,22 @@
 import { PropertyUnit } from "../types/floor-plan";
+export const UNIT_DATA_KEYS = [
+  "unitNumber",
+  "bhkName",
+  "towerName",
+  "floor",
+  "facingName",
+  "block",
+  "plotArea",
+  "width",
+  "length",
+  "caretarea",
+  "superBuildUparea",
+  "totalNumberofBathroom",
+  "totalNumberOfBalcony",
+  "noOfCarParking",
+  "parkingType",
+  "terraceArea",
+];
 
 export const getUniqueOptionsByKeys = (
   units: PropertyUnit[],
@@ -9,7 +27,7 @@ export const getUniqueOptionsByKeys = (
 
   const filteredUnits = units.filter((unit) => {
     return Object.entries(selectedFilters).every(([key, value]) => {
-      if (value === null || value === "") return true;
+      if (value == null || value === "") return true;
       return String(unit[key as keyof PropertyUnit]) === String(value);
     });
   });
@@ -22,6 +40,8 @@ export const getUniqueOptionsByKeys = (
 
       filteredUnits.forEach((unit) => {
         const value = unit[key];
+        // Handle edge case where value is string "null"
+        if (value === "null") return;
         if (value != null && value !== "" && value == value) {
           uniqueValues.add(String(value));
         }

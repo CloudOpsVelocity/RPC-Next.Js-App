@@ -31,8 +31,12 @@ import { MdBalcony } from "react-icons/md";
 import PropertyCard from "./components/property-card";
 import ByUnitFilters from "./components/by-unit-filters";
 import FloorplanLeftsection from "./components/floorplan-leftsection";
-import { getUniqueOptionsByKeys } from "./utils/generateuniqueoptions";
+import {
+  getUniqueOptionsByKeys,
+  UNIT_DATA_KEYS,
+} from "./utils/generateuniqueoptions";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { FiInfo } from "react-icons/fi";
 
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
@@ -96,7 +100,7 @@ export default function FloorPlans({
       .filter((v) => v !== null);
 
   const [unitFilters, setUnitFilters] = useState({});
-  const [, { open }] = useReqCallPopup(); 
+  const [, { open }] = useReqCallPopup();
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
     setUnitFilters((prev) => ({ ...prev, bhkName: bhk === "All" ? "" : bhk }));
@@ -124,17 +128,7 @@ export default function FloorPlans({
     if (!projectUnitsData) return {};
     return getUniqueOptionsByKeys(
       projectUnitsData,
-      [
-        "unitNumber",
-        "bhkName",
-        "towerName",
-        "floor",
-        "facingName",
-        "block",
-        "plotArea",
-        "width",
-        "length",
-      ],
+      UNIT_DATA_KEYS as (keyof PropertyUnit)[],
       unitFilters
     );
   }, [projectUnitsData, unitFilters]);
@@ -158,24 +152,12 @@ export default function FloorPlans({
     setAllBhks();
   }, [propCgId, phases]);
 
-  const allKeys = [
-    "unitNumber",
-    "bhkName",
-    "towerName",
-    "floor",
-    "facingName",
-    "block",
-    "length",
-    "width",
-    "plotArea",
-  ];
-
   const onSelectCard = (unit: any) => {
-    if(!unit) return;
+    if (!unit) return;
     setModalState({ isOpen: true, unit });
     setSelectedView("bhk");
     handleBhkClick("All");
-    allKeys.forEach((eachKey) => {
+    UNIT_DATA_KEYS.forEach((eachKey) => {
       if (unit[eachKey]) {
         handleUnitFilterChange(eachKey, unit[eachKey]);
       }
@@ -185,14 +167,14 @@ export default function FloorPlans({
   const onClosingPopup = () => {
     handleBhkClick("All");
     setAllBhks();
-    setModalState(prev=>({ ...prev, isOpen: false }));
-    allKeys.forEach((eachKey) => {
+    setModalState((prev) => ({ ...prev, isOpen: false }));
+    setSelectedView("type");
+    UNIT_DATA_KEYS.forEach((eachKey) => {
       handleUnitFilterChange(eachKey, "");
     });
   };
   const handleOpenFullScreenModal = (unit: PropertyUnit) => {
     setFullScreenModalState({ isOpen: true, unit: unit });
-
   };
   const handleReqcallBack = (unit: PropertyUnit) => {
     open({
@@ -205,7 +187,12 @@ export default function FloorPlans({
     });
   };
 
-  const rightSideUnit = modalState.unit !== null ? modalState.unit : projectUnitsData && projectUnitsData[0] ? projectUnitsData[0] : {};
+  const rightSideUnit =
+    modalState.unit !== null
+      ? modalState.unit
+      : projectUnitsData && projectUnitsData[0]
+      ? projectUnitsData[0]
+      : {};
 
   return (
     <div className="w-full md:w-[90%] mx-auto px-3 md:px-4 py-8">
@@ -280,7 +267,7 @@ export default function FloorPlans({
           </>
         )}
 
-        <div className="mt-3 gap-6 flex justify-between w-full ">
+        <div className="mt-3 gap-6 flex justify-between w-full  flex-wrap-reverse md:flex-nowrap">
           {/* FLOOR PLAN LEFT SECTION */}
           <FloorplanLeftsection
             units={filteredUnits}
@@ -288,27 +275,64 @@ export default function FloorPlans({
             onSelectCard={onSelectCard}
             handleReqcallBack={handleReqcallBack}
           />
-          <div className="hidden md:block w-[50%] ">
-            <div 
-              className="sticky top-4" 
-              onClick={()=> rightSideUnit ? onSelectCard(rightSideUnit) : ("")}
+          <div className="block w-full md:w-[50%]">
+            <div
+              className="sticky top-4"
+              onClick={() => (rightSideUnit ? onSelectCard(rightSideUnit) : "")}
             >
-              <Image
-                src={
-                  isLoading
-                    ? "data:image/webp;base64,...(fallback image)"
-                    : rightSideUnit && rightSideUnit.floorPlanUrl
-                    ? rightSideUnit.floorPlanUrl.split(",")[0]
-                    : ImgNotAvail
-                }
-                alt="Default Floor Plan"
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-lg shadow-md"
-              />
-              <p className="mt-4 text-center text-gray-600">
-                Click on a unit to view its floor plan
-              </p>
+              {rightSideUnit ? (
+                <div className="p-4 bg-[#F8FBFF] rounded-lg">
+                  <p className="text-[12px] sm:text-[14px] font-[500] text-[#005DA0]">
+                    {rightSideUnit.unitNumber &&
+                      "Unit No. " + rightSideUnit.unitNumber}
+                    {rightSideUnit.bhkName && " | " + rightSideUnit.bhkName}
+                    {rightSideUnit.towerName &&
+                      rightSideUnit.towerName !== "NA" &&
+                      " | Tower " + rightSideUnit.towerName}
+                    {rightSideUnit.floor &&
+                      ` | ${
+                        propCgId === projectprops.rowHouse ||
+                        propCgId === projectprops.villa
+                          ? "Elevation"
+                          : "Floor"
+                      } ` +
+                        `${
+                          rightSideUnit.floor.toString() === "0"
+                            ? "G"
+                            : rightSideUnit.floor
+                        }`}
+                    {rightSideUnit.facingName &&
+                      " | Facing " + rightSideUnit.facingName}
+                    {rightSideUnit.superBuildUparea &&
+                      " | Area. " + rightSideUnit.superBuildUparea + " sq.ft"}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-center text-gray-600">
+                  Click on a unit to view its floor plan
+                </p>
+              )}
+              <div className="relative group mt-4">
+                <Image
+                  src={
+                    isLoading
+                      ? "data:image/webp;base64,...(fallback image)"
+                      : rightSideUnit && rightSideUnit.floorPlanUrl
+                      ? rightSideUnit.floorPlanUrl.split(",")[0]
+                      : ImgNotAvail
+                  }
+                  alt="Default Floor Plan"
+                  width={800}
+                  height={600}
+                  className="w-full h-[250px] sm:h-[300px] md:h-[350px] xl:h-[530px] rounded-lg shadow-md cursor-pointer object-contain"
+                />
+                <div className="absolute px-5 cursor-pointer bottom-0 right-0 bg-black/50 py-3 rounded-b-lg opacity-100 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center justify-center gap-2 text-white max-w-fit">
+                    <FiInfo size={16} />
+                    <p className="text-sm">Click to view more details</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

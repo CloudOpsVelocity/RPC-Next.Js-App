@@ -19,6 +19,7 @@ import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import PopupFilters from "./PopupFilters";
 
 import { PropertyUnit } from "../types/floor-plan";
+import Image from "next/image";
 
 interface FloorPlanModalProps {
   modalState: any;
@@ -30,7 +31,7 @@ interface FloorPlanModalProps {
   filteredUnits: PropertyUnit[];
   options: Record<keyof PropertyUnit, string[]> | Record<string, never>;
   handleOpenFullScreenModal: (unit: PropertyUnit) => void;
-  handleReqcallBack:any;
+  handleReqcallBack: any;
 }
 
 type Props = {
@@ -63,14 +64,14 @@ export function FloorPlanModal({
   filteredUnits: propFilteredUnits,
   options,
   handleOpenFullScreenModal,
-  handleReqcallBack
+  handleReqcallBack,
 }: FloorPlanModalProps) {
   const [currentUnit, setCurrentUnit] = useState(initialUnit);
   const [filteredUnits, setFilteredUnits] = useState(
     propFilteredUnits ? propFilteredUnits : []
   );
 
-  const {isOpen, unit} = modalState;
+  const { isOpen, unit } = modalState;
 
   const [currentPage, setCurrentPage] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
@@ -101,20 +102,20 @@ export function FloorPlanModal({
     setCurrentPage(targetPage);
   };
 
-  const [currentIndex, setCurrentIndex ] = useState(0);
-  
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrevUnit = () => {
     let curIndex = filteredUnits.findIndex(
       (unit) => unit.unitIdEnc === currentUnit.unitIdEnc
     );
-    const prevIndex = (curIndex - 1 + filteredUnits.length) % filteredUnits.length;
+    const prevIndex =
+      (curIndex - 1 + filteredUnits.length) % filteredUnits.length;
 
     const nextUnit = filteredUnits[prevIndex];
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
-    setCurrentIndex(curIndex-1);
-    console.log(curIndex-1, filteredUnits.length);
+    setCurrentIndex(curIndex - 1);
+    console.log(curIndex - 1, filteredUnits.length);
   };
 
   const handleNextUnit = () => {
@@ -126,9 +127,8 @@ export function FloorPlanModal({
     const nextUnit = filteredUnits[nextIndex];
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
-    setCurrentIndex(curIndex+1);
-    console.log(curIndex+1, filteredUnits.length);
-    
+    setCurrentIndex(curIndex + 1);
+    console.log(curIndex + 1, filteredUnits.length);
   };
 
   useEffect(() => {
@@ -154,12 +154,18 @@ export function FloorPlanModal({
   }, [isOpen, onClose, currentUnit]);
 
   useEffect(() => {
-    setFilteredUnits(propFilteredUnits ? propFilteredUnits : []);
-    setCurrentPage(0);
+    if (propFilteredUnits && propFilteredUnits.length > 0) {
+      setFilteredUnits(propFilteredUnits);
+      setCurrentUnit(propFilteredUnits[0]); // Set first filtered unit as current
+      setCurrentIndex(0); // Reset current index
+      setCurrentPage(0); // Reset page
+    }
   }, [propFilteredUnits]);
 
   useEffect(() => {
-    ensureUnitVisible(currentUnit);
+    if (filteredUnits.length > 0) {
+      ensureUnitVisible(filteredUnits[0]);
+    }
   }, [filteredUnits]);
 
   if (!isOpen) return null;
@@ -172,6 +178,7 @@ export function FloorPlanModal({
   const visibleUnits = filteredUnits
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
+  console.log(visibleUnits.length);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -180,13 +187,21 @@ export function FloorPlanModal({
         {/* Header */}
         <div className="flex items-start md:items-center justify-between flex-col md:flex-row p-2 border-b bg-white relative">
           <h3 className="text-lg md:text-xl font-semibold text-[#0073C6]">
-            {`${propCgId !== projectprops.plot ? currentUnit.bhkName : `${currentUnit.length}X${currentUnit.width} ft`} - 
-            ${propertyDetailsTypes && propertyDetailsTypes.get(propCgId) ? propertyDetailsTypes?.get(propCgId)?.name : "" } - 
+            {`${
+              propCgId !== projectprops.plot
+                ? currentUnit.bhkName
+                : `${currentUnit.length}X${currentUnit.width} ft`
+            } - 
+            ${
+              propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
+                ? propertyDetailsTypes?.get(propCgId)?.name
+                : ""
+            } - 
             Unit ${currentUnit.unitNumber}`}
           </h3>
           <div className="flex gap-2 mt-[10px] md:mt-0">
             <button
-              onClick={()=>handleReqcallBack(unit)}
+              onClick={() => handleReqcallBack(unit)}
               className="px-[8px] py-[2px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
             >
               Request Quotation
@@ -209,16 +224,14 @@ export function FloorPlanModal({
         {/* Main Content */}
         <div className="flex h-[calc(100vh-48px)]">
           {/* Left Side - Filters */}
-            <PopupFilters
-              // handleUnitFilterChange={handleFilterChange}
-              options={options}
-              dataFilters={filters}
-              setDataFilters={setFilters}
-              showFilters={showFilters}
-              setShowFilters={setShowFilters}
-            />
-
-
+          <PopupFilters
+            // handleUnitFilterChange={handleFilterChange}
+            options={options}
+            dataFilters={filters}
+            setDataFilters={setFilters}
+            showFilters={showFilters}
+            setShowFilters={setShowFilters}
+          />
 
           {/* Center - Floor Plan and Details */}
           <div className="flex-1 flex flex-col overflow-y-auto md:overflow-hidden pb-[50px]">
@@ -230,10 +243,12 @@ export function FloorPlanModal({
                     className="flex-1 relative"
                     onClick={() => handleOpenFullScreenModal(currentUnit)}
                   >
-                    <img
+                    <Image
                       src={mainImageUrl}
+                      width={800}
+                      height={600}
                       alt={`Floor Plan for ${currentUnit.bhkName}`}
-                      className="w-full h-full object-contain cursor-pointer"
+                      className="w-full h-full max-h-[600px] object-contain cursor-pointer"
                     />
                     <button
                       // onClick={() => handleOpenFullScreenModal(currentUnit)}
@@ -242,26 +257,34 @@ export function FloorPlanModal({
                       <FaExpand className="w-5 h-5 text-gray-600" />
                     </button>
                   </div>
-                  {filteredUnits.length > 2 &&
-                  <div className="flex justify-between mt-4"> 
-                    <button
-                      onClick={handlePrevUnit}
-                      disabled={currentIndex === 0}
-                      className={`flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg ${currentIndex === 0 ? " cursor-not-allowed " : "hover:bg-[#0073C6] hover:text-white"}`}
-                    >
-                      <FaChevronLeft />
-                      <span className="hidden sm:inline">Previous</span>
-                    </button>
-                    <button
-                      onClick={handleNextUnit}
-                      disabled={currentIndex === filteredUnits.length-1}
-                      className={`flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg ${currentIndex === filteredUnits.length-1 ? "cursor-not-allowed" : "hover:bg-[#0073C6] hover:text-white"}`}
-                    >
-                      <span className="hidden sm:inline">Next</span>
-                      <FaChevronRight />
-                    </button>
-                  </div>
-                  }
+                  {filteredUnits.length > 2 && (
+                    <div className="flex justify-between mt-4">
+                      <button
+                        onClick={handlePrevUnit}
+                        disabled={currentIndex === 0}
+                        className={`flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg ${
+                          currentIndex === 0
+                            ? " cursor-not-allowed "
+                            : "hover:bg-[#0073C6] hover:text-white"
+                        }`}
+                      >
+                        <FaChevronLeft />
+                        <span className="hidden sm:inline">Previous</span>
+                      </button>
+                      <button
+                        onClick={handleNextUnit}
+                        disabled={currentIndex === filteredUnits.length - 1}
+                        className={`flex items-center gap-2 px-4 py-2 bg-[#ECF7FF] text-[#0073C6] rounded-lg ${
+                          currentIndex === filteredUnits.length - 1
+                            ? "cursor-not-allowed"
+                            : "hover:bg-[#0073C6] hover:text-white"
+                        }`}
+                      >
+                        <span className="hidden sm:inline">Next</span>
+                        <FaChevronRight />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -400,7 +423,9 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Car Parking"
-                      value={`${currentUnit.noOfCarParking} ${currentUnit.parkingType ? currentUnit.parkingType : ""}`}
+                      value={`${currentUnit.noOfCarParking} ${
+                        currentUnit.parkingType ? currentUnit.parkingType : ""
+                      }`}
                       icon={
                         <FaCar className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -430,26 +455,22 @@ export function FloorPlanModal({
                   </h4>
                   <div className="flex gap-1">
                     <button
-                      // onClick={() =>
-                      //   // setCurrentPage((prev) => Math.max(prev - 1, 0))
-                      // }
-                      // disabled={currentPage === 0}
                       onClick={handlePrevUnit}
                       disabled={currentIndex === 0}
-                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${currentIndex === 0 ? "cursor-not-allowed " : ""}`}
+                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${
+                        currentIndex === 0 ? "cursor-not-allowed " : ""
+                      }`}
                     >
                       <FaChevronLeft className="w-4 h-4" />
                     </button>
                     <button
-                      // onClick={() =>
-                      //   setCurrentPage((prev) =>
-                      //     Math.min(prev + 1, totalPages - 1)
-                      //   )
-                      // }
-                      // disabled={currentPage === totalPages - 1}
                       onClick={handleNextUnit}
-                      disabled={currentIndex === filteredUnits.length-1}
-                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${currentIndex === filteredUnits.length-1 ? "cursor-not-allowed " : ""}`}
+                      disabled={currentIndex === filteredUnits.length - 1}
+                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${
+                        currentIndex === filteredUnits.length - 1
+                          ? "cursor-not-allowed "
+                          : ""
+                      }`}
                     >
                       <FaChevronRight className="w-4 h-4" />
                     </button>

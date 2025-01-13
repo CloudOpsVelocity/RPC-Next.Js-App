@@ -9,24 +9,20 @@ import { PropertyUnit } from "../types/floor-plan";
 
 type Props = {
   options: any;
-  // handleUnitFilterChange: (name: string, value: string) => void;
-  dataFilters:any;
-  setDataFilters:any;
-  showFilters:any;
-  setShowFilters:any;
+  dataFilters: any;
+  setDataFilters: any;
+  showFilters: any;
+  setShowFilters: any;
 };
 
 export default function PopupFilters({
   options,
-  // handleUnitFilterChange,
   dataFilters,
   setDataFilters,
   showFilters,
   setShowFilters,
 }: Props) {
-
   const [filters, setFilters] = useState(dataFilters);
-
   const [backupFilters, setBackupFilters] = useState({
     unitNumber: "",
     bhkName: "",
@@ -35,18 +31,26 @@ export default function PopupFilters({
     facingName: "",
     block: "",
     plotArea: "",
-    length:"",
     width: "",
+    length: "",
+    caretarea: "",
+    superBuildUparea: "",
+    totalNumberofBathroom: "",
+    totalNumberOfBalcony: "",
+    noOfCarParking: "",
+    parkingType: "",
+    terraceArea: "",
   });
 
   const isMobile = useMediaQuery("(max-width: 601px)");
-  
+
   const propCgId = useAtomValue(propCgIdAtom);
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = String(filters[key]).toLowerCase();
     return (
-      options !== undefined && options[key] !== undefined &&
+      options !== undefined &&
+      options[key] !== undefined &&
       options[key].filter((option: string | number) => {
         const optionValue = String(option).toLowerCase();
         return optionValue.includes(filterValue);
@@ -54,24 +58,28 @@ export default function PopupFilters({
     );
   };
 
-  
   function isActualNaN(value: any) {
-    return value !== value; // Only NaN is not equal to itself
+    return value !== value;
   }
 
-  const handleUnitFilterChange = (name: string | number | symbol, value: string | number) => {
+  const handleUnitFilterChange = (
+    name: string | number | symbol,
+    value: string | number
+  ) => {
     setDataFilters((prev: PropertyUnit) => ({
       ...prev,
       [name]: isActualNaN(value) ? "" : value,
     }));
   };
 
-  const handleFilterChange = (key: keyof typeof filters, value: string, type?:string) => {
+  const handleFilterChange = (
+    key: keyof typeof filters,
+    value: string,
+    type?: string
+  ) => {
     setFilters((prev: any) => ({ ...prev, [key]: String(value) }));
     setBackupFilters((prev: any) => ({ ...prev, [key]: String(value) }));
-    // if(!isMobile || type === "C"){
-      handleUnitFilterChange(key, value);
-    // }
+    handleUnitFilterChange(key, value);
   };
 
   const onSearchChange = (key: keyof typeof filters, value: string) => {
@@ -80,9 +88,12 @@ export default function PopupFilters({
 
   const onMouseOut = (key: keyof typeof filters, value: string) => {
     let data = filteredOptions(key);
-    if(data && !data.includes(value)){
-      setFilters((prev: any) => ({ ...prev, [key]: backupFilters[key] }));
-    }else{
+    if (data && !data.includes(value)) {
+      setFilters((prev: { [key: string]: string }) => ({
+        ...prev,
+        [key]: backupFilters[key as keyof typeof backupFilters],
+      }));
+    } else {
       handleFilterChange(key, value);
     }
   };
@@ -93,9 +104,13 @@ export default function PopupFilters({
     });
   };
 
-  const renderFilter = (key: keyof typeof filters, placeholder: string, title: string) => {  
+  const renderFilter = (
+    key: keyof typeof filters,
+    placeholder: string,
+    title: string
+  ) => {
     return (
-      <div key={key} className="relative mb-[10px]">
+      <div key={String(key)} className="relative mb-[10px]">
         <label
           className="block text-sm font-medium text-gray-700 mb-1"
           htmlFor="tower"
@@ -104,95 +119,154 @@ export default function PopupFilters({
         </label>
         <FilterInput
           value={filters[key] || ""}
-          onChange={(value) => handleFilterChange(key, value)}
+          onChange={(value: any) => handleFilterChange(key, value)}
           options={filteredOptions(key)}
           placeholder={placeholder}
-          onBlur={(value) => onMouseOut(key, value)}
-          onSearchChange={(value:any) => onSearchChange(key, value)}
+          onBlur={(value: any) => onMouseOut(key, value)}
+          onSearchChange={(value: any) => onSearchChange(key, value)}
         />
       </div>
     );
   };
 
-  const onApplyFilters = (identifier:string) => {
+  const onApplyFilters = (identifier: string) => {
     setShowFilters(false);
 
-    if(identifier == "A"){
+    if (identifier == "A") {
       setDataFilters(backupFilters);
-    }else{
+    } else {
       setBackupFilters(dataFilters);
     }
   };
 
   return (
-      <div
-        className={`${showFilters ? "absolute inset-0 z-20 bg-white" : "hidden"
-        } md:relative md:block w-full md:w-64 border-r bg-[#F8FBFF] p-3 overflow-y-auto`}
-      >
+    <div
+      className={`${
+        showFilters ? "absolute inset-0 z-20 bg-white" : "hidden"
+      } md:relative md:block w-full md:w-64 border-r bg-[#F8FBFF] h-full`}
+    >
+      <div className="sticky top-0 z-10 bg-[#F8FBFF] p-3 border-b flex justify-between items-center">
+        <h3 className="font-medium">Filters</h3>
+        <button
+          onClick={clearFilters}
+          className="text-[#0073C6] text-sm font-bold hover:underline"
+        >
+          Clear All
+        </button>
+      </div>
 
-        <div className="flex flex-col ">
-          
-          {/* Filter inputs */}
-          {options?.towerName && options?.towerName.length > 0 && (propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
-            renderFilter("towerName", "Search Tower", "Tower Name")
-          )}
+      <div className="h-[calc(100vh-120px)] overflow-y-auto p-3 custom-scrollbar">
+        <div className="flex flex-col">
+          {/* Basic Details */}
+          {options?.towerName &&
+            options?.towerName.length > 0 &&
+            (propCgId === projectprops.apartment ||
+              propCgId === projectprops.villament) &&
+            renderFilter("towerName", "Search Tower", "Tower Name")}
 
-          {options?.bhkName && options?.bhkName.length > 0 && propCgId !== projectprops.plot && (
-            renderFilter("bhkName", "Select BHK Type", "BHK Type")
-          )}
+          {options?.bhkName &&
+            options?.bhkName.length > 0 &&
+            propCgId !== projectprops.plot &&
+            renderFilter("bhkName", "Select BHK Type", "BHK Type")}
 
-          {options?.facingName && options?.facingName.length > 0 && (
-            renderFilter("facingName", "Select Facing", "Facing")
-          )}
+          {options?.facingName &&
+            options?.facingName.length > 0 &&
+            renderFilter("facingName", "Select Facing", "Facing")}
 
-          {options?.floor && options?.floor.length > 0 && propCgId !== projectprops.plot && (
-            renderFilter("floor", "Select Floor", "Floor")
-          )}
+          {options?.floor &&
+            options?.floor.length > 0 &&
+            propCgId !== projectprops.plot &&
+            renderFilter("floor", "Select Floor", "Floor")}
 
-          {options?.unitNumber && options?.unitNumber.length > 0 && (
-            renderFilter("unitNumber", "Select Unit Number", "Unit Number")
-          )}
+          {options?.unitNumber &&
+            options?.unitNumber.length > 0 &&
+            renderFilter("unitNumber", "Select Unit Number", "Unit Number")}
 
-          {options?.block && options?.block.length > 0&& propCgId === projectprops.apartment && (
-            renderFilter("block", "Select Block", "Block")
-          )}
+          {options?.block &&
+            options?.block.length > 0 &&
+            propCgId === projectprops.apartment &&
+            renderFilter("block", "Select Block", "Block")}
 
-          {options?.plotArea && options?.plotArea.length > 0 && propCgId === projectprops.plot && (
-            renderFilter("plotArea", "Select Plot Area", "Plot Area")
-          )}
+          {/* Area Details */}
+          {options?.plotArea &&
+            options?.plotArea.length > 0 &&
+            propCgId === projectprops.plot &&
+            renderFilter("plotArea", "Select Plot Area", "Plot Area")}
 
-          {options?.length && options?.length.length > 0 && propCgId === projectprops.plot && (
-            renderFilter("length", "Select Length", "Length")
-          )}
+          {options?.caretarea &&
+            options?.caretarea.length > 0 &&
+            renderFilter("caretarea", "Select Carpet Area", "Carpet Area")}
 
-          {options?.width && options?.width.length > 0 && propCgId === projectprops.plot && (
-            renderFilter("width", "Select Width", "Width")
-          )}
+          {options?.superBuildUparea &&
+            options?.superBuildUparea.length > 0 &&
+            renderFilter(
+              "superBuildUparea",
+              "Select Super Built-up Area",
+              "Super Built-up Area"
+            )}
 
+          {options?.terraceArea &&
+            options?.terraceArea.length > 0 &&
+            renderFilter("terraceArea", "Select Terrace Area", "Terrace Area")}
+
+          {/* Unit Features */}
+          {options?.totalNumberofBathroom &&
+            options?.totalNumberofBathroom.length > 0 &&
+            renderFilter(
+              "totalNumberofBathroom",
+              "Select Number of Bathrooms",
+              "Number of Bathrooms"
+            )}
+
+          {options?.totalNumberOfBalcony &&
+            options?.totalNumberOfBalcony.length > 0 &&
+            renderFilter(
+              "totalNumberOfBalcony",
+              "Select Number of Balconies",
+              "Number of Balconies"
+            )}
+
+          {options?.noOfCarParking &&
+            options?.noOfCarParking.length > 0 &&
+            renderFilter(
+              "noOfCarParking",
+              "Select Car Parking Count",
+              "Car Parking Count"
+            )}
+
+          {options?.parkingType &&
+            options?.parkingType.length > 0 &&
+            renderFilter("parkingType", "Select Parking Type", "Parking Type")}
+
+          {/* Plot Dimensions */}
+          {options?.length &&
+            options?.length.length > 0 &&
+            propCgId === projectprops.plot &&
+            renderFilter("length", "Select Length", "Length")}
+
+          {options?.width &&
+            options?.width.length > 0 &&
+            propCgId === projectprops.plot &&
+            renderFilter("width", "Select Width", "Width")}
+        </div>
+      </div>
+
+      {showFilters && (
+        <div className="sticky bottom-0 bg-[#F8FBFF] p-3 border-t flex justify-between items-center gap-[4px] md:hidden">
           <button
-            onClick={() => clearFilters()}
-            className="ml-auto p-[4px] bg-[#0073C6] text-white text-[14px] rounded-[4px] "
+            onClick={() => onApplyFilters("A")}
+            className="w-[50%] p-2 bg-[#0073C6] text-white rounded-[4px]"
           >
-            Clear Filters
+            Apply Filters
+          </button>
+          <button
+            onClick={() => onApplyFilters("C")}
+            className="w-[50%] p-2 bg-white text-[#0073C6] font-bold border-solid border-[1px] border-[#0073C6] rounded-[4px]"
+          >
+            Cancel
           </button>
         </div>
-
-        {showFilters && (
-          <div className="flex justify-between items-center gap-[4px]">
-            <button
-              onClick={() => onApplyFilters("A")}
-              className="w-[50%] mt-4 p-2 bg-[#0073C6] text-white rounded-[4px] md:hidden"
-            >
-              Apply Filters
-            </button>
-            <button
-              onClick={() => onApplyFilters("C")}
-              className="w-[50%] mt-4 p-2 bg-white text-[#0073C6] font-bold md:hidden border-solid border-[1px] border-[#0073C6] rounded-[4px] "
-            >
-              Cancel
-            </button>
-          </div>
-        )}
-      </div>
+      )}
+    </div>
   );
 }

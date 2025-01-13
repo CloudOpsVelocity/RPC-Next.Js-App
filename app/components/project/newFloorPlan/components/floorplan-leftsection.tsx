@@ -11,6 +11,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef } from "react";
 import { projectprops } from "@/app/data/projectDetails";
 import { PropertyUnit } from "../types/floor-plan";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
   units: any;
@@ -26,11 +27,11 @@ export default function FloorplanLeftsection({
   handleReqcallBack,
 }: Props) {
   const parentRef = useRef<HTMLDivElement>(null);
-
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const rowVirtualizer = useVirtualizer({
     count: units?.length || 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 300, // Adjust based on your card's average height
+    estimateSize: () => (isMobile ? 225 : 270), // Adjust based on your card's average height
     overscan: 5,
   });
 

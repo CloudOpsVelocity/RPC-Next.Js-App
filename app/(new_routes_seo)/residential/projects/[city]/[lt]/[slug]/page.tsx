@@ -103,7 +103,7 @@ export async function generateStaticParams() {
       slugs.push({ city, lt, slug });
     }
   }
-  console.log(slugs);
+
   return slugs;
 
   // Extract project names from the keys

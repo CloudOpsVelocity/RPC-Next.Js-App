@@ -161,14 +161,19 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
           />
         )}
-        {/* <FloorPlans
-          phases={data.phases}
-          projName={data.projectName}
-          partialUnitData={data.partialUnitData}
-          phaseOverview={phaseOverview}
-          slug={slug}
-          postedById={data.builderId}
-        /> */}
+        {data.projIdEnc === "0d1a266da2f55719f25fc89557db315f" ? (
+          <FloorPlans
+            phases={data.phases}
+            projName={data.projectName}
+            partialUnitData={data.partialUnitData}
+            phaseOverview={phaseOverview}
+            slug={slug}
+            postedById={data.builderId}
+          />
+        ) : (
+          ""
+        )}
+
         {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}

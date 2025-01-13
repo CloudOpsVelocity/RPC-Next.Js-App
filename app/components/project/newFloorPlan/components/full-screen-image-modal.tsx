@@ -32,7 +32,10 @@ type Props = {
 
 const DataItem = ({ title, value, icon }: Props) => {
   return (
-    <div key={title} className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg">
+    <div
+      key={title}
+      className="flex items-center gap-4 bg-[#F8FBFF] p-3 rounded-lg"
+    >
       <div className="bg-[#ECF7FF] p-2 rounded-lg">{icon}</div>
       <div>
         <p className="text-[#4D6677] text-sm font-medium">{title}</p>
@@ -46,26 +49,29 @@ export function FullScreenImageModal({
   isOpen,
   onClose,
   unit,
-  handleReqcallBack
+  handleReqcallBack,
 }: FullScreenImageModalProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        e.stopPropagation(); // Prevent event from bubbling up
+        onClose();
+      }
     };
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
+      document.addEventListener("keydown", handleEscape, true); // Use capture phase
       document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleEscape, true); // Clean up with capture phase
       document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
   const propCgId = useAtomValue(propCgIdAtom);
- 
+
   if (!isOpen) return null;
 
   return (
@@ -75,22 +81,42 @@ export function FullScreenImageModal({
         {/* Header */}
         <div className="flex items-start md:items-center justify-between flex-col md:flex-row p-2 border-b bg-white relative">
           <h3 className="text-xl font-semibold text-[#0073C6]">
-            {`${propCgId !== projectprops.plot ? unit.bhkName : `${unit.length}X${unit.width} ft`} - 
-            ${propertyDetailsTypes && propertyDetailsTypes.get(propCgId) ? propertyDetailsTypes?.get(propCgId)?.name : "" } - 
+            {`${
+              propCgId !== projectprops.plot
+                ? unit.bhkName
+                : `${unit.length}X${unit.width} ft`
+            } - 
+            ${
+              propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
+                ? propertyDetailsTypes?.get(propCgId)?.name
+                : ""
+            } - 
             Unit ${unit.unitNumber}`}
           </h3>
           <div className="flex items-center gap-[6px] md:gap-4 mt-[10px] md:mt-0">
-            
-            <button  
-              onClick={()=> unit.floorPlanUrl?.split(",")[0] ? downloadFn(unit.floorPlanUrl?.split(",")[0]) : ("")} 
-              className={`flex items-center gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${unit.floorPlanUrl?.split(",")[0] ? "" : "cursor-not-allowed"} `}
+            <button
+              onClick={() =>
+                unit.floorPlanUrl?.split(",")[0]
+                  ? downloadFn(unit.floorPlanUrl?.split(",")[0])
+                  : ""
+              }
+              className={`flex items-center gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${
+                unit.floorPlanUrl?.split(",")[0] ? "" : "cursor-not-allowed"
+              } `}
               disabled={unit.floorPlanUrl?.split(",")[0] ? false : true}
-              title={unit.floorPlanUrl?.split(",")[0] ? "Click to Download Floorplan" : "Floorplan not Available"}
+              title={
+                unit.floorPlanUrl?.split(",")[0]
+                  ? "Click to Download Floorplan"
+                  : "Floorplan not Available"
+              }
             >
               <FaDownload className="w-4 h-4" />
               <span>Download Floor Plan</span>
             </button>
-            <button onClick={()=>handleReqcallBack(unit)} className="flex items-center gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors">
+            <button
+              onClick={() => handleReqcallBack(unit)}
+              className="flex items-center gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
+            >
               <FaMessage className="w-4 h-4" />
               <span>Request Quotation</span>
             </button>
@@ -123,7 +149,6 @@ export function FullScreenImageModal({
                   Area Details
                 </h4>
                 <div className="flex gap-[10px] flex-wrap ">
-
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Super Built-up Area"
@@ -133,7 +158,7 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-              
+
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Carpet Area"
@@ -143,8 +168,9 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-              
-                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+
+                  {(propCgId === projectprops.apartment ||
+                    propCgId === projectprops.villament) && (
                     <DataItem
                       title="Tower"
                       value={unit.towerName}
@@ -153,7 +179,7 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-              
+
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Floor"
@@ -175,7 +201,7 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-              
+
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Length"
@@ -185,7 +211,7 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-              
+
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Width"
@@ -195,7 +221,7 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-              
+
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Plot Area"
@@ -214,9 +240,8 @@ export function FullScreenImageModal({
                   Unit Features
                 </h4>
                 <div className="flex gap-[10px] flex-wrap">
-
                   {propCgId !== projectprops.plot && (
-                  <DataItem
+                    <DataItem
                       title="Unit Type"
                       value={unit.bhkName}
                       icon={
@@ -224,7 +249,7 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-                
+
                   <DataItem
                     title="Facing"
                     value={unit.facingName}
@@ -232,7 +257,7 @@ export function FullScreenImageModal({
                       <FaCompass className="text-[#0073C6] text-xl sm:text-2xl" />
                     }
                   />
-                
+
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Bathrooms"
@@ -242,7 +267,7 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-                
+
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Balconies"
@@ -252,28 +277,28 @@ export function FullScreenImageModal({
                       }
                     />
                   )}
-                  
+
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Car Parking"
-                      value={`${unit.noOfCarParking} ${unit.parkingType ? unit.parkingType : ""}`}
+                      value={`${unit.noOfCarParking} ${
+                        unit.parkingType ? unit.parkingType : ""
+                      }`}
                       icon={
                         <FaCar className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
                     />
                   )}
-                
-                  {unit.terraceArea &&
-                    unit.terraceArea !== "null" && (
-                      <DataItem
-                        title="Terrace Area"
-                        value={`${unit.terraceArea} sq.ft`}
-                        icon={
-                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                        }
-                      />
-                 )}
 
+                  {unit.terraceArea && unit.terraceArea !== "null" && (
+                    <DataItem
+                      title="Terrace Area"
+                      value={`${unit.terraceArea} sq.ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
                 </div>
               </div>
             </div>
