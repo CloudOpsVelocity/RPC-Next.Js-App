@@ -12,8 +12,8 @@ module.exports = {
     "/test/*",
   ],
   generateIndexSitemap: false,
-
   generateRobotsTxt: true,
+
   additionalPaths: async (config) => {
     return [
       {
@@ -46,6 +46,10 @@ module.exports = {
       },
     ],
     additionalSitemaps: [
+      `${process.env.NEXT_PUBLIC_URL}/dashboard-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_URL}/listing-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_URL}/builder-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_URL}/project-details-sitemap.xml`,
       `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/0.xml`,
       `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/1.xml`,
       `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/2.xml`,

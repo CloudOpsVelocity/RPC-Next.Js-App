@@ -4,12 +4,10 @@ import fs from "fs";
 import { getServerSideSitemap } from "next-sitemap";
 
 // Utility function to split the array into chunks
-const chunkArray = (array: any[], sizes: number[]) => {
-  let start = 0;
+const chunkArray = (array: any[], chunkSize: number) => {
   const chunks = [];
-  for (let size of sizes) {
-    chunks.push(array.slice(start, start + size));
-    start += size;
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, i + chunkSize));
   }
   return chunks;
 };
@@ -30,19 +28,11 @@ export async function GET(
   const data = fs.readFileSync(filePath, "utf-8");
   const projectSlugs = JSON.parse(data);
 
-  // Calculate how many chunks we need (we want exactly 5 sitemaps)
-  const totalEntries = projectSlugs.length;
-  const baseSize = Math.floor(totalEntries / 5); // Minimum entries per sitemap
-  const extraEntries = totalEntries % 5; // Remaining entries to distribute
+  // Set the chunk size (50,000 entries per sitemap)
+  const chunkSize = 50000;
 
-  // Create an array of chunk sizes: 4 chunks with 'baseSize', and 1 with 'baseSize + 1'
-  const sizes = Array(5).fill(baseSize);
-  for (let i = 0; i < extraEntries; i++) {
-    sizes[i] += 1; // Distribute the remaining 1 entry
-  }
-
-  // Split the project slugs into chunks with the calculated sizes
-  const sitemapChunks = chunkArray(projectSlugs, sizes);
+  // Split the project slugs into chunks of 50,000
+  const sitemapChunks = chunkArray(projectSlugs, chunkSize);
 
   // Check if the requested index is within the valid range
   if (sitemapIndex >= sitemapChunks.length) {
