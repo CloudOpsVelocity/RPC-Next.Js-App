@@ -161,7 +161,7 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
           />
         )}
-        {data.projIdEnc === "0d1a266da2f55719f25fc89557db315f" ? (
+        {process.env.NODE_ENV == "development" || data.projIdEnc === "0d1a266da2f55719f25fc89557db315f" ? (
           <FloorPlans
             phases={data.phases}
             projName={data.projectName}

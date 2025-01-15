@@ -326,10 +326,11 @@ export default function FloorPlans({
                   height={600}
                   className="w-full h-[250px] sm:h-[300px] md:h-[350px] xl:h-[530px] rounded-lg shadow-md cursor-pointer object-contain"
                 />
-                <div className="absolute px-5 cursor-pointer bottom-0 right-0 bg-black/50 py-3 rounded-b-lg opacity-100 group-hover:opacity-100 transition-opacity">
-                  <div className="flex items-center justify-center gap-2 text-white max-w-fit">
-                    <FiInfo size={16} />
-                    <p className="text-sm">Click to view more details</p>
+                <div className="absolute px-2 sm:px-5 cursor-pointer bottom-0 right-0 bg-black/50 py-1.5 sm:py-3 rounded-b-lg opacity-100 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center justify-center gap-1 sm:gap-2 text-white max-w-fit">
+                    <p className="text-xs sm:text-sm">
+                      Click to view more details
+                    </p>
                   </div>
                 </div>
               </div>

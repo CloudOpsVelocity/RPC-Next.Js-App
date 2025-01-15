@@ -142,13 +142,19 @@ export function FloorPlanModal({
       }
     };
 
+    const handlePopState = () => {
+      onClose();
+    };
+
     if (isOpen) {
       document.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("popstate", handlePopState);
       document.body.style.overflow = "hidden";
     }
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("popstate", handlePopState);
       document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose, currentUnit]);
@@ -178,7 +184,6 @@ export function FloorPlanModal({
   const visibleUnits = filteredUnits
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
-  console.log(visibleUnits.length);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -248,7 +253,7 @@ export function FloorPlanModal({
                       width={800}
                       height={600}
                       alt={`Floor Plan for ${currentUnit.bhkName}`}
-                      className="w-full h-full max-h-[600px] object-contain cursor-pointer"
+                      className="w-full h-full max-h-[300px] sm:max-h-[600px] object-contain cursor-pointer"
                     />
                     <button
                       // onClick={() => handleOpenFullScreenModal(currentUnit)}
@@ -289,8 +294,8 @@ export function FloorPlanModal({
               </div>
 
               {/* Unit Details */}
-              <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 max-h-[100%] overflow-y-auto ">
-                <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2">
+              <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 h-[calc(100vh-300px)] md:h-auto overflow-y-auto">
+                <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 sticky top-0 bg-white">
                   Area Details
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-4">
@@ -378,7 +383,7 @@ export function FloorPlanModal({
                   )}
                 </div>
 
-                <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6">
+                <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6 sticky top-[48px] bg-white">
                   Unit Features
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-4">

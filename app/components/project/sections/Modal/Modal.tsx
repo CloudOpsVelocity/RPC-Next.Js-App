@@ -34,13 +34,20 @@ const Modal = ({
   children: React.ReactNode;
 }) => {
   useEffect(() => {
+    const handlePopState = () => {
+      onClose();
+    };
+
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("popstate", handlePopState);
     }
+
     return () => {
       document.body.style.overflow = "unset";
+      window.removeEventListener("popstate", handlePopState);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
