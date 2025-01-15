@@ -456,7 +456,7 @@ export function FloorPlanModal({
               <div className="border-t bg-white p-[10px] md:p-4">
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="text-sm font-semibold">
-                    Available Units ({filteredUnits ? filteredUnits.length : 0})
+                    Filtered Units ({filteredUnits ? filteredUnits.length : 0})
                   </h4>
                   <div className="flex gap-1">
                     <button

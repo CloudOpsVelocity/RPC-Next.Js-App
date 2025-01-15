@@ -10,7 +10,7 @@ export default function Page({ params: { slug } }: Props) {
         src={decodedUrl}
         type="application/pdf"
         width="100%"
-        className="h-[100vh]"
+        className="h-[100vh] pt-[70px]"
       />
     </div>
   );

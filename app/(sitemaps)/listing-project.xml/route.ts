@@ -12,7 +12,8 @@ export async function GET(request: Request) {
     loc: `${process.env.NEXT_PUBLIC_URL}/${slug}`,
     lastmod: new Date().toISOString(),
   }));
+  logger.info(`Count of Sitemap: ${generatedSitemap.length}`);
 
   logger.info(`Case SEO Details Sitemap: Generated Sitemap`);
-  return getServerSideSitemap(generatedSitemap);
+  return getServerSideSitemap(generatedSitemap, {});
 }

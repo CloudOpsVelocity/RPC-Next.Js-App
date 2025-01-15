@@ -1,3 +1,5 @@
+const { default: axios } = require("axios");
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_URL || "https://example.com",
@@ -11,13 +13,44 @@ module.exports = {
   ],
   generateIndexSitemap: false,
 
-  // generateRobotsTxt: true,
-  // robotsTxtOptions: {
-  //   policies: [
-  //     {
-  //       userAgent: "*",
-  //       allow: "/",
-  //     },
-  //   ],
-  // },
+  generateRobotsTxt: true,
+  additionalPaths: async (config) => {
+    return [
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemap/0.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemap/1.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemap/2.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemap/3.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemap/4.xml`,
+        lastmod: new Date().toISOString(),
+      },
+    ];
+  },
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
+    additionalSitemaps: [
+      `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/0.xml`,
+      `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/1.xml`,
+      `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/2.xml`,
+      `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/3.xml`,
+      `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/4.xml`,
+    ],
+  },
 };
