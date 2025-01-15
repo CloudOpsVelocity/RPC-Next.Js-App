@@ -107,7 +107,7 @@ const MainBox = ({ data, refetch }: Props) => {
 
   const [, { open }] = useReqCallPopup();
   const overlayData = useAtomValue(overlayAtom);
-
+console.log(data,type)
   const handleOpen = () => {
     console.log(overlayData);
     open({
@@ -121,7 +121,7 @@ const MainBox = ({ data, refetch }: Props) => {
         type === "proj"
           ? projName
           : `${bhkName ?? ""} ${propTypeName} for
-      ${data.cg === "R" ? "Rent" : "Sale"} in ${localityName}`,
+      ${data.category === "Rent" ? "Rent" : "Sale"} in ${localityName}`,
     });
   };
   const isMobile = useMediaQuery("(max-width: 1600px)");

@@ -91,7 +91,7 @@ export function FullScreenImageModal({
             {`${
               propCgId !== projectprops.plot
                 ? unit.bhkName
-                : `${unit.length}X${unit.width} ft`
+                : `(${unit.length} X ${unit.width}) ft`
             } - 
             ${
               propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
