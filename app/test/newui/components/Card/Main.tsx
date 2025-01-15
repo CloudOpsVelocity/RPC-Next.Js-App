@@ -84,7 +84,7 @@ const MainBox = ({ data, refetch }: Props) => {
       url = createProjectLinkUrl({
         city: data.city,
         locality: data.locality,
-        slug: data.projName, 
+        slug: data.projName,
         projIdEnc: projEncId,
       });
       window.open(url, "_blank");
@@ -109,7 +109,6 @@ const MainBox = ({ data, refetch }: Props) => {
   const overlayData = useAtomValue(overlayAtom);
 
   const handleOpen = () => {
-    console.log(overlayData);
     open({
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
