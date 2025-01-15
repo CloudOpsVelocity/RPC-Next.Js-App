@@ -59,9 +59,9 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
       />
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="sticky top-0 flex items-start md:items-center justify-between flex-col md:flex-row p-2 md:p-4 border-b bg-white shadow-sm">
+        <div className="sticky top-0 flex items-center justify-between flex-row p-2 md:p-4 border-b bg-white shadow-sm">
           <h3 className="text-base md:text-xl font-semibold text-[#0073C6]">
-            Floor Plan - {floorData.bhkName || data.propTypeName}{" "}
+            {floorData.bhkName || data.propTypeName}{" "}
             {floorData.unitNumber && `- Unit ${floorData.unitNumber}`}
           </h3>
           <div className="flex items-center max-w-fit justify-end gap-2 md:gap-4 mt-2 md:mt-0">
@@ -158,11 +158,45 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   items={[
                     { label: "Unit Type", value: floorData.bhkName ?? "" },
                     { label: "Unit Number", value: floorData.unitNumber ?? "" },
-                    ...(floorData.towerName
+                    ...(floorData.towerName &&
+                    (type === projectprops.apartment ||
+                      type === projectprops.villament)
                       ? [{ label: "Tower", value: floorData.towerName }]
                       : []),
-                    ...(floorData.block
+                    ...(floorData.block &&
+                    type === projectprops.apartment &&
+                    type !== projectprops.plot
                       ? [{ label: "Block", value: floorData.block }]
+                      : []),
+                    ...(floorData.floor !== undefined
+                      ? [
+                          {
+                            label:
+                              type === projectprops.rowHouse ||
+                              type === projectprops.villa
+                                ? "At Elevation"
+                                : "At Floor",
+                            value: `${
+                              floorData.isBasement === "Y" ? "B+" : ""
+                            }${
+                              floorData.floor === 0 || floorData.floor === "0"
+                                ? "G"
+                                : type === projectprops.rowHouse ||
+                                  type === projectprops.villa
+                                ? `G+${floorData.floor}`
+                                : floorData.floor
+                            }`,
+                          },
+                        ]
+                      : []),
+                    ...(floorData.totalFloor !== undefined &&
+                    type !== projectprops.plot
+                      ? [
+                          {
+                            label: "Total No.Of Floors",
+                            value: floorData.totalFloor,
+                          },
+                        ]
                       : []),
                   ]}
                 />
@@ -191,7 +225,11 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                         },
                       ]
                     : []),
-                  ...(floorData.plotArea
+                  ...(floorData.plotArea &&
+                  (type === projectprops.plot ||
+                    type === projectprops.villa ||
+                    type === projectprops.rowHouse ||
+                    type === projectprops.independent)
                     ? [
                         {
                           label: "Plot Area",
@@ -202,7 +240,18 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                         },
                       ]
                     : []),
-                  ...(floorData.gardenArea
+                  ...(floorData.ga && type !== projectprops.plot
+                    ? [
+                        {
+                          label: "Garden Space",
+                          value: `${floorData.ga} sq.ft`,
+                        },
+                      ]
+                    : []),
+                  ...(floorData.gardenArea &&
+                  (type === projectprops.villa ||
+                    type === projectprops.rowHouse ||
+                    type === projectprops.villament)
                     ? [
                         {
                           label: "Garden Area",
@@ -213,12 +262,48 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                         },
                       ]
                     : []),
-                  ...(floorData.terraceArea
+                  ...(floorData.ta && type !== projectprops.plot
+                    ? [
+                        {
+                          label: "Terrace Area",
+                          value: `${formatNumberWithSuffix(
+                            floorData.ta,
+                            false
+                          )} sq.ft`,
+                        },
+                      ]
+                    : []),
+                  ...(floorData.ba && type !== projectprops.plot
+                    ? [
+                        {
+                          label: "Balcony Area",
+                          value: `${floorData.ba} sq.ft`,
+                        },
+                      ]
+                    : []),
+                  ...(floorData.terraceArea &&
+                  floorData.terraceArea !== "null" &&
+                  (type === projectprops.villa ||
+                    type === projectprops.rowHouse ||
+                    type === projectprops.villament ||
+                    type === projectprops.independent)
                     ? [
                         {
                           label: "Terrace Area",
                           value: `${formatNumberWithSuffix(
                             floorData.terraceArea,
+                            false
+                          )} sq.ft`,
+                        },
+                      ]
+                    : []),
+                  ...(floorData.totalBalconySize &&
+                  type === projectprops.villament
+                    ? [
+                        {
+                          label: "Balcony Size",
+                          value: `${formatNumberWithSuffix(
+                            floorData.totalBalconySize,
                             false
                           )} sq.ft`,
                         },
@@ -278,8 +363,13 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                 icon={propertyDetailsSvgs.facingName}
                 title="Other Details"
                 items={[
-                  { label: "Facing", value: floorData.facingName ?? "" },
-                  ...(floorData.totalNumberOfBalcony
+                  {
+                    label:
+                      type === projectprops.plot ? "Plot Facing" : "Facing",
+                    value: floorData.facingName ?? "",
+                  },
+                  ...(floorData.totalNumberOfBalcony &&
+                  type !== projectprops.plot
                     ? [
                         {
                           label: "Balconies",
@@ -287,10 +377,31 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                         },
                       ]
                     : []),
-                  {
-                    label: "Bathrooms",
-                    value: floorData.totalNumberofBathroom?.toString() ?? "0",
-                  },
+                  ...(type !== projectprops.plot
+                    ? [
+                        {
+                          label: "Bathrooms",
+                          value:
+                            floorData.totalNumberofBathroom?.toString() ?? "0",
+                        },
+                      ]
+                    : []),
+                  ...(type === projectprops.plot && floorData.length
+                    ? [
+                        {
+                          label: "Length of Plot",
+                          value: `${floorData.length} ft.`,
+                        },
+                      ]
+                    : []),
+                  ...(type === projectprops.plot && floorData.width
+                    ? [
+                        {
+                          label: "Breadth of Plot",
+                          value: `${floorData.width} ft.`,
+                        },
+                      ]
+                    : []),
                 ]}
               />
             </div>
