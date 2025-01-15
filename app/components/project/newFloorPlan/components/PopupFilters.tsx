@@ -118,7 +118,7 @@ export default function PopupFilters({
           {title}
         </label>
         <FilterInput
-          value={filters[key] || ""}
+          value={placeholder == "Select Floor" ? filters[key] == "0" ? "G"  : filters[key] : filters[key] || ""}
           onChange={(value: any) => handleFilterChange(key, value)}
           options={filteredOptions(key)}
           placeholder={placeholder}
@@ -230,8 +230,8 @@ export default function PopupFilters({
             options?.noOfCarParking.length > 0 &&
             renderFilter(
               "noOfCarParking",
-              "Select Car Parking Count",
-              "Car Parking Count"
+              "Select Number of Car Parkings",
+              "Number of Car Parkings"
             )}
 
           {options?.parkingType &&

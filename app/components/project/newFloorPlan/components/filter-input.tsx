@@ -43,13 +43,13 @@ const FilterInput: React.FC<FilterInputProps> = ({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <div className="relative">
+      <div className="relative w-full p-2 border rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0073C6] ">
         <input
           type="text"
           value={value}
           onChange={(e) => onSearchChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="w-full p-2 border rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0073C6]"
+          className="w-[90%]  truncate"
           placeholder={placeholder}
           onBlur={(e) => onBlur(e.target.value)}
         />

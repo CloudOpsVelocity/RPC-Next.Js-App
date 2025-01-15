@@ -195,7 +195,7 @@ export function FloorPlanModal({
             {`${
               propCgId !== projectprops.plot
                 ? currentUnit.bhkName
-                : `${currentUnit.length}X${currentUnit.width} ft`
+                : `(${currentUnit.length} X ${currentUnit.width}) sq.ft`
             } - 
             ${
               propertyDetailsTypes && propertyDetailsTypes.get(propCgId)

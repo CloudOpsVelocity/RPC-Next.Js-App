@@ -78,7 +78,7 @@ export default function FloorplanLeftsection({
                       <div className="flex flex-wrap items-center gap-1 md:gap-2 mb-2">
                         <h3 className="text-[14px] xs:text-[16px] sm:text-[18px] md:text-[20px] xl:text-[24px] font-bold text-[#232323]">
                           {unit.propType === projectprops.plot
-                            ? `${unit.length}ftx${unit.width} ft`
+                            ? `${unit.length} ft x ${unit.width} ft`
                             : unit.bhkName}
                         </h3>
                         {unit.aptTypeName && unit.aptTypeName !== "" && (
@@ -216,7 +216,7 @@ export default function FloorplanLeftsection({
                             Length
                           </p>
                           <p className="text-sm xs:text-base sm:text-lg font-bold">
-                            {unit.length}
+                            {`${unit.length} ft`}
                           </p>
                         </div>
                       </div>
@@ -229,7 +229,7 @@ export default function FloorplanLeftsection({
                             Width
                           </p>
                           <p className="text-sm xs:text-base sm:text-lg font-bold">
-                            {unit.width}
+                          {`${unit.width} ft`}
                           </p>
                         </div>
                       </div>

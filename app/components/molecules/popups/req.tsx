@@ -19,6 +19,7 @@ import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
+import { title } from "process";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
