@@ -53,14 +53,16 @@ type Action =
   | { type: "SET_FILTERS"; payload: SearchFilter };
 
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
-  console.log(action)
   switch (action.type) {
     case "reset":
       return initialState;
     case "update":
-      var newData = action.payload.propType === projectprops.plot ? {...action.payload, bhk: []} : 
-        action.payload.bhk !== undefined && action.payload.bhk.length > 0  ? {...action.payload, propType: null} : 
-        {...action.payload}
+      var newData =
+        action.payload.propType === projectprops.plot
+          ? { ...action.payload, bhk: [] }
+          : // action.payload.bhk !== undefined && action.payload.bhk.length > 0  ? {...action.payload, propType: null} :
+            { ...action.payload };
+
       return {
         ...state,
         ...newData,
@@ -167,7 +169,7 @@ export const ProjSearchAppliedFiltersStore = atom(
       | "phaseId"
   ) => {
     const appliedFilters = get(projSearchStore);
-    let queryString:string | null = "";
+    let queryString: string | null = "";
     if (type === "add") {
       for (const [key, value] of Object.entries(appliedFilters)) {
         // Skip areaValue and bugdetValue if they match initial values
@@ -204,7 +206,7 @@ export const ProjSearchAppliedFiltersStore = atom(
           queryString = queryString.replace(/-bhk=[^&]*/g, "");
           set(projSearchStore, {
             type: "update",
-            payload: { bhk: initialState.bhk},
+            payload: { bhk: initialState.bhk },
           });
           break;
         case "phaseId":
@@ -238,9 +240,10 @@ export const ProjSearchAppliedFiltersStore = atom(
             let listedBy =
               getParams.get("sf")?.match(/listedBy=[^\s&]*\+?(\d+)?/)?.[0] ??
               "";
-              console.log("key name")
-            
-            let finalKey = listedBy !== "" ?  listedBy.split("=")[1].split("-")[0] : null;
+            console.log("key name");
+
+            let finalKey =
+              listedBy !== "" ? listedBy.split("=")[1].split("-")[0] : null;
             queryString = finalKey;
 
             set(projSearchStore, {

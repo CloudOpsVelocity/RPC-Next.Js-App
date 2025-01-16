@@ -66,27 +66,23 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
     severData = await getNewProjSearchData(url);
   }
   let city = `Bengaluru`;
+  const frontEndFilter = {
+    ...(slugValues.P ? { propType: parseInt(slugValues.P) } : {}),
+    ...(slugValues.CG ? { cg: slugValues.CG } : {}),
+    ...(slugValues.C ? { city: `${city}+${slugValues.C}` } : {}),
+    ...(slugValues.B ? { bhk: [parseInt(slugValues.B)] } : {}),
+    ...(slugValues.L
+      ? {
+          localities: [
+            `${slug.split("-").at(-Number(atMinusIndex))}+${slugValues.L}`,
+          ],
+        }
+      : {}),
+  };
   return (
     <>
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
-      <NewSearchPage
-        serverData={severData}
-        frontendFilters={{
-          ...(slugValues.CG ? { cg: slugValues.CG } : {}),
-          ...(slugValues.C ? { city: `${city}+${slugValues.C}` } : {}),
-          ...(slugValues.P ? { propTypes: parseInt(slugValues.P) } : {}),
-          ...(slugValues.B ? { unitTypes: [parseInt(slugValues.B)] } : {}),
-          ...(slugValues.L
-            ? {
-                localities: [
-                  `${slug.split("-").at(-Number(atMinusIndex))}+${
-                    slugValues.L
-                  }`,
-                ],
-              }
-            : {}),
-        }}
-      />
+      <NewSearchPage serverData={severData} frontendFilters={frontEndFilter} />
     </>
   );
 }

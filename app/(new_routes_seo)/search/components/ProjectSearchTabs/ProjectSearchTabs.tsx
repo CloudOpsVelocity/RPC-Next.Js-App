@@ -95,6 +95,7 @@ export default function ProjectSearchTabs() {
       type: "update",
       payload: updatedFilters,
     });
+    console.log(updatedFilters);
     handleApplyFilters();
   };
   const handleSortBy = (option: any) => {
