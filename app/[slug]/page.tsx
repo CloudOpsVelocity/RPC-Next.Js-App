@@ -57,11 +57,12 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   let atMinusIndex = slugValues.count + 2;
   let severData;
   if (!searchParams.sf) {
-    let url = `&${slugValues.CG ? `cg=${slugValues.CG}` : ""}&${
-      slugValues.C ? `city=${slugValues.C}` : ""
+    let url = `${slugValues.CG ? `&cg=${slugValues.CG}` : ""}${
+      slugValues.C ? `&city=${slugValues.C}` : ""
     }&${slugValues.P ? `propType=${slugValues.P}` : ""}&${
       slugValues.B ? `bhk=${slugValues.B}` : ""
     }&${slugValues.L ? `localities=${slugValues.L}` : ""}`;
+    console.log(url);
     severData = await getNewProjSearchData(url);
   }
   let city = `Bengaluru`;

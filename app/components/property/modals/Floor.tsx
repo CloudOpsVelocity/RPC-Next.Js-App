@@ -98,13 +98,13 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
             )}
             <button
               onClick={() => setOpened(false)}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors bg-white"
             >
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                className="w-4 h-4 text-gray-600"
+                className="w-6 h-6 text-gray-600"
               >
                 <path
                   strokeLinecap="round"

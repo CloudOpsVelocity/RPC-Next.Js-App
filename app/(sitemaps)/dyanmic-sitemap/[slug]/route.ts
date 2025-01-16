@@ -29,7 +29,7 @@ export async function GET(
   const projectSlugs = JSON.parse(data);
 
   // Set the chunk size (50,000 entries per sitemap)
-  const chunkSize = 50000;
+  const chunkSize = 30000;
 
   // Split the project slugs into chunks of 50,000
   const sitemapChunks = chunkArray(projectSlugs, chunkSize);

@@ -36,6 +36,26 @@ module.exports = {
         loc: `${config.siteUrl}/dyanmic-sitemap/4.xml`,
         lastmod: new Date().toISOString(),
       },
+      {
+        loc: `${config.siteUrl}/residential-projects/for-sale`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/residential-projects/for-rent`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/search?sf=projStatus=106`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/search?sf=projStatus=107`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/search?sf=projStatus=108`,
+        lastmod: new Date().toISOString(),
+      },
     ];
   },
   robotsTxtOptions: {

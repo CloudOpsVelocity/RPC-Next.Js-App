@@ -155,7 +155,7 @@ function Footer() {
       ],
       hrefs: [
         "/privacy",
-        "/terms",
+        "/terms-and-conditions",
         "/cookies",
         "/fair-housing",
         "/accessibility",
