@@ -169,9 +169,18 @@ export default function PropertyTypeDetailsCrad({
       return `Ground + ${cg.elevation} Floors`;
     }
 
-    const basement = tower.elevationBasement || 0;
-    const podium = tower.noOfPodium || 0;
-    const floors = tower.totalFloor || 0;
+    // Find tower with max floors
+    let maxTower = cg.towerData?.reduce((max: any, t: any) => {
+      return t.totalFloor > (max?.totalFloor || 0) ? t : max;
+    }, cg.towerData[0]);
+
+    if (!maxTower) {
+      maxTower = tower;
+    }
+
+    const basement = maxTower.elevationBasement || 0;
+    const podium = maxTower.noOfPodium || 0;
+    const floors = maxTower.totalFloor || 0;
 
     let str = "";
     if (basement > 0) str += `${basement} Basement${basement > 1 ? "s" : ""}, `;
@@ -187,8 +196,10 @@ export default function PropertyTypeDetailsCrad({
       ? `G+${cg.elevation}`
       : cg.towerData &&
         cg.towerData?.reduce((max: string, tower: any) => {
-          const elevStr = getElevationString(tower); 
-          return elevStr.length > max.length ? elevStr : max;
+          const elevStr = getElevationString(tower);
+          const currElevation = tower.totalFloor || 0;
+          const maxElevation = max ? parseInt(max.split("+").pop() || "0") : 0;
+          return currElevation > maxElevation ? elevStr : max;
         }, "");
 
   const elevationTooltip =
