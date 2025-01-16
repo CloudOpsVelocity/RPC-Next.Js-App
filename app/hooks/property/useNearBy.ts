@@ -2,6 +2,7 @@ import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "next/navigation";
 import { BACKEND_BASE_URL } from "@/app/env";
+import RTK_CONFIG from "@/app/config/rtk";
 
 export default function useNearby({
   lat,
@@ -25,15 +26,16 @@ export default function useNearby({
   const queryClient = useQueryClient();
   const getData = async () => {
     const res = await axios.get(
-      `${BACKEND_BASE_URL}/api/v1/fetch/nearbyProperties?lat=${lat}&lng=${lng}&bhkId=${bhkId}&propType=${propType}&cg=${cg.toLowerCase()}&propIdEnc=${(slug|| bhk_unit_type).split('-')[1]}${
-        projId ? `&projIdEnc=${projId}` : ""
-      }  `
+      `${BACKEND_BASE_URL}/api/v1/fetch/nearbyProperties?lat=${lat}&lng=${lng}&bhkId=${bhkId}&propType=${propType}&cg=${cg.toLowerCase()}&propIdEnc=${
+        (slug || bhk_unit_type).split("-")[1]
+      }${projId ? `&projIdEnc=${projId}` : ""}  `
     );
     return res.data;
   };
   const { isLoading, data } = useQuery({
     queryKey: [`nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg],
     queryFn: getData,
+    ...RTK_CONFIG,
   });
   const updateTodo = async () => {};
 
@@ -42,7 +44,9 @@ export default function useNearby({
     // When mutate is called:
     onMutate: async ({ id, type }: { id: string; type: "other" | "proj" }) => {
       await queryClient.cancelQueries({
-        queryKey: [`nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg],
+        queryKey: [
+          `nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg,
+        ],
       });
       const whichDataUpdate = type === "proj" ? "projListing" : "otherListing";
       const previousData: any = queryClient.getQueryData([
@@ -54,10 +58,13 @@ export default function useNearby({
         }
         return property;
       });
-      queryClient.setQueryData([`nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg], {
-        ...previousData,
-        [whichDataUpdate]: updatedData,
-      });
+      queryClient.setQueryData(
+        [`nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg],
+        {
+          ...previousData,
+          [whichDataUpdate]: updatedData,
+        }
+      );
       return { previousData };
     },
 

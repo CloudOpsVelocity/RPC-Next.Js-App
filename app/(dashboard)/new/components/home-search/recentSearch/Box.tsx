@@ -11,7 +11,7 @@ type Props = {
 
 export default function Box({ item }: Props) {
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
-  const handlePush = async (type: string, apiData: any) => {
+  const handlePush = async (type: string, data: any, apiData: any) => {
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],
@@ -40,30 +40,30 @@ export default function Box({ item }: Props) {
           const data = extractApiValues(apiData.stringId);
           {
             let url;
-            let localityName = apiData.name
-              .split(" in ")[1]
-              .toLowerCase()
-              .trim();
+            let localityName = apiData.name.split("in")[1].toLowerCase().trim();
             url =
-              `propType=${data.PT}${
-                data.BH ? `-unitTypes=${data.BH}` : ""
-              }-cg=${data.CG}-localities=${localityName}` +
+              `propType=${data.PT}${data.BH ? `-bhk=${data.BH}` : ""}-cg=${
+                data.CG
+              }-localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
-
-            window.open("/search/listing?sf=" + url);
+            window.open(
+              data.PJ && data.PJ !== "null"
+                ? `/search/listing?sf=${url}`
+                : "/search?sf=" + url
+            );
           }
         }
         break;
       case "projectListing":
         {
-          let projectName = apiData.name.split(" in ")[1].trim();
+          let projectName = data.name.split(" in ")[1].trim();
           // console.log(projectName);
           const url = `projIdEnc=${
-            apiData.stringId
-          }-listedBy=${AgentOwnerBuilderMap.get(
+            data.stringId
+          }&listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
-          )}-projName=${projectName}`;
+          )}&projName=${projectName}`;
           window.open("/search/listing?sf=" + url);
         }
         break;
@@ -73,7 +73,7 @@ export default function Box({ item }: Props) {
             window.open(apiData.stringUrl);
           } else {
             const url =
-              encodeURIComponent(apiData.name) +
+              encodeURIComponent(data.name) +
               "%2B" +
               encodeURIComponent(apiData.stringId.split("_")[1]);
             window.open(
@@ -98,7 +98,7 @@ export default function Box({ item }: Props) {
   return (
     <Tooltip label={item.name} withArrow>
       <div
-        onClick={(e) => handlePush(item.ct, item)}
+        onClick={(e) => handlePush(item.ct, item,item)}
         className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-[#4B77C1] text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200"
       >
         {truncateText(item?.name, 36)} {config.icon}

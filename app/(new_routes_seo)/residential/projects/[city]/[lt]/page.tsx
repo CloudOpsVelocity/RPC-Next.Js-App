@@ -52,7 +52,7 @@ export const dynamic = "force-dynamic";
 const getSearchData = async (locality: string): Promise<any> => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}`;
-
+    console.log(baseUrl);
     const url = `${baseUrl}`;
 
     const res = await fetch(url);

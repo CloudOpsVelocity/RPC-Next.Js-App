@@ -131,16 +131,14 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   };
 
   const handleDownload = (url: string) => {
+    const brocherPageUrl = `/pdf/${encodeURIComponent(
+      url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
+    )}`;
+
     if (!session) {
       LoginOpen(
         () => {
-          url &&
-            window.open(
-              `/pdf/${encodeURIComponent(
-                url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
-              )}`,
-              "_blank"
-            );
+          url && window.open(brocherPageUrl, "_blank");
         },
         {
           type: "brochure",
@@ -149,7 +147,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
       );
       return;
     }
-    window.open(url, "_blank");
+    window.open(brocherPageUrl, "_blank");
   };
 
   const loadPDF = async (phase: ProjectPhase) => {

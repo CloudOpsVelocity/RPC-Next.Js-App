@@ -207,7 +207,9 @@ export default function PartialUnitModal({ data }: any) {
                 }}
               >
                 <div className="flex items-center justify-center w-full h-full max-h-[calc(100vh-550px)] sm:max-h-[calc(100vh-250px)] lg:max-h-full">
-                  <img
+                  <Image
+                    width={800}
+                    height={600}
                     src={selectedOne?.floorPlan?.split(",")[3] ?? ImgNotAvail}
                     alt="Floor Plan"
                     className="max-w-full max-h-full object-contain"
@@ -301,24 +303,28 @@ export default function PartialUnitModal({ data }: any) {
           </div>
         </div>
 
-        {/* Thumbnail Carousel */}
-        {isData.others.length > 1 && (
-          <div className="flex justify-center gap-2 p-4 bg-white border-t overflow-x-auto">
-            {isData.others.map((item: any, index: number) => (
-              <button
-                key={index}
-                onClick={() => setActive(index)}
-                className={`relative min-w-[80px] h-[60px] rounded-lg overflow-hidden border-2 transition-colors ${
-                  active === index ? "border-[#0073C6]" : "border-transparent"
-                }`}
-              >
-                <img
-                  src={item?.floorPlan?.split(",")[3] ?? ImgNotAvail}
-                  alt={`Floor Plan ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </button>
-            ))}
+        {isData && isData.others && isData.others?.length > 0 && (
+          <div className="w-[95%] m-auto overflow-x-auto inline-flex">
+            {isData.others.map((item: any, index: number) => {
+              const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
+              return (
+                <div
+                  key={`floorplan-${index}`}
+                  onClick={() => setActive(index)}
+                  className={`relative min-w-[80px] h-[60px] rounded-lg border-2 transition-colors ${
+                    active === index ? "border-[#0073C6]" : "border-transparent"
+                  }`}
+                >
+                  <Image
+                    width={80}
+                    height={60}
+                    src={imageUrl}
+                    alt={`Floor Plan ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

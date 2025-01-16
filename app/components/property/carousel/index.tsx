@@ -28,24 +28,26 @@ export default function NearByCarouselProperty({
 }) {
   const { data, mutate } = useNearby({
     lat,
-    lng, 
+    lng,
     projId,
     cg,
     bhkId,
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
   const listingType = cg === "R" ? "Rent" : "Sale";
-
-  console.log(builderName, builderId);
-    
   return (
     <div
       className="flex flex-col justify-start items-start w-[100%] mt-[20px] sm:mt-[50px] scroll-mt-[220px]"
       id="similarListing"
     >
-      <ProjectCarousel 
+      <ProjectCarousel
         type="prop"
-        title={<Fragment>Other {listingType} listings in <span className="text-[#148B16]">{projName}</span></Fragment>}
+        title={
+          <Fragment>
+            Other {listingType} listings in{" "}
+            <span className="text-[#148B16]">{projName}</span>
+          </Fragment>
+        }
         projName={""}
         content={
           propTypeName === "Independent House/Building"
@@ -59,11 +61,18 @@ export default function NearByCarouselProperty({
         }
         mutate={mutate}
         ct="proj"
-        url={`/search/listing?sf=builderIds=${builderName ?? ""}${builderId ?? ""}`}
+        url={`/search/listing?sf=builderIds=${builderName ?? ""}${
+          builderId ?? ""
+        }`}
       />
       <ProjectCarousel
         type="prop"
-        title={<Fragment>Nearby Similar {listingType} Listings of <span className="text-[#148B16] ">{projName}</span></Fragment>}
+        title={
+          <Fragment>
+            Nearby Similar {listingType} Listings of{" "}
+            <span className="text-[#148B16] ">{projName}</span>
+          </Fragment>
+        }
         content={`Check some similar nearby ${listingType.toLowerCase()} listings available`}
         data={
           data != undefined && data.otherListing != undefined
