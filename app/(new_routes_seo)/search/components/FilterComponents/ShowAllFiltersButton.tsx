@@ -78,6 +78,11 @@ export default function ShowAllFiltersButton({
       name: "Plot",
       icon: <MdLandscape className="w-5 h-5 text-green-700" />,
     },
+    indp: {
+      id: 36,
+      name: "Independent",
+      icon: <MdLandscape className="w-5 h-5 text-green-700" />,
+    },
   };
   const [state, dispatch] = useAtom(projSearchStore);
   const toggleExpand = (section: string) => {
@@ -334,10 +339,10 @@ export default function ShowAllFiltersButton({
             </div>
             <div className="  ml-4">
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] text-lg font-semibold"
                 id="Area (in Sq.ft)"
               >
-                Area (In Sq.ft)
+                Super Built-Up Area (In Sq.ft)
               </h3>
               <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
                 {state.areaValue[0]} sq.ft - {state.areaValue[1]} sq.ft
@@ -369,7 +374,7 @@ export default function ShowAllFiltersButton({
 
             <div className="ml-4">
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[1%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[1%] text-lg font-semibold  "
                 id="Budget"
               >
                 Budget
@@ -404,13 +409,13 @@ export default function ShowAllFiltersButton({
             </div>
             <div className="p-6 flex flex-col items-start  flex-wrap justify-between   ">
               {renderFilterSection(
-                "Bathrooms",
+                "Number of Bathrooms",
                 SEARCH_FILTER_DATA.Bathrooms,
                 "bathroom",
                 6
               )}
               {renderFilterSection(
-                "parking",
+                "Number of Parkings",
                 SEARCH_FILTER_DATA.Parkings,
                 "parking",
                 6
@@ -423,20 +428,20 @@ export default function ShowAllFiltersButton({
               )}
               {!isproject &&
                 renderFilterSection(
-                  "facings",
+                  "facing",
                   SEARCH_FILTER_DATA.facing,
                   "facings",
                   9
                 )}
               {!isproject &&
                 renderFilterSection(
-                  "UsedorNotUsed",
+                  "Used or Un-used",
                   SEARCH_FILTER_DATA.UsedorNotUsed,
                   "isUsed"
                 )}
               {!isproject &&
                 renderFilterSection(
-                  "PostedBy",
+                  "Posted By",
                   SEARCH_FILTER_DATA.PostedBy,
                   "listedBy"
                 )}

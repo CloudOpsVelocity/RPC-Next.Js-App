@@ -78,6 +78,7 @@ const MainBox = ({ data, refetch }: Props) => {
     Com: state.compareAdded,
     Sh: state.shortListed,
   };
+
   const onClickRedirect = (projEncId: string) => {
     let url;
     if (data.type == "proj") {
