@@ -194,7 +194,7 @@ export default function ListingSearchTabs() {
               >
                 {state.sortByfield != null && state.sortType != null
                   ? getSortyByValue(state)
-                  : "New First"}
+                  : "Newest First"}
               </div>
             </button>
 

@@ -88,7 +88,7 @@ export default function FloorplanLeftsection({
                         )}
                       </div>
 
-                      <div className="flex flex-wrap justify-between w-full sm:w-auto gap-2 xs:gap-4 md:mt-2 sm:mt-0">
+                      <div className="flex flex-wrap justify-between w-[60%] sm:w-auto gap-2 xs:gap-4 md:mt-2 sm:mt-0">
                         {unit.superBuildUparea !== null && (
                           <div className="space-y-0.5 xs:space-y-1">
                             <p className="text-[10px] xs:text-xs sm:text-sm text-gray-500 font-medium">

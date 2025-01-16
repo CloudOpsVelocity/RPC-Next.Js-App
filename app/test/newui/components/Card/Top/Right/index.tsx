@@ -50,7 +50,7 @@ export default function TopRightSection({
 
   city,
   cityName,
-
+  towerData,
   locality,
   localityName,
   phaseName,
@@ -58,6 +58,7 @@ export default function TopRightSection({
   bhk,
   bhkName,
 }: Props) {
+  console.log(atFloor)
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
@@ -249,7 +250,7 @@ export default function TopRightSection({
                   Avg Price:₹ {formatNumberWithSuffix(basePrice)}
                 </p>
                 <p className="text-right text-[12px] text-nowrap">
-                  Elevation: G+30
+                  {towerData? towerData : "N/A"}
                 </p>
               </div>
             )}

@@ -372,7 +372,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   type !== projectprops.plot
                     ? [
                         {
-                          label: "Balconies",
+                          label: "Number of Balconies",
                           value: floorData.totalNumberOfBalcony.toString(),
                         },
                       ]
@@ -380,7 +380,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   ...(type !== projectprops.plot
                     ? [
                         {
-                          label: "Bathrooms",
+                          label: "Number of Bathrooms",
                           value:
                             floorData.totalNumberofBathroom?.toString() ?? "0",
                         },
