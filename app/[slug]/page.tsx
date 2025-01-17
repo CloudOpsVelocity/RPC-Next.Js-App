@@ -109,6 +109,7 @@ export const generateStaticParams = async () => {
     return res.map((slug: string) => ({ slug }));
     // return [];
   }
+
   return [];
 };
 
