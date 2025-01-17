@@ -119,7 +119,7 @@ export default function PartialUnitModal({ data }: any) {
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
           <h3 className="text-lg sm:text-xl font-semibold text-[#0073C6]">
             {selectedOne
-              ? `${selectedOne.unitType} ${
+              ? `${selectedOne.unitType ?? ""} ${
                   propertyDetailsTypes.get(propId)?.name
                 }`
               : "Floor Plan"}
