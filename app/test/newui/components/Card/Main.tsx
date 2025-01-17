@@ -108,7 +108,7 @@ const MainBox = ({ data, refetch }: Props) => {
 
   const [, { open }] = useReqCallPopup();
   const overlayData = useAtomValue(overlayAtom);
-console.log(data,type)
+
   const handleOpen = () => {
     open({
       modal_type:

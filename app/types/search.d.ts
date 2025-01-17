@@ -12,7 +12,7 @@ export interface SearchFilter {
   bugdetValue: [number, number];
   builderIds: string[];
   city: string | null;
-  facings: number[];
+  facing: number[];
   furnish: number | null;
   propStatus: string | null;
   projStatus: string | number | null;

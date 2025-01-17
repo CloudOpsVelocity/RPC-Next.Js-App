@@ -39,8 +39,6 @@ interface Location {
 }
 
 export default function ShowAllFiltersButton({
-  selectedFilters,
-  toggleFilter,
   isOpen,
   onToggle,
   isListing,
@@ -428,9 +426,9 @@ export default function ShowAllFiltersButton({
               )}
               {!isproject &&
                 renderFilterSection(
-                  "facing",
+                  "Facing",
                   SEARCH_FILTER_DATA.facing,
-                  "facings",
+                  "facing",
                   9
                 )}
               {!isproject &&

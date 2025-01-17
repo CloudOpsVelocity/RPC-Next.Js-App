@@ -57,7 +57,6 @@ export default function ProjData({
     slug: postedByName,
     city: builderCity ? builderCity : cityName,
   });
-  console.log(category);
   // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
@@ -98,7 +97,7 @@ export default function ProjData({
         {/* </button> */}
       </p>
 
-      {category == "Sale" ? (
+      {/* {category == "Sale" || type === "proj" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24 sm:top-0 sm:right-[65px] w-full xl:w-[calc(100%-220px)] ">
           Avg Price:{" "}
           <span className="font-bold ml-1">
@@ -106,7 +105,7 @@ export default function ProjData({
             ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
           </span>
         </div>
-      ) : null}
+      ) : null} */}
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}

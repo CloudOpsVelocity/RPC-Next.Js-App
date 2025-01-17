@@ -25,6 +25,7 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
   const transformedParams = apiFilterQueryParams
     .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern
     .replace(/budget=(\d+),(\d+)/, "minPrice=$1&maxPrice=$2") // Budget transformation
+    .replace(/areaValue=(\d+),(\d+)/, "minArea=$1&maxArea=$2")
     .replace(
       /(localities|builderIds|phaseId)=([^&]+)/g,
       (_, key, value) =>

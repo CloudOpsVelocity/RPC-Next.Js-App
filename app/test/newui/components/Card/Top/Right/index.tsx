@@ -54,11 +54,9 @@ export default function TopRightSection({
   locality,
   localityName,
   phaseName,
-
   bhk,
   bhkName,
 }: Props) {
-  console.log(atFloor)
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
@@ -108,7 +106,7 @@ export default function TopRightSection({
         type !== "proj" && ""
       )}
     >
-      {
+      {category == "Sale" || type === "proj" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
           Avg Price:{" "}
           <span className="font-bold ml-1">
@@ -116,7 +114,7 @@ export default function TopRightSection({
             ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
           </span>
         </div>
-      }
+      ) : null}
 
       {isMobile && (
         <>
@@ -244,16 +242,17 @@ export default function TopRightSection({
                 </button>
               </div>
             )}
-            {type === "proj" && (
-              <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
-                <p className="text-right text-[12px] text-nowrap text-[#148B16]">
-                  Avg Price:₹ {formatNumberWithSuffix(basePrice)}
-                </p>
-                <p className="text-right text-[12px] text-nowrap">
-                  {towerData? towerData : "N/A"}
-                </p>
-              </div>
-            )}
+            {type === "proj" ||
+              (category == "Sale" && (
+                <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
+                  <p className="text-right text-[12px] text-nowrap text-[#148B16]">
+                    Avg Price:₹ {formatNumberWithSuffix(basePrice)}
+                  </p>
+                  <p className="text-right text-[12px] text-nowrap">
+                    {towerData ? towerData : "N/A"}
+                  </p>
+                </div>
+              ))}
 
             {type !== "proj" && (
               <>

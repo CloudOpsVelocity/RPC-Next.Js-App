@@ -19,7 +19,7 @@ export const initialState: SearchFilter = {
   bugdetValue: [500000, 600000000],
   builderIds: [],
   city: null,
-  facings: [],
+  facing: [],
   furnish: null,
   propStatus: null,
   projStatus: null,

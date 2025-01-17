@@ -50,13 +50,16 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
         searchRef.current &&
         !searchRef.current.contains(event.target as Node)
       ) {
+        if (openDropdown === "allFilters") {
+          handleApplyFilters();
+        }
         setIsSearchOpen(false);
         setOpenDropdown(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [openDropdown, handleApplyFilters]);
 
   const toggleFilter = (category: string, value: string) => {
     if (
@@ -204,11 +207,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             }`
           );
         }
-        // setFilters((prevFilters) => ({
-        //   ...prevFilters,
-        //   builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
-        // }));
-        // handleResetQuery();
         break;
       default:
         break;
