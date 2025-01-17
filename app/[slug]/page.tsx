@@ -111,6 +111,7 @@ export const generateStaticParams = async () => {
   }
   return [];
 };
+
 export async function generateMetadata(
   { params }: any,
   parent: ResolvingMetadata
