@@ -57,8 +57,7 @@ export default function ProjData({
     slug: postedByName,
     city: builderCity ? builderCity : cityName,
   });
-
-  const { filters } = useSearchFilters();
+  console.log(category);
   // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
@@ -99,7 +98,7 @@ export default function ProjData({
         {/* </button> */}
       </p>
 
-      {filters.cg == "S" ? (
+      {category == "Sale" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24 sm:top-0 sm:right-[65px] w-full xl:w-[calc(100%-220px)] ">
           Avg Price:{" "}
           <span className="font-bold ml-1">
@@ -113,7 +112,9 @@ export default function ProjData({
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
       </p>
 
-      <p className={`text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold w-full xl:w-[calc(100%-100px)]`}>
+      <p
+        className={`text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold w-full xl:w-[calc(100%-100px)]`}
+      >
         <span>
           {sortedBhks && sortedBhks.length > 5
             ? sortedBhks

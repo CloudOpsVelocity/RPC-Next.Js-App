@@ -76,6 +76,10 @@ export default function ProjectSearchTabs() {
             sortByfield: null,
             sortType: null,
             facings: null,
+            ...(state.propStatus && {
+              projStatus: state.propStatus === "R" ? 107 : 106,
+              propStatus: null,
+            }),
           }
         : {
             ...state,
@@ -90,6 +94,15 @@ export default function ProjectSearchTabs() {
               ])
             ),
             listedBy: value,
+            ...(state.projStatus && {
+              propStatus:
+                state.projStatus !== 108
+                  ? state.projStatus == 106
+                    ? "U"
+                    : "R"
+                  : null,
+              projStatus: null,
+            }),
           };
     dispath({
       type: "update",
@@ -142,14 +155,14 @@ export default function ProjectSearchTabs() {
 
   return (
     <div className="sticky top-0   z-10 ">
-      <div className=" w-full bg-slate-50 shadow-mdmax-w-7xl  mx-auto sm:px-4 pb-4 pt-2     sm:pb-3">
+      <div className=" w-full bg-slate-50 shadow-md max-w-7xl  mx-auto sm:px-4 pb-4 pt-2     sm:pb-3">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div
             ref={scrollContainerRef}
             onWheel={handleWheel}
             className="overflow-x-auto no-scrollbar"
           >
-            <div className="flex items-center sm:gap-1 p-8 sm:p -0 xl:gap-2 min-w-max">
+            <div className="flex items-center sm:gap-1 p-8 sm:p-0 xl:gap-2 min-w-max">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}

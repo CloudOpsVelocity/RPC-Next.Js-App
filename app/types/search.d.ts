@@ -15,7 +15,7 @@ export interface SearchFilter {
   facings: number[];
   furnish: number | null;
   propStatus: string | null;
-  projStatus: string | null;
+  projStatus: string | number | null;
   pnb: number | null;
   sortByfield: string | null;
   sortType: number | null;
