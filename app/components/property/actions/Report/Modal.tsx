@@ -37,7 +37,9 @@ export default function ReportModal({ issueData }: any) {
     try {
       const singleString = reportStatus.join(", ");
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${(slug || bhk_unit_type).split("-")[1]}&iden=L`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${
+          (slug || bhk_unit_type).split("-")[1]
+        }&iden=L`,
         {
           method: "POST",
           headers: {
@@ -72,7 +74,7 @@ export default function ReportModal({ issueData }: any) {
     close();
     setTimeout(() => {
       setText("");
-      setStatus("idle"); 
+      setStatus("idle");
       setreportStatus([]);
       seterrorMsg(false);
     }, 500);
@@ -84,7 +86,6 @@ export default function ReportModal({ issueData }: any) {
         onClose={onClose}
         centered
         size={isMobile ? "100%" : status === "success" ? "32%" : "50%"}
-        // className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
         styles={{
           header: {
             display: "none",
@@ -108,10 +109,10 @@ export default function ReportModal({ issueData }: any) {
             <>
               {" "}
               <header className="flex  flex-col items-center gap-[8px] text-center pt-3 mb-2">
-                <p className="text-[#242424] text-center font-[Montserrat] text-[18px] sm:text-[22px] not-italic font-medium leading-[normal]">
+                <p className="text-[#242424] text-center  text-[18px] sm:text-[22px] not-italic font-medium leading-[normal]">
                   Report Issue for Property
                 </p>
-                <p className="text-[#148B16]  font-[Montserrat] !text-wrap text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
+                <p className="text-[#148B16]   !text-wrap text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
                   Let us know your feedback this will allow us to serve you
                   better!
                 </p>
@@ -148,18 +149,21 @@ export default function ReportModal({ issueData }: any) {
                     classNames={{
                       input: S.ratingInput,
                     }}
-                    onBlurCapture={() => {
-                      // let validation of
-                      //   setErrorMessage("Please enter your comment below");
-                      if (text === "" && reportStatus.includes(670))
+                    onChange={(e) => {
+                      setText(e.target.value);
+                      if (e.target.value.length > 400) {
                         setStatus("error");
-                      else setStatus("idle");
+                      } else {
+                        setStatus("idle");
+                      }
                     }}
-                    onChange={(e) => setText(e.target.value)}
                     value={text}
-                  /> 
-                  {status === "error" &&
-                  <p className="text-[12px] sm:text-[14px] text-[#F00]">Please add comment to submit issue</p>}
+                  />
+                  {status === "error" && (
+                    <p className="text-[12px] sm:text-[14px] text-[#F00]">
+                      Please add comment to submit issue
+                    </p>
+                  )}
                 </div>
                 <div className="flex justify-center items-center ">
                   <Button

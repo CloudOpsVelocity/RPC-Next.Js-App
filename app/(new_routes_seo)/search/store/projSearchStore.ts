@@ -240,11 +240,10 @@ export const ProjSearchAppliedFiltersStore = atom(
             let listedBy =
               getParams.get("sf")?.match(/listedBy=[^\s&]*\+?(\d+)?/)?.[0] ??
               "";
-            console.log("key name");
 
             let finalKey =
               listedBy !== "" ? listedBy.split("=")[1].split("-")[0] : null;
-            queryString = finalKey;
+            queryString = listedBy;
 
             set(projSearchStore, {
               payload: { ...initialState, listedBy: finalKey },

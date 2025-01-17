@@ -347,14 +347,18 @@ export default function ShowAllFiltersButton({
               </p>
               <RangeSlider
                 color="green"
-                marks={[
-                  { value: 0, label: "0 sq.ft" },
-                  { value: 1000, label: "1000 sq.ft" },
-                  { value: 2000, label: "2000 sq.ft" },
-                  { value: 3000, label: "3000 sq.ft" },
-                  { value: 4000, label: "4000 sq.ft" },
-                  { value: 5000, label: "5000 sq.ft" },
-                ]}
+                marks={
+                  window.innerWidth > 768
+                    ? [
+                        { value: 0, label: "0 sq.ft" },
+                        { value: 1000, label: "1000 sq.ft" },
+                        { value: 2000, label: "2000 sq.ft" },
+                        { value: 3000, label: "3000 sq.ft" },
+                        { value: 4000, label: "4000 sq.ft" },
+                        { value: 5000, label: "5000 sq.ft" },
+                      ]
+                    : []
+                }
                 min={0}
                 max={5000}
                 value={state.areaValue}
@@ -372,7 +376,7 @@ export default function ShowAllFiltersButton({
 
             <div className="ml-4">
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[1%] text-lg font-semibold  "
+                className=" text-[#202020] mb-[1%] text-[14px] mt-[1%] text-lg font-semibold  "
                 id="Budget"
               >
                 Budget

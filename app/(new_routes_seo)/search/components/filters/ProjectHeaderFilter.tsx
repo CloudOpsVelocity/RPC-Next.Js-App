@@ -152,8 +152,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       case "listing":
         {
           const paramsObject = extractApiValues(data.stringId);
-
-          let localityName = data.name.split(" in ")[1].toLowerCase().trim();
+          alert(JSON.stringify(paramsObject));
+          let localityName = data.name.split("-")[1].toLowerCase().trim();
 
           if (isListingSearch) {
             dispatch({
@@ -175,7 +175,13 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               paramsObject.CG
             }-localities=${localityName}%2B${encodeURIComponent(
               paramsObject.LT
-            )}`;
+            )}${
+              paramsObject.PJ
+                ? `-projIdEnc=${paramsObject.PJ}-projName=${
+                    data.name.split("-")[1]
+                  }`
+                : ""
+            }`;
             window.open(url);
           }
         }
@@ -200,7 +206,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
           window.open(
-            `/search?sf=builderIds=${url}-city=${data.stringId.split("_")[0]}${
+            `/search?sf=builderIds=${url}${
               data.type !== "BuilderProject"
                 ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
                 : ""

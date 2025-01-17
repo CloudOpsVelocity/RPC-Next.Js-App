@@ -72,11 +72,11 @@ export default function Results() {
           const data = extractApiValues(apiData.stringId);
           {
             let url;
-            let localityName = apiData.name.split("in")[1].toLowerCase().trim();
+            let localityName = apiData.name.split("-")[1];
             url =
-              `propType=${data.PT}${
-                data.BH ? `-bhk=${data.BH}` : ""
-              }-cg=${data.CG}-localities=${localityName}` +
+              `propType=${data.PT}${data.BH ? `-bhk=${data.BH}` : ""}-cg=${
+                data.CG
+              }-localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
             window.open(

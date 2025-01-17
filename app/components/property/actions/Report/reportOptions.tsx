@@ -40,7 +40,7 @@ export default function ReportOptions({
                   reportStatus.includes == x.cid ? "#0073C6" : "green"
                 }`}
                 classNames={{
-                  label: `text-[13px] leading-normal capitalize font-feature-settings-[clig off] font-[Montserrat] ${
+                  label: `text-[13px] leading-normal capitalize font-feature-settings-[clig off]  ${
                     reportStatus.find((item) => item === x.cid)
                       ? /*  reportStatus.includes(x.cid) */
                         "!text-[#0073C6] !font-bold"

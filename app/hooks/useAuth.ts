@@ -102,9 +102,9 @@ export default function useAuth({
       });
       type === "register"
         ? setTimeout(() => {
-            router.push(redirectPath.url);
+            router.push(redirectPath.url ?? '/');
           }, 5000)
-        : router.push(redirectPath.url);
+        : router.push(redirectPath.url ?? '/');
     } else {
       if (res?.error === "A" || res?.error === "B") {
         router.push(`/register/${res?.error === "A" ? "agent" : "builder"}`);
@@ -120,8 +120,8 @@ export default function useAuth({
     }
   };
 
-  const login = (data: Action) => {
-    loginWithCredentials({
+  const login = async  (data: Action) => {
+ return  await loginWithCredentials({
       username: data.username,
       password: data.password,
     });

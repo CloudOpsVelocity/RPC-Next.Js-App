@@ -18,6 +18,7 @@ import { projSearchStore } from "../../../store/projSearchStore";
 import ListingSearchTabs from "../ListingSearchTabs";
 import { usePathname } from "next/navigation";
 import { useHydrateAtoms } from "jotai/utils";
+import { getAllAuthorityNames } from "@/app/utils/api/project";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -69,8 +70,13 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       enabled: isTrue,
       // ...RTK_CONFIG,
     });
-  const allItems =
-     !isTrue ? serverData : data?.pages?.flat() || [];
+  const { data: approvedData } = useQuery({
+    queryKey: ["projAuth"],
+    enabled: true,
+    queryFn: () => getAllAuthorityNames(),
+    ...RTK_CONFIG,
+  });
+  const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
 
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,

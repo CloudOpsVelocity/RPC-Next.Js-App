@@ -19,6 +19,7 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MAX_LENTH_TEXT } from "@/app/validations/auth";
+import { TbArrowAutofitDown } from "react-icons/tb";
 const schema = yup.object().shape({
   username: yup
     .number()
@@ -63,10 +64,9 @@ function Login({ params }: any) {
   const { login } = useAuth({ type: "login" });
   const onSubmit = async (values: any) => {
     setState("pending");
-    login(values);
+    await login(values);
     setState("success");
   };
-
 
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
@@ -137,7 +137,7 @@ function Login({ params }: any) {
         </Link>
 
         <Button
-          loading={isLoading}
+          loading={state === "pending"}
           type="submit"
           size={isMobile ? "compact-xs" : "md"}
           className="!w-[100%] !h-[50px]  mt-[4%] !bg-[#0c7aca] rounded-[6px] !text-[20px] sm:h-[57px] !font-extrabold:"
