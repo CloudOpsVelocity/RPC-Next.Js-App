@@ -11,6 +11,7 @@ import {
   FaChevronRight,
   FaBath,
   FaHome,
+  FaStoreAlt,
 } from "react-icons/fa";
 import { FaExpand, FaRuler, FaTree } from "react-icons/fa6";
 import { useAtomValue } from "jotai";
@@ -195,7 +196,7 @@ export function FloorPlanModal({
             {`${
               propCgId !== projectprops.plot
                 ? currentUnit.bhkName
-                : `(${currentUnit.length} X ${currentUnit.width}) sq.ft`
+                : `(${currentUnit.length} X ${currentUnit.width}) ${currentUnit.plotArea} sq.ft`
             } - 
             ${
               propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
@@ -375,7 +376,7 @@ export function FloorPlanModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Plot Area"
-                      value={`${currentUnit.plotArea} ft`}
+                      value={`${currentUnit.plotArea} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -392,7 +393,7 @@ export function FloorPlanModal({
                       title="Unit Type"
                       value={currentUnit.bhkName}
                       icon={
-                        <FaBuilding className="text-[#0073C6] text-xl sm:text-2xl" />
+                        <FaStoreAlt className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
                     />
                   )}

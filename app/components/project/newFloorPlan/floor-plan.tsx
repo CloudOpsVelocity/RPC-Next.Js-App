@@ -120,6 +120,7 @@ export default function FloorPlans({
   });
 
   const handleUnitFilterChange = (name: string, value: string | number) => {
+    console.log(name);
     setUnitFilters((prev) => ({ ...prev, [name]: value }));
   };
 

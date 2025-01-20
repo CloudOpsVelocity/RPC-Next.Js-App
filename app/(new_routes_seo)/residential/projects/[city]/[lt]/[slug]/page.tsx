@@ -21,7 +21,8 @@ export default async function Page({ params }: Props) {
   // const { PJ: slug } = await extractProjectParamsValues(value);
 
   let slug = name.split("-").at(-1);
-  if (!slug) return notFound();
+
+  if (!slug || slug.length !== 32) return notFound();
   console.time("project detaild api calling" + slug);
   let [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
