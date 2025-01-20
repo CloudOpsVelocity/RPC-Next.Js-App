@@ -424,7 +424,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </div>
             <div
               onClick={(e) => e.stopPropagation()}
-              className="  max-h-[100vh] py-4 sm:p-4 space-y-6   overflow-y"
+              className="  max-h-[100vh] py-4 sm:p-4 overflow-y"
             >
               {/* <PropertyTypeDropdown
                 selectedFilters={selectedFilters}

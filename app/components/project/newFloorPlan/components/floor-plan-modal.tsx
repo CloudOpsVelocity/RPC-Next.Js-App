@@ -186,6 +186,20 @@ export function FloorPlanModal({
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
 
+  const formatNumberWithCommas = (num: any): string => {
+    const number = num !== undefined && num !== "" ? parseFloat(num) : num;
+    const numberString = number.toFixed(2); // Convert to string with 2 decimal places
+    const [integerPart, decimalPart] = numberString.split(".");
+
+    let formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    if (decimalPart === "00") {
+      return formattedInteger;
+    }
+
+    return `${formattedInteger}.${decimalPart}`;
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -196,7 +210,7 @@ export function FloorPlanModal({
             {`${
               propCgId !== projectprops.plot
                 ? currentUnit.bhkName
-                : `(${currentUnit.length} X ${currentUnit.width}) ${currentUnit.plotArea} sq.ft`
+                : `(${currentUnit.length} X ${currentUnit.width}) ${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`
             } - 
             ${
               propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
@@ -303,7 +317,7 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Super Built-up Area"
-                      value={`${currentUnit.superBuildUparea} sq.ft`}
+                      value={`${formatNumberWithCommas(currentUnit.superBuildUparea)} sq.ft`} 
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -313,7 +327,7 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Carpet Area"
-                      value={`${currentUnit.caretarea} sq.ft`}
+                      value={`${formatNumberWithCommas(currentUnit.caretarea)} sq.ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -356,7 +370,7 @@ export function FloorPlanModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Length"
-                      value={`${currentUnit.length} ft`}
+                      value={`${formatNumberWithCommas(currentUnit.length)} ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -366,7 +380,7 @@ export function FloorPlanModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Width"
-                      value={`${currentUnit.width} ft`}
+                      value={`${formatNumberWithCommas(currentUnit.width)} ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -376,7 +390,7 @@ export function FloorPlanModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Plot Area"
-                      value={`${currentUnit.plotArea} sq.ft`}
+                      value={`${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -442,7 +456,7 @@ export function FloorPlanModal({
                     currentUnit.terraceArea !== "null" && (
                       <DataItem
                         title="Terrace Area"
-                        value={`${currentUnit.terraceArea} sq.ft`}
+                        value={`${formatNumberWithCommas(currentUnit.terraceArea)} sq.ft`}
                         icon={
                           <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                         }
