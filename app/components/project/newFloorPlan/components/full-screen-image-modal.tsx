@@ -91,7 +91,7 @@ export function FullScreenImageModal({
             {`${
               propCgId !== projectprops.plot
                 ? unit.bhkName
-                : `(${unit.length} X ${unit.width}) ft`
+                : `(${unit.length} X ${unit.width}) ${unit.plotArea} sq.ft`
             } - 
             ${
               propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
@@ -234,7 +234,7 @@ export function FullScreenImageModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Plot Area"
-                      value={`${unit.plotArea} ft`}
+                      value={`${unit.plotArea} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
