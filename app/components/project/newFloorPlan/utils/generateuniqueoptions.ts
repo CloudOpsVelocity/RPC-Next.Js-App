@@ -22,15 +22,17 @@ export const UNIT_DATA_KEYS = [
 export const getUniqueOptionsByKeys = (
   units: PropertyUnit[],
   keys: (keyof PropertyUnit)[],
-  selectedFilters: Partial<PropertyUnit>
+  selectedFilters: Partial<PropertyUnit>,
+  cacheKey: string
 ) => {
   if (!units || units.length === 0) return {};
 
+  // Filter units based on selected filters
   const filteredUnits = units.filter((unit) => {
     return Object.entries(selectedFilters).every(([key, value]) => {
       if (value == null || value === "") return true;
 
-      // Handle special case for "floor" key
+      // Special handling for "floor" key
       if (key === "floor") {
         const unitValue = String(unit[key as keyof PropertyUnit]);
         const filterValue = value === "G" ? "0" : String(value);
@@ -43,34 +45,44 @@ export const getUniqueOptionsByKeys = (
 
   if (filteredUnits.length === 0) return {};
 
-  let options: Record<keyof PropertyUnit, string[]> = keys.reduce(
-    (result: Record<keyof PropertyUnit, string[]>, key) => {
-      const uniqueValues = new Set<string>();
+  // Cache for BHK options
+  const cacheAllBhkOptions = new Map<string, string[]>();
+  if (!cacheAllBhkOptions.has(cacheKey)) {
+    const uniqueBhkNames = Array.from(
+      new Set(units.map((unit) => unit["bhkName"]).filter(Boolean))
+    );
+    cacheAllBhkOptions.set(cacheKey, uniqueBhkNames);
+  }
 
-      filteredUnits.forEach((unit) => {
-        const value = unit[key];
-        // Handle edge case where value is string "null"
-        if (value === "null") return;
-        if (value != null && value !== "") {
-          let processedValue = String(value);
-          if (key === "floor" && processedValue === "0") {
-            processedValue = "G"; // Replace "0" with "G" for "floor" key
-          } else if (processedValue === "0" && key !== "floor") {
-            return; // Skip adding "0" for keys other than "floor"
-          }
-          uniqueValues.add(processedValue);
+  // Initialize options map
+  const options: Record<keyof PropertyUnit, string[]> = {} as Record<
+    keyof PropertyUnit,
+    string[]
+  >;
+
+  // Process filtered units to extract unique values for each key
+  keys.forEach((key) => {
+    const uniqueValues = new Set<string>();
+    filteredUnits.forEach((unit) => {
+      const value = unit[key];
+      if (value && value !== "null" && value !== "None") {
+        let processedValue = String(value);
+        if (key === "floor" && processedValue === "0") {
+          processedValue = "G"; // Replace "0" with "G" for "floor"
+        } else if (processedValue === "0" && key !== "floor") {
+          return; // Skip adding "0" for non-floor keys
         }
-      });
-
-      const uniqueArray = Array.from(uniqueValues);
-      if (uniqueArray.length > 0) {
-        result[key] = uniqueArray;
+        uniqueValues.add(processedValue);
       }
+    });
+    if (uniqueValues.size > 0) {
+      options[key] = Array.from(uniqueValues);
+    }
+  });
 
-      return result;
-    },
-    {} as Record<keyof PropertyUnit, string[]>
-  );
-
-  return { options, filteredUnits };
+  return {
+    options,
+    filteredUnits,
+    cacheAllBhkOptions: ["All", ...(cacheAllBhkOptions.get(cacheKey) || [])],
+  };
 };

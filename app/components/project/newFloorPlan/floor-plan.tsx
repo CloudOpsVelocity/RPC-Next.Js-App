@@ -120,25 +120,30 @@ export default function FloorPlans({
   });
 
   const handleUnitFilterChange = (name: string, value: string | number) => {
-    console.log(name);
     setUnitFilters((prev) => ({ ...prev, [name]: value }));
   };
-
-  // Memoize the filtering options
+  const BHK_OPTION_CACHE_KEY = `${propCgId}/${selectedPhase}`;
   const memoOptions = useCallback(() => {
     if (!projectUnitsData) return {};
     return getUniqueOptionsByKeys(
       projectUnitsData,
       UNIT_DATA_KEYS as (keyof PropertyUnit)[],
-      unitFilters
+      unitFilters,
+      BHK_OPTION_CACHE_KEY
     );
   }, [projectUnitsData, unitFilters]);
 
-  const { options, filteredUnits } =
-    selectedView === "unit" || selectedView === "bhk"
-      ? memoOptions()
-      : { options: {}, filteredUnits: projectUnitsData || [] };
-
+  const {
+    options,
+    filteredUnits,
+    cacheAllBhkOptions = [],
+  } = selectedView === "unit" || selectedView === "bhk"
+    ? memoOptions()
+    : {
+        options: {},
+        filteredUnits: projectUnitsData || [],
+        cacheAllBhkOptions: [],
+      };
   const setAllBhks = () => {
     if (Array.isArray(options?.bhkName)) {
       let data = ["All", ...options.bhkName];
@@ -159,7 +164,9 @@ export default function FloorPlans({
     setSelectedView("bhk");
     handleBhkClick("All");
     UNIT_DATA_KEYS.forEach((eachKey) => {
-      if (unit[eachKey]) {
+      if (eachKey === "floor" && unit[eachKey] === 0) {
+        handleUnitFilterChange("floor", "G");
+      } else if (unit[eachKey]) {
         handleUnitFilterChange(eachKey, unit[eachKey]);
       }
     });
@@ -254,7 +261,7 @@ export default function FloorPlans({
               propCgId !== projectprops.plot && (
                 <BHKTabs
                   onSelect={handleBhkClick}
-                  bhkNames={allBhkNames}
+                  bhkNames={cacheAllBhkOptions}
                   selectedBHK={selectedBHK}
                 />
               )}
