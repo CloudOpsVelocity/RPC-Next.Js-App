@@ -15,8 +15,10 @@ import { ImgNotAvail } from "@/app/data/project";
 import { useAtomValue } from "jotai";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
-import { downloadFn } from "@/app/(auth)/utils/handleCallBackAction";
 import Image from "next/image";
+import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
+import { useSession } from "next-auth/react";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 
 interface FullScreenImageModalProps {
   isOpen: boolean;
@@ -79,6 +81,41 @@ export function FullScreenImageModal({
 
   const propCgId = useAtomValue(propCgIdAtom);
 
+  const [, { open: LoginOpen }] = usePopShortList(); 
+  const { data: session } = useSession();
+
+  const downloadFn = async () => { 
+    try {
+      const floorplanUrl = unit.floorPlanUrl && unit.floorPlanUrl?.split(",")[0] ? unit.floorPlanUrl?.split(",")[0] : ""
+      const response = await fetch(floorplanUrl);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = "floorplan.webp";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading image:", error);
+    }
+  };
+
+  const handleDownload = async () => {
+    if (session) {
+      console.log("logged in")
+      downloadFn();
+    } else {
+      console.log("logged out")
+
+      LoginOpen(downloadFn, {
+        type: "floor-plan",
+        link: unit.floorPlanUrl?.split(",")[0],
+      });
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -102,11 +139,7 @@ export function FullScreenImageModal({
           </h3>
           <div className="flex items-center w-full justify-end gap-2 md:gap-4 mt-2 md:mt-0">
             <button
-              onClick={() =>
-                unit.floorPlanUrl?.split(",")[0]
-                  ? downloadFn(unit.floorPlanUrl?.split(",")[0])
-                  : ""
-              }
+              onClick={() =>handleDownload()}
               className={`flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${
                 unit.floorPlanUrl?.split(",")[0] ? "" : "cursor-not-allowed"
               } `}
@@ -161,7 +194,7 @@ export function FullScreenImageModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Super Built-up Area"
-                      value={`${unit.superBuildUparea} sq.ft`}
+                      value={`${formatNumberWithCommas(unit.superBuildUparea)} sq.ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -171,7 +204,7 @@ export function FullScreenImageModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Carpet Area"
-                      value={`${unit.caretarea} sq.ft`}
+                      value={`${formatNumberWithCommas(unit.caretarea)} sq.ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -224,7 +257,7 @@ export function FullScreenImageModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Length"
-                      value={`${unit.length} ft`}
+                      value={`${formatNumberWithCommas(unit.length)} ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -234,17 +267,38 @@ export function FullScreenImageModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Width"
-                      value={`${unit.width} ft`}
+                      value={`${formatNumberWithCommas(unit.width)} ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
                     />
                   )}
 
-                  {propCgId === projectprops.plot && (
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.villament && (
                     <DataItem
                       title="Plot Area"
-                      value={`${unit.plotArea} sq.ft`}
+                      value={`${formatNumberWithCommas(unit.plotArea)} sq.ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+
+                  
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && unit.gardenArea && (
+                    <DataItem
+                      title="Garden Area"
+                      value={`${formatNumberWithCommas(unit.gardenArea)} sq.ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )} 
+                
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && unit.parkingArea && (
+                    <DataItem
+                      title="Parking Area"
+                      value={`${formatNumberWithCommas(unit.parkingArea)} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -297,7 +351,7 @@ export function FullScreenImageModal({
                     />
                   )}
 
-                  {propCgId !== projectprops.plot && (
+                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
                     <DataItem
                       title="Car Parking"
                       value={`${unit.noOfCarParking} ${
@@ -312,7 +366,7 @@ export function FullScreenImageModal({
                   {unit.terraceArea && unit.terraceArea !== "null" && (
                     <DataItem
                       title="Terrace Area"
-                      value={`${unit.terraceArea} sq.ft`}
+                      value={`${formatNumberWithCommas(unit.terraceArea)} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }

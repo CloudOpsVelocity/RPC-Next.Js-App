@@ -18,6 +18,8 @@ export interface PropertyUnit {
   plotArea: string;
   width: string;
   length: string;
+  gardenArea: string;
+  parkingArea:string;
 }
 
 export interface TabItem {

@@ -49,7 +49,7 @@ const FilterInput: React.FC<FilterInputProps> = ({
           value={value}
           onChange={(e) => onSearchChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="w-[90%]  truncate"
+          className="w-[90%] truncate focus:outline-none "
           placeholder={placeholder}
           onBlur={(e) => onBlur(e.target.value)}
         />

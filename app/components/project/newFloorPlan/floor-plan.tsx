@@ -88,7 +88,17 @@ export default function FloorPlans({
       .sort()
       .filter((v) => v !== null);
 
-  const [unitFilters, setUnitFilters] = useState({});
+  const [unitFilters, setUnitFilters] = useState({
+      unitNumber: "",
+      bhkName: "",
+      towerName: "",
+      floor: "",
+      facingName: "",
+      block: "",
+      plotArea: "",
+      length: "",
+      width: "",
+  });
   const [, { open }] = useReqCallPopup();
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
@@ -109,8 +119,29 @@ export default function FloorPlans({
   });
 
   const handleUnitFilterChange = (name: string, value: string | number) => {
-    setUnitFilters((prev) => ({ ...prev, [name]: value }));
+    if(name === "unitNumber" && value !== ""){
+      console.log(name, value);
+      const unitFilteredData = projectUnitsData.filter((item:any) => item.unitNumber === value);
+      if(unitFilteredData && unitFilteredData.length > 0){
+        console.log(unitFilteredData[0]);
+        // setUnitFilters(unitFilteredData[0]);
+        setUnitFilters({
+          unitNumber: unitFilteredData[0].unitNumber ? unitFilteredData[0].unitNumber : "",
+          bhkName: unitFilteredData[0].bhkName ? unitFilteredData[0].bhkName : "",
+          towerName: unitFilteredData[0].towerName ? unitFilteredData[0].towerName : "",
+          floor: unitFilteredData[0].floor ? unitFilteredData[0].floor : "",
+          facingName: unitFilteredData[0].facingName ? unitFilteredData[0].facingName : "",
+          block: unitFilteredData[0].block ? unitFilteredData[0].block : "",
+          plotArea: unitFilteredData[0].plotArea ? unitFilteredData[0].plotArea : "",
+          length: unitFilteredData[0].length ? unitFilteredData[0].length : "",
+          width: unitFilteredData[0].width ? unitFilteredData[0].width : "",
+        })
+      }
+    }else{
+      setUnitFilters((prev) => ({ ...prev, [name]: value }));
+    }
   };
+
   const BHK_OPTION_CACHE_KEY = `${propCgId}/${selectedPhase}`;
   const memoOptions = useCallback(() => {
     if (!projectUnitsData) return {};
@@ -168,6 +199,18 @@ export default function FloorPlans({
     setSelectedView("type");
     UNIT_DATA_KEYS.forEach((eachKey) => {
       handleUnitFilterChange(eachKey, "");
+    });
+
+    setUnitFilters({
+      unitNumber: "",
+      bhkName: "",
+      towerName: "",
+      floor: "",
+      facingName: "",
+      block: "",
+      plotArea: "",
+      length: "",
+      width: "",
     });
   };
   const handleOpenFullScreenModal = (unit: PropertyUnit) => {
@@ -259,6 +302,8 @@ export default function FloorPlans({
               <ByUnitFilters
                 options={options}
                 handleUnitFilterChange={handleUnitFilterChange}
+                filters={unitFilters}
+                setFilters={setUnitFilters}
               />
             )}
           </>
@@ -359,7 +404,7 @@ export default function FloorPlans({
           filters={unitFilters}
           setFilters={setUnitFilters}
           filteredUnits={filteredUnits}
-          options={options || {}}
+          options={options || {}} 
           handleOpenFullScreenModal={handleOpenFullScreenModal}
           handleReqcallBack={handleReqcallBack}
         />

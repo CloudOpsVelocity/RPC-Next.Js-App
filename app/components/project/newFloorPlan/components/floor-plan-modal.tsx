@@ -21,6 +21,7 @@ import PopupFilters from "./PopupFilters";
 
 import { PropertyUnit } from "../types/floor-plan";
 import Image from "next/image";
+import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
 
 interface FloorPlanModalProps {
   modalState: any;
@@ -116,7 +117,7 @@ export function FloorPlanModal({
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
     setCurrentIndex(curIndex - 1);
-    console.log(curIndex - 1, filteredUnits.length);
+    // console.log(curIndex - 1, filteredUnits.length);
   };
 
   const handleNextUnit = () => {
@@ -129,7 +130,7 @@ export function FloorPlanModal({
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
     setCurrentIndex(curIndex + 1);
-    console.log(curIndex + 1, filteredUnits.length);
+    // console.log(curIndex + 1, filteredUnits.length);
   };
 
   useEffect(() => {
@@ -186,19 +187,7 @@ export function FloorPlanModal({
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
 
-  const formatNumberWithCommas = (num: any): string => {
-    const number = num !== undefined && num !== "" ? parseFloat(num) : num;
-    const numberString = number.toFixed(2); // Convert to string with 2 decimal places
-    const [integerPart, decimalPart] = numberString.split(".");
-
-    let formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    if (decimalPart === "00") {
-      return formattedInteger;
-    }
-
-    return `${formattedInteger}.${decimalPart}`;
-  };
+    console.log(filteredUnits)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -251,6 +240,7 @@ export function FloorPlanModal({
             setDataFilters={setFilters}
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            filteredUnits={filteredUnits}
           />
 
           {/* Center - Floor Plan and Details */}
@@ -397,10 +387,30 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  {propCgId === projectprops.plot && (
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.villament && (
                     <DataItem
                       title="Plot Area"
                       value={`${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && currentUnit.gardenArea && (
+                    <DataItem
+                      title="Garden Area"
+                      value={`${formatNumberWithCommas(currentUnit.gardenArea)} sq.ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )} 
+
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && currentUnit.parkingArea && (
+                    <DataItem
+                      title="Parking Area"
+                      value={`${formatNumberWithCommas(currentUnit.parkingArea)} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -450,7 +460,7 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  {propCgId !== projectprops.plot && (
+                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
                     <DataItem
                       title="Car Parking"
                       value={`${currentUnit.noOfCarParking} ${
