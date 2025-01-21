@@ -4,7 +4,6 @@ import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
 import FilterInput from "./filter-input";
-import { useMediaQuery } from "@mantine/hooks";
 import { PropertyUnit } from "../types/floor-plan";
 
 type Props = {
@@ -41,8 +40,6 @@ export default function PopupFilters({
     parkingType: "",
     terraceArea: "",
   });
-
-  const isMobile = useMediaQuery("(max-width: 601px)");
 
   const propCgId = useAtomValue(propCgIdAtom);
 
@@ -118,7 +115,13 @@ export default function PopupFilters({
           {title}
         </label>
         <FilterInput
-          value={placeholder == "Select Floor" ? filters[key] == "0" ? "G"  : filters[key] : filters[key] || ""}
+          value={
+            placeholder == "Select Floor"
+              ? filters[key] == "0"
+                ? "G"
+                : filters[key]
+              : filters[key] || ""
+          }
           onChange={(value: any) => handleFilterChange(key, value)}
           options={filteredOptions(key)}
           placeholder={placeholder}
@@ -171,12 +174,12 @@ export default function PopupFilters({
 
           {options?.facingName &&
             options?.facingName.length > 0 &&
-            renderFilter("facingName", "Select Facing", "Facing")}
+            renderFilter("facingName", "Select Facing", "At Facing")}
 
           {options?.floor &&
             options?.floor.length > 0 &&
             propCgId !== projectprops.plot &&
-            renderFilter("floor", "Select Floor", "Floor")}
+            renderFilter("floor", "Select Floor", "At Floor")}
 
           {options?.unitNumber &&
             options?.unitNumber.length > 0 &&
@@ -191,23 +194,31 @@ export default function PopupFilters({
           {options?.plotArea &&
             options?.plotArea.length > 0 &&
             propCgId === projectprops.plot &&
-            renderFilter("plotArea", "Select Plot Area", "Plot Area")}
+            renderFilter("plotArea", "Select Plot Area", "Plot Area (sq.ft)")}
 
           {options?.caretarea &&
             options?.caretarea.length > 0 &&
-            renderFilter("caretarea", "Select Carpet Area", "Carpet Area")}
+            renderFilter(
+              "caretarea",
+              "Select Carpet Area",
+              "Carpet Area (sq.ft)"
+            )}
 
           {options?.superBuildUparea &&
             options?.superBuildUparea.length > 0 &&
             renderFilter(
               "superBuildUparea",
               "Select Super Built-up Area",
-              "Super Built-up Area"
+              "Super Built-up Area (sq.ft)"
             )}
 
           {options?.terraceArea &&
             options?.terraceArea.length > 0 &&
-            renderFilter("terraceArea", "Select Terrace Area", "Terrace Area")}
+            renderFilter(
+              "terraceArea",
+              "Select Terrace Area",
+              "Terrace Area (sq.ft)"
+            )}
 
           {/* Unit Features */}
           {options?.totalNumberofBathroom &&

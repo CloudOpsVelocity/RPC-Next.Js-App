@@ -191,7 +191,12 @@ export function FullScreenImageModal({
 
                   {propCgId !== projectprops.plot && (
                     <DataItem
-                      title="Floor"
+                      title={
+                        propCgId === projectprops.rowHouse ||
+                        propCgId === projectprops.villa
+                          ? "Elevation"
+                          : "Floor"
+                      }
                       value={
                         unit.floor === 0
                           ? "Ground Floor"
@@ -203,7 +208,12 @@ export function FullScreenImageModal({
                                 suffixes[v] ||
                                 suffixes[0]
                               );
-                            })()} Floor`
+                            })()} ${
+                              propCgId === projectprops.rowHouse ||
+                              propCgId === projectprops.villa
+                                ? "Elevation"
+                                : "Floor"
+                            }`
                       }
                       icon={
                         <FaBuilding className="text-[#0073C6] text-xl sm:text-2xl" />

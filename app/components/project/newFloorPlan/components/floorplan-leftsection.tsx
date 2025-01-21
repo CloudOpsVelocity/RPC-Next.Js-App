@@ -31,7 +31,7 @@ export default function FloorplanLeftsection({
   const rowVirtualizer = useVirtualizer({
     count: units?.length || 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => (isMobile ? 225 : 270), // Adjust based on your card's average height
+    estimateSize: () => (isMobile ? 175 : 270), // Adjust based on your card's average height
     overscan: 5,
   });
 
