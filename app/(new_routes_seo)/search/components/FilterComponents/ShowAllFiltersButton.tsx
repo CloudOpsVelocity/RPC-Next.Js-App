@@ -1,5 +1,5 @@
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MdTune,
   MdKeyboardArrowDown,
@@ -223,6 +223,16 @@ export default function ShowAllFiltersButton({
     );
   };
 
+  useEffect(()=>{
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    }; 
+  }, [isOpen])
+
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
   const serverCity = useAtomValue(serverCityAtom);
@@ -259,8 +269,8 @@ export default function ShowAllFiltersButton({
         />
       </button>
       {isOpen && (
-        <div className="absolute top-full flex flex-col right-0 mt-2 mb-8 sm:mb-0 max-w-full sm:min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
-          <div className="flex items-center justify-between gap-4 pb-4 border-b  z-50 ">
+        <div className="absolute top-full flex flex-col right-0 sm:mb-0 max-w-full sm:min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
+          <div className="flex items-center justify-between gap-4 pb-4 border-1   mt-3 z-50 max-w-[90%]  ">
             <button
               onClick={() => {
                 handleClearFilters(isproject ? "clearAll" : "listing");
@@ -281,7 +291,7 @@ export default function ShowAllFiltersButton({
             <div className="flex flex-col mb-6 ml-4 gap-6">
               <LocalitySearch<Location>
                 data={localitydata || []}
-                displayKey="name"
+                displayKey="name" 
                 loading={isLoading}
                 valueKey="stringId"
                 onChange={handleLocationChange}

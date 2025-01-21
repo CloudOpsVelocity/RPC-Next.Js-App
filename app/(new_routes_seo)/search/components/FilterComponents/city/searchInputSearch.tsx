@@ -169,7 +169,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
             id="dynamic-search"
             ref={inputRef}
             type="text"
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-[90%] pl-10 pr-4 mr-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder={placeholder}
             value={searchTerm}
             onChange={(e) => {
@@ -206,7 +206,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
           <ul
             id="search-list"
             ref={listRef}
-            className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto"
+            className="absolute z-10 w-[90%] mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto"
             role="listbox"
           >
             {loading ? (
