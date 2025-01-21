@@ -8,13 +8,7 @@ import { BHKTabs } from "./components/bhk-tabs";
 import { FullScreenImageModal } from "./components/full-screen-image-modal";
 import { useAtom, useAtomValue } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
-import {
-  ApartmentIcon,
-  PlotIcon,
-  VillamentIcon,
-  VillaIcon,
-  RowHouseIcon,
-} from "@/app/images/commonSvgs";
+
 import { projectprops } from "@/app/data/projectDetails";
 import SubHeading from "../headings/SubHeading";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
@@ -22,13 +16,8 @@ import Button from "@/app/elements/button";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import RTK_CONFIG from "@/app/config/rtk";
-import { BiBuildingHouse } from "react-icons/bi";
-import { LuBedDouble } from "react-icons/lu";
 import Image from "next/image";
 import { ImgNotAvail } from "@/app/data/project";
-import { FaBed } from "react-icons/fa6";
-import { MdBalcony } from "react-icons/md";
-import PropertyCard from "./components/property-card";
 import ByUnitFilters from "./components/by-unit-filters";
 import FloorplanLeftsection from "./components/floorplan-leftsection";
 import {
@@ -36,7 +25,6 @@ import {
   UNIT_DATA_KEYS,
 } from "./utils/generateuniqueoptions";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { FiInfo } from "react-icons/fi";
 
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
@@ -49,6 +37,7 @@ interface FloorPlansProps {
   slug: string;
   postedById: number;
 }
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 export default function FloorPlans({
   phases,
@@ -120,25 +109,30 @@ export default function FloorPlans({
   });
 
   const handleUnitFilterChange = (name: string, value: string | number) => {
-    console.log(name);
     setUnitFilters((prev) => ({ ...prev, [name]: value }));
   };
-
-  // Memoize the filtering options
+  const BHK_OPTION_CACHE_KEY = `${propCgId}/${selectedPhase}`;
   const memoOptions = useCallback(() => {
     if (!projectUnitsData) return {};
     return getUniqueOptionsByKeys(
       projectUnitsData,
       UNIT_DATA_KEYS as (keyof PropertyUnit)[],
-      unitFilters
+      unitFilters,
+      BHK_OPTION_CACHE_KEY
     );
   }, [projectUnitsData, unitFilters]);
 
-  const { options, filteredUnits } =
-    selectedView === "unit" || selectedView === "bhk"
-      ? memoOptions()
-      : { options: {}, filteredUnits: projectUnitsData || [] };
-
+  const {
+    options,
+    filteredUnits,
+    cacheAllBhkOptions = [],
+  } = selectedView === "unit" || selectedView === "bhk"
+    ? memoOptions()
+    : {
+        options: {},
+        filteredUnits: projectUnitsData || [],
+        cacheAllBhkOptions: [],
+      };
   const setAllBhks = () => {
     if (Array.isArray(options?.bhkName)) {
       let data = ["All", ...options.bhkName];
@@ -159,7 +153,9 @@ export default function FloorPlans({
     setSelectedView("bhk");
     handleBhkClick("All");
     UNIT_DATA_KEYS.forEach((eachKey) => {
-      if (unit[eachKey]) {
+      if (eachKey === "floor" && unit[eachKey] === 0) {
+        handleUnitFilterChange("floor", "G");
+      } else if (unit[eachKey]) {
         handleUnitFilterChange(eachKey, unit[eachKey]);
       }
     });
@@ -254,7 +250,7 @@ export default function FloorPlans({
               propCgId !== projectprops.plot && (
                 <BHKTabs
                   onSelect={handleBhkClick}
-                  bhkNames={allBhkNames}
+                  bhkNames={cacheAllBhkOptions}
                   selectedBHK={selectedBHK}
                 />
               )}
@@ -284,28 +280,42 @@ export default function FloorPlans({
               {rightSideUnit ? (
                 <div className="p-4 bg-[#F8FBFF] rounded-lg">
                   <p className="text-[12px] sm:text-[14px] font-[500] text-[#005DA0]">
-                    {rightSideUnit.unitNumber &&
-                      "Unit No. " + rightSideUnit.unitNumber}
-                    {rightSideUnit.bhkName && " | " + rightSideUnit.bhkName}
-                    {rightSideUnit.towerName &&
-                      rightSideUnit.towerName !== "NA" &&
-                      " | Tower " + rightSideUnit.towerName}
-                    {rightSideUnit.floor &&
+                    {projName}
+                    {propCgId != projectprops.plot &&
+                      rightSideUnit?.bhkName &&
+                      " | " + rightSideUnit?.bhkName}
+                    {propCgId == projectprops.apartment &&
+                      rightSideUnit?.towerName &&
+                      rightSideUnit?.towerName != "NA" &&
+                      " | Tower " + rightSideUnit?.towerName}
+                    {propCgId != projectprops.plot &&
                       ` | ${
-                        propCgId === projectprops.rowHouse ||
-                        propCgId === projectprops.villa
+                        propCgId == projectprops.rowHouse ||
+                        propCgId == projectprops.villa
                           ? "Elevation"
                           : "Floor"
                       } ` +
                         `${
-                          rightSideUnit.floor.toString() === "0"
+                          rightSideUnit?.floor?.toString() === "0"
                             ? "G"
-                            : rightSideUnit.floor
+                            : rightSideUnit?.floor
                         }`}
-                    {rightSideUnit.facingName &&
-                      " | Facing " + rightSideUnit.facingName}
-                    {rightSideUnit.superBuildUparea &&
-                      " | Area. " + rightSideUnit.superBuildUparea + " sq.ft"}
+                    {rightSideUnit?.unitNumber &&
+                      " | Unit No. " + rightSideUnit?.unitNumber}
+                    {" | Facing " + rightSideUnit?.facingName}
+                    {propCgId != projectprops.plot &&
+                      rightSideUnit?.superBuildUparea &&
+                      " | Area. " +
+                        formatNumberWithSuffix(
+                          rightSideUnit?.superBuildUparea,
+                          false
+                        ) +
+                        " sq.ft"}
+                    {propCgId == projectprops.plot &&
+                      rightSideUnit?.plotArea &&
+                      " | Area. " +
+                        formatNumberWithSuffix(rightSideUnit?.plotArea, false) +
+                        " sq.ft"}
                   </p>
                 </div>
               ) : (

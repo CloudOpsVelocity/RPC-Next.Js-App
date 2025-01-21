@@ -104,7 +104,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <meta name="theme-color" content="#ffffff" />
       </head>
       {process.env.NODE_ENV !== "development" && (
-        <GoogleTagManager gtmId="GTM-TGQ5TJV9" />
+        <GoogleTagManager gtmId="GTM-T7W6VL9F" />
       )}
 
       <body className={`${montserrat.className}  `}>

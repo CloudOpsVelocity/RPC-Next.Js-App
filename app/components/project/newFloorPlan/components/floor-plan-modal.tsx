@@ -347,7 +347,12 @@ export function FloorPlanModal({
 
                   {propCgId !== projectprops.plot && (
                     <DataItem
-                      title="Floor"
+                      title={
+                        propCgId === projectprops.rowHouse ||
+                        propCgId === projectprops.villa
+                          ? "Elevation"
+                          : "Floor"
+                      }
                       value={
                         currentUnit.floor === 0
                           ? "Ground Floor"
@@ -359,7 +364,12 @@ export function FloorPlanModal({
                                 suffixes[v] ||
                                 suffixes[0]
                               );
-                            })()} Floor`
+                            })()} ${
+                              propCgId === projectprops.rowHouse ||
+                              propCgId === projectprops.villa
+                                ? "Elevation"
+                                : "Floor"
+                            }`
                       }
                       icon={
                         <FaBuilding className="text-[#0073C6] text-xl sm:text-2xl" />
@@ -507,7 +517,9 @@ export function FloorPlanModal({
                           : "bg-white hover:bg-gray-50"
                       }`}
                     >
-                      <img
+                      <Image
+                        width={800}
+                        height={600}
                         src={unit?.floorPlanUrl?.split(",")[0] ?? ImgNotAvail}
                         alt={`Thumbnail for ${unit.bhkName}`}
                         className="w-full aspect-video object-cover rounded-md mb-1"
