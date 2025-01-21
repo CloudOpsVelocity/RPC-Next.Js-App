@@ -18,7 +18,7 @@ export default async function Page({ params: { city, lt } }: Props) {
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
-  console.log(filterValues);
+
   const serverData = await getSearchData(filterValues.LT as string);
   return (
     <NewSearchPage
@@ -51,7 +51,7 @@ export async function generateStaticParams() {
 export const dynamic = "force-dynamic";
 const getSearchData = async (locality: string): Promise<any> => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
     console.log(baseUrl);
     const url = `${baseUrl}`;
 
