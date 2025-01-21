@@ -17,7 +17,7 @@ export default function Page({}: Props) {
         ]}
       />
       <ProjSearchMainFilterSection />
-      <div className="max-w-[98%] sm:w-[99%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap ">
+      <div className="max-w-[98%] sm:min-w-full mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap ">
         <LeftSection />
         <RightSection />
       </div>
