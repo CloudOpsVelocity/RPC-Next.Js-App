@@ -152,7 +152,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       case "listing":
         {
           const paramsObject = extractApiValues(data.stringId);
-          alert(data.name.split("in")[1].split("-")[0].trim());
+          // alert(data.name.split("in")[1].split("-")[0].trim());
           let localityName = data.name.split("-")[1].toLowerCase().trim();
 
           if (isListingSearch) {
