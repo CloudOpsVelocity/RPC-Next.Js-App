@@ -152,7 +152,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       case "listing":
         {
           const paramsObject = extractApiValues(data.stringId);
-          alert(JSON.stringify(paramsObject));
+          // alert(data.name.split("in")[1].split("-")[0].trim());
           let localityName = data.name.split("-")[1].toLowerCase().trim();
 
           if (isListingSearch) {
@@ -177,9 +177,10 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               paramsObject.LT
             )}${
               paramsObject.PJ
-                ? `-projIdEnc=${paramsObject.PJ}-projName=${
-                    data.name.split("-")[1]
-                  }`
+                ? `-projIdEnc=${paramsObject.PJ}-projName=${data.name
+                    .split("in")[1]
+                    .split("-")[0]
+                    .trim()}`
                 : ""
             }`;
             window.open(url);
@@ -424,7 +425,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </div>
             <div
               onClick={(e) => e.stopPropagation()}
-              className="  max-h-[100vh] py-4 sm:p-4 overflow-y"
+              className="  max-h-[100vh]   overflow-y"
             >
               {/* <PropertyTypeDropdown
                 selectedFilters={selectedFilters}

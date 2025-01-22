@@ -111,7 +111,8 @@ export default function TopRightSection({
           Avg Price:{" "}
           <span className="font-bold ml-1">
             {" "}
-            ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
+           {/*  ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)} */}
+           ₹{formatNumberWithSuffix(type === "proj"? basePrice: price)}
           </span>
         </div>
       ) : null}
@@ -246,7 +247,7 @@ export default function TopRightSection({
               (category == "Sale" && (
                 <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
                   <p className="text-right text-[12px] text-nowrap text-[#148B16]">
-                    Avg Price:₹ {formatNumberWithSuffix(basePrice)}
+                    Avg Price:₹ {formatNumberWithSuffix(type === "proj"? basePrice: price)}
                   </p>
                   <p className="text-right text-[12px] text-nowrap">
                     {towerData ? towerData : "N/A"}
