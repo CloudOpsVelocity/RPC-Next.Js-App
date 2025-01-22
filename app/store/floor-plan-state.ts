@@ -3,9 +3,7 @@ import { selectAtom } from "jotai/utils";
 import { PropertyUnit } from "../components/project/newFloorPlan/types/floor-plan";
 import { UNIT_DATA_KEYS } from "../components/project/newFloorPlan/utils/generateuniqueoptions";
 
-export const currentPhaseAtom = atom(554);
-export const propCgIdAtom = atom(35);
-
+// Define interfaces
 interface UnitFilters {
   unitNumber: string;
   bhkName: string;
@@ -17,6 +15,30 @@ interface UnitFilters {
   width: string;
   length: string;
 }
+
+interface ModalState {
+  isOpen: boolean;
+  unit: PropertyUnit | null;
+  isPartialUnit: boolean;
+}
+
+interface FullScreenModalState {
+  isOpen: boolean;
+  unit: PropertyUnit | null;
+}
+
+interface FloorPlanState {
+  selectedPropertyType: string;
+  selectedView: string;
+  selectedBHK: string;
+  unitFilters: UnitFilters;
+  modalState: ModalState;
+  fullScreenModalState: FullScreenModalState;
+  rightSideUnit: PropertyUnit | null;
+  projectUnits: PropertyUnit[];
+}
+
+// Initial states
 const initialUnitFilters: UnitFilters = {
   unitNumber: "",
   bhkName: "",
@@ -28,6 +50,7 @@ const initialUnitFilters: UnitFilters = {
   width: "",
   length: "",
 };
+
 const initialState: FloorPlanState = {
   selectedPropertyType: "apartment",
   selectedView: "type",
@@ -45,36 +68,58 @@ const initialState: FloorPlanState = {
   rightSideUnit: null,
   projectUnits: [],
 };
-interface FloorPlanState {
-  selectedPropertyType: string;
-  selectedView: string;
-  selectedBHK: string;
-  unitFilters: UnitFilters;
-  modalState: {
-    isOpen: boolean;
-    unit: PropertyUnit | null;
-    isPartialUnit: boolean;
-  };
-  fullScreenModalState: {
-    isOpen: boolean;
-    unit: PropertyUnit | null;
-  };
-  rightSideUnit: PropertyUnit | null;
-  projectUnits: PropertyUnit[];
-}
 
-// Create a combined atom for filters and units
+// Atoms for global state
+export const floorPlanStateAtom = atom<FloorPlanState>(initialState);
+
+export const projectUnitsAtom = atom<PropertyUnit[]>([]);
+
+export const selectedPropertyTypeAtom = atom(
+  (get) => get(floorPlanStateAtom).selectedPropertyType,
+  (get, set, value: string) =>
+    set(floorPlanStateAtom, {
+      ...get(floorPlanStateAtom),
+      selectedPropertyType: value,
+    })
+);
+
+export const modalStateAtom = atom(
+  (get) => get(floorPlanStateAtom).modalState,
+  (get, set, modalState: ModalState) =>
+    set(floorPlanStateAtom, {
+      ...get(floorPlanStateAtom),
+      modalState,
+    })
+);
+
+export const fullScreenModalStateAtom = atom(
+  (get) => get(floorPlanStateAtom).fullScreenModalState,
+  (get, set, fullScreenModalState: FullScreenModalState) =>
+    set(floorPlanStateAtom, {
+      ...get(floorPlanStateAtom),
+      fullScreenModalState,
+    })
+);
+
+export const unitFiltersAtom = atom(
+  (get) => get(floorPlanStateAtom).unitFilters,
+  (get, set, unitFilters: UnitFilters) =>
+    set(floorPlanStateAtom, {
+      ...get(floorPlanStateAtom),
+      unitFilters,
+    })
+);
+
+// Combined atom for filters and units
 export const filtersAndUnitsAtom = atom((get) => ({
-  filters: get(floorPlanStateAtom).unitFilters,
+  filters: get(unitFiltersAtom),
   units: get(projectUnitsAtom),
 }));
 
-// Updated selectors using proper selectAtom syntax
+// Selectors for filtered units
 export const filteredUnitsSelector = selectAtom(
   filtersAndUnitsAtom,
-  (state) => {
-    const { filters, units } = state;
-
+  ({ filters, units }) => {
     return units.filter((unit) => {
       return Object.entries(filters).every(([key, value]) => {
         if (!value) return true;
@@ -92,6 +137,7 @@ export const filteredUnitsSelector = selectAtom(
   (a, b) => JSON.stringify(a) === JSON.stringify(b)
 );
 
+// Selector for unique options
 export const uniqueOptionsSelector = selectAtom(
   filteredUnitsSelector,
   (units) => {
@@ -119,18 +165,4 @@ export const uniqueOptionsSelector = selectAtom(
     return options;
   },
   (a, b) => JSON.stringify(a) === JSON.stringify(b)
-);
-
-// Base atoms (these stay the same)
-export const floorPlanStateAtom = atom<FloorPlanState>(initialState);
-export const projectUnitsAtom = atom<PropertyUnit[]>([]);
-
-// Other atoms remain the same...
-export const selectedPropertyTypeAtom = atom(
-  (get) => get(floorPlanStateAtom).selectedPropertyType,
-  (get, set, value: string) =>
-    set(floorPlanStateAtom, {
-      ...get(floorPlanStateAtom),
-      selectedPropertyType: value,
-    })
 );
