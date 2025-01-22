@@ -212,7 +212,7 @@ Props) {
     open("floor");
   };
   const handlePricingFloorPlanClick = (selectedBhk: any) => {
-    if (selectedBhk.bhkName.includes("_")) {
+    if (selectedBhk.bhkName.includes("_")) { 
       const [length, width] = selectedBhk.bhkName.split("_");
       form.setValues({
         ...setPropertyValues(
@@ -295,6 +295,8 @@ Props) {
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
   }, [currentPhase]);
   if (isLoading) return <Loading />;
+
+  console.log(PhaseOverview)
   return (
     <>
       {!partialUnitData &&
@@ -310,6 +312,7 @@ Props) {
             handlePricingFloorPlanClick={handlePricingFloorPlanClick}
           />
         ))}{" "}
+
       <div
         className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[0%]"
         id="floor-plans"

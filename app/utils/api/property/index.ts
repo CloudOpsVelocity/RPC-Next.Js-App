@@ -75,6 +75,7 @@ const getReportConstData = async () => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/getConstantList`,
     ["propReport"]
   );
+  console.log(res)
   return res.data;
 };
 /* export const getCommonData = async (key:any) => {
@@ -90,6 +91,7 @@ export {
   getNearByLocations,
   getReportConstData,
 };
+
 function parseOtherCharge(otherChargeString: string): number {
   let sum = 0;
 

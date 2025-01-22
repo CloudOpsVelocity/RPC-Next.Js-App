@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const formatNumberWithCommas = (num: any): string => {
+    if(num){
     const number = num !== undefined && num !== "" ? parseFloat(num) : num;
     const numberString = number.toFixed(2); // Convert to string with 2 decimal places
     const [integerPart, decimalPart] = numberString.split(".");
@@ -12,6 +13,7 @@ export const formatNumberWithCommas = (num: any): string => {
     }
 
     return `${formattedInteger}.${decimalPart}`;
+  }
 };
 
 async function getUrlSlugs(type: "project" | "listing") {

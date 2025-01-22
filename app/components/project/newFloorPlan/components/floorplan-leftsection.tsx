@@ -8,7 +8,7 @@ import {
 import { BiBuildingHouse } from "react-icons/bi";
 import { MdBalcony } from "react-icons/md";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { projectprops } from "@/app/data/projectDetails";
 import { PropertyUnit } from "../types/floor-plan";
 import { useMediaQuery } from "@mantine/hooks";

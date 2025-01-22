@@ -81,6 +81,7 @@ export default async function ProjectsDetailsPage({
   const imageUrl = data?.media?.coverImageUrl.split(",")[1];
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
 
+  console.log(phaseOverview);
   return (
     <section className="w-full relative break-words ">
       {/* <meta name="keywords" content={`${data.projectName}, ${data.localityName}, ${data.cityName}, real estate, property`} /> */}
@@ -161,22 +162,33 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
           />
         )}
-        {process.env.NODE_ENV == "development" ||
-        data.projIdEnc === "0d1a266da2f55719f25fc89557db315f" ||
-        data.projIdEnc === "88bcbd719b76b51abdcbde509965a294" ? (
-          <FloorPlans
-            phases={data.phases}
-            projName={data.projectName}
-            partialUnitData={data.partialUnitData}
-            phaseOverview={phaseOverview}
-            slug={slug}
-            postedById={data.builderId}
-          />
-        ) : (
-          ""
-        )}
 
         {!data.partialUnitData ? (
+          process.env.NODE_ENV === "development" ||
+          data.projIdEnc === "0d1a266da2f55719f25fc89557db315f" ||
+          data.projIdEnc === "88bcbd719b76b51abdcbde509965a294" ? (
+            <FloorPlans
+              phases={data.phases}
+              projName={data.projectName}
+              partialUnitData={data.partialUnitData}
+              phaseOverview={phaseOverview}
+              slug={slug}
+              postedById={data.builderId}
+            />
+          ) : (
+            ""
+          )
+        ) : (
+          <PartialUnitData
+            partialUnitData={data.partialUnitData}
+            projName={data.projectName}
+            phaseList={data.phases}
+            data={data}
+            type="partial"
+          />
+        )}
+
+        {/* {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}
             // overview={overview}
@@ -198,7 +210,7 @@ export default async function ProjectsDetailsPage({
             data={data}
             type="partial"
           />
-        )}
+        )}  */}
 
         <GalleryBlock
           {...data.media}
