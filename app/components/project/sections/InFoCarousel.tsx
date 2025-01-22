@@ -61,7 +61,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
 
   return (
     <div
-      className="justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto sm:min-h-[340px] max-h-[340px] xl:max-h-[340px] overflow-auto"
+      className="justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto sm:min-h-[180px] max-h-[340px] xl:max-h-[340px] overflow-auto"
     >
       <table className="min-w-full border-collapse mr-auto">
         <thead className="sticky top-0 z-[1]">

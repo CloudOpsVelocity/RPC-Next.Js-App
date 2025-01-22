@@ -187,8 +187,6 @@ export function FloorPlanModal({
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
 
-    console.log(filteredUnits)
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -241,6 +239,7 @@ export function FloorPlanModal({
             showFilters={showFilters}
             setShowFilters={setShowFilters}
             filteredUnits={filteredUnits}
+            modalState={modalState}
           />
 
           {/* Center - Floor Plan and Details */}

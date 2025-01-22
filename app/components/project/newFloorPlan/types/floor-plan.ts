@@ -20,6 +20,7 @@ export interface PropertyUnit {
   length: string;
   gardenArea: string;
   parkingArea:string;
+  aptType: string;
 }
 
 export interface TabItem {

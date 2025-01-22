@@ -13,6 +13,7 @@ type Props = {
   showFilters: any;
   setShowFilters: any;
   filteredUnits:any;
+  modalState?:any;
 };
 
 export default function PopupFilters({
@@ -21,7 +22,8 @@ export default function PopupFilters({
   setDataFilters,
   showFilters,
   setShowFilters,
-  filteredUnits
+  filteredUnits,
+  modalState
 }: Props) {
   const [filters, setFilters] = useState(dataFilters);
   const [backupFilters, setBackupFilters] = useState({
@@ -194,6 +196,7 @@ export default function PopupFilters({
         </button>
       </div>
 
+      
       <div className="h-[calc(100vh-120px)] overflow-y-auto p-3 custom-scrollbar">
         <div className="flex flex-col">
           {/* Basic Details */}
