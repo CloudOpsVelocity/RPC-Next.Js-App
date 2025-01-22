@@ -140,7 +140,7 @@ const overlayReducer = (
               content.waterCharge === "NA"
                 ? "Already Included"
                 : content.waterCharge === "A"
-                ? "Lifetime"
+                ? "As Per Actuals"
                 : formatNumber(content.waterCharge),
           },
           {

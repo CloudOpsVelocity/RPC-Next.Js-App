@@ -72,6 +72,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
   }, [focusedIndex, isOpen]);
 
   const handleSelect = (item: T) => {
+
     const isValidBuilderParams = !item.value.includes("/");
     if (isValidBuilderParams || category === "localities") {
       dispatch({
@@ -125,7 +126,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
     <div ref={wrapperRef} className="w-full max-w-md">
       <label
         htmlFor="dynamic-search"
-        className="block text-sm font-medium text-gray-700 mb-1"
+        className="block text-sm font-medium text-gray-700 sm:mb-1 sm:text-lg sm:font-semibold mb-3"
       >
         {label}
       </label>

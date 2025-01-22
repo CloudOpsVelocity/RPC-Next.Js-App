@@ -50,6 +50,8 @@ export default function ShowAllFiltersButton({
   const { handleClearFilters, handleApplyFilters } =
     useProjSearchAppliedFilters();
 
+
+  const [state, dispatch] = useAtom(projSearchStore);
   const propertyiconss = {
     apt: {
       id: 35,
@@ -76,16 +78,17 @@ export default function ShowAllFiltersButton({
       name: "Plot",
       icon: <MdLandscape className="w-5 h-5 text-green-700" />,
     },
-    indp: {
+    ...(("/seach/listing" === path  || "/search" === path && state.listedBy !== null ) && {indp: {
       id: 36,
       name: "Independent",
       icon: <MdLandscape className="w-5 h-5 text-green-700" />,
-    },
+    }} ) 
+    
   };
-  const [state, dispatch] = useAtom(projSearchStore);
   const toggleExpand = (section: string) => {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
+
   const getPhasesData = async () => {
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/post-project/phase-name-by-project?projIdEnc=${state?.projIdEnc}`;
     const res = await fetch(url);
@@ -288,7 +291,7 @@ export default function ShowAllFiltersButton({
             </button>
           </div>
           <div className="flex flex-col justify-start max-h-[66vh] mb-10 sm:mb-0 overflow-y-auto">
-            <div className="flex flex-col mb-6 ml-4 gap-6">
+            <div className="flex flex-col mb-6 ml-4 gap-6 sm:mT-6">
               <LocalitySearch<Location>
                 data={localitydata || []}
                 displayKey="name" 

@@ -184,10 +184,10 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       ) : (
         <EmptyState />
       )}
-      {hasNextPage && shouldFetchMore && (
+      {hasNextPage && shouldFetchMore && !isLoading && data && (
         <div
           ref={ref}
-          className="w-full py-8 flex justify-center items-center text-gray-600"
+          className="w-full py-8 flex justify-center items-center bg-rose-600 text-gray-600"
         >
           <LoadingSpinner />
         </div>
