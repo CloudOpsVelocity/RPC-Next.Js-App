@@ -223,15 +223,15 @@ export default function ShowAllFiltersButton({
     );
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     }
 
     return () => {
       document.body.style.overflow = "unset";
-    }; 
-  }, [isOpen])
+    };
+  }, [isOpen]);
 
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
@@ -291,7 +291,7 @@ export default function ShowAllFiltersButton({
             <div className="flex flex-col mb-6 ml-4 gap-6">
               <LocalitySearch<Location>
                 data={localitydata || []}
-                displayKey="name" 
+                displayKey="name"
                 loading={isLoading}
                 valueKey="stringId"
                 onChange={handleLocationChange}

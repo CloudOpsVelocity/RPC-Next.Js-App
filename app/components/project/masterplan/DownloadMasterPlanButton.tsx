@@ -11,7 +11,7 @@ type Props = {
 export default function DownloadMasterPlanButton({ media }: Props) {
   const [, { open: LoginOpen }] = usePopShortList();
   const { data: session } = useSession();
-  const downloadFn = async () => {
+  const downloadFn = async () => { 
     try {
       const response = await fetch(media);
       const blob = await response.blob();

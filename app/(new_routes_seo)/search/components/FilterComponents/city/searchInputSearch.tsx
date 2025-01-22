@@ -125,7 +125,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
     <div ref={wrapperRef} className="w-full max-w-md">
       <label
         htmlFor="dynamic-search"
-        className="block text-sm font-medium text-gray-700 mb-1"
+        className="text-lg font-semibold mb-3"
       >
         {label}
       </label>

@@ -177,9 +177,10 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               paramsObject.LT
             )}${
               paramsObject.PJ
-                ? `-projIdEnc=${paramsObject.PJ}-projName=${
-                  data.name.split("in")[1].split("-")[0].trim()
-                  }`
+                ? `-projIdEnc=${paramsObject.PJ}-projName=${data.name
+                    .split("in")[1]
+                    .split("-")[0]
+                    .trim()}`
                 : ""
             }`;
             window.open(url);

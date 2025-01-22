@@ -12,6 +12,7 @@ type Props = {
   setDataFilters: any;
   showFilters: any;
   setShowFilters: any;
+  filteredUnits:any;
 };
 
 export default function PopupFilters({
@@ -20,6 +21,7 @@ export default function PopupFilters({
   setDataFilters,
   showFilters,
   setShowFilters,
+  filteredUnits
 }: Props) {
   const [filters, setFilters] = useState(dataFilters);
   const [backupFilters, setBackupFilters] = useState({
@@ -39,6 +41,7 @@ export default function PopupFilters({
     noOfCarParking: "",
     parkingType: "",
     terraceArea: "",
+    totalBalconySize:""
   });
 
   const propCgId = useAtomValue(propCgIdAtom);
@@ -59,14 +62,45 @@ export default function PopupFilters({
     return value !== value;
   }
 
-  const handleUnitFilterChange = (
-    name: string | number | symbol,
-    value: string | number
-  ) => {
-    setDataFilters((prev: PropertyUnit) => ({
-      ...prev,
-      [name]: isActualNaN(value) ? "" : value,
-    }));
+  const handleUnitFilterChange = ( name: string | number | symbol,  value: string | number) => {
+    if(name === "unitNumber" && value !== ""){
+      const unitFilteredData = filteredUnits.filter((item:any) => item.unitNumber === value);
+      if(unitFilteredData && unitFilteredData.length > 0){
+        console.log(unitFilteredData[0]);
+        // setUnitFilters(unitFilteredData[0]); 
+
+        let data = {
+          unitNumber: unitFilteredData[0].unitNumber ? unitFilteredData[0].unitNumber : "",
+          bhkName: unitFilteredData[0].bhkName ? unitFilteredData[0].bhkName : "",
+          towerName: unitFilteredData[0].towerName ? unitFilteredData[0].towerName : "",
+          floor: unitFilteredData[0].floor ? unitFilteredData[0].floor : "",
+          facingName: unitFilteredData[0].facingName ? unitFilteredData[0].facingName : "",
+          block: unitFilteredData[0].block ? unitFilteredData[0].block : "",
+          plotArea: unitFilteredData[0].plotArea ? unitFilteredData[0].plotArea : "",
+          length: unitFilteredData[0].length ? unitFilteredData[0].length : "",
+          width: unitFilteredData[0].width ? unitFilteredData[0].width : "",
+          parkingArea: unitFilteredData[0].parkingArea ? unitFilteredData[0].parkingArea : "",
+          gardenArea: unitFilteredData[0].gardenArea ? unitFilteredData[0].gardenArea : "",
+          parkingType: unitFilteredData[0].parkingType ? unitFilteredData[0].parkingType : "",
+          terraceArea: unitFilteredData[0].terraceArea ? unitFilteredData[0].terraceArea : "",
+          caretarea: unitFilteredData[0].caretarea ? unitFilteredData[0].caretarea : "",
+          superBuildUparea: unitFilteredData[0].superBuildUparea ? unitFilteredData[0].superBuildUparea : "",
+          totalNumberofBathroom: unitFilteredData[0].totalNumberofBathroom ? unitFilteredData[0].totalNumberofBathroom : "",
+          totalNumberOfBalcony: unitFilteredData[0].totalNumberOfBalcony ? unitFilteredData[0].totalNumberOfBalcony : "",
+          noOfCarParking: unitFilteredData[0].noOfCarParking ? unitFilteredData[0].noOfCarParking : "",
+          totalBalconySize: unitFilteredData[0].totalBalconySize ? unitFilteredData[0].totalBalconySize : "",
+        }
+
+        setDataFilters(data);
+        setFilters(data);
+        setBackupFilters(data);
+      }
+    }else{
+      setDataFilters((prev: PropertyUnit) => ({
+        ...prev,
+        [name]: isActualNaN(value) ? "" : value,
+      }));
+    }
   };
 
   const handleFilterChange = (
@@ -193,8 +227,9 @@ export default function PopupFilters({
           {/* Area Details */}
           {options?.plotArea &&
             options?.plotArea.length > 0 &&
-            propCgId === projectprops.plot &&
-            renderFilter("plotArea", "Select Plot Area", "Plot Area (sq.ft)")}
+            propCgId !== projectprops.apartment && propCgId !== projectprops.villament &&
+            renderFilter("plotArea", "Select Plot Area", "Plot Area (sq.ft)")
+          }
 
           {options?.caretarea &&
             options?.caretarea.length > 0 &&
@@ -210,7 +245,7 @@ export default function PopupFilters({
               "superBuildUparea",
               "Select Super Built-up Area",
               "Super Built-up Area (sq.ft)"
-            )}
+          )}
 
           {options?.terraceArea &&
             options?.terraceArea.length > 0 &&
@@ -218,7 +253,25 @@ export default function PopupFilters({
               "terraceArea",
               "Select Terrace Area",
               "Terrace Area (sq.ft)"
-            )}
+          )}
+          
+          {options?.gardenArea &&
+            options?.gardenArea.length > 0 &&
+            propCgId !== projectprops.apartment && propCgId !== projectprops.plot &&
+            renderFilter(
+              "gardenArea",
+              "Select Garden Area",
+              "Garden Area (sq.ft)"
+          )}
+
+          {options?.parkingArea &&
+            options?.parkingArea.length > 0 &&
+            propCgId !== projectprops.apartment && propCgId !== projectprops.plot &&
+            renderFilter(
+              "parkingArea",
+              "Select Parking Area",
+              "Parking Area (sq.ft)"
+          )}
 
           {/* Unit Features */}
           {options?.totalNumberofBathroom &&
@@ -235,7 +288,16 @@ export default function PopupFilters({
               "totalNumberOfBalcony",
               "Select Number of Balconies",
               "Number of Balconies"
-            )}
+          )}
+
+          {options?.totalBalconySize &&
+            options?.totalBalconySize.length > 0 &&
+            propCgId === projectprops.villament && 
+            renderFilter(
+              "totalBalconySize",
+              "Select Balconie Size",
+              "Balconie Size"
+          )}
 
           {options?.noOfCarParking &&
             options?.noOfCarParking.length > 0 &&
@@ -247,7 +309,9 @@ export default function PopupFilters({
 
           {options?.parkingType &&
             options?.parkingType.length > 0 &&
-            renderFilter("parkingType", "Select Parking Type", "Parking Type")}
+            (propCgId === projectprops.apartment || propCgId === projectprops.villament) &&
+            renderFilter("parkingType", "Select Parking Type", "Parking Type")
+          }
 
           {/* Plot Dimensions */}
           {options?.length &&

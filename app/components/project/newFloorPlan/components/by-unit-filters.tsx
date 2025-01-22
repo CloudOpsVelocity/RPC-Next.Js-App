@@ -1,31 +1,34 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-import React, { useState, useCallback, useRef, useEffect } from "react";
-import { getUniqueOptionsByKeys } from "../utils/generateuniqueoptions";
+import React, { useState, useRef, useEffect } from "react";
+// import { getUniqueOptionsByKeys } from "../utils/generateuniqueoptions";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
 
 type Props = {
-  options: any;
+  options: any; 
   handleUnitFilterChange: (name: string, value: string) => void;
+  filters:any;
+  setFilters:any;
 };
 
 export default function ByUnitFilters({
   options,
   handleUnitFilterChange,
+  filters, setFilters
 }: Props) {
-  const [filters, setFilters] = useState({
-    unitNumber: "",
-    bhkName: "",
-    towerName: "",
-    floor: "",
-    facingName: "",
-    block: "",
-    plotArea: "",
-    length: "",
-    width: "",
-  });
+  // const [filters, setFilters] = useState({
+  //   unitNumber: "",
+  //   bhkName: "",
+  //   towerName: "",
+  //   floor: "",
+  //   facingName: "",
+  //   block: "",
+  //   plotArea: "",
+  //   length: "",
+  //   width: "",
+  // });
 
   const [backupFilters, setBackupFilters] = useState({
     unitNumber: "",
@@ -71,19 +74,19 @@ export default function ByUnitFilters({
   };
 
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: String(value) }));
+    setFilters((prev: any) => ({ ...prev, [key]: String(value) }));
     setBackupFilters((prev) => ({ ...prev, [key]: String(value) }));
     handleUnitFilterChange(key, value);
   };
 
   const onSearchChange = (key: keyof typeof filters, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: String(value) }));
+    setFilters((prev: any) => ({ ...prev, [key]: String(value) }));
   };
 
   const onMouseOut = (key: keyof typeof filters, value: string) => {
     let data = filteredOptions(key);
     if (!data.includes(value)) {
-      setFilters((prev) => ({ ...prev, [key]: backupFilters[key] }));
+      setFilters((prev: any) => ({ ...prev, [key]: backupFilters[key] }));
     } else {
       handleFilterChange(key, value);
     }

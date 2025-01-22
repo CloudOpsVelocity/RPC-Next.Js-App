@@ -21,6 +21,7 @@ import PopupFilters from "./PopupFilters";
 
 import { PropertyUnit } from "../types/floor-plan";
 import Image from "next/image";
+import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
 
 interface FloorPlanModalProps {
   modalState: any;
@@ -116,7 +117,7 @@ export function FloorPlanModal({
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
     setCurrentIndex(curIndex - 1);
-    console.log(curIndex - 1, filteredUnits.length);
+    // console.log(curIndex - 1, filteredUnits.length);
   };
 
   const handleNextUnit = () => {
@@ -129,7 +130,7 @@ export function FloorPlanModal({
     setCurrentUnit(nextUnit);
     ensureUnitVisible(nextUnit);
     setCurrentIndex(curIndex + 1);
-    console.log(curIndex + 1, filteredUnits.length);
+    // console.log(curIndex + 1, filteredUnits.length);
   };
 
   useEffect(() => {
@@ -186,6 +187,8 @@ export function FloorPlanModal({
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
 
+    console.log(filteredUnits)
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -196,7 +199,7 @@ export function FloorPlanModal({
             {`${
               propCgId !== projectprops.plot
                 ? currentUnit.bhkName
-                : `(${currentUnit.length} X ${currentUnit.width}) ${currentUnit.plotArea} sq.ft`
+                : `(${currentUnit.length} X ${currentUnit.width}) ${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`
             } - 
             ${
               propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
@@ -237,6 +240,7 @@ export function FloorPlanModal({
             setDataFilters={setFilters}
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            filteredUnits={filteredUnits}
           />
 
           {/* Center - Floor Plan and Details */}
@@ -303,7 +307,7 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Super Built-up Area"
-                      value={`${currentUnit.superBuildUparea} sq.ft`}
+                      value={`${formatNumberWithCommas(currentUnit.superBuildUparea)} sq.ft`} 
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -313,7 +317,7 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Carpet Area"
-                      value={`${currentUnit.caretarea} sq.ft`}
+                      value={`${formatNumberWithCommas(currentUnit.caretarea)} sq.ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -366,7 +370,7 @@ export function FloorPlanModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Length"
-                      value={`${currentUnit.length} ft`}
+                      value={`${formatNumberWithCommas(currentUnit.length)} ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -376,17 +380,37 @@ export function FloorPlanModal({
                   {propCgId === projectprops.plot && (
                     <DataItem
                       title="Width"
-                      value={`${currentUnit.width} ft`}
+                      value={`${formatNumberWithCommas(currentUnit.width)} ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
                     />
                   )}
 
-                  {propCgId === projectprops.plot && (
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.villament && (
                     <DataItem
                       title="Plot Area"
-                      value={`${currentUnit.plotArea} sq.ft`}
+                      value={`${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && currentUnit.gardenArea && (
+                    <DataItem
+                      title="Garden Area"
+                      value={`${formatNumberWithCommas(currentUnit.gardenArea)} sq.ft`}
+                      icon={
+                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )} 
+
+                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && currentUnit.parkingArea && (
+                    <DataItem
+                      title="Parking Area"
+                      value={`${formatNumberWithCommas(currentUnit.parkingArea)} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -436,7 +460,7 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  {propCgId !== projectprops.plot && (
+                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
                     <DataItem
                       title="Car Parking"
                       value={`${currentUnit.noOfCarParking} ${
@@ -452,7 +476,7 @@ export function FloorPlanModal({
                     currentUnit.terraceArea !== "null" && (
                       <DataItem
                         title="Terrace Area"
-                        value={`${currentUnit.terraceArea} sq.ft`}
+                        value={`${formatNumberWithCommas(currentUnit.terraceArea)} sq.ft`}
                         icon={
                           <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                         }
