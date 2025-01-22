@@ -13,7 +13,7 @@ export default function NewListingSearchpage({
   serverData,
   frontendFilters,
 }: Props) {
-  console.log(serverData === null ? true : false)
+
   return (
     <main className="pt-[6%] mt-[10%] sm:mt-0">
       <ProjSearchMainFilterSection

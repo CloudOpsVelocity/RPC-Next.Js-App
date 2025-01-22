@@ -16,8 +16,8 @@ import PostYourListing from "./(dashboard)/new/components/post-your-listing";
 import BlogsSection from "./(dashboard)/new/components/blogs";
 import Req from "./(dashboard)/new/components/Req";
 import SharePopup from "./(dashboard)/searchOldPage/components/SharePopup";
-import { cookies, headers } from "next/headers";
-import { decryptData } from "./utils/auth/nodeCrypto";
+// import { cookies, headers } from "next/headers";
+// import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
   const cityData = {
     data: {
@@ -26,11 +26,13 @@ export default async function Page() {
     },
     status: true,
   };
-  const encriptedLatLang = cookies().get("ui")?.value;
-  const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : "";
+  // const encriptedLatLang = cookies().get("ui")?.value;
+  // const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : "";
   const [data, listingData, shortIds] = await Promise.all([
-    getData(cityData?.data?.cityId, latLang),
-    getHomeListingData(cityData?.data?.cityId, latLang),
+    // getData(cityData?.data?.cityId, latLang),
+    // getHomeListingData(cityData?.data?.cityId, latLang),
+    getData(cityData?.data?.cityId),
+    getHomeListingData(cityData?.data?.cityId),
     getShortIds(),
   ]);
   return (

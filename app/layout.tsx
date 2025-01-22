@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 import type { Metadata } from "next";
-
-import { Montserrat, Playball } from "next/font/google";
 import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";

@@ -62,7 +62,7 @@ const overlayReducer = (
     if (!value) return "";
     return new Intl.NumberFormat("en-IN").format(Number(value));
   };
-  console.log("charges...")
+
   switch (action.type) {
     case "OPEN":
       if (action.conType === "otherCharges") {
@@ -92,7 +92,9 @@ const overlayReducer = (
                   value: `${
                     content.securetyType === "F"
                       ? formatNumber(content.security.toString())
-                      : formatNumber((content.securityMonth * content.price).toString())
+                      : formatNumber(
+                          (content.securityMonth * content.price).toString()
+                        )
                   }`,
                 },
               ]
@@ -177,7 +179,7 @@ const overlayReducer = (
           pType: action.pType,
           lat: action.lat,
           lang: action.lang,
-          propId: action.propId
+          propId: action.propId,
         };
       }
       return {
@@ -189,7 +191,7 @@ const overlayReducer = (
         pType: action.pType,
         lat: action.lat,
         lang: action.lang,
-        propId: action.propId
+        propId: action.propId,
       };
     case "CLOSE":
       return initialState;

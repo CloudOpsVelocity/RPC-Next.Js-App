@@ -20,7 +20,6 @@ export const getListingSearchData = async (
 };
 
 const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
-  console.log(apiFilterQueryParams);
   // Directly process the input string in a single pass
   const transformedParams = apiFilterQueryParams
     .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern

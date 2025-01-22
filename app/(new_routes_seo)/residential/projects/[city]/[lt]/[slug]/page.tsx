@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
 import { getPagesSlugs } from "@/app/seo/api";
 import { Metadata, ResolvingMetadata } from "next";
+
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -126,7 +127,44 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   let slug = params.slug.split("-").at(-1);
-  const { basicData: data } = await getProjectDetails(slug as string);
+  const {
+    basicData: data,
+    phaseOverview,
+    nearByLocations,
+  } = await getProjectDetails(slug as string);
+
+  // Calculate price range in a readable format
+  const formatPrice = (price: number) => {
+    if (price >= 10000000) return `${(price / 10000000).toFixed(2)} Cr`;
+    if (price >= 100000) return `${(price / 100000).toFixed(2)} L`;
+    return `${price.toLocaleString()}`;
+  };
+
+  const priceRange = `${formatPrice(data.minPrice)} - ${formatPrice(
+    data.maxPrice
+  )}`;
+
+  // Get all available configurations
+  const configurations = phaseOverview
+    .flatMap((phase: any) =>
+      Object.values(phase.propTypeOverview).flatMap(
+        (type: any) => type.unitTypes
+      )
+    )
+    .filter(
+      (value: string, index: number, self: string[]) =>
+        self.indexOf(value) === index
+    )
+    .join(", ");
+
+  // Get nearby landmarks for description
+  const nearbyLandmarks = [
+    ...(nearByLocations.school || []).slice(0, 2).map((s: any) => s.name),
+    ...(nearByLocations.hospital || []).slice(0, 2).map((h: any) => h.name),
+    ...(nearByLocations.train_station || [])
+      .slice(0, 1)
+      .map((t: any) => t.name),
+  ].join(", ");
 
   // Constructing SEO-friendly title
   const title = `${data?.projectName} ${data.availableProperties?.join(
@@ -142,32 +180,75 @@ export async function generateMetadata(
     data.cityName
   }. Explore Project Details, Pricing, Brochure PDF, Floor Plans, Reviews, Master Plan, Amenities, and Contact Information. Secure your future home now!`;
 
-  const ogTitle = title;
-  const ogDescription = description;
-  const ogImage =
-    data.media.coverImageUrl.split(",")[1] || "default-image-url.jpg";
-  const ogUrl = `${process.env.NEXTAUTH_URL}/${params.city}/${params.lt}/${params.slug}`;
+  // Get all relevant keywords
+  const keywords = [
+    data.projectName,
+    ...(data.availableProperties || []),
+    data.localityName,
+    data.cityName,
+    configurations,
+    "Property",
+    "Real Estate",
+    "Home",
+    data.cityName,
+    `${data.cityName} Properties`,
+    "Buy Property",
+    data.postedByName,
+    nearbyLandmarks,
+    "RERA Approved",
+  ].join(", ");
 
-  const twitterCard = "summary_large_image";
-  const twitterTitle = title;
-  const twitterDescription = description;
-  const twitterImage = ogImage;
+  const canonical = `${process.env.NEXTAUTH_URL}/${params.city}/${params.lt}/${params.slug}`;
 
   return {
     title,
     description,
+    keywords,
+    metadataBase: new URL(process.env.NEXTAUTH_URL || ""),
+    alternates: {
+      canonical,
+    },
     openGraph: {
-      title: ogTitle,
-      description: ogDescription,
-      url: ogUrl,
-      images: [ogImage],
+      title,
+      description,
+      url: canonical,
+      siteName: data.projectName,
+      images: data.media.coverImageUrl.split(",").map((url) => ({
+        url,
+        width: 1200,
+        height: 630,
+      })),
+      locale: "en_IN",
       type: "website",
+      videos: data.media.walkThrowVideoUrl
+        ? [data.media.walkThrowVideoUrl]
+        : undefined,
     },
     twitter: {
-      card: twitterCard,
-      title: twitterTitle,
-      description: twitterDescription,
-      images: [twitterImage],
+      card: "summary_large_image",
+      title,
+      description,
+      images: [data.media.coverImageUrl.split(",")[0]],
+      site: "@yourTwitterHandle",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    // verification: {
+    //   google: "your-google-verification-code",
+    // },
+    category: "Real Estate",
+    other: {
+      "price-range": priceRange,
+      "property-type": data?.availableProperties?.join(", ") || "",
+      "launch-date": data.startDate,
+      "possession-date": data.endDate,
+      "builder-name": data.postedByName,
+      "rera-id": phaseOverview[0]?.reraId,
+      "total-units": data.totalUnit.toString(),
+      "project-area": data.totalLandArea,
+      "project-status": data.projectStatus,
     },
   };
 }

@@ -87,7 +87,6 @@ export default function ListingDetailsPage({
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName}${data?.projIdEnc ? `, ${data?.propName}` : ""}`;
 
-  console.log(data)
   return (
     <div className="w-full">
       <link

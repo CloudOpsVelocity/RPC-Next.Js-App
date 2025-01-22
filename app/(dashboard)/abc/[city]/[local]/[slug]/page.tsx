@@ -326,7 +326,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 //   const slugs = projResult.map((slug: string) => ({
 //     slug: slug,
 //   }));
-//   // console.log(slugs);
+
 //   return slugs;
 // }
 

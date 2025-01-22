@@ -8,11 +8,7 @@ import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/proj
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
-      {
-        next: { tags: [slug] },
-        cache: "no-store",
-      }
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`
     );
 
     if (!response.ok) {

@@ -13,10 +13,9 @@ import useNewsearch from "@/app/hooks/search/useNewSearch";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useMediaQuery } from "@mantine/hooks";
 
-
 export function MainSearchMultiSelect({ type }: { type: string }) {
   const isMobile = useMediaQuery("(max-width: 601px)");
-  
+
   const AgentOwnerBuilderMap = new Map([
     ["BuilderAgentListing", "A"],
     ["BuilderOwnerListing", "I"],
@@ -59,7 +58,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
   };
 
   const handlePush = async (type: string, data: any) => {
-    switch (type) { 
+    switch (type) {
       case "Locality":
         handleAddSearch(`${data.name}+${data.stringId}`);
         break;
@@ -70,9 +69,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
           window.open(
             `/search/listing?sf=projIdEnc=${
               data.stringId.split("_")[0]
-            }-phaseId=${data.stringId.split("_")[1]}-projName=${
-              data.name
-            }`
+            }-phaseId=${data.stringId.split("_")[1]}-projName=${data.name}`
           );
         }
 
@@ -80,27 +77,23 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
       case "Listings":
         {
           const paramsObject = extractApiValues(data.stringId);
-          
-            let url;
-            let localityName = data.name
-              .split(" in ")[1]
-              .toLowerCase()
-              .trim();
-            url =
-              `propType=${paramsObject.PT}${
-                paramsObject.BH ? `-bhk=${paramsObject.BH}` : ""
-              }-cg=${paramsObject.CG}-localities=${localityName}` +
-              "%2B" +
-              encodeURIComponent(paramsObject.LT);
 
-            window.open("/search/listing?sf=" + url);
-          
+          let url;
+          let localityName = data.name.split(" in ")[1].toLowerCase().trim();
+          url =
+            `propType=${paramsObject.PT}${
+              paramsObject.BH ? `-bhk=${paramsObject.BH}` : ""
+            }-cg=${paramsObject.CG}-localities=${localityName}` +
+            "%2B" +
+            encodeURIComponent(paramsObject.LT);
+
+          window.open("/search/listing?sf=" + url);
         }
         break;
       case "Project Listings":
         {
           let projectName = data.name.split(" in ")[1].trim();
-          // console.log(projectName);
+
           const url = `projIdEnc=${
             data.stringId
           }-listedBy=${AgentOwnerBuilderMap.get(
@@ -118,9 +111,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
           window.open(
-            `/search?sf=builderIds=${url}-city=${
-              data.stringId.split("_")[0]
-            }${
+            `/search?sf=builderIds=${url}-city=${data.stringId.split("_")[0]}${
               data.type !== "BuilderProject"
                 ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
                 : ""
@@ -192,7 +183,6 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
       return [];
     }
 
-
     return [
       <Combobox.Group key={group.group} label={group.group}>
         {filteredItems.map((item: any, index: number) => {
@@ -227,7 +217,11 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
   return (
     <Combobox store={combobox} withinPortal={false} keepMounted>
       <Combobox.DropdownTarget>
-        <PillsInput onClick={() => combobox.openDropdown()} mb="3%" maw={isMobile ? "96%" : "60%"}>
+        <PillsInput
+          onClick={() => combobox.openDropdown()}
+          mb="3%"
+          maw={isMobile ? "96%" : "60%"}
+        >
           <Pill.Group>
             {values}
 

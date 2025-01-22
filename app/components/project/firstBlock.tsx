@@ -1,5 +1,5 @@
 "use client";
-import React, {  useRef } from "react";
+import React, { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -15,14 +15,11 @@ import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 
 import { useQuery } from "react-query";
-import BuilderLink, {
-  generateBuilderUrl,
-} from "@/app/utils/linkRouters/Builder";
-import { useHydrateAtoms } from "jotai/utils";
-import { projectReqDataAtom } from "@/app/store/project/project.req";
+import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+
 type Props = {
   projectDetails: Main | null;
   companyName: string;
@@ -112,16 +109,23 @@ const FirstBlock: React.FC<Props> = ({
                   w={"auto"}
                 >
                   <picture>
-                    <source media="(max-width: 460px)" srcSet={imageUrl.split(',')[1]} />
-                    <source media="(max-width: 768px)" srcSet={imageUrl.split(',')[2]} />
-                    <source media="(min-width: 1200px)" srcSet={imageUrl.split(',')[3]} />
+                    <source
+                      media="(max-width: 460px)"
+                      srcSet={imageUrl.split(",")[1]}
+                    />
+                    <source
+                      media="(max-width: 768px)"
+                      srcSet={imageUrl.split(",")[2]}
+                    />
+                    <source
+                      media="(min-width: 1200px)"
+                      srcSet={imageUrl.split(",")[3]}
+                    />
                     <Image
                       alt="project image"
-                      src={imageUrl.split(',')[3]}
+                      src={imageUrl.split(",")[3]}
                       fill
-                      className={` bg-gray-${
-                        index + 1
-                      }`}
+                      className={` bg-gray-${index + 1}`}
                       unoptimized
                     />
                   </picture>
@@ -182,7 +186,7 @@ const FirstBlock: React.FC<Props> = ({
               </p>
 
               <p
-                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-0 sm:mt-[5%] xl:mt-[3%] mt-auto"
+                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer  sm:mt-[5%] xl:mt-[3%] mt-auto"
                 onClick={() => scrollToTopic("floorPlansdiv")}
               >
                 <Image

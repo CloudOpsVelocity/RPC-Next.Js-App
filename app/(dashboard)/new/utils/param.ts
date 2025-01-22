@@ -20,7 +20,7 @@ function formatArray(value: any[]): string {
 //     queryEntries.push(`sf=${encodeURIComponent(params.sf)}`);
 //     delete params.sf; // Remove 'sf' from params to avoid duplicate handling
 //   }
- 
+
 //   for (const [key, value] of Object.entries(params)) {
 //     // Convert keys if they are in the conversion map
 //     const newKey = keyConversionMap[key] || key;
@@ -80,7 +80,6 @@ function formatArray(value: any[]): string {
 let RENT_BUGDET_VALUE = [0, 100000];
 
 function toQueryParams(params: QueryParams): string {
-  console.log(params);
   const queryEntries: string[] = [];
 
   for (const [key, value] of Object.entries(params)) {
@@ -104,13 +103,19 @@ function toQueryParams(params: QueryParams): string {
       ) {
         // queryEntries.push(`minPrice=${encodeURIComponent(String(value[0]))}`);
         // queryEntries.push(`maxPrice=${encodeURIComponent(String(value[1]))}`);
-        let budMinVal = value[0] !== undefined && value[0] !== "" ? 
-                            encodeURIComponent(String(value[0])) : 
-                            params.cg == "R" ? DEFAULT_BUGDET_VALUE_RENT[0] : DEFAULT_BUGDET_VALUE[0];
-        
-        let budMaxVal = value[1] !== undefined && value[1] !== "" ? 
-                            encodeURIComponent(String(value[1])) : 
-                            params.cg == "R" ? DEFAULT_BUGDET_VALUE_RENT[1] : DEFAULT_BUGDET_VALUE[1];
+        let budMinVal =
+          value[0] !== undefined && value[0] !== ""
+            ? encodeURIComponent(String(value[0]))
+            : params.cg == "R"
+            ? DEFAULT_BUGDET_VALUE_RENT[0]
+            : DEFAULT_BUGDET_VALUE[0];
+
+        let budMaxVal =
+          value[1] !== undefined && value[1] !== ""
+            ? encodeURIComponent(String(value[1]))
+            : params.cg == "R"
+            ? DEFAULT_BUGDET_VALUE_RENT[1]
+            : DEFAULT_BUGDET_VALUE[1];
 
         queryEntries.push(`bugdetValue=${budMinVal},${budMaxVal}`);
       }

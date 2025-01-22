@@ -58,7 +58,7 @@ export default function Box({ item }: Props) {
       case "projectListing":
         {
           let projectName = data.name.split(" in ")[1].trim();
-          // console.log(projectName);
+        
           const url = `projIdEnc=${
             data.stringId
           }&listedBy=${AgentOwnerBuilderMap.get(

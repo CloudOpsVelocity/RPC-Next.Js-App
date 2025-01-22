@@ -68,7 +68,6 @@ const convertToOriginalState = (data: any): SearchFilterOld => {
     convertedData.facings = data.facings.split(",").map(Number);
   }
   if (data.reraIds !== undefined) {
-    console.log(data);
     convertedData.reraVerified = data.reraIds.split(",").map(Number);
   }
   if (data.minArea !== undefined && data.maxArea !== undefined) {
