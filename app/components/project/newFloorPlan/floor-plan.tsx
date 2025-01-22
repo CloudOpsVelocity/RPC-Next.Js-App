@@ -377,7 +377,7 @@ export default function FloorPlans({
                       bhkNames={cacheAllBhkOptions}
                       selectedBHK={selectedBHK}
                     />
-                  )}
+                )}
 
                 {selectedView === "unit" && (
                   <ByUnitFilters
