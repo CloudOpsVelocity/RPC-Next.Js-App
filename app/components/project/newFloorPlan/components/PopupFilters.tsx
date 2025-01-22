@@ -9,7 +9,7 @@ import { PropertyUnit } from "../types/floor-plan";
 type Props = {
   options: any;
   dataFilters: any;
-  setDataFilters: any;
+  setDataFilters: any; 
   showFilters: any;
   setShowFilters: any;
   filteredUnits:any;
@@ -46,8 +46,6 @@ export default function PopupFilters({
     totalBalconySize:""
   });
 
-  console.log(options)
-
   const propCgId = useAtomValue(propCgIdAtom);
 
   const filteredOptions = (key: keyof typeof filters) => {
@@ -72,7 +70,6 @@ export default function PopupFilters({
       if(unitFilteredData && unitFilteredData.length > 0){
         console.log(unitFilteredData[0]);
         // setUnitFilters(unitFilteredData[0]); 
-
         let data = {
           unitNumber: unitFilteredData[0].unitNumber ? unitFilteredData[0].unitNumber : "",
           bhkName: unitFilteredData[0].bhkName ? unitFilteredData[0].bhkName : "",
