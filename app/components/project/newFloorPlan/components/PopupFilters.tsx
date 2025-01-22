@@ -44,6 +44,8 @@ export default function PopupFilters({
     totalBalconySize:""
   });
 
+  console.log(options)
+
   const propCgId = useAtomValue(propCgIdAtom);
 
   const filteredOptions = (key: keyof typeof filters) => {

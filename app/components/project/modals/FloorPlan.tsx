@@ -516,7 +516,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
         {getOptions("aptTypeName").length > 0 &&
           (propCgId == projectprops.apartment ||
             propCgId == projectprops.villament) && (
-            <Select
+            <Select 
               key={"unit-type-name"}
               w={"full"}
               mt="md"
@@ -537,7 +537,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
-          )}
+        )}
 
         {getOptions("facingName").filter(
           (option: string) => option !== "Don't Know"
