@@ -31,6 +31,8 @@ import RTK_CONFIG from "@/app/config/rtk";
 import { NumberFormatter } from "@mantine/core";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import Tooltip from "../atoms/Tooltip";
+import { PropertyUnit } from "./newFloorPlan/types/floor-plan";
+import { modalStateAtom } from "@/app/store/new-floor-plan-state";
 
 type Props = {
   cg: any;
@@ -67,7 +69,12 @@ export default function PropertyTypeDetailsCrad({
   isPartialData,
   slug,
 }: Props) {
-  const [, { open }] = useFloorPlanPopup();
+  // const [, { open }] = useFloorPlanPopup();
+  const [modalState, setModalState] = useAtom<{
+    isOpen: boolean;
+    unit: PropertyUnit | null;
+    isPartialUnit?: boolean;
+  }>(modalStateAtom);
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
@@ -81,7 +88,7 @@ export default function PropertyTypeDetailsCrad({
     ...RTK_CONFIG,
   });
   const handleOpen = () => {
-    open("overview");
+    setModalState({ isOpen: true, unit: null });
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);

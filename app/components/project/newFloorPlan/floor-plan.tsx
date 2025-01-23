@@ -9,6 +9,12 @@ import { BHKTabs } from "./components/bhk-tabs";
 import { FullScreenImageModal } from "./components/full-screen-image-modal";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
+import {
+  fullScreenModalStateAtom,
+  modalStateAtom,
+  selectedPropertyTypeAtom,
+  unitFiltersAtom,
+} from "@/app/store/new-floor-plan-state";
 
 import { projectprops } from "@/app/data/projectDetails";
 import SubHeading from "../headings/SubHeading";
@@ -59,27 +65,20 @@ export default function FloorPlans({
   const propCgId = useAtomValue(propCgIdAtom);
   const [selectedPropertyType, setSelectedPropertyType] = useState("apartment");
   const [selectedView, setSelectedView] = useState("type");
-  const [modalState, setModalState] = useState<{
+  const [modalState, setModalState] = useAtom<{
     isOpen: boolean;
     unit: PropertyUnit | null;
     isPartialUnit?: boolean;
-  }>({
-    isOpen: false,
-    unit: null,
-    isPartialUnit: false,
-  });
+  }>(modalStateAtom);
 
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const form = useForm();
 
-  const [fullScreenModalState, setFullScreenModalState] = useState<{
+  const [fullScreenModalState, setFullScreenModalState] = useAtom<{
     isOpen: boolean;
     unit: PropertyUnit | null;
-  }>({
-    isOpen: false,
-    unit: null,
-  });
+  }>(fullScreenModalStateAtom);
   const [selectedBHK, setSelectedBHK] = useState("All");
   const [allBhkNames, setAllBhkNames] = useState(["All"]);
 

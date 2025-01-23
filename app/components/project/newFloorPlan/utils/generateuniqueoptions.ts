@@ -17,7 +17,7 @@ export const UNIT_DATA_KEYS = [
   "noOfCarParking",
   "parkingType",
   "terraceArea",
-  "aptType"
+  "aptType",
 ];
 
 export const getUniqueOptionsByKeys = (
@@ -66,9 +66,9 @@ export const getUniqueOptionsByKeys = (
     const uniqueValues = new Set<string>();
     filteredUnits.forEach((unit) => {
       const value = unit[key];
-      if (value && value !== "null" && value !== "None") {
+      if (value !== undefined && value !== "null" && value !== "None") {
         let processedValue = String(value);
-        if (key === "floor" && processedValue === "0") {
+        if (key === "floor" && processedValue == "0") {
           processedValue = "G"; // Replace "0" with "G" for "floor"
         } else if (processedValue === "0" && key !== "floor") {
           return; // Skip adding "0" for non-floor keys

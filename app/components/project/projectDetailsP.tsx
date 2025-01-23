@@ -20,7 +20,6 @@ import { useAtom } from "jotai";
 
 import NoProperties from "./notfound";
 import SubHeading from "./headings/SubHeading";
-import { projectReqDataAtom } from "@/app/store/project/project.req";
 type Props = {
   data: PhaseList[];
   slug: string;
