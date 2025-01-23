@@ -13,7 +13,6 @@ import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import DownloadBrocher from "../../DownloadBrocher";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
-import useSearchFilters from "@/app/hooks/search";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = any;
@@ -60,7 +59,6 @@ export default function TopRightSection({
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
-  const { filters } = useSearchFilters();
 
   // const url =
   //   type === "proj"
@@ -111,8 +109,8 @@ export default function TopRightSection({
           Avg Price:{" "}
           <span className="font-bold ml-1">
             {" "}
-           {/*  ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)} */}
-           ₹{formatNumberWithSuffix(type === "proj"? basePrice: price)}
+            {/*  ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)} */}
+            ₹{formatNumberWithSuffix(type === "proj" ? basePrice : price)}
           </span>
         </div>
       ) : null}
@@ -247,7 +245,10 @@ export default function TopRightSection({
               (category == "Sale" && (
                 <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
                   <p className="text-right text-[12px] text-nowrap text-[#148B16]">
-                    Avg Price:₹ {formatNumberWithSuffix(type === "proj"? basePrice: price)}
+                    Avg Price:₹{" "}
+                    {formatNumberWithSuffix(
+                      type === "proj" ? basePrice : price
+                    )}
                   </p>
                   <p className="text-right text-[12px] text-nowrap">
                     {towerData ? towerData : "N/A"}

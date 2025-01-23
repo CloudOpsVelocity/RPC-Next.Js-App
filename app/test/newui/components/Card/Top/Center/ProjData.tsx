@@ -10,7 +10,6 @@ import selectedSearchAtom, {
 import BuilderLink, {
   generateBuilderUrl,
 } from "@/app/utils/linkRouters/Builder";
-import useSearchFilters from "@/app/hooks/search";
 
 type Props = any;
 

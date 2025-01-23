@@ -47,6 +47,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   let isTrue = pathname.includes("search")
     ? true
     : serverData !== null && apiFilterQueryParams !== null;
+  console.log(apiFilterQueryParams);
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
       queryKey: [

@@ -97,6 +97,10 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   });
 
   useEffect(() => {
+    if (entry?.isIntersecting) {
+      alert("view thing");
+    }
+
     if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
       fetchNextPage();
       setPage((prev) => prev + 1);
@@ -164,13 +168,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   );
 
   return (
-    <div className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]">
+    <div
+      className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]"
+      ref={containerRef}
+    >
       <ProjectSearchTabs />
       {isLoading ? (
         <LoadingBlock />
       ) : allItems.length > 0 ? (
         <div
-          ref={containerRef}
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,
             width: "100%",
@@ -185,7 +191,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       {hasNextPage && shouldFetchMore && !isLoading && data && (
         <div
           ref={ref}
-          className="w-full py-8 flex justify-center items-center bg-rose-600 text-gray-600"
+          className="w-full py-8 flex justify-center items-center  text-gray-600"
         >
           <LoadingSpinner />
         </div>

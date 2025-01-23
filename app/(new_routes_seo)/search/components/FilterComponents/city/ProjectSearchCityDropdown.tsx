@@ -11,7 +11,7 @@ import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import useSearchFilters from "@/app/hooks/search";
+
 import { useAtom, useAtomValue } from "jotai";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 import { projSearchStore } from "../../../store/projSearchStore";

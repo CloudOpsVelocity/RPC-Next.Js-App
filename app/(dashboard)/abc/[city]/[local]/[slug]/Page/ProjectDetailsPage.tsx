@@ -81,7 +81,6 @@ export default async function ProjectsDetailsPage({
   const imageUrl = data?.media?.coverImageUrl.split(",")[1];
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
 
-  console.log(phaseOverview);
   return (
     <section className="w-full relative break-words ">
       {/* <meta name="keywords" content={`${data.projectName}, ${data.localityName}, ${data.cityName}, real estate, property`} /> */}

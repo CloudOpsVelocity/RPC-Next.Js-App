@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 import MapSkeleton from "@/app/components/maps/Skeleton";
-import useSearchFilters from "@/app/hooks/search";
+
 import { useInfiniteQuery } from "react-query";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
