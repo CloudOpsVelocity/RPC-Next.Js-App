@@ -12,6 +12,7 @@ import { useEffect, useRef } from "react";
 import { projectprops } from "@/app/data/projectDetails";
 import { PropertyUnit } from "../types/floor-plan";
 import { useMediaQuery } from "@mantine/hooks";
+import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
 
 type Props = {
   units: any;
@@ -98,8 +99,8 @@ export default function FloorplanLeftsection({
                             </p>
                             <p className="text-[14px] xs:text-lg sm:text-xl text-gray-900 font-bold">
                               {unit.propType === projectprops.plot
-                                ? `${unit.plotArea} sq.ft`
-                                : `${unit.superBuildUparea} sq.ft`}
+                                ? `${formatNumberWithCommas(unit.plotArea)} sq.ft`
+                                : `${formatNumberWithCommas(unit.superBuildUparea)} sq.ft`} 
                             </p>
                           </div>
                         )}
@@ -188,7 +189,7 @@ export default function FloorplanLeftsection({
                               Carpet Area
                             </p>
                             <p className="text-sm xs:text-base sm:text-lg font-bold">
-                              {unit.caretarea} sq.ft
+                              {formatNumberWithCommas(unit.caretarea)} sq.ft
                             </p>
                           </div>
                         </div>
@@ -204,7 +205,7 @@ export default function FloorplanLeftsection({
                               Terrace Area
                             </p>
                             <p className="text-sm xs:text-base sm:text-lg font-bold">
-                              {unit.terraceArea} sq.ft
+                              {formatNumberWithCommas(unit.terraceArea)} sq.ft
                             </p>
                           </div>
                         </div>
@@ -217,7 +218,7 @@ export default function FloorplanLeftsection({
                             Length
                           </p>
                           <p className="text-sm xs:text-base sm:text-lg font-bold">
-                            {`${unit.length} ft`}
+                            {`${formatNumberWithCommas(unit.length)} ft`}
                           </p>
                         </div>
                       </div>
@@ -230,7 +231,7 @@ export default function FloorplanLeftsection({
                             Width
                           </p>
                           <p className="text-sm xs:text-base sm:text-lg font-bold">
-                            {`${unit.width} ft`}
+                            {`${formatNumberWithCommas(unit.width)} ft`}
                           </p>
                         </div>
                       </div>

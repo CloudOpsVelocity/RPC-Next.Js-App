@@ -231,6 +231,7 @@ export default function FloorPlans({
     handleBhkClick("All");
     if (!state) {
       UNIT_DATA_KEYS.forEach((eachKey) => {
+        console.log(eachKey);
         if (eachKey === "floor" && unit[eachKey] === 0) {
           handleUnitFilterChange("floor", "G");
         } else if (unit[eachKey]) {

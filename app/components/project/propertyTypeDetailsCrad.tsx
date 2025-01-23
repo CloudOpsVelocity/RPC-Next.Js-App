@@ -80,7 +80,6 @@ export default function PropertyTypeDetailsCrad({
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
     ...RTK_CONFIG,
   });
-  console.log(projectUnitsData)
   const handleOpen = () => {
     open("overview");
   };

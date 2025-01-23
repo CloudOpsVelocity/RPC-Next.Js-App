@@ -35,6 +35,7 @@ export default function Navigation({
   const [lastScrollY, setLastScrollY] = useState(0);
   const [leftScroll, setLeftScroll] = useState(0);
   const [opened, { open }] = useReqCallPopup();
+  
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -200,7 +201,7 @@ export default function Navigation({
           const conditions = conditionsArray.find(
             (item) => item.key === topic.id
           );
-
+ 
           return (
             conditions?.condtion && (
               <div
