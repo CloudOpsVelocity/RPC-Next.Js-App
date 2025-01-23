@@ -173,7 +173,7 @@ export default function ProjData({
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(price))}{" "}
-        {otherCharges?.otherCharge && Object.keys(otherCharges).length > 2 && (
+        {otherCharges?.otherCharge && Object.keys(otherCharges).length > 1 && (
           <span
             className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
             onClick={(e) => {
@@ -201,7 +201,7 @@ export default function ProjData({
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         {propName}{" "}
       </p>
-      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-110px)]">
+      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-118px)]">
         Address: {address}
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">

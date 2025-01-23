@@ -70,6 +70,15 @@ export default function ListingData({
     return authorityNames.join(", ");
   };
 
+  const getApproveNamesProj=()=>{
+   const proJAuth=projAuthority? projAuthority.split(',') : [];
+   console.log(proJAuth)
+    const resultedValue = proJAuth.map((item:string)=>{
+     return item.split("–")[0]
+    })
+    return resultedValue.join(",")
+  };
+
   const formatter = new Intl.NumberFormat("en-in", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -141,7 +150,7 @@ export default function ListingData({
             <DownSectionCard
               label={"Approved By"}
               value={
-                approvedById ? getApproveNames() : null
+                projAuthority ? getApproveNamesProj() : null
               }
             />
 
