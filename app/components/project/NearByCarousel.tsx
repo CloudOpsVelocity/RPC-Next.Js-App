@@ -68,7 +68,7 @@ export default function NearByCarousel({
         builderName={builderData?.data?.companyName}
         ct="proj"
         id="other-projects"
-        url={`/search/listing?lat=${lat}&lng=${lng}`}
+        url={`/search?lat=${lat}&lng=${lng}`}
       />
     </div>
   );
