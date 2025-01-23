@@ -64,10 +64,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         }
         return nextPage;
       },
-      // cacheTime: 300000,
       enabled: isTrue,
-      // enabled: true,
-
       ...RTK_CONFIG,
     });
 
@@ -91,21 +88,25 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     ...RTK_CONFIG,
   });
 
-  const { ref, entry } = useIntersection({
-    root: containerRef.current,
-    threshold: 0.1,
-  });
-
+  // Handle scroll events for both mobile and desktop
   useEffect(() => {
-    if (entry?.isIntersecting) {
-      alert("view thing");
-    }
+    const container = containerRef.current;
+    if (!container) return;
 
-    if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
-      fetchNextPage();
-      setPage((prev) => prev + 1);
-    }
-  }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]);
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      // Check if user has scrolled to bottom (with a small threshold)
+      if (scrollHeight - scrollTop - clientHeight < 50) {
+        if (hasNextPage && shouldFetchMore && !isLoading) {
+          fetchNextPage();
+          setPage((prev) => prev + 1);
+        }
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
 
   const renderProjectCard = useCallback(
     (virtualRow: any) => {
@@ -169,7 +170,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
   return (
     <div
-      className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]"
+      className="p-[0%] max-h-[60vh] sm:max-h-[500px] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] sm:max-w-[50%]"
       ref={containerRef}
     >
       <ProjectSearchTabs />
@@ -189,10 +190,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         <EmptyState />
       )}
       {hasNextPage && shouldFetchMore && !isLoading && data && (
-        <div
-          ref={ref}
-          className="w-full py-8 flex justify-center items-center  text-gray-600"
-        >
+        <div className="w-full py-8 flex justify-center items-center text-gray-600">
           <LoadingSpinner />
         </div>
       )}

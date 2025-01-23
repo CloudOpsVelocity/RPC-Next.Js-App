@@ -152,7 +152,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       case "listing":
         {
           const paramsObject = extractApiValues(data.stringId);
-          // alert(data.name.split("in")[1].split("-")[0].trim());
+          alert(JSON.stringify(paramsObject));
           let localityName = data.name.split("-")[1].toLowerCase().trim();
 
           if (isListingSearch) {
@@ -176,7 +176,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             }-localities=${localityName}%2B${encodeURIComponent(
               paramsObject.LT
             )}${
-              paramsObject.PJ
+              paramsObject.PJ && paramsObject.PJ !== "null"
                 ? `-projIdEnc=${paramsObject.PJ}-projName=${data.name
                     .split("in")[1]
                     .split("-")[0]

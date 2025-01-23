@@ -50,7 +50,6 @@ export default function ShowAllFiltersButton({
   const { handleClearFilters, handleApplyFilters } =
     useProjSearchAppliedFilters();
 
-
   const [state, dispatch] = useAtom(projSearchStore);
   const propertyiconss = {
     apt: {
@@ -78,12 +77,14 @@ export default function ShowAllFiltersButton({
       name: "Plot",
       icon: <MdLandscape className="w-5 h-5 text-green-700" />,
     },
-    ...(("/seach/listing" === path  || "/search" === path && state.listedBy !== null ) && {indp: {
-      id: 36,
-      name: "Independent",
-      icon: <MdLandscape className="w-5 h-5 text-green-700" />,
-    }} ) 
-    
+    ...(("/seach/listing" === path ||
+      ("/search" === path && state.listedBy !== null)) && {
+      indp: {
+        id: 36,
+        name: "Independent",
+        icon: <MdLandscape className="w-5 h-5 text-green-700" />,
+      },
+    }),
   };
   const toggleExpand = (section: string) => {
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
@@ -254,9 +255,11 @@ export default function ShowAllFiltersButton({
   const handleLocationChange = (selected: Location[]) => {
     console.log("Selected locations:", selected);
   };
-  const isproject = path.includes("search")
-    ? state.listedBy == null
-    : isListing;
+  const isproject =
+    path !== "/search/listing" && path.includes("search")
+      ? state.listedBy == null
+      : isListing;
+
   return (
     <div className="  relative">
       <button
