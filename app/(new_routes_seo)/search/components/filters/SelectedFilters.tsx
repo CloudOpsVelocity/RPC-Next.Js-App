@@ -78,8 +78,10 @@ export default function SelectedFilters({}: Props) {
                       : category === "parking" || category === "bathroom"
                       ? `${values} ${category}`
                       : category === "pnb" ? SEARCH_FILTER_DATA.photoAvail?.filter(each=>each.value == values)[0]?.title
-                      : category === "projName" ? values :
-                      SelectedFiltersMap.get(values)
+                      : category === "projName" ? values : 
+                      category === "lat" ? "lat" :category == "lng" ? "lng" :
+                      SelectedFiltersMap.get(values) 
+      
                     }
                   </span>
                   <button
