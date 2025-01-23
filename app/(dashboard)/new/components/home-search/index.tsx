@@ -14,13 +14,16 @@ import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
+import CompareShortListCount from "./CompareShortListCount";
 
 const HomeSearch = ({
   count,
   cityData,
+  shortIds,
 }: {
   count: number;
   cityData?: CityData;
+  shortIds?: any;
 }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const [isOpen, setIsOpen] = useState(false);
@@ -45,21 +48,7 @@ const HomeSearch = ({
       <Alert />
       {/* shortlisted */}
       {/* <ShortListed /> */}
-      {count ? (
-        <a
-          href="/your-profile/shortlisted"
-          target="_blank"
-          className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#2D4657] bg-[#1a2733] fixed bottom-10 right-5 sm:text-sm xl:text-xl z-[1000]"
-        >
-          <span className="hidden sm:block text-white font-bold">
-            Shortlisted
-          </span>{" "}
-          <div className="flex justify-center items-center rounded-sm border-[0.5px] border-solid border-[#4A7091] bg-[#2d4657] px-1 gap-1 text-white sm:text-sm xl:text-xl not-italic font-bold">
-            <p>{count}</p>
-            <SelectedHeartIcon />
-          </div>
-        </a>
-      ) : null}
+      {count ? <CompareShortListCount initialValue={shortIds} /> : null}
       <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}

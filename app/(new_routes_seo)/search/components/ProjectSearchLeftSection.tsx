@@ -1,6 +1,6 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
-import { Loader } from "@mantine/core";
+
 import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import ProjectCard from "@/app/test/newui/components/Card";
@@ -64,11 +64,11 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         }
         return nextPage;
       },
-      cacheTime: 300000,
+      // cacheTime: 300000,
       enabled: isTrue,
       // enabled: true,
 
-      // ...RTK_CONFIG,
+      ...RTK_CONFIG,
     });
 
   const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
@@ -164,15 +164,13 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   );
 
   return (
-    <div
-      className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]"
-      ref={containerRef}
-    >
+    <div className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%]  overflow-y-auto max-w-[99%]  sm:max-w-[50%]">
       <ProjectSearchTabs />
       {isLoading ? (
         <LoadingBlock />
       ) : allItems.length > 0 ? (
         <div
+          ref={containerRef}
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,
             width: "100%",

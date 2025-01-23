@@ -26,11 +26,8 @@ export default async function Page() {
     },
     status: true,
   };
-  // const encriptedLatLang = cookies().get("ui")?.value;
-  // const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : "";
+
   const [data, listingData, shortIds] = await Promise.all([
-    // getData(cityData?.data?.cityId, latLang),
-    // getHomeListingData(cityData?.data?.cityId, latLang),
     getData(cityData?.data?.cityId),
     getHomeListingData(cityData?.data?.cityId),
     getShortIds(),
@@ -40,6 +37,7 @@ export default async function Page() {
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
       <HomeSearch
         count={shortIds?.total}
+        shortIds={shortIds}
         cityData={{
           cityId: cityData?.data?.cityId ?? "",
           cityName: cityData?.data?.city ?? "",

@@ -6,6 +6,7 @@ import Card from "./Card";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import Css from "../../Style.module.css";
+import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCompare";
 type Props = {
   data: any;
   shortIds: any;

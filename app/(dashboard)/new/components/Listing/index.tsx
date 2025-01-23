@@ -7,7 +7,7 @@ import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getHomeListingData } from "@/app/(new_routes_seo)/utils/new-seo-routes/llisting.api";
-import dynamic from "next/dynamic";
+
 import ListingCarousel from "./Carousel";
 // const ListingCarousel = dynamic(() => import("./Carousel"), {
 //   ssr: false,
@@ -39,23 +39,23 @@ export default function DynamicListing({
     ...RTK_CONFIG,
   });
   const url =
-  title === "Featured Projects"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search`
-    : title === "Ready to Move Sale Listings"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=s-propStatus=R`
-    : title === "Ready to Move Rent Listings"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=R-propStatus=R`
-    : title === "Featured Plot Listings"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=32`
-    : title === "Under Construction Sale Listings"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U`
-    : title === "Under Construction Rent Listings"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U-cg=R`
-    : title === "Independent Sale Listings"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=S`
-    : title === "Independent Rent Listings"
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=R`
-    : `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
+    title === "Featured Projects"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search`
+      : title === "Ready to Move Sale Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=s-propStatus=R`
+      : title === "Ready to Move Rent Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=R-propStatus=R`
+      : title === "Featured Plot Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=32`
+      : title === "Under Construction Sale Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U`
+      : title === "Under Construction Rent Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U-cg=R`
+      : title === "Independent Sale Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=S`
+      : title === "Independent Rent Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=R`
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
   return isLoading ? (
     <div>Loading...</div>
   ) : (

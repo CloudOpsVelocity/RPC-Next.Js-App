@@ -7,6 +7,7 @@ import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getHomePageProjectData } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
+import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCompare";
 
 type Props = {
   data: any;
@@ -25,6 +26,7 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
     enabled: isEnabled,
     ...RTK_CONFIG,
   });
+
   return isLoading ? (
     <div> Loading...</div>
   ) : (

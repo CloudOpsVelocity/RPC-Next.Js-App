@@ -12,8 +12,6 @@ import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import {
   fullScreenModalStateAtom,
   modalStateAtom,
-  selectedPropertyTypeAtom,
-  unitFiltersAtom,
 } from "@/app/store/new-floor-plan-state";
 
 import { projectprops } from "@/app/data/projectDetails";
@@ -33,9 +31,6 @@ import {
   UNIT_DATA_KEYS,
 } from "./utils/generateuniqueoptions";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-
-const iconStyles: string =
-  " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 
 interface FloorPlansProps {
   phases: any;
