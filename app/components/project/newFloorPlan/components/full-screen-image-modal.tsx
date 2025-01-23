@@ -19,6 +19,8 @@ import Image from "next/image";
 import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import { FiShare2 } from "react-icons/fi";
+import { imageUrlParser } from "@/app/utils/image";
 
 interface FullScreenImageModalProps {
   isOpen: boolean;
@@ -111,6 +113,21 @@ export function FullScreenImageModal({
 
       LoginOpen(downloadFn, {
         type: "floor-plan",
+        link: unit.floorPlanUrl?.split(",")[0], 
+      });
+    }
+  };
+
+  const handleShare = () => {
+    navigator.share({ title: "", url: unit.floorPlanUrl?.split(",")[0] });
+  };
+
+  const handleShearMasterplan = async () => {
+    if (session) {
+      handleShare();
+    } else {
+      LoginOpen(handleShare, {
+        type: "floor-plan",
         link: unit.floorPlanUrl?.split(",")[0],
       });
     }
@@ -138,6 +155,17 @@ export function FullScreenImageModal({
             Unit ${unit.unitNumber}`}
           </h3>
           <div className="flex items-center w-full justify-end gap-2 md:gap-4 mt-2 md:mt-0">
+            {unit.floorPlanUrl?.split(",")[0] &&
+            <button
+              onClick={() =>handleShearMasterplan()}
+              className={`flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors`}
+              title="Click to Download Floorplan"
+            >
+              <FiShare2 className="w-5 h-5" />
+              <span className="hidden md:inline">Shear Floor Plan</span>
+            </button>
+            }
+
             <button
               onClick={() =>handleDownload()}
               className={`flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${
