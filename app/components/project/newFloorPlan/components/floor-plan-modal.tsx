@@ -193,7 +193,7 @@ export function FloorPlanModal({
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex items-start md:items-center justify-between flex-col md:flex-row p-2 border-b bg-white relative">
-          <h3 className="text-lg md:text-xl font-semibold text-[#0073C6]">
+          <h3 className="text-lg md:text-xl font-semibold text-[#0073C6] text-nowrap  ">
             {`${
               propCgId !== projectprops.plot
                 ? currentUnit.bhkName

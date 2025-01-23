@@ -13,12 +13,17 @@ import { projectprops } from "@/app/data/projectDetails";
 import { PropertyUnit } from "../types/floor-plan";
 import { useMediaQuery } from "@mantine/hooks";
 import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
+import { useAtom } from "jotai";
+import { currentPhaseAtom } from "@/app/store/vewfloor";
 
 type Props = {
   units: any;
   isLoading: boolean;
   onSelectCard: any;
   handleReqcallBack: (unit: PropertyUnit) => void;
+  getRightsideData: any;
+  selectedBHK: any;
+  propCgId: any;
 };
 
 export default function FloorplanLeftsection({
@@ -26,6 +31,10 @@ export default function FloorplanLeftsection({
   isLoading,
   onSelectCard,
   handleReqcallBack,
+  getRightsideData,
+  selectedBHK,
+  propCgId
+
 }: Props) {
   const parentRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -35,12 +44,24 @@ export default function FloorplanLeftsection({
     estimateSize: () => (isMobile ? 175 : 270), // Adjust based on your card's average height
     overscan: 5,
   });
+  const [selectedPhase] = useAtom(currentPhaseAtom);
+
+  const dataList = rowVirtualizer.getVirtualItems();
+
+  useEffect(()=>{
+    if(dataList && dataList.length > 0 && dataList[0] !== undefined){
+      const unit = units[dataList[0].index];
+      getRightsideData(unit);
+    }
+  }, [dataList, selectedBHK, selectedPhase, propCgId]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  const dataList = rowVirtualizer.getVirtualItems();
+
+
+
 
   return (
     <div
