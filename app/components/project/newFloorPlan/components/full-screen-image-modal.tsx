@@ -313,6 +313,16 @@ export function FullScreenImageModal({
                   Unit Features
                 </h4>
                 <div className="flex gap-[10px] flex-wrap">
+                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+                    <DataItem
+                      title={propCgId === projectprops.apartment? "Apartment Type" :"Villament Type" }
+                      value={unit.aptTypeName}
+                      icon={
+                        <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Unit Type"

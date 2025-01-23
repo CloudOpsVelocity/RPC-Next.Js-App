@@ -38,8 +38,12 @@ const FilterInput: React.FC<FilterInputProps> = ({
   }, []);
 
   const filteredOptions = options.filter((option) =>
-    String(option).toLowerCase().includes(value && value !== "" && typeof(value) !== "number" ? value.toLowerCase() : value)
+    String(option).toLowerCase().includes(value !== undefined && value !== "" && typeof(value) !== "number" ? value.toLowerCase() : value)
   );
+
+  console.log(options)
+
+  console.log(filteredOptions)
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -49,7 +53,7 @@ const FilterInput: React.FC<FilterInputProps> = ({
           value={value}
           onChange={(e) => onSearchChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="w-[90%] truncate focus:outline-none "
+          className="w-[90%] truncate focus:outline-none"
           placeholder={placeholder}
           onBlur={(e) => onBlur(e.target.value)}
         />

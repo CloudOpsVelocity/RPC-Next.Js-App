@@ -70,11 +70,7 @@ export default function PropertyTypeDetailsCrad({
   slug,
 }: Props) {
   // const [, { open }] = useFloorPlanPopup();
-  const [modalState, setModalState] = useAtom<{
-    isOpen: boolean;
-    unit: PropertyUnit | null;
-    isPartialUnit?: boolean;
-  }>(modalStateAtom);
+  const [modalState, setModalState] = useAtom(modalStateAtom);
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
@@ -88,7 +84,7 @@ export default function PropertyTypeDetailsCrad({
     ...RTK_CONFIG,
   });
   const handleOpen = () => {
-    setModalState({ isOpen: true, unit: null });
+    setModalState({ isOpen: true, unit: null, type: "overview", isPartialUnit: false });
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);
