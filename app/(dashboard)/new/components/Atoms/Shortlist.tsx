@@ -6,6 +6,7 @@ import { HeartIcon } from "@/app/images/HomePageIcons";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCompare";
 
 type Props = {
   reqId: string;
@@ -16,7 +17,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
-  const router = useRouter();
+  const { mutate } = useOptimisticShortlistCompare();
 
   const onAddingShortList = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -24,6 +25,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
     e.preventDefault();
     if (session) {
       setState(!state);
+      mutate(state ? "remove" : "add");
       toggleShortlist({
         id: reqId,
         status: state ? "N" : "Y",
