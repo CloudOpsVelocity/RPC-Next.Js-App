@@ -203,7 +203,6 @@ export default function FloorPlans({
 
   const [rightSideUnit, setRightSideUnit] = useState(initailFilterState);
   const getRightsideData = (data:any) => {
-    console.log(data);
     setRightSideUnit(data);
   }
 
@@ -211,28 +210,7 @@ export default function FloorPlans({
     setSelectedView("type");
     setAllBhks();
     setUnitFilters(initailFilterState);
-  }, [propCgId, phases]);
-
-  // useEffect(() => {
-  //   // getRightsideData(modalState.unit !== null
-  //   //   ? modalState.unit
-  //   //   : projectUnitsData && projectUnitsData[0]
-  //   //   ? projectUnitsData[0]
-  //   //   : {}
-  //   // )
-
-  //   let obj = projectUnitsData && projectUnitsData[0] ? projectUnitsData[0] : {}
-  //   getRightsideData(obj);
-  
-  //   console.log(obj)
-
-
-  // }, [
-  //   propCgId,
-  //   phases,
-  //   projectUnitsData,
-  //   unitFilters,
-  // ]);
+  }, [propCgId, selectedPhase]);
 
   const onSelectCard = (unit: any, state?: boolean) => {
     if (!unit) return;
@@ -278,7 +256,6 @@ export default function FloorPlans({
   };
 
   const handlePricingFloorPlanClick = (selBhk: any) => {
-    console.log(selBhk)
     if (selBhk.bhkName.includes("_")) {
       const [length, width] = selBhk.bhkName.split("_");
       form.setValues({
@@ -423,7 +400,6 @@ export default function FloorPlans({
               handleReqcallBack={handleReqcallBack}
               getRightsideData={getRightsideData}
               selectedBHK={selectedBHK}
-              phases={phases}
               propCgId={propCgId}
             />
             <div className="block w-full md:w-[50%]">

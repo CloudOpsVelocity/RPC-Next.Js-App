@@ -13,6 +13,8 @@ import { projectprops } from "@/app/data/projectDetails";
 import { PropertyUnit } from "../types/floor-plan";
 import { useMediaQuery } from "@mantine/hooks";
 import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
+import { useAtom } from "jotai";
+import { currentPhaseAtom } from "@/app/store/vewfloor";
 
 type Props = {
   units: any;
@@ -21,7 +23,6 @@ type Props = {
   handleReqcallBack: (unit: PropertyUnit) => void;
   getRightsideData: any;
   selectedBHK: any;
-  phases: any;
   propCgId: any;
 };
 
@@ -32,7 +33,6 @@ export default function FloorplanLeftsection({
   handleReqcallBack,
   getRightsideData,
   selectedBHK,
-  phases,
   propCgId
 
 }: Props) {
@@ -44,16 +44,16 @@ export default function FloorplanLeftsection({
     estimateSize: () => (isMobile ? 175 : 270), // Adjust based on your card's average height
     overscan: 5,
   });
+  const [selectedPhase] = useAtom(currentPhaseAtom);
 
   const dataList = rowVirtualizer.getVirtualItems();
 
   useEffect(()=>{
-    console.log(dataList);
     if(dataList && dataList.length > 0 && dataList[0] !== undefined){
       const unit = units[dataList[0].index];
       getRightsideData(unit);
     }
-  }, [dataList, selectedBHK, phases, propCgId]);
+  }, [dataList, selectedBHK, selectedPhase, propCgId]);
 
   if (isLoading) {
     return <div>Loading...</div>;
