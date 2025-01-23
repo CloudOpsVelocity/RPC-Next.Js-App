@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
@@ -43,13 +43,15 @@ export default function PopupFilters({
     noOfCarParking: "",
     parkingType: "",
     terraceArea: "",
-    totalBalconySize:""
+    totalBalconySize:"",
+    aptTypeName:""
   });
 
   const propCgId = useAtomValue(propCgIdAtom);
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = String(filters[key]).toLowerCase();
+    console.log(filterValue, filters, key)
     return (
       options !== undefined &&
       options[key] !== undefined &&
@@ -68,7 +70,6 @@ export default function PopupFilters({
     if(name === "unitNumber" && value !== ""){
       const unitFilteredData = filteredUnits.filter((item:any) => item.unitNumber === value);
       if(unitFilteredData && unitFilteredData.length > 0){
-        console.log(unitFilteredData[0]);
         // setUnitFilters(unitFilteredData[0]); 
         let data = {
           unitNumber: unitFilteredData[0].unitNumber ? unitFilteredData[0].unitNumber : "",
@@ -90,6 +91,7 @@ export default function PopupFilters({
           totalNumberOfBalcony: unitFilteredData[0].totalNumberOfBalcony ? unitFilteredData[0].totalNumberOfBalcony : "",
           noOfCarParking: unitFilteredData[0].noOfCarParking ? unitFilteredData[0].noOfCarParking : "",
           totalBalconySize: unitFilteredData[0].totalBalconySize ? unitFilteredData[0].totalBalconySize : "",
+          aptTypeName: unitFilteredData[0].aptTypeName ? unitFilteredData[0].aptTypeName : "",
         }
 
         setDataFilters(data);
@@ -142,7 +144,7 @@ export default function PopupFilters({
     title: string
   ) => {
     return (
-      <div key={String(key)} className="relative mb-[10px]">
+      <div key={String(key)+"input"} className="relative mb-[10px]">
         <label
           className="block text-sm font-medium text-gray-700 mb-1"
           htmlFor="tower"
@@ -197,6 +199,16 @@ export default function PopupFilters({
       <div className="h-[calc(100vh-120px)] overflow-y-auto p-3 custom-scrollbar">
         <div className="flex flex-col">
           {/* Basic Details */}
+          {options?.aptTypeName &&
+            options?.aptTypeName.length > 0 &&
+            (propCgId === projectprops.apartment || propCgId === projectprops.villament) &&
+            renderFilter(
+              "aptTypeName", 
+              propCgId === projectprops.apartment ? "Search Apartment type" : "Search Villament type", 
+              propCgId === projectprops.apartment ? "Apartment type" : "Villament type", 
+            )
+          }
+
           {options?.towerName &&
             options?.towerName.length > 0 &&
             (propCgId === projectprops.apartment ||

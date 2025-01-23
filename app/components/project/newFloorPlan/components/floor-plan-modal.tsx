@@ -421,6 +421,16 @@ export function FloorPlanModal({
                   Unit Features
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-4">
+                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+                    <DataItem
+                      title={propCgId === projectprops.apartment? "Apartment Type" :"Villament Type" }
+                      value={currentUnit.aptTypeName}
+                      icon={
+                        <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Unit Type"
@@ -481,6 +491,8 @@ export function FloorPlanModal({
                         }
                       />
                     )}
+
+                    
                 </div>
               </div>
             </div>

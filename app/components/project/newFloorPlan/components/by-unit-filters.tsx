@@ -76,7 +76,7 @@ export default function ByUnitFilters({
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
     setFilters((prev: any) => ({ ...prev, [key]: String(value) }));
     setBackupFilters((prev) => ({ ...prev, [key]: String(value) }));
-    handleUnitFilterChange(key, value);
+    handleUnitFilterChange(key.toString(), value);
   };
 
   const onSearchChange = (key: keyof typeof filters, value: string) => {
@@ -101,10 +101,10 @@ export default function ByUnitFilters({
 
     return (
       <div
-        key={key}
+        key={key.toString()}
         className="relative"
         ref={(el) => {
-          if (el) dropdownRefs.current[key] = el;
+          if (el) dropdownRefs.current[key.toString()] = el;
         }}
       >
         <div className="relative">
@@ -112,7 +112,7 @@ export default function ByUnitFilters({
             type="text"
             value={filters[key]}
             onChange={(e) => onSearchChange(key, e.target.value)}
-            onFocus={() => setFocusedFilter(key)}
+            onFocus={() => setFocusedFilter(key.toString())}
             className="px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073C6]  w-full truncate"
             placeholder={placeholder}
             onBlur={(e) => onMouseOut(key, e.target.value)}
@@ -121,7 +121,7 @@ export default function ByUnitFilters({
             <button
               onClick={() => clearFilter(key)}
               className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              aria-label={`Clear ${key} filter`}
+              aria-label={`Clear ${key.toString()} filter`}
             >
               <FaTimes />
             </button>

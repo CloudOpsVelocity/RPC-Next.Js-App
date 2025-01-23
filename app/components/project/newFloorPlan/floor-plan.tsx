@@ -65,11 +65,7 @@ export default function FloorPlans({
   const propCgId = useAtomValue(propCgIdAtom);
   const [selectedPropertyType, setSelectedPropertyType] = useState("apartment");
   const [selectedView, setSelectedView] = useState("type");
-  const [modalState, setModalState] = useAtom<{
-    isOpen: boolean;
-    unit: PropertyUnit | null;
-    isPartialUnit?: boolean;
-  }>(modalStateAtom);
+  const [modalState, setModalState] = useAtom(modalStateAtom);
 
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
@@ -101,7 +97,7 @@ export default function FloorPlans({
       .sort()
       .filter((v) => v !== null);
 
-  const [unitFilters, setUnitFilters] = useState({
+  const initailFilterState = {
     unitNumber: "",
     bhkName: "",
     towerName: "",
@@ -109,9 +105,20 @@ export default function FloorPlans({
     facingName: "",
     block: "",
     plotArea: "",
-    length: "",
     width: "",
-  });
+    length: "",
+    caretarea: "",
+    superBuildUparea: "",
+    totalNumberofBathroom: "",
+    totalNumberOfBalcony: "",
+    noOfCarParking: "",
+    parkingType: "",
+    terraceArea: "",
+    totalBalconySize:"",
+    aptTypeName:""
+  }
+
+  const [unitFilters, setUnitFilters] = useState(initailFilterState);
   const [, { open }] = useReqCallPopup();
   const [, { open: openFloorPlan, type }] = useFloorPlanPopup();
 
@@ -124,6 +131,7 @@ export default function FloorPlans({
     setAllBhks();
     setSelectedView(type);
     handleBhkClick("All");
+    setUnitFilters(initailFilterState);
   };
 
   const { data: projectUnitsData, isLoading } = useQuery({
@@ -140,7 +148,7 @@ export default function FloorPlans({
       );
       if (unitFilteredData && unitFilteredData.length > 0) {
         // setUnitFilters(unitFilteredData[0]);
-        setUnitFilters({
+        setUnitFilters(prev => ({ ...prev,
           unitNumber: unitFilteredData[0].unitNumber
             ? unitFilteredData[0].unitNumber
             : "",
@@ -160,7 +168,7 @@ export default function FloorPlans({
             : "",
           length: unitFilteredData[0].length ? unitFilteredData[0].length : "",
           width: unitFilteredData[0].width ? unitFilteredData[0].width : "",
-        });
+        }));
       }
     } else {
       setUnitFilters((prev) => ({ ...prev, [name]: value }));
@@ -182,8 +190,8 @@ export default function FloorPlans({
     options,
     filteredUnits,
     cacheAllBhkOptions = [],
-  } = selectedView === "unit" || selectedView === "bhk"
-    ? memoOptions()
+  } = selectedView === "unit" || selectedView === "bhk" || modalState.type === "overview"
+    ? memoOptions() 
     : {
         options: {},
         filteredUnits: projectUnitsData || [],
@@ -198,11 +206,12 @@ export default function FloorPlans({
     }
   };
 
-  const [rightSideUnit, setRightSideUnit] = useState({});
+  const [rightSideUnit, setRightSideUnit] = useState(initailFilterState);
 
   useEffect(() => {
     setSelectedView("type");
     setAllBhks();
+    setUnitFilters(initailFilterState);
   }, [propCgId, phases]);
 
   useEffect(() => {
@@ -225,12 +234,11 @@ export default function FloorPlans({
 
   const onSelectCard = (unit: any, state?: boolean) => {
     if (!unit) return;
-    setModalState({ isOpen: true, unit, isPartialUnit: state ? state : false });
+    setModalState({ isOpen: true, unit, isPartialUnit: state ? state : false, type: "floorplan" });
     setSelectedView("bhk");
     handleBhkClick("All");
     if (!state) {
       UNIT_DATA_KEYS.forEach((eachKey) => {
-        console.log(eachKey);
         if (eachKey === "floor" && unit[eachKey] === 0) {
           handleUnitFilterChange("floor", "G");
         } else if (unit[eachKey]) {
@@ -251,17 +259,7 @@ export default function FloorPlans({
       handleUnitFilterChange(eachKey, "");
     });
 
-    setUnitFilters({
-      unitNumber: "",
-      bhkName: "",
-      towerName: "",
-      floor: "",
-      facingName: "",
-      block: "",
-      plotArea: "",
-      length: "",
-      width: "",
-    });
+    setUnitFilters(initailFilterState);
   };
   const handleOpenFullScreenModal = (unit: PropertyUnit) => {
     setFullScreenModalState({ isOpen: true, unit: unit });
@@ -278,6 +276,7 @@ export default function FloorPlans({
   };
 
   const handlePricingFloorPlanClick = (selBhk: any) => {
+    console.log(selBhk)
     if (selBhk.bhkName.includes("_")) {
       const [length, width] = selBhk.bhkName.split("_");
       form.setValues({
@@ -298,7 +297,8 @@ export default function FloorPlans({
         floorPlanUrl: filtertedFloor[0]?.floorPlanUrl ?? ImgNotAvail,
       });
       setFloorsArray(filtertedFloor);
-      openFloorPlan("floor");
+      // openFloorPlan("floor");
+      onSelectCard(filtertedFloor[0], true);
       return;
     }
 

@@ -10,9 +10,13 @@ export const selectedPropertyTypeAtom = atom<string>("apartment");
 export const modalStateAtom = atom<{
   isOpen: boolean;
   unit: any;
+  type: 'floorplan' | "overview"
+  isPartialUnit?: boolean
 }>({
   isOpen: false,
   unit: null,
+  type: "floorplan",
+  isPartialUnit: false
 });
 
 // Unit filter atoms

@@ -78,6 +78,7 @@ const getReportConstData = async () => {
   console.log(res)
   return res.data;
 };
+
 /* export const getCommonData = async (key:any) => {
   const res = await axios.post(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}common/get/locality-name/id?id=${key}`,
