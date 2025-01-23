@@ -227,7 +227,7 @@ export default function PopupFilters({
           {options?.floor &&
             options?.floor.length > 0 &&
             propCgId !== projectprops.plot &&
-            renderFilter("floor", "Select Floor", "At Floor")}
+            renderFilter("floor", "Select Floor", "At Elevation")}
 
           {options?.unitNumber &&
             options?.unitNumber.length > 0 &&
