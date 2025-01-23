@@ -19,6 +19,10 @@ type Props = {
   isLoading: boolean;
   onSelectCard: any;
   handleReqcallBack: (unit: PropertyUnit) => void;
+  getRightsideData: any;
+  selectedBHK: any;
+  phases: any;
+  propCgId: any;
 };
 
 export default function FloorplanLeftsection({
@@ -26,6 +30,11 @@ export default function FloorplanLeftsection({
   isLoading,
   onSelectCard,
   handleReqcallBack,
+  getRightsideData,
+  selectedBHK,
+  phases,
+  propCgId
+
 }: Props) {
   const parentRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -36,11 +45,23 @@ export default function FloorplanLeftsection({
     overscan: 5,
   });
 
+  const dataList = rowVirtualizer.getVirtualItems();
+
+  useEffect(()=>{
+    console.log(dataList);
+    if(dataList && dataList.length > 0 && dataList[0] !== undefined){
+      const unit = units[dataList[0].index];
+      getRightsideData(unit);
+    }
+  }, [dataList, selectedBHK, phases, propCgId]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  const dataList = rowVirtualizer.getVirtualItems();
+
+
+
 
   return (
     <div
