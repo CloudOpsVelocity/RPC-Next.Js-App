@@ -32,7 +32,7 @@ import {
   WallIcons,
 } from "@/app/images/commonSvgs";
 import { BiFoodTag } from "react-icons/bi";
-
+import { GiKnifeFork } from "react-icons/gi";
 import React from "react";
 import RoomBasicDetails from "./RoomBasicDetails";
 import PropertyHeading from "./heading";
@@ -309,7 +309,7 @@ const OtherDetails = ({
             />
         
             <RoomBasicDetails
-              icon={<BiFoodTag size={26} color="#00487C" />}
+              icon={<GiKnifeFork size={26} color="#00487C" />}
               title="Food Preferences"
               value={foodAllowedType === "Y" ? "Veg Only" :
                 "Anything"}

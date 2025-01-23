@@ -49,13 +49,13 @@ export default function ListingSearchTabs() {
       id: 2,
       type: "sqftPrice",
       value: "sqft-low-high",
-      label: "Price/sqft: Low to High",
+      label: "Price / sqft: Low to High",
     },
     {
       id: 1,
       type: "sqftPrice",
       value: "sqft-high-low",
-      label: "Price/sqft: High to Low",
+      label: "Price / sqft: High to Low",
     },
   ];
 
@@ -126,12 +126,12 @@ export default function ListingSearchTabs() {
       (state.sortByfield === "sqftPrice" && state.sortType == 1) ||
       (state.sortType == 1 && state.sortByfield === "basePrice")
     ) {
-      return "Price/sqft: High to Low";
+      return "Price / sqft: High to Low";
     } else if (
       (state.sortType == 2 && state.sortByfield === "sqftPrice") ||
       (state.sortType == 2 && state.sortByfield === "basePrice")
     ) {
-      return "Price/sqft: Low to High";
+      return "Price / sqft: Low to High";
     }
 
     return "Newest First";

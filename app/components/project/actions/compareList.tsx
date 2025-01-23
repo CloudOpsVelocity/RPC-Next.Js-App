@@ -37,8 +37,9 @@ export default function CompareList({slug}:{slug:string}) {
       openSuccesPopup();
       return;
     }
-    handleCompare();
+
     if (session) {
+      handleCompare();
       return;
     } else {
       open(loginHandleComapare);

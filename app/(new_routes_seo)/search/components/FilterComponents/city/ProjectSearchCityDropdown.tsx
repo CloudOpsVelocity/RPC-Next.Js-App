@@ -16,6 +16,7 @@ import { useAtom, useAtomValue } from "jotai";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 import { projSearchStore } from "../../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
+import { City } from "@/app/images/commonSvgs";
 
 interface City {
   id: number;
@@ -72,6 +73,7 @@ export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     retry: 3, // Retry failed requests 3 times
   });
+  
 
   const filteredCities = useMemo(() => {
     if (!isOpen) return [];
@@ -231,7 +233,7 @@ export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
                     >
                       <button
                         className={`flex items-center w-full h-full px-2  text-left transition-colors ${
-                          activeIndex === virtualRow.index
+                          city.id === selectedCity?.id
                             ? "bg-blue-500 text-white font-bold"
                             : "text-gray-800 hover:bg-blue-100 hover:text-blue-700 "
                         }`}

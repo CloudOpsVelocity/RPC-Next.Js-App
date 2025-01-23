@@ -105,9 +105,9 @@ const Overlay: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="px-3 py-0.5 font-bold flex justify-between items-center">
-          <h1 className="text-base sm:text-lg">{title}</h1>
+          <h1 className="text-xs sm:text-lg">{title}</h1>
           <IoIosCloseCircle
-            size={22}
+            size={26}
             color="#0073C6"
             className="cursor-pointer"
             onClick={() => dispatch({ type: "CLOSE" })}
