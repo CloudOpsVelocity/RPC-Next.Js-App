@@ -70,7 +70,7 @@ export default function SearchSec({}: Props) {
       <Combobox.Target>
         <div
           onClick={() => setShowAllLocalities(!showAllLocalities)}
-          className="w-[100%] sm:min-w-[49.9%]   p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start  flex-wrap"
+          className="w-[100%] sm:min-w-[49.9%] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start flex-wrap"
         >
           <div className="flex flex-wrap gap-2 items-center h-auto">
             {f.locality?.map(
@@ -115,7 +115,7 @@ export default function SearchSec({}: Props) {
             }}
             onKeyDown={handleKeyDown}
             /* min-w-[234px]   sm:min-w-[255px] we change input width for full text visible in search main  */
-            className=" min-w-[100%]    text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
+            className=" min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
           />
         </div>
       </Combobox.Target>
