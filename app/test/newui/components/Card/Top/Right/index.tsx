@@ -111,7 +111,7 @@ export default function TopRightSection({
           <span className="font-bold ml-1">
             {" "}
             {/*  ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)} */}
-            ₹{formatNumberWithSuffix(type === "proj" ? basePrice : price)}
+            ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
           </span>
         </div>
       ) : null}
@@ -149,43 +149,87 @@ export default function TopRightSection({
                   <ShareIcon />
                 </button>
                 {floorPlan && type !== "proj" && (
-                <div
-                  onClick={() =>
-                    window.open(
-                      `/image?path=${
-                        floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
-                      }&type=F`,
-                      "_blank"
-                    )
-                  }
-                  className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
-                >
-                  {/* <Image className="flex sm:hidden" alt="floorPlan-icon" src="/floorPlan.png" width={6} height={7}/> */}
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Blueprint Roll */}
-                    <path
-                      d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4Z"
-                      fill="#6B9AFF"
-                      fillOpacity="0.1"
-                    />
-                    <path d="M3 4V20C3 20.5523 3.44772 21 4 21H5V3H4C3.44772 3 3 3.44772 3 4Z" fill="#6B9AFF" />
+                  <div
+                    onClick={() =>
+                      window.open(
+                        `/image?path=${
+                          floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
+                        }&type=F`,
+                        "_blank"
+                      )
+                    }
+                    className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
+                  >
+                    {/* <Image className="flex sm:hidden" alt="floorPlan-icon" src="/floorPlan.png" width={6} height={7}/> */}
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      {/* Blueprint Roll */}
+                      <path
+                        d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4Z"
+                        fill="#6B9AFF"
+                        fillOpacity="0.1"
+                      />
+                      <path
+                        d="M3 4V20C3 20.5523 3.44772 21 4 21H5V3H4C3.44772 3 3 3.44772 3 4Z"
+                        fill="#6B9AFF"
+                      />
 
-                    {/* House */}
-                    <path d="M8 10H16L12 7L8 10Z" fill="#6B9AFF" />
-                    <rect x="9" y="10" width="6" height="5" fill="#6B9AFF" />
-                    <rect x="10.5" y="12" width="1.5" height="3" fill="white" />
-                    <rect x="13" y="12" width="1" height="1" fill="white" />
+                      {/* House */}
+                      <path d="M8 10H16L12 7L8 10Z" fill="#6B9AFF" />
+                      <rect x="9" y="10" width="6" height="5" fill="#6B9AFF" />
+                      <rect
+                        x="10.5"
+                        y="12"
+                        width="1.5"
+                        height="3"
+                        fill="white"
+                      />
+                      <rect x="13" y="12" width="1" height="1" fill="white" />
 
-                    {/* Measurement Line */}
-                    <line x1="8" y1="16" x2="16" y2="16" stroke="#6B9AFF" strokeWidth="0.5" />
-                    <line x1="8" y1="15.5" x2="8" y2="16.5" stroke="#6B9AFF" strokeWidth="0.5" />
-                    <line x1="16" y1="15.5" x2="16" y2="16.5" stroke="#6B9AFF" strokeWidth="0.5" />
+                      {/* Measurement Line */}
+                      <line
+                        x1="8"
+                        y1="16"
+                        x2="16"
+                        y2="16"
+                        stroke="#6B9AFF"
+                        strokeWidth="0.5"
+                      />
+                      <line
+                        x1="8"
+                        y1="15.5"
+                        x2="8"
+                        y2="16.5"
+                        stroke="#6B9AFF"
+                        strokeWidth="0.5"
+                      />
+                      <line
+                        x1="16"
+                        y1="15.5"
+                        x2="16"
+                        y2="16.5"
+                        stroke="#6B9AFF"
+                        strokeWidth="0.5"
+                      />
 
-                    {/* Pencil */}
-                    <path d="M14 8L16 6L17 7L15 9L14 8Z" fill="#6B9AFF" />
-                    <rect x="16" y="5.5" width="1.5" height="1" transform="rotate(45 16.5 5.5)" fill="#6B9AFF" />
-                  </svg>
-                </div>)}
+                      {/* Pencil */}
+                      <path d="M14 8L16 6L17 7L15 9L14 8Z" fill="#6B9AFF" />
+                      <rect
+                        x="16"
+                        y="5.5"
+                        width="1.5"
+                        height="1"
+                        transform="rotate(45 16.5 5.5)"
+                        fill="#6B9AFF"
+                      />
+                    </svg>
+                  </div>
+                )}
                 <div
                   onClick={() => {
                     handleClick();
@@ -244,7 +288,6 @@ export default function TopRightSection({
                   {" "}
                   View on Map
                 </div>
-                
               </button>
             </div>
 
@@ -302,7 +345,7 @@ export default function TopRightSection({
                   <p className="text-right text-[12px] text-nowrap text-[#148B16]">
                     Avg Price:₹{" "}
                     {formatNumberWithSuffix(
-                      type === "proj" ? basePrice : price
+                      type === "proj" ? basePrice : sqftPrice
                     )}
                   </p>
                   <p className="text-right text-[12px] text-nowrap">
@@ -419,7 +462,6 @@ export default function TopRightSection({
                     }
                   >
                     <span className="hidden sm:flex">View Floor Plan</span>
-                    
                   </button>
                 )}
               </>

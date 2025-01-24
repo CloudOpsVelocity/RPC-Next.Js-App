@@ -65,7 +65,7 @@ export default function ProjData({
           <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
         )}
         {/* <button className="w-6 h-6 p-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 xl:hidden"> */}
-       {/*  <NewMapIcon
+        {/*  <NewMapIcon
           className="w-5 h-5 sm:hidden"
           onClick={() => {
             // handleClick();
@@ -173,29 +173,30 @@ export default function ProjData({
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(price))}{" "}
-        {otherCharges?.otherCharge && Object.keys(otherCharges).length > 1 && (
-          <span
-            className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              dispatch({
-                conType: "otherCharges",
-                content: {
-                  charges: otherCharges,
-                },
-                // id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
-                id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
-                  propTypeId ?? propTypeName ?? ""
-                }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
-                title: "Other Charges",
-                type: "OPEN",
-                pType: type,
-              });
-            }}
-          >
-            View Other Charges
-          </span>
-        )}
+        {otherCharges?.otherCharge ||
+          (otherCharges && Object.keys(otherCharges).length > 1 && (
+            <span
+              className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch({
+                  conType: "otherCharges",
+                  content: {
+                    charges: otherCharges,
+                  },
+                  // id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
+                  id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+                    propTypeId ?? propTypeName ?? ""
+                  }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
+                  title: "Other Charges",
+                  type: "OPEN",
+                  pType: type,
+                });
+              }}
+            >
+              View Other Charges
+            </span>
+          ))}
       </p>
 
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
@@ -219,7 +220,7 @@ export default function ProjData({
               : undefined
           }
         >
-       {/* {getTypeText(type)} */}
+          {/* {getTypeText(type)} */}
           {postedByName}
         </span>
       </p>

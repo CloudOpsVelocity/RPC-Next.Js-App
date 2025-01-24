@@ -13,7 +13,12 @@ import "leaflet/dist/leaflet.css";
 import { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
-import { BlueMobileMapIcon, createCustomIconReactLeafLet, MapIcon, MobileMapIcon } from "@/app/data/map";
+import {
+  BlueMobileMapIcon,
+  createCustomIconReactLeafLet,
+  MapIcon,
+  MobileMapIcon,
+} from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
@@ -34,7 +39,7 @@ const Map = ({
 
   return (
     <MapContainer
-    zoom={13}
+      zoom={13}
       center={position}
       className={clsx(
         " h-[291px] sm:h-[456px] xl:h-[600px] w-full z-[1] relative",
@@ -79,10 +84,9 @@ const Content: React.FC<any> = ({
   lang,
   selected,
   setSelectedLocation,
-  
 }) => {
   const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
-const Icon =  createCustomIconReactLeafLet(selected);
+  const Icon = createCustomIconReactLeafLet(selected);
   const map = useMap();
   useEffect(() => {
     if (selectedLocation && selectedLocation.name) {
@@ -90,12 +94,17 @@ const Icon =  createCustomIconReactLeafLet(selected);
         parseFloat(selectedLocation.lat),
         parseFloat(selectedLocation.lng),
       ]);
- 
     }
   }, [selectedLocation, selected, position, map]);
 
   useEffect(() => {
-    const bounds = L.latLngBounds([...data.map((item: any) => [parseFloat(item?.lat), parseFloat(item?.lang)]), position]);
+    const bounds = L.latLngBounds([
+      ...data.map((item: any) => [
+        parseFloat(item?.lat),
+        parseFloat(item?.lang),
+      ]),
+      position,
+    ]);
     map.fitBounds(bounds);
   }, [selected, map, position]);
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -113,8 +122,8 @@ const Icon =  createCustomIconReactLeafLet(selected);
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
             icon={Icon}
-/*             {...(isMobile && { icon: BlueMobileMapIcon })}
- */            zIndexOffset={100}
+            /*             {...(isMobile && { icon: BlueMobileMapIcon })}
+             */ zIndexOffset={100}
             eventHandlers={{
               click: () =>
                 setSelectedLocation({

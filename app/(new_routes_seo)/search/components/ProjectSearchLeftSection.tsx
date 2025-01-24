@@ -41,6 +41,9 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
+  const { entry } = useIntersection({
+    root: containerRef.current,
+  });
   let isTrue = pathname.includes("search")
     ? true
     : serverData !== null && apiFilterQueryParams !== null;
@@ -90,6 +93,10 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
   // Handle scroll events for both mobile and desktop
   useEffect(() => {
+    if (entry?.isIntersecting) {
+      alert("view thing");
+    }
+
     if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
       fetchNextPage();
       setPage((prev) => prev + 1);
