@@ -73,11 +73,11 @@ export default function Results() {
           alert(JSON.stringify(data));
           {
             let url;
-            let localityName = apiData.name.split("-")[1];
+            let localityName = apiData.name.split("-")[1] ? apiData.name.split("-")[1] : apiData.name.split(" in ")[1];
             url =
               `propType=${data.PT}${data.BH ? `-bhk=${data.BH}` : ""}-cg=${
                 data.CG
-              }-localities=${localityName}` +
+              }-listedBy=All-localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
             window.open(
@@ -158,7 +158,7 @@ export default function Results() {
     </div>
   ) : (
     <ScrollArea
-      className={`px-5 py-2 min-h-[100px] max-h-[200px] ${
+      className={`px-5 py-2 min-h-[100px] max-h-[200px] overflow-auto ${
         noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px]"
       } `}
     >
@@ -194,7 +194,7 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
                   key={`locality-${index}`}
                 >
-                  <GrayMapIcon className="w-3 h-3" /> {locality.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {locality.name}
                 </li>
               ))}
             </ul>
@@ -218,7 +218,7 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`project-${index}`}
                 >
-                  <GrayMapIcon className="w-3 h-3" /> {project.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {project.name}
                 </li>
               ))}
             </ul>
@@ -238,7 +238,7 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`projectListing-${index}`}
                 >
-                  <GrayMapIcon className="w-3 h-3" /> {projectListing.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {projectListing.name}
                 </li>
               ))}
             </ul>
@@ -261,7 +261,7 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`listing-${index}`}
                 >
-                  <GrayMapIcon className="w-3 h-3" /> {listing.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {listing.name}
                 </li>
               ))}
             </ul>
@@ -284,7 +284,7 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`builder-${index}`}
                 >
-                  <GrayMapIcon className="w-3 h-3" /> {builder.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {builder.name}
                 </li>
               ))}
             </ul>
