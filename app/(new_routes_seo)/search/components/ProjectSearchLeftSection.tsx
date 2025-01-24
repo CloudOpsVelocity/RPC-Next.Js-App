@@ -97,9 +97,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   });
 
   useEffect(() => {
-    if (entry?.isIntersecting) {
-      alert("view thing");
-    }
+    
 
     if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
       fetchNextPage();

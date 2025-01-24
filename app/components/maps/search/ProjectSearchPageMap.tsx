@@ -120,7 +120,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             permanent={selected?.reqId === itemId}
             direction="top"
             offset={[10, -35]}
-            className={`${isProp ? "min-w-fit" : "min-w-[400px]"} !p-0`}
+            className={`${isProp ? "min-w-fit" : "min-w-[400px]"}  max-w-screen-sm !p-0`}
             sticky
           >
             {!isProp ? (

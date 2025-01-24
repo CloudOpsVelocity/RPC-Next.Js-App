@@ -144,15 +144,15 @@ export default function ListingSearchTabs() {
           <div
             ref={scrollContainerRef}
             onWheel={handleWheel}
-            className="overflow-x-auto no-scrollbar max-w-full flex flex-wrap"
+            className="overflow-x-auto no-scrollba"
           >
-            <div className="flex items-center gap-1 xl:gap-2 min-w-max ">
+            <div className="flex items-center sm:gap-1 p-8 sm:p-0 xl:gap-2 min-w-max ">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`
-                    whitespace-nowrap rounded-full px-[6px] md:px-2 xl:px-4 md:py-1 xl:py-2 text-sm md:text-base font-medium transition-all
+                     whitespace-nowrap rounded-full px-2  xl:px-4 md:py-1 xl:py-2 text-sm md:text-base font-medium transition-all
                     ${
                       state.listedBy === tab.id
                         ? "bg-[#0073C6] text-white shadow-md"
@@ -166,7 +166,7 @@ export default function ListingSearchTabs() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative xl:hidden flex justify-end self-end bg-slate-50 shadow-mdmax-w-7xl">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -189,8 +189,7 @@ export default function ListingSearchTabs() {
               </svg>
 
               <div
-                className="max-w-[105px] ml-auto sm:ml-[0] 
-              overflow-hidden text-ellipsis whitespace-nowrap"
+                className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap"
               >
                 {state.sortByfield != null && state.sortType != null
                   ? getSortyByValue(state)
@@ -199,7 +198,8 @@ export default function ListingSearchTabs() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 top-[40px] rounded-lg shadow-lg py-1 z-20 w-48 bg-white border border-white">
+              <div className="absolute top-[40px] right-0 w-48 bg-white
+               rounded-lg shadow-lg py-1 z-20 border border-white">
                 {sortOptions.map((option) => (
                   <button
                     key={option.value}
@@ -210,7 +210,7 @@ export default function ListingSearchTabs() {
                       setIsDropdownOpen(false);
                     }}
                     className={`
-                      block w-full text-left text-sm transition-colors px-4 py-2 
+                    block w-full text-left px-4 py-2 text-sm transition-colors
                       ${
                         getSortyByValue(state) === option.label
                           ? "text-white bg-[#0073C6]"

@@ -145,7 +145,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
                   aria-label={`Remove ${item}`}
                 >
                   <svg
-                    className="h-4 w-4"
+                    className="h-4 w-4 "
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -187,7 +187,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
             autoComplete="off"
           />
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 "
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

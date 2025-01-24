@@ -38,7 +38,7 @@ export default function SelectedFilters({}: Props) {
                       {category === "localities" || category === "builderIds" || category === "phaseId"
                         ? `${value.split("+")[0]}${
                             values.length - 1 === values.indexOf(value)
-                              ? "" : ", "
+                              ? "" : ""
                           }`
                         : category === "parking" || category === "bathroom"
                         ? `${value} ${category}`

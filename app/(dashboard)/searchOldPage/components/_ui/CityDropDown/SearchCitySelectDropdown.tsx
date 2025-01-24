@@ -219,10 +219,10 @@ export default function SearchCitySelectDropdown() {
                         onMouseEnter={() => setActiveIndex(virtualRow.index)}
                       >
                         <IoLocationSharp
-                          className={`mr-2 ${
+                          className={`mr-2 hover:text-gray-800 ${
                             activeIndex === virtualRow.index
-                              ? "text-white"
-                              : "text-gray-400"
+                              ? "text-gray-800"
+                              : "text-gray-800"
                           }`}
                         />
                         {city.name}
