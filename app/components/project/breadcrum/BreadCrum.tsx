@@ -1,6 +1,5 @@
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
-import Link from "next/link";
 import React from "react";
 
 export default function BreadCrumbs({ params }: { params: any }) {
@@ -23,6 +22,11 @@ export default function BreadCrumbs({ params }: { params: any }) {
       {" > "}
       {allParams.map((key, index) => {
         currentPath += `/${slugify(params[key])}`;
+
+        let name = params[key].replace(/-/g, " ");
+        const newArray = name.split(" ").slice(0, -1);
+        const newName = key !== "slug" ? name : newArray.join(" ");
+        
         return (
           <React.Fragment key={`${key[index]}`}>
             {index < Object.keys(params).length - 1 ? (
@@ -34,14 +38,14 @@ export default function BreadCrumbs({ params }: { params: any }) {
                 {titleOfKeys[key as keyof typeof titleOfKeys] && (
                   <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
                 )}
-                <span>{params[key].replace(/-/g, " ")}</span>
+                <span>{newName}</span>
               </a>
             ) : (
               <>
                 {titleOfKeys[key as keyof typeof titleOfKeys] && (
                   <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
                 )}
-                <span className="capitalize">{params[key].replace(/-/g, " ").replace("undefined ", "")}</span>
+                <span className="capitalize">{newName.replace("undefined ", "")}</span>
               </>
             )}
             {index < Object.keys(params).length - 1 && " > "}

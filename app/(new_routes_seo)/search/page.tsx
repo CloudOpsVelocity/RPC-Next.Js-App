@@ -6,14 +6,15 @@ import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
 type Props = {};
 
 export default function Page({}: Props) {
+
   return (
-    <main className="pt-[6%] mt-[10%] sm:mt-0 sm:pt-[3.7%]">
+    <main className="pt-[70px] mt-[10%] sm:mt-0 sm:pt-[3.7%]">
       <ProjectSearchBreadCrumbs
         items={[
           {
             href: "/",
             label: "Home",
-          },
+          }
         ]}
       />
       <ProjSearchMainFilterSection />

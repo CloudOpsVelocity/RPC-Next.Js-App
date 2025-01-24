@@ -3,6 +3,7 @@ import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFil
 import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
 import RightSection from "../components/ProjectSearchRightSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
+import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
 
 type Props = {
   serverData: any;
@@ -15,7 +16,8 @@ export default function NewListingSearchpage({
 }: Props) {
 
   return (
-    <main className="pt-[6%] mt-[10%] sm:mt-0">
+    <main className="pt-[70px] mt-[10%] sm:mt-0"> 
+      <ProjectSearchBreadCrumbs />
       <ProjSearchMainFilterSection
         isListing={serverData === null ? true : false}
       />

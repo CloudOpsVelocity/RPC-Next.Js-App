@@ -252,7 +252,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   };
   return (
     <>
-      <div className="w-full max-w-[100%]  max-h-[60vh]  bg-white border-b sticky top-0 z-40">
+      <div className="w-full max-w-[100%]  max-h-[60vh]  bg-white border-b sticky top-0 z-10">
         <div className=" px-1 ">
           <div
             ref={searchRef}

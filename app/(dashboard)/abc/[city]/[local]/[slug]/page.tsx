@@ -114,6 +114,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   if (!data.partialUnitData) {
     overview = await getOverViewData(slug);
   }
+  
   return (
     <section className="w-full relative break-words">
       {/* <!-- Facebook Meta Tags --> */}

@@ -49,7 +49,6 @@ export default function CompareShortListCount({ initialValue }: Props) {
       }
     }
   };
-  console.log(initialValue);
   const { data, isLoading } = useQuery({
     initialData: initialValue,
     queryKey: ["shortListed-compare-count"],
