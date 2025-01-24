@@ -19,6 +19,8 @@ import ListingSearchTabs from "../ListingSearchTabs";
 import { usePathname } from "next/navigation";
 import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
+import RequestCallBackModal from "@/app/components/molecules/popups/req";
+import LoginPopup from "@/app/components/project/modals/LoginPop";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -47,7 +49,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   let isTrue = pathname.includes("search")
     ? true
     : serverData !== null && apiFilterQueryParams !== null;
-  console.log(apiFilterQueryParams);
+
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
       queryKey: [
@@ -191,6 +193,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
           <LoadingSpinner />
         </div>
       )}
+      <LoginPopup />
+      <RequestCallBackModal />
     </div>
   );
 }
