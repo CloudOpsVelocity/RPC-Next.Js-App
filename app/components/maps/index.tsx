@@ -108,6 +108,7 @@ const Content: React.FC<any> = ({
     map.fitBounds(bounds);
   }, [selected, map, position]);
   const isMobile = useMediaQuery("(max-width: 601px)");
+  console.log(data)
   return (
     <>
       <TileLayer
@@ -139,7 +140,7 @@ const Content: React.FC<any> = ({
                 key={item.lat}
                 opacity={1}
                 direction="top"
-                permanent={selectedLocation?.lat === item?.lat}
+                permanent={selectedLocation?.lat === item?.lat} 
                 className="min-w-fit z-50"
                 offset={[4, -36]}
               >
@@ -159,13 +160,11 @@ const Content: React.FC<any> = ({
                 permanent={selectedLocation?.lat === item?.lat}
                 key={item.lang}
                 offset={isMobile ? [-7, -40] : [4, -36]}
-                className="min-w-fit"
+                className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
               >
-                <div className=" ">
-                  <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
-                    {item.name}
-                  </p>
-                </div>
+                <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal]">
+                  {item.name}
+                </p>
               </Tooltip>
             )}
 
