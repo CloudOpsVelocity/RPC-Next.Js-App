@@ -243,7 +243,7 @@ export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
                         <IoLocationSharp
                           className={`mr-2 ${
                             activeIndex === virtualRow.index
-                              ? "text-white"
+                              ? "text-gray-800"
                               : "text-gray-400"
                           }`}
                         />

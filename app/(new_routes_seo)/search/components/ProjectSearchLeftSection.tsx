@@ -90,23 +90,11 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
   // Handle scroll events for both mobile and desktop
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = container;
-      // Check if user has scrolled to bottom (with a small threshold)
-      if (scrollHeight - scrollTop - clientHeight < 50) {
-        if (hasNextPage && shouldFetchMore && !isLoading) {
-          fetchNextPage();
-          setPage((prev) => prev + 1);
-        }
-      }
-    };
-
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
+    if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
+      fetchNextPage();
+      setPage((prev) => prev + 1);
+    }
+  }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]);
 
   const renderProjectCard = useCallback(
     (virtualRow: any) => {
