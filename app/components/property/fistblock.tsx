@@ -172,15 +172,19 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   </h3>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
+                {projectDetails.projIdEnc ?
                 <Link
                   href={projectUrl}
                   target="_blank"
-                  className={`text-[#001F35]  sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
+                  className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
                     projectDetails.projIdEnc ? "underline text-blue-600" : ""
                   } `}
                 >
                   {projName}
                 </Link>
+                :
+                <span className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize">{projName}</span>
+                }
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
                 </p>
