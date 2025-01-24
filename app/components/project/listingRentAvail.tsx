@@ -81,8 +81,8 @@ const Card = ({
   const [, { open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
   );
-  const handleBoxClick = (value: string, cg: "S" | "R") => {
-    value === "0"
+  const handleBoxClick = (value: any, cg: "S" | "R") => { 
+    value
       ? openSuccesPopup()
       : window.open(`/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`);
   };
@@ -96,7 +96,7 @@ const Card = ({
           ? "border border-solid border-[#FBE885]"
           : "border border-solid border-[#B1DEFF] "
       )}
-      onClick={() => handleBoxClick(block ? r : s, type === "sell" ? "S" : "R")}
+      onClick={() => handleBoxClick(block, type === "sell" ? "S" : "R")}
     >
       <AvailListSideSvg type={type} />
       <div className="flex justify-evenly sm:justify-center items-center gap-2 sm:gap-[22px] h-full ">

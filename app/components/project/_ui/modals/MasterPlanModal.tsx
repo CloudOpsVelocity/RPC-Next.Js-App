@@ -9,6 +9,8 @@ import { newIcons, PopupOpenSvg } from "@/app/images/commonSvgs";
 import { useSetAtom } from "jotai";
 import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import { useSession } from "next-auth/react";
 
 interface ZoomableMasterplanModalProps {
   imageUrl: string;
@@ -23,6 +25,10 @@ export default function FullScreenMasterPlanModal({
 }: ZoomableMasterplanModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const openSharePopup = useSetAtom(searchShareAtom);
+  const [, { open: LoginOpen }] = usePopShortList();
+  const { data: session } = useSession();
+    
+  
   const openModal = () => {
     document.body.style.overflow = "hidden";
     setIsOpen(true);
@@ -53,7 +59,7 @@ export default function FullScreenMasterPlanModal({
     }); */
   };
 
-  const handleDownload = async () => {
+  const handleDownload = async () => { 
     try {
       const response = await fetch(imageUrl);
       const blob = await response.blob();
@@ -67,6 +73,28 @@ export default function FullScreenMasterPlanModal({
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error downloading image:", error);
+    }
+  };
+
+  const handleDownloadMasterplan = async () => {
+    if (session) {
+      handleDownload();
+    } else {
+      LoginOpen(handleDownload, {
+        type: "master-plan",
+        link: imageUrl,
+      });
+    }
+  };
+
+  const handleShearMasterplan = async () => {
+    if (session) {
+      handleShare();
+    } else {
+      LoginOpen(handleShare, {
+        type: "master-plan",
+        link: imageUrl,
+      });
     }
   };
 
@@ -106,14 +134,14 @@ export default function FullScreenMasterPlanModal({
             </h2>
             <div className="flex items-center space-x-2">
               <button
-                onClick={handleShare}
+                onClick={handleShearMasterplan}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Share"
               >
                 <FiShare2 className="w-5 h-5" />
               </button>
               <button
-                onClick={handleDownload}
+                onClick={handleDownloadMasterplan}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Download"
               >

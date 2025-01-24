@@ -157,7 +157,7 @@ export default function Results() {
     </div>
   ) : (
     <ScrollArea
-      className={`px-5 py-2 h-[200px] ${
+      className={`px-5 py-2 min-h-[100px] max-h-[200px] ${
         noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px]"
       } `}
     >

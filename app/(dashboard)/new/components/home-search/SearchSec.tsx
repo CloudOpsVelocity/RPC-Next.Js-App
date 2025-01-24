@@ -120,7 +120,7 @@ export default function SearchSec({}: Props) {
         </div>
       </Combobox.Target>
       {name && (
-        <Combobox.Dropdown className="min-w-[92%]  !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]">
+        <Combobox.Dropdown className="min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]">
           <Results />
         </Combobox.Dropdown>
       )}
