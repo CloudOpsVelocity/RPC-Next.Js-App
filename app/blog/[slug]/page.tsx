@@ -21,3 +21,4 @@ export default function Page({ params }: Params) {
     <SubscribeBlock />
   </div>
 }
+

@@ -15,7 +15,7 @@ function BlogDetailRightSection() {
       {allBlogData.map((eachBlog) => {
         return (
           <div
-            className={`flex cursor-pointer w-full flex-col items-start gap-1 px-8 py-6 md:px-[24px] md:py-[16px] border-b-[#66666666] border-b border-solid select-none duration-500
+            className={`flex cursor-pointer w-full flex-col items-start gap-1 xl:px-8 xl:py-6 md:px-[24px] md:py-[16px] px-[16px] py-[10px] border-b-[#66666666] border-b border-solid select-none duration-500 
               ${
                 selectedBlog === eachBlog.id
                   ? "bg-[#2aa3270f] duration-500"
@@ -28,14 +28,14 @@ function BlogDetailRightSection() {
               className={`text-[color:var(--800,#2D3748)] text-[16px] md:text-[14px] not-italic font-bold leading-[normal] flex gap-[8px] 
                 ${
                   selectedBlog === eachBlog.id
-                    ? "text-[20px] md:text-[16px]"
+                    ? "xl:text-[20px] md:text-[16px] text-[14px]"
                     : ""
                 }`}
             >
               {selectedBlog === eachBlog.id ? playIcon : ""}
               {eachBlog.heading}
             </h3>
-            <p className="text-[#303030] text-sm md:text-[12px] italic font-medium leading-[normal]">
+            <p className="text-[#303030] xl:text-[14px] md:text-[12px] text-[12px] italic font-medium leading-[normal]">
               {eachBlog.text}
             </p>
           </div>

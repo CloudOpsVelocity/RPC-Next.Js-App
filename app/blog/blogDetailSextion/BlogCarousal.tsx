@@ -55,7 +55,7 @@ function BlogCarousal() {
     };
     
     return (
-        <div className="flex justify-center items-center w-[80%] md:w-[90%] mb-[3%] relative " >
+        <div className="flex justify-center items-center w-[94%] md:w-[90%] mb-[3%] relative " >
             {allBlogData != undefined && allBlogData != null && allBlogData.length >= 2 &&
             <PrevCarouselButton
                 className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute left-[-50px] md:left-[-40px] top-[45%] z-10`}
