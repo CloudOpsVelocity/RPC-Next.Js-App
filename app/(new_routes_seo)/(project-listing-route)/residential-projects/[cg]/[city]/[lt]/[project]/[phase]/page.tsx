@@ -21,13 +21,16 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-  const { bhk_unit_type, cg, city, lt, project } = params;
+  const { cg, city, lt, project } = params;
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
   const values = await findPathForProjectListing(pathname);
+  console.log(values);
   if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
   const severData = await getSearchData(
-    `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
+    `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${
+      filtersValues.PJ
+    }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
   );
   console.log(filtersValues);
   return (
@@ -44,9 +47,9 @@ export default async function Page({ params }: Props) {
               propType: parseInt(filtersValues.PT as string),
             }
           : {}),
-          ...(filtersValues.PH && {
-            phaseId: [`${params.phase}+${filtersValues.PH}`],
-          }),
+        ...(filtersValues.PH && {
+          phaseId: [`${params.phase}+${filtersValues.PH}`],
+        }),
       }}
     />
   );
