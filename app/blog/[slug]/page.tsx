@@ -19,5 +19,5 @@ export default function Page({ params }: Params) {
     <BlogDetailsDescription />
     <FeaturedBlogs />
     <SubscribeBlock />
-  </div>
+  </div> 
 }

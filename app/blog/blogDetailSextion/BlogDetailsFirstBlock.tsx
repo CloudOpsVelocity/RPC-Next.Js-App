@@ -25,7 +25,6 @@ function BlogDetailsFirstBlock() {
         <TringleIcons key="TringleIcon2" className="absolute top-[24%] right-[-120px] z-10 " number={4} />
         <TringleIcons key="TringleIcon2" className="absolute top-[-50px] right-[-10px] z-10 " number={5} />
 
-
         <Image
             src={apartmentCardImg} 
             alt="blog Image" width={100} height={269} 
