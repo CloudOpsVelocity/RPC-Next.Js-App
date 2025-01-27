@@ -4,11 +4,11 @@ import React from 'react';
 
 function FeaturedBlogCard() {
     return (
-        <div className=' max-w-[297px] w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] '>
+        <div className=' min-w-[297px] border-t-1 border-solid shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] '>
             <Image
                 src={apartmentCardImg} 
                 alt="blog Image" width={100} height={269} 
-                className='rounded-[10px] w-full h-[179px]  ' 
+                className='rounded-[10px] w-full h-[179px]' 
             />
 
             <div className='p-[16px]  '>
@@ -28,9 +28,9 @@ function FeaturedBlogCard() {
 function FeaturedBlogs() {
     const dummyData = [1,2,3,4];
     return (
-        <div className=' mb-[3%] w-[80%] '>
-            <h2 className='text-black text-[32px] italic font-bold leading-[normal] mb-[32px] '>Featured <span className='text-[#2AA327] italic font-bold leading-[normal]'>Blogs</span></h2>
-            <div className=' flex justify-between items-start gap-[20px] '>
+        <div className=' mb-[3%] w-[94%] md:w-[90%] xl:w-[80%] '>
+            <h2 className='text-black text-[20px] md:text-[24px] xl:text-[32px] italic font-bold leading-[normal] mb-[32px] '>Featured <span className='text-[#2AA327] italic font-bold leading-[normal]'>Blogs</span></h2>
+            <div className=' flex justify-between items-start xl:gap-[20px] gap-[10px] p-[8px] overflow-x-auto '>
                 {dummyData.map((each, index)=>{
                     return(
                         <FeaturedBlogCard key={`FeaturedBlogCard_${each}`} />
