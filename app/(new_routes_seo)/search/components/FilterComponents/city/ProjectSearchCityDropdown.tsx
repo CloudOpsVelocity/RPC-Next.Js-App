@@ -18,7 +18,7 @@ import { projSearchStore } from "../../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
 import { City } from "@/app/images/commonSvgs";
 
-interface City {
+interface ICity {
   id: number;
   name: string;
   cityid: number;
@@ -34,11 +34,13 @@ type Props = {
   handleDropdownToggle: any;
 };
 
-export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
+export default function ProjSearchCityDropDown({
+  handleDropdownToggle,
+}: Props) {
   const [state, dispatch] = useAtom(projSearchStore);
   let servercityData = `Bengaluru+9`;
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCity, setSelectedCity] = useState<City | null>(null);
+  const [selectedCity, setSelectedCity] = useState<ICity | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -66,14 +68,13 @@ export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
     data: allCities = [],
     isLoading,
     error,
-  } = useQuery<City[]>({
+  } = useQuery<ICity[]>({
     queryKey: ["all-cities"],
     queryFn: getAllCitiesDetails,
     ...RTK_CONFIG,
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     retry: 3, // Retry failed requests 3 times
   });
-  
 
   const filteredCities = useMemo(() => {
     if (!isOpen) return [];
@@ -129,7 +130,7 @@ export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
     [isOpen, filteredCities, activeIndex]
   );
 
-  const selectCity = useCallback((city: City) => {
+  const selectCity = useCallback((city: ICity) => {
     if (!city) return;
     setSelectedCity(city);
     setSearchTerm("");
@@ -157,7 +158,7 @@ export default function ProjSearchCityDropDown({handleDropdownToggle}:Props) {
       <button
         onClick={() => {
           setIsOpen((prev) => !prev);
-          handleDropdownToggle()
+          handleDropdownToggle();
         }}
         className="flex items-center text-gray-800 text-[14px] xl:text-[16px] font-semibold gap-x-2 p-3 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
       >
