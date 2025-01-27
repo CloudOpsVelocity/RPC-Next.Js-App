@@ -12,7 +12,7 @@ function BlogDetailsFirstBlock() {
   const {date, text, heading} = data;
 
   return (
-    <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>
+    <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>
       <button className='text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 flex justify-center items-center self-start '>
         <span className=' bg-[#E8F3FF] w-[18px] h-[18px] xl:w-[32px] xl:h-[32px] rounded-[50%] flex justify-center items-center '>{backIcon}</span>
         Back

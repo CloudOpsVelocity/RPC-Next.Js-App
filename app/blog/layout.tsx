@@ -5,9 +5,7 @@ import Header from '@/app/components/layouts/primary/header'
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
       {children}
-      <Footer />
     </>
   )
 }
