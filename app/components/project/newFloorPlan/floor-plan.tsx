@@ -96,7 +96,7 @@ export default function FloorPlans({
     unitNumber: "",
     bhkName: "",
     towerName: "",
-    floor: "",
+    floor: 0,
     facingName: "",
     block: "",
     plotArea: "",
@@ -104,18 +104,19 @@ export default function FloorPlans({
     length: "",
     caretarea: "",
     superBuildUparea: "",
-    totalNumberofBathroom: "",
-    totalNumberOfBalcony: "",
-    noOfCarParking: "",
-    parkingType: "",
     terraceArea: "",
-    totalBalconySize:"",
-    aptTypeName:""
-  }
+    parkingType: "",
+    totalNumberofBathroom: 0,
+    totalNumberOfBalcony: 0,
+    noOfCarParking: 0,
+    floorPlanUrl: "",
+    gardenArea: "",
+    parkingArea: "",
+    aptTypeName: "",
+  };
 
   const [unitFilters, setUnitFilters] = useState(initailFilterState);
   const [, { open }] = useReqCallPopup();
-  const [, { open: openFloorPlan, type }] = useFloorPlanPopup();
 
   const handleBhkClick = (bhk: string) => {
     setSelectedBHK(bhk);
@@ -143,7 +144,8 @@ export default function FloorPlans({
       );
       if (unitFilteredData && unitFilteredData.length > 0) {
         // setUnitFilters(unitFilteredData[0]);
-        setUnitFilters(prev => ({ ...prev,
+        setUnitFilters((prev) => ({
+          ...prev,
           unitNumber: unitFilteredData[0].unitNumber
             ? unitFilteredData[0].unitNumber
             : "",
@@ -185,8 +187,10 @@ export default function FloorPlans({
     options,
     filteredUnits,
     cacheAllBhkOptions = [],
-  } = selectedView === "unit" || selectedView === "bhk" || modalState.type === "overview"
-    ? memoOptions() 
+  } = selectedView === "unit" ||
+  selectedView === "bhk" ||
+  modalState.type === "overview"
+    ? memoOptions()
     : {
         options: {},
         filteredUnits: projectUnitsData || [],
@@ -202,9 +206,9 @@ export default function FloorPlans({
   };
 
   const [rightSideUnit, setRightSideUnit] = useState(initailFilterState);
-  const getRightsideData = (data:any) => {
+  const getRightsideData = (data: any) => {
     setRightSideUnit(data);
-  }
+  };
 
   useEffect(() => {
     setSelectedView("type");
@@ -214,7 +218,12 @@ export default function FloorPlans({
 
   const onSelectCard = (unit: any, state?: boolean) => {
     if (!unit) return;
-    setModalState({ isOpen: true, unit, isPartialUnit: state ? state : false, type: "floorplan" });
+    setModalState({
+      isOpen: true,
+      unit,
+      isPartialUnit: state ? state : false,
+      type: "floorplan",
+    });
     setSelectedView("bhk");
     handleBhkClick("All");
     if (!state) {

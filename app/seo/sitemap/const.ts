@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const formatNumberWithCommas = (num: any): string => {
-    if(num){
+export const formatNumberWithCommas = (num: any): string | undefined => {
+  if (num) {
     const number = num !== undefined && num !== "" ? parseFloat(num) : num;
     const numberString = number.toFixed(2); // Convert to string with 2 decimal places
     const [integerPart, decimalPart] = numberString.split(".");

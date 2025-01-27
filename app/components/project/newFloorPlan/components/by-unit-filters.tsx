@@ -7,16 +7,17 @@ import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
 
 type Props = {
-  options: any; 
+  options: any;
   handleUnitFilterChange: (name: string, value: string) => void;
-  filters:any;
-  setFilters:any;
+  filters: any;
+  setFilters: any;
 };
 
 export default function ByUnitFilters({
   options,
   handleUnitFilterChange,
-  filters, setFilters
+  filters,
+  setFilters,
 }: Props) {
   // const [filters, setFilters] = useState({
   //   unitNumber: "",
@@ -86,7 +87,10 @@ export default function ByUnitFilters({
   const onMouseOut = (key: keyof typeof filters, value: string) => {
     let data = filteredOptions(key);
     if (!data.includes(value)) {
-      setFilters((prev: any) => ({ ...prev, [key]: backupFilters[key] }));
+      setFilters((prev: any) => ({
+        ...prev,
+        [key]: backupFilters[key as keyof typeof backupFilters],
+      })); // [key]: backupFilters[key as keyof typeof backupFilters key] }));
     } else {
       handleFilterChange(key, value);
     }
@@ -151,9 +155,10 @@ export default function ByUnitFilters({
 
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {options?.towerName && (propCgId === projectprops.apartment || propCgId === projectprops.villament) && 
-          renderFilter("towerName", "Search Tower")
-      }
+      {options?.towerName &&
+        (propCgId === projectprops.apartment ||
+          propCgId === projectprops.villament) &&
+        renderFilter("towerName", "Search Tower")}
       {options?.floor &&
         propCgId !== projectprops.plot &&
         renderFilter("floor", "Search Floor")}

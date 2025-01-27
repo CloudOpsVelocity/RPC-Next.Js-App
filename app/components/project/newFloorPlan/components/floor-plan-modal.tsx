@@ -27,9 +27,9 @@ interface FloorPlanModalProps {
   modalState: any;
   onClose: () => void;
   units: PropertyUnit[];
-  initialUnit: PropertyUnit;
+  initialUnit: any;
   filters: Partial<PropertyUnit>;
-  setFilters: (filters: Partial<PropertyUnit>) => void;
+  setFilters: (filters: any) => void;
   filteredUnits: PropertyUnit[];
   options: Record<keyof PropertyUnit, string[]> | Record<string, never>;
   handleOpenFullScreenModal: (unit: PropertyUnit) => void;
@@ -197,7 +197,9 @@ export function FloorPlanModal({
             {`${
               propCgId !== projectprops.plot
                 ? currentUnit.bhkName
-                : `(${currentUnit.length} X ${currentUnit.width}) ${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`
+                : `(${currentUnit.length} X ${
+                    currentUnit.width
+                  }) ${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`
             } - 
             ${
               propertyDetailsTypes && propertyDetailsTypes.get(propCgId)
@@ -306,7 +308,9 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Super Built-up Area"
-                      value={`${formatNumberWithCommas(currentUnit.superBuildUparea)} sq.ft`} 
+                      value={`${formatNumberWithCommas(
+                        currentUnit.superBuildUparea
+                      )} sq.ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -316,7 +320,9 @@ export function FloorPlanModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Carpet Area"
-                      value={`${formatNumberWithCommas(currentUnit.caretarea)} sq.ft`}
+                      value={`${formatNumberWithCommas(
+                        currentUnit.caretarea
+                      )} sq.ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -386,44 +392,60 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  {propCgId !== projectprops.apartment && propCgId !== projectprops.villament && (
-                    <DataItem
-                      title="Plot Area"
-                      value={`${formatNumberWithCommas(currentUnit.plotArea)} sq.ft`}
-                      icon={
-                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                      }
-                    />
-                  )}
+                  {propCgId !== projectprops.apartment &&
+                    propCgId !== projectprops.villament && (
+                      <DataItem
+                        title="Plot Area"
+                        value={`${formatNumberWithCommas(
+                          currentUnit.plotArea
+                        )} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
 
-                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && currentUnit.gardenArea && (
-                    <DataItem
-                      title="Garden Area"
-                      value={`${formatNumberWithCommas(currentUnit.gardenArea)} sq.ft`}
-                      icon={
-                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                      }
-                    />
-                  )} 
+                  {propCgId !== projectprops.apartment &&
+                    propCgId !== projectprops.plot &&
+                    currentUnit.gardenArea && (
+                      <DataItem
+                        title="Garden Area"
+                        value={`${formatNumberWithCommas(
+                          currentUnit.gardenArea
+                        )} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
 
-                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && currentUnit.parkingArea && (
-                    <DataItem
-                      title="Parking Area"
-                      value={`${formatNumberWithCommas(currentUnit.parkingArea)} sq.ft`}
-                      icon={
-                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                      }
-                    />
-                  )}
+                  {propCgId !== projectprops.apartment &&
+                    propCgId !== projectprops.plot &&
+                    currentUnit.parkingArea && (
+                      <DataItem
+                        title="Parking Area"
+                        value={`${formatNumberWithCommas(
+                          currentUnit.parkingArea
+                        )} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
                 </div>
 
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6 sticky top-[48px] bg-white">
                   Unit Features
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-4">
-                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+                  {(propCgId === projectprops.apartment ||
+                    propCgId === projectprops.villament) && (
                     <DataItem
-                      title={propCgId === projectprops.apartment? "Apartment Type" :"Villament Type" }
+                      title={
+                        propCgId === projectprops.apartment
+                          ? "Apartment Type"
+                          : "Villament Type"
+                      }
                       value={currentUnit.aptTypeName}
                       icon={
                         <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
@@ -469,7 +491,8 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+                  {(propCgId === projectprops.apartment ||
+                    propCgId === projectprops.villament) && (
                     <DataItem
                       title="Car Parking"
                       value={`${currentUnit.noOfCarParking} ${
@@ -485,14 +508,14 @@ export function FloorPlanModal({
                     currentUnit.terraceArea !== "null" && (
                       <DataItem
                         title="Terrace Area"
-                        value={`${formatNumberWithCommas(currentUnit.terraceArea)} sq.ft`}
+                        value={`${formatNumberWithCommas(
+                          currentUnit.terraceArea
+                        )} sq.ft`}
                         icon={
                           <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                         }
                       />
                     )}
-
-                    
                 </div>
               </div>
             </div>
