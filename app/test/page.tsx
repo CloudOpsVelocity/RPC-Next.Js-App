@@ -29,13 +29,27 @@ const coverImageUrl =
 const [defaultImg, smallImg, mediumImg, largeImg] = coverImageUrl.split(",");
 
 function CoverImage() {
-  // const array1 = ["a", "b", "c"];
-  // const iterator1 = array1[Symbol.iterator]();
-  // console.log(iterator1);
-  // console.log(iterator1);
-  // for (const value of iterator1) {
-  //   console.log(value);
-  // }
+  class Bhks {
+    private height = 0;
+    bhk: string[];
+    constructor(bhk: string[]) {
+      if (!Array.isArray(bhk)) {
+        this.bhk = [];
+      }
+      this.bhk = bhk;
+    }
+    get bhkNames() {
+      return this.bhk;
+    }
+    set setBhk(bhk: string[]) {
+      this.bhk = bhk;
+    }
+
+    private static privateMethod() {}
+  }
+  const bhk = new Bhks(["2BHK", "3BHK", "4BHK"]);
+  console.log(bhk);
+
   return (
     <>
       {/* // <picture>

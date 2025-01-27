@@ -1,5 +1,5 @@
 import React from "react";
-import LoginPopup from "@/app/components/project/modals/LoginPop";
+
 import {
   getData,
   getHomeListingData,
@@ -7,15 +7,16 @@ import {
 } from "./(dashboard)/new/api";
 import HomeSearch from "./(dashboard)/new/components/home-search";
 import HomeFeatures from "./(dashboard)/new/components/features";
-import NewAddedProjects from "./(dashboard)/new/components/newly-added-projects";
-import DynamicListing from "./(dashboard)/new/components/Listing";
-import TopLocalities from "./(dashboard)/new/components/top-localities";
-import HandPickedProjects from "./(dashboard)/new/components/hand-picked-projects";
-import ListbySection from "./(dashboard)/new/components/ListedBy";
-import PostYourListing from "./(dashboard)/new/components/post-your-listing";
-import BlogsSection from "./(dashboard)/new/components/blogs";
-import Req from "./(dashboard)/new/components/Req";
-import SharePopup from "./(dashboard)/searchOldPage/components/SharePopup";
+// import MiddleSection from "./(dashboard)/new/components/MiddleSection";
+const MiddleSection = dynamic(
+  () => import("./(dashboard)/new/components/MiddleSection"),
+  {
+    ssr: false,
+    loading: () => <div>Loading...</div>,
+  }
+);
+
+import dynamic from "next/dynamic";
 // import { cookies, headers } from "next/headers";
 // import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
@@ -27,96 +28,28 @@ export default async function Page() {
     status: true,
   };
 
-  const [data, listingData, shortIds] = await Promise.all([
+  const [data, listingData] = await Promise.all([
     getData(cityData?.data?.cityId),
     getHomeListingData(cityData?.data?.cityId),
-    getShortIds(),
+    // getShortIds(),
   ]);
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
       <HomeSearch
-        count={shortIds?.total}
-        shortIds={shortIds}
+        // count={shortIds?.total}
+        // shortIds={shortIds}
         cityData={{
           cityId: cityData?.data?.cityId ?? "",
           cityName: cityData?.data?.city ?? "",
         }}
       />
       <HomeFeatures />
-      <NewAddedProjects
-        data={data.featured}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-      />
-      <DynamicListing
-        title="Ready to Move Sale Listings"
-        content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
-        data={listingData["r_Sale"]}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-        dataKey="r_Sale"
-      />
-      <TopLocalities />
-      <DynamicListing
-        title="Ready to Move Rent Listings"
-        content="Find Your Perfect Home, Ready to Move In - Rent Today!"
-        data={listingData["r_Rent"]}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-        dataKey="r_Rent"
-      />
-      <DynamicListing
-        title="Featured Plot Listings"
-        content="Browse Top Listings and Find Your Perfect Plot Today!"
-        data={listingData["p"]}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-        dataKey="p"
-      />
-      <DynamicListing
-        title="Under Construction Sale Listings"
-        content="Explore Our Under Construction Listings Today!"
-        data={listingData["u_Sale"]}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-        dataKey="u_Sale"
-      />
-      <HandPickedProjects
+      <MiddleSection
         data={data}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
+        listingData={listingData}
+        cityData={cityData}
       />
-      <DynamicListing
-        title="Under Construction Rent Listings"
-        content="Discover New Developments and Under Construction Rent Listings!"
-        data={listingData["u_Rent"]}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-        dataKey="u_Rent"
-      />
-      <DynamicListing
-        title="Independent Sale Listings"
-        content="Your Gateway to Independent Living - Browse and Buy with Confidence"
-        data={listingData["i_Sale"]}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-        dataKey="i_Sale"
-      />{" "}
-      <ListbySection />
-      <DynamicListing
-        title="Independent Rent Listings"
-        content="Discover Your Ideal Rental: Independent Listings, Endless Options."
-        data={listingData["i_Rent"]}
-        shortIds={shortIds}
-        cityId={cityData?.data?.cityId}
-        dataKey="i_Rent"
-      />
-      <PostYourListing />
-      <BlogsSection />
-      <LoginPopup />
-      <SharePopup />
-      <Req />
     </div>
   );
 }

@@ -17,13 +17,13 @@ import { CityData } from "../../search";
 import CompareShortListCount from "./CompareShortListCount";
 
 const HomeSearch = ({
-  count,
+  // count,
   cityData,
-  shortIds,
-}: {
-  count: number;
+}: // shortIds,
+{
+  // count: number;
   cityData?: CityData;
-  shortIds?: any;
+  // shortIds?: any;
 }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +48,7 @@ const HomeSearch = ({
       <Alert />
       {/* shortlisted */}
       {/* <ShortListed /> */}
-      {count ? <CompareShortListCount initialValue={shortIds} /> : null}
+
       <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}
