@@ -7,6 +7,8 @@ import { findPathForBuilderDetails } from "../../utils/new-seo-routes/builder";
 import { BASE_PATH_BUILDER_DETAILS } from "../../utils/new-seo-routes/builder.route";
 import { notFound } from "next/navigation";
 import { getCitiesBuilder } from "../../utils/new-seo-routes/builder.client";
+import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 type Props = {
   params: {
     city: string;
@@ -26,32 +28,19 @@ export default async function Page({ params: { city } }: Props) {
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("builder-list");
-
-  // Convert the `res` object into a regular object (not a Map)
-  const resObject = { ...res };
-
+  await redisService.saveBuilderSlug(SlugsType.BUILDER, res);
   const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "builderSlugs.json");
 
   // Ensure the 'static' directory exists
   if (!fs.existsSync(staticDir)) {
     fs.mkdirSync(staticDir);
   }
 
-  // Convert the object to a JSON string
-  const jsonContent = JSON.stringify(resObject, null, 2);
-
-  // Write the JSON content to the file
-  fs.writeFileSync(filePath, jsonContent);
-
-  console.log(`JSON data has been saved to ${filePath}`);
-
   // Prepare the slugs for static generation
-  const builderRess = Object.keys(resObject);
+  const builderRess = Object.keys(res);
   const slugs = builderRess.map((data) => {
     const [staticPath, staticPath2, city, slug] = data.split("/");
-    return {city};
+    return { city };
   });
   return slugs;
 }
-

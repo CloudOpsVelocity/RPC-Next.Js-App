@@ -1,5 +1,6 @@
 import Redis from "ioredis";
 import redisConnection from "./redis.connection";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 
 class RedisService {
   private static instance: RedisService;
@@ -152,13 +153,13 @@ class RedisService {
     const fullKey = `seo:slug:${key}`;
     const exists = await this.existsKey(fullKey);
     if (!exists) {
-      await this.saveSlug("seo", key, value, ttl);
+      await this.saveSlug(SlugsType.STATIC, key, value, ttl);
     }
   }
 
   // Get SEO slug
   async getSeoSlug(key: string): Promise<string[]> {
-    const result = await this.getSlug("seo", key);
+    const result = await this.getSlug(SlugsType.STATIC, key);
     if (!result) return [];
     return result as string[];
   }
@@ -169,12 +170,12 @@ class RedisService {
     value: string,
     ttl?: number
   ): Promise<void> {
-    await this.saveSlug("listing", key, value, ttl);
+    await this.saveSlug(SlugsType.STATIC, key, value, ttl);
   }
 
   // Get Listing slug
   async getListingSlug(key: string): Promise<string | null> {
-    return await this.getSlug("listing", key);
+    return await this.getSlug(SlugsType.STATIC, key);
   }
 
   // Save Builder slug
@@ -183,12 +184,12 @@ class RedisService {
     value: string,
     ttl?: number
   ): Promise<void> {
-    await this.saveSlug("builder", key, value, ttl);
+    await this.saveSlug(SlugsType.STATIC, key, value, ttl);
   }
 
   // Get Builder slug
-  async getBuilderSlug(key: string): Promise<string | null> {
-    return await this.getSlug("builder", key);
+  async getBuilderSlug(key: string): Promise<any | null> {
+    return await this.getSlug(SlugsType.STATIC, key);
   }
 
   // Save Project slug
@@ -197,12 +198,12 @@ class RedisService {
     value: string,
     ttl?: number
   ): Promise<void> {
-    await this.saveSlug("project", key, value, ttl);
+    await this.saveSlug(SlugsType.STATIC, key, value, ttl);
   }
 
   // Get Project slug
-  async getProjectSlug(key: string): Promise<string | null> {
-    return await this.getSlug("project", key);
+  async getProjectSlug(key: string): Promise<any | null> {
+    return await this.getSlug(SlugsType.STATIC, key);
   }
 }
 

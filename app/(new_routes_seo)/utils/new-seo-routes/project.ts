@@ -1,6 +1,8 @@
 import path from "path";
 import fs from "fs";
 import { notFound } from "next/navigation";
+import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 export const extractProjectParamsValues = (input: string) => {
   const result: { [key: string]: string | number } = {};
 
@@ -53,17 +55,11 @@ export const extractProjectParamsValues = (input: string) => {
 };
 export async function findPathForProjectDetails(inputUrl: string) {
   console.time("findPathForProjectDetails");
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/slugs?type=P`,
-    {
-      next: { tags: ["projectSlugs"] },
-    }
-  );
-  const builderJsonData = await res.json();
+  const projectJsonData = await redisService.getProjectSlug(SlugsType.PROJECT);
+
   console.timeEnd("findPathForProjectDetails");
-  if (builderJsonData[inputUrl]) {
-    return builderJsonData[inputUrl];
+  if (projectJsonData[inputUrl]) {
+    return projectJsonData[inputUrl];
   }
   notFound();
-  return null;
 }

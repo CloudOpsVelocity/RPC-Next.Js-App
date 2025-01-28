@@ -10,6 +10,8 @@ import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
 import { getPagesSlugs } from "@/app/seo/api";
 import { Metadata, ResolvingMetadata } from "next";
+import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 
 type Props = {
   params: { city: string; lt: string; slug: string };
@@ -82,20 +84,20 @@ export default async function Page({ params }: Props) {
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("project-list");
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
+  // const staticDir = path.join(process.cwd(), "static");
+  // const filePath = path.join(staticDir, "projectSlugs.json");
 
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
+  // // Ensure the 'static' directory exists
+  // if (!fs.existsSync(staticDir)) {
+  //   fs.mkdirSync(staticDir);
+  // }
 
-  // Convert the data object into JSON
-  const jsonContent = JSON.stringify(res, null, 2);
+  // // Convert the data object into JSON
+  // const jsonContent = JSON.stringify(res, null, 2);
 
-  // Write the JSON data to the file
-  fs.writeFileSync(filePath, jsonContent);
-  console.log("projectSlugs.json file created successfully");
+  // // Write the JSON data to the file
+  // fs.writeFileSync(filePath, jsonContent);
+  await redisService.saveProjectSlug(SlugsType.PROJECT, res);
   const projectRes = Object.keys(res);
   const slugs = [];
   for (let i = 0; i < projectRes.length; i++) {
