@@ -16,7 +16,7 @@ export async function findSeoParams(inputUrl: string) {
       return builderJsonData[path];
     }
   }
-  console.timeEnd("dynamic" + headers().get("x-ip") ?? "LOCAL");
+
   return null;
 }
 export function extractCaseSeoParams(values: string) {

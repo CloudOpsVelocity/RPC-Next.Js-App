@@ -13,6 +13,8 @@ import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
 import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 import logger from "../utils/logger";
+import redisService from "../utils/redis/redis.service";
+import CaseSeoSearchService from "../services/case-seo.service";
 type Props = {
   params: {
     slug: string;
@@ -45,41 +47,9 @@ type Props = {
 // // Example usage
 // const key = "mysecretkey"; // Your encryption key
 export default async function Page({ params: { slug }, searchParams }: Props) {
-  // const ids = "WUpWJzxBVlE7OitIOjQ6UENdUSc6QEg6";
-  // const startTime = performance.now();
-  // console.log(decode(ids, key));
-  // const endTime = performance.now();
-  // console.log(`Decoding took ${endTime - startTime} milliseconds`);
-  if (!slug.includes("-")) return notFound();
-  // const values = await findSeoParams(slug);
-  // console.log(values)
-
-  const slugValues: any = extractCaseSeoParams(slug) as any;
-  let atMinusIndex = slugValues.count + 2;
-  let severData;
-  if (!searchParams.sf) {
-    let url = `${slugValues.CG ? `&cg=${slugValues.CG}` : ""}${
-      slugValues.C ? `&city=${slugValues.C}` : ""
-    }&${slugValues.P ? `propType=${slugValues.P}` : ""}&${
-      slugValues.B ? `bhk=${slugValues.B}` : ""
-    }&${slugValues.L ? `localities=${slugValues.L}` : ""}`;
-    console.log(url);
-    severData = await getNewProjSearchData(url);
-  }
-  let city = `Bengaluru`;
-  const frontEndFilter = {
-    ...(slugValues.P ? { propType: parseInt(slugValues.P) } : {}),
-    ...(slugValues.CG ? { cg: slugValues.CG } : {}),
-    ...(slugValues.C ? { city: `${city}+${slugValues.C}` } : {}),
-    ...(slugValues.B ? { bhk: [parseInt(slugValues.B)] } : {}),
-    ...(slugValues.L
-      ? {
-          localities: [
-            `${slug.split("-").at(-Number(atMinusIndex))}+${slugValues.L}`,
-          ],
-        }
-      : {}),
-  };
+  const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
+    sf: !!searchParams.sf,
+  });
   return (
     <>
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
@@ -91,20 +61,8 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 export const generateStaticParams = async () => {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("case-seo");
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "case-seo.json");
-
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
-
-  // Convert the data object into JSON
-  const jsonContent = JSON.stringify(res, null, 2);
-
-  // Write the JSON data to the file
-  fs.writeFileSync(filePath, jsonContent);
-  console.log("case-seo.json file created successfully");
+  await redisService.saveSeoSlug("case-seo", res);
+  console.log(`case-seo saved in redis succesfully`);
   if (process.env.ENVIRONMENT === "production") {
     return res.map((slug: string) => ({ slug }));
   }

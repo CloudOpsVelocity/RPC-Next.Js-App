@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
 import { getServerSideSitemap } from "next-sitemap";
+import redisService from "@/app/utils/redis/redis.service";
 
 // Utility function to split the array into chunks
 const chunkArray = (array: any[], chunkSize: number) => {
@@ -24,9 +25,7 @@ export async function GET(
   }
 
   // Path to your JSON file (projectSlugs or case-seo.json)
-  const filePath = path.join(process.cwd(), "static", "case-seo.json");
-  const data = fs.readFileSync(filePath, "utf-8");
-  const projectSlugs = JSON.parse(data);
+  const projectSlugs = await redisService.getSeoSlug("case-seo");
 
   // Set the chunk size (50,000 entries per sitemap)
   const chunkSize = 30000;
