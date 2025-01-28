@@ -24,12 +24,12 @@ export default async function Page({ params }: Props) {
   let slug = name.split("-").at(-1);
 
   if (!slug || slug.length !== 32) return notFound();
-  console.time("project detaild api calling" + slug);
-  let [projResponse, amenitiesFromDB] = await Promise.all([ 
+  console.time("project detaild api calling" + slug + process.env.NODE_ENV);
+  let [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),
   ]);
-  console.timeEnd("project detaild api calling" + slug);
+  console.timeEnd("project detaild api calling" + slug + process.env.NODE_ENV);
   if (projResponse.basicData.projAuthorityId) {
     const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
     projResponse = {

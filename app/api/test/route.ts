@@ -6,8 +6,8 @@ import redis from "@/app/utils/redis/redis.config";
 
 export async function GET(req: Request, res: NextResponse) {
   try {
-    const data = await getAllData();
-    return NextResponse.json({ status: true, data });
+    // const data = await getAllData();
+    return NextResponse.json({ status: true, data: "'hello'" });
   } catch (error) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });
