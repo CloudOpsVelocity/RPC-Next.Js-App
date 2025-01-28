@@ -55,10 +55,10 @@ function BlogCarousal() {
     };
     
     return (
-        <div className="flex justify-center items-center w-[80%] md:w-[90%] mb-[3%] relative " >
+        <div className="flex justify-center items-center w-[94%] md:w-[90%] mb-[3%] relative " >
             {allBlogData != undefined && allBlogData != null && allBlogData.length >= 2 &&
             <PrevCarouselButton
-                className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute left-[-50px] md:left-[-40px] top-[45%] z-10`}
+                className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute left-[10px] md:left-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("L")}
                 circle='#227FBC' iconColor='white'
             />
@@ -73,7 +73,7 @@ function BlogCarousal() {
                 onMouseMove={handleMouseMove}
                 style={{ userSelect: "none" }}
             >
-                <div className=' w-full flex justify-start items-start max-w-[1000px] gap-[20px] '> 
+                <div className='w-full flex justify-start items-start max-w-[1000px] gap-[20px] '> 
                     {allBlogData?.map((card: any) => (
                         <BlogCard key={`blogCard_${card.id}`} data={card} />
                     ))}
@@ -82,7 +82,7 @@ function BlogCarousal() {
 
             {allBlogData != undefined && allBlogData != null && allBlogData.length >= 2 &&
             <NextCarouselButton
-                className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute right-[-50px] md:right-[-40px] top-[45%]  z-10`}
+                className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute right-[10px] md:right-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("R")}
                 circle='#227FBC' iconColor='white'
             />
