@@ -1,4 +1,4 @@
-const baseUrl = process.env.NEXTAUTH_URL;
+const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
 // Replace with your actual base URL
 
 const data = [
@@ -41,11 +41,11 @@ const data = [
 export const unAuthorizedData = [
   {
     label: "Login",
-    url: `${baseUrl}/login`,
+    url: `${process.env.NEXT_PUBLIC_PROJECT_URL}/login`,
   },
   {
     label: "Sign Up",
-    url: `${baseUrl}/register`,
+    url: `${process.env.NEXT_PUBLIC_PROJECT_URL}/register`,
   },
 ];
 

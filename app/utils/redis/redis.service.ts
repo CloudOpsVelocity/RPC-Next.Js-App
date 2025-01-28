@@ -144,8 +144,16 @@ class RedisService {
   }
 
   // Save SEO slug
-  async saveSeoSlug(key: string, value: string, ttl?: number): Promise<void> {
-    await this.saveSlug("seo", key, value, ttl);
+  async saveSeoSlug(
+    key: string,
+    value: string,
+    ttl: number = 172800
+  ): Promise<void> {
+    const fullKey = `seo:slug:${key}`;
+    const exists = await this.existsKey(fullKey);
+    if (!exists) {
+      await this.saveSlug("seo", key, value, ttl);
+    }
   }
 
   // Get SEO slug
