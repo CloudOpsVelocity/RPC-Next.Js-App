@@ -42,7 +42,7 @@ export default function page({}: Props) {
     <div className="w-full">
       <Header />{" "}
       <div className="mt-[70px] w-full shrink-0 rounded-[10px] m-auto h-auto bg-[#F5F7F8]">
-        ABout Us
+        {/* ABout Us */}
         {/*About */}
         <div className="flex sm:flex-row items-center justify-start w-full gap-[4%] mb-5 sm:mb-0 sm:max-w-[80%] mx-auto flex-col-reverse max-w-full">
           <div className="content flex flex-col justify-start items-center sm:items-start max-w-[97%] sm:max-w-[60%] ">
