@@ -19,8 +19,6 @@ export default function Page({}: Props) {
   return <CoverImage />;
 }
 
-import Image from "next/image";
-
 // Your coverImageUrl string
 const coverImageUrl =
   "https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover.webp?v=1730784410064,https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover-small.webp,https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover-medium.webp,https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover-large.webp";
