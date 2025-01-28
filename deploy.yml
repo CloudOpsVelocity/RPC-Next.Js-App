@@ -1,0 +1,40 @@
+name: Deploy Next.js App to AWS EC2
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # GitHub-hosted runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Copy build to EC2
+        run: |
+          scp -i ${{ secrets.AWS_EC2_KEY }} -r .next/* ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }}:/opt/apps
+          scp -i ${{ secrets.AWS_EC2_KEY }} -r public/* ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }}:/opt/apps
+
+      - name: Start application on EC2
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.AWS_EC2_KEY }}
+          script: |
+            cd /path/to/your/app
+            pm2 restart all || pm2 start npm --name "next-app" -- start
