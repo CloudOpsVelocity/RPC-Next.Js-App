@@ -7,8 +7,8 @@ import redisService from "@/app/utils/redis/redis.service";
 
 export async function GET(req: Request, res: NextResponse) {
   try {
-    const data = await redisService.getSeoSlug("case-seo");
-    return NextResponse.json(data);
+    // const data = await redisService.getSeoSlug("case-seo");
+    return NextResponse.json({});
   } catch (error) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });
