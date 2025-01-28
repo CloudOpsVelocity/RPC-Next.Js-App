@@ -16,7 +16,7 @@ export default function Page({}: Props) {
     return array;
   };
   console.table([3, 5, 1, 58, 765, 4, 343, 23, 65]);
-  return <CoverImage />;
+  return <div className="mt-[60%]">{process.env.NODE_ENV}</div>;
 }
 
 // Your coverImageUrl string

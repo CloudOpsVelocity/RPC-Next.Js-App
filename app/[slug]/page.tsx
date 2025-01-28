@@ -12,6 +12,7 @@ import { findSeoParams, extractCaseSeoParams } from "./_utils/findParams";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
 import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
+import logger from "../utils/logger";
 type Props = {
   params: {
     slug: string;
@@ -104,10 +105,9 @@ export const generateStaticParams = async () => {
   // Write the JSON data to the file
   fs.writeFileSync(filePath, jsonContent);
   console.log("case-seo.json file created successfully");
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.ENVIRONMENT === "production") {
     return res.map((slug: string) => ({ slug }));
   }
-
   return [];
 };
 

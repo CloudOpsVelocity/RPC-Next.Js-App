@@ -348,7 +348,7 @@ function MobileDropDown() {
                 <button
                   onClick={() =>
                     window.open(
-                      `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile/dashboard`,
+                      `${process.env.NEXTAUTH_URL}/your-profile/dashboard`,
                       "_blank"
                     )
                   }
