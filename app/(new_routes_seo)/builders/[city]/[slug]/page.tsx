@@ -5,6 +5,8 @@ import fs from "fs";
 import { getBuilderDetailsPageData } from "@/app/utils/api/builder";
 import { notFound } from "next/navigation";
 import BuilderPage from "@/app/builder/[slug]/Page/BuilderPage";
+import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 type Props = {
   params: {
     city: string;
@@ -13,13 +15,10 @@ type Props = {
 };
 
 async function getBuilderSlug(pathname: string) {
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "builderSlugs.json");
-  console.time("getBuilderSlugs");
   try {
-    // Read the JSON file asynchronously
-    const jsonData = fs.readFileSync(filePath, "utf-8");
-    const builderJsonData = JSON.parse(jsonData);
+    const builderJsonData = await redisService.getBuilderSlug(
+      SlugsType.BUILDER
+    );
     const decodeUrl = decodeURIComponent(pathname);
     return builderJsonData[decodeUrl];
   } catch (error) {
