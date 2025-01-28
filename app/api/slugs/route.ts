@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import { revalidatePath, revalidateTag } from "next/cache";
 import logger from "@/app/utils/logger";
+import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 
 const typeMapping = {
   P: "project",
@@ -33,17 +35,20 @@ export async function POST(request: Request, response: Response) {
     }
 
     type = typeMapping[type as keyof typeof typeMapping] || type;
-    const filePath = getFilePath(type);
-    // Ensure the file exists
-    if (!fs.existsSync(filePath)) {
-      logger.warn(
-        `File does not exist, creating a new one: ${filePath}. Request: ${request.method} ${request.url}`
+    const cacheKey = `${SlugsType.STATIC}:slug:${type}`; // Redis key for the slugs data
+
+    // Get data from Redis cache
+    const data = await redisService.getKey(cacheKey);
+    let parsedData: { [key: string]: string } = {};
+
+    if (data) {
+      parsedData = JSON.parse(data);
+    } else {
+      logger.info(
+        "No data found in Redis. Falling back to default data structure."
       );
-      fs.writeFileSync(filePath, JSON.stringify({}));
     }
 
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const data = JSON.parse(fileContent);
     switch (action) {
       case "create": {
         logger.info(
@@ -74,7 +79,7 @@ export async function POST(request: Request, response: Response) {
           }
 
           // Check if the slug already exists in data
-          if (Object.prototype.hasOwnProperty.call(data, slug)) {
+          if (Object.prototype.hasOwnProperty.call(parsedData, slug)) {
             errors.push(`Slug "${slug}" already exists`);
           } else {
             if (type === "project") {
@@ -82,12 +87,12 @@ export async function POST(request: Request, response: Response) {
               let base = "/residential/projects/";
               for (let i = 3; i < slugParts.length; i++) {
                 base += slugParts[i] + (slugParts.length - 1 == i ? "" : "/");
-                if (!data[base]) {
-                  data[base] = id;
+                if (!parsedData[base]) {
+                  parsedData[base] = id;
                 }
               }
             } else {
-              data[slug] = id;
+              parsedData[slug] = id;
               logger.info(
                 `Slug "${slug}" added with ID: ${id}. Request: ${request.method} ${request.url}`
               );
@@ -107,14 +112,11 @@ export async function POST(request: Request, response: Response) {
             { status: 400 }
           );
         }
-        // Write updated data to the file
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+
+        // Save updated data to Redis
+        await redisService.setKey(cacheKey, JSON.stringify(parsedData));
         logger.info(
-          `File updated with new slugs. Request: ${request.method} ${request.url}`
-        );
-        // Success response if all slugs were processed correctly
-        logger.info(
-          `Slugs created successfully. Request: ${request.method} ${request.url}`
+          `Slugs created successfully and data updated in Redis. Request: ${request.method} ${request.url}`
         );
         type === "project" && revalidateTag("projectSlugs");
         return NextResponse.json(
@@ -122,6 +124,7 @@ export async function POST(request: Request, response: Response) {
           { status: 201 }
         );
       }
+
       case "update": {
         logger.info(
           `Action: update. Request: ${request.method} ${request.url}`
@@ -142,19 +145,22 @@ export async function POST(request: Request, response: Response) {
         }
 
         // Find and delete existing slugs with the same id
-        Object.keys(data).forEach((key) => {
-          if (type === "project" && data[key].includes(`LT_${id}*`)) {
+        Object.keys(parsedData).forEach((key) => {
+          if (type === "project" && parsedData[key].includes(`LT_${id}*`)) {
             logger.info(
               `Deleting existing slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
             );
-            delete data[key];
+            delete parsedData[key];
             revalidatePath(key.split("/").slice(0, 6).join("/"));
             revalidatePath(key);
-          } else if (type === "builder" && id === data[key].split("_")[1]) {
+          } else if (
+            type === "builder" &&
+            id === parsedData[key].split("_")[1]
+          ) {
             logger.info(
               `Deleting existing slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
             );
-            delete data[key];
+            delete parsedData[key];
             revalidatePath(key);
           }
         });
@@ -172,7 +178,7 @@ export async function POST(request: Request, response: Response) {
             );
           }
           // Check if the new slug already exists
-          if (Object.prototype.hasOwnProperty.call(data, slug)) {
+          if (Object.prototype.hasOwnProperty.call(parsedData, slug)) {
             logger.error(
               `Slug '${slug}' already exists. Request: ${request.method} ${request.url}`
             );
@@ -185,21 +191,22 @@ export async function POST(request: Request, response: Response) {
           logger.info(
             `Adding new slug "${slug}" with ID: ${newId}. Request: ${request.method} ${request.url}`
           );
-          data[slug] = newId;
+          parsedData[slug] = newId;
         }
 
-        // Write updated data to the file
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        // Save updated data to Redis
+        await redisService.setKey(cacheKey, JSON.stringify(parsedData));
         logger.info(
-          `Successfully updated slugs file with new data. Request: ${request.method} ${request.url}`
+          `Successfully updated slugs file with new data in Redis. Request: ${request.method} ${request.url}`
         );
+
         let revalidateTagId: string | null = null;
         // Revalidate all paths for the new slugs
         Object.keys(slugs).forEach((slug) => {
           revalidatePath(slug);
           if (!revalidateTagId) {
             if (type === "project") {
-              let id = data[slug].split("_")[2].split("*")[0];
+              let id = parsedData[slug].split("_")[2].split("*")[0];
               revalidateTagId = id;
               revalidateTag(id);
             } else if (type === "builder") {
@@ -214,6 +221,7 @@ export async function POST(request: Request, response: Response) {
           { status: 200 }
         );
       }
+
       case "delete": {
         logger.info(
           `Action: delete. Request: ${request.method} ${request.url}`
@@ -230,21 +238,24 @@ export async function POST(request: Request, response: Response) {
 
         let deleted = false; // Track whether a deletion occurs
         // Loop over keys and delete the ones that contain the id
-        Object.keys(data).forEach((key) => {
-          if (type === "project" && data[key].includes(`LT_${id}*`)) {
+        Object.keys(parsedData).forEach((key) => {
+          if (type === "project" && parsedData[key].includes(`LT_${id}*`)) {
             logger.info(
               `Deleting slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
             );
-            delete data[key];
+            delete parsedData[key];
             if (!deleted) {
               revalidatePath(key.split("/").slice(0, 6).join("/"));
               deleted = true;
             }
-          } else if (type === "builder" && id === data[key].split("_")[1]) {
+          } else if (
+            type === "builder" &&
+            id === parsedData[key].split("_")[1]
+          ) {
             logger.info(
               `Deleting slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
             );
-            delete data[key];
+            delete parsedData[key];
             if (!deleted) {
               revalidatePath(key);
               deleted = true;
@@ -263,8 +274,8 @@ export async function POST(request: Request, response: Response) {
           );
         }
 
-        // Write updated data back to the file
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        // Save updated data back to Redis
+        await redisService.setKey(cacheKey, JSON.stringify(parsedData));
         logger.info(
           `${type} with ID "${id}" deleted successfully. Request: ${request.method} ${request.url}`
         );
@@ -289,28 +300,51 @@ export async function POST(request: Request, response: Response) {
       `Error processing POST request: ${error}. Request: ${request.method} ${request.url}`
     );
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
 }
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const type = searchParams.get("type");
-  if (!type || (type !== "P" && type !== "B")) {
-    logger.error(
-      `Invalid type parameter. Request: ${request.method} ${request.url}`
-    );
-    return new Response("something went wrong", {
-      status: 400,
-    });
-  }
-  const filePath = getFilePath(typeMapping[type]);
-  const data = fs.readFileSync(filePath, "utf-8");
+  try {
+    const { searchParams } = new URL(request.url);
+    const type = searchParams.get("type");
 
-  logger.info(
-    `GET request successful. Request: ${request.method} ${request.url}`
-  );
-  return NextResponse.json(JSON.parse(data), { status: 200 });
+    if (!type || (type !== "P" && type !== "B")) {
+      logger.error(
+        `Invalid type parameter. Request: ${request.method} ${request.url}`
+      );
+      return NextResponse.json(
+        { error: "Invalid type parameter" },
+        { status: 400 }
+      );
+    }
+
+    const mappedType = typeMapping[type as keyof typeof typeMapping];
+    const cacheKey = `${SlugsType.STATIC}:slug:${mappedType}`;
+
+    // Get data from Redis cache
+    const data = await redisService.getKey(cacheKey);
+
+    if (!data) {
+      logger.error(
+        `No data found in Redis for type ${mappedType}. Request: ${request.method} ${request.url}`
+      );
+      return NextResponse.json({ error: "Data not found" }, { status: 404 });
+    }
+
+    logger.info(
+      `GET request successful. Request: ${request.method} ${request.url}`
+    );
+    return NextResponse.json(JSON.parse(data), { status: 200 });
+  } catch (error) {
+    logger.error(
+      `Error processing GET request: ${error}. Request: ${request.method} ${request.url}`
+    );
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }
