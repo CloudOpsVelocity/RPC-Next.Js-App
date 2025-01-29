@@ -150,7 +150,7 @@ class RedisService {
     value: string,
     ttl: number = 172800
   ): Promise<void> {
-    const fullKey = `seo:slug:${key}`;
+    const fullKey = `${SlugsType.STATIC}:slug:${key}`;
     const exists = await this.existsKey(fullKey);
     if (!exists) {
       await this.saveSlug(SlugsType.STATIC, key, value, ttl);
@@ -174,8 +174,8 @@ class RedisService {
   }
 
   // Get Listing slug
-  async getListingSlug(key: string): Promise<string | null> {
-    return await this.getSlug(SlugsType.STATIC, key);
+  async getListingSlug(key: string): Promise<any | null> {
+    return (await this.getSlug(SlugsType.STATIC, key)) || {};
   }
 
   // Save Builder slug

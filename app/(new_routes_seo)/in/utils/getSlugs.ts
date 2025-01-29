@@ -1,3 +1,5 @@
+import { SlugsType } from "@/app/common/constatns/slug.constants";
+import redisService from "@/app/utils/redis/redis.service";
 import fs from "fs";
 import path from "path";
 async function getListingSLugs(pathname: string) {
@@ -49,10 +51,7 @@ export async function getNestedSlug(pathname: string, level?: number) {
 }
 
 export async function findPathForProjectListing(inputUrl: string) {
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "listingSlugs.json");
-  const jsonData = fs.readFileSync(filePath, "utf8");
-  const builderJsonData = JSON.parse(jsonData);
+  const builderJsonData = await redisService.getListingSlug(SlugsType.LISTING);
   for (const path in builderJsonData) {
     if (path.startsWith(inputUrl)) {
       return builderJsonData[path];

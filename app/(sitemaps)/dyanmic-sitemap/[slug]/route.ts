@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { getServerSideSitemap } from "next-sitemap";
 import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 
 // Utility function to split the array into chunks
 const chunkArray = (array: any[], chunkSize: number) => {
@@ -25,7 +26,7 @@ export async function GET(
   }
 
   // Path to your JSON file (projectSlugs or case-seo.json)
-  const projectSlugs = await redisService.getSeoSlug("case-seo");
+  const projectSlugs = await redisService.getSeoSlug(SlugsType.SEO);
 
   // Set the chunk size (50,000 entries per sitemap)
   const chunkSize = 30000;

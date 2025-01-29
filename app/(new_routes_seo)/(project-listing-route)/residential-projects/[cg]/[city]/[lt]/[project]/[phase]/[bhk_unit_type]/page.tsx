@@ -41,10 +41,10 @@ export default async function Page({ params }: Props) {
   // filtersValues.PT == "32"
   //   ? filtersValues.count === 7
   //   : filtersValues.count === 8;
-
+  console.log(isProjectListing, pathname);
   if (!isProjectListing) {
     const values = await findPathForProjectListing(pathname);
-
+    console.log(values);
     if (!values) return notFound();
     filtersValues = extractListingParamsValues(values);
     serverData = await getSearchData(

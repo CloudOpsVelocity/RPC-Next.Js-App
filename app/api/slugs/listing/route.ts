@@ -4,9 +4,8 @@ import path from "path";
 import { revalidatePath, revalidateTag } from "next/cache";
 import logger from "@/app/utils/logger";
 import { getPagesSlugs } from "@/app/seo/api";
-
-const getFilePath = () =>
-  path.join(process.cwd(), "static", "listingSlugs.json");
+import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 
 export async function POST(request: Request) {
   let body = await request.json();
@@ -20,16 +19,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const filePath = getFilePath();
-
-  // Ensure the file exists
-  if (!fs.existsSync(filePath)) {
-    logger.info(`POST ${request.url}: Creating new listingSlugs.json file`);
-    fs.writeFileSync(filePath, JSON.stringify({}));
-  }
-
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const data = JSON.parse(fileContent);
+  const data = await redisService.getListingSlug(SlugsType.LISTING);
 
   switch (action) {
     case "create": {
@@ -69,8 +59,7 @@ export async function POST(request: Request) {
         );
         return NextResponse.json({ error: errors.join(", ") }, { status: 400 });
       }
-      // Write the updated data back to the file
-      fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+      await redisService.saveListingSlug(SlugsType.LISTING, data);
       logger.info(`POST ${request.url}: Successfully created new listing(s)`, {
         slugs,
       });
@@ -120,7 +109,7 @@ export async function POST(request: Request) {
         logger.info(`POST ${request.url}: Added new slug: ${slug}`);
       });
       // Write updated data to the file
-      fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+      await redisService.saveListingSlug(SlugsType.LISTING, data);
       // Revalidate all paths for the new slugs
       Object.keys(slugs).forEach((slug) => {
         revalidatePath(slug);
@@ -162,7 +151,7 @@ export async function POST(request: Request) {
           { status: 404 }
         );
       }
-      fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+      await redisService.saveListingSlug(SlugsType.LISTING, data);
       logger.info(`POST ${request.url}: Successfully deleted listing slugs`);
       return NextResponse.json(
         { message: `Listing slugs deleted successfully` },
@@ -194,16 +183,7 @@ export async function PUT(request: Request) {
     );
   }
 
-  const filePath = getFilePath();
-
-  // Ensure the file exists
-  if (!fs.existsSync(filePath)) {
-    logger.info(`PUT ${request.url}: Creating new listingSlugs.json file`);
-    fs.writeFileSync(filePath, JSON.stringify({}));
-  }
-
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const data = JSON.parse(fileContent);
+  const data = await redisService.getListingSlug(SlugsType.LISTING);
 
   // First delete existing slugs based on ids
   if (id) {
@@ -220,7 +200,7 @@ export async function PUT(request: Request) {
 
   Object.assign(data, slugs); // Merge new slugs into existing data
 
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  await redisService.saveListingSlug(SlugsType.LISTING, data);
   logger.info(`PUT ${request.url}: Successfully updated listing slugs`);
 
   return NextResponse.json(
@@ -229,27 +209,25 @@ export async function PUT(request: Request) {
   );
 }
 
-export async function PATCH() {
-  const res = await getPagesSlugs("listing-search-seo");
-  // Fetch data and cache the keys
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "listingSlugs.json");
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
-  // Convert the data object into JSON
-  const jsonContent = JSON.stringify(res, null, 2);
-  // Write the JSON data to the file
-  fs.writeFileSync(filePath, jsonContent);
-  return NextResponse.json(
-    { message: "Listing slugs updated successfully" },
-    { status: 200 }
-  );
-}
+// export async function PATCH() {
+//   const res = await getPagesSlugs("listing-search-seo");
+//   // Fetch data and cache the keys
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "listingSlugs.json");
+//   // Ensure the 'static' directory exists
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
+//   // Convert the data object into JSON
+//   const jsonContent = JSON.stringify(res, null, 2);
+//   // Write the JSON data to the file
+//   fs.writeFileSync(filePath, jsonContent);
+//   return NextResponse.json(
+//     { message: "Listing slugs updated successfully" },
+//     { status: 200 }
+//   );
+// }
 export async function GET(request: Request) {
-  const filePath = getFilePath();
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const data = JSON.parse(fileContent);
+  const data = await redisService.getListingSlug(SlugsType.LISTING);
   return NextResponse.json(data, { status: 200 });
 }

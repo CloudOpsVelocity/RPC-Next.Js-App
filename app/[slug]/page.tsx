@@ -15,6 +15,7 @@ import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 import logger from "../utils/logger";
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
+import { SlugsType } from "../common/constatns/slug.constants";
 type Props = {
   params: {
     slug: string;
@@ -61,7 +62,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 export const generateStaticParams = async () => {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("case-seo");
-  await redisService.saveSeoSlug("case-seo", res);
+  await redisService.saveSeoSlug(SlugsType.SEO, res);
   console.log(`case-seo saved in redis succesfully`);
   if (process.env.ENVIRONMENT === "production") {
     return res.map((slug: string) => ({ slug }));

@@ -3,6 +3,8 @@ import { getServerSideSitemap } from "next-sitemap";
 import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
+import redisService from "@/app/utils/redis/redis.service";
+import { SlugsType } from "@/app/common/constatns/slug.constants";
 
 type SlugParams = {
   emptyPath?: string;
@@ -28,21 +30,12 @@ export async function generateSlugs(
 
   if (!keys) {
     const res = await getPagesSlugs(slugType);
-    // Fetch data and cache the keys
-    const staticDir = path.join(process.cwd(), "static");
-    const filePath = path.join(staticDir, "listingSlugs.json");
-    // Ensure the 'static' directory exists
-    if (!fs.existsSync(staticDir)) {
-      fs.mkdirSync(staticDir);
-    }
-    // Convert the data object into JSON
-    const jsonContent = JSON.stringify(res, null, 2);
-    // Write the JSON data to the file
-    fs.writeFileSync(filePath, jsonContent);
+    await redisService.saveSeoSlug(SlugsType.LISTING, res);
+
     keys = Object.keys(res);
     cache.set(slugType, keys);
   }
-  // Map through the sliced keys and return the parameters
+
   const slugs = keys.map((data) => {
     if (data.includes("/residential/listings") && type === "solo-listing") {
       const [emptyPath, country, , cg, city, lt, bhk_unit_type, slug] =
