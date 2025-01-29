@@ -158,79 +158,58 @@ export default function TopRightSection({
                         "_blank"
                       )
                     }
-                    className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
+                    className="xm:px-[1px] sm:py-[1px] inline-flex flex-row justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
                   >
-                    {/* <Image className="flex sm:hidden" alt="floorPlan-icon" src="/floorPlan.png" width={6} height={7}/> */}
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {/* Blueprint Roll */}
-                      <path
-                        d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4Z"
-                        fill="#6B9AFF"
-                        fillOpacity="0.1"
-                      />
-                      <path
-                        d="M3 4V20C3 20.5523 3.44772 21 4 21H5V3H4C3.44772 3 3 3.44772 3 4Z"
-                        fill="#6B9AFF"
-                      />
-
-                      {/* House */}
-                      <path d="M8 10H16L12 7L8 10Z" fill="#6B9AFF" />
-                      <rect x="9" y="10" width="6" height="5" fill="#6B9AFF" />
-                      <rect
-                        x="10.5"
-                        y="12"
-                        width="1.5"
-                        height="3"
-                        fill="white"
-                      />
-                      <rect x="13" y="12" width="1" height="1" fill="white" />
-
-                      {/* Measurement Line */}
-                      <line
-                        x1="8"
-                        y1="16"
-                        x2="16"
-                        y2="16"
-                        stroke="#6B9AFF"
-                        strokeWidth="0.5"
-                      />
-                      <line
-                        x1="8"
-                        y1="15.5"
-                        x2="8"
-                        y2="16.5"
-                        stroke="#6B9AFF"
-                        strokeWidth="0.5"
-                      />
-                      <line
-                        x1="16"
-                        y1="15.5"
-                        x2="16"
-                        y2="16.5"
-                        stroke="#6B9AFF"
-                        strokeWidth="0.5"
-                      />
-
-                      {/* Pencil */}
-                      <path d="M14 8L16 6L17 7L15 9L14 8Z" fill="#6B9AFF" />
-                      <rect
-                        x="16"
-                        y="5.5"
-                        width="1.5"
-                        height="1"
-                        transform="rotate(45 16.5 5.5)"
-                        fill="#6B9AFF"
-                      />
-                    </svg>
+                    <div className="flex items-center justify-center">
+                      <div className="flex flex-col items-center">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            width="24"
+                            height="24"
+                            rx="4"
+                            fill="#0073C6"
+                            fillOpacity="0.1"
+                          />
+                          <path
+                            d="M6 7C6 6.44772 6.44772 6 7 6H17C17.5523 6 18 6.44772 18 7V17C18 17.5523 17.5523 18 17 18H7C6.44772 18 6 17.5523 6 17V7Z"
+                            stroke="#0073C6"
+                            strokeWidth="1.5"
+                          />
+                          <path
+                            d="M6 9H18"
+                            stroke="#0073C6"
+                            strokeWidth="1.5"
+                          />
+                          <path
+                            d="M9 9V18"
+                            stroke="#0073C6"
+                            strokeWidth="1.5"
+                          />
+                          <path
+                            d="M12 12H15"
+                            stroke="#0073C6"
+                            strokeWidth="1.5"
+                          />
+                          <path
+                            d="M12 15H15"
+                            stroke="#0073C6"
+                            strokeWidth="1.5"
+                          />
+                        </svg>
+                        <span className="text-[10px] hidden sm:flex text-[#0073C6] font-medium mt-0.5">
+                          Floor Plan
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 )}
-                <div
+                {/* <div
                   onClick={() => {
                     handleClick();
                     setSelected({
@@ -247,7 +226,7 @@ export default function TopRightSection({
                   className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
                 >
                   <NewMapIcon className="w-6 h-6" />
-                </div>
+                </div> */}
                 {/* 
                 <button
                   className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px] rounded text-[#242424] text-sm not-italic font-semibold sm:my-1 md:mb-1 xl:gradient"

@@ -24,7 +24,7 @@ const Map = ({ data, lat, lang, type }: any) => {
     <>
       <MapContainer
         center={position}
-        className="h-[calc(100vh-75vh)] sm:h-[calc(100vh-18vh)] xl:h-[calc(100vh-24vh)] w-full  max-w-full -z-[1]"
+        className="h-[calc(100vh-75vh)] sm:h-[calc(100vh)] xl:h-[calc(100vh-24vh)] w-full  max-w-full -z-[1]"
         scrollWheelZoom
         zoom={12}
       >
@@ -120,7 +120,9 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             permanent={selected?.reqId === itemId}
             direction="top"
             offset={[10, -35]}
-            className={`${isProp ? "min-w-fit" : "min-w-[400px]"}  max-w-screen-sm !p-0`}
+            className={`${
+              isProp ? "min-w-fit" : "min-w-[400px]"
+            }  max-w-screen-sm !p-0`}
             sticky
           >
             {!isProp ? (

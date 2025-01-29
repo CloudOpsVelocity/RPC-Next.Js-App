@@ -80,7 +80,7 @@ export default async function ProjectsDetailsPage({
   } for sale in ${data.localityName} ${data.cityName}`;
   const imageUrl = data?.media?.coverImageUrl.split(",")[1];
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
-console.log(params)
+  console.log(params);
   return (
     <section className="w-full relative break-words ">
       {/* <meta name="keywords" content={`${data.projectName}, ${data.localityName}, ${data.cityName}, real estate, property`} /> */}
@@ -163,20 +163,14 @@ console.log(params)
         )}
 
         {!data.partialUnitData ? (
-          process.env.NODE_ENV === "development" ||
-          data.projIdEnc === "0d1a266da2f55719f25fc89557db315f" ||
-          data.projIdEnc === "88bcbd719b76b51abdcbde509965a294" ? (
-            <FloorPlans
-              phases={data.phases}
-              projName={data.projectName}
-              partialUnitData={data.partialUnitData}
-              phaseOverview={phaseOverview}
-              slug={slug}
-              postedById={data.builderId}
-            />
-          ) : (
-            ""
-          )
+          <FloorPlans
+            phases={data.phases}
+            projName={data.projectName}
+            partialUnitData={data.partialUnitData}
+            phaseOverview={phaseOverview}
+            slug={slug}
+            postedById={data.builderId}
+          />
         ) : (
           <PartialUnitData
             partialUnitData={data.partialUnitData}

@@ -56,7 +56,6 @@ export const extractProjectParamsValues = (input: string) => {
 export async function findPathForProjectDetails(inputUrl: string) {
   console.time("findPathForProjectDetails");
   const projectJsonData = await redisService.getProjectSlug(SlugsType.PROJECT);
-
   console.timeEnd("findPathForProjectDetails");
   if (projectJsonData[inputUrl]) {
     return projectJsonData[inputUrl];

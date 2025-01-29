@@ -87,13 +87,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     }
   };
 
-  const handleClear = (category: string) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [category]: [],
-    }));
-  };
-
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);

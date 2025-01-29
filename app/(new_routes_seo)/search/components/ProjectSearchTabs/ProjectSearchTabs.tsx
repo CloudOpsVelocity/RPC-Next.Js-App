@@ -108,7 +108,7 @@ export default function ProjectSearchTabs() {
       type: "update",
       payload: updatedFilters,
     });
-    console.log(updatedFilters);
+
     handleApplyFilters();
   };
   const handleSortBy = (option: any) => {
@@ -154,7 +154,7 @@ export default function ProjectSearchTabs() {
   // Default value if no conditions are met
 
   return (
-    <div className="sticky top-0   z-10 ">
+    <div className="sticky top-0  z-[6]   ">
       <div className=" w-full bg-slate-50 shadow-md max-w-7xl  mx-auto sm:px-4 pb-4 pt-2     sm:pb-3">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div

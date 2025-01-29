@@ -173,30 +173,30 @@ export default function ProjData({
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(price))}{" "}
-        {otherCharges?.otherCharge ||
-          (otherCharges && Object.keys(otherCharges).length > 1 && (
-            <span
-              className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
-              onClick={(e) => {
-                e.stopPropagation();
-                dispatch({
-                  conType: "otherCharges",
-                  content: {
-                    charges: otherCharges,
-                  },
-                  // id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
-                  id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
-                    propTypeId ?? propTypeName ?? ""
-                  }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
-                  title: "Other Charges",
-                  type: "OPEN",
-                  pType: type,
-                });
-              }}
-            >
-              View Other Charges
-            </span>
-          ))}
+        {(otherCharges?.otherCharge ||
+          (otherCharges && Object.keys(otherCharges).length > 2)) && (
+          <span
+            className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch({
+                conType: "otherCharges",
+                content: {
+                  charges: otherCharges,
+                },
+                // id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
+                id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+                  propTypeId ?? propTypeName ?? ""
+                }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
+                title: "Other Charges",
+                type: "OPEN",
+                pType: type,
+              });
+            }}
+          >
+            View Other Charges
+          </span>
+        )}
       </p>
 
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
