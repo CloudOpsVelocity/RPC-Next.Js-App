@@ -71,18 +71,6 @@ export default async function Page({
 export async function generateStaticParams() {
   const slugs = generateSlugs("listing-search-seo", "solo-listing");
   return slugs;
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  // const res = await getPagesSlugs("listing-search-seo");
-  // // Extract project names from the keys
-  // const projectRes = Object.keys(res);
-  // const slugs = projectRes.map((data) => {
-  //   if (data.includes("/in/for-")) {
-  //     const [emtypath, country, cg, city, lt, bhk_unit_type, slug] =
-  //       data.split("/");
-  //     return { cg, city, lt, bhk_unit_type };
-  //   }
-  // });
-  // return slugs;
 }
 export async function generateMetadata(
   { params }: any,

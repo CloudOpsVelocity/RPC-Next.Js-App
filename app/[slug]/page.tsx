@@ -64,8 +64,7 @@ export const generateStaticParams = async () => {
   await redisService.saveSeoSlug("case-seo", res);
   console.log(`case-seo saved in redis succesfully`);
   if (process.env.ENVIRONMENT === "production") {
-    // return res.map((slug: string) => ({ slug }));
-    return []
+    return res.map((slug: string) => ({ slug }));
   }
   return [];
 };

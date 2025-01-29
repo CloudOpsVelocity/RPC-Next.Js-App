@@ -4,7 +4,6 @@ import {
   findPathForProjectDetails,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import { getPagesSlugs } from "@/app/seo/api";
 import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import { notFound } from "next/navigation";
 import React from "react";
