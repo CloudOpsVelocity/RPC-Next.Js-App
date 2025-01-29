@@ -16,7 +16,6 @@ import { useSession } from "next-auth/react";
 
 function Footer() {
   const { data: session } = useSession();
-  console.log(session);
   const socialIcons = [
     {
       name: "facebook",
