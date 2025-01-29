@@ -1,3 +1,4 @@
+"use client";
 import { GrpDarkLogoSvg } from "@/app/images/getrightLogo";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -11,8 +12,10 @@ import {
 } from "react-icons/fa";
 import Subscribe from "@/app/test/components/Section/Subscribe";
 import { memo } from "react";
+import { useSession } from "next-auth/react";
 
 function Footer() {
+  const { data: session } = useSession();
   const socialIcons = [
     {
       name: "facebook",
@@ -103,10 +106,10 @@ function Footer() {
         "Home",
         "Projects",
         "Properties",
-        "Post Project",
+        session !== undefined && session !== null && session.user?.userType === "B" ? "Post Project" : "",
         "Post Property",
         "Builders",
-        "Login/Signup",
+        session === null ? "Login/Signup" : "",
         "Listing Search",
         "Project Search",
       ],
@@ -221,7 +224,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="sm:mt-4  md:space-y-4">
+                    {/* <ul className="sm:mt-4  md:space-y-4">
                       {links.map((link, index) => {
                         if (link == "Login/Signup") {
                           return (
@@ -249,7 +252,23 @@ function Footer() {
                           );
                         }
                       })}
-                    </ul>
+                    </ul> */}
+
+                    <ul className="sm:mt-4  md:space-y-4">
+                    {links.map((link, index) => {
+                      if(link !== ""){
+                      return(
+                      <li key={link}>
+                        <a
+                          href={hrefs[index]}
+                          target={target}
+                          className="text-xs sm:text-base text-gray-300 hover:text-white"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    )}})}
+                  </ul>
                   </div>
                 );
               })}

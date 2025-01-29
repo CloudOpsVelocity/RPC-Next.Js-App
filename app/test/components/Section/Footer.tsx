@@ -10,8 +10,12 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import Subscribe from "./Subscribe";
+import { useSession } from "next-auth/react";
 
 export default function EnhancedFooter() {
+  const { data: session } = useSession();
+  console.log(session)
+  
   const socialIcons = [
     {
       name: "facebook",
@@ -102,10 +106,10 @@ export default function EnhancedFooter() {
         "Home",
         "Projects",
         "Properties",
-        "Post Project",
+        session !== null && session.user?.userType === "B" ? "Post Project" : "",
         "Post Property",
         "Builders",
-        "Login/Signup",
+        session === null ? "Login/Signup" : "",
       ],
       hrefs: [
         "/",
@@ -218,7 +222,9 @@ export default function EnhancedFooter() {
                     {title}
                   </h3>
                   <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link, index) => (
+                    {links.map((link, index) => {
+                      if(link !== ""){
+                      return(
                       <li key={link}>
                         <a
                           href={hrefs[index]}
@@ -228,7 +234,7 @@ export default function EnhancedFooter() {
                           {link}
                         </a>
                       </li>
-                    ))}
+                    )}})}
                   </ul>
                 </div>
               ))}
