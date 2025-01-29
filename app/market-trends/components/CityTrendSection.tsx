@@ -2,7 +2,9 @@
 import React, { useState } from 'react'
 import { listingProps } from '@/app/data/projectDetails';
 import { DropdownArrowIcon, LikeIcon } from '@/app/images/commonSvgs';
-import { getAllLocalitiesDetails } from '@/app/utils/stats_cities';
+import { getAllCitiesDetails, getAllLocalitiesDetails } from '@/app/utils/stats_cities';
+import { useQuery } from 'react-query';
+import RTK_CONFIG from '@/app/config/rtk';
 
 type Props = {
     cityName: string;
@@ -332,21 +334,42 @@ const TrendFilters = () => {
 }
 
 interface Locality {
-  id: string | number;
+  id: string;
   name: string;
-  cityid: string | number;
-  isactive: string;
-  stateId: string | number;
-  parentId: string | number;
-  type: number;
-  createdate: string;
-  modidate: string;
 }
 
+interface City {
+  id: string;
+  name: string;
+}
+
+const cityIds = [9, 577, 714, 576, 580, 582, 585, 641];
+
 function CityTrendSection({cityName}: Props) {
-  const allLocalities: Locality[] | any = getAllLocalitiesDetails(); // Fetch all localities
-  console.log(allLocalities)
-  
+
+  const {
+    data: AllLocalities,
+  } = useQuery<Locality[], Error>({
+    queryKey: ["all-localities"],
+    queryFn: getAllLocalitiesDetails,
+    ...RTK_CONFIG,
+    enabled: true,
+  });
+
+  console.log(AllLocalities);
+
+  const {
+    data: AllCities,
+  } = useQuery<City[], Error>({
+    queryKey: ["all-cities"],
+    queryFn: getAllCitiesDetails,
+    ...RTK_CONFIG,
+    enabled: true,
+  });
+
+  const currentCities = AllCities?.filter((city:any)=> cityIds.includes(city?.id));
+  console.log(currentCities);
+
   return (
     <div className='w-[70%] pb-[30px] gap-[20px] flex items-start justify-start overflow-y-auto relative px-[6px]'>
       <div className='flex flex-col items-center'>

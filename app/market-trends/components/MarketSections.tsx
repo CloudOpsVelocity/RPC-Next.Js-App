@@ -3,7 +3,8 @@ import { getAllCitiesDetails } from '@/app/utils/stats_cities';
 import RTK_CONFIG from '@/app/config/rtk';
 import { useQuery } from 'react-query';
 
-type Props = {};
+type Props = {
+};
 
 interface City {
   id: string;

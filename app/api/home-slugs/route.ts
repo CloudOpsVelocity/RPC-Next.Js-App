@@ -45,7 +45,7 @@ function mapUrls(cities: City[], localities: Locality[], type: string): Record<s
     } else {
       console.error(`Invalid type: ${type}`);
     }
-
+ 
     return acc;
   }, {} as Record<string, string | number>); // Flatten and filter out null values
 }
