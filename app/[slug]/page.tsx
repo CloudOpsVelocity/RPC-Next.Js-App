@@ -59,7 +59,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 }
 
 export const generateStaticParams = async () => {
-  Get the data (mocked here, replace with your actual data fetching logic)
+  // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("case-seo");
   await redisService.saveSeoSlug("case-seo", res);
   console.log(`case-seo saved in redis succesfully`);
