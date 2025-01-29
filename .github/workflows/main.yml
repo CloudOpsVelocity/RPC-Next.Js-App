@@ -40,19 +40,3 @@ jobs:
           rsync -avz --exclude='node_modules' --exclude='.git' \
           -e "ssh -i key.pem -o StrictHostKeyChecking=no" ./ \
           ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }}:/opt/apps/code
-
-      # Step 7: Trigger custom script on EC2
-      - name: Trigger custom script on EC2
-        run: |
-          ssh -i key.pem -o StrictHostKeyChecking=no ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }} << 'EOF'
-            # Navigate to your app directory
-            cd /opt/apps
-            
-            # Run your custom script
-            bash ./prod.sh  # Replace with the path to your script
-          EOF
-
-      # Step 8: Cleanup
-      - name: Remove PEM file
-        run: |
-          rm -f key.pem  # Remove the key file for security
