@@ -1,10 +1,11 @@
 "use client"
 import React, { useState } from 'react'
 import { listingProps } from '@/app/data/projectDetails';
-import { DropdownArrowIcon, LikeIcon } from '@/app/images/commonSvgs';
-import { getAllCitiesDetails, getAllLocalitiesDetails } from '@/app/utils/stats_cities';
+import { LikeIcon } from '@/app/images/commonSvgs';
+import { getLocalityDetails } from '@/app/utils/stats_cities';
 import { useQuery } from 'react-query';
 import RTK_CONFIG from '@/app/config/rtk';
+import { useSearchParams } from 'next/navigation';
 
 type Props = {
     cityName: string;
@@ -346,29 +347,37 @@ interface City {
 const cityIds = [9, 577, 714, 576, 580, 582, 585, 641];
 
 function CityTrendSection({cityName}: Props) {
+  const getParams = useSearchParams();
+  const stateId = getParams.get("si");
+  const cityId: string | null = getParams.get("ci") ? getParams.get("ci") : null;
 
+  console.log(stateId, cityId);
   const {
     data: AllLocalities,
   } = useQuery<Locality[], Error>({
     queryKey: ["all-localities"],
-    queryFn: getAllLocalitiesDetails,
+    queryFn: () => getLocalityDetails(parseInt(cityId)),
     ...RTK_CONFIG,
     enabled: true,
   });
+
+  // {
+  //   id: 28,
+  //   name: 'A Narayanapura',
+  //   cityid: 9,
+  //   isactive: 'Y',
+  //   stateId: 11,
+  //   parentId: 11,
+  //   type: 1,
+  //   createdate: '2024-08-07',
+  //   modidate: '2024-08-07'
+  // },
+
+  const currentCity = AllLocalities?.filter((city:any)=> city?.stateId == stateId && city?.cityid == cityId);
 
   console.log(AllLocalities);
+  console.log(currentCity);
 
-  const {
-    data: AllCities,
-  } = useQuery<City[], Error>({
-    queryKey: ["all-cities"],
-    queryFn: getAllCitiesDetails,
-    ...RTK_CONFIG,
-    enabled: true,
-  });
-
-  const currentCities = AllCities?.filter((city:any)=> cityIds.includes(city?.id));
-  console.log(currentCities);
 
   return (
     <div className='w-[70%] pb-[30px] gap-[20px] flex items-start justify-start overflow-y-auto relative px-[6px]'>
