@@ -16299,25 +16299,25 @@ export const TringleIcons = ({ className, number }: any) => {
     );
   }else if(number === 2){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="208" height="217" viewBox="0 0 208 217" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="208" height="217" viewBox="0 0 208 217" fill="none">
         <path d="M0.571731 6.13972C-0.0968808 2.28782 3.65503 -0.843385 7.32517 0.503525L203.985 72.6759C207.655 74.0228 208.491 78.8376 205.489 81.3426L44.6564 215.569C41.6549 218.074 37.0672 216.39 36.3986 212.538L0.571731 6.13972Z" fill="#227FBC" fill-opacity="0.46"/>
       </svg>
     );
   }else if(number === 3){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="167" height="170" viewBox="0 0 167 170" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="167" height="170" viewBox="0 0 167 170" fill="none">
         <path d="M1.80166 55.2906C-0.45237 53.1822 0.421323 49.4244 3.3743 48.5265L161.606 0.417488C164.559 -0.480345 167.376 2.15519 166.677 5.16146L129.225 166.248C128.526 169.255 124.835 170.377 122.581 168.269L1.80166 55.2906Z" fill="#227FBC" fill-opacity="0.4"/>
       </svg>
     );
   }else if(number === 4){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="105" height="110" viewBox="0 0 105 110" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="105" height="110" viewBox="0 0 105 110" fill="none">
         <path d="M0.493448 3.75869C0.157458 1.82306 2.04285 0.249587 3.88714 0.926428L102.711 37.194C104.556 37.8709 104.976 40.2904 103.467 41.5492L22.6466 109C21.1383 110.259 18.8329 109.412 18.4969 107.477L0.493448 3.75869Z" fill="#D7DBFB" fill-opacity="0.55"/>
       </svg>
     );
   }else if(number === 5){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="61" height="64" viewBox="0 0 61 64" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="61" height="64" viewBox="0 0 61 64" fill="none">
         <path d="M0.0618229 1.89621C-0.133015 0.773748 0.960312 -0.138703 2.02981 0.253793L59.3375 21.2852C60.407 21.6777 60.6505 23.0807 59.7759 23.8107L12.9083 62.9249C12.0337 63.6549 10.6968 63.1643 10.502 62.0418L0.0618229 1.89621Z" fill="#D7DBFB" fill-opacity="0.55"/>
       </svg>
     );
