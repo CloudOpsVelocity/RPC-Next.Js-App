@@ -22,12 +22,12 @@ export const options: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const REQ_URL = `/api/auth/[...nextauth]`
+        const REQ_URL = `/api/auth/[...nextauth]`;
         const decryptedPassword = CryptoJS.AES.decrypt(
           credentials?.password!!,
           process.env.NEXT_PUBLIC_SECRET!!
         ).toString(CryptoJS.enc.Utf8);
-   
+
         try {
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`,
@@ -36,7 +36,8 @@ export const options: NextAuthOptions = {
               password: decryptedPassword,
             }
           );
-          if (!credentials?.username) throw new Error("Invalid credentials provided.");
+          if (!credentials?.username)
+            throw new Error("Invalid credentials provided.");
           const maskedMobileNumber = maskMobileNumber(credentials?.username);
           if (res.data.status) {
             if (res.data.flag === "a") {
@@ -60,7 +61,9 @@ export const options: NextAuthOptions = {
                 httpOnly: true,
                 path: "/",
               });
-              logger.info(`User ${maskedMobileNumber} OTP verified, proceeding to second step. Request: ${req.method} ${REQ_URL}`);
+              logger.info(
+                `User ${maskedMobileNumber} OTP verified, proceeding to second step. Request: ${req.method} ${REQ_URL}`
+              );
               throw new Error(res.data.userType);
             }
             cookies().set("token", res.data.token, {
@@ -69,7 +72,9 @@ export const options: NextAuthOptions = {
               httpOnly: true,
               path: "/",
             });
-            logger.info(`User ${maskedMobileNumber} logged in successfully. Request: ${req.method} ${REQ_URL}`);
+            logger.info(
+              `User ${maskedMobileNumber} logged in successfully. Request: ${req.method} ${REQ_URL}`
+            );
             return {
               ...res.data,
             };
@@ -77,18 +82,28 @@ export const options: NextAuthOptions = {
             // console.log(res.data.identifer);
             switch (res.data.identifer) {
               case "NF":
-                logger.error(`User ${maskedMobileNumber} not found. Suggesting sign-up. Request: ${req.method} ${REQ_URL}`);
+                logger.error(
+                  `User ${maskedMobileNumber} not found. Suggesting sign-up. Request: ${req.method} ${REQ_URL}`
+                );
                 throw new Error("We can't find user. Please Sign Up!");
               case "IU":
-                logger.error(`User ${maskedMobileNumber} under review. Request: ${req.method}`);
-                throw new Error("User is under review. Please wait for Approval");
+                logger.error(
+                  `User ${maskedMobileNumber} under review. Request: ${req.method}`
+                );
+                throw new Error(
+                  "User is under review. Please wait for Approval"
+                );
               default:
-                logger.error(`Invalid credentials provided for user ${maskedMobileNumber}. Request: ${req.method} ${REQ_URL}`);
+                logger.error(
+                  `Invalid credentials provided for user ${maskedMobileNumber}. Request: ${req.method} ${REQ_URL}`
+                );
                 throw new Error("Please enter correct password");
             }
           }
         } catch (error: any) {
-          logger.error(`Error during authorization: ${error.message}. Request: ${req.method} ${REQ_URL}`);
+          logger.error(
+            `Error during authorization: ${error.message}. Request: ${req.method} ${REQ_URL}`
+          );
           throw new Error(error.message);
         }
       },

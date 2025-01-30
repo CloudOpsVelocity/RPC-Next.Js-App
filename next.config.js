@@ -6,18 +6,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.ENVIRONMENT === "production",
   },
-
-  // output: "export",
-  // eslint: {
-  //   dirs: ["app", "components", "lib", "pages", "styles"],
-  // },
-
-  // typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
-    // cpus
-
-    // ppr: true,
   },
 
   images: {
