@@ -96,7 +96,7 @@ export default function FloorPlans({
     unitNumber: "",
     bhkName: "",
     towerName: "",
-    floor: 0,
+    floor: "",
     facingName: "",
     block: "",
     plotArea: "",
@@ -172,23 +172,28 @@ export default function FloorPlans({
     }
   };
 
-  const BHK_OPTION_CACHE_KEY = `${propCgId}/${selectedPhase}`;
   const memoOptions = useCallback(() => {
-    if (!projectUnitsData) return {};
+    if (!projectUnitsData)
+      return {
+        options: {},
+        filteredUnits: [],
+        cacheAllBhkOptions: [],
+      };
     return getUniqueOptionsByKeys(
       projectUnitsData,
       UNIT_DATA_KEYS as (keyof PropertyUnit)[],
-      unitFilters,
-      BHK_OPTION_CACHE_KEY
+      unitFilters
     );
   }, [projectUnitsData, unitFilters]);
+
   const mustCallMemo =
     selectedView === "unit" ||
     selectedView === "bhk" ||
     modalState.type === "overview";
+
   const {
-    options,
-    filteredUnits,
+    options = {},
+    filteredUnits = [],
     cacheAllBhkOptions = [],
   } = mustCallMemo
     ? memoOptions()
@@ -197,9 +202,9 @@ export default function FloorPlans({
         filteredUnits: projectUnitsData || [],
         cacheAllBhkOptions: [],
       };
-  console.log(options);
+
   const setAllBhks = () => {
-    if (Array.isArray(options?.bhkName)) {
+    if (options && "bhkName" in options && Array.isArray(options.bhkName)) {
       let data = ["All", ...options.bhkName];
       setAllBhkNames(() => {
         return [...data];

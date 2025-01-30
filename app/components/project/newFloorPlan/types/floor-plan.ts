@@ -3,7 +3,7 @@ export interface PropertyUnit {
   projIdEnc: string;
   bhkName: string;
   towerName: string;
-  floor: number;
+  floor: number | string;
   unitNumber: string;
   facingName: string;
   caretarea: string;
@@ -19,7 +19,7 @@ export interface PropertyUnit {
   width: string;
   length: string;
   gardenArea: string;
-  parkingArea:string;
+  parkingArea: string;
   aptTypeName: string;
 }
 

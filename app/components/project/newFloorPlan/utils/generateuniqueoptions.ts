@@ -23,18 +23,31 @@ export const UNIT_DATA_KEYS = [
 export const getUniqueOptionsByKeys = (
   units: PropertyUnit[],
   keys: (keyof PropertyUnit)[],
-  selectedFilters: Partial<PropertyUnit>,
-  cacheKey: string
+  selectedFilters: Partial<PropertyUnit>
 ) => {
-  console.log(keys, selectedFilters, cacheKey);
-  if (!units || units.length === 0) return {};
+  // Return early if no units
+  if (!units || units.length === 0) {
+    return {
+      options: {},
+      filteredUnits: [],
+      cacheAllBhkOptions: ["All"],
+    };
+  }
 
-  // Filter units based on selected filters
+  // Filter units based on selected filters, but only consider non-empty/non-zero filters
   const filteredUnits = units.filter((unit) => {
     return Object.entries(selectedFilters).every(([key, value]) => {
-      if (value == null || value === "") return true;
+      // Skip filtering if value is empty/zero/null
+      if (
+        value === null ||
+        value === "" ||
+        value === 0 ||
+        value === undefined
+      ) {
+        return true;
+      }
 
-      // Special handling for "floor" key
+      // Special handling for floor
       if (key === "floor") {
         const unitValue = String(unit[key as keyof PropertyUnit]);
         const filterValue = value === "G" ? "0" : String(value);
@@ -45,51 +58,43 @@ export const getUniqueOptionsByKeys = (
     });
   });
 
-  if (filteredUnits.length === 0) return {};
-
-  // Cache for BHK options
-  const cacheAllBhkOptions = new Map<string, string[]>();
-  if (!cacheAllBhkOptions.has(cacheKey)) {
-    const uniqueBhkNames = Array.from(
-      new Set(units.map((unit) => unit["bhkName"]).filter(Boolean))
-    );
-    cacheAllBhkOptions.set(cacheKey, uniqueBhkNames);
-  }
-
   // Initialize options map
   const options: Record<keyof PropertyUnit, string[]> = {} as Record<
     keyof PropertyUnit,
     string[]
   >;
 
-  // Process filtered units to extract unique values for each key
+  // Get unique values for each key from filtered units
   keys.forEach((key) => {
     const uniqueValues = new Set<string>();
     filteredUnits.forEach((unit) => {
       const value = unit[key];
       if (
-        value !== undefined &&
+        value != null &&
         value !== "null" &&
         value !== "None" &&
         value !== ""
       ) {
         let processedValue = String(value);
-        if (key === "floor" && processedValue == "0") {
-          processedValue = "G"; // Replace "0" with "G" for "floor"
-        } else if (processedValue == "0" && key !== "floor") {
-          return; // Skip adding "0" for non-floor keys
+        if (key === "floor" && processedValue === "0") {
+          processedValue = "G";
         }
         uniqueValues.add(processedValue);
       }
     });
     if (uniqueValues.size > 0) {
-      options[key] = Array.from(uniqueValues);
+      options[key] = Array.from(uniqueValues).sort();
     }
   });
+
+  // Get unique BHK options for cache
+  const uniqueBhkNames = Array.from(
+    new Set(units.map((unit) => unit.bhkName).filter(Boolean))
+  ).sort();
 
   return {
     options,
     filteredUnits,
-    cacheAllBhkOptions: ["All", ...(cacheAllBhkOptions.get(cacheKey) || [])],
+    cacheAllBhkOptions: ["All", ...uniqueBhkNames],
   };
 };

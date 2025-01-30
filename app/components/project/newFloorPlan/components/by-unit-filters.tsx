@@ -19,6 +19,7 @@ export default function ByUnitFilters({
   filters,
   setFilters,
 }: Props) {
+  console.log(options);
   // const [filters, setFilters] = useState({
   //   unitNumber: "",
   //   bhkName: "",
