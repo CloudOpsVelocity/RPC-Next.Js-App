@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: process.env.ENVIRONMENT !== "production",
+    ignoreBuildErrors: process.env.ENVIRONMENT === "production",
   },
 
   // output: "export",
