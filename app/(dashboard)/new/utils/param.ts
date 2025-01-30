@@ -146,7 +146,7 @@ function toQueryParams(params: QueryParams): string {
 
   // Add listedBy=ALL if cg=R
   if (params.cg === "R") {
-    queryEntries.push("listedBy=ALL");
+    queryEntries.push("listedBy=All");
   }
 
   return queryEntries.join("-");

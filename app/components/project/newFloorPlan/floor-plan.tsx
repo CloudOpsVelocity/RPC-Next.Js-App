@@ -182,20 +182,22 @@ export default function FloorPlans({
       BHK_OPTION_CACHE_KEY
     );
   }, [projectUnitsData, unitFilters]);
-
+  const mustCallMemo =
+    selectedView === "unit" ||
+    selectedView === "bhk" ||
+    modalState.type === "overview";
   const {
     options,
     filteredUnits,
     cacheAllBhkOptions = [],
-  } = selectedView === "unit" ||
-  selectedView === "bhk" ||
-  modalState.type === "overview"
+  } = mustCallMemo
     ? memoOptions()
     : {
         options: {},
         filteredUnits: projectUnitsData || [],
         cacheAllBhkOptions: [],
       };
+  console.log(options);
   const setAllBhks = () => {
     if (Array.isArray(options?.bhkName)) {
       let data = ["All", ...options.bhkName];

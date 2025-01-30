@@ -26,6 +26,7 @@ export const getUniqueOptionsByKeys = (
   selectedFilters: Partial<PropertyUnit>,
   cacheKey: string
 ) => {
+  console.log(keys, selectedFilters, cacheKey);
   if (!units || units.length === 0) return {};
 
   // Filter units based on selected filters
@@ -66,11 +67,16 @@ export const getUniqueOptionsByKeys = (
     const uniqueValues = new Set<string>();
     filteredUnits.forEach((unit) => {
       const value = unit[key];
-      if (value !== undefined && value !== "null" && value !== "None") {
+      if (
+        value !== undefined &&
+        value !== "null" &&
+        value !== "None" &&
+        value !== ""
+      ) {
         let processedValue = String(value);
         if (key === "floor" && processedValue == "0") {
           processedValue = "G"; // Replace "0" with "G" for "floor"
-        } else if (processedValue === "0" && key !== "floor") {
+        } else if (processedValue == "0" && key !== "floor") {
           return; // Skip adding "0" for non-floor keys
         }
         uniqueValues.add(processedValue);
