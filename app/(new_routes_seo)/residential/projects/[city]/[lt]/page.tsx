@@ -54,7 +54,28 @@ const getSearchData = async (locality: string): Promise<any> => {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
     console.log(baseUrl);
     const url = `${baseUrl}`;
+ 
+    const res = await fetch(url);
 
+    if (!res.ok) {
+      throw new Error(`Error fetching data: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+
+export const getFilteredSearchData = async (city: number | string | null, locality: number | string | null, cg: number | string | null): Promise<any> => {
+  try {
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=${city}${locality ? `&localities=${locality}` : ""}&cg=${cg}`;
+    console.log(baseUrl);
+    const url = `${baseUrl}`;
+ 
     const res = await fetch(url);
 
     if (!res.ok) {

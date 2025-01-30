@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 
 const staticData = [
     {
@@ -124,15 +125,24 @@ type Props = {}
 
 
 function MarketNavigator({}: Props) {
+  const [section, setSection] = useState("");
   return (
-    <div className=' flex justify-start items-center max-w-[100%] overflow-x-auto relative top-[-17px] '>
-        <div className='flex justify-start items-center gap-[16px] '>
-            {staticData.map(each=>{
+    <div className=' flex justify-start items-center max-w-[94%] md:max-w-[100%] overflow-x-auto relative top-[-17px] '>
+        <div className='flex justify-start items-center gap-[8px] md:gap-[16px] '>
+            {staticData.map((each)=>{
                 return(
-                    <button key={each.name} title={`Click to Select ${each.name}`} className='group border-[2px] border-solid border-white bg-transparent text-nowrap rounded-[34px] '>
-                        <div className=' w-[34px] h-[34px] min-w-[34px] rounded-full bg-gray-600 flex justify-center items-center gap-[10px] overflow-hidden transition-all duration-500 ease-in-out group-hover:w-auto group-hover:min-w-[100px] group-hover:px-[10px] '> 
-                            {each.icon}
-                            <span className='hidden group-hover:block font-bold text-[14px] text-white '>{each.name}</span>
+                    <button 
+                        key={each.name}  
+                        title={`Click to Select ${each.name}`} className={`group border-[2px] border-solid border-white bg-transparent text-nowrap rounded-[34px] `}
+                        onClick={()=>setSection(each.name)}
+                    >
+                        <div className={`w-[28px] h-[28px] md:w-[34px] md:h-[34px] min-w-[28px] md:min-w-[34px] rounded-full bg-gray-600 flex justify-center items-center gap-[10px] overflow-hidden transition-all duration-500 ease-in-out group-hover:w-auto group-hover:min-w-[100px] group-hover:px-[10px] ${each.name === section ? "w-auto min-w-[100px] px-[10px]" : ""} `}> 
+                            <span className='w-[16px] h-[16px] md:w-[22px] md:h-[22px] flex justify-center items-center ' >{each.icon}</span>
+                            {each.name === section ?
+                            <span className={` font-bold text-[12px] md:text-[14px] text-white`}>{each.name}</span>
+                            :
+                            <span className={`hidden group-hover:block font-bold text-[12px] md:text-[14px] text-white `}>{each.name}</span>
+                            }
                         </div>
                     </button>
                 )

@@ -59,7 +59,7 @@ export const getCitiesDetails = async (cId: number) => {
 };
 
 
-export const getLocalityDetails = async (cId: number) => {
+export const getLocalityDetails = async (cId: number | string | null) => {
   const url = `${baseURL}/common/getLocalityfromCity?cityId=${cId}`;
 
   try {
