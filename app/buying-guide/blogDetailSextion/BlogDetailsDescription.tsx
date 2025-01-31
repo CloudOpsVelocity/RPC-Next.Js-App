@@ -1,12 +1,16 @@
-import { apartmentCardImg } from '@/app/images/commonImages'
+"use client"
+import { blogDetails } from '@/app/hooks/blog';
+import { useAtom } from 'jotai';
 import Image from 'next/image'
-import React from 'react'
+import React from 'react';
+
+const dummyImage = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/Blog-Images/Investing-101.webp`;
 
 function BlogMiniCard() {
   return (
     <div className='max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] self-end ml-auto shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#E8F3FF] '>
         <Image
-            src={apartmentCardImg} 
+            src={dummyImage} 
             alt="blog Image" width={120} height={90} 
             className=' min-w-[120px] h-[90px] border-gray shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#227FBC] ' 
         />
@@ -26,6 +30,9 @@ function BlogMiniCard() {
 } 
 
 function BlogDetailsDescription() {
+  const [{ selectedBlog }] = useAtom(blogDetails);
+  console.log(selectedBlog);
+  
   return (
     <div className='w-[94%] xl:w-[80%] mb-[3%] '>
         <h3 className='text-[#303030] text-[16px] md:text-[22px] xl:text-[28px] not-italic font-bold md:leading-8 mb-[14px] md:mb-[20px] '>Lorem ipsum dolor sit amet, consectetur adipiscing</h3>
@@ -47,7 +54,7 @@ function BlogDetailsDescription() {
         <h3 className='text-[#303030] text-[18px] md:text-[22px] xl:text-[28px] not-italic font-bold xl:leading-8 mb-[16px] md:mb-[20px] '>Lorem ipsum dolor sit amet, consectetur adipiscing</h3>
 
         <Image
-            src={apartmentCardImg} 
+            src={dummyImage} 
             alt="blog Image" width={100} height={269} 
             className='rounded-[10px] w-full h-[235px] md:h-[435px] xl:h-[600px]' 
         />

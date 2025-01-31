@@ -12,7 +12,7 @@ function BlogDetailLeftSection() {
   return (
     <div className='max-w-[617px] w-full '>
         <Image 
-            src={apartmentCardImg} 
+            src={data?.coverImage} 
             alt="blog Image" width={100} height={269} 
             className='rounded-[10px] w-full xl:max-h-[269px] md:max-h-[200px] max-h-[210px] first-letter: border-[0.5px] border-gray border-solid mb-[16px] ' 
         />

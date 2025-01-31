@@ -1,20 +1,23 @@
 "use client"
-import { apartmentCardImg } from '@/app/images/commonImages';
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import { backIcon, Facebook, ShearIcon, TringleIcons, WhatsApp } from '@/app/images/commonSvgs';
 import { usePathname } from 'next/navigation';
 
 function BlogDetailsFirstBlock() {
-  const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
+  const [{ allBlogData }, setBlogDetails] = useAtom(blogDetails);
   const path = usePathname();
   const currentBlog = path.split("/")[2].replaceAll("%20", " ");
   console.log(currentBlog);
 
-  const data = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog)[0];
-  const {date, text, heading} = data;
+  const data:any = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog)[0];
+  const {date, text, heading, coverImage} = data;
+
+  useEffect(()=>{
+    setBlogDetails(prev => ({ ...prev, selectedBlog : data }));
+  }, [data])
 
   return (
     <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>
@@ -31,7 +34,7 @@ function BlogDetailsFirstBlock() {
         <TringleIcons key="TringleIcon2" className="absolute top-[-50px] right-[-10px] z-10 xl:w-[61px] xl:h-[64px]" number={5} />
 
         <Image
-            src={apartmentCardImg} 
+            src={coverImage} 
             alt="blog Image" width={100} height={269} 
             className='rounded-[10px] w-full h-full relative max-h-[260px] md:max-h-[463px] bg-white z-1' 
         />
