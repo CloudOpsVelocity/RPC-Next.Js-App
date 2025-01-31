@@ -36,6 +36,9 @@ const nextConfig = {
       {
         hostname: "d24ksaw8earfo7.cloudfront.net",
       },
+      {
+        hostname: "d24ksaw8earfo7.cloudfront.net",
+      },
     ],
   },
   env: {
