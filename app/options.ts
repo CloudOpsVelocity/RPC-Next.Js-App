@@ -76,10 +76,14 @@ export const options: NextAuthOptions = {
               httpOnly: true,
               path: "/",
             });
-            const redisKey = encode(
-              `${res.data.mobile}`,
-              process.env.NEXT_PUBLIC_SECRET!
-            );
+            // const redisKey = encode(
+            //   `${res.data.mobile}`,
+            //   process.env.NEXT_PUBLIC_SECRET!
+            // );
+            // 1. identity unique sesion there
+            // 2. set unique session
+            // 3. set unique session to a single number
+
             // if (!(await redisService.client.exists(`user_${redisKey}`))) {
             //   redisService.client.smembers(`user_${redisKey}`, "false");
             // }
