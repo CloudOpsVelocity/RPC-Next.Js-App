@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import { defaultCitySvg, emptyFilesIcon, strikeIconIcon } from '@/app/images/commonSvgs';
 import { useAtom } from 'jotai';
 import { trendsFilterData } from '../data.ts/marketBlogalData';
+import { usePathname } from 'next/navigation';
 
 type Props = {
 };
@@ -34,6 +35,7 @@ function MarketSections({}: Props) {
   const currentCities = AllCities?.filter((city:any)=> cityIds.includes(city?.id) && (inputSearch === "" || city.name.toLowerCase().includes(inputSearch)));
 
   // console.log(AllCities);
+  const path = usePathname();
 
   return (
     <div className='w-[94%] md:w-[70%] pb-[30px] flex flex-col items-center  '>
@@ -45,7 +47,7 @@ function MarketSections({}: Props) {
         {currentCities && currentCities?.length > 0 ?
           currentCities?.map((eachCity:any)=>{
           return(
-              <a key={eachCity.name} href={`/market-trends/${eachCity?.name.toLowerCase()}?si=${eachCity?.stateId}&ci=${eachCity?.id}`} target='_blank'>
+              <a key={eachCity.name} href={`${path}/${eachCity?.name.toLowerCase()}?si=${eachCity?.stateId}&ci=${eachCity?.id}`} target='_blank'>
               <div className=' cursor-pointer min-h-[140px] md:min-h-[218px] w-[100px] md:w-[180px] rounded-[10px] border-t-[1px] border-solid shadow-md flex flex-col justify-center items-center transition-all duration-[0.5s] ease-[ease-in-out] hover:-translate-y-2.5 hover:shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] '>
                 <div className='w-[60px] h-[60px] md:w-[100px] md:h-[100px] rounded-[50%] shadow-md border-t-[1px] border-solid '>
                   {/* city image */}
@@ -54,7 +56,6 @@ function MarketSections({}: Props) {
                 <span className=' font-medium text-[12px] md:text-[16px] mt-[10px] md:mt-[16px] text-center '>Property Rates in {eachCity.name}</span>
               </div>
               </a>
-
           )})
         :
         <div className="flex w-full h-full justify-center items-center flex-col">

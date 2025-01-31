@@ -92,7 +92,7 @@ function Footer() {
 
       ],
       hrefs: [
-        "/market-trends",
+        "/market-trends/locality-insights",
         "/buying-guide",
         "/selling-tips",
         "/news",

@@ -1,9 +1,7 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { listingProps } from '@/app/data/projectDetails';
 import { emptyFilesIcon, LikeIcon, strikeIconIcon } from '@/app/images/commonSvgs';
-import { useQuery } from 'react-query';
-import RTK_CONFIG from '@/app/config/rtk';
 import { useSearchParams } from 'next/navigation';
 import { getFilteredSearchData } from '@/app/(new_routes_seo)/residential/projects/[city]/[lt]/page';
 import Image from 'next/image';
@@ -11,6 +9,7 @@ import { formatCurrency } from '@/app/utils/numbers';
 import { defaultCitySvg } from '@/app/images/commonSvgs';
 import { useAtom } from 'jotai';
 import { trendsFilterData } from '../data.ts/marketBlogalData';
+import { formatNumberWithCommas } from '@/app/seo/sitemap/const';
 
 type Props = {
     cityName: string;
@@ -51,31 +50,32 @@ const filtersStaticData = {
 
 };
 
-const PriceCard = ({eachCity, cityName, cityId, filters}: {eachCity:any, cityName:String, cityId:any, filters:any}) => {
+const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filters:any}) => {
     const [popupData, setPopupData] = useState({isOpen: false, data:null, boxId:null});
     const onSelectBox = (identifier:string, data:any) => {
       if(identifier === "OPEN"){
-        setPopupData({isOpen: true, data: data, boxId: data.id})
+        setPopupData({isOpen: true, data: data, boxId: data.propIdEnc})
       }else{
         setPopupData({isOpen: false, data:null, boxId:null})
       }
     }
+    console.log(eachCity);
     return(
         <div 
-          key={eachCity.locality}  
+          key={eachCity.localityName}  
           className='group px-[10px] md:px-[30px] w-full p-[10px] rounded-[10px] border-t-[1px] border-solid shadow-md hover:shadow-lg flex flex-col items-center justify-between transition-all duration-[0.5s]  '
         >
             {/* Top section */}
             <div onClick={()=> onSelectBox(!popupData.isOpen ? "OPEN" : "CLOSE", eachCity)} className='flex items-center justify-between cursor-pointer w-full md:min-h-[124px] gap-[10px] md:gap-[20px] '>
-              <div className='flex items-center justify-between xl:flex-nowrap flex-wrap w-full '>
+              <div className='flex items-center justify-between xl:flex-nowrap flex-wrap w-full gap-[10px]'>
                   <div className='flex items-center gap-[10px] mr-[100%] md:mr-[0%] mb-[10px] md:mb-0 '>
                     <div className=' min-w-[44px] md:min-w-[44px] w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-[50%] shadow-md border-t-[1px] border-solid '>
                       {/* city image */}
-                      {eachCity.coverUrl ?
+                      {eachCity.coverImage ?
                       <Image
                         className="w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-[50%] shadow-md"
                         alt="Locality"
-                        src={eachCity.coverUrl}
+                        src={eachCity.coverImage}
                         width={64}
                         height={64}
                       />
@@ -84,20 +84,28 @@ const PriceCard = ({eachCity, cityName, cityId, filters}: {eachCity:any, cityNam
                       }
                     </div>
                     <div>
-                        <p className='font-bold text-[12px] md:text-[16px] text-nowrap '>{eachCity.locality}</p>
-                        <p className=' text-gray-700 first-letter: capitalize text-[12px] md:text-[16px]'>{eachCity.city ? eachCity.city : cityName}</p>
+                        <p className='font-bold text-[12px] md:text-[16px] text-nowrap '>{eachCity.localityName}</p>
+                        <p className=' text-gray-700 first-letter: capitalize text-[12px] md:text-[16px] p-0 m-0'>{eachCity.cityName ? eachCity.cityName : ""}</p>
+                        <span className='text-[10px] text-white bg-gray-600 p-[2px] font-medium rounded-[4px] '>{eachCity.propTypeName === "Independent House/Building" ? "Independent House" : eachCity.propTypeName}</span>
                     </div>
                   </div>
 
                   <div>
                       <p className='text-gray-700 text-[12px] md:text-[16px]'>Rate on GetRightProperty</p>
-                      <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.maxPrice))}</p>
+                      <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.sqftPrice))} / sq.ft</p>
                   </div>
 
+                  <div>
+                      <p className='text-gray-700 text-[12px] md:text-[16px]'>Super Buildup Area</p>  
+                      <p className='font-bold text-[12px] md:text-[16px] '>{formatNumberWithCommas(eachCity.sba)} sq.ft</p>
+                  </div>
+
+                  {filters.cg == "R" && eachCity.rate &&
                   <div>
                       <p className='text-gray-700 text-[12px] md:text-[16px]'>Rental Yield</p> 
                       <p className='font-bold text-[12px] md:text-[16px] '>{eachCity.rate}%</p>
                   </div>
+                  }
               </div>
               <div className='min-w-[30px] md:min-w-[40px] w-[30px] h-[30px] md:w-[40px] md:h-[40px] flex justify-center items-center cursor-pointer border-solid border-[1px] border-gray-300 rounded-full shadow-md '>
                   <svg
@@ -106,7 +114,7 @@ const PriceCard = ({eachCity, cityName, cityId, filters}: {eachCity:any, cityNam
                       height="29"
                       viewBox="0 0 28 29"
                       fill="none"
-                      className={` rotate-[-90deg] w-[16px] h-[16px] md:w-[24px] md:h-[24px] relative right-[1px] top-[2px] transition-all duration-500 flex justify-center items-center ${popupData.boxId === eachCity.id && popupData.isOpen ? "rotate-[90deg]" : ""} `}
+                      className={` rotate-[-90deg] w-[16px] h-[16px] md:w-[24px] md:h-[24px] relative right-[1px] top-[2px] transition-all duration-500 flex justify-center items-center ${popupData.boxId === eachCity.propIdEnc && popupData.isOpen ? "rotate-[90deg]" : ""} `}
                     >
                       <path
                         d="M6.125 15.2305H23.625C23.8571 15.2305 24.0796 15.1383 24.2437 14.9742C24.4078 14.8101 24.5 14.5875 24.5 14.3555C24.5 14.1234 24.4078 13.9008 24.2437 13.7367C24.0796 13.5727 23.8571 13.4805 23.625 13.4805H6.125C5.89294 13.4805 5.67038 13.5727 5.50628 13.7367C5.34219 13.9008 5.25 14.1234 5.25 14.3555C5.25 14.5875 5.34219 14.8101 5.50628 14.9742C5.67038 15.1383 5.89294 15.2305 6.125 15.2305Z"
@@ -121,20 +129,20 @@ const PriceCard = ({eachCity, cityName, cityId, filters}: {eachCity:any, cityNam
             </div>
 
             {/* popup data */}
-            <div className={`w-full opacity-0 transition-all duration-500 mt-[10px] md:mt-0 ${popupData.boxId === eachCity.id && popupData.isOpen ? "opacity-100" : ""}`}>
-              {popupData.boxId === eachCity.id && popupData.isOpen &&
+            <div className={`w-full opacity-0 transition-all duration-500 mt-[10px] md:mt-0 ${popupData.boxId === eachCity.propIdEnc && popupData.isOpen ? "opacity-100" : ""}`}>
+              {popupData.boxId === eachCity.propIdEnc && popupData.isOpen &&
               <div className={`w-full`}>
-                <p className='mb-[10px] font-semibold text-gray-700 text-[12px] md:text-[16px] '>Quick Links for {eachCity.locality}</p>
+                <p className='mb-[10px] font-semibold text-gray-700 text-[12px] md:text-[16px] '>Quick Links for {eachCity.localityName}</p>
                 <div className=' flex flex-wrap gap-[10px] w-full '>
                   {localityCheckList.map(each=>{
                     return(
-                      <a key={each.name} href={`/search?sf=city=${cityName}%2B${cityId}-cg=${filters.cg}`} target='_blank'>
+                      <a key={each.name} href={`/search?sf=city=${eachCity.cityName}%2B${cityId}-cg=${filters.cg}`} target='_blank'>
                         <p 
                           onClick={(e)=>e.stopPropagation()}
                           className='bg-white cursor-pointer border-[1px] flex items-center gap-[4px] border-solid border-gray rounded-[30px] h-[30px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize text-gray-600 p-[4px] px-[10px] hover:bg-gray-200 '
                         >
                           {/* /search?sf=city=Chennai%2B580-cg=S */}
-                          {`${each.name} in ${eachCity.locality}`}
+                          {`${each.name} in ${eachCity.localityName}`}
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 15" fill="none">
                             <path d="M9.5 4H13.5V8" stroke="#4B77C1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             <path d="M13.5 4L7.85 9.65C7.75654 9.74161 7.63088 9.79293 7.5 9.79293C7.36912 9.79293 7.24346 9.74161 7.15 9.65L4.85 7.35C4.75654 7.25839 4.63088 7.20707 4.5 7.20707C4.36912 7.20707 4.24346 7.25839 4.15 7.35L0.5 11" stroke="#4B77C1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -173,16 +181,15 @@ const PriceCard = ({eachCity, cityName, cityId, filters}: {eachCity:any, cityNam
 const initialFilters = {
     trendType:"L",
     zone:"",
-    propType:"",
+    propType: "Apartment",
     duration:"", 
     sigment:"",
     cg:"S"
 }
 
 const TrendFilters = ({filters, onFilterChange}:{filters: any, onFilterChange:any}) => {
-
   return(
-    <div className='flex flex-col min-w-[285px] shadow-md rounded-[10px] !sticky !top-0 md:!top-[70px] border-t-[2px] border-solid p-[10px] order-1 md:order-2  '>
+    <div className='flex flex-col md:min-w-[240px] md:max-w-[260px] xl:min-w-[285px] xl:max-w-[300px] shadow-md rounded-[10px] !sticky !top-0 md:!top-[70px] border-t-[2px] border-solid p-[10px] order-1 md:order-2  '>
       <h3 className='mb-[10px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize'>Show Price Trends for</h3>
       <div className='flex justify-start items-center gap-[10px] mb-[10px] md:mb-[16px] '>
           <button 
@@ -194,7 +201,7 @@ const TrendFilters = ({filters, onFilterChange}:{filters: any, onFilterChange:an
           </button>
 
           <button 
-            className={`bg-white border-[1px] border-solid border-[#47a5e9] rounded-[30px] h-[24px] mdh-[30px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize text-[#37a7f7]  p-[4px] px-[8px] ${filters.trendType === "S" ? "!bg-[#99c7e7] !text-white !border-0" : ""} `}
+            className={`bg-white border-[1px] border-solid border-[#47a5e9] rounded-[30px] h-[24px] md:h-[30px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize text-[#37a7f7] p-[4px] px-[8px] ${filters.trendType === "S" ? "!bg-[#99c7e7] !text-white !border-0" : ""} `}
             onClick={onFilterChange}
             name="trendType"
             value="S"
@@ -249,7 +256,7 @@ const TrendFilters = ({filters, onFilterChange}:{filters: any, onFilterChange:an
               name="propType"
               value={eachProp}
             >
-                {eachProp}
+              {eachProp === "Independent House/Building" ? "Independent" : eachProp}
             </button>
           )
         })}
@@ -303,9 +310,12 @@ interface City {
   name: string;
 }
 
+
 function CityTrendSection({cityName}: Props) {
   const [filters, setFilters] = useState(initialFilters);
-    const [{inputSearch}] = useAtom(trendsFilterData);
+  const [AllLocalities, setAllLocalities] = useState([]);
+
+  const [{inputSearch}] = useAtom(trendsFilterData);
   
   const onFilterChange = (e:any) => {
     let name = e.target.name;
@@ -316,20 +326,38 @@ function CityTrendSection({cityName}: Props) {
   const getParams = useSearchParams();
   const cityId = getParams.get("ci");
 
-  const {  data: AllLocalities } = useQuery<Locality[], Error>({
-    queryKey: ["all-localities"],
-    queryFn: () => getFilteredSearchData(cityId, null, filters.cg),
-    ...RTK_CONFIG,
-    enabled: true,
-  });
+  // const {  data: AllLocalities } = useQuery<Locality[], Error>({
+  //   queryKey: ["all-localities"],
+  //   queryFn: () => getFilteredSearchData(cityId, null, filters.cg),
+  //   ...RTK_CONFIG,
+  //   enabled: true,
+  // }); 
+
+  type PropertyType = "Apartment" | "Villa" | "Plot" | "Row House" | "Villament" | "Independent House/Building";
+
+
+  useEffect(()=>{
+    // const data:any = getFilteredSearchData(cityId, null, filters.cg)
+    // setAllLocalities(data);
+    const propertyType: PropertyType = filters.propType as PropertyType;    
+    const fetchData = async () => {
+      try {
+          const data:any = await getFilteredSearchData(cityId, null, filters.cg, `cg=${filters.cg}&propType=${listingProps[propertyType]}`);
+          setAllLocalities(data);
+      } catch (error) {
+          console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  },[cityId, filters.cg, filters.propType]);
 
   console.log(AllLocalities);
 
-  const filteredLocalities = AllLocalities?.filter((city:any)=> (inputSearch === "" || city.locality.toLowerCase().includes(inputSearch)));
-
+  const filteredLocalities = AllLocalities?.filter((city:any)=> (inputSearch === "" || city.localityName.toLowerCase().includes(inputSearch)));
 
   return (      
-      <div className='w-[96%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-start overflow-y-auto relative px-[6px]'>
+      <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-start overflow-y-auto relative px-[6px] max-w-[1200px]'>
         {filteredLocalities && filteredLocalities?.length > 0 ?
         <>
           <div className='flex flex-col items-center order-2 md:order-1 '>
@@ -339,7 +367,7 @@ function CityTrendSection({cityName}: Props) {
               <div className=' flex items-start justify-start flex-wrap gap-[20px] w-full '>
                   {filteredLocalities?.map((eachCity:any)=>{
                     return(
-                      <PriceCard key={eachCity?.locality} eachCity={eachCity} cityName={cityName} cityId={cityId} filters={filters} />
+                      <PriceCard key={eachCity?.propIdEnc} eachCity={eachCity} cityId={cityId} filters={filters} />
                   )})}
               </div>
           </div>

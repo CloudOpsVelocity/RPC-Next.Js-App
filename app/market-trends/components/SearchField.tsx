@@ -13,7 +13,7 @@ function SearchField({}: Props) {
   };
 
   return (
-    <div className='flex justify-between border-t-[1px] border-solid shadow-md rounded-[4px] min-w-0 md:min-w-[600px] w-[90%]  p-[4px] md:p-[10px] gap-[6px] mb-[20px] mt-[0px] md:mb-[30px] md:mt-[20px] '>
+    <div className='flex justify-between border-t-[1px] border-solid shadow-md rounded-[4px] max-w-[600px] w-[90%]  p-[4px] md:p-[10px] gap-[6px] mb-[20px] mt-[0px] md:mb-[30px] md:mt-[20px] '>
         <input 
             type='search'
             placeholder='Enter a city, locality or society'

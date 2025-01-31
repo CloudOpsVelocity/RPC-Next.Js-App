@@ -3,7 +3,7 @@ import React from 'react'
 type Props = {};
 
 const styles = {
-    svgStyle: "transition-transform duration-300 group-hover:scale-125"
+    svgStyle: "transition-transform duration-300 group-hover:scale-125 h-[80px] w-[80px] md:h-[130px] md:w-[130px] "
 }
 
 const allPoints = [
@@ -278,16 +278,16 @@ function PointsBlock({}: Props) {
         {allPoints.map((eachPoint:any, index:number)=>{
             return(
                 <div key={eachPoint.title} className={`group flex justify-start items-start w-full gap-[20px] mb-[30px] ${index % 2 !== 0 ? "flex-row-reverse" : ""} 
-                    relative overflow-hidden transition-all duration-500 hover:bg-gradient-to-r from-gray-100 to-gray-300 bg-[length:200%_200%] hover:shadow-lg rounded-[150px] border-solid border-t-[2px]
+                    relative overflow-hidden transition-all duration-500 hover:bg-gradient-to-r from-gray-100 to-gray-300 bg-[length:200%_200%] hover:shadow-lg rounded-[100px] md:rounded-[150px] border-solid border-t-[2px]
                 `}>
-                    <div className={`h-[150px] w-[200px] p-[10px] shadow-md bg-gradient-to-r ${index % 2 !== 0 ? "rounded-r-[150px] from-gray-500 to-[#cccccc]" : "rounded-l-[150px] from-[#cccccc] to-gray-500"} `}>
+                    <div className={`h-[100px] w-[150px] md:h-[150px] md:w-[200px] p-[10px] shadow-md bg-gradient-to-r ${index % 2 !== 0 ? "rounded-r-[100px] md:rounded-r-[150px] from-gray-500 to-[#cccccc]" : "rounded-l-[100px] md:rounded-l-[150px] from-[#cccccc] to-gray-500"} `}>
                         {eachPoint.icon}
                     </div>
-                    <div className={`w-full flex flex-col justify-start items-start pt-[6px] ${index % 2 !== 0 ? "text-right" : "text-left"} `}>
-                        <h3 className={`w-full font-bold text-gray-700 text-[20px] mb-[10px] ${index % 2 !== 0 ? "text-right" : "text-left"} `}>{eachPoint.title}</h3>
+                    <div className={`w-full flex flex-col justify-start items-start pt-[6px] max-h-[100px] md:max-h-[150px] overflow-y-auto ${index % 2 !== 0 ? "text-right" : "text-left"} `}>
+                        <h3 className={`w-full font-bold text-gray-700 text-[14px] md:text-[16px] xl:text-[20px] mb-[4px] md:mb-[10px] ${index % 2 !== 0 ? "text-right" : "text-left"} `}>{eachPoint.title}</h3>
                         {eachPoint.points.map((eachOne:any, ind:number)=>{
                             return(
-                                <p key={`points_${ind}`} className={`w-full text-gray-600 font-normal ${index % 2 !== 0 ? "text-right" : "text-left"} `}>{eachOne}</p>
+                                <p key={`points_${ind}`} className={`w-full text-gray-600 font-normal text-[12px] md:text-[14px] xl:text-[16px] ${index % 2 !== 0 ? "text-right" : "text-left"} `}>{eachOne}</p>
                             )
                         })}
                     </div>

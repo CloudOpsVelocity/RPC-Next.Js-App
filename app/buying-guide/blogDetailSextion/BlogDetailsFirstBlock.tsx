@@ -5,10 +5,15 @@ import React from 'react'
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import { backIcon, Facebook, ShearIcon, TringleIcons, WhatsApp } from '@/app/images/commonSvgs';
+import { usePathname } from 'next/navigation';
 
 function BlogDetailsFirstBlock() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
-  const data = allBlogData.filter(each=> each.id === selectedBlog)[0];
+  const path = usePathname();
+  const currentBlog = path.split("/")[2].replaceAll("%20", " ");
+  console.log(currentBlog);
+
+  const data = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog)[0];
   const {date, text, heading} = data;
 
   return (
@@ -17,7 +22,6 @@ function BlogDetailsFirstBlock() {
         <span className=' bg-[#E8F3FF] w-[18px] h-[18px] xl:w-[32px] xl:h-[32px] rounded-[50%] flex justify-center items-center '>{backIcon}</span>
         Back
       </button>
-
 
       <div className='rounded-[10px] relative w-full md:w-[50%] max-h-[463px] border-[0.5px] border-gray border-solid  bg-white '>
         <TringleIcons key="TringleIcon1" className="absolute bottom-[-180px] left-[-120px] z-0 xl:w-[408px] xl:h-[427px] w-[308px] h-[327px]" number={1} />

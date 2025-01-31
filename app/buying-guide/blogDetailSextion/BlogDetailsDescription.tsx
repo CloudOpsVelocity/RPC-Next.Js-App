@@ -29,7 +29,7 @@ function BlogDetailsDescription() {
   return (
     <div className='w-[94%] xl:w-[80%] mb-[3%] '>
         <h3 className='text-[#303030] text-[16px] md:text-[22px] xl:text-[28px] not-italic font-bold md:leading-8 mb-[14px] md:mb-[20px] '>Lorem ipsum dolor sit amet, consectetur adipiscing</h3>
-        <p className='text-[14px] md:text-[18px] xl:text-[24px] not-italic  xl:leading-10 tracking-[0.96px] mb-[16px]'>
+        <p className='text-[14px] md:text-[18px] xl:text-[20px] not-italic  xl:leading-[26px] tracking-[0.96px] mb-[16px]'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
             magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
             consequat. Duis auteeeee irure dolor in reprehe nderit in voluptate velit esse cillum dolore eu fugiat nulla 
@@ -49,11 +49,11 @@ function BlogDetailsDescription() {
         <Image
             src={apartmentCardImg} 
             alt="blog Image" width={100} height={269} 
-            className='rounded-[10px] w-full h-[235px] md:h-[435px] xl:h-[735px]' 
+            className='rounded-[10px] w-full h-[235px] md:h-[435px] xl:h-[600px]' 
         />
 
         <h3 className='text-[#303030] text-[16px] md:text-[22px] xl:text-[28px] not-italic font-bold md:leading-8 mb-[14px] md:mb-[20px] '>Lorem ipsum dolor sit amet, consectetur adipiscing</h3>
-        <p className='text-[14px] md:text-[18px] xl:text-[24px] not-italic xl:leading-10 tracking-[0.96px] mb-[16px]'>
+        <p className='text-[14px] md:text-[18px] xl:text-[20px] not-italic xl:leading-[26px] tracking-[0.96px] mb-[16px]'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
             magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
             consequat. Duis auteeeee irure dolor in reprehe nderit in voluptate velit esse cillum dolore eu fugiat nulla 
