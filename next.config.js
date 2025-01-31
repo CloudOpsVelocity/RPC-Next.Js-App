@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const createMDX = require("@next/mdx");
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -45,4 +47,5 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const withMDX = createMDX();
+module.exports = withMDX(nextConfig);
