@@ -57,7 +57,9 @@ export class PropertyRecommender {
     }
 
     // Floor proximity (within 2 floors)
-    const floorDiff = Math.abs(reference.floor - candidate.floor);
+    const floorDiff = Math.abs(
+      (reference.floor as number) - (candidate.floor as number)
+    );
     if (floorDiff <= 2) {
       score += this.WEIGHTS.floorMatch * (1 - floorDiff * 0.3);
     }

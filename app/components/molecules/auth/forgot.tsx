@@ -56,7 +56,7 @@ function ForgotForm() {
   });
   const onSubmit = async (values: any) => {
     setStatus("pending");
-    const data = await resendOtp(values.mobile,'pwd_change');
+    const data = await resendOtp(values.mobile, "pwd_change");
     if (data?.status) {
       setStatus("otp");
       open();
@@ -83,7 +83,11 @@ function ForgotForm() {
       {status === "success" ? (
         <ForgotSucess />
       ) : form.values.otp ? (
-        <Form status={status} setStatus={setStatus} />
+        <Form
+          status={status}
+          mobile={form.values.mobile}
+          setStatus={setStatus}
+        />
       ) : (
         <form
           onSubmit={form.onSubmit(onSubmit)}
@@ -201,7 +205,7 @@ const validationSchema = yup.object().shape({
     })
     .max(40, "Password should not exceed 40 characters"),
 });
-const Form = ({ status, setStatus }: any) => {
+const Form = ({ status, setStatus, mobile }: any) => {
   const form = useFormHook({
     defaultValues: {
       password: "",
@@ -212,18 +216,16 @@ const Form = ({ status, setStatus }: any) => {
     criteriaMode: "firstError",
     progressive: true,
     resolver: yupHook(validationSchema),
-    // validate: yupResolver(validationSchema),
-    // validateInputOnBlur: true,
-    // validateInputOnChange: true,
-    // onValuesChange(values) {
-    //   if (values.password.length >= 6) {
-    //     form.setFieldError("confirmPassword", null);
-    //   }
-    // },
   });
+  const { login } = useAuth({ type: "login" });
   const onSubmit = async (values: any) => {
     try {
-      const data = await resetPasswordApi(values.password);
+      const data = await resetPasswordApi(values.password).then((res) => {
+        login({
+          password: values.password,
+          username: mobile as string,
+        });
+      });
       setStatus("success");
     } catch (error) {
       toast.error("Something went wrong.");
