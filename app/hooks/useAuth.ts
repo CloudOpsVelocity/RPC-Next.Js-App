@@ -96,15 +96,16 @@ export default function useAuth({
       redirect: false,
     });
     if (res?.ok) {
-      // redirectPath.action && handleCallBackAction({
-      //   type:redirectPath.url.split("#")[1],
-      //   action:redirectPath.action
-      // });
-      // type === "register"
-      //   ? setTimeout(() => {
-      //       router.push(redirectPath.url ?? '/');
-      //     }, 5000)
-      //   : router.push(redirectPath.url ?? '/');
+      redirectPath.action &&
+        handleCallBackAction({
+          type: redirectPath.url.split("#")[1],
+          action: redirectPath.action,
+        });
+      type === "register"
+        ? setTimeout(() => {
+            router.push(redirectPath.url ?? "/");
+          }, 5000)
+        : router.push(redirectPath.url ?? "/");
     } else {
       if (res?.error === "A" || res?.error === "B") {
         router.push(`/register/${res?.error === "A" ? "agent" : "builder"}`);
