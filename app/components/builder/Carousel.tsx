@@ -262,8 +262,8 @@ const BuilderCarousel = ({
             refetch={refetch}
           />
         )}
-        slidesToShow={3.5}
-        gap={10}
+        slidesToShow={4}
+        // gap={10}
         url="/search"
       />
       {/* <MainCarousel

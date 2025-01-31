@@ -12,23 +12,18 @@ import { PasswordInput } from "react-hook-form-mantine";
 import { yupResolver as yupHook } from "@hookform/resolvers/yup";
 import { useForm as useFormHook } from "react-hook-form";
 import useAuth from "@/app/hooks/useAuth";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import CountryInput from "../../atoms/CountryInput";
 import S from "@/app/styles/Numinput.module.css";
 import * as yup from "yup";
 import { useState } from "react";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import AuthPopup from "./authPopup";
 import { resendOtp, resetPasswordApi } from "@/app/utils/auth";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import { forgetPasswordLockImg } from "@/app/images/commonImages";
-import { signIn } from "next-auth/react";
+
 import ForgotAuthPopup from "../../atoms/ForgotPopup";
-import handleTrimAndReplace, {
-  handleTrimAndReplaceReactHookForm,
-} from "@/app/utils/input/validations";
+import { handleTrimAndReplaceReactHookForm } from "@/app/utils/input/validations";
 const schema = yup.object().shape({
   mobile: yup
     .number()
