@@ -11,8 +11,8 @@ type Props = {
 function BlogCard({data}: Props) {
   const path = usePathname();
   const title = data && data.heading ? data.heading : ""; 
-  const pathName = title.toLowerCase().replace(" ", "-");
-  
+  const pathName = title.toLowerCase();
+
   return ( 
     <a href={`${path}/${pathName}`} target='_blank'>
       <div className='w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] bg-white min-w-[280px] '>
@@ -30,7 +30,7 @@ function BlogCard({data}: Props) {
           />
       </div>
     </a>
-  )
+  ) 
 }
 
-export default BlogCard;
+export default BlogCard
