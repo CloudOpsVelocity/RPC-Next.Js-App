@@ -17,7 +17,7 @@ function BlogDetailsFirstBlock() {
 
   useEffect(()=>{
     setBlogDetails(prev => ({ ...prev, selectedBlog : data }));
-  }, [data])
+  }, [data]);
 
   return (
     <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>

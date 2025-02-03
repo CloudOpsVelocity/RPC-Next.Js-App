@@ -275,6 +275,7 @@ const allPoints = [
 function PointsBlock({}: Props) {
   return (
     <div className='w-full'>
+        <h2 className='text-[22px] text-center font-bold mb-[20px] '>How do I Sale My House?</h2>
         {allPoints.map((eachPoint:any, index:number)=>{
             return(
                 <div key={eachPoint.title} className={`group flex justify-start items-start w-full gap-[20px] mb-[30px] ${index % 2 !== 0 ? "flex-row-reverse" : ""} 
