@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation';
 
 type Props = { 
-  data: any; 
+  data: any;  
 };
 
 function BlogCard({data}: Props) {

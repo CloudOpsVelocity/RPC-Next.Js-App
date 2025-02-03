@@ -56,7 +56,7 @@ function BlogDetailsDescription() {
         <Image
             src={dummyImage} 
             alt="blog Image" width={100} height={269} 
-            className='rounded-[10px] w-full h-[235px] md:h-[435px] xl:h-[600px]' 
+            className='rounded-[10px] w-full h-[235px] md:h-[435px] xl:h-[600px] mb-[30px]' 
         />
 
         <h3 className='text-[#303030] text-[16px] md:text-[22px] xl:text-[28px] not-italic font-bold md:leading-8 mb-[14px] md:mb-[20px] '>Lorem ipsum dolor sit amet, consectetur adipiscing</h3>

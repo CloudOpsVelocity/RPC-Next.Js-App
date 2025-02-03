@@ -181,7 +181,8 @@ const config = {
 
 function NewsSections({}: Props) {
   return (
-    <div className=' p-[5%] flex flex-col justify-normal items-start  '>
+    <div className=' p-[5%] flex flex-col justify-center items-start  '>
+        
         <h2 className=' text-[30px] mb-[40px] font-bold '>Bangalore Property News</h2>
         
         <div className=' flex gap-[16px] flex-wrap '>
