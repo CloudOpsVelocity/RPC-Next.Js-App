@@ -102,7 +102,7 @@ function NewsDetailsPage({}: Props) {
                 />
             </div>
 
-            <p dangerouslySetInnerHTML={{ __html: desc }} className="custom-html text-[16px] leading-[26px] mb-[16px] " />
+            <p dangerouslySetInnerHTML={{ __html: desc }} className=" text-[16px] leading-[26px] mb-[16px] " />
         </div>
     )
 }

@@ -436,64 +436,70 @@ const initailState = {
             title:"Bengaluru’s Real Estate Investment Trust (REIT) Market: A Growing Opportunity for Investors",
             content:"Bengaluru, India’s Silicon Valley, has always been a hotspot for real estate investments, attracting both domestic and international buyers. With its robust IT industry, rapidly growing economy, and world-class infrastructure, the city offers some of the best opportunities for property investments in India.",
             desc:`<h4><strong>Introduction: The Rise of REITs in Bengaluru&rsquo;s Booming Real Estate Market</strong></h4>
-                    <p>Bengaluru, India&rsquo;s Silicon Valley, has always been a hotspot for real estate investments, attracting both domestic and international buyers. With its robust IT industry, rapidly growing economy, and world-class infrastructure, the city offers some of the best opportunities for property investments in India. However, traditional real estate investment often requires substantial capital and comes with challenges such as property management, liquidity concerns, and regulatory complexities.</p>
-                    <p>This is where&nbsp;<strong>Real Estate Investment Trusts (REITs)</strong>&nbsp;have emerged as a game-changing alternative for investors. REITs allow individuals to invest in income-generating real estate assets without directly owning or managing properties. The concept, which has been highly successful in developed markets like the US, Europe, and Singapore, is now gaining momentum in India&mdash;especially in Bengaluru.</p>
-                    <p>With the introduction of SEBI-regulated REITs in India, Bengaluru&rsquo;s real estate market is witnessing a surge in institutional investments, offering a unique opportunity for both retail and institutional investors to earn steady rental income and long-term capital appreciation. This article explores the growing REIT market in Bengaluru, its benefits, key players, and why investors should consider this asset class for portfolio diversification.</p>
-                    <h3><strong>What are REITs? Understanding the Concept</strong></h3>
-                    <p><strong>Real Estate Investment Trusts (REITs)</strong>&nbsp;are investment vehicles that allow investors to pool their money and invest in a diversified portfolio of income-generating real estate assets. These assets typically include commercial office spaces, shopping malls, hotels, and other real estate properties that generate rental income.</p>
-                    <p>REITs function similarly to mutual funds, where investors purchase units in a professionally managed portfolio of properties. The income generated from these properties&mdash;mostly in the form of rentals&mdash;is distributed among unit holders as dividends. In India, REITs are required to distribute at least&nbsp;<strong>90% of their net distributable cash flows</strong>&nbsp;to investors, making them an attractive option for passive income seekers.</p>
-                    <h3><strong>Why Bengaluru is Emerging as a Hub for REIT Investments</strong></h3>
-                    <p>Bengaluru has established itself as India&rsquo;s premier&nbsp;<strong>commercial real estate market</strong>, driven by rapid urbanization, a strong IT and startup ecosystem, and a growing influx of multinational corporations. Several factors make the city a promising destination for REIT investments:</p>
-                    <h4><strong>1. Thriving Commercial Real Estate Sector</strong></h4>
-                    <p>Bengaluru has one of the largest office space markets in India, with key commercial hubs such as&nbsp;<strong>Whitefield, Outer Ring Road (ORR), Electronic City, Koramangala, and Manyata Tech Park</strong>&nbsp;witnessing high occupancy rates. The demand for premium office spaces is consistently rising due to the expansion of IT companies, global capability centers (GCCs), and startups.</p>
-                    <p>REITs primarily invest in&nbsp;<strong>commercial real estate</strong>, and Bengaluru&rsquo;s booming office space market provides an ideal environment for investors seeking stable rental yields and capital appreciation.</p>
-                    <h4><strong>2. High Rental Yields and Occupancy Rates</strong></h4>
-                    <p>Compared to other major Indian cities, Bengaluru offers&nbsp;<strong>higher rental yields</strong>&nbsp;for commercial properties, ranging from&nbsp;<strong>7% to 10% per annum</strong>, making it a lucrative investment avenue. With top IT parks, coworking spaces, and business districts experiencing&nbsp;<strong>80-95% occupancy rates</strong>, REITs investing in Bengaluru&rsquo;s real estate sector enjoy strong cash flows and predictable returns.</p>
-                    <h4><strong>3. Infrastructure Development Boosting Property Demand</strong></h4>
-                    <p>Bengaluru&rsquo;s&nbsp;<strong>expanding metro network (Namma Metro Phase 2 &amp; 3), elevated corridors, suburban railway, and airport expansion</strong>&nbsp;are significantly improving connectivity across the city. As infrastructure develops, commercial hubs near metro corridors and major roadways are witnessing higher demand and appreciation in property values, benefiting REIT investors.</p>
-                    <h4><strong>4. Institutional and Foreign Investments in Bengaluru</strong></h4>
-                    <p>Foreign Direct Investment (FDI) in real estate has surged in Bengaluru due to&nbsp;<strong>relaxed government regulations and strong economic growth</strong>. Institutional investors, including sovereign wealth funds, private equity firms, and real estate developers, are actively acquiring commercial assets in Bengaluru, further boosting the attractiveness of REITs.</p>
-                    <h3><strong>Major REIT Players in India and Their Bengaluru Presence</strong></h3>
-                    <p>India&rsquo;s REIT market is still in its early stages but has already gained significant traction. Here are some of the leading REITs with strong exposure to Bengaluru&rsquo;s real estate market:</p>
-                    <h4><strong>1. Embassy Office Parks REIT</strong></h4>
-                    <ul>
-                    <li>India&rsquo;s&nbsp;<strong>first publicly listed REIT</strong>&nbsp;(launched in 2019)</li>
-                    <li>Holds&nbsp;<strong>33 million sq. ft.</strong>&nbsp;of office spaces across India, with a significant presence in Bengaluru</li>
-                    <li>Owns large commercial properties like&nbsp;<strong>Embassy Manyata Business Park, Embassy TechVillage, and Embassy GolfLinks Business Park</strong></li>
-                    <li>High-quality office spaces with&nbsp;<strong>global tenants like IBM, Microsoft, and Accenture</strong></li>
-                    </ul>
-                    <h4><strong>2. Mindspace Business Parks REIT</strong></h4>
-                    <ul>
-                    <li>Owns&nbsp;<strong>29.5 million sq. ft.</strong>&nbsp;of office assets across Mumbai, Pune, Hyderabad, and Bengaluru</li>
-                    <li>Bengaluru assets include&nbsp;<strong>prestigious IT parks and business districts</strong></li>
-                    <li>Diversified tenant base with&nbsp;<strong>multinational companies and Fortune 500 firms</strong></li>
-                    </ul>
-                    <h4><strong>3. Brookfield India REIT</strong></h4>
-                    <ul>
-                    <li>Owns&nbsp;<strong>18.7 million sq. ft.</strong>&nbsp;of premium commercial real estate, including assets in Bengaluru</li>
-                    <li>Focuses on&nbsp;<strong>Grade A office spaces with stable long-term leases</strong></li>
-                    <li>Strong institutional backing with&nbsp;<strong>global investment firms</strong></li>
-                    </ul>
-                    <h3><strong>Benefits of Investing in REITs</strong></h3>
-                    <p>REITs offer multiple advantages over traditional real estate investments, making them an appealing option for investors seeking&nbsp;<strong>steady income, liquidity, and diversification</strong>.</p>
-                    <h4><strong>1. Passive Income and Regular Dividends</strong></h4>
-                    <p>REITs are required to distribute&nbsp;<strong>90% of their rental income</strong>&nbsp;as dividends, providing a consistent stream of income for investors. This makes them an attractive choice for those looking for&nbsp;<strong>stable, passive income</strong>&nbsp;without the hassles of property management.</p>
-                    <h4><strong>2. Affordable Entry with High Liquidity</strong></h4>
-                    <p>Unlike traditional real estate investments that require&nbsp;<strong>large capital outlays</strong>, REITs allow investors to&nbsp;<strong>buy units on stock exchanges with minimal investment</strong>. Additionally, since REITs are publicly traded, they offer&nbsp;<strong>high liquidity</strong>, unlike physical real estate, which can take months or years to sell.</p>
-                    <h4><strong>3. Portfolio Diversification</strong></h4>
-                    <p>REITs invest in&nbsp;<strong>a diversified portfolio of commercial properties</strong>, reducing the risk associated with individual property investments. Investors benefit from&nbsp;<strong>exposure to high-value real estate assets</strong>&nbsp;across multiple locations and industries.</p>
-                    <h4><strong>4. Tax Efficiency</strong></h4>
-                    <p>REITs enjoy&nbsp;<strong>tax benefits</strong>, with dividend income being largely tax-exempt for investors. Additionally, long-term capital gains from REIT investments are taxed at lower rates compared to traditional real estate transactions.</p>
-                    <h4><strong>5. Hedge Against Inflation</strong></h4>
-                    <p>Commercial real estate rentals typically&nbsp;<strong>increase over time</strong>, keeping pace with inflation. REITs provide a natural hedge against inflation by ensuring that rental income grows steadily, preserving the purchasing power of investments.</p>
-                    <h3><strong>Future Outlook: The Growth of Bengaluru&rsquo;s REIT Market</strong></h3>
-                    <p>With&nbsp;<strong>rising demand for Grade A office spaces, increasing foreign investments, and favorable government regulations</strong>, the REIT market in Bengaluru is poised for&nbsp;<strong>significant expansion</strong>. As infrastructure projects enhance connectivity and commercial districts expand,&nbsp;<strong>more REITs are expected to enter the market</strong>, providing investors with diversified and high-yielding opportunities.</p>
-                    <p>Moreover, as&nbsp;<strong>residential REITs (housing-focused REITs) gain regulatory approval</strong>, investors may soon be able to diversify beyond commercial properties, unlocking new investment avenues in Bengaluru&rsquo;s growing real estate landscape.</p>
-                    <h3><strong>Conclusion: Why Now is the Right Time to Invest in Bengaluru&rsquo;s REIT Market</strong></h3>
-                    <p>Bengaluru&rsquo;s&nbsp;<strong>Real Estate Investment Trust (REIT) market</strong>&nbsp;is emerging as a&nbsp;<strong>lucrative investment opportunity</strong>, offering stable&nbsp;<strong>rental income, capital appreciation, and diversification</strong>&nbsp;in a high-growth real estate market. With strong demand for commercial properties, institutional investments, and infrastructure advancements, REITs provide an&nbsp;<strong>affordable and low-risk way</strong>&nbsp;to participate in Bengaluru&rsquo;s booming real estate sector.</p>
-                    <p>For investors looking to&nbsp;<strong>diversify their portfolios, generate passive income, and gain exposure to premium commercial real estate assets</strong>, Bengaluru&rsquo;s REIT market presents an excellent&nbsp;<strong>long-term growth opportunity</strong>. As more REITs enter the Indian market, investors can expect&nbsp;<strong>greater accessibility, enhanced returns, and a more mature real estate investment ecosystem</strong>&nbsp;in the coming years.</p>
-                    <p><strong>Now is the time to explore REITs as a smart and future-ready investment option in Bengaluru&rsquo;s thriving real estate landscape.</strong></p>`,
-                                url:`${BASE_URL}/staticmedia-images-icons/News/News-8.png`,
+<p>Bengaluru, India&rsquo;s Silicon Valley, has always been a hotspot for real estate investments, attracting both domestic and international buyers. With its robust IT industry, rapidly growing economy, and world-class infrastructure, the city offers some of the best opportunities for property investments in India. However, traditional real estate investment often requires substantial capital and comes with challenges such as property management, liquidity concerns, and regulatory complexities.</p>
+<p>This is where&nbsp;<strong>Real Estate Investment Trusts (REITs)</strong>&nbsp;have emerged as a game-changing alternative for investors. REITs allow individuals to invest in income-generating real estate assets without directly owning or managing properties. The concept, which has been highly successful in developed markets like the US, Europe, and Singapore, is now gaining momentum in India&mdash;especially in Bengaluru.</p>
+<p>With the introduction of SEBI-regulated REITs in India, Bengaluru&rsquo;s real estate market is witnessing a surge in institutional investments, offering a unique opportunity for both retail and institutional investors to earn steady rental income and long-term capital appreciation. This article explores the growing REIT market in Bengaluru, its benefits, key players, and why investors should consider this asset class for portfolio diversification.</p>
+<hr />
+<h3><strong>What are REITs? Understanding the Concept</strong></h3>
+<p><strong>Real Estate Investment Trusts (REITs)</strong>&nbsp;are investment vehicles that allow investors to pool their money and invest in a diversified portfolio of income-generating real estate assets. These assets typically include commercial office spaces, shopping malls, hotels, and other real estate properties that generate rental income.</p>
+<p>REITs function similarly to mutual funds, where investors purchase units in a professionally managed portfolio of properties. The income generated from these properties&mdash;mostly in the form of rentals&mdash;is distributed among unit holders as dividends. In India, REITs are required to distribute at least&nbsp;<strong>90% of their net distributable cash flows</strong>&nbsp;to investors, making them an attractive option for passive income seekers.</p>
+<hr />
+<h3><strong>Why Bengaluru is Emerging as a Hub for REIT Investments</strong></h3>
+<p>Bengaluru has established itself as India&rsquo;s premier&nbsp;<strong>commercial real estate market</strong>, driven by rapid urbanization, a strong IT and startup ecosystem, and a growing influx of multinational corporations. Several factors make the city a promising destination for REIT investments:</p>
+<h4><strong>1. Thriving Commercial Real Estate Sector</strong></h4>
+<p>Bengaluru has one of the largest office space markets in India, with key commercial hubs such as&nbsp;<strong>Whitefield, Outer Ring Road (ORR), Electronic City, Koramangala, and Manyata Tech Park</strong>&nbsp;witnessing high occupancy rates. The demand for premium office spaces is consistently rising due to the expansion of IT companies, global capability centers (GCCs), and startups.</p>
+<p>REITs primarily invest in&nbsp;<strong>commercial real estate</strong>, and Bengaluru&rsquo;s booming office space market provides an ideal environment for investors seeking stable rental yields and capital appreciation.</p>
+<h4><strong>2. High Rental Yields and Occupancy Rates</strong></h4>
+<p>Compared to other major Indian cities, Bengaluru offers&nbsp;<strong>higher rental yields</strong>&nbsp;for commercial properties, ranging from&nbsp;<strong>7% to 10% per annum</strong>, making it a lucrative investment avenue. With top IT parks, coworking spaces, and business districts experiencing&nbsp;<strong>80-95% occupancy rates</strong>, REITs investing in Bengaluru&rsquo;s real estate sector enjoy strong cash flows and predictable returns.</p>
+<h4><strong>3. Infrastructure Development Boosting Property Demand</strong></h4>
+<p>Bengaluru&rsquo;s&nbsp;<strong>expanding metro network (Namma Metro Phase 2 &amp; 3), elevated corridors, suburban railway, and airport expansion</strong>&nbsp;are significantly improving connectivity across the city. As infrastructure develops, commercial hubs near metro corridors and major roadways are witnessing higher demand and appreciation in property values, benefiting REIT investors.</p>
+<h4><strong>4. Institutional and Foreign Investments in Bengaluru</strong></h4>
+<p>Foreign Direct Investment (FDI) in real estate has surged in Bengaluru due to&nbsp;<strong>relaxed government regulations and strong economic growth</strong>. Institutional investors, including sovereign wealth funds, private equity firms, and real estate developers, are actively acquiring commercial assets in Bengaluru, further boosting the attractiveness of REITs.</p>
+<hr />
+<h3><strong>Major REIT Players in India and Their Bengaluru Presence</strong></h3>
+<p>India&rsquo;s REIT market is still in its early stages but has already gained significant traction. Here are some of the leading REITs with strong exposure to Bengaluru&rsquo;s real estate market:</p>
+<h4><strong>1. Embassy Office Parks REIT</strong></h4>
+<ul>
+<li>India&rsquo;s&nbsp;<strong>first publicly listed REIT</strong>&nbsp;(launched in 2019)</li>
+<li>Holds&nbsp;<strong>33 million sq. ft.</strong>&nbsp;of office spaces across India, with a significant presence in Bengaluru</li>
+<li>Owns large commercial properties like&nbsp;<strong>Embassy Manyata Business Park, Embassy TechVillage, and Embassy GolfLinks Business Park</strong></li>
+<li>High-quality office spaces with&nbsp;<strong>global tenants like IBM, Microsoft, and Accenture</strong></li>
+</ul>
+<h4><strong>2. Mindspace Business Parks REIT</strong></h4>
+<ul>
+<li>Owns&nbsp;<strong>29.5 million sq. ft.</strong>&nbsp;of office assets across Mumbai, Pune, Hyderabad, and Bengaluru</li>
+<li>Bengaluru assets include&nbsp;<strong>prestigious IT parks and business districts</strong></li>
+<li>Diversified tenant base with&nbsp;<strong>multinational companies and Fortune 500 firms</strong></li>
+</ul>
+<h4><strong>3. Brookfield India REIT</strong></h4>
+<ul>
+<li>Owns&nbsp;<strong>18.7 million sq. ft.</strong>&nbsp;of premium commercial real estate, including assets in Bengaluru</li>
+<li>Focuses on&nbsp;<strong>Grade A office spaces with stable long-term leases</strong></li>
+<li>Strong institutional backing with&nbsp;<strong>global investment firms</strong></li>
+</ul>
+<hr />
+<h3><strong>Benefits of Investing in REITs</strong></h3>
+<p>REITs offer multiple advantages over traditional real estate investments, making them an appealing option for investors seeking&nbsp;<strong>steady income, liquidity, and diversification</strong>.</p>
+<h4><strong>1. Passive Income and Regular Dividends</strong></h4>
+<p>REITs are required to distribute&nbsp;<strong>90% of their rental income</strong>&nbsp;as dividends, providing a consistent stream of income for investors. This makes them an attractive choice for those looking for&nbsp;<strong>stable, passive income</strong>&nbsp;without the hassles of property management.</p>
+<h4><strong>2. Affordable Entry with High Liquidity</strong></h4>
+<p>Unlike traditional real estate investments that require&nbsp;<strong>large capital outlays</strong>, REITs allow investors to&nbsp;<strong>buy units on stock exchanges with minimal investment</strong>. Additionally, since REITs are publicly traded, they offer&nbsp;<strong>high liquidity</strong>, unlike physical real estate, which can take months or years to sell.</p>
+<h4><strong>3. Portfolio Diversification</strong></h4>
+<p>REITs invest in&nbsp;<strong>a diversified portfolio of commercial properties</strong>, reducing the risk associated with individual property investments. Investors benefit from&nbsp;<strong>exposure to high-value real estate assets</strong>&nbsp;across multiple locations and industries.</p>
+<h4><strong>4. Tax Efficiency</strong></h4>
+<p>REITs enjoy&nbsp;<strong>tax benefits</strong>, with dividend income being largely tax-exempt for investors. Additionally, long-term capital gains from REIT investments are taxed at lower rates compared to traditional real estate transactions.</p>
+<h4><strong>5. Hedge Against Inflation</strong></h4>
+<p>Commercial real estate rentals typically&nbsp;<strong>increase over time</strong>, keeping pace with inflation. REITs provide a natural hedge against inflation by ensuring that rental income grows steadily, preserving the purchasing power of investments.</p>
+<hr />
+<h3><strong>Future Outlook: The Growth of Bengaluru&rsquo;s REIT Market</strong></h3>
+<p>With&nbsp;<strong>rising demand for Grade A office spaces, increasing foreign investments, and favorable government regulations</strong>, the REIT market in Bengaluru is poised for&nbsp;<strong>significant expansion</strong>. As infrastructure projects enhance connectivity and commercial districts expand,&nbsp;<strong>more REITs are expected to enter the market</strong>, providing investors with diversified and high-yielding opportunities.</p>
+<p>Moreover, as&nbsp;<strong>residential REITs (housing-focused REITs) gain regulatory approval</strong>, investors may soon be able to diversify beyond commercial properties, unlocking new investment avenues in Bengaluru&rsquo;s growing real estate landscape.</p>
+<hr />
+<h3><strong>Conclusion: Why Now is the Right Time to Invest in Bengaluru&rsquo;s REIT Market</strong></h3>
+<p>Bengaluru&rsquo;s&nbsp;<strong>Real Estate Investment Trust (REIT) market</strong>&nbsp;is emerging as a&nbsp;<strong>lucrative investment opportunity</strong>, offering stable&nbsp;<strong>rental income, capital appreciation, and diversification</strong>&nbsp;in a high-growth real estate market. With strong demand for commercial properties, institutional investments, and infrastructure advancements, REITs provide an&nbsp;<strong>affordable and low-risk way</strong>&nbsp;to participate in Bengaluru&rsquo;s booming real estate sector.</p>
+<p>For investors looking to&nbsp;<strong>diversify their portfolios, generate passive income, and gain exposure to premium commercial real estate assets</strong>, Bengaluru&rsquo;s REIT market presents an excellent&nbsp;<strong>long-term growth opportunity</strong>. As more REITs enter the Indian market, investors can expect&nbsp;<strong>greater accessibility, enhanced returns, and a more mature real estate investment ecosystem</strong>&nbsp;in the coming years.</p>
+<p><strong>Now is the time to explore REITs as a smart and future-ready investment option in Bengaluru&rsquo;s thriving real estate landscape.</strong></p>`,
+            url:`${BASE_URL}/staticmedia-images-icons/News/News-8.png`,
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
