@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useEffect } from 'react'
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
-import { backIcon, Facebook, ShearIcon, TringleIcons, WhatsApp } from '@/app/images/commonSvgs';
+import { backIcon, Facebook, facebookRedirectLink, ShearIcon, TringleIcons, WhatsApp, whatsappRedirectLink } from '@/app/images/commonSvgs';
 import { usePathname } from 'next/navigation';
 
 function BlogDetailsFirstBlock() {
@@ -12,19 +12,22 @@ function BlogDetailsFirstBlock() {
   const currentBlog = path.split("/")[2].replaceAll("%20", " ");
   console.log(currentBlog);
 
-  const data:any = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog)[0];
+  const data:any = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog.toLowerCase())[0];
   const {date, text, heading, coverImage} = data;
 
   useEffect(()=>{
     setBlogDetails(prev => ({ ...prev, selectedBlog : data }));
   }, [data]);
 
+
   return (
     <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>
-      <button className='text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 flex justify-center items-center self-start '>
-        <span className=' bg-[#E8F3FF] w-[18px] h-[18px] xl:w-[32px] xl:h-[32px] rounded-[50%] flex justify-center items-center '>{backIcon}</span>
-        Back
-      </button>
+      <a href={"/blog"} target="_blank">
+        <button className='text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 flex justify-center items-center self-start '>
+          <span className=' bg-[#E8F3FF] w-[18px] h-[18px] xl:w-[32px] xl:h-[32px] rounded-[50%] flex justify-center items-center '>{backIcon}</span>
+          Back
+        </button>
+      </a>
 
 
       <div className='rounded-[10px] relative w-full md:w-[50%] max-h-[463px] border-[0.5px] border-gray border-solid  bg-white '>
@@ -36,7 +39,11 @@ function BlogDetailsFirstBlock() {
 
         <Image
             src={coverImage} 
-            alt="blog Image" width={100} height={269} 
+            quality={80}
+            //priority={coverImage}
+            height={630}
+            width={1200}
+            alt="blog Image" /* width={100} height={269}  */
             className='rounded-[10px] w-full h-full relative max-h-[260px] md:max-h-[463px] bg-white z-1' 
         />
       </div>
@@ -49,9 +56,19 @@ function BlogDetailsFirstBlock() {
               <p className={`text-[#627A9E] italic font-medium leading-[normal] text-[16px]`}>{date}</p>
               <div className='gap-[12px] flex justify-center items-center h-[24px] '>
                   {/* <FacebookShareButton /> */}
-                  <ShearIcon className={"w-[24px] h-[24px]"} />
-                  <Facebook className={"w-[24px] h-[24px]" } />
-                  <WhatsApp className={"w-[24px] h-[24px]" } />
+                  <ShearIcon 
+                    onClick={()=>navigator.share({
+                        title: "Share Blog",
+                        url: "www.getrightproperty.com/blog",
+                    })} 
+                    className={"w-[24px] h-[24px]"} 
+                  /> 
+                  <a href={facebookRedirectLink} target="_blank">
+                    <Facebook className={"w-[24px] h-[24px]" } />
+                  </a>
+                  <a href={whatsappRedirectLink} target="_blank">
+                    <WhatsApp className={"w-[24px] h-[24px]" } />
+                  </a>
               </div>
           </div>
       </div>

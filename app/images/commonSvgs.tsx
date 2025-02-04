@@ -2,6 +2,10 @@
 import clsx from "clsx";
 import React from "react";
 
+export const whatsappRedirectLink = `https://api.whatsapp.com/send?phone=+918884440963&text=${"Hello"}`;
+export const facebookRedirectLink = "https://www.facebook.com/profile.php?id=100066833915037";
+
+
 export const homeSvg = (
   <svg
     className="homepageImage"
@@ -4926,7 +4930,7 @@ export const WhatsAppButton = ({ name, type }: Props) => {
             <stop offset="1" stopColor="white" />
           </linearGradient>
         </defs>
-      </svg>
+      </svg> 
     </a>
   );
 };
@@ -5437,10 +5441,11 @@ export const LenseIcon = ({ className }: { className?: string }) => {
   );
 };
 
-export const ShearIcon = ({ className }: { className?: string }) => {
+export const ShearIcon = ({ className, onClick }: { className?: string, onClick?: any }) => {
   return (
     <svg
       className={className}
+      onClick={()=>onClick()}
       xmlns="http://www.w3.org/2000/svg"
       width="18"
       height="19"

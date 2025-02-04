@@ -1,4 +1,4 @@
-import NewsSections from "../components/NewsSections";
+import NewsSections from "@/app/news/components/NewsSections";
 
 type Params = {
   params: {

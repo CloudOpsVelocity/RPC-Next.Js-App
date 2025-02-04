@@ -9,7 +9,11 @@ function FeaturedBlogCard({data}:{data:any}) {
         <div className=' min-w-[297px] border-t-1 border-solid shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] '>
             <Image
                 src={data?.coverImage} 
-                alt="blog Image" width={100} height={269} 
+                alt="blog Image" /* width={100} height={269} */ 
+                quality={80}
+                priority={data?.coverImage}
+                height={630}
+                width={1200}
                 className='rounded-[10px] w-full h-[179px]' 
             />
 

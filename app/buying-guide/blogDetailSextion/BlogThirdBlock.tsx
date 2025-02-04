@@ -1,8 +1,8 @@
 import React from 'react'
-import ContentBox from './ContentBox'
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import Image from 'next/image';
+import ContentBox from '@/app/blog/blogDetailSextion/ContentBox';
 
 function BlogThirdBlock() {
     const [{ selectedBlog, allBlogData }, setBlogData] = useAtom(blogDetails);
@@ -22,7 +22,10 @@ function BlogThirdBlock() {
 
             <Image
                 src={data?.coverImage} 
-                alt="blog Image" width={100} height={269} 
+                alt="blog Image" /* width={100} height={269}  */
+                quality={80}
+                height={630}
+                width={1200}
                 className='rounded-[10px] w-[94%] xl:w-[50%] mb-[10px] md:mb-0 border-[0.5px] border-gray border-solid rounded-l-0 max-w-[100%] md:max-w-[598px] xl:max-h-[284px] md:max-h-[200px] max-h-[200px] ' 
             />
         </div>

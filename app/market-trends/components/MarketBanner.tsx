@@ -28,7 +28,7 @@ export default function MarketBanner({title, text}: Props) {
 
         {!path.includes("news") ?
         <div className="relative flex flex-col items-center justify-center h-full ">
-          {title && <h2 className='text-[18px] md:text-[28px] text-white leading-[30px] shadow-[2px 2px 5px rgba(0, 0, 0, 1)] mb-0 md:mb-[16px] font-bold '>Property Rates & Price Trends</h2>}
+          {title && <h2 className='text-[18px] md:text-[28px] text-white leading-[30px] shadow-[2px 2px 5px rgba(0, 0, 0, 1)] mb-0 md:mb-[16px] font-bold '>{title}</h2>}
           {text && <p className='text-[11px] text-[#cccccc] font-semibold mb-[20px] '>{text}</p>}
         </div>
         :

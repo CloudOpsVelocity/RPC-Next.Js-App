@@ -24,7 +24,7 @@ function MarketSections({text}: Props) {
   
   const {
     data: AllCities,
-    // isLoading: citiesLoading,
+    isLoading: citiesLoading,
     // error: citiesError,
   } = useQuery<City[], Error>({
     queryKey: ["all-cities"],
@@ -34,9 +34,9 @@ function MarketSections({text}: Props) {
   });
 
   const currentCities = AllCities?.filter((city:any)=> cityIds.includes(city?.id) && (inputSearch === "" || city.name.toLowerCase().includes(inputSearch)));
-
-  // console.log(AllCities);
   const path = usePathname();
+
+  console.log(citiesLoading)
 
   return (
     <div className='w-[94%] md:w-[70%] pb-[30px] flex flex-col items-center  '>

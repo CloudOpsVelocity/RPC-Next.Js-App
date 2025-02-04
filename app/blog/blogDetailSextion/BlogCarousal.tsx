@@ -66,7 +66,7 @@ function BlogCarousal() {
 
             <div 
                 ref={containerRef} 
-                className='flex justify-start items-center w-full overflow-y-auto mt-5 mb-[3%] scroll-smooth scrollbar-hide cursor-grab '
+                className='flex justify-start items-center w-full overflow-y-auto mt-5 scroll-smooth scrollbar-hide cursor-grab '
                 onMouseDown={handleMouseDown}
                 onMouseLeave={handleMouseLeave}
                 onMouseUp={handleMouseUp}

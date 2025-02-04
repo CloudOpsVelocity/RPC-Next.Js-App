@@ -1,3 +1,4 @@
+import { commonLinks } from '@/app/news/components/NewsDetailsPage';
 import React from 'react'
 
 type Props = {};
@@ -135,7 +136,6 @@ const allPoints = [
                 </g>
             </g>
             </svg>
-
     },
     {
         title:"Market Aggressively",
@@ -155,7 +155,6 @@ const allPoints = [
        c0,23-16.6,42.2-38.4,46.4v36.4l5.3,0c3.6,0,7.1,1.5,9.7,4l24.2,24.2c3.3,3.3,5.2,7.8,5.2,12.5v28L134.8,254z M54.7,84.7
        c19.6,0,35.4-15.9,35.4-35.4S74.3,13.8,54.7,13.8c-19.6,0-35.4,15.9-35.4,35.4S35.2,84.7,54.7,84.7z"/>
    </svg>
-
     },
     {
         title:"Highlight Key Selling Points",
@@ -178,7 +177,6 @@ const allPoints = [
        </g>
    </g>
    </svg>
-
     },
     {
         title:"Work with a Skilled Agent",
@@ -199,7 +197,6 @@ const allPoints = [
             M352.347,391.971v-58.028h-30v58.028h-59.263v-93.028h148.525v93.028H352.347z"/>
    </g>
    </svg>
-
     },
     {
         title:"Be Flexible with Showings",
@@ -238,23 +235,21 @@ const allPoints = [
        </g>
    </g>
    </svg>
-
     },
     {
         title:"Offer Incentives",
         points:["Consider offering closing cost assistance or including appliances to entice buyers."],
         icon: <svg className={styles.svgStyle} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         viewBox="0 0 256 173">
-   <path d="M128.3,56.9c15.2,0,27.4-12.2,27.4-27.4S143.5,2,128.3,2c-15.2,0-27.4,12.2-27.4,27.4C100.9,44.7,113.2,56.9,128.3,56.9z
-        M64.6,136.3H15.3c-16,0-16.9-24.4,0.3-24.4h42.7l24.5-36.1C90,66,98.3,61.3,109.9,61.3h36.5c11.7,0,19.9,4.3,27.1,14.6l24.6,36.1
-       h43c17.2,0,16.2,24.4,0.6,24.4h-49.3c-3.9,0-8.6-1.4-11.4-5.6l-18.8-26.8l-0.1,67.2H94.8l-0.1-67.2l-18.8,26.8
-       C73.2,134.9,68.5,136.3,64.6,136.3z M31,98.5c16,0,29-13,29-29s-13-29-29-29S2,53.5,2,69.6C2,85.6,15,98.5,31,98.5z M29.4,72
-       c-5.3-1.9-8.6-4.6-8.6-9.3c0-4.4,2.9-7.9,8.3-9v-4.8h4v4.6c3.3,0,5.7,0.7,7.5,1.6l-1.6,5.7c-1.3-0.5-3.5-1.5-6.4-1.5
-       s-4.6,1.5-4.6,2.9c0,2,1.9,2.8,5.9,4.4c5.5,2,8,4.8,8,9.3s-2.8,8-8.7,9.3v4.6h-4v-4.4c-3.5,0-7-0.9-8.6-1.9l1.5-5.9
-       c1.9,0.9,4.8,2,7.9,2c3.3,0,5-1.5,5-3.5S33.2,73.5,29.4,72z M225,40.5c-16,0-29,13-29,29s13,29,29,29c16,0,29-13,29-29
-       S241,40.5,225,40.5z M236.5,86.2l-11.5-6l-11.4,6l2.2-12.7l-9.3-9l12.8-1.9L225,51l5.7,11.6l12.8,1.8l-9.2,9L236.5,86.2z"/>
-   </svg>
-
+        <path d="M128.3,56.9c15.2,0,27.4-12.2,27.4-27.4S143.5,2,128.3,2c-15.2,0-27.4,12.2-27.4,27.4C100.9,44.7,113.2,56.9,128.3,56.9z
+                M64.6,136.3H15.3c-16,0-16.9-24.4,0.3-24.4h42.7l24.5-36.1C90,66,98.3,61.3,109.9,61.3h36.5c11.7,0,19.9,4.3,27.1,14.6l24.6,36.1
+            h43c17.2,0,16.2,24.4,0.6,24.4h-49.3c-3.9,0-8.6-1.4-11.4-5.6l-18.8-26.8l-0.1,67.2H94.8l-0.1-67.2l-18.8,26.8
+            C73.2,134.9,68.5,136.3,64.6,136.3z M31,98.5c16,0,29-13,29-29s-13-29-29-29S2,53.5,2,69.6C2,85.6,15,98.5,31,98.5z M29.4,72
+            c-5.3-1.9-8.6-4.6-8.6-9.3c0-4.4,2.9-7.9,8.3-9v-4.8h4v4.6c3.3,0,5.7,0.7,7.5,1.6l-1.6,5.7c-1.3-0.5-3.5-1.5-6.4-1.5
+            s-4.6,1.5-4.6,2.9c0,2,1.9,2.8,5.9,4.4c5.5,2,8,4.8,8,9.3s-2.8,8-8.7,9.3v4.6h-4v-4.4c-3.5,0-7-0.9-8.6-1.9l1.5-5.9
+            c1.9,0.9,4.8,2,7.9,2c3.3,0,5-1.5,5-3.5S33.2,73.5,29.4,72z M225,40.5c-16,0-29,13-29,29s13,29,29,29c16,0,29-13,29-29
+            S241,40.5,225,40.5z M236.5,86.2l-11.5-6l-11.4,6l2.2-12.7l-9.3-9l12.8-1.9L225,51l5.7,11.6l12.8,1.8l-9.2,9L236.5,86.2z"/>
+        </svg>
     },
     {
         title:"Ensure a Smooth Inspection",
@@ -267,7 +262,6 @@ const allPoints = [
         <circle cx="30" cy="32" r="7" fill="#2F88FF" stroke="#000000" stroke-width="4"/>
         <path d="M36 37L42 42" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-
     },
     
 ]
@@ -275,7 +269,33 @@ const allPoints = [
 function PointsBlock({}: Props) {
   return (
     <div className='w-full'>
-        <h2 className='text-[22px] text-center font-bold mb-[20px] '>How do I Sale My House?</h2>
+        {/* <h2 className='text-[22px] text-center font-bold mb-[20px] '>How do I Sale My House?</h2> */}
+        <div className="flex flex-col md:flex-row justify-between w-full mb-[16px]  md:mb-[26px] ">
+               <div className="flex flex-wrap gap-[10px]">
+                   {commonLinks.redirections.map((eachOne:any)=>{
+                       return(
+                         <a key={eachOne.name} href={eachOne.link} target='_blank' >
+                           <p className=" bg-gray-400 text-[10px] md:text-[12px] cursor-pointer text-white p-[2px] px-[4px] md:px-[6px] ">#{eachOne.name}</p>
+                         </a>
+                       )
+                   })}
+               </div>
+    
+               <div className="flex space-x-6 mt-[10px] gap-[10px] md:gap-[16px] md:mt-0 items-end justify-end max-h-[32px] ">
+                   {commonLinks.socialIcons.map(({ name, icon, link }) => (
+                   <a
+                       key={name}
+                       href={link}
+                       target="_blank"
+                       className="text-white hover:text-gray-300 !m-0"
+                   >
+                       <span className="sr-only">{name}</span>
+                       {icon}
+                   </a>
+                   ))}
+               </div>
+        </div>
+
         {allPoints.map((eachPoint:any, index:number)=>{
             return(
                 <div key={eachPoint.title} className={`group flex justify-start items-start w-full gap-[20px] mb-[30px] ${index % 2 !== 0 ? "flex-row-reverse" : ""} 
@@ -295,8 +315,7 @@ function PointsBlock({}: Props) {
                 </div>
             )
         })}
-    
-    </div>
+    </div> 
   )
 }
 

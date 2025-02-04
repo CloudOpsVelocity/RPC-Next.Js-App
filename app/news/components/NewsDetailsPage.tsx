@@ -8,18 +8,18 @@ import Image from 'next/image';
 import { SocialIcons } from '@/app/images/commonSvgs';
 
 
-type Props = {};
+type Props = {}; 
 const styles = {
-    soclalIconStyle: "h-[32px] w-[32px]"
+    soclalIconStyle: "h-[24px] w-[24px] md:h-[32px] md:w-[32px]"
 }
-const commonLinks = {
+export const commonLinks = {
     redirections: [
-      {name: "Bangalore Real Estate", link:""},
-      {name: "Builders", link:""},
-      {name: "Buyers", link:""},
-      {name: "Owners", link:""},
-      {name: "Real Estate News", link:""},
-      {name: "Residential", link:""},
+      {name: "Bangalore Real Estate", link:"/market-trends/locality-insights"},
+      {name: "Builders", link:"/search?sf=listedBy=B"},
+      {name: "Buyers", link:"/search"},
+      {name: "Owners", link:"/search?sf=listedBy=I"},
+      {name: "Real Estate News", link:"/market-trends/news"},
+      {name: "Residential", link:"/search?sf=listedBy=All"},
     ],
     socialIcons : [
       {
@@ -29,7 +29,7 @@ const commonLinks = {
       },
       {
         name: "instagram",
-        icon: <SocialIcons  type="instagram" className={styles.soclalIconStyle + "fill-pink-700"} />,
+        icon: <SocialIcons  type="instagram" className={styles.soclalIconStyle} />,
         link: "https://www.instagram.com/_getrightproperty_/?utm_source=qr#",
       },
       {
@@ -55,35 +55,32 @@ function NewsDetailsPage({}: Props) {
     const [{allData}] = useAtom(newsData);
     const path = usePathname();
     const currentBlog = path.split("/")[2].replaceAll("%20", " ");
-    console.log(currentBlog);
-    console.log(allData)
 
     const data:any = allData.filter((each:any) => each?.name === currentBlog)[0];
     if(!data) return;
     const {name, title, desc, url, section, user, date, viewsCount } = data;
-    console.log(data);
 
     return (
-        <div className=" flex flex-col w-[96%] md:w-[70%] xl:w-[50%] py-[30px] ">
-            <h1 className=" text-[36px] font-bold text-wrap ">{title}</h1>
-            <div className="flex justify-between w-full items-center mb-[26px] ">
-                <div className="flex flex-wrap gap-[10px] ">
+        <div className=" flex flex-col  w-[96%] md:w-[80%] xl:w-[50%] py-[30px] ">
+            <h1 className=" text-[20px] md:text-[24px] xl:text-[36px] font-bold text-wrap mb-[14px] md:mb-[20px] ">{title}</h1>
+            <div className="flex flex-col md:flex-row justify-between w-full md:items-center mb-[16px]  md:mb-[26px] ">
+                <div className="flex flex-wrap gap-[10px]">
                     {commonLinks.redirections.map((eachOne:any)=>{
                         return(
                           <a key={eachOne.name} href={eachOne.link} target='_blank' >
-                            <p className=" bg-gray-400 text-[12px] cursor-pointer text-white p-[2px] px-[6px] ">#{eachOne.name}</p>
+                            <p className=" bg-gray-400 text-[10px] md:text-[12px] cursor-pointer text-white p-[2px] px-[4px] md:px-[6px] ">#{eachOne.name}</p>
                           </a>
                         )
                     })}
                 </div>
 
-                <div className="flex space-x-6">
+                <div className="flex space-x-6 mt-[10px] gap-[10px] md:gap-[16px] md:mt-0 items-end justify-end max-h-[32px] ">
                     {commonLinks.socialIcons.map(({ name, icon, link }) => (
                     <a
                         key={name}
                         href={link}
                         target="_blank"
-                        className="text-white hover:text-gray-300"
+                        className="text-white hover:text-gray-300 !m-0"
                     >
                         <span className="sr-only">{name}</span>
                         {icon}
@@ -92,7 +89,7 @@ function NewsDetailsPage({}: Props) {
                 </div>
             </div>
 
-            <div className=" h-[400px] w-full bg-gray-300 mb-[16px] ">
+            <div className="h-[280px] md:h-[360px] xl:h-[400px] w-full bg-gray-300 mb-[16px] ">
                 <Image
                     src={url}
                     width={800}
@@ -102,7 +99,7 @@ function NewsDetailsPage({}: Props) {
                 />
             </div>
 
-            <p dangerouslySetInnerHTML={{ __html: desc }} className="custom-html text-[16px] leading-[26px] mb-[16px] " />
+            <p dangerouslySetInnerHTML={{ __html: desc }} className="custom-html text-[14px] md:text-[16px] leading-[26px] mb-[16px] " />
         </div>
     )
 }

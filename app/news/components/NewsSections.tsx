@@ -2,21 +2,21 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import React from 'react'
-import { newsData } from '../store/newsState';
 import { usePathname } from 'next/navigation';
+import { emptyFilesIcon, strikeIconIcon } from '@/app/images/commonSvgs';
+import { newsData } from '@/app/news/store/newsState';
 import { trendsFilterData } from '@/app/market-trends/data.ts/marketBlogalData';
 
 type Props = {
-    cityName:string;
+    cityName?:string;
 }
 
 type CradProps = {
     data:any;
-    cityName:string;
+    cityName?:string;
 }
 
-function Card({data, cityName}: CradProps) {
-  const getClampedText = (text:string, maxLines:number ) => {
+export const getClampedText = (text:string, maxLines:number ) => {
     const words = text?.split(" ");
     const newText = text?.split(" ")?.slice(0, maxLines * 4)
 
@@ -27,10 +27,11 @@ function Card({data, cityName}: CradProps) {
     }
   }
 
+function Card({data, cityName}: CradProps) {
   const pathname = usePathname();
 
   return (
-    <a href={`${pathname}/${data.name}`} target="_blank">
+    <a href={`/news/${data.name}`} target="_blank">
         <div className="flex min-w-[240px] sm:w-[238px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-t-[4px] sm:rounded-t-[10px] xl:rounded-t-[4px] border-solid border-[#B9CFEB] hover:shadow-lg ">
             <p className=' border-0 p-[4px] bg-[#6b9472] text-[12px] font-bold text-white mr-auto mb-[16px] absolute top-[10px] right-[10px] '>{data.section}</p>
 
@@ -97,26 +98,31 @@ const config = {
     )
 };
 
+
 function NewsSections({cityName}: Props) {
     const [{allData}] = useAtom(newsData);
     const [{inputSearch}] = useAtom(trendsFilterData);
+    const currentCities = allData?.filter((city:any) => (inputSearch === "" || city.title.toLowerCase().includes(inputSearch)));
 
-    const currentCities = allData?.filter((city:any) => (inputSearch === "" || city.name.toLowerCase().includes(inputSearch)));
-
-    console.log(currentCities);
-
-    cityName = cityName ? cityName : "Bengaluru";
     return (
-        <div className=' w-full flex flex-col justify-center items-center py-[3%]  '>
+        <div className=' w-full flex flex-col justify-center items-center pb-[3%]  '>
             <div className='w-[96%] md:w-[90%] xl:w-[80%] flex flex-col  '>
                 <h2 className='text-[16px] md:text-[20px] xl:text-[24px] mb-[16px] md:mb-[20px] font-bold first-letter:capitalize '>{cityName} Property News</h2>
                 
                 <div className=' flex gap-[16px] flex-wrap  '>
-                    {allData?.map(eachCard=>{
+                    {currentCities && currentCities.length > 0 ?
+                    currentCities?.map(eachCard=>{
                         return(
                             <Card key={eachCard.title} data={eachCard} cityName={cityName} />
                         )
-                    })}
+                    })
+                    :
+                    <div className="flex w-full h-full justify-center items-center flex-col">
+                      <span className='max-h-[600px] max-w-[600px]'>{emptyFilesIcon}</span>
+                      No Matching Results Found!
+                      <span className="relative left-[10%]">{strikeIconIcon}</span>
+                    </div>
+                    }
                 </div>
             </div>
         </div>

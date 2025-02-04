@@ -1,42 +1,46 @@
 "use client"
 import { blogDetails } from '@/app/hooks/blog';
+import { getClampedText } from '@/app/news/components/NewsSections';
 import { useAtom } from 'jotai';
-import Image from 'next/image'
+import Image from 'next/image';
 import React from 'react';
 
-const dummyImage = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/Blog-Images/Investing-101.webp`;
-
-function BlogMiniCard() {
+function BlogMiniCard({data}:{data:any}) {
   return (
-    <div className='max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] self-end ml-auto shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#E8F3FF] '>
-        <Image
-            src={dummyImage} 
-            alt="blog Image" width={120} height={90} 
-            className=' min-w-[120px] h-[90px] border-gray shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#227FBC] ' 
-        />
+    <a href={`/blog/${data.heading}`} target='_blank'>
+      <div className='max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] self-end ml-auto shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#E8F3FF] '>
+          <Image
+              src={data.coverImage} 
+              alt="blog Image" width={120} height={90} 
+              className=' min-w-[120px] h-[90px] border-gray shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#227FBC] ' 
+          />
 
-        <div className='w-full'>
-            <h3 className={`text-[#227FBC] not-italic font-bold leading-[normal] mb-[6px] md:mb-[10px] text-[16px]`}>Next Read</h3>
-            <p className='text-[color:var(--800,#2D3748)] text-base not-italic font-bold leading-[normal]'>Resale Value</p>
-            <p className={`text-[#303030] text-[14px] italic font-medium leading-[normal] `}>How to Maximise your Property’s Resale Value</p>
-            
-            <div className={`flex justify-between items-center `}>
-                <p className={`text-[#627A9E] italic font-medium leading-[normal] text-[12px]`}>May 24th, 2024</p>
-            </div>
-        </div>
-
-    </div>
-  )
+          <div className='w-full'>
+              <h3 className={`text-[#227FBC] not-italic font-bold leading-[normal] mb-[6px] md:mb-[10px] text-[16px]`}>Next Read</h3>
+              <p className='text-[color:var(--800,#2D3748)] text-base not-italic font-bold leading-[normal]'>{data.heading}</p>
+              <p className={`text-[#303030] text-[14px] italic font-medium leading-[normal] `}>{getClampedText(data.content, 3)}</p>
+              
+              <div className={`flex justify-between items-center `}>
+                  <p className={`text-[#627A9E] italic font-medium leading-[normal] text-[12px]`}>{data.date}</p>
+              </div>
+          </div>
+      </div>
+    </a>
+  ) 
 } 
 
 function BlogDetailsDescription() {
-  const [{ selectedBlog }] = useAtom(blogDetails);
+  const [{ allBlogData, selectedBlog }] = useAtom<any>(blogDetails);
   console.log(selectedBlog);
-  
+
+  const nextBlogId = selectedBlog.id+1 < allBlogData.length ? selectedBlog.id+1 : 0
+  const nextBlogdata:any = allBlogData.filter((each:any)=> each.id === nextBlogId)[0];
+
+  console.log(nextBlogdata);
   return (
     <div className='w-[94%] xl:w-[80%] mb-[3%] '>
-        <h3 className='text-[#303030] text-[16px] md:text-[22px] xl:text-[28px] not-italic font-bold md:leading-8 mb-[14px] md:mb-[20px] '>Lorem ipsum dolor sit amet, consectetur adipiscing</h3>
-        <p className='text-[14px] md:text-[18px] xl:text-[20px] not-italic  xl:leading-[26px] tracking-[0.96px] mb-[16px]'>
+        {/* <h3 className='text-[#303030] text-[16px] md:text-[22px] xl:text-[28px] not-italic font-bold md:leading-8 mb-[14px] md:mb-[20px] '>Lorem ipsum dolor sit amet, consectetur adipiscing</h3>
+        <p className='text-[14px] md:text-[18px] xl:text-[20px] not-italic xl:leading-[26px] tracking-[0.96px] mb-[16px]'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
             magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
             consequat. Duis auteeeee irure dolor in reprehe nderit in voluptate velit esse cillum dolore eu fugiat nulla 
@@ -67,11 +71,10 @@ function BlogDetailsDescription() {
             pariatur. Excepteur sint occaecat cupidatatte non proident, sunt in culpa qui officia ese runt mollit anim id 
             est laborum. Lorem ipsum dolor sit amet, consectetur adipiscin g elit, sed do eiusmod tempor incididunt ut labore 
             et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-        </p>
+        </p> */}
 
-        <BlogMiniCard />
-
-
+        <p dangerouslySetInnerHTML={{ __html: selectedBlog?.desc }} className="custom-html text-[14px] md:text-[16px] leading-[26px] mb-[16px] " />
+        <BlogMiniCard data={nextBlogdata} />
     </div>
   )
 }

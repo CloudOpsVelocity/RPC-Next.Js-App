@@ -12,15 +12,20 @@ function BlogCard({data}: Props) {
   const path = usePathname();
   const title = data && data.heading ? data.heading : ""; 
   const pathName = title.toLowerCase();
+  console.log(path, pathName)
 
   return ( 
     <a href={`${path}/${pathName}`} target='_blank'>
-      <div className='w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] bg-white min-w-[280px] '>
+      <div className='w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] bg-white min-w-[280px] min-h-[430px]'>
           <Image
               src={data?.coverImage} 
               alt="blog Image" 
-              width={100} height={269} 
-              className='rounded-[10px] w-full max-h-[179px] border-[0.5px] border-gray border-solid mb-[16px] ' 
+             /*  width={100} height={269}  */
+              quality={80}
+              //priority={data?.coverImage}
+              height={630}
+              width={1200}
+              className='rounded-[10px] w-full max-h-[179px] border-[0.5px] border-gray border-solid mb-[16px] h-[280px]' 
           />
           <ContentBox
               heading={title}

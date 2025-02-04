@@ -23,7 +23,7 @@ function Footer() {
       link: "https://www.facebook.com/profile.php?id=100066833915037",
     },
     {
-      name: "instagram",
+      name: "instagram", 
       icon: <FaInstagram size={24} />,
       link: "https://www.instagram.com/_getrightproperty_/?utm_source=qr#",
     },
@@ -95,7 +95,7 @@ function Footer() {
         "/market-trends/locality-insights",
         "/buying-guide",
         "/selling-tips",
-        "/news",
+        "/market-trends/news",
         // "/mortgage-calculator",
         // "/home-valuation",
 

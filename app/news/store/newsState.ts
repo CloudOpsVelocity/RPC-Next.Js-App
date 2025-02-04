@@ -40,7 +40,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 03, 2024",
-            viewsCount:"3353"
+            viewsCount:"2353"
         },{
             name:"Metro Expansion",
             title:"Metro Expansion: A Game Changer for Bengaluru’s Real Estate Market",
@@ -71,7 +71,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
-            viewsCount:"3653"
+            viewsCount:"4653"
         },{
             name:"Bengaluru Rising Demand for Luxury Homes",
             title:"Bengaluru’s Rising Demand for Luxury Homes: A New Era in Real Estate",
@@ -122,7 +122,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
-            viewsCount:"3653"
+            viewsCount:"353"
         },{
             name:"Bengaluru Real Estate Market",
             title:"Bengaluru’s Real Estate Market: A Boon for First-Time Homebuyers",
@@ -177,7 +177,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
-            viewsCount:"3653"
+            viewsCount:"653"
         },{
             name:"Bengaluru Commercial Real Estate Surge",
             title:"Bengaluru’s Commercial Real Estate Surge: The Future of Office Spaces",
@@ -248,7 +248,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
-            viewsCount:"3653"
+            viewsCount:"53"
         },{
             name:"Bengaluru Rising Popularity Among NRIs",
             title:"Bengaluru’s Rising Popularity Among NRIs: A Lucrative Investment Opportunity",
@@ -323,7 +323,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
-            viewsCount:"3653"
+            viewsCount:"33"
         },{
             name:"Sustainable Real Estate in Bengaluru",
             title:"Sustainable Real Estate in Bengaluru: Eco-Friendly Living on the Rise",
@@ -430,7 +430,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
-            viewsCount:"3653"
+            viewsCount:"7653"
         },{
             name:"Bengaluru Real Estate Investment Trust (REIT) Market",
             title:"Bengaluru’s Real Estate Investment Trust (REIT) Market: A Growing Opportunity for Investors",
@@ -497,7 +497,7 @@ const initailState = {
             section: "Technology",
             user:"Ram Dev",
             date:"Sep 04, 2024",
-            viewsCount:"3653"
+            viewsCount:"2653"
         }
     ]
 }
