@@ -236,10 +236,8 @@ export const ProjSearchAppliedFiltersStore = atom(
         case "listing":
           {
             const getParams = new URLSearchParams(window.location.search);
-
             let listedBy =
-              getParams.get("sf")?.match(/listedBy=[^\s&]*\+?(\d+)?/)?.[0] ??
-              "";
+              getParams.get("sf")?.match(/listedBy=[^-\s]+/)?.[0] ?? "";
 
             let finalKey =
               listedBy !== "" ? listedBy.split("=")[1].split("-")[0] : null;

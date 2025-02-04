@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import CryptoJS from "crypto-js";
 import logger from "./utils/logger";
 import { maskMobileNumber } from "./(auth)/utils";
-import redisService from "./utils/redis/redis.service";
+// import redisService from "./utils/redis/redis.service";
 import crypto from "crypto";
 import { encode } from "./(auth)/utils/handleXosEnc";
 // import { signOut } from "@auth";
@@ -76,10 +76,14 @@ export const options: NextAuthOptions = {
               httpOnly: true,
               path: "/",
             });
-            const redisKey = encode(
-              `${res.data.mobile}`,
-              process.env.NEXT_PUBLIC_SECRET!
-            );
+            // const redisKey = encode(
+            //   `${res.data.mobile}`,
+            //   process.env.NEXT_PUBLIC_SECRET!
+            // );
+            // 1. identity unique sesion there
+            // 2. set unique session
+            // 3. set unique session to a single number
+
             // if (!(await redisService.client.exists(`user_${redisKey}`))) {
             //   redisService.client.smembers(`user_${redisKey}`, "false");
             // }

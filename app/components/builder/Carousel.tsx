@@ -263,7 +263,7 @@ const BuilderCarousel = ({
           />
         )}
         slidesToShow={4}
-        // gap={10}
+        gap={10}
         url="/search"
       />
       {/* <MainCarousel

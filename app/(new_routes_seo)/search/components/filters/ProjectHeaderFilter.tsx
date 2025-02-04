@@ -147,7 +147,11 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
           const paramsObject = extractApiValues(data.stringId);
 
           let localityName = data.name
-            .split((paramsObject.count as number) > 4 ? "-" : "in")[1]
+            .split(
+              (paramsObject.count as number) > 4 || paramsObject.PT === "32"
+                ? "-"
+                : "in"
+            )[1]
             .toLowerCase()
             .trim();
 
@@ -164,7 +168,10 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                 ...(paramsObject.PJ && paramsObject.PJ !== "null"
                   ? {
                       projIdEnc: paramsObject.PJ as string,
-                      projName: data.name.split("in")[1].split("-")[0].trim(),
+                      projName: data.name
+                        .split(" in ", 2)[1]
+                        .split("-")[0]
+                        .trim(),
                     }
                   : {}),
               },
@@ -254,7 +261,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   };
   return (
     <>
-      <div className="w-full max-w-[100%]  max-h-[60vh]  bg-white border-b sticky top-0 z-10">
+      <div className="w-full max-w-[100%]  max-h-[60vh]  bg-white border-b sticky top-0 z-[11]">
         <div className=" px-1 ">
           <div
             ref={searchRef}

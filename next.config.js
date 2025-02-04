@@ -36,6 +36,9 @@ const nextConfig = {
       {
         hostname: "d24ksaw8earfo7.cloudfront.net",
       },
+      {
+        hostname: "d24ksaw8earfo7.cloudfront.net",
+      },
     ],
   },
   env: {
@@ -47,8 +50,15 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.resolve.alias.canvas = false;
+    if (!isServer) {
+      config.resolve.fallback = {
+        dns: false,
+        net: false,
+        tls: false,
+      };
+    }
     return config;
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
