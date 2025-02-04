@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
+const createMDX = require("@next/mdx");
+
+const withMDX = createMDX({
+  options: {
+    // providerImportSource: "@mdx-js/react",
+  },
+});
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -8,8 +16,9 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
-  },
 
+    mdxRs: true,
+  },
   images: {
     remotePatterns: [
       { hostname: "d2sa15fzpcbn0k.cloudfront.net" },
@@ -27,6 +36,9 @@ const nextConfig = {
       {
         hostname: "d24ksaw8earfo7.cloudfront.net",
       },
+      {
+        hostname: "d24ksaw8earfo7.cloudfront.net",
+      },
     ],
   },
   env: {
@@ -38,11 +50,18 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.resolve.alias.canvas = false;
+    if (!isServer) {
+      config.resolve.fallback = {
+        dns: false,
+        net: false,
+        tls: false,
+      };
+    }
     return config;
   },
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 };
 
-module.exports = nextConfig;
+module.exports = withMDX(nextConfig);

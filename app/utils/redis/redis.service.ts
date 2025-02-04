@@ -1,10 +1,11 @@
 import Redis from "ioredis";
+
 import redisConnection from "./redis.connection";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 
 class RedisService {
   private static instance: RedisService;
-  private client: Redis;
+  public client: Redis;
 
   // Private constructor to prevent instantiation outside the class
   private constructor() {

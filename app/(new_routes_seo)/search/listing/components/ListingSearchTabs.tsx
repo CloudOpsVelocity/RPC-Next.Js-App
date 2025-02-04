@@ -138,7 +138,7 @@ export default function ListingSearchTabs() {
   };
 
   return (
-    <div className="sticky top-0 z-10">
+    <div className="sticky top-0  z-10">
       <div className="w-full bg-slate-50 shadow-md max-w-7xl mx-auto px-[6px] md:px-4 py-2">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div
@@ -188,9 +188,7 @@ export default function ListingSearchTabs() {
                 />
               </svg>
 
-              <div
-                className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap"
-              >
+              <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                 {state.sortByfield != null && state.sortType != null
                   ? getSortyByValue(state)
                   : "Newest First"}
@@ -198,8 +196,10 @@ export default function ListingSearchTabs() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-[40px] right-0 w-48 bg-white
-               rounded-lg shadow-lg py-1 z-20 border border-white">
+              <div
+                className="absolute top-[40px] right-0 w-48 bg-white
+               rounded-lg shadow-lg py-1 z-20 border border-white"
+              >
                 {sortOptions.map((option) => (
                   <button
                     key={option.value}

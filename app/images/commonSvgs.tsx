@@ -16299,33 +16299,30 @@ export const TringleIcons = ({ className, number }: any) => {
     );
   }else if(number === 2){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="208" height="217" viewBox="0 0 208 217" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="208" height="217" viewBox="0 0 208 217" fill="none">
         <path d="M0.571731 6.13972C-0.0968808 2.28782 3.65503 -0.843385 7.32517 0.503525L203.985 72.6759C207.655 74.0228 208.491 78.8376 205.489 81.3426L44.6564 215.569C41.6549 218.074 37.0672 216.39 36.3986 212.538L0.571731 6.13972Z" fill="#227FBC" fill-opacity="0.46"/>
       </svg>
     );
   }else if(number === 3){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="167" height="170" viewBox="0 0 167 170" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="167" height="170" viewBox="0 0 167 170" fill="none">
         <path d="M1.80166 55.2906C-0.45237 53.1822 0.421323 49.4244 3.3743 48.5265L161.606 0.417488C164.559 -0.480345 167.376 2.15519 166.677 5.16146L129.225 166.248C128.526 169.255 124.835 170.377 122.581 168.269L1.80166 55.2906Z" fill="#227FBC" fill-opacity="0.4"/>
       </svg>
     );
   }else if(number === 4){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="105" height="110" viewBox="0 0 105 110" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="105" height="110" viewBox="0 0 105 110" fill="none">
         <path d="M0.493448 3.75869C0.157458 1.82306 2.04285 0.249587 3.88714 0.926428L102.711 37.194C104.556 37.8709 104.976 40.2904 103.467 41.5492L22.6466 109C21.1383 110.259 18.8329 109.412 18.4969 107.477L0.493448 3.75869Z" fill="#D7DBFB" fill-opacity="0.55"/>
       </svg>
     );
   }else if(number === 5){
     return (
-      <svg className={className}  xmlns="http://www.w3.org/2000/svg" width="61" height="64" viewBox="0 0 61 64" fill="none">
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="61" height="64" viewBox="0 0 61 64" fill="none">
         <path d="M0.0618229 1.89621C-0.133015 0.773748 0.960312 -0.138703 2.02981 0.253793L59.3375 21.2852C60.407 21.6777 60.6505 23.0807 59.7759 23.8107L12.9083 62.9249C12.0337 63.6549 10.6968 63.1643 10.502 62.0418L0.0618229 1.89621Z" fill="#D7DBFB" fill-opacity="0.55"/>
       </svg>
     );
   }
 };
-
-
-
 
 export const LikeIcon = ({ className }: { className?: string }) => {
   return (
@@ -16340,3 +16337,6 @@ export const LikeIcon = ({ className }: { className?: string }) => {
     </svg>
   )
 } 
+
+export const defaultCitySvg = <svg className='!min-w-[60px] !min-h-[60px] !md:min-w-[100px] !md:min-h-[100px] ' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path className='w-[60px] h-[60px] md:w-[100px] md:h-[100px] ' d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#8DD9FF" /><path d="M112 412.94h44.954V504H112z" fill="#FFFFFF" /><path d="M910.666 445.5H966V520h-55.334z" fill="#B2B9C9" /><path d="M928 592h89.738A515.586 515.586 0 0 0 1024 512c0-8.048-0.238-16.042-0.606-24H928v104z" fill="#9FC3DD" /><path d="M0.198 506.204C0.17 508.146 0 510.05 0 512c0 27.22 2.17 53.928 6.262 80H98v-85.796H0.198z" fill="#B39191" /><path d="M144 592h96l-16-176-80 32v144" fill="#B2B9C9" /><path d="M617.5 432h93v160h-93z" fill="#7FAAB8" /><path d="M224 352h64v240h-64zM576 384h64v208h-64z" fill="#EEE1C2" /><path d="M432 344.004h64V592h-64z" fill="#9FC3DD" /><path d="M734 448h93v144H734z" fill="#B2B9C9" /><path d="M835 472H928v120h-93z" fill="#B39191" /><path d="M6.262 592C44.674 836.764 256.45 1024 512 1024s467.324-187.236 505.738-432H6.262z" fill="#43AB5F" /><path d="M945.754 784c36.036-57.354 61.05-122.334 71.984-192H6.262c10.934 69.666 35.95 134.646 71.984 192h867.508z" fill="#71BE63" /><path d="M31.23 688h961.54c11.266-30.74 19.762-62.816 24.968-96H6.262c5.208 33.184 13.702 65.26 24.968 96z" fill="#94D75B" /><path d="M12.498 624h999.006c2.374-10.56 4.54-21.198 6.234-32H6.262c1.696 10.802 3.862 21.44 6.236 32z" fill="#B0EB81" /><path d="M748.078 966.312L512 592 275.924 966.31C346.574 1003.106 426.828 1024 512 1024s165.428-20.892 236.078-57.688z" fill="#674447" /><path d="M572.546 688L512 592l-60.546 96h121.092z" fill="#8C665B" /><path d="M576 592V296l-80-48v344" fill="#FDEFDB" /><path d="M352 192v400h80V136zM688 260h64v332h-64z" fill="#FFFFFF" /><path d="M288 592v-80H192v80" fill="#A29B91" /><path d="M380 592v-192h-92v192" fill="#9FC3DD" /><path d="M640 592v-64l-96 16v48" fill="#88B7C6" /><path d="M800 432h64v160h-64z" fill="#FDEFDB" /><path d="M512 592l211.658 386.198a509.48 509.48 0 0 0 24.42-11.886L512 592zM512 592L275.924 966.31a508.52 508.52 0 0 0 24.418 11.888L512 592z" fill="#FFFFFF" /><path d="M556.364 1021.864L512 592l14.846 431.546c9.914-0.284 19.754-0.838 29.518-1.682zM512 592l-44.364 429.864c9.764 0.842 19.604 1.398 29.518 1.682L512 592z" fill="#E9B668" /><path d="M80 480h64v112H80z" fill="#9FC3DD" /><path d="M659 548.5H766V592h-107z" fill="#A29B91" /><path d="M432 437h35.636V592H432z" fill="#B39191" /><path d="M240 560h91.334v32H240z" fill="#9E8282" /><path d="M164.666 560h42.812v32H164.666zM449.938 560h35.396v32h-35.396zM752 560h57v32H752z" fill="#EEE1C2" /><path d="M572.546 568.792h44.954V592h-44.954zM787.046 540H832v52h-44.954zM905.524 552.666h93.81V592h-93.81zM57.524 540h44.954v52H57.524z" fill="#9E8282" /><path d="M360 540h33.962v52H360zM693.52 568.792h33.962V592H693.52zM46.038 568.792H80V592H46.038zM196.704 576h65.266v16H196.704z" fill="#B2B9C9" /></svg>
+

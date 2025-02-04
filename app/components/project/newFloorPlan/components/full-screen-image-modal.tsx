@@ -83,12 +83,15 @@ export function FullScreenImageModal({
 
   const propCgId = useAtomValue(propCgIdAtom);
 
-  const [, { open: LoginOpen }] = usePopShortList(); 
+  const [, { open: LoginOpen }] = usePopShortList();
   const { data: session } = useSession();
 
-  const downloadFn = async () => { 
+  const downloadFn = async () => {
     try {
-      const floorplanUrl = unit.floorPlanUrl && unit.floorPlanUrl?.split(",")[0] ? unit.floorPlanUrl?.split(",")[0] : ""
+      const floorplanUrl =
+        unit.floorPlanUrl && unit.floorPlanUrl?.split(",")[0]
+          ? unit.floorPlanUrl?.split(",")[0]
+          : "";
       const response = await fetch(floorplanUrl);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
@@ -106,14 +109,14 @@ export function FullScreenImageModal({
 
   const handleDownload = async () => {
     if (session) {
-      console.log("logged in")
+      console.log("logged in");
       downloadFn();
     } else {
-      console.log("logged out")
+      console.log("logged out");
 
       LoginOpen(downloadFn, {
         type: "floor-plan",
-        link: unit.floorPlanUrl?.split(",")[0], 
+        link: unit.floorPlanUrl?.split(",")[0],
       });
     }
   };
@@ -155,19 +158,19 @@ export function FullScreenImageModal({
             Unit ${unit.unitNumber}`}
           </h3>
           <div className="flex items-center w-full justify-end gap-2 md:gap-4 mt-2 md:mt-0">
-            {unit.floorPlanUrl?.split(",")[0] &&
-            <button
-              onClick={() =>handleShearMasterplan()}
-              className={`flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors`}
-              title="Click to Download Floorplan"
-            >
-              <FiShare2 className="w-5 h-5" />
-              <span className="hidden md:inline">Shear Floor Plan</span>
-            </button>
-            }
+            {unit.floorPlanUrl?.split(",")[0] && (
+              <button
+                onClick={() => handleShearMasterplan()}
+                className={`flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors`}
+                title="Click to Download Floorplan"
+              >
+                <FiShare2 className="w-5 h-5" />
+                <span className="hidden md:inline">Shear Floor Plan</span>
+              </button>
+            )}
 
             <button
-              onClick={() =>handleDownload()}
+              onClick={() => handleDownload()}
               className={`flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors ${
                 unit.floorPlanUrl?.split(",")[0] ? "" : "cursor-not-allowed"
               } `}
@@ -222,7 +225,9 @@ export function FullScreenImageModal({
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Super Built-up Area"
-                      value={`${formatNumberWithCommas(unit.superBuildUparea)} sq.ft`}
+                      value={`${formatNumberWithCommas(
+                        unit.superBuildUparea
+                      )} sq.ft`}
                       icon={
                         <FaRuler className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -263,7 +268,7 @@ export function FullScreenImageModal({
                           ? "Ground Floor"
                           : `${unit.floor}${(() => {
                               const suffixes = ["th", "st", "nd", "rd"];
-                              const v = unit.floor % 100;
+                              const v = (unit?.floor as number) % 100;
                               return (
                                 suffixes[(v - 20) % 10] ||
                                 suffixes[v] ||
@@ -302,36 +307,44 @@ export function FullScreenImageModal({
                     />
                   )}
 
-                  {propCgId !== projectprops.apartment && propCgId !== projectprops.villament && (
-                    <DataItem
-                      title="Plot Area"
-                      value={`${formatNumberWithCommas(unit.plotArea)} sq.ft`}
-                      icon={
-                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                      }
-                    />
-                  )}
+                  {propCgId !== projectprops.apartment &&
+                    propCgId !== projectprops.villament && (
+                      <DataItem
+                        title="Plot Area"
+                        value={`${formatNumberWithCommas(unit.plotArea)} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
 
-                  
-                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && unit.gardenArea && (
-                    <DataItem
-                      title="Garden Area"
-                      value={`${formatNumberWithCommas(unit.gardenArea)} sq.ft`}
-                      icon={
-                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                      }
-                    />
-                  )} 
-                
-                  {propCgId !== projectprops.apartment && propCgId !== projectprops.plot && unit.parkingArea && (
-                    <DataItem
-                      title="Parking Area"
-                      value={`${formatNumberWithCommas(unit.parkingArea)} sq.ft`}
-                      icon={
-                        <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                      }
-                    />
-                  )}
+                  {propCgId !== projectprops.apartment &&
+                    propCgId !== projectprops.plot &&
+                    unit.gardenArea && (
+                      <DataItem
+                        title="Garden Area"
+                        value={`${formatNumberWithCommas(
+                          unit.gardenArea
+                        )} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
+
+                  {propCgId !== projectprops.apartment &&
+                    propCgId !== projectprops.plot &&
+                    unit.parkingArea && (
+                      <DataItem
+                        title="Parking Area"
+                        value={`${formatNumberWithCommas(
+                          unit.parkingArea
+                        )} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
                 </div>
               </div>
 
@@ -341,9 +354,14 @@ export function FullScreenImageModal({
                   Unit Features
                 </h4>
                 <div className="flex gap-[10px] flex-wrap">
-                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+                  {(propCgId === projectprops.apartment ||
+                    propCgId === projectprops.villament) && (
                     <DataItem
-                      title={propCgId === projectprops.apartment? "Apartment Type" :"Villament Type" }
+                      title={
+                        propCgId === projectprops.apartment
+                          ? "Apartment Type"
+                          : "Villament Type"
+                      }
                       value={unit.aptTypeName}
                       icon={
                         <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
@@ -389,7 +407,8 @@ export function FullScreenImageModal({
                     />
                   )}
 
-                  {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && (
+                  {(propCgId === projectprops.apartment ||
+                    propCgId === projectprops.villament) && (
                     <DataItem
                       title="Car Parking"
                       value={`${unit.noOfCarParking} ${
@@ -404,7 +423,9 @@ export function FullScreenImageModal({
                   {unit.terraceArea && unit.terraceArea !== "null" && (
                     <DataItem
                       title="Terrace Area"
-                      value={`${formatNumberWithCommas(unit.terraceArea)} sq.ft`}
+                      value={`${formatNumberWithCommas(
+                        unit.terraceArea
+                      )} sq.ft`}
                       icon={
                         <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                       }

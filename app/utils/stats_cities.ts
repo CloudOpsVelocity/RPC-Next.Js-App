@@ -46,8 +46,21 @@ export const getAllLocalitiesDetails = () => {
     });
 };
 
+
 export const getCitiesDetails = async (cId: number) => {
   const url = `${baseURL}/common/getCityList?statecid=${cId}`;
+
+  try {
+    const response = await axios.post(url);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const getLocalityDetails = async (cId: number | string | null) => {
+  const url = `${baseURL}/common/getLocalityfromCity?cityId=${cId}`;
 
   try {
     const response = await axios.post(url);
