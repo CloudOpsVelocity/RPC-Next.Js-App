@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import CryptoJS from "crypto-js";
 import logger from "./utils/logger";
 import { maskMobileNumber } from "./(auth)/utils";
-import redisService from "./utils/redis/redis.service";
+// import redisService from "./utils/redis/redis.service";
 import crypto from "crypto";
 import { encode } from "./(auth)/utils/handleXosEnc";
 // import { signOut } from "@auth";

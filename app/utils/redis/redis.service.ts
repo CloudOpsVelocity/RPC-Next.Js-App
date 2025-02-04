@@ -1,4 +1,5 @@
 import Redis from "ioredis";
+
 import redisConnection from "./redis.connection";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 
