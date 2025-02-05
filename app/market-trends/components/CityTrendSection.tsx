@@ -335,7 +335,6 @@ function CityTrendSection({cityName}: Props) {
 
   type PropertyType = "Apartment" | "Villa" | "Plot" | "Row House" | "Villament" | "Independent House/Building";
 
-
   useEffect(()=>{
     // const data:any = getFilteredSearchData(cityId, null, filters.cg)
     // setAllLocalities(data);
