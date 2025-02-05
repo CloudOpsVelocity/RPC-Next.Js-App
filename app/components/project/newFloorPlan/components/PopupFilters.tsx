@@ -179,6 +179,8 @@ export default function PopupFilters({
     }
   };
 
+  console.log(options);
+
   return (
     <div
       className={`${
@@ -194,7 +196,7 @@ export default function PopupFilters({
           Clear All
         </button>
       </div>
-
+ 
       
       <div className="h-[calc(100vh-120px)] overflow-y-auto p-3 custom-scrollbar">
         <div className="flex flex-col">

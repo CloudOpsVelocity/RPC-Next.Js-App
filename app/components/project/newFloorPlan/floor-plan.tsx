@@ -108,6 +108,7 @@ export default function FloorPlans({
     parkingType: "",
     totalNumberofBathroom: 0,
     totalNumberOfBalcony: 0,
+    totalBalconySize:0,
     noOfCarParking: 0,
     floorPlanUrl: "",
     gardenArea: "",
@@ -224,7 +225,6 @@ export default function FloorPlans({
   }, [propCgId, selectedPhase]);
 
   const onSelectCard = (unit: any, state?: boolean) => {
-    console.log(unit, state)
     if (!unit) return;
     setModalState({
       isOpen: true,
@@ -262,7 +262,6 @@ export default function FloorPlans({
     setFullScreenModalState({ isOpen: true, unit: unit });
   };
   const handleReqcallBack = (unit: PropertyUnit) => {
-    console.log(unit);
     if(!unit) return;
     open({
       modal_type: "REQ_QUOTE",

@@ -187,8 +187,6 @@ export function FloorPlanModal({
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
 
-  console.log(currentUnit)
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -212,10 +210,7 @@ export function FloorPlanModal({
           </h3>
           <div className="flex gap-2 mt-[10px] md:mt-0">
             <button
-              onClick={() => {
-                console.log(unit);
-                handleReqcallBack(unit);
-              }}
+              onClick={() => handleReqcallBack(unit)}
               className="px-[8px] py-[2px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
             >
               Request Quotation
@@ -453,7 +448,7 @@ export function FloorPlanModal({
                 </div>
 
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6 sticky top-[48px] bg-white">
-                  Unit Features
+                  Unit Features 
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-4">
                   {(propCgId === projectprops.apartment ||
@@ -464,7 +459,7 @@ export function FloorPlanModal({
                           ? "Apartment Type"
                           : "Villament Type"
                       }
-                      value={currentUnit.aptTypeName}
+                      value={currentUnit.aptTypeName ? currentUnit.aptTypeName : propCgId === projectprops.apartment ? "Apartment" : "Villament"}
                       icon={
                         <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -503,6 +498,16 @@ export function FloorPlanModal({
                     <DataItem
                       title="Balconies"
                       value={currentUnit.totalNumberOfBalcony}
+                      icon={
+                        <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
+
+                  {propCgId !== projectprops.plot && currentUnit.totalBalconySize &&(
+                    <DataItem
+                      title="Balcony Size"
+                      value={`${currentUnit.totalBalconySize} sq.ft`}
                       icon={
                         <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
                       }

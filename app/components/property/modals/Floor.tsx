@@ -161,7 +161,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                     ...(floorData.aptTypeName &&
                       (type === projectprops.apartment ||
                         type === projectprops.villament)
-                        ? [{ label: type === projectprops.apartment ? "Apartment Type" : "Villament Type", value: floorData.aptTypeName.replace("Apartment", type === projectprops.apartment ? "Apartment" : "Villament") }]
+                        ? [{ label: "Property Type", value: floorData.aptTypeName.replace("Apartment", type === projectprops.apartment ? "Apartment" : "Villament") }]
                         : []),
                     ...(floorData.towerName &&
                     (type === projectprops.apartment ||
