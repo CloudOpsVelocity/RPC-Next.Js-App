@@ -18,7 +18,8 @@ interface City {
   name?: string;
 }
 
-const cityIds = [9, 577, 714, 576, 580, 582, 585, 641];
+// 577, 714, 576, 580, 582, 585, 641
+const cityIds = [9, ];
 
 function MarketSections({text}: Props) {
   const [{inputSearch}] = useAtom(trendsFilterData);
@@ -52,13 +53,13 @@ function MarketSections({text}: Props) {
             const pageUrl = !path.includes("news") ? `${path}/${eachCity?.name.toLowerCase()}?si=${eachCity?.stateId}&ci=${eachCity?.id}` : `${path}/${eachCity?.name.toLowerCase()}`
             return(
                 <a key={eachCity.name} href={pageUrl} target='_blank'>
-                <div className=' cursor-pointer min-h-[140px] md:min-h-[218px] w-[100px] md:w-[180px] rounded-[10px] border-t-[1px] border-solid shadow-md flex flex-col justify-center items-center transition-all duration-[0.5s] ease-[ease-in-out] hover:-translate-y-2.5 hover:shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] '>
-                  <div className='w-[60px] h-[60px] md:w-[100px] md:h-[100px] rounded-[50%] shadow-md border-t-[1px] border-solid '>
-                    {/* city image */}
-                    <span className='!min-w-[60px] !min-h-[60px] !md:min-w-[100px] !md:min-h-[100px] '>{defaultCitySvg}</span>
+                  <div className=' cursor-pointer min-h-[140px] md:min-h-[218px] w-[100px] md:w-[180px] rounded-[10px] border-t-[1px] border-solid shadow-md flex flex-col justify-center items-center transition-all duration-[0.5s] ease-[ease-in-out] hover:-translate-y-2.5 hover:shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] '>
+                    <div className='w-[60px] h-[60px] md:w-[100px] md:h-[100px] rounded-[50%] shadow-md border-t-[1px] border-solid '>
+                      {/* city image */}
+                      <span className='!min-w-[60px] !min-h-[60px] !md:min-w-[100px] !md:min-h-[100px] '>{defaultCitySvg}</span>
+                    </div>
+                    <span className=' font-medium text-[12px] md:text-[16px] mt-[10px] md:mt-[16px] text-center '>{text} {eachCity.name}</span>
                   </div>
-                  <span className=' font-medium text-[12px] md:text-[16px] mt-[10px] md:mt-[16px] text-center '>{text} {eachCity.name}</span>
-                </div>
                 </a>
             )})
           :
