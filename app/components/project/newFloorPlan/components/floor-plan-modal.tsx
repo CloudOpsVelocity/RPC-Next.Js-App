@@ -531,7 +531,7 @@ export function FloorPlanModal({
 
             {/* Bottom Carousel */}
             {visibleUnits && visibleUnits.length > 0 && (
-              <div className="border-t bg-white p-[10px] md:p-4">
+              <div className=" pb-[100px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4">
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="text-sm font-semibold">
                     Filtered Units ({filteredUnits ? filteredUnits.length : 0})
