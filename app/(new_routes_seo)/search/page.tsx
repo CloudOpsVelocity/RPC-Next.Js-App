@@ -6,6 +6,7 @@ import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
 type Props = {};
 
 export default function Page({}: Props) {
+  console.log(2)
 
   return (
     <main className="pt-[70px] mt-[10%] sm:mt-0 sm:pt-[3.7%]">

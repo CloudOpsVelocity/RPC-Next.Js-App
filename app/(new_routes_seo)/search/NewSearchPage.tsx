@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default function NewSearchPage({ serverData, frontendFilters }: Props) {
+  console.log(1)
   return (
     <main className="pt-[6%] mt-[10%] sm:mt-0 sm:pt-[3.7%]">
       <ProjectSearchBreadCrumbs

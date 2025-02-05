@@ -51,7 +51,7 @@ export default function PopupFilters({
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = String(filters[key]).toLowerCase();
-    console.log(filterValue, filters, key)
+    // console.log(filterValue, filters, key)
     return (
       options !== undefined &&
       options[key] !== undefined &&

@@ -187,6 +187,8 @@ export function FloorPlanModal({
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
 
+  console.log(currentUnit)
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -210,7 +212,10 @@ export function FloorPlanModal({
           </h3>
           <div className="flex gap-2 mt-[10px] md:mt-0">
             <button
-              onClick={() => handleReqcallBack(unit)}
+              onClick={() => {
+                console.log(unit);
+                handleReqcallBack(unit);
+              }}
               className="px-[8px] py-[2px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
             >
               Request Quotation
@@ -432,6 +437,19 @@ export function FloorPlanModal({
                         }
                       />
                     )}
+
+                  {currentUnit.terraceArea &&
+                    currentUnit.terraceArea !== "null" && (
+                      <DataItem
+                        title="Terrace Area"
+                        value={`${formatNumberWithCommas(
+                          currentUnit.terraceArea
+                        )} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
                 </div>
 
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6 sticky top-[48px] bg-white">
@@ -491,8 +509,7 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  {(propCgId === projectprops.apartment ||
-                    propCgId === projectprops.villament) && (
+                  {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Car Parking"
                       value={`${currentUnit.noOfCarParking} ${
@@ -503,19 +520,6 @@ export function FloorPlanModal({
                       }
                     />
                   )}
-
-                  {currentUnit.terraceArea &&
-                    currentUnit.terraceArea !== "null" && (
-                      <DataItem
-                        title="Terrace Area"
-                        value={`${formatNumberWithCommas(
-                          currentUnit.terraceArea
-                        )} sq.ft`}
-                        icon={
-                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                        }
-                      />
-                    )}
                 </div>
               </div>
             </div>
