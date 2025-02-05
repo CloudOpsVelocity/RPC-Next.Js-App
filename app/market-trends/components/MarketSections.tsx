@@ -62,10 +62,9 @@ function MarketSections({text}: Props) {
                       <Image
                           src={bengalureImg} 
                           quality={80}
-                          //priority={coverImage}
                           height={630}
                           width={1200}
-                          alt="blog Image" /* width={100} height={269}  */
+                          alt="blog Image"
                           className='rounded-[50%] w-full h-full relative' 
                       />
                       {/* <span className='!min-w-[60px] !min-h-[60px] !md:min-w-[100px] !md:min-h-[100px] '>{defaultCitySvg}</span> */}
