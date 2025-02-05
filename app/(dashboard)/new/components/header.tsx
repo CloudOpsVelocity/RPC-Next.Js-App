@@ -30,7 +30,9 @@ export default function Header() {
         </div>
       ) : (
         <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
-          <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
+          <a href={"/blog"} target="_blank">
+            <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
+          </a>
           <ForBuilders />
           <PostProjectBtn />
           <Btn />

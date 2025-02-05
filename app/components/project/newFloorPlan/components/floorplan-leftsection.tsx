@@ -263,6 +263,7 @@ export default function FloorplanLeftsection({
                   <div className="mt-2 xs:mt-3 sm:mt-4 flex justify-between items-center">
                     <button
                       onClick={(e) => {
+                        console.log(unit);
                         e.stopPropagation();
                         handleReqcallBack(unit);
                       }}

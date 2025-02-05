@@ -1,5 +1,6 @@
 import React from 'react';
-import { Facebook, ShearIcon, WhatsApp } from '@/app/images/commonSvgs';
+import { Facebook, facebookRedirectLink, ShearIcon, WhatsApp, whatsappRedirectLink } from '@/app/images/commonSvgs';
+import { getClampedText } from '@/app/news/components/NewsSections';
 
 type Props = { 
     heading: string; 
@@ -15,16 +16,28 @@ function ContentBox({ heading, text, content, date, type }: Props) {
         <h3 className={`text-[color:var(--800,#2D3748)] not-italic font-bold leading-[normal] mb-[4px] ${type == "small" ? "text-[14px]" : "xl:text-[24px] md:text-[18px] text-[16px]"} `}>{heading}</h3>
         <p className={`text-[#01417C] italic font-bold leading-[normal] ${type == "small" ? "text-[12px]" : "text-[16px] md:text-[14px]"} `}>{text}</p>
         {content &&
-        <p className={`text-[#303030] not-italic font-normal leading-[normal] mb-[16px] mt-[16px] ${type == "small" ? "text-[12px]" : "xl:text-[16px] md:text-[14px] text-[12px]"} `}>{content}</p>
+        <p className={`text-[#303030] not-italic font-normal leading-[normal] mb-[16px] mt-[16px] ${type == "small" ? "text-[12px]" : "xl:text-[16px] md:text-[14px] text-[12px]"} `}>
+          {getClampedText(content, 10)}
+        </p>
         }
 
-        <div className={`flex justify-between items-center `}>
+        <div className={`flex justify-between items-center mt-auto`}>
             <p className={`text-[#627A9E] italic font-medium leading-[normal] ${type == "small" ? "text-[12px]" : "xl:text-[16px] md:text-[14px] text-[12px]"} `}>{date}</p>
             <div className='gap-[12px] flex justify-center items-center h-[24px] '>
                 {/* <FacebookShareButton /> */}
-                <ShearIcon className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]"} />
-                <Facebook className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
-                <WhatsApp className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
+                <ShearIcon 
+                  className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]"} 
+                  onClick={()=>navigator.share({
+                      title: "Share Blog",
+                      url: "https://www.getrightproperty.com/blog",
+                  })} 
+                />
+                <a href={facebookRedirectLink} target="_blank">
+                  <Facebook className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
+                </a>
+                <a href={whatsappRedirectLink} target="_blank">
+                  <WhatsApp className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
+                </a>
             </div>
         </div>
     </div>

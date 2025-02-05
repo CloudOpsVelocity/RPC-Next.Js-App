@@ -29,7 +29,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpened(false);
-      }
+      } 
     };
 
     const handlePopState = () => {
@@ -158,6 +158,11 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   items={[
                     { label: "Unit Type", value: floorData.bhkName ?? "" },
                     { label: "Unit Number", value: floorData.unitNumber ?? "" },
+                    ...(floorData.aptTypeName &&
+                      (type === projectprops.apartment ||
+                        type === projectprops.villament)
+                        ? [{ label: "Property Type", value: floorData.aptTypeName.replace("Apartment", type === projectprops.apartment ? "Apartment" : "Villament") }]
+                        : []),
                     ...(floorData.towerName &&
                     (type === projectprops.apartment ||
                       type === projectprops.villament)
@@ -428,12 +433,13 @@ const DetailCard = ({ icon, title, items }: DetailCardProps) => {
         <h3 className="text-[#303A42] font-semibold">{title}</h3>
       </div>
       <div className="space-y-2">
-        {items.map((item, index) => (
-          <div key={index} className="flex justify-between text-sm">
+        {items.map((item, index) => {
+          return(
+          <div key={item.label} className="flex justify-between text-sm">
             <span className="text-[#4D6677]">{item.label}</span>
             <span className="text-[#1A1A1A] font-semibold">{item.value}</span>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   );

@@ -83,15 +83,15 @@ export default function PropertyTypeDetailsCrad({
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
     ...RTK_CONFIG,
   });
-  const handleOpen = () => {
-    setModalState({ isOpen: true, unit: null, type: "overview", isPartialUnit: false });
+  const handleOpen = (unit:any) => {
+    setModalState({ isOpen: true, unit: unit, type: "overview", isPartialUnit: false });
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);
     setPrpCgId(newPropCgId);
     setFloorsArray(projectUnitsData);
     setSelectedFloor(null);
-    handleOpen();
+    handleOpen(projectUnitsData[0] ? projectUnitsData[0] : null );
   };
 
   function scrollToTopic(id: string): void {

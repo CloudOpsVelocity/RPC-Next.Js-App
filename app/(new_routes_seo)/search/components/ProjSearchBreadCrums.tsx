@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React from "react";
 import { FaHome, FaChevronRight } from "react-icons/fa";
 import { BASE_PATH_PROJECT_DETAILS } from "../../utils/new-seo-routes/project.route";
 

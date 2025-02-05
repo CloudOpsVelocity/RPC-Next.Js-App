@@ -53,6 +53,7 @@ type Action =
   | { type: "SET_FILTERS"; payload: SearchFilter };
 
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
+  console.log(action);
   switch (action.type) {
     case "reset":
       return initialState;

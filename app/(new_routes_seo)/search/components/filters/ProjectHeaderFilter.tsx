@@ -42,7 +42,9 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     handleResetQuery,
     onSearchChange,
     name,
-  } = useProjSearchMatcher();
+  } = useProjSearchMatcher(); 
+
+  console.log(state)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

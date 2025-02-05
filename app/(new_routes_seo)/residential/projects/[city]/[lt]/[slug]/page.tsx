@@ -69,7 +69,7 @@ export default async function Page({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        ouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <ProjectsDetailsPage
         projResponse={projResponse}

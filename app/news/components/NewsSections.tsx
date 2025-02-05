@@ -1,110 +1,22 @@
+"use client";
+import { useAtom } from 'jotai';
 import Image from 'next/image';
-import React, { useMemo } from 'react'
+import React from 'react'
+import { usePathname } from 'next/navigation';
+import { emptyFilesIcon, strikeIconIcon } from '@/app/images/commonSvgs';
+import { newsData } from '@/app/news/store/newsState';
+import { trendsFilterData } from '@/app/market-trends/data.ts/marketBlogalData';
 
-type Props = {}
+type Props = {
+    cityName?:string;
+}
 
 type CradProps = {
     data:any;
+    cityName?:string;
 }
 
-const staticCardsData = [
-    {
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore the Karnataka government will issue A Khata Certificates for B Khata properties across the State soon.",
-        desc: "The Karnataka government will issue A Khata Certificates for B Khata properties across the State soon. The proposal, approved by the government, is awaiting legal amendments by the legislature. Once the laws are amended, over six lakh B Khata property holders will benefit from this move in Bangalore alone. Read on to know more.",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },
-    {
-        section: "Policy Change",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "RERA",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Infrastructure",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Residential",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Texation",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },{
-        section: "Technology",
-        title:"Building plan approval process gets digitised in Bangalore",
-        desc: "Property Building plan approval process gets digitised in Bangalore",
-        user:"Ram Dev",
-        date:"Sep 03, 2024",
-        viewsCount:"3353"
-    },
-];
-
-function Card({data}: CradProps) {
-  const getClampedText = (text:string, maxLines:number ) => {
+export const getClampedText = (text:string, maxLines:number ) => {
     const words = text?.split(" ");
     const newText = text?.split(" ")?.slice(0, maxLines * 4)
 
@@ -115,30 +27,38 @@ function Card({data}: CradProps) {
     }
   }
 
+function Card({data, cityName}: CradProps) {
+  const pathname = usePathname();
+
   return (
-    <div className="flex min-w-[240px] sm:w-[238px] xl:w-[340px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-t-[4px] sm:rounded-t-[10px] xl:rounded-t-[4px] border-solid border-[#B9CFEB] hover:shadow-lg ">
-        <p className=' border-0 py-[6px] px-[8px] bg-[#6b9472] text-[12px] font-bold text-white mr-auto mb-[16px] absolute top-[10px] right-[10px] '>{data.section}</p>
+    <a href={`/news/${data.name}`} target="_blank">
+        <div className="flex min-w-[240px] sm:w-[238px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-t-[4px] sm:rounded-t-[10px] xl:rounded-t-[4px] border-solid border-[#B9CFEB] hover:shadow-lg ">
+            <p className=' border-0 p-[4px] bg-[#6b9472] text-[12px] font-bold text-white mr-auto mb-[16px] absolute top-[10px] right-[10px] '>{data.section}</p>
 
-        <Image height={140} width={494} className="h-[118px] sm:h-[142px] xl:h-[160px] rounded-t-[4px] sm:rounded-t-[10px] xl:rounded-t-[4px]" src={"/test.jpg"} alt="" />
-        <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white ">
-            <p className="text-gray-600 text-[12px] not-italic font-normal flex items-center gap-[4px] leading-[150%]">
-                {config.eye} {data.viewsCount}
-            </p>
-            <p className="text-gray-600 text-[12px] not-italic font-normal ">
-                {data.user}
-            </p>
-            <p className="text-[color:var(--Black,#000)] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-normal leading-[150%] ">
-                {getClampedText(data.title, 2)}
-            </p>
+            <Image height={140} width={494} className="h-[118px] sm:h-[142px] xl:h-[160px] rounded-t-[4px] sm:rounded-t-[10px] xl:rounded-t-[4px]" src={data.url} alt="" />
+            <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white w-full ">
+                <div className='flex justify-between items-center w-full '>
+                    <p className="text-gray-600 text-[12px] not-italic font-normal flex items-center gap-[4px] leading-[150%]">
+                        {config.eye} {data.viewsCount}
+                    </p>
 
-            <p className="text-gray-800 text-[12px] font-semibold sm:text-[14px] xl:text-[16px] not-italic hidden duration-[1s] opacity-0 group-hover:opacity-100 group-hover:block transition-opacity ">
-                {getClampedText(data.desc, 6)}
-            </p>
+                    <p className='border-0 py-[2px] px-[4px] bg-blue-400 text-[10px] text-white font-bold first-letter:capitalize '>{cityName}</p>
+                </div>
+                <p className="text-gray-600 text-[12px] not-italic font-normal ">
+                    {data.user}
+                </p>
+                <p className="text-[color:var(--Black,#000)] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-normal leading-[150%] ">
+                    {getClampedText(data.title, 2)}
+                </p>
+
+                <p className="text-gray-800 text-[12px] font-semibold sm:text-[14px] xl:text-[16px] not-italic hidden duration-[1s] opacity-0 group-hover:opacity-100 group-hover:block transition-opacity ">
+                    {getClampedText(data.content, 6)}
+                </p>
+            </div>
         </div>
-    </div>
+    </a>
   );
 }
-
 
 const config = {
     readMoreIcon: (
@@ -179,20 +99,34 @@ const config = {
 };
 
 
-function NewsSections({}: Props) {
-  return (
-    <div className=' p-[5%] flex flex-col justify-normal items-start  '>
-        <h2 className=' text-[30px] mb-[40px] font-bold '>Bangalore Property News</h2>
-        
-        <div className=' flex gap-[16px] flex-wrap '>
-            {staticCardsData.map(eachCard=>{
-                return(
-                    <Card key={eachCard.title} data={eachCard} />
-                )
-            })}
+function NewsSections({cityName}: Props) {
+    const [{allData}] = useAtom(newsData);
+    const [{inputSearch}] = useAtom(trendsFilterData);
+    const currentCities = allData?.filter((city:any) => (inputSearch === "" || city.title.toLowerCase().includes(inputSearch)));
+
+    return (
+        <div className=' w-full flex flex-col justify-center items-center pb-[3%]  '>
+            <div className='w-[96%] md:w-[90%] xl:w-[80%] flex flex-col  '>
+                <h2 className='text-[16px] md:text-[20px] xl:text-[24px] mb-[16px] md:mb-[20px] font-bold first-letter:capitalize '>{cityName} Property News</h2>
+                
+                <div className=' flex gap-[16px] flex-wrap  '>
+                    {currentCities && currentCities.length > 0 ?
+                    currentCities?.map(eachCard=>{
+                        return(
+                            <Card key={eachCard.title} data={eachCard} cityName={cityName} />
+                        )
+                    })
+                    :
+                    <div className="flex w-full h-full justify-center items-center flex-col">
+                      <span className='max-h-[600px] max-w-[600px]'>{emptyFilesIcon}</span>
+                      No Matching Results Found!
+                      <span className="relative left-[10%]">{strikeIconIcon}</span>
+                    </div>
+                    }
+                </div>
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default NewsSections;

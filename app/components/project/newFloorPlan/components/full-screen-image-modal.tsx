@@ -185,7 +185,10 @@ export function FullScreenImageModal({
               <span className="hidden md:inline">Download Floor Plan</span>
             </button>
             <button
-              onClick={() => handleReqcallBack(unit)}
+              onClick={() =>{ 
+                console.log(unit);
+                handleReqcallBack(unit)
+              }}
               className="flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
             >
               <FaMessage className="w-4 h-4" />

@@ -10,13 +10,16 @@ type Props = {
   frontendFilters: any;
 };
 
+console.log(3)
+
+
 export default function NewListingSearchpage({
   serverData,
   frontendFilters,
 }: Props) {
 
   return (
-    <main className="pt-[70px] mt-[10%] sm:mt-0"> 
+    <main className="pt-[70px] mt-[10%] sm:mt-0">  
       <ProjectSearchBreadCrumbs />
       <ProjSearchMainFilterSection
         isListing={serverData === null ? true : false}

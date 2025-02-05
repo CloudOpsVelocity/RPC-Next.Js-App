@@ -25,9 +25,24 @@ const config: Config = {
         "screen-spacing": "50px",
         "less-screen-spacing": "30px",
       },
+
+      animation: {
+        gradient: "gradientBG 6s ease infinite",
+      },
+      keyframes: {
+        gradientBG: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+      },
+      backgroundSize: {
+        "gradient-animate": "200% 200%",
+      },
     },
   },
 
   plugins: [require("tailwind-scrollbar-hide"),   require('@tailwindcss/typography')],
 };
 export default config;
+
+

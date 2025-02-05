@@ -108,6 +108,7 @@ export default function FloorPlans({
     parkingType: "",
     totalNumberofBathroom: 0,
     totalNumberOfBalcony: 0,
+    totalBalconySize:0,
     noOfCarParking: 0,
     floorPlanUrl: "",
     gardenArea: "",
@@ -227,7 +228,7 @@ export default function FloorPlans({
     if (!unit) return;
     setModalState({
       isOpen: true,
-      unit,
+      unit: unit,
       isPartialUnit: state ? state : false,
       type: "floorplan",
     });
@@ -261,6 +262,7 @@ export default function FloorPlans({
     setFullScreenModalState({ isOpen: true, unit: unit });
   };
   const handleReqcallBack = (unit: PropertyUnit) => {
+    if(!unit) return;
     open({
       modal_type: "REQ_QUOTE",
       reqId: unit.unitIdEnc,
@@ -269,7 +271,7 @@ export default function FloorPlans({
       title: unit.unitNumber,
       postedId: postedById,
     });
-  };
+  }; 
 
   const handlePricingFloorPlanClick = (selBhk: any) => {
     if (selBhk.bhkName.includes("_")) {
@@ -507,7 +509,7 @@ export default function FloorPlans({
             onClose={() => onClosingPopup()}
             initialUnit={rightSideUnit}
             units={projectUnitsData || []}
-            filters={unitFilters}
+            filters={unitFilters} 
             setFilters={setUnitFilters}
             filteredUnits={filteredUnits}
             options={options || {}}

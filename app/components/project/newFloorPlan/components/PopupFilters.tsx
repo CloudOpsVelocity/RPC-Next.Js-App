@@ -51,7 +51,7 @@ export default function PopupFilters({
 
   const filteredOptions = (key: keyof typeof filters) => {
     const filterValue = String(filters[key]).toLowerCase();
-    console.log(filterValue, filters, key)
+    // console.log(filterValue, filters, key)
     return (
       options !== undefined &&
       options[key] !== undefined &&
@@ -179,6 +179,8 @@ export default function PopupFilters({
     }
   };
 
+  console.log(options);
+
   return (
     <div
       className={`${
@@ -194,7 +196,7 @@ export default function PopupFilters({
           Clear All
         </button>
       </div>
-
+ 
       
       <div className="h-[calc(100vh-120px)] overflow-y-auto p-3 custom-scrollbar">
         <div className="flex flex-col">

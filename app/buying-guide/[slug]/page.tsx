@@ -1,7 +1,7 @@
+import SubscribeBlock from "@/app/blog/blogDetailSextion/SubscribeBlock";
 import BlogDetailsDescription from "../blogDetailSextion/BlogDetailsDescription";
 import BlogDetailsFirstBlock from "../blogDetailSextion/BlogDetailsFirstBlock";
 import FeaturedBlogs from "../blogDetailSextion/FeaturedBlogs";
-import SubscribeBlock from "../blogDetailSextion/SubscribeBlock";
 
 type Params = {
   params: {
