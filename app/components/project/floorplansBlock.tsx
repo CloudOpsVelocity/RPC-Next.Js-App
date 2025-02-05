@@ -100,6 +100,7 @@ Props) {
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
+  console.log(projectUnitsData)
   // const {
   //   data: overview,
   //   isLoading: overviewdataLoading,

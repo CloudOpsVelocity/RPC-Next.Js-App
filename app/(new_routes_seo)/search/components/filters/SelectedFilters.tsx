@@ -17,7 +17,7 @@ export default function SelectedFilters({}: Props) {
         (Array.isArray(value) && value.length > 0) || value !== null
     ) && (
       <div className="border-t w-full">
-        <div className="flex overflow-x-auto gap-2 px-[10px] "> 
+        <div className="flex overflow-x-auto gap-2 px-[10px] ">  
           {Object.entries(state).map(([category, values]) =>
               values !== null &&
               values !== undefined && 

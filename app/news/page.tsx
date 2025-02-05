@@ -7,6 +7,6 @@ import NewsSections from "./components/NewsSections";
 export default function Page() {
   return <div className="h-[100%] w-[100%] mt-[70px] flex flex-col overflow-hidden ">
     <NewsBanner />
-    <NewsSections />
+    <NewsSections  />
   </div>;
 }  

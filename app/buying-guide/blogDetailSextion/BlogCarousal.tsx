@@ -1,12 +1,11 @@
 "use client"
-
 import React, {useRef, useState} from 'react';
-import BlogCard from './BlogCarousalCard';
 import { NextCarouselButton, PrevCarouselButton } from '@/app/images/commonSvgs';
 import { useMediaQuery } from '@mantine/hooks';
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import "@mantine/carousel/styles.css";
+import BlogCard from '@/app/blog/blogDetailSextion/BlogCarousalCard';
 
 function BlogCarousal() {
     const [{ allBlogData }] = useAtom(blogDetails);
@@ -66,7 +65,7 @@ function BlogCarousal() {
 
             <div 
                 ref={containerRef} 
-                className='flex justify-start items-center w-full overflow-y-auto mt-5 mb-[3%] scroll-smooth scrollbar-hide cursor-grab '
+                className='flex justify-start items-center w-full overflow-y-auto mt-5 scroll-smooth scrollbar-hide cursor-grab '
                 onMouseDown={handleMouseDown}
                 onMouseLeave={handleMouseLeave}
                 onMouseUp={handleMouseUp}

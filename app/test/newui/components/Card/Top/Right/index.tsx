@@ -57,6 +57,10 @@ export default function TopRightSection({
   bhk,
   bhkName,
 }: Props) {
+
+
+
+
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
