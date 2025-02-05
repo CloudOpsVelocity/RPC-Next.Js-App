@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
@@ -44,7 +44,9 @@ export default function PopupFilters({
     parkingType: "",
     terraceArea: "",
     totalBalconySize:"",
-    aptTypeName:""
+    aptTypeName:"",
+    gardenArea: "",
+    parkingArea:"",
   });
 
   const propCgId = useAtomValue(propCgIdAtom);

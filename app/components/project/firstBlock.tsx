@@ -73,7 +73,7 @@ const FirstBlock: React.FC<Props> = ({
       {projectDetails && (
         <>
           {hasReraStatus && (
-            <p className="flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[16px]  xl:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
+            <p className="flex items-center pl-[8px] text-center text-[12px] sm:text-[16px]  xl:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0   z-10 left-0 absolute">
               <ReraIcon className="h-[14px] w-[14px] sm:h-[16px] sm:w-[16px] xl:h-[24px] xl:w-[24px]" />
               RERA
             </p>

@@ -193,7 +193,7 @@ export function FloorPlanModal({
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex items-start md:items-center justify-between flex-col md:flex-row p-2 border-b bg-white relative">
-          <h3 className="text-lg md:text-xl font-semibold text-[#0073C6] text-nowrap  ">
+          <h3 className="text-lg md:text-xl font-semibold text-[#0073C6] text-nowrap w-[calc(100vw-30px)] ">
             {`${
               propCgId !== projectprops.plot
                 ? currentUnit.bhkName
@@ -419,20 +419,6 @@ export function FloorPlanModal({
                       />
                     )}
 
-                  {propCgId !== projectprops.apartment &&
-                    propCgId !== projectprops.plot &&
-                    currentUnit.parkingArea && (
-                      <DataItem
-                        title="Parking Area"
-                        value={`${formatNumberWithCommas(
-                          currentUnit.parkingArea
-                        )} sq.ft`}
-                        icon={
-                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
-                        }
-                      />
-                    )}
-
                   {currentUnit.terraceArea &&
                     currentUnit.terraceArea !== "null" && (
                       <DataItem
@@ -445,6 +431,20 @@ export function FloorPlanModal({
                         }
                       />
                     )}
+
+                  {propCgId !== projectprops.apartment &&
+                    propCgId !== projectprops.plot &&
+                    currentUnit.parkingArea && (
+                      <DataItem
+                        title="Parking Area"
+                        value={`${formatNumberWithCommas(
+                          currentUnit.parkingArea
+                        )} sq.ft`}
+                        icon={
+                          <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}                
                 </div>
 
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6 sticky top-[48px] bg-white">
@@ -531,11 +531,12 @@ export function FloorPlanModal({
 
             {/* Bottom Carousel */}
             {visibleUnits && visibleUnits.length > 0 && (
-              <div className=" pb-[100px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4">
+              <div className=" pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4">
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="text-sm font-semibold">
                     Filtered Units ({filteredUnits ? filteredUnits.length : 0})
                   </h4>
+                  {visibleUnits && visibleUnits.length > 1 &&
                   <div className="flex gap-1">
                     <button
                       onClick={handlePrevUnit}
@@ -558,6 +559,8 @@ export function FloorPlanModal({
                       <FaChevronRight className="w-4 h-4" />
                     </button>
                   </div>
+                  }
+
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2 scroll-smooth ">
                   {visibleUnits.map((unit) => (
