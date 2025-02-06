@@ -8,13 +8,10 @@ type Props = {
   text?: string;
 };
 
-const backImg =
-  "https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg";
-
+const backImg = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/market-trends/banner.jpg`
+  
 export default function MarketBanner({ title, text }: Props) {
   const path = usePathname();
-
-  console.log(path);
 
   return (
     <div className="relative p-[3%] w-full h-[140px] md:h-[160px] lg:h-[200px] flex flex-col justify-center items-center bg-gradient-to-r from-gray-500 to-[#cccccc] overflow-hidden animate-gradient">

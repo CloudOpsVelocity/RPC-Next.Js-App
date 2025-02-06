@@ -1,8 +1,10 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaHome, FaChevronRight } from "react-icons/fa";
 import { BASE_PATH_PROJECT_DETAILS } from "../../utils/new-seo-routes/project.route";
+import { useAtom } from "jotai";
+import { projSearchStore } from "../store/projSearchStore";
 
 interface BreadcrumbItem {
   label: string;
@@ -19,7 +21,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   const pathname = usePathname();
   const getParams = useSearchParams();
   let listedBy = getParams.get("sf");
-  let allParams:any = [
+  let initailAlParams:any = [
     {
       href: "/",
       label: "Home",
@@ -32,70 +34,35 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     }
   ];
 
-  const cropText = (text:string, word: string) => {
-    const result = text.split(word)[0] + word;
-    return result;
-  }
-
-  function textFormat(text:string) {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  }
-
-  if(listedBy){ // -- query params not equel to null --
-    listedBy?.split("-").forEach((each:any)=>{
-      let key = each.split("=")[0];
-      let value = each.split("=")[1];
-      // console.log(key, value)
+  const [state] = useAtom(projSearchStore);
   
-      if(key === "cg"){
-        allParams[1] = {
-          href: `${BASE_PATH_PROJECT_DETAILS}${value === "R" ? "/for-rent" : "/For-sale"}`,
-          label: value === "R" ? "For Rent" : "For Sale",
-        };
-      }
+
+  const [allParams, setAllParams] = useState(initailAlParams)
+
+  useEffect(()=>{
+    let oldParams = [...allParams];
+
+    oldParams[1] = {
+      href: `${BASE_PATH_PROJECT_DETAILS}${state.cg === "R" ? "/for-rent" : "/For-sale"}`,
+      label: state.cg === "R" ? "For Rent" : "For Sale",
+    };
   
-      if(key === "localities"){
-        allParams.push({
-          href: `${BASE_PATH_PROJECT_DETAILS}${"/bengaluru/" + value.includes("+") ? value.split("+")[0] : value}`,
-          label: value.includes("+") ? value.split("+")[0] : value,
-        });
-      }
-    });
-  }else{ // for Path params
-    // console.log(pathname)
-    let path = pathname.split("/"); // index start from 4 (locality)
-    let isProjectSearch = path[1] === "residential-projects"
-    
-    // cropText(pathname, path[2]);
-    allParams[1] = { // category
-      href: isProjectSearch ? cropText(pathname, path[2]) : "",
-      label: isProjectSearch ? textFormat(path[2]) : "",
+    let localityName = state.localities.length > 0 ? state.localities[0] : "";
+    oldParams[3] = {
+      href: localityName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}` : "", 
+      label: localityName.split("+")[0],
     };
 
-    if(path[4] !== undefined){ // locality
-      allParams[3] = { 
-        href: cropText(pathname, path[4]),
-        label: textFormat(path[4]),
-      };
-    }
+    oldParams[4] = {
+      href: state.projName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}/${state.projName}` : "", 
+      label: state.projName !== "" ? state.projName : "",
+    };
+    setAllParams(oldParams);
+  }, [listedBy, state]);
 
-    if(path[5] !== undefined){ // project name
-      allParams[4] = { 
-        href: cropText(pathname, path[5]),
-        label: textFormat(path[5]),
-      };
-    }
-
-    if(path[6] !== undefined){ // property name
-      allParams[5] = { 
-        href: cropText(pathname, path[6]),
-        label: textFormat(path[6]),
-      };
-    }
-  }
 
   if (!allParams || allParams.length === 0) {
-    return null; // Return null if no breadcrumb items exist
+    return null;
   }
 
   return (

@@ -10,7 +10,6 @@ type Props = {};
 export default function SelectedFilters({}: Props) {
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
-  console.log(state);
   return (
     Object.entries(state).some(
       ([_, value]) =>
@@ -86,7 +85,7 @@ export default function SelectedFilters({}: Props) {
                   </span>
                   <button
                     onClick={() => {
-                      dispatch({
+                      dispatch({ 
                         type: "update",
                         payload: {
                           [category]: null,

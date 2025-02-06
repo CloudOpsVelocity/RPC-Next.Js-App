@@ -29,11 +29,11 @@ export const getClampedText = (text:string, maxLines:number ) => {
 function Card({data, cityName}: CradProps) {
   return (
     <a href={`/news/${data.name}`} target="_blank">
-        <div className="flex max-w-[600px] min-w-[240px] sm:w-[238px] md:w-[300px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-[4px] xl:rounded-[10px]  border-solid border-[#B9CFEB] hover:shadow-lg ">
+        <div className="flex max-w-[600px] min-w-[240px] sm:w-[260px] md:w-[300px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-[4px] xl:rounded-[10px]  border-solid border-[#B9CFEB] hover:shadow-lg ">
             <p className=' border-0 p-[4px] bg-[#6b9472] text-[12px] font-bold text-white mr-auto mb-[16px] absolute top-[10px] right-[10px] '>{data.section}</p>
 
             <Image height={140} width={494} className="h-[118px] sm:h-[142px] xl:h-[160px] rounded-t-[4px] xl:rounded-t-[10px] " src={data.url} alt="" />
-            <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white w-full rounded-[4px] xl:rounded-[10px]">
+            <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white w-full rounded-[4px] xl:rounded-[10px] overflow-y-auto scrollbar-hide ">
                 <div className='flex justify-between items-center w-full '>
                     <p className="text-gray-600 text-[12px] not-italic font-normal flex items-center gap-[4px] leading-[150%]">
                         {config.eye} {data.viewsCount}
@@ -103,7 +103,7 @@ function NewsSections({cityName}: Props) {
 
     return (
         <div className=' w-full flex flex-col justify-center items-center pb-[3%]  '>
-            <div className='w-[96%] md:w-[90%] xl:w-[80%] flex flex-col  '>
+            <div className='w-[96%] md:w-[94%] xl:w-[80%] flex flex-col  '>
                 <h2 className='text-[16px] md:text-[20px] xl:text-[24px] mb-[16px] md:mb-[20px] font-bold first-letter:capitalize '>{cityName} Property News</h2>
                 
                 <div className=' flex flex-wrap gap-[20px] justify-evenly items-start '>
@@ -114,8 +114,8 @@ function NewsSections({cityName}: Props) {
                         )
                     })
                     :
-                    <div className="flex w-full h-full justify-center items-center flex-col">
-                      <span className='max-h-[600px] max-w-[600px]'>{emptyFilesIcon}</span>
+                    <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">
+                      <span className='max-h-[400px] max-w-[400px]'>{emptyFilesIcon}</span>
                       No Matching Results Found!
                       <span className="relative left-[10%]">{strikeIconIcon}</span>
                     </div>

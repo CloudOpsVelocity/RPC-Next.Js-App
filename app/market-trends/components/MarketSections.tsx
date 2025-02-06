@@ -73,9 +73,9 @@ function MarketSections({text}: Props) {
                 </a>
             )})
           :
-          <div className="flex w-full h-full justify-center items-center flex-col">
-            <span className='max-h-[600px] max-w-[600px]'>{emptyFilesIcon}</span>
-            No Matching Results Found!
+          <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">
+            <span className='max-h-[400px] max-w-[400px] '>{emptyFilesIcon}</span>
+            No Matching Results Found! 
             <span className="relative left-[10%]">{strikeIconIcon}</span>
           </div>
           }
