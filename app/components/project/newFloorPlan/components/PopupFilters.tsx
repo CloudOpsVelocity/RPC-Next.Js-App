@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { useAtomValue } from "jotai";
 import { projectprops } from "@/app/data/projectDetails";
@@ -44,7 +44,9 @@ export default function PopupFilters({
     parkingType: "",
     terraceArea: "",
     totalBalconySize:"",
-    aptTypeName:""
+    aptTypeName:"",
+    gardenArea: "",
+    parkingArea:"",
   });
 
   const propCgId = useAtomValue(propCgIdAtom);
@@ -143,6 +145,10 @@ export default function PopupFilters({
     placeholder: string,
     title: string
   ) => {
+    if(filteredOptions(key).length === 1 && (filteredOptions(key)[0] == 0 || filteredOptions(key)[0] === "") ){
+      console.log(filteredOptions(key), key);
+      return;
+    }
     return (
       <div key={String(key)+"input"} className="relative mb-[10px]">
         <label
@@ -179,7 +185,7 @@ export default function PopupFilters({
     }
   };
 
-  console.log(options);
+
 
   return (
     <div
@@ -224,12 +230,16 @@ export default function PopupFilters({
 
           {options?.facingName &&
             options?.facingName.length > 0 &&
-            renderFilter("facingName", "Select Facing", "At Facing")}
+            renderFilter("facingName", "Select Facing", "Facing")}
 
           {options?.floor &&
             options?.floor.length > 0 &&
             propCgId !== projectprops.plot &&
-            renderFilter("floor", "Select Floor", "At Elevation")}
+            renderFilter(
+              "floor", 
+              (propCgId === projectprops.villa || propCgId === projectprops.rowHouse) ? "Select Elevation" : "Select Floor", 
+              (propCgId === projectprops.villa || propCgId === projectprops.rowHouse) ? "At Elevation" : "At Floor")
+            }
 
           {options?.unitNumber &&
             options?.unitNumber.length > 0 &&
