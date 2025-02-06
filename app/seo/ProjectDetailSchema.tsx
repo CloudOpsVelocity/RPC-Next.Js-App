@@ -147,7 +147,10 @@ const schemaData: Graph = {
 };
 
 const ProjectSchema = () => (
-  <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+  />
 );
 
 export default ProjectSchema;
