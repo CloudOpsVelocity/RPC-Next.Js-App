@@ -42,6 +42,7 @@ import Disclamer from "@/app/components/builder/Disclamer";
 import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
 import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
 import ProjectSchema from "@/app/seo/ProjectDetailSchema";
+import FAQJsonLdScript from "@/app/seo/Faqjson";
 // import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
 const ProjectGallery = dynamic(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
@@ -91,8 +92,8 @@ export default async function ProjectsDetailsPage({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={imageUrl || ""} />
-      {/* <FAQJsonLdScript data={data} /> */}
-      <ProjectSchema projectData={{ ...projResponse, url }} />
+      <FAQJsonLdScript data={data} />
+      <ProjectSchema />
       {/* <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} /> */}
