@@ -461,7 +461,7 @@ function CityTrendSection({ cityName }: Props) {
 
   return (  
     <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-start overflow-y-auto relative px-[6px] max-w-[1200px]'>
-        {filteredLocalities && filteredLocalities?.length > 0 ?
+        {filteredLocalities && filteredLocalities?.length > 0 ? (
         <>
           <div className="flex flex-col items-center order-2 md:order-1 ">
             <h2 className="font-bold mb-[4px] mr-auto text-[18px] ">
@@ -491,7 +491,7 @@ function CityTrendSection({ cityName }: Props) {
           <span className="max-h-[600px] max-w-[600px]">{emptyFilesIcon}</span>
           No Matching Results Found!
           <span className="relative left-[10%]">{strikeIconIcon}</span>
-        </div>
+        </div>)
         }
     </div>
   )
