@@ -1,8 +1,5 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
-import fs from "fs";
-import path from "path";
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import {
   extractProjectParamsValues,
@@ -49,35 +46,13 @@ export async function generateStaticParams() {
 }
 
 export const dynamic = "force-dynamic";
-const getSearchData = async (locality: string): Promise<any> => {
+const getSearchData = async (locality: string) => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
     console.log(baseUrl);
     const url = `${baseUrl}`;
- 
+
     const res = await fetch(url);
-
-    if (!res.ok) {
-      throw new Error(`Error fetching data: ${res.statusText}`);
-    }
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
-export const getFilteredSearchData = async (city: number | string | null, locality: number | string | null, cg: number | string | null, filters?: string): Promise<any> => {
-  try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0&city=${city}`;
-    const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
-    const res = await fetch(url, {
-      next: {
-        revalidate: 60,
-      },
-    });
 
     if (!res.ok) {
       throw new Error(`Error fetching data: ${res.statusText}`);
