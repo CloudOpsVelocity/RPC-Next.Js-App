@@ -2,8 +2,7 @@ import { TringleIcons } from "@/app/images/commonSvgs";
 import React from "react";
 
 type Props = {};
-const backImg =
-  "https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg";
+const backImg = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/market-trends/banner.jpg`
 
 export default function NewsBanner({}: Props) {
   return (

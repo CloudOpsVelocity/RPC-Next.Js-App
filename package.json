@@ -78,6 +78,7 @@
     "react-pdf": "^9.1.1",
     "react-player": "^2.14.1",
     "react-query": "^3.39.3",
+    "react-schemaorg": "^2.0.0",
     "react-share": "^5.0.3",
     "react-zoom-pan-pinch": "^3.4.2",
     "schema-dts": "^1.1.2",

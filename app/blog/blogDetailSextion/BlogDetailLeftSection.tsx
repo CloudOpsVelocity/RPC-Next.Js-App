@@ -3,11 +3,13 @@ import ContentBox from './ContentBox'
 import Image from 'next/image'
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
+import { usePathname } from 'next/navigation';
 
 function BlogDetailLeftSection() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
   const data = allBlogData.filter(each=> each.id === selectedBlog)[0];
-  
+  const pathName = data && data.heading ? data.heading.toLowerCase() : "";
+  console.log(pathName)
   return (
     <div className='max-w-[617px] w-full '>
         <Image 
@@ -26,6 +28,7 @@ function BlogDetailLeftSection() {
             content={data && data.content ? data.content : ""}
             date={data && data.date ? data.date : ""}
             type='large'
+            href={pathName}
         />
     </div>
   )

@@ -4,14 +4,6 @@ const generateFAQJsonLd = (data: any) => {
   const jsonLd: WithContext<VideoObject> = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    name: data.name,
-    description: data.description,
-    // duration publishDate size
-    thumbnailUrl: `${process.env.NEXT_PUBLIC_PROJECT_URL}/staticmedia-images-icons/grp-logo/Logo-without-background.png`,
-    contentUrl: data.contentUrl,
-    contentSize: data.contentSize,
-    duration: "PT2M",
-    regionsAllowed: "ALL",
   };
   return jsonLd;
 };

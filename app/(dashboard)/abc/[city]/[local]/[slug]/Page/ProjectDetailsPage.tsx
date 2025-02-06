@@ -19,12 +19,12 @@ import MasterPlan from "@/app/components/project/masterplan";
 const ProjectDetailsP = dynamic(
   () => import("@/app/components/project/projectDetailsP")
 );
-const FloorplansBlock = dynamic(
-  () => import("@/app/components/project/floorplansBlock"),
-  {
-    ssr: false,
-  }
-);
+// const FloorplansBlock = dynamic(
+//   () => import("@/app/components/project/floorplansBlock"),
+//   {
+//     ssr: false,
+//   }
+// );
 // import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Specifications from "@/app/components/project/specification";
@@ -34,16 +34,15 @@ import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-
 import FaqWithBg from "@/app/components/project/faq";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import FAQJsonLdScript from "@/app/seo/Faqjson";
-import QAJsonLdScript from "@/app/seo/Qnajson";
-import PropertyJsonLdScript from "@/app/seo/Productjson";
-import ArticleJsonLdScript from "@/app/seo/ArticleJson";
+// import FAQJsonLdScript from "@/app/seo/Faqjson";
 import Reviews from "@/app/components/project/reviews";
 import PartialUnitData from "@/app/components/project/sections";
 import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 import Disclamer from "@/app/components/builder/Disclamer";
 import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
 import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
+import ProjectSchema from "@/app/seo/ProjectDetailSchema";
+import FAQJsonLdScript from "@/app/seo/Faqjson";
 // import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
 const ProjectGallery = dynamic(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
@@ -83,7 +82,6 @@ export default async function ProjectsDetailsPage({
   console.log(params);
   return (
     <section className="w-full relative break-words ">
-      {/* <meta name="keywords" content={`${data.projectName}, ${data.localityName}, ${data.cityName}, real estate, property`} /> */}
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={url} />
       <meta property="og:title" content={title} />
@@ -95,6 +93,7 @@ export default async function ProjectsDetailsPage({
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={imageUrl || ""} />
       <FAQJsonLdScript data={data} />
+      <ProjectSchema projectData={{ ...projResponse, url }} />
       {/* <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} /> */}

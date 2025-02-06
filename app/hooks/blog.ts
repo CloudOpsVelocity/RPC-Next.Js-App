@@ -8,7 +8,7 @@ const initialAllBlogsData = [
       content:`Investing is one of the most effective ways to grow wealth and achieve financial freedom. However, for beginners, the world of investing can seem overwhelming. Understanding the basics can help you make informed decisions and set a solid foundation for your financial future.`,
       date:"May 20th 2024",
       coverImage: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/Blog-Images/Investing-101.webp`,
-      desc:`<p><strong>Investing 101: A Beginner&rsquo;s Guide to Growing Your Wealth</strong></p>
+      desc:`<p><strong>Investing: A Beginner&rsquo;s Guide to Growing Your Wealth</strong></p>
               <p>Investing is one of the most effective ways to grow wealth and achieve financial freedom. However, for beginners, the world of investing can seem overwhelming. Understanding the basics can help you make informed decisions and set a solid foundation for your financial future.</p>
               <h3><strong>Why Invest?</strong></h3>
               <ol>

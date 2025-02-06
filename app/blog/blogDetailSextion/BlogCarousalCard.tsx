@@ -12,7 +12,6 @@ function BlogCard({data}: Props) {
   const path = usePathname();
   const title = data && data.heading ? data.heading : ""; 
   const pathName = title.toLowerCase();
-  // console.log(path, pathName)
 
   return ( 
     <a href={`${path}/${pathName}`} target='_blank'>
@@ -33,6 +32,7 @@ function BlogCard({data}: Props) {
               content={data && data.content ? data.content : ""}
               date={data && data.date ? data.date : ""}
               type='small'
+              href={pathName}
           />
       </div>
     </a>
