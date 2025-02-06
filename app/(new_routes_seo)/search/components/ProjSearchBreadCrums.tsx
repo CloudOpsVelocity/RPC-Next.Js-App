@@ -39,33 +39,24 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
 
   const [allParams, setAllParams] = useState(initailAlParams)
 
-  const cropText = (text:string, word: string) => {
-    const result = text.split(word)[0] + word;
-    return result;
-  }
-
-  function textFormat(text:string) {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  }
-
   useEffect(()=>{
     let oldParams = [...allParams];
 
-        oldParams[1] = {
-          href: `${BASE_PATH_PROJECT_DETAILS}${state.cg === "R" ? "/for-rent" : "/For-sale"}`,
-          label: state.cg === "R" ? "For Rent" : "For Sale",
-        };
-    
-        let localityName = state.localities.length > 0 ? state.localities[0] : "";
-        oldParams[3] = {
-          href: localityName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}` : "", 
-          label: localityName.split("+")[0],
-        };
+    oldParams[1] = {
+      href: `${BASE_PATH_PROJECT_DETAILS}${state.cg === "R" ? "/for-rent" : "/For-sale"}`,
+      label: state.cg === "R" ? "For Rent" : "For Sale",
+    };
+  
+    let localityName = state.localities.length > 0 ? state.localities[0] : "";
+    oldParams[3] = {
+      href: localityName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}` : "", 
+      label: localityName.split("+")[0],
+    };
 
-        oldParams[4] = {
-          href: state.projName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}/${state.projName}` : "", 
-          label: state.projName !== "" ? state.projName : "",
-        };
+    oldParams[4] = {
+      href: state.projName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}/${state.projName}` : "", 
+      label: state.projName !== "" ? state.projName : "",
+    };
     setAllParams(oldParams);
   }, [listedBy, state]);
 
