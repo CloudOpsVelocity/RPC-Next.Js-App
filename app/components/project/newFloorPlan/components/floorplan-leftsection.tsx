@@ -62,7 +62,6 @@ export default function FloorplanLeftsection({
 
 
 
-
   return (
     <div
       ref={parentRef}
@@ -78,6 +77,8 @@ export default function FloorplanLeftsection({
         >
           {dataList.map((virtualRow) => {
             const unit = units[virtualRow.index];
+            console.log(unit)
+
             return (
               <div
                 key={virtualRow.index}
@@ -148,14 +149,14 @@ export default function FloorplanLeftsection({
                           unit.propType === projectprops.villament) && (
                           <div className="flex items-center bg-gray-100 rounded-full px-1.5 xs:px-2 sm:px-3 py-0.5 xs:py-1">
                             <FaBuilding className="text-[#0073C6] mr-1 xs:mr-1 sm:mr-2 text-xs xs:text-sm" />
-                            <p className="font-semibold">{unit.towerName}</p>
+                            <p className="font-semibold first-letter:capitalize">{unit.towerName == "defaultTower" ? "Default Tower" : unit.towerName }</p>
                           </div>
                         )}
                       {unit.floor !== undefined &&
                         unit.propType !== projectprops.plot && (
                           <div className="flex items-center bg-gray-100 rounded-full px-1.5 xs:px-2 sm:px-3 py-0.5 xs:py-1">
                             <BiBuildingHouse className="text-[#0073C6] mr-1 xs:mr-1 sm:mr-2 text-xs xs:text-sm" />
-                            <p className="font-semibold">
+                            <p className="font-semibold first-letter:capitalize">
                               {(unit.propType === projectprops.villa || unit.propType === projectprops.rowHouse) ? "Elevation" : "Floor"} {unit.floor === 0 ? "G" : unit.floor}
                             </p> 
                           </div>
@@ -163,8 +164,16 @@ export default function FloorplanLeftsection({
                       {unit.unitNumber !== null && (
                         <div className="flex items-center bg-gray-100 rounded-full px-1.5 xs:px-2 sm:px-3 py-0.5 xs:py-1">
                           <FaBed className="text-[#0073C6] mr-1 xs:mr-1 sm:mr-2 text-xs xs:text-sm" />
-                          <p className="font-semibold">
+                          <p className="font-semibold first-letter:capitalize">
                             Unit: {unit.unitNumber}
+                          </p>
+                        </div>
+                      )}
+                        {unit.block && unit.propType === projectprops.apartment && (
+                        <div className="flex items-center bg-gray-100 rounded-full px-1.5 xs:px-2 sm:px-3 py-0.5 xs:py-1">
+                            <FaBuilding className="text-[#0073C6] mr-1 xs:mr-1 sm:mr-2 text-xs xs:text-sm" />
+                            <p className="font-semibold first-letter:capitalize">
+                            {unit.block}
                           </p>
                         </div>
                       )}
@@ -201,7 +210,7 @@ export default function FloorplanLeftsection({
                           </div>
                         </div>
                       )}
-                    {unit.caretarea !== null &&
+                    {unit.caretarea !== null && unit.caretarea !== "" &&
                       unit.propType !== projectprops.plot && (
                         <div className="flex items-center gap-1 xs:gap-2">
                           <MdBalcony className="text-[#0073C6] text-lg xs:text-xl sm:text-2xl" />
@@ -216,17 +225,17 @@ export default function FloorplanLeftsection({
                         </div>
                       )}
 
-                    {unit.terraceArea !== null &&
-                      unit.terraceArea !== "null" &&
+                    {unit.gardenArea && unit.gardenArea !== "" &&
+                      unit.gardenArea !== "null" &&
                       unit.propType !== projectprops.plot && (
                         <div className="flex items-center gap-1 xs:gap-2">
                           <BiBuildingHouse className="text-[#0073C6] text-lg xs:text-xl sm:text-2xl" />
                           <div>
                             <p className="text-[10px] xs:text-xs sm:text-sm text-gray-500 font-medium">
-                              Terrace Area
+                              Garden Area
                             </p>
                             <p className="text-sm xs:text-base sm:text-lg font-bold">
-                              {formatNumberWithCommas(unit.terraceArea)} sq.ft
+                              {formatNumberWithCommas(unit.gardenArea)} sq.ft
                             </p>
                           </div>
                         </div>

@@ -38,7 +38,6 @@ function BlogDetailsDescription() {
   const nextBlogId = selectedBlog.id+1 < allBlogData.length ? selectedBlog.id+1 : 0
   const nextBlogdata:any = allBlogData.filter((each:any)=> each.id === nextBlogId)[0];
 
-  console.log(nextBlogdata);
   return (
     <div className='w-[94%] xl:w-[80%] mb-[3%] '>
         <p 

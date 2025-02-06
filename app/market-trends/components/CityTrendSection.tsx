@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { listingProps } from '@/app/data/projectDetails';
+import { listingProps, projectprops } from '@/app/data/projectDetails';
 import { emptyFilesIcon, LikeIcon, strikeIconIcon } from '@/app/images/commonSvgs';
 import { useSearchParams } from 'next/navigation';
 
@@ -95,10 +95,19 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
                       <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.sqftPrice))} / sq.ft</p>
                   </div>
 
+                  {filters.propType !== "Plot" &&
                   <div className='md:min-w-[160px]'>
                       <p className='text-gray-700 text-[12px] md:text-[16px] '>Super Buildup Area</p>  
                       <p className='font-bold text-[12px] md:text-[16px] '>{formatNumberWithCommas(eachCity.sba)} sq.ft</p>
                   </div>
+                  }
+
+                  {filters.propType === "Plot" &&
+                  <div className='md:min-w-[160px]'>
+                      <p className='text-gray-700 text-[12px] md:text-[16px] '>Plot Area</p>  
+                      <p className='font-bold text-[12px] md:text-[16px] '>{formatNumberWithCommas(eachCity.pa)} sq.ft</p>
+                  </div>
+                  }
 
           {filters.cg == "R" && eachCity.rate && (
             <div>
@@ -244,7 +253,7 @@ const TrendFilters = ({
       <h3 className="mb-[10px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
         Show Price Trends for
       </h3>
-      <div className="flex justify-start items-center gap-[10px] mb-[10px] md:mb-[16px] ">
+      {/* <div className="flex justify-start items-center gap-[10px] mb-[10px] md:mb-[16px] ">
         <button
           className={`bg-white border-[1px] border-solid border-[#47a5e9] rounded-[30px] h-[24px] md:h-[30px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize text-[#37a7f7]  p-[4px] px-[8px] ${
             filters.trendType === "L"
@@ -270,9 +279,9 @@ const TrendFilters = ({
         >
           Societies
         </button>
-      </div>
+      </div> */}
 
-      <h3 className="mb-[10px]  text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
+      {/* <h3 className="mb-[10px]  text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
         Select Zone
       </h3>
       <div className="mb-[12px] ">
@@ -300,7 +309,7 @@ const TrendFilters = ({
             </div>
           );
         })}
-      </div>
+      </div> */}
 
       <h3 className="mb-[10px]  text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
         Category
@@ -350,7 +359,7 @@ const TrendFilters = ({
         })}
       </div>
 
-      <h3 className="mb-[10px]  text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
+      {/* <h3 className="mb-[10px]  text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
         Duration
       </h3>
       <div className="flex flex-wrap gap-[10px] mb-[10px] md:mb-[16px] ">
@@ -371,9 +380,9 @@ const TrendFilters = ({
             </button>
           );
         })}
-      </div>
+      </div> */}
 
-      <h3 className="mb-[10px]  text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
+      {/* <h3 className="mb-[10px]  text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
         Price Segment
       </h3>
       <div className="flex flex-wrap gap-[10px] mb-[10px] md:mb-[16px] ">
@@ -394,7 +403,7 @@ const TrendFilters = ({
             </button>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -460,39 +469,41 @@ function CityTrendSection({ cityName }: Props) {
   if(AllLocalities.isLoading) return <div className='h-[30vh] flex justify-center items-center '><Loading /></div>
 
   return (  
-    <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-start overflow-y-auto relative px-[6px] max-w-[1200px]'>
-        {filteredLocalities && filteredLocalities?.length > 0 ? (
-        <>
-          <div className="flex flex-col items-center order-2 md:order-1 ">
-            <h2 className="font-bold mb-[4px] mr-auto text-[18px] ">
-              Property Rates in {cityName}
-            </h2>
-            <p className="font-medium mr-auto text-[14px] mb-[20px] text-gray-500  ">
-              50 of 180 Localities in {cityName}
-            </p>
+    <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-between overflow-y-auto relative px-[6px] max-w-[1200px]'>
+      <div className="flex flex-col items-center order-2 md:order-1 ">
+        <h2 className="font-bold mb-[4px] mr-auto text-[18px] ">
+          Property Rates in {cityName}
+        </h2>
+        <p className="font-medium mr-auto text-[14px] mb-[20px] text-gray-500  ">
+          50 of 180 Localities in {cityName}
+        </p>
 
-            <div className=" flex items-start justify-start flex-wrap gap-[20px] w-full ">
-              {filteredLocalities?.map((eachCity: any) => {
-                return (
-                  <PriceCard
-                    key={eachCity?.propIdEnc}
-                    eachCity={eachCity}
-                    cityId={cityId}
-                    filters={filters}
-                  />
-                );
-              })}
-            </div>
+        {filteredLocalities && filteredLocalities?.length > 0 ? (
+          <div className=" flex items-start justify-start flex-wrap gap-[20px] w-full ">
+            {filteredLocalities?.map((eachCity: any) => {
+              return (
+                <PriceCard
+                  key={eachCity?.propIdEnc}
+                  eachCity={eachCity}
+                  cityId={cityId}
+                  filters={filters}
+                />
+              )
+            })}
           </div>
-          <TrendFilters filters={filters} onFilterChange={onFilterChange} />
-        </>
-      ) : (
-        <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">
-          <span className="max-h-[400px] max-w-[400px]">{emptyFilesIcon}</span>
-          No Matching Results Found!
-          <span className="relative left-[10%]">{strikeIconIcon}</span>
-        </div>)
+        ) : (
+          <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">
+            <div className='flex justify-center items-center flex-col'>
+              <span className="max-h-[400px] max-w-[400px]">{emptyFilesIcon}</span>
+              No Matching Results Found!
+              <span className="relative left-[10%]">{strikeIconIcon}</span>
+            </div>
+          </div>)
         }
+
+      </div>
+
+      <TrendFilters filters={filters} onFilterChange={onFilterChange} />
     </div>
   )
 }
