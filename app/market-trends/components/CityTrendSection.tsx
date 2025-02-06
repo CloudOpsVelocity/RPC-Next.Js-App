@@ -10,6 +10,7 @@ import { defaultCitySvg } from '@/app/images/commonSvgs';
 import { useAtom } from 'jotai';
 import { trendsFilterData } from '../data.ts/marketBlogalData';
 import { formatNumberWithCommas } from '@/app/seo/sitemap/const';
+import Loading from '@/app/components/atoms/Loader';
 
 type Props = {
     cityName: string;
@@ -67,8 +68,8 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
         >
             {/* Top section */}
             <div onClick={()=> onSelectBox(!popupData.isOpen ? "OPEN" : "CLOSE", eachCity)} className='flex items-center justify-between cursor-pointer w-full md:min-h-[124px] gap-[10px] md:gap-[20px] '>
-              <div className='flex items-center justify-between xl:flex-nowrap flex-wrap w-full gap-[10px]'>
-                  <div className='flex items-center gap-[10px] mr-[100%] md:mr-[0%] mb-[10px] md:mb-0 '>
+              <div className='flex items-center xl:flex-nowrap flex-wrap w-full gap-[20px]'>
+                  <div className='flex items-center gap-[10px] mr-[100%] md:mr-[0%] mb-[10px] md:mb-0 md:min-w-[270px] '>
                     <div className=' min-w-[44px] md:min-w-[44px] w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-[50%] shadow-md border-t-[1px] border-solid '>
                       {/* city image */}
                       {eachCity.coverImage ?
@@ -90,13 +91,13 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
                     </div>
                   </div>
 
-                  <div>
-                      <p className='text-gray-700 text-[12px] md:text-[16px]'>Rate on GetRightProperty</p>
+                  <div className='md:min-w-[210px]'>
+                      <p className='text-gray-700 text-[12px] md:text-[16px] '>Rate on GetRightProperty</p>
                       <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.sqftPrice))} / sq.ft</p>
                   </div>
 
-                  <div>
-                      <p className='text-gray-700 text-[12px] md:text-[16px]'>Super Buildup Area</p>  
+                  <div className='md:min-w-[160px]'>
+                      <p className='text-gray-700 text-[12px] md:text-[16px] '>Super Buildup Area</p>  
                       <p className='font-bold text-[12px] md:text-[16px] '>{formatNumberWithCommas(eachCity.sba)} sq.ft</p>
                   </div>
 
@@ -313,7 +314,7 @@ interface City {
 
 function CityTrendSection({cityName}: Props) {
   const [filters, setFilters] = useState(initialFilters);
-  const [AllLocalities, setAllLocalities] = useState([]);
+  const [AllLocalities, setAllLocalities] = useState({data:[], isLoading: true});
 
   const [{inputSearch}] = useAtom(trendsFilterData);
   
@@ -336,25 +337,27 @@ function CityTrendSection({cityName}: Props) {
   type PropertyType = "Apartment" | "Villa" | "Plot" | "Row House" | "Villament" | "Independent House/Building";
 
   useEffect(()=>{
-    // const data:any = getFilteredSearchData(cityId, null, filters.cg)
-    // setAllLocalities(data);
+    setAllLocalities(prev => ({...prev, isLoading: true}));
     const propertyType: PropertyType = filters.propType as PropertyType;    
     const fetchData = async () => {
       try {
           const data:any = await getFilteredSearchData(cityId, null, filters.cg, `cg=${filters.cg}&propType=${listingProps[propertyType]}`);
-          setAllLocalities(data);
+          setAllLocalities({data:data, isLoading:false});
       } catch (error) {
           console.error("Error fetching data:", error);
+          setAllLocalities(prev => ({...prev, isLoading: false}));
       }
     };
 
-    fetchData();
+    fetchData(); 
   },[cityId, filters.cg, filters.propType]);
 
-  const filteredLocalities = AllLocalities?.filter((city:any)=> (inputSearch === "" || city.localityName.toLowerCase().includes(inputSearch)));
+  const filteredLocalities = AllLocalities?.data?.filter((city:any)=> (inputSearch === "" || city.localityName.toLowerCase().includes(inputSearch)));
 
-  return (      
-      <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-start overflow-y-auto relative px-[6px] max-w-[1200px]'>
+  if(AllLocalities.isLoading) return <div className='h-[30vh] flex justify-center items-center '><Loading /></div>
+
+  return (  
+    <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-start overflow-y-auto relative px-[6px] max-w-[1200px]'>
         {filteredLocalities && filteredLocalities?.length > 0 ?
         <>
           <div className='flex flex-col items-center order-2 md:order-1 '>
@@ -377,7 +380,7 @@ function CityTrendSection({cityName}: Props) {
           <span className="relative left-[10%]">{strikeIconIcon}</span>
         </div>
         }
-      </div>
+    </div>
   )
 }
 

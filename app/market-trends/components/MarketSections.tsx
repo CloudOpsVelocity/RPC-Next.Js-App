@@ -28,7 +28,7 @@ function MarketSections({text}: Props) {
   const {
     data: AllCities,
     isLoading: citiesLoading,
-    // error: citiesError,
+    error: citiesError,
   } = useQuery<City[], Error>({
     queryKey: ["all-cities"],
     queryFn: getAllCitiesDetails,
@@ -40,11 +40,11 @@ function MarketSections({text}: Props) {
   const path = usePathname();
   const bengalureImg = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/News/Bengaluru.jpg`
 
+  if(citiesError) return <div className='h-[30vh] flex justify-center items-center '>Something went wrong!</div>
+  if(citiesLoading) return <div className='h-[30vh] flex justify-center items-center '><Loading /></div>
+
   return (
-   
     <div className='w-[94%] md:w-[70%] pb-[30px] flex flex-col items-center  '>
-      {!citiesLoading ?
-      <>
         <h2 className='font-bold mb-[4px] md:mb-[10px] mr-auto text-[16px] md:text-[24px]  '>Select a City</h2>
         <p className='font-normal mr-auto text-[12px] md:text-[16px] mb-[16px] md:mb-[30px] '>To check property rates & price trends</p>
 
@@ -52,7 +52,6 @@ function MarketSections({text}: Props) {
       
           {currentCities && currentCities?.length > 0 ?
           currentCities?.map((eachCity:any)=>{
-            console.log(eachCity)
             const pageUrl = !path.includes("news") ? `${path}/${eachCity?.name.toLowerCase()}?si=${eachCity?.stateId}&ci=${eachCity?.id}` : `${path}/${eachCity?.name.toLowerCase()}`
             return(
                 <a key={eachCity.name} href={pageUrl} target='_blank'>
@@ -81,10 +80,6 @@ function MarketSections({text}: Props) {
           </div>
           }
         </div>
-      </>
-      :
-      <Loading />
-      }
     </div>
   )
 }

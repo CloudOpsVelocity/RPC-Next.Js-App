@@ -12,7 +12,7 @@ function BlogCard({data}: Props) {
   const path = usePathname();
   const title = data && data.heading ? data.heading : ""; 
   const pathName = title.toLowerCase();
-  console.log(path, pathName)
+  // console.log(path, pathName)
 
   return ( 
     <a href={`${path}/${pathName}`} target='_blank'>

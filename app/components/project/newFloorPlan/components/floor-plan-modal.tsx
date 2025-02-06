@@ -43,6 +43,8 @@ type Props = {
 };
 
 const DataItem = ({ title, value, icon }: Props) => {
+  if(value === "" || value === "0" || value === 0 ) return;
+  
   return (
     <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
       <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">{icon}</div>
@@ -211,7 +213,7 @@ export function FloorPlanModal({
           <div className="flex gap-2 mt-[10px] md:mt-0">
             <button
               onClick={() => handleReqcallBack(unit)}
-              className="px-[8px] py-[2px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
+              className="px-[8px] py-[2px] md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors text-nowrap"
             >
               Request Quotation
             </button>

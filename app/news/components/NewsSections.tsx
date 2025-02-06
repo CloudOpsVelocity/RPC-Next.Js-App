@@ -2,7 +2,6 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import React from 'react'
-import { usePathname } from 'next/navigation';
 import { emptyFilesIcon, strikeIconIcon } from '@/app/images/commonSvgs';
 import { newsData } from '@/app/news/store/newsState';
 import { trendsFilterData } from '@/app/market-trends/data.ts/marketBlogalData';
@@ -28,15 +27,13 @@ export const getClampedText = (text:string, maxLines:number ) => {
   }
 
 function Card({data, cityName}: CradProps) {
-  const pathname = usePathname();
-
   return (
     <a href={`/news/${data.name}`} target="_blank">
-        <div className="flex min-w-[240px] sm:w-[238px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-t-[4px] sm:rounded-t-[10px] xl:rounded-t-[4px] border-solid border-[#B9CFEB] hover:shadow-lg ">
+        <div className="flex max-w-[600px] min-w-[240px] sm:w-[238px] md:w-[300px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-[4px] xl:rounded-[10px]  border-solid border-[#B9CFEB] hover:shadow-lg ">
             <p className=' border-0 p-[4px] bg-[#6b9472] text-[12px] font-bold text-white mr-auto mb-[16px] absolute top-[10px] right-[10px] '>{data.section}</p>
 
-            <Image height={140} width={494} className="h-[118px] sm:h-[142px] xl:h-[160px] rounded-t-[4px] sm:rounded-t-[10px] xl:rounded-t-[4px]" src={data.url} alt="" />
-            <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white w-full ">
+            <Image height={140} width={494} className="h-[118px] sm:h-[142px] xl:h-[160px] rounded-t-[4px] xl:rounded-t-[10px] " src={data.url} alt="" />
+            <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white w-full rounded-[4px] xl:rounded-[10px]">
                 <div className='flex justify-between items-center w-full '>
                     <p className="text-gray-600 text-[12px] not-italic font-normal flex items-center gap-[4px] leading-[150%]">
                         {config.eye} {data.viewsCount}
@@ -109,7 +106,7 @@ function NewsSections({cityName}: Props) {
             <div className='w-[96%] md:w-[90%] xl:w-[80%] flex flex-col  '>
                 <h2 className='text-[16px] md:text-[20px] xl:text-[24px] mb-[16px] md:mb-[20px] font-bold first-letter:capitalize '>{cityName} Property News</h2>
                 
-                <div className=' flex gap-[16px] flex-wrap  '>
+                <div className=' flex flex-wrap gap-[20px] justify-evenly items-start '>
                     {currentCities && currentCities.length > 0 ?
                     currentCities?.map(eachCard=>{
                         return(
