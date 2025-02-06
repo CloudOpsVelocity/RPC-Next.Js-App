@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Graph,
   WebPage,
   Product,
   Offer,
@@ -9,9 +8,6 @@ import {
   Place,
   Review,
   FAQPage,
-  Question,
-  Answer,
-  ListItem,
   BreadcrumbList,
   Organization,
   LocalBusiness,
