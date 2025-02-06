@@ -213,7 +213,7 @@ export default function TopRightSection({
                     </div>
                   </div>
                 )}
-                {/* <div
+                <div
                   onClick={() => {
                     handleClick();
                     setSelected({
@@ -230,7 +230,7 @@ export default function TopRightSection({
                   className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
                 >
                   <NewMapIcon className="w-6 h-6" />
-                </div> */}
+                </div>
                 {/* 
                 <button
                   className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px] rounded text-[#242424] text-sm not-italic font-semibold sm:my-1 md:mb-1 xl:gradient"
@@ -331,9 +331,9 @@ export default function TopRightSection({
                       type === "proj" ? basePrice : sqftPrice
                     )}
                   </p>
-                  <p className="text-right text-[12px] text-nowrap">
+                 {/*  <p className="text-right text-[12px] text-nowrap">
                     {towerData ? towerData : "N/A"}
-                  </p>
+                  </p> */}
                 </div>
               ))}
 
