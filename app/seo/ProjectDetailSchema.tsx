@@ -25,10 +25,10 @@ import {
 } from "schema-dts";
 
 interface ProjectData {
-  phaseOverview: any[]; // You'll need to type these properly later
-  nearByLocations: any; // Same here - add specific types
-  basicData: any; // And here
-  // ... other properties
+  phaseOverview: any[];
+  nearByLocations: any;
+  basicData: any;
+  url: string;
 }
 
 interface MySchemaData {
@@ -61,89 +61,107 @@ interface ProjectSchemaProps {
 
 const ProjectSchema: React.FC<ProjectSchemaProps> = ({ projectData }) => {
   const generateSchemaData = (): MySchemaData => {
-    const { basicData, phaseOverview, nearByLocations } = projectData;
+    const { basicData, phaseOverview, nearByLocations, url } = projectData;
 
     const graph: any[] = [];
 
+    // Helper function to safely add data to the graph
+    const pushGraphItem = (item: any) => {
+      if (item) {
+        graph.push(item);
+      }
+    };
+
     // WebPage
-    graph.push({
+    pushGraphItem({
       "@type": "WebPage",
-      name: basicData.projectName,
-      url: window.location.href, // Or a more specific URL if available
-      description: basicData.about, // Use project description
+      name: basicData?.projectName,
+      url: url,
+      description: basicData?.about,
     });
 
     // Organization (Builder)
-    graph.push({
+    pushGraphItem({
       "@type": "Organization",
-      name: basicData.projPromoter,
-      url: basicData.projBroucherUrl ? basicData.projBroucherUrl : null, // Add website if available
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: basicData.address,
-        addressLocality: basicData.localityName,
-        addressRegion: basicData.state,
-        postalCode: basicData.pinCode,
-        addressCountry: "India", // Or get from data if available
-      },
-      telephone: basicData.projPromoterContact
-        ? basicData.projPromoterContact
-        : null, // Add phone if available
+      name: basicData?.projPromoter,
+      url: basicData?.projBroucherUrl,
+      address:
+        basicData?.address &&
+        basicData?.localityName &&
+        basicData?.state &&
+        basicData?.pinCode
+          ? {
+              "@type": "PostalAddress",
+              streetAddress: basicData.address,
+              addressLocality: basicData.localityName,
+              addressRegion: basicData.state,
+              postalCode: basicData.pinCode,
+              addressCountry: "India",
+            }
+          : undefined,
+      telephone: basicData?.projPromoterContact,
     });
 
     // LocalBusiness (Real Estate Project)
-    graph.push({
+    pushGraphItem({
       "@type": "LocalBusiness",
-      name: basicData.projectName,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: basicData.address,
-        addressLocality: basicData.localityName,
-        addressRegion: basicData.state,
-        postalCode: basicData.pinCode,
-        addressCountry: "India",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: basicData.lat,
-        longitude: basicData.lang,
-      },
-      telephone: basicData.projPromoterContact
-        ? basicData.projPromoterContact
-        : null,
-      url: window.location.href, // Or a more specific URL
-      // ... other properties as needed (e.g., openingHours, priceRange)
+      name: basicData?.projectName,
+      address:
+        basicData?.address &&
+        basicData?.localityName &&
+        basicData?.state &&
+        basicData?.pinCode
+          ? {
+              "@type": "PostalAddress",
+              streetAddress: basicData.address,
+              addressLocality: basicData.localityName,
+              addressRegion: basicData.state,
+              postalCode: basicData.pinCode,
+              addressCountry: "India",
+            }
+          : undefined,
+      geo:
+        basicData?.lat && basicData?.lang
+          ? {
+              "@type": "GeoCoordinates",
+              latitude: basicData.lat,
+              longitude: basicData.lang,
+            }
+          : undefined,
+      telephone: basicData?.projPromoterContact,
+      url: url,
     });
 
-    // Product (Plots) - Adapt as needed based on data
-    phaseOverview.forEach((phase) => {
-      if (phase.propTypeOverview && phase.propTypeOverview.plot) {
+    // Product (Plots)
+    phaseOverview?.forEach((phase) => {
+      if (phase?.propTypeOverview?.plot) {
         const plotData = phase.propTypeOverview.plot;
-        plotData.unitTypes.forEach((unitType: any) => {
-          const priceListEntry = plotData.priceList.find(
+        plotData?.unitTypes?.forEach((unitType: any) => {
+          const priceListEntry = plotData?.priceList?.find(
             (entry: any) => entry.bhkOrDimension === unitType
           );
-          graph.push({
+          pushGraphItem({
             "@type": "Product",
-            name: `Plot in ${basicData.projectName} (${unitType})`,
-            description: `Plot size ${unitType} in ${basicData.projectName}`, // More details if available
-            brand: basicData.projPromoter, // Or builder name
-            sku: unitType, // Use unitType as SKU or a unique identifier
-            offers: {
-              "@type": "Offer",
-              priceCurrency: "INR", // Indian Rupees
-              price: priceListEntry
-                ? priceListEntry.minPrice
-                : plotData.minPrice, // Use specific price if available, fallback to minPrice
-              availability: "http://schema.org/InStock", // Or "PreOrder" etc.
-            },
+            name: `Plot in ${basicData?.projectName} (${unitType})`,
+            description: `Plot size ${unitType} in ${basicData?.projectName}`,
+            brand: basicData?.projPromoter,
+            sku: unitType,
+            offers:
+              priceListEntry || plotData?.minPrice
+                ? {
+                    "@type": "Offer",
+                    priceCurrency: "INR",
+                    price: priceListEntry?.minPrice ?? plotData.minPrice, // Use nullish coalescing operator
+                    availability: "http://schema.org/InStock",
+                  }
+                : undefined,
           });
         });
       }
     });
 
     // FAQPage
-    if (basicData.faqs && basicData.faqs.length > 0) {
+    if (basicData?.faqs?.length > 0) {
       const faqItems = basicData.faqs.map((faq: any) => ({
         "@type": "Question",
         name: faq.faqQuestion,
@@ -153,29 +171,31 @@ const ProjectSchema: React.FC<ProjectSchemaProps> = ({ projectData }) => {
         },
       }));
 
-      graph.push({
+      pushGraphItem({
         "@type": "FAQPage",
         mainEntity: faqItems,
       });
     }
 
-    // Iterate through nearByLocations and add Place entities
-    for (const category in nearByLocations) {
-      nearByLocations[category].forEach((location: any) => {
-        graph.push({
-          "@type": "Place",
-          name: location.name,
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: location.lat,
-            longitude: location.lang,
-          },
-          // ... other properties like address, telephone, etc., if available
+    // NearBy Locations
+    if (nearByLocations) {
+      for (const category in nearByLocations) {
+        nearByLocations[category]?.forEach((location: any) => {
+          pushGraphItem({
+            "@type": "Place",
+            name: location.name,
+            geo:
+              location.lat && location.lang
+                ? {
+                    "@type": "GeoCoordinates",
+                    latitude: location.lat,
+                    longitude: location.lang,
+                  }
+                : undefined,
+          });
         });
-      });
+      }
     }
-
-    // ... Add more schema types as needed (e.g., Review, Offer, etc.)
 
     // BreadcrumbList
     const breadcrumbs = [
@@ -183,23 +203,23 @@ const ProjectSchema: React.FC<ProjectSchemaProps> = ({ projectData }) => {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://example.com", // Replace with your actual home page URL
+        item: "https://example.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: "/projects", // Replace with the appropriate URL
+        item: "/projects",
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: basicData.projectName,
-        item: window.location.href,
+        name: basicData?.projectName,
+        item: url,
       },
     ];
 
-    graph.push({
+    pushGraphItem({
       "@type": "BreadcrumbList",
       itemListElement: breadcrumbs,
     });

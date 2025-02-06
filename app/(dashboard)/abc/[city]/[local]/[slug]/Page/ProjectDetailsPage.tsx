@@ -96,7 +96,7 @@ export default async function ProjectsDetailsPage({
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={imageUrl || ""} />
       <FAQJsonLdScript data={data} />
-      <ProjectSchema projectData={projResponse} />
+      <ProjectSchema projectData={{ ...projResponse, url }} />
       {/* <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} /> */}
