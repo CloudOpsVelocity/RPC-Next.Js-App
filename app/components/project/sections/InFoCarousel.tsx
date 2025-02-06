@@ -41,7 +41,8 @@ export default function InFoCarousel({ partialUnitData }: Props) {
   const setData = useSetAtom(selectedPartialUnitAtom);
 
   const handleCardClick = (units: any, item: any) => {
-    console.log(units, item)
+    // console.log(units, item)
+    // const dataLength = sortUnits(Object.keys(data)).length;
     if (partialUnitData.type === "overview") {
       // console.log(partialUnitData.handlePricingFloorPlanClick)
       partialUnitData.handlePricingFloorPlanClick &&

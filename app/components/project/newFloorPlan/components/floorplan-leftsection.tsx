@@ -156,8 +156,8 @@ export default function FloorplanLeftsection({
                           <div className="flex items-center bg-gray-100 rounded-full px-1.5 xs:px-2 sm:px-3 py-0.5 xs:py-1">
                             <BiBuildingHouse className="text-[#0073C6] mr-1 xs:mr-1 sm:mr-2 text-xs xs:text-sm" />
                             <p className="font-semibold">
-                              Floor {unit.floor === 0 ? "G" : unit.floor}
-                            </p>
+                              {(unit.propType === projectprops.villa || unit.propType === projectprops.rowHouse) ? "Elevation" : "Floor"} {unit.floor === 0 ? "G" : unit.floor}
+                            </p> 
                           </div>
                         )}
                       {unit.unitNumber !== null && (

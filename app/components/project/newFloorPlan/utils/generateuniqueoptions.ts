@@ -18,6 +18,8 @@ export const UNIT_DATA_KEYS = [
   "parkingType",
   "terraceArea",
   "aptTypeName",
+  "gardenArea",
+  "parkingArea"
 ];
 
 export const getUniqueOptionsByKeys = (
