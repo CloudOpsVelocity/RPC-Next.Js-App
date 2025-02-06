@@ -5,9 +5,10 @@ import { blogDetails } from '@/app/hooks/blog';
 import Image from 'next/image';
 
 function BlogThirdBlock() {
-    const [{ selectedBlog, allBlogData }, setBlogData] = useAtom(blogDetails);
+    const [{ allBlogData }] = useAtom(blogDetails);
     const data = allBlogData[0];
-    
+    const pathName = data && data.heading.toLowerCase() ? data.heading : ""
+
     return (
         <div className='w-[94%] md:w-[90%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center border shadow-[0px_5px_4px_0px_rgba(221,221,221,0.25)] rounded-[5px] border-solid border-[#E2E2E2] bg-white mb-[3%]'>
             <div className='mx-[20px] w-full md:w-[50%] p-[10px] md:p-0 '>
@@ -17,6 +18,7 @@ function BlogThirdBlock() {
                     content={data && data.content ? data.content : ""}
                     date={data && data.date ? data.date : ""}
                     type='large'
+                    href={pathName}
                 />
             </div>
 

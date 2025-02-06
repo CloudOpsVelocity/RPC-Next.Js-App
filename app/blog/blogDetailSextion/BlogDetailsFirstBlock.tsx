@@ -29,7 +29,6 @@ function BlogDetailsFirstBlock() {
         </button>
       </a>
 
-
       <div className='rounded-[10px] relative w-full md:w-[50%] max-h-[463px] border-[0.5px] border-gray border-solid  bg-white '>
         <TringleIcons key="TringleIcon1" className="absolute bottom-[-180px] left-[-120px] z-0 xl:w-[408px] xl:h-[427px] w-[308px] h-[327px]" number={1} />
         <TringleIcons key="TringleIcon2" className="absolute bottom-[-60px] left-[20px] z-10 xl:w-[208px] xl:h-[217px] w-[108px] h-[117px]" number={2} />
@@ -40,10 +39,9 @@ function BlogDetailsFirstBlock() {
         <Image
             src={coverImage} 
             quality={80}
-            //priority={coverImage}
             height={630}
             width={1200}
-            alt="blog Image" /* width={100} height={269}  */
+            alt="blog Image"
             className='rounded-[10px] w-full h-full relative max-h-[260px] md:max-h-[463px] bg-white z-1' 
         />
       </div>
