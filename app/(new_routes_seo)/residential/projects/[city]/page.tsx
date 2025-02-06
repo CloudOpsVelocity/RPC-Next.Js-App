@@ -1,8 +1,5 @@
 import { getPagesSlugs } from "@/app/seo/api";
-import path from "path";
 import React from "react";
-import fs from "fs";
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 type Props = {
   params: { city: string; lt: string };
@@ -26,7 +23,7 @@ export async function generateStaticParams() {
   }
   return slugs;
 }
-const getSearchData = async (): Promise<any> => {
+const getSearchData = async () => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
 
