@@ -42,6 +42,7 @@ export default function Results() {
   };
 
   const handlePush = async (type: string, data: any, apiData: any) => {
+    console.log(apiData)
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],
@@ -69,9 +70,29 @@ export default function Results() {
       case "listing":
         {
           addToRecent({ ...apiData, ct: "listing" });
-          const data = extractApiValues(apiData.stringId);
+          const data = extractApiValues(apiData.stringId)
+          /* console.log(JSON.stringify(data, ));
           alert(JSON.stringify(data));
-          {
+          console.log(JSON.stringify(data, ...apiData)); */
+
+
+            let localityName = apiData.name.split("-")[1] ? apiData.name.split("-")[1] : apiData.name.split(" in ")[1];
+            const url = `/search/listing?sf=propType=${data.PT}${
+              data.BH ? `-bhk=${data.BH}` : ""
+            }-cg=${
+              data.CG
+            }-localities=${localityName}%2B${encodeURIComponent(
+              data.LT
+            )}${
+              data.PJ && data.PJ !== "null"
+                ? `-projIdEnc=${data.PJ}-projName=${apiData.name
+                    .split("in")[1]
+                    .split("-")[0]
+                    .trim()}`
+                : ""
+            }`;
+            window.open(url);
+        /*   {
             let url;
             let localityName = apiData.name.split("-")[1] ? apiData.name.split("-")[1] : apiData.name.split(" in ")[1];
             url =
@@ -85,7 +106,7 @@ export default function Results() {
                 ? `/search/listing?sf=${url}`
                 : "/search?sf=" + url
             );
-          }
+          } */
         }
         break;
       case "projectListing":
