@@ -1,5 +1,5 @@
-1. hentry
-2. WEBPAGE
+1. Hentry
+2. WEBPAGE 🚧
 3. VideoObject
 4. Article
 5. Product
