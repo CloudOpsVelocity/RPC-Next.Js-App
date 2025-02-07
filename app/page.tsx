@@ -7,7 +7,7 @@ import {
 } from "./(dashboard)/new/api";
 import HomeSearch from "./(dashboard)/new/components/home-search";
 import HomeFeatures from "./(dashboard)/new/components/features";
-// import MiddleSection from "./(dashboard)/new/components/MiddleSection";
+
 const MiddleSection = dynamic(
   () => import("./(dashboard)/new/components/MiddleSection"),
   {
@@ -17,8 +17,6 @@ const MiddleSection = dynamic(
 );
 
 import dynamic from "next/dynamic";
-// import { cookies, headers } from "next/headers";
-// import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
   const cityData = {
     data: {

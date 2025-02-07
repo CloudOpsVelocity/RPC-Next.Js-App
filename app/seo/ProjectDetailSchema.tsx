@@ -3,6 +3,7 @@ import { MERGERPROJECT } from "../validations/types/project";
 
 interface ProjectData extends MERGERPROJECT {
   url: string;
+  desc: string;
 }
 
 const COMPANY_NAME = "RP CLAN PVT LMT";
@@ -18,6 +19,7 @@ const generateSchema = (projectData: ProjectData) => {
     nearByLocations,
     phaseOverview,
     url: projectDetailsPageUrl,
+    desc,
   } = projectData;
 
   const schemaData: Graph = {
@@ -114,6 +116,34 @@ const generateSchema = (projectData: ProjectData) => {
           })),
         },
       },
+
+      ...phaseOverview?.map((phase: any) => ({
+        "@type": "Product",
+        name: `${basicData?.projectName} - ${phase.name}`,
+        description: phase.details || "Details about the project phase.",
+        brand: {
+          "@type": "Brand",
+          name: COMPANY_NAME,
+        },
+        category: "Real Estate - Phase",
+        image: basicData?.media.coverImageUrl || [`${DOMAIN}default-image.jpg`],
+        url: projectDetailsPageUrl,
+        offers: {
+          "@type": "AggregateOffer",
+          priceCurrency: "INR",
+          lowPrice: phase.minPrice || "0",
+          highPrice: phase.maxPrice || "0",
+          availability: "https://schema.org/InStock",
+          seller: {
+            "@type": "RealEstateAgent",
+            name: COMPANY_NAME,
+            url: COMPANY_URL,
+          },
+        },
+        isFamilyFriendly: "https://schema.org/True",
+        keywords: desc,
+        releaseDate: phase.releaseDate || basicData?.endDate || "",
+      })),
     ],
   };
 
@@ -121,21 +151,15 @@ const generateSchema = (projectData: ProjectData) => {
 };
 
 const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
-  />
+  // <script
+  //   type="application/ld+json"
+  //   dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
+  // />
+  <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
 );
 
 export default ProjectSchema;
 
-// {
-//   "@type": "VideoObject",
-//   name: "Luxury Apartment Tour",
-//   description: "A walkthrough of a luxury apartment",
-//   uploadDate: "2024-02-06",
-//   thumbnailUrl: "https://example.com/thumbnail.jpg",
-// },
 // {
 //   "@type": "Article",
 //   headline: "Best Properties to Buy in 2024",
@@ -144,14 +168,7 @@ export default ProjectSchema;
 //     name: "John Doe",
 //   },
 // },
-// {
-//   "@type": "Product",
-//   name: "Luxury Apartment",
-//   brand: {
-//     "@type": "Brand",
-//     name: "Premium Homes",
-//   },
-// },
+
 // {
 //   "@type": "Residence",
 //   name: "Skyline Towers",

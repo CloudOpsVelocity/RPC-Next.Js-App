@@ -1,8 +1,8 @@
 1. Hentry
-2. WEBPAGE 🚧
-3. VideoObject
+2. WEBPAGE ✅
+3. VideoObject 🚧
 4. Article
-5. Product
+5. Product ⚒
 6. Residence
 7. SaleEvent
 8. RealEstateAgent
