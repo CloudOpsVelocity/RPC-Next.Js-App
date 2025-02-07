@@ -8,11 +8,18 @@ interface ProjectData extends MERGERPROJECT {
 
 const COMPANY_NAME = "RP CLAN PVT LMT";
 const COMPANY_URL = "https://rpclan.com/";
+const PRICE_CURRENY = "INR";
 const LOGO_URL =
   "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png";
 const DOMAIN = "https://www.getrightproperty.com/";
-let PHONE_NUMBER = "+91 8884440963";
-
+const PHONE_NUMBER = "+91 8884440963";
+const propertyMap = new Map<string, { name: string }>([
+  ["apt", { name: "Apartment" }],
+  ["plot", { name: "Plot" }],
+  ["rowHouse", { name: "Rowhouse" }],
+  ["villa", { name: "Villa" }],
+  ["vlmt", { name: "Villament" }],
+]);
 const generateSchema = (projectData: ProjectData) => {
   const {
     basicData,
@@ -21,7 +28,45 @@ const generateSchema = (projectData: ProjectData) => {
     url: projectDetailsPageUrl,
     desc,
   } = projectData;
+  const generateProductSchema = () => {
+    const schemaData = phaseOverview?.map((phase: any) => {
+      const propTypes = Object.keys(phase.propTypeOverview);
+      const propTypeData = propTypes.map((propType: any) => {
+        const propTypeOverview = phase.propTypeOverview[propType];
+        const propTypeSchema = {
+          "@type": "Product",
+          name: `${basicData?.projectName} - ${phase.phaseName} - ${
+            propertyMap.get(propType)?.name
+          })}`,
+          description: desc || "Details about the project phase.",
+          image: basicData.media.coverImageUrl,
+          brand: {
+            "@type": "Brand",
+            name: basicData?.projectName.split(" ")[0],
+          },
+          offers: {
+            "@type": "Offer",
+            url: projectDetailsPageUrl,
+            price: basicData.minPrice,
+            priceCurrency: PRICE_CURRENY,
+            availability: "https://schema.org/InStock",
+            seller: {
+              "@type": "Organization",
+              name: COMPANY_NAME,
+            },
+            isFamilyFriendly: "https://schema.org/True",
+            priceValidUntil: basicData.endDate,
+            itemCondition: "http://schema.org/NewCondition",
+          },
+        };
+        return propTypeSchema;
+      });
 
+      return [...propTypeData];
+    });
+
+    return schemaData;
+  };
   const schemaData: Graph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -116,34 +161,36 @@ const generateSchema = (projectData: ProjectData) => {
           })),
         },
       },
-
-      ...phaseOverview?.map((phase: any) => ({
-        "@type": "Product",
-        name: `${basicData?.projectName} - ${phase.name}`,
-        description: phase.details || "Details about the project phase.",
-        brand: {
-          "@type": "Brand",
-          name: COMPANY_NAME,
-        },
-        category: "Real Estate - Phase",
-        image: basicData?.media.coverImageUrl || [`${DOMAIN}default-image.jpg`],
-        url: projectDetailsPageUrl,
-        offers: {
-          "@type": "AggregateOffer",
-          priceCurrency: "INR",
-          lowPrice: phase.minPrice || "0",
-          highPrice: phase.maxPrice || "0",
-          availability: "https://schema.org/InStock",
-          seller: {
-            "@type": "RealEstateAgent",
-            name: COMPANY_NAME,
-            url: COMPANY_URL,
-          },
-        },
-        isFamilyFriendly: "https://schema.org/True",
-        keywords: desc,
-        releaseDate: phase.releaseDate || basicData?.endDate || "",
-      })),
+      // {
+      //   "@type": "Article",
+      //   headline: "Best Properties to Buy in 2024",
+      //   author: {
+      //     "@type": "Person",
+      //     name: "John Doe",
+      //   },
+      //   datePublished: "2025-02-05",
+      //   dateModified: "2025-02-05",
+      //   description:
+      //     "A comprehensive guide to the best properties to invest in this year, including top cities and upcoming projects.",
+      //   image: "https://example.com/image.jpg",
+      //   publisher: {
+      //     "@type": "Organization",
+      //     name: "RealEstate Magazine",
+      //     logo: {
+      //       "@type": "ImageObject",
+      //       url: "https://example.com/logo.jpg",
+      //     },
+      //   },
+      //   mainEntityOfPage: {
+      //     "@type": "WebPage",
+      //     "@id": "https://example.com/best-properties-to-buy-2024",
+      //   },
+      //   articleBody:
+      //     "This article discusses the best properties to invest in 2024, focusing on key locations, price trends, and expert opinions. With a focus on residential and commercial properties, readers can find valuable insights into the most promising investments for the year.",
+      //   keywords:
+      //     "properties, real estate, 2024 investment, best properties, top cities, upcoming projects",
+      // },
+      ...generateProductSchema(),
     ],
   };
 

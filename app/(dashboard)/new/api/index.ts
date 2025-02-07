@@ -9,9 +9,7 @@ export const getData = async (city?: number | string, coordinates?: any) => {
     url = `${url}?city=${city}`;
   }
   const res = await fetch(url, {
-    next: {
-      revalidate: 90,
-    },
+    cache: "no-cache",
   });
   const data = await res.json();
   return data;
@@ -75,4 +73,3 @@ export const getShortIds = async () => {
     }
   }
 };
-

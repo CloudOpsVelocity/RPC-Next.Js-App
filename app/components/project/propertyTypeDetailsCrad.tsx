@@ -83,15 +83,20 @@ export default function PropertyTypeDetailsCrad({
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
     ...RTK_CONFIG,
   });
-  const handleOpen = (unit:any) => {
-    setModalState({ isOpen: true, unit: unit, type: "overview", isPartialUnit: false });
+  const handleOpen = (unit: any) => {
+    setModalState({
+      isOpen: true,
+      unit: unit,
+      type: "overview",
+      isPartialUnit: false,
+    });
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);
     setPrpCgId(newPropCgId);
     setFloorsArray(projectUnitsData);
     setSelectedFloor(null);
-    handleOpen(projectUnitsData[0] ? projectUnitsData[0] : null );
+    handleOpen(projectUnitsData[0] ? projectUnitsData[0] : null);
   };
 
   function scrollToTopic(id: string): void {
@@ -103,7 +108,6 @@ export default function PropertyTypeDetailsCrad({
         block: "start",
         inline: "center",
       });
-
       setSticky(true);
     }
     setC("floorPlans");
