@@ -1,4 +1,5 @@
 "use client"
+
 import React, {useRef, useState} from 'react';
 import { NextCarouselButton, PrevCarouselButton } from '@/app/images/commonSvgs';
 import { useMediaQuery } from '@mantine/hooks';
@@ -8,7 +9,7 @@ import "@mantine/carousel/styles.css";
 import BlogCard from '@/app/blog/blogDetailSextion/BlogCarousalCard';
 
 function BlogCarousal() {
-    const [{ allBlogData }] = useAtom(blogDetails);
+    const [{ allBlogData, selectedBlog }] = useAtom(blogDetails);
     const isMobile = useMediaQuery(`(max-width: 750px)`);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -52,10 +53,12 @@ function BlogCarousal() {
             }
         }
     };
+
+    const newList = allBlogData.filter(each=> each.id !== selectedBlog);
     
     return (
         <div className="flex justify-center items-center w-[94%] md:w-[90%] mb-[3%] relative " >
-            {allBlogData != undefined && allBlogData != null && allBlogData.length >= 2 &&
+            {newList != undefined && newList != null && newList?.length >= 2 &&
             <PrevCarouselButton
                 className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute left-[10px] md:left-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("L")}
@@ -73,13 +76,14 @@ function BlogCarousal() {
                 style={{ userSelect: "none" }}
             >
                 <div className='w-full flex justify-start items-start max-w-[1000px] gap-[20px] '> 
-                    {allBlogData?.map((card: any) => (
+
+                    {newList?.map((card: any) => (
                         <BlogCard key={`blogCard_${card.id}`} data={card} />
                     ))}
                 </div>
             </div>
 
-            {allBlogData != undefined && allBlogData != null && allBlogData.length >= 2 &&
+            {newList != undefined && newList != null && newList.length >= 2 &&
             <NextCarouselButton
                 className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute right-[10px] md:right-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("R")}

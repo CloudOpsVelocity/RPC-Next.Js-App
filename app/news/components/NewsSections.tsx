@@ -28,7 +28,7 @@ export const getClampedText = (text:string, maxLines:number ) => {
 
 function Card({data, cityName}: CradProps) {
   return (
-    <a href={`/news/${data.name}`} target="_blank">
+    <a href={`/news/${data.name.replaceAll(" ", "-")}`} target="_blank">
         <div className="flex max-w-[600px] min-w-[240px] sm:w-[260px] md:w-[300px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-[4px] xl:rounded-[10px]  border-solid border-[#B9CFEB] hover:shadow-lg ">
             <p className=' border-0 p-[4px] bg-[#6b9472] text-[12px] font-bold text-white mr-auto mb-[16px] absolute top-[10px] right-[10px] '>{data.section}</p>
 

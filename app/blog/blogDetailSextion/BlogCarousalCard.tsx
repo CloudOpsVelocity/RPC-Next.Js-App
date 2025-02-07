@@ -11,7 +11,7 @@ type Props = {
 function BlogCard({data}: Props) {
   const path = usePathname();
   const title = data && data.heading ? data.heading : ""; 
-  const pathName = title.toLowerCase();
+  const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return ( 
     <a href={`${path}/${pathName}`} target='_blank'>
@@ -19,9 +19,7 @@ function BlogCard({data}: Props) {
           <Image
               src={data?.coverImage} 
               alt="blog Image" 
-             /*  width={100} height={269}  */
               quality={80}
-              //priority={data?.coverImage}
               height={630}
               width={1200}
               className='rounded-[10px] w-full max-h-[179px] border-[0.5px] border-gray border-solid mb-[16px] h-[280px]' 
