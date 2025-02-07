@@ -2,21 +2,19 @@
 
 2. WEBPAGE ✅
 3. VideoObject 🚧
-4. Article
-5. Product ✅
-6. Residence
-7. RealEstateAgent
-8. Place
-9. PostalAddress
-10. GeoCoordinates
+4. Product ✅
+5. Place ✅
+6. GeoCoordinates ✅
+7. Organization ✅
+8. Residence
+9. RealEstateAgent
+10. PostalAddress
 11. LocationFeatureSpecification
-12. ApartmentComplex / Product
-13. FAQPage ✅
-14. Organization
-15. SiteNavigationElement
-16. Apartment
-17. ViewAction
-18. WebSite
-19. BreadcrumbList
-20. SaleEvent
-21. AggregateOffer
+12. SiteNavigationElement
+13. Apartment
+14. ViewAction
+15. WebSite
+16. BreadcrumbList
+17. SaleEvent
+18. AggregateOffer
+19. FAQPage ✅

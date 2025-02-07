@@ -17,7 +17,7 @@ function App() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const jobOpenings: JobOpening[] = [
-    {
+    /* {
       id: 1,
       title: 'Senior Sales Executive',
       department: 'Sales',
@@ -34,23 +34,23 @@ function App() {
       type: 'Full-time',
       description: 'Manage and grow existing client relationships while identifying new opportunities.',
       icon: <FaHandshake className="w-5 h-5" />
-    },
-    {
+    }, */
+    /* {
       id: 3,
       title: 'Senior Frontend Developer',
       department: 'Tech',
-      location: 'Remote',
+      location: 'Bengaluru India',
       type: 'Full-time',
       description: 'Build and maintain modern web applications using React and TypeScript.',
       icon: <FaLaptopCode className="w-5 h-5" />
-    },
+    }, */
     {
       id: 4,
-      title: 'Backend Engineer',
+      title: 'Backend Engineer (Java Developer)',
       department: 'Tech',
-      location: 'Austin, TX',
+      location: 'Bengaluru India',
       type: 'Full-time',
-      description: 'Develop scalable backend services and APIs using Node.js and PostgreSQL.',
+      description: 'We are hiring a Backend Developer with expertise in Java Spring Boot, MySQL, Solr DB, Redis, AWS, and S3 image uploads to build scalable, high-performance applications. Join us to develop and maintain robust backend services and cloud-based infrastructure.',
       icon: <FaCode className="w-5 h-5" />
     }
   ];
@@ -185,14 +185,14 @@ function App() {
     }
   };
   
-
+  const backgroundImageBanner = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/career/Banner.jpg`;
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div 
         className="relative bg-cover bg-center h-[300px] mt-20"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80")',
+          backgroundImage: `url(${backgroundImageBanner})`,        
         }}
       >
         <div className="absolute inset-0 bg-black/50">
@@ -213,9 +213,9 @@ function App() {
 
       {/* Job Listings */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-1 md:max-w-[60%]  gap-8 mx-auto">
           {/* Sales Openings */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          {false && <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex items-center gap-3 mb-6">
               <FaDollarSign className="w-8 h-8 text-blue-600" />
               <h2 className="text-2xl font-bold text-gray-800">Sales Openings</h2>
@@ -247,10 +247,10 @@ function App() {
                   </div>
                 ))}
             </div>
-          </div>
+          </div>}
 
           {/* Tech Openings */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white rounded-xl shadow-lg p-6 ">
             <div className="flex items-center gap-3 mb-6">
               <FaCode className="w-8 h-8 text-purple-600" />
               <h2 className="text-2xl font-bold text-gray-800">Tech Openings</h2>

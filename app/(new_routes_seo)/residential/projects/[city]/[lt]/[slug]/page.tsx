@@ -42,42 +42,14 @@ export default async function Page({ params }: Props) {
       },
     };
   }
-  const structuredData = {
-    "@context": "http://schema.org",
-    "@type": "RealEstateListing",
-    name: projResponse.basicData.projectName,
-    description: projResponse.basicData.about,
-    image: projResponse.basicData.media.coverImageUrl.split(",")[1] || "",
 
-    url: `${process.env.NEXTAUTH_URL}/${city}/${lt}/${slug}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: projResponse.basicData.localityName,
-      addressRegion: projResponse.basicData.cityName,
-      postalCode: projResponse.basicData.pinCode || "",
-      streetAddress: projResponse.basicData.address || "",
-    },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "INR",
-      price: projResponse.basicData.basePrice || "",
-      itemCondition: "http://schema.org/NewCondition",
-      availability: "http://schema.org/InStock",
-    },
-  };
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <ProjectsDetailsPage
-        projResponse={projResponse}
-        amenitiesFromDB={amenitiesFromDB}
-        slug={slug as string}
-        params={params}
-      />
-    </>
+    <ProjectsDetailsPage
+      projResponse={projResponse}
+      amenitiesFromDB={amenitiesFromDB}
+      slug={slug as string}
+      params={params}
+    />
   );
 }
 

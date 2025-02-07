@@ -10,9 +10,8 @@ function BlogDetailsFirstBlock() {
   const [{ allBlogData }, setBlogDetails] = useAtom(blogDetails);
   const path = usePathname();
   const currentBlog = path.split("/")[2].replaceAll("-", " ");
-  console.log(currentBlog);
 
-  const data:any = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog)[0];
+  const data:any = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog.toLowerCase())[0];
   const {date, text, heading, coverImage} = data;
 
   useEffect(()=>{
@@ -58,7 +57,7 @@ function BlogDetailsFirstBlock() {
                     className={"w-[24px] h-[24px]"} 
                     onClick={()=>navigator.share({
                       title: "Share Blog",
-                      url: "www.getrightproperty.com/blog",
+                      url: "",
                     })} 
                   />
                   <a href={facebookRedirectLink} target="_blank">

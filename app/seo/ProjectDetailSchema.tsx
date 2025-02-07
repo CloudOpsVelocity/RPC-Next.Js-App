@@ -1,13 +1,15 @@
-import { Graph } from "schema-dts";
+import { Graph, Place } from "schema-dts";
 import { MERGERPROJECT } from "../validations/types/project";
+import { OPENING_HOURS } from "./common/opening-hours";
+import { Organization_SCHEMA } from "./common/organisation-details";
 
 interface ProjectData extends MERGERPROJECT {
   url: string;
   desc: string;
 }
 
-const COMPANY_NAME = "RP CLAN PVT LMT";
-const COMPANY_URL = "https://rpclan.com/";
+const COMPANY_NAME = "GET RIGHT PROPERTY";
+const COMPANY_URL = "https://www.getrightproperty.com/";
 const PRICE_CURRENY = "INR";
 const LOGO_URL =
   "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png";
@@ -28,16 +30,34 @@ const generateSchema = (projectData: ProjectData) => {
     url: projectDetailsPageUrl,
     desc,
   } = projectData;
+  const nearByLocationsSchema: Place[] = [];
+  if (nearByLocations) {
+    for (const category in nearByLocations) {
+      nearByLocations[category]?.forEach((location: any) => {
+        nearByLocationsSchema.push({
+          "@type": "Place",
+          name: location.name,
+          geo:
+            location.lat && location.lang
+              ? {
+                  "@type": "GeoCoordinates",
+                  latitude: location.lat,
+                  longitude: location.lang,
+                }
+              : undefined,
+        });
+      });
+    }
+  }
   const generateProductSchema = () => {
     const schemaData = phaseOverview?.map((phase: any) => {
       const propTypes = Object.keys(phase.propTypeOverview);
       const propTypeData = propTypes.map((propType: any) => {
-        const propTypeOverview = phase.propTypeOverview[propType];
         const propTypeSchema = {
           "@type": "Product",
-          name: `${basicData?.projectName} - ${phase.phaseName} - ${
-            propertyMap.get(propType)?.name
-          })}`,
+          name: `${basicData?.projectName} - ${
+            phase.phaseName ? phase.phaseName + " -" : ""
+          }  ${propertyMap.get(propType)?.name}`,
           description: desc || "Details about the project phase.",
           image: basicData.media.coverImageUrl,
           brand: {
@@ -75,7 +95,7 @@ const generateSchema = (projectData: ProjectData) => {
         name: basicData?.projectName || "Real Estate Property Listings",
         url: projectDetailsPageUrl || `${DOMAIN}property-listings`,
         description:
-          basicData?.about ||
+          desc ||
           "Find top real estate listings, including apartments, villas, and commercial spaces.",
         breadcrumb: {
           "@type": "BreadcrumbList",
@@ -147,12 +167,7 @@ const generateSchema = (projectData: ProjectData) => {
             latitude: basicData?.lat || "0",
             longitude: basicData?.lang || "0",
           },
-          openingHoursSpecification: {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            opens: "09:00",
-            closes: "18:00",
-          },
+          openingHoursSpecification: OPENING_HOURS,
           telephone: PHONE_NUMBER,
           additionalProperty: phaseOverview?.map((phase: any) => ({
             "@type": "PropertyValue",
@@ -161,36 +176,67 @@ const generateSchema = (projectData: ProjectData) => {
           })),
         },
       },
-      // {
-      //   "@type": "Article",
-      //   headline: "Best Properties to Buy in 2024",
-      //   author: {
-      //     "@type": "Person",
-      //     name: "John Doe",
-      //   },
-      //   datePublished: "2025-02-05",
-      //   dateModified: "2025-02-05",
-      //   description:
-      //     "A comprehensive guide to the best properties to invest in this year, including top cities and upcoming projects.",
-      //   image: "https://example.com/image.jpg",
-      //   publisher: {
-      //     "@type": "Organization",
-      //     name: "RealEstate Magazine",
-      //     logo: {
-      //       "@type": "ImageObject",
-      //       url: "https://example.com/logo.jpg",
-      //     },
-      //   },
-      //   mainEntityOfPage: {
-      //     "@type": "WebPage",
-      //     "@id": "https://example.com/best-properties-to-buy-2024",
-      //   },
-      //   articleBody:
-      //     "This article discusses the best properties to invest in 2024, focusing on key locations, price trends, and expert opinions. With a focus on residential and commercial properties, readers can find valuable insights into the most promising investments for the year.",
-      //   keywords:
-      //     "properties, real estate, 2024 investment, best properties, top cities, upcoming projects",
-      // },
+      {
+        "@context": "https://schema.org",
+        "@type": "Place",
+        name: basicData?.projectName || "Unknown",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: basicData?.address || "Unknown",
+          addressLocality: basicData?.localityName || "Unknown",
+          addressRegion: basicData?.state || "Unknown",
+          postalCode: "560087",
+          addressCountry: "IN",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: basicData?.lat || "12.9716",
+          longitude: basicData?.lang || "77.5946",
+        },
+        image: basicData.media.projectPlanUrl,
+        url: projectDetailsPageUrl,
+        telephone: PHONE_NUMBER,
+        description: desc,
+        openingHoursSpecification: OPENING_HOURS,
+        amenityFeature: [
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Swimming Pool",
+            value: "true",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Gym",
+            value: "true",
+          },
+        ],
+      },
+      {
+        "@type": "GeoCoordinates",
+        latitude: basicData?.lat || "12.9716",
+        longitude: basicData?.lang || "77.5946",
+      },
       ...generateProductSchema(),
+      ...nearByLocationsSchema,
+      Organization_SCHEMA,
+      {
+        "@type": "AggregateOffer",
+        priceCurrency: "INR",
+        highPrice: basicData.maxPrice,
+        lowPrice: basicData.minPrice,
+        seller: {
+          "@type": "Organization",
+          name: basicData.projectName.split(" ")[0],
+          url: "https://www.builderalliance.in/",
+        },
+        offerCount: 1,
+        availability: "https://schema.org/InStock",
+        itemOffered: {
+          "@type": "Product",
+          name: basicData?.projectName,
+          image: basicData.media.projectPlanUrl,
+        },
+      },
     ],
   };
 
