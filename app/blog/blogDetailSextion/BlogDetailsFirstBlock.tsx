@@ -9,16 +9,16 @@ import { usePathname } from 'next/navigation';
 function BlogDetailsFirstBlock() {
   const [{ allBlogData }, setBlogDetails] = useAtom(blogDetails);
   const path = usePathname();
-  const currentBlog = path.split("/")[2].replaceAll("%20", " ");
+  const currentBlog = path.split("/")[2].replaceAll("-", " ");
   console.log(currentBlog);
 
   const data:any = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog.toLowerCase())[0];
+
   const {date, text, heading, coverImage} = data;
 
   useEffect(()=>{
-    setBlogDetails(prev => ({ ...prev, selectedBlog : data }));
+    setBlogDetails(prev => ({ ...prev, selectedBlog : data })); 
   }, [data]);
-
 
   return (
     <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>

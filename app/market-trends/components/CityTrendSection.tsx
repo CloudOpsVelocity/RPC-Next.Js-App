@@ -249,7 +249,7 @@ const TrendFilters = ({
   onFilterChange: any;
 }) => {
   return (
-    <div className="flex flex-col md:min-w-[240px] md:max-w-[260px] xl:min-w-[285px] xl:max-w-[300px] shadow-md rounded-[10px] !sticky !top-0 md:!top-[70px] border-t-[2px] border-solid p-[10px] order-1 md:order-2  ">
+    <div className="flex flex-col md:min-w-[240px] md:max-w-[260px] xl:min-w-[260px] xl:max-w-[260px] shadow-md rounded-[10px]  md:!top-[70px] border-t-[2px] border-solid p-[10px] order-1 md:order-2 max-h-[300px] sticky top-[100px]  ">
       <h3 className="mb-[10px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
         Show Price Trends for
       </h3>
@@ -469,41 +469,45 @@ function CityTrendSection({ cityName }: Props) {
   if(AllLocalities.isLoading) return <div className='h-[30vh] flex justify-center items-center '><Loading /></div>
 
   return (  
-    <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col md:flex-row items-start justify-between overflow-y-auto relative px-[6px] max-w-[1200px]'>
-      <div className="flex flex-col items-center order-2 md:order-1 ">
+    <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col items-start justify-between overflow-y-auto relative px-[6px] max-w-[1200px]'>
+     
+      <div className=' flex flex-col '>
         <h2 className="font-bold mb-[4px] mr-auto text-[18px] ">
           Property Rates in {cityName}
         </h2>
-        <p className="font-medium mr-auto text-[14px] mb-[20px] text-gray-500  ">
-          50 of 180 Localities in {cityName}
+        <p className="font-medium mr-auto text-[14px] text-gray-500  ">
+          {filteredLocalities && filteredLocalities?.length ? filteredLocalities?.length : 0 } Localities in {cityName}
         </p>
-
-        {filteredLocalities && filteredLocalities?.length > 0 ? (
-          <div className=" flex items-start justify-start flex-wrap gap-[20px] w-full ">
-            {filteredLocalities?.map((eachCity: any) => {
-              return (
-                <PriceCard
-                  key={eachCity?.propIdEnc}
-                  eachCity={eachCity}
-                  cityId={cityId}
-                  filters={filters}
-                />
-              )
-            })}
-          </div>
-        ) : (
-          <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">
-            <div className='flex justify-center items-center flex-col'>
-              <span className="max-h-[400px] max-w-[400px]">{emptyFilesIcon}</span>
-              No Matching Results Found!
-              <span className="relative left-[10%]">{strikeIconIcon}</span>
-            </div>
-          </div>)
-        }
-
       </div>
 
-      <TrendFilters filters={filters} onFilterChange={onFilterChange} />
+      <div className='flex justify-between w-full gap-[20px] flex-col md:flex-row relative '>
+        <div className="flex flex-col items-center order-2 md:order-1 ">
+          {filteredLocalities && filteredLocalities?.length > 0 ? (
+            <div className=" flex items-start justify-start flex-wrap gap-[20px] w-full relative">
+              {filteredLocalities?.map((eachCity: any) => {
+                return (
+                  <PriceCard
+                    key={eachCity?.propIdEnc}
+                    eachCity={eachCity}
+                    cityId={cityId}
+                    filters={filters}
+                  />
+                )
+              })}
+            </div>
+          ) : (
+            <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">
+              <div className='flex justify-center items-center flex-col'>
+                <span className="max-h-[400px] max-w-[400px]">{emptyFilesIcon}</span>
+                No Matching Results Found!
+                <span className="relative left-[10%]">{strikeIconIcon}</span>
+              </div>
+            </div>)
+          }
+        </div>
+        <TrendFilters filters={filters} onFilterChange={onFilterChange} />
+      </div>
+
     </div>
   )
 }
