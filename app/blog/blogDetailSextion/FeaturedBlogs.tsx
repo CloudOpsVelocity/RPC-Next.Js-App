@@ -45,7 +45,7 @@ function FeaturedBlogCard({ data }: { data: any }) {
 function FeaturedBlogs() {
   const [{ allBlogData, selectedBlog }] = useAtom(blogDetails);
   const newList = allBlogData.filter(
-    (each: any) => each?.heading !== selectedBlog?.heading
+    (each: any) => each?.id !== selectedBlog?.id
   );
 
   return (

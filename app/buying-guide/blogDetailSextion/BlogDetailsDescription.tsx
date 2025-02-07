@@ -6,10 +6,9 @@ import Image from 'next/image';
 import React from 'react';
 import style from '../../blog/Blog.module.css';
 
-
 function BlogMiniCard({data}:{data:any}) {
   return (
-    <a href={`/blog/${data.heading.replaceAll(" ", "-")}`} target='_blank'>
+    <a href={`/buying-guide/${data.heading.replaceAll(" ", "-")}`} target='_blank'>
       <div className='max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] self-end ml-auto shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#E8F3FF] '>
           <Image
               src={data.coverImage} 
@@ -33,7 +32,6 @@ function BlogMiniCard({data}:{data:any}) {
 
 function BlogDetailsDescription() {
   const [{ allBlogData, selectedBlog }] = useAtom<any>(blogDetails);
-  console.log(selectedBlog);
 
   const nextBlogId = selectedBlog.id+1 < allBlogData.length ? selectedBlog.id+1 : 0
   const nextBlogdata:any = allBlogData.filter((each:any)=> each.id === nextBlogId)[0];

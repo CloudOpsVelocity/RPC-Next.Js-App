@@ -34,9 +34,8 @@ function FeaturedBlogCard({data}:{data:any}) {
 } 
 
 function FeaturedBlogs() { 
-    const dummyData = [1,2,3,4]; 
     const [{ allBlogData, selectedBlog }] = useAtom(blogDetails);
-    const newList = allBlogData.filter((each:any)=>each?.heading !== selectedBlog?.heading);
+    const newList = allBlogData.filter((each:any)=>each?.id !== selectedBlog?.id);
     
     return (
         <div className=' mb-[3%] w-[94%] md:w-[90%] xl:w-[80%] '>
