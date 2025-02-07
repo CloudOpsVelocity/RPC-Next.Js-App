@@ -319,7 +319,7 @@ const initialAllBlogsData = [
 ];
 
 const initailBlogData = {
-    selectedBlog: 0,
+    selectedBlog: initialAllBlogsData[0],
     allBlogData: initialAllBlogsData,
     blogPageData: null,
     isBlogPageOpen: false,

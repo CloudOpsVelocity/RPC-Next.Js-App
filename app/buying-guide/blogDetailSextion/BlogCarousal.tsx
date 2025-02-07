@@ -54,7 +54,7 @@ function BlogCarousal() {
         }
     };
 
-    const newList = allBlogData.filter(each=> each.id !== selectedBlog);
+    const newList = allBlogData.filter(each=> each.id !== selectedBlog.id);
     
     return (
         <div className="flex justify-center items-center w-[94%] md:w-[90%] mb-[3%] relative " >

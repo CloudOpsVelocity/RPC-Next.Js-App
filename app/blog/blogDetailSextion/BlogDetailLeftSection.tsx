@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 function BlogDetailLeftSection() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
-  const data = allBlogData.filter(each=> each.id === selectedBlog)[0];
+  const data = allBlogData.filter(each=> each.heading === selectedBlog.heading)[0];
   const pathName = data && data.heading ? data.heading.toLowerCase() : "";
   console.log(pathName)
   return (
