@@ -15,8 +15,7 @@ function BlogDetailRightSection() {
       {allBlogData.map((eachBlog) => {
         return (
           <div
-            className={`flex cursor-pointer w-full flex-col items-start gap-1 xl:px-8 xl:py-6 md:px-[24px] md:py-[16px] px-[16px] py-[10px] border-b-[#66666666] border-b border-solid select-none duration-500 
-              ${
+            className={`flex cursor-pointer w-full flex-col items-start gap-1 xl:px-8 xl:py-6 md:px-[24px] md:py-[16px] px-[16px] py-[10px] border-b-[#66666666] border-b border-solid select-none duration-500 ${
                 selectedBlog === eachBlog.id
                   ? "bg-[#2aa3270f] duration-500"
                   : ""

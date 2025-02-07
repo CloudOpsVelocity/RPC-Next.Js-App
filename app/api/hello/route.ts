@@ -15,7 +15,7 @@ export async function GET(req: Request) {
   console.log(type);
   // Define a mapping of types to corresponding keyword values
   const typeMappings: Record<string, string> = {
-    commute: "public transport",
+    Commute: "public transport",
     train: "train",
     bus: "bus station",
     hospital: "hospital",

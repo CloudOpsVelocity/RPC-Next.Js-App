@@ -527,6 +527,17 @@ export function FloorPlanModal({
                       }
                     />
                   )}
+
+                  
+                  {propCgId === projectprops.apartment && currentUnit.block && (
+                    <DataItem
+                      title="Block"
+                      value={currentUnit.block}
+                      icon={
+                        <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
+                      }
+                    />
+                  )}
                 </div>
               </div>
             </div>

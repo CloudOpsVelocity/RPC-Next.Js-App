@@ -25,7 +25,7 @@ export interface Area {
 }
 export const areas: Area[] = [
   {
-    name: "commute",
+    name: "Commute",
     Icon: CommuteIcon,
     key: "transit_station",
   },

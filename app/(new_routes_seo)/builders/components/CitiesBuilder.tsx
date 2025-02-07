@@ -18,6 +18,7 @@ import { Pagination, Select } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import BuilderDetailsCard from "./BuilderDetailsCard";
 import { useMediaQuery } from "@mantine/hooks";
+import { ImCross } from "react-icons/im";
 
 export default function BuildersDirectory({
   city,
@@ -91,9 +92,15 @@ export default function BuildersDirectory({
     setSearchInput(e.target.value); // Update only the input field
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchInput === "") return;
+    if (searchInput === "") {
+      if (searchTerm != "") {
+        handleResetFilters();
+      } else {
+        return;
+      }
+    }
     const validBuilderName = searchInput
       .trim()
       .replace(/[^\w\s&]/g, "")
@@ -109,14 +116,14 @@ export default function BuildersDirectory({
     setPage(0); // Reset page to 0 when sorting changes
     isMobile && setShowFilter(false);
   };
-   const handleResetFilters = () => {
+  const handleResetFilters = () => {
     setSearchInput("");
     setSearchTerm("");
     setPage(0);
     // setFilterCity(id ?? "");
-    setSortOrder(0)
+    setSortOrder(0);
     isMobile && setShowFilter(false);
-   }
+  };
   const resultArray = [];
   for (let key in cities) {
     if (Object.prototype.hasOwnProperty.call(cities, key)) {
@@ -149,21 +156,38 @@ export default function BuildersDirectory({
               } flex-col md:flex-row w-full md:w-auto space-y-1 sm:space-y-4 md:space-y-0 md:space-x-4 mt-4 md:mt-0`}
             >
               <div className="flex items-center space-x-4">
-                <form className="flex items-center justify-end space-x-1">
+                <form
+                  className="flex items-center justify-end space-x-1"
+                  onSubmit={handleSubmit}
+                >
+                  {/* <div className="flex justify-between gap-1 items-center w-full md:w-auto bg-white border border-gray-300 text-gray-700 sm:py-2 px-2 pr-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                   <input
                     type="text"
                     placeholder="Search Builder..."
-                    className="w-full md:w-auto bg-white border border-gray-300 text-gray-700 sm:py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="border-none focus:none focus:outline-none"
                     onChange={handleSearchInputChange} // Change only input
                     value={searchInput}
                     maxLength={80}
                     pattern="[a-zA-Z0-9\s]*" // Restricts special characters
                     title="Special characters are not allowed"
                   />
+                  {searchInput != "" &&<ImCross onClick={()=>setSearchInput("")} className="cursor-pointer"/>}
+                  </div> */}
+                  <input
+                    type="text"
+                    placeholder="Search Builder..."
+                    className="w-full md:w-auto bg-white border border-gray-300 text-gray-700 sm:py-2 px-2 pr-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={handleSearchInputChange} // Change only input
+                    value={searchInput}
+                    maxLength={80}
+                    pattern="[a-zA-Z0-9\s]*" // Restricts special characters
+                    title="Special characters are not allowed"
+                  />
+
                   <button
                     type="submit"
                     className="bg-[#0073C6] inline-flex justify-center items-center text-white font-semibold py-1 sm:py-2 px-4 rounded-lg  transition duration-300"
-                    onClick={handleSubmit} // Trigger search on click
+                    //onClick={handleSubmit} // Trigger search on click
                   >
                     <FaSearch className="sm:mr-2" />
                     <span className="hidden sm:flex">Search</span>
@@ -216,8 +240,8 @@ export default function BuildersDirectory({
               </div>
             </div>
           ) : (!shouldFetch
-          ? initialData.builderData?.length
-          : data?.builderData?.length) > 0 ? (
+              ? initialData.builderData?.length
+              : data?.builderData?.length) > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-6 md:gap-8">
               {(!shouldFetch
                 ? initialData.builderData

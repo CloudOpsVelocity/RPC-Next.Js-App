@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 function BlogDetailsFirstBlock() {
   const [{ allBlogData }, setBlogDetails] = useAtom(blogDetails);
   const path = usePathname();
-  const currentBlog = path.split("/")[2].replaceAll("%20", " ");
+  const currentBlog = path.split("/")[2].replaceAll("-", " ");
   console.log(currentBlog);
 
   const data:any = allBlogData.filter(each=> each.heading.toLowerCase() === currentBlog)[0];

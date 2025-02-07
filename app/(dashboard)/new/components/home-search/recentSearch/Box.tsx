@@ -36,8 +36,10 @@ export default function Box({ item }: Props) {
 
         break;
       case "listing":
+        
         {
           const data = extractApiValues(apiData.stringId);
+          alert(JSON.stringify(data))
           {
             let url;
             let localityName = apiData.name.split("in")[1].toLowerCase().trim();
@@ -50,7 +52,7 @@ export default function Box({ item }: Props) {
             window.open(
               data.PJ && data.PJ !== "null"
                 ? `/search/listing?sf=${url}`
-                : "/search?sf=" + url
+                : "/search/?sf=" + `${url}-listedBy=All`
             );
           }
         }

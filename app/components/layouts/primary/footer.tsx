@@ -159,7 +159,7 @@ function Footer() {
         // "Accessibility",
       ],
       hrefs: [
-        "/privacy",
+        "/privacy-policy",
         "/terms-and-conditions",
         "/sitemap.xml",
         // "/cookies",

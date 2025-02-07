@@ -69,9 +69,10 @@ export default function BuilderDetailsCard({
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden relative hover:shadow border border-blue-200 hover:border-blue-500">
+      <BuilderLink routeParams={{ city: cityName, slug: userName }}>
       <div className="px-2 pb-4 sm:pb-4 sm:px-5 pt-0 sm:pt-4">
         {/* Logo and Name, wrapped in BuilderLink */}
-        <BuilderLink routeParams={{ city: cityName, slug: userName }}>
+        
           <div className="flex flex-row md:flex-row items-center mb-0 cursor-pointer">
             <div className="w-20 h-20 md:w-24 md:h-24 mb-0 md:mb-0 md:mr-4 flex items-center justify-center">
               <Image
@@ -87,7 +88,7 @@ export default function BuilderDetailsCard({
               {userName}
             </h2>
           </div>
-        </BuilderLink>
+       
 
         {/* Information Section */}
         <div className="space-y-1 md:space-y-3">
@@ -138,6 +139,7 @@ export default function BuilderDetailsCard({
         </div>
 
         {/* "Projects by Builder" Section */}
+        {completedProject > 0 || newProject > 0 || onGoingProject > 0 && 
         <div className="flex py-2 px-2 sm:px-4 bg-blue-50 rounded-lg shadow-sm border border-gray-200 mt-2 flex-wrap">
           {/* Projects Summary Title */}
           <div className="mt-0 text-sm sm:text-base font-semibold text-blue-900 text-nowrap mr-2">
@@ -215,7 +217,8 @@ export default function BuilderDetailsCard({
               </span>
             )}
           </div>
-        </div>
+        </div>}
+        
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2 sm:mt-4">
@@ -240,6 +243,7 @@ export default function BuilderDetailsCard({
           </BuilderLink>
         </div>
       </div>
+      </BuilderLink>
 
       {/* Modal/Overlay Component */}
       {isModalOpen.action && (

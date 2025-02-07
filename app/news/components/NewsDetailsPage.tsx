@@ -54,7 +54,7 @@ export const commonLinks = {
 function NewsDetailsPage({}: Props) {
     const [{allData}] = useAtom(newsData);
     const path = usePathname();
-    const currentBlog = path.split("/")[2].replaceAll("%20", " ");
+    const currentBlog = path.split("/")[2].replaceAll("-", " ");
 
     const data:any = allData.filter((each:any) => each?.name === currentBlog)[0];
     if(!data) return;

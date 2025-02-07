@@ -11,6 +11,7 @@ const generateArticleJsonLd = (data: any) => {
       name: "",
       url: "",
     },
+
     // image: data.image,
     // datePublished: data.datePublished,
     // dateModified: data.dateModified,
