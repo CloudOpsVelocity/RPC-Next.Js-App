@@ -152,6 +152,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     );
   });
 
+
   const LoadingBlock = () => (
     <div className="flex items-center justify-center h-full w-full ">
       <div className="text-center flex items-center justify-center flex-col ">

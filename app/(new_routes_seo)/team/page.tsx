@@ -122,7 +122,7 @@ export default function TeamPage() {
                 We're always looking for talented individuals to join our Bangalore real estate family.
               </p>
               <a
-                href="/Senior Sales Executive"
+                href="/careers"
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
               >
                 View Open Positions
