@@ -5,18 +5,18 @@
 4. Article
 5. Product ✅
 6. Residence
-7. SaleEvent
-8. RealEstateAgent
-9. Place
-10. FAQPage
-11. BreadcrumbList
+7. RealEstateAgent
+8. Place
+9. PostalAddress
+10. GeoCoordinates
+11. LocationFeatureSpecification
 12. ApartmentComplex / Product
-13. Organization
-14. SiteNavigationElement
-15. Apartment
-16. PostalAddress
-17. GeoCoordinates
-18. LocationFeatureSpecification
-19. ViewAction
-20. WebSite
+13. FAQPage ✅
+14. Organization
+15. SiteNavigationElement
+16. Apartment
+17. ViewAction
+18. WebSite
+19. BreadcrumbList
+20. SaleEvent
 21. AggregateOffer
