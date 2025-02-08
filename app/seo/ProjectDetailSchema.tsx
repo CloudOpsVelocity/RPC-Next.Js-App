@@ -218,7 +218,7 @@ const generateSchema = (projectData: ProjectData) => {
       },
       ...generateProductSchema(),
       ...nearByLocationsSchema,
-      Organization_SCHEMA,
+
       {
         "@type": "AggregateOffer",
         priceCurrency: "INR",
