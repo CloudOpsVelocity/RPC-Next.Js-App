@@ -100,6 +100,9 @@ export function ProjectCard({
     city: cardData.builderCity,
     slug: cardData.builderName,
   });
+
+  console.log("shortlist res: ", cardData.shortListed)
+
   return (
     /*  <ProjectLink
         routeParams={{
@@ -322,7 +325,7 @@ const ProjectCarousel = ({
         </div>
         <NewCarousel
           data={data}
-          renderItem={(project: any, index) => (
+          renderItem={(project: any) => (
             <ProjectCard
               key={`proj_${project?.projIdEnc}`}
               type={type}
@@ -363,6 +366,7 @@ const ProjectCarousel = ({
 };
 
 export default ProjectCarousel;
+
 function formatDate(inputDate: string | undefined): string {
   if (inputDate == null) {
     return "";

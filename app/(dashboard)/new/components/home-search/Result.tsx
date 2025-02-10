@@ -131,7 +131,7 @@ export default function Results() {
             const url =
               encodeURIComponent(data.name) +
               "%2B" +
-              encodeURIComponent(apiData.stringId.split("_")[1]);
+              encodeURIComponent(apiData.stringId.split("_")[1] ? apiData.stringId.split("_")[1] : apiData.stringId );
             window.open(
               `/search?sf=builderIds=${url}-city=${encodeURIComponent(
                 filters?.city ?? ""

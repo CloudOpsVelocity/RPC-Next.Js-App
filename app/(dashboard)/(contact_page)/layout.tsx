@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main>
-      <Header />
+      {/* <Header /> */}
       <div className="pt-[70px]">
         <Link
           href={"/"}
@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Link>
         {children}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

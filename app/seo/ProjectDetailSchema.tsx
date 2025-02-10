@@ -1,7 +1,7 @@
 import { Graph, Place } from "schema-dts";
 import { MERGERPROJECT } from "../validations/types/project";
 import { OPENING_HOURS } from "./common/opening-hours";
-import { Organization_SCHEMA } from "./common/organisation-details";
+import { REALESTATEAGENT_SCHEMA } from "./common/real-estateagent";
 
 interface ProjectData extends MERGERPROJECT {
   url: string;
@@ -224,7 +224,6 @@ const generateSchema = (projectData: ProjectData) => {
       },
       ...generateProductSchema(),
       ...nearByLocationsSchema,
-
       {
         "@type": "AggregateOffer",
         priceCurrency: "INR",
@@ -243,6 +242,141 @@ const generateSchema = (projectData: ProjectData) => {
           image: basicData.media.projectPlanUrl,
         },
       },
+      {
+        "@type": "Residence",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: basicData?.localityName,
+          addressRegion: basicData?.stateName,
+          addressCountry: "India",
+          postalCode: basicData?.pinCode,
+          streetAddress: basicData?.address,
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: basicData?.lat,
+          longitude: basicData?.lang,
+        },
+      },
+      {
+        "@type": "PostalAddress",
+        addressLocality: basicData?.localityName,
+        addressRegion: basicData?.stateName,
+        addressCountry: "India",
+        postalCode: basicData?.pinCode,
+        streetAddress: basicData?.address,
+        areaServed: basicData?.localityName,
+      },
+      {
+        "@type": "ApartmentComplex",
+        name: basicData?.projectName,
+        description: basicData?.about,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: basicData?.localityName,
+          addressRegion: basicData?.stateName,
+          addressCountry: "India",
+          postalCode: basicData?.pinCode,
+          streetAddress: basicData?.address,
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: basicData?.lat,
+          longitude: basicData?.lang,
+        },
+        image: basicData?.media.coverImageUrl,
+        telephone: PHONE_NUMBER,
+        amenityFeature: [],
+      },
+      {
+        "@type": "SaleEvent",
+        name: "Buy " + basicData?.projectName,
+        startDate: projectData?.basicData.startDate,
+        endDate: projectData?.basicData.endDate,
+        url: projectDetailsPageUrl,
+        description: desc,
+        image: basicData?.media.coverImageUrl,
+        eventStatus: "http://schema.org/EventScheduled",
+        eventAttendanceMode: "http://schema.org/MixedEventAttendanceMode",
+        location: [
+          {
+            "@type": "VirtualLocation",
+            url: projectDetailsPageUrl,
+          },
+          {
+            "@type": "Place",
+            name: basicData?.projectName,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: basicData?.localityName,
+              addressRegion: basicData?.stateName,
+              addressCountry: "India",
+              postalCode: basicData?.pinCode,
+            },
+          },
+        ],
+        offers: {
+          "@type": "Offer",
+          url: projectDetailsPageUrl,
+          priceCurrency: "INR",
+          priceValidUntil: projectData?.basicData.endDate,
+          availability: "http://schema.org/InStock",
+          category: "Primary",
+        },
+        performer: {
+          "@type": "PerformingGroup",
+          name: basicData?.projectName,
+        },
+        organizer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          logo: LOGO_URL,
+        },
+      },
+      {
+        "@type": "ViewAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: projectDetailsPageUrl,
+          actionPlatform: [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+          ],
+        },
+        name: `View ${basicData?.projectName} Details`,
+        description:
+          desc || `View complete details about ${basicData?.projectName}`,
+        image: basicData?.media.coverImageUrl,
+        url: projectDetailsPageUrl,
+      },
+      {
+        "@type": "Article",
+        headline: `${basicData?.projectName} - Property Details and Pricing`,
+        description:
+          desc ||
+          `Complete details about ${basicData?.projectName} including pricing, amenities, and location information`,
+        image: basicData?.media.coverImageUrl,
+        datePublished: projectData?.basicData.startDate,
+        dateModified: projectData?.basicData.endDate,
+        author: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          logo: LOGO_URL,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          logo: LOGO_URL,
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": projectDetailsPageUrl,
+        },
+        url: projectDetailsPageUrl,
+        articleBody:
+          desc ||
+          `${basicData?.projectName} is a residential project located in ${basicData?.localityName}, ${basicData?.stateName}.`,
+      },
     ],
   };
 
@@ -254,8 +388,10 @@ const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
     type="application/ld+json"
     dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
   />
-  // <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
 );
+// ) : (
+// <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
+// );
 
 export default ProjectSchema;
 
@@ -266,117 +402,4 @@ export default ProjectSchema;
 //     "@type": "Person",
 //     name: "John Doe",
 //   },
-// },
-
-// {
-//   "@type": "Residence",
-//   name: "Skyline Towers",
-//   address: {
-//     "@type": "PostalAddress",
-//     streetAddress: "123 Main St",
-//     addressLocality: "New York",
-//     addressRegion: "NY",
-//     postalCode: "10001",
-//     addressCountry: "US",
-//   },
-// },
-// {
-//   "@type": "SaleEvent",
-//   name: "Exclusive Property Sale",
-//   startDate: "2024-03-01",
-// },
-// {
-//   "@type": "RealEstateAgent",
-//   name: "Top Realtors Inc.",
-//   telephone: "+1-555-555-5555",
-// },
-// {
-//   "@type": "Place",
-//   name: "Downtown Luxury Apartments",
-//   geo: {
-//     "@type": "GeoCoordinates",
-//     latitude: 40.7128,
-//     longitude: -74.006,
-//   },
-// },
-// {
-//   "@type": "FAQPage",
-//   mainEntity: [
-//     {
-//       "@type": "Question",
-//       name: "What are the payment options?",
-//       acceptedAnswer: {
-//         "@type": "Answer",
-//         text: "We accept credit cards, bank transfers, and cryptocurrency.",
-//       },
-//     },
-//   ],
-// },
-// {
-//   "@type": "BreadcrumbList",
-//   itemListElement: [
-//     {
-//       "@type": "ListItem",
-//       position: 1,
-//       name: "Home",
-//       item: "https://example.com",
-//     },
-//     {
-//       "@type": "ListItem",
-//       position: 2,
-//       name: "Properties",
-//       item: "https://example.com/properties",
-//     },
-//   ],
-// },
-// {
-//   "@type": "ApartmentComplex",
-//   name: "Skyline Residences",
-// },
-// {
-//   "@type": "Organization",
-//   name: "Real Estate Hub",
-//   url: "https://realestatehub.com",
-// },
-// {
-//   "@type": "SiteNavigationElement",
-//   name: "Main Navigation",
-//   url: "https://example.com",
-// },
-// {
-//   "@type": "Apartment",
-//   name: "Luxury Apartment",
-//   numberOfRooms: 3,
-// },
-// {
-//   "@type": "PostalAddress",
-//   streetAddress: "456 Elm St",
-//   addressLocality: "Los Angeles",
-//   addressRegion: "CA",
-//   postalCode: "90001",
-//   addressCountry: "US",
-// },
-// {
-//   "@type": "GeoCoordinates",
-//   latitude: 40.7128,
-//   longitude: -74.006,
-// },
-// {
-//   "@type": "LocationFeatureSpecification",
-//   name: "Gym and Pool",
-// },
-// {
-//   "@type": "ViewAction",
-//   target: "https://example.com/listing/123",
-// },
-// {
-//   "@type": "WebSite",
-//   name: "Best Property Listings",
-//   url: "https://example.com",
-// },
-// {
-//   "@type": "AggregateOffer",
-//   priceCurrency: "USD",
-//   lowPrice: "500000",
-//   highPrice: "1500000",
 // },

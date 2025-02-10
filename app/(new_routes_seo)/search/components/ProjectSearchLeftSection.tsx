@@ -44,6 +44,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const { entry } = useIntersection({
     root: containerRef.current,
   });
+
+
   let isTrue = pathname.includes("search")
     ? true
     : serverData !== null && apiFilterQueryParams !== null;
@@ -72,6 +74,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     });
 
   const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
+  console.log(hasNextPage , shouldFetchMore ,isLoading , data )
 
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
@@ -151,6 +154,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       </div>
     );
   });
+  
+ 
 
 
   const LoadingBlock = () => (
@@ -165,11 +170,12 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   );
 
   return (
+       <div className="flex  flex-col  w-full sm:max-w-[50%] ">
+    <ProjectSearchTabs />
     <div
-      className="p-[0%] max-h-[60vh] sm:max-h-[calc(100vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] sm:max-w-[50%]"
+      className="p-[0%] max-h-[60vh] sm:max-h-[calc(100vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] "
       ref={containerRef}
     >
-      <ProjectSearchTabs />
       {isLoading ? (
         <LoadingBlock />
       ) : allItems.length > 0 ? (
@@ -185,7 +191,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       ) : (
         <EmptyState />
       )}
-      {hasNextPage && shouldFetchMore && !isLoading && data && (
+      {hasNextPage && shouldFetchMore  && (
         <div className="w-full py-8 flex justify-center items-center text-gray-600">
           <LoadingSpinner />
         </div>
@@ -193,6 +199,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       <LoginPopup />
       <RequestCallBackModal />
     </div>
+    </div>  
   );
 }
 export default memo(LeftSection);

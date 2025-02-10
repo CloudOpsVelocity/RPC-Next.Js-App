@@ -1,10 +1,6 @@
 import React from "react";
 
-import {
-  getData,
-  getHomeListingData,
-  getShortIds,
-} from "./(dashboard)/new/api";
+import { getData, getHomeListingData } from "./(dashboard)/new/api";
 import HomeSearch from "./(dashboard)/new/components/home-search";
 import HomeFeatures from "./(dashboard)/new/components/features";
 
