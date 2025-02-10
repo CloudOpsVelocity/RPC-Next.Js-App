@@ -9,7 +9,9 @@ export const getData = async (city?: number | string, coordinates?: any) => {
     url = `${url}?city=${city}`;
   }
   const res = await fetch(url, {
-    cache: "no-cache",
+    next: {
+      revalidate: 3600,
+    },
   });
   const data = await res.json();
   return data;
@@ -27,7 +29,7 @@ export const getHomeListingData = async (
   }
   const res = await fetch(url, {
     next: {
-      revalidate: 90,
+      revalidate: 3600,
     },
   });
   const data = await res.json();
