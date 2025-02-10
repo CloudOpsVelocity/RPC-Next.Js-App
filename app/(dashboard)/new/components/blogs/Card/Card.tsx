@@ -2,30 +2,31 @@ import Image from "next/image";
 import React from "react";
 
 type Props = {
-  data:any
+  data: any;
 };
 
-export default function Card({data}: Props) {
-  const title = data && data.heading ? data.heading : ""; 
-  const pathName = title.toLowerCase();
+export default function Card({ data }: Props) {
+  const title = data && data.heading ? data.heading : "";
+  const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return (
-    <a href={`blog/${pathName}`} target='_blank' className="hover:shadow-lg">
+    <a href={`blog/${pathName}`} target="_blank" className="hover:shadow-lg">
       <div className="flex min-h-[230px] min-w-[300px] sm:w-[338px] xl:w-[427px]  flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] rounded-t-[4px]  xl:rounded-t-[4px] border-solid border-[#B9CFEB] ">
-        <Image 
-          height={196} width={494} 
-          className="h-[118px] sm:h-[142px] xl:h-[196px] rounded-t-[4px] xl:rounded-t-[4px]" 
-          src={data?.coverImage} alt="" 
+        <Image
+          height={196}
+          width={494}
+          className="h-[118px] sm:h-[142px] xl:h-[196px] rounded-t-[4px] xl:rounded-t-[4px]"
+          src={data?.coverImage}
+          alt={title}
         />
         <div className="flex flex-col h-auto gap-[6px] w-full justify-between items-start p-[12px]">
-          
           <h2 className="text-[color:var(--Black,#000)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic leading-[150%] font-bold ">
             {title}
           </h2>
           <p className="text-[color:var(--Black,#000)] text-[12px] sm:text-[16px] xl:text-[18px] not-italic font-normal leading-[150%] mb-auto ">
             {data && data.text ? data.text : ""}
           </p>
-         
+
           <button className="inline-flex mt-auto gap-1 justify-center items-center text-[color:var(--Secondary-Blue-1,#006EBE)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic font-bold leading-[150%]">
             Read {config.readMoreIcon}
           </button>

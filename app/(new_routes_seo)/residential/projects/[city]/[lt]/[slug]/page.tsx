@@ -171,9 +171,7 @@ export async function generateMetadata(
     nearbyLandmarks,
     "RERA Approved",
   ].join(", ");
-
-  const canonical = `${process.env.NEXTAUTH_URL}/${params.city}/${params.lt}/${params.slug}`;
-
+  const canonical = `${process.env.NEXTAUTH_URL}/residential/projects/${params.city}/${params.lt}/${params.slug}`;
   return {
     title,
     description,

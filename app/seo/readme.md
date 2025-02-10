@@ -6,8 +6,8 @@
 5. Place ✅
 6. GeoCoordinates ✅
 7. Organization ✅
-8. Residence
-9. RealEstateAgent
+8. RealEstateAgent
+9. Residence
 10. PostalAddress
 11. LocationFeatureSpecification
 12. SiteNavigationElement
@@ -16,5 +16,5 @@
 15. WebSite
 16. BreadcrumbList
 17. SaleEvent
-18. AggregateOffer
+18. AggregateOffer ✅
 19. FAQPage ✅

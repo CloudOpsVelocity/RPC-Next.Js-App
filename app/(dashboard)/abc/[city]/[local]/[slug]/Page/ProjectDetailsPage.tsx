@@ -83,7 +83,7 @@ export default async function ProjectsDetailsPage({
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />
-      <link rel="canonical" href={url} />
+      {/* <link rel="canonical" href={url} /> */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={desc} />
       <meta property="og:image" content={imageUrl || ""} />

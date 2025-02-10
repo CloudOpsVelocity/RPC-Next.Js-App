@@ -17,7 +17,7 @@ const MiddleSection = dynamic(
 );
 
 import dynamic from "next/dynamic";
-import { Organization_SCHEMA } from "./seo/common/organisation-details";
+
 export default async function Page() {
   const cityData = {
     data: {
@@ -34,12 +34,6 @@ export default async function Page() {
   ]);
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(Organization_SCHEMA),
-        }}
-      />
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
       <HomeSearch
         // count={shortIds?.total}

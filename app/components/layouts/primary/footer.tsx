@@ -23,7 +23,7 @@ function Footer() {
       link: "https://www.facebook.com/profile.php?id=100066833915037",
     },
     {
-      name: "instagram", 
+      name: "instagram",
       icon: <FaInstagram size={24} />,
       link: "https://www.instagram.com/_getrightproperty_/?utm_source=qr#",
     },
@@ -89,7 +89,6 @@ function Footer() {
         "Real Estate News",
         // "Mortgage Calculator",
         // "Home Valuation",
-
       ],
       hrefs: [
         "/market-trends/locality-insights",
@@ -98,7 +97,6 @@ function Footer() {
         "/market-trends/news",
         // "/mortgage-calculator",
         // "/home-valuation",
-
       ],
       target: "_blank",
     },
@@ -108,7 +106,11 @@ function Footer() {
         "Home",
         "Projects",
         "Properties",
-        session !== undefined && session !== null && session.user?.userType === "B" ? "Post Project" : "",
+        session !== undefined &&
+        session !== null &&
+        session.user?.userType === "B"
+          ? "Post Project"
+          : "",
         "Post Property",
         "Builders",
         session === null ? "Login/Signup" : "",
@@ -257,20 +259,22 @@ function Footer() {
                     </ul> */}
 
                     <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link, index) => {
-                      if(link !== ""){
-                      return(
-                      <li key={link}>
-                        <a
-                          href={hrefs[index]}
-                          target={target}
-                          className="text-xs sm:text-base text-gray-300 hover:text-white"
-                        >
-                          {link}
-                        </a>
-                      </li>
-                    )}})}
-                  </ul>
+                      {links.map((link, index) => {
+                        if (link !== "") {
+                          return (
+                            <li key={link}>
+                              <a
+                                href={hrefs[index]}
+                                target={target}
+                                className="text-xs sm:text-base text-gray-300 hover:text-white"
+                              >
+                                {link}
+                              </a>
+                            </li>
+                          );
+                        }
+                      })}
+                    </ul>
                   </div>
                 );
               })}

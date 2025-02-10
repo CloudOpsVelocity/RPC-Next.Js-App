@@ -1,24 +1,9 @@
 "use client";
 import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
 import { Tabs, ScrollArea } from "@mantine/core";
-import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
 import { useMediaQuery } from "@mantine/hooks";
-import {
-  AtmIcon,
-  BankIcon,
-  BusIcon,
-  ClinikIcon,
-  CommuteIcon,
-  HospitalIcon,
-  MallIcon,
-  MarketIcon,
-  PostOfficeIcon,
-  RestaurentIcon,
-  SchoolIcon,
-  TrainIcon,
-  nearbyLocationIcon,
-} from "@/app/images/commonSvgs";
+import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
@@ -90,7 +75,7 @@ const LeafMap: React.FC<{
           <PropertyHeading
             title={
               <Fragment>
-                Location Map Of {" "}
+                Location Map Of{" "}
                 <span className="text-[#148B16]">{projName}</span>
               </Fragment>
             }
@@ -186,12 +171,12 @@ const LeafMap: React.FC<{
 
       {mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 w-[90%] mx-auto hidden sm:block">
-          <h1
+          <h2
             className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words scroll-mt-[180px] "
             id="near-by-projects"
           >
             Nearby <span className="text-[#148B16] ml-1">{projName} </span>
-          </h1>
+          </h2>
           <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
             {downData.map((item: any, index: number) => (
               <MapCard

@@ -82,13 +82,13 @@ export default function HeaderActions({
   return (
     <div>
       {" "}
-      <h1
+      <h2
         className="text-h2 sm:text-[22px] lg:text-[32px] mt-[3%] xl:mt-[100px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
         {type == "overview" ? "Price " : "Floor Plans "} For{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
-      </h1>
+      </h2>
       <SubHeading text="See floor plans as per your selected property type" />
       <div
         className={`flex justify-start items-start md:items-center  mb-[8px] flex-col md:flex-row  ${
