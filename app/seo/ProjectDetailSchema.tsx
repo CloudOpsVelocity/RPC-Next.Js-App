@@ -45,6 +45,12 @@ const generateSchema = (projectData: ProjectData) => {
                   longitude: location.lang,
                 }
               : undefined,
+          additionalType: "http://schema.org/PropertyValue",
+          additionalProperty: {
+            "@type": "PropertyValue",
+            name: category,
+            value: location.distance,
+          },
         });
       });
     }
@@ -244,11 +250,11 @@ const generateSchema = (projectData: ProjectData) => {
 };
 
 const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
-  />
-  // <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
+  // <script
+  //   type="application/ld+json"
+  //   dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
+  // />
+  <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
 );
 
 export default ProjectSchema;
