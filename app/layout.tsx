@@ -12,7 +12,7 @@ import { Provider } from "jotai";
 import montserrat from "@/font";
 import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
-
+import { Organization_SCHEMA } from "./seo/common/organisation-details";
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
 //   weight: ['400'], // Required weight for Playball font
@@ -100,6 +100,12 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(Organization_SCHEMA),
+          }}
+        />
       </head>
       {process.env.NODE_ENV !== "development" && (
         <GoogleTagManager gtmId="GTM-T7W6VL9F" />

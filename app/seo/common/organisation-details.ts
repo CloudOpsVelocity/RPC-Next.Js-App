@@ -1,4 +1,5 @@
 export const Organization_SCHEMA = {
+  "@context": "https://schema.org",
   "@type": "Organization",
   name: "GET RIGHT PROPERTY",
   url: "https://www.getrightproperty.com",
