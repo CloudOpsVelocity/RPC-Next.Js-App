@@ -7,7 +7,7 @@ type Props = {
 
 export default function Card({ data }: Props) {
   const title = data && data.heading ? data.heading : "";
-  const pathName = title.toLowerCase();
+  const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return (
     <a href={`blog/${pathName}`} target="_blank" className="hover:shadow-lg">

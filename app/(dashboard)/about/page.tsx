@@ -70,6 +70,7 @@ export default function page({}: Props) {
               className="text-[#FFF] mt-[14px] px-[10px] py-[6px] text-[13px] sm:mt-[20px] xl:mt-[34px]  sm:text-[17px]  xl:text-[20px] not-italic font-bold leading-[normal] sm:px-[20.514px] sm:py-[13.676px] justify-center items-center gap-[7.598px] rounded-[4px] bg-[#0073C6]"
               href={url}
               target="_blank"
+              rel="noopener noreferrer"
             >
               Explore Now
             </a>
@@ -230,6 +231,7 @@ export default function page({}: Props) {
               <a
                 href="https://www.getrightproperty.com/search?sf=projStatus=108"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
               >
                 Explore Now
@@ -250,6 +252,7 @@ export default function page({}: Props) {
               <a
                 href="https://www.getrightproperty.com/search?sf=projStatus=107"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
               >
                 Explore Now
@@ -270,6 +273,7 @@ export default function page({}: Props) {
               <a
                 href="https://www.getrightproperty.com/search?sf=projStatus=106"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="ursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
               >
                 Explore Now

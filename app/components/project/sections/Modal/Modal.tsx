@@ -146,12 +146,11 @@ export default function PartialUnitModal({ data }: any) {
                 </button>
                 <button
                   onClick={() => {
-                    const floorPlanUrl =
-                      selectedOne?.floorPlan?.split(",")[3] || "";
+                    const floorPlanUrl = selectedOne?.floorPlan?.split(",")[3] || "";
                     if (floorPlanUrl) {
                       navigator.share({
                         title: "Share Floor Plan",
-                        url: floorPlanUrl,
+                        url: `/image?path=${floorPlanUrl.replace("https://media.getrightproperty.com", "")}&type=F`,
                       });
                     }
                   }}
