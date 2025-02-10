@@ -383,15 +383,15 @@ const generateSchema = (projectData: ProjectData) => {
   return JSON.stringify(schemaData);
 };
 
-const ProjectSchema = ({ projectData }: { projectData: ProjectData }) =>
-  process.env.ENVIRONMENT !== "dev" ? (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
-    />
-  ) : (
-    <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
-  );
+const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
+  />
+);
+// ) : (
+// <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
+// );
 
 export default ProjectSchema;
 
