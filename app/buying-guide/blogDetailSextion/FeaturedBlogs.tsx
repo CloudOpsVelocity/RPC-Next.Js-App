@@ -6,7 +6,6 @@ import Image from 'next/image';
 import React from 'react';
 
 function FeaturedBlogCard({data}:{data:any}) {
-    console.log(data)
     return (
         <div className=' min-w-[297px] min-h-[340px] md:min-h-[380px] border-t-1 border-solid shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] '>
             <Image

@@ -44,7 +44,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     name,
   } = useProjSearchMatcher(); 
 
-  console.log(state)
+  // console.log(state)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

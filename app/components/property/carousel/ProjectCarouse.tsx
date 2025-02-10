@@ -31,6 +31,8 @@ export default function NearByCarouselProjProperty({
     type: "proj",
   });
 
+  console.log(data?.nearbyProj);
+
   return (
     <div
       className="flex flex-col justify-start items-start w-full  scroll-mt-[150px]"
@@ -64,7 +66,7 @@ export default function NearByCarouselProjProperty({
         title={
           <Fragment>
             Nearby Projects{" "}
-            <span className="text-[#148B16]">
+            <span className="text-[#148B16]"> 
               {builderData?.data?.userName}
             </span>
           </Fragment>

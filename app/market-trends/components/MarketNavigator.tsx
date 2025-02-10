@@ -6,7 +6,7 @@ export const staticData = [
     {
         name: "Locality Insights",
         value: "",
-        icon: <svg width="22px" height="22px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" fill="#F2F2F2" d="M75 87.425L50 100 25 87.425 0 100V12.576L25 0l25 12.576L75 0l25 12.576V100L75 87.425z"/><path clip-rule="evenodd" stroke="#6BC9F2" stroke-width="4" stroke-miterlimit="10" d="M15 60V32l9.988-5.006L50 41l25-12 12 4" fill="none"/><path clip-rule="evenodd" stroke="#E64C3C" stroke-width="4" stroke-miterlimit="10" d="M15 61v-8l10-5 25 13 25-11 12-5V32" fill="none"/><path clip-rule="evenodd" stroke="#F29C1F" stroke-width="4" stroke-miterlimit="10" d="M15 61l35 18 17-8V43l20-10" fill="none"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#ffffff" d="M87 36.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/><path fill="#2980BA" d="M87 31c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2m0-3a5 5 0 1 0 .001 10.001A5 5 0 0 0 87 28z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#ffffff" d="M15 64.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/><path fill="#2980BA" d="M15 59c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2m0-3a5 5 0 1 0 .001 10.001A5 5 0 0 0 15 56z"/><path opacity=".15" fill-rule="evenodd" clip-rule="evenodd" fill="#2C3E50" d="M0 100l25-12.576V0L0 12.576V100zm50-87.424V100l25-12.576V0L50 12.576z"/></svg>,
+        icon: <svg width="22px" height="22px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" fill="#F2F2F2" d="M75 87.425L50 100 25 87.425 0 100V12.576L25 0l25 12.576L75 0l25 12.576V100L75 87.425z"/><path clipRule="evenodd" stroke="#6BC9F2" strokeWidth="4" strokeMiterlimit="10" d="M15 60V32l9.988-5.006L50 41l25-12 12 4" fill="none"/><path clipRule="evenodd" stroke="#E64C3C" strokeWidth="4" strokeMiterlimit="10" d="M15 61v-8l10-5 25 13 25-11 12-5V32" fill="none"/><path clipRule="evenodd" stroke="#F29C1F" strokeWidth="4" strokeMiterlimit="10" d="M15 61l35 18 17-8V43l20-10" fill="none"/><path fillRule="evenodd" clipRule="evenodd" fill="#ffffff" d="M87 36.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/><path fill="#2980BA" d="M87 31c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2m0-3a5 5 0 1 0 .001 10.001A5 5 0 0 0 87 28z"/><path fillRule="evenodd" clipRule="evenodd" fill="#ffffff" d="M15 64.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/><path fill="#2980BA" d="M15 59c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2m0-3a5 5 0 1 0 .001 10.001A5 5 0 0 0 15 56z"/><path opacity=".15" fillRule="evenodd" clipRule="evenodd" fill="#2C3E50" d="M0 100l25-12.576V0L0 12.576V100zm50-87.424V100l25-12.576V0L50 12.576z"/></svg>,
         href:"/market-trends/locality-insights"  
     },{
         name: "News",
@@ -39,11 +39,11 @@ export const staticData = [
     //     icon: <svg width="22px" height="22px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
     //     <title>trend</title>
     //     <desc>Created with Sketch.</desc>
-    //         <g id="trend" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    //         <g id="trend" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
     //             <g id="编组">
-    //                 <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" x="0" y="0" width="48" height="48"/>
-    //                 <rect id="Rectangle" stroke="#000000" stroke-width="4" fill="#2F88FF" fill-rule="nonzero" stroke-linejoin="round" x="6" y="6" width="36" height="36" rx="3"/>
-    //                 <g id="Group" transform="translate(13.000000, 13.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+    //                 <rect id="矩形" fillOpacity="0.01" fill="#FFFFFF" x="0" y="0" width="48" height="48"/>
+    //                 <rect id="Rectangle" stroke="#000000" strokeWidth="4" fill="#2F88FF" fillRule="nonzero" stroke-linejoin="round" x="6" y="6" width="36" height="36" rx="3"/>
+    //                 <g id="Group" transform="translate(13.000000, 13.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" strokeWidth="4">
     //                     <polyline id="Line-2" transform="translate(10.729923, 10.927306) rotate(-135.000000) translate(-10.729923, -10.927306) " points="13.8290808 -0.525973264 13.8290808 7.47402674 7.63076535 7.48132266 7.6591204 22.3805856"/>
     //                     <polyline id="Path-6" points="13 5 21 5 21 13"/>
     //                 </g>
@@ -56,11 +56,11 @@ export const staticData = [
     //     value: "",
     //     icon: <svg width="22px" height="22px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     //                 <g id="chat" transform="translate(-248 -124)">
-    //                 <path id="Path_66" data-name="Path 66" d="M275,146h4V125H253v4" fill="none" stroke="#f1d17c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    //                 <path id="Path_67" data-name="Path 67" d="M270,150h5V129H249v21h14" fill="none" stroke="#498efc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    //                 <path id="Path_68" data-name="Path 68" d="M270,150v5l-7-5" fill="none" stroke="#498efc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    //                 <line id="Line_36" data-name="Line 36" x2="8" transform="translate(258 137)" fill="none" stroke="#f1d17c" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"/>
-    //                 <line id="Line_37" data-name="Line 37" x2="8" transform="translate(258 142)" fill="none" stroke="#f1d17c" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"/>
+    //                 <path id="Path_66" data-name="Path 66" d="M275,146h4V125H253v4" fill="none" stroke="#f1d17c" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2"/>
+    //                 <path id="Path_67" data-name="Path 67" d="M270,150h5V129H249v21h14" fill="none" stroke="#498efc" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2"/>
+    //                 <path id="Path_68" data-name="Path 68" d="M270,150v5l-7-5" fill="none" stroke="#498efc" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2"/>
+    //                 <line id="Line_36" data-name="Line 36" x2="8" transform="translate(258 137)" fill="none" stroke="#f1d17c" stroke-linecap="square" strokeMiterlimit="10" strokeWidth="2"/>
+    //                 <line id="Line_37" data-name="Line 37" x2="8" transform="translate(258 142)" fill="none" stroke="#f1d17c" stroke-linecap="square" strokeMiterlimit="10" strokeWidth="2"/>
     //                 </g>
     //             </svg>,
     //     href:"/market-trends/ratings-and-reviews"  
@@ -93,7 +93,7 @@ export const staticData = [
     // },{
     //     name: "Articles",
     //     value: "",
-    //     icon: <svg width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter">
+    //     icon: <svg width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#FFFFFF" strokeWidth="1" stroke-linecap="round" stroke-linejoin="miter">
     //         <rect x="2" y="2" width="20" height="20" rx="0"/>
     //         <rect x="2" y="2" width="20" height="20" rx="0" fill="#FFFFFF" opacity="0.1"/>
     //         <line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/>
@@ -105,11 +105,11 @@ export const staticData = [
     //     name: "Budget Calculator",
     //     value: "",
     //     icon: <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //     <path d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V11H2V6Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M18.5 16.5L15.5 16.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-    //     <path d="M12 11H22V18C22 20.2091 20.2091 22 18 22H12V11Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M12 11H2V18C2 20.2091 3.79086 22 6 22H12V11Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M5.5 18L7 16.5M7 16.5L8.49999 15M7 16.5L8.5 18M7 16.5L5.50001 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    //     <path d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V11H2V6Z" stroke="#ffffff" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M18.5 16.5L15.5 16.5" stroke="#ffffff" strokeWidth="2" stroke-linecap="round"/>
+    //     <path d="M12 11H22V18C22 20.2091 20.2091 22 18 22H12V11Z" stroke="#ffffff" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M12 11H2V18C2 20.2091 3.79086 22 6 22H12V11Z" stroke="#ffffff" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M5.5 18L7 16.5M7 16.5L8.49999 15M7 16.5L8.5 18M7 16.5L5.50001 15" stroke="#ffffff" strokeWidth="2" stroke-linecap="round"/>
     //     </svg>,
     // },{
     //     name: "EMI Calculator",
@@ -117,7 +117,7 @@ export const staticData = [
     //     icon: <svg width="22px" height="22px" viewBox="0 -0.5 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg">
     //     <title>890</title>
     //     <defs/>
-    //     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    //     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
     //         <path d="M13.58,0 L4.322,0 C3.592,0 3,0.598 3,1.334 L3,14.667 C3,15.404 3.592,16 4.322,16 L13.58,16 C14.309,16 15,15.404 15,14.667 L15,1.334 C15,0.598 14.31,0 13.58,0 L13.58,0 Z M7.021,14 L4.987,14 L4.987,13 L7.021,13 L7.021,14 L7.021,14 Z M7.021,8.021 L4.987,8.021 L4.987,7 L7.021,7 L7.021,8.021 L7.021,8.021 Z M10,14 L7.986,14 L7.986,13 L10,13 L10,14 L10,14 Z M7.021,11 L4.987,11 L4.987,10 L7.021,10 L7.021,11 L7.021,11 Z M10,11 L7.986,11 L7.986,10 L10,10 L10,11 L10,11 Z M10,8 L7.986,8 L7.986,7 L10,7 L10,8 L10,8 Z M13,14 L11,14 L11,9.979 L13,9.979 L13,14 L13,14 Z M13,8.02 L10.986,8.02 L10.986,7 L13,7 L13,8.02 L13,8.02 Z M14.014,6 L4,6 L4,2 L14.014,2 L14.014,6 L14.014,6 Z" fill="#000000" stroke='#ffffff' />
     //     </g>
     // </svg>,
@@ -125,12 +125,12 @@ export const staticData = [
     //     name: "Home Loan Eligibility Calculator",
     //     value: "",
     //     icon: <svg width="22px" height="22px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //     <path d="M10 17V44H38V17" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M5 22L10 17L24 4L38 17L43 22" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M19 19L24 25L29 19" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M18 31H30" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M18 25H30" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M24 25V37" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M10 17V44H38V17" stroke="#ffffff" strokeWidth="4" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M5 22L10 17L24 4L38 17L43 22" stroke="#ffffff" strokeWidth="4" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M19 19L24 25L29 19" stroke="#ffffff" strokeWidth="4" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M18 31H30" stroke="#ffffff" strokeWidth="4" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M18 25H30" stroke="#ffffff" strokeWidth="4" stroke-linecap="round" stroke-linejoin="round"/>
+    //     <path d="M24 25V37" stroke="#ffffff" strokeWidth="4" stroke-linecap="round" stroke-linejoin="round"/>
     //     </svg>,
     // },{
     //     name: "Area Convertor Tool",
