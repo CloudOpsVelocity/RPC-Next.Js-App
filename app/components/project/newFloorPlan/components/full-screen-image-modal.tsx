@@ -122,13 +122,14 @@ export function FullScreenImageModal({
   };
 
   const handleShare = () => {
-    navigator.share({ title: "", url: unit.floorPlanUrl?.split(",")[0] });
+    navigator.share({ title: "", url: `/image?path=${unit.floorPlanUrl?.split(",")[0].replace("https://media.getrightproperty.com", "")}&type=F`});
   };
 
   const handleShearMasterplan = async () => {
     if (session) {
       handleShare();
     } else {
+      console.log(unit.floorPlanUrl?.split(",")[0])
       LoginOpen(handleShare, {
         type: "floor-plan",
         link: unit.floorPlanUrl?.split(",")[0],
@@ -136,7 +137,7 @@ export function FullScreenImageModal({
     }
   };
 
-  // `/image?path=${unit.floorPlanUrl?.split(",")[0]}&type=F`
+  // `/image?path=${unit.floorPlanUrl?.split(",")[0]}` 
 
   if (!isOpen) return null;
 

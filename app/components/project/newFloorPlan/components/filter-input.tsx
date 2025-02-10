@@ -41,9 +41,6 @@ const FilterInput: React.FC<FilterInputProps> = ({
     String(option).toLowerCase().includes(value !== undefined && value !== "" && typeof(value) !== "number" ? value.toLowerCase() : value)
   );
 
-  console.log(options)
-
-  console.log(filteredOptions)
 
   return (
     <div className="relative" ref={dropdownRef}>
