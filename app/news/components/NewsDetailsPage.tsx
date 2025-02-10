@@ -40,7 +40,7 @@ export const commonLinks = {
       {
         name: "youtube",
         icon: <SocialIcons  type="youtube" className={styles.soclalIconStyle} />,
-        link: "https://www.youtube.com/@getrightproperty",
+        link: "https://youtube.com/@getrightproperty-1?si=GEoeTK1G9g0LkNau",
       },
       {
         name: "linkedin",

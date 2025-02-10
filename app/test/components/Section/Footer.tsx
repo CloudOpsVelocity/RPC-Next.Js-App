@@ -35,7 +35,7 @@ export default function EnhancedFooter() {
     {
       name: "youtube",
       icon: <FaYoutube size={24} />,
-      link: "https://www.youtube.com/@getrightproperty",
+      link: "https://youtube.com/@getrightproperty-1?si=GEoeTK1G9g0LkNau",
     },
     {
       name: "linkedin",

@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaHome, FaChevronRight } from "react-icons/fa";
 import { BASE_PATH_PROJECT_DETAILS } from "../../utils/new-seo-routes/project.route";
@@ -18,9 +18,15 @@ interface BreadcrumbProps {
 const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   items = [],
 }) => {
-  const pathname = usePathname();
   const getParams = useSearchParams();
   let listedBy = getParams.get("sf");
+  // console.log(listedBy)
+
+  // const cityName = listedBy?.split("-")?.map(each=>each.split("="))?.filter(a=>a[0] === "city")[0][1]?.split("+")[0] ;
+  // const finalCityName = cityName ? cityName : "bengaluru"
+  // console.log(cityName)
+  
+
   let initailAlParams:any = [
     {
       href: "/",
@@ -33,6 +39,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
       label: "Bengaluru",
     }
   ];
+
 
   const [state] = useAtom(projSearchStore);
   

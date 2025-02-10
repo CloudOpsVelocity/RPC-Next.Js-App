@@ -189,7 +189,7 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
                         <path
                           d="M13.5 4L7.85 9.65C7.75654 9.74161 7.63088 9.79293 7.5 9.79293C7.36912 9.79293 7.24346 9.74161 7.15 9.65L4.85 7.35C4.75654 7.25839 4.63088 7.20707 4.5 7.20707C4.36912 7.20707 4.24346 7.25839 4.15 7.35L0.5 11"
                           stroke="#4B77C1"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke-linecap="round"
                           stroke-linejoin="round"
                         />

@@ -76,9 +76,8 @@ function BlogCarousal() {
                 style={{ userSelect: "none" }}
             >
                 <div className='w-full flex justify-start items-start max-w-[1000px] gap-[20px] '> 
-
                     {newList?.map((card: any) => (
-                        <BlogCard key={`blogCard_${card.id}`} data={card} />
+                        <BlogCard key={`guideCard_${card.id}`} data={card} proviousPage="G" />
                     ))}
                 </div>
             </div>

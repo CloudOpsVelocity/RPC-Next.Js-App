@@ -8,7 +8,7 @@ export default function Box({ id, name, url }: Props) {
     <a
       className="flex flex-col items-center justify-center gap-[18px] text-[#242424]  text-base sm:text-[20px] not-italic font-semibold leading-[normal]"
       target="_blank"
-      href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=localities=${name}%2B${id}`}
+      href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=localities=${name}-${id}`}
     >
       <Image
         src={url}

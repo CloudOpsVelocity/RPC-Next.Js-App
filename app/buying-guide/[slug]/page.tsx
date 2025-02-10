@@ -1,7 +1,7 @@
 import SubscribeBlock from "@/app/blog/blogDetailSextion/SubscribeBlock";
-import BlogDetailsDescription from "../blogDetailSextion/BlogDetailsDescription";
 import BlogDetailsFirstBlock from "../blogDetailSextion/BlogDetailsFirstBlock";
 import FeaturedBlogs from "../blogDetailSextion/FeaturedBlogs";
+import BlogDetailsDescription from "@/app/blog/blogDetailSextion/BlogDetailsDescription";
 
 type Params = {
   params: {
@@ -10,7 +10,9 @@ type Params = {
 };
 
 export async function generateMetadata({ params }: Params) {
-  return { title: `Post: ${params.slug}` };
+  // return { title: `Post: ${params.slug}` };
+  return "Get Right Property";
+
 }
 
 export default function Page({ params }: Params) {

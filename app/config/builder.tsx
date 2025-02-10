@@ -17,7 +17,7 @@ export const config = new Map([
         width="11.603"
         height="14.5038"
         fill="#006CB4"
-        fill-opacity="0.29"
+        fillOpacity="0.29"
       />
       <rect
         x="17.4045"

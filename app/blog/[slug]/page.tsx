@@ -10,7 +10,8 @@ type Params = {
 };
 
 export async function generateMetadata({ params }: Params) {
-  return { title: `Post: ${params.slug}` };
+  // return { title: `Post: ${params.slug}` };
+  return "Get Right Property";
 }
 
 export default function Page({ params }: Params) {

@@ -10,7 +10,7 @@ export default function CardSection({}: Props) {
   const [{ allBlogData }] = useAtom(blogDetails);
   
   return (
-    <div className="w-full  flex sm:justify-center sm:items-center gap-4 mt-4 overflow-x-scroll scrollbar-hide py-[10px] ">
+    <div className="w-full flex sm:justify-center items-start gap-4 mt-4 overflow-x-scroll scrollbar-hide py-[10px] ">
       {allBlogData.map((eachCard: any, index:number)=>{
         if(index < 3){
           return(

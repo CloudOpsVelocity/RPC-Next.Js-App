@@ -90,6 +90,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     window.open(url, "_blank");
   };
 
+  console.log(cardData.shortListed)
+
   return ( 
     <div
       onClick={() => redirect(reqId)}
