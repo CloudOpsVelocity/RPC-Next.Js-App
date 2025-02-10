@@ -9,49 +9,101 @@ export default function BreadCrumbs({ params }: { params: any }) {
     lt: "Projects In ",
   };
   let currentPath = "";
-
+  const breadcrumsschema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: allParams.map((key, index) => {
+      currentPath += `/${slugify(params[key])}`;
+      let name = params[key].replace(/-/g, " ");
+      const newArray = name.split(" ").slice(0, -1);
+      const newName = key !== "slug" ? name : newArray.join(" ");
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        name: titleOfKeys[key as keyof typeof titleOfKeys]
+          ? titleOfKeys[key as keyof typeof titleOfKeys] + newName
+          : newName,
+        item: `${process.env.NEXT_PUBLIC_BASE_URL}${BASE_PATH_PROJECT_DETAILS}${currentPath}`,
+      };
+    }),
+  };
+  const siteNavigationSchema = {
+    "@context": "https://schema.org",
+    "@graph": allParams.map((key, index) => {
+      currentPath += `/${slugify(params[key])}`;
+      let name = params[key].replace(/-/g, " ");
+      const newArray = name.split(" ").slice(0, -1);
+      const newName = key !== "slug" ? name : newArray.join(" ");
+      return {
+        "@context": "https://schema.org",
+        "@type": "SiteNavigationElement",
+        position: index + 1,
+        name: titleOfKeys[key as keyof typeof titleOfKeys]
+          ? titleOfKeys[key as keyof typeof titleOfKeys] + newName
+          : newName,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}${BASE_PATH_PROJECT_DETAILS}${currentPath}`,
+      };
+    }),
+  };
   return (
-    <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-      <a
-        href={`/`}
-        target="_blank"
-        className="hover:underline cursor-pointer capitalize"
-      >
-        Home
-      </a>
-      {" > "}
-      {allParams.map((key, index) => {
-        currentPath += `/${slugify(params[key])}`;
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumsschema),
+        }}
+      />
 
-        let name = params[key].replace(/-/g, " ");
-        const newArray = name.split(" ").slice(0, -1);
-        const newName = key !== "slug" ? name : newArray.join(" ");
-        
-        return (
-          <React.Fragment key={`${key[index]}`}>
-            {index < Object.keys(params).length - 1 ? (
-              <a
-                href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
-                target="_blank"
-                className="hover:underline cursor-pointer capitalize"
-              >
-                {titleOfKeys[key as keyof typeof titleOfKeys] && (
-                  <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
-                )}
-                <span>{newName}</span>
-              </a>
-            ) : (
-              <>
-                {titleOfKeys[key as keyof typeof titleOfKeys] && (
-                  <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
-                )}
-                <span className="capitalize">{newName.replace("undefined ", "")}</span>
-              </>
-            )}
-            {index < Object.keys(params).length - 1 && " > "}
-          </React.Fragment>
-        );
-      })}
-    </p>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(siteNavigationSchema),
+        }}
+      />
+      <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
+        <a
+          href={`/`}
+          target="_blank"
+          className="hover:underline cursor-pointer capitalize"
+        >
+          Home
+        </a>
+        {" > "}
+        {allParams.map((key, index) => {
+          currentPath += `/${slugify(params[key])}`;
+
+          let name = params[key].replace(/-/g, " ");
+          const newArray = name.split(" ").slice(0, -1);
+          const newName = key !== "slug" ? name : newArray.join(" ");
+
+          return (
+            <React.Fragment key={`${key[index]}`}>
+              {index < Object.keys(params).length - 1 ? (
+                <a
+                  href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
+                  target="_blank"
+                  className="hover:underline cursor-pointer capitalize"
+                >
+                  {titleOfKeys[key as keyof typeof titleOfKeys] && (
+                    <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
+                  )}
+                  <span>{newName}</span>
+                </a>
+              ) : (
+                <>
+                  {titleOfKeys[key as keyof typeof titleOfKeys] && (
+                    <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
+                  )}
+                  <span className="capitalize">
+                    {newName.replace("undefined ", "")}
+                  </span>
+                </>
+              )}
+              {index < Object.keys(params).length - 1 && " > "}
+            </React.Fragment>
+          );
+        })}
+      </p>
+    </>
   );
 }

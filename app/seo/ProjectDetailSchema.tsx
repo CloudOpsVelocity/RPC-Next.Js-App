@@ -1,7 +1,7 @@
 import { Graph, Place } from "schema-dts";
 import { MERGERPROJECT } from "../validations/types/project";
 import { OPENING_HOURS } from "./common/opening-hours";
-import { Organization_SCHEMA } from "./common/organisation-details";
+import { REALESTATEAGENT_SCHEMA } from "./common/real-estateagent";
 
 interface ProjectData extends MERGERPROJECT {
   url: string;
@@ -224,7 +224,6 @@ const generateSchema = (projectData: ProjectData) => {
       },
       ...generateProductSchema(),
       ...nearByLocationsSchema,
-
       {
         "@type": "AggregateOffer",
         priceCurrency: "INR",
@@ -243,19 +242,128 @@ const generateSchema = (projectData: ProjectData) => {
           image: basicData.media.projectPlanUrl,
         },
       },
+      {
+        "@type": "Residence",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: basicData?.localityName,
+          addressRegion: basicData?.stateName,
+          addressCountry: "India",
+          postalCode: basicData?.pinCode,
+          streetAddress: basicData?.address,
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: basicData?.lat,
+          longitude: basicData?.lang,
+        },
+      },
+      {
+        "@type": "PostalAddress",
+        addressLocality: basicData?.localityName,
+        addressRegion: basicData?.stateName,
+        addressCountry: "India",
+        postalCode: basicData?.pinCode,
+        streetAddress: basicData?.address,
+        areaServed: basicData?.localityName,
+      },
+      {
+        "@type": "ApartmentComplex",
+        name: basicData?.projectName,
+        description: basicData?.about,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: basicData?.localityName,
+          addressRegion: basicData?.stateName,
+          addressCountry: "India",
+          postalCode: basicData?.pinCode,
+          streetAddress: basicData?.address,
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: basicData?.lat,
+          longitude: basicData?.lang,
+        },
+        image: basicData?.media.coverImageUrl,
+        telephone: PHONE_NUMBER,
+        amenityFeature: [],
+      },
+      {
+        "@type": "SaleEvent",
+        name: "Buy " + basicData?.projectName,
+        startDate: projectData?.basicData.startDate,
+        endDate: projectData?.basicData.endDate,
+        url: projectDetailsPageUrl,
+        description: desc,
+        image: basicData?.media.coverImageUrl,
+        eventStatus: "http://schema.org/EventScheduled",
+        eventAttendanceMode: "http://schema.org/MixedEventAttendanceMode",
+        location: [
+          {
+            "@type": "VirtualLocation",
+            url: projectDetailsPageUrl,
+          },
+          {
+            "@type": "Place",
+            name: basicData?.projectName,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: basicData?.localityName,
+              addressRegion: basicData?.stateName,
+              addressCountry: "India",
+              postalCode: basicData?.pinCode,
+            },
+          },
+        ],
+        offers: {
+          "@type": "Offer",
+          url: projectDetailsPageUrl,
+          priceCurrency: "INR",
+          priceValidUntil: projectData?.basicData.endDate,
+          availability: "http://schema.org/InStock",
+          category: "Primary",
+        },
+        performer: {
+          "@type": "PerformingGroup",
+          name: basicData?.projectName,
+        },
+        organizer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          logo: LOGO_URL,
+        },
+      },
+      {
+        "@type": "ViewAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: projectDetailsPageUrl,
+          actionPlatform: [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+          ],
+        },
+        name: `View ${basicData?.projectName} Details`,
+        description:
+          desc || `View complete details about ${basicData?.projectName}`,
+        image: basicData?.media.coverImageUrl,
+        url: projectDetailsPageUrl,
+      },
     ],
   };
 
   return JSON.stringify(schemaData);
 };
 
-const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
-  />
-  // <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
-);
+const ProjectSchema = ({ projectData }: { projectData: ProjectData }) =>
+  process.env.ENVIRONMENT !== "dev" ? (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
+    />
+  ) : (
+    <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
+  );
 
 export default ProjectSchema;
 
