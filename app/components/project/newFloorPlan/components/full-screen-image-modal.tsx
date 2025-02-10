@@ -136,6 +136,8 @@ export function FullScreenImageModal({
     }
   };
 
+  // `/image?path=${unit.floorPlanUrl?.split(",")[0]}&type=F`
+
   if (!isOpen) return null;
 
   return (
