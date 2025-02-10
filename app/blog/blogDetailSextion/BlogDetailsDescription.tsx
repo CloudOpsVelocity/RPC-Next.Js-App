@@ -8,7 +8,7 @@ import React from 'react';
 function BlogMiniCard({data}:{data:any}) {
   return (
     <div className=' flex justify-end items-end w-full '> 
-      <a href={`/blog/${data.heading}`} target='_blank'>
+      <a href={`/blog/${data.heading}`} target='_blank' rel="noopener noreferrer" >
         <div 
           className={`max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid 
              border-t-[1px]  hover:shadow-lg

@@ -30,7 +30,7 @@ export default function Box({ item }: Props) {
               apiData.stringId.split("_")[0]
             }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
-            }`
+            }`, "_blank", "noreferrer"
           );
         }
 
@@ -52,7 +52,7 @@ export default function Box({ item }: Props) {
             window.open(
               data.PJ && data.PJ !== "null"
                 ? `/search/listing?sf=${url}`
-                : "/search/?sf=" + `${url}-listedBy=All`
+                : "/search/?sf=" + `${url}-listedBy=All`, "_blank", "noreferrer"
             );
           }
         }
@@ -66,7 +66,7 @@ export default function Box({ item }: Props) {
           }&listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
           )}&projName=${projectName}`;
-          window.open("/search/listing?sf=" + url);
+          window.open("/search/listing?sf=" + url , "_blank", "noreferrer");
         }
         break;
       case "builder":
@@ -85,7 +85,7 @@ export default function Box({ item }: Props) {
                 apiData.type !== "BuilderProject"
                   ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
-              }`
+              }`, "_blank", "noreferrer"
             );
           }
         }

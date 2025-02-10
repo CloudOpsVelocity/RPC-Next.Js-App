@@ -32,7 +32,7 @@ export default function Card({ item }: Props) {
   const builderiRedirect = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    window.open(urlBuilder, "_blank");
+    window.open(urlBuilder, "_blank", "noreferrer");
   };
 
   return (
