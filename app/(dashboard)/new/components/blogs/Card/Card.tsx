@@ -10,7 +10,12 @@ export default function Card({ data }: Props) {
   const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return (
-    <a href={`blog/${pathName}`} target="_blank" className="hover:shadow-lg">
+    <a
+      href={`blog/${pathName}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:shadow-lg"
+    >
       <div className="flex min-h-[230px] min-w-[300px] sm:w-[338px] xl:w-[427px]  flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] rounded-t-[4px]  xl:rounded-t-[4px] border-solid border-[#B9CFEB] ">
         <Image
           height={196}

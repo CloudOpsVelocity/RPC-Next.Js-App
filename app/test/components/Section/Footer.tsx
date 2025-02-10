@@ -287,6 +287,7 @@ export default function EnhancedFooter() {
             <a
               href={`tel:${8884440963}`}
               target="_blank"
+              rel="noopener noreferrer"
               className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
             >
               <FaPhoneAlt className="mr-1" /> +91-8884440963
@@ -296,7 +297,7 @@ export default function EnhancedFooter() {
             Copyright © 2024 GetRightProperty. All Rights Reserved.
             <span>
               <br />A Product By &quot;
-              <a href="https://rpclan.com/" target="_blank">
+              <a href="https://rpclan.com/" target="_blank" rel="noopener noreferrer">
                 {" "}
                 RPCLAN SERVICES PVT.LTD
               </a>
