@@ -81,12 +81,14 @@ const Card = ({
   const [, { open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
   );
-  const handleBoxClick = (value: any, cg: "S" | "R") => { 
+  const handleBoxClick = (value: any, cg: "S" | "R") => {
     value
       ? openSuccesPopup()
-      : window.open(`/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`);
+      : window.open(
+          `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`
+        );
   };
-  
+
   return (
     <div
       id={id}
@@ -125,7 +127,7 @@ const Card = ({
           <Image
             src={type === "rent" ? config.rentIcon : config.sellIcon}
             className="w-[24px] h-[23px]"
-            alt=""
+            alt="stock icon"
             width={24}
             height={23}
           />
@@ -135,10 +137,8 @@ const Card = ({
   );
 };
 let config = {
-  sellIcon:
-    `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/yellowarrow.png`,
-  rentIcon:
-    `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/bluearrow.png`,
+  sellIcon: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/yellowarrow.png`,
+  rentIcon: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/bluearrow.png`,
   rentLogo: "/abc/rent.png",
   sellLogo: "/abc/sell.png",
   rentMobileLogo: "/abc/rent.svg",
