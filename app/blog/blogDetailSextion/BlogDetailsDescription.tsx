@@ -5,24 +5,21 @@ import { useAtom } from "jotai";
 import Image from "next/image";
 import React from "react";
 import style from "../Blog.module.css";
-import { useSearchParams } from "next/navigation";
 
 function BlogMiniCard({ data }: { data: any }) {
-  const getParams = useSearchParams();
-  let pp = getParams.get("pp");
 
   return (
     <div className=" flex justify-end items-end w-full ">
-      <a href={`/blog/${data.heading.replaceAll(" ", "-")}`} target="_blank">
+      <a href={`/buying-guide/${data.heading.replaceAll(" ", "-")}`} target="_blank">
         <div
           className={`max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid 
              border-t-[1px]  hover:shadow-lg
           `}
-          title="Click to View Next Blog"
+          title="Click to View Next buying-guide"
         >
           <Image
             src={data.coverImage}
-            alt="blog Image"
+            alt="buying-guide Image"
             width={120}
             height={90}
             className=" min-w-[120px] h-[90px] border-gray shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#227FBC] "

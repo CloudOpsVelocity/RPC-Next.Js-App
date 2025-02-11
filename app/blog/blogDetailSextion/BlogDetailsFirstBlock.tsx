@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import { backIcon, Facebook, facebookRedirectLink, ShearIcon, TringleIcons, WhatsApp, whatsappRedirectLink } from '@/app/images/commonSvgs';
@@ -8,11 +8,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 function BlogDetailsFirstBlock() {
   const [{ allBlogData }, setBlogDetails] = useAtom(blogDetails);
-  const [isMounted, setIsMounted] = useState(false);
   const path = usePathname();
-  const getParams = useSearchParams()
-  let listedBy = getParams.get("pp");
-  const pathHref = listedBy === "B" ? "/blog" : listedBy === "G" ? "/buying-guide" : "/";
 
   const currentBlog = path.split("/")[2].replaceAll("-", " ");
 
@@ -24,19 +20,21 @@ function BlogDetailsFirstBlock() {
     setBlogDetails(prev => ({ ...prev, selectedBlog : data })); 
   }, [data]);
 
-
-
+  // const getParams = useSearchParams();
+  // let listedBy = getParams.get("pp");
+  // const pathHref = listedBy === "B" ? "/blog" : listedBy === "G" ? "/buying-guide" : "/";
 
   return (
     <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>
-      <a href={pathHref} target="_blank">
+      {/* <a href={pathHref} target="_blank"> */}
         <button 
+          onClick={() => window.close()}
           className='text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 left-0 flex justify-center items-center self-start '
         >
           <span className=' bg-[#E8F3FF] w-[18px] h-[18px] xl:w-[32px] xl:h-[32px] rounded-[50%] flex justify-center items-center '>{backIcon}</span>
           Back
         </button>
-      </a>
+      {/* </a> */}
 
       <div className='rounded-[10px] relative w-full md:w-[50%] max-h-[463px] border-[0.5px] border-gray border-solid  bg-white '>
         <TringleIcons key="TringleIcon1" className="absolute bottom-[-180px] left-[-120px] z-0 xl:w-[408px] xl:h-[427px] w-[308px] h-[327px]" number={1} />

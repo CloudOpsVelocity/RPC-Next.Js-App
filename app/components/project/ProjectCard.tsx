@@ -101,7 +101,7 @@ export function ProjectCard({
     slug: cardData.builderName,
   });
 
-  console.log("shortlist res: ", cardData.shortListed)
+  // console.log("shortlist res: ", cardData.shortListed)
 
   return (
     /*  <ProjectLink
