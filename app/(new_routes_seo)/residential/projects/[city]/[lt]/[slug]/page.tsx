@@ -19,19 +19,14 @@ type Props = {
 // let metadataCache: {title?: string, description?: string} = {};
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
-  // const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
-  // const value = await findPathForProjectDetails(pathname);
-  // const { PJ: slug } = await extractProjectParamsValues(value);
-
   let slug = name.split("-").at(-1);
-
   if (!slug || slug.length !== 32) return notFound();
-  console.time("project detaild api calling" + slug + process.env.NODE_ENV);
+  console.time("project detaild api calling" + slug);
   let [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),
   ]);
-  console.timeEnd("project detaild api calling" + slug + process.env.NODE_ENV);
+  console.timeEnd("project detaild api calling" + slug);
   if (projResponse.basicData.projAuthorityId) {
     const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
     projResponse = {
