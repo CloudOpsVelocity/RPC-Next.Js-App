@@ -54,7 +54,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
           <div className="flex items-center gap-1 text-gray-700 mt-0.5">
             <BiSolidUser size={14} className="text-purple-600" />
             <p className="text-[12px] font-medium">
-              Builder__: <span className="text-gray-500 ml-0.5">{postedByName}</span>
+              Builder: <span className="text-gray-500 ml-0.5">{postedByName}</span>
             </p>
           </div>
         </div>
