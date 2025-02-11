@@ -26,12 +26,12 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
     enabled: isEnabled,
     ...RTK_CONFIG,
   });
-
+  console.log(newlyAddedProjects);
   return isLoading ? (
     <div> Loading...</div>
   ) : (
     (isEnabled
-      ? newlyAddedProjects?.status && newlyAddedProjects["New Launch"]?.length
+      ? newlyAddedProjects?.status && newlyAddedProjects["featured"]?.length
       : data?.length) > 0 && (
       <div className="mt-[40px] sm:mt-[60px] w-[95%] m-auto">
         <MainHeading
@@ -41,7 +41,7 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
         />
 
         <CardCarousel
-          data={isEnabled ? newlyAddedProjects["New Launch"] : data}
+          data={isEnabled ? newlyAddedProjects["featured"] : data}
           shortIds={shortIds}
         />
       </div>

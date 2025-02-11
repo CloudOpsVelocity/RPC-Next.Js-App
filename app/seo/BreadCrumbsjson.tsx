@@ -1,17 +1,17 @@
-import { VideoObject, WithContext } from "schema-dts";
+import { SiteNavigationElement, VideoObject, WithContext } from "schema-dts";
 
 const generateFAQJsonLd = (data: any) => {
-  const jsonLd: WithContext<VideoObject> = {
+  const jsonLd: WithContext<SiteNavigationElement> = {
     "@context": "https://schema.org",
-    "@type": "VideoObject",
+    "@type": "SiteNavigationElement",
     name: data.name,
     description: data.description,
     // duration publishDate size
     thumbnailUrl: `${process.env.NEXT_PUBLIC_PROJECT_URL}/staticmedia-images-icons/grp-logo/Logo-without-background.png`,
-    contentUrl: data.contentUrl,
-    contentSize: data.contentSize,
-    duration: "PT2M",
-    regionsAllowed: "ALL",
+    // contentUrl: data.contentUrl,
+    // contentSize: data.contentSize,
+    // duration: "PT2M",
+    // regionsAllowed: "ALL",
   };
   return jsonLd;
 };

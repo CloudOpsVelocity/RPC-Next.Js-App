@@ -43,6 +43,7 @@ export default function MainHeading({ title, content, className,url }: Props) {
             className="text-[#0073C6]  text-[14px] sm:text-[18px] xl:text-[20px]  not-italic font-bold leading-[normal]"
             href={url}
             target="_blank"
+            rel="noopener noreferrer"
           >
             View all
           </a>

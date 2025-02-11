@@ -63,30 +63,6 @@ export const Organization_SCHEMA = {
     "@type": "Organization",
     name: "RERA",
   },
-  //   worksFor: {
-  //     "@type": "Person",
-  //     name: "Rahul Vishwakarma",
-  //     jobTitle: "Real Estate Agent",
-  //     telephone: "+91 8884445678",
-  //     url: "https://rera.karnataka.gov.in/home",
-  //   },
-  //   offers: {
-  //     "@type": "OfferCatalog",
-  //     name: "Property Listings",
-  //     itemListElement: [
-  //       {
-  //         "@type": "Offer",
-  //         url: "https://www.getrightproperty.com/search/listing",
-  //         priceCurrency: "INR",
-  //         price: "100000",
-  //         eligibleRegion: {
-  //           "@type": "Place",
-  //           name: "Bangalore",
-  //         },
-  //         category: "Residential",
-  //         description: "Residential Apartment For Sale",
-  //       },
-  //     ],
-  //   },
+
   telephone: "+91 8884440963",
 };

@@ -54,6 +54,8 @@ function Footer() {
         "/search?sf=city=Mumbai%2B577",
         "/search?sf=city=Hyderabad%2B582",
       ],
+      /*  rel="noopener noreferrer", */
+      rel: "noopener noreferrer",
       target: "_blank",
     },
     {
@@ -78,6 +80,7 @@ function Footer() {
         "/vacation-rentals",
         "/foreclosures", */
       ],
+      rel: "noopener noreferrer",
       target: "_blank",
     },
     {
@@ -98,6 +101,7 @@ function Footer() {
         // "/mortgage-calculator",
         // "/home-valuation",
       ],
+      rel: "noopener noreferrer",
       target: "_blank",
     },
     {
@@ -128,6 +132,7 @@ function Footer() {
         "/search/listing",
         "/search",
       ],
+      rel: "noopener noreferrer",
       target: "_blank",
     },
     {
@@ -148,6 +153,7 @@ function Footer() {
         // "/press",
         // "/partnerships",
       ],
+      rel: "noopener noreferrer",
       target: "_blank",
     },
     {
@@ -168,6 +174,7 @@ function Footer() {
         // "/fair-housing",
         // "/accessibility",
       ],
+      rel: "noopener noreferrer",
       target: "_blank",
     },
   ];
@@ -188,6 +195,7 @@ function Footer() {
                   key={name}
                   href={link}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white hover:text-gray-300"
                 >
                   <span className="sr-only">{name}</span>
@@ -199,7 +207,7 @@ function Footer() {
 
           <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(0, 2).map(({ title, links, hrefs, target }) => (
+              {sections.slice(0, 2).map(({ title, links, hrefs, rel }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
@@ -209,7 +217,8 @@ function Footer() {
                       <li key={link}>
                         <a
                           href={hrefs[index]}
-                          target={target}
+                          rel={rel}
+                          target="_blank"
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
                           {link}
@@ -222,7 +231,7 @@ function Footer() {
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(2, 4).map(({ title, links, hrefs, target }) => {
+              {sections.slice(2, 4).map(({ title, links, hrefs, rel }) => {
                 return (
                   <div key={title}>
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
@@ -265,7 +274,8 @@ function Footer() {
                             <li key={link}>
                               <a
                                 href={hrefs[index]}
-                                target={target}
+                                rel={rel}
+                                target="_blank"
                                 className="text-xs sm:text-base text-gray-300 hover:text-white"
                               >
                                 {link}
@@ -280,7 +290,7 @@ function Footer() {
               })}
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(4).map(({ title, links, hrefs, target }) => (
+              {sections.slice(4).map(({ title, links, hrefs, rel }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
@@ -290,7 +300,8 @@ function Footer() {
                       <li key={link}>
                         <a
                           href={hrefs[index]}
-                          target={target}
+                          rel={rel}
+                          target="_blank"
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
                           {link}
@@ -326,7 +337,7 @@ function Footer() {
             </button>
             <a
               href={`tel:${8884440963}`}
-              target="_blank"
+              rel="noopener noreferrer"
               className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
             >
               <FaPhoneAlt className="mr-1" /> +91-8884440963
@@ -336,7 +347,7 @@ function Footer() {
             Copyright © 2024 GetRightProperty. All Rights Reserved.
             <span>
               <br />A Product By &quot;
-              <a href="https://rpclan.com/" target="_blank">
+              <a href="https://rpclan.com/" rel="noopener noreferrer">
                 {" "}
                 RPCLAN SERVICES PVT.LTD
               </a>

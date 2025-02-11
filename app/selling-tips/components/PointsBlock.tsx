@@ -284,6 +284,7 @@ function PointsBlock({}: Props) {
                <div className="flex space-x-6 mt-[10px] gap-[10px] md:gap-[16px] md:mt-0 items-end justify-end max-h-[32px] ">
                    {commonLinks.socialIcons.map(({ name, icon, link }) => (
                    <a
+                   rel="noopener noreferrer"
                        key={name}
                        href={link}
                        target="_blank"

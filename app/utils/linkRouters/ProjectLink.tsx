@@ -45,7 +45,8 @@ export default function ProjectLink({
   }, [routeParams]);
 
   return (
-    <Link {...rest} href={href}>
+    <Link {...rest} href={href}  
+      rel="noopener noreferrer">
       {children}
     </Link>
   );

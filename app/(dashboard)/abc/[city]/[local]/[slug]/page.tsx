@@ -164,7 +164,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               Home
             </a>{" "}
             {" > "}
-            <Link href={"/project/banglore"}>
+            <Link 
+              rel={""}
+            href={"/project/banglore"}>
               <span className="hover:underline cursor-pointer">
                 Projects In {data.cityName}
               </span>
