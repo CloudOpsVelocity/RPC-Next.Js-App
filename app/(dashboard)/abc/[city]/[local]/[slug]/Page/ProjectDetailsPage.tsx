@@ -77,7 +77,7 @@ export default async function ProjectsDetailsPage({
   const title = `${data?.projectName} ${
     data.availableProperties && data?.availableProperties?.join(" ")
   } for sale in ${data.localityName} ${data.cityName}`;
-  const imageUrl = data?.media?.coverImageUrl.split(",")[1];
+  const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
   console.log(params);
   return (
