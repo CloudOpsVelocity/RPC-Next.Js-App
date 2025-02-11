@@ -10,11 +10,13 @@ import {
 interface ListingSchemaProps {
   nearByLocations: any;
   listing: any;
+  faqData: any;
 }
 
 export const generateListingSchema = ({
   nearByLocations,
   listing,
+  faqData,
 }: ListingSchemaProps) => {
   const nearByLocationsSchema: Place[] = [];
 
@@ -174,7 +176,9 @@ const ListingSchema = ({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: generateListingSchema(listingData) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(generateListingSchema(listingData)),
+      }}
     />
   );
 };

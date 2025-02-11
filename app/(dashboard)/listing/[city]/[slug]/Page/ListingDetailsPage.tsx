@@ -94,6 +94,7 @@ export default function ListingDetailsPage({
         listingData={{
           listing: data,
           nearByLocations: nearByLocations,
+          faqData: projData.faqs,
         }}
       />
       <link
