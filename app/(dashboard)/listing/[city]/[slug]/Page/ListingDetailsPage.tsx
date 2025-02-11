@@ -32,6 +32,7 @@ const PropertyFirstBlock = dynamic(
 );
 // const LeafMap = dynamic(() => import("@/app/components/project/map"));
 import LeafMap from "@/app/components/project/map";
+import ListingSchema from "@/app/seo/listing/listing.schema";
 const PropertyMap = dynamic(() => import("@/app/components/property/map"));
 const NearByCarouselProperty = dynamic(
   () => import("@/app/components/property/carousel")
@@ -89,6 +90,12 @@ export default function ListingDetailsPage({
 
   return (
     <div className="w-full">
+      <ListingSchema
+        listingData={{
+          listing: data,
+          nearByLocations: nearByLocations,
+        }}
+      />
       <link
         rel="canonical"
         href={`${process.env.NEXT_PUBLIC_URL}${pathname}`}
