@@ -10,6 +10,7 @@ type Props = {};
 export default function SelectedFilters({}: Props) {
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
+  console.log(state)
   return (
     Object.entries(state).some(
       ([_, value]) =>
@@ -27,6 +28,8 @@ export default function SelectedFilters({}: Props) {
               category !== "cg" &&
               category !== "city" &&
               category !== "projIdEnc" &&
+              category !== "lat" &&
+              category !== "lng" &&
               (Array.isArray(values) ? (
                 values.map((value) => (
                   <div
@@ -80,7 +83,6 @@ export default function SelectedFilters({}: Props) {
                       : category === "projName" ? values : 
                       category === "lat" ? "lat" :category == "lng" ? "lng" :
                       SelectedFiltersMap.get(values) 
-      
                     }
                   </span>
                   <button

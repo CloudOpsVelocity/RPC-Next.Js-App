@@ -162,7 +162,7 @@ export default function ProjectSearchTabs() {
             onWheel={handleWheel}
             className="overflow-x-auto no-scrollbar"
           >
-            <div className="flex items-center sm:gap-1 p-8 sm:p-0 xl:gap-2 min-w-max">
+            <div className="flex items-center sm:gap-1 py-8 sm:p-0 xl:gap-2 min-w-max">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}

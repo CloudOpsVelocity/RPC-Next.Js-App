@@ -18,14 +18,10 @@ interface BreadcrumbProps {
 const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   items = [],
 }) => {
+  const [state] = useAtom(projSearchStore);
+
   const getParams = useSearchParams();
   let listedBy = getParams.get("sf");
-  // console.log(listedBy)
-
-  // const cityName = listedBy?.split("-")?.map(each=>each.split("="))?.filter(a=>a[0] === "city")[0][1]?.split("+")[0] ;
-  // const finalCityName = cityName ? cityName : "bengaluru"
-  // console.log(cityName)
-  
 
   let initailAlParams:any = [
     {
@@ -36,32 +32,34 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
       label: "For Buy",
     },{
       href: `${BASE_PATH_PROJECT_DETAILS}${"/bengaluru"}`,
-      label: "Bengaluru",
+      label: "bengaluru",
     }
   ];
-
-
-  const [state] = useAtom(projSearchStore);
-  
 
   const [allParams, setAllParams] = useState(initailAlParams)
 
   useEffect(()=>{
     let oldParams = [...allParams];
+    const finalCityName = state && state.city && state.city.split("+")[0] ? state?.city.split("+")[0] : "bengaluru";
 
     oldParams[1] = {
       href: `${BASE_PATH_PROJECT_DETAILS}${state.cg === "R" ? "/for-rent" : "/For-sale"}`,
       label: state.cg === "R" ? "For Rent" : "For Sale",
     };
+
+    oldParams[2] = {
+      href: `${BASE_PATH_PROJECT_DETAILS}${finalCityName}`,
+      label: finalCityName,
+    };
   
     let localityName = state.localities.length > 0 ? state.localities[0] : "";
     oldParams[3] = {
-      href: localityName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}` : "", 
+      href: localityName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${localityName}` : "", 
       label: localityName.split("+")[0],
     };
 
     oldParams[4] = {
-      href: state.projName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/bengaluru/${localityName}/${state.projName}` : "", 
+      href: state.projName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${localityName}/${state.projName}` : "", 
       label: state.projName !== "" ? state.projName : "",
     };
     setAllParams(oldParams);
@@ -79,7 +77,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     >
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         <li>
-          <a
+          <a 
             href="/"
             className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
           >

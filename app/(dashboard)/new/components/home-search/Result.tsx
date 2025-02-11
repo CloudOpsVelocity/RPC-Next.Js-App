@@ -86,7 +86,7 @@ export default function Results() {
             )}${
               data.PJ && data.PJ !== "null"
                 ? `-projIdEnc=${data.PJ}-projName=${apiData.name
-                    .split("in")[1]
+                    .split(" in ")[1]
                     .split("-")[0]
                     .trim()}`
                 : ""

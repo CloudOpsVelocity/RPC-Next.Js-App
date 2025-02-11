@@ -264,6 +264,7 @@ const ProjectCarousel = ({
         </div>
         <NewCarousel 
           data={data}
+          type={type}
           renderItem={(project: any, index) => (
             <PropertyCard
             type={type}

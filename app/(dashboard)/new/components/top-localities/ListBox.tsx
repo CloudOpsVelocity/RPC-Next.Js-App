@@ -23,13 +23,13 @@ const config = {
     },
     {
       name: "koramangala", 
-      id: 362,
+      id: 354,
       type: "L",
       url: "/koramangala.webp"
     },
     {
       name: "jp nagar",
-      id: 306,
+      id: 298,
       type: "L",
       url: "/jpnagar.jpg"
     },
@@ -47,7 +47,7 @@ const config = {
     },
     {
       name: "indira nagar",
-      id: 262,
+      id: 261,
       type: "L",
       url: "/Indiranagar.jpg"
     },

@@ -55,9 +55,11 @@ function Card({ data, cityName }: CradProps) {
               {cityName}
             </p>
           </div>
+          {data.user &&
           <p className="text-gray-600 text-[12px] not-italic font-normal ">
             {data.user}
           </p>
+          }
           <p className="text-[color:var(--Black,#000)] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-normal leading-[150%] ">
             {getClampedText(data.title, 2)}
           </p>

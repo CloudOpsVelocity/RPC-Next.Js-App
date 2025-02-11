@@ -35,7 +35,7 @@ export default function Navigation({
   const [lastScrollY, setLastScrollY] = useState(0);
   const [leftScroll, setLeftScroll] = useState(0);
   const [opened, { open }] = useReqCallPopup();
-  
+
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -114,7 +114,7 @@ export default function Navigation({
           ? true
           : false,
     },
- 
+
     { condtion: true, key: TOPIC_IDS.OVERVIEW },
     { condtion: true, key: TOPIC_IDS.LISTINGS_AVAILABLE },
     { condtion: true, key: TOPIC_IDS.ABOUT },
@@ -150,10 +150,10 @@ export default function Navigation({
     { condtion: projectReqData?.isNearby, key: TOPIC_IDS.SIMILAR_PROJECTS },
     { condtion: true, key: TOPIC_IDS.CONTACT },
   ];
-  const {data:userData} = useQuery({
-    queryKey:[`builder/${detailsData.builderId}&isBuilderPage=Nproj`],
-   enabled:false
-  })
+  const { data: userData } = useQuery({
+    queryKey: [`builder/${detailsData.builderId}&isBuilderPage=Nproj`],
+    enabled: false,
+  });
 
   useEffect(() => {
     if (
@@ -185,7 +185,7 @@ export default function Navigation({
       {leftScroll > 0 && (
         <Image
           src="/auth/arrow.svg"
-          alt=""
+          alt="Left Scroll Icon"
           className="rotate-180 cursor-pointer"
           width={40}
           height={40}
@@ -201,7 +201,7 @@ export default function Navigation({
           const conditions = conditionsArray.find(
             (item) => item.key === topic.id
           );
- 
+
           return (
             conditions?.condtion && (
               <div
@@ -249,7 +249,7 @@ export default function Navigation({
       </div>
       <Image
         src="/auth/arrow.svg"
-        alt=""
+        alt="Right Scroll Icon"
         className="cursor-pointer"
         width={40}
         height={40}

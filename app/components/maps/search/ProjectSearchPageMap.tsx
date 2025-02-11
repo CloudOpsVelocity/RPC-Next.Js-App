@@ -121,7 +121,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             direction="top"
             offset={[10, -35]}
             className={`${
-              isProp ? "min-w-fit" : "min-w-[400px]"
+              isProp ? "min-w-fit" : isMobile ? "min-w-[300px]" : "min-w-[400px]"
             }  max-w-screen-sm !p-0`}
             sticky
           >

@@ -56,6 +56,7 @@ export default function ListingCarousel({ shortIds, data ,dataKey,url}: Props) {
     slidesToShow={isMobile ? 1 : 4} 
     url={url} 
     data={data} 
+    type="prop"
     renderItem={(item:any, index) => (
     <ListingCard
       item={item}

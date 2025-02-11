@@ -258,6 +258,7 @@ const BuilderCarousel = ({
       </p>
       <NewCarousel
         data={data}
+        type="proj"
         renderItem={(item: any, index) => (
           <ProjectCard
             type={type}

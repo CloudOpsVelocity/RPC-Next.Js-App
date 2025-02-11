@@ -160,6 +160,7 @@ const generateSchema = (projectData: ProjectData) => {
         mainEntity: {
           "@type": "Place",
           name: basicData?.projectName || "Real Estate Project",
+          image: basicData.media.coverImageUrl,
           address: {
             "@type": "PostalAddress",
             streetAddress: basicData?.address || "Unknown",
@@ -186,6 +187,7 @@ const generateSchema = (projectData: ProjectData) => {
         "@context": "https://schema.org",
         "@type": "Place",
         name: basicData?.projectName || "Unknown",
+
         address: {
           "@type": "PostalAddress",
           streetAddress: basicData?.address || "Unknown",
@@ -240,6 +242,18 @@ const generateSchema = (projectData: ProjectData) => {
           "@type": "Product",
           name: basicData?.projectName,
           image: basicData.media.projectPlanUrl,
+          description: desc || "Details about the project",
+          brand: {
+            "@type": "Brand",
+            name: basicData?.projectName.split(" ")[0],
+          },
+          offers: {
+            "@type": "Offer",
+            url: projectDetailsPageUrl,
+            price: basicData.minPrice,
+            priceCurrency: PRICE_CURRENY,
+            availability: "https://schema.org/InStock",
+          },
         },
       },
       {
@@ -306,6 +320,7 @@ const generateSchema = (projectData: ProjectData) => {
           {
             "@type": "Place",
             name: basicData?.projectName,
+            image: basicData.media.coverImageUrl,
             address: {
               "@type": "PostalAddress",
               addressLocality: basicData?.localityName,
@@ -319,6 +334,8 @@ const generateSchema = (projectData: ProjectData) => {
           "@type": "Offer",
           url: projectDetailsPageUrl,
           priceCurrency: "INR",
+          price: basicData.minPrice,
+          validFrom: basicData.startDate,
           priceValidUntil: projectData?.basicData.endDate,
           availability: "http://schema.org/InStock",
           category: "Primary",
@@ -330,6 +347,7 @@ const generateSchema = (projectData: ProjectData) => {
         organizer: {
           "@type": "Organization",
           name: COMPANY_NAME,
+          url: COMPANY_URL,
           logo: LOGO_URL,
         },
       },
@@ -361,6 +379,7 @@ const generateSchema = (projectData: ProjectData) => {
         author: {
           "@type": "Organization",
           name: COMPANY_NAME,
+          url: COMPANY_URL,
           logo: LOGO_URL,
         },
         publisher: {
@@ -384,6 +403,7 @@ const generateSchema = (projectData: ProjectData) => {
 };
 
 const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
+  // <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
   <script
     type="application/ld+json"
     dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}

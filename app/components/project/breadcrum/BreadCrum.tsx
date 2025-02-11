@@ -23,7 +23,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
         name: titleOfKeys[key as keyof typeof titleOfKeys]
           ? titleOfKeys[key as keyof typeof titleOfKeys] + newName
           : newName,
-        item: `${process.env.NEXT_PUBLIC_BASE_URL}${BASE_PATH_PROJECT_DETAILS}${currentPath}`,
+        item: `${process.env.NEXT_PUBLIC_PROJECT_URL}${BASE_PATH_PROJECT_DETAILS}${currentPath}`,
       };
     }),
   };
@@ -41,7 +41,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
         name: titleOfKeys[key as keyof typeof titleOfKeys]
           ? titleOfKeys[key as keyof typeof titleOfKeys] + newName
           : newName,
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}${BASE_PATH_PROJECT_DETAILS}${currentPath}`,
+        url: `${process.env.NEXT_PUBLIC_PROJECT_URL}${BASE_PATH_PROJECT_DETAILS}${currentPath}`,
       };
     }),
   };
@@ -75,12 +75,18 @@ export default function BreadCrumbs({ params }: { params: any }) {
           let name = params[key].replace(/-/g, " ");
           const newArray = name.split(" ").slice(0, -1);
           const newName = key !== "slug" ? name : newArray.join(" ");
-
+          const redirectPath =
+            key == "lt"
+              ? `/${params.city}/${params.lt}`
+              : key == "city"
+              ? `/${params.city}`
+              : ``;
           return (
             <React.Fragment key={`${key[index]}`}>
               {index < Object.keys(params).length - 1 ? (
                 <a
-                  href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
+                  // href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
+                  href={`${BASE_PATH_PROJECT_DETAILS}${redirectPath}`}
                   target="_blank"
                   className="hover:underline cursor-pointer capitalize"
                 >

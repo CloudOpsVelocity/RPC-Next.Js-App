@@ -101,7 +101,7 @@ export function ProjectCard({
     slug: cardData.builderName,
   });
 
-  console.log("shortlist res: ", cardData.shortListed)
+  // console.log("shortlist res: ", cardData.shortListed)
 
   return (
     /*  <ProjectLink
@@ -325,6 +325,7 @@ const ProjectCarousel = ({
         </div>
         <NewCarousel
           data={data}
+          type={type}
           renderItem={(project: any) => (
             <ProjectCard
               key={`proj_${project?.projIdEnc}`}
