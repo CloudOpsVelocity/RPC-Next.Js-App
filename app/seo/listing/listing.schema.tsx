@@ -79,15 +79,32 @@ export const generateListingSchema = ({
         },
       },
       {
-        "@type": "Apartment",
+        "@type":
+          listing.propTypeName === "Apartment"
+            ? "Apartment"
+            : listing.propTypeName === "Villament"
+            ? "House"
+            : listing.propTypeName === "Plot"
+            ? "Land"
+            : listing.propTypeName === "Villa"
+            ? "Villa"
+            : listing.propTypeName === "Row House"
+            ? "RowHouse"
+            : listing.propTypeName === "Independent House/Building"
+            ? "ResidentialBuilding"
+            : "Apartment",
         name: listing.propName,
         description: listing.usp,
-        numberOfRooms: listing.nobt,
-        floorSize: {
-          "@type": "QuantitativeValue",
-          value: listing.sba,
-          unitCode: "SqFt",
-        },
+        numberOfRooms:
+          listing.propTypeName !== "Land" ? listing.nobt : undefined,
+        floorSize:
+          listing.propTypeName !== "Land"
+            ? {
+                "@type": "QuantitativeValue",
+                value: listing.sba,
+                unitCode: "SqFt",
+              }
+            : undefined,
         address: {
           "@type": "PostalAddress",
           streetAddress: listing.address,
@@ -101,18 +118,27 @@ export const generateListingSchema = ({
           latitude: listing.lat,
           longitude: listing.lang,
         },
-        image: listing.projMedia.coverImageUrl.split(",")[0],
+        image: listing.projMedia?.coverImageUrl?.split(",")[0],
         url: `${DOMAIN}property/${listing.propIdEnc}`,
         telephone: PHONE_NUMBER,
-        amenityFeature: listing.amenities.map((amenity: number) => ({
-          "@type": "LocationFeatureSpecification",
-          name: amenity.toString(),
-          value: "true",
-        })),
-        numberOfBathroomsTotal: listing.bathRooms,
-        yearBuilt: listing.yearBuilt,
+        amenityFeature:
+          listing.propTypeName !== "Land"
+            ? listing.amenities?.map((amenity: number) => ({
+                "@type": "LocationFeatureSpecification",
+                name: amenity.toString(),
+                value: "true",
+              }))
+            : undefined,
+        numberOfBathroomsTotal:
+          listing.propTypeName !== "Land" ? listing.bathRooms : undefined,
+        yearBuilt:
+          listing.propTypeName !== "Land" ? listing.yearBuilt : undefined,
         propertyType: listing.propTypeName,
-        floorLevel: listing.floorNo,
+        floorLevel: ["Apartment", "Residential Building"].includes(
+          listing.propTypeName
+        )
+          ? listing.floorNo
+          : undefined,
       },
       {
         "@type": "Product",
@@ -151,15 +177,40 @@ export const generateListingSchema = ({
       },
       {
         "@type": "FAQPage",
-        mainEntity:
-          listing.faqs?.map((faq: any) => ({
+        mainEntity: [
+          ...(faqData?.map((faq: any) => ({
             "@type": "Question",
             name: faq.question,
             acceptedAnswer: {
               "@type": "Answer",
               text: faq.answer,
             },
-          })) || [],
+          })) || []),
+          {
+            "@type": "Question",
+            name: `How can I contact the owner of ${listing.propName}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `You can contact the owner of ${listing.propName} by clicking on the contact button on the property listing page. Our team will connect you with the owner directly.`,
+            },
+          },
+          {
+            "@type": "Question",
+            name: `What is the price of ${listing.propName}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `The price of ${listing.propName} is Rs. ${listing.price}. Please contact us for detailed pricing information and negotiations.`,
+            },
+          },
+          {
+            "@type": "Question",
+            name: `Is ${listing.propName} available for immediate possession?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `Please contact us to know the exact possession status of ${listing.propName}. We will provide you with all the necessary details about availability and possession timeline.`,
+            },
+          },
+        ],
       },
       ...nearByLocationsSchema,
     ],
