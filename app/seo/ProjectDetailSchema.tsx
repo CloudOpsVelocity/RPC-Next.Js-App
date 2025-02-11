@@ -334,6 +334,8 @@ const generateSchema = (projectData: ProjectData) => {
           "@type": "Offer",
           url: projectDetailsPageUrl,
           priceCurrency: "INR",
+          price: basicData.minPrice,
+          validFrom: basicData.startDate,
           priceValidUntil: projectData?.basicData.endDate,
           availability: "http://schema.org/InStock",
           category: "Primary",
