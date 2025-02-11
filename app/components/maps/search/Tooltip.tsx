@@ -45,7 +45,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
             <BiSolidBuildings size={16} className="text-blue-600" />
             {projName}
           </h3>
-          <div className="flex items-center gap-1 text-gray-700 mt-0.5">
+          <div className="flex items-center gap-1 text-gray-700 mt-0.5"> 
             <BiSolidMapPin size={14} className="text-emerald-600" />
             <p className="text-[12px] font-medium">
               {locality}, {city}

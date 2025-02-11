@@ -72,7 +72,7 @@ export default function ListingData({
 
   const getApproveNamesProj=()=>{
    const proJAuth=projAuthority? projAuthority.split(',') : [];
-   console.log(proJAuth)
+  //  console.log(proJAuth)
     const resultedValue = proJAuth.map((item:string)=>{
      return item.split("–")[0]
     })
