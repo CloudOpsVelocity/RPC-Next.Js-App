@@ -63,6 +63,7 @@ export const Organization_SCHEMA = {
     "@type": "Organization",
     name: "RERA",
   },
-
+  image:
+    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
   telephone: "+91 8884440963",
 };

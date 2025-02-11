@@ -16,7 +16,6 @@ const realEstateProject: WithContext<Project> = {
     postalCode: "90210",
     addressCountry: "US",
   },
-
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Sales",
