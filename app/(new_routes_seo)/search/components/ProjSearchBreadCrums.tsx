@@ -77,7 +77,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     >
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         <li>
-          <a
+          <a 
             href="/"
             className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
           >
