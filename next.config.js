@@ -12,9 +12,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors:
-      process.env.ENVIRONMENT === "production" ||
-      process.env.ENVIRONMENT === "test",
+    ignoreBuildErrors: process.env.ENVIRONMENT === "production",
+    //  ||
+    // process.env.ENVIRONMENT === "test",
   },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
