@@ -242,6 +242,18 @@ const generateSchema = (projectData: ProjectData) => {
           "@type": "Product",
           name: basicData?.projectName,
           image: basicData.media.projectPlanUrl,
+          description: desc || "Details about the project",
+          brand: {
+            "@type": "Brand",
+            name: basicData?.projectName.split(" ")[0],
+          },
+          offers: {
+            "@type": "Offer",
+            url: projectDetailsPageUrl,
+            price: basicData.minPrice,
+            priceCurrency: PRICE_CURRENY,
+            availability: "https://schema.org/InStock",
+          },
         },
       },
       {
