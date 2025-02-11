@@ -41,9 +41,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  const { entry } = useIntersection({
+/*   const { entry } = useIntersection({
     root: containerRef.current,
-  });
+    threshold: 0.1,
+  }); */
+  
+    const { ref, entry } = useIntersection({
+      root: containerRef.current,
+      threshold: 0.1,
+    });
 
 
   let isTrue = pathname.includes("search")
@@ -69,13 +75,20 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         }
         return nextPage;
       },
+      cacheTime: 300000,
       enabled: isTrue,
+ /*      enabled: isTrue,
+      ...RTK_CONFIG, */
+    });
+    const { data: approvedData } = useQuery({
+      queryKey: ["projAuth"],
+      enabled: true,
+      queryFn: () => getAllAuthorityNames(),
       ...RTK_CONFIG,
     });
-
   const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
-  console.log(hasNextPage , shouldFetchMore ,isLoading , data )
-
+/*   console.log(hasNextPage , shouldFetchMore ,isLoading , data )
+ */
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
     getScrollElement: () => containerRef.current,
@@ -87,15 +100,10 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     },
   });
 
-  const { data: approvedData } = useQuery({
-    queryKey: ["projAuth"],
-    enabled: true,
-    queryFn: () => getAllAuthorityNames(),
-    ...RTK_CONFIG,
-  });
+
 
   // Handle scroll events for both mobile and desktop
-  useEffect(() => {
+ /*  useEffect(() => {
     if (entry?.isIntersecting) {
       alert("view thing");
     }
@@ -104,8 +112,13 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       fetchNextPage();
       setPage((prev) => prev + 1);
     }
+  }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]); */
+ useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
+      fetchNextPage();
+      setPage((prev) => prev + 1);
+    }
   }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]);
-
   const renderProjectCard = useCallback(
     (virtualRow: any) => {
       const eachOne = allItems[virtualRow.index];
@@ -170,33 +183,35 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   );
 
   return (
-       <div className="flex  flex-col  w-full sm:max-w-[50%] ">
+  <div className="flex  flex-col  w-full sm:max-w-[50%] ">
     <ProjectSearchTabs />
-    <div
-      className="p-[0%] max-h-[60vh] sm:max-h-[calc(100vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] "
-      ref={containerRef}
-    >
-      {isLoading ? (
-        <LoadingBlock />
-      ) : allItems.length > 0 ? (
-        <div
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-        </div>
-      ) : (
-        <EmptyState />
-      )}
-      {hasNextPage && shouldFetchMore  && (
-        <div className="w-full py-8 flex justify-center items-center text-gray-600">
-          <LoadingSpinner />
-        </div>
-      )}
-      <LoginPopup />
+      <div
+        className="p-[0%] max-h-[60vh] sm:max-h-[calc(100vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] "
+        ref={containerRef}
+      >
+        {isLoading ? (
+          <LoadingBlock />
+        ) : allItems.length > 0 ? (
+          <div
+            style={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
+          </div>
+        ) : (
+          <EmptyState />
+        )}
+        {hasNextPage && shouldFetchMore  && (
+          <div
+          ref={ref}
+          className="w-full py-8 flex justify-center items-center text-gray-600">
+            <LoadingSpinner />
+          </div>
+        )}
+        <LoginPopup />
       <RequestCallBackModal />
     </div>
     </div>  
