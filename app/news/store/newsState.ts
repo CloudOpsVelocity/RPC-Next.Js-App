@@ -38,7 +38,7 @@ const initailState = {
                     <p>For those looking to invest, buy a home, or simply be part of the city&rsquo;s growth story, Bengaluru offers unparalleled opportunities and the promise of a bright, future-ready destination. As the city evolves, it continues to be a beacon of innovation, a hub of opportunities, and a land of exciting prospects for all who call it home.</p>`,
             url:`${BASE_URL}/staticmedia-images-icons/News/New-1.jpeg`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 03, 2024",
             viewsCount:"2353"
         },{
@@ -69,7 +69,7 @@ const initailState = {
                     <p>In the coming years, as Bengaluru continues to grow, it will remain a hotbed for real estate investment, and the metro expansion will be a driving force in shaping the city&rsquo;s property trends. For anyone looking to capitalize on Bengaluru&rsquo;s real estate boom, investing in properties near metro corridors is a strategic and highly rewarding move.</p>`,
             url:`${BASE_URL}/staticmedia-images-icons/News/News-2.jpeg`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 04, 2024",
             viewsCount:"4653"
         },{
@@ -120,7 +120,7 @@ const initailState = {
                     <p>As Bengaluru evolves, luxury living will continue to be at the forefront of the city&rsquo;s real estate developments. The future looks bright for luxury real estate in Bengaluru, with developers continuing to innovate and deliver homes that meet the sophisticated tastes and needs of today&rsquo;s elite buyers.</p>`,
             url:`${BASE_URL}/staticmedia-images-icons/News/News-3.avif`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 04, 2024",
             viewsCount:"353"
         },{
@@ -175,7 +175,7 @@ const initailState = {
                     <p>As the city expands and modernizes, the dream of owning a home in Bengaluru will remain a central goal for many young professionals and families. With the right support, the future looks bright for first-time buyers in Bengaluru&rsquo;s dynamic real estate market.</p>`,
             url:`${BASE_URL}/staticmedia-images-icons/News/News-4.jpg`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 04, 2024",
             viewsCount:"653"
         },{
@@ -246,7 +246,7 @@ const initailState = {
                     <p>For businesses and investors, Bengaluru offers a wealth of opportunities in the commercial real estate market. As the city continues to develop, it will remain a top choice for companies looking to expand their presence in India and across the globe. For those looking to tap into Bengaluru&rsquo;s thriving commercial real estate sector, now is the time to invest in the city&rsquo;s dynamic office space market.</p>`,
             url:`${BASE_URL}/staticmedia-images-icons/News/News-5.avif`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 04, 2024",
             viewsCount:"53"
         },{
@@ -321,7 +321,7 @@ const initailState = {
                     <p>Now is the perfect time for NRIs to consider Bengaluru as a key part of their real estate investment strategy. With the right property and strategic planning, investors can unlock significant wealth in one of India&rsquo;s most promising real estate markets.</p>`,
             url:`${BASE_URL}/staticmedia-images-icons/News/News-6.avif`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 04, 2024",
             viewsCount:"33"
         },{
@@ -428,7 +428,7 @@ const initailState = {
                     <p>Investing in sustainable real estate in Bengaluru not only benefits the environment but also offers significant financial returns, making it an ideal choice for homebuyers, investors, and developers alike. As Bengaluru continues to grow, its real estate sector will become increasingly defined by eco-friendly innovations, setting the stage for a greener, more sustainable future.</p>`,
             url:`${BASE_URL}/staticmedia-images-icons/News/News-7.avif`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 04, 2024",
             viewsCount:"7653"
         },{
@@ -495,7 +495,7 @@ const initailState = {
                     <p><strong>Now is the time to explore REITs as a smart and future-ready investment option in Bengaluru&rsquo;s thriving real estate landscape.</strong></p>`,
                                 url:`${BASE_URL}/staticmedia-images-icons/News/News-8.png`,
             section: "Technology",
-            user:"Ram Dev",
+            user:"",
             date:"Sep 04, 2024",
             viewsCount:"2653"
         }

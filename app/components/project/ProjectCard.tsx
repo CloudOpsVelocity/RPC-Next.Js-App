@@ -325,6 +325,7 @@ const ProjectCarousel = ({
         </div>
         <NewCarousel
           data={data}
+          type={type}
           renderItem={(project: any) => (
             <ProjectCard
               key={`proj_${project?.projIdEnc}`}
