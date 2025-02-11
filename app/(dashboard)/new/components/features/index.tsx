@@ -6,7 +6,7 @@ type Props = {};
 
 export default function HomeFeatures({}: Props) {
   return (
-    <div className="w-full pb-[10px] pl-[4%] m-auto pt-[10px] md:pt-0 sm:mt-0 sm:pb-16 sm:pt-8 bg-[#EEF4F9] ">
+    <div className="w-full pb-[10px] pl-[4%] m-auto pt-[10px] sm:mt-0 sm:pb-16 md:pt-8 bg-[#EEF4F9] ">
       <h1 className=" text-[#202020] text-left md:text-center  text-[14px] md:text-[20px] xl:text-[24px] not-italic font-bold m-0 ">
         Why Choose{" "}
         <span className=" text-[color:var(--Brand-green-primary,#148B16)] text-[14px] md:text-[20px] xl:text-[24px] not-italic font-bold">

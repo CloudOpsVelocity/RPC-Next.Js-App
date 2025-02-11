@@ -11,6 +11,7 @@ interface CarouselProps<T> {
   className?: string;
   url?: string;
   renderViewMore?: () => React.ReactNode; // Function to render the "View More" card
+  type?:string;
 }
 
 function NewCarousel<T>({
@@ -20,6 +21,7 @@ function NewCarousel<T>({
   gap = 24,
   url,
   renderViewMore,
+  type,
 }: CarouselProps<T>) {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTab = useMediaQuery("(max-width: 1280px)");
@@ -87,7 +89,7 @@ function NewCarousel<T>({
           <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             View More
           </h3>
-          <p className="text-sm text-gray-500">Explore all listings</p>
+          <p className="text-sm text-gray-500">Explore all {type == "proj" ? "Projects" : "listings"}</p>
         </div>
         <div className="flex items-center gap-2 text-gray-400">
           <span className="text-xs">Browse complete catalog</span>
