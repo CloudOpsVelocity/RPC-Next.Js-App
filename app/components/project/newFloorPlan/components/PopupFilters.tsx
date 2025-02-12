@@ -77,22 +77,22 @@ export default function PopupFilters({
           unitNumber: unitFilteredData[0].unitNumber ? unitFilteredData[0].unitNumber : "",
           bhkName: unitFilteredData[0].bhkName ? unitFilteredData[0].bhkName : "",
           towerName: unitFilteredData[0].towerName ? unitFilteredData[0].towerName : "",
-          floor: unitFilteredData[0].floor ? unitFilteredData[0].floor : "",
+          floor: unitFilteredData[0].floor !== null ? unitFilteredData[0].floor : "",
           facingName: unitFilteredData[0].facingName ? unitFilteredData[0].facingName : "",
-          block: unitFilteredData[0].block ? unitFilteredData[0].block : "",
-          plotArea: unitFilteredData[0].plotArea ? unitFilteredData[0].plotArea : "",
+          block: unitFilteredData[0].block !== null ? unitFilteredData[0].block : "",
+          plotArea: unitFilteredData[0].plotArea !== null ? unitFilteredData[0].plotArea : "",
           length: unitFilteredData[0].length ? unitFilteredData[0].length : "",
           width: unitFilteredData[0].width ? unitFilteredData[0].width : "",
-          parkingArea: unitFilteredData[0].parkingArea ? unitFilteredData[0].parkingArea : "",
-          gardenArea: unitFilteredData[0].gardenArea ? unitFilteredData[0].gardenArea : "",
+          parkingArea: unitFilteredData[0].parkingArea !== null ? unitFilteredData[0].parkingArea : "",
+          gardenArea: unitFilteredData[0].gardenArea !== null ? unitFilteredData[0].gardenArea : "",
           parkingType: unitFilteredData[0].parkingType ? unitFilteredData[0].parkingType : "",
-          terraceArea: unitFilteredData[0].terraceArea ? unitFilteredData[0].terraceArea : "",
+          terraceArea: unitFilteredData[0].terraceArea !== null ? unitFilteredData[0].terraceArea : "",
           caretarea: unitFilteredData[0].caretarea ? unitFilteredData[0].caretarea : "",
           superBuildUparea: unitFilteredData[0].superBuildUparea ? unitFilteredData[0].superBuildUparea : "",
-          totalNumberofBathroom: unitFilteredData[0].totalNumberofBathroom ? unitFilteredData[0].totalNumberofBathroom : "",
+          totalNumberofBathroom: unitFilteredData[0].totalNumberofBathroom !== null ? unitFilteredData[0].totalNumberofBathroom : "",
           totalNumberOfBalcony: unitFilteredData[0].totalNumberOfBalcony ? unitFilteredData[0].totalNumberOfBalcony : "",
           noOfCarParking: unitFilteredData[0].noOfCarParking ? unitFilteredData[0].noOfCarParking : "",
-          totalBalconySize: unitFilteredData[0].totalBalconySize ? unitFilteredData[0].totalBalconySize : "",
+          totalBalconySize: unitFilteredData[0].totalBalconySize !== null ? unitFilteredData[0].totalBalconySize : "",
           aptTypeName: unitFilteredData[0].aptTypeName ? unitFilteredData[0].aptTypeName : "",
         }
 
@@ -140,6 +140,8 @@ export default function PopupFilters({
     });
   };
 
+  console.log(filters)
+
   const renderFilter = (
     key: keyof typeof filters,
     placeholder: string,
@@ -159,11 +161,7 @@ export default function PopupFilters({
         </label>
         <FilterInput
           value={
-            placeholder == "Select Floor"
-              ? filters[key] == "0"
-                ? "G"
-                : filters[key]
-              : filters[key] || ""
+            placeholder == "Select Floor" ? filters[key] == "0" ? "G" : filters[key] : filters[key] || ""
           }
           onChange={(value: any) => handleFilterChange(key, value)}
           options={filteredOptions(key)}
