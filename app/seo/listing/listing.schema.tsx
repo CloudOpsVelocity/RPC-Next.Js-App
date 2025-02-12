@@ -289,13 +289,13 @@ const ListingSchema = ({
   listingData: ListingSchemaProps;
 }) => {
   return (
-    // <script
-    //   type="application/ld+json"
-    //   dangerouslySetInnerHTML={{
-    //     __html: JSON.stringify(generateListingSchema(listingData)),
-    //   }}
-    // />
-    <div>{JSON.stringify(generateListingSchema(listingData))}</div>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(generateListingSchema(listingData)),
+      }}
+    />
+    // <div>{JSON.stringify(generateListingSchema(listingData))}</div>
   );
 };
 
