@@ -67,7 +67,7 @@ export default function Navigation({
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
 
-  let similarAvl = similarData?.otherListing.length > 1;
+  // let similarAvl = similarData?.otherListing.length > 1;
   let SimilatListingAvl =
     similarData?.otherListing.length > 1 || similarData?.projListing.length > 1;
   useEffect(() => {
@@ -173,7 +173,7 @@ export default function Navigation({
       {leftScroll > 0 && (
         <Image
           src="/auth/arrow.svg"
-          alt=""
+          alt="left arrow"
           className="rotate-180 cursor-pointer"
           width={41}
           height={64}
@@ -228,7 +228,7 @@ export default function Navigation({
       </div>
       <Image
         src="/auth/arrow.svg"
-        alt=""
+        alt="right arrow"
         className="cursor-pointer"
         width={41}
         height={64}

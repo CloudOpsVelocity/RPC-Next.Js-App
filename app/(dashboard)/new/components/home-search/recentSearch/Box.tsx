@@ -30,16 +30,17 @@ export default function Box({ item }: Props) {
               apiData.stringId.split("_")[0]
             }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
-            }`, "_blank", "noreferrer"
+            }`,
+            "_blank",
+            "noreferrer"
           );
         }
 
         break;
       case "listing":
-        
         {
           const data = extractApiValues(apiData.stringId);
-          alert(JSON.stringify(data))
+
           {
             let url;
             let localityName = apiData.name.split("in")[1].toLowerCase().trim();
@@ -52,7 +53,9 @@ export default function Box({ item }: Props) {
             window.open(
               data.PJ && data.PJ !== "null"
                 ? `/search/listing?sf=${url}`
-                : "/search/?sf=" + `${url}-listedBy=All`, "_blank", "noreferrer"
+                : "/search/?sf=" + `${url}-listedBy=All`,
+              "_blank",
+              "noreferrer"
             );
           }
         }
@@ -60,13 +63,13 @@ export default function Box({ item }: Props) {
       case "projectListing":
         {
           let projectName = data.name.split(" in ")[1].trim();
-        
+
           const url = `projIdEnc=${
             data.stringId
           }&listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
           )}&projName=${projectName}`;
-          window.open("/search/listing?sf=" + url , "_blank", "noreferrer");
+          window.open("/search/listing?sf=" + url, "_blank", "noreferrer");
         }
         break;
       case "builder":
@@ -85,7 +88,9 @@ export default function Box({ item }: Props) {
                 apiData.type !== "BuilderProject"
                   ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
-              }`, "_blank", "noreferrer"
+              }`,
+              "_blank",
+              "noreferrer"
             );
           }
         }
@@ -100,7 +105,7 @@ export default function Box({ item }: Props) {
   return (
     <Tooltip label={item.name} withArrow>
       <div
-        onClick={(e) => handlePush(item.ct, item,item)}
+        onClick={(e) => handlePush(item.ct, item, item)}
         className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-[#4B77C1] text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200"
       >
         {truncateText(item?.name, 36)} {config.icon}

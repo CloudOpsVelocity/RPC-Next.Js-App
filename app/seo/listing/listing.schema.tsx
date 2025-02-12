@@ -212,6 +212,49 @@ export const generateListingSchema = ({
           },
         ],
       },
+      {
+        "@type": "PropertyValue",
+        name: listing.propName,
+        value: listing.price,
+        unitText: "INR",
+        propertyID: listing.id,
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "bedrooms",
+            value: listing.bhk,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "furnishing",
+            value: listing.furnishType,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "propertyType",
+            value: listing.propType,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "area",
+            value: listing.sba,
+            unitText: "sq ft",
+          },
+        ],
+      },
+      {
+        "@type": "PostalAddress",
+        addressCountry: "IN",
+        addressLocality: listing.ltName,
+        addressRegion: listing.ctName,
+        streetAddress: listing.address,
+        postalCode: listing.pincode || "",
+      },
+      {
+        "@type": "GeoCoordinates",
+        latitude: listing.lat,
+        longitude: listing.lang,
+      },
       ...nearByLocationsSchema,
     ],
   };
