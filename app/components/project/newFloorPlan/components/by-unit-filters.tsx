@@ -65,7 +65,7 @@ export default function ByUnitFilters({
   }, []);
 
   const filteredOptions = (key: keyof typeof filters) => {
-    const filterValue = filters[key].toLowerCase();
+    const filterValue = typeof(filters[key]) === "number" ? filters[key] : filters[key].toLowerCase();
     return (
       options &&
       options[key].filter((option: string | number) => {
@@ -103,7 +103,8 @@ export default function ByUnitFilters({
 
   const renderFilter = (key: keyof typeof filters, placeholder: string) => {
     const isFocused = focusedFilter === key;
-
+    console.log(filters)
+    
     return (
       <div
         key={key.toString()}
@@ -153,6 +154,8 @@ export default function ByUnitFilters({
       </div>
     );
   };
+
+  console.log(options?.floor)
 
   return (
     <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
