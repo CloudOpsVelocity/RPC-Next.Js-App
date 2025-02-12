@@ -73,7 +73,7 @@ export default function PropertyOverView({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
         </div>
-        <div className="flex justify-start xl:justify-end items-start xl:items-end xl:flex-col mt-[3%] xl:mt-0 pb-10 relative xl:absolute xl:right-0 xl:bottom-0 flex-wrap">
+        <div className="flex justify-start xl:justify-end items-start xl:items-end xl:flex-col mt-[3%] xl:mt-0 pb-10 relative xl:absolute xl:right-0 xl:bottom-0 flex-wrap gap-[10px]">
           <ReportSectionProperty issueData={issueData} />
           <ShortList {...data} />
           <CompareList {...data} />
