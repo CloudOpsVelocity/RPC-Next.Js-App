@@ -255,6 +255,24 @@ export const generateListingSchema = ({
         latitude: listing.lat,
         longitude: listing.lang,
       },
+      {
+        "@type": "ViewAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${DOMAIN}property/${listing.propIdEnc}`,
+          actionPlatform: [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+            "http://schema.org/AndroidPlatform",
+            "http://schema.org/IOSPlatform",
+          ],
+        },
+        expectsAcceptanceOf: {
+          "@type": "Offer",
+          price: listing.price,
+          priceCurrency: PRICE_CURRENY,
+        },
+      },
       ...nearByLocationsSchema,
     ],
   };
