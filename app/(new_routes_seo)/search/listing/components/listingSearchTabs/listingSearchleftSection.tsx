@@ -172,7 +172,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     <div className="flex  flex-col  w-full sm:max-w-[50%] ">
     <ListingSearchTabs />
     <div
-      className="p-[0%] max-h-[85vh] sm:max-h-[calc(78vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%]"
+      className="p-[0%] max-h-[85vh] sm:max-h-[calc(72vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%]"
       ref={containerRef}
     >
       {isLoading ? (
