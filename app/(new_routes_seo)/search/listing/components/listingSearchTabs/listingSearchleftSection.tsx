@@ -166,7 +166,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
   return (
     <div
-      className="p-[0%] sm:max-h-[500px] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] sm:max-w-[50%]"
+      className="p-[0%] sm:max-h-[calc(78vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] sm:max-w-[50%]"
       ref={containerRef}
     >
       <ListingSearchTabs />

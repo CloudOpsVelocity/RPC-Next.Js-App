@@ -93,7 +93,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     count: allItems.length,
     getScrollElement: () => containerRef.current,
     estimateSize: () => 300,
-    overscan: 1,
+    overscan: 20,
     enabled: true,
     measureElement: (element) => {
       return element?.getBoundingClientRect().height || 300;
@@ -186,7 +186,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   <div className="flex  flex-col  w-full sm:max-w-[50%] ">
     <ProjectSearchTabs />
       <div
-        className="p-[0%] max-h-[60vh] sm:max-h-[calc(100vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] "
+        className="p-[0%] max-h-[60vh] sm:max-h-[calc(67vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] "
         ref={containerRef}
       >
         {isLoading ? (
