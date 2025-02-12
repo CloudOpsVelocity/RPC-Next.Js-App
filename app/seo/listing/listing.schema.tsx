@@ -11,15 +11,18 @@ interface ListingSchemaProps {
   nearByLocations: any;
   listing: any;
   faqData: any;
+  title: string;
+  url: string;
 }
 
 export const generateListingSchema = ({
   nearByLocations,
   listing,
   faqData,
+  title,
+  url,
 }: ListingSchemaProps) => {
   const nearByLocationsSchema: Place[] = [];
-
   for (const category in nearByLocations) {
     nearByLocations[category]?.forEach((location: any) => {
       nearByLocationsSchema.push({
@@ -45,8 +48,8 @@ export const generateListingSchema = ({
     "@graph": [
       {
         "@type": "WebPage",
-        name: listing.propName,
-        url: `${DOMAIN}property/${listing.propIdEnc}`,
+        name: title,
+        url: url,
         description: listing.usp,
         breadcrumb: {
           "@type": "BreadcrumbList",
@@ -66,14 +69,14 @@ export const generateListingSchema = ({
             {
               "@type": "ListItem",
               position: 3,
-              name: listing.propName,
+              name: title,
               item: `${DOMAIN}property/${listing.propIdEnc}`,
             },
           ],
         },
         mainEntity: {
           "@type": "RealEstateListing",
-          url: `${DOMAIN}property/${listing.propIdEnc}`,
+          url: url,
           datePosted: listing.createdAt,
           description: listing.usp,
         },
@@ -85,15 +88,15 @@ export const generateListingSchema = ({
             : listing.propTypeName === "Villament"
             ? "House"
             : listing.propTypeName === "Plot"
-            ? "Land"
+            ? "RealEstateListing"
             : listing.propTypeName === "Villa"
-            ? "Villa"
+            ? "RealEstateListing"
             : listing.propTypeName === "Row House"
-            ? "RowHouse"
+            ? "RealEstateListing"
             : listing.propTypeName === "Independent House/Building"
             ? "ResidentialBuilding"
             : "Apartment",
-        name: listing.propName,
+        name: title,
         description: listing.usp,
         numberOfRooms:
           listing.propTypeName !== "Land" ? listing.nobt : undefined,
@@ -119,7 +122,7 @@ export const generateListingSchema = ({
           longitude: listing.lang,
         },
         image: listing.projMedia?.coverImageUrl?.split(",")[0],
-        url: `${DOMAIN}property/${listing.propIdEnc}`,
+        url: url,
         telephone: PHONE_NUMBER,
         amenityFeature:
           listing.propTypeName !== "Land"
@@ -133,7 +136,7 @@ export const generateListingSchema = ({
           listing.propTypeName !== "Land" ? listing.bathRooms : undefined,
         yearBuilt:
           listing.propTypeName !== "Land" ? listing.yearBuilt : undefined,
-        propertyType: listing.propTypeName,
+        // propertyType: listing.propTypeName,
         floorLevel: ["Apartment", "Residential Building"].includes(
           listing.propTypeName
         )
@@ -142,7 +145,7 @@ export const generateListingSchema = ({
       },
       {
         "@type": "Product",
-        name: listing.propName,
+        name: title,
         description: listing.usp,
         image: listing.projMedia.coverImageUrl.split(",")[0],
         brand: {
@@ -151,7 +154,7 @@ export const generateListingSchema = ({
         },
         offers: {
           "@type": "Offer",
-          url: `${DOMAIN}property/${listing.propIdEnc}`,
+          url: url,
           price: listing.price,
           priceCurrency: PRICE_CURRENY,
           availability: "https://schema.org/InStock",
@@ -180,10 +183,10 @@ export const generateListingSchema = ({
         mainEntity: [
           ...(faqData?.map((faq: any) => ({
             "@type": "Question",
-            name: faq.question,
+            name: faq.faqQuestion,
             acceptedAnswer: {
               "@type": "Answer",
-              text: faq.answer,
+              text: faq.faqAnswer,
             },
           })) || []),
           {
@@ -212,6 +215,67 @@ export const generateListingSchema = ({
           },
         ],
       },
+      {
+        "@type": "PropertyValue",
+        name: title,
+        value: listing.price,
+        unitText: "INR",
+        propertyID: listing.id,
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "bedrooms",
+            value: listing.bhk,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "furnishing",
+            value: listing.furnishType,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "propertyType",
+            value: listing.propType,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "area",
+            value: listing.sba,
+            unitText: "sq ft",
+          },
+        ],
+      },
+      {
+        "@type": "PostalAddress",
+        addressCountry: "IN",
+        addressLocality: listing.ltName,
+        addressRegion: listing.ctName,
+        streetAddress: listing.address,
+        postalCode: listing.pincode || "",
+      },
+      {
+        "@type": "GeoCoordinates",
+        latitude: listing.lat,
+        longitude: listing.lang,
+      },
+      {
+        "@type": "ViewAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${DOMAIN}property/${listing.propIdEnc}`,
+          actionPlatform: [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+            "http://schema.org/AndroidPlatform",
+            "http://schema.org/IOSPlatform",
+          ],
+        },
+        expectsAcceptanceOf: {
+          "@type": "Offer",
+          price: listing.price,
+          priceCurrency: PRICE_CURRENY,
+        },
+      },
       ...nearByLocationsSchema,
     ],
   };
@@ -231,6 +295,7 @@ const ListingSchema = ({
         __html: JSON.stringify(generateListingSchema(listingData)),
       }}
     />
+    // <div>{JSON.stringify(generateListingSchema(listingData))}</div>
   );
 };
 

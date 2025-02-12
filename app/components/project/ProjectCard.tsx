@@ -202,7 +202,7 @@ export function ProjectCard({
                 onAddingShortList(e, cardData.projIdEnc);
               }}
             >
-              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
+              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg} 
               {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
             </button>
           </div>

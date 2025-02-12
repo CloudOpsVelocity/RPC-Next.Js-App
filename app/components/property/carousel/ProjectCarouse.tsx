@@ -28,10 +28,10 @@ export default function NearByCarouselProjProperty({
   const { data: builderData } = useBuilder({
     id: builderId ?? 1109,
     y: "N",
-    type: "proj",
+    type: "proj", 
   });
 
-  console.log(data?.nearbyProj);
+  // console.log(data?.nearbyProj);
 
   return (
     <div

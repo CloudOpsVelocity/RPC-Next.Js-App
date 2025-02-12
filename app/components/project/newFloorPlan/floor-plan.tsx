@@ -150,22 +150,23 @@ export default function FloorPlans({
           unitNumber: unitFilteredData[0].unitNumber
             ? unitFilteredData[0].unitNumber
             : "",
-          bhkName: unitFilteredData[0].bhkName
+          bhkName: unitFilteredData[0].bhkName !== null
             ? unitFilteredData[0].bhkName
             : "",
-          towerName: unitFilteredData[0].towerName
+          towerName: unitFilteredData[0].towerName !== null
             ? unitFilteredData[0].towerName
             : "",
-          floor: unitFilteredData[0].floor ? unitFilteredData[0].floor : "",
-          facingName: unitFilteredData[0].facingName
+          floor: unitFilteredData[0].floor !== undefined && unitFilteredData[0].floor !== null && unitFilteredData[0].floor !== "" ? 
+            unitFilteredData[0].floor == 0 ? "G" : unitFilteredData[0].floor : "",
+          facingName: unitFilteredData[0].facingName !== null
             ? unitFilteredData[0].facingName
             : "",
-          block: unitFilteredData[0].block ? unitFilteredData[0].block : "",
-          plotArea: unitFilteredData[0].plotArea
+          block: unitFilteredData[0].block !== null ? unitFilteredData[0].block : "",
+          plotArea: unitFilteredData[0].plotArea !== null
             ? unitFilteredData[0].plotArea
             : "",
-          length: unitFilteredData[0].length ? unitFilteredData[0].length : "",
-          width: unitFilteredData[0].width ? unitFilteredData[0].width : "",
+          length: unitFilteredData[0].length !== null ? unitFilteredData[0].length : "",
+          width: unitFilteredData[0].width !== null ? unitFilteredData[0].width : "",
         }));
       }
     } else {
@@ -335,7 +336,7 @@ export default function FloorPlans({
             handlePricingFloorPlanClick={handlePricingFloorPlanClick}
           />
         ))}{" "}
-      <div className="w-full md:w-[90%] mx-auto px-3 md:px-4 py-8">
+      <div className="w-full md:w-[90%] mx-auto px-3 md:px-4 py-8" id="floor-plans">
         <h2
           className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
           id="floorPlansdiv"

@@ -129,12 +129,55 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   const changePage = (offset: number) => {
     setState((prev) => ({ ...prev, pageNumber: prev.pageNumber + offset }));
   };
+  
+  const downloadBroucher=(url: string)=>{
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Network response was not ok: ${response.statusText}`
+          );
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "brochure.pdf";
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error("Error fetching or downloading the file:", error);
+      });
+  }
 
   const handleDownload = (url: string) => {
     const brocherPageUrl = `/pdf/${encodeURIComponent(
       url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
     )}`;
-
+     if(isMobile){
+      if (!session) {
+        LoginOpen(
+          () => {
+            url && downloadBroucher(brocherPageUrl);
+            ;
+          },
+          {
+            type: "brochure",
+            link: url,
+          }
+        );
+        return;
+      }
+      downloadBroucher(brocherPageUrl);
+      return;
+     }
     if (!session) {
       LoginOpen(
         () => {
