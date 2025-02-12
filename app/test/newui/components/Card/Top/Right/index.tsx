@@ -60,7 +60,7 @@ export default function TopRightSection({
 
 
 
-
+console.log(type)
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
@@ -227,9 +227,9 @@ export default function TopRightSection({
                       propType: type === "proj" ? propType : propTypeName,
                     });
                   }}
-                  className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
+                  className="inline-flex sm:hidden  xm:px-[1px] sm:py-[1px]  justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer "
                 >
-                  <NewMapIcon className="w-6 h-6" />
+                  <NewMapIcon className="w-6 h-6 " />
                 </div>
                 {/* 
                 <button
@@ -322,9 +322,9 @@ export default function TopRightSection({
                 </button>
               </div>
             )}
-            {type === "proj" ||
+            {type === "proj" ||( type === null ) ||
               (category == "Sale" && (
-                <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
+                <div className="text-xs flex xl:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
                   <p className="text-right text-[12px] text-nowrap text-[#148B16]">
                     Avg Price:₹{" "}
                     {formatNumberWithSuffix(

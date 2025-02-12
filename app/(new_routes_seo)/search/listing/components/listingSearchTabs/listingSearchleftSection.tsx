@@ -98,8 +98,12 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   });
 
   useEffect(() => {
+
     if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
+   
       fetchNextPage();
+      console.log("calling api", (entry?.isIntersecting && hasNextPage && shouldFetchMore))
+
       setPage((prev) => prev + 1);
     }
   }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]);
@@ -165,11 +169,12 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   );
 
   return (
+    <div className="flex  flex-col  w-full sm:max-w-[50%] ">
+    <ListingSearchTabs />
     <div
-      className="p-[0%] sm:max-h-[500px] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] sm:max-w-[50%]"
+      className="p-[0%] max-h-[85vh] sm:max-h-[calc(100vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%]"
       ref={containerRef}
     >
-      <ListingSearchTabs />
       {isLoading ? (
         <LoadingBlock />
       ) : allItems.length > 0 ? (
@@ -196,6 +201,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       <LoginPopup />
       <RequestCallBackModal />
     </div>
+      </div>
   );
 }
 
