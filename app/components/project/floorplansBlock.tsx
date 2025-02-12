@@ -306,7 +306,7 @@ Props) {
         ) : (
           <PartialUnitData
             partialUnitData={paritalUnitParser(PhaseOverview)}
-            projName={projName}
+            projName={projName} 
             phaseList={phaseList}
             data={projectUnitsData}
             type="overview"

@@ -24,8 +24,12 @@ export default function Message({ cg, propTypeName }: any) {
     (data?.compareAdded && "/your-profile/compare") ||
     (data?.shortListed && "/your-profile/shortlisted")
   }`;
+
+  // inline-flex items-center mt-4  gap-2 p-1.5 rounded-lg bg-[#fff5c3]  sm:-bottom-5  sm:right-0 w-full md:min-w-fit sm:mt-1
+
   return (
     (data?.compareAdded || data?.shortListed) && (
+    <div>
       <div
         className={clsx(
           "flex items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] sm:bottom-5 sm:right-0 w-full md:min-w-fit mt-0 xl:mt-4 ",
@@ -66,6 +70,7 @@ export default function Message({ cg, propTypeName }: any) {
           for {dynamicText} Property
         </span>
       </div>
+    </div>
     )
   );
 }
