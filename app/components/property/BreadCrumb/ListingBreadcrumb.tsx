@@ -61,22 +61,30 @@ export default function ListingBreadCrumbs({
 
   return (
     <>
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbItems,
-        })}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbItems,
+          }),
+        }}
+      >
+        {}
       </script>
 
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "SiteNavigationElement",
-          name: breadcrumbItems.map((item) => item.name),
-          url: breadcrumbItems.map((item) => item.item),
-        })}
-      </script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SiteNavigationElement",
+            name: breadcrumbItems.map((item) => item.name),
+            url: breadcrumbItems.map((item) => item.item),
+          }),
+        }}
+      ></script>
 
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
         <a
