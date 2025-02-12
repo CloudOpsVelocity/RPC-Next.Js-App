@@ -302,8 +302,8 @@ export function FloorPlanModal({
               </div>
 
               {/* Unit Details */}
-              <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 h-[calc(100vh-300px)] md:h-auto overflow-y-auto">
-                <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 sticky top-0 bg-white">
+              <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 h-[calc(100vh-300px)] md:h-auto overflow-y-auto !pt-0 ">
+                <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 sticky top-0 bg-white pt-3 sm:pt-6">
                   Area Details
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-4">
