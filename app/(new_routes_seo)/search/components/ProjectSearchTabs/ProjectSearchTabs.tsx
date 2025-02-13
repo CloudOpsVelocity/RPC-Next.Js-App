@@ -156,15 +156,15 @@ export default function ProjectSearchTabs() {
   // Default value if no conditions are met
 
   return (
-    <div className="bg-slate-50 shadow-md sm:min-w-[65rem]">
-      <div className=" w-full     sm:px-4 pb-4 pt-2     sm:pb-3">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div className="bg-slate-50 shadow-md max-w-[50%] flex-nowrap ">
+      <div className=" w-full pb-[6px] pt-[10px] px-[10px]">
+        <div className="flex flex-col gap-[10px] md:flex-row md:items-center md:justify-between ">
           <div
             ref={scrollContainerRef}
             onWheel={handleWheel}
-            className="overflow-x-auto no-scrollbar"
+            className="overflow-x-auto no-scrollbar max-w-full pb-[2px] "
           >
-            <div className="flex items-center sm:gap-1 py-8 sm:p-0 xl:gap-2 min-w-max">
+            <div className="flex items-center sm:gap-1 py-8 sm:p-0 xl:gap-2 min-w-max ">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -184,7 +184,7 @@ export default function ProjectSearchTabs() {
             </div>
           </div>
 
-          <div className="relative hidden xl:flex">
+          <div className="relative flex">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -246,7 +246,7 @@ export default function ProjectSearchTabs() {
           </div>
         </div>
       </div>
-      <div className=" relative xl:hidden flex justify-end self-end bg-slate-50 shadow-mdmax-w-7xl ">
+      <div className=" relative hidden justify-end self-end bg-slate-50 shadow-md ">
         <button
           onClick={(e) => {
             e.stopPropagation();

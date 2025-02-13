@@ -184,7 +184,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       className={`flex flex-col w-full sm:max-w-[50%] relative pt-[4%] overflow-auto`}
       ref={containerRef}
     >
-      <div className="p-[0%]">
+      <div className="p-[0%] pt-[6%]">
         {isLoading && allItems.length === 0 ? (
           <LoadingBlock />
         ) : allItems.length > 0 ? (

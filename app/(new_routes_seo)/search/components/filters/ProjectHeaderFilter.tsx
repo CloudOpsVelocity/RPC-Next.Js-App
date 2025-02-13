@@ -412,7 +412,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               Filters
             </button>
           </div>
-          <div className="flex flex-wrap flex-row  items-center">
+          <div className="flex flex-wrap md:flex-nowrap flex-row items-start w-full">
             <ProjectSearchTabs />
             <SelectedFilters />
           </div>
