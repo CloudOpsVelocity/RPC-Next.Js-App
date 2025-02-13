@@ -291,6 +291,12 @@ export function FloorPlanModal({
                       <FaExpand className="w-5 h-5 text-gray-600" />
                     </button>
                   </div>
+                  
+                  <button 
+                   onClick={() => handleOpenFullScreenModal(currentUnit)}
+                  className=" sm:hidden underline text-right  text-base sm:text-lg font-semibold text-blue-500  p-1  bg-white  right-0">
+                   View All Details
+                  </button>
                   {filteredUnits.length > 2 && (
                     <div className="flex justify-between mt-4">
                       <button
@@ -324,6 +330,7 @@ export function FloorPlanModal({
 
               {/* Unit Details */}
               <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 h-[calc(100vh-300px)] md:h-auto overflow-y-auto !pt-0 ">
+             
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 sticky top-0 bg-white pt-3 sm:pt-6">
                   Area Details
                 </h4>

@@ -228,13 +228,12 @@ export function FullScreenImageModal({
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        <div className="flex-1 flex flex-col lg:flex-row h-auto  overflow-scroll">
           {/* Left - Floor Plan Image */}
           <div className="flex-1 p-[10px] md:p-6 flex items-center justify-center bg-[#F8FBFF]">
             <Image
               width={800}
-              
-             height={platform == "iOS" ? 250 :   600}
+              height={platform == "iOS" ? 250 :   600}
               src={unit.floorPlanUrl?.split(",")[0] ?? ImgNotAvail}
               alt={`Floor Plan for ${unit.bhkName}`}
               /* className="max-w-full h-full  object-contain " */
@@ -243,7 +242,7 @@ export function FullScreenImageModal({
           </div>
 
           {/* Right - Unit Details */}
-          <div className="w-full lg:w-96 bg-white p-[10px] md:p-6 overflow-y-auto border-t lg:border-t-0 lg:border-l">
+          <div className="w-full lg:w-96 bg-white p-[10px] md:p-6  border-t lg:border-t-0 lg:border-l">
           <div className={`${platform == "iOS" ? "mb-28 space-y-6" :"space-y-6" } `}>
             
           {/* Area Details */}
