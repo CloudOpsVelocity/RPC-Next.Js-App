@@ -41,13 +41,12 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  /*   const { entry } = useIntersection({
-    root: containerRef.current,
-    threshold: 0.1,
-  }); */
+
+  // Create a separate ref for intersection observer
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   const { ref, entry } = useIntersection({
-    root: containerRef.current,
+    root: null, // Changed from containerRef.current to null to observe viewport
     threshold: 0.1,
   });
 
@@ -68,54 +67,64 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         return response;
       },
       getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
-        return nextPage;
+        // Only return next page if lastPage has full 20 items
+        return lastPage?.length === 20 ? allPages.length : undefined;
       },
       cacheTime: 300000,
       enabled: isTrue,
-      /*      enabled: isTrue,
-      ...RTK_CONFIG, */
+      staleTime: 0, // Ensure fresh data on filter changes
+      refetchOnWindowFocus: false,
     });
+
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
     enabled: true,
     queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
   });
+
   const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
-  /*   console.log(hasNextPage , shouldFetchMore ,isLoading , data )
-   */
+
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
     getScrollElement: () => containerRef.current,
     estimateSize: () => 300,
-    overscan: 20,
+    overscan: 5, // Reduced overscan to improve performance
     enabled: true,
     measureElement: (element) => {
       return element?.getBoundingClientRect().height || 300;
     },
   });
 
-  // Handle scroll events for both mobile and desktop
-  /*  useEffect(() => {
-    if (entry?.isIntersecting) {
-      alert("view thing");
+  // Enhanced infinite scroll logic
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const target = entries[0];
+        if (
+          target.isIntersecting &&
+          hasNextPage &&
+          shouldFetchMore &&
+          !isLoading
+        ) {
+          fetchNextPage();
+          setPage((prev) => prev + 1);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "100px",
+        threshold: 0.1,
+      }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
     }
 
-    if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
-      fetchNextPage();
-      setPage((prev) => prev + 1);
-    }
-  }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]); */
-  useEffect(() => {
-    if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
-      fetchNextPage();
-      setPage((prev) => prev + 1);
-    }
-  }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]);
+    return () => observer.disconnect();
+  }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
+
   const renderProjectCard = useCallback(
     (virtualRow: any) => {
       const eachOne = allItems[virtualRow.index];
@@ -166,7 +175,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   });
 
   const LoadingBlock = () => (
-    <div className="flex items-center justify-center h-full w-full ">
+    <div className="flex items-center justify-center h-full w-full pt-[15%]">
       <div className="text-center flex items-center justify-center flex-col ">
         <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
         <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">
@@ -177,10 +186,12 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   );
 
   return (
-    <div className="flex  flex-col  w-full sm:max-w-[50%] relative">
-      <ProjectSearchTabs />
-      <div className="p-[0%]  " ref={containerRef}>
-        {isLoading ? (
+    <div
+      className="flex flex-col w-full sm:max-w-[50%] relative pt-[6%] overflow-auto"
+      ref={containerRef}
+    >
+      <div className="p-[0%]">
+        {isLoading && allItems.length === 0 ? (
           <LoadingBlock />
         ) : allItems.length > 0 ? (
           <div
@@ -197,10 +208,10 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         )}
         {hasNextPage && shouldFetchMore && (
           <div
-            ref={ref}
+            ref={loadMoreRef}
             className="w-full py-8 flex justify-center items-center text-gray-600"
           >
-            <LoadingSpinner />
+            {isLoading && <LoadingSpinner />}
           </div>
         )}
         <LoginPopup />

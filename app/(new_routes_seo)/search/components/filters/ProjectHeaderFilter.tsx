@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect, useRef, FormEvent } from "react";
 import {
   MdSearch,
@@ -8,10 +7,6 @@ import {
   MdFilterList,
   MdBusiness,
 } from "react-icons/md";
-import PropertyTypeDropdown from "../FilterComponents/PropertyTypeDropdown";
-
-import BHKTypeDropdown from "../FilterComponents/BHKTypeDropdown";
-import BudgetDropdown from "../FilterComponents/BudgetDropdown";
 import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
 import BuyRent from "../FilterComponents/BuyRent";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
@@ -20,9 +15,9 @@ import { projSearchStore } from "../../store/projSearchStore";
 import { usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
-import { myClientLogger } from "@/app/utils/clientLogger";
 import SelectedFilters from "./SelectedFilters";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
+import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
 
 export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -42,7 +37,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     handleResetQuery,
     onSearchChange,
     name,
-  } = useProjSearchMatcher(); 
+  } = useProjSearchMatcher();
 
   // console.log(state)
 
@@ -418,6 +413,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </button>
           </div>
           <SelectedFilters />
+          <ProjectSearchTabs />
           {/* Selected Filters */}
         </div>
       </div>
