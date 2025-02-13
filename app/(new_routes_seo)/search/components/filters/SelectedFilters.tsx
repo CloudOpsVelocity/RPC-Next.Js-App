@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import React from "react"; 
+import React from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
 import { SEARCH_FILTER_DATA, SelectedFiltersMap } from "@/app/data/search";
@@ -15,11 +15,12 @@ export default function SelectedFilters({}: Props) {
       ([_, value]) =>
         (Array.isArray(value) && value.length > 0) || value !== null
     ) && (
-      <div className="border-t w-full">
-        <div className="flex overflow-x-auto gap-2 px-[10px] ">  
-          {Object.entries(state).map(([category, values]) =>
+      <div className="border-t ">
+        <div className="flex overflow-x-auto gap-2 px-[10px] ">
+          {Object.entries(state).map(
+            ([category, values]) =>
               values !== null &&
-              values !== undefined && 
+              values !== undefined &&
               category !== "bugdetValue" &&
               category !== "areaValue" &&
               category !== "sortByfield" &&
@@ -36,15 +37,17 @@ export default function SelectedFilters({}: Props) {
                     className="flex items-center text-nowrap gap-2 mb-[6px] mt-[6px] bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
                   >
                     <span>
-                      {category === "localities" || category === "builderIds" || category === "phaseId"
+                      {category === "localities" ||
+                      category === "builderIds" ||
+                      category === "phaseId"
                         ? `${value.split("+")[0]}${
                             values.length - 1 === values.indexOf(value)
-                              ? "" : ""
+                              ? ""
+                              : ""
                           }`
                         : category === "parking" || category === "bathroom"
                         ? `${value} ${category}`
-                        : SelectedFiltersMap.get(value)
-                      }
+                        : SelectedFiltersMap.get(value)}
                     </span>
                     <button
                       onClick={() => {
@@ -78,22 +81,28 @@ export default function SelectedFilters({}: Props) {
                       ? "All Listings"
                       : category === "parking" || category === "bathroom"
                       ? `${values} ${category}`
-                      : category === "pnb" ? SEARCH_FILTER_DATA.photoAvail?.filter(each=>each.value == values)[0]?.title
-                      : category === "projName" ? values : 
-                      category === "lat" ? "lat" :category == "lng" ? "lng" :
-                      SelectedFiltersMap.get(values) 
-                    }
+                      : category === "pnb"
+                      ? SEARCH_FILTER_DATA.photoAvail?.filter(
+                          (each) => each.value == values
+                        )[0]?.title
+                      : category === "projName"
+                      ? values
+                      : category === "lat"
+                      ? "lat"
+                      : category == "lng"
+                      ? "lng"
+                      : SelectedFiltersMap.get(values)}
                   </span>
                   <button
                     onClick={() => {
-                      dispatch({ 
+                      dispatch({
                         type: "update",
                         payload: {
                           [category]: null,
                           ...(category === "projName" && {
                             projIdEnc: null,
-                            phaseId: []
-                          })
+                            phaseId: [],
+                          }),
                         },
                       });
                       handleApplyFilters();

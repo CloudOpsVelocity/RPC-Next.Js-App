@@ -68,6 +68,8 @@ export default function ProjectSearchTabs() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isDropdownOpen]);
   const handleTabsChange = (value: string | null) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     const updatedFilters =
       value === null
         ? {
