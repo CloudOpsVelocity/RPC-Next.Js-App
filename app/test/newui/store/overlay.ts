@@ -133,7 +133,7 @@ const overlayReducer = (
               content.elctCharge === "NA"
                 ? "Already Included"
                 : content.elctCharge === "A"
-                ? "Lifetime"
+                ? "As Per Actuals"
                 : formatNumber(content.elctCharge),
           },
           {
@@ -151,7 +151,7 @@ const overlayReducer = (
               content.maintananceChargess === "NA"
                 ? "Already Included"
                 : content.maintananceChargess === "A"
-                ? "Lifetime"
+                ? "As Per Actuals"
                 : formatNumber(content.maintananceChargess),
           },
           ...(content.otherCharge
