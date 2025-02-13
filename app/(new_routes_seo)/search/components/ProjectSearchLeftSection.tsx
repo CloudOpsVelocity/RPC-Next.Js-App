@@ -45,11 +45,6 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   // Create a separate ref for intersection observer
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const { ref, entry } = useIntersection({
-    root: null, // Changed from containerRef.current to null to observe viewport
-    threshold: 0.1,
-  });
-
   let isTrue = pathname.includes("search")
     ? true
     : serverData !== null && apiFilterQueryParams !== null;
@@ -187,7 +182,9 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
   return (
     <div
-      className="flex flex-col w-full sm:max-w-[50%] relative pt-[6%] overflow-auto"
+      className={`flex flex-col w-full sm:max-w-[50%] relative pt-[${
+        state.listedBy ? 6 : 5
+      }%] overflow-auto`}
       ref={containerRef}
     >
       <div className="p-[0%]">
