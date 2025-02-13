@@ -22,8 +22,8 @@ export default function Page({}: Props) {
         <ProjSearchMainFilterSection />
       </div>
       <div className=" sm:min-w-full mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap relative">
-        {/* <LeftSection /> */}
-        <div className="w-[100%] sm:w-[50%]"></div>
+        <LeftSection />
+        <div className="w-[100%] sm:w-[50%] -z-10"></div>
         <RightSection />
       </div>
     </main>
