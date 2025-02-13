@@ -99,9 +99,9 @@ export const generateListingSchema = ({
         name: title,
         description: listing.usp,
         numberOfRooms:
-          listing.propTypeName !== "Land" ? listing.nobt : undefined,
+          listing.propTypeName !== "Plot" ? listing.nobt : undefined,
         floorSize:
-          listing.propTypeName !== "Land"
+          listing.propTypeName !== "Plot"
             ? {
                 "@type": "QuantitativeValue",
                 value: listing.sba,
@@ -218,9 +218,19 @@ export const generateListingSchema = ({
       {
         "@type": "PropertyValue",
         name: title,
+        unitText: "INR",
+        propertyID: listing.id,
+        unitCode: "INR",
+        value: listing.price * 0.1,
+      },
+      {
+        "@type": "PropertyValue",
+        name: title,
         value: listing.price,
         unitText: "INR",
         propertyID: listing.id,
+        unitCode: "INR",
+
         additionalProperty: [
           {
             "@type": "PropertyValue",
