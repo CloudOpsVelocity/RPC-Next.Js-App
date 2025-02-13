@@ -41,16 +41,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-/*   const { entry } = useIntersection({
+  /*   const { entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
   }); */
-  
-    const { ref, entry } = useIntersection({
-      root: containerRef.current,
-      threshold: 0.1,
-    });
 
+  const { ref, entry } = useIntersection({
+    root: containerRef.current,
+    threshold: 0.1,
+  });
 
   let isTrue = pathname.includes("search")
     ? true
@@ -77,18 +76,18 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       },
       cacheTime: 300000,
       enabled: isTrue,
- /*      enabled: isTrue,
+      /*      enabled: isTrue,
       ...RTK_CONFIG, */
     });
-    const { data: approvedData } = useQuery({
-      queryKey: ["projAuth"],
-      enabled: true,
-      queryFn: () => getAllAuthorityNames(),
-      ...RTK_CONFIG,
-    });
+  const { data: approvedData } = useQuery({
+    queryKey: ["projAuth"],
+    enabled: true,
+    queryFn: () => getAllAuthorityNames(),
+    ...RTK_CONFIG,
+  });
   const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
-/*   console.log(hasNextPage , shouldFetchMore ,isLoading , data )
- */
+  /*   console.log(hasNextPage , shouldFetchMore ,isLoading , data )
+   */
   const rowVirtualizer = useVirtualizer({
     count: allItems.length,
     getScrollElement: () => containerRef.current,
@@ -100,10 +99,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     },
   });
 
-
-
   // Handle scroll events for both mobile and desktop
- /*  useEffect(() => {
+  /*  useEffect(() => {
     if (entry?.isIntersecting) {
       alert("view thing");
     }
@@ -113,7 +110,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       setPage((prev) => prev + 1);
     }
   }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]); */
- useEffect(() => {
+  useEffect(() => {
     if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
       fetchNextPage();
       setPage((prev) => prev + 1);
@@ -167,9 +164,6 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       </div>
     );
   });
-  
- 
-
 
   const LoadingBlock = () => (
     <div className="flex items-center justify-center h-full w-full ">
@@ -183,12 +177,9 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   );
 
   return (
-  <div className="flex  flex-col  w-full sm:max-w-[50%] ">
-    <ProjectSearchTabs />
-      <div
-        className="p-[0%] max-h-[85vh] sm:max-h-[calc(67vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%] "
-        ref={containerRef}
-      >
+    <div className="flex  flex-col  w-full sm:max-w-[50%] relative">
+      <ProjectSearchTabs />
+      <div className="p-[0%]  " ref={containerRef}>
         {isLoading ? (
           <LoadingBlock />
         ) : allItems.length > 0 ? (
@@ -204,17 +195,18 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         ) : (
           <EmptyState />
         )}
-        {hasNextPage && shouldFetchMore  && (
+        {hasNextPage && shouldFetchMore && (
           <div
-          ref={ref}
-          className="w-full py-8 flex justify-center items-center text-gray-600">
+            ref={ref}
+            className="w-full py-8 flex justify-center items-center text-gray-600"
+          >
             <LoadingSpinner />
           </div>
         )}
         <LoginPopup />
-      <RequestCallBackModal />
+        <RequestCallBackModal />
+      </div>
     </div>
-    </div>  
   );
 }
 export default memo(LeftSection);

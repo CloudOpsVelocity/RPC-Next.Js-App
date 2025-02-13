@@ -180,7 +180,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-[#253F59] text-white">
+    <footer className="bg-[#253F59] text-white z-[5]">
       <div className="max-w-[95%] mx-auto pt-2 sm:pt-12 pb-6 px-1 sm:px-6  lg:pt-16 lg:pb-8 lg:px-8">
         <div className="xl:grid xl:grid-cols-4 xl:gap-8">
           <div className=" sm:space-y-6 xl:col-span-1">

@@ -56,7 +56,7 @@ const RightSection = ({ serverData }: any) => {
   const apidata = !isTrue ? serverData : data?.pages?.flat() || [];
   return (
     <div
-      className="w-[100%] sm:w-[50%]  flex justify-start items-start z-[1] md:w-[50%] scroll-mt-[150px]"
+      className="w-[100%] min-h-[100vh] sm:w-[50%] sm:fixed top-[20%] right-0  flex justify-start items-start -z-50  md:w-[50%] scroll-mt-[150px]"
       id="mobileMap"
     >
       <Map
