@@ -4,7 +4,6 @@ import {
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import Link from "next/link";
 import React from "react";
-
 export const slugify = (name: string): string => {
   return name
     .toLowerCase()
@@ -16,10 +15,12 @@ export default function ListingBreadCrumbs({
   params,
   isProject,
   title,
+  pathname,
 }: {
   params: any;
   isProject: boolean;
   title: string;
+  pathname: string;
 }) {
   const allParams = Object.keys(params || {});
   const isIndependent = title.includes("Independent");
@@ -28,64 +29,68 @@ export default function ListingBreadCrumbs({
     lt: `${isIndependent ? "Independent Listings" : "Projects"} In `,
   };
   let currentPath = "";
+  let breadcrumbPath = "";
+  // Generate breadcrumb schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "/",
+      },
+      ...allParams.map((key, index) => {
+        breadcrumbPath += `/${slugify(params[key])}`;
+        return {
+          "@type": "ListItem",
+          position: index + 2,
+          name: params[key].replace(/-/g, " "),
+          item: `${
+            isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
+          }${breadcrumbPath}`,
+        };
+      }),
+    ],
+  };
 
-  // Generate breadcrumb items for schema
-  const breadcrumbItems = [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "/",
-    },
-  ];
-
-  allParams.forEach((key, index) => {
-    currentPath += `/${slugify(params[key])}`;
-    const name = titleOfKeys[key as keyof typeof titleOfKeys]
-      ? `${titleOfKeys[key as keyof typeof titleOfKeys]}${params[key].replace(
-          /-/g,
-          " "
-        )}`
-      : params[key].replace(/-/g, " ");
-
-    breadcrumbItems.push({
-      "@type": "ListItem",
-      position: index + 2,
-      name:
-        index === allParams.length - 1 ? title.replace("undefined ", "") : name,
-      item: `${
-        isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
-      }${currentPath}`,
-    });
-  });
+  // Generate SiteNavigationElement schema
+  const siteNavSchema = {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    name: "Breadcrumb Navigation",
+    url: pathname,
+    hasPart: [
+      {
+        "@type": "SiteNavigationElement",
+        name: "Home",
+        url: "/",
+      },
+      ...allParams.map((key) => ({
+        "@type": "SiteNavigationElement",
+        name: params[key].replace(/-/g, " "),
+        url: `${
+          isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
+        }${breadcrumbPath}`,
+      })),
+    ],
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: breadcrumbItems,
-          }),
+          __html: JSON.stringify(breadcrumbSchema),
         }}
-      >
-        {}
-      </script>
-
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SiteNavigationElement",
-            name: breadcrumbItems.map((item) => item.name),
-            url: breadcrumbItems.map((item) => item.item),
-          }),
+          __html: JSON.stringify(siteNavSchema),
         }}
-      ></script>
-
+      />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
         <a
           href={`/`}
@@ -109,6 +114,7 @@ export default function ListingBreadCrumbs({
                     target="_blank"
                     className="hover:underline cursor-pointer capitalize"
                   >
+                    {/* <a onTouchStart={() => {}}></a> */}
                     {titleOfKeys[key as keyof typeof titleOfKeys] && (
                       <span>
                         {titleOfKeys[key as keyof typeof titleOfKeys]}

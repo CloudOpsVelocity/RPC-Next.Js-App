@@ -109,6 +109,7 @@ export default function ListingDetailsPage({
             params={params}
             isProject={!!data.projIdEnc}
             title={title}
+            pathname={pathname}
           />
           {/* Top Cover Image Card */}
           <PropertyFirstBlock
