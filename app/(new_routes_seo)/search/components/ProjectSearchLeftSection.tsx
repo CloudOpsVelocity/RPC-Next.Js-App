@@ -182,9 +182,9 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
   return (
     <div
-      className={`flex flex-col w-full sm:max-w-[50%] relative pt-[${
-        state.listedBy ? 6 : 5
-      }%] overflow-auto`}
+      className={`flex flex-col w-full sm:max-w-[50%] relative ${
+        state.listedBy ? "pt-[6%]" : "pt-[4%]"
+      } overflow-auto`}
       ref={containerRef}
     >
       <div className="p-[0%]">
