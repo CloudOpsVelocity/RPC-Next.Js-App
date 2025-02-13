@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   FaTimes,
   FaCompass,
@@ -21,6 +21,7 @@ import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { FiShare2 } from "react-icons/fi";
 import { imageUrlParser } from "@/app/utils/image";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface FullScreenImageModalProps {
   isOpen: boolean;
@@ -85,6 +86,26 @@ export function FullScreenImageModal({
 
   const [, { open: LoginOpen }] = usePopShortList();
   const { data: session } = useSession();
+
+  
+      //this content ios and anirod
+      const [platform, setPlatform] = useState('');
+      const isMobile = useMediaQuery('(max-width: 768px)') 
+  
+    useEffect(() => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      if (/iphone|ipod/.test(userAgent)) {
+        setPlatform('iOS');
+      } else if (/android/.test(userAgent)) {
+        setPlatform('Android');
+      } else {
+        setPlatform('Unknown');
+    }
+    }, []);
+    console.log(platform)
+
+
+
 
   const downloadFn = async () => {
     try {
@@ -199,7 +220,7 @@ export function FullScreenImageModal({
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full hover:bg-gray-100transition-colors"
             >
               <FaTimes className="w-4 h-4 text-gray-600" />
             </button>
@@ -212,17 +233,20 @@ export function FullScreenImageModal({
           <div className="flex-1 p-[10px] md:p-6 flex items-center justify-center bg-[#F8FBFF]">
             <Image
               width={800}
-              height={600}
+              
+             height={platform == "iOS" ? 250 :   600}
               src={unit.floorPlanUrl?.split(",")[0] ?? ImgNotAvail}
               alt={`Floor Plan for ${unit.bhkName}`}
-              className="max-w-full h-full  object-contain"
+              /* className="max-w-full h-full  object-contain " */
+              className={`max-w-full h-full  object-contain ${platform == "iOS" ? " max-h-[100%] sm:max-h-[600px]"  :   ""} `}
             />
           </div>
 
           {/* Right - Unit Details */}
           <div className="w-full lg:w-96 bg-white p-[10px] md:p-6 overflow-y-auto border-t lg:border-t-0 lg:border-l">
-            <div className="space-y-6">
-              {/* Area Details */}
+          <div className={`${platform == "iOS" ? "mb-28 space-y-6" :"space-y-6" } `}>
+            
+          {/* Area Details */}
               <div>
                 <h4 className="text-lg font-semibold text-[#303A42] mb-[20px] border-b pb-2">
                   Area Details

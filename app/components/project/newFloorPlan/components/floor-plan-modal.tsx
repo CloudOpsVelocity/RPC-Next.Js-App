@@ -22,6 +22,7 @@ import PopupFilters from "./PopupFilters";
 import { PropertyUnit } from "../types/floor-plan";
 import Image from "next/image";
 import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface FloorPlanModalProps {
   modalState: any;
@@ -41,7 +42,6 @@ type Props = {
   value: any;
   icon: any;
 };
-
 const DataItem = ({ title, value, icon }: Props) => {
   if(value === "" || value === "0" || value === 0 ) return;
   
@@ -57,6 +57,10 @@ const DataItem = ({ title, value, icon }: Props) => {
     </div>
   );
 };
+
+
+ 
+
 
 export function FloorPlanModal({
   modalState,
@@ -84,6 +88,23 @@ export function FloorPlanModal({
     md: 4,
     lg: 8,
   };
+
+
+    //this content ios and anirod
+    const [platform, setPlatform] = useState('');
+    const isMobile = useMediaQuery('(max-width: 768px)') 
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (/iphone|ipod/.test(userAgent)) {
+      setPlatform('iOS');
+    } else if (/android/.test(userAgent)) {
+      setPlatform('Android');
+    } else {
+      setPlatform('Unknown');
+  }
+  }, []);
+  console.log(platform)
 
   const propCgId = useAtomValue(propCgIdAtom);
 
@@ -544,7 +565,7 @@ export function FloorPlanModal({
 
             {/* Bottom Carousel */}
             {visibleUnits && visibleUnits.length > 0 && (
-              <div className=" pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4">
+              <div className={`${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}>
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="text-sm font-semibold">
                     Filtered Units ({filteredUnits ? filteredUnits.length : 0})

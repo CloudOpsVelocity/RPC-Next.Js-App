@@ -125,6 +125,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
             </SessionProvider>
           </main>
           {/* <Footer /> */}
+         
         </MantineProvider>
       </body>
     </html>
