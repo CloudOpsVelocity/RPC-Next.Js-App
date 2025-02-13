@@ -177,6 +177,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
       }
       downloadBroucher(brocherPageUrl);
       return;
+      
      }
     if (!session) {
       LoginOpen(

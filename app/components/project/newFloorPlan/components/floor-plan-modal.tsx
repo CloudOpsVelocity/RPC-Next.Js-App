@@ -22,6 +22,7 @@ import PopupFilters from "./PopupFilters";
 import { PropertyUnit } from "../types/floor-plan";
 import Image from "next/image";
 import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface FloorPlanModalProps {
   modalState: any;
@@ -41,7 +42,6 @@ type Props = {
   value: any;
   icon: any;
 };
-
 const DataItem = ({ title, value, icon }: Props) => {
   if(value === "" || value === "0" || value === 0 ) return;
   
@@ -57,6 +57,10 @@ const DataItem = ({ title, value, icon }: Props) => {
     </div>
   );
 };
+
+
+ 
+
 
 export function FloorPlanModal({
   modalState,
@@ -84,6 +88,23 @@ export function FloorPlanModal({
     md: 4,
     lg: 8,
   };
+
+
+    //this content ios and anirod
+    const [platform, setPlatform] = useState('');
+    const isMobile = useMediaQuery('(max-width: 768px)') 
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (/iphone|ipod/.test(userAgent)) {
+      setPlatform('iOS');
+    } else if (/android/.test(userAgent)) {
+      setPlatform('Android');
+    } else {
+      setPlatform('Unknown');
+  }
+  }, []);
+  console.log(platform)
 
   const propCgId = useAtomValue(propCgIdAtom);
 
@@ -270,6 +291,12 @@ export function FloorPlanModal({
                       <FaExpand className="w-5 h-5 text-gray-600" />
                     </button>
                   </div>
+                  
+                  <button 
+                   onClick={() => handleOpenFullScreenModal(currentUnit)}
+                  className=" sm:hidden underline text-right  text-base sm:text-lg font-semibold text-blue-500  p-1  bg-white  right-0">
+                   View All Details
+                  </button>
                   {filteredUnits.length > 2 && (
                     <div className="flex justify-between mt-4">
                       <button
@@ -303,6 +330,7 @@ export function FloorPlanModal({
 
               {/* Unit Details */}
               <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 h-[calc(100vh-300px)] md:h-auto overflow-y-auto !pt-0 ">
+             
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 sticky top-0 bg-white pt-3 sm:pt-6">
                   Area Details
                 </h4>
@@ -544,7 +572,7 @@ export function FloorPlanModal({
 
             {/* Bottom Carousel */}
             {visibleUnits && visibleUnits.length > 0 && (
-              <div className=" pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4">
+              <div className={`${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}>
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="text-sm font-semibold">
                     Filtered Units ({filteredUnits ? filteredUnits.length : 0})
