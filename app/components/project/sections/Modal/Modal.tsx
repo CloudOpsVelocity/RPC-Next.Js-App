@@ -303,7 +303,7 @@ export default function PartialUnitModal({ data }: any) {
         </div>
 
         {isData && isData.others && isData.others?.length > 0 && (
-          <div className="w-[95%] m-auto overflow-x-auto inline-flex">
+          <div className="w-[95%] m-auto overflow-x-auto inline-flex mb-4">
             {isData.others.map((item: any, index: number) => {
               const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
               return (
