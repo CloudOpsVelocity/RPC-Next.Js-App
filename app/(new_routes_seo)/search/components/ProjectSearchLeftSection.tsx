@@ -9,7 +9,6 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
-import ProjectSearchTabs from "./ProjectSearchTabs/ProjectSearchTabs";
 import { useAtom, useAtomValue } from "jotai";
 import { initialState, projSearchStore } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";

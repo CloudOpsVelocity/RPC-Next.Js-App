@@ -156,7 +156,7 @@ export default function ProjectSearchTabs() {
   // Default value if no conditions are met
 
   return (
-    <div className="bg-slate-50 shadow-md max-w-[65rem]">
+    <div className="bg-slate-50 shadow-md sm:min-w-[65rem]">
       <div className=" w-full     sm:px-4 pb-4 pt-2     sm:pb-3">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div
