@@ -1,21 +1,12 @@
 import React from "react";
-import fs from "fs";
-import path from "path";
 import { getPagesSlugs } from "../seo/api";
-import ProjectSearchPage from "../(dashboard)/searchOldPage/Page/ProjectSearchPage";
-import { notFound } from "next/navigation";
-import {
-  getNewProjSearchData,
-  getProjSearchData,
-} from "../(new_routes_seo)/in/utils/api";
-import { findSeoParams, extractCaseSeoParams } from "./_utils/findParams";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
 import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
-import logger from "../utils/logger";
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
 import { SlugsType } from "../common/constatns/slug.constants";
+import { ProjectSeachSchema } from "../seo/search/project-search.schema";
 type Props = {
   params: {
     slug: string;
@@ -24,21 +15,18 @@ type Props = {
     sf: string;
   };
 };
-
-// // Example usage
-// const key = "mysecretkey"; // Your encryption key
 export default async function Page({ params: { slug }, searchParams }: Props) {
   const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
     sf: !!searchParams.sf,
   });
   return (
     <>
+      <ProjectSeachSchema properties={severData} />
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
       <NewSearchPage serverData={severData} frontendFilters={frontEndFilter} />
     </>
   );
 }
-
 export const generateStaticParams = async () => {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("case-seo");

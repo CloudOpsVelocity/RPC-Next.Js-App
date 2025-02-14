@@ -49,7 +49,7 @@ const CaseSeoSearchService = async (
   let severData;
   if (!searchParams.sf) {
     const url = createUrl(slugValues);
-
+    console.log(url);
     severData = await getNewProjSearchData(url);
   }
 
