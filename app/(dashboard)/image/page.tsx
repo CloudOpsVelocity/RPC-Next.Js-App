@@ -14,6 +14,8 @@ export default function Page({ searchParams: { path, type } }: Props) {
       F: "floor_plan",
     },
   };
+
+
   let isDownloading = false; // Flag to track whether a download is in progress
   const handleDownload = async () => {
     // If already downloading, return immediately
@@ -47,7 +49,6 @@ export default function Page({ searchParams: { path, type } }: Props) {
       isDownloading = false;
     }
   };
-
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:items-start mt-6 m-4 h-[60vh] md:mt-[6%]">
       <Image
