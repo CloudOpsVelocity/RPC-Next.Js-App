@@ -5,6 +5,7 @@ import RightSection from "../components/ProjectSearchRightSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
 import FloatingArrowIcon from "../components/ProjectSearchTabs/FloatingArrowIcon";
+import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 
 type Props = {
   serverData: any;
@@ -15,9 +16,9 @@ export default function NewListingSearchpage({
   serverData,
   frontendFilters,
 }: Props) {
-
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
+      {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs />
         <ProjSearchMainFilterSection
