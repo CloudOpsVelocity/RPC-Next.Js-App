@@ -6,6 +6,7 @@ import {
   Marker,
   Tooltip,
   useMap,
+  Popup
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import L, { LatLngTuple } from "leaflet";
@@ -20,7 +21,6 @@ import TooltipProp from "./ToolltipProp";
 
 const Map = ({ data, lat, lang, type, styles }: any) => {
   const position: LatLngTuple = [lat, lang];
-  console.log("this map")
   return (
     <>
       <MapContainer
@@ -53,7 +53,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   const MobileIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [30, 30],
-    iconAnchor: [19, 38],
+    iconAnchor: [5, 38],
     popupAnchor: [0, -38],
   });
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
@@ -145,6 +145,23 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               <TooltipProp data={item} />
             )}
           </Tooltip>
+
+          {/* <Popup closeButton={false}>
+            {!isProp ? (
+              <TooltipProj
+                data={{
+                  projName: item.projName,
+                  city: item.city,
+                  state: item.state,
+                  locality: item.locality,
+                  postedByName: item.postedByName,
+                  phases: Object.values(phases || {}),
+                }}
+              />
+            ) : (
+              <TooltipProp data={item} />
+            )}
+          </Popup > */}
         </Marker>
       );
     })

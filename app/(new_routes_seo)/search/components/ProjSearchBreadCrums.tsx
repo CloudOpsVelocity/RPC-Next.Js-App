@@ -60,18 +60,22 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     };
 
     let localityName = state.localities.length > 0 ? state.localities[0] : "";
+    let finalLocName = localityName.includes("+")
+      ? localityName.split("+")[0]
+      : localityName;
+    console.log(finalLocName);
     oldParams[3] = {
       href:
         localityName !== ""
-          ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${localityName}`
+          ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}`
           : "",
-      label: localityName.split("+")[0],
+      label: finalLocName,
     };
 
     oldParams[4] = {
       href:
         state.projName !== ""
-          ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${localityName}/${state.projName}`
+          ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}/${state.projName}`
           : "",
       label: state.projName !== "" ? state.projName : "",
     };

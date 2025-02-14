@@ -3,7 +3,7 @@ import LeftSection from "./components/ProjectSearchLeftSection";
 import RightSection from "./components/ProjectSearchRightSection";
 import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
-import FloatingArrowIcon from "./components/ProjectSearchTabs/FloatingArrowIcon";
+
 import { ProjectSeachSchema } from "@/app/seo/search/project-search.schema";
 type Props = {
   serverData: any;
@@ -28,8 +28,6 @@ export default function NewSearchPage({ serverData, frontendFilters }: Props) {
         <div className="w-[100%] sm:w-[50%] -z-10" />
         <RightSection serverData={serverData} />
       </div>
-
-      <FloatingArrowIcon />
     </main>
   );
 }

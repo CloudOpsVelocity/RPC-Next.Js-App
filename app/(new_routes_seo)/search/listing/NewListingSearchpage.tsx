@@ -3,7 +3,7 @@ import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFil
 import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
-import FloatingArrowIcon from "../components/ProjectSearchTabs/FloatingArrowIcon";
+
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 
 type Props = {
@@ -32,8 +32,6 @@ export default function NewListingSearchpage({
         <div className="w-[100%] sm:w-[50%] -z-10" />
         <ListingSearchRightSection serverData={serverData} />
       </div>
-
-      <FloatingArrowIcon />
     </main>
   );
 }

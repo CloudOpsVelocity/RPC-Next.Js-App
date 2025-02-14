@@ -3,7 +3,6 @@ import LeftSection from "./components/ProjectSearchLeftSection";
 import RightSection from "./components/ProjectSearchRightSection";
 import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
-import FloatingArrowIcon from "./components/ProjectSearchTabs/FloatingArrowIcon";
 type Props = {};
 
 export default function Page({}: Props) {
@@ -20,7 +19,6 @@ export default function Page({}: Props) {
         <RightSection />
       </div>
 
-      <FloatingArrowIcon />
     </main>
   );
 }

@@ -15,6 +15,7 @@ import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
+import FloatingArrowIcon from "../../../components/ProjectSearchTabs/FloatingArrowIcon";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -210,6 +211,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         <LoginPopup />
         <RequestCallBackModal />
       </div>
+
+      <FloatingArrowIcon />
     </div>
   );
 }
