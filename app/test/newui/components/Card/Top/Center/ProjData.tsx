@@ -10,6 +10,7 @@ import selectedSearchAtom, {
 import BuilderLink, {
   generateBuilderUrl,
 } from "@/app/utils/linkRouters/Builder";
+import ProjectLink, { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = any;
 
@@ -56,6 +57,13 @@ export default function ProjData({
     slug: postedByName,
     city: builderCity ? builderCity : cityName,
   });
+  let projectUrl=createProjectLinkUrl({
+      city:cityName,
+      slug:propName,
+      locality:localityName,
+      projIdEnc:projIdEnc
+  })
+
   // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
@@ -200,7 +208,23 @@ export default function ProjData({
       </p>
 
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
-        {propName}{" "}
+      <span
+          className={`font-bold ${
+            projIdEnc != undefined ? "underline cursor-pointer" : ""
+          }`}
+          onClick={
+            projIdEnc != undefined
+              ? (e) => {
+                  e.stopPropagation();
+                  window.open(projectUrl, "_blank");
+                }
+              : undefined
+          }
+        >
+          {/* {getTypeText(type)} */}
+          {propName}{" "}
+        </span>
+     
       </p>
       <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-118px)]">
         Address: {address}
