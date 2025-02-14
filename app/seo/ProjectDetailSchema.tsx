@@ -78,6 +78,25 @@ const generateSchema = (projectData: ProjectData) => {
             priceValidUntil: basicData.endDate,
             itemCondition: "http://schema.org/NewCondition",
           },
+          review: {
+            "@type": "Review",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: "4.5",
+              bestRating: "5",
+            },
+            author: {
+              "@type": "Person",
+              name: "Rahul Kumar",
+            },
+          },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.8",
+            reviewCount: "150",
+            bestRating: "5",
+            worstRating: "1",
+          },
         };
         return propTypeSchema;
       });

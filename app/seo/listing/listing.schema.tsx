@@ -79,6 +79,33 @@ export const generateListingSchema = ({
           url: url,
           datePosted: listing.createdAt,
           description: listing.usp,
+          name: title,
+          identifier: listing.propIdEnc,
+          price: {
+            "@type": "MonetaryAmount",
+            currency: "INR",
+            value: listing.price,
+          },
+          numberOfRooms:
+            listing.propTypeName !== "Plot" ? listing.nobt : undefined,
+          floorSize:
+            listing.propTypeName !== "Plot"
+              ? {
+                  "@type": "QuantitativeValue",
+                  value: listing.sba,
+                  unitCode: "SqFt",
+                }
+              : undefined,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: listing.address,
+            addressLocality: listing.ltName,
+            addressRegion: listing.stateName,
+            postalCode: listing.pinCode,
+            addressCountry: "IN",
+          },
+          image: listing.projMedia?.coverImageUrl?.split(",")[0],
+          telephone: PHONE_NUMBER,
         },
       },
       {

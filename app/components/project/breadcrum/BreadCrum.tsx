@@ -27,10 +27,11 @@ export default function BreadCrumbs({ params }: { params: any }) {
       };
     }),
   };
+  let siteMapPath = "";
   const siteNavigationSchema = {
     "@context": "https://schema.org",
     "@graph": allParams.map((key, index) => {
-      currentPath += `/${slugify(params[key])}`;
+      siteMapPath += `/${slugify(params[key])}`;
       let name = params[key].replace(/-/g, " ");
       const newArray = name.split(" ").slice(0, -1);
       const newName = key !== "slug" ? name : newArray.join(" ");
@@ -41,7 +42,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
         name: titleOfKeys[key as keyof typeof titleOfKeys]
           ? titleOfKeys[key as keyof typeof titleOfKeys] + newName
           : newName,
-        url: `${process.env.NEXT_PUBLIC_PROJECT_URL}${BASE_PATH_PROJECT_DETAILS}${currentPath}`,
+        url: `${process.env.NEXT_PUBLIC_PROJECT_URL}${BASE_PATH_PROJECT_DETAILS}${siteMapPath}`,
       };
     }),
   };

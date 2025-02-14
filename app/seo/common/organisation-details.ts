@@ -3,7 +3,10 @@ export const Organization_SCHEMA = {
   "@type": "Organization",
   name: "GET RIGHT PROPERTY",
   url: "https://www.getrightproperty.com",
-  logo: "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
+  },
   contactPoint: {
     "@type": "ContactPoint",
     telephone: "+91 8884440963",
@@ -36,34 +39,35 @@ export const Organization_SCHEMA = {
     "@type": "Person",
     name: "Rahul Vishwakarma",
   },
-  foundingDate: "07-02-2025",
+  foundingDate: "2025-02-07",
   description:
     "We are a premier real estate agency offering buying, selling, and rental services for residential properties.",
   department: [
     {
       "@type": "Organization",
       name: "Sales Department",
-      employee: {
-        "@type": "Person",
-        name: "Abhishek Kumar",
-        jobTitle: "Sales Manager",
-      },
+      employee: [
+        {
+          "@type": "Person",
+          name: "Abhishek Kumar",
+          jobTitle: "Sales Manager",
+        },
+      ],
     },
     {
       "@type": "Organization",
       name: "Property Management",
-      employee: {
-        "@type": "Person",
-        name: "Sneha Kumari",
-        jobTitle: "HR",
-      },
+      employee: [
+        {
+          "@type": "Person",
+          name: "Sneha Kumari",
+          jobTitle: "HR",
+        },
+      ],
     },
   ],
   memberOf: {
     "@type": "Organization",
     name: "RERA",
   },
-  image:
-    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
-  telephone: "+91 8884440963",
 };

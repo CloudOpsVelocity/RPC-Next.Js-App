@@ -94,7 +94,7 @@ export default function ListingDetailsPage({
         listingData={{
           listing: data,
           nearByLocations: nearByLocations,
-          faqData: projData.faqs,
+          faqData: projData?.faqs,
           title: title,
           url: pathname,
         }}
@@ -109,6 +109,7 @@ export default function ListingDetailsPage({
             params={params}
             isProject={!!data.projIdEnc}
             title={title}
+            pathname={pathname}
           />
           {/* Top Cover Image Card */}
           <PropertyFirstBlock
