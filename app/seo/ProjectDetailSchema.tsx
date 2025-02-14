@@ -116,35 +116,7 @@ const generateSchema = (projectData: ProjectData) => {
         description:
           desc ||
           "Find top real estate listings, including apartments, villas, and commercial spaces.",
-        breadcrumb: {
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            {
-              "@type": "ListItem",
-              position: 1,
-              name: "Home",
-              item: DOMAIN,
-            },
-            {
-              "@type": "ListItem",
-              position: 2,
-              name: "Real Estate",
-              item: `${DOMAIN}real-estate`,
-            },
-            {
-              "@type": "ListItem",
-              position: 3,
-              name: "Property Listings",
-              item: `${DOMAIN}property-listings`,
-            },
-            {
-              "@type": "ListItem",
-              position: 4,
-              name: basicData?.projectName || "Project",
-              item: projectDetailsPageUrl,
-            },
-          ],
-        },
+
         datePublished: new Date().toISOString(),
         dateModified: new Date().toISOString(),
         author: {
@@ -422,17 +394,5 @@ const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
     dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
   />
 );
-// ) : (
-// <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
-// );
 
 export default ProjectSchema;
-
-// {
-//   "@type": "Article",
-//   headline: "Best Properties to Buy in 2024",
-//   author: {
-//     "@type": "Person",
-//     name: "John Doe",
-//   },
-// },
