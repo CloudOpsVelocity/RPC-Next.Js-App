@@ -1,7 +1,6 @@
 import React from "react";
 import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFilterSection";
 import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
-import RightSection from "../components/ProjectSearchRightSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
 import FloatingArrowIcon from "../components/ProjectSearchTabs/FloatingArrowIcon";
