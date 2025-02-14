@@ -203,7 +203,7 @@ export default function TopRightSection({
                             strokeWidth="1.5"
                           />
                         </svg>
-                        <span className="text-[10px] hidden sm:flex text-[#0073C6] font-medium mt-0.5">
+                        <span className="text-[10px] hidden xl:flex text-[#0073C6] font-medium mt-0.5">
                           Floor Plan
                         </span>
                       </div>

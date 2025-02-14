@@ -50,7 +50,9 @@ location
   // };
   const dispatch = useSetAtom(overlayAtom);
   return (
-    <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
+    <div
+    
+    className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
       <div className="flex gap-[9px]">
         {type === "proj" ? (
           <>
@@ -107,18 +109,19 @@ location
               amenCount > 0 && (
                 <button
                 className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
-                onClick={() =>
-             
+                onClick={(e) => {
+                  e.stopPropagation();
                   dispatch({
                     content: [],
                     conType: "amenities",
                     title: "Amenities",
-                    id: `${projIdEnc ??   ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
+                    id: `${projIdEnc ?? ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
                     type: "OPEN",
                     pType: type,
-                    propId: propIdEnc
-                  })
-                }
+                    propId: propIdEnc,
+                  });
+                }}
+                
               >
                 <span className="bg-white rounded-full text-black px-2">
                   {amenCount}
@@ -129,7 +132,8 @@ location
             }
            <button
                 className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
-                onClick={() =>{
+                onClick={(e) =>{
+                  e.stopPropagation();
                   console.log("near by 2")
                   dispatch({
                     type: "OPEN",
@@ -158,7 +162,11 @@ location
         <div className=" right-1 inline-flex">
           <button
             className="bg-btnPrimary rounded-[4px]  bottom-2 left-1 text-white text-[12px] px-1 font-bold"
-            onClick={() => onAddingCompare()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddingCompare()
+            }}
+            
           >
             {isCompared ? "Remove  Compare" : "Add to Compare"}
           </button>
@@ -186,6 +194,7 @@ type CountListProps = {
 };
 const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
   const handleAgentOwner = (type: "A" | "I" | "B") => {
+   
     window.open(
       `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
       "_blank"
@@ -195,11 +204,12 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
   return (
     value > 0 && (
       <button
-        onClick={() =>
-          handleAgentOwner(
-            type === "Owner" ? "I" : type === "Builder" ? "B" : "A"
-          )
-        }
+      onClick={(e) => {
+        e.stopPropagation();
+        handleAgentOwner(
+          type === "Owner" ? "I" : type === "Builder" ? "B" : "A"
+        );
+      }}      
         className={clsx(
           "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",
           type === "Owner"

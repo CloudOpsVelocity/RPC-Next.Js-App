@@ -18,7 +18,10 @@ const Button = ({
     <div className={buttonConClass || ""}>
       <button
         className={buttonClass || ""}
-        onClick={(e) => onChange && onChange(e)}
+        onClick={(e) =>{
+          e.stopPropagation();
+          onChange && onChange(e)
+        }}
       >
         {icon}
         {title}
