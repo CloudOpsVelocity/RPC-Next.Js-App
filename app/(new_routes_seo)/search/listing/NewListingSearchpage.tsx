@@ -4,7 +4,6 @@ import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearc
 import RightSection from "../components/ProjectSearchRightSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
-import FloatingArrowIcon from "../components/ProjectSearchTabs/FloatingArrowIcon";
 
 type Props = {
   serverData: any;
@@ -32,8 +31,6 @@ export default function NewListingSearchpage({
         <div className="w-[100%] sm:w-[50%] -z-10" />
         <ListingSearchRightSection serverData={serverData} />
       </div>
-
-      <FloatingArrowIcon />
     </main>
   );
 }

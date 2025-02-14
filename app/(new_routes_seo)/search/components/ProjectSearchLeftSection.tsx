@@ -15,6 +15,7 @@ import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import { usePathname } from "next/navigation";
+import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -211,6 +212,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         <LoginPopup />
         <RequestCallBackModal />
       </div>
+
+      <FloatingArrowIcon />
     </div>
   );
 }

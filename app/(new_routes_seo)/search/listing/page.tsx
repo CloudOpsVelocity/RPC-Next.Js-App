@@ -3,7 +3,6 @@ import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFil
 import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
-import FloatingArrowIcon from "../components/ProjectSearchTabs/FloatingArrowIcon";
 
 type Props = {};
 
@@ -19,8 +18,6 @@ export default function Page({}: Props) {
         <div className="w-[100%] sm:w-[50%] -z-10" />
         <ListingSearchRightSection/>
       </div>
-
-      <FloatingArrowIcon />
     </main>
   );
 }
