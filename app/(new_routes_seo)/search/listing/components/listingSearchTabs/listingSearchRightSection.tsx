@@ -51,15 +51,16 @@ const ListingSearchRightSection = ({ serverData }: any) => {
   const apidata = !isTrue ? serverData : data?.pages.flat() || [];
   return (
     <div
-      className="w-[100%] sm:w-[50%]  flex justify-start items-start z-[1] md:w-[50%] scroll-mt-[150px]"
+      className=" w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 "
       id="mobileMap"
     >
-      <Map
+      <Map 
         projName={"Searched Location"}
         lat={(apidata && apidata[0]?.lat) ?? 47.46489}
         lang={(apidata && apidata[0]?.lang) ?? 15.34043}
         data={apidata}
         type={"prop"}
+        styles="h-[calc(100vh-75vh)] sm:h-[calc(78vh)] md:h-[calc(100vh-220px)] xl:h-[calc(100vh-262px)] w-full  max-w-full"
       />
     </div>
   );

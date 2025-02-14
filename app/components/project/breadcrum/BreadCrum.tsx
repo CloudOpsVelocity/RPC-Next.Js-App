@@ -5,8 +5,8 @@ import React from "react";
 export default function BreadCrumbs({ params }: { params: any }) {
   const allParams = Object.keys(params);
   const titleOfKeys = {
-    city: "Project In ",
-    lt: "Projects In ",
+    city: "Project in ",
+    lt: "Projects in ",
   };
   let currentPath = "";
   const breadcrumsschema = {

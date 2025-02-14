@@ -1,26 +1,21 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
-import { Loader } from "@mantine/core";
-import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
-import {
-  getListingSearchData,
-  getSearchData,
-} from "../../../utils/project-search-queryhelpers";
+import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 /* import ListingSearchTabs from "../ListingSearchTabs"; */
 import { projSearchStore } from "../../../store/projSearchStore";
-import ListingSearchTabs from "../ListingSearchTabs";
 import { usePathname } from "next/navigation";
 import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
+import FloatingArrowIcon from "../../../components/ProjectSearchTabs/FloatingArrowIcon";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -92,21 +87,37 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     },
   });
 
-  const { ref, entry } = useIntersection({
-    root: containerRef.current,
-    threshold: 0.1,
-  });
+    const loadMoreRef = useRef<HTMLDivElement>(null);
+  
+    // Enhanced infinite scroll logic
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const target = entries[0];
+          if (
+            target.isIntersecting &&
+            hasNextPage &&
+            shouldFetchMore &&
+            !isLoading
+          ) {
+            fetchNextPage();
+            setPage((prev) => prev + 1);
+          }
+        },
+        {
+          root: null,
+          rootMargin: "100px",
+          threshold: 0.1,
+        }
+      );
+  
+      if (loadMoreRef.current) {
+        observer.observe(loadMoreRef.current);
+      }
+  
+      return () => observer.disconnect();
+    }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
 
-  useEffect(() => {
-
-    if (entry?.isIntersecting && hasNextPage && shouldFetchMore) {
-   
-      fetchNextPage();
-      console.log("calling api", (entry?.isIntersecting && hasNextPage && shouldFetchMore))
-
-      setPage((prev) => prev + 1);
-    }
-  }, [entry?.isIntersecting, hasNextPage, fetchNextPage, shouldFetchMore]);
 
   const renderProjectCard = useCallback(
     (virtualRow: any) => {
@@ -168,41 +179,47 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     </div>
   );
 
-  return (
-    <div className="flex  flex-col  w-full sm:max-w-[50%] ">
-    <ListingSearchTabs />
+  return ( 
     <div
-      className="p-[0%] max-h-[85vh] sm:max-h-[calc(72vh)] w-full xl:max-h-[700px] xl:min-h-[65%] overflow-y-auto max-w-[99%]"
+      className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading ? (
-        <LoadingBlock />
-      ) : allItems.length > 0 ? (
-        <div
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-        </div>
-      ) : (
-        <EmptyState />
-      )}
-      {hasNextPage && shouldFetchMore && (
-        <div
-          ref={ref}
-          className="w-full py-8 flex justify-center items-center text-gray-600"
-        >
-          <LoadingSpinner />
-        </div>
-      )}
-      <LoginPopup />
-      <RequestCallBackModal />
-    </div>
+      <div>
+        {isLoading ? (
+          <LoadingBlock />
+        ) : allItems.length > 0 ? (
+          <div
+            style={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
+          </div>
+        ) : (
+          <EmptyState />
+        )}
+        {hasNextPage && shouldFetchMore && (
+          <div
+            ref={loadMoreRef}
+            className="w-full py-8 flex justify-center items-center text-gray-600"
+          >
+            <LoadingSpinner />
+          </div>
+        )}
+        <LoginPopup />
+        <RequestCallBackModal />
       </div>
+
+      <FloatingArrowIcon />
+    </div>
   );
 }
 
 export default memo(LeftSection);
+
+
+
+
+

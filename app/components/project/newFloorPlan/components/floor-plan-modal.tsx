@@ -58,9 +58,8 @@ const DataItem = ({ title, value, icon }: Props) => {
   );
 };
 
-
+console.log("None")
  
-
 
 export function FloorPlanModal({
   modalState,
@@ -93,6 +92,7 @@ export function FloorPlanModal({
     //this content ios and anirod
     const [platform, setPlatform] = useState('');
     const isMobile = useMediaQuery('(max-width: 768px)') 
+    console.log(currentUnit.noOfCarParking)
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -548,7 +548,7 @@ export function FloorPlanModal({
                     <DataItem
                       title="Car Parking"
                       value={`${currentUnit.noOfCarParking} ${
-                        currentUnit.parkingType ? currentUnit.parkingType : ""
+                        (currentUnit.parkingType && currentUnit.parkingType != "None")? currentUnit.parkingType : ""
                       }`}
                       icon={
                         <FaCar className="text-[#0073C6] text-xl sm:text-2xl" />

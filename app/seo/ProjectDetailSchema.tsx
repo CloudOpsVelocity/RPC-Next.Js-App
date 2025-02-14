@@ -110,41 +110,85 @@ const generateSchema = (projectData: ProjectData) => {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "SaleEvent",
+        name: `Buy ${basicData?.projectName}`,
+        startDate: new Date(
+          projectData?.basicData?.startDate?.replace("IST", "+05:30")
+        ).toISOString(),
+        endDate: new Date(
+          projectData?.basicData?.endDate?.replace("IST", "+05:30")
+        ).toISOString(),
+        url: projectDetailsPageUrl,
+        description: desc,
+        image: basicData?.media?.coverImageUrl
+          ? [basicData.media.coverImageUrl]
+          : [],
+        eventStatus: "http://schema.org/EventScheduled",
+        eventAttendanceMode: "http://schema.org/OnlineEventAttendanceMode",
+        location: [
+          {
+            "@type": "VirtualLocation",
+            url: projectDetailsPageUrl,
+          },
+          {
+            "@type": "Place",
+            name: basicData?.projectName,
+            image: basicData?.media?.coverImageUrl
+              ? [basicData.media.coverImageUrl]
+              : [],
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: basicData?.localityName,
+              addressRegion: basicData?.stateName,
+              addressCountry: "India",
+              postalCode: basicData?.pinCode,
+            },
+          },
+        ],
+        offers: {
+          "@type": "Offer",
+          url: projectDetailsPageUrl,
+          priceCurrency: "INR",
+          price: basicData?.minPrice,
+          validFrom: new Date(
+            basicData?.startDate?.replace("IST", "+05:30")
+          ).toISOString(),
+          priceValidUntil: new Date(
+            projectData?.basicData?.endDate?.replace("IST", "+05:30")
+          ).toISOString(),
+          availability: "http://schema.org/InStock",
+          category: "RealEstate",
+        },
+        organizer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          url: COMPANY_URL,
+          logo: LOGO_URL,
+        },
+        eventLocation: {
+          "@type": "Place",
+          name: basicData?.projectName,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: basicData?.localityName,
+            addressRegion: basicData?.stateName,
+            addressCountry: "India",
+            postalCode: basicData?.pinCode,
+          },
+        },
+        potentialAction: {
+          "@type": "BuyAction",
+          target: projectDetailsPageUrl,
+        },
+      },
+      {
         "@type": "WebPage",
         name: basicData?.projectName || "Real Estate Property Listings",
         url: projectDetailsPageUrl || `${DOMAIN}property-listings`,
         description:
           desc ||
           "Find top real estate listings, including apartments, villas, and commercial spaces.",
-        breadcrumb: {
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            {
-              "@type": "ListItem",
-              position: 1,
-              name: "Home",
-              item: DOMAIN,
-            },
-            {
-              "@type": "ListItem",
-              position: 2,
-              name: "Real Estate",
-              item: `${DOMAIN}real-estate`,
-            },
-            {
-              "@type": "ListItem",
-              position: 3,
-              name: "Property Listings",
-              item: `${DOMAIN}property-listings`,
-            },
-            {
-              "@type": "ListItem",
-              position: 4,
-              name: basicData?.projectName || "Project",
-              item: projectDetailsPageUrl,
-            },
-          ],
-        },
+
         datePublished: new Date().toISOString(),
         dateModified: new Date().toISOString(),
         author: {
@@ -315,55 +359,7 @@ const generateSchema = (projectData: ProjectData) => {
         telephone: PHONE_NUMBER,
         amenityFeature: [],
       },
-      {
-        "@type": "SaleEvent",
-        name: "Buy " + basicData?.projectName,
-        startDate: projectData?.basicData.startDate,
-        endDate: projectData?.basicData.endDate,
-        url: projectDetailsPageUrl,
-        description: desc,
-        image: basicData?.media.coverImageUrl,
-        eventStatus: "http://schema.org/EventScheduled",
-        eventAttendanceMode: "http://schema.org/MixedEventAttendanceMode",
-        location: [
-          {
-            "@type": "VirtualLocation",
-            url: projectDetailsPageUrl,
-          },
-          {
-            "@type": "Place",
-            name: basicData?.projectName,
-            image: basicData.media.coverImageUrl,
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: basicData?.localityName,
-              addressRegion: basicData?.stateName,
-              addressCountry: "India",
-              postalCode: basicData?.pinCode,
-            },
-          },
-        ],
-        offers: {
-          "@type": "Offer",
-          url: projectDetailsPageUrl,
-          priceCurrency: "INR",
-          price: basicData.minPrice,
-          validFrom: basicData.startDate,
-          priceValidUntil: projectData?.basicData.endDate,
-          availability: "http://schema.org/InStock",
-          category: "Primary",
-        },
-        performer: {
-          "@type": "PerformingGroup",
-          name: basicData?.projectName,
-        },
-        organizer: {
-          "@type": "Organization",
-          name: COMPANY_NAME,
-          url: COMPANY_URL,
-          logo: LOGO_URL,
-        },
-      },
+
       {
         "@type": "ViewAction",
         target: {
@@ -422,17 +418,5 @@ const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
     dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
   />
 );
-// ) : (
-// <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
-// );
 
 export default ProjectSchema;
-
-// {
-//   "@type": "Article",
-//   headline: "Best Properties to Buy in 2024",
-//   author: {
-//     "@type": "Person",
-//     name: "John Doe",
-//   },
-// },

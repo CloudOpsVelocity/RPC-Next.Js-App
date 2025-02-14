@@ -6,6 +6,7 @@ import {
   Marker,
   Tooltip,
   useMap,
+  Popup
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import L, { LatLngTuple } from "leaflet";
@@ -18,13 +19,13 @@ import selectedSearchAtom from "@/app/store/search/map";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
 
-const Map = ({ data, lat, lang, type }: any) => {
+const Map = ({ data, lat, lang, type, styles }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
     <>
       <MapContainer
         center={position}
-        className="h-[calc(100vh-75vh)] sm:h-[calc(78vh)] xl:h-[calc(100vh-24vh)] w-full  max-w-full -z-[1]"
+        className={styles ? styles : "h-[calc(100vh-75vh)] sm:h-[calc(78vh)] xl:h-[calc(100vh-24vh)] w-full  max-w-full "}
         scrollWheelZoom
         zoom={12}
       >
@@ -52,7 +53,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   const MobileIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [30, 30],
-    iconAnchor: [19, 38],
+    iconAnchor: [5, 38],
     popupAnchor: [0, -38],
   });
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
@@ -121,7 +122,11 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             direction="top"
             offset={[10, -35]}
             className={`${
-              isProp ? "min-w-fit" : isMobile ? "min-w-[300px]" : "min-w-[400px]"
+              isProp
+                ? "min-w-fit"
+                : isMobile
+                ? "min-w-[300px]"
+                : "min-w-[400px]"
             }  max-w-screen-sm !p-0`}
             sticky
           >
@@ -140,6 +145,23 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               <TooltipProp data={item} />
             )}
           </Tooltip>
+
+          {/* <Popup closeButton={false}>
+            {!isProp ? (
+              <TooltipProj
+                data={{
+                  projName: item.projName,
+                  city: item.city,
+                  state: item.state,
+                  locality: item.locality,
+                  postedByName: item.postedByName,
+                  phases: Object.values(phases || {}),
+                }}
+              />
+            ) : (
+              <TooltipProp data={item} />
+            )}
+          </Popup > */}
         </Marker>
       );
     })

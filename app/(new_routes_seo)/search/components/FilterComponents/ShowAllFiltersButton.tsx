@@ -23,6 +23,7 @@ import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import RTK_CONFIG from "@/app/config/rtk";
+import SelectedFiltersDropdown from "../filters/SelectedFiltersDropdown";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
@@ -275,6 +276,7 @@ export default function ShowAllFiltersButton({
           }`}
         />
       </button>
+
       {isOpen && (
         <div className="absolute top-full flex flex-col right-0 sm:mb-0 max-w-full sm:min-w-[700px] bg-white rounded-lg shadow-lg border z-50 ">
           <div className="flex items-center justify-between gap-4 pb-4 border-1   mt-3 z-50 max-w-[90%]  ">

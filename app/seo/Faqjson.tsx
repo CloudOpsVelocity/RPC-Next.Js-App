@@ -26,7 +26,7 @@ const generateFAQJsonLd = (data: any) => {
     description: data.description,
     author: {
       "@type": "Person",
-      name: data.builderName,
+      name: data.projectName.split(" ")[0],
       url: `${process.env.NEXT_PUBLIC_PROJECT_URL}/builders/bengaluru/${data.builderId}`,
     },
     image: "",
