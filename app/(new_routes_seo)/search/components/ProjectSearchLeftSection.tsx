@@ -1,7 +1,6 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 
-import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from "@tanstack/react-virtual";
@@ -9,8 +8,8 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
-import { useAtom, useAtomValue } from "jotai";
-import { initialState, projSearchStore } from "../store/projSearchStore";
+import { useAtomValue } from "jotai";
+import { projSearchStore } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { useHydrateAtoms } from "jotai/utils";
@@ -44,7 +43,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   // Create a separate ref for intersection observer
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  let isTrue = pathname.includes("search")
+  let isTrue = pathname.includes("search") 
     ? true
     : serverData !== null && apiFilterQueryParams !== null;
 
@@ -177,15 +176,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         </h2>
       </div>
     </div>
-  );
+  ); 
 
   return (
     <div
-      className={`flex flex-col w-full sm:max-w-[50%] relative pt-[4%] overflow-auto`}
+      className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      <div className="p-[0%] pt-[6%]">
-        {isLoading && allItems.length === 0 ? (
+      <div className="">
+        {isLoading ? (
           <LoadingBlock />
         ) : allItems.length > 0 ? (
           <div
@@ -200,12 +199,13 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         ) : (
           <EmptyState />
         )}
+
         {hasNextPage && shouldFetchMore && (
           <div
             ref={loadMoreRef}
             className="w-full py-8 flex justify-center items-center text-gray-600"
           >
-            {isLoading && <LoadingSpinner />}
+            <LoadingSpinner />
           </div>
         )}
         <LoginPopup />

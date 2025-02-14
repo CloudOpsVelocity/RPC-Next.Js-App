@@ -18,6 +18,7 @@ import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 import SelectedFilters from "./SelectedFilters";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
 import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
+import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
 
 export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -38,8 +39,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     onSearchChange,
     name,
   } = useProjSearchMatcher();
-
-  // console.log(state)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -258,11 +257,11 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   };
   return (
     <>
-      <div className="w-full max-w-[100%]  max-h-[60vh]  bg-white border-b sticky top-0 z-[11]">
+      <div className="w-full max-w-[100%] max-h-[60vh] bg-white border-b relative md:sticky top-0 z-auto md:z-[11]">
         <div className=" px-1 ">
           <div
             ref={searchRef}
-            className="flex flex-wrap items-center gap-2 py-3 max-w-[820px]"
+            className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 max-w-[820px]"
           >
             <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
@@ -276,7 +275,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                 >
                   <input
                     type="text"
-                    className="w-full py-2 px-4 outline-none"
+                    className="w-full py-[4px] px-[6px] xl:py-2 xl:px-4 outline-none"
                     placeholder="Search By Locality, Projects or Listings"
                     value={searchQuery}
                     onChange={(e) => handleSearchChange(e)}
@@ -405,15 +404,20 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </div>
 
             <button
-              className="md:hidden flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
+              className="md:hidden flex items-center h-[38px] md:h-[42px] xl:h-auto gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
               onClick={() => setIsDrawerOpen(true)}
             >
               <MdFilterList className="w-5 h-5" />
               Filters
             </button>
           </div>
-          <div className="flex flex-wrap md:flex-nowrap flex-row items-start w-full">
-            <ProjectSearchTabs />
+          <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
+            {isListing ? 
+              <ListingSearchTabs />
+              :
+              <ProjectSearchTabs />
+            }
+       
             <SelectedFilters />
           </div>
 

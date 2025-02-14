@@ -25,7 +25,7 @@ export default function BuyRent({ openDropdown, handleDropdownToggle }: Props) {
   return (
     <div className="relative m-1">
       <button
-        className="flex items-center gap-2 px-4 py-2 bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
+        className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2  bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
         onClick={() => handleDropdownToggle("buy")}
       >
         {state.cg === "R" ? "Rent" : "Buy"}
