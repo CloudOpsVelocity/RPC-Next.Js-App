@@ -54,7 +54,6 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   
     let localityName = state.localities.length > 0 ? state.localities[0] : "";
     let finalLocName = localityName.includes("+") ? localityName.split("+")[0] : localityName;
-    console.log(finalLocName)
     oldParams[3] = {
       href: localityName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}` : "", 
       label: finalLocName,
