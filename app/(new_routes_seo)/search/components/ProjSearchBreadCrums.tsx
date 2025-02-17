@@ -63,7 +63,6 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     let finalLocName = localityName.includes("+")
       ? localityName.split("+")[0]
       : localityName;
-    console.log(finalLocName);
     oldParams[3] = {
       href:
         localityName !== ""
