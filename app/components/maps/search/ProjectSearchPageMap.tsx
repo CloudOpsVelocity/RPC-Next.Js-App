@@ -21,7 +21,8 @@ import TooltipProp from "./ToolltipProp";
 
 const Map = ({ data, lat, lang, type, styles }: any) => {
   const position: LatLngTuple = [lat, lang];
-  return (
+
+  return ( 
     <>
       <MapContainer
         center={position}
@@ -49,7 +50,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     iconSize: [60, 60],
     iconAnchor: [19, 38],
     popupAnchor: [0, -38],
-  });
+  }); 
   const MobileIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [30, 30],
@@ -62,7 +63,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
 
   useEffect(() => {
     if (selected && selected.projOrPropName) {
-      map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 19);
+      const position:any = [parseFloat(selected.lat) + 0.3, parseFloat(selected.lang) ];
+      map.setView(position, map.getZoom(), { animate: true });
     }
   }, [selected, map]);
 
@@ -96,7 +98,6 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             },
           }
         : null;
-
       return (
         <Marker
           key={itemId}
@@ -139,6 +140,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
                   locality: item.locality,
                   postedByName: item.postedByName,
                   phases: Object.values(phases || {}),
+                  coverUrl: item.coverUrl
                 }}
               />
             ) : (

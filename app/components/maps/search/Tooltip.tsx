@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { 
   BiSolidBuildings, 
@@ -23,6 +24,7 @@ type TooltipProjProps = {
   locality: string;
   postedByName: string;
   phases: PhaseData[];
+  coverUrl: string;
 };
 
 function formatCurrency(amount: number): string {
@@ -34,11 +36,18 @@ function formatCurrency(amount: number): string {
   }).format(amount);
 }
 export default function TooltipProj({ data }: { data: TooltipProjProps }) {
-  const { projName, city, state, locality, phases, postedByName } = data;
-
+  const { projName, city, state, locality, phases, postedByName, coverUrl } = data; 
   return (
-    <div className="bg-white shadow-md text-xs rounded-lg overflow-hidden border border-gray-200">
+    <div className="bg-white text-xs rounded-lg overflow-hidden">
       <div className="space-y-1 p-2">
+        <Image
+          src={coverUrl} 
+          alt="listing cover Image"
+          quality={80}
+          height={630}
+          width={1200}
+          className='rounded-[4px] w-full mb-[4px] xl:mb-[10px] md:mb-0 border-[0.5px] border-gray border-solid rounded-l-0 h-[100px] xl:h-[160px] ' 
+        />
         {/* Header */}
         <div className="border-b border-gray-200 pb-1">
           <h3 className="font-semibold text-gray-900 flex items-center gap-1 text-sm">
@@ -49,7 +58,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
             <BiSolidMapPin size={14} className="text-emerald-600" />
             <p className="text-[12px] font-medium">
               {locality}, {city}
-            </p>
+            </p> 
           </div>
           <div className="flex items-center gap-1 text-gray-700 mt-0.5">
             <BiSolidUser size={14} className="text-purple-600" />
