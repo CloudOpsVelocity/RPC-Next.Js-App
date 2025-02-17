@@ -1,13 +1,14 @@
-import React from "react";
-import BuilderCarousel from "@/app/components/builder/Carousel";
-import Reqcallback from "@/app/components/builder/Reqcallback";
-import ProjectDrawer from "@/app/components/project/Drawer";
-import dynamic from "next/dynamic";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
-import TopProfileBlock from "@/app/components/builder/topProfileBlock";
-import ProjectDetails from "@/app/components/builder/projectDetails";
-import ManagementBlock from "@/app/components/builder/management";
-import Disclamer from "@/app/components/builder/Disclamer";
+import React from "react";
+import TopProfileBlock from "./BuilderPageTopProfileBlock";
+import ProjectDetails from "./BuilderPageAboutProjectDetailsAndAddress";
+import ManagementBlock from "./management-section/BuilderPageManagementSection";
+import BuilderCarousel from "./BuilderPageCarousel";
+import Reqcallback from "./Reqcallback";
+import ProjectDrawer from "@/app/components/project/Drawer";
+import Disclamer from "./disclamer/BuilderPageDisclamer";
+import dynamic from "next/dynamic";
+
 const LoginPopup = dynamic(
   () => import("@/app/components/project/modals/LoginPop"),
   {
@@ -17,7 +18,7 @@ const LoginPopup = dynamic(
 );
 type Props = { data: any; id: string };
 
-export default function BuilderPage({ data, id }: Props) {
+export default function BuilderDetailsPage({ data, id }: Props) {
   const refURls = data?.data?.sourceBuilderUrl?.split(",");
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">

@@ -1,24 +1,16 @@
 "use client";
-
 import { useState } from "react";
-import {
-  FaSearch,
-  FaFilter,
-  FaRedoAlt,
-  FaClosedCaptioning,
-} from "react-icons/fa";
+import { FaSearch, FaRedoAlt } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
-
 import { useQuery } from "react-query";
-import {
-  getAllCititesForBuilders,
-  getCitiesBuilder,
-} from "../../utils/new-seo-routes/builder.client";
 import { Pagination, Select } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import BuilderDetailsCard from "./BuilderDetailsCard";
 import { useMediaQuery } from "@mantine/hooks";
-import { ImCross } from "react-icons/im";
+import {
+  getAllCititesForBuilders,
+  getCitiesBuilder,
+} from "../../services/builder-client.service";
 
 export default function BuildersDirectory({
   city,

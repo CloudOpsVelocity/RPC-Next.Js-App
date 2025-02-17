@@ -1,6 +1,6 @@
 import React from "react";
-import BuildersDirectory from "./components/CitiesBuilder";
-import { getCitiesBuilder } from "../utils/new-seo-routes/builder.client";
+import BuildersDirectory from "./_components/search-page/CitiesBuilder";
+import { getCitiesBuilder } from "./services/builder-client.service";
 
 type Props = {};
 
