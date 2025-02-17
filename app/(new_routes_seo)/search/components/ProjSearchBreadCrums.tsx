@@ -23,62 +23,97 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   const getParams = useSearchParams();
   let listedBy = getParams.get("sf");
 
-  let initailAlParams:any = [
+  let initailAlParams: any = [
     {
       href: "/",
       label: "Home",
-    },{
+    },
+    {
       href: "/",
       label: "For Buy",
-    },{
+    },
+    {
       href: `${BASE_PATH_PROJECT_DETAILS}${"/bengaluru"}`,
       label: "bengaluru",
-    }
+    },
   ];
 
-  const [allParams, setAllParams] = useState(initailAlParams)
+  const [allParams, setAllParams] = useState(initailAlParams);
 
-  useEffect(()=>{
+  useEffect(() => {
     let oldParams = [...allParams];
-    const finalCityName = state && state.city && state.city.split("+")[0] ? state?.city.split("+")[0] : "bengaluru";
+    const finalCityName =
+      state && state.city && state.city.split("+")[0]
+        ? state?.city.split("+")[0]
+        : "bengaluru";
 
     oldParams[1] = {
-      href: `${BASE_PATH_PROJECT_DETAILS}${state.cg === "R" ? "/for-rent" : "/For-sale"}`,
+      href: `${BASE_PATH_PROJECT_DETAILS}${
+        state.cg === "R" ? "/for-rent" : "/For-sale"
+      }`,
       label: state.cg === "R" ? "For Rent" : "For Sale",
     };
 
     oldParams[2] = {
-      href: `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}`, 
+      href: `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}`,
       label: finalCityName,
     };
-  
+
     let localityName = state.localities.length > 0 ? state.localities[0] : "";
-    let finalLocName = localityName.includes("+") ? localityName.split("+")[0] : localityName;
+    let finalLocName = localityName.includes("+")
+      ? localityName.split("+")[0]
+      : localityName;
     oldParams[3] = {
-      href: localityName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}` : "", 
+      href:
+        localityName !== ""
+          ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}`
+          : "",
       label: finalLocName,
     };
 
     oldParams[4] = {
-      href: state.projName !== "" ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}/${state.projName}` : "", 
+      href:
+        state.projName !== ""
+          ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}/${state.projName}`
+          : "",
       label: state.projName !== "" ? state.projName : "",
     };
     setAllParams(oldParams);
   }, [listedBy, state]);
 
-
   if (!allParams || allParams.length === 0) {
     return null;
   }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: allParams
+      .filter((item: any) => item.label !== "")
+      .map((item: any, index: number) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@id": `${process.env.NEXT_PUBLIC_URL}${item.href}`,
+          name: item.label,
+        },
+      })),
+  };
 
   return (
     <nav
       aria-label="Project Search Breadcrumbs"
       className="w-full px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] xl:py-4 bg-gray-100 rounded-md shadow-sm max-w-[100%] overflow-x-auto "
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         <li>
-          <a 
+          <a
             href="/"
             className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
           >
@@ -86,27 +121,36 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
             <span className="sr-only">Home</span>
           </a>
         </li>
-        {allParams.map((item:any, index:number) => {
-          if(item.label !== ""){
-          return(
-          <li key={item.href} className="flex items-center">
-            <FaChevronRight
-              className="h-4 w-4 flex-shrink-0 text-gray-400"
-              aria-hidden="true"
-            />
-            {index !== allParams.length -1 ?
-            <a
-              href={item.href}
-              target="_blank"
-              className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
-              aria-current={index === allParams.length - 1 ? "page" : undefined}
-            >
-              {item.label}
-            </a>
-            :
-            <span className={`ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap`}>{item.label}</span>}
-          </li>
-        )}})}
+        {allParams.map((item: any, index: number) => {
+          if (item.label !== "") {
+            return (
+              <li key={item.href} className="flex items-center">
+                <FaChevronRight
+                  className="h-4 w-4 flex-shrink-0 text-gray-400"
+                  aria-hidden="true"
+                />
+                {index !== allParams.length - 1 ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
+                    aria-current={
+                      index === allParams.length - 1 ? "page" : undefined
+                    }
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <span
+                    className={`ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap`}
+                  >
+                    {item.label}
+                  </span>
+                )}
+              </li>
+            );
+          }
+        })}
       </ol>
     </nav>
   );
