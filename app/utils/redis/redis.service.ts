@@ -2,6 +2,7 @@ import Redis from "ioredis";
 
 import redisConnection from "./redis.connection";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
+import { getPagesSlugs } from "@/app/seo/api";
 
 class RedisService {
   private static instance: RedisService;
@@ -18,8 +19,10 @@ class RedisService {
    */
   public static getInstance(): RedisService {
     if (!RedisService.instance) {
+      console.log("new instance");
       RedisService.instance = new RedisService();
     }
+    console.log("old instance");
     return RedisService.instance;
   }
 
@@ -136,7 +139,32 @@ class RedisService {
   async getSlug(type: string, key: string): Promise<any | null> {
     const fullKey = `${type}:slug:${key}`;
     const value = await this.getKey(fullKey);
-    if (!value) return null;
+    if (!value) {
+      console.log(type);
+      switch (key) {
+        case SlugsType.BUILDER:
+          console.log("No builder slug found");
+          break;
+        case SlugsType.LISTING:
+          console.log("No listing slug found");
+          break;
+        case SlugsType.PROJECT: {
+          const res = await getPagesSlugs("project-list");
+          this.saveSlug(type, key, res);
+          return res;
+        }
+        case SlugsType.SEO: {
+          const res = await getPagesSlugs("case-seo");
+          this.saveSlug(type, key, res);
+          return res;
+        }
+
+        default:
+          console.log("No matching slug type found");
+          break;
+      }
+      return;
+    }
     try {
       return JSON.parse(value);
     } catch (error) {

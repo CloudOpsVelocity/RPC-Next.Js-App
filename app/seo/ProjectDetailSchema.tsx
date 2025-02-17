@@ -125,26 +125,20 @@ const generateSchema = (projectData: ProjectData) => {
           : [],
         eventStatus: "http://schema.org/EventScheduled",
         eventAttendanceMode: "http://schema.org/OnlineEventAttendanceMode",
-        location: [
-          {
-            "@type": "VirtualLocation",
-            url: projectDetailsPageUrl,
+        location: {
+          "@type": "Place",
+          name: basicData?.projectName,
+          image: basicData?.media?.coverImageUrl
+            ? [basicData.media.coverImageUrl]
+            : [],
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: basicData?.localityName,
+            addressRegion: basicData?.stateName,
+            addressCountry: "India",
+            postalCode: basicData?.pinCode,
           },
-          {
-            "@type": "Place",
-            name: basicData?.projectName,
-            image: basicData?.media?.coverImageUrl
-              ? [basicData.media.coverImageUrl]
-              : [],
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: basicData?.localityName,
-              addressRegion: basicData?.stateName,
-              addressCountry: "India",
-              postalCode: basicData?.pinCode,
-            },
-          },
-        ],
+        },
         offers: {
           "@type": "Offer",
           url: projectDetailsPageUrl,
@@ -179,6 +173,12 @@ const generateSchema = (projectData: ProjectData) => {
         potentialAction: {
           "@type": "BuyAction",
           target: projectDetailsPageUrl,
+        },
+        performer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          url: COMPANY_URL,
+          logo: LOGO_URL,
         },
       },
       {
@@ -398,12 +398,30 @@ const generateSchema = (projectData: ProjectData) => {
         },
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": projectDetailsPageUrl,
+          "@id": projectDetailsPageUrl + "#",
         },
-        url: projectDetailsPageUrl,
+        url: projectDetailsPageUrl + "#",
         articleBody:
           desc ||
           `${basicData?.projectName} is a residential project located in ${basicData?.localityName}, ${basicData?.stateName}.`,
+      },
+      {
+        "@type": "VirtualLocation",
+        name: `Virtual Tour of ${basicData?.projectName}`,
+        description: `Experience a virtual walkthrough of ${basicData?.projectName} from anywhere`,
+        url: projectDetailsPageUrl,
+        additionalType: "https://schema.org/3DModel",
+        potentialAction: {
+          "@type": "ViewAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: projectDetailsPageUrl,
+            actionPlatform: [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/MobileWebPlatform",
+            ],
+          },
+        },
       },
     ],
   };
