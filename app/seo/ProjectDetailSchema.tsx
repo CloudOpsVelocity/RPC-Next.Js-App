@@ -582,27 +582,11 @@ const generateSchema = (projectData: ProjectData) => {
             validFrom: projectData?.basicData.startDate,
             validThrough: projectData?.basicData.endDate,
           },
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: basicData?.localityName,
-            addressRegion: basicData?.stateName,
-            addressCountry: "IN",
-          },
           url: projectDetailsPageUrl,
           image: basicData?.media.coverImageUrl,
-        },
-        provider: {
-          "@type": "RealEstateAgent",
-          name: COMPANY_NAME,
-          telephone: PHONE_NUMBER,
-          email: "contactus@grp.com",
-          url: COMPANY_URL,
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: basicData?.localityName,
-            addressRegion: basicData?.stateName,
-            addressCountry: "India",
-            postalCode: basicData?.pinCode,
+          specialCoverage: {
+            "@type": "Place",
+            name: `${basicData?.localityName}, ${basicData?.cityName}`,
           },
         },
       },
@@ -646,7 +630,6 @@ const generateSchema = (projectData: ProjectData) => {
             name: "Total Units",
             value: basicData?.floorPlanCount || "Not Specified",
           },
-
           {
             "@type": "PropertyValue",
             name: "Launch Date",
@@ -657,6 +640,35 @@ const generateSchema = (projectData: ProjectData) => {
             name: "Possession Status",
             value: basicData?.endDate || "Not Specified",
           },
+          ...(basicData?.nearByLocations?.map((location: any) => ({
+            "@type": "PropertyValue",
+            name: "Nearby Location",
+            value: {
+              "@type": "Place",
+              name: location.name,
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: location.locality,
+                addressRegion: location.region,
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: location.latitude,
+                longitude: location.longitude,
+              },
+              distance: `${location.distance} km`,
+            },
+          })) || []),
+          ...(basicData?.amenityList?.map((amenity) => ({
+            "@type": "PropertyValue",
+            name: "Amenity",
+            value: amenity.name,
+          })) || []),
+          ...(basicData?.specificationList?.map((spec) => ({
+            "@type": "PropertyValue",
+            name: "Specification",
+            value: spec.specName,
+          })) || []),
         ],
         distribution: {
           "@type": "DataDownload",
@@ -670,6 +682,9 @@ const generateSchema = (projectData: ProjectData) => {
           basicData?.localityName,
           basicData?.stateName,
           "property for sale",
+          ...(basicData?.nearByLocations?.map((loc: any) => loc.name) || []),
+          ...(basicData?.amenityList?.map((amenity: any) => amenity.name) ||
+            []),
         ],
       },
     ],
