@@ -43,30 +43,15 @@ export default function GalleryBlock({
   }
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
-  // const [, { open }] = useGallery();
   const [galleryState, dispatch] = useAtom(galleryStateAtom);
   const handleMediaClick = (media: string, index: number) => {
-    // if (isMobile) {
-    //   const isVideo = videos.includes(media);
-    //   dispatch({
-    //     type:"OPEN",
-    //     payload:{
-    //       items:images,
-    //       mediaType:isVideo ? "video" : "image",
-    //       title:"Project Gallery",
-    //       activeIndex:index
-    //     }
-    //   })
-    //   // open(isVideo ? "video" : "image", media);
-    // }
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
 
-
   return (
     <div
-      className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
+      className="w-[95%] md:w-[90%] sm:pt-[50px] scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
       id="gallery"
     >
       {type === "prop" ? (
@@ -82,7 +67,7 @@ export default function GalleryBlock({
           >
             Gallery of{" "}
             <span
-              className="text-[#148B16] font-[700]  scroll-mt-[260px]"
+              className="text-[#148B16] font-[700] scroll-mt-[260px]"
               id="photos"
             >
               {projName}
@@ -95,13 +80,13 @@ export default function GalleryBlock({
           />
         </>
       )}
-      <div className=" flex justify-center flex-col md:flex-row items-center-full sm:mt-[1%] ">
-        {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white  h-[220px] overflow-hidden sm:h-[394px] lg:h-auto  md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center p-1">
+      <div className="flex justify-center flex-col md:flex-row items-center-full sm:mt-[1%]">
+        {/* Image display con */}
+        <div className="w-[100%] md:w-[50%] bg-white h-[220px] overflow-hidden sm:h-[394px] lg:h-auto md:mb-[0%] mr-[3%] rounded-[14px] flex justify-center items-center p-1">
           {selectedMedia && (
             <div
               className={clsx(
-                "w-[100%]   sm:h-[100%] md:h-[100%] sm:max-h-[100%] flex justify-center items-center sm:mb-[3%] md:mb-[0%] sm:mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
+                "w-[100%] sm:h-[100%] md:h-[100%] sm:max-h-[100%] flex justify-center items-center sm:mb-[3%] md:mb-[0%] sm:mr-[3%] relative rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)]",
                 (selectedMedia.includes(".mp4") ||
                   selectedMedia.includes("youtube")) &&
                   "flex justify-center items-center"
@@ -117,7 +102,7 @@ export default function GalleryBlock({
                   playing
                 />
               ) : (
-                <div className=" min-h-[220px]  max-h-[250px] sm:max-h-[400px] xl:max-h-[450px]">
+                <div className="min-h-[220px] max-h-[250px] sm:max-h-[400px] xl:max-h-[450px]">
                   <picture>
                     <source
                       media="(max-width: 460px)"
@@ -127,13 +112,12 @@ export default function GalleryBlock({
                       media="(max-width: 800px)"
                       srcSet={selectedMedia.split(",")[2]}
                     />
-                    {/* <source media="(min-width: 1200px)" srcSet={selectedMedia.split(',')[3]} /> */}
                     <Image
                       src={selectedMedia.split(",")[2]}
                       alt="Preview"
-                      className="cursor-pointer object-contain  "
+                      className="cursor-pointer object-contain"
                       onClick={() => {
-                        dispatch({ 
+                        dispatch({
                           type: "OPEN",
                           payload: {
                             items: images,
@@ -145,8 +129,6 @@ export default function GalleryBlock({
                       }}
                       width={799}
                       height={400}
-                      // sizes="(max-width: 460px) 460px, (max-width: 800px) 800px, 799px"
-                      // fill
                       unoptimized
                     />
                   </picture>
@@ -169,37 +151,22 @@ export default function GalleryBlock({
                     },
                   });
                 }}
-                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[6] "
+                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[6]"
               >
-                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px]" />
               </button>
-              {/* <Gallery
-                selectedMedia={selectedMedia}
-                images={images}
-                videos={videos}
-                isImage={
-                  selectedMedia.includes(".mp4") ||
-                  selectedMedia.includes("youtube")
-                    ? false
-                    : true
-                }
-                currentSlide={currentSlide}
-                setCurrentSlide={setCurrentSlide}
-              /> */}
             </div>
           )}
         </div>
         {/* all media display con */}
         <div className="w-[100%] md:w-[47%] mt-3 sm:mt-0">
-          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
+          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%]">
             Photos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap relative">
             {images?.map((img, ind) => {
-              // Skip images that contain "masterplan" in the URL
               if (img.includes("masterplan")) return null;
 
-              // Extract the image URL from the comma-separated string and split it to get the title and alt text
               const imageUrl = img.split(",")[1];
               const imageName = imageUrl.split("/")[6]?.split(".")[0];
 
@@ -208,12 +175,29 @@ export default function GalleryBlock({
                   className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
                   key={`gallery_block_${ind}`}
                 >
+                  <script type="application/ld+json">
+                    {JSON.stringify({
+                      "@context": "https://schema.org/",
+                      "@type": "ImageObject",
+                      contentUrl: imageUrl,
+                      license:
+                        "https://www.getrightproperty.com/privacy-policy",
+                      acquireLicensePage:
+                        "https://www.getrightproperty.com/privacy-policy",
+                      creditText: imageName,
+                      creator: {
+                        "@type": "Person",
+                        name: "Get Right Property",
+                      },
+                      copyrightNotice: "Get Right Property",
+                    })}
+                  </script>
                   <Image
                     src={imageUrl}
-                    alt={imageName}
-                    title={imageName}
+                    alt={imageName || ""}
+                    title={imageName || ""}
                     className={clsx(
-                      `!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300`,
+                      "!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300",
                       selectedMedia?.split("?")[0] === img.split("?")[0] &&
                         "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                     )}
@@ -224,75 +208,72 @@ export default function GalleryBlock({
                 </div>
               );
             })}
+          </div>
         </div>
 
-          {videos && videos.length > 0 && (
-            <>
-              <h3 className="text-[#737579] font-[600] text-[20px] sm:pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] scroll-mt-[400px]">
-                Videos
-              </h3>
-              <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
-                {videos?.map((img, ind) => (
-                  <div
-                    key={`gallery_block_vide_${ind}`}
-                    className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
-                      ${
-                        selectedMedia === img
-                          ? "border-2 !border-btnPrimary shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
-                          : ""
-                      }`}
-                  >
-                    <VideoJsonLdScript
-                      contentUrl={img as string}
-                      name={`${projName} ${VideoALText(img)}`}
-                      description={`This video is about ${projName} ${VideoALText(
-                        img
-                      )}`}
+        {videos && videos.length > 0 && (
+          <>
+            <h3 className="text-[#737579] font-[600] text-[20px] sm:pt-4 lg:text-[24px] mb-1 sm:mb-[2%] scroll-mt-[400px]">
+              Videos
+            </h3>
+            <div className="flex justify-start items-start w-full gap-[4%] flex-wrap">
+              {videos?.map((img, ind) => (
+                <div
+                  key={`gallery_block_video_${ind}`}
+                  className={clsx(
+                    "relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px] bg-white rounded-[5px] mb-[4%] cursor-pointer",
+                    selectedMedia === img &&
+                      "border-2 !border-btnPrimary shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                  )}
+                >
+                  <VideoJsonLdScript
+                    contentUrl={img}
+                    name={`${projName} ${VideoALText(img)}`}
+                    description={`This video is about ${projName} ${VideoALText(
+                      img
+                    )}`}
+                  />
+                  {img.includes("youtube") ? (
+                    <Image
+                      width={150}
+                      height={90}
+                      src={getYouTubeThumbnailUrl(img) ?? ""}
+                      className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover"
+                      alt="thumbnail"
+                      onClick={() => handleMediaClick(img, ind)}
                     />
-                    {img.includes("youtube") ? (
-                      <Image
-                        width={150}
-                        height={90}
-                        src={getYouTubeThumbnailUrl(img) ?? ""}
-                        className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover "
-                        alt="thumbnail"
-                        onClick={() => handleMediaClick(img as string, ind)}
-                      />
-                    ) : (
-                      <video
-                        key={img}
-                        src={img as string}
-                        className={`!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover`}
-                        content=""
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleMediaClick(img as string, ind);
-                        }}
-                        // controls
-                      >
-                        <track
-                          src="/audio.vtt" // Replace with the actual path to your captions file
-                          kind="captions"
-                          srcLang="en"
-                          label="English"
-                          default
-                        />
-                      </video>
-                    )}
-                    <span
-                      className="absolute pointer-events-none "
+                  ) : (
+                    <video
+                      key={img}
+                      src={img}
+                      className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover"
                       onClick={(e) => {
-                        handleMediaClick(img as string, ind);
+                        e.preventDefault();
+                        handleMediaClick(img, ind);
                       }}
                     >
-                      {videoPlayIcon}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
+                      <track
+                        src="/audio.vtt"
+                        kind="captions"
+                        srcLang="en"
+                        label="English"
+                        default
+                      />
+                    </video>
+                  )}
+                  <span
+                    className="absolute pointer-events-none"
+                    onClick={(e) => {
+                      handleMediaClick(img, ind);
+                    }}
+                  >
+                    {videoPlayIcon}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -308,14 +289,10 @@ const AltText = (url: string) => {
   }
 };
 
-
-
-
-
 const VideoALText = (url: string) => {
   if (url.includes("walk-Through-video")) {
     return "Walk Through Video";
   } else {
-    return `Project Video`;
+    return "Project Video";
   }
 };
