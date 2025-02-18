@@ -111,7 +111,7 @@ const generateSchema = (projectData: ProjectData) => {
     "@graph": [
       {
         "@type": "SaleEvent",
-        name: `Buy ${basicData?.projectName}`,
+        name: `Avail Offer for ${basicData?.projectName}`,
         startDate: new Date(
           projectData?.basicData?.startDate?.replace("IST", "+05:30")
         ).toISOString(),
@@ -119,18 +119,46 @@ const generateSchema = (projectData: ProjectData) => {
           projectData?.basicData?.endDate?.replace("IST", "+05:30")
         ).toISOString(),
         url: projectDetailsPageUrl,
-        description: desc,
+        description: "Special discounts available for a limited time.",
         image: basicData?.media?.coverImageUrl
           ? [basicData.media.coverImageUrl]
           : [],
-        eventStatus: "http://schema.org/EventScheduled",
-        eventAttendanceMode: "http://schema.org/OnlineEventAttendanceMode",
-        location: {
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "MixedEventAttendanceMode",
+        location: [
+          {
+            "@type": "VirtualLocation",
+            url: projectDetailsPageUrl,
+          },
+          {
+            "@type": "Place",
+            name: basicData.projectName,
+            address: basicData.address,
+          },
+        ],
+        offers: {
+          "@type": "Offer",
+          url: projectDetailsPageUrl,
+          priceCurrency: "INR",
+          price: basicData?.minPrice,
+          validFrom: new Date(
+            basicData?.startDate?.replace("IST", "+05:30")
+          ).toISOString(),
+          priceValidUntil: new Date(
+            projectData?.basicData?.endDate?.replace("IST", "+05:30")
+          ).toISOString(),
+          availability: "http://schema.org/InStock",
+          category: "RealEstate",
+        },
+        organizer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          url: COMPANY_URL,
+          logo: LOGO_URL,
+        },
+        eventLocation: {
           "@type": "Place",
           name: basicData?.projectName,
-          image: basicData?.media?.coverImageUrl
-            ? [basicData.media.coverImageUrl]
-            : [],
           address: {
             "@type": "PostalAddress",
             addressLocality: basicData?.localityName,
@@ -139,6 +167,113 @@ const generateSchema = (projectData: ProjectData) => {
             postalCode: basicData?.pinCode,
           },
         },
+        potentialAction: {
+          "@type": "BuyAction",
+          target: projectDetailsPageUrl,
+        },
+        performer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          url: COMPANY_URL,
+          logo: LOGO_URL,
+        },
+      },
+      {
+        "@type": "SaleEvent",
+        name: `Call Now  :8884440963`,
+        startDate: new Date(
+          projectData?.basicData?.startDate?.replace("IST", "+05:30")
+        ).toISOString(),
+        endDate: new Date(
+          projectData?.basicData?.endDate?.replace("IST", "+05:30")
+        ).toISOString(),
+        url: projectDetailsPageUrl,
+        description: "Call our team now to get more details and offers.",
+        image: basicData?.media?.coverImageUrl
+          ? [basicData.media.coverImageUrl]
+          : [],
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "MixedEventAttendanceMode",
+        location: [
+          {
+            "@type": "VirtualLocation",
+            url: projectDetailsPageUrl,
+          },
+          {
+            "@type": "Place",
+            name: basicData.projectName,
+            address: basicData.address,
+          },
+        ],
+        offers: {
+          "@type": "Offer",
+          url: projectDetailsPageUrl,
+          priceCurrency: "INR",
+          price: basicData?.minPrice,
+          validFrom: new Date(
+            basicData?.startDate?.replace("IST", "+05:30")
+          ).toISOString(),
+          priceValidUntil: new Date(
+            projectData?.basicData?.endDate?.replace("IST", "+05:30")
+          ).toISOString(),
+          availability: "http://schema.org/InStock",
+          category: "RealEstate",
+        },
+        organizer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          url: COMPANY_URL,
+          logo: LOGO_URL,
+        },
+        eventLocation: {
+          "@type": "Place",
+          name: basicData?.projectName,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: basicData?.localityName,
+            addressRegion: basicData?.stateName,
+            addressCountry: "India",
+            postalCode: basicData?.pinCode,
+          },
+        },
+        potentialAction: {
+          "@type": "BuyAction",
+          target: projectDetailsPageUrl,
+        },
+        performer: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          url: COMPANY_URL,
+          logo: LOGO_URL,
+        },
+      },
+      {
+        "@type": "SaleEvent",
+        name: `Group Buy Discounts for ${basicData?.projectName}`,
+        startDate: new Date(
+          projectData?.basicData?.startDate?.replace("IST", "+05:30")
+        ).toISOString(),
+        endDate: new Date(
+          projectData?.basicData?.endDate?.replace("IST", "+05:30")
+        ).toISOString(),
+        url: projectDetailsPageUrl,
+        description: "Get discounts when buying in a group. Limited offer!",
+        image: basicData?.media?.coverImageUrl
+          ? [basicData.media.coverImageUrl]
+          : [],
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "MixedEventAttendanceMode",
+        location: [
+          {
+            "@type": "VirtualLocation",
+            url: projectDetailsPageUrl,
+          },
+          {
+            "@type": "Place",
+            name: basicData.projectName,
+            address: basicData.address,
+          },
+        ],
         offers: {
           "@type": "Offer",
           url: projectDetailsPageUrl,
@@ -295,23 +430,23 @@ const generateSchema = (projectData: ProjectData) => {
         },
         offerCount: 1,
         availability: "https://schema.org/InStock",
-        itemOffered: {
-          "@type": "Product",
-          name: basicData?.projectName,
-          image: basicData.media.projectPlanUrl,
-          description: desc || "Details about the project",
-          brand: {
-            "@type": "Brand",
-            name: basicData?.projectName.split(" ")[0],
-          },
-          offers: {
-            "@type": "Offer",
-            url: projectDetailsPageUrl,
-            price: basicData.minPrice,
-            priceCurrency: PRICE_CURRENY,
-            availability: "https://schema.org/InStock",
-          },
-        },
+        // itemOffered: {
+        //   "@type": "Product",
+        //   name: basicData?.projectName,
+        //   image: basicData.media.projectPlanUrl,
+        //   description: desc || "Details about the project",
+        //   brand: {
+        //     "@type": "Brand",
+        //     name: basicData?.projectName.split(" ")[0],
+        //   },
+        //   offers: {
+        //     "@type": "Offer",
+        //     url: projectDetailsPageUrl,
+        //     price: basicData.minPrice,
+        //     priceCurrency: PRICE_CURRENY,
+        //     availability: "https://schema.org/InStock",
+        //   },
+        // },
       },
       {
         "@type": "Residence",
@@ -398,9 +533,9 @@ const generateSchema = (projectData: ProjectData) => {
         },
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": projectDetailsPageUrl + "#",
+          "@id": projectDetailsPageUrl + "#article",
         },
-        url: projectDetailsPageUrl + "#",
+        url: projectDetailsPageUrl + "#article",
         articleBody:
           desc ||
           `${basicData?.projectName} is a residential project located in ${basicData?.localityName}, ${basicData?.stateName}.`,
@@ -420,6 +555,29 @@ const generateSchema = (projectData: ProjectData) => {
               "http://schema.org/DesktopWebPlatform",
               "http://schema.org/MobileWebPlatform",
             ],
+          },
+        },
+      },
+      {
+        "@type": "LandUseType",
+        name: "Residential",
+        description:
+          "A property primarily used for residential purposes, such as single-family homes, apartments, and townhouses.",
+      },
+      {
+        "@type": "SpecialAnnouncement",
+        name: `${basicData?.projectName} - Special Offer`,
+        category: "https://www.wikidata.org/wiki/Q27552",
+        datePosted: projectData?.basicData.startDate,
+        expires: projectData?.basicData.endDate,
+        text: `Special announcement for ${basicData?.projectName} - Located in ${basicData?.localityName}`,
+        announcementLocation: {
+          "@type": "Place",
+          name: `${basicData?.localityName}, ${basicData?.stateName}`,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: basicData?.localityName,
+            addressRegion: basicData?.stateName,
           },
         },
       },
