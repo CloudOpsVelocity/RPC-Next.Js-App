@@ -16,7 +16,7 @@ export default function HeadBanner({}: Props) {
       </div>
       <div className="hidden sm:block">
         <Image
-          src={"/commonsimg/connect_page_banner.svg"}
+          src={"/imgofPhoneIcon/connect_page_banner.svg"}
           alt="contact"
           width={387}
           height={300}

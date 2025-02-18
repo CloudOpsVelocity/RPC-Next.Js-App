@@ -67,6 +67,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
           <a
             href={`/search?sf=projStatus=108-builderIds=${builderQueryNameAndId}`}
             target="_blank"
+             rel="noopener noreferrer"
             className="block"
           >
             <div className="flex justify-between items-center w-[90%]">
@@ -98,6 +99,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
           <a
             href={`/search?sf=projStatus=106-builderIds=${builderQueryNameAndId}`}
             target="_blank"
+             rel="noopener noreferrer"
             className="block"
           >
             <div className="flex justify-between items-center w-[90%]">
@@ -130,6 +132,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
           <a
             href={`/search?sf=projStatus=107-builderIds=${builderQueryNameAndId}`}
             target="_blank"
+             rel="noopener noreferrer"
             className="block"
           >
             <div className="flex justify-between items-center w-[90%]">
