@@ -597,6 +597,13 @@ const generateSchema = (projectData: ProjectData) => {
           telephone: PHONE_NUMBER,
           email: "contactus@grp.com",
           url: COMPANY_URL,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: basicData?.localityName,
+            addressRegion: basicData?.stateName,
+            addressCountry: "India",
+            postalCode: basicData?.pinCode,
+          },
         },
       },
       {
