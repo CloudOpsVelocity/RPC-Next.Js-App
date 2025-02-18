@@ -113,6 +113,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] xl:text-[20px] font-[700] p-[10px]  "
           href={urlBuilder}
           target="_blank"
+           rel="noopener noreferrer"
         >
           View Builder Details
         </a>

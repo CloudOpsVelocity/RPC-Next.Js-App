@@ -67,7 +67,7 @@ function NewsDetailsPage({}: Props) {
                 <div className="flex flex-wrap gap-[10px]">
                     {commonLinks.redirections.map((eachOne:any)=>{
                         return(
-                          <a key={eachOne.name} href={eachOne.link} target='_blank' >
+                          <a key={eachOne.name} href={eachOne.link} target='_blank'rel="noreferrer" >
                             <p className=" bg-gray-400 text-[10px] md:text-[12px] cursor-pointer text-white p-[2px] px-[4px] md:px-[6px] ">#{eachOne.name}</p>
                           </a>
                         )
