@@ -567,19 +567,103 @@ const generateSchema = (projectData: ProjectData) => {
       {
         "@type": "SpecialAnnouncement",
         name: `${basicData?.projectName} - Special Offer`,
-        category: "https://www.wikidata.org/wiki/Q27552",
         datePosted: projectData?.basicData.startDate,
         expires: projectData?.basicData.endDate,
         text: `Special announcement for ${basicData?.projectName} - Located in ${basicData?.localityName}`,
-        announcementLocation: {
-          "@type": "Place",
-          name: `${basicData?.localityName}, ${basicData?.stateName}`,
+        subjectOf: {
+          "@type": "RealEstateListing",
+          name: `${basicData?.projectName} - Luxury Apartments & Villas`,
+          description: `Explore ${basicData?.projectName}, offering ${basicData?.availableProperties} configurations with world-class amenities in ${basicData?.localityName}, ${basicData?.stateName}.`,
+          offers: {
+            "@type": "Offer",
+            price: basicData?.minPrice,
+            priceCurrency: "INR",
+            availability: "InStock",
+            validFrom: projectData?.basicData.startDate,
+            validThrough: projectData?.basicData.endDate,
+          },
           address: {
             "@type": "PostalAddress",
             addressLocality: basicData?.localityName,
             addressRegion: basicData?.stateName,
+            addressCountry: "IN",
           },
+          url: projectDetailsPageUrl,
+          image: basicData?.media.coverImageUrl,
         },
+        provider: {
+          "@type": "RealEstateAgent",
+          name: COMPANY_NAME,
+          telephone: PHONE_NUMBER,
+          email: "contactus@grp.com",
+          url: COMPANY_URL,
+        },
+      },
+      {
+        "@type": "Dataset",
+        name: `${basicData?.projectName} Property Details`,
+        description: `Comprehensive dataset for ${basicData?.projectName} located in ${basicData?.localityName}, ${basicData?.stateName}`,
+        creator: {
+          "@type": "Organization",
+          name: "Square Yards",
+        },
+        dateCreated: projectData?.basicData.startDate,
+        dateModified:
+          projectData?.basicData.startDate || projectData?.basicData.startDate,
+        license: "https://creativecommons.org/licenses/by/4.0/",
+        variableMeasured: [
+          {
+            "@type": "PropertyValue",
+            name: "Project Name",
+            value: basicData?.projectName,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Location",
+            value: `${basicData?.localityName}, ${basicData?.stateName}`,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Property Type",
+            value: "Residential",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Price Range",
+            value: `${basicData?.minPrice || "Contact"} - ${
+              basicData?.maxPrice || "for Price"
+            }`,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Total Units",
+            value: basicData?.floorPlanCount || "Not Specified",
+          },
+
+          {
+            "@type": "PropertyValue",
+            name: "Launch Date",
+            value: basicData?.startDate,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Possession Status",
+            value: basicData?.endDate || "Not Specified",
+          },
+        ],
+        distribution: {
+          "@type": "DataDownload",
+          contentUrl: projectDetailsPageUrl,
+          encodingFormat: "text/html",
+        },
+        keywords: [
+          "real estate",
+          "residential property",
+          basicData?.projectName,
+          basicData?.localityName,
+          basicData?.stateName,
+          "property for sale",
+        ],
       },
     ],
   };
