@@ -17,7 +17,15 @@ const inititalValue = {
   type: null,
   content: null,
 };
+type AtomNearby = {
+  data: any;
+  category: string;
+  isOpen: boolean;
+  selectedNearbyItem:any;
+};
 const selectedSearchAtom = atom<null | Atom>(null);
+export const selectedNearByAtom = atom<AtomNearby>({category:'', data: {}, isOpen:false, selectedNearbyItem: {}});
+
 export const listingSearchAtom = atom<null | Atom>(null);
 type ActionData =
   | {

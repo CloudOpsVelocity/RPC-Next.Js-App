@@ -11,6 +11,7 @@ type Props = {
 };
 
 export default function NewSearchPage({ serverData, frontendFilters }: Props) {
+
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative ">
       {serverData && <ProjectSeachSchema properties={serverData} />}

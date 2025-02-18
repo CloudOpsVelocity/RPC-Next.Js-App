@@ -7,6 +7,9 @@ import React, {
 } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { throttle } from "lodash";
+import { useSetAtom } from "jotai";
+import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import { useMap } from "react-leaflet";
 
 // types.ts
 export interface LocationItem {
@@ -36,11 +39,18 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const tabContainerRef = useRef<HTMLDivElement>(null);
+  const setNearby = useSetAtom(selectedNearByAtom);
+
+  const setSelected = useSetAtom(selectedSearchAtom);
+
 
   const categories = useMemo(() => Object.keys(data), [data]);
 
   const handleTabClick = useCallback((category: string) => {
     setSelectedCategory(category);
+    // console.log(category);
+    setNearby( (prev:any) => ({...prev, category: category }) );
+
   }, []);
 
   const updateScrollButtons = throttle(() => {
@@ -73,6 +83,18 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
       );
     };
   }, [updateScrollButtons]);
+
+
+  const onSelectLocation = (item:any) => {
+    setNearby( (prev:any) => ({...prev, selectedNearbyItem: item }) );
+
+    // setSelected({
+    //   lat: item.lat,
+    //   lang: item.lang,
+    //   type: "proj",
+    //   projOrPropName:'project'
+    // });
+  }
 
   return (
     <div className="relative bg-white rounded-lg shadow-md overflow-hidden w-full">
@@ -121,15 +143,16 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
       {/* Content */}
       <div className="overflow-y-auto bg-gray-50 p-1">
         {data &&
-        selectedCategory !== undefined &&
+        selectedCategory !== undefined && 
         data[selectedCategory] !== undefined &&
         data[selectedCategory].length !== undefined &&
         data[selectedCategory].length > 0 ? (
           <ul className="grid grid-cols-2 gap-1">
             {data[selectedCategory]?.map((item) => (
               <li
+                onClick={()=>onSelectLocation(item)}
                 key={item.placeId}
-                className="border p-2 rounded-lg shadow-sm bg-white hover:bg-blue-50 transition-colors duration-200"
+                className="border p-2 rounded-lg shadow-sm bg-white hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
               >
                 <h3 className="text-sm font-bold text-blue-600 truncate">
                   {item.name}

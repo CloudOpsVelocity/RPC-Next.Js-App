@@ -8,6 +8,7 @@ import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import RTK_CONFIG from "@/app/config/rtk";
 import { usePathname } from "next/navigation";
+import MapPopup from "@/app/test/newui/components/Card/Top/Right/MapPopup";
 
 const RightSection = ({ serverData }: any) => {
   const Map = useMemo(
@@ -44,7 +45,7 @@ const RightSection = ({ serverData }: any) => {
         return response;
       },
       getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
+        const nextPage = allPages.length; 
         if (lastPage.length < 20) {
           return;
         }
@@ -56,19 +57,23 @@ const RightSection = ({ serverData }: any) => {
   const apidata = !isTrue ? serverData : data?.pages?.flat() || [];
 
   return (
-    <div
-      className=" w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 "
-      id="mobileMap"
-    >
-      <Map
-        projName={"Searched Location"}
-        lat={(apidata && apidata[0]?.lat) ?? 47.46489}
-        lang={(apidata && apidata[0]?.lang) ?? 15.34043}
-        data={apidata}
-        type={"proj"}
-        styles="h-[calc(100vh-65vh)] sm:h-[calc(78vh)] md:h-[calc(100vh-220px)] xl:h-[calc(100vh-262px)] w-full  max-w-full"
-      />
-    </div>
+    <>
+      <div
+        className=" w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 "
+        id="mobileMap"
+      >
+        <Map
+          projName={"Searched Location"}
+          lat={(apidata && apidata[0]?.lat) ?? 47.46489}
+          lang={(apidata && apidata[0]?.lang) ?? 15.34043}
+          data={apidata}
+          type={"proj"}
+          styles="h-[calc(100vh-65vh)] sm:h-[calc(78vh)] md:h-[calc(100vh-220px)] xl:h-[calc(100vh-262px)] w-full  max-w-full"
+        />
+      </div>
+
+      <MapPopup />
+    </>
   );
 };
 

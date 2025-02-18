@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import { IoIosCloseCircle } from "react-icons/io";
 import useProjectCardData from "../../useProjectCardData";
@@ -17,9 +17,10 @@ const Overlay: React.FC = () => {
     pType: pType ?? "",
     lat,
     lang,
-    propId
+    propId,
   });
   const overlayRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -61,9 +62,9 @@ const Overlay: React.FC = () => {
       case "amenities":
         return <div className="flex flex-wrap gap-2">{renderAmenities()}</div>;
       case "nearby":
-        return (
+        return ( 
           <p>
-            {isLoading ? "Loading..." : <LocationCard data={amenitiesFromDB} />}
+            {isLoading ? "Loading..." : <LocationCard data={amenitiesFromDB} />} 
           </p>
         );
       case "readmore":

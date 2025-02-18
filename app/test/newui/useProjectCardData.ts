@@ -1,3 +1,5 @@
+import { selectedNearByAtom } from "@/app/store/search/map";
+import { createStore, useSetAtom } from "jotai";
 import { useQuery, QueryFunction } from "react-query";
 
 type Props = {
@@ -11,16 +13,22 @@ type Props = {
 };
 
 export default function useProjectCardData({ id, isOpen, conType, pType, lat, lang,propId }: Props) {
+
+  const setNearby = useSetAtom(selectedNearByAtom)
   const queryConfig = getQueryConfig(conType, id, isOpen, pType, lat, lang,propId);
 
   const { data, isLoading } = useQuery({
     queryKey: queryConfig.queryKey,
     queryFn: queryConfig.queryFn,
     enabled: queryConfig.enabled,
-  });
+    onSuccess: queryConfig.onSuccess,
+  }); 
+
+  setNearby( prev => ({...prev, data: data, isOpen: isOpen }) );
 
   return { data, isLoading };
 }
+
 
 function getQueryConfig(conType: string, id: string, isOpen: boolean, type: string, lat?: number, lang?: number,propId?: string) {
   const idToUse = id.includes('+') ?  id.split('+')[0] : id;
@@ -28,13 +36,17 @@ function getQueryConfig(conType: string, id: string, isOpen: boolean, type: stri
     return {
       queryKey: [conType + idToUse],
       queryFn: () => getAmenties(idToUse, type,propId),
-      enabled: isOpen,
+      enabled: isOpen, 
     };
   } else if (conType === "nearby") {
     return {
       queryKey: [conType + idToUse],
-      queryFn: () => getNearByLocations(idToUse, type, lat, lang),
+      queryFn: () => getNearByLocations(idToUse, type, lat, lang),  
       enabled: isOpen,
+      onSuccess:(data:any)=>  {
+        // console.log(data);
+        return data;
+      }
     };
   }
 

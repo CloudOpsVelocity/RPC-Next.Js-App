@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 "use client";
 import React, { useEffect } from "react";
 import {
@@ -6,7 +7,6 @@ import {
   Marker,
   Tooltip,
   useMap,
-  Popup
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import L, { LatLngTuple } from "leaflet";
@@ -14,10 +14,11 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
-import { useAtom } from "jotai";
-import selectedSearchAtom from "@/app/store/search/map";
+import { useAtom, useAtomValue } from "jotai";
+import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
+import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
 
 const Map = ({ data, lat, lang, type, styles }: any) => {
   const position: LatLngTuple = [lat, lang];
@@ -36,6 +37,7 @@ const Map = ({ data, lat, lang, type, styles }: any) => {
         />
         {/* @ts-ignore */}
         <MapContent data={data} type={type} />
+        
       </MapContainer>
       <polyline />
     </>
@@ -58,15 +60,28 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     popupAnchor: [0, -38],
   });
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
+  const { isOpen, selectedNearbyItem} = useAtomValue(selectedNearByAtom);
+
+  
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
 
   useEffect(() => {
-    if (selected && selected.projOrPropName) {
-      const position:any = [parseFloat(selected.lat) + 0.3, parseFloat(selected.lang) ];
-      map.setView(position, map.getZoom(), { animate: true });
+    const object:any = Object.keys(selectedNearbyItem).length > 0 ? selectedNearbyItem : selected
+    // if (object && object.projOrPropName) {
+    if (object) {
+      const position:any = [parseFloat(object.lat) + (isMobile ? 0.0005 : 0), parseFloat(object.lang) ];
+      map.setView(position, 100);
+    }else{
+      if (data && data?.length > 0) {
+        const bounds = L.latLngBounds(
+          data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
+        );
+        map.fitBounds(bounds);
+      }
     }
-  }, [selected, map]);
+  }, [selected, map, selectedNearbyItem]);
+
 
   useEffect(() => {
     if (data && data?.length > 0) {
@@ -76,6 +91,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       map.fitBounds(bounds);
     }
   }, [data, map]);
+
   return (
     data &&
     data?.map((item: any) => {
@@ -99,6 +115,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           }
         : null;
       return (
+        <>
         <Marker
           key={itemId}
           position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
@@ -119,7 +136,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           <Tooltip
             key={"tooltip_" + itemId + (selected?.reqId ?? "")}
             opacity={1}
-            permanent={selected?.reqId === itemId}
+            permanent={selected?.reqId === itemId} 
             direction="top"
             offset={[10, -35]}
             className={`${
@@ -165,7 +182,84 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             )}
           </Popup > */}
         </Marker>
+        <NearbyMarkers />
+        </>
       );
     })
   );
 };
+
+const NearbyMarkers = ({}) => {
+  const [{category, data, isOpen, selectedNearbyItem}, setSelectedLocation] = useAtom(selectedNearByAtom);
+
+  const isMobile = useMediaQuery("(max-width: 601px)");
+    const map = useMap();
+
+    useEffect(() => {
+      if (data && Object.keys(data).length > 0) {
+        const finalCateg = category !== "" ? category : Object.keys(data)[0]
+        const nearByData = data[finalCateg];
+
+        const bounds = L.latLngBounds(
+          nearByData.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
+        );
+        map.fitBounds(bounds);
+      }
+    }, [data, map, category]);
+
+    if(!data || Object.keys(data).length === 0) return;
+
+    const finalCategory = category !== "" ? category : Object.keys(data)[0]
+    const selectedNearByData = data ? data[finalCategory] : [];
+    const Icon:any = createCustomIconReactLeafLet(finalCategory);
+    
+    return(
+      selectedNearByData && selectedNearByData.length > 0 && selectedNearByData?.map((item: any) => {
+        return(
+          <Marker
+            key={item?.lat}
+            position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
+            title={item.name}
+            icon={Icon}
+            /*             {...(isMobile && { icon: BlueMobileMapIcon })}
+            */ zIndexOffset={100}
+            eventHandlers={{
+              click: () =>
+                setSelectedLocation((prev:any)=>({ ...prev, selectedNearbyItem: {lat: item?.lat, lang: item?.lang, name: item?.name }})),
+            }}
+          >
+            {!isMobile && (
+              <Tooltip
+                key={item.lat}
+                opacity={1}
+                direction="top"
+                permanent={selectedNearbyItem?.lat === item?.lat} 
+                className="min-w-fit z-50" 
+                offset={[4, -36]}
+              >
+                <div className=" ">
+                  <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
+                    {item.name}
+                  </p>
+                </div>
+              </Tooltip>
+            )}
+      
+            {selectedNearbyItem?.lat === item?.lat && (
+              <Tooltip
+                opacity={1}
+                direction="top"
+                permanent={selectedNearbyItem?.lat === item?.lat}
+                key={item.lang}
+                offset={isMobile ? [-7, -40] : [4, -36]}
+                className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
+              >
+                <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal]">
+                  {item.name}
+                </p>
+              </Tooltip>
+            )}
+          </Marker>
+      )}))
+    
+}

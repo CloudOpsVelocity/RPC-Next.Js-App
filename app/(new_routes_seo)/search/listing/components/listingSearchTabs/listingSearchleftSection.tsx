@@ -179,6 +179,11 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     </div>
   );
 
+  // const handleScroll = () => {
+  //   console.log("Scrolling...");
+  //   // setNearby( (prev:any) => ({...prev, category: "", data: {} }) );
+  // };
+
   return ( 
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
