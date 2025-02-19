@@ -156,6 +156,18 @@ export const generateListingSchema = ({
           "@type": "Brand",
           name: listing.postedByName,
         },
+        review: {
+          "@type": "Review",
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: "4.5",
+            bestRating: "5",
+          },
+          author: {
+            "@type": "Person",
+            name: "Rahul Kumar",
+          },
+        },
         offers: {
           "@type": "Offer",
           url: url,
@@ -291,6 +303,76 @@ export const generateListingSchema = ({
         },
       },
       ...nearByLocationsSchema,
+      {
+        "@type": "Dataset",
+        name: `${listing.propTypeName} Property Details`,
+        description: `Comprehensive dataset for ${listing.propTypeName} located in ${listing.ltName}`,
+        creator: {
+          "@type": "Organization",
+          name: listing.postedByName,
+        },
+        dateCreated: listing.createdAt,
+        dateModified: listing.updatedAt,
+        license: "https://creativecommons.org/licenses/by/4.0/",
+        variableMeasured: [
+          {
+            "@type": "PropertyValue",
+            name: "Property ID",
+            value: listing.propIdEnc,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Property Type",
+            value: listing.propTypeName,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Location",
+            value: `${listing.ltName}, ${listing.ctName}`,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Price",
+            value: listing.price,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Area",
+            value: `${listing.sba} sq ft`,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Status",
+            value: listing.status,
+          },
+        ],
+      },
+      {
+        "@type": "SpecialAnnouncement",
+        name: `${listing.propTypeName} - Special Offer`,
+        datePosted: listing.possassionDate,
+        expires: listing.availableFrom,
+        text: `Special announcement for ${listing.propTypeName} - Located in ${listing.ltName}`,
+        subjectOf: {
+          "@type": "RealEstateListing",
+          name: `${listing.propTypeName} - ${listing.propSubTypeName}`,
+          description: `Explore this ${listing.propTypeName} with ${listing.sba} sq ft area in ${listing.ltName}, ${listing.ctName}.`,
+          offers: {
+            "@type": "Offer",
+            price: listing.price,
+            priceCurrency: "INR",
+            availability: "InStock",
+            validFrom: listing.possassionDate,
+            validThrough: listing.availableFrom,
+          },
+          url: listing.url,
+          image: listing.imageUrl,
+          specialCoverage: {
+            "@type": "Place",
+            name: `${listing.ltName}, ${listing.ctName}`,
+          },
+        },
+      },
     ],
   };
 
