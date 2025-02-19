@@ -80,7 +80,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
       locality: cardData.localityName,
       projIdEnc: cardData.projIdEnc,
     });
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noreferrer");
     // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
   };
 

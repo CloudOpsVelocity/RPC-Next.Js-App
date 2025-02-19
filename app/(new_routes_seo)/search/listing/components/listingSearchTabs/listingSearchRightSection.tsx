@@ -60,7 +60,7 @@ const ListingSearchRightSection = ({ serverData }: any) => {
         lang={(apidata && apidata[0]?.lang) ?? 15.34043}
         data={apidata}
         type={"prop"}
-        styles="h-[calc(100vh-75vh)] sm:h-[calc(78vh)] md:h-[calc(100vh-220px)] xl:h-[calc(100vh-262px)] w-full  max-w-full"
+        styles="h-[calc(100vh-65vh)] md:h-[calc(100vh-220px)] xl:h-[calc(100vh-262px)] w-full  max-w-full"
       />
     </div>
   );

@@ -63,7 +63,6 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     let finalLocName = localityName.includes("+")
       ? localityName.split("+")[0]
       : localityName;
-    console.log(finalLocName);
     oldParams[3] = {
       href:
         localityName !== ""
@@ -134,6 +133,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
                   <a
                     href={item.href}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
                     aria-current={
                       index === allParams.length - 1 ? "page" : undefined

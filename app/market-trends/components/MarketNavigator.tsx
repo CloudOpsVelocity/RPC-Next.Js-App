@@ -161,7 +161,7 @@ function MarketNavigator({}: Props) {
         <div className='flex justify-start items-center gap-[8px] md:gap-[16px] '>
             {staticData.map((each)=>{
                 return(
-                    <a key={each.name} href={each.href} target='_blank'>
+                    <a key={each.name} href={each.href} target='_blank' rel="noreferrer">
                         <button 
                             title={`Click to Select ${each.name}`} className={`group border-[2px] border-solid border-white bg-transparent text-nowrap rounded-[34px] `}
                             // onClick={()=>onSelectSection(each.name)}

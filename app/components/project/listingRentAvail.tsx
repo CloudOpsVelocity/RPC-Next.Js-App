@@ -85,7 +85,7 @@ const Card = ({
     value
       ? openSuccesPopup()
       : window.open(
-          `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`
+          `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`, "noreferrer"
         );
   };
 

@@ -2,13 +2,13 @@ import React from "react";
 import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
-import BuildersDirectory from "../components/CitiesBuilder";
-import { findPathForBuilderDetails } from "../../utils/new-seo-routes/builder";
-import { BASE_PATH_BUILDER_DETAILS } from "../../utils/new-seo-routes/builder.route";
+import BuildersDirectory from "../_components/search-page/CitiesBuilder";
 import { notFound } from "next/navigation";
-import { getCitiesBuilder } from "../../utils/new-seo-routes/builder.client";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
+import { findPathForBuilderDetails } from "../services/builder-server.service";
+import { getCitiesBuilder } from "../services/builder-client.service";
+import { BASE_PATH_BUILDER_DETAILS } from "../builder.constant";
 type Props = {
   params: {
     city: string;

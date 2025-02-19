@@ -197,7 +197,7 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
    
     window.open(
       `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
-      "_blank"
+      "_blank", "noreferrer"
     );
   };
 

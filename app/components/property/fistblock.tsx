@@ -176,6 +176,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 <Link
                   href={projectUrl}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
                     projectDetails.projIdEnc ? "underline text-blue-600" : ""
                   } `}

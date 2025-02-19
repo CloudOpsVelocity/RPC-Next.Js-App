@@ -1,12 +1,10 @@
 import { getPagesSlugs } from "@/app/seo/api";
-import path from "path";
 import React from "react";
-import fs from "fs";
 import { getBuilderDetailsPageData } from "@/app/utils/api/builder";
 import { notFound } from "next/navigation";
-import BuilderPage from "@/app/builder/[slug]/Page/BuilderPage";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
+import BuilderDetailsPage from "../../_components/details-page/BuildersDetailsPage";
 type Props = {
   params: {
     city: string;
@@ -34,7 +32,7 @@ export default async function Page({ params: { city, slug } }: Props) {
   if (!id) return notFound();
   const data = await getBuilderDetailsPageData(id?.split("_")[1], pathname);
   return (
-    <BuilderPage
+    <BuilderDetailsPage
       data={{
         ...data,
         data: {
@@ -59,18 +57,3 @@ export async function generateStaticParams() {
   });
   return slugs;
 }
-// export const dynamic = "force-dyanmic";
-// export const dyanmicParams = true;
-
-// export async function generateMetadata(
-//   { params }: SeoProps,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   const pathname = `/builders/${params.city}/${params.slug}`;
-//   const id = await getBuilderSlug(pathname);
-//   const data = await getBuilderDetailsPageData(id?.split("_")[1], pathname);
-//   return {
-//     title: `${data.data.userName} | Top Real Estate Developer in ${data.data.cityName} | Properties in ${data.data.localityName}`,
-//     description: `Explore ${data.data.userName} - A leading real estate developer in ${data.data.cityName}. Browse through their residential and commercial projects in ${data.data.localityName} and discover your dream property.`,
-//   }
-// }

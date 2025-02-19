@@ -168,7 +168,7 @@ export default function ProjData({
           className="font-bold underline cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
-            window.open(urlBuilder, "_blank");
+            window.open(urlBuilder, "_blank", "noreferrer");
           }}
         >
           {postedByName}
@@ -220,7 +220,7 @@ export default function ProjData({
             projIdEnc != undefined
               ? (e) => {
                   e.stopPropagation();
-                  window.open(projectUrl, "_blank");
+                  window.open(projectUrl, "_blank", "noreferrer");
                 }
               : undefined
           }
@@ -242,7 +242,7 @@ export default function ProjData({
             postedBy === "Builder"
               ? (e) => {
                   e.stopPropagation();
-                  window.open(urlBuilder, "_blank");
+                  window.open(urlBuilder, "_blank", "noreferrer");
                 }
               : undefined
           }
