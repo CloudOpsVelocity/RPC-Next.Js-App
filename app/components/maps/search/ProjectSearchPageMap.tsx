@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
   Marker,
   Tooltip,
   useMap,
+  Popup,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import L, { LatLngTuple } from "leaflet";
@@ -55,42 +56,66 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   }); 
   const MobileIcon = L.icon({
     iconUrl: "/searchmarker.png",
-    iconSize: [30, 30],
+    iconSize: [50, 50],
     iconAnchor: [5, 38],
     popupAnchor: [0, -38],
   });
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
-  const { isOpen, selectedNearbyItem} = useAtomValue(selectedNearByAtom);
-
+  const { isOpen, selectedNearbyItem, id} = useAtomValue(selectedNearByAtom);
   
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
 
-  useEffect(() => {
-    const object:any = Object.keys(selectedNearbyItem).length > 0 ? selectedNearbyItem : selected
-    // if (object && object.projOrPropName) {
-    if (object) {
-      const position:any = [parseFloat(object.lat) + (isMobile ? 0.0005 : 0), parseFloat(object.lang) ];
-      map.setView(position, 100);
-    }else{
-      if (data && data?.length > 0) {
-        const bounds = L.latLngBounds(
-          data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
-        );
-        map.fitBounds(bounds);
+  const markerRef = useRef();
+
+  const eventHandlers = useMemo(
+    () => ({
+      mouseover() {
+        console.log("over");
+        if (markerRef) markerRef.current.openPopup();
+      },
+      mouseout() {
+        console.log("out");
+        if (markerRef) markerRef.current.closePopup();
       }
-    }
-  }, [selected, map, selectedNearbyItem]);
-
+    }),
+    []
+  );
 
   useEffect(() => {
-    if (data && data?.length > 0) {
+    if (selected && selected.projOrPropName && selected.lat && selected.lang) {
+        const position:any = [parseFloat(selected.lat) + (isMobile ? 0.0006 : 0), parseFloat(selected.lang) ];
+        map.setView(position, 100);
+    }
+  }, [selected, map]);
+
+  useEffect(() => {
+    if (selectedNearbyItem && selectedNearbyItem.lat && selectedNearbyItem.lang) {
+      const position:any = [parseFloat(selectedNearbyItem.lat), parseFloat(selectedNearbyItem.lang) ];
+      map.setView(position, 100);
+    }
+  }, [map, selectedNearbyItem]);
+
+  useEffect(() => {
+    if (data && data?.length > 0 && !isOpen) {
       const bounds = L.latLngBounds(
         data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
       );
       map.fitBounds(bounds);
     }
-  }, [data, map]);
+  }, [data]);
+
+  useEffect(() => {
+    const handleClickOutside = (event:any) => {
+      if (event.target.closest(".leaflet-container")) {
+        setSelectedValue(null);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [setSelectedValue]);
+
+
 
   return (
     data &&
@@ -114,26 +139,42 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             },
           }
         : null;
+      if(id === itemId || id === ""){
       return (
         <>
         <Marker
+          ref={markerRef}
           key={itemId}
           position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
           icon={isMobile ? MobileIcon : MapIcon}
-          eventHandlers={{
-            click: () => {
-              setSelectedValue({
-                projOrPropName: isProp ? item.propTypeName : item.projName,
-                lat: item.lat,
-                lang: item.lang,
-                type: isProp ? "prop" : "proj",
-                reqId: itemId,
-                propType: itemPropType,
-              });
-            },
-          }}
+          // eventHandlers={{
+          //   click: () => {
+          //     setSelectedValue({
+          //       projOrPropName: isProp ? item.propTypeName : item.projName,
+          //       lat: item.lat,
+          //       lang: item.lang,
+          //       type: isProp ? "prop" : "proj",
+          //       reqId: itemId,
+          //       propType: itemPropType,
+          //     });
+          //   },
+          //   mouseover: () => {
+          //     setSelectedValue({
+          //       projOrPropName: isProp ? item.propTypeName : item.projName,
+          //       lat: item.lat,
+          //       lang: item.lang,
+          //       type: isProp ? "prop" : "proj",
+          //       reqId: itemId,
+          //       propType: itemPropType,
+          //     });
+          //   }, // Open on hover
+          //   mouseout: () => {
+          //     setSelectedValue(null);
+          //   }, // Close when mouse leaves
+          // }}
+          eventHandlers={eventHandlers}
         >
-          <Tooltip
+          {/* <Tooltip
             key={"tooltip_" + itemId + (selected?.reqId ?? "")}
             opacity={1}
             permanent={selected?.reqId === itemId} 
@@ -142,9 +183,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             className={`${
               isProp
                 ? "min-w-fit"
-                : isMobile
-                ? "min-w-[300px]"
-                : "min-w-[400px]"
+                : isMobile ? "!min-w-[300px] !max-w-[340px]" : "!min-w-[400px]"
             }  max-w-screen-sm !p-0`}
             sticky
           >
@@ -163,9 +202,9 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             ) : (
               <TooltipProp data={item} />
             )}
-          </Tooltip>
+          </Tooltip> */}
 
-          {/* <Popup closeButton={false}>
+          <Popup>
             {!isProp ? (
               <TooltipProj
                 data={{
@@ -175,16 +214,38 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
                   locality: item.locality,
                   postedByName: item.postedByName,
                   phases: Object.values(phases || {}),
+                  coverUrl: item.coverUrl
                 }}
               />
             ) : (
               <TooltipProp data={item} />
             )}
-          </Popup > */}
+          </Popup>
+          
+          {/* {itemId === selected?.reqId &&           
+          <Popup>
+            {!isProp ? (
+              <TooltipProj
+                data={{
+                  projName: item.projName,
+                  city: item.city,
+                  state: item.state,
+                  locality: item.locality,
+                  postedByName: item.postedByName,
+                  phases: Object.values(phases || {}),
+                  coverUrl: item.coverUrl
+                }}
+              />
+            ) : (
+              <TooltipProp data={item} />
+            )}
+          </Popup>
+          } */}
+
         </Marker>
         <NearbyMarkers />
         </>
-      );
+      )}
     })
   );
 };
@@ -205,7 +266,17 @@ const NearbyMarkers = ({}) => {
         );
         map.fitBounds(bounds);
       }
-    }, [data, map, category]);
+    }, [data, category]);
+
+    useEffect(() => {
+      const handleClickOutside = (event:any) => {
+        if (event.target.closest(".leaflet-container")) {
+          setSelectedLocation((prev:any)=>({ ...prev, selectedNearbyItem: {}}))
+        }
+      };
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
+    }, [setSelectedLocation]);
 
     if(!data || Object.keys(data).length === 0) return;
 
@@ -221,8 +292,7 @@ const NearbyMarkers = ({}) => {
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
             icon={Icon}
-            /*             {...(isMobile && { icon: BlueMobileMapIcon })}
-            */ zIndexOffset={100}
+            zIndexOffset={100}
             eventHandlers={{
               click: () =>
                 setSelectedLocation((prev:any)=>({ ...prev, selectedNearbyItem: {lat: item?.lat, lang: item?.lang, name: item?.name }})),

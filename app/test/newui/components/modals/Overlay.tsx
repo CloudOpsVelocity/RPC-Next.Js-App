@@ -21,7 +21,6 @@ const Overlay: React.FC = () => {
   });
   const overlayRef = useRef<HTMLDivElement>(null);
 
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -123,7 +122,7 @@ const Overlay: React.FC = () => {
             >
               Close
             </button>
-          </div>
+          </div> 
         </div>
       </div>
     </div>

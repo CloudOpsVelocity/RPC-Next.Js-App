@@ -22,9 +22,11 @@ type AtomNearby = {
   category: string;
   isOpen: boolean;
   selectedNearbyItem:any;
+  id: string;
 };
 const selectedSearchAtom = atom<null | Atom>(null);
-export const selectedNearByAtom = atom<AtomNearby>({category:'', data: {}, isOpen:false, selectedNearbyItem: {}});
+export const selectedNearByAtom = atom<AtomNearby>({category:'', data: {}, isOpen:false, selectedNearbyItem: {}, id: ""});
+export const modalPopup = atom({data: {}, isOpen:false});
 
 export const listingSearchAtom = atom<null | Atom>(null);
 type ActionData =

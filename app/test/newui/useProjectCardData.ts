@@ -1,5 +1,5 @@
 import { selectedNearByAtom } from "@/app/store/search/map";
-import { createStore, useSetAtom } from "jotai";
+import { createStore, useAtom, useSetAtom } from "jotai";
 import { useQuery, QueryFunction } from "react-query";
 
 type Props = {
@@ -13,9 +13,8 @@ type Props = {
 };
 
 export default function useProjectCardData({ id, isOpen, conType, pType, lat, lang,propId }: Props) {
-
-  const setNearby = useSetAtom(selectedNearByAtom)
-  const queryConfig = getQueryConfig(conType, id, isOpen, pType, lat, lang,propId);
+  const [{id:projId, data: nearData}, setNearby] = useAtom(selectedNearByAtom)
+  const queryConfig = getQueryConfig(conType, id, isOpen, pType, lat, lang, propId);
 
   const { data, isLoading } = useQuery({
     queryKey: queryConfig.queryKey,
@@ -24,7 +23,10 @@ export default function useProjectCardData({ id, isOpen, conType, pType, lat, la
     onSuccess: queryConfig.onSuccess,
   }); 
 
-  setNearby( prev => ({...prev, data: data, isOpen: isOpen }) );
+  const itemId = id.includes("+") ? id.split("+")[0] : id;
+  if((nearData && Object.keys(nearData).length === 0) && (data && Object.keys(data).length !== 0)){
+    setNearby( prev => ({...prev, data: data, isOpen: true, id: itemId }) );
+  }
 
   return { data, isLoading };
 }
@@ -43,7 +45,7 @@ function getQueryConfig(conType: string, id: string, isOpen: boolean, type: stri
       queryKey: [conType + idToUse],
       queryFn: () => getNearByLocations(idToUse, type, lat, lang),  
       enabled: isOpen,
-      onSuccess:(data:any)=>  {
+      onSuccess:(data:any)=>  { 
         // console.log(data);
         return data;
       }

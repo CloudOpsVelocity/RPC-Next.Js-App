@@ -66,6 +66,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
               Builder: <span className="text-gray-500 ml-0.5">{postedByName}</span>
             </p>
           </div>
+          <button onClick={()=>console.log("opened")}>open</button>
         </div>
 
         {/* Phases */}

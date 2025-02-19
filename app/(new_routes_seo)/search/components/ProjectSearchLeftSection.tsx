@@ -8,7 +8,7 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { projSearchStore } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
@@ -18,6 +18,7 @@ import { usePathname } from "next/navigation";
 import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
+import { overlayAtom } from "@/app/test/newui/store/overlay";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -96,12 +97,13 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   });
   
   const setSelected = useSetAtom(selectedSearchAtom);
+  const [, dispatch] = useAtom(overlayAtom);
 
   useEffect(() => { 
     if(isMobile) return;
-    console.log(isMobile)
     const handleScroll = () => {
-      setNearby((prev:any) => ({...prev, category: "", data: {}, selectedNearbyItem:{} }));
+      setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+      dispatch({ type: "CLOSE" })
       setSelected(null);
     };
 

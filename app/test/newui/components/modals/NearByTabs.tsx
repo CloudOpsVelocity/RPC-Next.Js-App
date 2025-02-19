@@ -26,7 +26,7 @@ const Tabs: React.FC<TabsProps> = ({
   selectedCategory,
   categories,
 }) => {
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false); 
   const [canScrollRight, setCanScrollRight] = useState(true);
   const tabContainerRef = useRef<HTMLDivElement>(null);
   const updateScrollButtons = useCallback(

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import selectedSearchAtom, { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
 import React from "react";
 import HeartButton from "../Center/HeartButton";
@@ -99,8 +99,9 @@ export default function TopRightSection({
   const [lat, lang] = location?.split(",") ?? [];
   // console.log("card 1: ");
   const setNearby = useSetAtom(selectedNearByAtom);
+  const [mapPopup, setMapPopup] = useAtom(modalPopup);
 
-  
+
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -215,13 +216,13 @@ export default function TopRightSection({
                 )}
                 <div
                   onClick={() => {
-                    setNearby((prev:any) => ({...prev, category: "", data: {}, selectedNearbyItem:{} }));
-
+                    setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, id:"" }));
+                    setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     handleClick();
                     setSelected({
                       agentListing, 
                       ownerListing,
-                      projOrPropName,
+                      projOrPropName, 
                       lat,
                       lang,
                       type,
@@ -256,7 +257,7 @@ export default function TopRightSection({
               <button
                 className="max-w-fit sm:block hidden xl:hidden ml-auto px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold  md:mb-1 gradient"
                 onClick={() => {
-                  setNearby((prev:any) => ({...prev, category: "", data: {}, selectedNearbyItem:{} }));
+                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, id:"" }));
 
                   setSelected({
                     agentListing,
@@ -307,7 +308,8 @@ export default function TopRightSection({
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                   onClick={() => {
-                    // console.log("near by 1", data);
+                    console.log("near by 1", data);
+                    if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     dispatch({
                       type: "OPEN",
                       content: [],
@@ -406,7 +408,7 @@ export default function TopRightSection({
                   reqId: type === "proj" ? projIdEnc : propIdEnc,
                   propType: type === "proj" ? propType : propTypeName,
                 })
-                setNearby( (prev:any) => ({...prev, category: "", data:{} }) );
+                setNearby( (prev:any) => ({...prev, category: "", data:{}, id:"" }) );
               }}
             >
               {" "}
