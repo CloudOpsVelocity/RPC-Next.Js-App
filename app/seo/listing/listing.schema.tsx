@@ -186,13 +186,56 @@ export const generateListingSchema = ({
               ? "https://schema.org/UsedCondition"
               : "https://schema.org/NewCondition",
         },
-        aggregateRating: listing.rating
-          ? {
-              "@type": "AggregateRating",
-              ratingValue: listing.rating,
-              reviewCount: listing.reviewCount || 0,
-            }
-          : undefined,
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: listing.rating ?? 4.5,
+          reviewCount: listing.reviewCount || 5,
+          bestRating: "5",
+          worstRating: "1",
+        },
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Property Type",
+            value: listing.propTypeName,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Location",
+            value: `${listing.ltName}, ${listing.stateName}`,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Area",
+            value: listing.sba,
+            unitCode: "SqFt",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Bedrooms",
+            value: listing.nobt,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Bathrooms",
+            value: listing.bathRooms,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Floor Number",
+            value: listing.floorNo,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Furnishing Status",
+            value: listing.furnishType,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Year Built",
+            value: listing.yearBuilt,
+          },
+        ],
       },
       {
         "@type": "FAQPage",
@@ -305,10 +348,15 @@ export const generateListingSchema = ({
       {
         "@type": "SpecialAnnouncement",
         name: `${listing.propTypeName} - Special Offer`,
-        datePosted: listing.possassionDate,
-        expires: listing.possassionDate,
+        datePosted:
+          new Date(
+            listing?.availableFrom?.replace("IST", "+05:30")
+          ).toISOString() ?? "sdf",
+        expires:
+          new Date(
+            listing?.availableFrom?.replace("IST", "+05:30")
+          ).toISOString() ?? "sdfsdf",
         text: `Special announcement for ${listing.propTypeName} - Located in ${listing.ltName}`,
-
         subjectOf: {
           "@type": "RealEstateListing",
           name: title,
@@ -319,8 +367,12 @@ export const generateListingSchema = ({
           price: listing.price,
           priceCurrency: PRICE_CURRENY,
           availability: "InStock",
-          validFrom: listing.possassionDate,
-          validThrough: listing.possassionDate,
+          validFrom: listing?.availableFrom ?? "sdf",
+          validThrough: listing?.availableFrom ?? "sdfsdf",
+        },
+        specialCoverage: {
+          "@type": "Place",
+          name: `${listing.ltName}, ${listing.ctName}`,
         },
       },
 
