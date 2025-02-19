@@ -38,7 +38,7 @@ export default function ListingBreadCrumbs({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "/",
+        item: process.env.NEXT_PUBLIC_PROJECT_URL,
       },
       ...allParams.map((key, index) => {
         breadcrumbPath += `/${slugify(params[key])}`;

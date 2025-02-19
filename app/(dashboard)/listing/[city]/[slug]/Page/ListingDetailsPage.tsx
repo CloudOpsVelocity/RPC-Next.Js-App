@@ -30,7 +30,6 @@ const PropertyBanner = dynamic(
 const PropertyFirstBlock = dynamic(
   () => import("@/app/components/property/fistblock")
 );
-// const LeafMap = dynamic(() => import("@/app/components/project/map"));
 import LeafMap from "@/app/components/project/map";
 import ListingSchema from "@/app/seo/listing/listing.schema";
 const PropertyMap = dynamic(() => import("@/app/components/property/map"));
