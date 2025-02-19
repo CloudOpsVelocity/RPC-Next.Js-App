@@ -30,7 +30,6 @@ export default function MiddleSection({
   const { data: shortIds, isLoading } = useQuery(["shortIds"], () =>
     getClientShortIds(session)
   );
-  console.log(isLoading);
 
   return isLoading ? null : (
     <>

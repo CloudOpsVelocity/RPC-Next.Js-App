@@ -30,7 +30,6 @@ export default function ListingBreadCrumbs({
   };
   let currentPath = "";
   let breadcrumbPath = "";
-  // Generate breadcrumb schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -47,7 +46,7 @@ export default function ListingBreadCrumbs({
           "@type": "ListItem",
           position: index + 2,
           name: params[key].replace(/-/g, " "),
-          item: `${
+          item: `${process.env.NEXT_PUBLIC_PROJECT_URL}${
             isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
           }${breadcrumbPath}`,
         };
@@ -55,7 +54,6 @@ export default function ListingBreadCrumbs({
     ],
   };
 
-  // Generate SiteNavigationElement schema
   const siteNavSchema = {
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",

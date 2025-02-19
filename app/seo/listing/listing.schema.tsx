@@ -51,29 +51,6 @@ export const generateListingSchema = ({
         name: title,
         url: url,
         description: listing.usp,
-        breadcrumb: {
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            {
-              "@type": "ListItem",
-              position: 1,
-              name: "Home",
-              item: DOMAIN,
-            },
-            {
-              "@type": "ListItem",
-              position: 2,
-              name: listing.propTypeName,
-              item: `${DOMAIN}${listing.propTypeName.toLowerCase()}`,
-            },
-            {
-              "@type": "ListItem",
-              position: 3,
-              name: title,
-              item: `${DOMAIN}property/${listing.propIdEnc}`,
-            },
-          ],
-        },
         mainEntity: {
           "@type": "RealEstateListing",
           url: url,
