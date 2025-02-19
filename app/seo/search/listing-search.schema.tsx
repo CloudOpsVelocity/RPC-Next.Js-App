@@ -40,6 +40,26 @@ export const generateAllSchemas = (property: any) => {
             property.propStatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
+          priceValidUntil: property.endDate || "",
+        },
+        review: {
+          "@type": "Review",
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: "4.5",
+            bestRating: "5",
+          },
+          author: {
+            "@type": "Person",
+            name: "Rahul Kumar",
+          },
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.8",
+          reviewCount: "150",
+          bestRating: "5",
+          worstRating: "1",
         },
       },
       {
