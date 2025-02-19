@@ -302,6 +302,28 @@ export const generateListingSchema = ({
           priceCurrency: PRICE_CURRENY,
         },
       },
+      {
+        "@type": "SpecialAnnouncement",
+        name: `${listing.propTypeName} - Special Offer`,
+        datePosted: listing.possassionDate,
+        expires: listing.possassionDate,
+        text: `Special announcement for ${listing.propTypeName} - Located in ${listing.ltName}`,
+
+        subjectOf: {
+          "@type": "RealEstateListing",
+          name: title,
+          description: `Explore this ${listing.propTypeName} with ${listing.sba} sq ft area in ${listing.ltName}, ${listing.ctName}.`,
+        },
+        offers: {
+          "@type": "Offer",
+          price: listing.price,
+          priceCurrency: PRICE_CURRENY,
+          availability: "InStock",
+          validFrom: listing.possassionDate,
+          validThrough: listing.possassionDate,
+        },
+      },
+
       ...nearByLocationsSchema,
       {
         "@type": "Dataset",
@@ -346,32 +368,6 @@ export const generateListingSchema = ({
             value: listing.status,
           },
         ],
-      },
-      {
-        "@type": "SpecialAnnouncement",
-        name: `${listing.propTypeName} - Special Offer`,
-        datePosted: listing.possassionDate,
-        expires: listing.availableFrom,
-        text: `Special announcement for ${listing.propTypeName} - Located in ${listing.ltName}`,
-        subjectOf: {
-          "@type": "RealEstateListing",
-          name: `${listing.propTypeName} - ${listing.propSubTypeName}`,
-          description: `Explore this ${listing.propTypeName} with ${listing.sba} sq ft area in ${listing.ltName}, ${listing.ctName}.`,
-          offers: {
-            "@type": "Offer",
-            price: listing.price,
-            priceCurrency: "INR",
-            availability: "InStock",
-            validFrom: listing.possassionDate,
-            validThrough: listing.availableFrom,
-          },
-          url: listing.url,
-          image: listing.imageUrl,
-          specialCoverage: {
-            "@type": "Place",
-            name: `${listing.ltName}, ${listing.ctName}`,
-          },
-        },
       },
     ],
   };
