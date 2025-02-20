@@ -87,7 +87,7 @@ const RightSection = ({ serverData }: any) => {
       >
         <div className="flex flex-col justify-between items-center h-full w-full ">
           <div
-            className={` w-full ${nearByData && Object.keys(nearByData).length > 0 ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"} relative right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 `}
+            className={` w-full ${nearByData && Object.keys(nearByData).length > 0 ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"} right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 relative `}
           >
             <Map
               projName={"Searched Location"}
@@ -96,7 +96,7 @@ const RightSection = ({ serverData }: any) => {
               data={apidata}
               type={"proj"}
               // styles="h-[calc(100vh-40vh)] w-full max-w-full"
-              styles={`w-full max-w-full ${nearByData && Object.keys(nearByData).length > 0 ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"}`}
+              styles={` z-1 w-full max-w-full ${nearByData && Object.keys(nearByData).length > 0 ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"}`}
             />
           </div>
 

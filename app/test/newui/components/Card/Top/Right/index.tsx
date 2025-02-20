@@ -216,7 +216,7 @@ export default function TopRightSection({
                 )}
                 <div
                   onClick={() => {
-                    setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, id:"" }));
+                    setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, id:"", data:{} }));
                     setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     handleClick();
                     setSelected({
@@ -302,7 +302,7 @@ export default function TopRightSection({
                       pType: type,
                     })
                   }
-                >
+                > 
                   <span className="hidden sm:block">14+</span> Amenities
                 </button>
                 <button
@@ -483,6 +483,8 @@ export default function TopRightSection({
               <button
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 onClick={() => {
+                  setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+                  setSelected(null);
                   dispatch({
                     type: "OPEN",
                     content: [

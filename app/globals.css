@@ -290,11 +290,6 @@
   border-radius: 10px; /* Rounded thumb */
 }
 
-@media (min-width: 576px) {
-  .embla-thumbs__slide {
-    flex: 0 0 15%;
-  }
-}
 .embla-thumbs__slide__number {
   border-radius: 1.8rem;
   -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
@@ -369,4 +364,27 @@
 
 .custom-scrollbar::-webkit-scrollbar-corner {
   background: transparent; /* Transparent corner where horizontal and vertical scrollbars meet */
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 350px !important;
+  min-width: 300px !important;
+  max-width: 350px !important;
+}
+
+
+@media (min-width: 576px) {
+  .embla-thumbs__slide {
+    flex: 0 0 15%;
+  }
+}
+
+@media (max-width: 576px) {
+  .leaflet-popup-content {
+    width: 320px !important;
+    min-width: 280px !important;
+    max-width: 320px !important;
+  }
 }

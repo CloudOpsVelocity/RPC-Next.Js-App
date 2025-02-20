@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 "use client";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -20,22 +20,59 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
 import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
+import { RecenterIcon } from "@/app/images/commonSvgs";
+
+const RecenterButton = ({ center }: { center: any }) => {
+  const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
+  const { allMarkerRefs } = useAtomValue(selectedNearByAtom);
+
+  const handleRecenter = () => {
+    if(!selected?.reqId) return;
+    setSelectedValue((prev) => ({
+      ...prev,
+      reqId: selected?.reqId,
+      lat: selected?.lat,
+      lang: selected?.lang,
+      type: selected?.type,
+      propType: selected?.propType,
+    }));
+
+    if(!allMarkerRefs) return;
+    const marker = allMarkerRefs.current.get(selected?.reqId); 
+    if (marker) marker.openPopup();
+  };
+
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+
+  return (
+    isMobile &&
+    <button
+      onClick={(e:any) => {
+        handleRecenter();
+        e.stopPropagation();
+      }}
+      className="absolute top-[10px] right-[10px] cursor-pointer flex justify-center items-center z-[1000] !bg-black rounded-full shadow-md border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-100 transition p-[4px]"
+    >
+      <RecenterIcon />
+    </button>
+  );
+};
 
 const Map = ({ data, lat, lang, type, styles }: any) => {
   const position: LatLngTuple = [lat, lang];
-
   return ( 
     <>
       <MapContainer
         center={position}
-        className={styles ? styles : "h-[calc(100vh-75vh)] sm:h-[calc(78vh)] xl:h-[calc(100vh-24vh)] w-full  max-w-full "}
+        className={styles ? styles : "h-[calc(100vh-75vh)] sm:h-[calc(78vh)] xl:h-[calc(100vh-24vh)] w-full max-w-full "}
         scrollWheelZoom
-        zoom={12}
+        zoom={12} 
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <RecenterButton center={position} />
         {/* @ts-ignore */}
         <MapContent data={data} type={type} />
         
@@ -53,45 +90,72 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     iconSize: [60, 60],
     iconAnchor: [19, 38],
     popupAnchor: [0, -38],
-  }); 
+  });
+
   const MobileIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [50, 50],
     iconAnchor: [5, 38],
     popupAnchor: [0, -38],
   });
+
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
-  const { isOpen, selectedNearbyItem, id} = useAtomValue(selectedNearByAtom);
-  
+  const [{ isOpen, selectedNearbyItem, id, allMarkerRefs }, setSelectedNearby ] = useAtom(selectedNearByAtom);
+
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
 
-  const markerRef = useRef();
+  // 🔹 Create unique refs for each marker
+  const markerRefs = useRef(new window.Map());
 
-  const eventHandlers = useMemo(
-    () => ({
-      mouseover() {
-        console.log("over");
-        if (markerRef) markerRef.current.openPopup();
-      },
-      mouseout() {
-        console.log("out");
-        if (markerRef) markerRef.current.closePopup();
+  if(allMarkerRefs === null){
+    setSelectedNearby((prev:any)=> ({...prev, allMarkerRefs: markerRefs }))
+  }
+
+  // 🔹 Event handlers for each marker
+  const getEventHandlers = (itemId: string) => ({
+    mouseover: () => {
+      const marker = markerRefs.current.get(itemId);
+      if (marker) marker.openPopup();
+    },
+    mouseout: () => {
+      if(itemId !== selected?.reqId){
+        const marker = markerRefs.current.get(itemId);
+        if (marker) marker.closePopup();
       }
-    }),
-    []
-  );
+    },
+    click: () => {
+      setSelectedValue((prev) => ({
+        ...prev,
+        reqId: prev?.reqId === itemId ? null : itemId,
+      }));
+
+      const marker = markerRefs.current.get(itemId);
+      if (marker) marker.openPopup();
+    },
+  });
 
   useEffect(() => {
+    // for Recenter Project marker
     if (selected && selected.projOrPropName && selected.lat && selected.lang) {
-        const position:any = [parseFloat(selected.lat) + (isMobile ? 0.0006 : 0), parseFloat(selected.lang) ];
-        map.setView(position, 100);
+      const position: any = [
+        parseFloat(selected.lat),
+        parseFloat(selected.lang),
+      ];
+      map.setView(position, 100);
+
+      const marker = markerRefs.current.get(selected?.reqId);
+      if (marker) marker.openPopup();
     }
   }, [selected, map]);
 
   useEffect(() => {
+    // for Recenter Nearby marker
     if (selectedNearbyItem && selectedNearbyItem.lat && selectedNearbyItem.lang) {
-      const position:any = [parseFloat(selectedNearbyItem.lat), parseFloat(selectedNearbyItem.lang) ];
+      const position: any = [
+        parseFloat(selectedNearbyItem.lat),
+        parseFloat(selectedNearbyItem.lang),
+      ];
       map.setView(position, 100);
     }
   }, [map, selectedNearbyItem]);
@@ -105,17 +169,22 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     }
   }, [data]);
 
-  useEffect(() => {
-    const handleClickOutside = (event:any) => {
-      if (event.target.closest(".leaflet-container")) {
-        setSelectedValue(null);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [setSelectedValue]);
-
-
+  // 🔹 Close popup when clicking outside the map
+  // useEffect(() => {
+  //   const map = markerRefs.current?.values().next().value?._map; // Get the Leaflet map instance
+  
+  //   if (!map) return;
+  
+  //   const handleMapClick = () => {
+  //     setSelectedValue(null);
+  //   };
+  
+  //   // Use Leaflet's "preclick" event (fires before click propagates)
+  //   map.on("preclick", handleMapClick);
+  //   return () => {
+  //     map.off("preclick", handleMapClick);
+  //   };
+  // }, [setSelectedValue]);
 
   return (
     data &&
@@ -124,7 +193,6 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
       const itemPropType = isProp ? item?.propTypeName : item?.propType;
 
-      // Group phases if it's a project
       const phases = !isProp
         ? {
             [item.phaseName]: {
@@ -139,128 +207,63 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             },
           }
         : null;
-      if(id === itemId || id === ""){
-      return (
-        <>
-        <Marker
-          ref={markerRef}
-          key={itemId}
-          position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
-          icon={isMobile ? MobileIcon : MapIcon}
-          // eventHandlers={{
-          //   click: () => {
-          //     setSelectedValue({
-          //       projOrPropName: isProp ? item.propTypeName : item.projName,
-          //       lat: item.lat,
-          //       lang: item.lang,
-          //       type: isProp ? "prop" : "proj",
-          //       reqId: itemId,
-          //       propType: itemPropType,
-          //     });
-          //   },
-          //   mouseover: () => {
-          //     setSelectedValue({
-          //       projOrPropName: isProp ? item.propTypeName : item.projName,
-          //       lat: item.lat,
-          //       lang: item.lang,
-          //       type: isProp ? "prop" : "proj",
-          //       reqId: itemId,
-          //       propType: itemPropType,
-          //     });
-          //   }, // Open on hover
-          //   mouseout: () => {
-          //     setSelectedValue(null);
-          //   }, // Close when mouse leaves
-          // }}
-          eventHandlers={eventHandlers}
-        >
-          {/* <Tooltip
-            key={"tooltip_" + itemId + (selected?.reqId ?? "")}
-            opacity={1}
-            permanent={selected?.reqId === itemId} 
-            direction="top"
-            offset={[10, -35]}
-            className={`${
-              isProp
-                ? "min-w-fit"
-                : isMobile ? "!min-w-[300px] !max-w-[340px]" : "!min-w-[400px]"
-            }  max-w-screen-sm !p-0`}
-            sticky
-          >
-            {!isProp ? (
-              <TooltipProj
-                data={{
-                  projName: item.projName,
-                  city: item.city,
-                  state: item.state,
-                  locality: item.locality,
-                  postedByName: item.postedByName,
-                  phases: Object.values(phases || {}),
-                  coverUrl: item.coverUrl
-                }}
-              />
-            ) : (
-              <TooltipProp data={item} />
-            )}
-          </Tooltip> */}
 
-          <Popup>
-            {!isProp ? (
-              <TooltipProj
-                data={{
-                  projName: item.projName,
-                  city: item.city,
-                  state: item.state,
-                  locality: item.locality,
-                  postedByName: item.postedByName,
-                  phases: Object.values(phases || {}),
-                  coverUrl: item.coverUrl
-                }}
-              />
-            ) : (
-              <TooltipProp data={item} />
-            )}
-          </Popup>
-          
-          {/* {itemId === selected?.reqId &&           
-          <Popup>
-            {!isProp ? (
-              <TooltipProj
-                data={{
-                  projName: item.projName,
-                  city: item.city,
-                  state: item.state,
-                  locality: item.locality,
-                  postedByName: item.postedByName,
-                  phases: Object.values(phases || {}),
-                  coverUrl: item.coverUrl
-                }}
-              />
-            ) : (
-              <TooltipProp data={item} />
-            )}
-          </Popup>
-          } */}
-
-        </Marker>
-        <NearbyMarkers />
-        </>
-      )}
+      if (id === itemId || id === "") {
+        return (
+          <>
+            <Marker
+              ref={(el) => {
+                if (el) markerRefs.current.set(itemId, el);
+              }}
+              key={itemId}
+              position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
+              icon={isMobile ? MobileIcon : MapIcon}
+              eventHandlers={getEventHandlers(itemId)}
+            >
+              <Popup closeButton={false}>
+                {!isProp ? (
+                  <TooltipProj
+                    data={{
+                      projName: item.projName,
+                      city: item.city,
+                      state: item.state,
+                      locality: item.locality,
+                      postedByName: item.postedByName,
+                      phases: Object.values(phases || {}),
+                      coverUrl: item.coverUrl,
+                      reqId: itemId,
+                      type: isProp ? "prop" : "proj"
+                    }}
+                  />
+                ) : (
+                  <TooltipProp 
+                    data={{
+                      ...item,
+                      reqId: itemId,
+                      type: isProp ? "prop" : "proj"
+                    }}
+                  />
+                )}
+              </Popup>
+            </Marker>
+            <NearbyMarkers />
+          </>
+        );
+      }
     })
   );
 };
 
 const NearbyMarkers = ({}) => {
-  const [{category, data, isOpen, selectedNearbyItem}, setSelectedLocation] = useAtom(selectedNearByAtom);
+    const [{category, data, isOpen, selectedNearbyItem}, setSelectedLocation] = useAtom(selectedNearByAtom);
 
-  const isMobile = useMediaQuery("(max-width: 601px)");
+    const isMobile = useMediaQuery("(max-width: 601px)");
     const map = useMap();
 
     useEffect(() => {
       if (data && Object.keys(data).length > 0) {
         const finalCateg = category !== "" ? category : Object.keys(data)[0]
         const nearByData = data[finalCateg];
-
         const bounds = L.latLngBounds(
           nearByData.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
         );
@@ -269,6 +272,7 @@ const NearbyMarkers = ({}) => {
     }, [data, category]);
 
     useEffect(() => {
+      if(Object.keys(selectedNearbyItem).length === 0) return;
       const handleClickOutside = (event:any) => {
         if (event.target.closest(".leaflet-container")) {
           setSelectedLocation((prev:any)=>({ ...prev, selectedNearbyItem: {}}))
@@ -279,9 +283,8 @@ const NearbyMarkers = ({}) => {
     }, [setSelectedLocation]);
 
     if(!data || Object.keys(data).length === 0) return;
-
-    const finalCategory = category !== "" ? category : Object.keys(data)[0]
-    const selectedNearByData = data ? data[finalCategory] : [];
+    const finalCategory = category !== "" ? category : Object.keys(data)[0];
+    const selectedNearByData:any = data ? data[finalCategory] : "";
     const Icon:any = createCustomIconReactLeafLet(finalCategory);
     
     return(

@@ -23,14 +23,14 @@ export default function useProjectCardData({ id, isOpen, conType, pType, lat, la
     onSuccess: queryConfig.onSuccess,
   }); 
 
-  const itemId = id.includes("+") ? id.split("+")[0] : id;
+  const itemId = id.includes("+") ? propId ? propId : id.split("+")[0]  : id;
+
   if((nearData && Object.keys(nearData).length === 0) && (data && Object.keys(data).length !== 0)){
     setNearby( prev => ({...prev, data: data, isOpen: true, id: itemId }) );
   }
 
   return { data, isLoading };
-}
-
+} 
 
 function getQueryConfig(conType: string, id: string, isOpen: boolean, type: string, lat?: number, lang?: number,propId?: string) {
   const idToUse = id.includes('+') ?  id.split('+')[0] : id;
@@ -46,7 +46,6 @@ function getQueryConfig(conType: string, id: string, isOpen: boolean, type: stri
       queryFn: () => getNearByLocations(idToUse, type, lat, lang),  
       enabled: isOpen,
       onSuccess:(data:any)=>  { 
-        // console.log(data);
         return data;
       }
     };
