@@ -91,36 +91,32 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: pageUrl
-      ? pageUrl?.split("/").map((item: string, index: number) => {
-          if (index === 0) {
+      ? pageUrl
+          ?.split("/")
+          .filter(Boolean)
+          .map((item: string, index: number) => {
+            const path = pageUrl
+              .split("/")
+              .filter(Boolean)
+              .slice(0, index + 1)
+              .join("/");
+
             return {
               "@type": "ListItem",
               position: index + 1,
               item: {
-                "@id": `${process.env.NEXT_PUBLIC_URL}/`,
-                name: "Home",
+                "@id": index === 0 ? process.env.NEXT_PUBLIC_URL : `${path}`,
+                name: index === 0 ? "Home" : item,
               },
             };
-          }
-          return {
-            "@type": "ListItem",
-            position: index + 1,
-            item: {
-              "@id": `${process.env.NEXT_PUBLIC_URL}/${pageUrl
-                .split("/")
-                .slice(0, index + 1)
-                .join("/")}`,
-              name: item,
-            },
-          };
-        })
+          })
       : initailAlParams.map((item, index) => {
           return {
             "@type": "ListItem",
             position: index + 1,
             item: {
-              "@id": `${process.env.NEXT_PUBLIC_URL}/${item.href}`,
-              name: item.label,
+              "@id": index === 0 ? process.env.NEXT_PUBLIC_URL : `${item.href}`,
+              name: item.label || "Home",
             },
           };
         }),
