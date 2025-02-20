@@ -45,7 +45,11 @@ const CaseSeoSearchService = async (
   if (!slug.includes("-")) return notFound();
   const slugValues = extractCaseSeoParams(slug);
   console.log({ slugValues });
+
   let severData;
+  if (!slugValues.count) {
+    return { severData: [], frontEndFilter: {} };
+  }
   if (!searchParams.sf) {
     const url = createUrl(slugValues);
     console.log(url);
