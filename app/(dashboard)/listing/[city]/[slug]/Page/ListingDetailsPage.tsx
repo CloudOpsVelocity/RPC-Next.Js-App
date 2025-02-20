@@ -83,7 +83,7 @@ export default function ListingDetailsPage({
   params,
   pathname,
 }: Props) {
-  const title = `${data?.bhkName} ${data?.propTypeName} For
+  const title = `${data?.bhkName ?? ""} ${data?.propTypeName} For
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName}${data?.projIdEnc ? `, ${data?.propName}` : ""}`;
 

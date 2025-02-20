@@ -1,11 +1,5 @@
 import { Place } from "schema-dts";
-import {
-  DOMAIN,
-  PRICE_CURRENY,
-  COMPANY_NAME,
-  PHONE_NUMBER,
-  LOGO_URL,
-} from "../constants";
+import { DOMAIN, PRICE_CURRENY, PHONE_NUMBER } from "../constants";
 
 interface ListingSchemaProps {
   nearByLocations: any;
@@ -129,7 +123,7 @@ export const generateListingSchema = ({
         url: url,
         telephone: PHONE_NUMBER,
         amenityFeature:
-          listing.propTypeName !== "Land"
+          listing.propTypeName !== "Plot"
             ? listing.amenities?.map((amenity: number) => ({
                 "@type": "LocationFeatureSpecification",
                 name: amenity.toString(),
@@ -137,9 +131,9 @@ export const generateListingSchema = ({
               }))
             : undefined,
         numberOfBathroomsTotal:
-          listing.propTypeName !== "Land" ? listing.bathRooms : undefined,
+          listing.propTypeName !== "Plot" ? listing.bathRooms : undefined,
         yearBuilt:
-          listing.propTypeName !== "Land" ? listing.yearBuilt : undefined,
+          listing.propTypeName !== "Plot" ? listing.yearBuilt : undefined,
         // propertyType: listing.propTypeName,
         floorLevel: ["Apartment", "Residential Building"].includes(
           listing.propTypeName
@@ -294,7 +288,7 @@ export const generateListingSchema = ({
           {
             "@type": "PropertyValue",
             name: "bedrooms",
-            value: listing.bhk,
+            value: listing.bhk ?? "N/A",
           },
           {
             "@type": "PropertyValue",
