@@ -9,17 +9,19 @@ import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 type Props = {
   serverData: any;
   frontendFilters: any;
+  pageUrl: string;
 };
 
 export default function NewListingSearchpage({
   serverData,
   frontendFilters,
+  pageUrl,
 }: Props) {
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
       {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
-        <ProjectSearchBreadCrumbs />
+        <ProjectSearchBreadCrumbs pageUrl={pageUrl} />
         <ProjSearchMainFilterSection
           isListing={serverData === null ? true : false}
         />

@@ -23,7 +23,6 @@ import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import RTK_CONFIG from "@/app/config/rtk";
-import SelectedFiltersDropdown from "../filters/SelectedFiltersDropdown";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };

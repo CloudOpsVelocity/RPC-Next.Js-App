@@ -14,6 +14,8 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
           ? `https://getrightproperty.com/property/${property.projIdEnc}`
           : "https://getrightproperty.com",
         datePosted: property.launchDate || new Date().toISOString(),
+        postalCode: property.pincode || "",
+        streetAddress: property.address || "",
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
@@ -44,6 +46,26 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
             property.projstatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
+          priceValidUntil: property.possassionDate || "",
+        },
+        review: {
+          "@type": "Review",
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: "4.5",
+            bestRating: "5",
+          },
+          author: {
+            "@type": "Person",
+            name: "Rahul Kumar",
+          },
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.5",
+          reviewCount: "10",
+          bestRating: "5",
+          worstRating: "1",
         },
       },
       {

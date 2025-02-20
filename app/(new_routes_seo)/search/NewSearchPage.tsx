@@ -8,14 +8,19 @@ import { ProjectSeachSchema } from "@/app/seo/search/project-search.schema";
 type Props = {
   serverData: any;
   frontendFilters: any;
+  pageUrl: string;
 };
 
-export default function NewSearchPage({ serverData, frontendFilters }: Props) {
+export default function NewSearchPage({
+  serverData,
+  frontendFilters,
+  pageUrl,
+}: Props) {
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative ">
       {serverData && <ProjectSeachSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
-        <ProjectSearchBreadCrumbs />
+        <ProjectSearchBreadCrumbs pageUrl={pageUrl} />
         <ProjSearchMainFilterSection isListing={false} />
       </div>
 

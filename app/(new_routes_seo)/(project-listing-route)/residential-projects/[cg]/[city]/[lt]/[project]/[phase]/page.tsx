@@ -35,6 +35,7 @@ export default async function Page({ params }: Props) {
   console.log(filtersValues);
   return (
     <NewListingSearchpage
+      pageUrl={pathname}
       serverData={severData}
       frontendFilters={{
         localities: [`${lt}+${filtersValues.LT}`],

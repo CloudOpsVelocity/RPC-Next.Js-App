@@ -13,17 +13,19 @@ interface BreadcrumbItem {
 
 interface BreadcrumbProps {
   items?: BreadcrumbItem[];
+  pageUrl: string;
 }
 
 const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   items = [],
+  pageUrl,
 }) => {
   const [state] = useAtom(projSearchStore);
 
   const getParams = useSearchParams();
   let listedBy = getParams.get("sf");
 
-  let initailAlParams: any = [
+  let initailAlParams = [
     {
       href: "/",
       label: "Home",
@@ -76,7 +78,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
         state.projName !== ""
           ? `${BASE_PATH_PROJECT_DETAILS}/${finalCityName}/${finalLocName}/${state.projName}`
           : "",
-      label: state.projName !== "" ? state.projName : "",
+      label: state.projName !== "" ? state.projName || "" : "",
     };
     setAllParams(oldParams);
   }, [listedBy, state]);
@@ -88,16 +90,36 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: allParams
-      .filter((item: any) => item.label !== "")
-      .map((item: any, index: number) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-          "@id": `${process.env.NEXT_PUBLIC_URL}${item.href}`,
-          name: item.label,
-        },
-      })),
+    itemListElement: pageUrl
+      ? pageUrl
+          ?.split("/")
+          .filter(Boolean)
+          .map((item: string, index: number) => {
+            const path = pageUrl
+              .split("/")
+              .filter(Boolean)
+              .slice(0, index + 1)
+              .join("/");
+
+            return {
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@id": index === 0 ? process.env.NEXT_PUBLIC_URL : `${path}`,
+                name: index === 0 ? "Home" : item,
+              },
+            };
+          })
+      : initailAlParams.map((item, index) => {
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@id": index === 0 ? process.env.NEXT_PUBLIC_URL : `${item.href}`,
+              name: item.label || "Home",
+            },
+          };
+        }),
   };
 
   return (

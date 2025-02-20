@@ -19,11 +19,16 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
     sf: !!searchParams.sf,
   });
+  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${slug}`;
   return (
     <>
       <ProjectSeachSchema properties={severData} />
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
-      <NewSearchPage serverData={severData} frontendFilters={frontEndFilter} />
+      <NewSearchPage
+        serverData={severData}
+        frontendFilters={frontEndFilter}
+        pageUrl={pageUrl}
+      />
     </>
   );
 }
@@ -45,6 +50,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const id = params.slug.split("-");
   const heading = id.join(" ");
+
   return {
     title: `${heading} - Getrightproperty`,
     description: `Searching ${heading}, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,

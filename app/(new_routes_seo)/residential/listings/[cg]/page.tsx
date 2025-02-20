@@ -23,8 +23,10 @@ export default async function Page({ params: { cg } }: Props) {
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
   const severData = await getProjSearchData(`cg=${slugValues.CG}`);
+  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
   return (
     <NewSearchPage
+      pageUrl={pageUrl}
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,
