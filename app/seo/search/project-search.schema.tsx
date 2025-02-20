@@ -1,6 +1,15 @@
 export const generateAllSchemas = (property: any, properties?: any[]) => {
   if (!property) return [];
 
+  // Check if this builder/agent already exists in previous properties
+  const builderAlreadyExists =
+    properties?.findIndex((p, index) => {
+      return (
+        index < properties.indexOf(property) &&
+        p.postedByName === property.postedByName
+      );
+    }) !== -1;
+
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
@@ -68,18 +77,22 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
           worstRating: "1",
         },
       },
-      {
-        "@type": "RealEstateAgent",
-        name: property.postedByName || "GetRightProperty",
-        image: property.builderLogo || "https://getrightproperty.com/logo.png",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: property.builderCity || "",
-          addressRegion: property.state || "",
-          addressCountry: "IN",
-        },
-      },
-
+      ...(builderAlreadyExists
+        ? []
+        : [
+            {
+              "@type": "RealEstateAgent",
+              name: property.postedByName || "GetRightProperty",
+              image:
+                property.builderLogo || "https://getrightproperty.com/logo.png",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: property.builderCity || "",
+                addressRegion: property.state || "",
+                addressCountry: "IN",
+              },
+            },
+          ]),
       {
         "@type": "Place",
         geo: {
