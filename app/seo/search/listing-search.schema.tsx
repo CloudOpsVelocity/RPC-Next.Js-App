@@ -128,15 +128,10 @@ export const ListingSearchSchema = ({ properties }: any) => {
       return generateAllSchemas(property);
     })
     .filter(Boolean);
-
   if (!results.length) return null;
-
-  // Get unique builders/agents
   const uniqueBuilders = Array.from(
     new Set(properties.map((property: any) => property.postedByName))
   ).filter(Boolean);
-
-  // Create RealEstateAgent schemas for unique builders
   const realEstateAgentSchemas = uniqueBuilders.map((builderName: string) => {
     const builderProperty = properties.find(
       (p: any) => p.postedByName === builderName

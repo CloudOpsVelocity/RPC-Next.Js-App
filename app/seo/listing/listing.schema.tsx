@@ -1,11 +1,5 @@
 import { Place } from "schema-dts";
-import {
-  DOMAIN,
-  PRICE_CURRENY,
-  COMPANY_NAME,
-  PHONE_NUMBER,
-  LOGO_URL,
-} from "../constants";
+import { DOMAIN, PRICE_CURRENY, PHONE_NUMBER } from "../constants";
 
 interface ListingSchemaProps {
   nearByLocations: any;
@@ -23,24 +17,28 @@ export const generateListingSchema = ({
   url,
 }: ListingSchemaProps) => {
   const nearByLocationsSchema: Place[] = [];
-  for (const category in nearByLocations) {
-    nearByLocations[category]?.forEach((location: any) => {
-      nearByLocationsSchema.push({
-        "@type": "Place",
-        name: location.name,
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: location.lat,
-          longitude: location.lang,
-        },
-        additionalType: "http://schema.org/PropertyValue",
-        additionalProperty: {
-          "@type": "PropertyValue",
-          name: category,
-          value: location.distance,
-        },
+  if (nearByLocations) {
+    for (const category in nearByLocations) {
+      nearByLocations[category]?.forEach((location: any) => {
+        if (location?.name && location?.lat && location?.lang) {
+          nearByLocationsSchema.push({
+            "@type": "Place",
+            name: location.name,
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: location.lat,
+              longitude: location.lang,
+            },
+            additionalType: "http://schema.org/PropertyValue",
+            additionalProperty: {
+              "@type": "PropertyValue",
+              name: category,
+              value: location.distance ?? 0,
+            },
+          });
+        }
       });
-    });
+    }
   }
 
   const schemaData = {
@@ -48,113 +46,116 @@ export const generateListingSchema = ({
     "@graph": [
       {
         "@type": "WebPage",
-        name: title,
-        url: url,
-        description: listing.usp,
+        name: title || "N/A",
+        url: url || "N/A",
+        description: listing?.usp || "N/A",
         mainEntity: {
           "@type": "RealEstateListing",
-          url: url,
-          datePosted: listing.createdAt,
-          description: listing.usp,
-          name: title,
-          identifier: listing.propIdEnc,
+          url: url || "N/A",
+          datePosted: listing?.createdAt || new Date().toISOString(),
+          description: listing?.usp || "N/A",
+          name: title || "N/A",
+          identifier: listing?.propIdEnc || "N/A",
           price: {
             "@type": "MonetaryAmount",
             currency: "INR",
-            value: listing.price,
+            value: listing?.price || 0,
           },
           numberOfRooms:
-            listing.propTypeName !== "Plot" ? listing.nobt : undefined,
+            listing?.propTypeName !== "Plot" ? listing?.nobt || "N/A" : "N/A",
           floorSize:
-            listing.propTypeName !== "Plot"
+            listing?.propTypeName !== "Plot"
               ? {
                   "@type": "QuantitativeValue",
-                  value: listing.sba,
+                  value: listing?.sba || 0,
                   unitCode: "SqFt",
                 }
-              : undefined,
+              : "N/A",
           address: {
             "@type": "PostalAddress",
-            streetAddress: listing.address,
-            addressLocality: listing.ltName,
-            addressRegion: listing.stateName,
-            postalCode: listing.pinCode,
+            streetAddress: listing?.address || "N/A",
+            addressLocality: listing?.ltName || "N/A",
+            addressRegion: listing?.stateName || "N/A",
+            postalCode: listing?.pinCode || "N/A",
             addressCountry: "IN",
           },
-          image: listing.projMedia?.coverImageUrl?.split(",")[0],
-          telephone: PHONE_NUMBER,
+          image: listing?.projMedia?.coverImageUrl?.split(",")[0] || "N/A",
+          telephone: PHONE_NUMBER || "N/A",
         },
       },
       {
         "@type":
-          listing.propTypeName === "Apartment"
+          listing?.propTypeName === "Apartment"
             ? "Apartment"
-            : listing.propTypeName === "Villament"
+            : listing?.propTypeName === "Villament"
             ? "House"
-            : listing.propTypeName === "Plot"
+            : listing?.propTypeName === "Plot"
             ? "RealEstateListing"
-            : listing.propTypeName === "Villa"
+            : listing?.propTypeName === "Villa"
             ? "RealEstateListing"
-            : listing.propTypeName === "Row House"
+            : listing?.propTypeName === "Row House"
             ? "RealEstateListing"
-            : listing.propTypeName === "Independent House/Building"
+            : listing?.propTypeName === "Independent House/Building"
             ? "ResidentialBuilding"
             : "Apartment",
-        name: title,
-        description: listing.usp,
+        name: title || "N/A",
+        description: listing?.usp || "N/A",
         numberOfRooms:
-          listing.propTypeName !== "Plot" ? listing.nobt : undefined,
+          listing?.propTypeName !== "Plot" ? listing?.nobt || "N/A" : "N/A",
         floorSize:
-          listing.propTypeName !== "Plot"
+          listing?.propTypeName !== "Plot"
             ? {
                 "@type": "QuantitativeValue",
-                value: listing.sba,
+                value: listing?.sba || 0,
                 unitCode: "SqFt",
               }
-            : undefined,
+            : "N/A",
         address: {
           "@type": "PostalAddress",
-          streetAddress: listing.address,
-          addressLocality: listing.ltName,
-          addressRegion: listing.stateName,
-          postalCode: listing.pinCode,
+          streetAddress: listing?.address || "N/A",
+          addressLocality: listing?.ltName || "N/A",
+          addressRegion: listing?.stateName || "N/A",
+          postalCode: listing?.pinCode || "N/A",
           addressCountry: "IN",
         },
         geo: {
           "@type": "GeoCoordinates",
-          latitude: listing.lat,
-          longitude: listing.lang,
+          latitude: listing?.lat || 0,
+          longitude: listing?.lang || 0,
         },
-        image: listing.projMedia?.coverImageUrl?.split(",")[0],
-        url: url,
-        telephone: PHONE_NUMBER,
+        image: listing?.projMedia?.coverImageUrl?.split(",")[0] || "N/A",
+        url: url || "N/A",
+        telephone: PHONE_NUMBER || "N/A",
         amenityFeature:
-          listing.propTypeName !== "Land"
-            ? listing.amenities?.map((amenity: number) => ({
+          listing?.propTypeName !== "Plot" && listing?.amenities
+            ? listing.amenities.map((amenity: number) => ({
                 "@type": "LocationFeatureSpecification",
                 name: amenity.toString(),
                 value: "true",
               }))
-            : undefined,
+            : "N/A",
         numberOfBathroomsTotal:
-          listing.propTypeName !== "Land" ? listing.bathRooms : undefined,
+          listing?.propTypeName !== "Plot"
+            ? listing?.bathRooms || "N/A"
+            : "N/A",
         yearBuilt:
-          listing.propTypeName !== "Land" ? listing.yearBuilt : undefined,
-        // propertyType: listing.propTypeName,
+          listing?.propTypeName !== "Plot"
+            ? listing?.yearBuilt || "N/A"
+            : "N/A",
         floorLevel: ["Apartment", "Residential Building"].includes(
-          listing.propTypeName
+          listing?.propTypeName || ""
         )
-          ? listing.floorNo
-          : undefined,
+          ? listing?.floorNo || "N/A"
+          : "N/A",
       },
       {
         "@type": "Product",
-        name: title,
-        description: listing.usp,
-        image: listing.projMedia.coverImageUrl.split(",")[0],
+        name: title || "N/A",
+        description: listing?.usp || "N/A",
+        image: listing?.projMedia?.coverImageUrl?.split(",")[0] || "N/A",
         brand: {
           "@type": "Brand",
-          name: listing.postedByName,
+          name: listing?.postedByName || "N/A",
         },
         review: {
           "@type": "Review",
@@ -170,26 +171,26 @@ export const generateListingSchema = ({
         },
         offers: {
           "@type": "Offer",
-          url: url,
-          price: listing.price,
-          priceCurrency: PRICE_CURRENY,
+          url: url || "N/A",
+          price: listing?.price || 0,
+          priceCurrency: PRICE_CURRENY || "INR",
           availability: "https://schema.org/InStock",
           seller: {
             "@type": "Organization",
-            name: listing.postedByName,
+            name: listing?.postedByName || "N/A",
           },
           priceValidUntil: new Date(
             Date.now() + 30 * 24 * 60 * 60 * 1000
           ).toISOString(),
           itemCondition:
-            listing.furnishType === "Fully Furnished"
+            listing?.furnishType === "Fully Furnished"
               ? "https://schema.org/UsedCondition"
               : "https://schema.org/NewCondition",
         },
         aggregateRating: {
           "@type": "AggregateRating",
-          ratingValue: listing.rating ?? 4.5,
-          reviewCount: listing.reviewCount || 5,
+          ratingValue: listing?.rating ?? 4.5,
+          reviewCount: listing?.reviewCount || 5,
           bestRating: "5",
           worstRating: "1",
         },
@@ -197,43 +198,45 @@ export const generateListingSchema = ({
           {
             "@type": "PropertyValue",
             name: "Property Type",
-            value: listing.propTypeName,
+            value: listing?.propTypeName || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "Location",
-            value: `${listing.ltName}, ${listing.stateName}`,
+            value: `${listing?.ltName || "N/A"}, ${
+              listing?.stateName || "N/A"
+            }`,
           },
           {
             "@type": "PropertyValue",
             name: "Area",
-            value: listing.sba,
+            value: listing?.sba || 0,
             unitCode: "SqFt",
           },
           {
             "@type": "PropertyValue",
             name: "Bedrooms",
-            value: listing.nobt,
+            value: listing?.nobt || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "Bathrooms",
-            value: listing.bathRooms,
+            value: listing?.bathRooms || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "Floor Number",
-            value: listing.floorNo,
+            value: listing?.floorNo || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "Furnishing Status",
-            value: listing.furnishType,
+            value: listing?.furnishType || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "Year Built",
-            value: listing.yearBuilt,
+            value: listing?.yearBuilt || "N/A",
           },
         ],
       },
@@ -242,74 +245,88 @@ export const generateListingSchema = ({
         mainEntity: [
           ...(faqData?.map((faq: any) => ({
             "@type": "Question",
-            name: faq.faqQuestion,
+            name: faq?.faqQuestion || "N/A",
             acceptedAnswer: {
               "@type": "Answer",
-              text: faq.faqAnswer,
+              text: faq?.faqAnswer || "N/A",
             },
           })) || []),
           {
             "@type": "Question",
-            name: `How can I contact the owner of ${listing.propName}?`,
+            name: `How can I contact the owner of ${
+              listing?.propName || "this property"
+            }?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `You can contact the owner of ${listing.propName} by clicking on the contact button on the property listing page. Our team will connect you with the owner directly.`,
+              text: `You can contact the owner of ${
+                listing?.propName || "this property"
+              } by clicking on the contact button on the property listing page. Our team will connect you with the owner directly.`,
             },
           },
           {
             "@type": "Question",
-            name: `What is the price of ${listing.propName}?`,
+            name: `What is the price of ${
+              listing?.propName || "this property"
+            }?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `The price of ${listing.propName} is Rs. ${listing.price}. Please contact us for detailed pricing information and negotiations.`,
+              text: `The price of ${
+                listing?.propName || "this property"
+              } is Rs. ${
+                listing?.price || 0
+              }. Please contact us for detailed pricing information and negotiations.`,
             },
           },
           {
             "@type": "Question",
-            name: `Is ${listing.propName} available for immediate possession?`,
+            name: `Is ${
+              listing?.propName || "this property"
+            } available for immediate possession?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Please contact us to know the exact possession status of ${listing.propName}. We will provide you with all the necessary details about availability and possession timeline.`,
+              text: `Please contact us to know the exact possession status of ${
+                listing?.propName || "this property"
+              }. We will provide you with all the necessary details about availability and possession timeline.`,
             },
           },
         ],
       },
       {
         "@type": "PropertyValue",
-        name: title,
+        name: title || "N/A",
         unitText: "INR",
-        propertyID: listing.id,
+        propertyID: listing?.id || "N/A",
         unitCode: "INR",
-        value: listing.price * 0.1,
+        value: (listing?.price || 0) * 0.1,
       },
       {
         "@type": "PropertyValue",
-        name: title,
-        value: listing.price,
+        name: title || "N/A",
+        value: listing?.price || 0,
         unitText: "INR",
-        propertyID: listing.id,
+        propertyID: listing?.id || "N/A",
         unitCode: "INR",
 
         additionalProperty: [
           {
             "@type": "PropertyValue",
             name: "bedrooms",
-            value: listing.bhk,
+            value: listing?.bhk ?? "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "furnishing",
-            value: listing.furnishType,
+            value: listing?.furnishType || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "propertyType",
-            value: listing.propType,
+            value: listing?.propType || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "area",
-            value: listing.sba,
+            value: listing?.sba || 0,
             unitText: "sq ft",
           },
         ],
@@ -317,21 +334,21 @@ export const generateListingSchema = ({
       {
         "@type": "PostalAddress",
         addressCountry: "IN",
-        addressLocality: listing.ltName,
-        addressRegion: listing.ctName,
-        streetAddress: listing.address,
-        postalCode: listing.pincode || "",
+        addressLocality: listing?.ltName || "N/A",
+        addressRegion: listing?.ctName || "N/A",
+        streetAddress: listing?.address || "N/A",
+        postalCode: listing?.pincode || "N/A",
       },
       {
         "@type": "GeoCoordinates",
-        latitude: listing.lat,
-        longitude: listing.lang,
+        latitude: listing?.lat || 0,
+        longitude: listing?.lang || 0,
       },
       {
         "@type": "ViewAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: `${DOMAIN}property/${listing.propIdEnc}`,
+          urlTemplate: `${DOMAIN || ""}property/${listing?.propIdEnc || ""}`,
           actionPlatform: [
             "http://schema.org/DesktopWebPlatform",
             "http://schema.org/MobileWebPlatform",
@@ -341,83 +358,89 @@ export const generateListingSchema = ({
         },
         expectsAcceptanceOf: {
           "@type": "Offer",
-          price: listing.price,
-          priceCurrency: PRICE_CURRENY,
+          price: listing?.price || 0,
+          priceCurrency: PRICE_CURRENY || "INR",
         },
       },
       {
         "@type": "SpecialAnnouncement",
-        name: `${listing.propTypeName} - Special Offer`,
-        datePosted:
-          new Date(
-            listing?.availableFrom?.replace("IST", "+05:30")
-          ).toISOString() ?? "sdf",
-        expires:
-          new Date(
-            listing?.availableFrom?.replace("IST", "+05:30")
-          ).toISOString() ?? "sdfsdf",
-        text: `Special announcement for ${listing.propTypeName} - Located in ${listing.ltName}`,
+        name: `${listing?.propTypeName || "Property"} - Special Offer`,
+        datePosted: new Date(
+          listing?.availableFrom?.replace("IST", "+05:30") || new Date()
+        ).toISOString(),
+        expires: new Date(
+          listing?.availableFrom?.replace("IST", "+05:30") || new Date()
+        ).toISOString(),
+        text: `Special announcement for ${
+          listing?.propTypeName || "Property"
+        } - Located in ${listing?.ltName || "N/A"}`,
         subjectOf: {
           "@type": "RealEstateListing",
-          name: title,
-          description: `Explore this ${listing.propTypeName} with ${listing.sba} sq ft area in ${listing.ltName}, ${listing.ctName}.`,
+          name: title || "N/A",
+          description: `Explore this ${
+            listing?.propTypeName || "property"
+          } with ${listing?.sba || 0} sq ft area in ${
+            listing?.ltName || "N/A"
+          }, ${listing?.ctName || "N/A"}.`,
         },
         offers: {
           "@type": "Offer",
-          price: listing.price,
-          priceCurrency: PRICE_CURRENY,
+          price: listing?.price || 0,
+          priceCurrency: PRICE_CURRENY || "INR",
           availability: "InStock",
-          validFrom: listing?.availableFrom ?? "sdf",
-          validThrough: listing?.availableFrom ?? "sdfsdf",
+          validFrom: listing?.availableFrom || new Date().toISOString(),
+          validThrough: listing?.availableFrom || new Date().toISOString(),
         },
         specialCoverage: {
           "@type": "Place",
-          name: `${listing.ltName}, ${listing.ctName}`,
+          name: `${listing?.ltName || "N/A"}, ${listing?.ctName || "N/A"}`,
         },
       },
 
       ...nearByLocationsSchema,
       {
         "@type": "Dataset",
-        name: `${listing.propTypeName} Property Details`,
-        description: `Comprehensive dataset for ${listing.propTypeName} located in ${listing.ltName}`,
+        name: `${listing?.propTypeName || "Property"} Property Details`,
+        description: `Comprehensive dataset for ${
+          listing?.propTypeName || "property"
+        } located in ${listing?.ltName || "N/A"}`,
         creator: {
           "@type": "Organization",
-          name: listing.postedByName,
+          name: listing?.postedByName || "N/A",
         },
-        dateCreated: listing.createdAt,
-        dateModified: listing.updatedAt,
+        dateCreated: listing?.createdAt || new Date().toISOString(),
+        dateModified: listing?.updatedAt || new Date().toISOString(),
         license: "https://creativecommons.org/licenses/by/4.0/",
         variableMeasured: [
           {
             "@type": "PropertyValue",
             name: "Property ID",
-            value: listing.propIdEnc,
+            value: listing?.propIdEnc || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "Property Type",
-            value: listing.propTypeName,
+            value: listing?.propTypeName || "N/A",
           },
           {
             "@type": "PropertyValue",
             name: "Location",
-            value: `${listing.ltName}, ${listing.ctName}`,
+            value: `${listing?.ltName || "N/A"}, ${listing?.ctName || "N/A"}`,
           },
           {
             "@type": "PropertyValue",
             name: "Price",
-            value: listing.price,
+            value: listing?.price || 0,
           },
           {
             "@type": "PropertyValue",
             name: "Area",
-            value: `${listing.sba} sq ft`,
+            value: `${listing?.sba || 0} sq ft`,
           },
           {
             "@type": "PropertyValue",
             name: "Status",
-            value: listing.status,
+            value: listing?.status || "N/A",
           },
         ],
       },
@@ -439,7 +462,6 @@ const ListingSchema = ({
         __html: JSON.stringify(generateListingSchema(listingData)),
       }}
     />
-    // <div>{JSON.stringify(generateListingSchema(listingData))}</div>
   );
 };
 

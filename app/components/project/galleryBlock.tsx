@@ -175,23 +175,26 @@ export default function GalleryBlock({
                   className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
                   key={`gallery_block_${ind}`}
                 >
-                  <script type="application/ld+json">
-                    {JSON.stringify({
-                      "@context": "https://schema.org/",
-                      "@type": "ImageObject",
-                      contentUrl: imageUrl,
-                      license:
-                        "https://www.getrightproperty.com/privacy-policy",
-                      acquireLicensePage:
-                        "https://www.getrightproperty.com/privacy-policy",
-                      creditText: imageName,
-                      creator: {
-                        "@type": "Person",
-                        name: "Get Right Property",
-                      },
-                      copyrightNotice: "Get Right Property",
-                    })}
-                  </script>
+                  <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify({
+                        "@context": "https://schema.org/",
+                        "@type": "ImageObject",
+                        contentUrl: imageUrl,
+                        license:
+                          "https://www.getrightproperty.com/privacy-policy",
+                        acquireLicensePage:
+                          "https://www.getrightproperty.com/privacy-policy",
+                        creditText: imageName,
+                        creator: {
+                          "@type": "Person",
+                          name: "Get Right Property",
+                        },
+                        copyrightNotice: "Get Right Property",
+                      }),
+                    }}
+                  />
                   <Image
                     src={imageUrl}
                     alt={imageName || ""}

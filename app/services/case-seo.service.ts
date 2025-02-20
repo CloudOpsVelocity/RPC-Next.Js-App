@@ -43,10 +43,13 @@ const CaseSeoSearchService = async (
   searchParams: SearchParams
 ): Promise<SeoSearchResult> => {
   if (!slug.includes("-")) return notFound();
-
   const slugValues = extractCaseSeoParams(slug);
+  console.log({ slugValues });
 
   let severData;
+  if (!slugValues.count) {
+    return { severData: [], frontEndFilter: {} };
+  }
   if (!searchParams.sf) {
     const url = createUrl(slugValues);
     console.log(url);
@@ -61,11 +64,7 @@ const CaseSeoSearchService = async (
     ...(slugValues.B ? { bhk: [parseInt(slugValues.B)] } : {}),
     ...(slugValues.L
       ? {
-          localities: [
-            `${slug.split("-").at(-Number(slugValues.count + 2))}+${
-              slugValues.L
-            }`,
-          ],
+          localities: [`${slugValues.localityName}+${slugValues.L}`],
         }
       : {}),
   };
