@@ -1,3 +1,5 @@
+import { PHONE_NUMBER } from "../constants";
+
 export const generateAllSchemas = (property: any) => {
   if (!property) return [];
 
@@ -71,8 +73,9 @@ export const generateAllSchemas = (property: any) => {
           addressRegion: property.stateName || "",
           addressCountry: "IN",
         },
+        telephone: PHONE_NUMBER,
+        streetAddress: "N/A",
       },
-
       {
         "@type": "Place",
         geo: {
@@ -128,6 +131,31 @@ export const ListingSearchSchema = ({ properties }: any) => {
 
   if (!results.length) return null;
 
+  // Get unique builders/agents
+  const uniqueBuilders = Array.from(
+    new Set(properties.map((property: any) => property.postedByName))
+  ).filter(Boolean);
+
+  // Create RealEstateAgent schemas for unique builders
+  const realEstateAgentSchemas = uniqueBuilders.map((builderName: string) => {
+    const builderProperty = properties.find(
+      (p: any) => p.postedByName === builderName
+    );
+    return {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      name: builderName || "GetRightProperty",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: builderProperty?.cityName || "",
+        addressRegion: builderProperty?.stateName || "",
+        addressCountry: "IN",
+      },
+      telephone: PHONE_NUMBER,
+      streetAddress: "N/A",
+    };
+  });
+
   return (
     <>
       <script
@@ -136,6 +164,15 @@ export const ListingSearchSchema = ({ properties }: any) => {
           __html: JSON.stringify(results),
         }}
       />
+      {realEstateAgentSchemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema),
+          }}
+        />
+      ))}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
