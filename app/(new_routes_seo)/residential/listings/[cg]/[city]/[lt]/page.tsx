@@ -48,6 +48,7 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
     />
   ) : (
     <NewSearchPage
+      pageUrl={pathname}
       serverData={severData}
       frontendFilters={{
         localities: [`${lt}+${slugValues.LT}`],

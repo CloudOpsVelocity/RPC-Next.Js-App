@@ -57,6 +57,7 @@ export default async function Page({
     />
   ) : (
     <NewSearchPage
+      pageUrl={pathname}
       serverData={severData}
       frontendFilters={{
         localities: [`${lt}+${LT}`],

@@ -13,10 +13,12 @@ interface BreadcrumbItem {
 
 interface BreadcrumbProps {
   items?: BreadcrumbItem[];
+  pageUrl: string;
 }
 
 const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   items = [],
+  pageUrl,
 }) => {
   const [state] = useAtom(projSearchStore);
 
@@ -88,16 +90,29 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: allParams
-      .filter((item: any) => item.label !== "")
-      .map((item: any, index: number) => ({
+    itemListElement: pageUrl.split("/").map((item: string, index: number) => {
+      if (index === 0) {
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@id": `${process.env.NEXT_PUBLIC_URL}/`,
+            name: "Home",
+          },
+        };
+      }
+      return {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@id": `${process.env.NEXT_PUBLIC_URL}${item.href}`,
-          name: item.label,
+          "@id": `${process.env.NEXT_PUBLIC_URL}/${pageUrl
+            .split("/")
+            .slice(0, index + 1)
+            .join("/")}`,
+          name: item,
         },
-      })),
+      };
+    }),
   };
 
   return (
