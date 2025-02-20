@@ -90,6 +90,7 @@ export default async function Page({ params }: Props) {
 
   return !isProjectListing ? (
     <NewListingSearchpage
+      pageUrl={pathname}
       serverData={serverData}
       frontendFilters={{
         localities: [`${lt}+${filtersValues.LT}`],

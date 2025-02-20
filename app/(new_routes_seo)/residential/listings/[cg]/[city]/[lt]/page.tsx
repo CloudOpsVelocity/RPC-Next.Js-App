@@ -40,6 +40,7 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
 
   return slugValues.PT === "36" ? (
     <NewListingSearchpage
+      pageUrl={pathname}
       serverData={severData}
       frontendFilters={{
         localities: [`${lt}+${slugValues.LT}`],

@@ -47,6 +47,7 @@ export default async function Page({
   }
   return PT === "36" ? (
     <NewListingSearchpage
+      pageUrl={pathname}
       serverData={severData}
       frontendFilters={{
         localities: [`${lt}+${LT}`],
