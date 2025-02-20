@@ -1,7 +1,5 @@
 export const generateAllSchemas = (property: any, properties?: any[]) => {
   if (!property) return [];
-
-  // Check if this builder/agent already exists in previous properties
   const builderAlreadyExists =
     properties?.findIndex((p, index) => {
       return (

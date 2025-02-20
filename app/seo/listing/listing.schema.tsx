@@ -439,7 +439,6 @@ const ListingSchema = ({
         __html: JSON.stringify(generateListingSchema(listingData)),
       }}
     />
-    // <div>{JSON.stringify(generateListingSchema(listingData))}</div>
   );
 };
 
