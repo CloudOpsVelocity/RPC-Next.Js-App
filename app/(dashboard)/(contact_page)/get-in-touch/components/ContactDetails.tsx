@@ -34,15 +34,15 @@ export default function ContactDetails() {
 const Config = {
   contactData: [
     {
-      label: "+91-684534562",
+      label: "+91-8884440963",
       type: "phone",
-      link: "tel:+91684534562",
+      link: "tel:+91-8884440963",
       Icon: ContactPhone,
     },
     {
-      label: "contactus@grp.com",
+      label: "info@getrightproperty.com",
       type: "email",
-      link: "mailto:contactus@grp.com",
+      link: "mailto:info@getrightproperty.com",
       Icon: ContactEmail,
     },
     {
