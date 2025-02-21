@@ -102,9 +102,9 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   useEffect(() => { 
     if(isMobile) return;
     const handleScroll = () => {
+      setSelected(null);
       setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
       dispatch({ type: "CLOSE" })
-      setSelected(null);
     };
 
     window.addEventListener("scroll", handleScroll);
