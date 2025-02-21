@@ -9,7 +9,12 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         p.postedByName === property.postedByName
       );
     }) !== -1;
-
+  const PAGE_URL = createProjectLinkUrl({
+    city: property.city,
+    slug: property.projName,
+    locality: property.locality,
+    projIdEnc: property.projIdEnc,
+  });
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
@@ -19,9 +24,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
           property.locality ? `in ${property.locality}` : ""
         } ${property.city ? `, ${property.city}` : ""}`.trim(),
         description: property.projectAbout || "",
-        url: property.projIdEnc
-          ? `https://getrightproperty.com/property/${property.projIdEnc}`
-          : "https://getrightproperty.com",
+        url: PAGE_URL,
         datePosted: property.launchDate || new Date().toISOString(),
         postalCode: property.pincode || "",
         streetAddress: property.address || "",
@@ -47,12 +50,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
-        url: createProjectLinkUrl({
-          city: property.city,
-          slug: property.projName,
-          locality: property.locality,
-          projIdEnc: property.projIdEnc,
-        }),
+        url: PAGE_URL,
         offers: {
           "@type": "Offer",
           price: property.minPrice || "0",
@@ -85,12 +83,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
       },
       {
         "@type": "WebPage",
-        url: createProjectLinkUrl({
-          city: property.city,
-          slug: property.projName,
-          locality: property.locality,
-          projIdEnc: property.projIdEnc,
-        }),
+        url: PAGE_URL,
         name: property.projName || "",
         description: property.projectAbout || "",
         datePublished: property.launchDate || new Date().toISOString(),
@@ -155,24 +148,8 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
       },
       {
         "@type": "SiteNavigationElement",
-        name: [
-          "Home",
-          "Properties",
-          `${property.city || ""} Properties`,
-          `${property.propType || ""} in ${property.locality || ""}`,
-          property.projName || "",
-        ],
-        url: [
-          "https://getrightproperty.com",
-          "https://getrightproperty.com/properties",
-          `https://getrightproperty.com/${
-            property.city?.toLowerCase() || ""
-          }-properties`,
-          `https://getrightproperty.com/${
-            property.propType?.toLowerCase() || ""
-          }-in-${property.locality?.toLowerCase() || ""}`,
-          `https://getrightproperty.com/property/${property.projIdEnc || ""}`,
-        ],
+        name: ["Home", "Properties", property.projName],
+        url: [PAGE_URL],
       },
     ],
   };

@@ -153,6 +153,7 @@ export const generateListingSchema = ({
         name: title || "N/A",
         description: listing?.usp || "N/A",
         image: listing?.projMedia?.coverImageUrl?.split(",")[0] || "N/A",
+        url: url || "N/A",
         brand: {
           "@type": "Brand",
           name: listing?.postedByName || "N/A",

@@ -135,7 +135,7 @@ export const getAllAuthorityNames = async () => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/proj-authority`
   );
   // Single loop through res.data to find matching IDs
-  console.log(res.data);
+  // console.log(res.data);
   return res.data;
 };
 const getCachedUser = unstable_cache(

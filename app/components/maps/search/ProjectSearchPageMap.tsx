@@ -41,9 +41,8 @@ const RecenterButton = ({ center }: { center: any }) => {
       parseFloat(selected.lat),
       parseFloat(selected.lang),
     ];
-    const newZoom = Math.min(18, Math.max(1, 100)); 
 
-    map.setView(position, newZoom);
+    map.setView(position, 100);
 
     if(!allMarkerRefs) return;
     const marker = allMarkerRefs.current.get(selected?.reqId); 
@@ -108,7 +107,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   });
 
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
-  const [{ isOpen, selectedNearbyItem, id, allMarkerRefs }, setSelectedNearby ] = useAtom(selectedNearByAtom);
+  const [{ isOpen, selectedNearbyItem, id, allMarkerRefs, data:nearbyData }, setSelectedNearby ] = useAtom(selectedNearByAtom);
 
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
@@ -142,8 +141,6 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     },
   });
 
-  const newZoom = Math.min(18, Math.max(1, 100)); 
-
   useEffect(() => {
     // for Recenter Project marker
     if (selected && selected.projOrPropName && selected.lat && selected.lang) {
@@ -151,7 +148,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         parseFloat(selected.lat),
         parseFloat(selected.lang),
       ];
-      map.setView(position, newZoom );
+      map.setView(position, 100 );
 
       const marker = markerRefs.current.get(selected?.reqId);
       if (marker) marker.openPopup();
@@ -165,16 +162,19 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         parseFloat(selectedNearbyItem.lat),
         parseFloat(selectedNearbyItem.lang),
       ];
-      map.setView(position, newZoom);
+      map.setView(position, 100);
     }
   }, [map, selectedNearbyItem]);
 
   useEffect(() => {
-    if (data && data?.length > 0 && !isOpen) {
+    if (
+      data && data?.length > 0 
+      // && !isOpen && (selected === null || Object.keys(nearbyData).length > 0)
+    ) {
       const bounds = L.latLngBounds(
         data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
       );
-      map.fitBounds(bounds);
+      map.fitBounds(bounds, { padding: [50, 50] });
     }
   }, [data]);
 
@@ -259,7 +259,7 @@ const NearbyMarkers = ({}) => {
         const bounds = L.latLngBounds(
           nearByData.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
         );
-        map.fitBounds(bounds);
+        map.fitBounds(bounds, { padding: [50, 50] });
       }
     }, [data, category]);
 

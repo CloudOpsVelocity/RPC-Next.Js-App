@@ -7,20 +7,25 @@ import {
   MdFilterList,
   MdBusiness,
 } from "react-icons/md";
-import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
-import BuyRent from "../FilterComponents/BuyRent";
+
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import { usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
-import SelectedFilters from "./SelectedFilters";
-import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
-import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
-import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
 
-export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
+import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
+import BuyRent from "../../components/FilterComponents/BuyRent";
+import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
+import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
+import SelectedFilters from "../../components/filters/SelectedFilters";
+
+export default function ListingHeaderFilters({
+  isListing,
+}: {
+  isListing?: boolean;
+}) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
@@ -412,12 +417,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </button>
           </div>
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            {isListing ? 
-              <ListingSearchTabs />
-              :
-              <ProjectSearchTabs />
-            }
-       
+            <ListingSearchTabs />
+
             <SelectedFilters />
           </div>
 
