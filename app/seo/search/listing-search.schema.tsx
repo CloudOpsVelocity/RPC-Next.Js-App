@@ -43,6 +43,17 @@ export const generateAllSchemas = (property: any) => {
         image:
           property.coverImage?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
+        url: generateListingLinkUrl({
+          bhkUnitType: property.bhkName
+            ? property.bhkName + "-" + property.propTypeName
+            : property.propTypeName,
+          category: property.cg === "S" ? "for-sale" : "for-rent",
+          city: property.ctName,
+          locality: property.ltName,
+          propIdEnc: property.propIdEnc,
+          phase: property.phaseName,
+          projName: property.projIdEnc && property.propName,
+        }),
         offers: {
           "@type": "Offer",
           price: property.price || "0",
