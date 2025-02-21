@@ -83,6 +83,21 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
           worstRating: "1",
         },
       },
+      {
+        "@type": "WebPage",
+        url: createProjectLinkUrl({
+          city: property.city,
+          slug: property.projName,
+          locality: property.locality,
+          projIdEnc: property.projIdEnc,
+        }),
+        name: property.projName || "",
+        description: property.projectAbout || "",
+        datePublished: property.launchDate || new Date().toISOString(),
+        image:
+          property.coverUrl?.split(",")[0] ||
+          "https://getrightproperty.com/default-property.jpg",
+      },
       ...(builderAlreadyExists
         ? []
         : [
