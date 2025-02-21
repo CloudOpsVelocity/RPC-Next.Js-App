@@ -90,7 +90,12 @@ const RightSection = ({ serverData }: any) => {
           setMapPopup((prev:any) => ({...prev, isOpen: false}));
         }}
       >
-        {isLoader ? "Loading..." :
+        {isLoader ? (
+        <div className="flex justify-center items-center gap-2 w-full py-[30px] ">
+          <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
+          <span className="font-bold">Loading...</span> 
+        </div>
+        ) : (
         <div className="flex flex-col justify-between items-center h-full w-full ">
           <div
             className={` w-full ${isOpen ? "h-[calc(100vh-60vh)]" : "h-[calc(100vh-30vh)]"} right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 relative `}
@@ -106,12 +111,12 @@ const RightSection = ({ serverData }: any) => {
             />
           </div>
 
-          {isOpen &&
-          <div className="!h-[calc(100vh-60vh)] overflow-y-auto w-full ">
+          {nearByData && Object.keys(nearByData).length > 0 && isOpen &&
+            <div className="!h-[calc(100vh-60vh)] overflow-y-auto w-full ">
             <LocationCard data={nearByData} />
           </div>
           }
-        </div>
+        </div>)
         }
       </ModalBox>
   );

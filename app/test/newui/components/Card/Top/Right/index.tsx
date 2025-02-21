@@ -253,7 +253,7 @@ export default function TopRightSection({
                  
                 </button> */}
               </div>
-              <button
+              {/* <button
                 className="max-w-fit sm:block hidden xl:hidden ml-auto px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold  md:mb-1 gradient"
                 onClick={() => {
                   setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"" }));
@@ -275,7 +275,28 @@ export default function TopRightSection({
                   {" "}
                   View on Map
                 </div>
+              </button> */}
+
+              <button 
+                className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
+                onClick={() => {
+                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"" }));
+
+                  setSelected({
+                    agentListing,
+                    ownerListing,
+                    projOrPropName, 
+                    lat,
+                    lang,
+                    type,
+                    reqId: type === "proj" ? projIdEnc : propIdEnc,
+                    propType: type === "proj" ? propType : propTypeName,
+                  })}
+                }
+              >
+                  <span className="bg-white h-full w-full text-black group-hover:text-white transition-[300ms] rounded-md hover:bg-transparent">View on Map</span>
               </button>
+
             </div>
 
             {/* <div className="flex items-end flex-col justify-between md:gap-2 mt-[2px]">
@@ -404,7 +425,7 @@ export default function TopRightSection({
                 {config.shareIcon}
               </button>
             </div>
-            <button
+            {/* <button
               className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold my-2 md:mb-1 gradient"
               onClick={() => {
                 setSelected({
@@ -425,7 +446,29 @@ export default function TopRightSection({
                 {" "}
                 View on Map
               </div>
-            </button>
+            </button> */}
+
+            <button 
+                className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold group-hover:outline-none active:outline-none " 
+                onClick={() => {
+                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"" }));
+
+                  setSelected({
+                    agentListing,
+                    ownerListing,
+                    projOrPropName, 
+                    lat,
+                    lang,
+                    type,
+                    reqId: type === "proj" ? projIdEnc : propIdEnc,
+                    propType: type === "proj" ? propType : propTypeName,
+                  })}
+                }
+              >
+                  <span className="bg-white h-full w-full px-[6px] text-black group-hover:text-white transition-[300ms] rounded-md group-hover:bg-transparent">View on Map</span>
+              </button>
+
+
             {type !== "proj" && (
               <>
                 <ListingDownSectionCard label={"Tower"} value={towerName} />

@@ -168,8 +168,8 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
       <div className="flex items-center gap-2">
-        <div className="w-6 h-6 border-3 border-blue-500 border-t-transparent rounded-full animate-spin" />
-        <span>Loading more results...</span>
+        <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
+        <span className="font-bold">Loading more results...</span> 
       </div>
     );
   });
