@@ -6,7 +6,7 @@ import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
 import { SlugsType } from "../common/constatns/slug.constants";
-import { ProjectSeachSchema } from "../seo/search/project-search.schema";
+
 type Props = {
   params: {
     slug: string;
