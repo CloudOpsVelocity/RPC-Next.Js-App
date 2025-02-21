@@ -213,7 +213,7 @@ export default function TopRightSection({
                     </div>
                   </div>
                 )}
-                <div
+                {/* <div
                   onClick={() => {
                     setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, id:"", data:{}, isOpen: false }));
                     setMapPopup((prev:any) => ({...prev, isOpen: true}));
@@ -232,7 +232,28 @@ export default function TopRightSection({
                   className="inline-flex sm:hidden  xm:px-[1px] sm:py-[1px]  justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer "
                 >
                   <NewMapIcon className="w-6 h-6 " />
-                </div>
+                </div> */}
+
+                <button 
+                  className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
+                  onClick={() => {
+                    setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"", isOpen: false }));
+                    setMapPopup((prev:any) => ({...prev, isOpen: true}));
+                    setSelected({
+                      agentListing,
+                      ownerListing,
+                      projOrPropName, 
+                      lat,
+                      lang,
+                      type,
+                      reqId: type === "proj" ? projIdEnc : propIdEnc,
+                      propType: type === "proj" ? propType : propTypeName,
+                    })}
+                  }
+                >
+                    <span className=" px-[4px] h-full w-full text-white transition-[300ms] rounded-md bg-transparent">View Map</span>
+                </button>
+                
                 {/* 
                 <button
                   className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px] rounded text-[#242424] text-sm not-italic font-semibold sm:my-1 md:mb-1 xl:gradient"
@@ -278,10 +299,9 @@ export default function TopRightSection({
               </button> */}
 
               <button 
-                className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
+                className="group sm:flex hidden md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
                 onClick={() => {
-                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"" }));
-
+                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"", isOpen: false }));
                   setSelected({
                     agentListing,
                     ownerListing,
@@ -294,7 +314,7 @@ export default function TopRightSection({
                   })}
                 }
               >
-                  <span className="bg-white h-full w-full text-black group-hover:text-white transition-[300ms] rounded-md hover:bg-transparent">View on Map</span>
+                  <span className="bg-white px-[6px] h-full w-full text-black group-hover:text-white transition-[300ms] rounded-md hover:bg-transparent">View on Map</span>
               </button>
 
             </div>
@@ -311,7 +331,7 @@ export default function TopRightSection({
                 {" "}
                 {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
                 <button
-                  className="bg-orange-500 text-white text-right max-w-fit  px-1 sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs text-nowrap  inline-flex"
+                  className="bg-orange-500 text-white text-right max-w-fit px-[4px] py-[4px] md:py-[6px] sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs text-nowrap  inline-flex"
                   onClick={() =>
                     dispatch({
                       type: "OPEN",
@@ -326,7 +346,7 @@ export default function TopRightSection({
                   <span className="hidden sm:block">14+</span> Amenities
                 </button>
                 <button
-                  className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                  className="bg-teal-500 text-white text-right max-w-fit font-bold px-[4px] py-[4px] sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                   onClick={() => {
                     setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
                     // setSelected(null);
@@ -451,7 +471,7 @@ export default function TopRightSection({
             <button 
                 className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold group-hover:outline-none active:outline-none " 
                 onClick={() => {
-                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"" }));
+                  setNearby((prev:any) => ({...prev, category: "", isOpen: false, selectedNearbyItem:{}, data:{}, id:"" }));
 
                   setSelected({
                     agentListing,
@@ -544,7 +564,6 @@ export default function TopRightSection({
                     reqId: !propIdEnc ? projIdEnc : propIdEnc,
                     propType: !propIdEnc ? propType : propTypeName,
                     projOrPropName: propName ? propName : projName
-
                   })
                   dispatch({
                     type: "OPEN",

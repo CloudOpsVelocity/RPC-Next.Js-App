@@ -404,7 +404,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </div>
 
             <button
-              className="md:hidden flex items-center h-[38px] md:h-[42px] xl:h-auto gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
+              className="md:hidden flex text-[14px] items-center h-[38px] md:h-[42px] xl:h-auto gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
               onClick={() => setIsDrawerOpen(true)}
             >
               <MdFilterList className="w-5 h-5" />

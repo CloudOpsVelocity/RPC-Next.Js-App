@@ -160,7 +160,7 @@ export default function ProjSearchCityDropDown({
           setIsOpen((prev) => !prev);
           handleDropdownToggle();
         }}
-        className="flex items-center text-gray-800 h-[38px] md:h-[42px] xl:h-auto text-[14px] xl:text-[16px] font-semibold gap-x-2 p-[4px] px-[6px] md:p-3 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
+        className="flex items-center text-gray-800 h-[38px] md:h-[42px] xl:h-auto text-[12px] xl:text-[16px] font-semibold gap-[4px] md:gap-x-2 p-[4px] px-[6px] md:p-3 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
       >
         <IoLocationSharp className="text-blue-600 text-lg" />
         <span>
