@@ -1,3 +1,5 @@
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+
 export const generateAllSchemas = (property: any, properties?: any[]) => {
   if (!property) return [];
   const builderAlreadyExists =
@@ -45,6 +47,12 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
+        url: createProjectLinkUrl({
+          city: property.city,
+          slug: property.projIdEnc,
+          locality: property.locality,
+          projIdEnc: property.projIdEnc,
+        }),
         offers: {
           "@type": "Offer",
           price: property.minPrice || "0",
