@@ -106,7 +106,7 @@ export async function sendEmail(mailerData :any, selectedJob:any) {
         // Prepare the email data
         const emailData = {
             from: "info@getrightproperty.com",  
-            to_address: "manish@rpclan.com",   
+            to_address: "rahulrpclan@gmail.com",   
             subject: selectedJob.title,     
             message: message,  
             src: "Proper Sending" 

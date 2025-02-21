@@ -192,7 +192,7 @@ function App() {
     }
     setTimeout(()=>{
       setModalOpen(false)
-    },3000)
+    },5000)
   };
   
   const backgroundImageBanner = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/career/Banner.jpg`;

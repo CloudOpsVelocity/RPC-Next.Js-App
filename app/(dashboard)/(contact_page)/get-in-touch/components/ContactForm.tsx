@@ -101,7 +101,7 @@ const onSubmit = async (values: any) => {
       // Prepare the email data
       const emailData = {
           from: "info@getrightproperty.com",  
-          to_address: "manish@rpclan.com",   
+          to_address: "rahulrpclan@gmail.com",   
           subject: `Query From ${values.name}`,     
           message: message,  
           src: "Proper Sending" 
@@ -113,6 +113,7 @@ const onSubmit = async (values: any) => {
           },
       });
       setStatus("Done")
+
       setTimeout(()=>{
         setStatus("normal")
         form.reset()

@@ -42,7 +42,7 @@ const Config = {
     {
       label: "info@getrightproperty.com",
       type: "email",
-      link: "mailto:info@getrightproperty.com",
+      link: "mailto:rahulrpclan@gamil.com",
       Icon: ContactEmail,
     },
     {
