@@ -1,5 +1,18 @@
 export const generateAllSchemas = (property: any, properties?: any[]) => {
   if (!property) return [];
+
+  // Check if this property has already been processed
+  const propertyAlreadyExists =
+    properties?.findIndex((p, index) => {
+      return (
+        index < properties.indexOf(property) &&
+        p.projIdEnc === property.projIdEnc
+      );
+    }) !== -1;
+
+  // If property already exists, return null to filter it out
+  if (propertyAlreadyExists) return null;
+
   const builderAlreadyExists =
     properties?.findIndex((p, index) => {
       return (
@@ -11,31 +24,6 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "RealEstateListing",
-        name: `${property.projName || ""} ${property.propType || ""} ${
-          property.locality ? `in ${property.locality}` : ""
-        } ${property.city ? `, ${property.city}` : ""}`.trim(),
-        description: property.projectAbout || "",
-        url: property.projIdEnc
-          ? `https://getrightproperty.com/property/${property.projIdEnc}`
-          : "https://getrightproperty.com",
-        datePosted: property.launchDate || new Date().toISOString(),
-        postalCode: property.pincode || "",
-        streetAddress: property.address || "",
-        image:
-          property.coverUrl?.split(",")[0] ||
-          "https://getrightproperty.com/default-property.jpg",
-        offers: {
-          "@type": "Offer",
-          price: property.minPrice || "0",
-          priceCurrency: "INR",
-          availability:
-            property.projstatus?.toLowerCase() === "under construction"
-              ? "PreOrder"
-              : "InStock",
-        },
-      },
       {
         "@type": "Product",
         name: `${property.projName || ""} ${property.propType || ""} ${
