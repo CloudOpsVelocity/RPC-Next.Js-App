@@ -25,7 +25,7 @@ import { RecenterIcon } from "@/app/images/commonSvgs";
 const RecenterButton = ({ center }: { center: any }) => {
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
   const { allMarkerRefs } = useAtomValue(selectedNearByAtom);
-
+  const map = useMap();
   const handleRecenter = () => {
     if(!selected?.reqId) return;
     setSelectedValue((prev) => ({
@@ -36,6 +36,14 @@ const RecenterButton = ({ center }: { center: any }) => {
       type: selected?.type,
       propType: selected?.propType,
     }));
+
+    const position: any = [
+      parseFloat(selected.lat),
+      parseFloat(selected.lang),
+    ];
+    const newZoom = Math.min(18, Math.max(1, 100)); 
+
+    map.setView(position, newZoom);
 
     if(!allMarkerRefs) return;
     const marker = allMarkerRefs.current.get(selected?.reqId); 
@@ -129,11 +137,12 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         ...prev,
         reqId: prev?.reqId === itemId ? null : itemId,
       }));
-
       const marker = markerRefs.current.get(itemId);
       if (marker) marker.openPopup();
     },
   });
+
+  const newZoom = Math.min(18, Math.max(1, 100)); 
 
   useEffect(() => {
     // for Recenter Project marker
@@ -142,7 +151,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         parseFloat(selected.lat),
         parseFloat(selected.lang),
       ];
-      map.setView(position, 100);
+      map.setView(position, newZoom );
 
       const marker = markerRefs.current.get(selected?.reqId);
       if (marker) marker.openPopup();
@@ -156,7 +165,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         parseFloat(selectedNearbyItem.lat),
         parseFloat(selectedNearbyItem.lang),
       ];
-      map.setView(position, 100);
+      map.setView(position, newZoom);
     }
   }, [map, selectedNearbyItem]);
 
@@ -168,23 +177,6 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       map.fitBounds(bounds);
     }
   }, [data]);
-
-  // 🔹 Close popup when clicking outside the map
-  // useEffect(() => {
-  //   const map = markerRefs.current?.values().next().value?._map; // Get the Leaflet map instance
-  
-  //   if (!map) return;
-  
-  //   const handleMapClick = () => {
-  //     setSelectedValue(null);
-  //   };
-  
-  //   // Use Leaflet's "preclick" event (fires before click propagates)
-  //   map.on("preclick", handleMapClick);
-  //   return () => {
-  //     map.off("preclick", handleMapClick);
-  //   };
-  // }, [setSelectedValue]);
 
   return (
     data &&

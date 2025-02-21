@@ -84,16 +84,8 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
     };
   }, [updateScrollButtons]);
 
-
   const onSelectLocation = (item:any) => {
-    setNearby( (prev:any) => ({...prev, selectedNearbyItem: item }) );
-
-    // setSelected({
-    //   lat: item.lat,
-    //   lang: item.lang,
-    //   type: "proj",
-    //   projOrPropName:'project'
-    // });
+    setNearby( (prev:any) => ({...prev, selectedNearbyItem: item }));
   }
 
   return (

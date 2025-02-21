@@ -64,6 +64,8 @@ const RightSection = ({ serverData }: any) => {
     }); 
   const apidata = !isTrue ? serverData : data?.pages?.flat() || [];
 
+  // console.log(nearByData, isOpen)
+
   return (
     !isMobile ?
       <div
@@ -80,14 +82,14 @@ const RightSection = ({ serverData }: any) => {
         />
       </div>
       :
-      mapPopup.isOpen && 
+      mapPopup.isOpen &&
       <ModalBox 
         isOpen={mapPopup.isOpen}
         handleChange={()=>setMapPopup((prev:any) => ({...prev, isOpen: false}))} 
       >
         <div className="flex flex-col justify-between items-center h-full w-full ">
           <div
-            className={` w-full ${nearByData && Object.keys(nearByData).length > 0 ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"} right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 relative `}
+            className={` w-full ${isOpen ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"} right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 relative `}
           >
             <Map
               projName={"Searched Location"}
@@ -96,17 +98,16 @@ const RightSection = ({ serverData }: any) => {
               data={apidata}
               type={"proj"}
               // styles="h-[calc(100vh-40vh)] w-full max-w-full"
-              styles={` z-1 w-full max-w-full ${nearByData && Object.keys(nearByData).length > 0 ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"}`}
+              styles={` z-1 w-full max-w-full ${isOpen ? "h-[calc(100vh-70vh)]" : "h-[calc(100vh-40vh)]"}`}
             />
           </div>
 
-          {nearByData && Object.keys(nearByData).length > 0 &&
+          {isOpen &&
           <div className="!max-h-[300px] overflow-y-auto w-full ">
             <LocationCard data={nearByData} />
           </div>
           }
         </div>
-
       </ModalBox>
   );
 };

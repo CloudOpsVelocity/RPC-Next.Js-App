@@ -259,7 +259,6 @@ export const projSearchStore = atomWithReducer(initialState, mapReducer);
 
 projSearchStore.onMount = (setAtom) => {
   const path = window.location.pathname;
-  console.log(path)
   const searchParams = new URLSearchParams(window.location.search);
   if (path.includes("search") || searchParams.size > 0) {
     setAtom({

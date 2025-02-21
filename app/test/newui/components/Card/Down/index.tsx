@@ -5,7 +5,7 @@ import React from "react";
 import { overlayAtom } from "../../../store/overlay";
 import { useAtom, useSetAtom } from "jotai";
 import { PetFreindly, WhitePetFreindly } from "@/app/images/commonSvgs";
-import { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
+import selectedSearchAtom, { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
 
 export default function CardDownSection({
   a,
@@ -13,6 +13,7 @@ export default function CardDownSection({
   B,
   type,
   projName,
+  propName,
   projIdEnc,
   onAddingCompare,
   isCompared,
@@ -23,13 +24,15 @@ export default function CardDownSection({
   propIdEnc,
   propTypeName,
   title,
-location
+  propType,
+  location
 }: any) {
   const [lat,lang] = location?.split(',') ?? []
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
   const setNearby = useSetAtom(selectedNearByAtom);
-  
+  const setSelected = useSetAtom(selectedSearchAtom);
+
   // const name =
   //   type === "proj"
   //     ? projName
@@ -137,9 +140,16 @@ location
             <button
                 className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 onClick={(e) =>{
-                  console.log(projIdEnc)
                   e.stopPropagation();
                   setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+                  setSelected({
+                    lat,
+                    lang,
+                    type,
+                    reqId: !propIdEnc ? projIdEnc : propIdEnc,
+                    propType: !propIdEnc ? propType : propTypeName,
+                    projOrPropName: propName ? propName : projName
+                  })
                   if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
                   // console.log("near by 2");
                   dispatch({

@@ -47,7 +47,6 @@ export default function TopRightSection({
   category,
   phaseId,
   location,
-
   city,
   cityName,
   towerData,
@@ -257,12 +256,12 @@ export default function TopRightSection({
               <button
                 className="max-w-fit sm:block hidden xl:hidden ml-auto px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold  md:mb-1 gradient"
                 onClick={() => {
-                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, id:"" }));
+                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"" }));
 
                   setSelected({
                     agentListing,
                     ownerListing,
-                    projOrPropName,
+                    projOrPropName, 
                     lat,
                     lang,
                     type,
@@ -308,6 +307,16 @@ export default function TopRightSection({
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                   onClick={() => {
+                    setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+                    // setSelected(null);
+                    setSelected({
+                      lat: data.lat,
+                      lang: data.lang,
+                      type: data.type,
+                      reqId: !propIdEnc ? projIdEnc : propIdEnc,
+                      propType: !propIdEnc ? propType : propTypeName,
+                      projOrPropName: propName ? propName : projName
+                    })
                     console.log("near by 1", data);
                     if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     dispatch({
@@ -484,12 +493,21 @@ export default function TopRightSection({
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 onClick={() => {
                   setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
-                  setSelected(null);
+                  // setSelected(null);
+                  setSelected({
+                    lat: data.lat,
+                    lang: data.lang,
+                    type: data.type,
+                    reqId: !propIdEnc ? projIdEnc : propIdEnc,
+                    propType: !propIdEnc ? propType : propTypeName,
+                    projOrPropName: propName ? propName : projName
+
+                  })
                   dispatch({
                     type: "OPEN",
                     content: [
                       "Orion Mall",
-                      "Apollo Hospital",
+                      "Apollo Hospital", 
                       "Greenwood High International School",
                       "MG Road Metro Station",
                       "Major Bus Stop",

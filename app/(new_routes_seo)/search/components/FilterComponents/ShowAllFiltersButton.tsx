@@ -260,7 +260,7 @@ export default function ShowAllFiltersButton({
   const isproject =
     path !== "/search/listing" && path.includes("search")
       ? state.listedBy == null
-      : isListing;
+      : !isListing;
 
   return (
     <div className="  relative">
@@ -285,7 +285,7 @@ export default function ShowAllFiltersButton({
                 handleClearFilters(isproject ? "clearAll" : "listing");
                 onToggle();
               }}
-              className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+              className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100" 
             >
               Clear Filter
             </button>
@@ -345,7 +345,21 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.bhkDetails,
                   "bhk",
                   6
-                )}
+              )}
+              {isproject && (
+                <LocalitySearch<Location>
+                  data={builderData || []}
+                  displayKey="name"
+                  valueKey="stringId"
+                  onChange={handleLocationChange}
+                  placeholder="Search Builders..."
+                  loading={builderDataLoading}
+                  setQuery={setBuilderSearch}
+                  label="Builder"
+                  category="builderIds"
+                  multiple
+                />
+              )}
               {isproject &&
                 !isproject &&
                 renderFilterSection(
@@ -354,9 +368,9 @@ export default function ShowAllFiltersButton({
                   "reraIds"
                 )}
             </div>
-            <div className="  ml-4">
+            <div className="ml-6  ">
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] text-lg font-semibold"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] text-lg"
                 id="Area (in Sq.ft)"
               >
                 Super Built-Up Area (In Sq.ft)
@@ -393,7 +407,7 @@ export default function ShowAllFiltersButton({
               />
             </div>
 
-            <div className="ml-4">
+            <div className="ml-6">
               <h3
                 className=" text-[#202020] mb-[1%] text-[14px] mt-[1%] text-lg font-semibold  "
                 id="Budget"
@@ -441,6 +455,7 @@ export default function ShowAllFiltersButton({
                 "parking",
                 6
               )}
+             
               {renderFilterSection(
                 "Amenities",
                 SEARCH_FILTER_DATA.amenities,
@@ -484,20 +499,7 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "Phases"
                 )} */}
-              {isproject && (
-                <LocalitySearch<Location>
-                  data={builderData || []}
-                  displayKey="name"
-                  valueKey="stringId"
-                  onChange={handleLocationChange}
-                  placeholder="Search Builders..."
-                  loading={builderDataLoading}
-                  setQuery={setBuilderSearch}
-                  label="Builder"
-                  category="builderIds"
-                  multiple
-                />
-              )}
+           
             </div>
           </div>
         </div>
