@@ -13,5 +13,13 @@ type Props = {
 
 export default async function Page({ params: { cg, city } }: Props) {
   const severData = await getProjSearchData(``);
-  return <NewSearchPage serverData={severData} frontendFilters={{}} />;
+  const pathname = `/residential/listings`;
+  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
+  return (
+    <NewSearchPage
+      pageUrl={pageUrl}
+      serverData={severData}
+      frontendFilters={{}}
+    />
+  );
 }

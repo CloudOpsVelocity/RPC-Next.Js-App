@@ -165,6 +165,7 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
                     key={each.name}
                     href={`/search?sf=city=${eachCity.cityName}%2B${cityId}-cg=${filters.cg}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <p
                       onClick={(e) => e.stopPropagation()}

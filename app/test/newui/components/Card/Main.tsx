@@ -89,7 +89,7 @@ const MainBox = ({ data, refetch }: Props) => {
         slug: data.projName,
         projIdEnc: projEncId,
       });
-      window.open(url, "_blank");
+      window.open(url, "_blank" , "noreferrer");
     } else {
       url = generateListingLinkUrl({
         city: data.cityName,
@@ -103,7 +103,7 @@ const MainBox = ({ data, refetch }: Props) => {
           : "" + " " + data.propTypeName,
       });
 
-      window.open(url, "_blank");
+      window.open(url, "_blank",  "noreferrer");
     }
   };
 

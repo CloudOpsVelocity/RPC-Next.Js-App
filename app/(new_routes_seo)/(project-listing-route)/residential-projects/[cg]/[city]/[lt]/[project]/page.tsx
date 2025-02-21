@@ -32,6 +32,7 @@ export default async function Page({
   );
   return (
     <NewListingSearchpage
+      pageUrl={pathname}
       serverData={severData}
       frontendFilters={{
         localities: [`${lt}+${filtersValues.LT}`],

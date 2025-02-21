@@ -1,14 +1,9 @@
 import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
-import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
-import {
-  findPathForProjectListing,
-  getNestedSlug,
-} from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
-import { getPagesSlugs } from "@/app/seo/api";
 import { getAmenties, getAuthorityNames } from "@/app/utils/api/project";
 import {
   getListingDetails,
@@ -90,6 +85,7 @@ export default async function Page({ params }: Props) {
 
   return !isProjectListing ? (
     <NewListingSearchpage
+      pageUrl={pathname}
       serverData={serverData}
       frontendFilters={{
         localities: [`${lt}+${filtersValues.LT}`],

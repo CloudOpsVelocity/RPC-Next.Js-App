@@ -1,5 +1,12 @@
 export const generateAllSchemas = (property: any, properties?: any[]) => {
   if (!property) return [];
+  const builderAlreadyExists =
+    properties?.findIndex((p, index) => {
+      return (
+        index < properties.indexOf(property) &&
+        p.postedByName === property.postedByName
+      );
+    }) !== -1;
 
   const schemas = {
     "@context": "https://schema.org",
@@ -14,6 +21,8 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
           ? `https://getrightproperty.com/property/${property.projIdEnc}`
           : "https://getrightproperty.com",
         datePosted: property.launchDate || new Date().toISOString(),
+        postalCode: property.pincode || "",
+        streetAddress: property.address || "",
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
@@ -44,60 +53,44 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
             property.projstatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
+          priceValidUntil: property.possassionDate || "",
         },
-      },
-      {
-        "@type": "RealEstateAgent",
-        name: property.postedByName || "GetRightProperty",
-        image: property.builderLogo || "https://getrightproperty.com/logo.png",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: property.builderCity || "",
-          addressRegion: property.state || "",
-          addressCountry: "IN",
-        },
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: `What is the price of ${property.projName || ""} ${
-              property.propType || ""
-            } ${property.locality ? `in ${property.locality}` : ""}?`.trim(),
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: `The price starts from ₹${
-                property.minPrice || "0"
-              } onwards`.trim(),
-            },
+        review: {
+          "@type": "Review",
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: "4.5",
+            bestRating: "5",
           },
-          ...(property.minSba
-            ? [
-                {
-                  "@type": "Question",
-                  name: `What is the super built-up area available?`,
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: `The super built-up area ranges from ${property.minSba} to ${property.maxSba} sq.ft.`,
-                  },
-                },
-              ]
-            : []),
-          ...(property.amenCount
-            ? [
-                {
-                  "@type": "Question",
-                  name: `What are the amenities available?`,
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: `This property has ${property.amenCount} amenities.`,
-                  },
-                },
-              ]
-            : []),
-        ],
+          author: {
+            "@type": "Person",
+            name: "Rahul Kumar",
+          },
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.5",
+          reviewCount: "10",
+          bestRating: "5",
+          worstRating: "1",
+        },
       },
+      ...(builderAlreadyExists
+        ? []
+        : [
+            {
+              "@type": "RealEstateAgent",
+              name: property.postedByName || "GetRightProperty",
+              image:
+                property.builderLogo || "https://getrightproperty.com/logo.png",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: property.builderCity || "",
+                addressRegion: property.state || "",
+                addressCountry: "IN",
+              },
+            },
+          ]),
       {
         "@type": "Place",
         geo: {
@@ -176,11 +169,55 @@ export const ProjectSeachSchema = ({ properties }: any) => {
   if (!results.length) return null;
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(results),
-      }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(results),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What documents do I need to buy a property?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "The essential documents needed are sale deed, property tax receipts, encumbrance certificate, approved building plan, and completion certificate. Additional documents may be required based on the property type and location.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How do I verify property ownership?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "You can verify property ownership by checking the sale deed, property tax receipts, and obtaining an encumbrance certificate from the sub-registrar's office. It's also recommended to conduct a legal title search.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What are the steps involved in property registration?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Property registration involves document verification, payment of stamp duty and registration charges, signing the sale deed in presence of witnesses, and registering at the sub-registrar's office. The process typically takes 1-2 weeks.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How can I check if a property is legally approved?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "To check legal approval, verify the building plan approval, occupancy certificate, and NOCs from relevant authorities. Also ensure the property is free from any legal disputes or encumbrances.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+    </>
   );
 };

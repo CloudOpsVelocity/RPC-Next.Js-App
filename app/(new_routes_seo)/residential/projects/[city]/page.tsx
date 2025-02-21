@@ -7,7 +7,15 @@ type Props = {
 export const dynamic = "force-dynamic";
 export default async function Page({ params: { city, lt } }: Props) {
   const serverData = await getSearchData();
-  return <NewSearchPage frontendFilters={{}} serverData={serverData} />;
+  const pathname = `/residential/projects/${city}`;
+  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
+  return (
+    <NewSearchPage
+      pageUrl={pageUrl}
+      frontendFilters={{}}
+      serverData={serverData}
+    />
+  );
 }
 
 export async function generateStaticParams() {

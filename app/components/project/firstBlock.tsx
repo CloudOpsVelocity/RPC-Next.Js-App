@@ -165,6 +165,7 @@ const FirstBlock: React.FC<Props> = ({
                       city: data?.data?.cityName,
                     })}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >
                     {isLoading ? "Builder" : data?.data?.userName}

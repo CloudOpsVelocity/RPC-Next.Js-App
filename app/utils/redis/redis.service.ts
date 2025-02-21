@@ -135,7 +135,6 @@ class RedisService {
     await this.setKey(fullKey, JSON.stringify(value), ttl);
   }
 
-  // Get a slug by type
   async getSlug(type: string, key: string): Promise<any | null> {
     const fullKey = `${type}:slug:${key}`;
     const value = await this.getKey(fullKey);
@@ -143,11 +142,16 @@ class RedisService {
       console.log(type);
       switch (key) {
         case SlugsType.BUILDER:
-          console.log("No builder slug found");
+          const res = await getPagesSlugs("builder-list");
+          this.saveSlug(type, key, res);
+          return res;
           break;
-        case SlugsType.LISTING:
-          console.log("No listing slug found");
+        case SlugsType.LISTING: {
+          const res = await getPagesSlugs("listing-search-seo");
+          this.saveSlug(type, key, res);
+          return res;
           break;
+        }
         case SlugsType.PROJECT: {
           const res = await getPagesSlugs("project-list");
           this.saveSlug(type, key, res);
