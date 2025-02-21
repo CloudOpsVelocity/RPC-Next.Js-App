@@ -21,6 +21,9 @@ const config: Config = {
       fontSize: {
         h2: "18px",
       },
+      fontFamily: {
+        montserrat: ["var(--font-montserrat)"],
+      },
       padding: {
         "screen-spacing": "50px",
         "less-screen-spacing": "30px",

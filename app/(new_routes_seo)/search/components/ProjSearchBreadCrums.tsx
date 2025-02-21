@@ -16,12 +16,8 @@ interface BreadcrumbProps {
   pageUrl: string;
 }
 
-const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
-  items = [],
-  pageUrl,
-}) => {
+const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   const [state] = useAtom(projSearchStore);
-
   const getParams = useSearchParams();
   let listedBy = getParams.get("sf");
 

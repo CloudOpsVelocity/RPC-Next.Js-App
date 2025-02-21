@@ -1,22 +1,13 @@
 import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
-
-import { getPagesSlugs } from "@/app/seo/api";
 import { getAmenties, getAuthorityNames } from "@/app/utils/api/project";
 import {
   getListingDetails,
   getProjectDetails,
   getReportConstData,
 } from "@/app/utils/api/property";
-import { getStringPartByIndex } from "@/app/utils/dyanamic/projects";
 import { notFound } from "next/navigation";
-import path from "path";
 import React from "react";
-import fs from "fs";
-import getListingSLugs, {
-  findPathForProjectListing,
-} from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
-import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: {
@@ -32,12 +23,8 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.phase}/${params.bhk_unit_type}/${params.slug}`;
-  // const value = await findPathForProjectListing(pathname);
-  // if (!value) {
-  //   notFound();
-  // }
-  // const pdata = extractListingParamsValues(value);
-  let id = params.slug.split("-").at(-1);
+
+  let id = params.slug.includes("-") ? params.slug.split("-").at(-1) : null;
   if (!id) {
     notFound();
   }

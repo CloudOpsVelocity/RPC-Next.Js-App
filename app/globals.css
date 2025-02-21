@@ -372,8 +372,8 @@
   width: 350px !important;
   min-width: 300px !important;
   max-width: 350px !important;
+  font-family: var(--font-montserrat), sans-serif !important;
 }
-
 
 @media (min-width: 576px) {
   .embla-thumbs__slide {

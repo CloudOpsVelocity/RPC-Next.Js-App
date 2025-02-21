@@ -8,7 +8,6 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { FloorPlanNotAvail, ImgNotAvail } from "@/app/data/project";
 import { propertyDetailsSvgs, ShearIcon } from "@/app/images/commonSvgs";
-import SharePopup from "@/app/components/atoms/SharePopup";
 import { useQuery } from "react-query";
 import ZoomInOut from "../../actions/ZoomInOut";
 import useDownload from "@/app/hooks/property/useDownload";
@@ -146,11 +145,15 @@ export default function PartialUnitModal({ data }: any) {
                 </button>
                 <button
                   onClick={() => {
-                    const floorPlanUrl = selectedOne?.floorPlan?.split(",")[3] || "";
+                    const floorPlanUrl =
+                      selectedOne?.floorPlan?.split(",")[3] || "";
                     if (floorPlanUrl) {
                       navigator.share({
                         title: "Share Floor Plan",
-                        url: `/image?path=${floorPlanUrl.replace("https://media.getrightproperty.com", "")}&type=F`,
+                        url: `/image?path=${floorPlanUrl.replace(
+                          "https://media.getrightproperty.com",
+                          ""
+                        )}&type=F`,
                       });
                     }
                   }}

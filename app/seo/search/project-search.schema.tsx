@@ -1,3 +1,5 @@
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+
 export const generateAllSchemas = (property: any, properties?: any[]) => {
   if (!property) return [];
   const builderAlreadyExists =
@@ -45,6 +47,12 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
+        url: createProjectLinkUrl({
+          city: property.city,
+          slug: property.projName,
+          locality: property.locality,
+          projIdEnc: property.projIdEnc,
+        }),
         offers: {
           "@type": "Offer",
           price: property.minPrice || "0",
@@ -74,6 +82,21 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
           bestRating: "5",
           worstRating: "1",
         },
+      },
+      {
+        "@type": "WebPage",
+        url: createProjectLinkUrl({
+          city: property.city,
+          slug: property.projName,
+          locality: property.locality,
+          projIdEnc: property.projIdEnc,
+        }),
+        name: property.projName || "",
+        description: property.projectAbout || "",
+        datePublished: property.launchDate || new Date().toISOString(),
+        image:
+          property.coverUrl?.split(",")[0] ||
+          "https://getrightproperty.com/default-property.jpg",
       },
       ...(builderAlreadyExists
         ? []
