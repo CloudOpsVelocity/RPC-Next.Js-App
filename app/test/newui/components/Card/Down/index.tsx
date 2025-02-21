@@ -141,7 +141,7 @@ export default function CardDownSection({
                 className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 onClick={(e) =>{
                   e.stopPropagation();
-                  setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+                  setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
                   setSelected({
                     lat,
                     lang,

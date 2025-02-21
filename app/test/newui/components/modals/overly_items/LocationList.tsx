@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { throttle } from "lodash";
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMap } from "react-leaflet";
 
@@ -39,7 +39,7 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const tabContainerRef = useRef<HTMLDivElement>(null);
-  const setNearby = useSetAtom(selectedNearByAtom);
+  const [{selectedNearbyItem}, setNearby] = useAtom(selectedNearByAtom);
 
   const setSelected = useSetAtom(selectedSearchAtom);
 
@@ -85,8 +85,10 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   }, [updateScrollButtons]);
 
   const onSelectLocation = (item:any) => {
-    setNearby( (prev:any) => ({...prev, selectedNearbyItem: item }));
-  }
+    if(selectedNearbyItem.placeId !== item.placeId){
+      setNearby( (prev:any) => ({...prev, selectedNearbyItem: item })); 
+    }
+  };
 
   return (
     <div className="relative bg-white rounded-lg shadow-md overflow-hidden w-full">

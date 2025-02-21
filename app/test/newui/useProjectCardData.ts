@@ -26,7 +26,7 @@ export default function useProjectCardData({ id, isOpen, conType, pType, lat, la
   const itemId = id.includes("+") ? propId ? propId : id.split("+")[0]  : id;
 
   if((nearData && Object.keys(nearData).length === 0) && (data && Object.keys(data).length !== 0) && conType === "nearby"){
-    setNearby( prev => ({...prev, data: data, isOpen: true, id: itemId }) );
+    setNearby( prev => ({...prev, data: data, isOpen: true, id: itemId, isLoader: false }) );
   }
 
   return { data, isLoading };
@@ -71,7 +71,7 @@ async function getNearByLocations(id: string, type: string, lat?: number, lang?:
   } catch (error) {
     console.error("Failed to fetch nearby locations:", error);
     throw error;
-  }
+  } 
 }
 
 async function getAmenties(id: string, type: string,propId?: string) {
