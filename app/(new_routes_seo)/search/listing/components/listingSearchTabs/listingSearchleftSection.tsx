@@ -7,7 +7,7 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 /* import ListingSearchTabs from "../ListingSearchTabs"; */
 import { projSearchStore } from "../../../store/projSearchStore";
 import { usePathname } from "next/navigation";
@@ -16,6 +16,9 @@ import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import FloatingArrowIcon from "../../../components/ProjectSearchTabs/FloatingArrowIcon";
+import { useMediaQuery } from "@mantine/hooks";
+import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import { overlayAtom } from "@/app/test/newui/store/overlay";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -41,6 +44,9 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const pathname = usePathname();
+  const isMobile = useMediaQuery("(max-width: 601px)");
+    const setNearby = useSetAtom(selectedNearByAtom);
+  
   let isTrue = pathname.includes("search")
     ? true
     : serverData !== null && apiFilterQueryParams !== null;
@@ -178,6 +184,21 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       </div>
     </div>
   );
+
+  const setSelected = useSetAtom(selectedSearchAtom);
+  const [, dispatch] = useAtom(overlayAtom);
+
+  useEffect(() => { 
+     if(isMobile) return;
+     const handleScroll = () => {
+       setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+       dispatch({ type: "CLOSE" })
+       setSelected(null);
+     };
+ 
+     window.addEventListener("scroll", handleScroll);
+     return () => window.removeEventListener("scroll", handleScroll);
+   }, [isMobile]);
 
   return ( 
     <div

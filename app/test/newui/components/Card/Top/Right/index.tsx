@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import selectedSearchAtom from "@/app/store/search/map";
+import selectedSearchAtom, { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
 import React from "react";
 import HeartButton from "../Center/HeartButton";
@@ -47,7 +47,6 @@ export default function TopRightSection({
   category,
   phaseId,
   location,
-
   city,
   cityName,
   towerData,
@@ -98,6 +97,10 @@ export default function TopRightSection({
         });
   const [lat, lang] = location?.split(",") ?? [];
   // console.log("card 1: ");
+  const setNearby = useSetAtom(selectedNearByAtom);
+  const [mapPopup, setMapPopup] = useAtom(modalPopup);
+
+
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -212,11 +215,13 @@ export default function TopRightSection({
                 )}
                 <div
                   onClick={() => {
+                    setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, id:"", data:{} }));
+                    setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     handleClick();
                     setSelected({
-                      agentListing,
+                      agentListing, 
                       ownerListing,
-                      projOrPropName,
+                      projOrPropName, 
                       lat,
                       lang,
                       type,
@@ -250,17 +255,19 @@ export default function TopRightSection({
               </div>
               <button
                 className="max-w-fit sm:block hidden xl:hidden ml-auto px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold  md:mb-1 gradient"
-                onClick={() =>
+                onClick={() => {
+                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"" }));
+
                   setSelected({
                     agentListing,
                     ownerListing,
-                    projOrPropName,
+                    projOrPropName, 
                     lat,
                     lang,
                     type,
                     reqId: type === "proj" ? projIdEnc : propIdEnc,
                     propType: type === "proj" ? propType : propTypeName,
-                  })
+                  })}
                 }
               >
                 {" "}
@@ -294,13 +301,24 @@ export default function TopRightSection({
                       pType: type,
                     })
                   }
-                >
+                > 
                   <span className="hidden sm:block">14+</span> Amenities
                 </button>
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                   onClick={() => {
+                    setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+                    // setSelected(null);
+                    setSelected({
+                      lat: data.lat,
+                      lang: data.lang,
+                      type: data.type,
+                      reqId: !propIdEnc ? projIdEnc : propIdEnc,
+                      propType: !propIdEnc ? propType : propTypeName,
+                      projOrPropName: propName ? propName : projName
+                    })
                     console.log("near by 1", data);
+                    if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     dispatch({
                       type: "OPEN",
                       content: [],
@@ -388,7 +406,7 @@ export default function TopRightSection({
             </div>
             <button
               className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold my-2 md:mb-1 gradient"
-              onClick={() =>
+              onClick={() => {
                 setSelected({
                   agentListing,
                   ownerListing,
@@ -399,7 +417,8 @@ export default function TopRightSection({
                   reqId: type === "proj" ? projIdEnc : propIdEnc,
                   propType: type === "proj" ? propType : propTypeName,
                 })
-              }
+                setNearby( (prev:any) => ({...prev, category: "", data:{}, id:"" }) );
+              }}
             >
               {" "}
               <div className="py-[1px] px-[2px] inline-flex justify-center items-center bg-[#F0F9FF]  rounded">
@@ -473,11 +492,22 @@ export default function TopRightSection({
               <button
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 onClick={() => {
+                  setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+                  // setSelected(null);
+                  setSelected({
+                    lat: data.lat,
+                    lang: data.lang,
+                    type: data.type,
+                    reqId: !propIdEnc ? projIdEnc : propIdEnc,
+                    propType: !propIdEnc ? propType : propTypeName,
+                    projOrPropName: propName ? propName : projName
+
+                  })
                   dispatch({
                     type: "OPEN",
                     content: [
                       "Orion Mall",
-                      "Apollo Hospital",
+                      "Apollo Hospital", 
                       "Greenwood High International School",
                       "MG Road Metro Station",
                       "Major Bus Stop",

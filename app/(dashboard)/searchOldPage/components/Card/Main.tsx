@@ -9,8 +9,6 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { formatCurrency } from "@/app/utils/numbers";
-import { useSetAtom } from "jotai";
-import selectedSearchAtom from "@/app/store/search/map";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import LeftSection from "./Top/LeftSection";
 import CenterTop from "./Top/Center";

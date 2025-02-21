@@ -21,15 +21,14 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   });
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${slug}`;
   return (
-    <>
-      <ProjectSeachSchema properties={severData} />
+    <main>
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
       <NewSearchPage
         serverData={severData}
         frontendFilters={frontEndFilter}
         pageUrl={pageUrl}
       />
-    </>
+    </main>
   );
 }
 

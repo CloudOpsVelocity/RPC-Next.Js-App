@@ -10,11 +10,12 @@ import CenterTop from "./Top/Center";
 import CardDownSection from "./Down";
 import TopRightSection from "./Top/Right";
 import { useMediaQuery } from "@mantine/hooks";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import Overlay from "../modals/Overlay";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 
 type Props = {
   type: any;
@@ -66,7 +67,7 @@ const MainBox = ({ data, refetch }: Props) => {
       setState({ ...state, compareAdded: !state.compareAdded });
       toggleCompare({
         id: reqId,
-        status: state.compareAdded ? "N" : "Y",
+        status: state.compareAdded ? "N" : "Y", 
         source: type,
       });
     } else {
@@ -125,10 +126,31 @@ const MainBox = ({ data, refetch }: Props) => {
     });
   };
   const isMobile = useMediaQuery("(max-width: 1600px)");
+  
+  const [selected, setSelected] = useAtom(selectedSearchAtom);
+  const [{id}, setNearby] = useAtom(selectedNearByAtom)
+
+  const onHoverCard = () => {
+    // if(selected === null || selected?.reqId === newData.projIdEnc) return;
+    // setNearby((prev:any)=>({ ...prev, selectedNearbyItem: {}, id:""}))
+    // setSelected({
+    //   agentListing: newData.agentListing, 
+    //   ownerListing: newData.ownerListing,
+    //   projOrPropName: newData.projName,
+    //   lat: newData.lat,
+    //   lang: newData.lang,
+    //   type: type,
+    //   reqId: type === "proj" ? projIdEnc : propIdEnc,
+    //   propType: type === "proj" ? propTypeId : propTypeName,  
+    // });
+  }
   return (
-    <div  onClick={() => onClickRedirect(reqId)} className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]">
+    <div  
+      onMouseEnter={() => isMobile ? ("") : onHoverCard()}
+      onClick={() => onClickRedirect(reqId)} 
+      className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]"
+    >
       <div
-       
         className="flex flex-col xl:flex-row justify-start w-full  xl:max-w-full relative"
       >
         <LeftSection
@@ -152,7 +174,7 @@ const MainBox = ({ data, refetch }: Props) => {
             propTypeId ?? propTypeName ?? ""
           }${type === "proj" && phaseId ? "+" + phaseId : ""}` ===
             overlayData.id ? (
-            <Overlay />
+            <Overlay /> 
           ) : null}
           {isMobile && (
             <div className="flex   flex-col  justify-between relative">

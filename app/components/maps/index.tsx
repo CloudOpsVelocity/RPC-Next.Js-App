@@ -57,7 +57,7 @@ const Map = ({
           });
         }}
       >
-        <span className="hidden sm:block">Re- Center</span>
+        <span className="hidden sm:block">Re-Center</span>
         <RecenterIcon />
       </button>
       <Content
@@ -108,7 +108,6 @@ const Content: React.FC<any> = ({
     map.fitBounds(bounds);
   }, [selected, map, position]);
   const isMobile = useMediaQuery("(max-width: 601px)");
-  console.log(data)
   return (
     <>
       <TileLayer
@@ -141,7 +140,7 @@ const Content: React.FC<any> = ({
                 opacity={1}
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat} 
-                className="min-w-fit z-50"
+                className="min-w-fit z-50" 
                 offset={[4, -36]}
               >
                 <div className=" ">
