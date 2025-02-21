@@ -73,6 +73,7 @@ export default function AutoCitySelectDropdown({
   } = useQuery<DefaultCityResponse, Error>({
     queryKey: ["my-location"],
     queryFn: async () => await getUserCity(cityData),
+     
     onSuccess: (data) => {
       if (data.status) {
         setCity({

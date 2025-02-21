@@ -8,7 +8,7 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { projSearchStore } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
@@ -16,6 +16,9 @@ import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import { usePathname } from "next/navigation";
 import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
+import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import { useMediaQuery } from "@mantine/hooks";
+import { overlayAtom } from "@/app/test/newui/store/overlay";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -34,12 +37,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       },
     ],
   ]);
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
+  const setNearby = useSetAtom(selectedNearByAtom);
 
   // Create a separate ref for intersection observer
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -85,10 +91,26 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     estimateSize: () => 300,
     overscan: 5, // Reduced overscan to improve performance
     enabled: true,
-    measureElement: (element) => {
+    measureElement: (element) => { 
       return element?.getBoundingClientRect().height || 300;
     },
   });
+  
+  const setSelected = useSetAtom(selectedSearchAtom);
+  const [, dispatch] = useAtom(overlayAtom);
+
+  useEffect(() => { 
+    if(isMobile) return;
+    const handleScroll = () => {
+      setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
+      dispatch({ type: "CLOSE" })
+      setSelected(null);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobile]);
+
 
   // Enhanced infinite scroll logic
   useEffect(() => {
