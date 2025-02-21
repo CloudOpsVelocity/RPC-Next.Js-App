@@ -22,7 +22,6 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${slug}`;
   return (
     <main>
-      <ProjectSeachSchema properties={severData} />
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
       <NewSearchPage
         serverData={severData}
