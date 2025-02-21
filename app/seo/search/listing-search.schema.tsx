@@ -1,3 +1,4 @@
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { PHONE_NUMBER } from "../constants";
 
 export const generateAllSchemas = (property: any) => {
@@ -10,9 +11,17 @@ export const generateAllSchemas = (property: any) => {
         "@type": "RealEstateListing",
         name: `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`.trim(),
         description: property.usp || "",
-        url: property.propIdEnc
-          ? `https://getrightproperty.com/property/${property.propIdEnc}`
-          : "https://getrightproperty.com",
+        url: generateListingLinkUrl({
+          bhkUnitType: property.bhkName
+            ? property.bhkName + "-" + property.propTypeName
+            : property.propTypeName,
+          category: property.cg === "S" ? "for-sale" : "for-rent",
+          city: property.ctName,
+          locality: property.ltName,
+          propIdEnc: property.propIdEnc,
+          phase: property.phaseName,
+          projName: property.projIdEnc && property.propName,
+        }),
         datePosted: property.postedDate || new Date().toISOString(),
         image:
           property.coverImage?.split(",")[0] ||

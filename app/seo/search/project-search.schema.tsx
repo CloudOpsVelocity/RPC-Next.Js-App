@@ -49,7 +49,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
           "https://getrightproperty.com/default-property.jpg",
         url: createProjectLinkUrl({
           city: property.city,
-          slug: property.projIdEnc,
+          slug: property.projName,
           locality: property.locality,
           projIdEnc: property.projIdEnc,
         }),
