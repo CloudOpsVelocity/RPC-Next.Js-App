@@ -3,6 +3,17 @@ import { PHONE_NUMBER } from "../constants";
 
 export const generateAllSchemas = (property: any) => {
   if (!property) return [];
+  const PAGE_URL = generateListingLinkUrl({
+    bhkUnitType: property.bhkName
+      ? property.bhkName + "-" + property.propTypeName
+      : property.propTypeName,
+    category: property.cg === "S" ? "for-sale" : "for-rent",
+    city: property.ctName,
+    locality: property.ltName,
+    propIdEnc: property.propIdEnc,
+    phase: property.phaseName,
+    projName: property.projIdEnc && property.propName,
+  });
 
   const schemas = {
     "@context": "https://schema.org",
@@ -11,17 +22,7 @@ export const generateAllSchemas = (property: any) => {
         "@type": "RealEstateListing",
         name: `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`.trim(),
         description: property.usp || "",
-        url: generateListingLinkUrl({
-          bhkUnitType: property.bhkName
-            ? property.bhkName + "-" + property.propTypeName
-            : property.propTypeName,
-          category: property.cg === "S" ? "for-sale" : "for-rent",
-          city: property.ctName,
-          locality: property.ltName,
-          propIdEnc: property.propIdEnc,
-          phase: property.phaseName,
-          projName: property.projIdEnc && property.propName,
-        }),
+        url: PAGE_URL,
         datePosted: property.postedDate || new Date().toISOString(),
         image:
           property.coverImage?.split(",")[0] ||
@@ -43,17 +44,7 @@ export const generateAllSchemas = (property: any) => {
         image:
           property.coverImage?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
-        url: generateListingLinkUrl({
-          bhkUnitType: property.bhkName
-            ? property.bhkName + "-" + property.propTypeName
-            : property.propTypeName,
-          category: property.cg === "S" ? "for-sale" : "for-rent",
-          city: property.ctName,
-          locality: property.ltName,
-          propIdEnc: property.propIdEnc,
-          phase: property.phaseName,
-          projName: property.projIdEnc && property.propName,
-        }),
+        url: PAGE_URL,
         offers: {
           "@type": "Offer",
           price: property.price || "0",
