@@ -19,7 +19,10 @@ export default function NewListingSearchpage({
 }: Props) {
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
-      <link rel="canonical" href={`${pageUrl}`} />
+      <link
+        rel="canonical"
+        href={`${process.env.NEXT_PUBLIC_URL}/${pageUrl}`}
+      />
       {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs pageUrl={pageUrl} />
