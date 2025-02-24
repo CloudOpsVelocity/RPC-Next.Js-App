@@ -248,7 +248,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               icon={isMobile ? MobileIcon : MapIcon}
               eventHandlers={getEventHandlers(itemId)}
             >
-              <Popup closeButton={false}>
+              <Popup>
                 {!isProp ? (
                   <TooltipProj
                     data={{
