@@ -13,6 +13,7 @@ const MiddleSection = dynamic(
 );
 
 import dynamic from "next/dynamic";
+import { HomeSiteNavigationSchema } from "./seo/common/home.schema";
 
 export default async function Page() {
   const cityData = {
@@ -31,6 +32,7 @@ export default async function Page() {
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
+      <HomeSiteNavigationSchema />
       <HomeSearch
         // count={shortIds?.total}
         // shortIds={shortIds}
