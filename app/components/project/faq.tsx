@@ -52,8 +52,8 @@ export default function FaqWithBg({ data, projName,slug,postedById }: FaqWithBgP
           return (
             faq.faqAnswer &&
             faq.faqQuestion &&
-            <MainCard faq={faq} index={index} data={data} />
-          );
+            <MainCard key={`faqMainCard_${index.toString()}`} faq={faq} index={index} data={data} />
+          )
         })}
       </div>
       <AddQnaForm projName={projName} slug={slug} postedById={postedById} />

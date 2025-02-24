@@ -124,9 +124,10 @@ const FirstBlock: React.FC<Props> = ({
                     <Image
                       alt="project image"
                       src={imageUrl.split(",")[3]} 
-                      fill
+                      height={630}
+                      width={1200}
                       className={` bg-gray-${index + 1}`}
-                      unoptimized
+                      unoptimized 
                       quality={80}
                     />
                   </picture>

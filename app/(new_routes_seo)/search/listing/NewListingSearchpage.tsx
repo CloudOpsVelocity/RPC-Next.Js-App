@@ -26,8 +26,9 @@ export default function NewListingSearchpage({
       />
       {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
-        <ProjectSearchBreadCrumbs pageUrl={pageUrl} />
+        <ProjectSearchBreadCrumbs key="newSearchPage3" pageUrl={pageUrl} />
         <div className="flex flex-row items-start gap-2">
+          key="newSearchFilter3"
           <ListingHeaderFilters isListing={true} />
         </div>
       </div>
@@ -37,7 +38,10 @@ export default function NewListingSearchpage({
           frontendFilters={frontendFilters}
         />
         <div className="w-[100%] sm:w-[50%] -z-10" />
-        <ListingSearchRightSection serverData={serverData} />
+        <ListingSearchRightSection
+          serverData={serverData}
+          key="projListingSearchRightSection2"
+        />
       </div>
     </main>
   );

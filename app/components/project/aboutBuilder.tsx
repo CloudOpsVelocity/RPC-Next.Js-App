@@ -42,9 +42,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
                     ? `${nzData.logo}`
                     : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
                 }
-                // width={130}
-                // height={130}
-                fill
+                width={130}
+                height={130}
                 alt="logo"
                 className="object-contain "
                 unoptimized

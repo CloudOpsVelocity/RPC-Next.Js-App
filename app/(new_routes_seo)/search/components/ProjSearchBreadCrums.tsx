@@ -142,7 +142,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
         {allParams.map((item: any, index: number) => {
           if (item.label !== "") {
             return (
-              <li key={item.href} className="flex items-center">
+              <li key={item.href + index.toString()} className="flex items-center">
                 <FaChevronRight
                   className="h-4 w-4 flex-shrink-0 text-gray-400"
                   aria-hidden="true"

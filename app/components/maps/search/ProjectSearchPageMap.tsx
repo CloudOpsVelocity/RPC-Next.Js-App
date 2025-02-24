@@ -107,7 +107,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   });
 
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
-  const [{ isOpen, selectedNearbyItem, id, allMarkerRefs, data:nearbyData }, setSelectedNearby ] = useAtom(selectedNearByAtom);
+  const [{ isOpen, selectedNearbyItem, id, allMarkerRefs, data: nearbyData, category }, setSelectedNearby ] = useAtom(selectedNearByAtom);
 
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
@@ -167,20 +167,28 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   }, [map, selectedNearbyItem]);
 
   useEffect(() => {
-    if (
-      data && data?.length > 0 
-      // && !isOpen && (selected === null || Object.keys(nearbyData).length > 0)
-    ) {
+    if ( data && data?.length > 0 && nearbyData && Object.keys(nearbyData).length === 0 && selected === null ) {
       const bounds = L.latLngBounds(
         data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
       );
       map.fitBounds(bounds, { padding: [50, 50] });
     }
-  }, [data]);
+  }, [map, data, selected, nearbyData]);
+
+  useEffect(() => {
+    if (nearbyData && Object.keys(nearbyData).length > 0 && category === "") {
+      const finalCateg = category !== "" ? category : Object.keys(nearbyData)[0]
+      const nearByData = nearbyData[finalCateg];
+      const bounds = L.latLngBounds(
+        nearByData.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
+      );
+      map.fitBounds(bounds, { padding: [50, 50] });
+    }
+  }, [map, nearbyData, category]);
 
   return (
     data &&
-    data?.map((item: any) => {
+    data?.map((item: any, index:number) => {
       const isProp = !!item?.propIdEnc;
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
       const itemPropType = isProp ? item?.propTypeName : item?.propType;
@@ -207,7 +215,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               ref={(el) => {
                 if (el) markerRefs.current.set(itemId, el);
               }}
-              key={itemId}
+              key={itemId + "proijMarkerTag" + index.toString()}
               position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
               icon={isMobile ? MobileIcon : MapIcon}
               eventHandlers={getEventHandlers(itemId)}
@@ -253,17 +261,6 @@ const NearbyMarkers = ({}) => {
     const map = useMap();
 
     useEffect(() => {
-      if (data && Object.keys(data).length > 0) {
-        const finalCateg = category !== "" ? category : Object.keys(data)[0]
-        const nearByData = data[finalCateg];
-        const bounds = L.latLngBounds(
-          nearByData.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
-        );
-        map.fitBounds(bounds, { padding: [50, 50] });
-      }
-    }, [data, category]);
-
-    useEffect(() => {
       if(Object.keys(selectedNearbyItem).length === 0) return;
       const handleClickOutside = (event:any) => {
         if (event.target.closest(".leaflet-container")) {
@@ -280,10 +277,10 @@ const NearbyMarkers = ({}) => {
     const Icon:any = createCustomIconReactLeafLet(finalCategory);
     
     return(
-      selectedNearByData && selectedNearByData.length > 0 && selectedNearByData?.map((item: any) => {
+      selectedNearByData && selectedNearByData.length > 0 && selectedNearByData?.map((item: any, index:number) => {
         return(
           <Marker
-            key={item?.lat}
+            key={item?.lat + "markerTag" + index.toString()}
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
             icon={Icon}
@@ -295,7 +292,7 @@ const NearbyMarkers = ({}) => {
           >
             {!isMobile && (
               <Tooltip
-                key={item.lat}
+                key={item.lat + "tooltipTag" + index.toString()}
                 opacity={1}
                 direction="top"
                 permanent={selectedNearbyItem?.lat === item?.lat} 
@@ -315,7 +312,7 @@ const NearbyMarkers = ({}) => {
                 opacity={1}
                 direction="top"
                 permanent={selectedNearbyItem?.lat === item?.lat}
-                key={item.lang}
+                key={item.lang + "tooltipTag2" + index.toString()}
                 offset={isMobile ? [-7, -40] : [4, -36]}
                 className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
               >

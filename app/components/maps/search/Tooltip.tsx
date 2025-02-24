@@ -112,8 +112,8 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
 
           {/* Phases */}
           <div className="space-y-1 mt-1">
-            {phases.map((phase) => (
-              <div key={phase.phaseName} className="bg-gray-100 rounded px-1 py-0.5">
+            {phases.map((phase, index) => (
+              <div key={phase.phaseName + index.toString()} className="bg-gray-100 rounded px-1 py-0.5">
                 {phase.phaseName && <p className="font-semibold text-gray-800 text-xs !m-0 !p-0 mb-1 !font-montserrat">{`Phase: ${phase.phaseName}`}</p>}
                 <div className="flex w-full ">
                   {phase.propertyTypes.map((property, index) => (
