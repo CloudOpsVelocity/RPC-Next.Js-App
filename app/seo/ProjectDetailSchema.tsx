@@ -564,30 +564,47 @@ const generateSchema = (projectData: ProjectData) => {
         description:
           "A property primarily used for residential purposes, such as single-family homes, apartments, and townhouses.",
       },
+
       {
         "@type": "SpecialAnnouncement",
-        name: `${basicData?.projectName} - Special Offer`,
-        datePosted: projectData?.basicData.startDate,
-        expires: projectData?.basicData.endDate,
-        text: `Special announcement for ${basicData?.projectName} - Located in ${basicData?.localityName}`,
-        subjectOf: {
-          "@type": "RealEstateListing",
-          name: `${basicData?.projectName} - Luxury Apartments & Villas`,
-          description: `Explore ${basicData?.projectName}, offering ${basicData?.availableProperties} configurations with world-class amenities in ${basicData?.localityName}, ${basicData?.stateName}.`,
-          offers: {
-            "@type": "Offer",
-            price: basicData?.minPrice,
-            priceCurrency: "INR",
-            availability: "InStock",
-            validFrom: projectData?.basicData.startDate,
-            validThrough: projectData?.basicData.endDate,
+        name: `${basicData?.projectName} - Limited Time Offer`,
+        text: `Special discount available on ${
+          basicData?.projectName
+        } - Premium ${basicData?.availableProperties?.join(", ")} in ${
+          basicData?.localityName
+        }. Book now to avail exclusive launch prices starting from ${
+          basicData?.minPrice
+        }`,
+        datePosted: new Date(
+          basicData?.startDate?.replace("IST", "+05:30")
+        ).toISOString(),
+        expires: new Date(
+          basicData?.endDate?.replace("IST", "+05:30")
+        ).toISOString(),
+
+        spatialCoverage: {
+          "@type": "Place",
+          name: basicData?.localityName,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: basicData?.localityName,
+            addressRegion: basicData?.stateName,
+            addressCountry: "IN",
           },
-          url: projectDetailsPageUrl,
-          image: basicData?.media.coverImageUrl,
-          specialCoverage: {
-            "@type": "Place",
-            name: `${basicData?.localityName}, ${basicData?.cityName}`,
-          },
+        },
+        url: projectDetailsPageUrl,
+        image: basicData?.media.coverImageUrl,
+        description: desc,
+        offers: {
+          "@type": "Offer",
+          price: basicData?.minPrice,
+          priceCurrency: "INR",
+          validFrom: new Date(
+            basicData?.startDate?.replace("IST", "+05:30")
+          ).toISOString(),
+          validThrough: new Date(
+            basicData?.endDate?.replace("IST", "+05:30")
+          ).toISOString(),
         },
       },
       {
