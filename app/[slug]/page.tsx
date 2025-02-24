@@ -48,7 +48,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const id = params.slug.split("-");
-  const heading = id.join(" ");
+  const heading = cleanHeading(id);
 
   return {
     title: `${heading} - Getrightproperty`,
@@ -59,6 +59,11 @@ export async function generateMetadata(
     },
   };
 }
-
+function cleanHeading(id: string[]) {
+  return id
+    .join(" ")
+    .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG)\b/g, "")
+    .replace(/\s+/g, " ");
+}
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
