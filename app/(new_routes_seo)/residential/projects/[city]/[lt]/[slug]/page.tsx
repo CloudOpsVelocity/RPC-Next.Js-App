@@ -12,15 +12,18 @@ import { getPagesSlugs } from "@/app/seo/api";
 import { Metadata, ResolvingMetadata } from "next";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
+import { isValidSlugId } from "@/common/utils/slugUtils";
 
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
 // let metadataCache: {title?: string, description?: string} = {};
-export default async function Page({ params }: Props) {
+export default async function page({ params }: Props) {
   const { city, lt, slug: name } = params;
   let slug = name.split("-").at(-1);
-  if (!slug || slug.length !== 32) return notFound();
+  if (!slug || !isValidSlugId(slug)) {
+    notFound();
+  }
   console.time("project detaild api calling" + slug);
   let [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
@@ -96,6 +99,9 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   let slug = params.slug.split("-").at(-1);
+  if (!slug || !isValidSlugId(slug)) {
+    notFound();
+  }
   const {
     basicData: data,
     phaseOverview,
