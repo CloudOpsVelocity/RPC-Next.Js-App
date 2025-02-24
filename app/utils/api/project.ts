@@ -4,6 +4,7 @@ import { capitalizeWords } from "../letters";
 import axios from "axios";
 import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/utils/partialUnitParser";
 import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.client";
+import { notFound } from "next/navigation";
 
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   try {
@@ -20,7 +21,7 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
     }
 
     const data = await response.json();
-
+    if (!data.status) return notFound();
     let isRera = false;
     const phases = data?.phaseOverview?.map((el: any) => {
       if (el.rerastatus === "Recieved" || el.rerastatus === "Applied") {
@@ -42,7 +43,7 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
     } as MERGERPROJECT;
   } catch (error) {
     console.error(`Error fetching project details for slug "${slug}":`, error);
-    throw error; // Re-throw the error to handle it upstream if needed
+    notFound();
   }
 };
 

@@ -44,18 +44,15 @@ const CaseSeoSearchService = async (
 ): Promise<SeoSearchResult> => {
   if (!slug.includes("-")) return notFound();
   const slugValues = extractCaseSeoParams(slug);
-  console.log({ slugValues });
-
   let severData;
   if (!slugValues.count) {
-    return { severData: [], frontEndFilter: {} };
+    return notFound();
   }
   if (!searchParams.sf) {
     const url = createUrl(slugValues);
     console.log(url);
     severData = await getNewProjSearchData(url);
   }
-
   let city = `Bengaluru`;
   const frontEndFilter: FrontEndFilter = {
     ...(slugValues.P ? { propType: parseInt(slugValues.P) } : {}),

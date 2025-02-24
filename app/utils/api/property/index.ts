@@ -33,6 +33,10 @@ const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
       }
     );
     const data = await response.json();
+    if (!data || !data.status) {
+      return notFound();
+    }
+
     const filterOtherDetails =
       data.listing.otherPrice &&
       Object?.keys(data.listing.otherPrice).filter(

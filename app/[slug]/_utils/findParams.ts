@@ -67,6 +67,6 @@ export function extractCaseSeoParams(values: string) {
         break;
     }
   });
-
+  // B CG C L P
   return { ...result, count };
 }
