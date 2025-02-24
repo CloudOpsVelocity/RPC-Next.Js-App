@@ -1,6 +1,8 @@
 import { LIstingResponse } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
+import { isValidSlugId } from "@/common/utils/slugUtils";
 import axios from "axios";
+import { notFound } from "next/navigation";
 
 const getProjectDetails = async (slug: string): Promise<M | any> => {
   if (slug) {
@@ -20,47 +22,55 @@ const getProjectDetails = async (slug: string): Promise<M | any> => {
 };
 
 const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`,
-    {
-      next: { tags: [slug] },
-    }
-  );
-  const data = await response.json();
-  const filterOtherDetails =
-    data.listing.otherPrice &&
-    Object?.keys(data.listing.otherPrice).filter(
-      (item) =>
-        ![
-          "otherCharge",
-          "price",
-          "securetyType",
-          "clubHouseTill",
-          "securityMonth",
-          "security",
-        ].includes(item)
+  if (!isValidSlugId(slug)) {
+    notFound();
+  }
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`,
+      {
+        next: { tags: [slug] },
+      }
     );
-  const ac = filterOtherDetails?.reduce(
-    (a: any, b: any) =>
-      b !== "price" &&
-      !(
-        b === "clubHouseCharge" &&
-        data.listing.otherPrice.clubHouseCharge === "A"
-      ) &&
-      data.listing.otherPrice[b] !== "NA" &&
-      data.listing.otherPrice[b] !== "A"
-        ? Number(a) +
-          (b === "otherCharge"
-            ? parseOtherCharge(data.listing.otherPrice[b])
-            : Number(data.listing.otherPrice[b] || "0"))
-        : Number(a),
-    0
-  );
+    const data = await response.json();
+    const filterOtherDetails =
+      data.listing.otherPrice &&
+      Object?.keys(data.listing.otherPrice).filter(
+        (item) =>
+          ![
+            "otherCharge",
+            "price",
+            "securetyType",
+            "clubHouseTill",
+            "securityMonth",
+            "security",
+          ].includes(item)
+      );
+    const ac = filterOtherDetails?.reduce(
+      (a: any, b: any) =>
+        b !== "price" &&
+        !(
+          b === "clubHouseCharge" &&
+          data.listing.otherPrice.clubHouseCharge === "A"
+        ) &&
+        data.listing.otherPrice[b] !== "NA" &&
+        data.listing.otherPrice[b] !== "A"
+          ? Number(a) +
+            (b === "otherCharge"
+              ? parseOtherCharge(data.listing.otherPrice[b])
+              : Number(data.listing.otherPrice[b] || "0"))
+          : Number(a),
+      0
+    );
 
-  const otherCharges =
-    data.listing.otherPrice &&
-    parseOtherCharge(data.listing.otherPrice.otherCharge);
-  return { ...data, totalPrice: ac + otherCharges };
+    const otherCharges =
+      data.listing.otherPrice &&
+      parseOtherCharge(data.listing.otherPrice.otherCharge);
+    return { ...data, totalPrice: ac + otherCharges };
+  } catch (error) {
+    console.log(error);
+    notFound();
+  }
 };
 
 const getNearByLocations = async (slug: string): Promise<any> => {
@@ -75,7 +85,7 @@ const getReportConstData = async () => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/getConstantList`,
     ["propReport"]
   );
-  console.log(res)
+  console.log(res);
   return res.data;
 };
 

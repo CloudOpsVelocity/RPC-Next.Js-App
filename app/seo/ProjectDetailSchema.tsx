@@ -596,7 +596,7 @@ const generateSchema = (projectData: ProjectData) => {
         description: `Comprehensive dataset for ${basicData?.projectName} located in ${basicData?.localityName}, ${basicData?.stateName}`,
         creator: {
           "@type": "Organization",
-          name: "Square Yards",
+          name: basicData?.projectName.split(" ")[0],
         },
         dateCreated: projectData?.basicData.startDate,
         dateModified:
