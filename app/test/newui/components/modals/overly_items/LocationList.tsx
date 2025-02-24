@@ -108,9 +108,9 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
           className="overflow-x-auto flex space-x-1 scrollbar-hide"
         >
           <ul className="flex space-x-1">
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <li
-                key={category}
+                key={category + index.toString()}
                 onClick={() => handleTabClick(category)}
                 className={`cursor-pointer px-3 py-1 text-center text-sm font-semibold transition-colors duration-200 whitespace-nowrap rounded-md capitalize ${
                   selectedCategory === category

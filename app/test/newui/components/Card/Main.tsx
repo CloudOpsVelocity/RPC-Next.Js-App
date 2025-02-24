@@ -90,6 +90,7 @@ const MainBox = ({ data, refetch }: Props) => {
         projIdEnc: projEncId,
       });
       window.open(url, "_blank" , "noreferrer");
+      // return url;
     } else {
       url = generateListingLinkUrl({
         city: data.cityName,
@@ -102,8 +103,8 @@ const MainBox = ({ data, refetch }: Props) => {
           ? `${data.bhkName + " " + data.propTypeName}`
           : "" + " " + data.propTypeName,
       });
-
       window.open(url, "_blank",  "noreferrer");
+      // return url;
     }
   };
 
@@ -145,6 +146,7 @@ const MainBox = ({ data, refetch }: Props) => {
     // });
   }
   return (
+    // <a href={onClickRedirect(reqId)} rel="noreferrer" target="_">
     <div  
       onMouseEnter={() => isMobile ? ("") : onHoverCard()}
       onClick={() => onClickRedirect(reqId)} 
@@ -219,6 +221,7 @@ const MainBox = ({ data, refetch }: Props) => {
         handleOpen={handleOpen}
       />
     </div>
+    // </a>
   );
 };
 

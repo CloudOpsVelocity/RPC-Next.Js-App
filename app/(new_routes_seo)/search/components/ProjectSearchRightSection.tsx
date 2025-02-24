@@ -73,6 +73,7 @@ const RightSection = ({ serverData }: any) => {
         id="mobileMap"
       >
         <Map
+        key="ProjSearchPageMap"
           projName={"Searched Location"}
           lat={(apidata && apidata[0]?.lat) ?? 47.46489}
           lang={(apidata && apidata[0]?.lang) ?? 15.34043}
@@ -101,6 +102,7 @@ const RightSection = ({ serverData }: any) => {
             className={` w-full ${isOpen ? "h-[calc(100vh-60vh)]" : "h-[calc(100vh-30vh)]"} right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 relative `}
           >
             <Map
+            key="oldSeoSearchPageMap"
               projName={"Searched Location"}
               lat={(apidata && apidata[0]?.lat) ?? 47.46489}
               lang={(apidata && apidata[0]?.lang) ?? 15.34043} 

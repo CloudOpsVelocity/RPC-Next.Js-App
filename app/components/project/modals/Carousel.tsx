@@ -111,7 +111,7 @@ function CarouselModal({
       </div>
       <div className="flex flex-col md:flex-row pt-[2%] px-[2%]  mb-10 sm:mb-0 sm:mt-10 justify-center items-center sm:items-start gap-[45px] shrink-0 mt-4">
         <MiddleSection projName={projName} propCgId={propCgId} />
-        <RightSection propCgId={propCgId} />
+        <RightSection propCgId={propCgId} key="projRightSection3" />
       </div>
     </Modal>
   );

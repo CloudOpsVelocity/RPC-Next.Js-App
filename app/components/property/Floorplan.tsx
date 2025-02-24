@@ -95,7 +95,6 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                   src={data?.projMedia?.floorPlanUrl}
                   width={750}
                   height={750}
-                  // fill
                   className=" m-auto h-[300px] lg:h-[420px]"
                   unoptimized
                 />
