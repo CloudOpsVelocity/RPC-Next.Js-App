@@ -1,4 +1,5 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+import { PHONE_NUMBER } from "../constants";
 
 export const generateAllSchemas = (property: any, properties?: any[]) => {
   if (!property) return [];
@@ -46,7 +47,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         }`.trim(),
-        description: property.projectAbout || "",
+        description: property.projectAbout.slice(0, 250) || "",
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
@@ -99,11 +100,16 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
               name: property.postedByName || "GetRightProperty",
               image:
                 property.builderLogo || "https://getrightproperty.com/logo.png",
+              priceRange: property.minPrice || "0",
+              telephone: PHONE_NUMBER || "",
+
               address: {
                 "@type": "PostalAddress",
                 addressLocality: property.builderCity || "",
                 addressRegion: property.state || "",
                 addressCountry: "IN",
+                postalCode: property.pincode || "N/A",
+                streetAddress: property.address || "N/A",
               },
             },
           ]),
