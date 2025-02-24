@@ -78,6 +78,7 @@ const generateSchema = (projectData: ProjectData) => {
             priceValidUntil: basicData.endDate,
             itemCondition: "http://schema.org/NewCondition",
           },
+
           review: {
             "@type": "Review",
             reviewRating: {
@@ -610,7 +611,7 @@ const generateSchema = (projectData: ProjectData) => {
       {
         "@type": "Dataset",
         name: `${basicData?.projectName} Property Details`,
-        description: `Comprehensive dataset for ${basicData?.projectName} located in ${basicData?.localityName}, ${basicData?.stateName}`,
+        description: `Comprehensive dataset for ${basicData?.projectName} located in ${basicData?.localityName}, ${basicData?.state}`,
         creator: {
           "@type": "Organization",
           name: basicData?.projectName.split(" ")[0],
