@@ -14,14 +14,14 @@ export const generateAllSchemas = (property: any) => {
     phase: property.phaseName,
     projName: property.projIdEnc && property.propName,
   });
-
+  const description = property.usp.slice(0, 4800) || "";
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "RealEstateListing",
         name: `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`.trim(),
-        description: property.usp || "",
+        description,
         url: PAGE_URL,
         datePosted: property.postedDate || new Date().toISOString(),
         image:
@@ -40,7 +40,7 @@ export const generateAllSchemas = (property: any) => {
       {
         "@type": "Product",
         name: `${property.bhkName} ${property.propTypeName} in ${property.localityName}`.trim(),
-        description: property.usp || "",
+        description,
         image:
           property.coverImage?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
