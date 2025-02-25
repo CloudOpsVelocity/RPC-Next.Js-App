@@ -63,6 +63,34 @@ const websiteSchema = {
   ],
 };
 
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "GetRightProperty",
+  description:
+    "A comprehensive real estate platform for property search, listing and comparison in Bangalore",
+  brand: {
+    "@type": "Brand",
+    name: "GetRightProperty",
+  },
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "INR",
+    availability: "https://schema.org/InStock",
+    offerCount: "1000+",
+    highPrice: "50000000",
+    lowPrice: "500000",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.5",
+    reviewCount: "100",
+  },
+  image:
+    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
+  category: "Real Estate Services",
+};
+
 const offerSchema = {
   "@context": "https://schema.org",
   "@type": "Offer",
@@ -256,6 +284,12 @@ export const HomeSiteNavigationSchema = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema),
         }}
       />
       <script
