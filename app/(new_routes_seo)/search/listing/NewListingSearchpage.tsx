@@ -18,6 +18,8 @@ export default function NewListingSearchpage({
   frontendFilters,
   pageUrl,
 }: Props) {
+  const isListing = true;
+
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
       <link
@@ -29,7 +31,7 @@ export default function NewListingSearchpage({
         <ProjectSearchBreadCrumbs key="newSearchPage3" pageUrl={pageUrl} />
         <div className="flex flex-row items-start gap-2">
           
-          <ListingHeaderFilters key="newSearchFilter3" isListing={true} />
+          <ListingHeaderFilters key="newSearchFilter3" isListing={isListing} />
         </div>
       </div>
       <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
