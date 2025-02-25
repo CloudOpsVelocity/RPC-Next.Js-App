@@ -10,6 +10,7 @@ import {
   propertyMap,
   LOGO_URL,
 } from "./constants";
+import { convertToSchemaDate } from "@/common/utils/dateUtils";
 
 interface ProjectData extends MERGERPROJECT {
   url: string;
@@ -17,6 +18,10 @@ interface ProjectData extends MERGERPROJECT {
 }
 
 const generateSchema = (projectData: ProjectData) => {
+  const [startDate, endDate] = [
+    convertToSchemaDate(projectData?.basicData?.startDate),
+    convertToSchemaDate(projectData?.basicData?.endDate),
+  ];
   const {
     basicData,
     nearByLocations,
@@ -75,7 +80,7 @@ const generateSchema = (projectData: ProjectData) => {
               name: COMPANY_NAME,
             },
             isFamilyFriendly: "https://schema.org/True",
-            priceValidUntil: basicData.endDate,
+            priceValidUntil: endDate,
             itemCondition: "http://schema.org/NewCondition",
           },
 
@@ -113,12 +118,8 @@ const generateSchema = (projectData: ProjectData) => {
       {
         "@type": "SaleEvent",
         name: `Avail Offer for ${basicData?.projectName}`,
-        startDate: new Date(
-          projectData?.basicData?.startDate?.replace("IST", "+05:30")
-        ).toISOString(),
-        endDate: new Date(
-          projectData?.basicData?.endDate?.replace("IST", "+05:30")
-        ).toISOString(),
+        startDate,
+        endDate,
         url: projectDetailsPageUrl,
         description: "Special discounts available for a limited time.",
         image: basicData?.media?.coverImageUrl
@@ -142,12 +143,8 @@ const generateSchema = (projectData: ProjectData) => {
           url: projectDetailsPageUrl,
           priceCurrency: "INR",
           price: basicData?.minPrice,
-          validFrom: new Date(
-            basicData?.startDate?.replace("IST", "+05:30")
-          ).toISOString(),
-          priceValidUntil: new Date(
-            projectData?.basicData?.endDate?.replace("IST", "+05:30")
-          ).toISOString(),
+          validFrom: startDate,
+          priceValidUntil: endDate,
           availability: "http://schema.org/InStock",
           category: "RealEstate",
         },
@@ -182,12 +179,8 @@ const generateSchema = (projectData: ProjectData) => {
       {
         "@type": "SaleEvent",
         name: `Call Now  :8884440963`,
-        startDate: new Date(
-          projectData?.basicData?.startDate?.replace("IST", "+05:30")
-        ).toISOString(),
-        endDate: new Date(
-          projectData?.basicData?.endDate?.replace("IST", "+05:30")
-        ).toISOString(),
+        startDate,
+        endDate,
         url: projectDetailsPageUrl,
         description: "Call our team now to get more details and offers.",
         image: basicData?.media?.coverImageUrl
@@ -211,12 +204,8 @@ const generateSchema = (projectData: ProjectData) => {
           url: projectDetailsPageUrl,
           priceCurrency: "INR",
           price: basicData?.minPrice,
-          validFrom: new Date(
-            basicData?.startDate?.replace("IST", "+05:30")
-          ).toISOString(),
-          priceValidUntil: new Date(
-            projectData?.basicData?.endDate?.replace("IST", "+05:30")
-          ).toISOString(),
+          validFrom: startDate,
+          priceValidUntil: endDate,
           availability: "http://schema.org/InStock",
           category: "RealEstate",
         },
@@ -251,12 +240,8 @@ const generateSchema = (projectData: ProjectData) => {
       {
         "@type": "SaleEvent",
         name: `Group Buy Discounts for ${basicData?.projectName}`,
-        startDate: new Date(
-          projectData?.basicData?.startDate?.replace("IST", "+05:30")
-        ).toISOString(),
-        endDate: new Date(
-          projectData?.basicData?.endDate?.replace("IST", "+05:30")
-        ).toISOString(),
+        startDate,
+        endDate,
         url: projectDetailsPageUrl,
         description: "Get discounts when buying in a group. Limited offer!",
         image: basicData?.media?.coverImageUrl
@@ -280,12 +265,8 @@ const generateSchema = (projectData: ProjectData) => {
           url: projectDetailsPageUrl,
           priceCurrency: "INR",
           price: basicData?.minPrice,
-          validFrom: new Date(
-            basicData?.startDate?.replace("IST", "+05:30")
-          ).toISOString(),
-          priceValidUntil: new Date(
-            projectData?.basicData?.endDate?.replace("IST", "+05:30")
-          ).toISOString(),
+          validFrom: startDate,
+          priceValidUntil: endDate,
           availability: "http://schema.org/InStock",
           category: "RealEstate",
         },
@@ -519,8 +500,8 @@ const generateSchema = (projectData: ProjectData) => {
           desc ||
           `Complete details about ${basicData?.projectName} including pricing, amenities, and location information`,
         image: basicData?.media.coverImageUrl,
-        datePublished: projectData?.basicData.startDate,
-        dateModified: projectData?.basicData.endDate,
+        datePublished: startDate,
+        dateModified: endDate,
         author: {
           "@type": "Organization",
           name: COMPANY_NAME,
@@ -576,12 +557,8 @@ const generateSchema = (projectData: ProjectData) => {
         }. Book now to avail exclusive launch prices starting from ${
           basicData?.minPrice
         }`,
-        datePosted: new Date(
-          basicData?.startDate?.replace("IST", "+05:30")
-        ).toISOString(),
-        expires: new Date(
-          basicData?.endDate?.replace("IST", "+05:30")
-        ).toISOString(),
+        datePosted: startDate,
+        expires: endDate,
 
         spatialCoverage: {
           "@type": "Place",
@@ -600,12 +577,8 @@ const generateSchema = (projectData: ProjectData) => {
           "@type": "Offer",
           price: basicData?.minPrice,
           priceCurrency: "INR",
-          validFrom: new Date(
-            basicData?.startDate?.replace("IST", "+05:30")
-          ).toISOString(),
-          validThrough: new Date(
-            basicData?.endDate?.replace("IST", "+05:30")
-          ).toISOString(),
+          validFrom: startDate,
+          validThrough: endDate,
         },
       },
       {
@@ -616,9 +589,8 @@ const generateSchema = (projectData: ProjectData) => {
           "@type": "Organization",
           name: basicData?.projectName.split(" ")[0],
         },
-        dateCreated: projectData?.basicData.startDate,
-        dateModified:
-          projectData?.basicData.startDate || projectData?.basicData.startDate,
+        dateCreated: startDate,
+        dateModified: startDate || startDate,
         license: "https://creativecommons.org/licenses/by/4.0/",
         variableMeasured: [
           {
@@ -651,12 +623,12 @@ const generateSchema = (projectData: ProjectData) => {
           {
             "@type": "PropertyValue",
             name: "Launch Date",
-            value: basicData?.startDate,
+            value: startDate,
           },
           {
             "@type": "PropertyValue",
             name: "Possession Status",
-            value: basicData?.endDate || "Not Specified",
+            value: endDate || "Not Specified",
           },
           ...(basicData?.nearByLocations?.map((location: any) => ({
             "@type": "PropertyValue",

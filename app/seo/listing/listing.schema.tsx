@@ -1,5 +1,6 @@
 import { Place } from "schema-dts";
 import { DOMAIN, PRICE_CURRENY, PHONE_NUMBER } from "../constants";
+import { convertToSchemaDate } from "@/common/utils/dateUtils";
 
 interface ListingSchemaProps {
   nearByLocations: any;
@@ -16,6 +17,7 @@ export const generateListingSchema = ({
   title,
   url,
 }: ListingSchemaProps) => {
+  const availableFrom = convertToSchemaDate(listing?.availableFrom);
   const nearByLocationsSchema: Place[] = [];
   if (nearByLocations) {
     for (const category in nearByLocations) {
@@ -53,6 +55,7 @@ export const generateListingSchema = ({
           "@type": "RealEstateListing",
           url: url || "N/A",
           datePosted: listing?.createdAt || new Date().toISOString(),
+          availableFrom: availableFrom,
           description: listing?.usp || "N/A",
           name: title || "N/A",
           identifier: listing?.propIdEnc || "N/A",
@@ -176,6 +179,7 @@ export const generateListingSchema = ({
           price: listing?.price || 0,
           priceCurrency: PRICE_CURRENY || "INR",
           availability: "https://schema.org/InStock",
+          availabilityStarts: availableFrom,
           seller: {
             "@type": "Organization",
             name: listing?.postedByName || "N/A",
@@ -399,6 +403,7 @@ export const generateListingSchema = ({
         },
         dateCreated: listing?.createdAt || new Date().toISOString(),
         dateModified: listing?.updatedAt || new Date().toISOString(),
+        availableFrom: availableFrom,
         license: "https://creativecommons.org/licenses/by/4.0/",
         variableMeasured: [
           {

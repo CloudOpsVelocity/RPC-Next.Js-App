@@ -1,7 +1,12 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
+import { convertToSchemaDate } from "@/common/utils/dateUtils";
 
 export const generateAllSchemas = (property: any, properties?: any[]) => {
+  const [launchDate, possassionDate] = [
+    convertToSchemaDate(property?.launchDate),
+    convertToSchemaDate(property?.possassionDate),
+  ];
   if (!property) return [];
   const builderAlreadyExists =
     properties?.findIndex((p, index) => {
@@ -26,7 +31,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         } ${property.city ? `, ${property.city}` : ""}`.trim(),
         description: property.projectAbout || "",
         url: PAGE_URL,
-        datePosted: property.launchDate || new Date().toISOString(),
+        datePosted: launchDate || new Date().toISOString(),
         postalCode: property.pincode || "",
         streetAddress: property.address || "",
         image:
@@ -60,7 +65,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
             property.projstatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
-          priceValidUntil: property.possassionDate || "",
+          priceValidUntil: possassionDate || "",
         },
         review: {
           "@type": "Review",
@@ -87,7 +92,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         url: PAGE_URL,
         name: property.projName || "",
         description: property.projectAbout || "",
-        datePublished: property.launchDate || new Date().toISOString(),
+        datePublished: launchDate || new Date().toISOString(),
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
@@ -198,26 +203,34 @@ export const ProjectSeachSchema = ({ properties }: any) => {
               },
               {
                 "@type": "Question",
-                name: "How do I verify property ownership?",
+                name: "How can I find the best property prices in Bangalore?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "You can verify property ownership by checking the sale deed, property tax receipts, and obtaining an encumbrance certificate from the sub-registrar's office. It's also recommended to conduct a legal title search.",
+                  text: "GetRightProperty helps you find the best property prices in Bangalore by comparing prices across different localities, providing market analysis, and connecting you with verified sellers. Our extensive database includes both ready-to-move and under-construction properties.",
                 },
               },
               {
                 "@type": "Question",
-                name: "What are the steps involved in property registration?",
+                name: "What are the benefits of using GetRightProperty for property search?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Property registration involves document verification, payment of stamp duty and registration charges, signing the sale deed in presence of witnesses, and registering at the sub-registrar's office. The process typically takes 1-2 weeks.",
+                  text: "GetRightProperty offers verified listings, transparent pricing, expert guidance, and a hassle-free property search experience. We provide detailed property information, high-quality images, and direct contact with property owners and agents.",
                 },
               },
               {
                 "@type": "Question",
-                name: "How can I check if a property is legally approved?",
+                name: "Which are the top investment areas in Bangalore?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "To check legal approval, verify the building plan approval, occupancy certificate, and NOCs from relevant authorities. Also ensure the property is free from any legal disputes or encumbrances.",
+                  text: "Popular investment areas in Bangalore include Whitefield, Electronic City, Sarjapur Road, and Hebbal. These areas offer good appreciation potential, infrastructure development, and proximity to IT hubs. GetRightProperty can help you find the best properties in these locations.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What price ranges are available for properties in Bangalore?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Property prices in Bangalore vary by location and type. Apartments range from ₹40 lakhs to ₹5 crores, while villas start from ₹1 crore. GetRightProperty offers options across all budget ranges with transparent pricing and negotiation assistance.",
                 },
               },
             ],
