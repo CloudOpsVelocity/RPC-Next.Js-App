@@ -1,7 +1,12 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
+import { convertToSchemaDate } from "@/common/utils/dateUtils";
 
 export const generateAllSchemas = (property: any, properties?: any[]) => {
+  const [launchDate, possassionDate] = [
+    convertToSchemaDate(property?.launchDate),
+    convertToSchemaDate(property?.possassionDate),
+  ];
   if (!property) return [];
   const builderAlreadyExists =
     properties?.findIndex((p, index) => {
@@ -26,7 +31,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         } ${property.city ? `, ${property.city}` : ""}`.trim(),
         description: property.projectAbout || "",
         url: PAGE_URL,
-        datePosted: property.launchDate || new Date().toISOString(),
+        datePosted: launchDate || new Date().toISOString(),
         postalCode: property.pincode || "",
         streetAddress: property.address || "",
         image:
@@ -60,7 +65,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
             property.projstatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
-          priceValidUntil: property.possassionDate || "",
+          priceValidUntil: possassionDate || "",
         },
         review: {
           "@type": "Review",
@@ -87,7 +92,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         url: PAGE_URL,
         name: property.projName || "",
         description: property.projectAbout || "",
-        datePublished: property.launchDate || new Date().toISOString(),
+        datePublished: launchDate || new Date().toISOString(),
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
