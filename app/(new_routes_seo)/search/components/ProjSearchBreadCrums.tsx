@@ -20,6 +20,8 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   const [state] = useAtom(projSearchStore);
   const getParams = useSearchParams();
   let listedBy = getParams.get("sf");
+  console.log(pageUrl)
+  console.log(pageUrl.split("/"))
 
   let initailAlParams = [
     {
@@ -30,10 +32,10 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
       href: "/",
       label: "For Buy",
     },
-    {
-      href: `${BASE_PATH_PROJECT_DETAILS}${"/bengaluru"}`,
-      label: "bengaluru",
-    },
+    // {
+    //   href: `${BASE_PATH_PROJECT_DETAILS}${"/bengaluru"}`,
+    //   label: "bengaluru",
+    // },
   ];
 
   const [allParams, setAllParams] = useState(initailAlParams);
@@ -43,7 +45,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
     const finalCityName =
       state && state.city && state.city.split("+")[0]
         ? state?.city.split("+")[0]
-        : "bengaluru";
+        : "";
 
     oldParams[1] = {
       href: `${BASE_PATH_PROJECT_DETAILS}${

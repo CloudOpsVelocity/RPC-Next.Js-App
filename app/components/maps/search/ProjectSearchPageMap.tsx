@@ -96,14 +96,14 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     iconUrl: "/searchmarker.png",
     iconSize: [60, 60],
     iconAnchor: [19, 38],
-    popupAnchor: [0, -38],
+    popupAnchor: [10, -34],
   });
 
   const MobileIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [50, 50],
     iconAnchor: [5, 38],
-    popupAnchor: [0, -38],
+    popupAnchor: [20, -38],
   });
 
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
@@ -223,7 +223,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               <Popup>
                 {!isProp ? (
                   <TooltipProj
-                    data={{
+                      data={{
                       projName: item.projName,
                       city: item.city,
                       state: item.state,
@@ -297,7 +297,7 @@ const NearbyMarkers = ({}) => {
                 direction="top"
                 permanent={selectedNearbyItem?.lat === item?.lat} 
                 className="min-w-fit z-50" 
-                offset={[4, -36]}
+                offset={isMobile ? [6, -36] : [4, -36]}
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
@@ -313,7 +313,7 @@ const NearbyMarkers = ({}) => {
                 direction="top"
                 permanent={selectedNearbyItem?.lat === item?.lat}
                 key={item.lang + "tooltipTag2" + index.toString()}
-                offset={isMobile ? [-7, -40] : [4, -36]}
+                offset={isMobile ? [6, -36] : [4, -36]}
                 className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
               >
                 <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal]">
