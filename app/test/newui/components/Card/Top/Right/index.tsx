@@ -7,14 +7,12 @@ import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
 import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
-import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import DownloadBrocher from "../../DownloadBrocher";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
-import Image from "next/image";
 
 type Props = any;
 
@@ -99,7 +97,6 @@ export default function TopRightSection({
   // console.log("card 1: ");
   const setNearby = useSetAtom(selectedNearByAtom);
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
-
 
   return (
     <div
@@ -358,7 +355,7 @@ export default function TopRightSection({
                       propType: !propIdEnc ? propType : propTypeName,
                       projOrPropName: propName ? propName : projName
                     })
-                    console.log("near by 1", data);
+                    // console.log("near by 1", data);
                     if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     dispatch({
                       type: "OPEN",

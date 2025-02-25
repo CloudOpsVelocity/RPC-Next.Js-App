@@ -142,6 +142,8 @@ const PropertyFirstBlock: React.FC<Props> = ({
                     <Image
                       alt="project image"
                       src={imageUrl.split(",")[3]}
+                      // height={630}
+                      // width={1200}
                       fill
                       className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
                         index + 1

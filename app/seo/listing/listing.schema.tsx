@@ -365,39 +365,27 @@ export const generateListingSchema = ({
       },
       {
         "@type": "SpecialAnnouncement",
-        name: `${listing?.propTypeName || "Property"} - Special Offer`,
-        datePosted: new Date(
-          listing?.availableFrom?.replace("IST", "+05:30") || new Date()
-        ).toISOString(),
-        expires: new Date(
-          listing?.availableFrom?.replace("IST", "+05:30") || new Date()
-        ).toISOString(),
-        text: `Special announcement for ${
+        name: `${title || "Property"} - Limited Time Offer`,
+        text: `Special discount available on ${title || "Property"} - Premium ${
           listing?.propTypeName || "Property"
-        } - Located in ${listing?.ltName || "N/A"}`,
-        subjectOf: {
-          "@type": "RealEstateListing",
-          name: title || "N/A",
-          description: `Explore this ${
-            listing?.propTypeName || "property"
-          } with ${listing?.sba || 0} sq ft area in ${
-            listing?.ltName || "N/A"
-          }, ${listing?.ctName || "N/A"}.`,
-        },
-        offers: {
-          "@type": "Offer",
-          price: listing?.price || 0,
-          priceCurrency: PRICE_CURRENY || "INR",
-          availability: "InStock",
-          validFrom: listing?.availableFrom || new Date().toISOString(),
-          validThrough: listing?.availableFrom || new Date().toISOString(),
-        },
-        specialCoverage: {
+        } in ${
+          listing?.ltName || "N/A"
+        }. Book now to avail exclusive prices starting from ${
+          listing?.price || 0
+        }`,
+        datePosted: new Date(listing?.createdAt || new Date()).toISOString(),
+        expires: new Date(listing?.updatedAt || new Date()).toISOString(),
+        spatialCoverage: {
           "@type": "Place",
-          name: `${listing?.ltName || "N/A"}, ${listing?.ctName || "N/A"}`,
+          name: listing?.ltName || "N/A",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: listing?.ltName || "N/A",
+            addressRegion: listing?.ctName || "N/A",
+            addressCountry: "IN",
+          },
         },
       },
-
       ...nearByLocationsSchema,
       {
         "@type": "Dataset",

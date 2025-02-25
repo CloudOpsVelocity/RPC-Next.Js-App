@@ -34,7 +34,7 @@ export default function ProjectContent({ data }: Props) {
         />
       )}
 
-      <Map data={data[selectedCategory]} />
+      <Map key="leafletProContent2SearchPageMap" data={data[selectedCategory]} />
     </>
   );
 }

@@ -56,10 +56,7 @@ const DataItem = ({ title, value, icon }: Props) => {
       </div>
     </div>
   );
-};
-
-console.log("None")
- 
+}; 
 
 export function FloorPlanModal({
   modalState,

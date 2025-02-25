@@ -51,6 +51,7 @@ const RightSideBlock = ({ serverClientData }: any) => {
       className="w-[98%] sm:w-full scroll-mt-[200px] flex justify-start items-start z-[1] md:w-[50%] "
     >
       <Map
+        key="oldSearchPageListingMap"
         projName={"Searched Location"}
         lat={
           (serverClientData && (serverClientData[0]?.lat as any)) ?? 47.46489

@@ -116,7 +116,7 @@ const LeafMap: React.FC<{
             </Tabs>
             <div id="location-listing" className="grid gap-2">
               <ScrollArea
-                max-h={isMobile && "400"}
+                max-h={isMobile ? "400" : "auto"}
                 h={isMobile ? "auto" : 600}
                 pb={isMobile ? 10 : 50}
                 px={10}
@@ -157,6 +157,7 @@ const LeafMap: React.FC<{
         </section>
         <section>
           <Map
+            key="leaflet2SearchPageMap"
             data={mapData && mapData[selected] ? mapData[selected] : []}
             selectedLocation={selectedLocation}
             projName={projName}
@@ -221,6 +222,7 @@ const LeafMap: React.FC<{
         )}
       </div>
       <Map
+      key="leaflet3SearchPageMap"
         data={mapData && mapData[selected] ? mapData[selected] : []}
         selectedLocation={selectedLocation}
         projName={projName}

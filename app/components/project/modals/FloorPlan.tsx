@@ -170,6 +170,7 @@ function FloorPlanModal({
           />
           {selectedFloor && (
             <RightSection
+            key="projRightSection4"
               propCgId={propCgId}
               data={data}
               postedData={postedData}

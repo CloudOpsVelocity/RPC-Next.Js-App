@@ -30,6 +30,7 @@ const RightSideBlock = ({ serverData }: any) => {
       id="mobileMap"
     >
       <Map
+        key="oldSearchPageMap"
         projName={"Searched Location"}
         lat={(serverClientData && serverClientData[0]?.lat) ?? 47.46489}
         lang={(serverClientData && serverClientData[0]?.lang) ?? 15.34043}

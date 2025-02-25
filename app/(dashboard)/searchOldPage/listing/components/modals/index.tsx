@@ -39,7 +39,7 @@ function MapModal() {
       }}
     >
       <Header close={onClose} />
-      <Map />
+      <Map key="oldSearchPageMapModal" />
     </Modal>
   );
 }

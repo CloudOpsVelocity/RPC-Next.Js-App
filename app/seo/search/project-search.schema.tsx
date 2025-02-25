@@ -47,7 +47,7 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         }`.trim(),
-        description: property.projectAbout.slice(0, 250) || "",
+        description: property.projectAbout.slice(0, 4800) || "",
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
