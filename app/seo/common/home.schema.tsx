@@ -1,5 +1,3 @@
-import { Organization_SCHEMA } from "./organisation-details";
-
 const homeLinksData = [
   {
     name: "Home",
@@ -241,6 +239,31 @@ const FaqSchema = {
         text: "GetRightProperty offers one of the largest property comparisons in India, helping users compare listings and projects across different locations, price ranges, and property types. We provide insights on market trends, builder reputations, and real-time price variations to ensure you get the best deal.",
       },
     },
+  ],
+};
+const Organization_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "GetRightProperty",
+  url: "https://getrightproperty.com",
+  logo: "https://getrightproperty.com/logo.png",
+  description:
+    "GetRightProperty is a leading real estate platform in Bangalore helping people find their perfect property through advanced search and comparison tools.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bangalore",
+    addressRegion: "Karnataka",
+    addressCountry: "IN",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+91-8088886444",
+    contactType: "customer service",
+    email: "support@getrightproperty.com",
+  },
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=100066833915037",
+    "https://x.com/getrightproperty",
   ],
 };
 
