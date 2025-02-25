@@ -59,6 +59,8 @@ export default function TopRightSection({
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
 
+  console.log(data);
+
   // const url =
   //   type === "proj"
   //     ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
@@ -97,6 +99,7 @@ export default function TopRightSection({
   // console.log("card 1: ");
   const setNearby = useSetAtom(selectedNearByAtom);
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
+  console.log(brochureUrl)
 
   return (
     <div
