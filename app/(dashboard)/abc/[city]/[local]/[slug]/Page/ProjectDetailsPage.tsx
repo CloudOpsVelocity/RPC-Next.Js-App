@@ -100,6 +100,7 @@ export default async function ProjectsDetailsPage({
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <BreadCrumbs params={params} />
+
           {/* Top Cover Image Card */}
           <FirstBlock
             projectDetails={data}

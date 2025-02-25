@@ -1,11 +1,6 @@
-"use client";
-// import { amenitiesGroupList } from "@/app/images/commonSvgs";
-// import { readMoreAtom } from "@/app/store/drawer";
 import { AmenityList } from "@/app/validations/types/project";
-// import { useAtom } from "jotai";
 import React from "react";
 import PropertyHeading from "../property/heading";
-import { useMediaQuery } from "@mantine/hooks";
 import SubHeading from "./headings/SubHeading";
 import AmenitiesDisplay from "./_ui/Amenities";
 
@@ -20,21 +15,6 @@ export default function Amenties({
   projName: string;
   amenitiesFromDB: any;
 }) {
-  // const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
-  const isMobile = useMediaQuery(`(max-width: 750px)`);
-  const maxShow = isMobile ? 6 : 20;
-  // const shouldShowMore = data && data?.length > maxShow;
-  // // const handleReadMoreClick = () => {
-  // //   shouldShowMore &&
-  // //     setReadMore((prev) => ({
-  // //       ...prev,
-  // //       expanded: !prev.expanded,
-  // //       content: { data: data, amenitiesFromDB: amenitiesFromDB },
-  // //       type: "array",
-  // //       title: "Amenities Of",
-  // //     }));
-  // // };
-
   return (
     <div
       className="w-[95%] sm:w-[90%] xl:w-[90%] relative scroll-mt-[130px]  bg-white sm:pt-10 mb-[3%] "
@@ -61,12 +41,10 @@ export default function Amenties({
           </>
         )}
 
-        <div className="flex flex-wrap sm:mt-4" >
-          {
-            data && data?.length > 0 && (
-              <AmenitiesDisplay data={data} amenitiesData={amenitiesFromDB} />
-            )
-          }
+        <div className="flex flex-wrap sm:mt-4">
+          {data && data?.length > 0 && (
+            <AmenitiesDisplay data={data} amenitiesData={amenitiesFromDB} />
+          )}
         </div>
       </div>
     </div>
