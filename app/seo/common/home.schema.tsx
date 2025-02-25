@@ -30,6 +30,7 @@ const homeLinksData = [
     url: "/register/builder",
   },
 ];
+
 export const homeSiteNavigationSchemaData = {
   "@context": "https://schema.org",
   "@graph": homeLinksData.map((item) => ({
@@ -38,6 +39,98 @@ export const homeSiteNavigationSchemaData = {
     url: item.url,
   })),
 };
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "GetRightProperty",
+  url: "https://getrightproperty.com",
+  description:
+    "Find your perfect property in Bangalore with GetRightProperty - Your trusted real estate partner",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://getrightproperty.com/search?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=100066833915037",
+    "https://x.com/getrightproperty",
+    "https://www.instagram.com/_getrightproperty_/?utm_source=qr#",
+    "https://www.linkedin.com/company/get-right-property/",
+  ],
+};
+
+const offerSchema = {
+  "@context": "https://schema.org",
+  "@type": "Offer",
+  itemOffered: {
+    "@type": "Service",
+    name: "Property Listing Service",
+    description:
+      "List your property for free on GetRightProperty and reach thousands of potential buyers and tenants",
+  },
+  price: "N/A",
+  priceCurrency: "INR",
+  availability: "https://schema.org/InStock",
+  seller: {
+    "@type": "Organization",
+    name: "GetRightProperty",
+    url: "https://getrightproperty.com",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Bangalore",
+  },
+  deliveryLeadTime: {
+    "@type": "QuantitativeValue",
+    minValue: "1",
+    maxValue: "2",
+    unitCode: "DAY",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      item: {
+        "@id": "https://getrightproperty.com",
+        name: "Home",
+      },
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      item: {
+        "@id": "https://getrightproperty.com/properties",
+        name: "Properties",
+      },
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      item: {
+        "@id": "https://getrightproperty.com/projects",
+        name: "Projects",
+      },
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      item: {
+        "@id": "https://getrightproperty.com/agents",
+        name: "Agents",
+      },
+    },
+  ],
+};
+
 const FaqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -156,6 +249,24 @@ export const HomeSiteNavigationSchema = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(homeSiteNavigationSchemaData),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(offerSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
         }}
       />
       <script
