@@ -241,31 +241,6 @@ const FaqSchema = {
     },
   ],
 };
-const Organization_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "GetRightProperty",
-  url: "https://getrightproperty.com",
-  logo: "https://getrightproperty.com/logo.png",
-  description:
-    "GetRightProperty is a leading real estate platform in Bangalore helping people find their perfect property through advanced search and comparison tools.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Bangalore",
-    addressRegion: "Karnataka",
-    addressCountry: "IN",
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+91-8088886444",
-    contactType: "customer service",
-    email: "support@getrightproperty.com",
-  },
-  sameAs: [
-    "https://www.facebook.com/profile.php?id=100066833915037",
-    "https://x.com/getrightproperty",
-  ],
-};
 
 export const HomeSiteNavigationSchema = () => {
   return (
@@ -276,12 +251,7 @@ export const HomeSiteNavigationSchema = () => {
           __html: JSON.stringify(homeSiteNavigationSchemaData),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(Organization_SCHEMA),
-        }}
-      />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

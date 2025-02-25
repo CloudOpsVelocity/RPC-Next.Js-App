@@ -1,27 +1,30 @@
 export const Organization_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://www.getrightproperty.com/#organization",
   name: "GET RIGHT PROPERTY",
   url: "https://www.getrightproperty.com",
   logo: {
     "@type": "ImageObject",
     url: "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
   },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+91 8884440963",
-    contactType: "Customer Service",
-    areaServed: "IN",
-    availableLanguage: [
-      "English",
-      "Tamil",
-      "Telugu",
-      "Kannada",
-      "Malayalam",
-      "Hindi",
-      "Bengali",
-    ],
-  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+91 8884440963",
+      contactType: "Customer Service",
+      areaServed: "IN",
+      availableLanguage: [
+        "English",
+        "Tamil",
+        "Telugu",
+        "Kannada",
+        "Malayalam",
+        "Hindi",
+        "Bengali",
+      ],
+    },
+  ],
   sameAs: [
     "https://www.facebook.com/getrightproperty",
     "https://twitter.com/getrightproperty",
@@ -35,10 +38,12 @@ export const Organization_SCHEMA = {
     postalCode: "560066",
     addressCountry: "IN",
   },
-  founder: {
-    "@type": "Person",
-    name: "Rahul Vishwakarma",
-  },
+  founder: [
+    {
+      "@type": "Person",
+      name: "Rahul Vishwakarma",
+    },
+  ],
   foundingDate: "2025-02-07",
   description:
     "We are a premier real estate agency offering buying, selling, and rental services for residential properties.",
