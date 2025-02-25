@@ -1,3 +1,5 @@
+import { Organization_SCHEMA } from "./organisation-details";
+
 const homeLinksData = [
   {
     name: "Home",
@@ -249,6 +251,12 @@ export const HomeSiteNavigationSchema = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(homeSiteNavigationSchemaData),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(Organization_SCHEMA),
         }}
       />
       <script
