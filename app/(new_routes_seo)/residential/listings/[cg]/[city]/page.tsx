@@ -25,11 +25,11 @@ type Props = {
 
 export default async function Page({ params: { cg, city } }: Props) {
   const pathname = `${BASE_PATH_LISTING}/${cg}/${city}`;
-  const values = await findPathForProjectListing(pathname);
+  const values = await findPathForProjectListing(pathname); 
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
   const severData = await getProjSearchData(`cg=${slugValues.CG}`);
-  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
+  const pageUrl = `${process.env.NEXT_PUBLIC_URL}${pathname}`;
   return (
     <NewSearchPage
       serverData={severData}

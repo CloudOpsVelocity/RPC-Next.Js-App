@@ -21,8 +21,8 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-  const { cg, city, lt, project } = params;
-  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
+  const { cg, city, lt, project, phase } = params;
+  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}/${phase}`;
   const values = await findPathForProjectListing(pathname);
   console.log(values);
   if (!values) return notFound();
@@ -32,7 +32,7 @@ export default async function Page({ params }: Props) {
       filtersValues.PJ
     }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
   );
-  console.log(filtersValues);
+  console.log(pathname);
   return (
     <NewListingSearchpage
       pageUrl={pathname}

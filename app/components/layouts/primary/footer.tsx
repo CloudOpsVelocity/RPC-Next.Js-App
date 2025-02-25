@@ -49,7 +49,7 @@ function Footer() {
       links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
       hrefs: [
         "/search?sf=city=New+Delhi%2B683",
-        "/search?sf=city=Bengaluru%2B9",
+        "/residential-projects/for-sale/bengaluru",
         "/search?sf=city=Chennai%2B580",
         "/search?sf=city=Mumbai%2B577",
         "/search?sf=city=Hyderabad%2B582",
@@ -71,8 +71,8 @@ function Footer() {
         "Foreclosures", */
       ],
       hrefs: [
-        "/residential-projects/for-sale",
-        "/residential-projects/for-rent?listedBy=ALL&cg=R",
+        "/residential-projects/for-sale?sf=listedBy=All-cg=S",
+        "/residential-projects/for-rent?sf=listedBy=All-cg=R",
         "/search?sf=projStatus=108",
         "/search?sf=projStatus=106",
         "/search?sf=projStatus=107",

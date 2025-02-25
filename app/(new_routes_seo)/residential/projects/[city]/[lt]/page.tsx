@@ -18,7 +18,6 @@ export default async function Page({ params: { city, lt } }: Props) {
 
   const serverData = await getSearchData(filterValues.LT as string);
   return (
-    <>
       <NewSearchPage
         pageUrl={pathname}
         serverData={serverData}
@@ -26,7 +25,6 @@ export default async function Page({ params: { city, lt } }: Props) {
           localities: [`${lt}+${filterValues.LT}`],
         }}
       />
-    </>
   );
 }
 export async function generateStaticParams() {
