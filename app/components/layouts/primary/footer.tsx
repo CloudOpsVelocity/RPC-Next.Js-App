@@ -315,7 +315,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-4 sm:mt-12 border-t border-gray-700 sm:pt-8">
+        <div className="mt-4 sm:mt-12 border-t border-gray-700">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             <div>
               <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">

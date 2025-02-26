@@ -14,11 +14,11 @@ export default function HomeFeatures({}: Props) {
           Get Right Property?
         </span>
       </h1>
-      <p className=" text-[#242424] text-left md:text-center  text-[10px] md:text-[14px] xl:text-[16px] not-italic font-semibold leading-normal md:leading-[20px] xl: mt-[11px] xl:mt-[16px]">
+      <p className=" text-[#242424] text-left md:text-center  text-[12px] md:text-[14px] xl:text-[16px] not-italic font-semibold leading-normal md:leading-[20px] xl: mt-[11px] xl:mt-[16px]">
         Choose us for real estate because we offer expert guidance, a vast
         property selection and commitment to your dreams.
       </p>
-      <p className=" text-[#33535F] text-[10px] md:text-[14px] xl:text-[16px] not-italic font-semibold text-left md:text-center mt-[6px] xl:mt-[10px]">
+      <p className=" text-[#33535F] text-[12px] md:text-[14px] xl:text-[16px] not-italic font-semibold text-left md:text-center mt-[6px] xl:mt-[10px]">
         Trust in our experience to find your perfect home!
       </p>
       <div className=" shrink-0 m-auto flex justify-start sm:justify-center items-center mt-[10px] xl-[mt-0] xl:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
