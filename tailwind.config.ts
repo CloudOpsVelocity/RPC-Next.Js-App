@@ -17,6 +17,7 @@ const config: Config = {
         btnPrimary: "#0073C6",
         greenPrimary: "#148B16",
         bgPrimary: "#f1f1f1",
+        bgSecondary: "#0073C6",
       },
       fontSize: {
         h2: "18px",
@@ -44,8 +45,9 @@ const config: Config = {
     },
   },
 
-  plugins: [require("tailwind-scrollbar-hide"),   require('@tailwindcss/typography')],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/typography"),
+  ],
 };
 export default config;
-
-

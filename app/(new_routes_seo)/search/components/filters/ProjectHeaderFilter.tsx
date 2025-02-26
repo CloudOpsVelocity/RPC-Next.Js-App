@@ -284,7 +284,9 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                       setOpenDropdown(null);
                     }}
                   />
-                  <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                  <button type="submit">
+                    <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                  </button>
                 </form>
               </div>
               {isLoading ? (
@@ -412,12 +414,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </button>
           </div>
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            {isListing ? 
-              <ListingSearchTabs />
-              :
-              <ProjectSearchTabs />
-            }
-       
+            {isListing ? <ListingSearchTabs /> : <ProjectSearchTabs />}
+
             <SelectedFilters />
           </div>
 
