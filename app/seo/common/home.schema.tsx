@@ -77,7 +77,7 @@ const productSchema = {
     "@type": "AggregateOffer",
     priceCurrency: "INR",
     availability: "https://schema.org/InStock",
-    offerCount: "1000+",
+    offerCount: "1000",
     highPrice: "50000000",
     lowPrice: "500000",
   },
