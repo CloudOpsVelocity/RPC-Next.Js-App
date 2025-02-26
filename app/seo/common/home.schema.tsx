@@ -136,7 +136,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 2,
       item: {
-        "@id": "https://getrightproperty.com/properties",
+        "@id": "https://getrightproperty.com/search/listing",
         name: "Properties",
       },
     },
@@ -152,8 +152,16 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 4,
       item: {
-        "@id": "https://getrightproperty.com/agents",
-        name: "Agents",
+        "@id": "https://getrightproperty.com/post-your-listing",
+        name: "Post Property",
+      },
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      item: {
+        "@id": "https://getrightproperty.com/register",
+        name: "Signup",
       },
     },
   ],
