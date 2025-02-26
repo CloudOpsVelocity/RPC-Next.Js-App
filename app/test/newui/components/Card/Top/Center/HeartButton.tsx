@@ -23,6 +23,7 @@ let config = {
       fill="none"
       className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold  md:mb-1  "
     >
+      <title>Click to like</title>
       <circle
         cx="12"
         cy="12"

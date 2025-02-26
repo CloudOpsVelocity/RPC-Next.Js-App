@@ -28,10 +28,11 @@ export default function SearchSec({}: Props) {
   };
 
   const handleKeyDown = async (event: any) => {
+    console.log(searchQuery)
     if (event.key === "Enter") {
       event.preventDefault();
       const res = await fetch(
-        `${
+        `${ 
           process.env.NEXT_PUBLIC_BACKEND_URL
         }/matcher/string?word=${searchQuery}&cityId=${9}`
       );
@@ -54,6 +55,7 @@ export default function SearchSec({}: Props) {
 
   const handleSearch = () => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
+    console.log(`${whichPage}?sf=${toQueryParams(f)}`);
     window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank");
   };
 

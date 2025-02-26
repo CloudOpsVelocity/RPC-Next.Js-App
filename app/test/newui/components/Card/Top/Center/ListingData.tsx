@@ -236,6 +236,7 @@ export default function ListingData({
                 <span className="text-black">...</span>{" "}
                 <button
                   className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer   "
+                  title="Click to Read More"
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
                     console.log("read more testing");

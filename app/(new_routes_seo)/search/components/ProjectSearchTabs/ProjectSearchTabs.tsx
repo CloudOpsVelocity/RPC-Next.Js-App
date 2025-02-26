@@ -169,6 +169,7 @@ export default function ProjectSearchTabs() {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
+                  title={`Click to view ${tab.label}`}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] xl:px-4 xl:py-2 text-sm md:text-base font-medium transition-all ${
                       state.listedBy === tab.id
@@ -185,6 +186,7 @@ export default function ProjectSearchTabs() {
 
           <div className="relative hidden md:flex">
             <button
+              title="Click to view Sorting Options"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsDropdownOpen(!isDropdownOpen);
@@ -221,6 +223,7 @@ export default function ProjectSearchTabs() {
               >
                 {sortOptions.map((option) => (
                   <button
+                    title={`Click to view ${option.label}`}
                     key={option.value}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -228,9 +231,7 @@ export default function ProjectSearchTabs() {
                       handleSortBy(option);
                       setIsDropdownOpen(false);
                     }}
-                    className={`
-                      block w-full text-left px-4 py-2 text-sm transition-colors
-                      ${
+                    className={`block w-full text-left px-4 py-2 text-sm transition-colors ${
                         getSortyByValue(state) === option.label
                           ? "text-white bg-[#0073C6]"
                           : "text-gray-700 hover:bg-[#0073C6] hover:text-white"

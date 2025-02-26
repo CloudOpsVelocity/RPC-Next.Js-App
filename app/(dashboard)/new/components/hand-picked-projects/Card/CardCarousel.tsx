@@ -15,8 +15,8 @@ export default function CardCarousel({ data, shortIds, active }: Props) {
       align="start"
       slidesToScroll={1}
       mt={0}
-      nextControlIcon={<CarouseSelArrowIcon />}
-      previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
+      nextControlIcon={<CarouseSelArrowIcon title="Click to Forword" />}
+      previousControlIcon={<CarouseSelArrowIcon className="rotate-180" title="Click to Backword" />}
       controlsOffset={"-10px"}
       classNames={Css}
       key={active}
