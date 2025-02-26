@@ -100,13 +100,13 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(Organization_SCHEMA),
-          }}
-        />
       </head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(Organization_SCHEMA),
+        }}
+      />
       {process.env.NODE_ENV !== "development" && (
         <GoogleTagManager gtmId="GTM-T7W6VL9F" />
       )}
@@ -125,7 +125,6 @@ export default function RootLayout(params: { children: React.ReactNode }) {
             </SessionProvider>
           </main>
           {/* <Footer /> */}
-         
         </MantineProvider>
       </body>
     </html>

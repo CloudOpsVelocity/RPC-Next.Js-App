@@ -123,12 +123,10 @@ const FirstBlock: React.FC<Props> = ({
                     />
                     <Image
                       alt="project image"
-                      src={imageUrl.split(",")[3]} 
-                      height={630}
-                      width={1200}
-                      className={` bg-gray-${index + 1}`}
-                      unoptimized 
-                      quality={80}
+                      src={imageUrl.split(",")[3]}
+                      fill
+                      className={`bg-gray-${index + 1} `}
+                      unoptimized
                     />
                   </picture>
                 </Carousel.Slide>
