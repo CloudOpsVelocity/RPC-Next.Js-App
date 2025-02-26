@@ -31,7 +31,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
+  const { handleApplyFilters, handleClearFilters } =
+    useProjSearchAppliedFilters();
   const {
     data: searchData,
     isLoading,
@@ -235,12 +236,13 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     );
     const data = await res.json();
     if (Object.hasOwn(data, "ids")) {
+      handleClearFilters("clearAll");
       let ids = extractApiValues(data.ids);
       if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
         dispatch({
           type: "update",
           payload: {
-            ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
+            ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
             ...(ids.PT && { propType: parseInt(ids.PT as string) }),
             ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
             ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
@@ -251,7 +253,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       handleApplyFilters();
       handleResetQuery();
       setIsSearchOpen(false);
-      // myClientLogger("info", data);
       return;
     }
   };
