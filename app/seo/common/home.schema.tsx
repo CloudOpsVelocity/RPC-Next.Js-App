@@ -77,7 +77,7 @@ const productSchema = {
     "@type": "AggregateOffer",
     priceCurrency: "INR",
     availability: "https://schema.org/InStock",
-    offerCount: "1000+",
+    offerCount: "1000",
     highPrice: "50000000",
     lowPrice: "500000",
   },
@@ -136,7 +136,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 2,
       item: {
-        "@id": "https://getrightproperty.com/properties",
+        "@id": "https://getrightproperty.com/search/listing",
         name: "Properties",
       },
     },
@@ -144,7 +144,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 3,
       item: {
-        "@id": "https://getrightproperty.com/projects",
+        "@id": "https://getrightproperty.com/search",
         name: "Projects",
       },
     },
@@ -152,8 +152,16 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 4,
       item: {
-        "@id": "https://getrightproperty.com/agents",
-        name: "Agents",
+        "@id": "https://getrightproperty.com/post-your-listing",
+        name: "Post Property",
+      },
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      item: {
+        "@id": "https://getrightproperty.com/register",
+        name: "Signup",
       },
     },
   ],

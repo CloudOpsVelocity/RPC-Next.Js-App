@@ -463,6 +463,7 @@ export const SEARCH_FILTER_DATA = {
   PostedBy: [
     { title: "Owner", value: "I" },
     { title: "Agent", value: "A" },
+    { title: "Builder", value: "B" },
   ],
 };
 type SearchFilterItem = {

@@ -11,26 +11,33 @@ interface BreadcrumbProps {
 }
 
 const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
-  function trimStringUrl(str:string, word:string) {
+  function trimStringUrl(str: string, word: string) {
     const index = str.indexOf(word);
     return index !== -1 ? str.substring(0, index + word.length) : str;
   }
 
-  function trimFromWord(str:string, word:string) {
+  function trimFromWord(str: string, word: string) {
     const index = str.indexOf(word);
     return index !== -1 ? str.substring(index + word.length) : "";
   }
-  
-  let trimmedUrl = ""
-  if(pageUrl.includes("/residential/projects/")){
-    trimmedUrl = trimFromWord(pageUrl, "/residential/projects/");
-  }else if(pageUrl.includes("/residential-projects/")){
-    trimmedUrl = trimFromWord(pageUrl, "/residential-projects/");
-  }else if(pageUrl.includes("/residential/listings/")){
-    trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
-  }
 
-  const newParams = trimmedUrl.split("/");
+  let trimmedUrl = "";
+  let newParams: string[] = [];
+
+  if (pageUrl === "/search") {
+    newParams = ["Project Search"];
+  } else if (pageUrl === "/search/listing") {
+    newParams = ["Listing Search"];
+  } else if (pageUrl.includes("/residential/projects/")) {
+    trimmedUrl = trimFromWord(pageUrl, "/residential/projects/");
+    newParams = trimmedUrl.split("/");
+  } else if (pageUrl.includes("/residential-projects/")) {
+    trimmedUrl = trimFromWord(pageUrl, "/residential-projects/");
+    newParams = trimmedUrl.split("/");
+  } else if (pageUrl.includes("/residential/listings/")) {
+    trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
+    newParams = trimmedUrl.split("/");
+  }
 
   if (!newParams || newParams.length === 0) {
     return null;
@@ -64,7 +71,10 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
             "@type": "ListItem",
             position: index + 1,
             item: {
-              "@id": index === 0 ? process.env.NEXT_PUBLIC_URL : `${trimStringUrl(pageUrl, item)}`,
+              "@id":
+                index === 0
+                  ? process.env.NEXT_PUBLIC_URL
+                  : `${trimStringUrl(pageUrl, item)}`,
               name: item || "Home",
             },
           };
@@ -94,33 +104,33 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
         </li>
         {newParams.map((item: any, index: number) => {
           let url = trimStringUrl(pageUrl, item);
-            return (
-              <li key={item + index.toString()} className="flex items-center">
-                <FaChevronRight
-                  className="h-4 w-4 flex-shrink-0 text-gray-400"
-                  aria-hidden="true"
-                />
-                {index !== newParams.length - 1 ? (
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
-                    aria-current={
-                      index === newParams.length - 1 ? "page" : undefined
-                    }
-                  >
-                    {item.replaceAll("-", " ")}
-                  </a>
-                ) : (
-                  <span
-                    className={`ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize `}
-                  >
-                    {item.replaceAll("-", " ")}
-                  </span>
-                )}
-              </li>
-            );
+          return (
+            <li key={item + index.toString()} className="flex items-center">
+              <FaChevronRight
+                className="h-4 w-4 flex-shrink-0 text-gray-400"
+                aria-hidden="true"
+              />
+              {index !== newParams.length - 1 ? (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
+                  aria-current={
+                    index === newParams.length - 1 ? "page" : undefined
+                  }
+                >
+                  {item.replaceAll("-", " ")}
+                </a>
+              ) : (
+                <span
+                  className={`ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize `}
+                >
+                  {item.replaceAll("-", " ")}
+                </span>
+              )}
+            </li>
+          );
         })}
       </ol>
     </nav>
