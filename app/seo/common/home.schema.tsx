@@ -144,7 +144,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 3,
       item: {
-        "@id": "https://getrightproperty.com/projects",
+        "@id": "https://getrightproperty.com/search",
         name: "Projects",
       },
     },
