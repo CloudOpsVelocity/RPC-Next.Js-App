@@ -35,13 +35,6 @@ export default async function page({ params }: Props) {
     getProjectDetails(slug),
     getAmenties(),
   ]);
-
-  if (projResponse.basicData.projAuthorityId) {
-    const authorityNames = await getAuthorityNames(
-      projResponse.basicData.projAuthorityId
-    );
-    projResponse.basicData.projAuthorityNames = authorityNames;
-  }
   const localitySlug = projResponse.basicData.localityName
     .toLowerCase()
     .replaceAll(" ", "-");
@@ -63,6 +56,13 @@ export default async function page({ params }: Props) {
     });
     return permanentRedirect(path);
   }
+  if (projResponse.basicData.projAuthorityId) {
+    const authorityNames = await getAuthorityNames(
+      projResponse.basicData.projAuthorityId
+    );
+    projResponse.basicData.projAuthorityNames = authorityNames;
+  }
+
   return (
     <ProjectsDetailsPage
       projResponse={projResponse}
@@ -106,6 +106,7 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  console.log("getProjectDetailsMetaData");
   let slug = params.slug.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
