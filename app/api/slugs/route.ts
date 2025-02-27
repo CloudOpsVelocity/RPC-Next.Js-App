@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import path from "path";
+
 import { revalidatePath, revalidateTag } from "next/cache";
 import logger from "@/app/utils/logger";
 import redisService from "@/app/utils/redis/redis.service";
@@ -9,9 +9,6 @@ const typeMapping = {
   P: "project",
   B: "builder",
 };
-
-const getFilePath = (type: string) =>
-  path.join(process.cwd(), "static", `${type}Slugs.json`);
 
 export async function POST(request: Request, response: Response) {
   try {
