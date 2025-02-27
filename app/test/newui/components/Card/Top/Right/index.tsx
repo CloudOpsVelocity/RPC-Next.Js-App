@@ -59,8 +59,6 @@ export default function TopRightSection({
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
 
-  console.log(data);
-
   // const url =
   //   type === "proj"
   //     ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
@@ -99,7 +97,6 @@ export default function TopRightSection({
   // console.log("card 1: ");
   const setNearby = useSetAtom(selectedNearByAtom);
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
-  console.log(brochureUrl)
 
   return (
     <div
@@ -250,6 +247,7 @@ export default function TopRightSection({
                       type,
                       reqId: type === "proj" ? projIdEnc : propIdEnc,
                       propType: type === "proj" ? propType : propTypeName,
+                      phaseId: phaseId
                     })}
                   }
                 >
@@ -314,6 +312,7 @@ export default function TopRightSection({
                     type,
                     reqId: type === "proj" ? projIdEnc : propIdEnc,
                     propType: type === "proj" ? propType : propTypeName,
+                    phaseId: phaseId
                   })}
                 }
               >
@@ -329,6 +328,7 @@ export default function TopRightSection({
                 buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[12px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto rounded-full"
               />{" "}
             </div> */}
+            {/* tab and laptop */}
             {type === "proj" && (
               <div className="flex flex-col space-y-1 justify-end items-end">
                 {" "}
@@ -347,7 +347,7 @@ export default function TopRightSection({
                     })
                   }
                 > 
-                  <span className="hidden sm:block">14+</span> Amenities
+                  {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
                 </button>
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit font-bold px-[4px] py-[4px] sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
@@ -361,7 +361,8 @@ export default function TopRightSection({
                       type: data.type,
                       reqId: !propIdEnc ? projIdEnc : propIdEnc,
                       propType: !propIdEnc ? propType : propTypeName,
-                      projOrPropName: propName ? propName : projName
+                      projOrPropName: propName ? propName : projName,
+                      phaseId:phaseId
                     })
                     // console.log("near by 1", data);
                     if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
@@ -381,22 +382,25 @@ export default function TopRightSection({
                 >
                   Nearby
                 </button>
+
+
               </div>
             )}
-            {type === "proj" ||( type === null ) ||
-              (category == "Sale" && (
-                <div className="text-xs flex xl:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
-                  <p className="text-right text-[12px] text-nowrap text-[#148B16]">
-                    Avg Price:₹{" "}
-                    {formatNumberWithSuffix(
-                      type === "proj" ? basePrice : sqftPrice
-                    )}
+            {(type === "proj" || type === null || category == "Sale") && (
+                <div className="text-xs flex xl:hidden sm:text-base font-semibold text-[#4f4f4f] mt-[4px] justify-end items-end ">
+                  <p className="text-right text-[12px] md:text-[14px] text-nowrap ">
+                    Avg Price:
+                    <span className="text-[#148B16]">₹{" "}
+                      {formatNumberWithSuffix(
+                        type === "proj" ? basePrice : sqftPrice
+                      )}
+                    </span>
                   </p>
                  {/*  <p className="text-right text-[12px] text-nowrap">
                     {towerData ? towerData : "N/A"}
                   </p> */}
                 </div>
-              ))}
+              )}
 
             {type !== "proj" && (
               <>
@@ -487,12 +491,12 @@ export default function TopRightSection({
                     type,
                     reqId: type === "proj" ? projIdEnc : propIdEnc,
                     propType: type === "proj" ? propType : propTypeName,
+                    phaseId: phaseId
                   })}
                 }
               >
                   <span className="bg-white h-full w-full px-[6px] text-black group-hover:text-white transition-[300ms] rounded-md group-hover:bg-transparent">View on Map</span>
               </button>
-
 
             {type !== "proj" && (
               <>
@@ -571,7 +575,8 @@ export default function TopRightSection({
                     type: data.type,
                     reqId: !propIdEnc ? projIdEnc : propIdEnc,
                     propType: !propIdEnc ? propType : propTypeName,
-                    projOrPropName: propName ? propName : projName
+                    projOrPropName: propName ? propName : projName,
+                    phaseId: phaseId
                   })
                   dispatch({
                     type: "OPEN",

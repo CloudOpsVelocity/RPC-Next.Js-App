@@ -42,6 +42,7 @@ export default function Results() {
   };
 
   const handlePush = async (type: string, data: any, apiData: any) => {
+    console.log("aa aa a a")
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],
@@ -56,6 +57,7 @@ export default function Results() {
         if (apiData.type === "Project") {
           window.open(apiData.stringUrl);
         } else {
+          const phase = ""
           window.open(
             `/search/listing?sf=projIdEnc=${
               apiData.stringId.split("_")[0]

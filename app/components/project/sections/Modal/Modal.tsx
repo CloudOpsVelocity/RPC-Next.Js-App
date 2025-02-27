@@ -96,12 +96,22 @@ export default function PartialUnitModal({ data }: any) {
     }
   };
 
+  // const handlePrevious = () => {
+  //   setActive((prev) => (prev > 0 ? prev - 1 : isData.others.length - 1));
+  // };
+
   const handlePrevious = () => {
-    setActive((prev) => (prev > 0 ? prev - 1 : isData.others.length - 1));
+    setActive((prev: number) => {
+      if (prev > 0) return prev - 1;
+      return prev;
+    });
   };
 
   const handleNext = () => {
-    setActive((prev) => (prev < isData.others.length - 1 ? prev + 1 : 0));
+    setActive((prev: number) => {
+      if (prev < isData.others.length - 1) return prev + 1;
+      return prev;
+    });
   };
 
   if (!(isData.main === 0 ? true : isData.main)) {
@@ -183,13 +193,13 @@ export default function PartialUnitModal({ data }: any) {
               <>
                 <button
                   onClick={handlePrevious}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100]"
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100] ${active === 0 ? " cursor-not-allowed opacity-70 " : "" } `}
                 >
                   <FaChevronLeft className="w-4 h-4 text-gray-600" />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100]"
+                  className={`absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100] ${isData.others.length - 1 === active ? " cursor-not-allowed opacity-70 " : "" }`}
                 >
                   <FaChevronRight className="w-4 h-4 text-gray-600" />
                 </button>

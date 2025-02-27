@@ -10,6 +10,7 @@ type Props = {};
 export default function SelectedFilters({}: Props) {
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
+  console.log(state)
   return (
     Object.entries(state).some(
       ([_, value]) =>

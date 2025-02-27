@@ -81,6 +81,8 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
         }),
   };
 
+  console.log(newParams)
+
   return (
     <nav
       aria-label="Project Search Breadcrumbs"
