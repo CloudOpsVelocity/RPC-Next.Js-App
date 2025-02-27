@@ -31,7 +31,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
+  const { handleApplyFilters, handleClearFilters } =
+    useProjSearchAppliedFilters();
   const {
     data: searchData,
     isLoading,
@@ -235,23 +236,26 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     );
     const data = await res.json();
     if (Object.hasOwn(data, "ids")) {
+      handleClearFilters("clearAll");
       let ids = extractApiValues(data.ids);
       if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
         dispatch({
           type: "update",
           payload: {
-            ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
+            ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
             ...(ids.PT && { propType: parseInt(ids.PT as string) }),
             ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-            ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
+            ...(ids.PJ && {
+              projIdEnc: ids.PJ as string,
+              projName: searchQuery,
+              listedBy: !isListing ? "All" : null,
+            }),
           },
         });
       }
-
       handleApplyFilters();
       handleResetQuery();
       setIsSearchOpen(false);
-      // myClientLogger("info", data);
       return;
     }
   };
@@ -284,7 +288,9 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                       setOpenDropdown(null);
                     }}
                   />
-                  <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                  <button type="submit">
+                    <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                  </button>
                 </form>
               </div>
               {isLoading ? (
@@ -412,12 +418,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             </button>
           </div>
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            {isListing ? 
-              <ListingSearchTabs />
-              :
-              <ProjectSearchTabs />
-            }
-       
+            {isListing ? <ListingSearchTabs /> : <ProjectSearchTabs />}
+
             <SelectedFilters />
           </div>
 

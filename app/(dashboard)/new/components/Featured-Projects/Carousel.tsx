@@ -15,8 +15,8 @@ export default function FeatureCarousel({}: Props) {
       align="start"
       slidesToScroll={1}
       mt={20}
-      nextControlIcon={<CarouseSelArrowIcon />}
-      previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
+      nextControlIcon={<CarouseSelArrowIcon title="Click to Forword" />}
+      previousControlIcon={<CarouseSelArrowIcon className="rotate-180" title="Click to Backword" />}
       controlsOffset={"-10px"}
     >
       <Carousel.Slide>

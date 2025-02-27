@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
 import path from "path";
 import { revalidatePath, revalidateTag } from "next/cache";
 import logger from "@/app/utils/logger";
@@ -152,7 +151,8 @@ export async function POST(request: Request, response: Response) {
             );
             delete parsedData[key];
             revalidatePath(key.split("/").slice(0, 6).join("/"));
-            revalidatePath(key);
+            revalidatePath(key, "layout");
+            revalidateTag(id);
           } else if (
             type === "builder" &&
             id === parsedData[key].split("_")[1]

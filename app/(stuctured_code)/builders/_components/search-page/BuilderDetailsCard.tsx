@@ -67,6 +67,8 @@ export default function BuilderDetailsCard({
     };
   }, [isModalOpen.action]);
 
+  let newBranchCities = branchCities.replaceAll("null,", "");
+
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden relative hover:shadow border border-blue-200 hover:border-blue-500">
       <BuilderLink routeParams={{ city: cityName, slug: userName }}>
@@ -94,8 +96,8 @@ export default function BuilderDetailsCard({
         <div className="space-y-1 md:space-y-3">
           <p className="text-sm md:text-base text-black">
             <span className="font-semibold text-[#0073C6]">Operating in:</span>{" "}
-            {branchCities.substring(0, isMobile ? 53 : isTab ? 120 : 80)}
-            {branchCities.length > 80 && (
+            {newBranchCities.substring(0, isMobile ? 53 : isTab ? 120 : 80)}
+            {newBranchCities.length > 80 && (
               <>
                 ...
                 <button
@@ -273,7 +275,7 @@ export default function BuilderDetailsCard({
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">
                   Operating in Cities
                 </h3>
-                <p className="text-gray-700 leading-relaxed">{branchCities}</p>
+                <p className="text-gray-700 leading-relaxed">{newBranchCities}</p>
               </>
             )}
           </div>

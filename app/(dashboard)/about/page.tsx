@@ -1,15 +1,11 @@
-import Footer from "@/app/components/layouts/primary/footer";
-import Header from "@/app/components/layouts/primary/header";
 import React from "react";
 import {
-  BlogCOnatainerSVg,
   greenTick,
   Illustrationcircles,
   BuildingIconABout,
 } from "@/app/images/commonSvgs";
-import { Input } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
+import SubscribeBlock from "@/app/blog/blogDetailSextion/SubscribeBlock";
 type Props = {};
 
 export default function page({}: Props) {
@@ -39,8 +35,6 @@ export default function page({}: Props) {
   ];
 
   return (
-    <div className="w-full">
-      <Header />{" "}
       <div className="mt-[70px] w-full shrink-0 rounded-[10px] m-auto h-auto bg-[#F5F7F8]">
         {/* ABout Us */}
         {/*About */}
@@ -209,15 +203,15 @@ export default function page({}: Props) {
             The Perfect Solution to{" "}
             <span className="text-[#2AA327] ">Best Project Finding</span>
           </h1>
-          <p className="text-[rgba(0,_0,_51,_0.95)] mx-auto  sm:mt-[8px]  sm:max-w-[80%] text-[14px] sm:text-[16px] xl:text-[20px] not-italic font-normal leading-[21px] text-center sm;text-left sm:leading-[26px]">
+          <p className="text-[rgba(0,_0,_51,_0.95)] mx-auto  sm:mt-[8px]  sm:max-w-[80%] text-[14px] sm:text-[16px] xl:text-[20px] not-italic font-normal leading-[21px] text-center sm;text-left sm:leading-[26px] px-[8px] md:px-0 ">
             The perfect solution for finding the best projects. Our platform
             offers a seamless search experience, detailed listings, and
             real-time updates, making your project discovery quick and
             effortless.
           </p>
-          <div className="flex flex-row gap-[2%] w-full pb-[20px] sm:pb-0 overflow-x-scroll sm:overscroll-x-none mt-8 sm:mx-auto  sm:max-w-[80%]  sm:scrollbar-hide">
-            <div className="w-[235px] h-[293px] sm:h-auto flex-shrink-0 sm:w-[30%]  sm:max-w-[30%] p-3 sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF] [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
-              <div className=" w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
+          <div className="flex flex-row gap-[2%] w-full pb-[20px] sm:pb-0 overflow-x-scroll sm:overscroll-x-none mt-8 sm:mx-auto sm:max-w-[80%] sm:scrollbar-hide p-[10px] ">
+          <div className=" w-[235px] h-[310px] md:h-auto flex-shrink-0  sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF] [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
+            <div className=" w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
               <h1 className="text-[#003]  text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4">
@@ -232,12 +226,12 @@ export default function page({}: Props) {
                 href="https://www.getrightproperty.com/search?sf=projStatus=108"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
+                className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
                 Explore Now
               </a>
             </div>
-            <div className=" w-[235px] h-[293px] flex-shrink-0  sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
+            <div className=" w-[235px] h-[310px] md:h-auto flex-shrink-0  sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF] [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
               <div className=" w-[65.105px] h-[53px] rounded-[4px]  flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
@@ -253,12 +247,12 @@ export default function page({}: Props) {
                 href="https://www.getrightproperty.com/search?sf=projStatus=107"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
+                className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
                 Explore Now
               </a>
             </div>
-            <div className=" w-[235px] h-[293px] flex-shrink-0 sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%] p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
+            <div className=" w-[235px] h-[310px] md:h-auto flex-shrink-0  sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF] [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
               <div className=" w-[65.105px] h-[53px] rounded-[4px] text-[14px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
@@ -274,7 +268,7 @@ export default function page({}: Props) {
                 href="https://www.getrightproperty.com/search?sf=projStatus=106"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center "
+                className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
                 Explore Now
               </a>
@@ -333,7 +327,8 @@ export default function page({}: Props) {
           </div>
           <Illustrationcircles className=" hidden sm:block absolute mt-12 bottom-0 left-0 " />
         </div>
-        <div className="sm:max-w-[60%] bg-[#F5F7F8] nt-4 sm:mt-16 sm:pb-14 xl:pb-24 flex flex-row mx-auto max-w-[98%]    justify-between items-center gap-3">
+        {/* <div className="sm:max-w-[60%] bg-[#F5F7F8] nt-4 sm:mt-16 sm:pb-14 xl:pb-24 flex flex-row mx-auto max-w-[98%]    justify-between items-center gap-3">
+          
           <div className="hidden sm:block max-full ">
             <h1 className=" sm:mb-4 sm:text-[20px] xl:text-[24px] not-italic font-bold leading-[normal]">
               Subscribe To Our Newsletter
@@ -347,13 +342,14 @@ export default function page({}: Props) {
                 placeholder="Enter your mail for new blog  "
               />
               <button
-                className="text-[#FFF]    text-[20px] not-italic font-semibold leading-[normal] flex p-[9px]  justify-center items-center gap-[8px] rounded-[10px] bg-[#227FBC] "
+                className="text-[#FFF] text-[20px] not-italic font-semibold leading-[normal] flex p-[9px]  justify-center items-center gap-[8px] rounded-[10px] bg-[#227FBC] "
                 name="Subscribe button"
               >
                 Sumbit
               </button>
             </div>
           </div>
+          
           <BlogCOnatainerSVg className=" h-auto" />
           <div className="sm:hidden mt-[20px] mb-[20px] mx-auto flex flex-col justify-center items-center gap-2  max-w-[98%] rounded-[18px] p-2 border-[6px] border-solid border-[var(--White-1,#F5F5F5)] bg-[#FFF]">
             <h1 className=" text-[16px] not-italic font-bold leading-[normal]">
@@ -373,9 +369,10 @@ export default function page({}: Props) {
               Sumbit
             </button>
           </div>
+        </div> */}
+        <div className="w-full flex justify-center items-center py-[30px] ">
+          <SubscribeBlock />
         </div>
-      </div>{" "}
-      <Footer />
-    </div>
+      </div>
   );
 }

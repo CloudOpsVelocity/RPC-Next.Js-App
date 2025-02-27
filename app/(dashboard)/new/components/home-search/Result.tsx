@@ -33,7 +33,7 @@ export default function Results() {
     projectListing,
   } = data;
   const handleAddSearch = (newItem: string) => {
-    if (!filters.locality.includes(newItem)) {
+    if (!filters.locality.includes(newItem)) { 
       dispatch({ type: "ADD_LOCALITY", payload: newItem });
       handleResetQuery();
     } else {
@@ -42,7 +42,6 @@ export default function Results() {
   };
 
   const handlePush = async (type: string, data: any, apiData: any) => {
-    console.log(apiData)
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],
@@ -74,7 +73,6 @@ export default function Results() {
           /* console.log(JSON.stringify(data, ));
           alert(JSON.stringify(data));
           console.log(JSON.stringify(data, ...apiData)); */
-
 
             let localityName = apiData.name.split("-")[1] ? apiData.name.split("-")[1] : apiData.name.split(" in ")[1];
             const url = `/search/listing?sf=propType=${data.PT}${
@@ -160,6 +158,10 @@ export default function Results() {
     isEmptyOrNull(listings) &&
     isEmptyOrNull(projectListing);
   const showCityError = !filters.city;
+
+  const newListing = listings.filter((item:any, index:number, self:any) =>
+    index === self.findIndex((t:any) => t.name === item.name)
+  );
   return showCityError ? (
     <div className="px-4 py-3 bg-gray-100 border-l-4 border-gray-400 rounded">
       <div className="flex items-center">
@@ -263,11 +265,11 @@ export default function Results() {
                 </li>
               ))}
             </ul>
-            {listings?.length > 0 && (
+            {newListing?.length > 0 && (
               <SubHeading key="listings-subheading" text="Listings" />
             )}
             <ul key="listings-list">
-              {listings?.map((listing: any, index: number) => (
+              {newListing?.map((listing: any, index: number) => (
                 <li
                   onClick={() =>
                     handlePush(

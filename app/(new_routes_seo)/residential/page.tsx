@@ -1,16 +1,12 @@
 import React from "react";
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
-import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import ResidentialPage from "./_components/ResidentialDetailPage";
+import axios from "axios";
 
-type Props = {
-  params: {
-    cg: string;
-    city: string;
-    lt: string;
-  };
-};
+type Props = {};
 
-export default async function Page({ params: { cg, city } }: Props) {
-  const severData = await getProjSearchData(``);
-  return <ProjectSearchPage serverData={severData} frontendFilters={{}} />;
+export default async function page({}: Props) {
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/project?city=9`;
+  const data = await axios.get(url);
+
+  return <ResidentialPage data={data.data} />;
 }

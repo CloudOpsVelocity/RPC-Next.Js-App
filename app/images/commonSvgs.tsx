@@ -12089,6 +12089,7 @@ export const specificationsList = new Map([
 ]);
 export const greenTick = (
   <svg
+    className="min-w-[16px] min-h-[16px] max-w-[16px] max-h-[16px]"  
     xmlns="http://www.w3.org/2000/svg"
     width="18"
     height="19"

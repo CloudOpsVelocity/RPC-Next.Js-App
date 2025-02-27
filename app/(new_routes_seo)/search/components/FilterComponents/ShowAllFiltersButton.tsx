@@ -284,7 +284,7 @@ export default function ShowAllFiltersButton({
                 handleClearFilters(isproject ? "clearAll" : "listing");
                 onToggle();
               }}
-              className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100" 
+              className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
               Clear Filter
             </button>
@@ -296,20 +296,23 @@ export default function ShowAllFiltersButton({
             </button>
           </div>
           <div className="flex flex-col justify-start max-h-[66vh] mb-10 sm:mb-0 overflow-y-auto">
-            <div className="flex flex-col mb-6 ml-4 gap-6 sm:mT-6">
-              <LocalitySearch<Location>
-                data={localitydata || []}
-                displayKey="name"
-                loading={isLoading}
-                valueKey="stringId"
-                onChange={handleLocationChange}
-                placeholder="Search locations..."
-                label="Location"
-                setQuery={setSearchLocality}
-                category="localities"
-                multiple
-              />
-            </div>
+            {!state.projIdEnc && (
+              <div className="flex flex-col mb-6 ml-4 gap-6 sm:mT-6">
+                <LocalitySearch<Location>
+                  data={localitydata || []}
+                  displayKey="name"
+                  loading={isLoading}
+                  valueKey="stringId"
+                  onChange={handleLocationChange}
+                  placeholder="Search locations..."
+                  label="Location"
+                  setQuery={setSearchLocality}
+                  category="localities"
+                  multiple
+                />
+              </div>
+            )}
+
             <div className="px-6 flex  flex-col items-start  flex-wrap justify-between   ">
               {isproject &&
                 renderFilterSection(
@@ -344,7 +347,7 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.bhkDetails,
                   "bhk",
                   6
-              )}
+                )}
               {isproject && (
                 <LocalitySearch<Location>
                   data={builderData || []}
@@ -454,7 +457,7 @@ export default function ShowAllFiltersButton({
                 "parking",
                 6
               )}
-             
+
               {renderFilterSection(
                 "Amenities",
                 SEARCH_FILTER_DATA.amenities,
@@ -498,7 +501,6 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "Phases"
                 )} */}
-           
             </div>
           </div>
         </div>

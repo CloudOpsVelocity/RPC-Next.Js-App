@@ -115,20 +115,20 @@ export default function CardDownSection({
             {
               amenCount > 0 && (
                 <button
-                className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch({
-                    content: [],
-                    conType: "amenities",
-                    title: "Amenities",
-                    id: `${projIdEnc ?? ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
-                    type: "OPEN",
-                    pType: type,
-                    propId: propIdEnc,
-                  });
-                }}
-                
+                  className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
+                  title={`Click to view ${amenCount === 1 ? "" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch({
+                      content: [],
+                      conType: "amenities",
+                      title: "Amenities",
+                      id: `${projIdEnc ?? ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
+                      type: "OPEN",
+                      pType: type,
+                      propId: propIdEnc,
+                    }); 
+                  }}
               > 
                 <span className="bg-white rounded-full text-black px-2">
                   {amenCount}
@@ -139,7 +139,9 @@ export default function CardDownSection({
             }
             <button
                 className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                title="Click to view Near by Locations"
                 onClick={(e) =>{
+                  title="Click to view Near by Locations"
                   e.stopPropagation();
                   setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
                   setSelected({
@@ -177,14 +179,14 @@ export default function CardDownSection({
       {!isMobile && (
         <div className=" right-1 inline-flex">
           <button
+            title={`Click to ${isCompared ? "Remove Compare" : "Add to Compare"}`}
             className="bg-btnPrimary rounded-[4px]  bottom-2 left-1 text-white text-[12px] px-1 font-bold"
             onClick={(e) => {
               e.stopPropagation();
               onAddingCompare()
             }}
-            
           >
-            {isCompared ? "Remove  Compare" : "Add to Compare"}
+            {isCompared ? "Remove Compare" : "Add to Compare"}
           </button>
           <Button
             onChange={handleOpen}
@@ -220,12 +222,13 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
   return (
     value > 0 && (
       <button
-      onClick={(e) => {
-        e.stopPropagation();
-        handleAgentOwner(
-          type === "Owner" ? "I" : type === "Builder" ? "B" : "A"
-        );
-      }}      
+        title={`Click to view ${type} Listing`}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleAgentOwner(
+            type === "Owner" ? "I" : type === "Builder" ? "B" : "A"
+          );
+        }}      
         className={clsx(
           "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",
           type === "Owner"

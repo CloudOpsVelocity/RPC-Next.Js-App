@@ -92,7 +92,11 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
 
                   <div className='md:min-w-[210px]'>
                       <p className='text-gray-700 text-[12px] md:text-[16px] '>Rate on GetRightProperty</p>
+                      {filters.cg == "R" ?
+                      <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.price))}</p>
+                      :
                       <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.sqftPrice))} / sq.ft</p>
+                      }
                   </div>
 
                   {filters.propType !== "Plot" &&

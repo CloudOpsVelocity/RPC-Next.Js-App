@@ -114,6 +114,7 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
   return (
     value > 0 && (
       <button
+        title={`Click to view ${type} Listing`}
         onClick={() => handleAgentOwner(type === "Owner" ? "I" : type === "Builder" ? "B" : "A" )}
         className={clsx(
           "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",

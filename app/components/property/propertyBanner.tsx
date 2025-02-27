@@ -74,7 +74,7 @@ export default function PropertyBanner({
           <div className="relative">
             {((reraStatus as unknown) === "Recieved" ||
               (reraStatus as unknown) === "Applied") && (
-              <p className="absolute top-[1px] left-[0.8px] z-[10]">
+              <p className="absolute top-[1px] left-[0.8px] z-[1]">
                 <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
             )}

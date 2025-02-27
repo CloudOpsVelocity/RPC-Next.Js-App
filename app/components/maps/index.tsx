@@ -144,7 +144,7 @@ const Content: React.FC<any> = ({
                 offset={[4, -36]}
               >
                 <div className=" ">
-                  <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
+                  <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] text-center w-full">
                     {item.name}
                   </p>
                 </div>
@@ -161,7 +161,7 @@ const Content: React.FC<any> = ({
                 offset={isMobile ? [-7, -40] : [4, -36]}
                 className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
               >
-                <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal]">
+                <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal] text-center w-full">
                   {item.name}
                 </p>
               </Tooltip>
@@ -186,7 +186,7 @@ const Content: React.FC<any> = ({
           <p className="font-bold text-black text-lg sm:text-lg">{projName}</p>
         </Tooltip> */}
         <Popup className="min-w-fit" offset={[30, -4]}>
-          <p className="font-bold text-black text-[14px] sm:text-lg">
+          <p className="font-bold text-black text-[14px] sm:text-lg text-center w-full ">
             {projName}
           </p>
         </Popup>

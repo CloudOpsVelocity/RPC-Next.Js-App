@@ -38,6 +38,7 @@ const HomeSearch = ({
 
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
 
+
   return (
     <div
       className="px-1 sm:px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-10 bg-white pt-[100px] sm:pt-[100px] xl:pb-4 xl:py-28  relative mt-[70px] "
@@ -79,11 +80,10 @@ const HomeSearch = ({
 
             <div className="flex justify-between items-center gap-[10px] w-full">
               <div className="flex items-center w-full ">
-                {config.searchIcon} <SearchSec />
+                <span className="cursor-pointer" onClick={handleSearch}>{config.searchIcon}</span> <SearchSec />
               </div>
               <div className="flex gap-2">
                 <Nearme />
-
                 <div
                   onClick={handleSearch}
                   className={`flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6] cursor-pointer`}
