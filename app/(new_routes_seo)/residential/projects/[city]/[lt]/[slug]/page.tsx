@@ -6,13 +6,19 @@ import {
   getAuthorityNames,
   getProjectDetails,
 } from "@/app/utils/api/project";
-import { notFound } from "next/navigation";
+import {
+  notFound,
+  permanentRedirect,
+  redirect,
+  RedirectType,
+} from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
 import { getPagesSlugs } from "@/app/seo/api";
 import { Metadata, ResolvingMetadata } from "next";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { isValidSlugId } from "@/common/utils/slugUtils";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = {
   params: { city: string; lt: string; slug: string };
@@ -20,27 +26,43 @@ type Props = {
 // let metadataCache: {title?: string, description?: string} = {};
 export default async function page({ params }: Props) {
   const { city, lt, slug: name } = params;
-  let slug = name.split("-").at(-1);
+  const slug = name.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
   }
-  console.time("project detaild api calling" + slug);
-  let [projResponse, amenitiesFromDB] = await Promise.all([
-    getProjectDetails(slug as string),
+
+  const [projResponse, amenitiesFromDB] = await Promise.all([
+    getProjectDetails(slug),
     getAmenties(),
   ]);
-  console.timeEnd("project detaild api calling" + slug);
-  if (projResponse.basicData.projAuthorityId) {
-    const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
-    projResponse = {
-      ...projResponse,
-      basicData: {
-        ...projResponse.basicData,
-        projAuthorityNames: res,
-      },
-    };
-  }
 
+  if (projResponse.basicData.projAuthorityId) {
+    const authorityNames = await getAuthorityNames(
+      projResponse.basicData.projAuthorityId
+    );
+    projResponse.basicData.projAuthorityNames = authorityNames;
+  }
+  const localitySlug = projResponse.basicData.localityName
+    .toLowerCase()
+    .replaceAll(" ", "-");
+  const projectSlug = name.split("-").slice(0, -1).join("-");
+  const projectNameSlug = projResponse.basicData.projectName
+    .toLowerCase()
+    .replaceAll(" ", "-");
+
+  if (
+    localitySlug !== lt ||
+    projectSlug !== projectNameSlug ||
+    city !== projResponse.basicData.cityName.toLowerCase()
+  ) {
+    const path = createProjectLinkUrl({
+      city: projResponse.basicData.cityName,
+      slug: projResponse.basicData.projectName,
+      locality: projResponse.basicData.localityName,
+      projIdEnc: projResponse.basicData.projIdEnc,
+    });
+    return permanentRedirect(path);
+  }
   return (
     <ProjectsDetailsPage
       projResponse={projResponse}
@@ -54,19 +76,6 @@ export default async function page({ params }: Props) {
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("project-list");
-  // const staticDir = path.join(process.cwd(), "static");
-  // const filePath = path.join(staticDir, "projectSlugs.json");
-
-  // // Ensure the 'static' directory exists
-  // if (!fs.existsSync(staticDir)) {
-  //   fs.mkdirSync(staticDir);
-  // }
-
-  // // Convert the data object into JSON
-  // const jsonContent = JSON.stringify(res, null, 2);
-
-  // // Write the JSON data to the file
-  // fs.writeFileSync(filePath, jsonContent);
   await redisService.saveProjectSlug(SlugsType.PROJECT, res);
   const projectRes = Object.keys(res);
   const slugs = [];
@@ -77,7 +86,6 @@ export async function generateStaticParams() {
       slugs.push({ city, lt, slug });
     }
   }
-
   return slugs;
 
   // Extract project names from the keys

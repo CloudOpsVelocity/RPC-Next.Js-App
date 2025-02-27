@@ -22,8 +22,6 @@ async function getBuilderSlug(pathname: string) {
   } catch (error) {
     console.error("Error reading or parsing file:", error);
     return null;
-  } finally {
-    console.timeEnd("getBuilderSlugs");
   }
 }
 export default async function Page({ params: { city, slug } }: Props) {
