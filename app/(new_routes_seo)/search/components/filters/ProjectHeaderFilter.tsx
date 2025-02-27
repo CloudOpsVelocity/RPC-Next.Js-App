@@ -245,11 +245,14 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
             ...(ids.PT && { propType: parseInt(ids.PT as string) }),
             ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-            ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
+            ...(ids.PJ && {
+              projIdEnc: ids.PJ as string,
+              projName: searchQuery,
+              listedBy: !isListing ? "All" : null,
+            }),
           },
         });
       }
-
       handleApplyFilters();
       handleResetQuery();
       setIsSearchOpen(false);
