@@ -242,6 +242,7 @@ export async function POST(request: Request, response: Response) {
             );
             delete parsedData[key];
             if (!deleted) {
+              revalidateTag(id);
               revalidatePath(key.split("/").slice(0, 6).join("/"));
               deleted = true;
             }
