@@ -78,7 +78,7 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
             isAtStart() ? "opacity-50 cursor-not-allowed" : "opacity-100"
           }`}
         >
-          <CarouseSelArrowIcon className="rotate-180" />
+          <CarouseSelArrowIcon className="rotate-180" title="Click to Forword" />
         </button>
       )}
 
@@ -131,7 +131,7 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
             isAtEnd() ? "opacity-50 cursor-not-allowed" : "opacity-100"
           }`}
         >
-          <CarouseSelArrowIcon />
+          <CarouseSelArrowIcon title="Click to Backword" />
         </button>
       )}
     </div>

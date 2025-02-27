@@ -173,6 +173,7 @@ export default function TopRightSection({
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
+                          <title>Click to view Floorplan</title>
                           <rect
                             width="24"
                             height="24"
@@ -235,6 +236,7 @@ export default function TopRightSection({
                 </div> */}
 
                 <button 
+                  title="Click to view on Map"
                   className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
                   onClick={() => {
                     setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"", isOpen: false }));
@@ -300,6 +302,7 @@ export default function TopRightSection({
 
               <button 
                 className="group sm:flex hidden md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
+                title="Click to view on Map"
                 onClick={() => {
                   setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"", isOpen: false }));
                   setSelected({
@@ -331,6 +334,7 @@ export default function TopRightSection({
                 {" "}
                 {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
                 <button
+                  title={`Click to view ${amenCount === 1 ? "" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
                   className="bg-orange-500 text-white text-right max-w-fit px-[4px] py-[4px] md:py-[6px] sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs text-nowrap  inline-flex"
                   onClick={() =>
                     dispatch({
@@ -347,6 +351,7 @@ export default function TopRightSection({
                 </button>
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit font-bold px-[4px] py-[4px] sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                  title="Click to view all Near by Locations"
                   onClick={() => {
                     setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
                     // setSelected(null);
@@ -470,9 +475,9 @@ export default function TopRightSection({
 
             <button 
                 className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold group-hover:outline-none active:outline-none " 
+                title="Click to view on Map"
                 onClick={() => {
                   setNearby((prev:any) => ({...prev, category: "", isOpen: false, selectedNearbyItem:{}, data:{}, id:"" }));
-
                   setSelected({
                     agentListing,
                     ownerListing,
@@ -513,6 +518,7 @@ export default function TopRightSection({
                 />
                 {floorPlan && (
                   <button
+                    title="Click to view Floor Plan"
                     className="text-[14px]  text-btnPrimary  font-bold mt-2"
                     onClick={() =>
                       window.open(
@@ -535,6 +541,7 @@ export default function TopRightSection({
               {amenCount && (
                 <button
                   className="bg-orange-500 text-white py-1 px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                  title={`Click to view ${amenCount === 1 ? "" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
                   onClick={() =>
                     dispatch({
                       type: "OPEN",
@@ -554,6 +561,7 @@ export default function TopRightSection({
 
               <button
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                title="Click to view all Near by Locations"
                 onClick={() => {
                   setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
                   // setSelected(null);
@@ -639,6 +647,7 @@ const config = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>Click to Shear</title>
       <circle
         cx="13"
         cy="13"

@@ -360,7 +360,7 @@ const NearbyMarkers = ({}) => {
               offset={isMobile ? [-7, -40] : [4, -36]}
               className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
             >
-              <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal]">
+              <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal] text-center w-full ">
                 {item.name}
               </p>
             </Tooltip>

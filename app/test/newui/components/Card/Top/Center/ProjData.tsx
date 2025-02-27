@@ -165,6 +165,7 @@ export default function ProjData({
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
         {postedBy ?? "Builder"}:{" "}
         <span
+          title="Click to view Builder"
           className="font-bold underline cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();

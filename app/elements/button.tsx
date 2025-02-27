@@ -17,6 +17,7 @@ const Button = ({
   return (
     <div className={buttonConClass || ""}>
       <button
+        title={"Click to "+title}
         className={buttonClass || ""}
         onClick={(e) =>{
           e.stopPropagation();
