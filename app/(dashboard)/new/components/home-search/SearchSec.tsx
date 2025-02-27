@@ -49,10 +49,6 @@ export default function SearchSec({}: Props) {
     }
   };
 
-  // useEffect(()=>{
-  //   handleSearch();
-  // },[f.bhk]);
-
   const handleSearch = () => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
     console.log(`${whichPage}?sf=${toQueryParams(f)}`);
