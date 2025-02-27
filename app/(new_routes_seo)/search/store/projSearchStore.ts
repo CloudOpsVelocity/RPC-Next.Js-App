@@ -30,7 +30,7 @@ export const initialState: SearchFilter = {
   projIdEnc: null,
   lat: null,
   lng: null,
-  isUsed:null,
+  isUsed: null,
   projName: null,
   phaseId: [],
 };
@@ -237,11 +237,14 @@ export const ProjSearchAppliedFiltersStore = atom(
         case "listing":
           {
             const getParams = new URLSearchParams(window.location.search);
-            let listedBy = getParams.get("sf")?.match(/listedBy=[^-\s]+/)?.[0] ?? "";
+            let listedBy =
+              getParams.get("sf")?.match(/listedBy=[^-\s]+/)?.[0] ?? "";
 
-        // If `listedBy` exists, update the key; otherwise, set to null.
-        let finalKey = listedBy !== "" ? listedBy.split("=")[1].split("-")[0] : null;
-
+            let finalKey =
+              listedBy !== "" ? listedBy.split("=")[1].split("-")[0] : null;
+            if (listedBy) {
+              queryString = `listedBy=${finalKey}`;
+            }
             set(projSearchStore, {
               payload: { ...initialState, listedBy: finalKey },
               type: "update",
