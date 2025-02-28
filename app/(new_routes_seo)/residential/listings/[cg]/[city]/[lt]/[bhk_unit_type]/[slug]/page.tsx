@@ -34,10 +34,6 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.bhk_unit_type}/${params.slug}`;
-  // const value = await findPathForProjectListing(pathname);
-  // if (!value) return notFound();
-  // const { id } = extractListingParamsValues(value);
-  // console.log("hello form listing details page during builder");
   const id = params.slug.split("-").at(-1);
   if (!id) {
     notFound();
@@ -46,7 +42,7 @@ export default async function Page({ params }: Props) {
     listing: data,
     nearByLocations,
     totalPrice,
-  } = await getListingDetails(id as string);
+  } = await getListingDetails(id as string, pathname);
   const [projData, issueData, amenities] = await Promise.all([
     getProjectDetails(data.projIdEnc),
     getReportConstData(),

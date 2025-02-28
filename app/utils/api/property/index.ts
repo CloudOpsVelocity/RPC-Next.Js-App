@@ -2,7 +2,8 @@ import { LIstingResponse } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
 import { isValidSlugId } from "@/common/utils/slugUtils";
 import axios from "axios";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
+import { generateListingLinkUrl } from "../../linkRouters/ListingLink";
 
 const getProjectDetails = async (slug: string): Promise<M | any> => {
   if (slug) {
@@ -21,7 +22,10 @@ const getProjectDetails = async (slug: string): Promise<M | any> => {
   }
 };
 
-const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
+const getListingDetails = async (
+  slug: string,
+  pathname?: string
+): Promise<LIstingResponse> => {
   if (!isValidSlugId(slug)) {
     notFound();
   }
@@ -36,7 +40,26 @@ const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
     if (!data || !data.status) {
       return notFound();
     }
-
+    if (
+      pathname &&
+      (process.env.ENVIRONMENT === "production" ||
+        process.env.ENVIRONMENT === "test")
+    ) {
+      const originalPath = generateListingLinkUrl({
+        city: data.listing.ctName,
+        locality: data.listing.ltName,
+        bhkUnitType: data.listing.bhkName
+          ? `${data.listing.bhkName} ${data.listing.propTypeName}`
+          : data.listing.propTypeName,
+        propIdEnc: data.listing.propIdEnc,
+        category: data.listing.cg === "S" ? "for-sale" : "for-rent",
+        phase: data.listing.phaseName,
+        projName: data.listing.projIdEnc ? data.listing.propName : null,
+      });
+      if (originalPath !== pathname) {
+        throw new Error(originalPath);
+      }
+    }
     const filterOtherDetails =
       data.listing.otherPrice &&
       Object?.keys(data.listing.otherPrice).filter(
@@ -71,9 +94,10 @@ const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
       data.listing.otherPrice &&
       parseOtherCharge(data.listing.otherPrice.otherCharge);
     return { ...data, totalPrice: ac + otherCharges };
-  } catch (error) {
-    console.log(error);
-    notFound();
+  } catch (error: any) {
+    // console.log(error);
+    // notFound();
+    permanentRedirect(error.message as string);
   }
 };
 
@@ -89,7 +113,6 @@ const getReportConstData = async () => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/getConstantList`,
     ["propReport"]
   );
-  console.log(res);
   return res.data;
 };
 

@@ -29,10 +29,10 @@ export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}${
     phase ? `/${phase}` : ""
   }/${bhk_unit_type}`;
-  console.log(params)
+  console.log(params);
   let isProjectListing = bhk_unit_type.includes("listing");
   let serverData = null;
-  let filtersValues: any = {}; 
+  let filtersValues: any = {};
   // const isProjectListing =
   // filtersValues.PT == "32"
   //   ? filtersValues.count === 7
@@ -56,7 +56,8 @@ export default async function Page({ params }: Props) {
       nearByLocations,
       totalPrice,
     } = await getListingDetails(
-      (bhk_unit_type.split("-").at(-1) as string) ?? ""
+      (bhk_unit_type.split("-").at(-1) as string) ?? "",
+      pathname
     );
 
     const [projData, issueData, amenities] = await Promise.all([

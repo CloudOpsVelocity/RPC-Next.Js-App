@@ -37,7 +37,7 @@ export default function TopRightSection({
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const { filters } = useSearchFilters();
-  
+
   // const url =
   //   type === "proj"
   //     ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
@@ -52,17 +52,17 @@ export default function TopRightSection({
     }
   };
 
-   const url = generateListingLinkUrl({ 
-      bhkUnitType: bhkName ? bhkName : '',
-      city: city ? city : "",
-      propIdEnc: type == "proj" ? projIdEnc : propIdEnc,
-      category: filters.cg === "S" ? "for-sale" : "for-rent",
-      locality: locality ? locality : "",
-      phase: phaseName ? phaseName : "",
-      projName: projName ? projName : projName
-    })
+  const url = generateListingLinkUrl({
+    bhkUnitType: bhkName ? bhkName : "",
+    city: city ? city : "",
+    propIdEnc: type == "proj" ? projIdEnc : propIdEnc,
+    category: filters.cg === "S" ? "for-sale" : "for-rent",
+    locality: locality ? locality : "",
+    phase: phaseName ? phaseName : "",
+    projName: projName ? projName : projName,
+  });
 
-    console.log("card 2")
+  console.log("card 2");
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -104,7 +104,7 @@ export default function TopRightSection({
                     lang,
                     type,
                     reqId: type === "proj" ? projIdEnc : propIdEnc,
-                    propType: data?.propTypeName
+                    propType: data?.propTypeName,
                   });
                 }}
               >
@@ -153,12 +153,13 @@ export default function TopRightSection({
             </div>
             <button
               className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1 gradient"
-              onClick={() =>
-                navigator.share({
-                  text:'shear',
-                  url: url
-                })
-              
+              onClick={
+                () =>
+                  navigator.share({
+                    text: "shear",
+                    url: url,
+                  })
+
                 // setSelected({
                 //   agentListing,
                 //   ownerListing,
