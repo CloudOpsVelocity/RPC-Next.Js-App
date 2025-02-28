@@ -43,7 +43,6 @@ const testimonials = [
   },
 ];
 
-// Property filter options
 const propertyTypes = ["All", "Villa", "Apartment", "Villament", "Plot"];
 const priceRanges = [
   "All",
@@ -58,7 +57,7 @@ const locations = [
   "Whitefield",
   "Sarjapur Road",
 ];
-// Hero section slides
+
 const heroSlides = [
   {
     image:
@@ -81,34 +80,45 @@ const heroSlides = [
     subtitle: "Built with premium materials and attention to every detail.",
   },
 ];
+
 export default function ResidentialPage({ data }: { data: any }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [filterType, setFilterType] = useState("All");
   const [isSticky, setIsSticky] = useState(false);
   const [showEnquiryForm, setShowEnquiryForm] = useState(false);
 
-  // Handle sticky header
   useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 100);
-    };
-
+    const handleScroll = () => setIsSticky(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Automatically advance hero slider
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [heroSlides.length]);
 
+  const handleSlideChange = (index: number) => {
+    if (data?.featured?.length) {
+      setActiveSlide(index);
+    }
+  };
+
+  const handlePrevSlide = () => {
+    setActiveSlide(
+      (activeSlide - 1 + (data?.featured?.length || 0)) %
+        (data?.featured?.length || 1)
+    );
+  };
+
+  const handleNextSlide = () => {
+    setActiveSlide((activeSlide + 1) % (data?.featured?.length || 1));
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section with Slider */}
       <section className="relative h-[90vh] w-full">
         {data?.featured?.map((slide: any, index: number) => (
           <div
@@ -139,7 +149,6 @@ export default function ResidentialPage({ data }: { data: any }) {
           </div>
         ))}
 
-        {/* Slider Controls */}
         <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {data?.featured?.map((_: any, index: number) => (
             <button
@@ -147,35 +156,26 @@ export default function ResidentialPage({ data }: { data: any }) {
               className={`w-3 h-3 rounded-full transition-all ${
                 index === activeSlide ? "bg-primary w-6" : "bg-white/50"
               }`}
-              onClick={() => setActiveSlide(index)}
+              onClick={() => handleSlideChange(index)}
             />
           ))}
         </div>
 
-        {/* Navigation Arrows */}
         <button
           className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full"
-          onClick={() =>
-            setActiveSlide(
-              (activeSlide - 1 + (data?.featured?.length || 0)) %
-                (data?.featured?.length || 1)
-            )
-          }
+          onClick={handlePrevSlide}
         >
           <FaChevronLeft />
         </button>
         <button
           className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full"
-          onClick={() =>
-            setActiveSlide((activeSlide + 1) % (data?.featured?.length || 1))
-          }
+          onClick={handleNextSlide}
         >
           <FaChevronRight />
         </button>
       </section>
 
-      {/* Quick Search Section */}
-      <section className="relative   container mx-auto -mt-16 px-4">
+      <section className="relative container mx-auto -mt-16 px-4">
         <div className="bg-card shadow-xl rounded-xl p-6 z-[500] bg-white">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
@@ -187,7 +187,7 @@ export default function ResidentialPage({ data }: { data: any }) {
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
               >
-                {propertyTypes?.map((type) => (
+                {propertyTypes.map((type) => (
                   <option key={type} value={type}>
                     {type}
                   </option>
@@ -197,7 +197,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div>
               <label className="block text-sm font-medium mb-2">Location</label>
               <select className="w-full p-3 border rounded-lg bg-background">
-                {locations?.map((location) => (
+                {locations.map((location) => (
                   <option key={location} value={location}>
                     {location}
                   </option>
@@ -207,7 +207,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div>
               <label className="block text-sm font-medium mb-2">Budget</label>
               <select className="w-full p-3 border rounded-lg bg-background">
-                {priceRanges?.map((range) => (
+                {priceRanges.map((range) => (
                   <option key={range} value={range}>
                     {range}
                   </option>
@@ -215,7 +215,7 @@ export default function ResidentialPage({ data }: { data: any }) {
               </select>
             </div>
             <div className="flex items-end">
-              <button className="w-full bg-primary hover:bg-primary/90  p-3 rounded-lg font-medium flex items-center justify-center gap-2">
+              <button className="w-full bg-primary hover:bg-primary/90 p-3 rounded-lg font-medium flex items-center justify-center gap-2">
                 <FaSearch /> Search Properties
               </button>
             </div>
@@ -223,20 +223,19 @@ export default function ResidentialPage({ data }: { data: any }) {
         </div>
       </section>
 
-      {/* Property Listings */}
       <section className="py-20 container mx-auto px-4">
         {!data ? (
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
-          Object.entries(data || {})?.map(
+          Object.entries(data).map(
             ([category, properties]: any) =>
               properties.length > 0 && (
                 <div key={category} className="mb-16">
                   <h2 className="text-3xl font-bold mb-8">{category}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {properties?.map((property: any) => (
+                    {properties.map((property: any) => (
                       <div
                         key={property.projIdEnc}
                         className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
@@ -252,7 +251,6 @@ export default function ResidentialPage({ data }: { data: any }) {
                             {property.projstatus}
                           </div>
                         </div>
-
                         <div className="p-6">
                           <h3 className="text-xl font-bold mb-2">
                             {property.projName}
@@ -261,7 +259,6 @@ export default function ResidentialPage({ data }: { data: any }) {
                             <FaMapMarkerAlt /> {property.locality},{" "}
                             {property.city}
                           </p>
-
                           <div className="grid grid-cols-2 gap-4 mb-6">
                             <div className="text-sm">
                               <div className="font-semibold">Price Range</div>
@@ -294,13 +291,12 @@ export default function ResidentialPage({ data }: { data: any }) {
                               <div>{property.rerastatus}</div>
                             </div>
                           </div>
-
                           <div className="flex gap-4">
                             <Link
                               href={`/residential/projects/${property.city.toLowerCase()}/${property.locality.toLowerCase()}/${property.projName
                                 .toLowerCase()
                                 .replace(/ /g, "-")}-${property.projIdEnc}`}
-                              className="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90  text-white px-4 py-2 rounded-lg text-center text-sm font-medium transition-colors"
+                              className="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-center text-sm font-medium transition-colors"
                             >
                               View Details
                             </Link>
@@ -321,7 +317,6 @@ export default function ResidentialPage({ data }: { data: any }) {
         )}
       </section>
 
-      {/* Features Section */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-16">
@@ -365,7 +360,7 @@ export default function ResidentialPage({ data }: { data: any }) {
                 description:
                   "Our properties consistently exceed expectations with transparent processes and excellent after-sales service.",
               },
-            ]?.map((feature, index) => (
+            ].map((feature, index) => (
               <div
                 key={index}
                 className="p-8 rounded-xl bg-card hover:shadow-lg transition-all"
@@ -381,15 +376,13 @@ export default function ResidentialPage({ data }: { data: any }) {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-16">
             What Our Customers Say
           </h2>
-
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials?.map((testimonial, index) => (
+            {testimonials.map((testimonial, index) => (
               <div
                 key={index}
                 className="bg-card p-8 rounded-xl shadow hover:shadow-md transition-all"
@@ -419,7 +412,6 @@ export default function ResidentialPage({ data }: { data: any }) {
         </div>
       </section>
 
-      {/* Call to Action */}
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">
@@ -443,7 +435,6 @@ export default function ResidentialPage({ data }: { data: any }) {
         </div>
       </section>
 
-      {/* Enquiry Form Modal */}
       {showEnquiryForm && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
           <div className="bg-card rounded-xl p-6 max-w-md w-full relative animate-fadeIn">
@@ -453,52 +444,34 @@ export default function ResidentialPage({ data }: { data: any }) {
             >
               ✕
             </button>
-
             <h3 className="text-xl font-bold mb-6">
               Enquire About Our Properties
             </h3>
-
             <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Name</label>
-                <input
-                  type="text"
-                  className="w-full p-3 border rounded-lg bg-background"
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-1">Phone</label>
-                <input
-                  type="tel"
-                  className="w-full p-3 border rounded-lg bg-background"
-                  placeholder="Your phone number"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <input
-                  type="email"
-                  className="w-full p-3 border rounded-lg bg-background"
-                  placeholder="Your email"
-                />
-              </div>
-
+              {["Name", "Phone", "Email"].map((label, index) => (
+                <div key={index}>
+                  <label className="block text-sm font-medium mb-1">
+                    {label}
+                  </label>
+                  <input
+                    type={label === "Email" ? "email" : "text"}
+                    className="w-full p-3 border rounded-lg bg-background"
+                    placeholder={`Your ${label.toLowerCase()}`}
+                  />
+                </div>
+              ))}
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Property Type
                 </label>
                 <select className="w-full p-3 border rounded-lg bg-background">
-                  {propertyTypes.slice(1)?.map((type) => (
+                  {propertyTypes.slice(1).map((type) => (
                     <option key={type} value={type}>
                       {type}
                     </option>
                   ))}
                 </select>
               </div>
-
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Message
@@ -508,12 +481,10 @@ export default function ResidentialPage({ data }: { data: any }) {
                   placeholder="Your requirements"
                 ></textarea>
               </div>
-
               <button className="w-full bg-primary hover:bg-primary/90 text-white p-3 rounded-lg font-medium transition-colors">
                 Submit Enquiry
               </button>
             </form>
-
             <div className="mt-6 pt-6 border-t grid grid-cols-3 gap-4">
               <button className="flex items-center justify-center gap-2 p-2 bg-blue-600 text-white rounded-lg">
                 <FaPhone className="h-4 w-4" /> Call
