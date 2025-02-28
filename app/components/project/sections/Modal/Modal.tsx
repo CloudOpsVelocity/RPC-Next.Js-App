@@ -22,6 +22,7 @@ import {
 import { BiMessage } from "react-icons/bi";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { useMediaQuery } from "@mantine/hooks";
 
 const Modal = ({
   isOpen,
@@ -69,6 +70,21 @@ export default function PartialUnitModal({ data }: any) {
     setActive(0);
     reset();
   };
+
+
+  const [platform, setPlatform] = useState('');
+  const isMobile = useMediaQuery('(max-width: 768px)') 
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (/iphone|ipod/.test(userAgent)) {
+      setPlatform('iOS');
+    } else if (/android/.test(userAgent)) {
+      setPlatform('Android');
+    } else {
+      setPlatform('Unknown');
+  }
+  }, []);
 
   const selectedOne = isData.others[active];
   const { handleDownload } = useDownload("floorPlan");
@@ -118,12 +134,15 @@ export default function PartialUnitModal({ data }: any) {
     return null;
   }
 
+
+
+
   return (
     <Modal
       isOpen={isData.main === 0 ? true : isData.main}
       onClose={handleReset}
     >
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full ">
         {/* Header */}
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
           <h3 className="text-lg sm:text-xl font-semibold text-[#0073C6]">
@@ -185,8 +204,10 @@ export default function PartialUnitModal({ data }: any) {
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col max-h-full lg:flex-row overflow-hidden">
+        {/* Main Content overflow-hidden   <div className={`${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}> */}
+        
+       
+        <div className={`flex-1 flex flex-col max-h-full lg:flex-row  ${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}>
           {/* Left - Floor Plan Image */}
           <div className="flex-1 p-3 sm:p-6 flex items-center justify-center bg-[#F8FBFF] relative h-[calc(100vh-200px)] lg:h-auto">
             {isData.others.length > 1 && (
@@ -316,7 +337,7 @@ export default function PartialUnitModal({ data }: any) {
         </div>
 
         {isData && isData.others && isData.others?.length > 0 && (
-          <div className="w-[95%] m-auto overflow-x-auto inline-flex mb-4">
+          <div className={`w-[95%] m-auto overflow-x-auto inline-flex mb-4  ${platform == "iOS" ? "mb-28" : "" } `}>
             {isData.others.map((item: any, index: number) => {
               const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
               return (
