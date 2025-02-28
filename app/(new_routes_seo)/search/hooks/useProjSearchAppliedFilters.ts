@@ -9,7 +9,6 @@ export default function useProjSearchAppliedFilters() {
   const setAppliedFilters = useSetAtom(ProjSearchAppliedFiltersStore);
   const [name, setName] = useQueryState("sf");
   const handleApplyFilters = (callback?: () => void) => {
-    console.log("adding")
     setAppliedFilters(setName, "add");
     callback?.();
   };

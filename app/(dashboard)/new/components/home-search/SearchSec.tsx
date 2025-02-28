@@ -9,6 +9,7 @@ import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { toQueryParams } from "../../utils/param";
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
 type Props = {};
 export default function SearchSec({}: Props) {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
@@ -27,8 +28,9 @@ export default function SearchSec({}: Props) {
     dispatch({ type: "SHOW_FILTER", payload: true });
   };
 
+  const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map(each=>each.value.toString());
+
   const handleKeyDown = async (event: any) => {
-    console.log(searchQuery)
     if (event.key === "Enter") {
       event.preventDefault();
       const res = await fetch(
@@ -40,19 +42,37 @@ export default function SearchSec({}: Props) {
       if (data && data.ids) {
         let bhk = data.ids.split("*")[0];
         let oldBhks = f.bhk;
-        if (!oldBhks.includes(parseInt(bhk))) {
-          dispatch({ type: "ADD_BHK", payload: parseInt(bhk) });
-        } else {
-          handleSearch();
+        console.log(bhk)
+
+        if(allBhksIds.includes(bhk)){
+          if (!oldBhks.includes(parseInt(bhk))) {
+            dispatch({ type: "ADD_BHK", payload: parseInt(bhk) });
+          } else {
+            handleSearch();
+          }
+        }else{
+          if(bhk.length > 4){
+            handleSearch(bhk);
+          }else{
+            const whichPage = f.propType === 36 ? "/search/listing" : "/search";
+            window.open(whichPage, "_blank", "noreferrer");    
+          }
         }
       }
     }
   };
 
-  const handleSearch = () => {
+  const handleSearch = (projIdEnc?:string) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
-    console.log(`${whichPage}?sf=${toQueryParams(f)}`);
-    window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank");
+
+    if(projIdEnc){
+      const url = `projIdEnc=${projIdEnc}-listedBy=${"All"}-projName=${searchQuery.replaceAll(" ", "+")}`;
+      console.log(`${whichPage}?sf=${url}`);
+      window.open(`${whichPage}?sf=${url}`, "_blank", "noreferrer");    
+    }else{
+      console.log(`${whichPage}?sf=${toQueryParams(f)}`);
+      window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank", "noreferrer");
+    }
   };
 
   return (

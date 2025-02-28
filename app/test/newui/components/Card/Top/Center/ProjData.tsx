@@ -233,10 +233,10 @@ export default function ProjData({
       <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-118px)]">
         Address: {address}
       </p>
-      <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
+      <p className=" text-gray-600 text-[12px] sm:text-[12px] xl:text-[14px] not-italic font-semibold ">
         {postedBy ?? "Builder"}:{" "}
         <span
-          className={`font-bold ${
+          className={`font-bold text-[#242424] ${
             postedBy === "Builder" ? "underline cursor-pointer" : ""
           }`}
           onClick={

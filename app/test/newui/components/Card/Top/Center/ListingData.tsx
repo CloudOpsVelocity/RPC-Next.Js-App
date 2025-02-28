@@ -154,7 +154,7 @@ export default function ListingData({
               }
             />
 
-            {!isMobile && !isPlot && (
+            {!isPlot && (
               <DownSectionCard label={"Elevation"} value={`${towerData}`} />
             )}
           </div>
@@ -239,7 +239,7 @@ export default function ListingData({
                   title="Click to Read More"
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
-                    console.log("read more testing");
+                    // console.log("read more testing");
                     dispatch({
                       content: projectAbout,
                       // id: `${

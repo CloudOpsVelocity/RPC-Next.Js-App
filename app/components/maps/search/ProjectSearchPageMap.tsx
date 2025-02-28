@@ -216,7 +216,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     data?.map((item: any, index: number) => {
       const isProp = !!item?.propIdEnc;
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
-      const itemPropType = isProp ? item?.propTypeName : item?.propType;
+      // const itemPropType = isProp ? item?.propTypeName : item?.propType;
 
       const phases = !isProp
         ? {
@@ -233,7 +233,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           }
         : null;
 
-      if (id === itemId || id === "") {
+      if ((selected?.reqId === itemId && selected && selected?.phaseId === item.phaseId ) || !selected) {
         return (
           <>
             <Marker
