@@ -56,14 +56,25 @@ export default function ListingData({
     enabled: false,
   });
 
-  const getApproveNames = () => {
+  const getApprovedFirstName = (item:string) => {
+    if(item.includes(" - ")){
+      return item.split(" - ")[0];
+    }else if(item.includes(" – ")){
+      return item.split(" – ")[0];
+    }else if(item.includes("–")){
+      return item.split("–")[0];
+    }else if(item.includes("-")){
+      return item.split("-")[0]; 
+    }
+  };
 
+  const getApproveNames = () => {
     let idsString = approvedById ? approvedById.split(",") : [];
     if (!approvedData) return "N/A";
     const authorityNames = [];
     for (const item of approvedData as any) {
       if (idsString.includes(item.cid.toString())) {
-        authorityNames.push(item.constDesc.split(" – ")[0]);
+        authorityNames.push(getApprovedFirstName(item.constDesc));
       }
     }
 
@@ -72,10 +83,9 @@ export default function ListingData({
 
   const getApproveNamesProj=()=>{
    const proJAuth=projAuthority? projAuthority.split(',') : [];
-  //  console.log(proJAuth)
-    const resultedValue = proJAuth.map((item:string)=>{
-     return item.split("–")[0]
-    })
+   console.log(proJAuth)
+
+    const resultedValue = proJAuth.map((item:string)=>{getApprovedFirstName(item)})
     return resultedValue.join(",")
   };
 
