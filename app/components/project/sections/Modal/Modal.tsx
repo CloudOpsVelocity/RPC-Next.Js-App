@@ -207,9 +207,9 @@ export default function PartialUnitModal({ data }: any) {
         {/* Main Content overflow-hidden   <div className={`${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}> */}
         
        
-        <div className={`flex-1 flex flex-col max-h-full lg:flex-row  ${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}>
+        <div className={`flex-1 flex flex-col    max-h-full overflow-auto  lg:flex-row  ${platform == "iOS" ? "pb-[10px]" : "pb-[6px]" } z-[100]    sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}>
           {/* Left - Floor Plan Image */}
-          <div className="flex-1 p-3 sm:p-6 flex items-center justify-center bg-[#F8FBFF] relative h-[calc(100vh-200px)] lg:h-auto">
+          <div className="flex-1 p-3 sm:p-6 flex items-center justify-center bg-[#F8FBFF] relative  lg:h-auto">
             {isData.others.length > 1 && (
               <>
                 <button
@@ -254,7 +254,7 @@ export default function PartialUnitModal({ data }: any) {
           </div>
 
           {/* Right - Unit Details */}
-          <div className="w-full lg:w-96 bg-white p-3 sm:p-6 overflow-y-auto border-t lg:border-t-0 lg:border-l">
+          <div className="w-full lg:w-96 bg-white p-3 sm:p-6 h-auto border-t lg:border-t-0 lg:border-l">
             <div className="space-y-4 sm:space-y-6">
               {/* Area Details */}
               <div>
@@ -337,7 +337,7 @@ export default function PartialUnitModal({ data }: any) {
         </div>
 
         {isData && isData.others && isData.others?.length > 0 && (
-          <div className={`w-[95%] m-auto overflow-x-auto inline-flex mb-4  ${platform == "iOS" ? "mb-28" : "" } `}>
+          <div className={`w-[95%] m-auto  inline-flex mb-4 `}>
             {isData.others.map((item: any, index: number) => {
               const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
               return (
