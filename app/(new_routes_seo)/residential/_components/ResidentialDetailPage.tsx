@@ -187,7 +187,7 @@ export default function ResidentialPage({ data }: { data: any }) {
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
               >
-                {propertyTypes.map((type) => (
+                {propertyTypes?.map((type) => (
                   <option key={type} value={type}>
                     {type}
                   </option>
@@ -197,7 +197,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div>
               <label className="block text-sm font-medium mb-2">Location</label>
               <select className="w-full p-3 border rounded-lg bg-background">
-                {locations.map((location) => (
+                {locations?.map((location) => (
                   <option key={location} value={location}>
                     {location}
                   </option>
@@ -207,7 +207,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div>
               <label className="block text-sm font-medium mb-2">Budget</label>
               <select className="w-full p-3 border rounded-lg bg-background">
-                {priceRanges.map((range) => (
+                {priceRanges?.map((range) => (
                   <option key={range} value={range}>
                     {range}
                   </option>
@@ -230,13 +230,13 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
-          Object.entries(data || {}).map(
+          Object.entries(data || {})?.map(
             ([category, properties]: any) =>
               properties.length > 0 && (
                 <div key={category} className="mb-16">
                   <h2 className="text-3xl font-bold mb-8">{category}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {properties.map((property: any) => (
+                    {properties?.map((property: any) => (
                       <div
                         key={property.projIdEnc}
                         className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
@@ -365,7 +365,7 @@ export default function ResidentialPage({ data }: { data: any }) {
                 description:
                   "Our properties consistently exceed expectations with transparent processes and excellent after-sales service.",
               },
-            ].map((feature, index) => (
+            ]?.map((feature, index) => (
               <div
                 key={index}
                 className="p-8 rounded-xl bg-card hover:shadow-lg transition-all"
@@ -389,7 +389,7 @@ export default function ResidentialPage({ data }: { data: any }) {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {testimonials?.map((testimonial, index) => (
               <div
                 key={index}
                 className="bg-card p-8 rounded-xl shadow hover:shadow-md transition-all"
@@ -491,7 +491,7 @@ export default function ResidentialPage({ data }: { data: any }) {
                   Property Type
                 </label>
                 <select className="w-full p-3 border rounded-lg bg-background">
-                  {propertyTypes.slice(1).map((type) => (
+                  {propertyTypes.slice(1)?.map((type) => (
                     <option key={type} value={type}>
                       {type}
                     </option>

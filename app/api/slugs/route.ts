@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+
 import { revalidatePath, revalidateTag } from "next/cache";
 import logger from "@/app/utils/logger";
 import redisService from "@/app/utils/redis/redis.service";
@@ -10,9 +9,6 @@ const typeMapping = {
   P: "project",
   B: "builder",
 };
-
-const getFilePath = (type: string) =>
-  path.join(process.cwd(), "static", `${type}Slugs.json`);
 
 export async function POST(request: Request, response: Response) {
   try {
@@ -152,7 +148,8 @@ export async function POST(request: Request, response: Response) {
             );
             delete parsedData[key];
             revalidatePath(key.split("/").slice(0, 6).join("/"));
-            revalidatePath(key);
+            revalidatePath(key, "layout");
+            revalidateTag(id);
           } else if (
             type === "builder" &&
             id === parsedData[key].split("_")[1]
@@ -245,6 +242,7 @@ export async function POST(request: Request, response: Response) {
             );
             delete parsedData[key];
             if (!deleted) {
+              revalidateTag(id);
               revalidatePath(key.split("/").slice(0, 6).join("/"));
               deleted = true;
             }
