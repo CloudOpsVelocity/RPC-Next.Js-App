@@ -104,9 +104,7 @@ export default function ShowAllFiltersButton({
     enabled: state.projIdEnc !== null,
     ...RTK_CONFIG,
   });
-
   let phaseObjList: any = [];
-
   if (data && Object.keys(data).length > 0) {
     Object.keys(data).forEach((eachKey) => {
       if (eachKey === "status") return;
