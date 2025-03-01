@@ -140,6 +140,8 @@ export default function ProjSearchCityDropDown({
       payload: {
         city: `${city.name}+${city.id}`,
         localities: [],
+        projIdEnc: null,
+        projName: null,
       },
     });
     handleApplyFilters();

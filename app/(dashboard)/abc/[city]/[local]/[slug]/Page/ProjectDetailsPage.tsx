@@ -180,31 +180,6 @@ export default async function ProjectsDetailsPage({
             type="partial"
           />
         )}
-
-        {/* {!data.partialUnitData ? (
-          <FloorplansBlock
-            partialUnitData={data.partialUnitData}
-            // overview={overview}
-            projName={data.projectName}
-            data={data.phases}
-            slug={slug}
-            PhaseOverview={phaseOverview}
-            phaseList={data.phases}
-            postedData={{
-              postedById: data.builderId,
-              postedByName: data.companyName,
-            }}
-          />
-        ) : (
-          <PartialUnitData
-            partialUnitData={data.partialUnitData}
-            projName={data.projectName}
-            phaseList={data.phases}
-            data={data}
-            type="partial"
-          />
-        )}  */}
-
         <GalleryBlock
           {...data.media}
           projName={data.projectName}

@@ -62,7 +62,7 @@ export async function generateMetadata(
 function cleanHeading(id: string[]) {
   return id
     .join(" ")
-    .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG)\b/g, "")
+    .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
     .replace(/\s+/g, " ");
 }
 export const dynamic = "force-dynamic";

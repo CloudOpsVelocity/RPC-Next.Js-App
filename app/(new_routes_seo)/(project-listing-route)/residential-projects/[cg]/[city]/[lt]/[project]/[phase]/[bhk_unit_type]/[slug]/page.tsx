@@ -32,7 +32,7 @@ export default async function Page({ params }: Props) {
     listing: data,
     nearByLocations,
     totalPrice,
-  } = await getListingDetails(id as string);
+  } = await getListingDetails(id as string, pathname);
   const [projData, issueData, amenities] = await Promise.all([
     getProjectDetails(data.projIdEnc),
     getReportConstData(),

@@ -1,5 +1,4 @@
-"use client";
-import { memo, useState, useEffect } from "react";
+import { memo } from "react";
 import BrocherContent from "./BrocherContent";
 
 interface PhaseOverview {
@@ -19,18 +18,6 @@ const ProjectBrouchersSection = ({
 }): JSX.Element | null => {
   const isBrocherAvail =
     singleBroucher || phaseOverviewData.some((phase) => phase.phaseBrochureUrl);
-  const [deviceMemory, setDeviceMemory] = useState(null);
-
-  // useEffect(() => {
-  //   if ("deviceMemory" in navigator) {
-  //     setDeviceMemory(navigator.deviceMemory);
-  //   } else {
-  //     console.log(
-  //       "Device memory information is not supported in this browser."
-  //     );
-  //   }
-  // }, []);
-  // console.log(deviceMemory);
   if (!isBrocherAvail) return null;
   return (
     <BrocherContent
