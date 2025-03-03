@@ -46,72 +46,92 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
-          Object.entries(data).map(
-            ([category, properties]: any) =>
-              properties.length > 0 && (
-                <div key={category} className="mb-16">
-                  <h2 className="text-3xl font-bold mb-8">{category}</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {properties.map((property: any) => (
+          Object.entries(data).length > 0 &&
+          Object.entries(data).map(([category, properties]: any) => {
+            if (!properties || properties.length === 0) {
+              return null; // Handle case where properties is undefined or empty
+            }
+            return (
+              <div key={category} className="mb-16">
+                <h2 className="text-3xl font-bold mb-8">{category}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {properties.map((property: any) => {
+                    if (!property) {
+                      return null; // Handle case where property is undefined
+                    }
+                    const minPrice = property.minPrice
+                      ? parseInt(property.minPrice)
+                      : 0;
+                    const maxPrice = property.maxPrice
+                      ? parseInt(property.maxPrice)
+                      : 0;
+                    const possessionDate = property.possassionDate
+                      ? new Date(property.possassionDate).getFullYear()
+                      : "N/A";
+                    const propertyType =
+                      property.propTypes && property.propTypes.length > 0
+                        ? property.propTypes.join(", ")
+                        : "N/A";
+                    const reraStatus = property.rerastatus || "N/A";
+
+                    return (
                       <div
                         key={property.projIdEnc}
                         className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
                       >
                         <div className="relative h-64">
                           <Image
-                            src={property.coverUrl.split(",")[0]}
-                            alt={property.projName}
+                            src={
+                              property.coverUrl
+                                ? property.coverUrl.split(",")[0]
+                                : "/api/placeholder/60/60"
+                            }
+                            alt={property.projName || "Property Image"}
                             fill
                             className="object-cover"
                           />
                           <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
-                            {property.projstatus}
+                            {property.projstatus || "Status Unknown"}
                           </div>
                         </div>
                         <div className="p-6">
                           <h3 className="text-xl font-bold mb-2">
-                            {property.projName}
+                            {property.projName || "Unnamed Property"}
                           </h3>
                           <p className="text-muted-foreground flex items-center gap-2 mb-4">
-                            <FaMapMarkerAlt /> {property.locality},{" "}
-                            {property.city}
+                            <FaMapMarkerAlt />{" "}
+                            {property.locality || "Unknown Locality"},{" "}
+                            {property.city || "Unknown City"}
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
                             <div className="text-sm">
                               <div className="font-semibold">Price Range</div>
                               <div>
-                                ₹
-                                {(
-                                  parseInt(property.minPrice) / 10000000
-                                ).toFixed(2)}{" "}
-                                Cr - ₹
-                                {(
-                                  parseInt(property.maxPrice) / 10000000
-                                ).toFixed(2)}{" "}
-                                Cr
+                                ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
+                                {(maxPrice / 10000000).toFixed(2)} Cr
                               </div>
                             </div>
                             <div className="text-sm">
                               <div className="font-semibold">Property Type</div>
-                              <div>{property.propTypes.join(", ")}</div>
+                              <div>{propertyType}</div>
                             </div>
                             <div className="text-sm">
                               <div className="font-semibold">Possession</div>
-                              <div>
-                                {new Date(
-                                  property.possassionDate
-                                ).getFullYear()}
-                              </div>
+                              <div>{possessionDate}</div>
                             </div>
                             <div className="text-sm">
                               <div className="font-semibold">RERA Status</div>
-                              <div>{property.rerastatus}</div>
+                              <div>{reraStatus}</div>
                             </div>
                           </div>
                           <div className="flex gap-4">
                             <Link
-                              href={`/residential/projects/${property.city.toLowerCase()}/${property.locality.toLowerCase()}/${property.projName
-                                .toLowerCase()
+                              href={`/residential/projects/${
+                                property.city?.toLowerCase() || "unknown"
+                              }/${
+                                property.locality?.toLowerCase() || "unknown"
+                              }/${property.projName
+                                ?.toLowerCase()
                                 .replace(/ /g, "-")}-${property.projIdEnc}`}
                               className="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-center text-sm font-medium transition-colors"
                             >
@@ -126,11 +146,12 @@ export default function ResidentialPage({ data }: { data: any }) {
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
-              )
-          )
+              </div>
+            );
+          })
         )}
       </section>
 
@@ -206,12 +227,12 @@ export default function ResidentialPage({ data }: { data: any }) {
               >
                 <div className="flex items-center mb-6">
                   <div className="h-14 w-14 rounded-full overflow-hidden relative mr-4">
-                    <Image
+                    {/* <Image
                       src={testimonial.image}
                       alt={testimonial.name}
                       fill
                       className="object-cover"
-                    />
+                    /> */}
                   </div>
                   <div>
                     <h4 className="font-semibold">{testimonial.name}</h4>
