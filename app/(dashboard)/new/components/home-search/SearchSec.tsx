@@ -1,26 +1,26 @@
-import useSearchFilters from "@/app/hooks/search";
-import useQsearch from "@/app/hooks/search/useQsearch";
+import React, { useState, useEffect } from "react";
 import { Combobox, Pill, PillsInput, useCombobox } from "@mantine/core";
-import React, { FormEvent, useEffect, useState } from "react";
-import classes from "@/app/styles/search.module.css";
-import Results from "./Result";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
-import { extractApiValues } from "@/app/utils/dyanamic/projects";
-import { toQueryParams } from "../../utils/param";
+import Results from "./Result";
+import classes from "@/app/styles/search.module.css";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { toQueryParams } from "../../utils/param";
+import useQsearch from "@/app/hooks/search/useQsearch";
+
 type Props = {};
+
 export default function SearchSec({}: Props) {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const { onSearchChange, debounced, name, data } = useQsearch();
   const isTab = useMediaQuery("(max-width: 1600px)");
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
+
   const handleFieldClick = (e: any) => {
     e.stopPropagation();
     setShowAllLocalities(false);
@@ -28,53 +28,47 @@ export default function SearchSec({}: Props) {
     dispatch({ type: "SHOW_FILTER", payload: true });
   };
 
-  const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map(each=>each.value.toString());
+  const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map((each) => each.value.toString());
 
   const handleKeyDown = async (event: any) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const res = await fetch(
-        `${ 
-          process.env.NEXT_PUBLIC_BACKEND_URL
-        }/matcher/string?word=${searchQuery}&cityId=${9}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher/string?word=${searchQuery}&cityId=${9}`
       );
       const data = await res.json();
       if (data && data.ids) {
         let bhk = data.ids.split("*")[0];
         let oldBhks = f.bhk;
-        console.log(bhk)
 
-        if(allBhksIds.includes(bhk)){
+        if (allBhksIds.includes(bhk)) {
           if (!oldBhks.includes(parseInt(bhk))) {
             dispatch({ type: "ADD_BHK", payload: parseInt(bhk) });
           } else {
             handleSearch();
           }
-        }else{
-          if(bhk.length > 4){
+        } else {
+          if (bhk.length > 4) {
             handleSearch(bhk);
-          }else{
+          } else {
             const whichPage = f.propType === 36 ? "/search/listing" : "/search";
-            window.open(whichPage, "_blank", "noreferrer");    
+            window.open(whichPage, "_blank", "noreferrer");
           }
         }
       }
     }
   };
 
-  const handleSearch = (projIdEnc?:string) => {
+  const handleSearch = (projIdEnc?: string) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
 
-    if(projIdEnc){
+    if (projIdEnc) {
       const url = `projIdEnc=${projIdEnc}-listedBy=${"All"}-projName=${searchQuery.replaceAll(" ", "+")}`;
-      console.log(`${whichPage}?sf=${url}`);
-      window.open(`${whichPage}?sf=${url}`, "_blank", "noreferrer");    
-    }else{
-      console.log(`${whichPage}?sf=${toQueryParams(f)}`);
+      window.open(`${whichPage}?sf=${url}`, "_blank", "noreferrer");
+    } else {
       window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank", "noreferrer");
     }
   };
-  
 
   return (
     <Combobox
@@ -83,10 +77,8 @@ export default function SearchSec({}: Props) {
       onOptionSubmit={(val) => {
         onSearchChange(val);
         combobox.closeDropdown();
-        PillsInput
       }}
       keepMounted
-      position="bottom"
     >
       <Combobox.Target>
         <div
@@ -111,8 +103,7 @@ export default function SearchSec({}: Props) {
                 )
             )}
             {f.locality?.length > (isTab ? 1 : 2) &&
-              !showAllLocalities &&
-              f.locality?.length > (isTab ? 1 : 2) && (
+              !showAllLocalities && (
                 <Pill
                   className="capitalize cursor-pointer"
                   classNames={{ root: classes.MultiSelectionPill }}
@@ -135,13 +126,14 @@ export default function SearchSec({}: Props) {
               setSearchQuery(e.target.value);
             }}
             onKeyDown={handleKeyDown}
-            /* min-w-[234px]   sm:min-w-[255px] we change input width for full text visible in search main  */
-            className=" min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
+            className="min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
           />
         </div>
       </Combobox.Target>
       {name && (
-        <Combobox.Dropdown className="min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] !z-[10]">
+        <Combobox.Dropdown
+          className="min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] !z-[10]"
+        >
           <Results />
         </Combobox.Dropdown>
       )}
