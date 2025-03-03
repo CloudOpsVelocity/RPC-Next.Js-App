@@ -182,10 +182,11 @@ export default function Results() {
       </div>
     </div>
   ) : (
-    <ScrollArea
-      className={`px-5 py-2 min-h-[100px] max-h-[200px] overflow-auto ${
-        noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px]"
-      } `}
+    /* //overflow-auto ${
+        noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px] max-h-[200px] "
+      } ` */
+    <div
+      className={`px-5 py-2 min-h-[100px]  h-auto `}
     >
       {noResults || data == undefined ? (
         <div className="px-1 py-2 flex flex-row items-center justify-center gap-1">
@@ -316,7 +317,7 @@ export default function Results() {
           </div>
         </>
       )}
-    </ScrollArea>
+    </div>
   );
 }
 
