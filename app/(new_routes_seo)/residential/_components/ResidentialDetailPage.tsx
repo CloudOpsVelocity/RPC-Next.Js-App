@@ -6,12 +6,6 @@ import {
   FaThumbsUp,
   FaHandSparkles,
   FaMapMarkerAlt,
-  FaChevronLeft,
-  FaChevronRight,
-  FaSearch,
-  FaPhone,
-  FaEnvelope,
-  FaWhatsapp,
 } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
@@ -234,7 +228,6 @@ export default function ResidentialPage({ data }: { data: any }) {
           </div>
         </div>
       </section>
-      {/* 
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">
@@ -256,7 +249,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             </a>
           </div>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }
