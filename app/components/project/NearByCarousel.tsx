@@ -30,14 +30,14 @@ export default function NearByCarousel({
   const { data: builderData } = useBuilder({
     id: builderId ?? 1109,
     y: "N",
-    type: "proj"
-    
+    type: "proj",
   });
 
-  // console.log(data)
-
   return (
-    <div className="flex flex-col justify-start items-start w-full  mt-[4%] sm:mt-0 xl:pt-less-screen-spacing scroll-mt-28" id="similar-projects">
+    <div
+      className="flex flex-col justify-start items-start w-full  mt-[4%] sm:mt-0 xl:pt-less-screen-spacing scroll-mt-28"
+      id="similar-projects"
+    >
       <ProjectCarousel
         type="proj"
         title="Other Projects By"
@@ -45,15 +45,17 @@ export default function NearByCarousel({
         projName={capitalizeWords(builderData?.data?.userName ?? "")}
         data={
           data != undefined && data.builderProj != undefined
-            ? data.builderProj 
+            ? data.builderProj
             : []
         }
-        builderLinkActive={false} 
+        builderLinkActive={false}
         mutate={mutate}
         builderName={builderData?.data?.userName ?? ""}
-        ct="builder" 
+        ct="builder"
         id="similar-projects"
-        url={`/search/listing?builderIds=${builderData?.data?.userName ?? ""}${builderId ?? ""}`}
+        url={`/search/listing?builderIds=${builderData?.data?.userName ?? ""}${
+          builderId ?? ""
+        }`}
       />
       <ProjectCarousel
         type="proj"
@@ -73,5 +75,5 @@ export default function NearByCarousel({
         url={`/search?lat=${lat}&lng=${lng}`}
       />
     </div>
-  )
+  );
 }

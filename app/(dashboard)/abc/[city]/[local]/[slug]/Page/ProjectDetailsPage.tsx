@@ -8,7 +8,6 @@ import FirstBlock from "@/app/components/project/firstBlock";
 import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
-// import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
 import ListingRentAvail from "@/app/components/project/listingRentAvail";
@@ -19,13 +18,6 @@ import MasterPlan from "@/app/components/project/masterplan";
 const ProjectDetailsP = dynamic(
   () => import("@/app/components/project/projectDetailsP")
 );
-// const FloorplansBlock = dynamic(
-//   () => import("@/app/components/project/floorplansBlock"),
-//   {
-//     ssr: false,
-//   }
-// );
-// import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Specifications from "@/app/components/project/specification";
 import Banner from "@/app/components/project/banner";

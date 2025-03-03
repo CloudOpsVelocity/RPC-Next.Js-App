@@ -18,7 +18,7 @@ export default function NearByCarouselProjProperty({
   lat: string;
   lng: string;
   projId?: string;
-  builderId?: number; 
+  builderId?: number;
   company: string;
   nearBy?: {
     title: string;
@@ -28,10 +28,8 @@ export default function NearByCarouselProjProperty({
   const { data: builderData } = useBuilder({
     id: builderId ?? 1109,
     y: "N",
-    type: "proj", 
+    type: "proj",
   });
-
-  // console.log(data?.nearbyProj);
 
   return (
     <div
@@ -57,16 +55,18 @@ export default function NearByCarouselProjProperty({
             : []
         }
         mutate={mutate}
-        // builderName={builderData?.data?.userName}
         ct="builder"
-        url={`/search?sf=builderIds=${builderData?.data?.userName ?? ""}${builderId ?? ""}`}
+        url={`/search?sf=builderIds=${builderData?.data?.userName ?? ""}${
+          builderId ?? ""
+        }`}
       />
       <ProjectCarousel
+        key={`nearby-projects-${builderData?.data?.userName}`}
         type="proj"
         title={
           <Fragment>
             Nearby Projects of{" "}
-            <span className="text-[#148B16]"> 
+            <span className="text-[#148B16]">
               {builderData?.data?.userName}
             </span>
           </Fragment>
@@ -80,8 +80,7 @@ export default function NearByCarouselProjProperty({
             : []
         }
         mutate={mutate}
-        // builderName={builderData?.data?.userName}
-        ct="builder"
+        ct="proj"
         url={`/search?sf=lat=${lat}-lng=${lng}`}
       />
     </div>
