@@ -45,6 +45,11 @@ export default function parseProjectSearchQueryParams(params: string) {
       filters[key] = [+min, +max];
       continue;
     }
+    if (key === "cg" && value === "R" ) {
+      filters.bugdetValue = [0, 1000000]
+    }else if (key === "cg" && value === "S" ) {
+      filters.bugdetValue = [500000, 600000000]
+    }
     const hasComma = value.indexOf(",") !== -1;
     if (
       hasComma ||

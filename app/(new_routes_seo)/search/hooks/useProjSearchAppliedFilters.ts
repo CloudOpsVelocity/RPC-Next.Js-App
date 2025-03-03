@@ -1,7 +1,7 @@
 import { useAtom, useSetAtom } from "jotai";
 import { ProjSearchAppliedFiltersStore } from "../store/projSearchStore";
 import { useQueryState } from "nuqs";
-import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
+// import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
 
 type Props = {};
 
