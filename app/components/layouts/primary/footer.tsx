@@ -13,6 +13,7 @@ import {
 import Subscribe from "@/app/test/components/Section/Subscribe";
 import { memo } from "react";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 function Footer() {
   const { data: session } = useSession();
@@ -178,185 +179,164 @@ function Footer() {
       target: "_blank",
     },
   ];
-
+  const pathname = usePathname();
   return (
-    <footer className="bg-[#253F59] text-white relative z-30">
-      <div className="max-w-[95%] mx-auto pt-2 sm:pt-12 pb-6 px-1 sm:px-6  lg:pt-16 lg:pb-8 lg:px-8">
-        <div className="xl:grid xl:grid-cols-4 xl:gap-8">
-          <div className=" sm:space-y-6 xl:col-span-1">
-            <GrpDarkLogoSvg className="w-[130px] sm:w-[180px] sm:-ml-2" />
-            <p className="text-white text-sm sm:text-base mb-4 sm:mb-0">
-              We pride ourselves on delivering exceptional customer services
-              &amp; building lasting relationships with our clients
-            </p>
-            <div className="flex space-x-6">
-              {socialIcons.map(({ name, icon, link }) => (
-                <a
-                  key={name}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-gray-300"
-                >
-                  <span className="sr-only">{name}</span>
-                  {icon}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(0, 2).map(({ title, links, hrefs, rel }) => (
-                <div key={title}>
-                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
-                    {title}
-                  </h3>
-                  <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link, index) => (
-                      <li key={link}>
-                        <a
-                          href={hrefs[index]}
-                          rel={rel}
-                          target="_blank"
-                          className="text-xs sm:text-base text-gray-300 hover:text-white"
-                        >
-                          {link}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+    ![
+      "/login",
+      "/register",
+      "/register/individual",
+      "/register/agent",
+      "/register/builder",
+    ].includes(pathname) && (
+      <footer className="bg-[#253F59] text-white relative z-30">
+        <div className="max-w-[95%] mx-auto pt-2 sm:pt-12 pb-6 px-1 sm:px-6  lg:pt-16 lg:pb-8 lg:px-8">
+          <div className="xl:grid xl:grid-cols-4 xl:gap-8">
+            <div className=" sm:space-y-6 xl:col-span-1">
+              <GrpDarkLogoSvg className="w-[130px] sm:w-[180px] sm:-ml-2" />
+              <p className="text-white text-sm sm:text-base mb-4 sm:mb-0">
+                We pride ourselves on delivering exceptional customer services
+                &amp; building lasting relationships with our clients
+              </p>
+              <div className="flex space-x-6">
+                {socialIcons.map(({ name, icon, link }) => (
+                  <a
+                    key={name}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-gray-300"
+                  >
+                    <span className="sr-only">{name}</span>
+                    {icon}
+                  </a>
+                ))}
+              </div>
             </div>
 
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(2, 4).map(({ title, links, hrefs, rel }) => {
-                return (
+            <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                {sections.slice(0, 2).map(({ title, links, hrefs, rel }) => (
                   <div key={title}>
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    {/* <ul className="sm:mt-4  md:space-y-4">
-                      {links.map((link, index) => {
-                        if (link == "Login/Signup") {
-                          return (
-                            <li key={link}>
-                              <a
-                                href={hrefs[index]}
-                                target="_self"
-                                className="text-xs sm:text-base text-gray-300 hover:text-white"
-                              >
-                                {link}
-                              </a>
-                            </li>
-                          );
-                        } else {
-                          return (
-                            <li key={link}>
-                              <a
-                                href={hrefs[index]}
-                                target={target}
-                                className="text-xs sm:text-base text-gray-300 hover:text-white"
-                              >
-                                {link}
-                              </a>
-                            </li>
-                          );
-                        }
-                      })}
-                    </ul> */}
-
                     <ul className="sm:mt-4  md:space-y-4">
-                      {links.map((link, index) => {
-                        if (link !== "") {
-                          return (
-                            <li key={link}>
-                              <a
-                                href={hrefs[index]}
-                                rel={rel}
-                                target="_blank"
-                                className="text-xs sm:text-base text-gray-300 hover:text-white"
-                              >
-                                {link}
-                              </a>
-                            </li>
-                          );
-                        }
-                      })}
+                      {links.map((link, index) => (
+                        <li key={link}>
+                          <a
+                            href={hrefs[index]}
+                            rel={rel}
+                            target="_blank"
+                            className="text-xs sm:text-base text-gray-300 hover:text-white"
+                          >
+                            {link}
+                          </a>
+                        </li>
+                      ))}
                     </ul>
                   </div>
-                );
-              })}
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(4).map(({ title, links, hrefs, rel }) => (
-                <div key={title}>
-                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
-                    {title}
-                  </h3>
-                  <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link, index) => (
-                      <li key={link}>
-                        <a
-                          href={hrefs[index]}
-                          rel={rel}
-                          target="_blank"
-                          className="text-xs sm:text-base text-gray-300 hover:text-white"
-                        >
-                          {link}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+                ))}
+              </div>
 
-        <div className="mt-4 sm:mt-12 border-t border-gray-700">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-            <div>
-              <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
-                Subscribe to our newsletter
-              </h3>
-              <p className="mt-1 sm:mt-4 text-xs sm:text-base text-gray-300">
-                Get the latest news, market trends, and hot property listings
-                delivered to your inbox.
-              </p>
-              <Subscribe />
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                {sections.slice(2, 4).map(({ title, links, hrefs, rel }) => {
+                  return (
+                    <div key={title}>
+                      <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
+                        {title}
+                      </h3>
+
+                      <ul className="sm:mt-4  md:space-y-4">
+                        {links.map((link, index) => {
+                          if (link !== "") {
+                            return (
+                              <li key={link}>
+                                <a
+                                  href={hrefs[index]}
+                                  rel={rel}
+                                  target="_blank"
+                                  className="text-xs sm:text-base text-gray-300 hover:text-white"
+                                >
+                                  {link}
+                                </a>
+                              </li>
+                            );
+                          }
+                        })}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                {sections.slice(4).map(({ title, links, hrefs, rel }) => (
+                  <div key={title}>
+                    <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
+                      {title}
+                    </h3>
+                    <ul className="sm:mt-4  md:space-y-4">
+                      {links.map((link, index) => (
+                        <li key={link}>
+                          <a
+                            href={hrefs[index]}
+                            rel={rel}
+                            target="_blank"
+                            className="text-xs sm:text-base text-gray-300 hover:text-white"
+                          >
+                            {link}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-2 sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
-          <div className="flex space-x-6 md:order-2">
-            <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
-              <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
-            </button>
-            <a
-              href={`tel:${8884440963}`}
-              rel="noopener noreferrer"
-              className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
-            >
-              <FaPhoneAlt className="mr-1" /> +91-8884440963
-            </a>
+          <div className="mt-4 sm:mt-12 border-t border-gray-700">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+              <div>
+                <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
+                  Subscribe to our newsletter
+                </h3>
+                <p className="mt-1 sm:mt-4 text-xs sm:text-base text-gray-300">
+                  Get the latest news, market trends, and hot property listings
+                  delivered to your inbox.
+                </p>
+                <Subscribe />
+              </div>
+            </div>
           </div>
-          <p className="mt-1 text-xs sm:text-base text-white md:mt-0 md:order-1">
-            Copyright © 2024 GetRightProperty. All Rights Reserved.
-            <span>
-              <br />A Product By &quot;
-              <a href="https://rpclan.com/" rel="noopener noreferrer">
-                {" "}
-                RPCLAN SERVICES PVT.LTD
+
+          <div className="mt-2 sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
+            <div className="flex space-x-6 md:order-2">
+              <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
+                <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
+              </button>
+              <a
+                href={`tel:${8884440963}`}
+                rel="noopener noreferrer"
+                className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
+              >
+                <FaPhoneAlt className="mr-1" /> +91-8884440963
               </a>
-              &quot;
-            </span>
-          </p>
+            </div>
+            <p className="mt-1 text-xs sm:text-base text-white md:mt-0 md:order-1">
+              Copyright © 2024 GetRightProperty. All Rights Reserved.
+              <span>
+                <br />A Product By &quot;
+                <a href="https://rpclan.com/" rel="noopener noreferrer">
+                  {" "}
+                  RPCLAN SERVICES PVT.LTD
+                </a>
+                &quot;
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    )
   );
 }
 export default memo(Footer);
