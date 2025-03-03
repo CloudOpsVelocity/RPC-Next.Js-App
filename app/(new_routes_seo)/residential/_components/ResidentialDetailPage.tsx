@@ -46,7 +46,7 @@ export default function ResidentialPage({ data }: { data: any }) {
     <div className="min-h-screen bg-background">
       <Banner heroSlides={data?.featured} data={data} />
       <Filters />
-      {/* <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-4">
         {!data ? (
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -199,7 +199,7 @@ export default function ResidentialPage({ data }: { data: any }) {
         </div>
       </section>
 
-      <section className="py-20 bg-muted/30">
+      {/* <section className="py-20 bg-muted/30">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-16">
             What Our Customers Say
