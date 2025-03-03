@@ -1,6 +1,3 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import {
   FaHome,
   FaShieldAlt,
@@ -18,7 +15,8 @@ import {
 } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
-
+import Banner from "./Banner";
+import Filters from "./Filters";
 const testimonials = [
   {
     name: "Priya Sharma",
@@ -43,178 +41,12 @@ const testimonials = [
   },
 ];
 
-const propertyTypes = ["All", "Villa", "Apartment", "Villament", "Plot"];
-const priceRanges = [
-  "All",
-  "Under ₹80 Lakhs",
-  "₹80L - ₹1.2 Cr",
-  "Above ₹1.2 Cr",
-];
-const locations = [
-  "All",
-  "Kengeri",
-  "Electronic City",
-  "Whitefield",
-  "Sarjapur Road",
-];
-
-const heroSlides = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop",
-    title: "Modern Living Spaces",
-    subtitle:
-      "Discover exceptional residential properties designed for contemporary lifestyles.",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop",
-    title: "Vajra Elegance",
-    subtitle:
-      "Premium apartments in Kengeri with luxury amenities and smart features.",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop",
-    title: "Exceptional Quality",
-    subtitle: "Built with premium materials and attention to every detail.",
-  },
-];
 export default function ResidentialPage({ data }: { data: any }) {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [filterType, setFilterType] = useState("All");
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [heroSlides.length]);
-
-  const handleSlideChange = (index: number) => {
-    if (data?.featured?.length) {
-      setActiveSlide(index);
-    }
-  };
-
-  const handlePrevSlide = () => {
-    setActiveSlide(
-      (activeSlide - 1 + (data?.featured?.length || 0)) %
-        (data?.featured?.length || 1)
-    );
-  };
-
-  const handleNextSlide = () => {
-    setActiveSlide((activeSlide + 1) % (data?.featured?.length || 1));
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <section className="relative h-[90vh] w-full">
-        {data?.featured?.map((slide: any, index: number) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === activeSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={slide.coverUrl.split(",")[0]}
-              alt={slide.name}
-              fill
-              className="object-cover brightness-75"
-              priority={index === 0}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-background/90">
-              <div className="container mx-auto h-full flex items-end pb-32 px-4">
-                <div className="max-w-2xl text-white">
-                  <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-md animate-fadeIn">
-                    {slide.projName}
-                  </h1>
-                  <p className="text-lg md:text-2xl opacity-90 drop-shadow-md animate-slideUp">
-                    {`${slide.locality}, ${slide.city}`}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {data?.featured?.map((_: any, index: number) => (
-            <button
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === activeSlide ? "bg-primary w-6" : "bg-white/50"
-              }`}
-              onClick={() => handleSlideChange(index)}
-            />
-          ))}
-        </div>
-
-        <button
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full"
-          onClick={handlePrevSlide}
-        >
-          <FaChevronLeft />
-        </button>
-        <button
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full"
-          onClick={handleNextSlide}
-        >
-          <FaChevronRight />
-        </button>
-      </section>
-
-      <section className="relative container mx-auto -mt-16 px-4">
-        <div className="bg-card shadow-xl rounded-xl p-6 z-[500] bg-white">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Property Type
-              </label>
-              <select
-                className="w-full p-3 border rounded-lg bg-background"
-                value={filterType}
-                onChange={(e) => setFilterType(e.target.value)}
-              >
-                {propertyTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Location</label>
-              <select className="w-full p-3 border rounded-lg bg-background">
-                {locations.map((location) => (
-                  <option key={location} value={location}>
-                    {location}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Budget</label>
-              <select className="w-full p-3 border rounded-lg bg-background">
-                {priceRanges.map((range) => (
-                  <option key={range} value={range}>
-                    {range}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex items-end">
-              <button className="w-full bg-primary hover:bg-primary/90 p-3 rounded-lg font-medium flex items-center justify-center gap-2">
-                <FaSearch /> Search Properties
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 container mx-auto px-4">
+      <Banner heroSlides={data?.featured} data={data} />
+      <Filters />
+      {/* <section className="py-20 container mx-auto px-4">
         {!data ? (
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -424,7 +256,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
