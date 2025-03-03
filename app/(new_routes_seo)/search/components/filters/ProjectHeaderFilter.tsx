@@ -23,6 +23,7 @@ import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
 export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchError, setSearchError] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
   const path = usePathname();
   const [selectedFilters, setSelectedFilters] = useState<{
@@ -91,8 +92,13 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
+    if (/[^a-zA-Z0-9\s]/.test(value)) {
+      setSearchError("Special characters are not allowed.");
+    } else {
+      setSearchError("");
+      onSearchChange(value);
+    }
     setSearchQuery(value);
-    onSearchChange(value);
   };
   const isListingSearch = path.includes("listing");
   const AgentOwnerBuilderMap = new Map([
@@ -289,6 +295,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                       setOpenDropdown(null);
                     }}
                   />
+
                   <button type="submit">
                     <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                   </button>
@@ -370,6 +377,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                       <div className="p-3 text-gray-500">
                         {name
                           ? "No suggestions available"
+                          : searchError
+                          ? searchError
                           : "Search or type something"}
                       </div>
                     )}

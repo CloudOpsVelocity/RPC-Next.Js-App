@@ -106,7 +106,6 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  console.log("getProjectDetailsMetaData");
   let slug = params.slug.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();

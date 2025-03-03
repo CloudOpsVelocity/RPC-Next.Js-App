@@ -80,18 +80,9 @@ const heroSlides = [
     subtitle: "Built with premium materials and attention to every detail.",
   },
 ];
-
 export default function ResidentialPage({ data }: { data: any }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [filterType, setFilterType] = useState("All");
-  const [isSticky, setIsSticky] = useState(false);
-  const [showEnquiryForm, setShowEnquiryForm] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsSticky(window.scrollY > 100);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -425,80 +416,15 @@ export default function ResidentialPage({ data }: { data: any }) {
             <button className="bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-lg font-medium transition-colors">
               Book a Site Visit
             </button>
-            <button
+            <a
+              href="tel:+91-8884440963"
               className="bg-transparent border border-white hover:bg-white/10 px-6 py-3 rounded-lg font-medium transition-colors"
-              onClick={() => setShowEnquiryForm(true)}
             >
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       </section>
-
-      {showEnquiryForm && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-card rounded-xl p-6 max-w-md w-full relative animate-fadeIn">
-            <button
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
-              onClick={() => setShowEnquiryForm(false)}
-            >
-              ✕
-            </button>
-            <h3 className="text-xl font-bold mb-6">
-              Enquire About Our Properties
-            </h3>
-            <form className="space-y-4">
-              {["Name", "Phone", "Email"].map((label, index) => (
-                <div key={index}>
-                  <label className="block text-sm font-medium mb-1">
-                    {label}
-                  </label>
-                  <input
-                    type={label === "Email" ? "email" : "text"}
-                    className="w-full p-3 border rounded-lg bg-background"
-                    placeholder={`Your ${label.toLowerCase()}`}
-                  />
-                </div>
-              ))}
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Property Type
-                </label>
-                <select className="w-full p-3 border rounded-lg bg-background">
-                  {propertyTypes.slice(1).map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Message
-                </label>
-                <textarea
-                  className="w-full p-3 border rounded-lg bg-background resize-none h-24"
-                  placeholder="Your requirements"
-                ></textarea>
-              </div>
-              <button className="w-full bg-primary hover:bg-primary/90 text-white p-3 rounded-lg font-medium transition-colors">
-                Submit Enquiry
-              </button>
-            </form>
-            <div className="mt-6 pt-6 border-t grid grid-cols-3 gap-4">
-              <button className="flex items-center justify-center gap-2 p-2 bg-blue-600 text-white rounded-lg">
-                <FaPhone className="h-4 w-4" /> Call
-              </button>
-              <button className="flex items-center justify-center gap-2 p-2 bg-green-600 text-white rounded-lg">
-                <FaWhatsapp className="h-4 w-4" /> WhatsApp
-              </button>
-              <button className="flex items-center justify-center gap-2 p-2 bg-red-600 text-white rounded-lg">
-                <FaEnvelope className="h-4 w-4" /> Email
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
