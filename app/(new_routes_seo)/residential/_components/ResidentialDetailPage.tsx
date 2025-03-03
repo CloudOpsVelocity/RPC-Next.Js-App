@@ -46,14 +46,17 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
-          Object.entries(data).length > 0 &&
+          Array.isArray(data) &&
+          data.length > 0 &&
           Object.entries(data).map(([category, properties]: any) => {
-            if (!properties || properties.length === 0) {
+            if (!Array.isArray(properties) || properties.length === 0) {
               return null; // Handle case where properties is undefined or empty
             }
             return (
               <div key={category} className="mb-16">
-                <h2 className="text-3xl font-bold mb-8">{category}</h2>
+                <h2 className="text-3xl font-bold mb-8 capitalize">
+                  {category}
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {properties.map((property: any) => {
                     if (!property) {
@@ -69,7 +72,8 @@ export default function ResidentialPage({ data }: { data: any }) {
                       ? new Date(property.possassionDate).getFullYear()
                       : "N/A";
                     const propertyType =
-                      property.propTypes && property.propTypes.length > 0
+                      Array.isArray(property.propTypes) &&
+                      property.propTypes.length > 0
                         ? property.propTypes.join(", ")
                         : "N/A";
                     const reraStatus = property.rerastatus || "N/A";
@@ -220,7 +224,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             What Our Customers Say
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {testimonials?.map((testimonial, index) => (
               <div
                 key={index}
                 className="bg-card p-8 rounded-xl shadow hover:shadow-md transition-all"
