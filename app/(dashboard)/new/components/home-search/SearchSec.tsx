@@ -74,6 +74,7 @@ export default function SearchSec({}: Props) {
       window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank", "noreferrer");
     }
   };
+  
 
   return (
     <Combobox
@@ -82,8 +83,10 @@ export default function SearchSec({}: Props) {
       onOptionSubmit={(val) => {
         onSearchChange(val);
         combobox.closeDropdown();
+        PillsInput
       }}
       keepMounted
+      position="bottom"
     >
       <Combobox.Target>
         <div
