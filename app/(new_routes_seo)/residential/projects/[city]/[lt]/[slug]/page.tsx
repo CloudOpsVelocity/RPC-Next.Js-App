@@ -210,15 +210,12 @@ export async function generateMetadata(
       title,
       description,
       images: [data.media.coverImageUrl.split(",")[0]],
-      site: "@yourTwitterHandle",
+      site: "@getrightproperty",
     },
     robots: {
       index: true,
       follow: true,
     },
-    // verification: {
-    //   google: "your-google-verification-code",
-    // },
     category: "Real Estate",
     other: {
       "price-range": priceRange,
