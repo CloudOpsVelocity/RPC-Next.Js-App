@@ -135,8 +135,8 @@ export default function SearchSec({}: Props) {
       /*  <Combobox.Dropdown className="min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] !z-[10] mt-1 absolute top-full">
          <Results />
         </Combobox.Dropdown> */
-        <div className=" min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]  mt-2 bg-white shadow-xl absolute z-50 max-h-[400px] overflow-y-auto ">
-            <div className="flex items-center justify-between p-4 border-b">
+        <div className="  min-w-[[calc(100vw-9vw)]] sm:max-w-[100%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]  mt-2 bg-white shadow-xl absolute z-50 max-h-[400px] overflow-y-auto ">
+            <div className="flex items-center justify-between p-2 sm:p-4 border-b">
             <Results />
             </div>
             </div>
