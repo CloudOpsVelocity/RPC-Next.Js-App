@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaRedoAlt } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useQuery } from "react-query";
@@ -122,6 +122,19 @@ export default function BuildersDirectory({
       resultArray.push({ value: key, label: cities[key] }); // Custom handling, can adjust for keys, values, etc.
     }
   }
+
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (selectRef.current) {
+        selectRef.current.blur(); // Close dropdown when scrolling
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
       {/* Fixed Header */}
@@ -188,6 +201,7 @@ export default function BuildersDirectory({
               </div>
 
               <Select
+                ref={selectRef}
                 data={resultArray}
                 searchable
                 size={isMobile ? "xs" : "md"}
@@ -203,6 +217,7 @@ export default function BuildersDirectory({
                 }}
                 maxLength={20}
                 rightSection={<span />}
+                
               />
 
               <select
@@ -289,6 +304,7 @@ export default function BuildersDirectory({
         </div>
 
         {/* Pagination */}
+        {totalPages > 1 &&
         <div className="flex justify-center mt-8">
           <Pagination
             total={totalPages}
@@ -301,6 +317,7 @@ export default function BuildersDirectory({
             }}
           />
         </div>
+        }
       </div>
     </div>
   );

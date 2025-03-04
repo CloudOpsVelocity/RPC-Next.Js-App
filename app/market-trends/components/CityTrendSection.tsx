@@ -254,7 +254,7 @@ const TrendFilters = ({
   onFilterChange: any;
 }) => {
   return (
-    <div className="flex flex-col md:min-w-[240px] md:max-w-[260px] xl:min-w-[260px] xl:max-w-[260px] shadow-md rounded-[10px]  md:!top-[70px] border-t-[2px] border-solid p-[10px] order-1 md:order-2 max-h-[300px] sticky top-[100px]  ">
+    <div className="flex flex-col md:min-w-[240px] md:max-w-[260px] xl:min-w-[260px] xl:max-w-[260px] shadow-md rounded-[10px]  md:!top-[70px] border-t-[2px] border-solid p-[10px] order-1 md:order-2 max-h-[300px] md:sticky top-[100px]  ">
       <h3 className="mb-[10px] text-[12px] md:text-[14px] not-italic font-semibold leading-[normal] capitalize">
         Show Price Trends for
       </h3>

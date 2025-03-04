@@ -16,7 +16,7 @@ export default function ListBox({}: Props) {
 const config = {
   data: [
     {
-      name: "marathalli",
+      name: "Marathahalli",
       id: 397,
       type: "L",
       url: "/marathalli.jpg"
