@@ -72,6 +72,7 @@ export default function useAuth({
   const router = useRouter();
 
   const redirectPath = getCallPath();
+  console.log(redirectPath);
   const saveStep = async (step: number = 1) => {
     try {
       const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/user-signup-step?page=${step}`;
@@ -103,9 +104,9 @@ export default function useAuth({
         });
       type === "register"
         ? setTimeout(() => {
-            router.push(redirectPath.url ?? "/");
+            router.push(redirectPath.url || "/");
           }, 5000)
-        : router.push(redirectPath.url ?? "/");
+        : router.push(redirectPath.url || "/");
     } else {
       if (res?.error === "A" || res?.error === "B") {
         router.push(`/register/${res?.error === "A" ? "agent" : "builder"}`);
