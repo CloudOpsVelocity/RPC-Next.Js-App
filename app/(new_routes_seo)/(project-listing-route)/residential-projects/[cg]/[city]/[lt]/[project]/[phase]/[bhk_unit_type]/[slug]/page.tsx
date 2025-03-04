@@ -95,6 +95,7 @@ export async function generateMetadata(
       } in ${
         data.ltName
       }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+      url: data.projMedia.coverImageUrl,
     },
   };
 }

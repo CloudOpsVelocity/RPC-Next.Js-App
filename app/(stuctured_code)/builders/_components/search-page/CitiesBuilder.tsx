@@ -123,7 +123,7 @@ export default function BuildersDirectory({
     }
   }
 
-  const selectRef = useRef(null);
+  const selectRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -131,8 +131,8 @@ export default function BuildersDirectory({
         selectRef.current.blur(); // Close dropdown when scrolling
       }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -217,7 +217,6 @@ export default function BuildersDirectory({
                 }}
                 maxLength={20}
                 rightSection={<span />}
-                
               />
 
               <select
@@ -304,20 +303,20 @@ export default function BuildersDirectory({
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 &&
-        <div className="flex justify-center mt-8">
-          <Pagination
-            total={totalPages}
-            onNextPage={onNextPage}
-            onPreviousPage={onBackPage}
-            value={page + 1}
-            onChange={(value) => {
-              window.scrollTo(0, 0);
-              setPage(value - 1);
-            }}
-          />
-        </div>
-        }
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8">
+            <Pagination
+              total={totalPages}
+              onNextPage={onNextPage}
+              onPreviousPage={onBackPage}
+              value={page + 1}
+              onChange={(value) => {
+                window.scrollTo(0, 0);
+                setPage(value - 1);
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
