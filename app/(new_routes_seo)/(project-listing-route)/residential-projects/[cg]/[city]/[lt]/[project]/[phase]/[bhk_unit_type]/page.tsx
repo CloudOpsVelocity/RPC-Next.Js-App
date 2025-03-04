@@ -141,6 +141,7 @@ export async function generateMetadata(
       },
     };
   }
+
   const id = params.bhk_unit_type.split("-")[1];
   const {
     listing: data,
@@ -156,6 +157,7 @@ export async function generateMetadata(
     } in ${
       data.ltName
     }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+    applicationName: "Getrightproperty",
     openGraph: {
       title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
@@ -166,6 +168,21 @@ export async function generateMetadata(
         data.ltName
       }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
       url: data.projMedia.coverImageUrl,
+      type: "website",
+      // site_name: "Getrightproperty",
+      images: [
+        {
+          url: data.projMedia.coverImageUrl,
+          width: 800,
+          height: 600,
+          alt: `${data.bhkName ?? ""} ${data.propTypeName} image`,
+        },
+      ],
+      locale: "en_US",
+      siteName: "Getrightproperty",
+      countryName: "India",
+      emails: ["rahulrpclan@gamil.com"],
+      phoneNumbers: ["+91-8884440963"],
     },
   };
 }
