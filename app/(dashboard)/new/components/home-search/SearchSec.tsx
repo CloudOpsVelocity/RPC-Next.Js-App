@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
+import useSearchFilters from "@/app/hooks/search";
+import useQsearch from "@/app/hooks/search/useQsearch";
 import { Combobox, Pill, PillsInput, useCombobox } from "@mantine/core";
-import { useAtom } from "jotai";
+import React, { FormEvent, useEffect, useState } from "react";
+import classes from "@/app/styles/search.module.css";
+import Results from "./Result";
+import { useAtom, useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
-import Results from "./Result";
-import classes from "@/app/styles/search.module.css";
-import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { toQueryParams } from "../../utils/param";
-import useQsearch from "@/app/hooks/search/useQsearch";
-
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
 type Props = {};
-
 export default function SearchSec({}: Props) {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const { onSearchChange, debounced, name, data } = useQsearch();
   const isTab = useMediaQuery("(max-width: 1600px)");
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
-
   const handleFieldClick = (e: any) => {
     e.stopPropagation();
     setShowAllLocalities(false);
@@ -28,59 +28,57 @@ export default function SearchSec({}: Props) {
     dispatch({ type: "SHOW_FILTER", payload: true });
   };
 
-  const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map((each) => each.value.toString());
+  const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map(each=>each.value.toString());
 
   const handleKeyDown = async (event: any) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher/string?word=${searchQuery}&cityId=${9}`
+        `${ 
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/matcher/string?word=${searchQuery}&cityId=${9}`
       );
       const data = await res.json();
       if (data && data.ids) {
         let bhk = data.ids.split("*")[0];
         let oldBhks = f.bhk;
+        console.log(bhk)
 
-        if (allBhksIds.includes(bhk)) {
+        if(allBhksIds.includes(bhk)){
           if (!oldBhks.includes(parseInt(bhk))) {
             dispatch({ type: "ADD_BHK", payload: parseInt(bhk) });
           } else {
             handleSearch();
           }
-        } else {
-          if (bhk.length > 4) {
+        }else{
+          if(bhk.length > 4){
             handleSearch(bhk);
-          } else {
+          }else{
             const whichPage = f.propType === 36 ? "/search/listing" : "/search";
-            window.open(whichPage, "_blank", "noreferrer");
+            window.open(whichPage, "_blank", "noreferrer");    
           }
         }
       }
     }
   };
 
-  const handleSearch = (projIdEnc?: string) => {
+  const handleSearch = (projIdEnc?:string) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
 
-    if (projIdEnc) {
+    if(projIdEnc){
       const url = `projIdEnc=${projIdEnc}-listedBy=${"All"}-projName=${searchQuery.replaceAll(" ", "+")}`;
-      window.open(`${whichPage}?sf=${url}`, "_blank", "noreferrer");
-    } else {
+      console.log(`${whichPage}?sf=${url}`);
+      window.open(`${whichPage}?sf=${url}`, "_blank", "noreferrer");    
+    }else{
+      console.log(`${whichPage}?sf=${toQueryParams(f)}`);
       window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank", "noreferrer");
     }
   };
+  
 
   return (
-    <Combobox
-      store={combobox}
-      withinPortal={false}
-      onOptionSubmit={(val) => {
-        onSearchChange(val);
-        combobox.closeDropdown();
-      }}
-      keepMounted
-    >
-      <Combobox.Target>
+    <div className = "realtive">
+      
         <div
           onClick={() => setShowAllLocalities(!showAllLocalities)}
           className="w-[100%] sm:min-w-[49.9%] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start flex-wrap"
@@ -103,7 +101,8 @@ export default function SearchSec({}: Props) {
                 )
             )}
             {f.locality?.length > (isTab ? 1 : 2) &&
-              !showAllLocalities && (
+              !showAllLocalities &&
+              f.locality?.length > (isTab ? 1 : 2) && (
                 <Pill
                   className="capitalize cursor-pointer"
                   classNames={{ root: classes.MultiSelectionPill }}
@@ -126,17 +125,22 @@ export default function SearchSec({}: Props) {
               setSearchQuery(e.target.value);
             }}
             onKeyDown={handleKeyDown}
-            className="min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
+            /* min-w-[234px]   sm:min-w-[255px] we change input width for full text visible in search main  */
+            className=" min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
           />
         </div>
-      </Combobox.Target>
+     
       {name && (
-        <Combobox.Dropdown
-          className="min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] !z-[10]"
-        >
-          <Results />
-        </Combobox.Dropdown>
+        //absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto
+      /*  <Combobox.Dropdown className="min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] !z-[10] mt-1 absolute top-full">
+         <Results />
+        </Combobox.Dropdown> */
+        <div className=" min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]  mt-2 bg-white shadow-xl absolute z-50 max-h-[400px] overflow-y-auto ">
+            <div className="flex items-center justify-between p-4 border-b">
+            <Results />
+            </div>
+            </div>
       )}
-    </Combobox>
+    </div>
   );
 }
