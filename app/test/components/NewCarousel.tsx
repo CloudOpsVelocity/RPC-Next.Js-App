@@ -11,7 +11,7 @@ interface CarouselProps<T> {
   className?: string;
   url?: string;
   renderViewMore?: () => React.ReactNode; // Function to render the "View More" card
-  type?:string;
+  type?: string;
 }
 
 function NewCarousel<T>({
@@ -26,14 +26,26 @@ function NewCarousel<T>({
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTab = useMediaQuery("(max-width: 1280px)");
   const isLaptop = useMediaQuery("(max-width: 1600px)");
+  const calcSlideToShow = () => {
+    if (isMobile) {
+      return 1.1; // Show 1 slide on mobile
+    } else if (isTab) {
+      return slidesToShow - 2; // Show 2 slides on tablets
+    } else if (isLaptop) {
+      return slidesToShow - 1.5; // Show 3 slides on laptops
+    } else {
+      return slidesToShow; // Default for larger screens
+    }
+  };
 
-  slidesToShow = isMobile
-    ? 1.1
-    : isLaptop
-    ? isTab
-      ? slidesToShow - 1
-      : slidesToShow - 1
-    : slidesToShow;
+  slidesToShow = calcSlideToShow();
+  // slidesToShow = isMobile
+  //   ? 1.1
+  //   : isLaptop ? slidesToShow - 1.5
+  //   : isTab
+  //     ? slidesToShow - 2
+  //     : slidesToShow - 1
+  //   : slidesToShow;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -89,7 +101,9 @@ function NewCarousel<T>({
           <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             View More
           </h3>
-          <p className="text-sm text-gray-500">Explore all {type == "proj" ? "Projects" : "listings"}</p>
+          <p className="text-sm text-gray-500">
+            Explore all {type == "proj" ? "Projects" : "listings"}
+          </p>
         </div>
         <div className="flex items-center gap-2 text-gray-400">
           <span className="text-xs">Browse complete catalog</span>
