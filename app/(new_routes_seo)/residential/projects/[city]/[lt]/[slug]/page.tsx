@@ -29,7 +29,10 @@ const components = {
     () => import("@/app/components/project/projectDetailsP")
   ),
   GalleryBlock: dynamicImport(
-    () => import("@/app/components/project/galleryBlock")
+    () => import("@/app/components/project/galleryBlock"),
+    {
+      ssr: false,
+    }
   ),
   Specifications: dynamicImport(
     () => import("@/app/components/project/specification")
