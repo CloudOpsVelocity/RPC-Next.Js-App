@@ -312,7 +312,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                 isSearchOpen && (
                   <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">
                     {searchError ? (
-                      <div className="p-5">{searchError}</div>
+                      <div className="p-3">{searchError}</div>
                     ) : searchData.loc?.length > 0 ||
                       searchData.builders?.length > 0 ||
                       searchData.projects?.length > 0 ||

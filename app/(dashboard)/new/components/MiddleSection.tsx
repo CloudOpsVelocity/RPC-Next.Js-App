@@ -27,9 +27,11 @@ export default function MiddleSection({
   cityData,
 }: Props) {
   const { data: session } = useSession();
-  const { data: shortIds, isLoading } = useQuery(["shortIds"], () =>
-    getClientShortIds(session)
-  );
+  const { data: shortIds, isLoading } = useQuery({
+    queryKey: ["shortIds"],
+    queryFn: () => getClientShortIds(session),
+    enabled: !!session,
+  });
 
   return isLoading ? null : (
     <>
