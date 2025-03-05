@@ -131,7 +131,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   }
 
   // 🔹 Event handlers for each marker
-  const getEventHandlers = (itemId: string) => ({
+  const getEventHandlers = (itemId: string, item?: any) => ({
     mouseover: () => {
       const marker = markerRefs.current.get(itemId);
       if (marker) marker.openPopup();
@@ -143,12 +143,15 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       }
     },
     click: () => {
-      setSelectedValue((prev) => ({
-        ...prev,
-        reqId: prev?.reqId === itemId ? null : itemId,
-      }));
-      const marker = markerRefs.current.get(itemId);
-      if (marker) marker.openPopup();
+      if(selected?.reqId !== itemId && selected?.phaseId !== item?.phaseId ){
+        setSelectedValue((prev) => ({
+          ...prev,
+          reqId: itemId,
+          phaseId: item?.phaseId 
+        }));
+        const marker = markerRefs.current.get(itemId);
+        if (marker) marker.openPopup();
+      }
     },
   });
 
@@ -233,7 +236,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           }
         : null;
         
-      if ((selected?.reqId === itemId && selected && selected?.phaseId === item.phaseId ) || !selected) {
+      if ((selected?.reqId === itemId && selected && selected?.phaseId === item.phaseId) || (selected && selected?.reqId === itemId ) || !selected) {
         return (
           <>
             <Marker
@@ -246,7 +249,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
                 parseFloat(item?.lang || 0),
               ]}
               icon={isMobile ? MobileIcon : MapIcon}
-              eventHandlers={getEventHandlers(itemId)}
+              eventHandlers={getEventHandlers(itemId, item)}
             >
               <Popup>
                 {!isProp ? (
