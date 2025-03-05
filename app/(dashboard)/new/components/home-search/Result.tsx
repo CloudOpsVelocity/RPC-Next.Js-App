@@ -186,7 +186,7 @@ export default function Results() {
         noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px] max-h-[200px] "
       } ` */
     <div
-      className={`px-2 sm:px-5 py-2 min-h-[100px]  h-auto `}
+      className={`px-2  py-2 min-h-[100px]  h-auto w-full  `}
     >
       {noResults || data == undefined ? (
         <div className="px-1 py-2 flex flex-row items-center justify-center gap-1">
