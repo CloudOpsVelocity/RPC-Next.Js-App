@@ -147,7 +147,10 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         setSelectedValue((prev) => ({
           ...prev,
           reqId: itemId,
-          phaseId: item?.phaseId 
+          phaseId: item?.phaseId,
+          lat: item?.lat,
+          lang: item?.lang,
+          projOrPropName: item?.propName ? item?.propName : item?.projName,
         }));
         const marker = markerRefs.current.get(itemId);
         if (marker) marker.openPopup();
@@ -189,8 +192,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       data &&
       data?.length > 0 &&
       nearbyData &&
-      Object.keys(nearbyData).length === 0 &&
-      selected === null
+      Object.keys(nearbyData).length === 0 
+      && selected === null
     ) {
       const bounds = L.latLngBounds(
         data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
