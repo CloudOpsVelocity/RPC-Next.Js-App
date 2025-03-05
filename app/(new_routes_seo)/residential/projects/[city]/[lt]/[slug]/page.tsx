@@ -44,12 +44,23 @@ const AboutBuilder = dynamicImport(
 );
 const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamicImport(
-  () => import("@/app/components/project/NearByCarousel")
+  () => import("@/app/components/project/NearByCarousel"),
+  {
+    ssr: false,
+  }
 );
 const LoginPopup = dynamicImport(
-  () => import("@/app/components/project/modals/LoginPop")
+  () => import("@/app/components/project/modals/LoginPop"),
+  {
+    ssr: false,
+  }
 );
-const Reviews = dynamicImport(() => import("@/app/components/project/reviews"));
+const Reviews = dynamicImport(
+  () => import("@/app/components/project/reviews"),
+  {
+    ssr: false,
+  }
+);
 const PartialUnitData = dynamicImport(
   () => import("@/app/components/project/sections")
 );
@@ -74,7 +85,10 @@ const ProjectGallery = dynamicImport(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
 const SharePopup = dynamicImport(
-  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup")
+  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup"),
+  {
+    ssr: false,
+  }
 );
 const ProjectBrouchersSection = dynamicImport(
   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
