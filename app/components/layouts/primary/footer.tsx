@@ -216,7 +216,7 @@ function Footer() {
             <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 {sections.slice(0, 2).map(({ title, links, hrefs, rel }) => (
-                  <div key={title} className="min-h-[140px]">
+                  <div key={title} className="min-h-[154px]">
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
@@ -241,7 +241,7 @@ function Footer() {
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 {sections.slice(2, 4).map(({ title, links, hrefs, rel }) => {
                   return (
-                    <div key={title} className="min-h-[140px]">
+                    <div key={title} className="min-h-[154px]">
                       <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                         {title}
                       </h3>
@@ -270,7 +270,7 @@ function Footer() {
               </div>
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 {sections.slice(4).map(({ title, links, hrefs, rel }) => (
-                  <div key={title} className="min-h-[140px]">
+                  <div key={title} className="min-h-[154px]">
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
