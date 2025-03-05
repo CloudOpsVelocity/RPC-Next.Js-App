@@ -27,15 +27,12 @@ export default async function Page() {
   const [data, listingData] = await Promise.all([
     getData(cityData?.data?.cityId),
     getHomeListingData(cityData?.data?.cityId),
-    // getShortIds(),
   ]);
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
       <HomeSiteNavigationSchema />
       <HomeSearch
-        // count={shortIds?.total}
-        // shortIds={shortIds}
         cityData={{
           cityId: cityData?.data?.cityId ?? "",
           cityName: cityData?.data?.city ?? "",
