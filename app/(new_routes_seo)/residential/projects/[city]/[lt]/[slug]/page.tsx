@@ -5,9 +5,6 @@ const Amenties = dynamicImport(
 );
 const Loans = dynamicImport(() => import("@/app/components/project/loans"));
 
-const Overview = dynamicImport(
-  () => import("@/app/components/project/overview")
-);
 const About = dynamicImport(() => import("@/app/components/project/about"));
 const Navigation = dynamicImport(
   () => import("@/app/components/project/navigation")
@@ -99,6 +96,7 @@ import { isValidSlugId } from "@/common/utils/slugUtils";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import FirstBlock from "@/app/components/project/firstBlock";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import Overview from "@/app/components/project/overview";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
