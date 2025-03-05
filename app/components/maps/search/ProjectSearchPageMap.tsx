@@ -232,7 +232,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             },
           }
         : null;
-
+        
       if ((selected?.reqId === itemId && selected && selected?.phaseId === item.phaseId ) || !selected) {
         return (
           <>

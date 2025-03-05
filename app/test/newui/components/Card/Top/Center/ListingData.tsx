@@ -83,8 +83,6 @@ export default function ListingData({
 
   const getApproveNamesProj=()=>{
    const proJAuth=projAuthority? projAuthority.split(',') : [];
-   console.log(proJAuth)
-
     const resultedValue = proJAuth.map((item:string)=>{getApprovedFirstName(item)})
     return resultedValue.join(",")
   };

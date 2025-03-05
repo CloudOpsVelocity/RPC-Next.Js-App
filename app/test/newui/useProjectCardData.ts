@@ -20,7 +20,7 @@ export default function useProjectCardData({ id, isOpen, conType, pType, lat, la
     queryKey: queryConfig.queryKey,
     queryFn: queryConfig.queryFn,
     enabled: queryConfig.enabled,
-    onSuccess: queryConfig.onSuccess,
+    onSuccess: queryConfig.onSuccess, 
   }); 
 
   const itemId = id.includes("+") ? propId ? propId : id.split("+")[0]  : id;
@@ -28,7 +28,6 @@ export default function useProjectCardData({ id, isOpen, conType, pType, lat, la
   if((nearData && Object.keys(nearData).length === 0) && (data && Object.keys(data).length !== 0) && conType === "nearby"){
     setNearby( prev => ({...prev, data: data, isOpen: true, id: itemId, isLoader: false }) );
   }
-
   return { data, isLoading };
 } 
 

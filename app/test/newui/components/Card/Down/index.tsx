@@ -25,7 +25,8 @@ export default function CardDownSection({
   propTypeName,
   title,
   propType,
-  location
+  location,
+  phaseId
 }: any) {
   const [lat,lang] = location?.split(',') ?? []
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
@@ -146,11 +147,12 @@ export default function CardDownSection({
                   setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
                   setSelected({
                     lat,
-                    lang,
+                    lang, 
                     type,
                     reqId: !propIdEnc ? projIdEnc : propIdEnc,
                     propType: !propIdEnc ? propType : propTypeName,
-                    projOrPropName: propName ? propName : projName
+                    projOrPropName: propName ? propName : projName,
+                    phaseId: phaseId ? phaseId : ""
                   })
                   if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
                   // console.log("near by 2");
