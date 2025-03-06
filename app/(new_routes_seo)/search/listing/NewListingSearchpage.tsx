@@ -30,7 +30,6 @@ export default function NewListingSearchpage({
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs key="newSearchPage3" pageUrl={pageUrl} />
         <div className="flex flex-row items-start gap-2">
-          
           <ListingHeaderFilters key="newSearchFilter3" isListing={isListing} />
         </div>
       </div>

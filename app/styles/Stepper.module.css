@@ -132,7 +132,6 @@
 .textInput:focus::placeholder,
 .mangingDrCust:focus::placeholder {
   color: transparent !important;
-  
 }
 .textInput::placeholder,
 .cityPincodeCust::placeholder,
@@ -203,26 +202,7 @@
   font-weight: 600;
   line-height: normal;
 }
-@media only screen and (min-width: 641px) and (max-width: 1280px) {
-  .stepLabel {
-    max-width: 70px;
-    font-size: 12px;
-    text-align: center;
-  }
-  .stepLabelActive {
-    max-width: 70px;
-    font-size: 12px;
-    text-align: center;
-  }
-
-  .steplabelCommonForAll {
-    white-space: normal;
-    right: -15px !important;
-  }
-
-  .root {
-    width: 100%;
-  }
+@media (max-width: 1280px) {
   .textInput {
     height: 49px;
     /* font-family: Montserrat; */
@@ -320,7 +300,7 @@
     font-size: 14px;
     /* font-family: Montserrat; */
   }
-  .textInput:focus{
+  .textInput:focus {
     font-size: 16px;
     /* font-family: Montserrat; */
   }

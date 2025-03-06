@@ -33,7 +33,7 @@ export default function Results() {
     projectListing,
   } = data;
   const handleAddSearch = (newItem: string) => {
-    if (!filters.locality.includes(newItem)) { 
+    if (!filters.locality.includes(newItem)) {
       dispatch({ type: "ADD_LOCALITY", payload: newItem });
       handleResetQuery();
     } else {
@@ -42,7 +42,7 @@ export default function Results() {
   };
 
   const handlePush = async (type: string, data: any, apiData: any) => {
-    console.log("aa aa a a")
+    console.log("aa aa a a");
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],
@@ -57,7 +57,7 @@ export default function Results() {
         if (apiData.type === "Project") {
           window.open(apiData.stringUrl);
         } else {
-          const phase = ""
+          const phase = "";
           window.open(
             `/search/listing?sf=projIdEnc=${
               apiData.stringId.split("_")[0]
@@ -71,28 +71,28 @@ export default function Results() {
       case "listing":
         {
           addToRecent({ ...apiData, ct: "listing" });
-          const data = extractApiValues(apiData.stringId)
+          const data = extractApiValues(apiData.stringId);
           /* console.log(JSON.stringify(data, ));
           alert(JSON.stringify(data));
           console.log(JSON.stringify(data, ...apiData)); */
 
-            let localityName = apiData.name.split("-")[1] ? apiData.name.split("-")[1] : apiData.name.split(" in ")[1];
-            const url = `/search/listing?sf=propType=${data.PT}${
-              data.BH ? `-bhk=${data.BH}` : ""
-            }-cg=${
-              data.CG
-            }-localities=${localityName}%2B${encodeURIComponent(
-              data.LT
-            )}${
-              data.PJ && data.PJ !== "null"
-                ? `-projIdEnc=${data.PJ}-projName=${apiData.name
-                    .split(" in ")[1]
-                    .split("-")[0]
-                    .trim()}`
-                : ""
-            }`;
-            window.open(url);
-        /*   {
+          let localityName = apiData.name.split("-")[1]
+            ? apiData.name.split("-")[1]
+            : apiData.name.split(" in ")[1];
+          const url = `/search/listing?sf=propType=${data.PT}${
+            data.BH ? `-bhk=${data.BH}` : ""
+          }-cg=${data.CG}-localities=${localityName}%2B${encodeURIComponent(
+            data.LT
+          )}${
+            data.PJ && data.PJ !== "null"
+              ? `-projIdEnc=${data.PJ}-projName=${apiData.name
+                  .split(" in ")[1]
+                  .split("-")[0]
+                  .trim()}`
+              : ""
+          }`;
+          window.open(url);
+          /*   {
             let url;
             let localityName = apiData.name.split("-")[1] ? apiData.name.split("-")[1] : apiData.name.split(" in ")[1];
             url =
@@ -116,9 +116,9 @@ export default function Results() {
 
           const url = `projIdEnc=${
             data.stringId
-          }&listedBy=${AgentOwnerBuilderMap.get(
+          }-listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
-          )}&projName=${projectName}`;
+          )}-projName=${projectName}`;
           window.open("/search/listing?sf=" + url);
         }
         break;
@@ -131,7 +131,11 @@ export default function Results() {
             const url =
               encodeURIComponent(data.name) +
               "%2B" +
-              encodeURIComponent(apiData.stringId.split("_")[1] ? apiData.stringId.split("_")[1] : apiData.stringId );
+              encodeURIComponent(
+                apiData.stringId.split("_")[1]
+                  ? apiData.stringId.split("_")[1]
+                  : apiData.stringId
+              );
             window.open(
               `/search?sf=builderIds=${url}-city=${encodeURIComponent(
                 filters?.city ?? ""
@@ -161,8 +165,9 @@ export default function Results() {
     isEmptyOrNull(projectListing);
   const showCityError = !filters.city;
 
-  const newListing = listings.filter((item:any, index:number, self:any) =>
-    index === self.findIndex((t:any) => t.name === item.name)
+  const newListing = listings.filter(
+    (item: any, index: number, self: any) =>
+      index === self.findIndex((t: any) => t.name === item.name)
   );
   return showCityError ? (
     <div className="px-4 py-3 bg-gray-100 border-l-4 border-gray-400 rounded">
@@ -182,11 +187,10 @@ export default function Results() {
       </div>
     </div>
   ) : (
-    <ScrollArea
-      className={`px-5 py-2 min-h-[100px] max-h-[200px] overflow-auto ${
-        noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px]"
-      } `}
-    >
+    /* //overflow-auto ${
+        noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px] max-h-[200px] "
+      } ` */
+    <div className={`px-2  py-2 min-h-[100px]  h-auto w-full  `}>
       {noResults || data == undefined ? (
         <div className="px-1 py-2 flex flex-row items-center justify-center gap-1">
           {mainSearchNoResult}
@@ -219,7 +223,8 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
                   key={`locality-${index}`}
                 >
-                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {locality.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" />{" "}
+                  {locality.name}
                 </li>
               ))}
             </ul>
@@ -243,7 +248,8 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`project-${index}`}
                 >
-                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {project.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" />{" "}
+                  {project.name}
                 </li>
               ))}
             </ul>
@@ -263,7 +269,8 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`projectListing-${index}`}
                 >
-                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {projectListing.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" />{" "}
+                  {projectListing.name}
                 </li>
               ))}
             </ul>
@@ -286,7 +293,8 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`listing-${index}`}
                 >
-                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {listing.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" />{" "}
+                  {listing.name}
                 </li>
               ))}
             </ul>
@@ -309,14 +317,15 @@ export default function Results() {
                   className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`builder-${index}`}
                 >
-                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" /> {builder.name}
+                  <GrayMapIcon className="min-w-[10px] min-h-[10px] max-w-[10px] max-h-[10px]" />{" "}
+                  {builder.name}
                 </li>
               ))}
             </ul>
           </div>
         </>
       )}
-    </ScrollArea>
+    </div>
   );
 }
 

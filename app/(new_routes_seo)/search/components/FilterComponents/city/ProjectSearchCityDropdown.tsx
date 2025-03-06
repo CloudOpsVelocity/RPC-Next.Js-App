@@ -193,6 +193,7 @@ export default function ProjSearchCityDropDown({
                   setSearchTerm(e.target.value);
                   setActiveIndex(0);
                 }}
+                maxLength={30}
                 className="w-full pl-10 p-2 text-sm bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
               />
             </div>

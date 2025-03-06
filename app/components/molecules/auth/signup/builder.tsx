@@ -1062,7 +1062,7 @@ function Builder({ encriptedData }: any) {
                       active !== 0 ? prevStep() : router.back();
                     }
                   }}
-                  className="!rounded-[6px] !border-solid  !w-[46%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] disabled:opacity-50"
+                  className="!rounded-[6px]  !border-solid  !w-[46%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] disabled:opacity-50"
                 >
                   <BackSvg /> Back
                 </Button>

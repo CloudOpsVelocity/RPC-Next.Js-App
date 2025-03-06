@@ -23,6 +23,7 @@ import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
 export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchError, setSearchError] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
   const path = usePathname();
   const [selectedFilters, setSelectedFilters] = useState<{
@@ -91,8 +92,13 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
+    if (/[^a-zA-Z0-9\s]/.test(value)) {
+      setSearchError("Special characters are not allowed.");
+    } else {
+      setSearchError("");
+      onSearchChange(value);
+    }
     setSearchQuery(value);
-    onSearchChange(value);
   };
   const isListingSearch = path.includes("listing");
   const AgentOwnerBuilderMap = new Map([
@@ -224,10 +230,10 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       default:
         break;
     }
+    setSearchQuery("");
   };
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(searchQuery);
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_BACKEND_URL
@@ -257,6 +263,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       handleApplyFilters();
       handleResetQuery();
       setIsSearchOpen(false);
+      setSearchQuery("");
       return;
     }
   };
@@ -288,7 +295,11 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                       setIsSearchOpen(true);
                       setOpenDropdown(null);
                     }}
+                    maxLength={50}
+                    pattern="[a-zA-Z0-9\s]+"
+                    title="Only letters, numbers, and spaces are allowed."
                   />
+
                   <button type="submit">
                     <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                   </button>
@@ -301,10 +312,12 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               ) : (
                 isSearchOpen && (
                   <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">
-                    {searchData.loc?.length > 0 ||
-                    searchData.builders?.length > 0 ||
-                    searchData.projects?.length > 0 ||
-                    searchData.listing?.length > 0 ? (
+                    {searchError ? (
+                      <div className="p-3">{searchError}</div>
+                    ) : searchData.loc?.length > 0 ||
+                      searchData.builders?.length > 0 ||
+                      searchData.projects?.length > 0 ||
+                      searchData.listing?.length > 0 ? (
                       <>
                         {["loc", "listing", "projects", "builders"].map(
                           (type) =>
@@ -383,24 +396,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               />
             </div>
             <div className="hidden md:flex items-center gap-2 order-2">
-              {/*  <PropertyTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "propertyType"}
-                onToggle={() => handleDropdownToggle("propertyType")}
-              />
-              <BHKTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "bhkType"}
-                onToggle={() => handleDropdownToggle("bhkType")}
-              />
-              <BudgetDropdown
-                isOpen={openDropdown === "budget"}
-                onToggle={() => handleDropdownToggle("budget")}
-              /> */}
               <ShowAllFiltersButton
                 isListing={isListing}
                 selectedFilters={selectedFilters}
@@ -423,8 +418,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
 
             <SelectedFilters />
           </div>
-
-          {/* Selected Filters */}
         </div>
       </div>
 
@@ -444,24 +437,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               onClick={(e) => e.stopPropagation()}
               className="  max-h-[100vh]   overflow-y"
             >
-              {/* <PropertyTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "propertyType"}
-                onToggle={() => handleDropdownToggle("propertyType")}
-              />
-              <BHKTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "bhkType"}
-                onToggle={() => handleDropdownToggle("bhkType")}
-              />
-              <BudgetDropdown
-                isOpen={openDropdown === "budget"}
-                onToggle={() => handleDropdownToggle("budget")}
-              /> */}
               <ShowAllFiltersButton
                 isListing={isListing}
                 selectedFilters={selectedFilters}

@@ -1,25 +1,116 @@
-import React from "react";
-import path from "path";
-import fs from "fs";
+import dynamicImport from "next/dynamic";
+const Feature = dynamicImport(() => import("@/app/components/project/feature"));
+const Amenties = dynamicImport(
+  () => import("@/app/components/project/amenties")
+);
+const Loans = dynamicImport(() => import("@/app/components/project/loans"));
+
+const About = dynamicImport(() => import("@/app/components/project/about"));
+const Navigation = dynamicImport(
+  () => import("@/app/components/project/navigation")
+);
+const ProjectDrawer = dynamicImport(
+  () => import("@/app/components/project/Drawer")
+);
+const LeafMap = dynamicImport(() => import("@/app/components/project/map"));
+const ListingRentAvail = dynamicImport(
+  () => import("@/app/components/project/listingRentAvail")
+);
+const ErrorContainer = dynamicImport(
+  () => import("@/app/components/project/error/container")
+);
+const MobileHidden = dynamicImport(
+  () => import("@/app/components/molecules/MobileHidden")
+);
+const FloorplanDrawer = dynamicImport(
+  () => import("@/app/components/project/drawers/floorplan")
+);
+
+const MasterPlan = dynamicImport(
+  () => import("@/app/components/project/masterplan")
+);
+const ProjectDetailsP = dynamicImport(
+  () => import("@/app/components/project/projectDetailsP")
+);
+const GalleryBlock = dynamicImport(
+  () => import("@/app/components/project/galleryBlock")
+);
+const Specifications = dynamicImport(
+  () => import("@/app/components/project/specification")
+);
+const Banner = dynamicImport(() => import("@/app/components/project/banner"));
+const AboutBuilder = dynamicImport(
+  () => import("@/app/components/project/aboutBuilder")
+);
+const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
+const NearByCarousel = dynamicImport(
+  () => import("@/app/components/project/NearByCarousel"),
+  {
+    ssr: false,
+  }
+);
+const LoginPopup = dynamicImport(
+  () => import("@/app/components/project/modals/LoginPop"),
+  {
+    ssr: false,
+  }
+);
+const Reviews = dynamicImport(
+  () => import("@/app/components/project/reviews"),
+  {
+    ssr: false,
+  }
+);
+const PartialUnitData = dynamicImport(
+  () => import("@/app/components/project/sections")
+);
+const PropertyDataDisplay = dynamicImport(
+  () => import("@/app/components/project/_ui/PricingDetailsSection")
+);
+const Disclamer = dynamicImport(
+  () => import("@/app/components/builder/Disclamer")
+);
+const BreadCrumbs = dynamicImport(
+  () => import("@/app/components/project/breadcrum/BreadCrum")
+);
+const FloorPlans = dynamicImport(
+  () => import("@/app/components/project/newFloorPlan/floor-plan")
+);
+const ProjectSchema = dynamicImport(
+  () => import("@/app/seo/ProjectDetailSchema")
+);
+const FAQJsonLdScript = dynamicImport(() => import("@/app/seo/Faqjson"));
+
+const ProjectGallery = dynamicImport(
+  () => import("@/app/components/project/_ui/modals/GallerySectionModal")
+);
+const SharePopup = dynamicImport(
+  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup"),
+  {
+    ssr: false,
+  }
+);
+const ProjectBrouchersSection = dynamicImport(
+  () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
+  {
+    ssr: false,
+  }
+);
 import {
   getAmenties,
   getAuthorityNames,
   getProjectDetails,
 } from "@/app/utils/api/project";
-import {
-  notFound,
-  permanentRedirect,
-  redirect,
-  RedirectType,
-} from "next/navigation";
-import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getPagesSlugs } from "@/app/seo/api";
 import { Metadata, ResolvingMetadata } from "next";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { isValidSlugId } from "@/common/utils/slugUtils";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
-
+import FirstBlock from "@/app/components/project/firstBlock";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import Overview from "@/app/components/project/overview";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -35,6 +126,7 @@ export default async function page({ params }: Props) {
     getProjectDetails(slug),
     getAmenties(),
   ]);
+  const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const localitySlug = projResponse.basicData.localityName
     .toLowerCase()
     .replaceAll(" ", "-");
@@ -62,14 +154,197 @@ export default async function page({ params }: Props) {
     );
     projResponse.basicData.projAuthorityNames = authorityNames;
   }
-
+  const refURls = data?.sourceBuilderUrl?.split(",");
+  const url = `${process.env.NEXT_PUBLIC_URL}${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}/`;
+  const title = `${data?.projectName} ${
+    data.availableProperties && data?.availableProperties?.join(" ")
+  } for sale in ${data.localityName} ${data.cityName}`;
+  const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
+  const scrollId = undefined;
+  const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
   return (
-    <ProjectsDetailsPage
-      projResponse={projResponse}
-      amenitiesFromDB={amenitiesFromDB}
-      slug={slug as string}
-      params={params}
-    />
+    <section className="w-full relative break-words ">
+      <meta name="robots" content="index, follow" />
+      {/* <link rel="canonical" href={url} /> */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={desc} />
+      <meta property="og:image" content={imageUrl || ""} />
+      <meta property="og:url" content={url} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={desc} />
+      <meta name="twitter:image" content={imageUrl || ""} />
+      <FAQJsonLdScript data={data} />
+      <ProjectSchema projectData={{ ...projResponse, url, desc }} />
+      {/* <QAJsonLdScript data={data} />
+      <PropertyJsonLdScript data={data} />
+      <ArticleJsonLdScript data={data} /> */}
+      <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
+        <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
+          <BreadCrumbs params={params} />
+
+          {/* Top Cover Image Card */}
+          <FirstBlock
+            projectDetails={data}
+            companyName={data.postedByName}
+            builderId={data.builderId}
+            hasReraStatus={data.reraStatus}
+            scrollId={scrollId}
+          />
+        </div>
+        {/* Navigations Container */}
+        <MobileHidden>
+          <Navigation
+            isBrochure={
+              !!data?.media?.projBroucherUrl ||
+              phaseOverview?.some(
+                (item: { phaseBrochureUrl: string | null }) =>
+                  item.phaseBrochureUrl
+              )
+            }
+            detailsData={{ ...data, nearByLocations }}
+            slug={slug}
+            scrollId={scrollId}
+          />
+        </MobileHidden>
+        <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
+        <ListingRentAvail
+          projName={data.projectName}
+          r={data.rentListing}
+          s={data.saleListing}
+          slug={slug}
+        />
+        {/* About */}
+        <About
+          id="about"
+          heading="about"
+          projName={data.projectName}
+          content={data.about}
+          maxLines={12}
+        />
+        {/* Property Details */}
+        <ProjectDetailsP
+          projName={data.projectName}
+          data={data.phases}
+          slug={slug}
+          projData={data}
+          PhaseOverview={phaseOverview}
+          isPartialData={data.partialUnitData!!}
+        />
+
+        <MasterPlan
+          projName={data.projectName}
+          media={data?.media?.projectPlanUrl}
+        />
+        {data.partialUnitData && (
+          <PropertyDataDisplay
+            unitData={data.partialUnitData}
+            projName={data.projectName}
+            phaseList={data.phases}
+          />
+        )}
+
+        {!data.partialUnitData ? (
+          <FloorPlans
+            phases={data.phases}
+            projName={data.projectName}
+            partialUnitData={data.partialUnitData}
+            phaseOverview={phaseOverview}
+            slug={slug}
+            postedById={data.builderId}
+          />
+        ) : (
+          <PartialUnitData
+            partialUnitData={data.partialUnitData}
+            projName={data.projectName}
+            phaseList={data.phases}
+            data={data}
+            type="partial"
+          />
+        )}
+        <GalleryBlock
+          {...data.media}
+          projName={data.projectName}
+          media={data.media}
+        />
+        <ErrorContainer data={data.amenityList}>
+          <Amenties
+            data={data.amenityList}
+            projName={data.projectName}
+            amenitiesFromDB={amenitiesFromDB}
+          />
+        </ErrorContainer>
+        <div id="near-by" className="scroll-mt-[180px]" />
+        {data.lat && data.lang && (
+          <LeafMap
+            lat={data.lat}
+            lang={data.lang}
+            projName={data.projectName}
+            type="proj"
+            mapData={nearByLocations}
+          />
+        )}
+        <ProjectBrouchersSection
+          projName={data.projectName}
+          phaseOverviewData={phaseOverview}
+          singleBroucher={data.media?.projBroucherUrl}
+        />
+        <ErrorContainer data={data.specificationList}>
+          <Specifications
+            data={data.specificationList}
+            projName={data.projectName}
+          />
+        </ErrorContainer>
+        <ErrorContainer data={data.highlights}>
+          <Feature data={data.highlights} projName={data.projectName} />
+        </ErrorContainer>
+        <Banner projName={data.projectName} projIdEnc={slug} />
+        <ErrorContainer data={data.banks}>
+          <div id="bank-approvals" className="w-full h-auto scroll-mt-[150px]">
+            <Loans type="proj" banks={data.banks} name={data.projectName} />
+          </div>
+        </ErrorContainer>
+
+        <AboutBuilder id={data.builderId} />
+        {data.wbtp && (
+          <About
+            id="why-buy-this-project"
+            heading="Why Buy"
+            projName={`${data.projectName} ?`}
+            content={data.wbtp}
+            maxLines={12}
+          />
+        )}
+        <Reviews projName={data.projectName} projIdEnc={slug} />
+        <div
+          id="faq"
+          className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
+        >
+          <FaqWithBg
+            data={data.faqs}
+            slug={slug}
+            projName={data.projectName}
+            postedById={data.builderId}
+          />
+        </div>
+        <NearByCarousel
+          projName={data.projectName}
+          lat={data.lat}
+          lng={data.lang}
+          builderId={data.builderId}
+          company={data.companyName}
+          projId={slug}
+          slug={slug}
+        />
+        {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
+
+        <ProjectDrawer projName={data.projectName} />
+        <FloorplanDrawer />
+        <LoginPopup />
+        <ProjectGallery />
+        <SharePopup />
+      </div>
+    </section>
   );
 }
 
@@ -106,7 +381,6 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  console.log("getProjectDetailsMetaData");
   let slug = params.slug.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
@@ -211,15 +485,12 @@ export async function generateMetadata(
       title,
       description,
       images: [data.media.coverImageUrl.split(",")[0]],
-      site: "@yourTwitterHandle",
+      site: "@getrightproperty",
     },
     robots: {
       index: true,
       follow: true,
     },
-    // verification: {
-    //   google: "your-google-verification-code",
-    // },
     category: "Real Estate",
     other: {
       "price-range": priceRange,

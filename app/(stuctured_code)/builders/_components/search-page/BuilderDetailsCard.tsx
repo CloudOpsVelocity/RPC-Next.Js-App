@@ -69,6 +69,8 @@ export default function BuilderDetailsCard({
 
   let newBranchCities = branchCities.replaceAll("null,", "");
 
+  console.log(completedProject);
+
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden relative hover:shadow border border-blue-200 hover:border-blue-500">
       <BuilderLink routeParams={{ city: cityName, slug: userName }}>
@@ -264,7 +266,8 @@ export default function BuilderDetailsCard({
             {isModalOpen.type === "description" ? (
               <>
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">
-                  {companyName} - Full Description
+                  {/* {companyName} - Full Description */}
+                  Company Mission 
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
                   {builderDescription}

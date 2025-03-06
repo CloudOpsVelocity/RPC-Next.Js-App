@@ -44,14 +44,7 @@ type CardProps = {
   id?: string;
 };
 
-export function ProjectCard({
-  type,
-  cardData,
-  mutate,
-  ct,
-  id,
-  builderLinkActive,
-}: CardProps) {
+export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
@@ -101,19 +94,7 @@ export function ProjectCard({
     slug: cardData.builderName,
   });
 
-  console.log("shortlist res: ", cardData.shortListed)
-  console.log(cardData)
-
   return (
-    /*  <ProjectLink
-        routeParams={{
-        city: cardData.city,
-        locality: cardData.locality, 
-        slug: cardData.projName,
-      }}
-      target="_blank"
-      key={reqId}
-    > */
     <div
       className={clsx(
         "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[400px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -124,7 +105,7 @@ export function ProjectCard({
         <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
           <Link
             target="_blank"
-             rel="noopener noreferrer"
+            rel="noopener noreferrer"
             href={URLRedirectionProj}
             className="tracking-tight sm:text-[18px] font-[600]  line-clamp-2 text-wrap min-w-0 text-[#0073C6] cursor-pointer"
           >
@@ -167,7 +148,11 @@ export function ProjectCard({
 
         <div className="relative  max-h-[300px]">
           <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
-            <Link target="_blank"  rel="noopener noreferrer" href={URLRedirectionProj}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href={URLRedirectionProj}
+            >
               <Image
                 src={
                   type === "proj"
@@ -204,7 +189,7 @@ export function ProjectCard({
                 onAddingShortList(e, cardData.projIdEnc);
               }}
             >
-              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg} 
+              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
               {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
             </button>
           </div>
@@ -253,7 +238,7 @@ export function ProjectCard({
               <a
                 href={URLToBuilder}
                 target="_blank"
-                 rel="noopener noreferrer"
+                rel="noopener noreferrer"
                 className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline"
               >
                 {cardData.builderName}
@@ -345,25 +330,6 @@ const ProjectCarousel = ({
           // url={`/search?builderIds=${"builderName"}${"builderId"}`}
           url={url}
         />
-        {/* <MainCarousel>
-          {data &&
-            data?.map((project: any, index: number) => {
-              return (
-                <CarouselSlide
-                  className="!h-auto sm:!h-[500px] "
-                  key={`projCarouselSlide_${project?.projIdEnc}`}
-                >
-                  <ProjectCard
-                    key={`proj_${project?.projIdEnc}`}
-                    type={type}
-                    cardData={project}
-                    mutate={mutate}
-                    ct={ct ?? "builder"}
-                  />
-                </CarouselSlide>
-              );
-            })}
-        </MainCarousel> */}
       </div>
     )
   );

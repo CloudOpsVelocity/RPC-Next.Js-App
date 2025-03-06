@@ -133,7 +133,7 @@ const onSubmit = async (values: any) => {
     >
       <label htmlFor="name" className="w-full">
         <p className=" textsm:-[#333] text-[12px] sm:text-base not-italic font-semibold text-left">
-          Full Name
+          Full Name<span className="text-[#F00] ">*</span>
         </p>
         <input
           id="name"
@@ -149,7 +149,7 @@ const onSubmit = async (values: any) => {
 
       <label htmlFor="email" className="w-full">
         <p className="text-[#333] text-[12px] sm:text-base not-italic font-semibold text-left">
-          Email
+          Email<span className="text-[#F00] ">*</span>
         </p>
         <input
           id="email"
@@ -165,7 +165,7 @@ const onSubmit = async (values: any) => {
 
       <label htmlFor="tel" className="w-full">
         <p className="text-[#333] text-[12px] sm:text-base not-italic font-semibold text-left">
-          Mobile Number
+          Mobile Number<span className="text-[#F00] ">*</span>
         </p>
         <input
           id="tel"
@@ -181,7 +181,7 @@ const onSubmit = async (values: any) => {
 
       <label htmlFor="questions" className="w-full">
         <p className="text-[#333] text-[12px] sm:text-base not-italic font-semibold text-left">
-          What can we help you with?
+          What can we help you with?<span className="text-[#F00] ">*</span>
         </p>
         <textarea
           id="questions"

@@ -117,7 +117,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
                 {phase.phaseName && <p className="font-semibold text-gray-800 text-xs !m-0 !p-0 mb-1 !font-montserrat">{`Phase: ${phase.phaseName}`}</p>}
                 <div className="flex w-full ">
                   {phase.propertyTypes.map((property, index) => (
-                    <div key={property.propType + index} className="flex justify-between items-center text-xs bg-white p-1 rounded border border-gray-200">
+                    <div key={property.propType + index.toString()} className="flex justify-between items-center text-xs bg-white p-1 rounded border border-gray-200">
                       <span className="text-gray-800 font-medium !font-montserrat">{property.propType}</span>
                       <span className="text-emerald-700 font-semibold text-nowrap !font-montserrat ml-[4px] ">
                         {formatCurrency(Number(property.minPrice) || 0)} - {formatCurrency(Number(property.maxPrice) || 0)}

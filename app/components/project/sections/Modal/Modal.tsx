@@ -71,19 +71,18 @@ export default function PartialUnitModal({ data }: any) {
     reset();
   };
 
-
-  const [platform, setPlatform] = useState('');
-  const isMobile = useMediaQuery('(max-width: 768px)') 
+  const [platform, setPlatform] = useState("");
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
     if (/iphone|ipod/.test(userAgent)) {
-      setPlatform('iOS');
+      setPlatform("iOS");
     } else if (/android/.test(userAgent)) {
-      setPlatform('Android');
+      setPlatform("Android");
     } else {
-      setPlatform('Unknown');
-  }
+      setPlatform("Unknown");
+    }
   }, []);
 
   const selectedOne = isData.others[active];
@@ -133,9 +132,6 @@ export default function PartialUnitModal({ data }: any) {
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
-
-
-
 
   return (
     <Modal
@@ -205,25 +201,38 @@ export default function PartialUnitModal({ data }: any) {
         </div>
 
         {/* Main Content overflow-hidden   <div className={`${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}> */}
-        
-       
-        <div className={`flex-1 flex flex-col    max-h-full overflow-auto  lg:flex-row  ${platform == "iOS" ? "pb-[10px]" : "pb-[6px]" } z-[100]    sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}>
+
+        <div
+          className={`flex-1 flex flex-col    max-h-full overflow-auto  lg:flex-row  ${
+            platform == "iOS" ? "pb-[10px]" : "pb-[6px]"
+          } z-[100]    sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}
+        >
           {/* Left - Floor Plan Image */}
           <div className="flex-1 p-3 sm:p-6 flex items-center justify-center bg-[#F8FBFF] relative  lg:h-auto">
             {isData.others.length > 1 && (
               <>
-                <button
-                  onClick={handlePrevious}
-                  className={`absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100] ${active === 0 ? " cursor-not-allowed opacity-70 " : "" } `}
-                >
-                  <FaChevronLeft className="w-4 h-4 text-gray-600" />
-                </button>
-                <button
-                  onClick={handleNext}
-                  className={`absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100] ${isData.others.length - 1 === active ? " cursor-not-allowed opacity-70 " : "" }`}
-                >
-                  <FaChevronRight className="w-4 h-4 text-gray-600" />
-                </button>
+                {active !== 0 && (
+                  <button
+                    onClick={handlePrevious}
+                    className={`absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100] ${
+                      active === 0 ? " cursor-not-allowed opacity-70 " : ""
+                    } `}
+                  >
+                    <FaChevronLeft className="w-4 h-4 text-gray-600" />
+                  </button>
+                )}
+                {isData.others.length - 1 !== active && (
+                  <button
+                    onClick={handleNext}
+                    className={`absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white z-[100] ${
+                      isData.others.length - 1 === active
+                        ? " cursor-not-allowed opacity-70 "
+                        : ""
+                    }`}
+                  >
+                    <FaChevronRight className="w-4 h-4 text-gray-600" />
+                  </button>
+                )}
               </>
             )}
             <TransformWrapper>

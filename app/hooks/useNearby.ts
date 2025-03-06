@@ -39,14 +39,15 @@ export default function useNearby({
     refetchIntervalInBackground: false,
     retry: false,
     onSuccess(data) {
-      const isNearby = data?.nearbyProj?.length > 0 || data?.builderProj?.length > 0;
-        if(isNearby){
-        setProjectReqData((prev)=>({
-         ...prev,
+      const isNearby =
+        data?.nearbyProj?.length > 0 || data?.builderProj?.length > 0;
+      if (isNearby) {
+        setProjectReqData((prev) => ({
+          ...prev,
           isNearby,
         }));
       }
-     }
+    },
   });
 
   const queryClient = useQueryClient();
@@ -62,19 +63,13 @@ export default function useNearby({
       id: string;
       type: "builder" | "proj";
     }) => {
-      // Cancel any outgoing refetches
-      // (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({
         queryKey: [`nearby` + projId || slug],
       });
-      const whichDataUpdate = type === "proj" ? "nearbyProj" : "builderProj";
-      console.log(whichDataUpdate);
-      // Snapshot the previous value
       const previousData: any = queryClient.getQueryData([
         `nearby` + projId || slug,
       ]);
 
-      console.log(whichDataUpdate);
       const updatedData = previousData[
         type === "proj" ? "nearbyProj" : "builderProj"
       ].map((project: any) => {
