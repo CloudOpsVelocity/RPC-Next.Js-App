@@ -6,6 +6,7 @@ import useProjectCardData from "../../useProjectCardData";
 import LocationCard from "./overly_items/LocationList";
 import OtherChargesList from "./overly_items/OtherChargesListOverlay";
 import PropertyHighlights from "./overly_items/PropertyHightilights";
+import { useMediaQuery } from "@mantine/hooks";
 
 const Overlay: React.FC = () => {
   const [overlayState, dispatch] = useAtom(overlayAtom);
@@ -20,6 +21,7 @@ const Overlay: React.FC = () => {
     propId,
   });
   const overlayRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

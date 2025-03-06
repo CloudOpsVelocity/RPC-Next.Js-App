@@ -493,12 +493,6 @@ export default function ShowAllFiltersButton({
                   SEARCH_FILTER_DATA.furnish,
                   "furnish"
                 )}
-              {/* {isproject &&
-                renderFilterSection(
-                  "Phases",
-                  SEARCH_FILTER_DATA.furnish,
-                  "Phases"
-                )} */}
             </div>
           </div>
         </div>

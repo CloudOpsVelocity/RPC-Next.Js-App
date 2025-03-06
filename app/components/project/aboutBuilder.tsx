@@ -35,7 +35,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           </h2>
 
           <div className="inline-flex justify-center items-center ">
-            <div className="h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px] relative">
+            <div className=" relative">
               <Image
                 src={
                   nzData.logo
@@ -45,7 +45,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
                 width={130}
                 height={130}
                 alt="logo"
-                className="object-contain "
+                className="object-contain max-h-[93px] w-[93px] sm:max-h-[100px] sm:w-[133px] xl:max-h-[150px] xl:w-[158px] relative"
                 unoptimized
               />
             </div>

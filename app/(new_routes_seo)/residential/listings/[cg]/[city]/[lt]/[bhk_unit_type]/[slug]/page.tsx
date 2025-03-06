@@ -83,21 +83,28 @@ export async function generateMetadata(
   { params }: any,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const id = params.slug.split("-")[1];
+  const id = params?.slug?.split("-")[1];
   const {
     listing: data,
     nearByLocations,
     totalPrice,
   } = await getListingDetails(id as string);
+
+  const keywords = `${data.bhkName ?? ""}, ${data.propTypeName}, ${
+    data.ltName
+  }, ${data.ctName}, ${data.cg === "S" ? "Sale" : "Rent"}`;
+
   return {
     title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
       data.cg === "S" ? " Sale" : " Rent"
     } in ${data.ltName} - Getrightproperty`,
+    applicationName: "Getrightproperty",
     description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
       data.cg === "S" ? " Sale" : " Rent"
     } in ${
       data.ltName
-    }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+    }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Find your dream home today!`,
+    keywords: keywords, // Added keywords for SEO
     openGraph: {
       title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
@@ -106,7 +113,38 @@ export async function generateMetadata(
         data.cg === "S" ? " Sale" : " Rent"
       } in ${
         data.ltName
-      }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+      }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Explore listings now!`,
+      url: data.projMedia.coverImageUrl,
+      type: "website",
+      // site_name: "Getrightproperty",
+      images: [
+        {
+          url: data.projMedia.coverImageUrl,
+          width: 800,
+          height: 600,
+          alt: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+            data.cg === "S" ? " Sale" : " Rent"
+          } in ${data.ltName} - Getrightproperty`,
+        },
+      ],
+      locale: "en_US",
+      siteName: "Getrightproperty",
+      countryName: "India",
+      emails: ["rahulrpclan@gamil.com"],
+      phoneNumbers: ["+91-8884440963"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@Getrightproperty",
+      title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${data.ltName} - Getrightproperty`,
+      description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${
+        data.ltName
+      }, Bangalore. Get a verified search without any charges on Getrightproperty.`,
+      images: data.projMedia.coverImageUrl,
     },
   };
 }

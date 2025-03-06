@@ -294,6 +294,9 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                       setIsSearchOpen(true);
                       setOpenDropdown(null);
                     }}
+                    maxLength={50}
+                    pattern="[a-zA-Z0-9\s]+"
+                    title="Only letters, numbers, and spaces are allowed."
                   />
 
                   <button type="submit">
@@ -308,10 +311,12 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               ) : (
                 isSearchOpen && (
                   <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">
-                    {searchData.loc?.length > 0 ||
-                    searchData.builders?.length > 0 ||
-                    searchData.projects?.length > 0 ||
-                    searchData.listing?.length > 0 ? (
+                    {searchError ? (
+                      <div className="p-3">{searchError}</div>
+                    ) : searchData.loc?.length > 0 ||
+                      searchData.builders?.length > 0 ||
+                      searchData.projects?.length > 0 ||
+                      searchData.listing?.length > 0 ? (
                       <>
                         {["loc", "listing", "projects", "builders"].map(
                           (type) =>
@@ -377,8 +382,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                       <div className="p-3 text-gray-500">
                         {name
                           ? "No suggestions available"
-                          : searchError
-                          ? searchError
                           : "Search or type something"}
                       </div>
                     )}
@@ -392,24 +395,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               />
             </div>
             <div className="hidden md:flex items-center gap-2 order-2">
-              {/*  <PropertyTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "propertyType"}
-                onToggle={() => handleDropdownToggle("propertyType")}
-              />
-              <BHKTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "bhkType"}
-                onToggle={() => handleDropdownToggle("bhkType")}
-              />
-              <BudgetDropdown
-                isOpen={openDropdown === "budget"}
-                onToggle={() => handleDropdownToggle("budget")}
-              /> */}
               <ShowAllFiltersButton
                 isListing={isListing}
                 selectedFilters={selectedFilters}
@@ -432,8 +417,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
 
             <SelectedFilters />
           </div>
-
-          {/* Selected Filters */}
         </div>
       </div>
 
@@ -453,24 +436,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               onClick={(e) => e.stopPropagation()}
               className="  max-h-[100vh]   overflow-y"
             >
-              {/* <PropertyTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "propertyType"}
-                onToggle={() => handleDropdownToggle("propertyType")}
-              />
-              <BHKTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "bhkType"}
-                onToggle={() => handleDropdownToggle("bhkType")}
-              />
-              <BudgetDropdown
-                isOpen={openDropdown === "budget"}
-                onToggle={() => handleDropdownToggle("budget")}
-              /> */}
               <ShowAllFiltersButton
                 isListing={isListing}
                 selectedFilters={selectedFilters}

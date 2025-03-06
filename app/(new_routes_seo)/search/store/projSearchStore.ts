@@ -54,7 +54,6 @@ type Action =
   | { type: "SET_FILTERS"; payload: SearchFilter };
 
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
-  console.log(action);
   switch (action.type) {
     case "reset":
       return initialState;
@@ -264,7 +263,6 @@ export const projSearchStore = atomWithReducer(initialState, mapReducer);
 projSearchStore.onMount = (setAtom) => {
   const path = window.location.pathname;
   const searchParams = new URLSearchParams(window.location.search);
-  console.log(searchParams)
   if (path.includes("search") || searchParams.size > 0) {
     setAtom({
       type: "SET_FILTERS",
