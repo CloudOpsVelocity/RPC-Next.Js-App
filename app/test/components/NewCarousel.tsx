@@ -190,7 +190,7 @@ function NewCarousel<T>({
             </button>
           )}
 
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          {/* <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
             {Array.from({ length: maxIndex + 1 }).map((_, index) => (
               <button
                 key={index}
@@ -202,7 +202,7 @@ function NewCarousel<T>({
                 }`}
               />
             ))}
-          </div>
+          </div> */}
         </>
       )}
     </div>

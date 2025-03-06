@@ -38,7 +38,7 @@ export default function ListingData({
   projIdEnc,
   propStatus,
   towerData,
-  availableFor, 
+  availableFor,
   propIdEnc,
   phaseId,
   projAuthority,
@@ -56,15 +56,15 @@ export default function ListingData({
     enabled: false,
   });
 
-  const getApprovedFirstName = (item:string) => {
-    if(item.includes(" - ")){
+  const getApprovedFirstName = (item: string) => {
+    if (item.includes(" - ")) {
       return item.split(" - ")[0];
-    }else if(item.includes(" – ")){
+    } else if (item.includes(" – ")) {
       return item.split(" – ")[0];
-    }else if(item.includes("–")){
+    } else if (item.includes("–")) {
       return item.split("–")[0];
-    }else if(item.includes("-")){
-      return item.split("-")[0]; 
+    } else if (item.includes("-")) {
+      return item.split("-")[0];
     }
   };
 
@@ -81,10 +81,12 @@ export default function ListingData({
     return authorityNames.join(", ");
   };
 
-  const getApproveNamesProj=()=>{
-   const proJAuth=projAuthority? projAuthority.split(',') : [];
-    const resultedValue = proJAuth.map((item:string)=>{getApprovedFirstName(item)})
-    return resultedValue.join(",")
+  const getApproveNamesProj = () => {
+    const proJAuth = projAuthority ? projAuthority.split(",") : [];
+    const resultedValue = proJAuth.map((item: string) => {
+      return getApprovedFirstName(item);
+    });
+    return resultedValue.join(",");
   };
 
   const formatter = new Intl.NumberFormat("en-in", {
@@ -140,7 +142,7 @@ export default function ListingData({
             )}
 
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
-            {landArea !== undefined && landArea !== 0 &&
+            {landArea !== undefined && landArea !== 0 && (
               <DownSectionCard
                 label={type == "proj" ? "Land Area" : "Property Age"}
                 value={
@@ -149,7 +151,7 @@ export default function ListingData({
                     : `${propertyAge ?? 0} Years`
                 }
               />
-            }
+            )}
 
             <DownSectionCard
               label={"No. of Units"}
@@ -157,9 +159,7 @@ export default function ListingData({
             />
             <DownSectionCard
               label={"Approved By"}
-              value={
-                projAuthority ? getApproveNamesProj() : null
-              }
+              value={projAuthority ? getApproveNamesProj() : null}
             />
 
             {!isPlot && (
@@ -202,9 +202,7 @@ export default function ListingData({
 
               <DownSectionCard
                 label={"Approved By"}
-                value={
-                  approvedById ? getApproveNames() : null
-                }
+                value={approvedById ? getApproveNames() : null}
               />
 
               <DownSectionCard
@@ -215,10 +213,13 @@ export default function ListingData({
                 label={"Balcony"}
                 value={balcony && `${balcony} No's`}
               />
-              <DownSectionCard
-                label={"Parkings"}
-                value={parking && `${parking} No's (${coverParking})`}
-              />
+              {propTypeName != "Plot" && (
+                <DownSectionCard
+                  label={"Parkings"}
+                  value={parking && `${parking} No's (${coverParking})`}
+                />
+              )}
+
               {isRent && (
                 <DownSectionCard label={"Security Deposit"} value={`4,333`} />
               )}
@@ -278,7 +279,7 @@ export default function ListingData({
 }
 const DownSectionCard = ({
   label,
-  value, 
+  value,
   Icon,
 }: {
   label: string;

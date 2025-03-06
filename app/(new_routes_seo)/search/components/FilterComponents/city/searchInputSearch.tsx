@@ -38,6 +38,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [state, dispatch] = useAtom(projSearchStore);
+  const [error, setError] = useState("");
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const filteredItems = loading
     ? []
@@ -46,6 +47,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
           String(item.label).toLowerCase().includes(searchTerm.toLowerCase()) &&
           !selected.find((s) => s.value === item.value)
       );
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -121,14 +123,27 @@ export default function DynamicSearch<T extends Record<string, any>>({
     }
   };
 
+  const validateSearchTerm = (term: string) => {
+    const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/g;
+    return !specialCharPattern.test(term);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (validateSearchTerm(value)) {
+      setSearchTerm(value);
+      setQuery(value);
+      setIsOpen(true);
+      setFocusedIndex(-1);
+      setError("");
+    } else {
+      setSearchTerm(value);
+      setError("Special Character Not Allowed.");
+    }
+  };
+
   return (
     <div ref={wrapperRef} className="w-full max-w-md mb-6">
-      {/* <label
-        htmlFor="dynamic-search"
-        className="block text-sm font-medium text-gray-700 sm:mb-1 sm:text-lg sm:font-semibold mb-3"
-      >
-        {label}
-      </label> */}
       <h3 className="text-lg font-semibold mb-3">{label}</h3>
       <div className="relative">
         {state[category].length > 0 && (
@@ -173,12 +188,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
             className="w-[90%] pl-10 pr-4 mr-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder={placeholder}
             value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setQuery(e.target.value);
-              setIsOpen(true);
-              setFocusedIndex(-1);
-            }}
+            onChange={handleChange}
             onClick={() => setIsOpen(true)}
             onKeyDown={handleKeyDown}
             aria-expanded={isOpen}
@@ -186,6 +196,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
             aria-controls="search-list"
             role="combobox"
             autoComplete="off"
+            maxLength={50}
           />
           <svg
             className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 "
@@ -210,7 +221,9 @@ export default function DynamicSearch<T extends Record<string, any>>({
             className="absolute z-10 w-[90%] mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto"
             role="listbox"
           >
-            {loading ? (
+            {error ? (
+              <div className="p-3">{error}</div>
+            ) : loading ? (
               <li className="px-4 py-2 text-center text-gray-500">
                 Loading...
               </li>

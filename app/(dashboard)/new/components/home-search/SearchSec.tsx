@@ -197,10 +197,6 @@ export default function SearchSec({}: Props) {
       </div>
 
       {name && dropdownOpen && (
-        //absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto
-        /*  <Combobox.Dropdown className="min-w-[92%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] !z-[10] mt-1 absolute top-full">
-     <Results />
-    </Combobox.Dropdown> */
         <div
           className={`${
             isMobile

@@ -67,7 +67,7 @@ const MainBox = ({ data, refetch }: Props) => {
       setState({ ...state, compareAdded: !state.compareAdded });
       toggleCompare({
         id: reqId,
-        status: state.compareAdded ? "N" : "Y", 
+        status: state.compareAdded ? "N" : "Y",
         source: type,
       });
     } else {
@@ -89,7 +89,7 @@ const MainBox = ({ data, refetch }: Props) => {
         slug: data.projName,
         projIdEnc: projEncId,
       });
-      window.open(url, "_blank" , "noreferrer");
+      window.open(url, "_blank", "noreferrer");
       // return url;
     } else {
       url = generateListingLinkUrl({
@@ -103,7 +103,7 @@ const MainBox = ({ data, refetch }: Props) => {
           ? `${data.bhkName + " " + data.propTypeName}`
           : "" + " " + data.propTypeName,
       });
-      window.open(url, "_blank",  "noreferrer");
+      window.open(url, "_blank", "noreferrer");
       // return url;
     }
   };
@@ -127,34 +127,32 @@ const MainBox = ({ data, refetch }: Props) => {
     });
   };
   const isMobile = useMediaQuery("(max-width: 1600px)");
-  
-  const [selected, setSelected] = useAtom(selectedSearchAtom);
-  const [{id}, setNearby] = useAtom(selectedNearByAtom)
+
+  // const [selected, setSelected] = useAtom(selectedSearchAtom);
+  // const [{id}, setNearby] = useAtom(selectedNearByAtom)
 
   const onHoverCard = () => {
     // if(selected === null || selected?.reqId === newData.projIdEnc) return;
     // setNearby((prev:any)=>({ ...prev, selectedNearbyItem: {}, id:""}))
     // setSelected({
-    //   agentListing: newData.agentListing, 
+    //   agentListing: newData.agentListing,
     //   ownerListing: newData.ownerListing,
     //   projOrPropName: newData.projName,
     //   lat: newData.lat,
     //   lang: newData.lang,
     //   type: type,
     //   reqId: type === "proj" ? projIdEnc : propIdEnc,
-    //   propType: type === "proj" ? propTypeId : propTypeName,  
+    //   propType: type === "proj" ? propTypeId : propTypeName,
     // });
-  }
+  };
   return (
     // <a href={onClickRedirect(reqId)} rel="noreferrer" target="_">
-    <div  
-      onMouseEnter={() => isMobile ? ("") : onHoverCard()}
-      onClick={() => onClickRedirect(reqId)} 
+    <div
+      onMouseEnter={() => (isMobile ? "" : onHoverCard())}
+      onClick={() => onClickRedirect(reqId)}
       className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]"
     >
-      <div
-        className="flex flex-col xl:flex-row justify-start w-full  xl:max-w-full relative"
-      >
+      <div className="flex flex-col xl:flex-row justify-start w-full  xl:max-w-full relative">
         <LeftSection
           src={coverUrl ?? coverImage}
           rera={rerastatus}
@@ -174,7 +172,8 @@ const MainBox = ({ data, refetch }: Props) => {
           {overlayData.id &&
           `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
             propTypeId ?? propTypeName ?? ""
-          }${type === "proj" && phaseId ? "+" + phaseId : ""}` === overlayData.id ? (
+          }${type === "proj" && phaseId ? "+" + phaseId : ""}` ===
+            overlayData.id ? (
             <Overlay />
           ) : null}
           {isMobile && (
