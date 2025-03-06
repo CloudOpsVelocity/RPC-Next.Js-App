@@ -11,6 +11,7 @@ import { useMediaQuery } from "@mantine/hooks"
 import { toQueryParams } from "../../utils/param"
 import { SEARCH_FILTER_DATA } from "@/app/data/search"
 import { Pill } from "@mantine/core"
+import { extractApiValues } from "@/app/utils/dyanamic/projects"
 
 type Props = {}
 export default function SearchSec({}: Props) {
@@ -52,22 +53,57 @@ export default function SearchSec({}: Props) {
     dispatch({ type: "SHOW_FILTER", payload: true })
   }
 
+  const URLCreater = (ids: any) => {
+    let redirectionURL = "";
+  
+    // Handling CG (if exists)
+    if (ids.CG) {
+      redirectionURL += `cg=${ids.CG}`;
+    }
+  
+    // Handling PT (if exists)
+    if (ids.PT) {
+      redirectionURL += redirectionURL ? `-propType=${parseInt(ids.PT as string)}` : `propType=${parseInt(ids.PT as string)}`;
+    }
+  
+    // Handling BH (if exists)
+    if (ids.BH) {
+      redirectionURL += redirectionURL ? `-bhk=${parseInt(ids.BH as string)}` : `bhk=${parseInt(ids.BH as string)}`;
+    }
+  
+    /* // Handling count (if exists)
+    if (ids.count) {
+      redirectionURL += redirectionURL ? `-count=${ids.count}` : `count=${ids.count}`;
+    } */
+  
+    // Handling PJ (if exists)
+    if (ids.PJ) {
+      redirectionURL += redirectionURL 
+        ? `-projIdEnc=${ids.PJ as string}-projName=${searchQuery as string}-listedBy=All` 
+        : `projIdEnc=${ids.PJ as string}-projName=${searchQuery as string}-listedBy=All`;
+    }
+  
+    // Return the final redirection URL
+    return redirectionURL;
+  };
+  
+  
+
   const handleKeyDown = async (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       event.preventDefault()
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher/string?word=${searchQuery}&cityId=${9}`)
       const data = await res.json()
+    
       if (data && data.ids) {
         const bhk = data.ids.split("*")[0]
-        const oldBhks = f.bhk
-        console.log(bhk)
-
-        if (allBhksIds.includes(bhk)) {
-          if (!oldBhks.includes(Number.parseInt(bhk))) {
-            dispatch({ type: "ADD_BHK", payload: Number.parseInt(bhk) })
-          } else {
-            handleSearch()
-          }
+        let ids = extractApiValues(data.ids);
+        let URLReNew=URLCreater(ids)
+        alert(JSON.stringify(ids))
+        if (URLReNew != "") {
+          const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
+          alert(toRedirect)
+          window.open(toRedirect, "_blank", "noreferrer")
         } else {
           if (bhk.length > 4) {
             handleSearch(bhk)
