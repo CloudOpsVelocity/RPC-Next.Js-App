@@ -71,20 +71,12 @@ export default function SearchSec({}: Props) {
         ? `-propType=${parseInt(ids.PT as string)}`
         : `propType=${parseInt(ids.PT as string)}`;
     }
-
-    // Handling BH (if exists)
     if (ids.BH) {
       redirectionURL += redirectionURL
         ? `-bhk=${parseInt(ids.BH as string)}`
         : `bhk=${parseInt(ids.BH as string)}`;
     }
 
-    /* // Handling count (if exists)
-    if (ids.count) {
-      redirectionURL += redirectionURL ? `-count=${ids.count}` : `count=${ids.count}`;
-    } */
-
-    // Handling PJ (if exists)
     if (ids.PJ) {
       redirectionURL += redirectionURL
         ? `-projIdEnc=${ids.PJ as string}-projName=${
@@ -94,8 +86,6 @@ export default function SearchSec({}: Props) {
             searchQuery as string
           }-listedBy=All`;
     }
-
-    // Return the final redirection URL
     return redirectionURL;
   };
 
