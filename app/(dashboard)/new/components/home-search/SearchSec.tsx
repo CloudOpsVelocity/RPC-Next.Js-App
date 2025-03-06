@@ -105,10 +105,10 @@ export default function SearchSec({}: Props) {
           const bhk = data.ids.split("*")[0];
           let ids = extractApiValues(data.ids);
           let URLReNew = URLCreater(ids);
-          alert(JSON.stringify(ids));
+          //alert(JSON.stringify(ids));
           if (URLReNew != "") {
             const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
-            alert(toRedirect)
+            //alert(toRedirect)
             window.open(toRedirect, "_blank", "noreferrer")
           }
           
@@ -121,7 +121,7 @@ export default function SearchSec({}: Props) {
     }
    
 
-  const handleSearch = (projIdEnc?: string) => {
+/*   const handleSearch = (projIdEnc?: string) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
 
     if (projIdEnc) {
@@ -139,7 +139,7 @@ export default function SearchSec({}: Props) {
         "noreferrer"
       );
     }
-  };
+  }; */
 
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
