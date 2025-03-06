@@ -230,10 +230,10 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       default:
         break;
     }
+    setSearchQuery("");
   };
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(searchQuery);
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_BACKEND_URL
@@ -263,6 +263,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       handleApplyFilters();
       handleResetQuery();
       setIsSearchOpen(false);
+      setSearchQuery("");
       return;
     }
   };
