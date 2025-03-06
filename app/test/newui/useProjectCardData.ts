@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function useProjectCardData({ id, isOpen, conType, pType, lat, lang,propId }: Props) {
-  const [{id:projId, data: nearData}, setNearby] = useAtom(selectedNearByAtom)
+  const [{id:projId, data: nearData, isLoader}, setNearby] = useAtom(selectedNearByAtom)
   const queryConfig = getQueryConfig(conType, id, isOpen, pType, lat, lang, propId);
 
   const { data, isLoading } = useQuery({
@@ -27,6 +27,9 @@ export default function useProjectCardData({ id, isOpen, conType, pType, lat, la
 
   if((nearData && Object.keys(nearData).length === 0) && (data && Object.keys(data).length !== 0) && conType === "nearby"){
     setNearby( prev => ({...prev, data: data, isOpen: true, id: itemId, isLoader: false }) );
+  }
+  if(((data === undefined || (data && Object.keys(data).length === 0))) && conType === "nearby" && isLoader){
+    setNearby( prev => ({...prev, data: {}, isLoader: false }) );
   }
   return { data, isLoading };
 } 
