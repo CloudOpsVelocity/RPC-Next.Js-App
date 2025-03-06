@@ -104,14 +104,11 @@ export default function SearchSec({}: Props) {
           const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
           alert(toRedirect)
           window.open(toRedirect, "_blank", "noreferrer")
-        } else {
-          if (bhk.length > 4) {
-            handleSearch(bhk)
-          } else {
-            const whichPage = f.propType === 36 ? "/search/listing" : "/search"
-            window.open(whichPage, "_blank", "noreferrer")
-          }
         }
+        
+      } else {
+        const whichPage = f.propType === 36 ? "/search/listing" : "/search"
+        window.open(whichPage, "_blank", "noreferrer")
       }
     }
   }
