@@ -148,7 +148,7 @@ export default function CardDownSection({
                   setSelected({
                     lat,
                     lang, 
-                    type,
+                    type, 
                     reqId: !propIdEnc ? projIdEnc : propIdEnc,
                     propType: !propIdEnc ? propType : propTypeName,
                     projOrPropName: propName ? propName : projName,

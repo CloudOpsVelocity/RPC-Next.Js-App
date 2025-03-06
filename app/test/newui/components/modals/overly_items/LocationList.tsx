@@ -90,57 +90,67 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
     }
   };
 
+  const dataLength = data &&
+    selectedCategory !== undefined && 
+    data[selectedCategory] !== undefined &&
+    data[selectedCategory].length !== undefined ?
+    data[selectedCategory].length : 0;
+
   return (
     <div className="relative bg-white rounded-lg shadow-md overflow-hidden w-full">
       {/* Tabs with Scroll Buttons */}
-      <div className="relative border-b flex items-center bg-gray-100">
-        <button
-          onClick={() => scrollTabs("left")}
-          className={`p-1 text-gray-500 hover:text-gray-700 ${
-            !canScrollLeft && "opacity-50 cursor-not-allowed"
-          }`}
-          disabled={!canScrollLeft}
-        >
-          <FaChevronLeft />
-        </button>
-        <div
-          ref={tabContainerRef}
-          className="overflow-x-auto flex space-x-1 scrollbar-hide"
-        >
-          <ul className="flex space-x-1">
-            {categories.map((category, index) => (
-              <li
-                key={category + index.toString()}
-                onClick={() => handleTabClick(category)}
-                className={`cursor-pointer px-3 py-1 text-center text-sm font-semibold transition-colors duration-200 whitespace-nowrap rounded-md capitalize ${
-                  selectedCategory === category
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white"
-                }`}
-              >
-                {formatCategoryName(category)}
-              </li>
-            ))}
-          </ul>
+      {dataLength > 0 &&
+        <div className="relative border-b flex items-center bg-gray-100">
+            {dataLength > 3 &&
+            <button
+              onClick={() => scrollTabs("left")}
+              className={`p-1 text-gray-500 hover:text-gray-700 ${
+                !canScrollLeft && "opacity-50 cursor-not-allowed"
+              }`}
+              disabled={!canScrollLeft}
+            >
+              <FaChevronLeft />
+            </button>
+            }
+            
+            <div
+              ref={tabContainerRef}
+              className="overflow-x-auto flex space-x-1 scrollbar-hide"
+            >
+              <ul className="flex space-x-1">
+                {categories.map((category, index) => (
+                  <li
+                    key={category + index.toString()}
+                    onClick={() => handleTabClick(category)}
+                    className={`cursor-pointer px-3 py-1 text-center text-sm font-semibold transition-colors duration-200 whitespace-nowrap rounded-md capitalize ${
+                      selectedCategory === category
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white"
+                    }`}
+                  >
+                    {formatCategoryName(category)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {dataLength > 3 &&
+            <button
+              onClick={() => scrollTabs("right")}
+              className={`p-1 text-gray-500 hover:text-gray-700 ${
+                !canScrollRight && "opacity-50 cursor-not-allowed"
+              }`}
+              disabled={!canScrollRight}
+            >
+              <FaChevronRight />
+            </button>
+            }
         </div>
-        <button
-          onClick={() => scrollTabs("right")}
-          className={`p-1 text-gray-500 hover:text-gray-700 ${
-            !canScrollRight && "opacity-50 cursor-not-allowed"
-          }`}
-          disabled={!canScrollRight}
-        >
-          <FaChevronRight />
-        </button>
-      </div>
+      }
 
       {/* Content */}
       <div className="overflow-y-auto bg-gray-50 p-1">
-        {data &&
-        selectedCategory !== undefined && 
-        data[selectedCategory] !== undefined &&
-        data[selectedCategory].length !== undefined &&
-        data[selectedCategory].length > 0 ? (
+        {dataLength > 0 ? (
           <ul className="grid grid-cols-2 gap-1">
             {data[selectedCategory]?.map((item) => (
               <li

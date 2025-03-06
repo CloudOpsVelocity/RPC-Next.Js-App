@@ -174,9 +174,8 @@ const MainBox = ({ data, refetch }: Props) => {
           {overlayData.id &&
           `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
             propTypeId ?? propTypeName ?? ""
-          }${type === "proj" && phaseId ? "+" + phaseId : ""}` ===
-            overlayData.id ? (
-            <Overlay /> 
+          }${type === "proj" && phaseId ? "+" + phaseId : ""}` === overlayData.id ? (
+            <Overlay />
           ) : null}
           {isMobile && (
             <div className="flex   flex-col  justify-between relative">

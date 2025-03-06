@@ -1,6 +1,6 @@
 "use client";
 
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import React, { useEffect } from "react";
 import {
   diffToProjFromListing,
@@ -10,6 +10,7 @@ import {
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import { update } from "lodash";
 import { SearchFilter } from "@/app/types/search";
+import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 
 const tabs = [
   { id: null, label: "Projects" },
@@ -67,8 +68,14 @@ export default function ProjectSearchTabs() {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isDropdownOpen]);
+
+  const setSelected = useSetAtom(selectedSearchAtom);
+  const setNearby = useSetAtom(selectedNearByAtom);
+
   const handleTabsChange = (value: string | null) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setSelected(null);
+    setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: false}));
 
     const updatedFilters =
       value === null

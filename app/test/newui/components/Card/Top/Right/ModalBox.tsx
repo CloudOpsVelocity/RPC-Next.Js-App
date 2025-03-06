@@ -28,7 +28,7 @@ function ModalBox({children, isOpen, handleChange}: Props) {
             <div id='modalPopupInnerCon' className="relative bg-white flex flex-col overflow-y-auto shrink-0 z-[3] overflow-x-hidden max-h-[80%] h-full w-[94%] p-[2%] pt-[32px] rounded-[4px] justify-center items-center">
                 <button
                     onClick={() => handleChange(false)}
-                    className="p-[4px] hover:bg-gray-100 rounded-full absolute top-0 right-0 "
+                    className="p-[4px] hover:bg-gray-100 rounded-full absolute top-0 right-0"
                 >
                     <MdClose className="w-6 h-6" />
                 </button>
