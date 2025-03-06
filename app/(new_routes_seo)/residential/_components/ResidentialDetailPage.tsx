@@ -46,8 +46,7 @@ export default function ResidentialPage({ data }: { data: any }) {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
-          Array.isArray(data) &&
-          data.length > 0 &&
+          data &&
           Object.entries(data).map(([category, properties]: any) => {
             if (!Array.isArray(properties) || properties.length === 0) {
               return null; // Handle case where properties is undefined or empty
