@@ -21,6 +21,7 @@ export default function SearchSec({}: Props) {
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchError, setSearchError] = useState("");
 
   // Create a ref for the search container
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -90,32 +91,35 @@ export default function SearchSec({}: Props) {
   };
 
   const handleKeyDown = async (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      const res = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_BACKEND_URL
-        }/matcher/string?word=${searchQuery}&cityId=${9}`
-      );
-      const data = await res.json();
+    if (!(/[^a-zA-Z0-9\s]/.test(name as string ))) {
+      if (event.key === "Enter") {
 
-      if (data && data.ids) {
-        const bhk = data.ids.split("*")[0];
-        let ids = extractApiValues(data.ids);
-        let URLReNew = URLCreater(ids);
-        alert(JSON.stringify(ids));
-        if (URLReNew != "") {
-          const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
-          alert(toRedirect)
-          window.open(toRedirect, "_blank", "noreferrer")
+        event.preventDefault();
+        const res = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_BACKEND_URL
+          }/matcher/string?word=${searchQuery}&cityId=${9}`
+        );
+        const data = await res.json();
+        if (data && data.ids) {
+          const bhk = data.ids.split("*")[0];
+          let ids = extractApiValues(data.ids);
+          let URLReNew = URLCreater(ids);
+          alert(JSON.stringify(ids));
+          if (URLReNew != "") {
+            const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
+            alert(toRedirect)
+            window.open(toRedirect, "_blank", "noreferrer")
+          }
+          
+        } else {
+          const whichPage = f.propType === 36 ? "/search/listing" : "/search"
+          window.open(whichPage, "_blank", "noreferrer")
         }
-        
-      } else {
-        const whichPage = f.propType === 36 ? "/search/listing" : "/search"
-        window.open(whichPage, "_blank", "noreferrer")
       }
+    };
     }
-  };
+   
 
   const handleSearch = (projIdEnc?: string) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
@@ -137,6 +141,19 @@ export default function SearchSec({}: Props) {
     }
   };
 
+  const handleSearchChange = (e: any) => {
+    const value = e.target.value;
+    if (/[^a-zA-Z0-9\s]/.test(value)) {
+      setSearchError("Special characters are not allowed.");
+      onSearchChange(value);
+    } else {
+      setSearchError("");
+      onSearchChange(value);
+    }
+    setSearchQuery(value);
+  };
+
+//console.log(name,  dropdownOpen ,searchError )
   return (
     <div className="realtive w-[100%] " ref={searchContainerRef}>
       <div
@@ -181,28 +198,35 @@ export default function SearchSec({}: Props) {
           onClick={handleFieldClick}
           value={name ?? ""}
           onChange={(e) => {
-            onSearchChange(e.target.value);
-            setSearchQuery(e.target.value);
+            handleSearchChange(e)
           }}
+          maxLength={50}
+           pattern="[a-zA-Z0-9\s]+"
+           title="Only letters, numbers, and spaces are allowed."
           onKeyDown={handleKeyDown}
           /* min-w-[234px]   sm:min-w-[255px] we change input width for full text visible in search main  */
           className=" min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
         />
       </div>
 
-      {name && dropdownOpen && (
-        <div
-          className={`${
-            isMobile
-              ? "min-w-[92%] max-w-[92%] w-full "
-              : "max-w-[calc(100% - 70%)]"
-          } sm:max-w-[100%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]  mt-2 bg-white shadow-xl absolute z-10 max-h-[400px] overflow-y-auto `}
-        >
-          <div className="flex items-center justify-between p-2 border-b">
-            <Results />
-          </div>
-        </div>
-      )}
+      {
+  ((name && dropdownOpen) || searchError !== '') && (
+    <div
+      className={`${
+        isMobile
+          ? 'min-w-[92%] max-w-[92%] w-full '
+          : 'max-w-[calc(100% - 70%)]'
+      } sm:max-w-[100%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] mt-2 bg-white shadow-xl absolute z-10 max-h-[400px] overflow-y-auto`}
+    >
+      <div className="flex items-center justify-between p-2 border-b">
+        {searchError !== '' ? (
+          <div className="p-3">{searchError}</div>
+        ) : (
+          <Results />
+        )}
+      </div>
     </div>
+  )
+}   </div>
   );
 }
