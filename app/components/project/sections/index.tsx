@@ -24,7 +24,11 @@ export default function PartialUnitData({
   handlePricingFloorPlanClick,
 }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
-  const isPropTypesAvailable = (partialUnitData && partialUnitData[currentPhase] && Object.keys(partialUnitData[currentPhase] || {})) ?? 0;
+  const isPropTypesAvailable =
+    (partialUnitData &&
+      partialUnitData[currentPhase] &&
+      Object.keys(partialUnitData[currentPhase] || {})) ??
+    0;
   return (
     <div
       className={`w-[95%] md:w-[90%] scroll-mt-[50px] md:mb-[2%] sm:mb-[5%]  ${
@@ -44,8 +48,12 @@ export default function PartialUnitData({
           data={{ ...data, type }}
         />
       ) : (
-        <NoProperties phase={phaseList?.find((phase: any) => phase.phaseId == currentPhase)
-          ?.phaseName as any} />
+        <NoProperties
+          phase={
+            phaseList?.find((phase: any) => phase.phaseId == currentPhase)
+              ?.phaseName as any
+          }
+        />
       )}
     </div>
   );

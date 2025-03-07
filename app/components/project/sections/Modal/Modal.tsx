@@ -63,6 +63,7 @@ const Modal = ({
 
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
+  // console.log(isData);
   const propId = useAtomValue(propCgIdAtom);
   const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
@@ -84,6 +85,20 @@ export default function PartialUnitModal({ data }: any) {
       setPlatform("Unknown");
     }
   }, []);
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        handlePrevious();
+      } else if (event.key === "ArrowRight") {
+        // alert(JSON.stringify(isData));
+        handleNext();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [active]);
 
   const selectedOne = isData.others[active];
   const { handleDownload } = useDownload("floorPlan");
@@ -128,7 +143,6 @@ export default function PartialUnitModal({ data }: any) {
       return prev;
     });
   };
-
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }

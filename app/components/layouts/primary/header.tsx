@@ -29,9 +29,15 @@ export default function Header({}: Props) {
       "/register/individual",
       "/register/agent",
       "/register/builder",
+      "/forgot",
     ].includes(pathname) && (
-      <div className={`flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[20] `}>
-        <Link href={"/"} className={` ${pathname === "/" ? "pointer-events-none" : '' }`}>
+      <div
+        className={`flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[20] `}
+      >
+        <Link
+          href={"/"}
+          className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
+        >
           <GrpLogoSvg className="h-[40px]   sm:h-[50px] w-auto" />
         </Link>
         {isMobile ? (
@@ -42,7 +48,9 @@ export default function Header({}: Props) {
         ) : (
           <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
             <a href={"/blog"} target="_blank" rel="noopener noreferrer">
-              <p className="text-[#242424] text-xl not-italic font-medium cursor-pointer">Blogs</p>
+              <p className="text-[#242424] text-xl not-italic font-medium cursor-pointer">
+                Blogs
+              </p>
             </a>
             <ForBuilders />
             <PostProjectBtn />
@@ -69,7 +77,11 @@ const ForBuilders = () => {
         <Menu.Dropdown
           className="!p-0 cursor-pointer"
           onClick={() =>
-            window.open(`/login?cc=${encryptUrl(pathName)}`, "_blank", "noreferrer")
+            window.open(
+              `/login?cc=${encryptUrl(pathName)}`,
+              "_blank",
+              "noreferrer"
+            )
           }
         >
           <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
@@ -151,7 +163,7 @@ function Dropdown() {
         ) : (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <Link
-            rel="noopener noreferrer"
+              rel="noopener noreferrer"
               className=""
               href={{
                 pathname: `/register`,
@@ -349,7 +361,9 @@ function MobileDropDown() {
                 <button
                   onClick={() =>
                     window.open(
-                      `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile/dashboard`, "_blank", "noreferrer"
+                      `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile/dashboard`,
+                      "_blank",
+                      "noreferrer"
                     )
                   }
                   className={`rounded w-full pl-3 text-wrap flex items-center gap-2 text-[14px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${

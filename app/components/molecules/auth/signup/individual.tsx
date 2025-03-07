@@ -23,10 +23,7 @@ import {
 } from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 import clsx from "clsx";
-import {
-  getQueryParam,
-  getQueryParamClient,
-} from "@/app/hooks/custom/useRedirect";
+import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
 import { useForm } from "react-hook-form";
 
@@ -245,19 +242,6 @@ function Individual() {
               </p>
             )}
 
-            {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
-                <CountryInput
-                  onSelect={displayCountryCode}
-                  className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
-                    (form.errors.mobile != undefined &&
-                      form.errors.mobile != null) ||
-                    status === "error"
-                      ? "bottom-[65px]"
-                      : "bottom-[45px]"
-                  }  ml-[2px]`}
-                />
-              </div> */}
-
             <div className="w-full flex justify-between items-center flex-wrap-reverse">
               <Button
                 mt="sm"
@@ -298,7 +282,7 @@ function Individual() {
             )}
 
             <Link
-              href={{ pathname: queryParam.redirectPath }}
+              href={{ pathname: "/" }}
               className=" not-italic text-[#148B16] text-[14px]  font-semibold   leading-[normal]  sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center max-w-fit m-auto"
             >
               Continue without Register
