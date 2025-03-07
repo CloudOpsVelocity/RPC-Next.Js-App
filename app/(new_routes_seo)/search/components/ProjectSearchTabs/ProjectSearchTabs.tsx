@@ -13,10 +13,10 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 
 const tabs = [
   { id: null, label: "Projects" },
-  { id: "All", label: "All Listings" },
   { id: "B", label: "Builder Listings" },
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
+  { id: "All", label: "All Listings" },
 ];
 
 export default function ProjectSearchTabs() {
@@ -201,7 +201,7 @@ export default function ProjectSearchTabs() {
                     e.stopPropagation();
                     setIsDropdownOpen(!isDropdownOpen);
                   }}
-                  className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-xs sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
+                  className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[13px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
                 >
                   <svg
                     className="w-4 h-4"
