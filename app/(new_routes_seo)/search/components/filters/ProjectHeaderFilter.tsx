@@ -232,6 +232,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     }
     setSearchQuery("");
   };
+  // crollyww
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const res = await fetch(
@@ -256,6 +257,12 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               projIdEnc: ids.PJ as string,
               projName: searchQuery,
               listedBy: !isListing ? "All" : null,
+            }),
+            ...(ids.CG && {
+              cg: String(ids.CG) ?? "S",
+              ...(ids.CG == "R" && {
+                listedBy: "All",
+              }),
             }),
           },
         });
