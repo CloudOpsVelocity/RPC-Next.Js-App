@@ -185,7 +185,7 @@ export default function ProjectSearchTabs() {
                   key={tab.id}
                   title={`Click to view ${tab.label}`}
                   onClick={() => handleTabsChange(tab.id)}
-                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-xs xl:text-base font-medium transition-all ${
+                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
                     state.listedBy === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
@@ -195,7 +195,7 @@ export default function ProjectSearchTabs() {
                   {tab.label}
                 </button>
               ))}
-              <div className=" relative flex md:hidden justify-end self-end  ">
+              <div className=" relative flex md:hidden justify-end self-end  ml-auto">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
