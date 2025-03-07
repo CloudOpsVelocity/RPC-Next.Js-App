@@ -162,7 +162,7 @@ export default function ListingSearchTabs() {
                   {tab.label}
                 </button>
               ))}
-              <div className=" relative flex md:hidden justify-end self-end bg-slate-50 shadow-md pb-[4px] ">
+              <div className=" relative flex md:hidden justify-end self-end  ">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -229,7 +229,7 @@ export default function ListingSearchTabs() {
                 e.stopPropagation();
                 setIsDropdownOpen(!isDropdownOpen);
               }}
-              className="flex items-center gap-2 px-4 py-2 text-sm md:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
+              className="flex items-center gap-2 md:px-[6px] md:py-[4px] xl:px-4 xl:py-2 text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
             >
               <svg
                 className="w-4 h-4"
