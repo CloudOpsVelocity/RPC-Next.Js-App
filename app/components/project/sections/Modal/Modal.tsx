@@ -63,7 +63,7 @@ const Modal = ({
 
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
-  console.log(isData);
+  // console.log(isData);
   const propId = useAtomValue(propCgIdAtom);
   const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
@@ -90,7 +90,7 @@ export default function PartialUnitModal({ data }: any) {
       if (event.key === "ArrowLeft") {
         handlePrevious();
       } else if (event.key === "ArrowRight") {
-        alert(JSON.stringify(isData));
+        // alert(JSON.stringify(isData));
         handleNext();
       }
     };
