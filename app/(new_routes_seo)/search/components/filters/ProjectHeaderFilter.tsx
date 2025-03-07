@@ -415,7 +415,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
           </div>
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             {isListing ? <ListingSearchTabs /> : <ProjectSearchTabs />}
-
             <SelectedFilters />
           </div>
         </div>

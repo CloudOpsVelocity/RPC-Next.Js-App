@@ -75,7 +75,15 @@ export default function ProjectSearchTabs() {
   const handleTabsChange = (value: string | null) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setSelected(null);
-    setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: false}));
+    setNearby((prev: any) => ({
+      ...prev,
+      category: "",
+      data: {},
+      selectedNearbyItem: {},
+      id: "",
+      isOpen: false,
+      isLoader: false,
+    }));
 
     const updatedFilters =
       value === null
@@ -129,7 +137,7 @@ export default function ProjectSearchTabs() {
       type: "update",
     });
     handleApplyFilters();
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const getSortyByValue = (state: any): string => {
     if (
@@ -164,7 +172,7 @@ export default function ProjectSearchTabs() {
   // Default value if no conditions are met
 
   return (
-    <div className="bg-slate-50 shadow-md w-full md:w-[40%] xl:w-[50%] flex-nowrap ">
+    <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap ">
       <div className=" w-full pb-[6px] pt-[10px] px-[10px]">
         <div className="flex flex-col gap-[10px] md:flex-row md:items-center md:justify-between ">
           <div
@@ -178,11 +186,11 @@ export default function ProjectSearchTabs() {
                   key={tab.id}
                   title={`Click to view ${tab.label}`}
                   onClick={() => handleTabsChange(tab.id)}
-                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] xl:px-4 xl:py-2 text-sm md:text-base font-medium transition-all ${
-                      state.listedBy === tab.id
-                        ? "bg-[#0073C6] text-white shadow-md"
-                        : "text-black hover:bg-[#0073C6] hover:text-white"
-                    }
+                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] xl:px-4 xl:py-2 text-sm xl:text-base font-medium transition-all ${
+                    state.listedBy === tab.id
+                      ? "bg-[#0073C6] text-white shadow-md"
+                      : "text-black hover:bg-[#0073C6] hover:text-white"
+                  }
                   `}
                 >
                   {tab.label}
@@ -198,7 +206,7 @@ export default function ProjectSearchTabs() {
                 e.stopPropagation();
                 setIsDropdownOpen(!isDropdownOpen);
               }}
-              className="flex items-center gap-2 md:px-[6px] md:py-[4px] xl:px-4 xl:py-2 text-sm md:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
+              className="flex items-center gap-2 md:px-[6px] md:py-[4px] xl:px-4 xl:py-2 text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
             >
               <svg
                 className="w-4 h-4"
@@ -215,8 +223,6 @@ export default function ProjectSearchTabs() {
               </svg>
 
               <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
-                {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
-                  "Sort By"} */}
                 {state.sortByfield != null && state.sortType != null
                   ? getSortyByValue(state)
                   : "Newest First"}
@@ -234,15 +240,14 @@ export default function ProjectSearchTabs() {
                     key={option.value}
                     onClick={(e) => {
                       e.stopPropagation();
-                      // setSortBy(option.value);
                       handleSortBy(option);
                       setIsDropdownOpen(false);
                     }}
                     className={`block w-full text-left px-4 py-2 text-sm transition-colors ${
-                        getSortyByValue(state) === option.label
-                          ? "text-white bg-[#0073C6]"
-                          : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
-                      }
+                      getSortyByValue(state) === option.label
+                        ? "text-white bg-[#0073C6]"
+                        : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
+                    }
                     `}
                   >
                     {option.label}
@@ -253,7 +258,7 @@ export default function ProjectSearchTabs() {
           </div>
         </div>
       </div>
-      
+
       <div className=" relative flex md:hidden justify-end self-end bg-slate-50 shadow-md pb-[4px] ">
         <button
           onClick={(e) => {
@@ -286,9 +291,7 @@ export default function ProjectSearchTabs() {
         </button>
 
         {isDropdownOpen && (
-          <div
-            className="absolute top-[40px] right-0 w-48 bg-white rounded-lg shadow-lg py-1 z-20 border border-white"
-          >
+          <div className="absolute top-[40px] right-0 w-48 bg-white rounded-lg shadow-lg py-1 z-20 border border-white">
             {sortOptions.map((option) => (
               <button
                 key={option.value}
@@ -299,10 +302,10 @@ export default function ProjectSearchTabs() {
                   setIsDropdownOpen(false);
                 }}
                 className={`block w-full text-left px-4 py-2 text-sm transition-colors ${
-                        getSortyByValue(state) === option.label
-                          ? "text-white bg-[#0073C6]"
-                          : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
-                      }
+                  getSortyByValue(state) === option.label
+                    ? "text-white bg-[#0073C6]"
+                    : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
+                }
                     `}
               >
                 {option.label}
