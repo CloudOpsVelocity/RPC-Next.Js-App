@@ -63,7 +63,14 @@ export default function SearchSec({}: Props) {
 
     // Handling CG (if exists)
     if (ids.CG) {
-      redirectionURL += `cg=${ids.CG}`;
+      redirectionURL += `cg=${ids.CG  == "R" ? `${ids.CG}-listedBy=All` : ids.CG}`;
+    }
+
+    //handling LT
+    if (ids.LT) {
+      redirectionURL += redirectionURL
+        ? `-localities=${`${searchQuery}%2B${ids.LT}`}`
+        : `localities=${`${searchQuery}%2B${ids.LT}`}`;
     }
 
     // Handling PT (if exists)
@@ -108,7 +115,7 @@ export default function SearchSec({}: Props) {
           //alert(JSON.stringify(ids));
           if (URLReNew != "") {
             const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
-            //alert(toRedirect)
+         //alert(toRedirect)
             window.open(toRedirect, "_blank", "noreferrer")
           }
           
@@ -152,6 +159,8 @@ export default function SearchSec({}: Props) {
     }
     setSearchQuery(value);
   };
+
+  const isMobileStarting = useMediaQuery("(max-width: 760px)");
 
 //console.log(name,  dropdownOpen ,searchError )
   return (
