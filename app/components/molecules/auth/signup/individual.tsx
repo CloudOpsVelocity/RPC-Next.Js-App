@@ -23,10 +23,7 @@ import {
 } from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 import clsx from "clsx";
-import {
-  getQueryParam,
-  getQueryParamClient,
-} from "@/app/hooks/custom/useRedirect";
+import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
 import { useForm } from "react-hook-form";
 
@@ -244,19 +241,6 @@ function Individual() {
                 below
               </p>
             )}
-
-            {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
-                <CountryInput
-                  onSelect={displayCountryCode}
-                  className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
-                    (form.errors.mobile != undefined &&
-                      form.errors.mobile != null) ||
-                    status === "error"
-                      ? "bottom-[65px]"
-                      : "bottom-[45px]"
-                  }  ml-[2px]`}
-                />
-              </div> */}
 
             <div className="w-full flex justify-between items-center flex-wrap-reverse">
               <Button
