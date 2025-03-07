@@ -73,7 +73,6 @@ export default function PartialUnitModal({ data }: any) {
   };
 
   const [platform, setPlatform] = useState("");
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -90,7 +89,6 @@ export default function PartialUnitModal({ data }: any) {
       if (event.key === "ArrowLeft") {
         handlePrevious();
       } else if (event.key === "ArrowRight") {
-        // alert(JSON.stringify(isData));
         handleNext();
       }
     };
@@ -98,7 +96,7 @@ export default function PartialUnitModal({ data }: any) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [active]);
+  }, [active, isData]);
 
   const selectedOne = isData.others[active];
   const { handleDownload } = useDownload("floorPlan");
