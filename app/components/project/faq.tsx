@@ -4,7 +4,6 @@ import { Textarea, Button, Modal } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FAQ } from "@/app/validations/types/project";
 import { addQna } from "@/app/utils/api/actions/Qna";
-import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
 import { useSession } from "next-auth/react";
@@ -26,11 +25,16 @@ import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 type FaqWithBgProps = {
   data: FAQ[];
   projName: string;
-  slug:string;
-  postedById:number;
+  slug: string;
+  postedById: number;
 };
 
-export default function FaqWithBg({ data, projName,slug,postedById }: FaqWithBgProps) {
+export default function FaqWithBg({
+  data,
+  projName,
+  slug,
+  postedById,
+}: FaqWithBgProps) {
   return (
     <div
       className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]   "}
@@ -51,29 +55,59 @@ export default function FaqWithBg({ data, projName,slug,postedById }: FaqWithBgP
         {data?.map((faq, index) => {
           return (
             faq.faqAnswer &&
-            faq.faqQuestion &&
-            <MainCard key={`faqMainCard_${index.toString()}`} faq={faq} index={index} data={data} />
-          )
+            faq.faqQuestion && (
+              <MainCard
+                key={`faqMainCard_${index.toString()}`}
+                faq={faq}
+                index={index}
+                data={data}
+              />
+            )
+          );
         })}
       </div>
       <AddQnaForm projName={projName} slug={slug} postedById={postedById} />
     </div>
   );
 }
-const MainCard = ({faq,index,data}:{faq:FAQ,index:number,data:FAQ[]})=>{
-const isMobile = useMediaQuery(`(max-width: 601px)`);
-return (
-  <div>
-    {isMobile ? <MobileFaqCard   faqQuestion={faq.faqQuestion}
-                faqAnswer={faq.faqAnswer}
-                last={index === data.length - 1} /> : <FaqCard    faqQuestion={faq.faqQuestion}
-                faqAnswer={faq.faqAnswer}
-                key={faq.faqAnswer}
-                last={index === data.length - 1} />}
-  </div>
-)
-}
-const AddQnaForm = ({ projName, slug,postedById }: { projName: string,slug:string ,postedById:number}) => {
+const MainCard = ({
+  faq,
+  index,
+  data,
+}: {
+  faq: FAQ;
+  index: number;
+  data: FAQ[];
+}) => {
+  const isMobile = useMediaQuery(`(max-width: 601px)`);
+  return (
+    <div>
+      {isMobile ? (
+        <MobileFaqCard
+          faqQuestion={faq.faqQuestion}
+          faqAnswer={faq.faqAnswer}
+          last={index === data.length - 1}
+        />
+      ) : (
+        <FaqCard
+          faqQuestion={faq.faqQuestion}
+          faqAnswer={faq.faqAnswer}
+          key={faq.faqAnswer}
+          last={index === data.length - 1}
+        />
+      )}
+    </div>
+  );
+};
+const AddQnaForm = ({
+  projName,
+  slug,
+  postedById,
+}: {
+  projName: string;
+  slug: string;
+  postedById: number;
+}) => {
   const [, { open }] = usePopShortList();
   const { data: session } = useSession();
   const [status, setStatus] = useState<
@@ -96,7 +130,11 @@ const AddQnaForm = ({ projName, slug,postedById }: { projName: string,slug:strin
   const [opened, { close, open: openSuccesPopup }] = useMessagePopup("qna");
   const handleQna = async () => {
     try {
-      await addQna({ question: values.question, projIdEnc: slug,ansBy:postedById });
+      await addQna({
+        question: values.question,
+        projIdEnc: slug,
+        ansBy: postedById,
+      });
       openSuccesPopup();
       setStatus("success");
     } catch (error: any) {
@@ -109,8 +147,8 @@ const AddQnaForm = ({ projName, slug,postedById }: { projName: string,slug:strin
       setStatus("pending");
       handleQna();
     } else {
-      open(handleQna,{
-        type:"have-any-question",
+      open(handleQna, {
+        type: "have-any-question",
       });
     }
   };
@@ -125,7 +163,6 @@ const AddQnaForm = ({ projName, slug,postedById }: { projName: string,slug:strin
       onSubmit={onSubmit(formSubmit)}
       id="have-any-question"
     >
-    
       <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">
         <svg
           xmlns="http://www.w3.org/2000/svg"
