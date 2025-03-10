@@ -13,10 +13,10 @@ export default function Banner({ heroSlides, data }: Props) {
   const [activeSlide, setActiveSlide] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+      setActiveSlide((prev) => (prev + 1) % heroSlides?.length || 0);
     }, 5000);
     return () => clearInterval(interval);
-  }, [heroSlides.length]);
+  }, [heroSlides?.length]);
   const handleSlideChange = (index: number) => {
     if (data?.featured?.length) {
       setActiveSlide(index);
