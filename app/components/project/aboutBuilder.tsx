@@ -50,7 +50,12 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               />
             </div>
             <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
-              <Link href={urlBuilder}>{nzData.userName}</Link>
+              <Link
+                href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${urlBuilder}`}
+                about="builder details"
+              >
+                {nzData.userName}
+              </Link>
               <p className=" text-[#303A42] text-[14px] italic sm:text-[16px] xl:text-[20px] font-[500] ">
                 since {convertDateToMonthYear(nzData.companyStartDate)}
               </p>
