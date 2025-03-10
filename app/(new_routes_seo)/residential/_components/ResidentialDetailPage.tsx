@@ -140,12 +140,12 @@ export default function ResidentialPage({ data }: { data: any }) {
                             >
                               View Details
                             </Link>
-                            <a
+                            <Link rel="noopener noreferrer"
                               href="tel:+91-8884440963"
                               className="flex-1 border border-primary text-primary hover:bg-primary/10 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                             >
                               Enquire Now
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -265,12 +265,12 @@ export default function ResidentialPage({ data }: { data: any }) {
             <button className="bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-lg font-medium transition-colors">
               Book a Site Visit
             </button>
-            <a
+            <Link rel="noopener noreferrer"
               href="tel:+91-8884440963"
               className="bg-transparent border border-white hover:bg-white/10 px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </section>

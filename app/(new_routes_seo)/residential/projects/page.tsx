@@ -110,14 +110,14 @@ export default function Home() {
             Connect with our property experts for personalized assistance in
             finding your dream home in Bangalore.
           </p>
-          <a
+          <Link rel="noopener noreferrer"
             href={`https://api.whatsapp.com/send?phone=+918884440963&text=${encodeURIComponent(
               "Hello, I'm interested in finding a home in Bangalore. Can you help me with this?"
             )}`}
             className="bg-white text-bgSecondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
           >
             Schedule a Consultation
-          </a>
+          </Link>
         </div>
       </div>
     </div>

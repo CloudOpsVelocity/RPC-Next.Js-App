@@ -11,6 +11,7 @@ import { useAtom } from 'jotai';
 import { trendsFilterData } from '../data.ts/marketBlogalData';
 import { formatNumberWithCommas } from '@/app/seo/sitemap/const';
 import Loading from '@/app/components/atoms/Loader';
+import Link from 'next/link';
 
 type Props = {
   cityName: string;
@@ -165,11 +166,9 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
             <div className=" flex flex-wrap gap-[10px] w-full ">
               {localityCheckList.map((each) => {
                 return (
-                  <a
+                  <Link rel="noopener noreferrer"
                     key={each.name}
                     href={`/search?sf=city=${eachCity.cityName}%2B${cityId}-cg=${filters.cg}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     <p
                       onClick={(e) => e.stopPropagation()}
@@ -200,7 +199,7 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
                         />
                       </svg>
                     </p>
-                  </a>
+                  </Link>
                 );
               })}
             </div>

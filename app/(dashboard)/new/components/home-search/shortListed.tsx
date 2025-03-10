@@ -4,6 +4,7 @@ import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import React from "react";
 import { useQuery } from "react-query";
 import { getShortIds } from "../../api";
+import Link from "next/link";
 
 type Props = {};
 
@@ -13,9 +14,8 @@ export default function ShortListed({}: Props) {
     queryFn: getShortIds,
   });
   return data.total ? (
-    <a
+    <Link rel="noopener noreferrer"
       href="/your-profile/shortlisted"
-      target="_blank"
       className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#2D4657] bg-[#1a2733] fixed bottom-10 right-5 sm:text-sm xl:text-xl z-[1000]"
     >
       <span className="hidden sm:block text-white font-bold">Shortlisted</span>{" "}
@@ -23,6 +23,6 @@ export default function ShortListed({}: Props) {
         <p>{1000}</p>
         <SelectedHeartIcon />
       </div>
-    </a>
+    </Link>
   ) : null;
 }

@@ -62,7 +62,7 @@ const onSubmit = async (values: any) => {
                                 <tr>
                                     <td style="padding: 15px; width: 30%; font-weight: 600; color: #4B5563; background-color: #E5E7EB;">Email:</td>
                                     <td style="padding: 15px; background-color: #E5E7EB;">
-                                        <a href="mailto:${values.email}" style="color: #4F46E5; text-decoration: none;">${values.email}</a>
+                                        <Link rel="noopener noreferrer" href="mailto:${values.email}" style="color: #4F46E5; text-decoration: none;">${values.email}</Link>
                                     </td>
                                 </tr>
                                 <tr>
@@ -82,7 +82,7 @@ const onSubmit = async (values: any) => {
                     </tr>
                     <tr>
                         <td>
-                            <a href="mailto:${values.email}" style="display: inline-block; padding: 14px 30px; background-color: #4F46E5; color: #ffffff; text-decoration: none; font-weight: 600; border-radius: 50px; text-align: center; transition: background-color 0.3s ease;">Reply to manish</a>
+                            <Link rel="noopener noreferrer" href="mailto:${values.email}" style="display: inline-block; padding: 14px 30px; background-color: #4F46E5; color: #ffffff; text-decoration: none; font-weight: 600; border-radius: 50px; text-align: center; transition: background-color 0.3s ease;">Reply to manish</Link>
                         </td>
                     </tr>
                 </table>

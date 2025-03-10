@@ -21,6 +21,7 @@ import { formatCurrency } from "@/app/utils/numbers";
 import Image from "next/image";
 import Button from "@/app/elements/button";
 import { Project } from "@/app/types/home";
+import Link from "next/link";
 const HomeCarousel = () => {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const { data } = useCarouselData(1);
@@ -86,10 +87,8 @@ export function ProjectCard({ type, cardData }: CardProps) {
 
 
   return (
-      <a
-       href={link}
-
-        target="_blank"
+      <Link rel="noopener noreferrer"
+        href={link}
         key={reqId}
         className={clsx(
           "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -98,13 +97,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
       >
         {type == "proj" && (
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-            <a
-              target="_blank"
+            <Link rel="noopener noreferrer"
               className="tracking-tight text-[18px] font-[600] text-wrap text-[#565D70] cursor-pointer"
               href={link}
             >
               {cardData?.projName}
-            </a>
+            </Link>
             <div className="text-xs font-semibold  ">
               <span className="text-[16px] font-[700] text-[#148B16]">
                 {formatCurrency(32423)}
@@ -187,6 +185,6 @@ export function ProjectCard({ type, cardData }: CardProps) {
             />
           </div>
         </div>
-      </a>
+      </Link>
   );
 }

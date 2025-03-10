@@ -16,6 +16,7 @@ import classes from "@/app/styles/search.module.css";
 import { filterParser } from "@/app/utils/search";
 import { createQueryString } from "@/app/utils/search/query";
 import { formatBudgetValue } from "@/app/(dashboard)/searchOldPage/components/buget";
+import Link from "next/link";
 
 interface filters {
   bhks: string[];
@@ -159,14 +160,13 @@ const Searchbar = () => {
             </div>
 
             <div className="flex items-center">
-              <a
-                target="_blank"
+              <Link rel="noopener noreferrer"
                 href={`/search?sf=${handleSearch()}`}
                 className="bg-green-600  md:text-[24px] px-1 py-1
                  text-white md:py-2 rounded-xl  md:px-5 "
               >
                 Search
-              </a>
+              </Link>
             </div>
           </div>
         </section>

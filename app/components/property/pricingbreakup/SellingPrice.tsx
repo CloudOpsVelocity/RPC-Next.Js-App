@@ -22,7 +22,7 @@ export default function SellingPrice({
         <div className="text-[#38333A] ml-3 xl:ml-2  flex-row  gap-2 items-start  text-[14px] xl:text-2xl not-italic font-medium leading-[normal] capitalize inline-flex">
           <span>{DefaultIcon}</span> 
           {otherPrice.otherCharge && otherPrice.otherCharge !== "" ? 
-          `Total ${type} Price Including all the charges` : "Total Selling Price"}
+          `Total ${type} Price Including all the charges` : `Total ${type} Price`}
         </div>
         <h2 className="text-[#005202] text-[26px] ml-9 xl:m-0  xl:text-[34px] not-italic font-bold leading-[normal]">
           ₹{" "}

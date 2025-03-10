@@ -107,7 +107,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
         <span className=" text-[#737579] font-[500] mt-3">
           {" "}
-          <a href={"/"} className="hover:underline cursor-pointer ">Home</a> {" > "}
+          <Link rel="noopener noreferrer" href={"/"} className="hover:underline cursor-pointer ">Home</Link> {" > "}
         </span>
         <span>
           <span className="  text-[#4D6677] font-[600]">

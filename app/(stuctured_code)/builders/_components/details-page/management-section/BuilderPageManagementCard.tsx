@@ -1,5 +1,6 @@
 "use client";
 import clsx from "clsx";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -35,12 +36,12 @@ export default function Card({
       </div>
     </div>
   ) : (
-    <a href={`${scheme}${content}`} className={clsx("cursor-pointer")}>
+    <Link rel="noopener noreferrer" href={`${scheme}${content}`} className={clsx("cursor-pointer")}>
       <div className={clsx(styles.container, styles.text)}>
         {Icon} {title}
       </div>
       <div className=" sm:mt-2">{renderContent()}</div>
-    </a>
+    </Link>
   );
 }
 

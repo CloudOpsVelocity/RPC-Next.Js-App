@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { FaHome, FaChevronRight } from "react-icons/fa";
 interface BreadcrumbItem {
@@ -96,13 +97,13 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
       />
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         <li>
-          <a
+          <Link rel="noopener noreferrer"
             href="/"
             className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
           >
             <FaHome className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
             <span className="sr-only">Home</span>
-          </a>
+          </Link>
         </li>
         {newParams.map((item: any, index: number) => {
           let url = trimStringUrl(pageUrl, item);
@@ -113,17 +114,15 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
                 aria-hidden="true"
               />
               {index !== newParams.length - 1 ? (
-                <a
+                <Link rel="noopener noreferrer"
                   href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
                   aria-current={
                     index === newParams.length - 1 ? "page" : undefined
                   }
                 >
                   {item.replaceAll("-", " ")}
-                </a>
+                </Link>
               ) : (
                 <span
                   className={`ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize `}

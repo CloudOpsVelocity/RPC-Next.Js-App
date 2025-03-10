@@ -22,6 +22,7 @@ import {
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
 import { BlueMobileMapIcon } from "@/app/data/map";
+import Link from "next/link";
 
 const Map = ({ data }: any) => {
   const value = useAtomValue(mobileSearchPageMapModalReducerAtom);
@@ -53,7 +54,7 @@ const Map = ({ data }: any) => {
         zoom={10}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution='&copy; <Link rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 

@@ -5,6 +5,7 @@ import React from "react";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import { newsData } from "@/app/news/store/newsState";
 import { trendsFilterData } from "@/app/market-trends/data.ts/marketBlogalData";
+import Link from "next/link";
 
 type Props = {
   cityName?: string;
@@ -28,10 +29,8 @@ export const getClampedText = (text: string, maxLines: number) => {
 
 function Card({ data, cityName }: CradProps) {
   return (
-    <a
+    <Link rel="noopener noreferrer"
       href={`/news/${data.name.replaceAll(" ", "-")}`}
-      target="_blank"
-      rel="noopener noreferrer"
     >
       <div className="flex max-w-[600px] min-w-[240px] sm:w-[260px] md:w-[300px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-[4px] xl:rounded-[10px]  border-solid border-[#B9CFEB] hover:shadow-lg ">
         <p className=" border-0 p-[4px] bg-[#6b9472] text-[12px] font-bold text-white mr-auto mb-[16px] absolute top-[10px] right-[10px] ">
@@ -69,7 +68,7 @@ function Card({ data, cityName }: CradProps) {
           </p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
 
