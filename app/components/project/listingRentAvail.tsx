@@ -12,6 +12,7 @@ import Image from "next/image";
 import React from "react";
 import SubHeading from "./headings/SubHeading";
 import { TOPIC_IDS } from "@/app/data/projectDetails";
+import { useRouter } from "next/navigation";
 // space fixed
 export default function ListingRentAvail({
   projName,
@@ -78,14 +79,15 @@ const Card = ({
   id: string;
   slug: string;
 }) => {
+  const router = useRouter();
   const [, { open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
   );
   const handleBoxClick = (value: any, cg: "S" | "R") => {
     value
       ? openSuccesPopup()
-      : window.open(
-          `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`, "noreferrer"
+      : router.push(
+          `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`
         );
   };
 
