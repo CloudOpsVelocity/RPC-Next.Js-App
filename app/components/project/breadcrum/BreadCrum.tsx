@@ -1,5 +1,6 @@
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
+import Link from "next/link";
 import React from "react";
 
 export default function BreadCrumbs({ params }: { params: any }) {
@@ -85,17 +86,17 @@ export default function BreadCrumbs({ params }: { params: any }) {
           return (
             <React.Fragment key={`${key[index]}`}>
               {index < Object.keys(params).length - 1 ? (
-                <a
+                <Link
                   // href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
                   href={`${BASE_PATH_PROJECT_DETAILS}${redirectPath}`}
-                  target="_blank"
+                  // target="_blank"
                   className="hover:underline cursor-pointer capitalize"
                 >
                   {titleOfKeys[key as keyof typeof titleOfKeys] && (
                     <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
                   )}
                   <span>{newName}</span>
-                </a>
+                </Link>
               ) : (
                 <>
                   {titleOfKeys[key as keyof typeof titleOfKeys] && (
