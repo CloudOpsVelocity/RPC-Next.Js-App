@@ -81,7 +81,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
         <Link
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] xl:text-[20px] font-[700] p-[10px]  "
           href={urlBuilder}
-          rel="noopener noreferrer"
+          rel="noreferrer"
         >
           View Builder Details
         </Link>

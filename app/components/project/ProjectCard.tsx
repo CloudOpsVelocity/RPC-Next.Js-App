@@ -147,7 +147,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
 
         <div className="relative  max-h-[300px]">
           <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
-            <Link rel="noopener noreferrer" href={URLRedirectionProj}>
+            <Link rel="noreferrer" href={URLRedirectionProj}>
               <Image
                 src={
                   type === "proj"
@@ -232,7 +232,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
               Builder:{" "}
               <Link
                 href={URLToBuilder}
-                rel="noopener noreferrer"
+                rel="noreferrer"
                 className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline"
               >
                 {cardData.builderName}
