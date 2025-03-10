@@ -2,7 +2,11 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
 
-export const generateAllSchemas = (property: any, properties?: any[]) => {
+export const generateAllSchemas = (
+  property: any,
+  properties: any[],
+  index: number
+) => {
   const [launchDate, possassionDate] = [
     convertToSchemaDate(property?.launchDate),
     convertToSchemaDate(property?.possassionDate),
@@ -162,6 +166,26 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         name: ["Home", "Properties", property.projName],
         url: [PAGE_URL],
       },
+      {
+        "@type": "ItemList",
+        itemListElement: {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "Product",
+            name: property.projName || "N/A",
+            image: property.image || "N/A",
+            description: property.description || "N/A",
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "INR",
+              price: property.price || "N/A",
+              itemCondition: "http://schema.org/NewCondition",
+              availability: "http://schema.org/InStock",
+            },
+          },
+        },
+      },
     ],
   };
 
@@ -172,8 +196,8 @@ export const ProjectSeachSchema = ({ properties }: any) => {
   if (!Array.isArray(properties)) return null;
 
   const results = properties
-    .map((property: any) => {
-      return generateAllSchemas(property, properties);
+    .map((property: any, index: number) => {
+      return generateAllSchemas(property, properties, index);
     })
     .filter(Boolean);
 

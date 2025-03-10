@@ -6,6 +6,9 @@ import {
   onGoingProjIconSvg,
 } from "@/app/images/commonSvgs";
 import { getBuilderProjectsCount } from "@/app/utils/api/builder";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import React from "react";
 import { useQuery } from "react-query";
 
@@ -64,10 +67,9 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
     <div className="sm:rounded-[20px] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[1%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.newLaunch > 0 ? (
-          <a
+          <Link
             href={`/search?sf=projStatus=108-builderIds=${builderQueryNameAndId}`}
-            target="_blank"
-             rel="noopener noreferrer"
+            rel="noopener noreferrer"
             className="block"
           >
             <div className="flex justify-between items-center w-[90%]">
@@ -79,7 +81,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
             <span className="text-[#148B16] text-[13px] lg:text-[20px] font-[700]">
               New Launch {`Project${data?.newLaunch > 1 ? "s" : ""}`}
             </span>
-          </a>
+          </Link>
         ) : (
           <div>
             <div className="flex justify-between items-center w-[90%]">
@@ -96,10 +98,9 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
 
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.onGoing > 0 ? (
-          <a
+          <Link
             href={`/search?sf=projStatus=106-builderIds=${builderQueryNameAndId}`}
-            target="_blank"
-             rel="noopener noreferrer"
+            rel="noopener noreferrer"
             className="block"
           >
             <div className="flex justify-between items-center w-[90%]">
@@ -112,7 +113,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
               Ongoing <br className="block sm:hidden" />{" "}
               {`Project${data?.onGoing > 1 ? "s" : ""}`}
             </span>
-          </a>
+          </Link>
         ) : (
           <div>
             <div className="flex justify-between items-center w-[90%]">
@@ -129,10 +130,9 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
 
       <div className="w-[30%]">
         {data?.completed > 0 ? (
-          <a
+          <Link
             href={`/search?sf=projStatus=107-builderIds=${builderQueryNameAndId}`}
-            target="_blank"
-             rel="noopener noreferrer"
+            rel="noopener noreferrer"
             className="block"
           >
             <div className="flex justify-between items-center w-[90%]">
@@ -144,7 +144,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
             <span className="text-[#E3AC00] text-[13px] lg:text-[20px] font-[700]">
               Completed {`Project${data?.completed > 1 ? "s" : ""}`}
             </span>
-          </a>
+          </Link>
         ) : (
           <div>
             <div className="flex justify-between items-center w-[90%]">

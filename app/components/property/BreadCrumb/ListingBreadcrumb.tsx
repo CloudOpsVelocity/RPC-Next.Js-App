@@ -105,11 +105,11 @@ export default function ListingBreadCrumbs({
             <React.Fragment key={`${key[index]}`}>
               {!isLast ? (
                 <>
-                  <a
+                  <Link
                     href={`${
                       isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
                     }${currentPath}`}
-                    target="_blank"
+                    // target="_blank"
                     className="hover:underline cursor-pointer capitalize"
                   >
                     {/* <a onTouchStart={() => {}}></a> */}
@@ -123,7 +123,7 @@ export default function ListingBreadCrumbs({
                         ? params[key].replace(/-/g, " ").replace(/bhk/i, "BHK")
                         : params[key].replace(/-/g, " ")}
                     </span>
-                  </a>
+                  </Link>
                   {" > "}
                 </>
               ) : (

@@ -14,6 +14,7 @@ import Subscribe from "@/app/test/components/Section/Subscribe";
 import { memo } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 function Footer() {
   const { data: session } = useSession();
@@ -224,14 +225,13 @@ function Footer() {
                     <ul className="sm:mt-4  md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <a
+                          <Link
                             href={hrefs[index]}
                             rel={rel}
-                            target="_blank"
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
                           >
                             {link}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -252,14 +252,13 @@ function Footer() {
                           if (link !== "") {
                             return (
                               <li key={link}>
-                                <a
+                                <Link
                                   href={hrefs[index]}
                                   rel={rel}
-                                  target="_blank"
                                   className="text-xs sm:text-base text-gray-300 hover:text-white"
                                 >
                                   {link}
-                                </a>
+                                </Link>
                               </li>
                             );
                           }
@@ -278,14 +277,13 @@ function Footer() {
                     <ul className="sm:mt-4  md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <a
+                          <Link
                             href={hrefs[index]}
                             rel={rel}
-                            target="_blank"
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
                           >
                             {link}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
