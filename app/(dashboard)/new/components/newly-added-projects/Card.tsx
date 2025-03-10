@@ -44,7 +44,6 @@ export default function Card({ item }: Props) {
           slug: item.projName,
           projIdEnc: item.projIdEnc,
         }}
-        target="_blank"
       >
         <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
           {/*  {item.builderLogo && (
