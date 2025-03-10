@@ -6,6 +6,7 @@ import {
 } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import SubscribeBlock from "@/app/blog/blogDetailSextion/SubscribeBlock";
+import Link from "next/link";
 type Props = {};
 
 export default function page({}: Props) {
@@ -60,14 +61,12 @@ export default function page({}: Props) {
               to navigate property transactions and make informed decisions with
               ease.
             </p>
-            <a
+            <Link rel="noopener noreferrer"
               className="text-[#FFF] mt-[14px] px-[10px] py-[6px] text-[13px] sm:mt-[20px] xl:mt-[34px]  sm:text-[17px]  xl:text-[20px] not-italic font-bold leading-[normal] sm:px-[20.514px] sm:py-[13.676px] justify-center items-center gap-[7.598px] rounded-[4px] bg-[#0073C6]"
               href={url}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Explore Now
-            </a>
+            </Link>
           </div>
           <Image
             width={387}
@@ -222,14 +221,12 @@ export default function page({}: Props) {
                 projects. Explore innovative projects and find your perfect new
                 home today.{" "}
               </p>
-              <a
+              <Link rel="noopener noreferrer"
                 href="https://www.getrightproperty.com/search?sf=projStatus=108"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
                 Explore Now
-              </a>
+              </Link>
             </div>
             <div className=" w-[235px] h-[310px] md:h-auto flex-shrink-0  sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF] [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
               <div className=" w-[65.105px] h-[53px] rounded-[4px]  flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
@@ -243,14 +240,12 @@ export default function page({}: Props) {
                 homes ready for you. Discover quality craftsmanship and
                 move-in-ready projects now.{" "}
               </p>
-              <a
+              <Link rel="noopener noreferrer"
                 href="https://www.getrightproperty.com/search?sf=projStatus=107"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
                 Explore Now
-              </a>
+              </Link>
             </div>
             <div className=" w-[235px] h-[310px] md:h-auto flex-shrink-0  sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF] [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
               <div className=" w-[65.105px] h-[53px] rounded-[4px] text-[14px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
@@ -264,14 +259,12 @@ export default function page({}: Props) {
                 updated on construction progress and secure your ideal projects
                 early.{" "}
               </p>
-              <a
+              <Link rel="noopener noreferrer"
                 href="https://www.getrightproperty.com/search?sf=projStatus=106"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
                 Explore Now
-              </a>
+              </Link>
             </div>
           </div>
         </div>

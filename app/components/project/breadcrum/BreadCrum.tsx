@@ -63,13 +63,12 @@ export default function BreadCrumbs({ params }: { params: any }) {
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        <a
+        <Link rel="noopener noreferrer"
           href={`/`}
-          target="_blank"
           className="hover:underline cursor-pointer capitalize"
         >
           Home
-        </a>
+        </Link>
         {" > "}
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;
@@ -89,7 +88,6 @@ export default function BreadCrumbs({ params }: { params: any }) {
                 <Link
                   // href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
                   href={`${BASE_PATH_PROJECT_DETAILS}${redirectPath}`}
-                  // target="_blank"
                   className="hover:underline cursor-pointer capitalize"
                 >
                   {titleOfKeys[key as keyof typeof titleOfKeys] && (

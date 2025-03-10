@@ -1,5 +1,6 @@
 "use client";
 import clsx from "clsx";
+import Link from "next/link";
 import React from "react";
 
 export const whatsappRedirectLink = `https://api.whatsapp.com/send?phone=+918884440963&text=${"Hello"}`;
@@ -4726,7 +4727,7 @@ export const WhatsAppButton = ({ name, type }: Props) => {
   const whatsappLink = `https://api.whatsapp.com/send?phone=+918884440963&text=${encodedMessage}`;
 
   return (
-    <a href={whatsappLink} target="_blank"  rel="noopener noreferrer">
+    <Link rel="noopener noreferrer" href={whatsappLink}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="255"
@@ -4931,7 +4932,7 @@ export const WhatsAppButton = ({ name, type }: Props) => {
           </linearGradient>
         </defs>
       </svg> 
-    </a>
+    </Link>
   );
 };
 

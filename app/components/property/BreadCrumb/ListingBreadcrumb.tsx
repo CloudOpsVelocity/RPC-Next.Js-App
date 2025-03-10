@@ -90,13 +90,12 @@ export default function ListingBreadCrumbs({
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        <a
+        <Link rel="noopener noreferrer"
           href={`/`}
-          target="_blank"
           className="hover:underline cursor-pointer capitalize"
         >
           Home
-        </a>
+        </Link>
         {" > "}
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;

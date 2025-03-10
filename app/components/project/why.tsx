@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Why() {
@@ -17,9 +18,9 @@ export default function Why() {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
-          <a href="/" className="text-blue-600 hover:underline">
+          <Link rel="noopener noreferrer" href="/" className="text-blue-600 hover:underline">
             Read More
-          </a>
+          </Link>
         </p>
       </div>
     </>

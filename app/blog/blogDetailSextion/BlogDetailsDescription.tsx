@@ -5,12 +5,13 @@ import { useAtom } from "jotai";
 import Image from "next/image";
 import React from "react";
 import style from "../Blog.module.css";
+import Link from "next/link";
 
 function BlogMiniCard({ data }: { data: any }) {
 
   return (
     <div className=" flex justify-end items-end w-full ">
-      <a href={`/buying-guide/${data.heading.replaceAll(" ", "-")}`} target="_blank">
+      <Link rel="noopener noreferrer" href={`/buying-guide/${data.heading.replaceAll(" ", "-")}`}>
         <div
           className={`max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid 
              border-t-[1px]  hover:shadow-lg
@@ -49,7 +50,7 @@ function BlogMiniCard({ data }: { data: any }) {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

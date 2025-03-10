@@ -21,6 +21,7 @@ import { initialState, searachFilterAtom } from "@/app/store/search";
 import SearchCitySelectDropdown from "./_ui/CityDropDown/SearchCitySelectDropdown";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useAtomValue } from "jotai";
+import Link from "next/link";
 const SearchAndFilterCon = ({ frontendFilters ,cityData}: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
@@ -113,9 +114,9 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-4  w-full md:w-auto">
         <span className="text-[#737579] font-[500] mt-3">
           {" "}
-          <a className="hover:underline" href={"/"}>
+          <Link rel="noopener noreferrer" className="hover:underline" href={"/"}>
             Home
-          </a>{" "}
+          </Link>{" "}
           {" > "}
         </span>
         <span>
