@@ -69,12 +69,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
     slug: projName as string,
     projIdEnc: projectDetails?.projIdEnc as string,
   });
-  const builderUrl =
-    data &&
-    generateBuilderUrl({
-      slug: data?.data?.userName,
-      city: projectDetails?.ctName as string,
-    });
+
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -174,20 +169,21 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   </h3>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-                {projectDetails.projIdEnc ?
-                <Link
-                  href={projectUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
-                    projectDetails.projIdEnc ? "underline text-blue-600" : ""
-                  } `}
-                >
-                  {projName}
-                </Link>
-                :
-                <span className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize">{projName}</span>
-                }
+                {projectDetails.projIdEnc ? (
+                  <Link
+                    href={projectUrl}
+                    rel="noopener noreferrer"
+                    className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
+                      projectDetails.projIdEnc ? "underline text-blue-600" : ""
+                    } `}
+                  >
+                    {projName}
+                  </Link>
+                ) : (
+                  <span className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize">
+                    {projName}
+                  </span>
+                )}
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
                 </p>

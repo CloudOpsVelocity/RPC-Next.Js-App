@@ -20,6 +20,7 @@ import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import NewCarousel from "@/app/test/components/NewCarousel";
 import { slugify } from "../BreadCrumb/ListingBreadcrumb";
+import Link from "next/link";
 type Props = {
   type: string;
   title: any;
@@ -28,7 +29,7 @@ type Props = {
   data?: any;
   mutate?: ({ id }: { id: string; type: "other" | "proj" }) => void;
   ct?: "other" | "proj";
-  url?:string;
+  url?: string;
 };
 
 type CardProps = {
@@ -64,7 +65,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     }
   };
   const q = (e: any) => {
-    e.stopPropagation();
+    e.preventDefault();
     open({
       modal_type: "PROPERTY_REQ_CALLBACK",
       postedByName: get_posted_by(cardData.postedByName),
@@ -76,23 +77,25 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
   const redirect = (propId: string) => {
-
     const url = generateListingLinkUrl({
       locality: cardData.ltName,
       city: cardData.ctName,
       projName: cardData.projIdEnc ? cardData.propName : null,
       category: cardData.cg === "R" ? "for-rent" : "for-sale",
       propIdEnc: propId,
-      bhkUnitType: cardData.bhkName ? cardData.bhkName + " " + cardData.propTypeName : cardData.propTypeName,
+      bhkUnitType: cardData.bhkName
+        ? cardData.bhkName + " " + cardData.propTypeName
+        : cardData.propTypeName,
       phase: cardData.phase,
     });
-
-    window.open(url, "_blank", "noreferrer");
+    return url;
+    // window.open(url, "_blank", "noreferrer");
   };
 
-  return ( 
-    <div
-      onClick={() => redirect(reqId)}
+  return (
+    <Link
+      // onClick={() => redirect(reqId)}
+      href={redirect(reqId)}
       key={reqId}
       className={clsx(
         "border text-card-foreground min-w-[310px] max-w-full   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -133,8 +136,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
           <Image
             src={
               type === "proj"
-                ? cardData?.coverUrl?.split(',')[1]
-                : cardData.projMedia?.coverImageUrl?.split(',')[1]
+                ? cardData?.coverUrl?.split(",")[1]
+                : cardData.projMedia?.coverImageUrl?.split(",")[1]
             }
             alt="Sobha Dream Acres"
             className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] min-h-[212px] max-h-[212px]"
@@ -158,6 +161,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                   : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
               )}
               onClick={(e) => {
+                e.preventDefault();
                 onAddingShortList(e, cardData.propIdEnc);
               }}
             >
@@ -172,7 +176,10 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
         <div className="text-sm">
           {type != "proj" && (
             <p className="mb-[4px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
-           {cardData.propTypeName === "Plot" ? formatNumberWithSuffix(cardData.plotArea,false) + " sq.ft" : ""}    {cardData.bhkName} {cardData.propTypeName} for{" "}
+              {cardData.propTypeName === "Plot"
+                ? formatNumberWithSuffix(cardData.plotArea, false) + " sq.ft"
+                : ""}{" "}
+              {cardData.bhkName} {cardData.propTypeName} for{" "}
               {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName}{" "}
               <br />
               <span className="text-[18px] font-[700] text-[#148B16] ">
@@ -202,8 +209,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             {type === "proj" &&
               `${cardData?.city}, ${cardData.locality}, ${cardData.address}`}
 
-            {
-              `${cardData.ltName},   
+            {`${cardData.ltName},   
                 ${cardData.ctName}, 
                 ${cardData.stateName ?? ""}, 
                 ${cardData.pinCode}`}
@@ -231,7 +237,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
           />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -243,9 +249,8 @@ const ProjectCarousel = ({
   data,
   mutate,
   ct,
-  url
+  url,
 }: Props) => {
-   
   return (
     data?.length > 0 && (
       <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
@@ -261,16 +266,16 @@ const ProjectCarousel = ({
             {content}
           </p>
         </div>
-        <NewCarousel 
+        <NewCarousel
           data={data}
           type={type}
           renderItem={(project: any, index) => (
             <PropertyCard
-            type={type}
-            cardData={project}
-            mutate={mutate}
-            ct={ct ?? "other"}
-          />
+              type={type}
+              cardData={project}
+              mutate={mutate}
+              ct={ct ?? "other"}
+            />
           )}
           slidesToShow={4}
           gap={10}
