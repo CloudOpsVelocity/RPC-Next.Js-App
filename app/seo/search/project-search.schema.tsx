@@ -174,15 +174,23 @@ export const generateAllSchemas = (
           item: {
             "@type": "Product",
             name: property.projName || "N/A",
-            image: property.image || "N/A",
-            description: property.description || "N/A",
+            image: property.coverUrl?.split(",")[0] || "N/A",
+            description: property.about || "N/A",
             offers: {
               "@type": "Offer",
               priceCurrency: "INR",
-              price: property.price || "N/A",
+              price: property.minPrice || "N/A",
               itemCondition: "http://schema.org/NewCondition",
               availability: "http://schema.org/InStock",
             },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.5",
+              reviewCount: "10",
+              bestRating: "5",
+              worstRating: "1",
+            },
+            url: PAGE_URL,
           },
         },
       },
@@ -205,12 +213,13 @@ export const ProjectSeachSchema = ({ properties }: any) => {
 
   return (
     <>
-      <script
+      {JSON.stringify(results)}
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
-      />
+      /> */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
