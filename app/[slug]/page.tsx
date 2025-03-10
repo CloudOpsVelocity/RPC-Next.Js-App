@@ -37,7 +37,7 @@ export const generateStaticParams = async () => {
   const res = await getPagesSlugs("case-seo");
   await redisService.saveSeoSlug(SlugsType.SEO, res);
   console.log(`case-seo saved in redis succesfully`);
-  if (process.env.ENVIRONMENT === "production") {
+  if (process.env.ENVIRONMENT === "production" && process.env.LAKH_URLS) {
     return res.map((slug: string) => ({ slug }));
   }
   return [];
