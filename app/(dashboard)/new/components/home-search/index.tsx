@@ -77,8 +77,8 @@ const HomeSearch = ({
                 cityData={cityData}
               />
             </div>
-
-            <div className="flex justify-between items-center gap-[10px] w-full">
+            <SearchSec />
+          {/*   <div className="flex justify-between items-center gap-[10px] w-full">
               <div className="flex items-center w-full ">
                 <span className="cursor-pointer" onClick={handleSearch}>{config.searchIcon}</span> <SearchSec />
               </div>
@@ -91,7 +91,7 @@ const HomeSearch = ({
                   {isMobileStarting ? config.searchBtnIcon : "Search"}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           {f.showFilter && <QuickFilters />}
         </div>
