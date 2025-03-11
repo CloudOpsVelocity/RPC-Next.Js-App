@@ -261,16 +261,26 @@ export const ProjectSeachSchema = ({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SearchResultsPage",
-            name: "Property Search Results",
-            description:
-              "Search results for properties based on user criteria.",
-            mainEntity: results.map((property: any) => ({
-              "@type": "SearchResult",
-              name: property.name,
-              url: property.url,
-              image: property.coverUrl,
-              description: property.description,
-            })),
+            name: pagetitle,
+            url: pageUrl,
+            description: `Search results for ${pagetitle}`,
+            mainEntity: {
+              "@type": "SearchAction",
+              query: pagetitle,
+              location: {
+                "@type": "City",
+                name: "Bengaluru",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Whitefield",
+                  addressRegion: "Karnataka",
+                  addressCountry: "IN",
+                },
+              },
+              searchParameters: {
+                propertyType: "Apartment/Flat",
+              },
+            },
           }),
         }}
       />
