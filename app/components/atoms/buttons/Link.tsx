@@ -25,7 +25,8 @@ const Link: FC<ButtonProps> = ({
   const classes = clsx(baseClasses, variantClasses, className);
 
   return (
-    <NextLink href={href} className={classes} {...rest}>
+    <NextLink href={href}             prefetch={false}
+    className={classes} {...rest}>
       {children}
     </NextLink>
   );

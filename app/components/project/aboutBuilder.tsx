@@ -51,7 +51,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             </div>
             <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
               <Link
-         prefetch={false}
+               prefetch={false}
                 href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${urlBuilder}`}
                 about="builder details"
               >

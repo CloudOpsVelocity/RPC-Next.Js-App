@@ -234,6 +234,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
             <p className="text-[#242424]  text-[14px] xl:text-base not-italic font-semibold leading-[normal] mt-[4px] mb-[4px]">
               Builder:{" "}
               <Link
+                prefetch={false}
                 href={URLToBuilder}
                 rel="noreferrer"
                 className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline"

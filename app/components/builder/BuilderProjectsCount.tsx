@@ -99,6 +99,8 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.onGoing > 0 ? (
           <Link
+          prefetch={false}
+
             href={`/search?sf=projStatus=106-builderIds=${builderQueryNameAndId}`}
             rel="noopener noreferrer"
             className="block"
