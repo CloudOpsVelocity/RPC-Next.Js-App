@@ -208,15 +208,19 @@ export const ProjectSeachSchema = ({
   pageUrl: string;
 }) => {
   if (!Array.isArray(properties)) return null;
-
+  let PAGE_IMAGE = "";
   const results = properties
     .map((property: any, index: number) => {
+      if (!PAGE_IMAGE) {
+        PAGE_IMAGE = property.coverUrl?.split(",")[0];
+      }
       return generateAllSchemas(property, properties, index);
     })
     .filter(Boolean);
 
   if (!results.length) return null;
-
+  const pagetitle = cleanHeading(pageUrl);
+  const address = pagetitle.split("In")[1];
   return (
     <>
       <script
@@ -292,36 +296,123 @@ export const ProjectSeachSchema = ({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "http://schema.org",
-            "@type": "CollectionPage",
-            name: "Available Properties in Bangalore",
+            "@type": "Dataset",
+            name: "Real Estate Properties Dataset",
             description:
-              "Explore a curated list of available properties in Bangalore, featuring various types of real estate including apartments, villas, and commercial spaces.",
-            mainEntity: [
+              "A dataset containing various real estate properties available in Bangalore, including details such as price, location, and amenities.",
+            creator: {
+              "@type": "Organization",
+              name: "Getrightproperty",
+              url: "https://www.getrightproperty.com",
+            },
+            dateCreated: new Date().toISOString(),
+            distribution: {
+              "@type": "DataDownload",
+              contentUrl: pageUrl,
+              encodingFormat: "application/json",
+            },
+            includedInDataCatalog: {
+              "@type": "DataCatalog",
+              name: "Real Estate Listings Catalog",
+              url: "https://www.getrightproperty.com/catalog",
+            },
+            variableMeasured: [
               {
-                "@type": "Apartment",
-                name: "2 BHK Apartment Flat in Whitefield, Bengaluru",
+                "@type": "PropertyValue",
+                name: "Location",
+                description: address,
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Amenities",
                 description:
-                  "A spacious 2 BHK apartment flat located in the vibrant area of Whitefield, Bengaluru, offering modern amenities and a comfortable living experience.",
-                address: {
-                  "@type": "PostalAddress",
-                  streetAddress: "Whitefield, Bengaluru",
-                  addressLocality: "Bengaluru",
-                  addressRegion: "Karnataka",
-                  postalCode: "560066",
-                  addressCountry: "IN",
-                },
-                image: "URL_TO_IMAGE",
-                offers: {
-                  "@type": "Offer",
-                  priceCurrency: "INR",
-                  price: "5000000",
-                  itemCondition: "http://schema.org/NewCondition",
-                  availability: "http://schema.org/InStock",
-                },
-                url: pageUrl,
+                  "List of amenities available with the property, including Gym, Swimming Pool, Club House, Children’s Play Area, Security, Power Backup, Car Parking, and more.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Price Range",
+                description:
+                  "The price range of properties available, from ₹500000 to ₹600000000.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Floor Size",
+                description:
+                  "The floor size of properties ranges from Super Built-Up Area.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Number of Rooms",
+                description: "Properties available with 1 to 6 rooms.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Number of Bathrooms",
+                description: "Properties available with 1 to 6 bathrooms.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Parking Availability",
+                description:
+                  "Properties with parking space ranging from 0 to 6 vehicles.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Furnishing Status",
+                description:
+                  "Properties available as Unfurnished, Semi-Furnished, and Fully Furnished.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Property Status",
+                description:
+                  "Properties categorized as Under Construction or Ready to Move.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Property Type",
+                description:
+                  "Available property types include Apartment, Villa, Plot, and Independent House.",
               },
             ],
           }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            JSON.stringify({
+              "@context": "http://schema.org",
+              "@type": "CollectionPage",
+              name: `Available Properties in Bangalore - ${pagetitle}`,
+              description: `Discover an extensive collection of available properties in Bangalore, including a diverse range of real estate options such as luxurious apartments, elegant villas, and prime commercial spaces. Whether you're looking for a cozy home or an investment opportunity, our listings cater to all your needs.`,
+              mainEntity: [
+                {
+                  "@type": "Apartment",
+                  name: pagetitle,
+                  description: `Introducing a stunning ${pagetitle}, a spacious 2 BHK apartment flat located in the vibrant area of Whitefield, Bengaluru. This property offers modern amenities, a comfortable living experience, and is situated close to essential services and entertainment options.`,
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: address,
+                    addressLocality: "Bengaluru",
+                    addressRegion: "Karnataka",
+                    addressCountry: "IN",
+                  },
+                  image: PAGE_IMAGE,
+                  url: pageUrl,
+                  additionalType: "http://schema.org/RealEstateListing",
+                  offers: {
+                    "@type": "Offer",
+                    price: "Price not disclosed",
+                    priceCurrency: "INR",
+                    itemCondition: "http://schema.org/NewCondition",
+                    availability: "http://schema.org/InStock",
+                  },
+                },
+              ],
+            })
+          ),
         }}
       />
 
@@ -331,6 +422,22 @@ export const ProjectSeachSchema = ({
           __html: JSON.stringify({
             "@type": "FAQPage",
             mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is the purpose of this page?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `The purpose of this page is to provide detailed information about the property titled "${pagetitle}", including its features, pricing, and availability.`,
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What is the address of the property?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `The address of the property is "${address}".`,
+                },
+              },
               {
                 "@type": "Question",
                 name: "What documents do I need to buy a property?",
@@ -378,3 +485,22 @@ export const ProjectSeachSchema = ({
     </>
   );
 };
+
+function cleanHeading(url: string) {
+  const ids =
+    url
+      .replace(/^\//, "")
+      .split(process.env.NEXTAUTH_URL ?? "")[1]
+      ?.split("-") ?? [];
+  const cleaned = ids
+    .join(" ")
+    .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ|")\b/g, "")
+    .replace(/\s+/g, " ")
+    .replace("/", "")
+    .trim();
+
+  return cleaned
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
