@@ -228,6 +228,15 @@ export default function ShowAllFiltersButton({
     );
   };
 
+  useEffect(()=>{
+    if(isOpen){
+      document.body.style.overflow = "hidden";
+    }else{
+      document.body.style.overflow = "unset";
+    }
+  }, [isOpen])
+
+  
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
   const serverCity = useAtomValue(serverCityAtom);
