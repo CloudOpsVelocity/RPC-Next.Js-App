@@ -316,6 +316,7 @@ export const ProjectSeachSchema = ({
               name: "Real Estate Listings Catalog",
               url: "https://www.getrightproperty.com/catalog",
             },
+            license: "https://creativecommons.org/licenses/by/4.0/",
             variableMeasured: [
               {
                 "@type": "PropertyValue",
