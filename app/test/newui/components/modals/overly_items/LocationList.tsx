@@ -32,7 +32,7 @@ const formatCategoryName = (category: string) => {
   return category.replace(/_/g, " ");
 };
 // eslint-disable-next-line react/display-name
-const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
+const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => { 
   const [selectedCategory, setSelectedCategory] = useState<string>(
     Object.keys(data)[0]
   );
@@ -44,13 +44,12 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   const setSelected = useSetAtom(selectedSearchAtom);
 
 
-  const categories = useMemo(() => Object.keys(data), [data]);
+  const categories = useMemo(() => Object.keys(data), [data]); 
 
   const handleTabClick = useCallback((category: string) => {
     setSelectedCategory(category);
-    // console.log(category);
-    setNearby( (prev:any) => ({...prev, category: category }) );
-
+    console.log(category, selectedNearbyItem);
+    setNearby( (prev:any) => ({...prev, category: category, selectedNearbyItem: {} }) );
   }, []);
 
   const updateScrollButtons = throttle(() => {
@@ -85,7 +84,15 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   }, [updateScrollButtons]);
 
   const onSelectLocation = (item:any) => {
-    if(selectedNearbyItem.placeId !== item.placeId){
+    console.log(item)
+    item.lat = item.lat.replace(/[^0-9.]/g, '');
+    item.lang = item.lang.replace(/[^0-9.]/g, '');
+
+    if(
+      (Object.keys(selectedNearbyItem).length > 0 && selectedNearbyItem.placeId && item.placeId && selectedNearbyItem.placeId !== item.placeId) || 
+      (Object.keys(selectedNearbyItem).length > 0 && selectedNearbyItem.name && item.name && selectedNearbyItem.name !== item.placeId) ||
+      Object.keys(selectedNearbyItem).length === 0 
+    ){
       setNearby( (prev:any) => ({...prev, selectedNearbyItem: item })); 
     }
   };
