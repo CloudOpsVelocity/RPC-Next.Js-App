@@ -16,7 +16,7 @@ export default function ProjectContent({ data }: Props) {
     []
   );
   const categories = useMemo(() => Object.keys(data), [data]);
-  const [selectedCategory, setSelectedCategory] = useState<string>( 
+  const [selectedCategory, setSelectedCategory] = useState<string>(  
     categories[0]
   );
   const onTabClick = useCallback((category: string) => {

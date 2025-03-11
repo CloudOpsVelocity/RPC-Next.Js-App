@@ -394,9 +394,11 @@ export const generateListingSchema = ({
       {
         "@type": "Dataset",
         name: `${listing?.propTypeName || "Property"} Property Details`,
-        description: `Comprehensive dataset for ${
+        description: `This dataset provides comprehensive details about a ${
           listing?.propTypeName || "property"
-        } located in ${listing?.ltName || "N/A"}`,
+        } property located in ${listing?.ltName || "N/A"}, ${
+          listing.ctName
+        }, including its price, area, and status.`,
         creator: {
           "@type": "Organization",
           name: listing?.postedByName || "N/A",
