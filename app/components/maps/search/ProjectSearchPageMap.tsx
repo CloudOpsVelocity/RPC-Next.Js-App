@@ -9,7 +9,7 @@ import {
   useMap,
   Popup,
 } from "react-leaflet";
-import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import "leaflet/dist/leaflet.css";
 import L, { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
@@ -23,7 +23,7 @@ import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 
 export const checkLatAndLang = (number:any) => {
-  var invalidChars = ["e", "E", "N", "+", "°"];
+  var invalidChars = ["e", "E", "W", "N", "S", "+", "°"];
   if(number === undefined && number === null && number === "") return;
   const finalNumber = number.toString();
   const isIncluded = invalidChars.some(each => finalNumber.includes(each));
@@ -180,7 +180,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       map.setView(position, 100);
 
       const marker = markerRefs.current.get(selected?.reqId);
-      if (marker) marker.openPopup();
+      if (marker && !isMobile) marker.openPopup();
     }
   }, [selected, map]);
 
