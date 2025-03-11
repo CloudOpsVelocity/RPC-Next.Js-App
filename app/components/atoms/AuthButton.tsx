@@ -20,24 +20,22 @@ export default function AuthButton() {
   return (
     <>
       {session?.user?.isActive === "Y" && session?.user?.userType === "B" && (
-        <a
-          target="_blank"
+        <Link rel="noopener noreferrer"
           href={postProjectLink}
           className="text-[16px] gap-[10px] lg:text-[20px] flex justify-center items-center font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
         >
           {postDetailsIcon}
           Post Your Project
-        </a>
+        </Link>
       )}
       {(session?.user?.isActive === "Y" || !session) && (
-        <a
-          target="_blank"
+        <Link rel="noopener noreferrer"
           href={postListingLink}
           className="hidden md:flex text-[12px] py-1 px-1 gap-[10px] lg:text-[20px]  justify-center items-center font-semibold md:px-5 bg-[#227FBC] md:py-1.5 rounded-xl text-white"
         >
           {postDetailsIcon}
           Post Listing
-        </a>
+        </Link>
       )}
 
       <Dropdown />

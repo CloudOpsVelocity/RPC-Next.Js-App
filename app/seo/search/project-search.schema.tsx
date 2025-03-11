@@ -2,7 +2,11 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
 
-export const generateAllSchemas = (property: any, properties?: any[]) => {
+export const generateAllSchemas = (
+  property: any,
+  properties: any[],
+  index: number
+) => {
   const [launchDate, possassionDate] = [
     convertToSchemaDate(property?.launchDate),
     convertToSchemaDate(property?.possassionDate),
@@ -162,6 +166,34 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         name: ["Home", "Properties", property.projName],
         url: [PAGE_URL],
       },
+      {
+        "@type": "ItemList",
+        itemListElement: {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "Product",
+            name: property.projName || "N/A",
+            image: property.coverUrl?.split(",")[0] || "N/A",
+            description: property.about || "N/A",
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "INR",
+              price: property.minPrice || "N/A",
+              itemCondition: "http://schema.org/NewCondition",
+              availability: "http://schema.org/InStock",
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.5",
+              reviewCount: "10",
+              bestRating: "5",
+              worstRating: "1",
+            },
+            url: PAGE_URL,
+          },
+        },
+      },
     ],
   };
 
@@ -172,8 +204,8 @@ export const ProjectSeachSchema = ({ properties }: any) => {
   if (!Array.isArray(properties)) return null;
 
   const results = properties
-    .map((property: any) => {
-      return generateAllSchemas(property, properties);
+    .map((property: any, index: number) => {
+      return generateAllSchemas(property, properties, index);
     })
     .filter(Boolean);
 
@@ -187,6 +219,113 @@ export const ProjectSeachSchema = ({ properties }: any) => {
           __html: JSON.stringify(results),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SearchResultsPage",
+            name: "Property Search",
+            description:
+              "Find properties based on various filters including location, budget, area, amenities, and more.",
+            offers: {
+              "@type": "Offer",
+              price: "₹500000 - ₹600000000",
+              priceCurrency: "INR",
+            },
+            area: {
+              "@type": "QuantitativeValue",
+              value: "0 - 5000",
+              unitCode: "SQF",
+            },
+            numberOfBathroomsTotal: {
+              "@type": "QuantitativeValue",
+              value: "1 - 6",
+            },
+            numberOfRooms: {
+              "@type": "QuantitativeValue",
+              value: "1 - 6",
+            },
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Your selected localities",
+              addressRegion: "Your selected city",
+              addressCountry: "IN",
+            },
+            reraRegistered: true,
+            floorSize: {
+              "@type": "QuantitativeValue",
+              value: "Super Built-Up Area",
+              unitCode: "SQF",
+            },
+            furnishing: ["Unfurnished", "Semi-Furnished", "Fully Furnished"],
+            bhkType: ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK+"],
+            propertyStatus: ["Under Construction", "Ready to Move"],
+            propertyType: ["Apartment", "Villa", "Plot", "Independent House"],
+            parking: {
+              "@type": "QuantitativeValue",
+              value: "0 - 6",
+            },
+            facing: ["East", "West", "North", "South"],
+            amenities: [
+              "Gym",
+              "Swimming Pool",
+              "Club House",
+              "Children’s Play Area",
+              "Security",
+              "Power Backup",
+              "Car Parking",
+            ],
+            listedBy: ["Owner", "Broker", "Builder"],
+            photoAvailability: true,
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "CollectionPage",
+            name: "Available Properties in Bangalore",
+            description:
+              "Explore a curated list of available properties in Bangalore, featuring various types of real estate including apartments, villas, and commercial spaces.",
+            mainEntity: [
+              {
+                "@type": "Apartment",
+                name: "2 BHK Apartment Flat in Whitefield, Bengaluru",
+                description:
+                  "A spacious 2 BHK apartment flat located in the vibrant area of Whitefield, Bengaluru, offering modern amenities and a comfortable living experience.",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "Whitefield, Bengaluru",
+                  addressLocality: "Bengaluru",
+                  addressRegion: "Karnataka",
+                  postalCode: "560066",
+                  addressCountry: "IN",
+                },
+                image: "URL_TO_IMAGE",
+                offers: {
+                  "@type": "Offer",
+                  priceCurrency: "INR",
+                  price: "5000000",
+                  itemCondition: "http://schema.org/NewCondition",
+                  availability: "http://schema.org/InStock",
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.8",
+                  reviewCount: "25",
+                  bestRating: "5",
+                  worstRating: "1",
+                },
+                url: "URL_TO_PROPERTY_PAGE",
+              },
+            ],
+          }),
+        }}
+      />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

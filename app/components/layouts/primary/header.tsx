@@ -47,13 +47,17 @@ export default function Header({}: Props) {
           </div>
         ) : (
           <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
+<<<<<<< HEAD
 {/*             <a href={"/blog"} target="_blank" rel="noopener noreferrer">
  */}    
               <a href={"/blog"}>
+=======
+            <Link rel="noopener noreferrer" href={"/blog"}>
+>>>>>>> a30af250d3ece1429c0a18ca4d0131a22ece8bda
               <p className="text-[#242424] text-xl not-italic font-medium cursor-pointer">
                 Blogs
               </p>
-            </a>
+            </Link>
             <ForBuilders />
             <PostProjectBtn />
             <Btn />

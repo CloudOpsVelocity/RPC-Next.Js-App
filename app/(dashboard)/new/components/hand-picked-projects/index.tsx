@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { getHomePageProjectData } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
 import RTK_CONFIG from "@/app/config/rtk";
+import Link from "next/link";
 
 type Props = { data: any; shortIds: any; cityId?: string };
 
@@ -43,25 +44,23 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
               content="Discover Your Dream Home with Handpicked Projects – Where Quality Meets Elegance"
               url={url}
             />
-            <a
+            <Link rel="noopener noreferrer"
               className="hidden  xl:block text-[#0073C6] text-nowrap  text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
               href={url}
-              target="_blank"
             >
               View all
-            </a>
+            </Link>
           </div>
 
           <div className=" w-full flex flex-col xl:flex-row justify-start items-start mt-2 xl:mt-10 flex-nowrap sm:gap-6 ">
             <div className=" w-full flex flex-row justify-between  items-end  xl:hidden ">
               <SideTabs className="" active={active} setActive={setActive} />
-              <a
+              <Link rel="noopener noreferrer"
                 className="  text-[#0073C6] text-nowrap  text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
                 href={url}
-                target="_blank"
               >
                 View all
-              </a>
+              </Link>
             </div>
             <SideTabs
               className={"hidden xl:block"}

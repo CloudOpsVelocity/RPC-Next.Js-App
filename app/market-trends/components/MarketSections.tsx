@@ -9,6 +9,7 @@ import { trendsFilterData } from '../data.ts/marketBlogalData';
 import { usePathname } from 'next/navigation';
 import Loading from '@/app/components/atoms/Loader';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
   text:string;
@@ -54,7 +55,7 @@ function MarketSections({text}: Props) {
           currentCities?.map((eachCity:any)=>{
             const pageUrl = !path.includes("news") ? `${path}/${eachCity?.name.toLowerCase()}?si=${eachCity?.stateId}&ci=${eachCity?.id}` : `${path}/${eachCity?.name.toLowerCase()}`
             return(
-                <a key={eachCity.name} href={pageUrl} target='_blank'>
+              <Link rel="noopener noreferrer" key={eachCity.name} href={pageUrl}>
                   <div className=' cursor-pointer min-h-[140px] md:min-h-[218px] w-[100px] md:w-[180px] rounded-[10px] border-t-[1px] border-solid shadow-md flex flex-col justify-center items-center transition-all duration-[0.5s] ease-[ease-in-out] hover:-translate-y-2.5 hover:shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] '>
                     <div className='w-[60px] h-[60px] md:w-[100px] md:h-[100px] rounded-[50%] shadow-md border-t-[1px] border-solid '>
                       {/* city image */}
@@ -70,7 +71,7 @@ function MarketSections({text}: Props) {
                     </div>
                     <span className=' font-medium text-[12px] md:text-[16px] mt-[10px] md:mt-[16px] text-center '>{text} {eachCity.name}</span>
                   </div>
-                </a>
+                </Link>
             )})
           :
           <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">

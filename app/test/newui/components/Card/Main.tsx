@@ -16,6 +16,7 @@ import Overlay from "../modals/Overlay";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import { useRouter } from "next/navigation";
 
 type Props = {
   type: any;
@@ -45,6 +46,7 @@ const MainBox = ({ data, refetch }: Props) => {
     shortListed: shortListed === "Y" ? true : false,
   });
   const { data: session } = useSession();
+  const router = useRouter();
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, toggleCompare } = useShortlistAndCompare();
   const reqId = type === "proj" ? projIdEnc : propIdEnc;
@@ -89,7 +91,8 @@ const MainBox = ({ data, refetch }: Props) => {
         slug: data.projName,
         projIdEnc: projEncId,
       });
-      window.open(url, "_blank", "noreferrer");
+      router.push(url);
+      // window.open(url, "_blank", "noreferrer");
       // return url;
     } else {
       url = generateListingLinkUrl({
@@ -103,7 +106,8 @@ const MainBox = ({ data, refetch }: Props) => {
           ? `${data.bhkName + " " + data.propTypeName}`
           : "" + " " + data.propTypeName,
       });
-      window.open(url, "_blank", "noreferrer");
+      router.push(url);
+      // window.open(url, "_blank", "noreferrer");
       // return url;
     }
   };
@@ -131,24 +135,25 @@ const MainBox = ({ data, refetch }: Props) => {
   // const [selected, setSelected] = useAtom(selectedSearchAtom);
   // const [{id}, setNearby] = useAtom(selectedNearByAtom)
 
-  const onHoverCard = () => {
-    // if(selected === null || selected?.reqId === newData.projIdEnc) return;
-    // setNearby((prev:any)=>({ ...prev, selectedNearbyItem: {}, id:""}))
-    // setSelected({
-    //   agentListing: newData.agentListing,
-    //   ownerListing: newData.ownerListing,
-    //   projOrPropName: newData.projName,
-    //   lat: newData.lat,
-    //   lang: newData.lang,
-    //   type: type,
-    //   reqId: type === "proj" ? projIdEnc : propIdEnc,
-    //   propType: type === "proj" ? propTypeId : propTypeName,
-    // });
-  };
+  // const onHoverCard = () => {
+  //   // if(selected === null || selected?.reqId === newData.projIdEnc) return;
+  //   // setNearby((prev:any)=>({ ...prev, selectedNearbyItem: {}, id:""}))
+  //   // setSelected({
+  //   //   agentListing: newData.agentListing,
+  //   //   ownerListing: newData.ownerListing,
+  //   //   projOrPropName: newData.projName,
+  //   //   lat: newData.lat,
+  //   //   lang: newData.lang,
+  //   //   type: type,
+  //   //   reqId: type === "proj" ? projIdEnc : propIdEnc,
+  //   //   propType: type === "proj" ? propTypeId : propTypeName,
+  //   // });
+  // };
   return (
     // <a href={onClickRedirect(reqId)} rel="noreferrer" target="_">
     <div
-      onMouseEnter={() => (isMobile ? "" : onHoverCard())}
+      // onMouseEnter={() => (isMobile ? "" : onHoverCard())}
+
       onClick={() => onClickRedirect(reqId)}
       className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]"
     >

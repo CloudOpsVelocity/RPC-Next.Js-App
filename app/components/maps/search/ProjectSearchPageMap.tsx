@@ -203,7 +203,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   }, [map, data, selected, nearbyData]);
 
   useEffect(() => {
-    if (nearbyData && Object.keys(nearbyData).length > 0 && category === "") {
+    if (nearbyData && Object.keys(nearbyData).length > 0 ) {
       const finalCateg =
         category !== "" ? category : Object.keys(nearbyData)[0];
       const nearByData = nearbyData[finalCateg];

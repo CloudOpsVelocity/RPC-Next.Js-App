@@ -1,6 +1,7 @@
 import React from 'react';
 import { Facebook, facebookRedirectLink, ShearIcon, WhatsApp, whatsappRedirectLink } from '@/app/images/commonSvgs';
 import { getClampedText } from '@/app/news/components/NewsSections';
+import Link from 'next/link';
 
 type Props = { 
     heading: string; 
@@ -33,12 +34,12 @@ function ContentBox({ heading, text, content, date, type, href }: Props) {
                       url: `https://www.getrightproperty.com/blog${href ? `/${href}` : ""}`
                   })} 
                 />
-                <a href={facebookRedirectLink} target="_blank">
+                <Link rel="noopener noreferrer" href={facebookRedirectLink}>
                   <Facebook className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
-                </a>
-                <a href={whatsappRedirectLink} target="_blank">
+                </Link>
+                <Link rel="noopener noreferrer" href={whatsappRedirectLink}>
                   <WhatsApp className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
-                </a>
+                </Link>
             </div>
         </div>
     </div>

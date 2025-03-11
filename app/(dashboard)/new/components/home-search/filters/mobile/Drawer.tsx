@@ -9,6 +9,7 @@ import { SearchIcon, SmallHomeIcon } from "@/app/images/HomePageIcons";
 import SearchSec from "../../SearchSec";
 import useSearchFilters from "@/app/hooks/search";
 import classes from "@/app/styles/search.module.css";
+import Link from "next/link";
 type Props = {
   opened: boolean;
   close: () => void;
@@ -61,13 +62,12 @@ function AppDrawer({ close, opened }: Props) {
 
               <div className="hidden sm:flex gap-2">
                 <Nearme />
-                <a
+                <Link rel="noopener noreferrer"
                   href={`/search`}
-                  target="_blank"
                   className={`flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}
                 >
                   {config.searchBtnIcon}
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -115,13 +115,12 @@ function AppDrawer({ close, opened }: Props) {
           {/* for mobile */}
           <div className="sm:hidden mt-[10px] flex gap-2">
             <Nearme />
-            <a
+            <Link rel="noopener noreferrer"
               href={`/search`}
-              target="_blank"
               className={`flex justify-center items-center gap-[4px] rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}
             >
               {config.searchBtnIcon} Search
-            </a>
+            </Link>
           </div>
         </div>
         <div className="mt-2">
