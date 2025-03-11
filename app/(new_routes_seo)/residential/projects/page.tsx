@@ -110,7 +110,7 @@ export default function Home() {
             Connect with our property experts for personalized assistance in
             finding your dream home in Bangalore.
           </p>
-          <Link rel="noopener noreferrer"
+          <Link rel="noreferrer" target="_blank"
             href={`https://api.whatsapp.com/send?phone=+918884440963&text=${encodeURIComponent(
               "Hello, I'm interested in finding a home in Bangalore. Can you help me with this?"
             )}`}
