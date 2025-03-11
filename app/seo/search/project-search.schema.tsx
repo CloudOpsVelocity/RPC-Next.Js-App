@@ -202,13 +202,10 @@ export const generateAllSchemas = (
 
 export const ProjectSeachSchema = ({
   properties,
-  metaData,
+  pageUrl,
 }: {
   properties: any;
-  metaData: {
-    title: string;
-    url: string;
-  };
+  pageUrl: string;
 }) => {
   if (!Array.isArray(properties)) return null;
 
@@ -321,7 +318,7 @@ export const ProjectSeachSchema = ({
                   itemCondition: "http://schema.org/NewCondition",
                   availability: "http://schema.org/InStock",
                 },
-                url: "URL_TO_PROPERTY_PAGE",
+                url: pageUrl,
               },
             ],
           }),
