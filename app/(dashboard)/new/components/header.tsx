@@ -31,7 +31,9 @@ export default function Header() {
       ) : (
         <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
           <Link rel="noopener noreferrer" href={"/blog"}>
-            <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
+            <p className="text-[#242424] text-xl not-italic font-medium">
+              Blogs
+            </p>
           </Link>
           <ForBuilders />
           <PostProjectBtn />
@@ -132,7 +134,7 @@ function Dropdown() {
             <Link
               className=""
               href={{
-                pathname: `/register`, 
+                pathname: `/register`,
                 search: redirectQueryParam,
               }}
               onClick={(e) => {
@@ -146,44 +148,44 @@ function Dropdown() {
         )}
       </Menu.Target>
       {session ? (
-          <Menu.Dropdown
-            className="!z-[1000]"
-            classNames={{
-              dropdown: S.dropdown,
-            }}
-          >
-            <>
-              {data.map((item, index) =>
-                session.user?.userType !== "B" &&
-                item.label === "Post Project" ? null : (
-                  <Menu.Item
-                    key={item.label}
-                    classNames={{
-                      itemLabel: S.itemLabel,
-                    }}
-                    component="a"
-                    className="block text-gray-700 hover:text-green-500 transition-colors"
-                    href={item.url}
-                    target="_blank"
-                  >
-                    {item.label}
-                  </Menu.Item>
-                )
-              )}
-              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-            </>
+        <Menu.Dropdown
+          className="!z-[1000]"
+          classNames={{
+            dropdown: S.dropdown,
+          }}
+        >
+          <>
+            {data.map((item, index) =>
+              session.user?.userType !== "B" &&
+              item.label === "Post Project" ? null : (
+                <Menu.Item
+                  key={item.label}
+                  classNames={{
+                    itemLabel: S.itemLabel,
+                  }}
+                  component="a"
+                  className="block text-gray-700 hover:text-green-500 transition-colors"
+                  href={item.url}
+                  // target="_blank"
+                >
+                  {item.label}
+                </Menu.Item>
+              )
+            )}
+            <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+          </>
 
-            <Menu.Item
-              classNames={{
-                itemLabel: S.itemLabel,
-              }}
-              component="button"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-              onClick={handleLogout}
-            >
-              Log Out
-            </Menu.Item>
-          </Menu.Dropdown>
+          <Menu.Item
+            classNames={{
+              itemLabel: S.itemLabel,
+            }}
+            component="button"
+            className="block text-gray-700 hover:text-green-500 transition-colors"
+            onClick={handleLogout}
+          >
+            Log Out
+          </Menu.Item>
+        </Menu.Dropdown>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"
@@ -306,44 +308,44 @@ function MobileDropDown() {
         )}
       </Menu.Target>
       {session ? (
-          <Menu.Dropdown
-            className="!z-[1000]"
-            classNames={{
-              dropdown: S.dropdown,
-            }}
-          >
-            <>
-              {data.map((item, index) =>
-                session.user?.userType !== "B" &&
-                item.label === "Post Project" ? null : (
-                  <Menu.Item
-                    key={item.label}
-                    classNames={{
-                      itemLabel: S.itemLabel,
-                    }}
-                    component="a"
-                    className="block text-gray-700 hover:text-green-500 transition-colors"
-                    href={item.url}
-                    target="_blank"
-                  >
-                    {item.label}
-                  </Menu.Item>
-                )
-              )}
-              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-            </>
+        <Menu.Dropdown
+          className="!z-[1000]"
+          classNames={{
+            dropdown: S.dropdown,
+          }}
+        >
+          <>
+            {data.map((item, index) =>
+              session.user?.userType !== "B" &&
+              item.label === "Post Project" ? null : (
+                <Menu.Item
+                  key={item.label}
+                  classNames={{
+                    itemLabel: S.itemLabel,
+                  }}
+                  component="a"
+                  className="block text-gray-700 hover:text-green-500 transition-colors"
+                  href={item.url}
+                  // target="_blank"
+                >
+                  {item.label}
+                </Menu.Item>
+              )
+            )}
+            <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+          </>
 
-            <Menu.Item
-              classNames={{
-                itemLabel: S.itemLabel,
-              }}
-              component="button"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-              onClick={handleLogout}
-            >
-              Log Out
-            </Menu.Item>
-          </Menu.Dropdown>
+          <Menu.Item
+            classNames={{
+              itemLabel: S.itemLabel,
+            }}
+            component="button"
+            className="block text-gray-700 hover:text-green-500 transition-colors"
+            onClick={handleLogout}
+          >
+            Log Out
+          </Menu.Item>
+        </Menu.Dropdown>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"

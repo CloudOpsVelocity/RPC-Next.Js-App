@@ -31,7 +31,7 @@ export default function VersaMessage({
         <p className="text-[#242424]  px-2 text-center text-[16px] mt-2 xl:text-xl not-italic font-medium xl:leading-8 xl:mt-[19px]">
           {content}
         </p>
-        <p className="text-[#148B16] text-[14px] sm:text-xl italic font-semibold leading-6 sm:leading-8 text-center w-full sm:min-w-[500px] px-4">
+        <p className="text-[#148B16] text-[14px] sm:text-lg xl:text-xl italic font-semibold leading-6 sm:leading-8 text-center w-full sm:min-w-[500px] px-4">
           {greenText}
         </p>
       </div>
