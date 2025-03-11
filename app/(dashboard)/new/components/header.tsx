@@ -30,7 +30,8 @@ export default function Header() {
         </div>
       ) : (
         <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
-          <a href={"/blog"} target="_blank">
+          {/* <a href={"/blog"} target="_blank"> */}
+          <a href={"/blog"} >
             <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
           </a>
           <ForBuilders />
@@ -164,7 +165,7 @@ function Dropdown() {
                     component="a"
                     className="block text-gray-700 hover:text-green-500 transition-colors"
                     href={item.url}
-                    target="_blank"
+                    // target="_blank"
                   >
                     {item.label}
                   </Menu.Item>
@@ -324,7 +325,7 @@ function MobileDropDown() {
                     component="a"
                     className="block text-gray-700 hover:text-green-500 transition-colors"
                     href={item.url}
-                    target="_blank"
+                    // target="_blank"
                   >
                     {item.label}
                   </Menu.Item>

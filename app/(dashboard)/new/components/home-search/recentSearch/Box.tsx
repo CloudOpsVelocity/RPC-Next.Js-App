@@ -3,6 +3,7 @@ import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { truncateText } from "@/app/utils/letters";
 import { Tooltip } from "@mantine/core";
 import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type Props = {
@@ -26,6 +27,8 @@ type Props = {
 
 export default function Box({ item }: Props) {
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
+  const router = useRouter() 
+
   const handlePush = async (type: string, data: any, apiData: any) => {
     console.log("box.ts")
     const AgentOwnerBuilderMap = new Map([
@@ -39,7 +42,7 @@ export default function Box({ item }: Props) {
     switch (type) {
       case "project":
         if (apiData.type === "Project") {
-          window.open(apiData.stringUrl);
+          router.push(apiData.stringUrl);
         } else {
           window.open(
             `/search/listing?sf=projIdEnc=${
@@ -57,7 +60,8 @@ export default function Box({ item }: Props) {
         {
           const data = extractApiValues(apiData.stringId);
           
-            let localityName = apiData.name.split(" in ")[1].split("-")[1].toLowerCase().trim();
+            let localityName = apiData.name.split(" in ")[1].
+            toLowerCase().trim();
 
             // let url;
             // url =
@@ -88,7 +92,7 @@ export default function Box({ item }: Props) {
                     .trim()}`
                 : ""
             }`;
-            window.open(url, "_blank", "noreferrer");
+            router.push(url);
         }
         break;
       case "projectListing":
@@ -100,19 +104,19 @@ export default function Box({ item }: Props) {
           }&listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
           )}&projName=${projectName}`;
-          window.open("/search/listing?sf=" + url, "_blank", "noreferrer");
+          router.push("/search/listing?sf=" + url);
         }
         break;
       case "builder":
         {
           if (apiData.type === "BuilderDetail") {
-            window.open(apiData.stringUrl);
+            router.push(apiData.stringUrl);
           } else {
             const url =
               encodeURIComponent(data.name) +
               "%2B" +
               encodeURIComponent(apiData.stringId.split("_")[1]);
-            window.open(
+              router.push(
               `/search?sf=builderIds=${url}-city=${encodeURIComponent(
                 filters?.city ?? ""
               )}${
@@ -120,8 +124,7 @@ export default function Box({ item }: Props) {
                   ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
               }`,
-              "_blank",
-              "noreferrer"
+              
             );
           }
         }

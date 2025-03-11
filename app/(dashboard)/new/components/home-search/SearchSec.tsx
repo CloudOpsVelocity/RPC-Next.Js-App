@@ -13,6 +13,7 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { Pill } from "@mantine/core";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import Nearme from "./Nearme";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 export default function SearchSec({}: Props) {
@@ -27,6 +28,7 @@ export default function SearchSec({}: Props) {
   // Create a ref for the search container
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const router = useRouter();
 
   const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map((each) =>
     each.value.toString()
@@ -120,12 +122,14 @@ export default function SearchSec({}: Props) {
           if (URLReNew != "") {
             const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
          //alert(toRedirect)
-            window.open(toRedirect, "_blank", "noreferrer")
+         router.push(toRedirect)       
+
           }
           
         } else {
           const whichPage = f.propType === 36 ? "/search/listing" : "/search"
-          window.open(whichPage, "_blank", "noreferrer")
+          router.push(whichPage);          
+
         }
       }
     };
@@ -217,7 +221,7 @@ export default function SearchSec({}: Props) {
           onChange={(e) => {
             handleSearchChange(e)
           }}
-          maxLength={50}
+          maxLength={80}
            pattern="[a-zA-Z0-9\s]+"
            title="Only letters, numbers, and spaces are allowed."
           onKeyDown={handleKeyDown}

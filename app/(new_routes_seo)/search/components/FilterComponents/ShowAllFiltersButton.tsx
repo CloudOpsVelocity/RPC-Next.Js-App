@@ -28,6 +28,7 @@ interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
   toggleFilter: (category: string, value: string) => void;
   isOpen: boolean;
+  
   onToggle: () => void;
   isListing?: boolean;
 }
@@ -40,6 +41,7 @@ interface Location {
 
 export default function ShowAllFiltersButton({
   isOpen,
+
   onToggle,
   isListing,
 }: ShowAllFiltersButtonProps) {
@@ -226,15 +228,8 @@ export default function ShowAllFiltersButton({
     );
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    }
 
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+
 
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);

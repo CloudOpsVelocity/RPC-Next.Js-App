@@ -19,7 +19,7 @@ export default function Tabs({}: Props) {
     }
     dispatch({ type: "SET_CG", payload: tab });
   };
-  return (
+    return (
     <div className="py-3 pr-3 sm:py-4 sm:pr-4 sm:p-4">
       <div className="flex space-x-1 sm:space-x-4">
         <button
@@ -36,7 +36,7 @@ export default function Tabs({}: Props) {
             {activeTab === "S" && config.underLine}
           </div>
         </button>
-        <button
+        { filters.propType != 32 && <button
           onClick={() => setActiveTab("R")}
           className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative ${
             activeTab === "R"
@@ -49,7 +49,7 @@ export default function Tabs({}: Props) {
           <div className="h-[2px] sm:h-[4px] ">
             {activeTab === "R" && config.underLine}
           </div>
-        </button>
+        </button>}
       </div>
     </div>
   );
