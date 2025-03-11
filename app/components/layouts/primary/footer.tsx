@@ -14,6 +14,7 @@ import Subscribe from "@/app/test/components/Section/Subscribe";
 import { memo } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 function Footer() {
   const { data: session } = useSession();
@@ -200,16 +201,14 @@ function Footer() {
               </p>
               <div className="flex space-x-6">
                 {socialIcons.map(({ name, icon, link }) => (
-                  <a
+                  <Link rel="noopener noreferrer"
                     key={name}
                     href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-white hover:text-gray-300"
                   >
                     <span className="sr-only">{name}</span>
                     {icon}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -224,14 +223,13 @@ function Footer() {
                     <ul className="sm:mt-4  md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <a
+                          <Link
                             href={hrefs[index]}
                             rel={rel}
-                            target="_blank"
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
                           >
                             {link}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -252,14 +250,13 @@ function Footer() {
                           if (link !== "") {
                             return (
                               <li key={link}>
-                                <a
+                                <Link
                                   href={hrefs[index]}
                                   rel={rel}
-                                  target="_blank"
                                   className="text-xs sm:text-base text-gray-300 hover:text-white"
                                 >
                                   {link}
-                                </a>
+                                </Link>
                               </li>
                             );
                           }
@@ -278,14 +275,13 @@ function Footer() {
                     <ul className="sm:mt-4  md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <a
+                          <Link
                             href={hrefs[index]}
                             rel={rel}
-                            target="_blank"
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
                           >
                             {link}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -315,22 +311,21 @@ function Footer() {
               <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
                 <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
               </button>
-              <a
+              <Link rel="noopener noreferrer"
                 href={`tel:${8884440963}`}
-                rel="noopener noreferrer"
                 className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
               >
                 <FaPhoneAlt className="mr-1" /> +91-8884440963
-              </a>
+              </Link>
             </div>
             <p className="mt-1 text-xs sm:text-base text-white md:mt-0 md:order-1">
               Copyright © 2024 GetRightProperty. All Rights Reserved.
               <span>
                 <br />A Product By &quot;
-                <a href="https://rpclan.com/" rel="noopener noreferrer">
+                <Link rel="noopener noreferrer" href="https://rpclan.com/">
                   {" "}
                   RPCLAN SERVICES PVT.LTD
-                </a>
+                </Link>
                 &quot;
               </span>
             </p>

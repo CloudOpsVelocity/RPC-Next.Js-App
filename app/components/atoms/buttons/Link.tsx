@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import clsx from "clsx";
-
+import NextLink from "next/link";
 interface ButtonProps extends HTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   variant?: "blue" | "green";
@@ -25,9 +25,9 @@ const Link: FC<ButtonProps> = ({
   const classes = clsx(baseClasses, variantClasses, className);
 
   return (
-    <a href={href} target="_blank" className={classes} {...rest}>
+    <NextLink href={href} className={classes} {...rest}>
       {children}
-    </a>
+    </NextLink>
   );
 };
 

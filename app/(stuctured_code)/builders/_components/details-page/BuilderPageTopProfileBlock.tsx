@@ -3,6 +3,7 @@ import { convertDateToMonthYear } from "@/app/utils/date";
 import { capitalizeWords } from "@/app/utils/letters";
 import { Data } from "@/app/validations/types/builder";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function BuilderPageTopProfileBlock({
@@ -16,25 +17,23 @@ export default function BuilderPageTopProfileBlock({
     <div className="w-full flex justify-between items-center bg=[] relative">
       <div className="flex flex-col h-[100%]  lg:min-h-[250px]  justify-between items-start ml-[2%] ">
         <p className="text-[12px] md:text-[20px] text-[#565D70] font-[500] mt-2 sm:mt-0 sm:mb-[1%] ">
-          <a className="hover:underline cursor-pointer" href={"/"}>
+          <Link rel="noopener noreferrer" className="hover:underline cursor-pointer" href={"/"}>
             Home
-          </a>
+          </Link>
           {" > "}
-          <a
+          <Link rel="noopener noreferrer"
             href={"/builders"}
-            target="_blank"
             className="hover:underline cursor-pointer"
           >
             Builders
-          </a>
+          </Link>
           {" > "}
-          <a
-            target="_blank"
+          <Link rel="noopener noreferrer"
             href={`/builders/${builderCity}`}
             className="hover:underline cursor-pointer capitalize"
           >
             {builderCity}
-          </a>
+          </Link>
           {" > "}
           <span>{capitalizeWords(userName)}</span>
         </p>

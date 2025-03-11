@@ -122,7 +122,10 @@ export default function GalleryBlock({
                           payload: {
                             items: images,
                             mediaType: "image",
-                            title: "Project Gallery",
+                            title:
+                              type === "prop"
+                                ? "Property Gallery"
+                                : "Project Gallery",
                             activeIndex: images.indexOf(selectedMedia),
                           },
                         });
@@ -281,16 +284,6 @@ export default function GalleryBlock({
     </div>
   );
 }
-
-const AltText = (url: string) => {
-  if (url.includes("cover")) {
-    return "Cover Image";
-  } else if (url.includes("projectPlanUrl")) {
-    return "Master Plan";
-  } else {
-    return `Image ${url.split("?")[0].split("/").pop()?.split(".")[0]}`;
-  }
-};
 
 const VideoALText = (url: string) => {
   if (url.includes("walk-Through-video")) {

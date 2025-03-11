@@ -47,11 +47,11 @@ export default function Header({}: Props) {
           </div>
         ) : (
           <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
-            <a href={"/blog"} target="_blank" rel="noopener noreferrer">
+            <Link rel="noopener noreferrer" href={"/blog"}>
               <p className="text-[#242424] text-xl not-italic font-medium cursor-pointer">
                 Blogs
               </p>
-            </a>
+            </Link>
             <ForBuilders />
             <PostProjectBtn />
             <Btn />
@@ -76,13 +76,7 @@ const ForBuilders = () => {
         </Menu.Target>
         <Menu.Dropdown
           className="!p-0 cursor-pointer"
-          onClick={() =>
-            window.open(
-              `/login?cc=${encryptUrl(pathName)}`,
-              "_blank",
-              "noreferrer"
-            )
-          }
+          onClick={() => window.open(`/login?cc=${encryptUrl(pathName)}`)}
         >
           <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
             <div>
@@ -199,7 +193,7 @@ function Dropdown() {
                   component="a"
                   className=" text-gray-700 hover:text-green-500 transition-colors flex"
                   href={item.url}
-                  target="_blank"
+                  // target="_blank"
                 >
                   <div className="flex items-center gap-2">
                     {homePageSvgsMap.get(item.svg ?? "")}{" "}
@@ -362,7 +356,7 @@ function MobileDropDown() {
                   onClick={() =>
                     window.open(
                       `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile/dashboard`,
-                      "_blank",
+
                       "noreferrer"
                     )
                   }
@@ -391,7 +385,7 @@ function MobileDropDown() {
                   component="a"
                   className=" text-gray-700 hover:text-green-500 transition-colors flex"
                   href={item.url}
-                  target="_blank"
+                  // target="_blank"
                   rel="noopener noreferrer"
                 >
                   <div className="flex items-center gap-2">

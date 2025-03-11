@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
+import Link from "next/link";
 
 const socialIcons = [
   { name: "facebook", icon: <FaFacebook size={24} /> },
@@ -89,14 +90,14 @@ const EnhancedFooter2 = () => {
             </p>
             <div className="flex space-x-6">
               {socialIcons.map(({ name, icon }) => (
-                <a
+                <Link rel="noopener noreferrer"
                   key={name}
                   href="/"
                   className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
                 >
                   <span className="sr-only">{name}</span>
                   {icon}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -110,12 +111,12 @@ const EnhancedFooter2 = () => {
                   <ul className="mt-4 space-y-4">
                     {section.links.map((link) => (
                       <li key={link}>
-                        <a
+                        <Link rel="noopener noreferrer"
                           href="/"
                           className="hover:text-blue-300 transition-colors duration-300"
                         >
                           {link}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -131,12 +132,12 @@ const EnhancedFooter2 = () => {
                   <ul className="mt-4 space-y-4">
                     {section.links.map((link) => (
                       <li key={link}>
-                        <a
+                        <Link rel="noopener noreferrer"
                           href="/"
                           className="hover:text-blue-300 transition-colors duration-300"
                         >
                           {link}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -164,20 +165,20 @@ const EnhancedFooter2 = () => {
                 Get instant property alerts on the go.
               </p>
               <div className="mt-4 flex space-x-4">
-                <a
+                <Link rel="noopener noreferrer"
                   href="/"
                   className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
                 >
                   <FaAppStoreIos className="mr-2" />
                   App Store
-                </a>
-                <a
+                </Link>
+                <Link rel="noopener noreferrer"
                   href="/"
                   className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
                 >
                   <IoLogoGooglePlaystore className="mr-2" />
                   Google Play
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -187,23 +188,21 @@ const EnhancedFooter2 = () => {
             <button className="text-gray-400 hover:text-blue-400 inline-flex items-center">
               <FaLocationDot className="mr-2" /> Whitefield, Bengaluru-560066
             </button>
-            <a
+            <Link rel="noopener noreferrer"
               href="tel:+918884440963"
               className="text-gray-400 hover:text-blue-400 inline-flex items-center"
             >
               <FaPhoneAlt className="mr-2" /> +91-8884440963
-            </a>
+            </Link>
           </div>
           <p className="mt-8 text-base md:mt-0 md:order-1">
             &copy; 2024 GetRightProperty. All rights reserved. A product of{" "}
-            <a
+            <Link rel="noopener noreferrer"
               href="https://rpclan.com/"
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300"
             >
               RPCLAN SERVICES PVT.LTD
-            </a>
+            </Link>
           </p>
         </div>
       </div>

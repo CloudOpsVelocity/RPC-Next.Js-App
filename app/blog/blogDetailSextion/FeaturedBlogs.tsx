@@ -3,6 +3,7 @@ import { blogDetails } from "@/app/hooks/blog";
 import { getClampedText } from "@/app/news/components/NewsSections";
 import { useAtom } from "jotai";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function FeaturedBlogCard({ data }: { data: any }) {
@@ -62,13 +63,12 @@ function FeaturedBlogs() {
               ? each.heading.toLowerCase().replaceAll(" ", "-")
               : "";
           return (
-            <a
+            <Link rel="noopener noreferrer"
               key={`FeaturedBlogCard_${each.heading}`}
               href={`/blog/${pathName}`}
-              target="_blank"
             >
               <FeaturedBlogCard data={each} />
-            </a>
+            </Link>
           );
         })}
       </div>

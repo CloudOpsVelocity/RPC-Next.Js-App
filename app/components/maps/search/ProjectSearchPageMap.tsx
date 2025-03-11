@@ -180,8 +180,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       selectedNearbyItem.lang
     ) {
       const position: any = [
-        parseFloat(selectedNearbyItem.lat),
-        parseFloat(selectedNearbyItem.lang),
+        parseFloat(selectedNearbyItem.lat.replace(/[^0-9.]/g, '')),
+        parseFloat(selectedNearbyItem.lang.replace(/[^0-9.]/g, '')),
       ];
       map.setView(position, 100);
     }
@@ -196,26 +196,26 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       && selected === null
     ) {
       const bounds = L.latLngBounds(
-        data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
+        data.map((item: any) => [parseFloat(item?.lat), parseFloat(item?.lang)])
       );
       map.fitBounds(bounds, { padding: [50, 50] });
     }
   }, [map, data, selected, nearbyData]);
 
   useEffect(() => {
-    if (nearbyData && Object.keys(nearbyData).length > 0 && category === "") {
-      const finalCateg =
-        category !== "" ? category : Object.keys(nearbyData)[0];
+    if (nearbyData && Object.keys(nearbyData).length > 0 && Object.keys(selectedNearbyItem).length === 0 ) {
+      const finalCateg = category !== "" ? category : Object.keys(nearbyData)[0];
       const nearByData = nearbyData[finalCateg];
+      const newData = selected !== null ? [...nearByData, selected] : [...nearByData];
       const bounds = L.latLngBounds(
-        nearByData.map((item: any) => [
-          parseFloat(item.lat),
-          parseFloat(item.lang),
+        newData.map((item: any) => [
+          parseFloat(item.lat.replace(/[^0-9.]/g, '')),
+          parseFloat(item.lang.replace(/[^0-9.]/g, '')),
         ])
       );
       map.fitBounds(bounds, { padding: [50, 50] });
     }
-  }, [map, nearbyData, category]);
+  }, [map, nearbyData, category, selectedNearbyItem, selected]);
 
   return (
     data &&
@@ -239,7 +239,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           }
         : null;
         
-      if ((selected?.reqId === itemId && selected && selected?.phaseId === item.phaseId) || (selected && selected?.reqId === itemId ) || !selected) {
+      if ((selected && selected?.reqId === itemId && selected?.phaseId === item.phaseId) || (selected && selected?.reqId === itemId ) || !selected) {
         return (
           <>
             <Marker
@@ -324,7 +324,7 @@ const NearbyMarkers = ({}) => {
       return (
         <Marker
           key={item?.lat + "markerTag" + index.toString()}
-          position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
+          position={[parseFloat(item?.lat.replace(/[^0-9.]/g, '')), parseFloat(item?.lang.replace(/[^0-9.]/g, ''))]}
           title={item.name}
           icon={Icon}
           zIndexOffset={100}
@@ -333,8 +333,8 @@ const NearbyMarkers = ({}) => {
               setSelectedLocation((prev: any) => ({
                 ...prev,
                 selectedNearbyItem: {
-                  lat: item?.lat,
-                  lang: item?.lang,
+                  lat: item?.lat.replace(/[^0-9.]/g, ''),
+                  lang: item?.lang.replace(/[^0-9.]/g, ''),
                   name: item?.name,
                 },
               })),

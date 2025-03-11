@@ -11,7 +11,10 @@ export default function Page({}: Props) {
     <main className="pt-[70px] min-h-[calc(100vh)] relative ">
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs key="newSearchPage2" pageUrl={"/search"} />
-        <ProjSearchMainFilterSection isListing={isListing} key="newSearchFilter2" />
+        <ProjSearchMainFilterSection
+          isListing={isListing}
+          key="newSearchFilter2"
+        />
       </div>
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
         <LeftSection />

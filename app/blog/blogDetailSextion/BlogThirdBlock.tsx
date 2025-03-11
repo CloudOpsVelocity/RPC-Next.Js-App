@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 function BlogThirdBlock() {
     const [{ selectedBlog }] = useAtom(blogDetails);
@@ -12,7 +13,7 @@ function BlogThirdBlock() {
     const path = usePathname();
 
     return (
-        <a href={`${path}/${pathName}`} target='_blank' rel="noreferrer" className='flex justify-center items-center ' >
+        <Link rel="noopener noreferrer" href={`${path}/${pathName}`} className='flex justify-center items-center ' >
             <div className='w-[94%] md:w-[90%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center border shadow-[0px_5px_4px_0px_rgba(221,221,221,0.25)] rounded-[5px] border-solid border-[#E2E2E2] bg-white mb-[3%]'>
                 <div className='mx-[20px] w-full md:w-[50%] p-[10px] md:p-0 '>
                     <ContentBox
@@ -34,7 +35,7 @@ function BlogThirdBlock() {
                     className='rounded-[10px] w-[94%] xl:w-[50%] mb-[10px] md:mb-0 border-[0.5px] border-gray border-solid rounded-l-0 max-w-[100%] md:max-w-[598px] xl:max-h-[284px] md:max-h-[200px] max-h-[200px] ' 
                 />
             </div>
-        </a>
+        </Link>
     )
 }
 

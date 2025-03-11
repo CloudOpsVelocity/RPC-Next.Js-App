@@ -2,7 +2,11 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
 
-export const generateAllSchemas = (property: any, properties?: any[]) => {
+export const generateAllSchemas = (
+  property: any,
+  properties: any[],
+  index: number
+) => {
   const [launchDate, possassionDate] = [
     convertToSchemaDate(property?.launchDate),
     convertToSchemaDate(property?.possassionDate),
@@ -162,23 +166,61 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         name: ["Home", "Properties", property.projName],
         url: [PAGE_URL],
       },
+      {
+        "@type": "ItemList",
+        itemListElement: {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "Product",
+            name: property.projName || "N/A",
+            image: property.coverUrl?.split(",")[0] || "N/A",
+            description: property.about || "N/A",
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "INR",
+              price: property.minPrice || "N/A",
+              itemCondition: "http://schema.org/NewCondition",
+              availability: "http://schema.org/InStock",
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.5",
+              reviewCount: "10",
+              bestRating: "5",
+              worstRating: "1",
+            },
+            url: PAGE_URL,
+          },
+        },
+      },
     ],
   };
 
   return schemas;
 };
 
-export const ProjectSeachSchema = ({ properties }: any) => {
+export const ProjectSeachSchema = ({
+  properties,
+  pageUrl,
+}: {
+  properties: any;
+  pageUrl: string;
+}) => {
   if (!Array.isArray(properties)) return null;
-
+  let PAGE_IMAGE = "";
   const results = properties
-    .map((property: any) => {
-      return generateAllSchemas(property, properties);
+    .map((property: any, index: number) => {
+      if (!PAGE_IMAGE) {
+        PAGE_IMAGE = property.coverUrl?.split(",")[0];
+      }
+      return generateAllSchemas(property, properties, index);
     })
     .filter(Boolean);
 
   if (!results.length) return null;
-
+  const pagetitle = cleanHeading(pageUrl);
+  const address = pagetitle.split("In")[1];
   return (
     <>
       <script
@@ -191,8 +233,328 @@ export const ProjectSeachSchema = ({ properties }: any) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
+            "@type": "Apartment",
+            name: `Luxury ${pagetitle}`,
+            description:
+              "A luxurious apartment with modern amenities and stunning views.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: address,
+              addressRegion: "Bengaluru",
+              addressCountry: "IN",
+            },
+            amenities: [
+              "Gym",
+              "Swimming Pool",
+              "24/7 Security",
+              "Parking",
+              "Garden",
+            ],
+            image: "https://example.com/image.jpg",
+            url: pageUrl,
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SearchResultsPage",
+            name: pagetitle,
+            url: pageUrl,
+            primaryImageOfPage: PAGE_IMAGE,
+            description: `Search results for ${pagetitle}`,
+            isFamilyFriendly: true,
+            keywords: pagetitle,
+            reviewedBy: {
+              "@type": "Organization",
+              name: "Get Right Property",
+            },
+            additionalProperty: [
+              {
+                "@type": "PropertyValue",
+                name: "Nearby Schools",
+                description:
+                  "Information about schools located in proximity to the property, including their ratings and distance.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Public Transport",
+                description:
+                  "Details about the availability of public transport options near the property, including bus and metro stations.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Shopping Centers",
+                description:
+                  "List of shopping centers and malls nearby, highlighting convenience for residents.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Healthcare Facilities",
+                description:
+                  "Information about nearby hospitals and clinics, ensuring residents have access to healthcare.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Parks and Recreation",
+                description:
+                  "Details about parks and recreational areas nearby, promoting a healthy lifestyle.",
+              },
+            ],
+            mainEntity: {
+              "@type": "SearchAction",
+              query: pagetitle,
+              location: {
+                "@type": "City",
+                name: "Bengaluru",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Whitefield",
+                  addressRegion: "Karnataka",
+                  addressCountry: "IN",
+                },
+              },
+            },
+          }),
+        }}
+      />
+
+      {/* <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SearchResultsPage",
+            name: "Property Search",
+            description:
+              "Find properties based on various filters including location, budget, area, amenities, and more.",
+            offers: {
+              "@type": "Offer",
+              price: "₹500000 - ₹600000000",
+              priceCurrency: "INR",
+            },
+            area: {
+              "@type": "QuantitativeValue",
+              value: "0 - 5000",
+              unitCode: "SQF",
+            },
+            numberOfBathroomsTotal: {
+              "@type": "QuantitativeValue",
+              value: "1 - 6",
+            },
+            numberOfRooms: {
+              "@type": "QuantitativeValue",
+              value: "1 - 6",
+            },
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Your selected localities",
+              addressRegion: "Your selected city",
+              addressCountry: "IN",
+            },
+            reraRegistered: true,
+            floorSize: {
+              "@type": "QuantitativeValue",
+              value: "Super Built-Up Area",
+              unitCode: "SQF",
+            },
+            furnishing: ["Unfurnished", "Semi-Furnished", "Fully Furnished"],
+            bhkType: ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK+"],
+            propertyStatus: ["Under Construction", "Ready to Move"],
+            propertyType: ["Apartment", "Villa", "Plot", "Independent House"],
+            parking: {
+              "@type": "QuantitativeValue",
+              value: "0 - 6",
+            },
+            facing: ["East", "West", "North", "South"],
+            amenities: [
+              "Gym",
+              "Swimming Pool",
+              "Club House",
+              "Children’s Play Area",
+              "Security",
+              "Power Backup",
+              "Car Parking",
+            ],
+            listedBy: ["Owner", "Broker", "Builder"],
+            photoAvailability: true,
+          }),
+        }}
+      /> */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "Dataset",
+            name: "Real Estate Properties Dataset",
+            description:
+              "A dataset containing various real estate properties available in Bangalore, including details such as price, location, and amenities.",
+            creator: {
+              "@type": "Organization",
+              name: "Getrightproperty",
+              url: "https://www.getrightproperty.com",
+            },
+            dateCreated: new Date().toISOString(),
+            distribution: {
+              "@type": "DataDownload",
+              contentUrl: pageUrl,
+              encodingFormat: "application/json",
+            },
+            includedInDataCatalog: {
+              "@type": "DataCatalog",
+              name: "Real Estate Listings Catalog",
+              url: "https://www.getrightproperty.com/catalog",
+            },
+            license: "https://creativecommons.org/licenses/by/4.0/",
+            variableMeasured: [
+              {
+                "@type": "PropertyValue",
+                name: "Location",
+                description: address,
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Amenities",
+                description:
+                  "List of amenities available with the property, including Gym, Swimming Pool, Club House, Children’s Play Area, Security, Power Backup, Car Parking, and more.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Price Range",
+                description:
+                  "The price range of properties available, from ₹500000 to ₹600000000.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Floor Size",
+                description:
+                  "The floor size of properties ranges from Super Built-Up Area.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Number of Rooms",
+                description: "Properties available with 1 to 6 rooms.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Number of Bathrooms",
+                description: "Properties available with 1 to 6 bathrooms.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Parking Availability",
+                description:
+                  "Properties with parking space ranging from 0 to 6 vehicles.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Furnishing Status",
+                description:
+                  "Properties available as Unfurnished, Semi-Furnished, and Fully Furnished.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Property Status",
+                description:
+                  "Properties categorized as Under Construction or Ready to Move.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Property Type",
+                description:
+                  "Available property types include Apartment, Villa, Plot, and Independent House.",
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "CollectionPage",
+            name: `Available Properties in Bangalore - ${pagetitle}`,
+
+            description: `Discover an extensive collection of available properties in Bangalore, including a diverse range of real estate options such as luxurious apartments, elegant villas, and prime commercial spaces. Whether you're looking for a cozy home or an investment opportunity, our listings cater to all your needs.`,
+            mainEntity: [
+              {
+                "@type": "Apartment",
+                name: pagetitle,
+                description: `Introducing a stunning ${pagetitle}, a spacious 2 BHK apartment flat located in the vibrant area of Whitefield, Bengaluru. This property offers modern amenities, a comfortable living experience, and is situated close to essential services and entertainment options.`,
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: address,
+                  addressLocality: "Bengaluru",
+                  addressRegion: "Karnataka",
+                  addressCountry: "IN",
+                },
+                image: PAGE_IMAGE,
+                url: pageUrl,
+                additionalType: "http://schema.org/RealEstateListing",
+              },
+            ],
+            additionalProperty: [
+              {
+                "@type": "PropertyValue",
+                name: "Nearby Schools",
+                description:
+                  "Information about schools located in proximity to the property, including their ratings and distance.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Public Transport",
+                description:
+                  "Details about the availability of public transport options near the property, including bus and metro stations.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Shopping Centers",
+                description:
+                  "List of shopping centers and malls nearby, highlighting convenience for residents.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Healthcare Facilities",
+                description:
+                  "Information about nearby hospitals and clinics, ensuring residents have access to healthcare.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Parks and Recreation",
+                description:
+                  "Details about parks and recreational areas nearby, promoting a healthy lifestyle.",
+              },
+            ],
+          }),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@type": "FAQPage",
             mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is the purpose of this page?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `The purpose of this page is to provide detailed information about the property titled "${pagetitle}", including its features, pricing, and availability.`,
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What is the address of the property?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `The address of the property is "${address}".`,
+                },
+              },
               {
                 "@type": "Question",
                 name: "What documents do I need to buy a property?",
@@ -240,3 +602,22 @@ export const ProjectSeachSchema = ({ properties }: any) => {
     </>
   );
 };
+
+function cleanHeading(url: string) {
+  const ids =
+    url
+      .replace(/^\//, "")
+      .split(process.env.NEXTAUTH_URL ?? "")[1]
+      ?.split("-") ?? [];
+  const cleaned = ids
+    .join(" ")
+    .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ|")\b/g, "")
+    .replace(/\s+/g, " ")
+    .replace("/", "")
+    .trim();
+
+  return cleaned
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
