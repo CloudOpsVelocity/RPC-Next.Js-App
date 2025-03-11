@@ -234,7 +234,7 @@ export const ProjectSeachSchema = ({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@type": "Apartment",
-            name: "Luxury Apartment",
+            name: `Luxury ${pagetitle}`,
             description:
               "A luxurious apartment with modern amenities and stunning views.",
             address: {
@@ -263,7 +263,14 @@ export const ProjectSeachSchema = ({
             "@type": "SearchResultsPage",
             name: pagetitle,
             url: pageUrl,
+            primaryImageOfPage: PAGE_IMAGE,
             description: `Search results for ${pagetitle}`,
+            isFamilyFriendly: true,
+            keywords: pagetitle,
+            reviewedBy: {
+              "@type": "Organization",
+              name: "Get Right Property",
+            },
             mainEntity: {
               "@type": "SearchAction",
               query: pagetitle,
@@ -276,9 +283,6 @@ export const ProjectSeachSchema = ({
                   addressRegion: "Karnataka",
                   addressCountry: "IN",
                 },
-              },
-              searchParameters: {
-                propertyType: "Apartment/Flat",
               },
             },
           }),
