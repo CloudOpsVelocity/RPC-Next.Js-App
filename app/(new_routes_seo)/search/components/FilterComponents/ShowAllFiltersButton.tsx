@@ -230,6 +230,7 @@ export default function ShowAllFiltersButton({
 
   useEffect(()=>{
     if(isOpen){
+      window.scrollTo({ top: 0, behavior: "smooth" });
       document.body.style.overflow = "hidden";
     }else{
       document.body.style.overflow = "unset";
@@ -261,7 +262,7 @@ export default function ShowAllFiltersButton({
       : !isListing;
 
   return (
-    <div className="  relative">
+    <div className="  relative  ">
       <button
         onClick={onToggle}
         className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] rounded-full hover:bg-gray-50"

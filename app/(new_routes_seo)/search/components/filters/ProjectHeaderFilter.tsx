@@ -89,14 +89,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
-    
     setIsSearchOpen(false);
-    if(dropdownName == "allFilters" ){
-      if( document.body.style.overflow === "hidden")
-      document.body.style.overflow = "unset";
-    }else{
-      document.body.style.overflow = "hidden";
-    }
     if(dropdownName == "allFiltersdes" ){
       if( document.body.style.overflow === "hidden")
       document.body.style.overflow = "unset";
