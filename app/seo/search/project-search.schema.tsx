@@ -233,6 +233,57 @@ export const ProjectSeachSchema = ({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
+            "@type": "Apartment",
+            name: "Luxury Apartment",
+            description:
+              "A luxurious apartment with modern amenities and stunning views.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: address,
+              addressRegion: "Bengaluru",
+              addressCountry: "IN",
+            },
+            amenities: [
+              "Gym",
+              "Swimming Pool",
+              "24/7 Security",
+              "Parking",
+              "Garden",
+            ],
+            image: "https://example.com/image.jpg",
+            url: pageUrl,
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SearchResultsPage",
+            name: "Property Search Results",
+            description:
+              "Search results for properties based on user criteria.",
+            mainEntity: results.map((property: any) => ({
+              "@type": "SearchResult",
+              name: property.name,
+              url: property.url,
+              image: property.coverUrl,
+              description: property.description,
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: property.ratingValue || "N/A",
+                reviewCount: property.reviewCount || "0",
+              },
+            })),
+          }),
+        }}
+      />
+
+      {/* <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SearchResultsPage",
             name: "Property Search",
@@ -290,7 +341,7 @@ export const ProjectSeachSchema = ({
             photoAvailability: true,
           }),
         }}
-      />
+      /> */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -402,13 +453,6 @@ export const ProjectSeachSchema = ({
                 image: PAGE_IMAGE,
                 url: pageUrl,
                 additionalType: "http://schema.org/RealEstateListing",
-                offers: {
-                  "@type": "Offer",
-                  price: "Price not disclosed",
-                  priceCurrency: "INR",
-                  itemCondition: "http://schema.org/NewCondition",
-                  availability: "http://schema.org/InStock",
-                },
               },
             ],
           }),
