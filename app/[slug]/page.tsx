@@ -49,15 +49,50 @@ export async function generateMetadata(
   const id = params.slug.split("-");
   const heading = cleanHeading(id);
 
+  const twitterTitle = `${heading} - Getrightproperty`;
+  const twitterDescription = `Searching ${heading}, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default.webp`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/${params.slug}`;
+
   return {
-    title: `${heading} - Getrightproperty`,
-    description: `Searching ${heading}, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+    title: twitterTitle,
+    description: twitterDescription,
+    keywords: [
+      `${heading} Bangalore`,
+      `${heading} property`,
+      `${heading} for sale`,
+      `real estate Bangalore`,
+      "Buy property in Bangalore",
+      "Verified property listings",
+    ],
+    robots: "index, follow",
     openGraph: {
-      title: `${heading} - Getrightproperty`,
-      description: `Searching ${heading}, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+      title: twitterTitle,
+      description: twitterDescription,
+      url,
+      type: "website",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${heading} Property Image`,
+        },
+      ],
+      siteName: "Getrightproperty",
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: twitterTitle,
+      description: twitterDescription,
+      site: "@Getrightproperty",
+      creator: "@Getrightproperty",
+      images: [imageUrl],
     },
   };
 }
+
 function cleanHeading(id: string[]) {
   return id
     .join(" ")

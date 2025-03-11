@@ -271,6 +271,38 @@ export const ProjectSeachSchema = ({
               "@type": "Organization",
               name: "Get Right Property",
             },
+            additionalProperty: [
+              {
+                "@type": "PropertyValue",
+                name: "Nearby Schools",
+                description:
+                  "Information about schools located in proximity to the property, including their ratings and distance.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Public Transport",
+                description:
+                  "Details about the availability of public transport options near the property, including bus and metro stations.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Shopping Centers",
+                description:
+                  "List of shopping centers and malls nearby, highlighting convenience for residents.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Healthcare Facilities",
+                description:
+                  "Information about nearby hospitals and clinics, ensuring residents have access to healthcare.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Parks and Recreation",
+                description:
+                  "Details about parks and recreational areas nearby, promoting a healthy lifestyle.",
+              },
+            ],
             mainEntity: {
               "@type": "SearchAction",
               query: pagetitle,
@@ -446,6 +478,7 @@ export const ProjectSeachSchema = ({
             "@context": "http://schema.org",
             "@type": "CollectionPage",
             name: `Available Properties in Bangalore - ${pagetitle}`,
+
             description: `Discover an extensive collection of available properties in Bangalore, including a diverse range of real estate options such as luxurious apartments, elegant villas, and prime commercial spaces. Whether you're looking for a cozy home or an investment opportunity, our listings cater to all your needs.`,
             mainEntity: [
               {
@@ -462,6 +495,38 @@ export const ProjectSeachSchema = ({
                 image: PAGE_IMAGE,
                 url: pageUrl,
                 additionalType: "http://schema.org/RealEstateListing",
+              },
+            ],
+            additionalProperty: [
+              {
+                "@type": "PropertyValue",
+                name: "Nearby Schools",
+                description:
+                  "Information about schools located in proximity to the property, including their ratings and distance.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Public Transport",
+                description:
+                  "Details about the availability of public transport options near the property, including bus and metro stations.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Shopping Centers",
+                description:
+                  "List of shopping centers and malls nearby, highlighting convenience for residents.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Healthcare Facilities",
+                description:
+                  "Information about nearby hospitals and clinics, ensuring residents have access to healthcare.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Parks and Recreation",
+                description:
+                  "Details about parks and recreational areas nearby, promoting a healthy lifestyle.",
               },
             ],
           }),
