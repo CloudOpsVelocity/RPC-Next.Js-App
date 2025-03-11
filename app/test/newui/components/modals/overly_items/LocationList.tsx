@@ -10,6 +10,7 @@ import { throttle } from "lodash";
 import { useAtom, useSetAtom } from "jotai";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMap } from "react-leaflet";
+import { checkLatAndLang } from "@/app/components/maps/search/ProjectSearchPageMap";
 
 // types.ts
 export interface LocationItem {
@@ -48,7 +49,6 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
 
   const handleTabClick = useCallback((category: string) => {
     setSelectedCategory(category);
-    console.log(category, selectedNearbyItem);
     setNearby( (prev:any) => ({...prev, category: category, selectedNearbyItem: {} }) );
   }, []);
 
@@ -84,16 +84,19 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   }, [updateScrollButtons]);
 
   const onSelectLocation = (item:any) => {
-    console.log(item)
-    item.lat = item.lat.replace(/[^0-9.]/g, '');
-    item.lang = item.lang.replace(/[^0-9.]/g, '');
+    item.lat = checkLatAndLang(item.lat);
+    item.lang = checkLatAndLang(item.lang);
 
-    if(
-      (Object.keys(selectedNearbyItem).length > 0 && selectedNearbyItem.placeId && item.placeId && selectedNearbyItem.placeId !== item.placeId) || 
-      (Object.keys(selectedNearbyItem).length > 0 && selectedNearbyItem.name && item.name && selectedNearbyItem.name !== item.placeId) ||
-      Object.keys(selectedNearbyItem).length === 0 
-    ){
-      setNearby( (prev:any) => ({...prev, selectedNearbyItem: item })); 
+    const checkData = 
+    (
+      Object.keys(selectedNearbyItem).length > 0 && 
+      (
+        (selectedNearbyItem.placeId !== undefined && item.placeId !== undefined && selectedNearbyItem.placeId !== item.placeId) ||
+        (selectedNearbyItem.placeId === undefined || item.placeId === undefined) && selectedNearbyItem.name !== item.name)
+    ) || Object.keys(selectedNearbyItem).length === 0;
+
+    if(checkData){
+      setNearby((prev:any) => ({...prev, selectedNearbyItem: item }));
     }
   };
 
