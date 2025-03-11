@@ -94,6 +94,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
   return (
     <Link
+    prefetch={false}
       // onClick={() => redirect(reqId)}
       href={redirect(reqId)}
       key={reqId}
@@ -104,7 +105,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     >
       {type == "proj" && (
         <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-          <Link rel="noopener noreferrer"
+          <Link prefetch={false} rel="noopener noreferrer"
             className="tracking-tight text-[18px] font-[600] text-wrap text-[#565D70] cursor-pointer"
             href={`/abc/karnataka/banglore/${reqId}`}
           >
