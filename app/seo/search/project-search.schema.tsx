@@ -381,38 +381,36 @@ export const ProjectSeachSchema = ({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            JSON.stringify({
-              "@context": "http://schema.org",
-              "@type": "CollectionPage",
-              name: `Available Properties in Bangalore - ${pagetitle}`,
-              description: `Discover an extensive collection of available properties in Bangalore, including a diverse range of real estate options such as luxurious apartments, elegant villas, and prime commercial spaces. Whether you're looking for a cozy home or an investment opportunity, our listings cater to all your needs.`,
-              mainEntity: [
-                {
-                  "@type": "Apartment",
-                  name: pagetitle,
-                  description: `Introducing a stunning ${pagetitle}, a spacious 2 BHK apartment flat located in the vibrant area of Whitefield, Bengaluru. This property offers modern amenities, a comfortable living experience, and is situated close to essential services and entertainment options.`,
-                  address: {
-                    "@type": "PostalAddress",
-                    streetAddress: address,
-                    addressLocality: "Bengaluru",
-                    addressRegion: "Karnataka",
-                    addressCountry: "IN",
-                  },
-                  image: PAGE_IMAGE,
-                  url: pageUrl,
-                  additionalType: "http://schema.org/RealEstateListing",
-                  offers: {
-                    "@type": "Offer",
-                    price: "Price not disclosed",
-                    priceCurrency: "INR",
-                    itemCondition: "http://schema.org/NewCondition",
-                    availability: "http://schema.org/InStock",
-                  },
+          __html: JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "CollectionPage",
+            name: `Available Properties in Bangalore - ${pagetitle}`,
+            description: `Discover an extensive collection of available properties in Bangalore, including a diverse range of real estate options such as luxurious apartments, elegant villas, and prime commercial spaces. Whether you're looking for a cozy home or an investment opportunity, our listings cater to all your needs.`,
+            mainEntity: [
+              {
+                "@type": "Apartment",
+                name: pagetitle,
+                description: `Introducing a stunning ${pagetitle}, a spacious 2 BHK apartment flat located in the vibrant area of Whitefield, Bengaluru. This property offers modern amenities, a comfortable living experience, and is situated close to essential services and entertainment options.`,
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: address,
+                  addressLocality: "Bengaluru",
+                  addressRegion: "Karnataka",
+                  addressCountry: "IN",
                 },
-              ],
-            })
-          ),
+                image: PAGE_IMAGE,
+                url: pageUrl,
+                additionalType: "http://schema.org/RealEstateListing",
+                offers: {
+                  "@type": "Offer",
+                  price: "Price not disclosed",
+                  priceCurrency: "INR",
+                  itemCondition: "http://schema.org/NewCondition",
+                  availability: "http://schema.org/InStock",
+                },
+              },
+            ],
+          }),
         }}
       />
 
