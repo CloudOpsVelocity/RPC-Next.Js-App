@@ -200,7 +200,16 @@ export const generateAllSchemas = (
   return schemas;
 };
 
-export const ProjectSeachSchema = ({ properties }: any) => {
+export const ProjectSeachSchema = ({
+  properties,
+  metaData,
+}: {
+  properties: any;
+  metaData: {
+    title: string;
+    url: string;
+  };
+}) => {
   if (!Array.isArray(properties)) return null;
 
   const results = properties
@@ -311,13 +320,6 @@ export const ProjectSeachSchema = ({ properties }: any) => {
                   price: "5000000",
                   itemCondition: "http://schema.org/NewCondition",
                   availability: "http://schema.org/InStock",
-                },
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: "4.8",
-                  reviewCount: "25",
-                  bestRating: "5",
-                  worstRating: "1",
                 },
                 url: "URL_TO_PROPERTY_PAGE",
               },
