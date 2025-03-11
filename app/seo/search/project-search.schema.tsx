@@ -270,11 +270,6 @@ export const ProjectSeachSchema = ({
               url: property.url,
               image: property.coverUrl,
               description: property.description,
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: property.ratingValue || "N/A",
-                reviewCount: property.reviewCount || "0",
-              },
             })),
           }),
         }}
