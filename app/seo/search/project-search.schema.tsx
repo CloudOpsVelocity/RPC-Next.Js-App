@@ -223,6 +223,68 @@ export const ProjectSeachSchema = ({ properties }: any) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SearchResultsPage",
+            name: "Property Search",
+            description:
+              "Find properties based on various filters including location, budget, area, amenities, and more.",
+            offers: {
+              "@type": "Offer",
+              price: "₹500000 - ₹600000000",
+              priceCurrency: "INR",
+            },
+            area: {
+              "@type": "QuantitativeValue",
+              value: "0 - 5000",
+              unitCode: "SQF",
+            },
+            numberOfBathroomsTotal: {
+              "@type": "QuantitativeValue",
+              value: "1 - 6",
+            },
+            numberOfRooms: {
+              "@type": "QuantitativeValue",
+              value: "1 - 6",
+            },
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Your selected localities",
+              addressRegion: "Your selected city",
+              addressCountry: "IN",
+            },
+            reraRegistered: true,
+            floorSize: {
+              "@type": "QuantitativeValue",
+              value: "Super Built-Up Area",
+              unitCode: "SQF",
+            },
+            furnishing: ["Unfurnished", "Semi-Furnished", "Fully Furnished"],
+            bhkType: ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK+"],
+            propertyStatus: ["Under Construction", "Ready to Move"],
+            propertyType: ["Apartment", "Villa", "Plot", "Independent House"],
+            parking: {
+              "@type": "QuantitativeValue",
+              value: "0 - 6",
+            },
+            facing: ["East", "West", "North", "South"],
+            amenities: [
+              "Gym",
+              "Swimming Pool",
+              "Club House",
+              "Children’s Play Area",
+              "Security",
+              "Power Backup",
+              "Car Parking",
+            ],
+            listedBy: ["Owner", "Broker", "Builder"],
+            photoAvailability: true,
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "http://schema.org",
             "@type": "CollectionPage",
             name: "Available Properties in Bangalore",
@@ -260,66 +322,10 @@ export const ProjectSeachSchema = ({ properties }: any) => {
                 url: "URL_TO_PROPERTY_PAGE",
               },
             ],
-            searchResults: {
-              "@type": "SearchResultsPage",
-              name: "Property Search",
-              description:
-                "Find properties based on various filters including location, budget, area, amenities, and more.",
-              offers: {
-                "@type": "Offer",
-                price: "₹500000 - ₹600000000",
-                priceCurrency: "INR",
-              },
-              area: {
-                "@type": "QuantitativeValue",
-                value: "0 - 5000",
-                unitCode: "SQF",
-              },
-              numberOfBathroomsTotal: {
-                "@type": "QuantitativeValue",
-                value: "1 - 6",
-              },
-              numberOfRooms: {
-                "@type": "QuantitativeValue",
-                value: "1 - 6",
-              },
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Your selected localities",
-                addressRegion: "Your selected city",
-                addressCountry: "IN",
-              },
-              reraRegistered: true,
-              floorSize: {
-                "@type": "QuantitativeValue",
-                value: "Super Built-Up Area",
-                unitCode: "SQF",
-              },
-              furnishing: ["Unfurnished", "Semi-Furnished", "Fully Furnished"],
-              bhkType: ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK+"],
-              propertyStatus: ["Under Construction", "Ready to Move"],
-              projectStatus: ["New Launch", "Under Construction", "Completed"],
-              propertyType: ["Apartment", "Villa", "Plot", "Independent House"],
-              parking: {
-                "@type": "QuantitativeValue",
-                value: "0 - 6",
-              },
-              facing: ["East", "West", "North", "South"],
-              amenities: [
-                "Gym",
-                "Swimming Pool",
-                "Club House",
-                "Children’s Play Area",
-                "Security",
-                "Power Backup",
-                "Car Parking",
-              ],
-              listedBy: ["Owner", "Broker", "Builder"],
-              photoAvailability: true,
-            },
           }),
         }}
       />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
