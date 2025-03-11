@@ -111,7 +111,7 @@ export default function SearchSec({}: Props) {
         const res = await fetch(
           `${
             process.env.NEXT_PUBLIC_BACKEND_URL
-          }/matcher/string?word=${searchQuery}&cityId=${9}`
+          }/matcher/string?word=${name}&cityId=${9}`
         );
         const data = await res.json();
         if (data && data.ids) {
@@ -128,8 +128,7 @@ export default function SearchSec({}: Props) {
           
         } else {
           const whichPage = f.propType === 36 ? "/search/listing" : "/search"
-          router.push(whichPage);          
-
+          router.push(`${whichPage}?sf=${toQueryParams(f)}`);          
         }
       }
     };
@@ -217,7 +216,7 @@ export default function SearchSec({}: Props) {
               : "Search By Locality, Project, Listing"
           }
           onClick={handleFieldClick}
-          value={name ?? ""}
+          value={searchQuery ?? ""}
           onChange={(e) => {
             handleSearchChange(e)
           }}

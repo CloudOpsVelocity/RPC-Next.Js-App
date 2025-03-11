@@ -44,14 +44,13 @@ export default function Box({ item }: Props) {
         if (apiData.type === "Project") {
           router.push(apiData.stringUrl);
         } else {
-          window.open(
+          router.push(
             `/search/listing?sf=projIdEnc=${
               apiData.stringId.split("_")[0]
             }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
             }`,
-            "_blank",
-            "noreferrer" 
+           
           );
         }
 
