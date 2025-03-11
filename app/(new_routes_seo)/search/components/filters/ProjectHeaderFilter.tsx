@@ -89,9 +89,19 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
+    
     setIsSearchOpen(false);
-    if(dropdownName == "allFilters"){
+    if(dropdownName == "allFilters" ){
+      if( document.body.style.overflow === "hidden")
       document.body.style.overflow = "unset";
+    }else{
+      document.body.style.overflow = "hidden";
+    }
+    if(dropdownName == "allFiltersdes" ){
+      if( document.body.style.overflow === "hidden")
+      document.body.style.overflow = "unset";
+    }else{
+      document.body.style.overflow = "hidden";
     }
   };
   const handleSearchChange = (e: any) => {
@@ -446,7 +456,10 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-lg font-semibold">Filters</h2>
               <button
-                onClick={() => setIsDrawerOpen(false)}
+              onClick={() => {
+                setIsDrawerOpen(false);
+                document.body.style.overflow = "unset";
+              }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >
                 <MdClose className="w-6 h-6" />
@@ -460,8 +473,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                 isListing={isListing}
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
-                isOpen  ={isDrawerOpentest}
-                onToggle={() => handleDropdownToggle("allFilters")}
+                isOpen 
+                onToggle={() => handleDropdownToggle("allFiltersdes")}
               />
             </div>
           </div>
