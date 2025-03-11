@@ -160,6 +160,7 @@ const FirstBlock: React.FC<Props> = ({
                 <p className="text-[#242424] sm:text-[16px] xl:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Builder:{" "}
                   <Link
+                    prefetch={false}
                     href={generateBuilderUrl({
                       slug: data?.data?.userName,
                       city: data?.data?.cityName,

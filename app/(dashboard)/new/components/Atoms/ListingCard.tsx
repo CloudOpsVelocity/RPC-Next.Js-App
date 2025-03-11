@@ -39,6 +39,7 @@ export default function ListingCard({ item, sl }: Props) {
   return (
     <div>
       <Link
+        prefetch={false}
         href={listingLink}
         rel="noopener noreferrer"
         // onClick={() => onRedirectOnProp()}

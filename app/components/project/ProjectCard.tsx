@@ -104,6 +104,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
       {type == "proj" && (
         <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
           <Link
+            prefetch={false}
             rel="noreferrer"
             href={URLRedirectionProj}
             className="tracking-tight sm:text-[18px] font-[600]  line-clamp-2 text-wrap min-w-0 text-[#0073C6] cursor-pointer"
@@ -147,7 +148,9 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
 
         <div className="relative  max-h-[300px]">
           <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
-            <Link rel="noreferrer" href={URLRedirectionProj}>
+            <Link rel="noreferrer" 
+            prefetch={false}
+            href={URLRedirectionProj}>
               <Image
                 src={
                   type === "proj"
@@ -231,6 +234,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
             <p className="text-[#242424]  text-[14px] xl:text-base not-italic font-semibold leading-[normal] mt-[4px] mb-[4px]">
               Builder:{" "}
               <Link
+                prefetch={false}
                 href={URLToBuilder}
                 rel="noreferrer"
                 className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline"
