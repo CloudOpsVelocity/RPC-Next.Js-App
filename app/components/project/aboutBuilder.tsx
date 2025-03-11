@@ -51,6 +51,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             </div>
             <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
               <Link
+         prefetch={false}
                 href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${urlBuilder}`}
                 about="builder details"
               >
@@ -84,6 +85,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           {nzData.pincode}
         </p>
         <Link
+        prefetch={false}
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] xl:text-[20px] font-[700] p-[10px]  "
           href={urlBuilder}
           rel="noreferrer"
