@@ -129,7 +129,7 @@ const LeafMap: React.FC<{
         />
       </div>
 
-      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px] w-[95%] sm:w-[90%] mx-auto">
+      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:max-h-[620px] w-[95%] sm:w-[90%] mx-auto">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -194,8 +194,8 @@ const LeafMap: React.FC<{
           />
         </section>
       </div>
-
-      {mapData[selected] && mapData[selected].length > 0 && (
+ 
+     {mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 w-[90%] mx-auto hidden sm:block">
           <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby

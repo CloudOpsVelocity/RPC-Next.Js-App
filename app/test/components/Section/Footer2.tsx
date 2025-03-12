@@ -90,10 +90,11 @@ const EnhancedFooter2 = () => {
             </p>
             <div className="flex space-x-6">
               {socialIcons.map(({ name, icon }) => (
-                <Link rel="noopener noreferrer"
+                <Link rel="noreferrer"
                   key={name}
                   href="/"
                   className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                  target='_blank'
                 >
                   <span className="sr-only">{name}</span>
                   {icon}

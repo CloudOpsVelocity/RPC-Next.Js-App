@@ -179,10 +179,11 @@ export default function EnhancedFooter() {
             </p>
             <div className="flex space-x-6">
               {socialIcons.map(({ name, icon, link }) => (
-                <Link rel="noopener noreferrer"
+                <Link rel="noreferrer"
                   key={name}
                   href={link}
                   className="text-white hover:text-gray-300"
+                  target='_blank'
                 >
                   <span className="sr-only">{name}</span>
                   {icon}

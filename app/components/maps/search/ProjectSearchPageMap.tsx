@@ -9,7 +9,7 @@ import {
   useMap,
   Popup,
 } from "react-leaflet";
-import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import "leaflet/dist/leaflet.css";
 import L, { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
@@ -23,7 +23,7 @@ import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 
 export const checkLatAndLang = (number:any) => {
-  var invalidChars = ["e", "E", "N", "+", "°"];
+  var invalidChars = ["e", "E", "W", "N", "S", "+", "°"];
   if(number === undefined && number === null && number === "") return;
   const finalNumber = number.toString();
   const isIncluded = invalidChars.some(each => finalNumber.includes(each));
@@ -54,7 +54,9 @@ const RecenterButton = ({ center }: { center: any }) => {
     map.setView(position, 100);
 
     if (!allMarkerRefs) return;
-    const marker = allMarkerRefs.current.get(selected?.reqId);
+    const refKey = `${selected?.reqId}-${selected?.phaseId}-${selected?.propTypeName ? selected?.propTypeName : selected?.propType}`;
+
+    const marker = allMarkerRefs.current.get(refKey);
     if (marker) marker.openPopup();
   };
 
@@ -145,12 +147,14 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   // 🔹 Event handlers for each marker
   const getEventHandlers = (itemId: string, item?: any) => ({
     mouseover: () => {
-      const marker = markerRefs.current.get(itemId);
+      const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+      const marker = markerRefs.current.get(refKey);
       if (marker) marker.openPopup();
     },
     mouseout: () => {
       if (itemId !== selected?.reqId) {
-        const marker = markerRefs.current.get(itemId);
+        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+        const marker = markerRefs.current.get(refKey);
         if (marker) marker.closePopup();
       }
     },
@@ -164,7 +168,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           lang: item?.lang,
           projOrPropName: item?.propName ? item?.propName : item?.projName,
         }));
-        const marker = markerRefs.current.get(itemId);
+        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+        const marker = markerRefs.current.get(refKey);
         if (marker) marker.openPopup();
       }
     },
@@ -178,9 +183,10 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         parseFloat(selected.lang),
       ];
       map.setView(position, 100);
+      const refKey = `${selected?.reqId}-${selected?.phaseId}-${selected?.propTypeName ? selected?.propTypeName : selected?.propType}`;
 
-      const marker = markerRefs.current.get(selected?.reqId);
-      if (marker) marker.openPopup();
+      const marker = markerRefs.current.get(refKey);
+      if (marker && !isMobile) marker.openPopup();
     }
   }, [selected, map]);
 
@@ -280,8 +286,17 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       const isProp = !!item?.propIdEnc;
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
       // const itemPropType = isProp ? item?.propTypeName : item?.propType;
-
-      const phases = !isProp
+        
+      if (
+        (selected && selected?.reqId === itemId &&
+          (
+            (selected?.phaseId === item.phaseId && (selected?.propType === item.propType || selected?.propType === item.propTypeName)) || 
+            (selected?.phaseId === item.phaseId && (!selected?.propType || !item.propType || !item.propTypeName)) || 
+            (!selected?.phaseId || !item.phaseId || !selected?.propType || !item.propType || !item.propTypeName)
+          )
+        ) || selected === null
+      ) {
+        const phases = !isProp
         ? {
             [item.phaseName]: {
               phaseName: item.phaseName,
@@ -291,17 +306,19 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
                   minPrice: item.minPrice,
                   maxPrice: item.maxPrice,
                 },
+                
               ],
             },
           }
         : null;
-        
-      if ((selected && selected?.reqId === itemId && selected?.phaseId === item.phaseId) || (selected && selected?.reqId === itemId ) || !selected) {
+
+        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+
         return (
           <>
             <Marker
               ref={(el) => {
-                if (el) markerRefs.current.set(itemId, el);
+                if (el) markerRefs.current.set(refKey, el);
               }}
               key={itemId + "proijMarkerTag" + index.toString()}
               position={[

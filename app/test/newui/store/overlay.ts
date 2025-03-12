@@ -47,7 +47,7 @@ const initialState: OverlayState = {
   isOpen: false,
   content: null,
   id: null,
-  title: "",
+  title: "", 
   conType: "none",
   pType: "",
   propId: "",
@@ -62,6 +62,8 @@ const overlayReducer = (
     if (!value) return "";
     return new Intl.NumberFormat("en-IN").format(Number(value));
   };
+  
+  console.log(action);
 
   switch (action.type) {
     case "OPEN":
@@ -73,9 +75,9 @@ const overlayReducer = (
           ...(content.clubHouseCharge
             ? [
                 {
-                  label: "Club house Subscription",
+                  label: "Club house Subscription", 
                   value:
-                    content.clubHouseCharge === "A"
+                    content.clubHouseCharge === "A" 
                       ? "Lifetime"
                       : content.clubHouseTill
                       ? `₹${formatNumber(content.clubHouseCharge)} for ${
