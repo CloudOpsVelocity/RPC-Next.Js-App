@@ -54,7 +54,9 @@ const RecenterButton = ({ center }: { center: any }) => {
     map.setView(position, 100);
 
     if (!allMarkerRefs) return;
-    const marker = allMarkerRefs.current.get(selected?.reqId);
+    const refKey = `${selected?.reqId}-${selected?.phaseId}-${selected?.propTypeName ? selected?.propTypeName : selected?.propType}`;
+
+    const marker = allMarkerRefs.current.get(refKey);
     if (marker) marker.openPopup();
   };
 
@@ -145,12 +147,14 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   // 🔹 Event handlers for each marker
   const getEventHandlers = (itemId: string, item?: any) => ({
     mouseover: () => {
-      const marker = markerRefs.current.get(itemId);
+      const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+      const marker = markerRefs.current.get(refKey);
       if (marker) marker.openPopup();
     },
     mouseout: () => {
       if (itemId !== selected?.reqId) {
-        const marker = markerRefs.current.get(itemId);
+        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+        const marker = markerRefs.current.get(refKey);
         if (marker) marker.closePopup();
       }
     },
@@ -164,7 +168,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           lang: item?.lang,
           projOrPropName: item?.propName ? item?.propName : item?.projName,
         }));
-        const marker = markerRefs.current.get(itemId);
+        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+        const marker = markerRefs.current.get(refKey);
         if (marker) marker.openPopup();
       }
     },
@@ -178,8 +183,9 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         parseFloat(selected.lang),
       ];
       map.setView(position, 100);
+      const refKey = `${selected?.reqId}-${selected?.phaseId}-${selected?.propTypeName ? selected?.propTypeName : selected?.propType}`;
 
-      const marker = markerRefs.current.get(selected?.reqId);
+      const marker = markerRefs.current.get(refKey);
       if (marker && !isMobile) marker.openPopup();
     }
   }, [selected, map]);
@@ -283,10 +289,12 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         
       if (
         (selected && selected?.reqId === itemId &&
-          (selected?.phaseId === item.phaseId && selected?.propType === item.propType) || 
-          (selected?.phaseId === item.phaseId && (!selected?.propType || !item.propType)) || 
-          (!selected?.phaseId || !item.phaseId || !selected?.propType || !item.propType)
-        ) || !selected
+          (
+            (selected?.phaseId === item.phaseId && (selected?.propType === item.propType || selected?.propType === item.propTypeName)) || 
+            (selected?.phaseId === item.phaseId && (!selected?.propType || !item.propType || !item.propTypeName)) || 
+            (!selected?.phaseId || !item.phaseId || !selected?.propType || !item.propType || !item.propTypeName)
+          )
+        ) || selected === null
       ) {
         const phases = !isProp
         ? {
@@ -304,11 +312,13 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           }
         : null;
 
+        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+
         return (
           <>
             <Marker
               ref={(el) => {
-                if (el) markerRefs.current.set(itemId, el);
+                if (el) markerRefs.current.set(refKey, el);
               }}
               key={itemId + "proijMarkerTag" + index.toString()}
               position={[

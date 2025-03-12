@@ -82,7 +82,7 @@ export default function PropertyBanner({
               <Image
                 src={media?.coverImageUrl?.split(",")[1]}
                 alt="Sobha Dream Acres"
-                className="flex  items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
+                className="flex items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] w-full h-full object-fill "
                 unoptimized
                 height={630}
                 width={1200}
