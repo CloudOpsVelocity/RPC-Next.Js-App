@@ -171,6 +171,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 </div>
                 {projectDetails.projIdEnc ? (
                   <Link
+                  prefetch={false}
                     href={projectUrl}
                     rel="noopener noreferrer"
                     className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
