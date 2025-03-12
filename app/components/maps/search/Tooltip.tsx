@@ -1,5 +1,6 @@
 import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
 import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
+import { formatCurrency } from '@/app/utils/numbers';
 import Image from 'next/image';
 import React from 'react';
 import { 
@@ -31,14 +32,14 @@ type TooltipProjProps = {
   reqId: string;
 };
 
-function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-    minimumFractionDigits: 0
-  }).format(amount);
-}
+// function formatCurrency(amount: number): string {
+//   return new Intl.NumberFormat('en-IN', {
+//     style: 'currency',
+//     currency: 'INR',
+//     maximumFractionDigits: 0,
+//     minimumFractionDigits: 0
+//   }).format(amount);
+// }
 
 export const onClickRedirect = ( data:any) => {
   console.log(data)
@@ -69,8 +70,7 @@ export const onClickRedirect = ( data:any) => {
 };
 
 export default function TooltipProj({ data }: { data: TooltipProjProps }) {
-  const { projName, city, locality, phases, postedByName, coverUrl } = data; 
-
+  const { projName, city, locality, phases, postedByName, coverUrl} = data; 
   return (
     <div 
       className="bg-white text-xs cursor-pointer rounded-lg overflow-hidden w-full max-w-[100%] " 
@@ -89,7 +89,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
           className=' w-[80px] xl:w-[100px] h-[80px] xl:h-[100px] border-[0.5px] border-gray border-solid rounded-[10px] ' 
         />
 
-        <div className='mt-0 pt-0'>
+        <div className='w-full mt-0 pt-0'>
           {/* Header */}
           <div className="border-b border-gray-200">
             <h3 className="font-semibold text-gray-900 flex items-center gap-[4px] text-sm !font-montserrat">
@@ -116,14 +116,15 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
               <div key={phase.phaseName + index.toString()} className="bg-gray-100 rounded px-1 py-0.5">
                 {phase.phaseName && <p className="font-semibold text-gray-800 text-xs !m-0 !p-0 mb-1 !font-montserrat">{`Phase: ${phase.phaseName}`}</p>}
                 <div className="flex w-full ">
-                  {phase.propertyTypes.map((property, index) => (
+                  {phase.propertyTypes.map((property, index) => {
+                    return(
                     <div key={property.propType + index.toString()} className="flex justify-between items-center text-xs bg-white p-1 rounded border border-gray-200">
                       <span className="text-gray-800 font-medium !font-montserrat">{property.propType}</span>
                       <span className="text-emerald-700 font-semibold text-nowrap !font-montserrat ml-[4px] ">
                         {formatCurrency(Number(property.minPrice) || 0)} - {formatCurrency(Number(property.maxPrice) || 0)}
                       </span>
                     </div>
-                  ))}
+                  )})}
                 </div>
               </div>
             ))}
