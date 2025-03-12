@@ -207,7 +207,7 @@ export const generateAllSchemas = (
           price: property.minRentPrice || property.minPrice || "0",
           priceCurrency: "INR"
         }
-      }
+      },
       {
         "@type": "ItemList",
         itemListElement: {
