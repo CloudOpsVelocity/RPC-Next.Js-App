@@ -36,7 +36,7 @@ export default function TooltipProp({ data }: Props) {
           width={1200}
           className=' w-[80px] xl:w-[100px] h-[80px] xl:h-[100px] border-[0.5px] border-gray border-solid rounded-[10px] ' 
         />
-        <div className='mt-0 pt-0'>
+        <div className='w-full mt-0 pt-0'>
           <p className="text-[#001F35] text-[12px] xl:text-[14px] not-italic font-semibold capitalize !m-0 !p-0 mb-[4px]">
             {bhkName} {propTypeName} for {category} in {localityName},{"  "}
             <span className="text-[#148B16] text-[14px] xl:text-[16px] not-italic font-bold">

@@ -94,7 +94,6 @@ export default function TopRightSection({
             : "" + " " + propTypeName,
         });
   const [lat, lang] = location?.split(",") ?? [];
-  // console.log("card 1: ");
   const setNearby = useSetAtom(selectedNearByAtom);
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
 
@@ -364,7 +363,6 @@ export default function TopRightSection({
                       projOrPropName: propName ? propName : projName,
                       phaseId:phaseId
                     })
-                    // console.log("near by 1", data);
                     if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
                     dispatch({
                       type: "OPEN",

@@ -280,8 +280,15 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       const isProp = !!item?.propIdEnc;
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
       // const itemPropType = isProp ? item?.propTypeName : item?.propType;
-
-      const phases = !isProp
+        
+      if (
+        (selected && selected?.reqId === itemId &&
+          (selected?.phaseId === item.phaseId && selected?.propType === item.propType) || 
+          (selected?.phaseId === item.phaseId && (!selected?.propType || !item.propType)) || 
+          (!selected?.phaseId || !item.phaseId || !selected?.propType || !item.propType)
+        ) || !selected
+      ) {
+        const phases = !isProp
         ? {
             [item.phaseName]: {
               phaseName: item.phaseName,
@@ -291,12 +298,12 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
                   minPrice: item.minPrice,
                   maxPrice: item.maxPrice,
                 },
+                
               ],
             },
           }
         : null;
-        
-      if ((selected && selected?.reqId === itemId && selected?.phaseId === item.phaseId) || (selected && selected?.reqId === itemId ) || !selected) {
+
         return (
           <>
             <Marker
