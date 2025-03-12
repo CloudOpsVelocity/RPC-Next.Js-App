@@ -162,6 +162,48 @@ export const generateAllSchemas = (property: any, properties?: any[]) => {
         name: ["Home", "Properties", property.projName],
         url: [PAGE_URL],
       },
+      {
+        "@type": "ViewAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: PAGE_URL
+        },
+        name: `View ${property.projName || "Property"} Details`,
+        description: `View detailed information about ${property.projName || "Property"} ${property.propType || ""} ${
+          property.locality ? `in ${property.locality}` : ""
+        } ${property.city ? `, ${property.city}` : ""}`.trim()
+      }
+      ,
+      {
+        "@type": "SellAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: PAGE_URL
+        },
+        name: `Buy ${property.bhkNames.join(",") || "Property"} In ${property.projName || ""} ${
+          property.locality ? `in ${property.locality}` : ""
+        } ${property.city ? `, ${property.city}` : ""}`.trim(),
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: property.minPrice || "0",
+          priceCurrency: "INR"
+        }
+      },
+      {
+        "@type": "RentAction",
+        target: {
+          "@type": "EntryPoint", 
+          urlTemplate: PAGE_URL
+        },
+        name: `Rent ${property.bhkNames.join(",") || "Property"} In ${property.projName || ""} ${
+          property.locality ? `in ${property.locality}` : ""
+        } ${property.city ? `, ${property.city}` : ""}`.trim(),
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: property.minRentPrice || property.minPrice || "0",
+          priceCurrency: "INR"
+        }
+      }
     ],
   };
 
