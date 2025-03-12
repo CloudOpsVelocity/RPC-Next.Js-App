@@ -74,7 +74,6 @@ export default function ListingBreadCrumbs({
       })),
     ],
   };
-
   return (
     <>
       <script
@@ -105,6 +104,7 @@ export default function ListingBreadCrumbs({
               {!isLast ? (
                 <>
                   <Link
+                  prefetch={false}
                     href={`${
                       isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
                     }${currentPath}`}
