@@ -1,4 +1,5 @@
 import { commonLinks } from '@/app/news/components/NewsDetailsPage';
+import Link from 'next/link';
 import React from 'react'
 
 type Props = {};
@@ -274,25 +275,23 @@ function PointsBlock({}: Props) {
                <div className="flex flex-wrap gap-[10px]">
                    {commonLinks.redirections.map((eachOne:any)=>{
                        return(
-                         <a key={eachOne.name} href={eachOne.link} target='_blank' rel="noreferrer">
+                        <Link rel="noopener noreferrer" key={eachOne.name} href={eachOne.link}>
                            <p className=" bg-gray-400 text-[10px] md:text-[12px] cursor-pointer text-white p-[2px] px-[4px] md:px-[6px] ">#{eachOne.name}</p>
-                         </a>
+                         </Link>
                        )
                    })}
                </div>
     
                <div className="flex space-x-6 mt-[10px] gap-[10px] md:gap-[16px] md:mt-0 items-end justify-end max-h-[32px] ">
                    {commonLinks.socialIcons.map(({ name, icon, link }) => (
-                   <a
-                   rel="noopener noreferrer"
+                   <Link rel="noopener noreferrer"
                        key={name}
                        href={link}
-                       target="_blank"
                        className="text-white hover:text-gray-300 !m-0"
                    >
                        <span className="sr-only">{name}</span>
                        {icon}
-                   </a>
+                   </Link>
                    ))}
                </div>
         </div>

@@ -10,6 +10,7 @@ import { throttle } from "lodash";
 import { useAtom, useSetAtom } from "jotai";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMap } from "react-leaflet";
+import { checkLatAndLang } from "@/app/components/maps/search/ProjectSearchPageMap";
 
 // types.ts
 export interface LocationItem {
@@ -32,7 +33,7 @@ const formatCategoryName = (category: string) => {
   return category.replace(/_/g, " ");
 };
 // eslint-disable-next-line react/display-name
-const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
+const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => { 
   const [selectedCategory, setSelectedCategory] = useState<string>(
     Object.keys(data)[0]
   );
@@ -44,13 +45,11 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   const setSelected = useSetAtom(selectedSearchAtom);
 
 
-  const categories = useMemo(() => Object.keys(data), [data]);
+  const categories = useMemo(() => Object.keys(data), [data]); 
 
   const handleTabClick = useCallback((category: string) => {
     setSelectedCategory(category);
-    // console.log(category);
-    setNearby( (prev:any) => ({...prev, category: category }) );
-
+    setNearby( (prev:any) => ({...prev, category: category, selectedNearbyItem: {} }) );
   }, []);
 
   const updateScrollButtons = throttle(() => {
@@ -85,8 +84,19 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   }, [updateScrollButtons]);
 
   const onSelectLocation = (item:any) => {
-    if(selectedNearbyItem.placeId !== item.placeId){
-      setNearby( (prev:any) => ({...prev, selectedNearbyItem: item })); 
+    item.lat = checkLatAndLang(item.lat);
+    item.lang = checkLatAndLang(item.lang);
+
+    const checkData = 
+    (
+      Object.keys(selectedNearbyItem).length > 0 && 
+      (
+        (selectedNearbyItem.placeId !== undefined && item.placeId !== undefined && selectedNearbyItem.placeId !== item.placeId) ||
+        (selectedNearbyItem.placeId === undefined || item.placeId === undefined) && selectedNearbyItem.name !== item.name)
+    ) || Object.keys(selectedNearbyItem).length === 0;
+
+    if(checkData){
+      setNearby((prev:any) => ({...prev, selectedNearbyItem: item }));
     }
   };
 

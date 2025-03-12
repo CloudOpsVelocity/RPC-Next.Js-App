@@ -28,6 +28,7 @@ interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
   toggleFilter: (category: string, value: string) => void;
   isOpen: boolean;
+
   onToggle: () => void;
   isListing?: boolean;
 }
@@ -40,6 +41,7 @@ interface Location {
 
 export default function ShowAllFiltersButton({
   isOpen,
+
   onToggle,
   isListing,
 }: ShowAllFiltersButtonProps) {
@@ -226,16 +228,16 @@ export default function ShowAllFiltersButton({
     );
   };
 
-  useEffect(() => {
-    if (isOpen) {
+  useEffect(()=>{
+    if(isOpen){
+      window.scrollTo({ top: 0, behavior: "smooth" });
       document.body.style.overflow = "hidden";
-    }
-
-    return () => {
+    }else{
       document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+    }
+  }, [isOpen])
 
+  
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
   const serverCity = useAtomValue(serverCityAtom);
@@ -260,7 +262,7 @@ export default function ShowAllFiltersButton({
       : !isListing;
 
   return (
-    <div className="  relative">
+    <div className="  relative  ">
       <button
         onClick={onToggle}
         className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] rounded-full hover:bg-gray-50"

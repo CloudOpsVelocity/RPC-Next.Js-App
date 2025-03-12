@@ -1,5 +1,6 @@
 import data from "@/app/data/auth";
 import clsx from "clsx";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -9,12 +10,15 @@ type Props = {
     title?: string;
     content?: string;
   };
-  url?:string
+  url?: string;
 };
 
-export default function MainHeading({ title, content, className,url }: Props) {
-
-
+export default function MainHeading({
+  title,
+  content,
+  className,
+  url = "/",
+}: Props) {
   return (
     <div className="flex flex-row  items-center justify-between">
       <div className=" flex flex-col  max-w-[80%] sm:max-w-full items-start justify-start gap-1">
@@ -39,14 +43,13 @@ export default function MainHeading({ title, content, className,url }: Props) {
         title != "Top Localities" &&
         title != "Listings Posted By" &&
         title != "Latest Blogs" && (
-          <a
+          <Link
+            rel="noopener noreferrer"
             className="text-[#0073C6]  text-[14px] sm:text-[18px] xl:text-[20px]  not-italic font-bold leading-[normal]"
             href={url}
-            target="_blank"
-            rel="noopener noreferrer"
           >
             View all
-          </a>
+          </Link>
         )}
     </div>
   );

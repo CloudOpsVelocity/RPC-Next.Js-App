@@ -1,6 +1,7 @@
 import { FaLinkedin, FaTwitter, FaEnvelope, FaFacebookF, FaInstagram } from "react-icons/fa"
 import { GiHouse } from "react-icons/gi"
 import { MdLocationOn } from "react-icons/md"
+import Link from "next/link";
 
 const teamMembers = [
   {
@@ -101,15 +102,15 @@ export default function TeamPage() {
                     <p className="text-sm text-blue-600 mb-4">{member.role}</p>
                     <p className="text-gray-600 mb-4">{member.bio}</p>
                     {/* <div className="flex justify-center space-x-4">
-                      <a target="_blank" href={member.linkedin} className="text-gray-400 hover:text-blue-500">
+                      <Link rel="noopener noreferrer" href={member.linkedin} className="text-gray-400 hover:text-blue-500">
                         <FaLinkedin className="w-6 h-6" />
-                      </a>
-                      <a target="_blank"  href={member.twitter} className="text-gray-400 hover:text-blue-400">
+                      </Link>
+                      <Link rel="noopener noreferrer"  href={member.twitter} className="text-gray-400 hover:text-blue-400">
                         <FaTwitter className="w-6 h-6" />
-                      </a>
-                      <a target="_blank" href={`mailto:${member.email}`} className="text-gray-400 hover:text-red-500">
+                      </Link>
+                      <Link rel="noopener noreferrer" href={`mailto:${member.email}`} className="text-gray-400 hover:text-red-500">
                         <FaEnvelope className="w-6 h-6" />
-                      </a>
+                      </Link>
                     </div> */}
                   </div>
                 </div>
@@ -121,13 +122,18 @@ export default function TeamPage() {
               <p className="text-xl text-gray-600 mb-8">
                 We're always looking for talented individuals to join our Bangalore real estate family.
               </p>
-              <a
+              <Link
+                prefetch={false} 
+                rel="noopener noreferrer"
                 href="/careers"
-                rel="noopener"
+
+
+
+                
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
               >
                 View Open Positions
-              </a>
+              </Link>
             </div>
 
             <div className="mt-20 bg-blue-50 rounded-lg p-8">

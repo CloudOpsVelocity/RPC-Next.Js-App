@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 function BlogDetailLeftSection() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
@@ -12,7 +13,7 @@ function BlogDetailLeftSection() {
   const path = usePathname();
 
   return ( 
-    <a href={`${path}/${pathName}`} target='_blank' rel="noreferrer">
+    <Link rel="noopener noreferrer" href={`${path}/${pathName}`}>
       <div className='max-w-[617px] w-full '>
           <Image 
               src={data?.coverImage} 
@@ -33,7 +34,7 @@ function BlogDetailLeftSection() {
               href={pathName}
           />
       </div>
-    </a>
+    </Link>
   )
 }
 

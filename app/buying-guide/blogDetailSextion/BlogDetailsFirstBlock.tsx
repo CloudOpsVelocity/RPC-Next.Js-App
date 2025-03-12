@@ -5,6 +5,7 @@ import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import { backIcon, Facebook, facebookRedirectLink, ShearIcon, TringleIcons, WhatsApp, whatsappRedirectLink } from '@/app/images/commonSvgs';
 import { usePathname, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 function BlogDetailsFirstBlock() { 
   const [{ allBlogData }, setBlogDetails] = useAtom(blogDetails);
@@ -66,12 +67,12 @@ function BlogDetailsFirstBlock() {
                       url: "",
                     })} 
                   />
-                  <a href={facebookRedirectLink} target="_blank">
+                  <Link rel="noopener noreferrer" href={facebookRedirectLink}>
                     <Facebook className={"w-[24px] h-[24px]" } />
-                  </a>
-                  <a href={whatsappRedirectLink} target="_blank">
+                  </Link>
+                  <Link rel="noopener noreferrer" href={whatsappRedirectLink}>
                     <WhatsApp className={"w-[24px] h-[24px]" } />
-                  </a>
+                  </Link>
               </div>
           </div>
       </div>

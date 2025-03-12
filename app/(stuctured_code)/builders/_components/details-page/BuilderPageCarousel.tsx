@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import NewCarousel from "@/app/test/components/NewCarousel";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import ButtonElement from "@/common/components/CustomButton";
+import { useRouter } from "next/navigation";
 
 type Props = {
   type: string;
@@ -39,7 +40,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openShort }] = usePopShortList();
   const isItemInShortlist = isShorlited === "Y";
-
+  const router = useRouter();
   const onAddingShortList = async () => {
     if (session) {
       const status = isItemInShortlist ? "N" : "Y";
@@ -67,15 +68,15 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
       title: cardData.projectName,
     });
   };
+
   const handleCardClick = () => {
-    console.log(cardData);
     const url = createProjectLinkUrl({
       city: cardData.cityName,
       slug: cardData.projectName,
       locality: cardData.localityName,
       projIdEnc: cardData.projIdEnc,
     });
-    window.open(url, "_blank");
+    router.push(url);
     // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
   };
 

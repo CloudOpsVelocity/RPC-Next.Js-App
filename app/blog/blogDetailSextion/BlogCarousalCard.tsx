@@ -3,6 +3,7 @@ import React from 'react'
 import ContentBox from './ContentBox'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 type Props = { 
   data: any; 
@@ -15,7 +16,7 @@ function BlogCard({data, proviousPage}: Props) {
   const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return ( 
-    <a href={`${path}/${pathName}`} target='_blank' rel="noreferrer">
+      <Link rel="noopener noreferrer" href={`${path}/${pathName}`}>
       <div className='w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] bg-white min-w-[280px] min-h-[430px]'>
           <Image
               src={data?.coverImage} 
@@ -34,7 +35,7 @@ function BlogCard({data, proviousPage}: Props) {
               href={pathName}
           />
       </div>
-    </a>
+    </Link>
   )
 }
 

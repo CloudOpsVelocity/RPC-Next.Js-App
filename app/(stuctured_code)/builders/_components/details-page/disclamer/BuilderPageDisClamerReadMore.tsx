@@ -1,5 +1,6 @@
 "use client";
 import clsx from "clsx";
+import Link from "next/link";
 import React, { useState } from "react";
 
 type Props = {};
@@ -14,12 +15,12 @@ export default function DisClamerReadMore({}: Props) {
       )}
     >
       from{" "}
-      <a
+      <Link rel="noopener noreferrer"
         href="https://www.getrightproperty.com"
         className="text-blue-600 underline"
       >
         Get Right Property
-      </a>{" "}
+      </Link>{" "}
       Sources of Information: Project details presented on this page are
       collected from public sources including State RERA websites (wherever
       applicable), project websites created by builders and authorized channel

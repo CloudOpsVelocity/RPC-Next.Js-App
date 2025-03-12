@@ -3,6 +3,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getShortIds } from "../../api";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 type Props = {
   initialValue: Record<string, any>;
@@ -57,9 +58,11 @@ export default function CompareShortListCount({ initialValue }: Props) {
   });
   return (
     !isLoading && (
-      <a
+      <Link 
+      prefetch={false}
+
+      rel="noopener noreferrer"
         href="/your-profile/shortlisted"
-        target="_blank"
         className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#2D4657] bg-[#1a2733] fixed bottom-10 right-5 sm:text-sm xl:text-xl z-[1000]"
       >
         <span className="hidden sm:block text-white font-bold">
@@ -69,7 +72,7 @@ export default function CompareShortListCount({ initialValue }: Props) {
           <p>{data.total}</p>
           <SelectedHeartIcon />
         </div>
-      </a>
+      </Link>
     )
   );
 }

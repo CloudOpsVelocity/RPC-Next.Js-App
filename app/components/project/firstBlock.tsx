@@ -19,6 +19,7 @@ import { useSetAtom } from "jotai";
 
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+import Link from "next/link";
 
 type Props = {
   projectDetails: Main | null;
@@ -158,17 +159,17 @@ const FirstBlock: React.FC<Props> = ({
 
                 <p className="text-[#242424] sm:text-[16px] xl:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Builder:{" "}
-                  <a
+                  <Link
+                    prefetch={false}
                     href={generateBuilderUrl({
                       slug: data?.data?.userName,
                       city: data?.data?.cityName,
                     })}
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >
                     {isLoading ? "Builder" : data?.data?.userName}
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

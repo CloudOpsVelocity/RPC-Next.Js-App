@@ -90,13 +90,12 @@ export default function ListingBreadCrumbs({
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        <a
+        <Link rel="noopener noreferrer"
           href={`/`}
-          target="_blank"
           className="hover:underline cursor-pointer capitalize"
         >
           Home
-        </a>
+        </Link>
         {" > "}
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;
@@ -105,11 +104,11 @@ export default function ListingBreadCrumbs({
             <React.Fragment key={`${key[index]}`}>
               {!isLast ? (
                 <>
-                  <a
+                  <Link
                     href={`${
                       isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
                     }${currentPath}`}
-                    target="_blank"
+                    // target="_blank"
                     className="hover:underline cursor-pointer capitalize"
                   >
                     {/* <a onTouchStart={() => {}}></a> */}
@@ -123,7 +122,7 @@ export default function ListingBreadCrumbs({
                         ? params[key].replace(/-/g, " ").replace(/bhk/i, "BHK")
                         : params[key].replace(/-/g, " ")}
                     </span>
-                  </a>
+                  </Link>
                   {" > "}
                 </>
               ) : (

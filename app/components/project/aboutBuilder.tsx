@@ -50,9 +50,13 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               />
             </div>
             <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
-              <a href={urlBuilder} target="_blank">
+              <Link
+               prefetch={false}
+                href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${urlBuilder}`}
+                about="builder details"
+              >
                 {nzData.userName}
-              </a>
+              </Link>
               <p className=" text-[#303A42] text-[14px] italic sm:text-[16px] xl:text-[20px] font-[500] ">
                 since {convertDateToMonthYear(nzData.companyStartDate)}
               </p>
@@ -63,35 +67,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           id={id?.toString()}
           builderName={nzData.userName}
         />
-        {/* <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center builderBg shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
-          <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020]  text-[14px] sm:text-[20px] xl:text-[24px] font-[700]">
-              {nzData.newProject}
-            </p>
-            <p className=" text-[#148B16]  text-[12px]    sm:text-[18px] xl:text-[20px] font-[700]">
-              New Launch {`Project${nzData.newProject > 1 ? "s" : ""}`}
-            </p>
-          </div>
 
-          <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020]  text-[14px] sm:text-[18px] xl:text-[24px] font-[700]">
-              {nzData.onGoingProject}
-            </p>
-            <p className=" text-[#001F35] text-[12px] sm:text-[18px] xl:text-[20px] font-[700]">
-              Ongoing <br className=" sm:hidden" />{" "}
-              {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
-            </p>
-          </div>
-
-          <div className="w-[30%] ">
-            <p className=" text-[#202020] text-[14px] sm:text-[18px] xl:text-[24px] font-[700]">
-              {nzData.completedProject}
-            </p>
-            <p className=" text-[#E3AC00] text-[12px] sm:text-[18px] xl:text-[20px] font-[700]">
-              Completed {`Project${nzData.completedProject > 1 ? "s" : ""}`}
-            </p>
-          </div>
-        </div> */}
         <About
           id="builder_vision"
           heading={""}
@@ -108,14 +84,14 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           {nzData.builderAddress}, {nzData.city}, {nzData.state},{" "}
           {nzData.pincode}
         </p>
-        <a
+        <Link
+        prefetch={false}
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] xl:text-[20px] font-[700] p-[10px]  "
           href={urlBuilder}
-          target="_blank"
-           rel="noopener noreferrer"
+          rel="noreferrer"
         >
           View Builder Details
-        </a>
+        </Link>
       </div>
     </div>
   );

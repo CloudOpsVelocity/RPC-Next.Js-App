@@ -63,6 +63,7 @@ const Modal = ({
 
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
+  // console.log(isData);
   const propId = useAtomValue(propCgIdAtom);
   const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
@@ -72,7 +73,6 @@ export default function PartialUnitModal({ data }: any) {
   };
 
   const [platform, setPlatform] = useState("");
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -84,6 +84,19 @@ export default function PartialUnitModal({ data }: any) {
       setPlatform("Unknown");
     }
   }, []);
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        handlePrevious();
+      } else if (event.key === "ArrowRight") {
+        handleNext();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [active, isData]);
 
   const selectedOne = isData.others[active];
   const { handleDownload } = useDownload("floorPlan");
@@ -128,7 +141,6 @@ export default function PartialUnitModal({ data }: any) {
       return prev;
     });
   };
-
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }

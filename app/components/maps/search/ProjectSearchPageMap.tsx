@@ -22,6 +22,18 @@ import TooltipProp from "./ToolltipProp";
 import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 
+export const checkLatAndLang = (number:any) => {
+  var invalidChars = ["e", "E", "N", "+", "°"];
+  if(number === undefined && number === null && number === "") return;
+  const finalNumber = number.toString();
+  const isIncluded = invalidChars.some(each => finalNumber.includes(each));
+  if(isIncluded){
+    return finalNumber.replace(/[^0-9.]/g, '');
+  }else{
+    return finalNumber;
+  }
+};
+
 const RecenterButton = ({ center }: { center: any }) => {
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
   const { allMarkerRefs } = useAtomValue(selectedNearByAtom);
@@ -180,8 +192,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       selectedNearbyItem.lang
     ) {
       const position: any = [
-        parseFloat(selectedNearbyItem.lat),
-        parseFloat(selectedNearbyItem.lang),
+        parseFloat(checkLatAndLang(selectedNearbyItem.lat)),
+        parseFloat(checkLatAndLang(selectedNearbyItem.lang)),
       ];
       map.setView(position, 100);
     }
@@ -196,26 +208,71 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       && selected === null
     ) {
       const bounds = L.latLngBounds(
-        data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
+        data.map((item: any) => [parseFloat(item?.lat), parseFloat(item?.lang)])
       );
       map.fitBounds(bounds, { padding: [50, 50] });
     }
   }, [map, data, selected, nearbyData]);
 
   useEffect(() => {
-    if (nearbyData && Object.keys(nearbyData).length > 0 && category === "") {
-      const finalCateg =
-        category !== "" ? category : Object.keys(nearbyData)[0];
+    if (nearbyData && Object.keys(nearbyData).length > 0 && Object.keys(selectedNearbyItem).length === 0 ) {
+      const finalCateg = category !== "" ? category : Object.keys(nearbyData)[0];
       const nearByData = nearbyData[finalCateg];
+      const newData = selected !== null ? [...nearByData, selected] : [...nearByData];
       const bounds = L.latLngBounds(
-        nearByData.map((item: any) => [
-          parseFloat(item.lat),
-          parseFloat(item.lang),
+        newData.map((item: any) => [
+          parseFloat(checkLatAndLang(item.lat)),
+          parseFloat(checkLatAndLang(item.lang)),
         ])
       );
       map.fitBounds(bounds, { padding: [50, 50] });
     }
-  }, [map, nearbyData, category]);
+  }, [map, nearbyData, category, selectedNearbyItem, selected]);
+
+  // useEffect(() => {
+  //   if (map) {
+  //     // Recenter Project Marker
+  //     if (selected?.projOrPropName && selected.lat && selected.lang) {
+  //       const position:any = [parseFloat(selected.lat), parseFloat(selected.lang)];
+  //       map.setView(position, 100);
+  //       markerRefs.current.get(selected.reqId)?.openPopup();
+  //       return;
+  //     }
+  
+  //     // Recenter Nearby Marker
+  //     if (selectedNearbyItem?.lat && selectedNearbyItem?.lang) {
+  //       const position:any = [
+  //         parseFloat(checkLatAndLang(selectedNearbyItem.lat)),
+  //         parseFloat(checkLatAndLang(selectedNearbyItem.lang)),
+  //       ];
+  //       map.setView(position, 100);
+  //       return;
+  //     }
+  
+  //     // Fit bounds for project data
+  //     if (data?.length && nearbyData && Object.keys(nearbyData).length === 0 && !selected) {
+  //       const bounds = L.latLngBounds(
+  //         data.map((item:any) => [parseFloat(item.lat), parseFloat(item.lang)])
+  //       );
+  //       map.fitBounds(bounds, { padding: [50, 50] });
+  //       return;
+  //     }
+  
+  //     // Fit bounds for nearby data
+  //     if (nearbyData && Object.keys(nearbyData).length > 0 && Object.keys(selectedNearbyItem).length === 0) {
+  //       const finalCateg = category || Object.keys(nearbyData)[0];
+  //       const nearByData = nearbyData[finalCateg] || [];
+  //       const newData = selected ? [...nearByData, selected] : nearByData;
+  //       const bounds = L.latLngBounds(
+  //         newData.map((item:any) => [
+  //           parseFloat(checkLatAndLang(item.lat)),
+  //           parseFloat(checkLatAndLang(item.lang)),
+  //         ])
+  //       );
+  //       map.fitBounds(bounds, { padding: [50, 50] });
+  //     }
+  //   }
+  // }, [map, selected, selectedNearbyItem, data, nearbyData, category]);
 
   return (
     data &&
@@ -239,7 +296,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           }
         : null;
         
-      if ((selected?.reqId === itemId && selected && selected?.phaseId === item.phaseId) || (selected && selected?.reqId === itemId ) || !selected) {
+      if ((selected && selected?.reqId === itemId && selected?.phaseId === item.phaseId) || (selected && selected?.reqId === itemId ) || !selected) {
         return (
           <>
             <Marker
@@ -324,7 +381,7 @@ const NearbyMarkers = ({}) => {
       return (
         <Marker
           key={item?.lat + "markerTag" + index.toString()}
-          position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
+          position={[parseFloat(checkLatAndLang(item?.lat)), parseFloat(checkLatAndLang(item?.lang))]}
           title={item.name}
           icon={Icon}
           zIndexOffset={100}
@@ -333,8 +390,8 @@ const NearbyMarkers = ({}) => {
               setSelectedLocation((prev: any) => ({
                 ...prev,
                 selectedNearbyItem: {
-                  lat: item?.lat,
-                  lang: item?.lang,
+                  lat: checkLatAndLang(item?.lat),
+                  lang: checkLatAndLang(item?.lang),
                   name: item?.name,
                 },
               })),

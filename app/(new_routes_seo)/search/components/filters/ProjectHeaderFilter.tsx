@@ -29,6 +29,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: string[];
   }>({});
+  const [isDrawerOpentest, setIsDrawerOpentest] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -89,6 +90,12 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
+    if(dropdownName == "allFiltersdes" ){
+      if( document.body.style.overflow === "hidden")
+      document.body.style.overflow = "unset";
+    }else{
+      document.body.style.overflow = "hidden";
+    }
   };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
@@ -232,6 +239,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
     }
     setSearchQuery("");
   };
+  // crollyww
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const res = await fetch(
@@ -257,6 +265,12 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               projName: searchQuery,
               listedBy: !isListing ? "All" : null,
             }),
+            ...(ids.CG && {
+              cg: String(ids.CG) ?? "S",
+              ...(ids.CG == "R" && {
+                listedBy: "All",
+              }),
+            }),
           },
         });
       }
@@ -267,6 +281,14 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       return;
     }
   };
+
+  const handleOpenDropdown=()=>{
+    setIsDrawerOpen(true);
+    setIsDrawerOpentest(true);
+    document.body.style.overflow = "hidden";
+  }
+
+
   return (
     <>
       <div className="w-full max-w-[100%] max-h-[60vh] bg-white border-b relative md:sticky top-0 z-auto md:z-[11]">
@@ -407,7 +429,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
 
             <button
               className="md:hidden flex text-[14px] items-center h-[38px] md:h-[42px] xl:h-auto gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
-              onClick={() => setIsDrawerOpen(true)}
+              onClick={() =>handleOpenDropdown()}
+              
             >
               <MdFilterList className="w-5 h-5" />
               Filters
@@ -415,7 +438,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
           </div>
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             {isListing ? <ListingSearchTabs /> : <ProjectSearchTabs />}
-
             <SelectedFilters />
           </div>
         </div>
@@ -427,7 +449,10 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-lg font-semibold">Filters</h2>
               <button
-                onClick={() => setIsDrawerOpen(false)}
+              onClick={() => {
+                setIsDrawerOpen(false);
+                document.body.style.overflow = "unset";
+              }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >
                 <MdClose className="w-6 h-6" />
@@ -441,8 +466,8 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                 isListing={isListing}
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
-                isOpen
-                onToggle={() => handleDropdownToggle("allFilters")}
+                isOpen 
+                onToggle={() => handleDropdownToggle("allFiltersdes")}
               />
             </div>
           </div>

@@ -139,7 +139,7 @@ export default function CardDownSection({
               )
             }
             <button
-                className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out min-h-[28px] "
                 title="Click to view Near by Locations"
                 onClick={(e) =>{
                   title="Click to view Near by Locations"

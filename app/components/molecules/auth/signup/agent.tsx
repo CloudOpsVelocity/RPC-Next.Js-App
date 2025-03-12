@@ -502,7 +502,7 @@ function Agent({ encriptedData }: any) {
             </p>
           )}
           <Link
-            href={{ pathname: queryParam.redirectPath }}
+            href={{ pathname: "/" }}
             className=" not-italic text-[#148B16] text-[14px]  font-semibold   leading-[normal]  sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center max-w-fit m-auto"
           >
             Continue without Register

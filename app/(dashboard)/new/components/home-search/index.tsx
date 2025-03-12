@@ -33,11 +33,10 @@ const HomeSearch = ({
       return;
     }
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
-    window.open(`${whichPage}?sf=${toQueryParams(f)}`,  "_blank", "noreferrer");
+    window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank", "noreferrer");
   };
 
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
-
 
   return (
     <div
@@ -77,21 +76,7 @@ const HomeSearch = ({
                 cityData={cityData}
               />
             </div>
-
-            <div className="flex justify-between items-center gap-[10px] w-full">
-              <div className="flex items-center w-full ">
-                <span className="cursor-pointer" onClick={handleSearch}>{config.searchIcon}</span> <SearchSec />
-              </div>
-              <div className="flex gap-2">
-                <Nearme />
-                <div
-                  onClick={handleSearch}
-                  className={`flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6] cursor-pointer`}
-                >
-                  {isMobileStarting ? config.searchBtnIcon : "Search"}
-                </div>
-              </div>
-            </div>
+            <SearchSec />
           </div>
           {f.showFilter && <QuickFilters />}
         </div>

@@ -39,8 +39,8 @@ export default function ListingCard({ item, sl }: Props) {
   return (
     <div>
       <Link
+        prefetch={false}
         href={listingLink}
-        target="_blank"
         rel="noopener noreferrer"
         // onClick={() => onRedirectOnProp()}
         className="w-full max-w-full sm:w-[370px] xl:w-[490px] xl:min-w-[490px] sm:max-w-[490px] cursor-pointer"
