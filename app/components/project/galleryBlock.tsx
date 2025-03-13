@@ -44,10 +44,12 @@ export default function GalleryBlock({
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const [galleryState, dispatch] = useAtom(galleryStateAtom);
-  const handleMediaClick = (media: string, index: number) => {
+  const handleMediaClick = (media: string, index: number) => { 
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
+
+  console.log(type);
 
   return (
     <div
@@ -147,7 +149,9 @@ export default function GalleryBlock({
                     payload: {
                       items: isVideo ? videos : images,
                       mediaType: isVideo ? "video" : "image",
-                      title: isVideo ? "Project Video" : "Project Gallery",
+                      title: type === "prop" ? 
+                        isVideo ? "Property Video" : "Property Gallery" : 
+                        isVideo ? "Project Video" : "Project Gallery",
                       activeIndex: isVideo
                         ? videos.indexOf(selectedMedia)
                         : images.indexOf(selectedMedia),
