@@ -31,7 +31,7 @@ export default async function Page({ params: { cg } }: Props) {
     <NewSearchPage
       serverData={severData}
       frontendFilters={{
-        cg: slugValues.CG,
+        cg: slugValues.CG, 
       }}
       pageUrl={pageUrl}
     />

@@ -23,14 +23,14 @@ const DownloadBroucher = ({
       url &&
         window.open(
           `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
-          "_blank"
+          "_self"
         );
     } else {
       LoginOpen(() => {
         url &&
           window.open(
             `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
-            "_blank"
+            "_self"
           );
       });
     }
@@ -82,7 +82,7 @@ const DownloadBroucher = ({
       //   <button
       //     // href={url}
       //     // download={true}
-      //     // target="_blank"
+      //     // target="_self"
       //     onClick={handleDownload}
       //     className="flex border-0 justify-center items-center text-[20px] lg:text-[24px] text-[#FFF] font-[700] rounded-[10px] bg-[#0073C6] gap-[8px] p-[5px]  "
       //   >

@@ -55,7 +55,7 @@ export default function EnhancedFooter() {
         "/search?sf=city=Mumbai%2B577",
         "/search?sf=city=Hyderabad%2B582",
       ],
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Properties",
@@ -79,7 +79,7 @@ export default function EnhancedFooter() {
         "/vacation-rentals",
         "/foreclosures", */
       ],
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Resources",
@@ -99,7 +99,7 @@ export default function EnhancedFooter() {
         "/home-valuation",
         "/news",
       ],
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Our Pages",
@@ -121,7 +121,7 @@ export default function EnhancedFooter() {
         "/builders",
         "/login",
       ],
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Company",
@@ -141,7 +141,7 @@ export default function EnhancedFooter() {
         "/get-in-touch",
         "/partnerships",
       ],
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Legal",
@@ -161,7 +161,7 @@ export default function EnhancedFooter() {
         "/accessibility",
         "/sitemap.xml",
       ],
-      target: "_blank",
+      target: "_self",
     },
   ];
 

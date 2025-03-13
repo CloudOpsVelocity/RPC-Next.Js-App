@@ -58,7 +58,7 @@ function Footer() {
       ],
       /*  rel="noopener noreferrer", */
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Properties",
@@ -83,7 +83,7 @@ function Footer() {
         "/foreclosures", */
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Resources",
@@ -104,7 +104,7 @@ function Footer() {
         // "/home-valuation",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Our Pages",
@@ -135,7 +135,7 @@ function Footer() {
         "/search",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Company",
@@ -156,7 +156,7 @@ function Footer() {
         // "/partnerships",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Legal",
@@ -177,7 +177,7 @@ function Footer() {
         // "/accessibility",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
   ];
   const pathname = usePathname();

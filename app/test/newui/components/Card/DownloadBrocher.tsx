@@ -14,10 +14,10 @@ export default function DownloadBrocher({ brochureUrl: url }: Props) {
 
   const handleDownload = () => {
     if (session) {
-      url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`);
+      url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_self");
     } else {
       LoginOpen(() => {
-        url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`);
+        url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_self");
       });
     }
   };

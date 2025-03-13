@@ -49,8 +49,6 @@ export default function GalleryBlock({
     setCurrentSlide(index);
   };
 
-  console.log(type);
-
   return (
     <div
       className="w-[95%] md:w-[90%] sm:pt-[50px] scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"

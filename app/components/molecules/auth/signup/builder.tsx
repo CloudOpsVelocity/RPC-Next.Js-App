@@ -1032,7 +1032,7 @@ function Builder({ encriptedData }: any) {
             label={
             <>
             I accept{' '}
-          <Anchor href="https://Rpclan.com" target="_blank" inherit>
+          <Anchor href="https://Rpclan.com" target="_self" inherit>
             terms and conditions
           </Anchor>
         </>

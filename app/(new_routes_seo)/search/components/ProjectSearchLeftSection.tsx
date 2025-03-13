@@ -45,7 +45,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  const setNearby = useSetAtom(selectedNearByAtom);
+  const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
 
   // Create a separate ref for intersection observer
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -97,11 +97,33 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   });
   
   const setSelected = useSetAtom(selectedSearchAtom);
-  const [, dispatch] = useAtom(overlayAtom);
+  const [, dispatch] = useAtom(overlayAtom);  
 
   useEffect(() => { 
     if(isMobile) return;
     const handleScroll = () => {
+
+      // if(allItems.length > 0){
+      //   allItems.forEach((item:any) => {
+      //     if (!allMarkerRefs) return;
+      //     const itemId = item.propIdEnc ? item.propIdEnc : item.projIdEnc;
+      //     const refKey = `${itemId}-${item?.phaseId}-${item?.propTypeName ? item?.propTypeName : item?.propType}`;
+        
+      //     const marker = allMarkerRefs.current.get(refKey);
+      //     if (marker) marker.closePopup();
+      //   });
+      // }
+
+      if(allMarkerRefs){
+        const keys = [...allMarkerRefs.current.keys()];      
+        if(keys.length > 0){
+          keys.forEach((refKey:string) => {
+            const marker = allMarkerRefs.current.get(refKey);
+            if (marker) marker.closePopup();
+          });
+        }
+      }
+
       setSelected(null);
       setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
       dispatch({ type: "CLOSE" })
@@ -109,7 +131,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isMobile]);
+  }, [isMobile, allItems]);
 
 
   // Enhanced infinite scroll logic

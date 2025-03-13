@@ -97,9 +97,9 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   };
   const onClickRedirect = (projEncId: string) => {
     if(data.type == "proj"){
-      window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
+      window.open(`/abc/karnataka/banglore/${projEncId}`, "_self");
     }else{
-      window.open(`/listing/banglore/${projEncId}`, "_blank");
+      window.open(`/listing/banglore/${projEncId}`, "_self");
     }
   };
 

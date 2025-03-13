@@ -51,7 +51,7 @@ export const onClickRedirect = ( data:any) => {
       slug: data.projName, 
       projIdEnc: data.reqId,
     });
-    window.open(url, "_blank");
+    window.open(url, "_self");
   } else {
     url = generateListingLinkUrl({
       city: data.cityName,
@@ -65,7 +65,7 @@ export const onClickRedirect = ( data:any) => {
         : "" + " " + data.propTypeName,
     });
 
-    window.open(url, "_blank");
+    window.open(url, "_self");
   }
 };
 

@@ -184,7 +184,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
     if (!session) {
       LoginOpen(
         () => {
-          url && window.open(brocherPageUrl, "_blank", "noreferrer");
+          url && window.open(brocherPageUrl, "_self", "noreferrer");
         },
         {
           type: "brochure",
@@ -193,7 +193,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
       );
       return;
     }
-    window.open(brocherPageUrl, "_blank", "noreferrer");
+    window.open(brocherPageUrl, "_self", "noreferrer");
   };
 
   const loadPDF = async (phase: ProjectPhase) => {

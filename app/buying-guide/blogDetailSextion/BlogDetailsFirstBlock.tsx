@@ -25,7 +25,7 @@ function BlogDetailsFirstBlock() {
 
   return (
     <div className='w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  '>
-      {/* <a href={pathHref} target="_blank"> */}
+      {/* <a href={pathHref} target="_self"> */}
         <button 
           onClick={()=>window.close()}
           className='text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 flex justify-center items-center self-start '>
@@ -67,10 +67,10 @@ function BlogDetailsFirstBlock() {
                       url: "",
                     })} 
                   />
-                  <Link rel="noreferrer" href={facebookRedirectLink} target='_blank'>
+                  <Link rel="noreferrer" href={facebookRedirectLink} target='_self'>
                     <Facebook className={"w-[24px] h-[24px]" } />
                   </Link>
-                  <Link rel="noreferrer" href={whatsappRedirectLink} target='_blank'>
+                  <Link rel="noreferrer" href={whatsappRedirectLink} target='_self'>
                     <WhatsApp className={"w-[24px] h-[24px]" } />
                   </Link>
               </div>

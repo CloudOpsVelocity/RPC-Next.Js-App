@@ -77,7 +77,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
       projIdEnc: cardData.projIdEnc,
     });
     router.push(url);
-    // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
+    // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_self");
   };
 
   console.log(isItemInShortlist);

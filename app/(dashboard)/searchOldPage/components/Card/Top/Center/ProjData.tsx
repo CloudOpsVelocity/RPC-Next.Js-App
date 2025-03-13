@@ -83,7 +83,7 @@ export default function ProjData({
           className="font-bold"
           onClick={(e) => {
             e.stopPropagation();
-            window.open(urlBuilder, "_blank");
+            window.open(urlBuilder, "_self");
           }}
         >{postedByName}</span> 
       </p>

@@ -144,12 +144,12 @@ export default function SearchSec({}: Props) {
         "+"
       )}`;
       console.log(`${whichPage}?sf=${url}`);
-      window.open(`${whichPage}?sf=${url}`, "_blank", "noreferrer");
+      window.open(`${whichPage}?sf=${url}`, "_self", "noreferrer");
     } else {
       console.log(`${whichPage}?sf=${toQueryParams(f)}`);
       window.open(
         `${whichPage}?sf=${toQueryParams(f)}`,
-        "_blank",
+        "_self",
         "noreferrer"
       );
     }

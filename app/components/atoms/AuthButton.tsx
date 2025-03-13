@@ -116,7 +116,7 @@ function Dropdown() {
                     component="a"
                     className="block text-gray-700 hover:text-green-500 transition-colors"
                     href={item.url}
-                    target="_blank"
+                    target="_self"
                   >
                     {item.label}
                   </Menu.Item>

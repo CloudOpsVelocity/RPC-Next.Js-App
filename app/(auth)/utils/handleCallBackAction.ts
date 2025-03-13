@@ -5,7 +5,7 @@ export default function useCallBackAction(data: any) {
     case "master-plan":
       return downloadFn(data?.action);
     case "brochure":
-      return window.open(data?.action, "_blank");
+      return window.open(data?.action, "_self");
     case "shortlist":
       addShortList({
         isactive: "Y",

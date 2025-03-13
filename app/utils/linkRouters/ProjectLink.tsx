@@ -18,7 +18,7 @@ type ProjectLinkProps = {
     locality: string;
     projIdEnc: string;
   };
-  target?: "_blank" | "_self" | "_parent" | "_top";
+  target?: "_self" | "_self" | "_parent" | "_top";
   children: ReactNode;
   className?: string;
 };

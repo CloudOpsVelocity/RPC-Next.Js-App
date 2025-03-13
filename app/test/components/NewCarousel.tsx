@@ -77,7 +77,7 @@ function NewCarousel<T>({
 
   const DefaultViewMore = () => (
     <button
-      onClick={() => (url ? window.open(url, "_blank", "noreferrer") : "")}
+      onClick={() => (url ? window.open(url, "_self", "noreferrer") : "")}
       className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 "
     >
       <div className="h-full w-full rounded-lg bg-white p-4 flex flex-col items-center justify-center space-y-4">
