@@ -243,7 +243,7 @@ export const ProjectSeachSchema = ({
           __html: JSON.stringify(results),
         }}
       />
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -515,7 +515,7 @@ export const ProjectSeachSchema = ({
             ],
           }),
         }}
-      />
+      /> */}
 
       <script
         type="application/ld+json"
