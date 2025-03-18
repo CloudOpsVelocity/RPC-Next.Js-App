@@ -274,7 +274,7 @@ export const ProjectSeachSchema = ({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: ({
+          __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
             name: `Property Listings - ${pagetitle}`,
