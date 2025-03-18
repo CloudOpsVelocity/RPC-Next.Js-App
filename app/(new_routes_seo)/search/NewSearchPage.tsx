@@ -17,7 +17,6 @@ export default function NewSearchPage({
   pageUrl,
 }: Props) {
   const isListing = false;
-
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative ">
       <link

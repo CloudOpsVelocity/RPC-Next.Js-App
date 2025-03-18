@@ -208,34 +208,6 @@ export const generateAllSchemas = (
           priceCurrency: "INR"
         }
       },
-      // {
-      //   "@type": "ItemList",
-      //   itemListElement: {
-      //     "@type": "ListItem",
-      //     position: index + 1,
-      //     item: {
-      //       "@type": "Product",
-      //       name: property.projName || "N/A",
-      //       image: property.coverUrl?.split(",")[0] || "N/A",
-      //       description: property.about || "N/A",
-      //       offers: {
-      //         "@type": "Offer",
-      //         priceCurrency: "INR",
-      //         price: property.minPrice || "N/A",
-      //         itemCondition: "http://schema.org/NewCondition",
-      //         availability: "http://schema.org/InStock",
-      //       },
-      //       aggregateRating: {
-      //         "@type": "AggregateRating",
-      //         ratingValue: "4.5",
-      //         reviewCount: "10",
-      //         bestRating: "5",
-      //         worstRating: "1",
-      //       },
-      //       url: PAGE_URL,
-      //     },
-      //   },
-      // },
     ],
   };
 
@@ -263,15 +235,15 @@ export const ProjectSeachSchema = ({
   if (!results.length) return null;
   const pagetitle = cleanHeading(pageUrl);
   const address = pagetitle.split("In")[1];
-  return (
-    <>
-      <script
+  return 
+    <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
-      <script
+     
+      /* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -610,9 +582,9 @@ export const ProjectSeachSchema = ({
             ],
           }),
         }}
-      />
-    </>
-  );
+      /> */
+
+  
 };
 
 function cleanHeading(url: string) {
