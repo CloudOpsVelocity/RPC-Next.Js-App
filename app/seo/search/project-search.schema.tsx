@@ -25,8 +25,9 @@ export const generateAllSchemas = (
     locality: property.locality,
     projIdEnc: property.projIdEnc,
   });
-  const schemas = 
-    [
+  const schemas = {
+    "@context": "https://schema.org",
+    "@graph": [
       {
         "@type": "RealEstateListing",
         name: `${property.projName || ""} ${property.propType || ""} ${
@@ -207,8 +208,8 @@ export const generateAllSchemas = (
           priceCurrency: "INR"
         }
       },
-    ]
-  
+    ],
+  };
 
   return schemas;
 };
@@ -229,20 +230,23 @@ export const ProjectSeachSchema = ({
       }
       return generateAllSchemas(property, properties, index);
     })
-    .flat(); // Flatten the array of arrays
+    .filter(Boolean);
 
   if (!results.length) return null;
   const pagetitle = cleanHeading(pageUrl);
   const address = pagetitle.split("In")[1];
-  
-  return <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-          ...results,
-          {
+  return (
+    <>
+      {/* <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(results),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
             name: `Property Listings - ${pagetitle}`,
@@ -259,7 +263,7 @@ export const ProjectSeachSchema = ({
                 url: createProjectLinkUrl({
                   city: property.city,
                   slug: property.projName,
-                  locality: property.locality,
+                  locality: property.locality, 
                   projIdEnc: property.projIdEnc,
                 }),
                 offers: {
@@ -269,28 +273,39 @@ export const ProjectSeachSchema = ({
                 }
               }
             }))
-          },
-          {
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@type": "Apartment",
             name: `Luxury ${pagetitle}`,
-            description: "A luxurious apartment with modern amenities and stunning views.",
+            description:
+              "A luxurious apartment with modern amenities and stunning views.",
             address: {
               "@type": "PostalAddress",
               addressLocality: address,
-              addressRegion: "Bengaluru", 
+              addressRegion: "Bengaluru",
               addressCountry: "IN",
             },
             amenities: [
               "Gym",
-              "Swimming Pool", 
+              "Swimming Pool",
               "24/7 Security",
               "Parking",
-              "Garden"
+              "Garden",
             ],
             image: "https://example.com/image.jpg",
-            url: pageUrl
-          },
-          {
+            url: pageUrl,
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SearchResultsPage",
             name: pagetitle,
@@ -301,34 +316,39 @@ export const ProjectSeachSchema = ({
             keywords: pagetitle,
             reviewedBy: {
               "@type": "Organization",
-              name: "Get Right Property"
+              name: "Get Right Property",
             },
             additionalProperty: [
               {
                 "@type": "PropertyValue",
                 name: "Nearby Schools",
-                description: "Information about schools located in proximity to the property, including their ratings and distance."
+                description:
+                  "Information about schools located in proximity to the property, including their ratings and distance.",
               },
               {
-                "@type": "PropertyValue", 
+                "@type": "PropertyValue",
                 name: "Public Transport",
-                description: "Details about the availability of public transport options near the property, including bus and metro stations."
+                description:
+                  "Details about the availability of public transport options near the property, including bus and metro stations.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Shopping Centers",
-                description: "List of shopping centers and malls nearby, highlighting convenience for residents."
+                description:
+                  "List of shopping centers and malls nearby, highlighting convenience for residents.",
               },
               {
                 "@type": "PropertyValue",
-                name: "Healthcare Facilities", 
-                description: "Information about nearby hospitals and clinics, ensuring residents have access to healthcare."
+                name: "Healthcare Facilities",
+                description:
+                  "Information about nearby hospitals and clinics, ensuring residents have access to healthcare.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Parks and Recreation",
-                description: "Details about parks and recreational areas nearby, promoting a healthy lifestyle."
-              }
+                description:
+                  "Details about parks and recreational areas nearby, promoting a healthy lifestyle.",
+              },
             ],
             mainEntity: {
               "@type": "SearchAction",
@@ -340,90 +360,109 @@ export const ProjectSeachSchema = ({
                   "@type": "PostalAddress",
                   addressLocality: "Whitefield",
                   addressRegion: "Karnataka",
-                  addressCountry: "IN"
-                }
-              }
-            }
-          },
-          {
+                  addressCountry: "IN",
+                },
+              },
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "http://schema.org",
             "@type": "Dataset",
             name: "Real Estate Properties Dataset",
-            description: "A dataset containing various real estate properties available in Bangalore, including details such as price, location, and amenities.",
+            description:
+              "A dataset containing various real estate properties available in Bangalore, including details such as price, location, and amenities.",
             creator: {
               "@type": "Organization",
               name: "Getrightproperty",
-              url: "https://www.getrightproperty.com"
+              url: "https://www.getrightproperty.com",
             },
             dateCreated: new Date().toISOString(),
             distribution: {
               "@type": "DataDownload",
               contentUrl: pageUrl,
-              encodingFormat: "application/json"
+              encodingFormat: "application/json",
             },
             includedInDataCatalog: {
               "@type": "DataCatalog",
               name: "Real Estate Listings Catalog",
-              url: "https://www.getrightproperty.com/catalog"
+              url: "https://www.getrightproperty.com/catalog",
             },
             license: "https://creativecommons.org/licenses/by/4.0/",
             variableMeasured: [
               {
                 "@type": "PropertyValue",
                 name: "Location",
-                description: address
+                description: address,
               },
               {
                 "@type": "PropertyValue",
                 name: "Amenities",
-                description: "List of amenities available with the property, including Gym, Swimming Pool, Club House, Children's Play Area, Security, Power Backup, Car Parking, and more."
+                description:
+                  "List of amenities available with the property, including Gym, Swimming Pool, Club House, Children’s Play Area, Security, Power Backup, Car Parking, and more.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Price Range",
-                description: "The price range of properties available, from ₹500000 to ₹600000000."
+                description:
+                  "The price range of properties available, from ₹500000 to ₹600000000.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Floor Size",
-                description: "The floor size of properties ranges from Super Built-Up Area."
+                description:
+                  "The floor size of properties ranges from Super Built-Up Area.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Number of Rooms",
-                description: "Properties available with 1 to 6 rooms."
+                description: "Properties available with 1 to 6 rooms.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Number of Bathrooms",
-                description: "Properties available with 1 to 6 bathrooms."
+                description: "Properties available with 1 to 6 bathrooms.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Parking Availability",
-                description: "Properties with parking space ranging from 0 to 6 vehicles."
+                description:
+                  "Properties with parking space ranging from 0 to 6 vehicles.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Furnishing Status",
-                description: "Properties available as Unfurnished, Semi-Furnished, and Fully Furnished."
+                description:
+                  "Properties available as Unfurnished, Semi-Furnished, and Fully Furnished.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Property Status",
-                description: "Properties categorized as Under Construction or Ready to Move."
+                description:
+                  "Properties categorized as Under Construction or Ready to Move.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Property Type",
-                description: "Available property types include Apartment, Villa, Plot, and Independent House."
-              }
-            ]
-          },
-          {
+                description:
+                  "Available property types include Apartment, Villa, Plot, and Independent House.",
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "http://schema.org",
             "@type": "CollectionPage",
             name: `Available Properties in Bangalore - ${pagetitle}`,
+
             description: `Discover an extensive collection of available properties in Bangalore, including a diverse range of real estate options such as luxurious apartments, elegant villas, and prime commercial spaces. Whether you're looking for a cozy home or an investment opportunity, our listings cater to all your needs.`,
             mainEntity: [
               {
@@ -435,42 +474,53 @@ export const ProjectSeachSchema = ({
                   streetAddress: address,
                   addressLocality: "Bengaluru",
                   addressRegion: "Karnataka",
-                  addressCountry: "IN"
+                  addressCountry: "IN",
                 },
                 image: PAGE_IMAGE,
                 url: pageUrl,
-                additionalType: "http://schema.org/RealEstateListing"
-              }
+                additionalType: "http://schema.org/RealEstateListing",
+              },
             ],
             additionalProperty: [
               {
                 "@type": "PropertyValue",
                 name: "Nearby Schools",
-                description: "Information about schools located in proximity to the property, including their ratings and distance."
+                description:
+                  "Information about schools located in proximity to the property, including their ratings and distance.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Public Transport",
-                description: "Details about the availability of public transport options near the property, including bus and metro stations."
+                description:
+                  "Details about the availability of public transport options near the property, including bus and metro stations.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Shopping Centers",
-                description: "List of shopping centers and malls nearby, highlighting convenience for residents."
+                description:
+                  "List of shopping centers and malls nearby, highlighting convenience for residents.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Healthcare Facilities",
-                description: "Information about nearby hospitals and clinics, ensuring residents have access to healthcare."
+                description:
+                  "Information about nearby hospitals and clinics, ensuring residents have access to healthcare.",
               },
               {
                 "@type": "PropertyValue",
                 name: "Parks and Recreation",
-                description: "Details about parks and recreational areas nearby, promoting a healthy lifestyle."
-              }
-            ]
-          },
-          {
+                description:
+                  "Details about parks and recreational areas nearby, promoting a healthy lifestyle.",
+              },
+            ],
+          }),
+        }}
+      /> */}
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@type": "FAQPage",
             mainEntity: [
               {
@@ -478,63 +528,63 @@ export const ProjectSeachSchema = ({
                 name: "What is the purpose of this page?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The purpose of this page is to provide detailed information about the property titled "${pagetitle}", including its features, pricing, and availability.`
-                }
+                  text: `The purpose of this page is to provide detailed information about the property titled "${pagetitle}", including its features, pricing, and availability.`,
+                },
               },
               {
                 "@type": "Question",
                 name: "What is the address of the property?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The address of the property is "${address}".`
-                }
+                  text: `The address of the property is "${address}".`,
+                },
               },
               {
                 "@type": "Question",
                 name: "What documents do I need to buy a property?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The essential documents needed are sale deed, property tax receipts, encumbrance certificate, approved building plan, and completion certificate. Additional documents may be required based on the property type and location."
-                }
+                  text: "The essential documents needed are sale deed, property tax receipts, encumbrance certificate, approved building plan, and completion certificate. Additional documents may be required based on the property type and location.",
+                },
               },
               {
                 "@type": "Question",
                 name: "How can I find the best property prices in Bangalore?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "GetRightProperty helps you find the best property prices in Bangalore by comparing prices across different localities, providing market analysis, and connecting you with verified sellers. Our extensive database includes both ready-to-move and under-construction properties."
-                }
+                  text: "GetRightProperty helps you find the best property prices in Bangalore by comparing prices across different localities, providing market analysis, and connecting you with verified sellers. Our extensive database includes both ready-to-move and under-construction properties.",
+                },
               },
               {
                 "@type": "Question",
                 name: "What are the benefits of using GetRightProperty for property search?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "GetRightProperty offers verified listings, transparent pricing, expert guidance, and a hassle-free property search experience. We provide detailed property information, high-quality images, and direct contact with property owners and agents."
-                }
+                  text: "GetRightProperty offers verified listings, transparent pricing, expert guidance, and a hassle-free property search experience. We provide detailed property information, high-quality images, and direct contact with property owners and agents.",
+                },
               },
               {
                 "@type": "Question",
                 name: "Which are the top investment areas in Bangalore?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Popular investment areas in Bangalore include Whitefield, Electronic City, Sarjapur Road, and Hebbal. These areas offer good appreciation potential, infrastructure development, and proximity to IT hubs. GetRightProperty can help you find the best properties in these locations."
-                }
+                  text: "Popular investment areas in Bangalore include Whitefield, Electronic City, Sarjapur Road, and Hebbal. These areas offer good appreciation potential, infrastructure development, and proximity to IT hubs. GetRightProperty can help you find the best properties in these locations.",
+                },
               },
               {
                 "@type": "Question",
                 name: "What price ranges are available for properties in Bangalore?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Property prices in Bangalore vary by location and type. Apartments range from ₹40 lakhs to ₹5 crores, while villas start from ₹1 crore. GetRightProperty offers options across all budget ranges with transparent pricing and negotiation assistance."
-                }
-              }
-            ]
-          }
-        ]
-      }),
-    }}
-  />;
+                  text: "Property prices in Bangalore vary by location and type. Apartments range from ₹40 lakhs to ₹5 crores, while villas start from ₹1 crore. GetRightProperty offers options across all budget ranges with transparent pricing and negotiation assistance.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+    </>
+  );
 };
 
 function cleanHeading(url: string) {

@@ -6,7 +6,6 @@ import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
 import { SlugsType } from "../common/constatns/slug.constants";
-import { ProjectSeachSchema } from "../seo/search/project-search.schema";
 
 type Props = {
   params: {
@@ -23,9 +22,6 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${slug}`;
   return (
     <main>
-      {severData && (
-        <ProjectSeachSchema properties={severData} pageUrl={pageUrl} />
-      )}
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
       <NewSearchPage
         serverData={severData}
