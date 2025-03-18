@@ -3,7 +3,7 @@ import LeftSection from "./components/ProjectSearchLeftSection";
 import RightSection from "./components/ProjectSearchRightSection";
 import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
-import { ProjectSeachSchema } from "@/app/seo/search/project-search.schema";
+import { ProjectSeachSchema } from "@/app/seo/search/Project-searc-hschema";
 type Props = {
   serverData: any;
   frontendFilters: any;
@@ -22,9 +22,9 @@ export default function NewSearchPage({
         rel="canonical"
         href={`${process.env.NEXT_PUBLIC_URL}/${pageUrl}`}
       />
-      {serverData && (
+      {/* {serverData && ( */}
         <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />
-      )}
+      {/* )} */}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs key="newSearchPage1" pageUrl={pageUrl} />
         <ProjSearchMainFilterSection
