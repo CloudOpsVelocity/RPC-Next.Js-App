@@ -118,7 +118,7 @@ function Dropdown() {
     <Menu width={200} shadow="md">
       <Menu.Target>
         {session ? (
-          <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+          <div className=" text-[12px] flex justify-center items-center  gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1">
               {config.getIcon(session.user.userType)}{" "}
               {session.user.name.split(" ")[0].length >= 3
@@ -130,8 +130,9 @@ function Dropdown() {
             {config.blueChevron}
           </div>
         ) : (
-          <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+        /*   <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <Link
+            role="link" aria-label="Next Page"
               className=""
               href={{
                 pathname: `/register`,
@@ -144,7 +145,24 @@ function Dropdown() {
               Login/ Sign up
             </Link>
             {config.blueChevron}
-          </div>
+          </div> */
+        <div className="text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+          <Link
+            aria-label="Go to the Register page"  
+            className=""
+            href={{
+              pathname: `/register`,
+              search: redirectQueryParam,
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            Login/ Sign up
+          </Link>
+        {config.blueChevron}
+      </div>
+
         )}
       </Menu.Target>
       {session ? (
@@ -296,7 +314,7 @@ function MobileDropDown() {
       <Menu.Target>
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
-            <button className="inline-flex justify-center items-center gap-1">
+            <button aria-label="Next Page" className="inline-flex justify-center items-center gap-1">
               {config.getIcon(session.user.userType)}
             </button>
             {config.blueChevron}

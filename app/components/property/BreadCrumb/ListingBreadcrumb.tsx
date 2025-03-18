@@ -109,7 +109,7 @@ export default function ListingBreadCrumbs({
                    prefetch={false}
                    href={`${
                     isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
-                  }${currentPath}${currentPath.includes("for-sale") ? "?sf=listedBy=All-cg=S" : currentPath.includes("for-rent") ? "?sf=listedBy=All-cg=R" : ""}`}
+                  }${currentPath}${currentPath.includes("for-sale") ? "?sf=listedBy=All-cg=S" : currentPath.includes("for-rent") ? "?sf=listedBy=All-cg=R" : "'/"}`}
                   
                      //target="_blank"
                     className="hover:underline cursor-pointer capitalize"

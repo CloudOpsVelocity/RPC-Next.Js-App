@@ -8,13 +8,13 @@ type Props = {
 
 export default function SubHeading({ className, text }: Props) {
   return (
-    <h4
+    <h3
       className={clsx(
         "text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2",
         className
       )}
     >
       {text}
-    </h4>
+    </h3>
   );
 }

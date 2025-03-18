@@ -138,6 +138,7 @@ export default function GalleryBlock({
                 </div>
               )}
               <button
+              aria-label="OPEN"
                 onClick={() => {
                   const isVideo =
                     selectedMedia.includes(".mp4") ||

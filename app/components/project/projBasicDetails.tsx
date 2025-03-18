@@ -23,9 +23,12 @@ export default function ProjBasicDetails({
     (!type || type !== "authorities" ? (
       <div className={`${className} scroll-mt-[450px]`} {...(Id && { id: Id })}>
         {icon}
-        <h4 className=" text-[#001F35] text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
+        {/* <h4 className=" text-[#001F35] text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
           {title}
-        </h4>
+        </h4> */}
+        <h2 className="text-[#001F35] text-[13.5px] sm:text-[16px] xl:text-2xl not-italic whitespace-nowrap font-semibold">
+        {title}
+      </h2>
         <p className="text-[#148B16]  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold ">
           {value}
         </p>
@@ -33,9 +36,10 @@ export default function ProjBasicDetails({
     ) : (
       <div className={`${className} scroll-mt-[450px]`} {...(Id && { id: Id })}>
         {icon}
-        <h4 className=" text-[#001F35] text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
+       {/*  <h4 className=" text-[#001F35] text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
           {title}
-        </h4>
+        </h4> */}
+        
         <div className="text-[#148B16] inline-flex  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold ">
           {Array.isArray(value) &&
             value.map((item, index) => {
