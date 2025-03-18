@@ -25,9 +25,8 @@ export const generateAllSchemas = (
     locality: property.locality,
     projIdEnc: property.projIdEnc,
   });
-  const schemas = {
-    "@context": "https://schema.org",
-    "@graph": [
+  const schemas = 
+    [
       {
         "@type": "RealEstateListing",
         name: `${property.projName || ""} ${property.propType || ""} ${
@@ -208,8 +207,8 @@ export const generateAllSchemas = (
           priceCurrency: "INR"
         }
       },
-    ],
-  };
+    ]
+  
 
   return schemas;
 };
@@ -239,7 +238,10 @@ export const ProjectSeachSchema = ({
   return  <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(results),
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": results,
+          } ),
         }}
       />
      
