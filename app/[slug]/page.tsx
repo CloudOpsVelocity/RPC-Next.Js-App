@@ -2,10 +2,11 @@ import React from "react";
 import { getPagesSlugs } from "../seo/api";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
-import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
+import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage" ;
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
 import { SlugsType } from "../common/constatns/slug.constants";
+
 
 type Props = {
   params: {
@@ -23,6 +24,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   return (
     <main>
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
+      
       <NewSearchPage
         serverData={severData}
         frontendFilters={frontEndFilter}
@@ -35,7 +37,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 export const generateStaticParams = async () => {
   const res = await getPagesSlugs("case-seo");
   await redisService.saveSeoSlug(SlugsType.SEO, res);
-  console.log(`case-seo saved in redis succesfully`);
+
   if (process.env.ENVIRONMENT === "production" && process.env.LAKH_URLS) {
     return res.map((slug: string) => ({ slug }));
   }
