@@ -237,13 +237,13 @@ export const ProjectSeachSchema = ({
   const address = pagetitle.split("In")[1];
   return (
     <>
-      {/* <script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
-      /> */}
-      {/* <script
+      />
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -515,9 +515,9 @@ export const ProjectSeachSchema = ({
             ],
           }),
         }}
-      /> */}
+      />
 
-    
+ 
     </>
   );
 };
