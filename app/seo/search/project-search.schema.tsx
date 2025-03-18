@@ -235,8 +235,8 @@ export const ProjectSeachSchema = ({
   if (!results.length) return null;
   const pagetitle = cleanHeading(pageUrl);
   const address = pagetitle.split("In")[1];
-  return 
-    <script
+  
+  return  <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
