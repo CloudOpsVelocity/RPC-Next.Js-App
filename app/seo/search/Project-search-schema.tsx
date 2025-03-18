@@ -528,7 +528,7 @@ export const ProjectSeachSchema = ({
                 name: "What is the purpose of this page?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The purpose of this page is to provide detailed information about the property titled "${pagetitle}", including its features, pricing, and availability.`,
+                  text: `The purpose of this page is to provide detailed information about the property titled ${pagetitle}, including its features, pricing, and availability.`,
                 },
               },
               {
@@ -536,7 +536,7 @@ export const ProjectSeachSchema = ({
                 name: "What is the address of the property?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The address of the property is "${address}".`,
+                  text: `The address of the property is ${address}.`,
                 },
               },
               {
