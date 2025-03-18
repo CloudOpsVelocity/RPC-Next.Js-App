@@ -16,8 +16,6 @@ export default function NewSearchPage({
   pageUrl,
 }: Props) {
   const isListing = false;
-  const pagetitle = cleanHeading(pageUrl);
-  const address = pagetitle.split("In")[1];
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative ">
       <link
@@ -28,14 +26,15 @@ export default function NewSearchPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
+            "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: [
+            "mainEntity": [
               {
                 "@type": "Question",
                 name: "What is the purpose of this page?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The purpose of this page is to provide detailed information about the property titled "${pagetitle}", including its features, pricing, and availability.`,
+                  text: `The purpose of this page is to provide detailed information about the property titled , including its features, pricing, and availability.`,
                 },
               },
               {
@@ -43,7 +42,7 @@ export default function NewSearchPage({
                 name: "What is the address of the property?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The address of the property is "${address}".`,
+                  text: `The address of the property is .`,
                 },
               },
               {
@@ -86,8 +85,8 @@ export default function NewSearchPage({
                   text: "Property prices in Bangalore vary by location and type. Apartments range from ₹40 lakhs to ₹5 crores, while villas start from ₹1 crore. GetRightProperty offers options across all budget ranges with transparent pricing and negotiation assistance.",
                 },
               },
-            ],
-          }),
+            ]
+          })
         }}
       />
       {serverData && (
@@ -111,23 +110,4 @@ export default function NewSearchPage({
       </div>
     </main>
   );
-}
-
-function cleanHeading(url: string) {
-  const ids =
-    url
-      .replace(/^\//, "")
-      .split(process.env.NEXTAUTH_URL ?? "")[1]
-      ?.split("-") ?? [];
-  const cleaned = ids
-    .join(" ")
-    .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ|")\b/g, "")
-    .replace(/\s+/g, " ")
-    .replace("/", "")
-    .trim();
-
-  return cleaned
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
 }
