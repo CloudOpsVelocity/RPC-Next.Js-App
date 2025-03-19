@@ -16,6 +16,7 @@ export const generateAllSchemas = (property: any) => {
     phase: property.phaseName,
     projName: property.projIdEnc && property.propName,
   });
+  const cardTitle = `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`
   const description = property.usp.slice(0, 4800) || "";
   const schemas = {
     "@context": "https://schema.org",
@@ -127,6 +128,33 @@ export const generateAllSchemas = (property: any) => {
           "query-input": "required name=search_term_string",
         },
       },
+    {
+      "@type": "ViewAction", 
+      "target": PAGE_URL,
+      "name": "View Property Details",
+      "description": `View detailed information about ${cardTitle || 'this property'} located in ${property.localityName || property.cityName || ''}`,
+      "url": PAGE_URL,
+      "actionStatus": "https://schema.org/PotentialActionStatus"
+    },
+    {
+      "@type": property.category === "Rent" ? "RentAction" : "SellAction",
+      "object": {
+        "@type": "Residence",
+        "name": cardTitle || "",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": property.address || "",
+          "addressLocality": property.localityName || "",
+          "addressRegion": property.stateName || "",
+          "addressCountry": "IN"
+        }
+      },
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": property.price || 0,
+        "priceCurrency": "INR"
+      }
+    }
     ],
   };
 
@@ -170,6 +198,35 @@ export const ListingSearchSchema = ({ properties }: any) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: properties.map((property: any, index: number) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "RealEstateListing",
+                name: `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`.trim(),
+                url: generateListingLinkUrl({
+                  bhkUnitType: property.bhkName ? property.bhkName + "-" + property.propTypeName : property.propTypeName,
+                  category: property.cg === "S" ? "for-sale" : "for-rent", 
+                  city: property.ctName,
+                  locality: property.ltName,
+                  propIdEnc: property.propIdEnc,
+                  phase: property.phaseName,
+                  projName: property.projIdEnc && property.propName
+                }),
+                image: property.coverImage?.split(",")[0] || "https://getrightproperty.com/default-property.jpg",
+                price: property.price || "0",
+                priceCurrency: "INR"
+              }
+            }))
+          })
         }}
       />
       {realEstateAgentSchemas.map((schema, index) => (

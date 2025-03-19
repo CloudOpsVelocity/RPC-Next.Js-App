@@ -208,34 +208,6 @@ export const generateAllSchemas = (
           priceCurrency: "INR"
         }
       },
-      {
-        "@type": "ItemList",
-        itemListElement: {
-          "@type": "ListItem",
-          position: index + 1,
-          item: {
-            "@type": "Product",
-            name: property.projName || "N/A",
-            image: property.coverUrl?.split(",")[0] || "N/A",
-            description: property.about || "N/A",
-            offers: {
-              "@type": "Offer",
-              priceCurrency: "INR",
-              price: property.minPrice || "N/A",
-              itemCondition: "http://schema.org/NewCondition",
-              availability: "http://schema.org/InStock",
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.5",
-              reviewCount: "10",
-              bestRating: "5",
-              worstRating: "1",
-            },
-            url: PAGE_URL,
-          },
-        },
-      },
     ],
   };
 
@@ -269,6 +241,39 @@ export const ProjectSeachSchema = ({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: `Property Listings - ${pagetitle}`,
+            description: `Browse through our curated list of properties in ${pagetitle}`,
+            numberOfItems: properties.length,
+            itemListElement: properties.map((property, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "Apartment",
+                name: property.projName,
+                description: property.projectAbout || "",
+                image: property.coverUrl?.split(",")[0] || "https://getrightproperty.com/default-property.jpg",
+                url: createProjectLinkUrl({
+                  city: property.city,
+                  slug: property.projName,
+                  locality: property.locality, 
+                  projIdEnc: property.projIdEnc,
+                }),
+                offers: {
+                  "@type": "Offer",
+                  price: property.minPrice || "0",
+                  priceCurrency: "INR"
+                }
+              }
+            }))
+          }),
         }}
       />
       <script
@@ -362,69 +367,6 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-
-      {/* <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SearchResultsPage",
-            name: "Property Search",
-            description:
-              "Find properties based on various filters including location, budget, area, amenities, and more.",
-            offers: {
-              "@type": "Offer",
-              price: "₹500000 - ₹600000000",
-              priceCurrency: "INR",
-            },
-            area: {
-              "@type": "QuantitativeValue",
-              value: "0 - 5000",
-              unitCode: "SQF",
-            },
-            numberOfBathroomsTotal: {
-              "@type": "QuantitativeValue",
-              value: "1 - 6",
-            },
-            numberOfRooms: {
-              "@type": "QuantitativeValue",
-              value: "1 - 6",
-            },
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Your selected localities",
-              addressRegion: "Your selected city",
-              addressCountry: "IN",
-            },
-            reraRegistered: true,
-            floorSize: {
-              "@type": "QuantitativeValue",
-              value: "Super Built-Up Area",
-              unitCode: "SQF",
-            },
-            furnishing: ["Unfurnished", "Semi-Furnished", "Fully Furnished"],
-            bhkType: ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK+"],
-            propertyStatus: ["Under Construction", "Ready to Move"],
-            propertyType: ["Apartment", "Villa", "Plot", "Independent House"],
-            parking: {
-              "@type": "QuantitativeValue",
-              value: "0 - 6",
-            },
-            facing: ["East", "West", "North", "South"],
-            amenities: [
-              "Gym",
-              "Swimming Pool",
-              "Club House",
-              "Children’s Play Area",
-              "Security",
-              "Power Backup",
-              "Car Parking",
-            ],
-            listedBy: ["Owner", "Broker", "Builder"],
-            photoAvailability: true,
-          }),
-        }}
-      /> */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -575,7 +517,7 @@ export const ProjectSeachSchema = ({
         }}
       />
 
-      <script
+<script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -586,7 +528,7 @@ export const ProjectSeachSchema = ({
                 name: "What is the purpose of this page?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The purpose of this page is to provide detailed information about the property titled "${pagetitle}", including its features, pricing, and availability.`,
+                  text: `The purpose of this page is to provide detailed information about the property titled ${pagetitle}, including its features, pricing, and availability.`,
                 },
               },
               {
@@ -594,7 +536,7 @@ export const ProjectSeachSchema = ({
                 name: "What is the address of the property?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: `The address of the property is "${address}".`,
+                  text: `The address of the property is${address}.`,
                 },
               },
               {

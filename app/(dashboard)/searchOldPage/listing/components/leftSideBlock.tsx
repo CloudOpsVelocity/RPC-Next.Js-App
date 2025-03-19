@@ -110,7 +110,7 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
   );
 };
 
-export { LeftSideBlock };
+export default LeftSideBlock 
 
 import MapModal from "./modals";
 import Loading from "@/app/components/atoms/Loader";

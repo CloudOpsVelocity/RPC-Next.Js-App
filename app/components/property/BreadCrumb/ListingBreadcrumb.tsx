@@ -48,7 +48,7 @@ export default function ListingBreadCrumbs({
           name: params[key].replace(/-/g, " "),
           item: `${process.env.NEXT_PUBLIC_PROJECT_URL}${
             isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
-          }${breadcrumbPath}`,
+          }${breadcrumbPath }`,
         };
       }),
     ],
@@ -74,6 +74,7 @@ export default function ListingBreadCrumbs({
       })),
     ],
   };
+  console.log(params, currentPath )
   return (
     <>
       <script
@@ -103,12 +104,14 @@ export default function ListingBreadCrumbs({
             <React.Fragment key={`${key[index]}`}>
               {!isLast ? (
                 <>
+                
                   <Link
-                  prefetch={false}
-                    href={`${
-                      isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
-                    }${currentPath}`}
-                    // target="_blank"
+                   prefetch={false}
+                   href={`${
+                    isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
+                  }${currentPath}${currentPath.includes("for-sale") ? "?sf=listedBy=All-cg=S" : currentPath.includes("for-rent") ? "?sf=listedBy=All-cg=R" : "'/"}`}
+                  
+    target="_blank"
                     className="hover:underline cursor-pointer capitalize"
                   >
                     {/* <a onTouchStart={() => {}}></a> */}

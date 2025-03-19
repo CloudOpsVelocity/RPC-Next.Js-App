@@ -1,4 +1,4 @@
-"use client";
+
 import Button from "@/app/components/atoms/buttons/variansts";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { CallIcon } from "@/app/images/commongsSvgs2";

@@ -6,8 +6,10 @@ import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import SearchAndFilterCon from "../components/searchAndFilterCon";
-import { LeftSideBlock } from "../components/leftSideBlock";
+const LeftSideBlock = dynamic(() => import("../components/leftSideBlock"));
 import SharePopup from "../../components/SharePopup";
+import dynamic from "next/dynamic";
+
 type Props = {
   serverData: any;
   frontendFilters: any;
