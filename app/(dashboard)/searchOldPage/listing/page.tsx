@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "@/app/components/layouts/primary/header";
 import SearchAndFilterCon from "./components/searchAndFilterCon";
-import { LeftSideBlock } from "./components/leftSideBlock";
+import LeftSideBlock from "./components/leftSideBlock";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
