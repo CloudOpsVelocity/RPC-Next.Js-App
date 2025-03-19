@@ -164,12 +164,6 @@ export default function ProjectSearchTabs() {
     return "Newest First";
   };
 
-  // useEffect(() => {
-  //   getSortyByValue(state);
-  // }, [state]);
-
-  // Default value if no conditions are met
-
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap ">
       <div className=" w-full pb-[6px] pt-[10px] sm:px-[10px]">

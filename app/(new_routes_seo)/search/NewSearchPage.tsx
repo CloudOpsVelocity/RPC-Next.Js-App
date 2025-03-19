@@ -1,10 +1,13 @@
 import React from "react";
-import LeftSection from "./components/ProjectSearchLeftSection";
-import RightSection from "./components/ProjectSearchRightSection";
-import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
+import dynamic from "next/dynamic";
+const LeftSection = dynamic(() => import("./components/ProjectSearchLeftSection"));
+const RightSection = dynamic(() => import("./components/ProjectSearchRightSection"));
+// const ProjSearchMainFilterSection = dynamic(() => import("./components/filters/ProjSearchMainFilterSection"));
+// const ProjectSearchBreadCrumbs = dynamic(() => import("./components/ProjSearchBreadCrums"));
+import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
-
-import { ProjectSeachSchema } from "@/app/seo/search/project-search.schema";
+import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
+// import LeftSection from "";
 type Props = {
   serverData: any;
   frontendFilters: any;
@@ -46,3 +49,5 @@ export default function NewSearchPage({
     </main>
   );
 }
+
+
