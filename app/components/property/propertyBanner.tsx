@@ -52,7 +52,7 @@ export default function PropertyBanner({
       <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/approvedgreen.png`}
         alt="Sobha Dream Acres"
-        className="w-[220px] h-[150px]  xl:w-[312px] xl:h-auto absolute right-0 top-[0px] hidden sm:block"
+        className="w-[220px] h-[150px]  xl:w-[312px] xl:h-[312px] absolute right-0 top-[0px] hidden sm:block"
         width={312}
         height={312}
         unoptimized
@@ -91,12 +91,12 @@ export default function PropertyBanner({
           </div>
 
           <div className="ml-5">
-            <h3 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+            <h2 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               {projectName}
-            </h3>
-            <h4 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
+            </h2>
+            <h3 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
-            </h4>
+            </h3>
             <p className="text-[#242424] text-sm sm:text-[18px]  xl:text-[24px] not-italic font-medium leading-[normal] mb-2">
               Start- End Date: {formatDateDDMMYYYY(startDate)} -{" "}
               {formatDateDDMMYYYY(endDate)}
