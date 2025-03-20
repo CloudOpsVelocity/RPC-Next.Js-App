@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -36,8 +36,9 @@ const Map = ({
   className,
 }: any) => {
   const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
-
+  
   return (
+   
     <MapContainer
       zoom={13}
       center={position}

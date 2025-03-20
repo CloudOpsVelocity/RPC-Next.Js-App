@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { Suspense, useState,  } from "react";
 import clsx from "clsx";
 import styles from "@/app/styles/Map.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import { Area, areasMap } from "./data";
+import { CustomLoading } from "@/app/images/commonSvgs";
 
 const CustomScrollArea: React.FC<{
   areas: Area[];
@@ -19,6 +20,8 @@ const CustomScrollArea: React.FC<{
   const maxVisibleLines = 3;
   const itemsPerRow = isMobile ? 3 : 6;
   const maxVisibleItems = maxVisibleLines * itemsPerRow;
+  // Lazy load the Icon component
+
 
   const visibleItems = isExpanded ? items : items.slice(0, maxVisibleItems);
   const hiddenCount = items.length - visibleItems.length;
@@ -46,10 +49,15 @@ const CustomScrollArea: React.FC<{
                 selected === key && "!text-white font-semibold bg-[#0073C6]"
               )}
             >
-              <Icon
-                stroke={clsx(selected === key ? "#FFF" : "#0073C6")}
-                className={isMobile ? "w-4 h-4" : "w-5 h-5"}
-              />
+              
+              <Suspense fallback={<CustomLoading stroke="#0073C6" className="w-5 h-5" />}>
+                {Icon && (
+                  <Icon
+                    stroke={clsx(selected === key ? "#FFF" : "#0073C6")}
+                    className={isMobile ? "w-4 h-4" : "w-5 h-5"}
+                  />
+                )}
+              </Suspense>
               {name}
             </div>
           );

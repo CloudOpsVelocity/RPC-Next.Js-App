@@ -104,7 +104,7 @@ const LeafMap: React.FC<{
         />
       </div>
 
-      <div className="border border-[#92B2C8]  flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[456px] xl:h-[620px] w-[95%] sm:w-[90%] md:mx-auto">
+      <div className="border border-[#92B2C8]  flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[456px] xl:h-[620px] w-[95%] sm:w-[90%] mx-auto">
         <section className="bg-white ">
           <div id="tabs">
             <Tabs defaultValue="public">
