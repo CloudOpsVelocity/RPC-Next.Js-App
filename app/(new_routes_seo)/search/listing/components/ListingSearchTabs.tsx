@@ -16,7 +16,7 @@ const tabs = [
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
   { id: "B", label: "Builder Listings" },
-  { id: null, label: "All Listings" },
+  { id: (null || "All"), label: "All Listings" },
 ];
 
 export default function ListingSearchTabs() {
@@ -153,7 +153,7 @@ export default function ListingSearchTabs() {
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
-                    state.listedBy === tab.id
+                    state.listedBy === tab.id ||( state.listedBy == "All" && tab.id == null)
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }

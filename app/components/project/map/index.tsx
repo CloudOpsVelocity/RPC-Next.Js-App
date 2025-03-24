@@ -280,9 +280,9 @@ const MapCard = ({
       className="flex flex-col items-start gap-2 px-3 py-3 cursor-pointer shadow-sm rounded-lg border border-[#E5E7EB] bg-white w-full max-w-[300px] transition-all hover:shadow-md hover:border-[#D1D5DB] mb-2"
       onClick={handleClick}
     >
-      <h6 className="text-black text-lg font-semibold leading-tight capitalize w-full truncate">
+      <h3 className="text-black text-lg font-semibold leading-tight capitalize w-full truncate">
         {name}
-      </h6>
+      </h3>
       <div className="flex items-center justify-start w-full text-base text-gray-700">
         <div className="flex items-center gap-1">
           {nearbyLocationIcon}
@@ -362,9 +362,9 @@ const LocationList: React.FC<{
       onClick={handleClick}
     >
       <div className="flex items-center justify-between sm:flex-wrap">
-        <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
+        <h3 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
           {name}
-        </h6>
+        </h3>
         <div className="flex gap-1 text-sm">
           <span className="flex items-center">
             {nearbyLocationIcon}

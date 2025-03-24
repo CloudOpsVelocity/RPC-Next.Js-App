@@ -24,7 +24,7 @@ export default function Tabs({}: Props) {
       <div className="flex space-x-1 sm:space-x-4">
         <button
           onClick={() => setActiveTab("S")}
-          className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative ${
+          className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative bg-transparent ${
             activeTab === "S"
               ? "!text-[#148B16] font-semibold text-[12px] sm:text-[18px] f5fff6]"
               : ""

@@ -1,7 +1,7 @@
 import React from "react";
-import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFilterSection";
-import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
-import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
+import dynamic from "next/dynamic";
+const ListingSearhLeftSection = dynamic(() => import("./components/listingSearchTabs/listingSearchleftSection"));
+const ListingSearchRightSection = dynamic(() => import("./components/listingSearchTabs/listingSearchRightSection"));
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
 
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";

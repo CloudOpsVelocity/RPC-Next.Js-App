@@ -38,7 +38,16 @@ export default function OverviewBanner({
       className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "
       // id="brochure"
     >
-      <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
+      {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
+ */}
+            <img
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
+              width="237" 
+              height="263" 
+              loading="lazy"
+            alt="priceBagOverView"
+            className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"          />
+
 
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%]  flex-wrap">
         <div className=" grid  md:block">
@@ -89,6 +98,7 @@ export default function OverviewBanner({
           <WhatsAppButton
             className="cursor-pointer mt-2 sm:mt-4 "
             name={name}
+            aria-label={`Chat with ${name} on WhatsApp`}
           />
         </div>
       </div>

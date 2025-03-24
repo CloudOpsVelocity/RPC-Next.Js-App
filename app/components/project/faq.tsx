@@ -240,9 +240,9 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-0 capitalize">
+      <h3 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-0 capitalize">
         {faqQuestion}
-      </h4>
+      </h3>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
       {/*  {!last && ( */}
       <hr className="bg-[#00000080] my-4 sm:my-[18px] h-[2px]" />

@@ -120,14 +120,14 @@ export default function SearchSec({}: Props) {
           let URLReNew = URLCreater(ids);
           //alert(JSON.stringify(ids));
           if (URLReNew != "") {
-            const toRedirect= f.propType === 36 ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
+            const toRedirect= (f.propType === 36 || f.cg == "R" ) ? `/search/listing?sf=${URLReNew}` : `/search?sf=${URLReNew}`
          //alert(toRedirect)
          router.push(toRedirect)       
 
           }
           
         } else {
-          const whichPage = f.propType === 36 ? "/search/listing" : "/search"
+          const whichPage = (f.propType === 36 || f.cg == "R" ) ? "/search/listing" : "/search"
           router.push(`${whichPage}?sf=${toQueryParams(f)}`);          
         }
       }

@@ -24,7 +24,6 @@ export default function ProjectSearchTabs() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
-
   const handleWheel = (e: React.WheelEvent) => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += e.deltaY;
@@ -72,6 +71,7 @@ export default function ProjectSearchTabs() {
   const setNearby = useSetAtom(selectedNearByAtom);
 
   const handleTabsChange = (value: string | null) => {
+    
     window.scrollTo({ top: 0, behavior: "smooth" });
     setSelected(null);
     setNearby((prev: any) => ({
@@ -163,12 +163,6 @@ export default function ProjectSearchTabs() {
 
     return "Newest First";
   };
-
-  // useEffect(() => {
-  //   getSortyByValue(state);
-  // }, [state]);
-
-  // Default value if no conditions are met
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap ">

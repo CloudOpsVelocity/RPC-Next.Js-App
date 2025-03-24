@@ -186,8 +186,10 @@ class RedisService {
     const fullKey = `${SlugsType.STATIC}:slug:${key}`;
     const exists = await this.existsKey(fullKey);
     if (!exists) {
+      console.log(`case-seo saved in redis succesfully`);
       await this.saveSlug(SlugsType.STATIC, key, value, ttl);
     }
+
   }
 
   // Get SEO slug
