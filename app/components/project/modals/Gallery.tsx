@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Image } from "@mantine/core";
 import {
   ImgCarouselIcon,
-  PopupOpenSvg,
+  // PopupOpenSvg,
   PrevCarouselIcon,
   videoPlayIcon,
 } from "@/app/images/commonSvgs";

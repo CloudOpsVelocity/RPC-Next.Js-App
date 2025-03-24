@@ -1,12 +1,12 @@
-import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
+// import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
+// import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import {
   getProjSearchData,
   getSearchData,
 } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
-  getNestedSlug,
+  // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";

@@ -1,8 +1,9 @@
 "use client";
-import { Image } from "@mantine/core";
+// import { Image } from "@mantine/core";
 import React from "react";
-import NextImage from "next/image";
 import ReactPlayer from "react-player";
+
+// import NextImage from "next/image";
 type Props = { searchParams: { path: string } };
 export default function Page({ searchParams: { path } }: Props) {
   const handleDownload = async () => {

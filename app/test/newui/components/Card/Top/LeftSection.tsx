@@ -64,7 +64,7 @@ export default function LeftSection({
         />
         <source
           media="(max-width: 800px)"
-          srcSet={src ? src.split(",")[2] : ''}
+          srcSet={src ? src.split(",")[2] : ""}
         />
         <Image
           src={src}
@@ -74,6 +74,7 @@ export default function LeftSection({
           className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
           quality={100}
           unoptimized
+          priority
         />
       </picture>
       {/* <div>
@@ -122,7 +123,7 @@ export default function LeftSection({
 const Rera = () => {
   return (
     <p className="absolute top-0 left-[0.8px]">
-      <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+      <Image src={"/r.svg"} alt="rera" width={100} height={100} priority />
     </p>
   );
 };

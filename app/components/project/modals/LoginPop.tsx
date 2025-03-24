@@ -1,14 +1,17 @@
 "use client";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { Modal, Button, em } from "@mantine/core";
-import { comparingIcon, tagIcon } from "@/app/images/commonSvgs";
+import {
+  // useDisclosure,
+  useMediaQuery,
+} from "@mantine/hooks";
+import { Modal } from "@mantine/core";
+// import { comparingIcon, tagIcon } from "@/app/images/commonSvgs";
 import LoginPop from "@/app/components/molecules/popups/login";
 import S from "@/app/styles/Rating.module.css";
 
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Close from "../button/close";
 function LoginPopup() {
-  const [opened, { close ,data}] = usePopShortList();
+  const [opened, { close, data }] = usePopShortList();
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   const isTab = useMediaQuery(`(max-width: 1600px)`);
   return (

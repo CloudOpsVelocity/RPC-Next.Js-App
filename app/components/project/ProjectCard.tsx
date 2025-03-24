@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Button from "../../elements/button";
-import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
+import { Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useSession } from "next-auth/react";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -10,15 +10,17 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import { GlobalPageType } from "@/app/validations/global";
-import ProjectLink, {
+import {
+  // ProjectLink,
   createProjectLinkUrl,
 } from "@/app/utils/linkRouters/ProjectLink";
 import NewCarousel from "@/app/test/components/NewCarousel";
 import Link from "next/link";
-import BuilderLink, {
+import {
+  // BuilderLink,
   generateBuilderUrl,
 } from "@/app/utils/linkRouters/Builder";
-import { slugify } from "../property/BreadCrumb/ListingBreadcrumb";
+// import { slugify } from "../property/BreadCrumb/ListingBreadcrumb";
 
 type Props = {
   type: string;
@@ -148,9 +150,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
 
         <div className="relative  max-h-[300px]">
           <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
-            <Link rel="noreferrer" 
-            prefetch={false}
-            href={URLRedirectionProj}>
+            <Link rel="noreferrer" prefetch={false} href={URLRedirectionProj}>
               <Image
                 src={
                   type === "proj"

@@ -1,12 +1,12 @@
 import React from "react";
-import HomeSearch from "./home-search";
+// import HomeSearch from "./home-search";
 import HomeFeatures from "./features";
 import DynamicListing from "./Listing";
 import NewAddedProjects from "./newly-added-projects";
 import TopLocalities from "./top-localities";
 import ListbySection from "./ListedBy";
 import PostYourListing from "./post-your-listing";
-import Footer from "@/app/components/layouts/primary/footer";
+// import Footer from "@/app/components/layouts/primary/footer";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import BlogsSection from "./blogs";
 import SharePopup from "@/app/components/atoms/SharePopup";

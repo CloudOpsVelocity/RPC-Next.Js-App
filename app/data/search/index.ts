@@ -1,5 +1,5 @@
-import { Bathrooms } from "@/app/images/commonSvgs";
-import { title } from "process";
+// import { Bathrooms } from "@/app/images/commonSvgs";
+// import { title } from "process";
 
 export const SEARCH_FILTER_DATA = {
   projectstatus: [

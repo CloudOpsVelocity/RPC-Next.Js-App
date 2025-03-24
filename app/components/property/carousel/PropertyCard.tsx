@@ -1,25 +1,29 @@
 "use client";
 import React from "react";
-import { CarouselSlide } from "@mantine/carousel";
+// import { CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
-import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
+import {
+  // Phone,
+  Shorlisted,
+  shortlistIconSvg,
+} from "@/app/images/commonSvgs";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useSession } from "next-auth/react";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
-import { GlobalPageType } from "@/app/validations/global";
-import { useSetAtom } from "jotai";
-import { NearByDataAtom } from "@/app/store/nearby";
+// import { GlobalPageType } from "@/app/validations/global";
+// import { useSetAtom } from "jotai";
+// import { NearByDataAtom } from "@/app/store/nearby";
 import Button from "@/app/elements/button";
-import MainCarousel from "../../molecules/carousel/main";
+// import MainCarousel from "../../molecules/carousel/main";
 import { useMediaQuery } from "@mantine/hooks";
-import { redirect } from "next/dist/server/api-utils";
+// import { redirect } from "next/dist/server/api-utils";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import NewCarousel from "@/app/test/components/NewCarousel";
-import { slugify } from "../BreadCrumb/ListingBreadcrumb";
+// import { slugify } from "../BreadCrumb/ListingBreadcrumb";
 import Link from "next/link";
 type Props = {
   type: string;
@@ -94,7 +98,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
   return (
     <Link
-    prefetch={false}
+      prefetch={false}
       // onClick={() => redirect(reqId)}
       href={redirect(reqId)}
       key={reqId}
@@ -105,7 +109,9 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     >
       {type == "proj" && (
         <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-          <Link prefetch={false} rel="noopener noreferrer"
+          <Link
+            prefetch={false}
+            rel="noopener noreferrer"
             className="tracking-tight text-[18px] font-[600] text-wrap text-[#565D70] cursor-pointer"
             href={`/abc/karnataka/banglore/${reqId}`}
           >

@@ -1,13 +1,13 @@
-import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
+// import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
-  getNestedSlug,
+  // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
-import { getPagesSlugs } from "@/app/seo/api";
+// import { getPagesSlugs } from "@/app/seo/api";
 import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
 export default async function Page({
   params: { bhk_unit_type, cg, city, lt, project },
 }: Props) {
-  console.log(bhk_unit_type)
+  console.log(bhk_unit_type);
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();

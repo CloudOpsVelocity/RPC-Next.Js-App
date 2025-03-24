@@ -3,10 +3,10 @@ import Button from "@/app/elements/button";
 import {
   GradientLocation,
   Phone,
-  ReraIcon,
-  Shorlisted,
+  // ReraIcon,
+  // Shorlisted,
   Wallet,
-  shortlistIconSvg,
+  // shortlistIconSvg,
 } from "@/app/images/commonSvgs";
 import { Search } from "@/app/validations/types/search";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
@@ -18,7 +18,7 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useSetAtom } from "jotai";
 import { listingSearchAtom } from "@/app/store/search/map";
-import { Main } from "@/app/validations/property/search";
+// import { Main } from "@/app/validations/property/search";
 import Link from "next/link";
 import { calculatePerSqPrice } from "@/app/utils/price";
 
@@ -143,12 +143,17 @@ const ProjectDetailsCard = ({
                     {" "}
                     <p className="text-[#333] text-nowrap text-[12px] md:text-[16px] font-[500]">
                       Super Builtup Area:{" "}
-                      <span className=" font-[600]">{formatNumberWithSuffix(sba)} sq.ft</span>
+                      <span className=" font-[600]">
+                        {formatNumberWithSuffix(sba)} sq.ft
+                      </span>
                     </p>
                     <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
                       Carpet Area:{" "}
-                      <span className=" font-[600]"> {formatNumberWithSuffix(ca)} sq.ft </span>₹{" "}
-                      {calculatePerSqPrice(price, sba)}/ sqft
+                      <span className=" font-[600]">
+                        {" "}
+                        {formatNumberWithSuffix(ca)} sq.ft{" "}
+                      </span>
+                      ₹ {calculatePerSqPrice(price, sba)}/ sqft
                     </p>
                     <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
                       Available From:{" "}

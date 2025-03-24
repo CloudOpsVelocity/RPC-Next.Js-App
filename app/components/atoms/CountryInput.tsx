@@ -2,7 +2,7 @@
 
 import { isdDetailsList } from "@/app/data/isdDetails";
 import clsx from "clsx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 type props = {
   onSelect: any;

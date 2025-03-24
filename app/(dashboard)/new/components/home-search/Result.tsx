@@ -7,7 +7,7 @@ import {
   mainSearchNoResult,
 } from "@/app/images/commonSvgs";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { ScrollArea } from "@mantine/core";
+// import { ScrollArea } from "@mantine/core";
 import { useAtom } from "jotai";
 import React from "react";
 import toast from "react-hot-toast";
@@ -63,7 +63,8 @@ export default function Results() {
               apiData.stringId.split("_")[0]
             }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
-            }`, "_self"
+            }`,
+            "_self"
           );
         }
 
@@ -143,7 +144,8 @@ export default function Results() {
                 apiData.type !== "BuilderProject"
                   ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
-              }`,"_self"
+              }`,
+              "_self"
             );
           }
         }

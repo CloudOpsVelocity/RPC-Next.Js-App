@@ -1,12 +1,19 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { useMediaQuery, useScrollIntoView } from "@mantine/hooks";
+import {
+  useMediaQuery,
+  // useScrollIntoView
+} from "@mantine/hooks";
 import { SpecificationList } from "@/app/validations/types/project";
-import { Box, Group, Paper, ScrollArea, Stack } from "@mantine/core";
+import {
+  // Box, Group, Paper,
+  ScrollArea,
+  Stack,
+} from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
 import styles from "@/app/styles/Scrollbar.module.css";
 import clsx from "clsx";
-import { redirect } from "next/dist/server/api-utils";
+// import { redirect } from "next/dist/server/api-utils";
 export default function Specifications({
   data,
   projName,
@@ -113,12 +120,10 @@ export default function Specifications({
                   </span>
                   <div>
                     <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
-                      {spec.values.map((value, valueIndex) =>
+                      {spec.values.map(
+                        (value, valueIndex) =>
                           value && (
-                            <li
-                              className="break-words max-w-full"
-                              key={value}
-                            >
+                            <li className="break-words max-w-full" key={value}>
                               {value}
                             </li>
                           )

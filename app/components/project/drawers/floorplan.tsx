@@ -1,5 +1,5 @@
 "use client";
-import { Button, Divider, Drawer } from "@mantine/core";
+import { Divider, Drawer } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React from "react";
@@ -157,79 +157,77 @@ export default function FloorplanDrawer() {
     { axis: "x", pointer: { touch: true } }
   );
   return (
-      <Drawer
-        opened={Object.keys(cg).length > 0 ? true : false}
-        onClose={handleClose}
-        title="property Details"
-        position="right"
-        zIndex={1000}
-        classNames={S}
-        {...bind()}
-      >
-        <h3 className=" gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] md:text-[24px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
-          {getIcon(
-            BACKEND_PROP_TYPES[
-              cg?.propertyType as keyof typeof BACKEND_PROP_TYPES
-            ]
-          )}{" "}
-          {propName(cg.propertyType, "name")} details
-        </h3>
-        <div>
-          {/* Right */}
-          <div className="flex items-center space-x-4 mt-6">
+    <Drawer
+      opened={Object.keys(cg).length > 0 ? true : false}
+      onClose={handleClose}
+      title="property Details"
+      position="right"
+      zIndex={1000}
+      classNames={S}
+      {...bind()}
+    >
+      <h3 className=" gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] md:text-[24px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
+        {getIcon(
+          BACKEND_PROP_TYPES[
+            cg?.propertyType as keyof typeof BACKEND_PROP_TYPES
+          ]
+        )}{" "}
+        {propName(cg.propertyType, "name")} details
+      </h3>
+      <div>
+        {/* Right */}
+        <div className="flex items-center space-x-4 mt-6">
+          {" "}
+          <div className="max-w-[70px] lg:max-w-[115px] w-full h-[70px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee]  lg:bottom-[60px] ">
+            <Image
+              width={70}
+              height={70}
+              src={propName(cg?.propertyType, "img") as string}
+              alt="Preview"
+              className="w-full h-full object-cover rounded-[14px]"
+            />
+          </div>
+          {/* Left */}
+          <div>
             {" "}
-            <div className="max-w-[70px] lg:max-w-[115px] w-full h-[70px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee]  lg:bottom-[60px] ">
-              <Image
-                width={70}
-                height={70}
-                src={propName(cg?.propertyType, "img") as string}
-                alt="Preview"
-                className="w-full h-full object-cover rounded-[14px]"
-              />
-            </div>
-            {/* Left */}
-            <div>
-              {" "}
-              <p className="text-[16px]  lg:text-2xl text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
-                {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
-              </p>
-              <p className="text-[14px] lg:text-2xl text-[#242424]   italic font-medium leading-[normal]">
-                {formatCurrency(cg?.basePrice)} Base Price/ sq.ft
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="inline-flex items-center gap-4 p-2 sideBarBg mt-5">
-          <div className="flex gap-x-[16px] flex-wrap  ">
-            {cg?.propertyType == "apt" || cg?.propertyType == "vlmt" ? (
-              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-center  ">
-                <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-                <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
-                Tower{cg?.elevation > 1 ? "s" : ""}
-              </p>
-            ) : (
-              ""
-            )}
-            <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
-              <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
-              <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
+            <p className="text-[16px]  lg:text-2xl text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+              {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
             </p>
-            {cg?.propertyType === "rowHouse" || cg.propertyType === "villa" ? (
-              <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
-                <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-                <span className="mr-[6px] ml-[6px]">
-                  {"G+" + cg?.elevation}
-                </span>{" "}
-                Elevation
-              </p>
-            ) : (
-              ""
-            )}
+            <p className="text-[14px] lg:text-2xl text-[#242424]   italic font-medium leading-[normal]">
+              {formatCurrency(cg?.basePrice)} Base Price/ sq.ft
+            </p>
           </div>
         </div>
-        <Table data={cg?.unitTypes} cg={cg} propertyType={cg?.propertyType} />
-        {/* Drawer content */}
-      </Drawer>
+      </div>
+      <div className="inline-flex items-center gap-4 p-2 sideBarBg mt-5">
+        <div className="flex gap-x-[16px] flex-wrap  ">
+          {cg?.propertyType == "apt" || cg?.propertyType == "vlmt" ? (
+            <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-center  ">
+              <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+              <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span> Tower
+              {cg?.elevation > 1 ? "s" : ""}
+            </p>
+          ) : (
+            ""
+          )}
+          <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
+            <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
+            <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
+          </p>
+          {cg?.propertyType === "rowHouse" || cg.propertyType === "villa" ? (
+            <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
+              <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+              <span className="mr-[6px] ml-[6px]">{"G+" + cg?.elevation}</span>{" "}
+              Elevation
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+      <Table data={cg?.unitTypes} cg={cg} propertyType={cg?.propertyType} />
+      {/* Drawer content */}
+    </Drawer>
   );
 }
 

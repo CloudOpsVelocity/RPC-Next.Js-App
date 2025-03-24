@@ -7,7 +7,7 @@ import Image from "next/image";
 import React from "react";
 import { Svg } from "./heading";
 import ReadMore from "../atoms/readmore";
-import Button from "../atoms/buttons/variansts";
+// import Button from "../atoms/buttons/variansts";
 import Link from "../atoms/buttons/Link";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 

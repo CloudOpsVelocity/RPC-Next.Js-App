@@ -1,6 +1,6 @@
 "use client";
-import { useGallery } from "@/app/hooks/useGallery";
-import { ShearIcon } from "@/app/images/commonSvgs";
+// import { useGallery } from "@/app/hooks/useGallery";
+// import { ShearIcon } from "@/app/images/commonSvgs";
 import React from "react";
 import SharePopup from "../../atoms/SharePopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";

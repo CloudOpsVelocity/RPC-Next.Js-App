@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
   Combobox,
   InputBase,
@@ -7,12 +7,15 @@ import {
   NumberInput,
   Group,
   Input,
-  FocusTrap,
+  // FocusTrap,
 } from "@mantine/core";
 import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { useFocusReturn, useMediaQuery } from "@mantine/hooks";
+import {
+  // useFocusReturn,
+  useMediaQuery,
+} from "@mantine/hooks";
 import { toFormattedString } from "@/app/(dashboard)/searchOldPage/components/buget/budget";
 
 const MULTIPLIER = 100000;

@@ -11,7 +11,7 @@ import {
   RestaurentIcon,
   SchoolIcon,
   TrainIcon,
-  nearbyLocationIcon,
+  // nearbyLocationIcon,
 } from "@/app/images/commonSvgs";
 import { MdLocalAirport, MdTrain } from "react-icons/md";
 export interface Area {
@@ -100,7 +100,7 @@ export const areas: Area[] = [
   },
   {
     name: "Airport",
-    Icon:   MdLocalAirport,
+    Icon: MdLocalAirport,
     key: "airport",
   },
   {

@@ -14,7 +14,7 @@ import { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
 import {
-  BlueMobileMapIcon,
+  // BlueMobileMapIcon,
   createCustomIconReactLeafLet,
   MapIcon,
   MobileMapIcon,
@@ -139,8 +139,8 @@ const Content: React.FC<any> = ({
                 key={item.lat}
                 opacity={1}
                 direction="top"
-                permanent={selectedLocation?.lat === item?.lat} 
-                className="min-w-fit z-50" 
+                permanent={selectedLocation?.lat === item?.lat}
+                className="min-w-fit z-50"
                 offset={[4, -36]}
               >
                 <div className=" ">

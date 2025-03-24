@@ -1,8 +1,8 @@
 // utils/new_routes_seo/generateSlugs.ts
-import { getServerSideSitemap } from "next-sitemap";
+// import { getServerSideSitemap } from "next-sitemap";
 import { getPagesSlugs } from "@/app/seo/api";
-import path from "path";
-import fs from "fs";
+// import path from "path";
+// import fs from "fs";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 

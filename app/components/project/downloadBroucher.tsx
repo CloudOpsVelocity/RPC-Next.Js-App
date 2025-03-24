@@ -1,9 +1,9 @@
 "use client";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+// import Link from "next/link";
 import React from "react";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import { DocIcon } from "@/app/images/commonSvgs";
 import clsx from "clsx";
 // import { downloadIcon } from '@/app/images/commonSvgs';

@@ -1,8 +1,8 @@
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
+// import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
-  getNestedSlug,
+  // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import {
@@ -10,7 +10,7 @@ import {
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import {
-  BASE_PATH_LISTING,
+  // BASE_PATH_LISTING,
   BASE_PATH_PROJECT_LISTING,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { notFound } from "next/navigation";
@@ -31,7 +31,7 @@ export default async function Page({ params: { cg } }: Props) {
     <NewSearchPage
       serverData={severData}
       frontendFilters={{
-        cg: slugValues.CG, 
+        cg: slugValues.CG,
       }}
       pageUrl={pageUrl}
     />

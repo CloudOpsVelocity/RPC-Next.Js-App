@@ -1,29 +1,29 @@
 "use client";
-import { Carousel } from "@mantine/carousel";
+// import { Carousel } from "@mantine/carousel";
 import React from "react";
-import Style from "./Carouse.module.css";
-import InfoCard from "./InfoCard";
-import {
-  DarkCarouseIcon,
-  DarkNextCarouselButton,
-} from "@/app/images/commonSvgs";
+// import Style from "./Carouse.module.css";
+// import InfoCard from "./InfoCard";
+// import {
+//   DarkCarouseIcon,
+//   DarkNextCarouselButton,
+// } from "@/app/images/commonSvgs";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
-  parital_unit_atom,
+  // parital_unit_atom,
   selectedPartialUnitAtom,
 } from "@/app/store/partialsUnits";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-import RTK_CONFIG from "@/app/config/rtk";
-import { getPropId } from "../propertyTypeDetailsCrad";
-import { useQuery } from "react-query";
-import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
-import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
-import { useForm } from "@/app/context/floorplanContext";
-import { setPropertyValues } from "@/app/utils/dyanamic/projects";
-import { projectReqDataAtom } from "@/app/store/project/project.req";
+// import RTK_CONFIG from "@/app/config/rtk";
+// import { getPropId } from "../propertyTypeDetailsCrad";
+// import { useQuery } from "react-query";
+// import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
+// import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+// import { useForm } from "@/app/context/floorplanContext";
+// import { setPropertyValues } from "@/app/utils/dyanamic/projects";
+// import { projectReqDataAtom } from "@/app/store/project/project.req";
 
 type Props = {
   partialUnitData: any;
@@ -62,9 +62,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
   };
 
   return (
-    <div
-      className="justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto sm:min-h-[180px] max-h-[340px] xl:max-h-[340px] overflow-auto"
-    >
+    <div className="justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto sm:min-h-[180px] max-h-[340px] xl:max-h-[340px] overflow-auto">
       <table className="min-w-full border-collapse mr-auto">
         <thead className="sticky top-0 z-[1]">
           <tr className="flex flex-row justify-start items-center">
@@ -128,17 +126,23 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                     border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
                   >
                     {propCgId === 32
-                      ? data[item].plotArea 
-                        ? `${formatNumberWithSuffix(data[item].plotArea, false)} sq.ft`
+                      ? data[item].plotArea
+                        ? `${formatNumberWithSuffix(
+                            data[item].plotArea,
+                            false
+                          )} sq.ft`
                         : data[item].minPa === data[item].maxPa
-                          ? `${formatNumberWithSuffix(data[item].minPa, false)} sq.ft`
-                          : `${formatNumberWithSuffix(
-                              data[item].minPa,
-                              false
-                            )} - ${formatNumberWithSuffix(
-                              data[item].maxPa,
-                              false
-                            )} sq.ft`
+                        ? `${formatNumberWithSuffix(
+                            data[item].minPa,
+                            false
+                          )} sq.ft`
+                        : `${formatNumberWithSuffix(
+                            data[item].minPa,
+                            false
+                          )} - ${formatNumberWithSuffix(
+                            data[item].maxPa,
+                            false
+                          )} sq.ft`
                       : data[item].minSba !== data[item].maxSba
                       ? `${formatNumberWithSuffix(
                           data[item].minSba,
@@ -166,7 +170,10 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                             data[item].maxCa,
                             false
                           )} sq.ft`
-                        : `${formatNumberWithSuffix(data[item].minCa, false)} sq.ft`}
+                        : `${formatNumberWithSuffix(
+                            data[item].minCa,
+                            false
+                          )} sq.ft`}
                     </td>
                   )}
                   <td

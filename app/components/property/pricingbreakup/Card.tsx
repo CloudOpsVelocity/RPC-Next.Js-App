@@ -1,6 +1,9 @@
-import { List, NumberFormatter } from "@mantine/core";
+import {
+  // List,
+  NumberFormatter,
+} from "@mantine/core";
 import React from "react";
-import { TbH4 } from "react-icons/tb";
+// import { TbH4 } from "react-icons/tb";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
 import { formatCurrency } from "@/app/utils/numbers";
 import ListItem from "./ListItem";

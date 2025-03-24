@@ -1,5 +1,5 @@
-import path from "path";
-import fs from "fs";
+// import path from "path";
+// import fs from "fs";
 import { notFound } from "next/navigation";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";

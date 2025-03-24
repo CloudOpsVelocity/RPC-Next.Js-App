@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Switch, Group, ActionIcon, Box, Text, Button } from "@mantine/core";
+import { Group, ActionIcon, Box, Text } from "@mantine/core";
 import { TextInput } from "react-hook-form-mantine";
-import { FaPlus, FaTimes } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { randomId } from "@mantine/hooks";
 import StepCss from "@/app/styles/Stepper.module.css";
 import handleTrimAndReplace, {

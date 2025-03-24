@@ -1,5 +1,5 @@
-import fs from "fs";
-import { revalidatePath, revalidateTag } from "next/cache";
+// import fs from "fs";
+import { revalidateTag } from "next/cache";
 export async function POST(req: Request) {
   const data = await req.json();
   console.log(data.id);

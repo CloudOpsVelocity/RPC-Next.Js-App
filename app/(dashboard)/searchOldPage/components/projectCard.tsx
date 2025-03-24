@@ -1,17 +1,17 @@
 import React from "react";
-import Button from "@/app/elements/button";
-import { GradientLocation, Phone, ReraIcon } from "@/app/images/commonSvgs";
+// import Button from "@/app/elements/button";
+// import { GradientLocation, Phone, ReraIcon } from "@/app/images/commonSvgs";
 import { Search } from "@/app/validations/types/search";
-import { formatDateDDMMYYYY } from "@/app/utils/date";
-import Image from "next/image";
+// import { formatDateDDMMYYYY } from "@/app/utils/date";
+// import Image from "next/image";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import { formatCurrency } from "@/app/utils/numbers";
+// import { formatCurrency } from "@/app/utils/numbers";
 import { useSetAtom } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
-import { calculatePerSqPrice } from "@/app/utils/price";
+// import { calculatePerSqPrice } from "@/app/utils/price";
 
 type Props = {
   type: any;
@@ -88,9 +88,7 @@ const ProjectDetailsCard = ({ data }: Props) => {
   };
   const setSelected = useSetAtom(selectedSearchAtom);
 
-  return (
-    <div/>
-  )
+  return <div />;
 
   // return (
   //   // <div className=" flex w-full mb-[5%] flex-col shadow-md " id={reqId}>

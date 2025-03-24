@@ -1,12 +1,19 @@
 "use client";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { Drawer, Button, em } from "@mantine/core";
+import {
+  // useDisclosure,
+  useMediaQuery,
+} from "@mantine/hooks";
+import {
+  Drawer,
+  // Button,
+  em,
+} from "@mantine/core";
 import { useAtom } from "jotai";
 import { readMoreAtom } from "@/app/store/drawer";
 import S from "@/app/styles/Drawer.module.css";
 import { AmenityList } from "@/app/validations/types/project";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
-import React, { useState } from "react";
+import React from "react";
 import Close from "./button/close";
 import { useDrag } from "@use-gesture/react";
 function ProjectDrawer({ projName }: { projName: string }) {

@@ -1,7 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Combobox, Input, InputBase, Radio, useCombobox } from "@mantine/core";
 import styles from "./Style.module.css";
-import { DropDownIcon } from "@/app/images/commonSvgs";
+// import { DropDownIcon } from "@/app/images/commonSvgs";
 import useSearchFilters from "@/app/hooks/search";
 import {
   parseDataProjectProps,

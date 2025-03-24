@@ -1,28 +1,31 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 "use client";
-import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
-import { LuTrain, LuSearch } from "react-icons/lu";
+import React, { useState, useCallback, useMemo, Fragment } from "react";
+// import { LuTrain, LuSearch } from "react-icons/lu";
 import {
-  Text,
+  // Text,
   Tabs,
-  TextInput,
-  Loader,
+  // TextInput,
+  // Loader,
   ScrollArea,
-  Skeleton,
+  // Skeleton,
 } from "@mantine/core";
 
 import { clsx } from "clsx";
 import {
   Coordinates,
-  calculateDistance,
-  calculateTime,
+  // calculateDistance,
+  // calculateTime,
 } from "@/app/utils/maps";
-import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
-import Loading from "../../atoms/Loader";
+import {
+  // useDebouncedState,
+  useMediaQuery,
+} from "@mantine/hooks";
+// import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
 import PropertyHeading from "../../property/heading";
-import useMapData from "@/app/hooks/property/useMapData";
+// import useMapData from "@/app/hooks/property/useMapData";
 
 import {
   AtmIcon,
@@ -182,7 +185,7 @@ const LeafMap: React.FC<{
         </section>
         <section>
           <Map
-          key="leafletPropMap2SearchPageMap"
+            key="leafletPropMap2SearchPageMap"
             data={mapData && mapData[selected] ? mapData[selected] : []}
             selectedLocation={selectedLocation}
             projName={projName}
@@ -194,8 +197,8 @@ const LeafMap: React.FC<{
           />
         </section>
       </div>
- 
-     {mapData[selected] && mapData[selected].length > 0 && (
+
+      {mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 w-[90%] mx-auto hidden sm:block">
           <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
@@ -244,7 +247,7 @@ const LeafMap: React.FC<{
         )}
       </div>
       <Map
-      key="leafletPropMap3SearchPageMap"
+        key="leafletPropMap3SearchPageMap"
         data={mapData && mapData[selected] ? mapData[selected] : []}
         selectedLocation={selectedLocation}
         projName={projName}
@@ -295,28 +298,28 @@ const MapCard = ({
     setTimeout(() => setIsScrolling(false), 3000);
   };
   return (
-   <div
-         className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 xl:py-3 px-2"
-         onClick={handleClick}
-       >
-         <div className="flex items-center justify-between sm:flex-wrap">
-           <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
-             {name}
-           </h6>
-           <div className="flex gap-1 text-sm">
-             <span className="flex items-center">
-               {nearbyLocationIcon}
-               <span className="ml-[4px] text-[#005DA0] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
-                 {distance ?? "N/A"}
-               </span>
-               <span className="mx-2">|</span>
-               <span className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
-                 {time ?? "N/A"}
-               </span>
-             </span>
-           </div>
-         </div>
-       </div>
+    <div
+      className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 xl:py-3 px-2"
+      onClick={handleClick}
+    >
+      <div className="flex items-center justify-between sm:flex-wrap">
+        <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
+          {name}
+        </h6>
+        <div className="flex gap-1 text-sm">
+          <span className="flex items-center">
+            {nearbyLocationIcon}
+            <span className="ml-[4px] text-[#005DA0] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+              {distance ?? "N/A"}
+            </span>
+            <span className="mx-2">|</span>
+            <span className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+              {time ?? "N/A"}
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -351,27 +354,27 @@ const LocationList: React.FC<{
 
   return (
     <div
-          className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 xl:py-3 px-2"
-          onClick={handleClick}
-        >
-          <div className="flex items-center justify-between sm:flex-wrap">
-            <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
-              {name}
-            </h6>
-            <div className="flex gap-1 text-sm">
-              <span className="flex items-center">
-                {nearbyLocationIcon}
-                <span className="ml-[4px] text-[#005DA0] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
-                  {distance ?? "N/A"}
-                </span>
-                <span className="mx-2">|</span>
-                <span className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
-                  {time ?? "N/A"}
-                </span>
-              </span>
-            </div>
-          </div>
+      className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 xl:py-3 px-2"
+      onClick={handleClick}
+    >
+      <div className="flex items-center justify-between sm:flex-wrap">
+        <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
+          {name}
+        </h6>
+        <div className="flex gap-1 text-sm">
+          <span className="flex items-center">
+            {nearbyLocationIcon}
+            <span className="ml-[4px] text-[#005DA0] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+              {distance ?? "N/A"}
+            </span>
+            <span className="mx-2">|</span>
+            <span className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+              {time ?? "N/A"}
+            </span>
+          </span>
         </div>
+      </div>
+    </div>
   );
 };
 

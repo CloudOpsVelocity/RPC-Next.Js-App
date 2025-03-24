@@ -1,19 +1,25 @@
 "use client";
 import { Modal } from "@mantine/core";
-import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
+import {
+  // useLocalStorage,
+  useMediaQuery,
+} from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 import S from "@/app/styles/Rating.module.css";
 import { yupResolver } from "@mantine/form";
 import { ratingSchema, ratingSchema2 } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import LoginPopup from "../molecules/popups/login";
 import Close from "./button/close";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
-import { RatingForm, Success } from "./success/rating";
+import {
+  RatingForm,
+  // Success
+} from "./success/rating";
 import { FormProvider, useForm } from "@/app/context/rating";
 import { RatingMessage } from "./success";
 import Styles from "@/app/styles/Qna.module.css";
@@ -182,7 +188,9 @@ const AddRating = ({
           ? "100%"
           : session
           ? isDataSubmitted.isSubmitted
-            ? (isTab ? "40%" : "auto")
+            ? isTab
+              ? "40%"
+              : "auto"
             : "58%"
           : "35%"
       }

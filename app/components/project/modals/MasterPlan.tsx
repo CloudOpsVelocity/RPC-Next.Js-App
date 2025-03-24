@@ -1,5 +1,5 @@
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
-import { Flex, Image, Modal } from "@mantine/core";
+import { Image, Modal } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";

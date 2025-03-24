@@ -1,15 +1,15 @@
 import React from "react";
 import { BackgroundImage, Center, Box, Text } from "@mantine/core";
-import Button from "@/app/components/atoms/buttons/variansts";
+// import Button from "@/app/components/atoms/buttons/variansts";
 import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import Image from "next/image";
-import { ShareIcon } from "@/app/images/HomePageIcons";
+// import { ShareIcon } from "@/app/images/HomePageIcons";
 import ViewAllButton from "./ViewButton";
 import ShareBtn from "./ShareBtn";
 import ReqBtn from "./ReqBtn";
 import Shortlist from "./Shortlist";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 
 type Props = { item: any };
 

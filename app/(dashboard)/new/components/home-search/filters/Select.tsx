@@ -1,15 +1,13 @@
-import { useState } from "react";
 import { Combobox, Input, InputBase, Radio, useCombobox } from "@mantine/core";
 import styles from "./Style.module.css";
-import { DropDownIcon } from "@/app/images/commonSvgs";
-import useSearchFilters from "@/app/hooks/search";
+// import { DropDownIcon } from "@/app/images/commonSvgs";
+// import useSearchFilters from "@/app/hooks/search";
 import {
   parseDataProjectProps,
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { Console } from "console";
 import { useMediaQuery } from "@mantine/hooks";
 
 const keys = [

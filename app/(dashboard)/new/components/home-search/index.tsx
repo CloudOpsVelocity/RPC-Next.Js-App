@@ -4,17 +4,17 @@ import { useState } from "react";
 import Tabs from "./tabs";
 import Alert from "./Alert";
 import QuickFilters from "./filters/QuickFilters";
-import Nearme from "./Nearme";
+// import Nearme from "./Nearme";
 import SearchSec from "./SearchSec";
 import { useMediaQuery } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { toQueryParams } from "../../utils/param";
-import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
+// import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
-import CompareShortListCount from "./CompareShortListCount";
+// import CompareShortListCount from "./CompareShortListCount";
 
 const HomeSearch = ({
   // count,
