@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ProjectCard from "./components/Card/index";
+// import ProjectCard from "./components/Card/index";
 
 export default function Page() {
   const filters = {
@@ -76,5 +76,3 @@ const ReadMoreCard = () => {
     </div>
   );
 };
-
-

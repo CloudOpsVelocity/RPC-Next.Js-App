@@ -1,4 +1,4 @@
-import { SiteNavigationElement, VideoObject, WithContext } from "schema-dts";
+import { SiteNavigationElement, WithContext } from "schema-dts";
 
 const generateFAQJsonLd = (data: any) => {
   const jsonLd: WithContext<SiteNavigationElement> = {

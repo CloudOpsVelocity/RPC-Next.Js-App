@@ -1,5 +1,5 @@
 import { encryptUrl } from "@/app/hooks/custom/useRedirect";
-import { encryptData } from "@/app/utils/auth/nodeCrypto";
+// import { encryptData } from "@/app/utils/auth/nodeCrypto";
 import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
@@ -11,6 +11,3 @@ export async function POST(req: Request) {
     return Response.json({ ok: false, error: "Error reading file" });
   }
 }
-
-
-

@@ -1,4 +1,4 @@
-import useSearchFilters from "@/app/hooks/search";
+// import useSearchFilters from "@/app/hooks/search";
 import { HomeIcon, RentIcon } from "@/app/images/HomePageIcons";
 // import { homeSearchFiltersAtom } from "@/app/store/home";
 import clsx from "clsx";

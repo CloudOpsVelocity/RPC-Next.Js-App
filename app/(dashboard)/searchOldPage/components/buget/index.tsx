@@ -1,4 +1,4 @@
-import { RangeSlider } from "@mantine/core";
+// import { RangeSlider } from "@mantine/core";
 import React from "react";
 // import ClearAll from "../ClearAll";
 // import useSearchFilters from "@/app/hooks/search";

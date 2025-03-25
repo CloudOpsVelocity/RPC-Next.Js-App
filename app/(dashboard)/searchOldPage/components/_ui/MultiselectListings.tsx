@@ -11,8 +11,7 @@ import useQsearch from "@/app/hooks/search/useQsearch";
 import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
-import fakeData from "@/app/data/listing";
-import { Console } from "console";
+// import fakeData from "@/app/data/listing";
 import { projectprops } from "@/app/data/projectDetails";
 
 // For Listings
@@ -63,10 +62,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     filters.projIdEnc
   }`;
 
-
-
   const handlePush = async (type: string, data: any) => {
-
     switch (type) {
       case "Locality":
         handleAddSearch(`${data.name}+${data.id}`);
@@ -132,7 +128,10 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
       case "Builders":
         {
           let builderName = data.name.toLowerCase().split(" ").join("%2D");
-          let builderCity=data.builderCity.toLowerCase().split(" ").join("%2D");
+          let builderCity = data.builderCity
+            .toLowerCase()
+            .split(" ")
+            .join("%2D");
           let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/${builderCity}/${builderName}`;
           window.open(urlBuilder);
 

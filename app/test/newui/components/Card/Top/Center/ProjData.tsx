@@ -1,16 +1,22 @@
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+import {
+  formatCurrency,
+  // formatNumberWithSuffix
+} from "@/app/utils/numbers";
 import React from "react";
-import { NewMapIcon } from "@/app/images/commongsSvgs2";
+// import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import { sortUnits } from "@/app/utils/unitparser";
 import { useSetAtom } from "jotai";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
-import selectedSearchAtom, {
+import {
+  // selectedSearchAtom,
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
-import BuilderLink, {
+import {
+  // BuilderLink,
   generateBuilderUrl,
 } from "@/app/utils/linkRouters/Builder";
-import ProjectLink, {
+import {
+  // ProjectLink,
   createProjectLinkUrl,
 } from "@/app/utils/linkRouters/ProjectLink";
 

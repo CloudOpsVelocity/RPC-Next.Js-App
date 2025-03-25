@@ -16,7 +16,7 @@ import {
   parseAsFloat,
 } from "nuqs";
 import {
-  Query,
+  // Query,
   useInfiniteQuery,
   useMutation,
   useQueryClient,
@@ -321,7 +321,12 @@ export default function useSearchFilters(
   } = useInfiniteQuery({
     queryKey: ["srptest" + convertToQueryParams(params as any) + value],
     queryFn: ({ pageParam = 0 }) =>
-      getFilteredData(convertToQueryParams(params as any), pageParam, value,filters.city),
+      getFilteredData(
+        convertToQueryParams(params as any),
+        pageParam,
+        value,
+        filters.city
+      ),
 
     getNextPageParam: (lastPage: any, allPages: any) => {
       const nextPage = allPages.length;
@@ -337,8 +342,8 @@ export default function useSearchFilters(
         path.includes("/listings") ||
         path.includes("/residential")) &&
         countAppliedFiltersFromQuery() > 0 &&
-        input !== undefined) ,
-    ...RTK_CONFIG
+        input !== undefined),
+    ...RTK_CONFIG,
   });
   //  if any value is null then don't increase otherwise increase count
 
@@ -426,15 +431,15 @@ export default function useSearchFilters(
 }
 
 const getFilteredData = async (
-  query: string, 
+  query: string,
   page: number,
-  type: "project" | "owner" | "agent", 
+  type: "project" | "owner" | "agent",
   city: string | null
 ): Promise<Search[]> => {
   const hasCityParam = /(?:^|&)city=/.test(query);
   const hasCg = /(?:^|&)cg=/.test(query);
   const cgValue = !hasCg ? "&cg=S" : "";
-  
+
   let cityId = "9"; // Default city ID
   if (city) {
     const [_, cityIdFromParam] = city.split("+");
@@ -452,7 +457,9 @@ const getFilteredData = async (
           query && query !== "listedBy=ALL" ? `&${query}` : ""
         }${cgValue}${cityParam}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
-          query && query.includes("listedBy=ALL") ? `&${query.replace("listedBy=ALL", "")}` : `&${query}`
+          query && query.includes("listedBy=ALL")
+            ? `&${query.replace("listedBy=ALL", "")}`
+            : `&${query}`
         }${cityParam}${cgValue}`;
 
   try {

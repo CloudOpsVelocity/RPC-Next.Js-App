@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import { IoIosCloseCircle } from "react-icons/io";
 import useProjectCardData from "../../useProjectCardData";
@@ -10,7 +10,8 @@ import { useMediaQuery } from "@mantine/hooks";
 
 const Overlay: React.FC = () => {
   const [overlayState, dispatch] = useAtom(overlayAtom);
-  const { isOpen, content, title, id, conType, pType, lat, lang ,propId} = overlayState;
+  const { isOpen, content, title, id, conType, pType, lat, lang, propId } =
+    overlayState;
   const { data: amenitiesFromDB, isLoading } = useProjectCardData({
     id: id ?? "",
     isOpen,
@@ -49,27 +50,35 @@ const Overlay: React.FC = () => {
     return amenitiesFromDB
       .toString()
       .split(",")
-      .map((item: string) => (
-       item !== " " && <span
-          key={`amenity_${item}`}
-          className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
-        >
-          {item}
-        </span>
-      ));
+      .map(
+        (item: string) =>
+          item !== " " && (
+            <span
+              key={`amenity_${item}`}
+              className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
+            >
+              {item}
+            </span>
+          )
+      );
   };
   const renderContent = () => {
     switch (conType) {
       case "amenities":
         return <div className="flex flex-wrap gap-2">{renderAmenities()}</div>;
       case "nearby":
-        return ( 
+        return (
           <p>
-            {isLoading ? "Loading..." : <LocationCard data={amenitiesFromDB} />} 
+            {isLoading ? "Loading..." : <LocationCard data={amenitiesFromDB} />}
           </p>
         );
       case "readmore":
-        return <p className="prose-p:py-1 prose-no-break" dangerouslySetInnerHTML={{ __html: content }} />;
+        return (
+          <p
+            className="prose-p:py-1 prose-no-break"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        );
       case "bhk":
         return (
           <div className="flex flex-wrap gap-2">
@@ -124,7 +133,7 @@ const Overlay: React.FC = () => {
             >
               Close
             </button>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
