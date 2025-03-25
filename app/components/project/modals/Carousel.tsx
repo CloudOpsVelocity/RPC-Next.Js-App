@@ -53,7 +53,7 @@ function CarouselModal({
   let DownloadFile = async () => {
     try {
       const response = await fetch(selectedFloor?.floorPlanUrl.split(",")[3]);
-      console.log(response);
+      // console.log(response);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");

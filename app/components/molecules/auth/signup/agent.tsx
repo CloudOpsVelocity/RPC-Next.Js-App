@@ -121,7 +121,7 @@ function Agent({ encriptedData }: any) {
         setStatus("pending");
         //@ts-ignore
         let data = await register({ ...values, usertype: "A" });
-        console.log(data);
+        // console.log(data);
         if (data?.status) {
           setStatus("otp");
           open();

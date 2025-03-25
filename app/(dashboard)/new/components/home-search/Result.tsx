@@ -42,7 +42,7 @@ export default function Results() {
   };
 
   const handlePush = async (type: string, data: any, apiData: any) => {
-    console.log("aa aa a a");
+    // console.log("aa aa a a");
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],

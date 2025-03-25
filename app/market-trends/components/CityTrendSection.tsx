@@ -76,7 +76,7 @@ const PriceCard = ({
       setPopupData({ isOpen: false, data: null, boxId: null });
     }
   };
-  console.log(eachCity);
+  // console.log(eachCity);
   return (
     <div
       key={eachCity.localityName}

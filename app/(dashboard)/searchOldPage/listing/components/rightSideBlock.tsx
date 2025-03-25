@@ -46,8 +46,6 @@ const RightSideBlock = ({ serverClientData }: any) => {
     []
   );
 
-  console.log(serverClientData);
-
   return (
     <div
       id="mobileMap"

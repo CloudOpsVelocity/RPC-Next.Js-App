@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
   ]);
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
 
-  console.log(data.projectName);
+  // console.log(data.projectName);
 
   return (
     <section className="w-full relative break-words">

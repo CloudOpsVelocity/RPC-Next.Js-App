@@ -105,7 +105,7 @@ export const useFloorPlanStore = () => {
   };
   const applyFilters = useCallback(() => {
     const { floorplans, selectedFilters } = state;
-    console.log(selectedFilters);
+    // console.log(selectedFilters);
     const filteredData = floorplans.filter((item: any) => {
       return Object.keys(selectedFilters).every((key) => {
         const filterValue = selectedFilters[key];

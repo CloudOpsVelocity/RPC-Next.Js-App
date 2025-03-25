@@ -78,7 +78,7 @@ export default function useNearby({
         }
         return project;
       });
-      console.log(updatedData);
+      // console.log(updatedData);
       queryClient.setQueryData([`nearby` + projId || slug], {
         ...previousData,
         [type === "proj" ? "nearbyProj" : "builderProj"]: updatedData,

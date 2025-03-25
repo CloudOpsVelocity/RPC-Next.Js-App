@@ -29,7 +29,7 @@ export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}${
     phase ? `/${phase}` : ""
   }/${bhk_unit_type}`;
-  console.log(params);
+  // console.log(params);
   let isProjectListing = bhk_unit_type.includes("listing");
   let serverData = null;
   let filtersValues: any = {};
@@ -37,10 +37,10 @@ export default async function Page({ params }: Props) {
   // filtersValues.PT == "32"
   //   ? filtersValues.count === 7
   //   : filtersValues.count === 8;
-  console.log(isProjectListing, pathname);
+  // console.log(isProjectListing, pathname);
   if (!isProjectListing) {
     const values = await findPathForProjectListing(pathname);
-    console.log(values);
+    // console.log(values);
     if (!values) return notFound();
     filtersValues = extractListingParamsValues(values);
     serverData = await getSearchData(

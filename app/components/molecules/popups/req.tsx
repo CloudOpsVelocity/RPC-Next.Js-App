@@ -195,7 +195,7 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
     setStatus("success");
   };
 
-  console.log(popupState);
+  // console.log(popupState);
 
   return status === "otp" ? (
     <ReqOtpForm

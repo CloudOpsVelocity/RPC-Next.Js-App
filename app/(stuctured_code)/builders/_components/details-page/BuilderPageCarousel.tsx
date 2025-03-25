@@ -80,7 +80,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
     // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_self");
   };
 
-  console.log(isItemInShortlist);
+  // console.log(isItemInShortlist);
 
   return (
     <div

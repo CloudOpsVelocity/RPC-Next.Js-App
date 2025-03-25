@@ -101,7 +101,7 @@ export function FullScreenImageModal({
       setPlatform("Unknown");
     }
   }, []);
-  console.log(platform);
+  // console.log(platform);
 
   const downloadFn = async () => {
     try {

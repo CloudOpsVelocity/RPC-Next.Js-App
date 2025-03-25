@@ -73,7 +73,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
     });
   };
   const handleCardClick = () => {
-    console.log(cardData);
+    // console.log(cardData);
     const url = createProjectLinkUrl({
       city: cardData.cityName,
       slug: cardData.projectName,
@@ -84,7 +84,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
     // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_self");
   };
 
-  console.log(isItemInShortlist);
+  // console.log(isItemInShortlist);
 
   return (
     <div

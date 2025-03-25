@@ -27,10 +27,10 @@ type Props = {
 
 export default function Box({ item }: Props) {
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
-  const router = useRouter() 
+  const router = useRouter();
 
   const handlePush = async (type: string, data: any, apiData: any) => {
-    console.log("box.ts")
+    // console.log("box.ts")
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],
@@ -49,8 +49,7 @@ export default function Box({ item }: Props) {
               apiData.stringId.split("_")[0]
             }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
-            }`,
-           
+            }`
           );
         }
 
@@ -58,40 +57,37 @@ export default function Box({ item }: Props) {
       case "listing":
         {
           const data = extractApiValues(apiData.stringId);
-          
-            let localityName = apiData.name.split(" in ")[1].
-            toLowerCase().trim();
 
-            // let url;
-            // url =
-            //   `propType=${data.PT}${data.BH ? `-bhk=${data.BH}` : ""}-cg=${
-            //     data.CG
-            //   }-localities=${localityName}` +
-            //   "%2B" +
-            //   encodeURIComponent(data.LT);
-            // window.open(
-            //   data.PJ && data.PJ !== "null"
-            //     ? `/search/listing?sf=${url}`
-            //     : "/search/?sf=" + `${url}-listedBy=All`,
-            //   "_blank",
-            //   "noreferrer"
-            // );
+          let localityName = apiData.name.split(" in ")[1].toLowerCase().trim();
 
-            const url = `/search/listing?sf=propType=${data.PT}${
-              data.BH ? `-bhk=${data.BH}` : ""
-            }-cg=${
-              data.CG
-            }-localities=${localityName}%2B${encodeURIComponent(
-              data.LT
-            )}${
-              data.PJ && data.PJ !== "null"
-                ? `-projIdEnc=${data.PJ}-projName=${apiData.name
-                    .split(" in ")[1]
-                    .split("-")[0]
-                    .trim()}`
-                : ""
-            }`;
-            router.push(url);
+          // let url;
+          // url =
+          //   `propType=${data.PT}${data.BH ? `-bhk=${data.BH}` : ""}-cg=${
+          //     data.CG
+          //   }-localities=${localityName}` +
+          //   "%2B" +
+          //   encodeURIComponent(data.LT);
+          // window.open(
+          //   data.PJ && data.PJ !== "null"
+          //     ? `/search/listing?sf=${url}`
+          //     : "/search/?sf=" + `${url}-listedBy=All`,
+          //   "_blank",
+          //   "noreferrer"
+          // );
+
+          const url = `/search/listing?sf=propType=${data.PT}${
+            data.BH ? `-bhk=${data.BH}` : ""
+          }-cg=${data.CG}-localities=${localityName}%2B${encodeURIComponent(
+            data.LT
+          )}${
+            data.PJ && data.PJ !== "null"
+              ? `-projIdEnc=${data.PJ}-projName=${apiData.name
+                  .split(" in ")[1]
+                  .split("-")[0]
+                  .trim()}`
+              : ""
+          }`;
+          router.push(url);
         }
         break;
       case "projectListing":
@@ -115,15 +111,14 @@ export default function Box({ item }: Props) {
               encodeURIComponent(data.name) +
               "%2B" +
               encodeURIComponent(apiData.stringId.split("_")[1]);
-              router.push(
+            router.push(
               `/search?sf=builderIds=${url}-city=${encodeURIComponent(
                 filters?.city ?? ""
               )}${
                 apiData.type !== "BuilderProject"
                   ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
-              }`,
-              
+              }`
             );
           }
         }
@@ -173,8 +168,6 @@ const config = {
     </svg>
   ),
 };
-
-
 
 // /search/listing?sf=propType=31-bhk=49-cg=S-localities=sterling%20villa%20grande-krishnarajapura%2B369-projIdEnc=0bc531c355e8cd106f9b2cb44a4aa5f8-projName=Sterling%20Villa%20Grande
 

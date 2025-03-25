@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });
   }
-} 
+}
 export async function GET(req: Request) {
   const ip = new URL(req.url).searchParams.get("ip");
   if (process.env.NODE_ENV === "development" || ip === "::1") {
@@ -33,7 +33,6 @@ export async function GET(req: Request) {
         status: 200,
       }
     );
-    
   }
   // const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for");
   // console.log('ip log from get user city',ip)
@@ -43,9 +42,9 @@ export async function GET(req: Request) {
       return NextResponse.json({ ok: false, error: "IP not found" });
     }
     const data = await getCityStateFromIP(ip);
-    console.log(data);
+    // console.log(data);
     const cityStateId = await getCityStateIdFromDb(data.region, data.city);
-    console.log(cityStateId);
+    // console.log(cityStateId);
     if (!cityStateId.city) {
       return NextResponse.json({ ok: false, error: "City not found" });
     }
@@ -75,7 +74,9 @@ async function getCityStateFromIP(ip: string) {
   }
 }
 async function getCityStateIdFromDb(state: string, city: string) {
-  console.log(`[${new Date().toISOString()}] getCityStateIdFromDb - State: "${state}", City: "${city}"`);
+  console.log(
+    `[${new Date().toISOString()}] getCityStateIdFromDb - State: "${state}", City: "${city}"`
+  );
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/get-city-state/ip?city=${city}&state=${state}`
   );

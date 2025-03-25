@@ -72,7 +72,7 @@ export default function useAuth({
   const router = useRouter();
 
   const redirectPath = getCallPath();
-  console.log(redirectPath);
+  // console.log(redirectPath);
   const saveStep = async (step: number = 1) => {
     try {
       const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/user-signup-step?page=${step}`;

@@ -103,7 +103,7 @@ Props) {
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
-  console.log(projectUnitsData);
+  // console.log(projectUnitsData);
   // const {
   //   data: overview,
   //   isLoading: overviewdataLoading,
@@ -300,7 +300,7 @@ Props) {
   }, [currentPhase]);
   if (isLoading) return <Loading />;
 
-  console.log(PhaseOverview);
+  // console.log(PhaseOverview);
   return (
     <>
       {!partialUnitData &&

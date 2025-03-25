@@ -82,8 +82,6 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
         }),
   };
 
-  console.log(newParams)
-
   return (
     <nav
       aria-label="Project Search Breadcrumbs"
@@ -97,7 +95,8 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
       />
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         <li>
-          <Link rel="noopener noreferrer"
+          <Link
+            rel="noopener noreferrer"
             href="/"
             className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
           >
@@ -114,7 +113,8 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
                 aria-hidden="true"
               />
               {index !== newParams.length - 1 ? (
-                <Link rel="noopener noreferrer"
+                <Link
+                  rel="noopener noreferrer"
                   href={url}
                   className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
                   aria-current={
