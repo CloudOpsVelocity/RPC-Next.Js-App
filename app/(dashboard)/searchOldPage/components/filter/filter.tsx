@@ -4,7 +4,7 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
 import { RangeSlider } from "@mantine/core";
 import S from "@/app/styles/search.module.css";
-import { formatBudgetValue } from "../buget";
+// import { formatBudgetValue } from "../buget";
 import { toFormattedString } from "../buget/budget";
 const FilterSection = ({ open, close }: any) => {
   const { filters, handleSliderChange, setPropTypes, handleCheckboxClick } =

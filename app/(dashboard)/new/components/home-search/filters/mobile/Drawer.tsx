@@ -1,11 +1,11 @@
 import { Drawer, Pill } from "@mantine/core";
-import React, { Fragment } from "react";
+import React from "react";
 import Styles from "./S.module.css";
-import Box from "../../recentSearch/Box";
+// import Box from "../../recentSearch/Box";
 import QuickFilters from "../QuickFilters";
 import Nearme from "../../Nearme";
 import Tabs from "../../tabs";
-import { SearchIcon, SmallHomeIcon } from "@/app/images/HomePageIcons";
+import { SmallHomeIcon } from "@/app/images/HomePageIcons";
 import SearchSec from "../../SearchSec";
 import useSearchFilters from "@/app/hooks/search";
 import classes from "@/app/styles/search.module.css";
@@ -62,7 +62,8 @@ function AppDrawer({ close, opened }: Props) {
 
               <div className="hidden sm:flex gap-2">
                 <Nearme />
-                <Link rel="noopener noreferrer"
+                <Link
+                  rel="noopener noreferrer"
                   href={`/search`}
                   className={`flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}
                 >
@@ -115,7 +116,8 @@ function AppDrawer({ close, opened }: Props) {
           {/* for mobile */}
           <div className="sm:hidden mt-[10px] flex gap-2">
             <Nearme />
-            <Link rel="noopener noreferrer"
+            <Link
+              rel="noopener noreferrer"
               href={`/search`}
               className={`flex justify-center items-center gap-[4px] rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}
             >

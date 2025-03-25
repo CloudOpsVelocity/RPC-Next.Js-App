@@ -1,13 +1,21 @@
 "use client";
 import { useState } from "react";
-import { Stepper, Button, Group, Code, rem, FocusTrap } from "@mantine/core";
+import {
+  Stepper,
+  Button,
+  Group,
+  // Code, rem, FocusTrap
+} from "@mantine/core";
 import { TextInput, PasswordInput, NumberInput } from "react-hook-form-mantine";
 import N from "@/app/styles/Numinput.module.css";
 import S from "@/app/styles/Pass.module.css";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+  useRouter,
+  // useSearchParams
+} from "next/navigation";
 import Link from "next/link";
 import { styles } from "@/app/styles/Stepper";
-import { DropZone } from "./dropzone";
+// import { DropZone } from "./dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import AuthPopup from "../authPopup";
 import useAuth from "@/app/hooks/useAuth";
@@ -21,7 +29,8 @@ import {
 } from "@/app/images/commonSvgs";
 import StepCss from "@/app/styles/Stepper.module.css";
 import { registerOtherParser } from "@/app/utils/parse";
-import handleTrimAndReplace, {
+import {
+  // handleTrimAndReplace,
   handleTrimAllSpaces,
   handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";
@@ -112,7 +121,7 @@ function Agent({ encriptedData }: any) {
         setStatus("pending");
         //@ts-ignore
         let data = await register({ ...values, usertype: "A" });
-        console.log(data);
+        // console.log(data);
         if (data?.status) {
           setStatus("otp");
           open();

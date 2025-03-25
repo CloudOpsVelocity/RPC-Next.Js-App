@@ -5,15 +5,15 @@ import {
   Balcony,
   Bathrooms,
   BedRooms,
-  Block,
+  // Block,
   Car,
-  CarParkingIcon,
+  // CarParkingIcon,
   CloseBike,
   CornorIcon,
-  EndDate,
+  // EndDate,
   FlatIcon,
   Furnishing,
-  IdIcon,
+  // IdIcon,
   Marble,
   NoticeMonth,
   OpenBike,
@@ -23,15 +23,15 @@ import {
   ParkingIcon,
   PetFreindly,
   PlotConstruction,
-  PropertyAvailable,
-  SecurityIcon,
+  // PropertyAvailable,
+  // SecurityIcon,
   StartDate,
   Status,
-  TotalLandArea,
-  TowerIcon,
+  // TotalLandArea,
+  // TowerIcon,
   WallIcons,
 } from "@/app/images/commonSvgs";
-import { BiFoodTag } from "react-icons/bi";
+// import { BiFoodTag } from "react-icons/bi";
 import { GiKnifeFork } from "react-icons/gi";
 import React from "react";
 import RoomBasicDetails from "./RoomBasicDetails";
@@ -57,7 +57,7 @@ export default function RoomDetails({ data }: { data: Main }) {
         title="Listing details"
         desc={`Check the details For ${
           data.propTypeName === "Plot"
-            ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft"
+            ? formatNumberWithSuffix(data.plotArea, false) + " sq.ft"
             : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sale" : " Rent"}`}
@@ -188,7 +188,7 @@ const OtherDetails = ({
   cunstructionType,
   boundryWallEnclose,
   isUsed,
-  foodAllowedType
+  foodAllowedType,
 }: Main) => {
   return (
     <div
@@ -219,7 +219,7 @@ const OtherDetails = ({
           value={ownershipName}
           className={style.card}
         />
-     
+
         {propTypeName === "Plot" && (
           <RoomBasicDetails
             icon={<OpenSides />}
@@ -230,22 +230,31 @@ const OtherDetails = ({
         )}
         {propTypeName !== "Plot" && (
           <>
-             <RoomBasicDetails
-              icon={<PetFreindly className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />}
+            <RoomBasicDetails
+              icon={
+                <PetFreindly className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
+              }
               title="Pet Friendly"
-              value={ispetFriendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
+              value={
+                ispetFriendly === 1
+                  ? `Pets Are Allowed`
+                  : `Pets Are Not Allowed`
+              }
               className={style.card}
             />
-                  <RoomBasicDetails
-            icon={<Status className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />}
-            title="Availability Status"
-            value={
-              availablityStatus == "R" ? "Ready to Move" : "Under Construction"
-            }
-            className={style.card}
-          />
+            <RoomBasicDetails
+              icon={
+                <Status className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
+              }
+              title="Availability Status"
+              value={
+                availablityStatus == "R"
+                  ? "Ready to Move"
+                  : "Under Construction"
+              }
+              className={style.card}
+            />
           </>
-    
         )}
 
         <RoomBasicDetails
@@ -280,7 +289,6 @@ const OtherDetails = ({
         />
         )} */}
 
-
         <RoomBasicDetails
           icon={<Marble />}
           title="Type of Flooring"
@@ -307,12 +315,11 @@ const OtherDetails = ({
               value={availavleFor}
               className={style.card}
             />
-        
+
             <RoomBasicDetails
               icon={<GiKnifeFork size={26} color="#00487C" />}
               title="Food Preferences"
-              value={foodAllowedType === "Y" ? "Veg Only" :
-                "Anything"}
+              value={foodAllowedType === "Y" ? "Veg Only" : "Anything"}
               className={style.card}
             />
           </>

@@ -1,6 +1,6 @@
 import { getNearByLocations } from "@/app/utils/api/project";
 import { useParams } from "next/navigation";
-import { unstable_useCacheRefresh } from "react";
+// import { unstable_useCacheRefresh } from "react";
 import { useQuery } from "react-query";
 
 export default function useMapData({ projSlug }: { projSlug?: string }) {

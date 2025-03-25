@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import path from "path";
-import fs from "fs";
+// import path from "path";
+// import fs from "fs";
 import { getServerSideSitemap } from "next-sitemap";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";

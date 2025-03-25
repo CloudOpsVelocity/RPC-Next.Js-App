@@ -1,4 +1,4 @@
-import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
+// import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import { Divider } from "@mantine/core";
@@ -9,9 +9,7 @@ import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import Shortlist from "./Shortlist";
 import ListingReqBtn from "./ListingReqCallbackBtn";
-import ListingLink, {
-  generateListingLinkUrl,
-} from "@/app/utils/linkRouters/ListingLink";
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import Link from "next/link";
 type Props = {
   item: any;

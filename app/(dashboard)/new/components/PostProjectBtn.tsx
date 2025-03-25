@@ -28,6 +28,7 @@ export default function PostProjectBtn({}: Props) {
           height={36}
           alt="post"
           className="absolute h-[31px] sm:h-[36] right-0 text-[16px]  "
+          priority
         />
       </Link>
     )

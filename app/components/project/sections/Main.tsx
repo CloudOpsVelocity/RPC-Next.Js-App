@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import InFoCarousel from "./InFoCarousel";
-import CardCarousel from "./CardCarousel";
+// import CardCarousel from "./CardCarousel";
 import PartialUnitModal from "./Modal/Modal";
 type Props = {
   partialUnitData: any;

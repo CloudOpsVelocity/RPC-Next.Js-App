@@ -2,7 +2,7 @@ import logger from "@/app/utils/logger";
 import { getServerSideSitemap } from "next-sitemap";
 import path from "path";
 import fs from "fs";
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const filePath = path.join(process.cwd(), "static", `listingSlugs.json`);
   logger.info(`Listing Details Sitemap: Reading listingSlugs.json file`);

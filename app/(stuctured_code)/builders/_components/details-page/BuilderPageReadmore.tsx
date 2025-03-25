@@ -1,7 +1,7 @@
 "use client";
 import { readMoreAtom } from "@/app/store/drawer";
 import { useAtom } from "jotai";
-import React, { useState } from "react";
+import React from "react";
 
 interface ReadMoreProps {
   text: string;

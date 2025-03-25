@@ -50,7 +50,7 @@ const CaseSeoSearchService = async (
   }
   if (!searchParams.sf) {
     const url = createUrl(slugValues);
-    console.log(url);
+    // console.log(url);
     severData = await getNewProjSearchData(url);
   }
   let city = `Bengaluru`;

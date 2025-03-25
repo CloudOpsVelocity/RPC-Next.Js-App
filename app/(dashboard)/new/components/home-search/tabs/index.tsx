@@ -1,9 +1,9 @@
-import useSearchFilters from "@/app/hooks/search";
+// import useSearchFilters from "@/app/hooks/search";
 import { HomeIcon, RentIcon } from "@/app/images/HomePageIcons";
 // import { homeSearchFiltersAtom } from "@/app/store/home";
 import clsx from "clsx";
 import { useAtom } from "jotai";
-import React, { useState } from "react";
+import React from "react";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 type Props = {};
 
@@ -19,7 +19,7 @@ export default function Tabs({}: Props) {
     }
     dispatch({ type: "SET_CG", payload: tab });
   };
-    return (
+  return (
     <div className="py-3 pr-3 sm:py-4 sm:pr-4 sm:p-4">
       <div className="flex space-x-1 sm:space-x-4">
         <button
@@ -36,20 +36,22 @@ export default function Tabs({}: Props) {
             {activeTab === "S" && config.underLine}
           </div>
         </button>
-        { filters.propType != 32 && <button
-          onClick={() => setActiveTab("R")}
-          className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative ${
-            activeTab === "R"
-              ? "!text-[#148B16] font-semibold text-[12px] sm:text-[18px] f5fff6]"
-              : ""
-          }`}
-        >
-          <Box active={activeTab === "R"} Icon={RentIcon} />
-          Rent
-          <div className="h-[2px] sm:h-[4px] ">
-            {activeTab === "R" && config.underLine}
-          </div>
-        </button>}
+        {filters.propType != 32 && (
+          <button
+            onClick={() => setActiveTab("R")}
+            className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative ${
+              activeTab === "R"
+                ? "!text-[#148B16] font-semibold text-[12px] sm:text-[18px] f5fff6]"
+                : ""
+            }`}
+          >
+            <Box active={activeTab === "R"} Icon={RentIcon} />
+            Rent
+            <div className="h-[2px] sm:h-[4px] ">
+              {activeTab === "R" && config.underLine}
+            </div>
+          </button>
+        )}
       </div>
     </div>
   );

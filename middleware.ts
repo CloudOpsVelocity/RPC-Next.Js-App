@@ -1,7 +1,7 @@
-import { getServerSession } from "next-auth";
+// import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { options } from "./app/options";
+// import { options } from "./app/options";
 
 const AUTH_ROUTES = [
   "/login",

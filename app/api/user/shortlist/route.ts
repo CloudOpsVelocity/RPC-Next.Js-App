@@ -1,6 +1,6 @@
-import { addRating } from "@/app/utils/api/actions/ratings";
+// import { addRating } from "@/app/utils/api/actions/ratings";
 import axios from "axios";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   const data = await req.json();

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
+import { Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useSession } from "next-auth/react";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -80,7 +80,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
     // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_self");
   };
 
-  console.log(isItemInShortlist);
+  // console.log(isItemInShortlist);
 
   return (
     <div

@@ -1,13 +1,13 @@
 "use client";
-import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
+import React, { useState, useCallback, useMemo, Fragment } from "react";
 import { Tabs, ScrollArea } from "@mantine/core";
 import { Coordinates } from "@/app/utils/maps";
 import { useMediaQuery } from "@mantine/hooks";
 import { nearbyLocationIcon } from "@/app/images/commonSvgs";
-import Loading from "../../atoms/Loader";
+// import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
-import useMapData from "@/app/hooks/project/useMapData";
+// import useMapData from "@/app/hooks/project/useMapData";
 import PropertyHeading from "../../property/heading";
 import { useSetAtom } from "jotai";
 import { isScrollingAtom } from "../navigation";
@@ -222,7 +222,7 @@ const LeafMap: React.FC<{
         )}
       </div>
       <Map
-      key="leaflet3SearchPageMap"
+        key="leaflet3SearchPageMap"
         data={mapData && mapData[selected] ? mapData[selected] : []}
         selectedLocation={selectedLocation}
         projName={projName}

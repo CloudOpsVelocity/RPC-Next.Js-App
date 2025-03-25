@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import { projectReqDataAtom } from "@/app/store/project/project.req";
 import Image from "next/image";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
-import { FloorPlanNotAvail, ImgNotAvail } from "@/app/data/project";
+import {
+  // FloorPlanNotAvail,
+  ImgNotAvail,
+} from "@/app/data/project";
 import { propertyDetailsSvgs, ShearIcon } from "@/app/images/commonSvgs";
 import { useQuery } from "react-query";
 import ZoomInOut from "../../actions/ZoomInOut";
@@ -22,7 +25,7 @@ import {
 import { BiMessage } from "react-icons/bi";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 
 const Modal = ({
   isOpen,

@@ -9,14 +9,14 @@ import {
   useCombobox,
 } from "@mantine/core";
 import styles from "./Style.module.css";
-import useSearchFilters from "@/app/hooks/search";
+// import useSearchFilters from "@/app/hooks/search";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
 
 export function BasicMultiSelect() {
-  const [f, dispatch] = useAtom(homeSearchFiltersAtom); 
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const isTab = useMediaQuery("(max-width: 1600px)");
   const [expanded, setExpanded] = useState(false); // State to track if the list is expanded
   const combobox = useCombobox({
@@ -53,7 +53,6 @@ export function BasicMultiSelect() {
       value={item.value}
       key={item.value}
       active={f.bhk.includes(item.value)}
-
     >
       <Group gap="sm">
         <Checkbox
@@ -124,7 +123,7 @@ export function BasicMultiSelect() {
         </PillsInput>
       </Combobox.DropdownTarget>
 
-      <Combobox.Dropdown >
+      <Combobox.Dropdown>
         <Combobox.Options>{options}</Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>

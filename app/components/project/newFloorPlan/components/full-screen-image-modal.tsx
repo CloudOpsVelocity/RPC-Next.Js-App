@@ -20,7 +20,7 @@ import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { FiShare2 } from "react-icons/fi";
-import { imageUrlParser } from "@/app/utils/image";
+// import { imageUrlParser } from "@/app/utils/image";
 import { useMediaQuery } from "@mantine/hooks";
 
 interface FullScreenImageModalProps {
@@ -87,25 +87,21 @@ export function FullScreenImageModal({
   const [, { open: LoginOpen }] = usePopShortList();
   const { data: session } = useSession();
 
-  
-      //this content ios and anirod
-      const [platform, setPlatform] = useState('');
-      const isMobile = useMediaQuery('(max-width: 768px)') 
-  
-    useEffect(() => {
-      const userAgent = navigator.userAgent.toLowerCase();
-      if (/iphone|ipod/.test(userAgent)) {
-        setPlatform('iOS');
-      } else if (/android/.test(userAgent)) {
-        setPlatform('Android');
-      } else {
-        setPlatform('Unknown');
+  //this content ios and anirod
+  const [platform, setPlatform] = useState("");
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (/iphone|ipod/.test(userAgent)) {
+      setPlatform("iOS");
+    } else if (/android/.test(userAgent)) {
+      setPlatform("Android");
+    } else {
+      setPlatform("Unknown");
     }
-    }, []);
-    console.log(platform)
-
-
-
+  }, []);
+  // console.log(platform);
 
   const downloadFn = async () => {
     try {
@@ -143,14 +139,19 @@ export function FullScreenImageModal({
   };
 
   const handleShare = () => {
-    navigator.share({ title: "", url: `/image?path=${unit.floorPlanUrl?.split(",")[0].replace("https://media.getrightproperty.com", "")}&type=F`});
+    navigator.share({
+      title: "",
+      url: `/image?path=${unit.floorPlanUrl
+        ?.split(",")[0]
+        .replace("https://media.getrightproperty.com", "")}&type=F`,
+    });
   };
 
   const handleShearMasterplan = async () => {
     if (session) {
       handleShare();
     } else {
-      console.log(unit.floorPlanUrl?.split(",")[0])
+      console.log(unit.floorPlanUrl?.split(",")[0]);
       LoginOpen(handleShare, {
         type: "floor-plan",
         link: unit.floorPlanUrl?.split(",")[0],
@@ -158,7 +159,7 @@ export function FullScreenImageModal({
     }
   };
 
-  // `/image?path=${unit.floorPlanUrl?.split(",")[0]}` 
+  // `/image?path=${unit.floorPlanUrl?.split(",")[0]}`
 
   if (!isOpen) return null;
 
@@ -209,9 +210,9 @@ export function FullScreenImageModal({
               <span className="hidden md:inline">Download Floor Plan</span>
             </button>
             <button
-              onClick={() =>{ 
+              onClick={() => {
                 console.log(unit);
-                handleReqcallBack(unit)
+                handleReqcallBack(unit);
               }}
               className="flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
             >
@@ -233,19 +234,24 @@ export function FullScreenImageModal({
           <div className="flex-1 p-[10px] md:p-6 flex items-center justify-center bg-[#F8FBFF]">
             <Image
               width={800}
-              height={platform == "iOS" ? 250 :   600}
+              height={platform == "iOS" ? 250 : 600}
               src={unit.floorPlanUrl?.split(",")[0] ?? ImgNotAvail}
               alt={`Floor Plan for ${unit.bhkName}`}
               /* className="max-w-full h-full  object-contain " */
-              className={`max-w-full h-full  object-contain ${platform == "iOS" ? " max-h-[100%] sm:max-h-[600px]"  :   ""} `}
+              className={`max-w-full h-full  object-contain ${
+                platform == "iOS" ? " max-h-[100%] sm:max-h-[600px]" : ""
+              } `}
             />
           </div>
 
           {/* Right - Unit Details */}
           <div className="w-full lg:w-96 bg-white p-[10px] md:p-6  border-t lg:border-t-0 lg:border-l">
-          <div className={`${platform == "iOS" ? "mb-28 space-y-6" :"space-y-6" } `}>
-            
-          {/* Area Details */}
+            <div
+              className={`${
+                platform == "iOS" ? "mb-28 space-y-6" : "space-y-6"
+              } `}
+            >
+              {/* Area Details */}
               <div>
                 <h4 className="text-lg font-semibold text-[#303A42] mb-[20px] border-b pb-2">
                   Area Details

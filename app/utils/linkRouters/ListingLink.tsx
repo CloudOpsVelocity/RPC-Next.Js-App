@@ -2,21 +2,20 @@ import {
   BASE_PATH_LISTING,
   BASE_PATH_PROJECT_LISTING,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
-import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+// import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import Link, { LinkProps } from "next/link";
 import React, { ReactNode, useMemo } from "react";
 
 // Simple slugify function without memoization
 const slugify = (name: string): string => {
-  if(!name){
+  if (!name) {
     return "";
-  } else{
+  } else {
     return name
-    .toLowerCase() 
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
   }
-
 };
 
 type ListingLinkProps = {
@@ -48,13 +47,15 @@ const slugifyBHKUnitType = (bhkUnitType: string): string => {
 export const generateListingLinkUrl = (
   routeParams: ListingLinkProps["routeParams"]
 ): string => {
-  const { city, locality, projName, phase, bhkUnitType, propIdEnc, category } = routeParams;
+  const { city, locality, projName, phase, bhkUnitType, propIdEnc, category } =
+    routeParams;
 
   let url = `${
     projName ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
   }/${category}/${slugify(city)}/${slugify(locality)}`;
   if (projName) url += `/${slugify(projName)}`;
-  if (phase && phase !== "null" && phase !== undefined) url += `/${slugify(phase)}`;
+  if (phase && phase !== "null" && phase !== undefined)
+    url += `/${slugify(phase)}`;
   url += `/${slugifyBHKUnitType(bhkUnitType)}/listing-${propIdEnc}`;
   return url;
 };

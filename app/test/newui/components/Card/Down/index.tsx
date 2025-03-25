@@ -4,8 +4,11 @@ import clsx from "clsx";
 import React from "react";
 import { overlayAtom } from "../../../store/overlay";
 import { useAtom, useSetAtom } from "jotai";
-import { PetFreindly, WhitePetFreindly } from "@/app/images/commonSvgs";
-import selectedSearchAtom, { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
+import { WhitePetFreindly } from "@/app/images/commonSvgs";
+import selectedSearchAtom, {
+  modalPopup,
+  selectedNearByAtom,
+} from "@/app/store/search/map";
 
 export default function CardDownSection({
   a,
@@ -26,10 +29,10 @@ export default function CardDownSection({
   title,
   propType,
   location,
-  phaseId
+  phaseId,
 }: any) {
-  const [lat,lang] = location?.split(',') ?? []
-  const isMobile = useMediaQuery("(max-width: 1600px)"); 
+  const [lat, lang] = location?.split(",") ?? [];
+  const isMobile = useMediaQuery("(max-width: 1600px)");
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
   const setNearby = useSetAtom(selectedNearByAtom);
   const setSelected = useSetAtom(selectedSearchAtom);
@@ -58,9 +61,7 @@ export default function CardDownSection({
   // };
   const dispatch = useSetAtom(overlayAtom);
   return (
-    <div
-    
-    className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
+    <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
       <div className="flex gap-[9px]">
         {type === "proj" ? (
           <>
@@ -85,7 +86,7 @@ export default function CardDownSection({
           </>
         ) : (
           <>
-            {(isPetFriendly && propTypeName !== "Plot") ? (
+            {isPetFriendly && propTypeName !== "Plot" ? (
               <div className="flex items-center space-x-1 bg-green-500 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
                 <WhitePetFreindly className="w-[20px] h-[20px] " />
                 <span>Pet Friendly</span>
@@ -113,79 +114,92 @@ export default function CardDownSection({
             >
               Highlights
             </button> */}
-            {
-              amenCount > 0 && (
-                <button
-                  className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
-                  title={`Click to view ${amenCount === 1 ? "" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    dispatch({
-                      content: [],
-                      conType: "amenities",
-                      title: "Amenities",
-                      id: `${projIdEnc ?? ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
-                      type: "OPEN",
-                      pType: type,
-                      propId: propIdEnc,
-                    }); 
-                  }}
-              > 
+            {amenCount > 0 && (
+              <button
+                className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
+                title={`Click to view ${
+                  amenCount === 1 ? "" : "all"
+                } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch({
+                    content: [],
+                    conType: "amenities",
+                    title: "Amenities",
+                    id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+                      propTypeId ?? propTypeName ?? ""
+                    }`,
+                    type: "OPEN",
+                    pType: type,
+                    propId: propIdEnc,
+                  });
+                }}
+              >
                 <span className="bg-white rounded-full text-black px-2">
                   {amenCount}
                 </span>{" "}
                 Amenities
               </button>
-              )
-            }
+            )}
             <button
-                className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out min-h-[28px] "
-                title="Click to view Near by Locations"
-                onClick={(e) =>{
-                  title="Click to view Near by Locations"
-                  e.stopPropagation();
-                  setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
-                  setSelected({
-                    lat,
-                    lang, 
-                    type, 
-                    reqId: !propIdEnc ? projIdEnc : propIdEnc,
-                    propType: !propIdEnc ? propType : propTypeName,
-                    projOrPropName: propName ? propName : projName,
-                    phaseId: phaseId ? phaseId : ""
-                  })
-                  if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
-                  // console.log("near by 2");
-                  dispatch({
-                    type: "OPEN", 
-                    content: [],
-                    id: `${projIdEnc??   ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
-                    title: `NearBy Locations of ${title}`,
-                    conType: "nearby",
-                    pType: projIdEnc ? 'proj' : 'prop', 
-                    lat,
-                    lang,
-                    propId: propIdEnc
-                  })
-                }
-                }
-              >
-                Nearby
-              </button>
+              className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out min-h-[28px] "
+              title="Click to view Near by Locations"
+              onClick={(e) => {
+                title = "Click to view Near by Locations";
+                e.stopPropagation();
+                setNearby((prev: any) => ({
+                  ...prev,
+                  category: "",
+                  data: {},
+                  selectedNearbyItem: {},
+                  id: "",
+                  isOpen: false,
+                  isLoader: true,
+                }));
+                setSelected({
+                  lat,
+                  lang,
+                  type,
+                  reqId: !propIdEnc ? projIdEnc : propIdEnc,
+                  propType: !propIdEnc ? propType : propTypeName,
+                  projOrPropName: propName ? propName : projName,
+                  phaseId: phaseId ? phaseId : "",
+                });
+                if (isMobile)
+                  setMapPopup((prev: any) => ({ ...prev, isOpen: true }));
+                // console.log("near by 2");
+                dispatch({
+                  type: "OPEN",
+                  content: [],
+                  id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+                    propTypeId ?? propTypeName ?? ""
+                  }`,
+                  title: `NearBy Locations of ${title}`,
+                  conType: "nearby",
+                  pType: projIdEnc ? "proj" : "prop",
+                  lat,
+                  lang,
+                  propId: propIdEnc,
+                });
+              }}
+            >
+              Nearby
+            </button>
           </>
         )}
-              
       </div>
 
       {/* right section */}
       {!isMobile && (
         <div className=" right-1 inline-flex">
           <button
-            title={`Click to ${isCompared ? "Remove Compare" : "Add to Compare"}`}
+            title={`Click to ${
+              isCompared ? "Remove Compare" : "Add to Compare"
+            }`}
             className="bg-btnPrimary rounded-[4px]  bottom-2 left-1 text-white text-[12px] px-1 font-bold"
             onClick={(e) => {
               e.stopPropagation();
-              onAddingCompare()
+              onAddingCompare();
             }}
           >
             {isCompared ? "Remove Compare" : "Add to Compare"}
@@ -214,10 +228,10 @@ type CountListProps = {
 };
 const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
   const handleAgentOwner = (type: "A" | "I" | "B") => {
-   
     window.open(
       `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
-      "_self", "noreferrer"
+      "_self",
+      "noreferrer"
     );
   };
 
@@ -230,7 +244,7 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
           handleAgentOwner(
             type === "Owner" ? "I" : type === "Builder" ? "B" : "A"
           );
-        }}      
+        }}
         className={clsx(
           "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",
           type === "Owner"

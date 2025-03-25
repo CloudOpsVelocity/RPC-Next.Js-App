@@ -2,7 +2,7 @@ import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { Carousel } from "@mantine/carousel";
 import clsx from "clsx";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import React from "react";
 import styles from "@/app/styles/Carousel.module.css";
 import Image from "next/image";

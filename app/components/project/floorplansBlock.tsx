@@ -3,7 +3,7 @@ import {
   propertyDetailsTypes,
   projectprops,
   BACKEND_PROP_TYPES,
-  floorplanTypes,
+  // floorplanTypes,
 } from "../../data/projectDetails";
 import Button from "../../elements/button";
 import React, { useEffect, useState } from "react";
@@ -29,7 +29,10 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
 });
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "react-query";
-import { getOverViewData, getProjectUnits } from "@/app/utils/api/project";
+import {
+  // getOverViewData,
+  getProjectUnits,
+} from "@/app/utils/api/project";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
@@ -42,7 +45,7 @@ import { ImgNotAvail } from "@/app/data/project";
 import NoProperties from "./notfound";
 import Nofloor from "./error/nofloor";
 import clsx from "clsx";
-import CarouselSuggestion from "./unitblock/carousel";
+// import CarouselSuggestion from "./unitblock/carousel";
 import dynamic from "next/dynamic";
 import { Divider } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
@@ -100,7 +103,7 @@ Props) {
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
-  console.log(projectUnitsData)
+  // console.log(projectUnitsData);
   // const {
   //   data: overview,
   //   isLoading: overviewdataLoading,
@@ -130,7 +133,7 @@ Props) {
     if (data.id === 32 && floorPlanType === "bhk") {
       setFloorPlanType("type");
     }
-    setPropCgId(data.id); 
+    setPropCgId(data.id);
   };
   const iconStyles: string =
     " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
@@ -213,7 +216,7 @@ Props) {
     open("floor");
   };
   const handlePricingFloorPlanClick = (selectedBhk: any) => {
-    if (selectedBhk.bhkName.includes("_")) { 
+    if (selectedBhk.bhkName.includes("_")) {
       const [length, width] = selectedBhk.bhkName.split("_");
       form.setValues({
         ...setPropertyValues(
@@ -297,7 +300,7 @@ Props) {
   }, [currentPhase]);
   if (isLoading) return <Loading />;
 
-  console.log(PhaseOverview)
+  // console.log(PhaseOverview);
   return (
     <>
       {!partialUnitData &&
@@ -306,14 +309,13 @@ Props) {
         ) : (
           <PartialUnitData
             partialUnitData={paritalUnitParser(PhaseOverview)}
-            projName={projName} 
+            projName={projName}
             phaseList={phaseList}
             data={projectUnitsData}
             type="overview"
             handlePricingFloorPlanClick={handlePricingFloorPlanClick}
           />
         ))}{" "}
-
       <div
         className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[0%]"
         id="floor-plans"

@@ -1,17 +1,18 @@
 "use client";
-import PriceBag, {
-  DocIcon,
-  Phone,
+import {
+  // PriceBag,
+  // DocIcon,
+  // Phone,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
 import React from "react";
 
 import Button from "../../elements/button";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import RequestCallBackModal from "../molecules/popups/req";
-import DownloadBroucher from "@/app/components/project/downloadBroucher";
+// import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import { NumberFormatter } from "@mantine/core";
 export default function OverviewBanner({
   minPrice,
@@ -21,7 +22,7 @@ export default function OverviewBanner({
   basePrice,
   brocherUrl,
   builderId,
-  slug
+  slug,
 }: {
   minPrice: number;
   maxPrice: number;
@@ -30,7 +31,7 @@ export default function OverviewBanner({
   basePrice: number;
   brocherUrl?: string;
   builderId: number;
-  slug:string
+  slug: string;
 }) {
   const [opened, { open }] = useReqCallPopup();
   return (
@@ -39,15 +40,15 @@ export default function OverviewBanner({
       // id="brochure"
     >
       {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
- */}
-            <img
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
-              width="237" 
-              height="263" 
-              loading="lazy"
-            alt="priceBagOverView"
-            className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"          />
-
+       */}
+      <img
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
+        width="237"
+        height="263"
+        loading="lazy"
+        alt="priceBagOverView"
+        className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
+      />
 
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%]  flex-wrap">
         <div className=" grid  md:block">

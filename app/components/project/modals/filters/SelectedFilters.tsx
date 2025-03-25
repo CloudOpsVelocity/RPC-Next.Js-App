@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
@@ -70,12 +70,12 @@ const SelectedFilters = ({
                       (propCgId === 31 || propCgId === 33)
                       ? "Elevation"
                       : key === "aptTypeName"
-                        ? propCgId === 35
-                          ? "Apartment Type"
-                          : propCgId === 34
-                            ? "Villament Type" 
-                            : filterKeysDetails?.get(key)?.name
+                      ? propCgId === 35
+                        ? "Apartment Type"
+                        : propCgId === 34
+                        ? "Villament Type"
                         : filterKeysDetails?.get(key)?.name
+                      : filterKeysDetails?.get(key)?.name
                     : key}
                 </span>
                 <button className="ml-2 !w-[14px] !h-[14px]">

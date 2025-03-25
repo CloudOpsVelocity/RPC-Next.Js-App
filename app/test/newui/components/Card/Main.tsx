@@ -10,12 +10,12 @@ import CenterTop from "./Top/Center";
 import CardDownSection from "./Down";
 import TopRightSection from "./Top/Right";
 import { useMediaQuery } from "@mantine/hooks";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import Overlay from "../modals/Overlay";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
-import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+// import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useRouter } from "next/navigation";
 
 type Props = {

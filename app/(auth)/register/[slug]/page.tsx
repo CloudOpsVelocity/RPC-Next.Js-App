@@ -2,7 +2,7 @@ import Agent from "@/app/components/molecules/auth/signup/agent";
 import Builder from "@/app/components/molecules/auth/signup/builder";
 import Individual from "@/app/components/molecules/auth/signup/individual";
 import { decryptResumeSignupToken } from "@/app/utils/auth/crypto";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import React from "react";
 interface Props {

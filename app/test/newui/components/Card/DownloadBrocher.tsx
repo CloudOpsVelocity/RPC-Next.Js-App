@@ -1,8 +1,8 @@
-import downloadPDF from "@/app/(dashboard)/searchOldPage/Page/utils";
+// import downloadPDF from "@/app/(dashboard)/searchOldPage/Page/utils";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { DownLoadIcon } from "@/app/images/commongsSvgs2";
 import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React from "react";
 
 type Props = {
   brochureUrl: string;
@@ -14,10 +14,18 @@ export default function DownloadBrocher({ brochureUrl: url }: Props) {
 
   const handleDownload = () => {
     if (session) {
-      url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_self");
+      url &&
+        window.open(
+          `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
+          "_self"
+        );
     } else {
       LoginOpen(() => {
-        url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_self");
+        url &&
+          window.open(
+            `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
+            "_self"
+          );
       });
     }
   };

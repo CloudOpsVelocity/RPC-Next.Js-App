@@ -22,7 +22,7 @@ import BrokerContactTag from "./BrokersFreindly";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
 import { useQuery } from "react-query";
-import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+// import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 type Props = {
   projectDetails: Main | null;
   projName: string;
@@ -171,7 +171,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 </div>
                 {projectDetails.projIdEnc ? (
                   <Link
-                  prefetch={false}
+                    prefetch={false}
                     href={projectUrl}
                     rel="noopener noreferrer"
                     className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${

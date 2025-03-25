@@ -1,12 +1,12 @@
 "use client";
 import dayjs from "dayjs";
 import "@mantine/dates/styles.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Stepper,
   Button,
   Group,
-  Code,
+  // Code,
   Text,
   SimpleGrid,
   ScrollArea,
@@ -24,11 +24,18 @@ import StepCss from "@/app/styles/Stepper.module.css";
 
 // import { DateInput } from "@mantine/dates";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import {
+  // usePathname,
+  useRouter,
+} from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 import AuthPopup from "../authPopup";
-import { randomId, useDisclosure, usePageLeave } from "@mantine/hooks";
+import {
+  randomId,
+  useDisclosure,
+  // usePageLeave
+} from "@mantine/hooks";
 import useAuth from "@/app/hooks/useAuth";
 import Success from "../success";
 import { useQuery } from "react-query";
@@ -37,14 +44,17 @@ import {
   getCitiesDetails,
   getStatesDetails,
 } from "@/app/utils/stats_cities";
-import { deleteCookie, getCookie } from "cookies-next";
+import {
+  // deleteCookie,
+  getCookie,
+} from "cookies-next";
 import {
   cityParser,
   registerOtherParser,
   stateParser,
 } from "@/app/utils/parse";
 import {
-  agentSchema,
+  // agentSchema,
   builderFirstStepSchema,
   builderSchema,
   builderSchemaIndex1,
@@ -54,9 +64,9 @@ import {
   MAX_LENTH_TEXT,
   textAreaScema,
 } from "@/app/validations/auth";
-import CountryInput from "@/app/components/atoms/CountryInput";
+// import CountryInput from "@/app/components/atoms/CountryInput";
 import N from "@/app/styles/Numinput.module.css";
-import OldRouter from "next/router";
+// import OldRouter from "next/router";
 import {
   BackSvg,
   DateIcons,
@@ -67,7 +77,7 @@ import {
   StepperDotGreen,
 } from "@/app/images/commonSvgs";
 import {
-  handleAllTrimAndReplace,
+  // handleAllTrimAndReplace,
   handleTrimAllSpaces,
   handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";

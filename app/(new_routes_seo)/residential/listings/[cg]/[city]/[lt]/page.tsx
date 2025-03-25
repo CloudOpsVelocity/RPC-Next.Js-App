@@ -1,10 +1,10 @@
 import React from "react";
-import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
-import { getPagesSlugs } from "@/app/seo/api";
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
+// import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
+// import { getPagesSlugs } from "@/app/seo/api";
+// import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import {
   findPathForProjectListing,
-  getNestedSlug,
+  // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import {
   getProjSearchData,

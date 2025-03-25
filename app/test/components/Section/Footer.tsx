@@ -15,8 +15,8 @@ import Link from "next/link";
 
 export default function EnhancedFooter() {
   const { data: session } = useSession();
-  console.log(session)
-  
+  // console.log(session)
+
   const socialIcons = [
     {
       name: "facebook",
@@ -107,7 +107,9 @@ export default function EnhancedFooter() {
         "Home",
         "Projects",
         "Properties",
-        session !== null && session.user?.userType === "B" ? "Post Project" : "",
+        session !== null && session.user?.userType === "B"
+          ? "Post Project"
+          : "",
         "Post Property",
         "Builders",
         session === null ? "Login/Signup" : "",
@@ -179,11 +181,12 @@ export default function EnhancedFooter() {
             </p>
             <div className="flex space-x-6">
               {socialIcons.map(({ name, icon, link }) => (
-                <Link rel="noreferrer"
+                <Link
+                  rel="noreferrer"
                   key={name}
                   href={link}
                   className="text-white hover:text-gray-300"
-                  target='_blank'
+                  target="_blank"
                 >
                   <span className="sr-only">{name}</span>
                   {icon}
@@ -202,7 +205,8 @@ export default function EnhancedFooter() {
                   <ul className="sm:mt-4  md:space-y-4">
                     {links.map((link, index) => (
                       <li key={link}>
-                        <Link rel="noopener noreferrer"
+                        <Link
+                          rel="noopener noreferrer"
                           href={hrefs[index]}
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
@@ -223,17 +227,20 @@ export default function EnhancedFooter() {
                   </h3>
                   <ul className="sm:mt-4  md:space-y-4">
                     {links.map((link, index) => {
-                      if(link !== ""){
-                      return(
-                      <li key={link}>
-                        <Link rel="noopener noreferrer"
-                          href={hrefs[index]}
-                          className="text-xs sm:text-base text-gray-300 hover:text-white"
-                        >
-                          {link}
-                        </Link>
-                      </li>
-                    )}})}
+                      if (link !== "") {
+                        return (
+                          <li key={link}>
+                            <Link
+                              rel="noopener noreferrer"
+                              href={hrefs[index]}
+                              className="text-xs sm:text-base text-gray-300 hover:text-white"
+                            >
+                              {link}
+                            </Link>
+                          </li>
+                        );
+                      }
+                    })}
                   </ul>
                 </div>
               ))}
@@ -247,7 +254,8 @@ export default function EnhancedFooter() {
                   <ul className="sm:mt-4  md:space-y-4">
                     {links.map((link, index) => (
                       <li key={link}>
-                        <Link rel="noopener noreferrer"
+                        <Link
+                          rel="noopener noreferrer"
                           href={hrefs[index]}
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
@@ -282,7 +290,8 @@ export default function EnhancedFooter() {
             <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
               <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
             </button>
-            <Link rel="noopener noreferrer"
+            <Link
+              rel="noopener noreferrer"
               href={`tel:${8884440963}`}
               className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
             >
@@ -293,7 +302,7 @@ export default function EnhancedFooter() {
             Copyright © 2024 GetRightProperty. All Rights Reserved.
             <span>
               <br />A Product By &quot;
-              <Link rel="noopener noreferrer" href="https://rpclan.com/" >
+              <Link rel="noopener noreferrer" href="https://rpclan.com/">
                 {" "}
                 RPCLAN SERVICES PVT.LTD
               </Link>

@@ -1,4 +1,4 @@
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { ProjSearchAppliedFiltersStore } from "../store/projSearchStore";
 import { useQueryState } from "nuqs";
 // import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";

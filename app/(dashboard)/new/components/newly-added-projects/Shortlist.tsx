@@ -1,11 +1,11 @@
 "use client";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
-import { Shorlisted } from "@/app/images/commonSvgs";
+// import { Shorlisted } from "@/app/images/commonSvgs";
 import { HeartIcon } from "@/app/images/HomePageIcons";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import useIds from "../useIds";
+// import useIds from "../useIds";
 import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCompare";
 type Props = {
   reqId: string;

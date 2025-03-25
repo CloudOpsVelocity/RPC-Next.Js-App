@@ -7,7 +7,7 @@ import {
   fourStarIcon,
   lensSvg,
   miniItemsCrossIcon,
-  notificationIcon,
+  // notificationIcon,
 } from "@/app/images/commonSvgs";
 import {
   Checkbox,
@@ -21,11 +21,11 @@ import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
 import { useDebouncedState } from "@mantine/hooks";
-import useSearch from "@/app/hooks/search/useSearch";
+// import useSearch from "@/app/hooks/search/useSearch";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import ClearAll from "../../ClearAll";
-import Close from "@/app/components/project/button/close";
+// import Close from "@/app/components/project/button/close";
 import { formatBudgetValue } from "../../buget";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { toFormattedString } from "../../buget/budget";
@@ -64,18 +64,19 @@ const MobileFilter = ({ close }: any) => {
     remnoveSearchOptions,
     isFilterApplied,
   } = useSearchFilters();
-  const serverCity = useAtomValue(serverCityAtom)
+  const serverCity = useAtomValue(serverCityAtom);
   const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
+    queryFn: () =>
+      getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
   });
   const { isLoading: builderDataLoading, data: builderData } = useQuery({
-    queryFn: () => getData(builderSearch, "builders", filters.city ?? serverCity ?? ""),
+    queryFn: () =>
+      getData(builderSearch, "builders", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "builders" + builderSearch],
     enabled: builderSearch !== "",
   });
-
 
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
@@ -360,8 +361,8 @@ const MobileFilter = ({ close }: any) => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
-          {toFormattedString(filters.bugdetValue[1])} Cr
+            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+            {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"

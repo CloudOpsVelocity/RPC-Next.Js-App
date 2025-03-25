@@ -3,11 +3,11 @@ import About from "../project/about";
 import {
   TotalLandArea,
   callIconSvg,
-  completedProjIconSvg,
+  // completedProjIconSvg,
   emailIconSvg,
   lacationIconSvg,
-  newLaunchProjIconSvg,
-  onGoingProjIconSvg,
+  // newLaunchProjIconSvg,
+  // onGoingProjIconSvg,
 } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
 import Card from "./BuilderDetails/Card";
@@ -36,7 +36,7 @@ export default function ProjectDetails({
 }: Data) {
   return (
     <React.Fragment>
-      <BuilderProjectsCount  builderName={userName}  id={id} />
+      <BuilderProjectsCount builderName={userName} id={id} />
       <About
         id="whyBuy"
         heading="About Builder"

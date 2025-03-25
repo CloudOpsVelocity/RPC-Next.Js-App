@@ -1,7 +1,7 @@
 "use client";
 
 import { otpSchema } from "@/app/validations/auth";
-import { Box, Button, FocusTrap, Modal, PinInput, em } from "@mantine/core";
+import { Button, FocusTrap, PinInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";

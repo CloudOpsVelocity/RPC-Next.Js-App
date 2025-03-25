@@ -1,16 +1,16 @@
 import useSearchFilters from "@/app/hooks/search";
-import { DarkDropDownIcon, DropDownIcon } from "@/app/images/commonSvgs";
+import { DarkDropDownIcon } from "@/app/images/commonSvgs";
 import { Menu } from "@mantine/core";
 import clsx from "clsx";
-import React, { useState } from "react";
+import React from "react";
 
 type Props = {
-  typeProp:'proj' | 'listing'
-  ActivitiesType: null | string
+  typeProp: "proj" | "listing";
+  ActivitiesType: null | string;
 };
 
-export default function SortBy({typeProp,  ActivitiesType}: Props) {
-  const buyOrSell =ActivitiesType == "R"? "Rent" : "Sale";
+export default function SortBy({ typeProp, ActivitiesType }: Props) {
+  const buyOrSell = ActivitiesType == "R" ? "Rent" : "Sale";
 
   const commonConfig = [
     {
@@ -22,21 +22,24 @@ export default function SortBy({typeProp,  ActivitiesType}: Props) {
       label: "Price High to Low",
       value: 1,
       type: "maxPrice",
-    }
-  ];
-  const additionalConfig = buyOrSell != "Rent" ? [
-    {
-      label: "Price / sq.ft. : Low to High",
-      value: 2,
-      type: "basePrice",
     },
-    {
-      label: "Price / sq.ft. : High to Low",
-      value: 1,
-      type: "basePrice",
-    }
-  ] : [];
-  
+  ];
+  const additionalConfig =
+    buyOrSell != "Rent"
+      ? [
+          {
+            label: "Price / sq.ft. : Low to High",
+            value: 2,
+            type: "basePrice",
+          },
+          {
+            label: "Price / sq.ft. : High to Low",
+            value: 1,
+            type: "basePrice",
+          },
+        ]
+      : [];
+
   const commonConfigList = [
     {
       label: "Price Low to High",
@@ -47,42 +50,43 @@ export default function SortBy({typeProp,  ActivitiesType}: Props) {
       label: "Price High to Low",
       value: 1,
       type: "price",
-    }
-  ];
-  const additionalConfigList = buyOrSell != "Rent" ? [
-    {
-      label: "Price / sq.ft. : Low to High",
-      value: 2,
-      type: "sqftPrice",
     },
-    {
-      label: "Price / sq.ft. : High to Low",
-      value: 1,
-      type: "sqftPrice",
-    }
-  ] : [];
-    
-  
-  
+  ];
+  const additionalConfigList =
+    buyOrSell != "Rent"
+      ? [
+          {
+            label: "Price / sq.ft. : Low to High",
+            value: 2,
+            type: "sqftPrice",
+          },
+          {
+            label: "Price / sq.ft. : High to Low",
+            value: 1,
+            type: "sqftPrice",
+          },
+        ]
+      : [];
+
   const projConfig = [...commonConfig, ...additionalConfig];
-  const listConfig=[...commonConfigList, ...additionalConfigList]
+  const listConfig = [...commonConfigList, ...additionalConfigList];
 
-  const config=typeProp == "proj" ? projConfig :listConfig;
-
+  const config = typeProp == "proj" ? projConfig : listConfig;
 
   const { filters, setFilters, handleAppliedFilters, params } =
     useSearchFilters();
 
   const handleSetFilter = (sortByfield: string, sortType: number) => {
-    if(sortByfield  === "Newest First"){
+    if (sortByfield === "Newest First") {
       setFilters((prev) => ({
         ...prev,
         sortByfield: null,
         sortType: null,
       }));
-    }
-    else if(!(filters.sortByfield === sortByfield && filters.sortType === sortType)) {
-   /*    setFilters((prev) => ({
+    } else if (
+      !(filters.sortByfield === sortByfield && filters.sortType === sortType)
+    ) {
+      /*    setFilters((prev) => ({
         ...prev,
         sortByfield: null,
         sortType: null,
@@ -98,14 +102,15 @@ export default function SortBy({typeProp,  ActivitiesType}: Props) {
         sortByfield: sortByfield,
         sortType: sortType,
       }));
-      
     }
     handleAppliedFilters();
   };
-  const seletedValue = config.find(
-    (eachItem) =>
-      eachItem.value === params.sortType && eachItem.type === params.sortByfield
-  )?.label ?? "Newest First"
+  const seletedValue =
+    config.find(
+      (eachItem) =>
+        eachItem.value === params.sortType &&
+        eachItem.type === params.sortByfield
+    )?.label ?? "Newest First";
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
@@ -119,16 +124,17 @@ export default function SortBy({typeProp,  ActivitiesType}: Props) {
 
       <Menu.Dropdown>
         <Menu.Item
-              classNames={{
-                item: clsx(
-                  " text-xs text-[#242424] md:text-base font-[500] leading-[normal]",
-                  "Newest First" === seletedValue && "!bg-[#1C7ED6] !text-white"
-                ),
-              }}
-              value={seletedValue}
-              onClick={() => handleSetFilter("Newest First", 0)}
-        
-        >Newest First</Menu.Item>
+          classNames={{
+            item: clsx(
+              " text-xs text-[#242424] md:text-base font-[500] leading-[normal]",
+              "Newest First" === seletedValue && "!bg-[#1C7ED6] !text-white"
+            ),
+          }}
+          value={seletedValue}
+          onClick={() => handleSetFilter("Newest First", 0)}
+        >
+          Newest First
+        </Menu.Item>
         {config.map((eachItem, index) => {
           return (
             <Menu.Item
@@ -150,11 +156,6 @@ export default function SortBy({typeProp,  ActivitiesType}: Props) {
     </Menu>
   );
 }
-
-
-
-
-
 
 /* console.log(projConfig);
 

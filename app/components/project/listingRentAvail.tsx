@@ -2,10 +2,10 @@
 import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 import {
   AvailListSideSvg,
-  RentSvg,
-  SellSvg,
-  StockIcon,
-  postDetailsIcon,
+  // RentSvg,
+  // SellSvg,
+  // StockIcon,
+  // postDetailsIcon,
 } from "@/app/images/commonSvgs";
 import clsx from "clsx";
 import Image from "next/image";

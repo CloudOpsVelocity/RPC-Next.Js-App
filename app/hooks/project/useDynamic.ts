@@ -1,11 +1,11 @@
 import RTK_CONFIG from "@/app/config/rtk";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { Old_Standard_TT } from "next/font/google";
-import { useParams } from "next/navigation";
+// import { Old_Standard_TT } from "next/font/google";
+// import { useParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-export default function useDynamicProj(slug:string) {
+export default function useDynamicProj(slug: string) {
   const { data: Session } = useSession();
   const getData = async () => {
     const res = await axios.get(

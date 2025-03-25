@@ -5,11 +5,11 @@ import {
   MapContainer,
   TileLayer,
   Marker,
-  Popup,
+  // Popup,
   Tooltip,
-  useMap,
+  // useMap,
 } from "react-leaflet";
-import S from "@/app/styles/Share.module.css";
+// import S from "@/app/styles/Share.module.css";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
@@ -18,11 +18,11 @@ import * as L from "leaflet";
 import { useMediaQuery } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
 import {
-  listingSearchAtom,
+  // listingSearchAtom,
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
 import { BlueMobileMapIcon } from "@/app/data/map";
-import Link from "next/link";
+// import Link from "next/link";
 
 const Map = ({ data }: any) => {
   const value = useAtomValue(mobileSearchPageMapModalReducerAtom);

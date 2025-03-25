@@ -24,7 +24,7 @@ export default function LeftSection({ src, rera }: Props) {
 const Rera = () => {
   return (
     <p className="absolute top-0 left-[0.8px]">
-      <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+      <Image src={"/r.svg"} alt="rera" width={100} height={100} priority />
     </p>
   );
 };

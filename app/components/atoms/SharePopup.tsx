@@ -8,7 +8,7 @@ import {
   Telegram,
   WhatsAppIcon,
 } from "@/app/images/commonSvgs";
-import { Button, CopyButton, Modal, em } from "@mantine/core";
+import { CopyButton, Modal, em } from "@mantine/core";
 import { useClipboard, useDisclosure, useMediaQuery } from "@mantine/hooks";
 import React from "react";
 import {
@@ -97,7 +97,9 @@ export default function SharePopup({
       </Modal>
 
       <button
-        onClick={()=>{navigator.share({title:title, url:CopiedUrl})}}
+        onClick={() => {
+          navigator.share({ title: title, url: CopiedUrl });
+        }}
         className={clsx(
           "flex flex-nowrap justify-center items-center p-0.5 gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6]  not-italic font-semibold leading-[normal] tracking-[0.4px]",
           title === "Share Project" && "mt-[13px]",

@@ -1,30 +1,40 @@
 import axios from "axios";
-import Link from "next/link";
+// import Link from "next/link";
 
 const baseUrl = "https://info.getrightproperty.com/send_email";
 const endpoint = ""; // API endpoint
 
-export async function sendEmail(mailerData :any, selectedJob:any) {
-    const message = `
+export async function sendEmail(mailerData: any, selectedJob: any) {
+  const message = `
     <html>
         <body>
-            <p><strong>${mailerData.get('fullName')}</strong> is applying with the email address <Link rel="noopener noreferrer" href="mailto:${mailerData.get('email')}">${mailerData.get('email')}</Link> and phone number ${mailerData.get('phone')}.</p>
-            <p>They have ${mailerData.get('experience')} years of experience.</p>
-            <p><strong>Cover Letter:</strong> ${mailerData.get('coverLetter')}</p>
-            <p><strong>Resume Link:</strong> <a href="${mailerData.get('resumeUrl')}">${mailerData.get('resumeUrl')}</a></p>
+            <p><strong>${mailerData.get(
+              "fullName"
+            )}</strong> is applying with the email address <Link rel="noopener noreferrer" href="mailto:${mailerData.get(
+    "email"
+  )}">${mailerData.get("email")}</Link> and phone number ${mailerData.get(
+    "phone"
+  )}.</p>
+            <p>They have ${mailerData.get(
+              "experience"
+            )} years of experience.</p>
+            <p><strong>Cover Letter:</strong> ${mailerData.get(
+              "coverLetter"
+            )}</p>
+            <p><strong>Resume Link:</strong> <a href="${mailerData.get(
+              "resumeUrl"
+            )}">${mailerData.get("resumeUrl")}</a></p>
         </body>
     </html>
 `;
 
-// Attach the HTML message
+  // Attach the HTML message
 
+  try {
+    // Email data to be sent
+    console.log(mailerData, selectedJob);
 
-    try {
-        // Email data to be sent
-        console.log(mailerData, selectedJob);
-
- 
-        const message = `
+    const message = `
          <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,33 +64,49 @@ export async function sendEmail(mailerData :any, selectedJob:any) {
                     </h2>
 
                     <p style="margin-bottom: 25px; font-size: 16px; color: #4a5568;">
-                        <span style="display: inline-block; background-color: #ebf4ff; color: #4299e1; padding: 5px 10px; border-radius: 20px; font-weight: 600;">${mailerData.get('fullName')}</span> 
+                        <span style="display: inline-block; background-color: #ebf4ff; color: #4299e1; padding: 5px 10px; border-radius: 20px; font-weight: 600;">${mailerData.get(
+                          "fullName"
+                        )}</span> 
                         has submitted an application.
                     </p>
                     <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom: 30px;">
                         <tr>
                             <td width="30%" style="padding: 10px; background-color: #f7fafc; font-weight: 600; color: #4a5568;">Email:</td>
-                            <td style="padding: 10px;"><a href="mailto:${mailerData.get('email')}" style="color: #4299e1; text-decoration: none;">${mailerData.get('email')}</a></td>
+                            <td style="padding: 10px;"><a href="mailto:${mailerData.get(
+                              "email"
+                            )}" style="color: #4299e1; text-decoration: none;">${mailerData.get(
+      "email"
+    )}</a></td>
                         </tr>
                         <tr>
                             <td width="30%" style="padding: 10px; background-color: #f7fafc; font-weight: 600; color: #4a5568;">Phone:</td>
-                            <td style="padding: 10px;">${mailerData.get('phone')}</td>
+                            <td style="padding: 10px;">${mailerData.get(
+                              "phone"
+                            )}</td>
                         </tr>
                         <tr>
                             <td width="30%" style="padding: 10px; background-color: #f7fafc; font-weight: 600; color: #4a5568;">Experience:</td>
-                            <td style="padding: 10px;">${mailerData.get('experience')} years</td>
+                            <td style="padding: 10px;">${mailerData.get(
+                              "experience"
+                            )} years</td>
                         </tr>
                     </table>
                     
                     <h3 style="color: #4a5568; font-size: 20px; margin-top: 30px; margin-bottom: 15px; font-weight: 600;">Cover Letter</h3>
                     <div style="background-color: #f7fafc; border-left: 4px solid #4299e1; padding: 20px; margin-bottom: 30px; border-radius: 4px;">
-                        <p style="margin: 0; font-size: 16px; color: #4a5568; line-height: 1.8;">${mailerData.get('coverLetter')}</p>
+                        <p style="margin: 0; font-size: 16px; color: #4a5568; line-height: 1.8;">${mailerData.get(
+                          "coverLetter"
+                        )}</p>
                     </div>
-                     <p style="margin: 0; font-size: 16px; color: #4a5568; line-height: 1.8;">${mailerData.get('resumeUrl')}</p>
+                     <p style="margin: 0; font-size: 16px; color: #4a5568; line-height: 1.8;">${mailerData.get(
+                       "resumeUrl"
+                     )}</p>
                     <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 30px;">
                         <tr>
                             <td align="center">
-                                <a href="${mailerData.get('resumeUrl')}" style="display: inline-block; background-color: #4299e1; color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; font-size: 16px; transition: background-color 0.3s ease;">View Resume</a>
+                                <a href="${mailerData.get(
+                                  "resumeUrl"
+                                )}" style="display: inline-block; background-color: #4299e1; color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; font-size: 16px; transition: background-color 0.3s ease;">View Resume</a>
                             </td>
                         </tr>
                     </table>
@@ -101,30 +127,25 @@ export async function sendEmail(mailerData :any, selectedJob:any) {
 </html>
 
         `;
-        
-        // Prepare the email data
-        const emailData = {
-            from: "info@getrightproperty.com",  
-            to_address: "rahulrpclan@gmail.com",   
-            subject: selectedJob.title,     
-            message: message,  
-            src: "Proper Sending" 
-        };
-        
 
+    // Prepare the email data
+    const emailData = {
+      from: "info@getrightproperty.com",
+      to_address: "rahulrpclan@gmail.com",
+      subject: selectedJob.title,
+      message: message,
+      src: "Proper Sending",
+    };
 
-        const dataResult = await axios.post(baseUrl, emailData, {
-            headers: {
-                'Content-Type': 'application/json',  // Make sure it's application/json
-            },
-        });
+    const dataResult = await axios.post(baseUrl, emailData, {
+      headers: {
+        "Content-Type": "application/json", // Make sure it's application/json
+      },
+    });
 
-
-        console.log("Email sent successfully:", dataResult.data);
-        return true
-
-    } catch (error) {
-        console.error("Error sending email:", error);
-    }
+    console.log("Email sent successfully:", dataResult.data);
+    return true;
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
 }
-

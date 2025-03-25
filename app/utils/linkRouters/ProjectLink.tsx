@@ -1,5 +1,5 @@
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import React, { ReactNode, useMemo } from "react";
 
 // Simple slugify function without memoization
@@ -45,8 +45,7 @@ export default function ProjectLink({
   }, [routeParams]);
 
   return (
-    <Link {...rest} href={href}  
-      rel="noopener noreferrer">
+    <Link {...rest} href={href} rel="noopener noreferrer">
       {children}
     </Link>
   );
