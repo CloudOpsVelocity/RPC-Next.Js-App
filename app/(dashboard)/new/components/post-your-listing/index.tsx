@@ -17,6 +17,7 @@ export default function PostYourListing({}: Props) {
           width={387}
           height={257}
           className="block sm:hidden min-w-[214px] max-w-[214px] sm:min-w-[387px] sm:max-w-[387px] min-h-[143px] max-h-[143px] sm:min-h-[257px] sm:max-h-[257px] "
+          priority 
         />
         <p className="text-[12px] text-[#242424] sm:text-[16px] xl:text-[24px] not-italic mt-[18px] mb-[18px] font-medium sm:leading-[30px] tracking-[0.96px] sm:mb-[18px]">
           Your listings deserves the spotlight. Add it to our platform today!
@@ -30,6 +31,7 @@ export default function PostYourListing({}: Props) {
           width={387}
           height={257}
           className="hidden sm:block sm:min-w-[273px] sm:min-h-[182px] xl:min-w-[387px] xl:min-h-[257px] "
+          priority 
         />
       </div>
     </div>

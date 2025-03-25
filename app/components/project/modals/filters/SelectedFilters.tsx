@@ -86,6 +86,7 @@ const SelectedFilters = ({
                     width={14}
                     height={14}
                     className="!w-[14px] !h-[14px]"
+                    priority 
                   />
                 </button>
               </div>

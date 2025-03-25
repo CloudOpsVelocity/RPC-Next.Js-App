@@ -21,13 +21,16 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
 import { unitFloorsAtom } from "../byunitblock";
 import Button from "../../atoms/buttons/variansts";
-import SelectedFilters from "./filters/SelectedFilters";
+// import SelectedFilters from "./filters/SelectedFilters";
+const SelectedFilters = dynamic(() => import("./filters/SelectedFilters"));
+
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import ColumnVirtualizerFixed from "./VitualizedListCol";
 import { SelectCreatable } from "./filters/UnitINput";
 import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 // import RecentSearchedUnits from "../_ui/RecentSearchedUnits";
 import { RightSection } from "./FloorplanModalRightSection";
+import dynamic from "next/dynamic";
 
 type Props = {
   propCgId: any;
@@ -1005,6 +1008,7 @@ const MiddleSection = ({
               className="border-none w-full cursor-pointer"
               style={{ aspectRatio: "800 / 400", objectFit: "contain" }}
               onClick={open}
+              priority 
             />
           </picture>
         ) : (
@@ -1066,6 +1070,7 @@ const MiddleSection = ({
                     style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                     onClick={() => selectImg(index)}
                     unoptimized
+                    priority 
                   />
                 </div>
               )}

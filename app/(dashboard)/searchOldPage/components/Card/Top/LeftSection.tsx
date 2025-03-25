@@ -15,6 +15,7 @@ export default function LeftSection({ src, rera }: Props) {
         alt="projectCard"
         className="h-[162px] w-full  xl:h-[230px] xl:w-[304px] object-cover"
         quality={100}
+        priority 
       />
       {verified && <Rera />}
     </div>

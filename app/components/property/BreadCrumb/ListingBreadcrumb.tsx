@@ -3,6 +3,7 @@ import {
   BASE_PATH_PROJECT_LISTING,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import Link from "next/link";
+import Script from "next/script";
 import React from "react";
 export const slugify = (name: string): string => {
   return name
@@ -77,13 +78,15 @@ export default function ListingBreadCrumbs({
   // console.log(params, currentPath )
   return (
     <>
-      <script
+      <Script
+        id="ListingBreadCrumbsScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
-      <script
+      <Script
+        id="ListingBreadCrumbsScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(siteNavSchema),

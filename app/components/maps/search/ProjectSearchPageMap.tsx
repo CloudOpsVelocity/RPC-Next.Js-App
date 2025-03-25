@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -338,12 +338,12 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         }`;
 
         return (
-          <>
+          <Fragment key={itemId + "proijMarkerTag" + index.toString()}>
             <Marker
               ref={(el) => {
                 if (el) markerRefs.current.set(refKey, el);
               }}
-              key={itemId + "proijMarkerTag" + index.toString()}
+              
               position={[
                 parseFloat(item?.lat || 0),
                 parseFloat(item?.lang || 0),
@@ -378,7 +378,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               </Popup>
             </Marker>
             <NearbyMarkers />
-          </>
+          </Fragment>
         );
       }
     })

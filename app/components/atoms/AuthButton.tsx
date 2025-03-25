@@ -78,12 +78,12 @@ function Dropdown() {
       <Menu.Target>
         {session ? (
           <button className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline loginBg shadow-md">
-            <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
+            <Image width={30} height={30} alt="logout" src="/burger.svg" priority  />{" "}
             {session?.user?.name}
           </button>
         ) : (
           <div className="login-btn text-[12px] sm:text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline loginBg shadow-md">
-            <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
+            <Image width={30} height={30} alt="logout" src="/burger.svg" priority  />{" "}
             <Link
               href={{
                 pathname: `/register`,

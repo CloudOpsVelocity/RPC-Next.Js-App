@@ -112,7 +112,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
       >
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
         {isMobile && (
-          <div className="flex   flex-col  justify-between">
+          <div className="flex flex-col justify-between">
             <TopRightSection
               data={newData}
               type={type}

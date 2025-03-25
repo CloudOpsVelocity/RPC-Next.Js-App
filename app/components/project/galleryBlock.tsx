@@ -13,6 +13,7 @@ import VideoJsonLdScript from "@/app/seo/VideoJson";
 import { useAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
 import Image from "next/image";
+import Script from "next/script";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -133,6 +134,7 @@ export default function GalleryBlock({
                       width={799}
                       height={400}
                       unoptimized
+                      priority 
                     />
                   </picture>
                 </div>
@@ -186,7 +188,9 @@ export default function GalleryBlock({
                   className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
                   key={`gallery_block_${ind}`}
                 >
-                  <script
+                  <Script
+                    id="galleryScript1"
+
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                       __html: JSON.stringify({
@@ -218,6 +222,7 @@ export default function GalleryBlock({
                     onClick={() => handleMediaClick(img, ind)}
                     unoptimized
                     fill
+                    priority 
                   />
                 </div>
               );
@@ -255,6 +260,7 @@ export default function GalleryBlock({
                       className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover"
                       alt="thumbnail"
                       onClick={() => handleMediaClick(img, ind)}
+                      priority 
                     />
                   ) : (
                     <video

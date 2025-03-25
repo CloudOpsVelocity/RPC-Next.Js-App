@@ -100,6 +100,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const [, dispatch] = useAtom(overlayAtom);  
 
   useEffect(() => { 
+
     if(isMobile) return;
     const handleScroll = () => {
 
@@ -228,7 +229,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      <div className="">
+      <>
         {isLoading ? (
           <LoadingBlock />
         ) : allItems.length > 0 ? (
@@ -255,7 +256,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         )}
         <LoginPopup />
         <RequestCallBackModal />
-      </div>
+      </>
 
       <FloatingArrowIcon />
     </div>

@@ -106,6 +106,7 @@ const ProjectpropDetailsCard = ({
                 height={174}
                 alt="conver"
                 className="w-full h-[110px] md:h-[174px]  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] object-cover relative"
+                priority 
               />
               <p className="absolute text-[#FFF] text-[12px] bottom-2 left-5 md:mt-[-60px]  md:left-[10px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm ">
                 {" "}

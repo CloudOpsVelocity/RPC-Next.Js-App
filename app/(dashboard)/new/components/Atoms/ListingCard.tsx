@@ -61,6 +61,7 @@ export default function ListingCard({ item, sl }: Props) {
             width={490}
             height={276}
             className="object-cover w-full h-full"
+            priority 
           />
           <p className="absolute top-2 left-2 flex justify-center items-center gap-1 rounded p-1.5 bg-black/50 backdrop-blur-sm text-white text-[12px] not-italic font-semibold leading-[normal] capitalize border border-white/20">
             Posted Date: {formatDateDDMMYYYY(item.postedDate)}

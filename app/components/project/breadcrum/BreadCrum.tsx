@@ -1,6 +1,7 @@
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
+import Script from "next/script";
 import React from "react";
 
 export default function BreadCrumbs({ params }: { params: any }) {
@@ -49,14 +50,16 @@ export default function BreadCrumbs({ params }: { params: any }) {
   };
   return (
     <>
-      <script
+      <Script
+        id="BreadCrumbsScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumsschema),
         }}
       />
 
-      <script
+      <Script
+      id="BreadCrumbsScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(siteNavigationSchema),

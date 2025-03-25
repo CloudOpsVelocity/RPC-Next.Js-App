@@ -48,6 +48,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
                 alt="logo"
                 className="object-contain max-h-[93px] w-[93px] sm:max-h-[100px] sm:w-[133px] xl:max-h-[150px] xl:w-[158px] relative"
                 unoptimized
+                priority 
               />
             </div>
             <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">

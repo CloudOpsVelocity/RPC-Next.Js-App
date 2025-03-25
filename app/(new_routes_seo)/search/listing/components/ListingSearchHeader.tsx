@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent, memo } from "react";
 import {
   MdSearch,
   MdClose,
@@ -19,13 +19,16 @@ import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
 import BuyRent from "../../components/FilterComponents/BuyRent";
 import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
 import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
-import SelectedFilters from "../../components/filters/SelectedFilters";
+import dynamic from "next/dynamic";
+// import SelectedFilters from "../../components/filters/SelectedFilters";
+const SelectedFilters = dynamic(() => import("../../components/filters/SelectedFilters"));
 
-export default function ListingHeaderFilters({
+
+const ListingHeaderFilters = ({
   isListing,
 }: {
   isListing?: boolean;
-}) {
+}) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
@@ -122,7 +125,7 @@ export default function ListingHeaderFilters({
         break;
       case "projects":
         if (data.type === "Project") {
-          window.open(data.stringUrl);
+          typeof window !== "undefined" ? window.open(data.stringUrl) : ""
         } else {
           if (isListingSearch) {
             dispatch({
@@ -134,11 +137,11 @@ export default function ListingHeaderFilters({
               },
             });
           } else {
-            window.open(
+            typeof window !== "undefined" ? window.open(
               `/search/listing?sf=projIdEnc=${
                 data.stringId.split("_")[0]
               }-phaseId=${data.stringId.split("_")[1]}-projName=${data.name}`
-            );
+            ) : ""
           }
         }
 
@@ -193,7 +196,7 @@ export default function ListingHeaderFilters({
                     .trim()}`
                 : ""
             }`;
-            window.open(url);
+            typeof window !== "undefined" ? window.open(url) : ""
           }
         }
         break;
@@ -205,24 +208,24 @@ export default function ListingHeaderFilters({
           }-listedBy=${AgentOwnerBuilderMap.get(
             data.type
           )}-projName=${projectName}`;
-          window.open("/search/listing?sf=" + url);
+          typeof window !== "undefined" ? window.open("/search/listing?sf=" + url) : ""
         }
         break;
       case "builders":
         if (data.type === "BuilderDetail") {
-          window.open(data.stringUrl);
+          typeof window !== "undefined" ? window.open(data.stringUrl) : ''
         } else {
           const url =
             encodeURIComponent(data.name) +
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
-          window.open(
+            typeof window !== "undefined" ? window.open(
             `/search?sf=builderIds=${url}${
               data.type !== "BuilderProject"
                 ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
                 : ""
             }`
-          );
+          ) : ''
         }
         break;
       default:
@@ -473,4 +476,6 @@ export default function ListingHeaderFilters({
       )}
     </>
   );
-}
+};
+
+export default memo(ListingHeaderFilters);

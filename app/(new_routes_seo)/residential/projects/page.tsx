@@ -84,6 +84,7 @@ export default function Home() {
                           alt={property.name}
                           fill
                           className="object-cover"
+                          priority 
                         />
                       </div>
                       <div className="p-4">

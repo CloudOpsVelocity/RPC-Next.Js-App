@@ -85,6 +85,7 @@ function BlogDetailsFirstBlock() {
           height={630}
           width={1200}
           className="rounded-[10px] w-full h-full relative max-h-[260px] md:max-h-[463px] bg-white z-1"
+          priority 
         />
       </div>
 

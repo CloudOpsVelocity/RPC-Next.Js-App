@@ -85,7 +85,7 @@ export default function BuilderDetailsCard({
                 quality={100}
                 src={builderLogo}
                 alt={`${companyName} logo`}
-                className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                className="w-16 h-16 md:w-20 md:h-20 object-contain" priority 
               />
             </div>
             <h2 className="text-base ml-2 sm:ml-0 sm:text-2xl font-extrabold text-blue-900 text-left">

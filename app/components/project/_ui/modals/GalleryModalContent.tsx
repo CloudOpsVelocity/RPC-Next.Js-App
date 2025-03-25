@@ -213,6 +213,7 @@ export default function GalleryModalContent({}: Props) {
                     src={currentItem}
                     alt={"ALT TEXT"}
                     layout="fill"
+                    priority 
                     objectFit="contain"
                   />
                 </TransformComponent>
@@ -276,6 +277,7 @@ export default function GalleryModalContent({}: Props) {
                     layout="fill"
                     objectFit="cover"
                     unoptimized
+                    priority 
                   />
                 ) : item.includes("youtube") ? (
                   <Image
@@ -283,6 +285,7 @@ export default function GalleryModalContent({}: Props) {
                     alt={item}
                     layout="fill"
                     objectFit="cover"
+                    priority 
                   />
                 ) : (
                   <div className="w-full h-full bg-gray-800 flex items-center justify-center">

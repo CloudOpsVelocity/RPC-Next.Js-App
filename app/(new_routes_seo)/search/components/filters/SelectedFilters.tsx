@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import React from "react";
+import React, { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
 import { SEARCH_FILTER_DATA, SelectedFiltersMap } from "@/app/data/search";
@@ -7,11 +7,11 @@ import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters
 
 type Props = {};
 
-export default function SelectedFilters({}: Props) {
+const SelectedFilters = ({}: Props) => {
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   return (
-    Object.entries(state).some(
+    Object.entries(state).some( 
       ([_, value]) =>
         (Array.isArray(value) && value.length > 0) || value !== null
     ) && (
@@ -118,4 +118,6 @@ export default function SelectedFilters({}: Props) {
       </div>
     )
   );
-}
+};
+
+export default memo(SelectedFilters);

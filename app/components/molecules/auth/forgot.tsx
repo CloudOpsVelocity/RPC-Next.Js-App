@@ -105,6 +105,7 @@ function ForgotForm() {
             alt="lock"
             width={200}
             height={200}
+            priority 
           />
           <h3 className="font-normal text-[16px] xl:text-lg max-w-xl text-center">
             Don’t worry! Please enter the phone number we will send the OTP in

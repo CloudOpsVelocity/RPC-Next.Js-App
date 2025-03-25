@@ -1,6 +1,7 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
+import Script from "next/script";
 
 export const generateAllSchemas = (
   property: any,
@@ -237,13 +238,15 @@ export const ProjectSeachSchema = ({
   const address = pagetitle.split("In")[1];
   return (
     <>
-      <script
+      <Script
+      id="projSearchScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
-      <script
+      <Script
+      id="projSearchScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -276,7 +279,8 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <script
+      <Script
+      id="projSearchScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -302,7 +306,8 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <script
+      <Script
+      id="projSearchScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -367,7 +372,8 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <script
+      <Script
+      id="projSearchScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -455,7 +461,8 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <script
+      <Script
+      id="projSearchScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -517,7 +524,8 @@ export const ProjectSeachSchema = ({
         }}
       />
 
-<script
+<Script
+id="projSearchScript7"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

@@ -7,6 +7,7 @@ export const GrpLogoSvg = ({ className }: { className: string }) => (
     height={54}
     alt="getright logo"
     className={className}
+    priority 
   />
 );
 

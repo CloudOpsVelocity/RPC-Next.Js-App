@@ -646,6 +646,7 @@ Props) {
                               alt="image"
                               fill
                               unoptimized
+                              priority 
                             />
                             {/* two ways to use it a global component and sencond USE GLOBAL VARIABLES I NEED 
                              TO KNOW SPLIT IT BEFORE GLOBAL COMPONENT IT WILL BE VERY TO DIFF TO DIFF
@@ -663,6 +664,7 @@ Props) {
                               src={ImgNotAvail}
                               className="w-[60%] sm:w-[60%] h-full cursor-pointer "
                               alt="image"
+                              priority 
                             />
                           </div>
                         )}
@@ -765,6 +767,7 @@ Props) {
                             className="w-full h-full cursor-pointer  object-contain"
                             alt="image"
                             unoptimized
+                            priority 
                           />
                         ) : (
                           <div className="flex justify-center items-center flex-col min-w-fit ">
@@ -793,6 +796,7 @@ Props) {
                                   : "lg:h-[450px]"
                               }`}
                               alt="image"
+                              priority 
                             />
                           </div>
                         )}

@@ -67,7 +67,7 @@ const ListingSearchRightSection = ({ serverData }: any) => {
       id="mobileMap"
     >
       <Map 
-      key="liastingTabsSearchPageMap"
+        key="liastingTabsSearchPageMap"
         projName={"Searched Location"} 
         lat={(apidata && apidata[0]?.lat) ?? 47.46489}
         lang={(apidata && apidata[0]?.lang) ?? 15.34043}

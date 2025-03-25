@@ -25,6 +25,7 @@ export default function Card({ item }: Props) {
             src="https://im.proptiger.com/3/100683/13/sumadhura-infracon-23973255.jpeg?width=800&height=620"
             alt="logo icons"
             className="w-[100px] h-[100px] object-cover"
+            priority 
           />
         </div>
         <div className="absolute right-0 top-0 sm:w-[560px] h-[450px] sm:h-[514px] shrink-0  bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-end sm:justify-between">
@@ -54,6 +55,7 @@ export default function Card({ item }: Props) {
                   alt=""
                   width={16}
                   height={16}
+                  priority 
                 />{" "}
                 201 units
               </p>

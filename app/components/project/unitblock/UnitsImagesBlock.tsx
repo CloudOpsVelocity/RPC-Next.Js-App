@@ -81,6 +81,7 @@ const UnitsImagesBlock = ({
                 height={100}
                 alt="not found"
                 onClick={() => selectImg(eachOne)}
+                priority 
               />
             );
           })}

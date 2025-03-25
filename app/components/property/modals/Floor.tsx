@@ -140,6 +140,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   width={1200}
                   height={800}
                   className="max-w-full h-full object-contain"
+                  priority 
                 />
               </TransformComponent>
               {floorData.floorPlanUrl && (

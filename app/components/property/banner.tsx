@@ -84,6 +84,7 @@ export default function Banner({
             className="h-[320px] w-[320px] absolute -top-[87px] right-0"
             width={600}
             height={300}
+            priority 
           />
         </div>
         <AddRating

@@ -91,6 +91,7 @@ function MarketSections({ text }: Props) {
                       width={1200}
                       alt="blog Image"
                       className="rounded-[50%] w-full h-full relative"
+                      priority 
                     />
                     {/* <span className='!min-w-[60px] !min-h-[60px] !md:min-w-[100px] !md:min-h-[100px] '>{defaultCitySvg}</span> */}
                   </div>

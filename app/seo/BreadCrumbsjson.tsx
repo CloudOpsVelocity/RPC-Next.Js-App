@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { SiteNavigationElement, WithContext } from "schema-dts";
 
 const generateFAQJsonLd = (data: any) => {
@@ -19,7 +20,8 @@ const generateFAQJsonLd = (data: any) => {
 const BreadJsonLdScript = (data: any) => {
   const jsonLd = generateFAQJsonLd(data);
   return (
-    <script
+    <Script
+    id="BreadCrumbsScript5"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

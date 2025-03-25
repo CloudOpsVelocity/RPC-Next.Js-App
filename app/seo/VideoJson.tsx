@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { VideoObject, WithContext } from "schema-dts";
 
 const generateFAQJsonLd = (data: any) => {
@@ -11,7 +12,8 @@ const generateFAQJsonLd = (data: any) => {
 const VideoJsonLdScript = (data: any) => {
   const jsonLd = generateFAQJsonLd(data);
   return (
-    <script
+    <Script
+    id="videoScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

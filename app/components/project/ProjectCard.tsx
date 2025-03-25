@@ -163,6 +163,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
                 // height={212}
                 unoptimized
                 fill
+                priority 
               />
             </Link>
           </div>
@@ -171,7 +172,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
             (cardData.rerastatus === "Recieved" ||
               cardData.rerastatus === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
               </p>
             )}
 

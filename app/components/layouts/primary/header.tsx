@@ -81,17 +81,15 @@ const ForBuilders = () => {
         <Menu.Dropdown
           className="!p-0 cursor-pointer"
           onClick={() =>
-            window.open(
+            typeof window !== "undefined" ? window.open(
               `/login?cc=${encryptUrl(pathName)}`,
-            )
+            ):""
           }
         >
           <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
-            <div>
-              <p className="text-[#F5AC44] text-lg not-italic font-bold">
-                Calling Builders!!!
-              </p>
-            </div>
+            <p className="text-[#F5AC44] text-lg not-italic font-bold">
+              Calling Builders!!!
+            </p>
             <div className="text-[#242424] text-xs not-italic font-semibold">
               To Post Project Free!
             </div>
@@ -116,6 +114,7 @@ const ForBuilders = () => {
             width={220}
             height={220}
             className="absolute right-0 bottom-0"
+            priority 
           />
         </Menu.Dropdown>
       </Menu>
@@ -362,11 +361,11 @@ function MobileDropDown() {
               item.label === "Post Project" ? null : index == 0 && isMobile ? (
                 <button
                   onClick={() =>
-                    window.open(
+                    typeof window !== "undefined" ? window.open(
                       `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile/dashboard`,
                       "_self",
                       "noreferrer"
-                    )
+                    ) : ''
                   }
                   className={`rounded w-full pl-3 text-wrap flex items-center gap-2 text-[14px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${
                     session.user.userType == "A"

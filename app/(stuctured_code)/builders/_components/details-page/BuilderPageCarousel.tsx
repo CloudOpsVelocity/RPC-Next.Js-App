@@ -117,13 +117,13 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
             alt="Sobha Dream Acres"
             className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] object-cover min-h-[212px] rounded-[5px] max-h-[212px]"
             width={300}
-            height={212}
+            height={212} priority 
           />
           {type == "proj" &&
             (cardData.reraStatus === "Recieved" ||
               cardData.reraStatus === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
               </p>
             )}
 

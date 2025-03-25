@@ -59,7 +59,7 @@ export default function Card({ item }: Props) {
         )} */}
           {(item.rerastatus === "Recieved" ||
             item.rerastatus === "Applied") && (
-            <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+            <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
           )}
 
           {/*  <p className="text-green-600">{item.rerastatus}</p> */}

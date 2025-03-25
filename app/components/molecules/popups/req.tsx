@@ -119,6 +119,7 @@ const RequestCallBackModal = () => {
                     alt="Customer Support"
                     width={600}
                     height={534}
+                    priority 
                   />
                 </div>
               }

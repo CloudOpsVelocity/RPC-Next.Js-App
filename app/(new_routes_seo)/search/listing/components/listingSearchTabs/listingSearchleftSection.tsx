@@ -189,7 +189,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const [, dispatch] = useAtom(overlayAtom);
 
   useEffect(() => { 
-     if(isMobile) return;
+    if(isMobile) return;
      const handleScroll = () => {
        setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
        dispatch({ type: "CLOSE" })
@@ -205,7 +205,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      <div>
+      <>
         {isLoading ? (
           <LoadingBlock />
         ) : allItems.length > 0 ? (
@@ -231,7 +231,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         )}
         <LoginPopup />
         <RequestCallBackModal />
-      </div>
+      </>
 
       <FloatingArrowIcon />
     </div>

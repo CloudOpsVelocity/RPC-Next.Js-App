@@ -270,6 +270,7 @@ export default function PartialUnitModal({ data }: any) {
                     src={selectedOne?.floorPlan?.split(",")[3] ?? ImgNotAvail}
                     alt="Floor Plan"
                     className="max-w-full max-h-full object-contain"
+                    priority 
                   />
                 </div>
               </TransformComponent>
@@ -378,6 +379,7 @@ export default function PartialUnitModal({ data }: any) {
                     src={imageUrl}
                     alt={`Floor Plan ${index + 1}`}
                     className="w-full h-full object-cover"
+                    priority 
                   />
                 </div>
               );

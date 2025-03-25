@@ -75,6 +75,7 @@ export default function LeftSection({
           quality={100}
           unoptimized
           priority
+          // layout="intrinsic"
         />
       </picture>
       {/* <div>

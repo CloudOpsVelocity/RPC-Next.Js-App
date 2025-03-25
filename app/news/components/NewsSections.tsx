@@ -43,6 +43,7 @@ function Card({ data, cityName }: CradProps) {
           className="h-[118px] sm:h-[142px] xl:h-[160px] rounded-t-[4px] xl:rounded-t-[10px] "
           src={data.url}
           alt=""
+          priority 
         />
         <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white w-full rounded-[4px] xl:rounded-[10px] overflow-y-auto scrollbar-hide ">
           <div className="flex justify-between items-center w-full ">
