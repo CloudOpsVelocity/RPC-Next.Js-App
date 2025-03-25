@@ -322,7 +322,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                     title="Only letters, numbers, and spaces are allowed."
                   />
 
-                  <button type="submit">
+                  <button type="submit" name="projectHeaderSearchIcon">
                     <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                   </button>
                 </form>
