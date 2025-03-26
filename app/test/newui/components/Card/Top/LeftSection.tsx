@@ -1,4 +1,4 @@
-import { projectprops } from "@/app/(dashboard)/searchOldPage/components/Card/Top/Center/ProjData";
+// import { projectprops } from "@/app/(dashboard)/searchOldPage/components/Card/Top/Center/ProjData";
 import Button from "@/app/elements/button";
 import { CallIcon } from "@/app/images/commongsSvgs2";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
@@ -64,7 +64,7 @@ export default function LeftSection({
         />
         <source
           media="(max-width: 800px)"
-          srcSet={src ? src.split(",")[2] : ''}
+          srcSet={src ? src.split(",")[2] : ""}
         />
         <Image
           src={src ? src.includes("+")? src.replace(/\+/g, "%2B") : src : src }
@@ -74,6 +74,8 @@ export default function LeftSection({
           className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
           quality={100}
           unoptimized
+          priority
+          // layout="intrinsic"
         />
       </picture>
       {/* <div>
@@ -122,7 +124,7 @@ export default function LeftSection({
 const Rera = () => {
   return (
     <p className="absolute top-0 left-[0.8px]">
-      <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+      <Image src={"/r.svg"} alt="rera" width={100} height={100} priority />
     </p>
   );
 };

@@ -1,6 +1,7 @@
 import { Place } from "schema-dts";
 import { DOMAIN, PRICE_CURRENY, PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
+import Script from "next/script";
 
 interface ListingSchemaProps {
   nearByLocations: any;
@@ -452,7 +453,8 @@ const ListingSchema = ({
   listingData: ListingSchemaProps;
 }) => {
   return (
-    <script
+    <Script
+    id="listingScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(generateListingSchema(listingData)),

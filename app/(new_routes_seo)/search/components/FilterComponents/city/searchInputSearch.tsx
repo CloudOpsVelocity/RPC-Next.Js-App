@@ -1,6 +1,6 @@
 "use client";
 
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import React, { useState, useRef, useEffect } from "react";
 import { projSearchStore } from "../../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";

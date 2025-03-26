@@ -2,7 +2,7 @@
 import { Image } from "@mantine/core";
 import React from "react";
 import NextImage from "next/image";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 type Props = { searchParams: { path: string; type: "M" | "F" } };
 export default function Page({ searchParams: { path, type } }: Props) {
   path = path.replace(" ", "+");
@@ -14,7 +14,6 @@ export default function Page({ searchParams: { path, type } }: Props) {
       F: "floor_plan",
     },
   };
-
 
   let isDownloading = false; // Flag to track whether a download is in progress
   const handleDownload = async () => {
@@ -31,7 +30,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`
       );
-    
+
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
@@ -61,6 +60,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
         alt="post"
         component={NextImage}
         className="h-full"
+        priority 
       />
       <button
         className="inline-flex flex-col items-center  justify-center gap-2.5 p-3 rounded-[10px] bg-[#0073C6] text-white text-lg not-italic font-bold leading-[normal] tracking-[0.96px]  top-[10%] right-[7%]"

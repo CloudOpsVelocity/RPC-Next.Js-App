@@ -15,6 +15,7 @@ function BlogMiniCard({data}:{data:any}) {
               src={data.coverImage} 
               alt="blog Image" width={120} height={90} 
               className=' min-w-[120px] h-[90px] border-gray shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#227FBC] ' 
+              priority 
           />
 
           <div className='w-full'>

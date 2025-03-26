@@ -1,14 +1,14 @@
 "use client";
 
 import { useAtom } from "jotai";
-import React, { useEffect } from "react";
+import React, { memo } from "react";
 import {
   diffToProjFromListing,
   initialState,
   projSearchStore,
 } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
-import { update } from "lodash";
+// import { update } from "lodash";
 import { SearchFilter } from "@/app/types/search";
 
 const tabs = [
@@ -16,10 +16,10 @@ const tabs = [
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
   { id: "B", label: "Builder Listings" },
-  { id: (null || "All"), label: "All Listings" },
+  { id: null || "All", label: "All Listings" },
 ];
 
-export default function ListingSearchTabs() {
+ const ListingSearchTabs = () => {
   const [state, dispath] = useAtom(projSearchStore);
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
@@ -98,7 +98,7 @@ export default function ListingSearchTabs() {
       payload: updatedFilters,
     });
     handleApplyFilters();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    typeof window !== "undefined" ? window.scrollTo({ top: 0, behavior: "smooth" }) : ""
   };
 
   const handleSortBy = (option: any) => {
@@ -153,7 +153,8 @@ export default function ListingSearchTabs() {
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
-                    state.listedBy === tab.id ||( state.listedBy == "All" && tab.id == null)
+                    state.listedBy === tab.id ||
+                    (state.listedBy == "All" && tab.id == null)
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }
@@ -285,4 +286,6 @@ export default function ListingSearchTabs() {
       </div>
     </div>
   );
-}
+};
+
+export default memo(ListingSearchTabs);

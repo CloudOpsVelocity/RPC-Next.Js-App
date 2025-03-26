@@ -1,8 +1,8 @@
 "use client";
 import Button from "@/app/components/atoms/buttons/variansts";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { NearByDataAtom } from "@/app/store/nearby";
-import { useSetAtom } from "jotai";
+// import { NearByDataAtom } from "@/app/store/nearby";
+// import { useSetAtom } from "jotai";
 import React from "react";
 
 type Props = {

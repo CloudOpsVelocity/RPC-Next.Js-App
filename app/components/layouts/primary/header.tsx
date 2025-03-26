@@ -32,7 +32,7 @@ export default function Header({}: Props) {
       "/forgot",
     ].includes(pathname) && (
       <div
-        className={`flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[20] `}
+        className={`flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[30] `}
       >
         <Link 
           prefetch={false}
@@ -49,7 +49,7 @@ export default function Header({}: Props) {
           </div>
         ) : (
           <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
-            <a href={"/blog"} target="_blank" rel="noopener noreferrer">
+            <a href={"/blog"} target="_self" rel="noopener noreferrer">
     
              
               <p className="text-[#242424] text-xl not-italic font-medium cursor-pointer">
@@ -81,17 +81,15 @@ const ForBuilders = () => {
         <Menu.Dropdown
           className="!p-0 cursor-pointer"
           onClick={() =>
-            window.open(
+            typeof window !== "undefined" ? window.open(
               `/login?cc=${encryptUrl(pathName)}`,
-            )
+            ):""
           }
         >
           <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
-            <div>
-              <p className="text-[#F5AC44] text-lg not-italic font-bold">
-                Calling Builders!!!
-              </p>
-            </div>
+            <p className="text-[#F5AC44] text-lg not-italic font-bold">
+              Calling Builders!!!
+            </p>
             <div className="text-[#242424] text-xs not-italic font-semibold">
               To Post Project Free!
             </div>
@@ -116,6 +114,7 @@ const ForBuilders = () => {
             width={220}
             height={220}
             className="absolute right-0 bottom-0"
+            priority 
           />
         </Menu.Dropdown>
       </Menu>
@@ -201,7 +200,7 @@ function Dropdown() {
                   component="a"
                   className=" text-gray-700 hover:text-green-500 transition-colors flex"
                   href={item.url}
-                  // target="_blank"
+                  // target="_self"
                 >
                   <div className="flex items-center gap-2">
                     {homePageSvgsMap.get(item.svg ?? "")}{" "}
@@ -362,11 +361,11 @@ function MobileDropDown() {
               item.label === "Post Project" ? null : index == 0 && isMobile ? (
                 <button
                   onClick={() =>
-                    window.open(
+                    typeof window !== "undefined" ? window.open(
                       `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile/dashboard`,
-                      "_blank",
+                      "_self",
                       "noreferrer"
-                    )
+                    ) : ''
                   }
                   className={`rounded w-full pl-3 text-wrap flex items-center gap-2 text-[14px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${
                     session.user.userType == "A"
@@ -393,7 +392,7 @@ function MobileDropDown() {
                   component="a"
                   className=" text-gray-700 hover:text-green-500 transition-colors flex"
                   href={item.url}
-                  target="_blank"
+                  target="_self"
                   rel="noopener noreferrer"
                 >
                   <div className="flex items-center gap-2">

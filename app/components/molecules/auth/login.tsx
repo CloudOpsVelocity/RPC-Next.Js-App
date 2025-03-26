@@ -1,14 +1,19 @@
 "use client";
 import { PasswordInput, NumberInput } from "react-hook-form-mantine";
-import { Button, Box, em } from "@mantine/core";
+import {
+  Button,
+  // Box,
+  em,
+} from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
 import * as yup from "yup";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
-import handleTrimAndReplace, {
-  handleAllTrimAndReplace,
+import {
+  // handleTrimAndReplace,
+  // handleAllTrimAndReplace,
   handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
@@ -19,7 +24,7 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MAX_LENTH_TEXT } from "@/app/validations/auth";
-import { TbArrowAutofitDown } from "react-icons/tb";
+// import { TbArrowAutofitDown } from "react-icons/tb";
 const schema = yup.object().shape({
   username: yup
     .number()

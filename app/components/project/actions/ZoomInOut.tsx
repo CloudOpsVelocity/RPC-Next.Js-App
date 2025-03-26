@@ -1,5 +1,5 @@
 import {
-  RestaurentIcon,
+  // RestaurentIcon,
   ZoomInIcon,
   ZoomOutIcon,
   newIcons,

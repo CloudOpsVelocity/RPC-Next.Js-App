@@ -1,5 +1,5 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple } from "leaflet";
 import * as L from "leaflet";
@@ -28,6 +28,7 @@ const CustomMarker: React.FC<CustomMarkerProps> = (props) => {
           width={500}
           height={500}
           alt="Wrong with images"
+          priority 
         />
         <div className="my-2">
           <div className="flex items-center justify-between">

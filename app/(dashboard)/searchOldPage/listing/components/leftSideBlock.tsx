@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import {
-  DropDownIcon,
+  // DropDownIcon,
   emptyFilesIcon,
   strikeIconIcon,
 } from "@/app/images/commonSvgs";
@@ -110,15 +110,15 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
   );
 };
 
-export default LeftSideBlock 
+export default LeftSideBlock;
 
-import MapModal from "./modals";
+// import MapModal from "./modals";
 import Loading from "@/app/components/atoms/Loader";
-import { Vast_Shadow } from "next/font/google";
+// import { Vast_Shadow } from "next/font/google";
 import { useIntersection } from "@mantine/hooks";
 import SearchSkeleton from "@/app/components/atoms/skeleton/search";
-import SharePopup from "../../components/SharePopup";
-import path from "path";
+// import SharePopup from "../../components/SharePopup";
+// import path from "path";
 import { RightSideBlock } from "./rightSideBlock";
 import ProjectCard from "@/app/test/newui/components/Card";
 

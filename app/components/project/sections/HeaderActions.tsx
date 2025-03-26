@@ -1,24 +1,24 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import SubHeading from "../headings/SubHeading";
 import Button from "@/app/elements/button";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { useAtom, useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
-import NoProperties from "../notfound";
+// import NoProperties from "../notfound";
 import {
   PlotIcon,
   VillamentIcon,
   VillaIcon,
   RowHouseIcon,
   ApartmentIcon,
-  ByTypeSvg,
-  ByUnitSvg,
-  ByBhkSvg,
-  PopupOpenSvg,
+  // ByTypeSvg,
+  // ByUnitSvg,
+  // ByBhkSvg,
+  // PopupOpenSvg,
 } from "@/app/images/commonSvgs";
 import {
-  BACKEND_PROP_TYPES,
+  // BACKEND_PROP_TYPES,
   listingProps,
   parseDataProjectProps,
   projectprops,

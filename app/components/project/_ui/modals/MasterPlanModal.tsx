@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { GrPowerReset } from "react-icons/gr";
+// import { GrPowerReset } from "react-icons/gr";
 import { FiX, FiShare2, FiDownload, FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { newIcons, PopupOpenSvg } from "@/app/images/commonSvgs";
@@ -27,8 +27,7 @@ export default function FullScreenMasterPlanModal({
   const openSharePopup = useSetAtom(searchShareAtom);
   const [, { open: LoginOpen }] = usePopShortList();
   const { data: session } = useSession();
-    
-  
+
   const openModal = () => {
     document.body.style.overflow = "hidden";
     setIsOpen(true);
@@ -59,7 +58,7 @@ export default function FullScreenMasterPlanModal({
     }); */
   };
 
-  const handleDownload = async () => { 
+  const handleDownload = async () => {
     try {
       const response = await fetch(imageUrl);
       const blob = await response.blob();
@@ -113,11 +112,13 @@ export default function FullScreenMasterPlanModal({
             className="cursor-pointer max-h-[600px] object-contain shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
             onClick={openModal}
             unoptimized
+            priority 
           />
         </picture>
-        <button 
-          aria-label="Click to open the master plan image" 
-          onClick={openModal}>
+        <button
+          aria-label="Click to open the master plan image"
+          onClick={openModal}
+        >
           <div className="sm:bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-2 right-1 sm:right-4 z-1 mb-  [20px] sm:shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
             <p className="text-[#0073C6] hidden sm:block sm:text-[14px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
               Click on image to open master plan
@@ -208,6 +209,7 @@ export default function FullScreenMasterPlanModal({
                       alt={"ALT TEXT"}
                       layout="fill"
                       objectFit="contain"
+                      priority 
                     />
                   </TransformComponent>
                 </>

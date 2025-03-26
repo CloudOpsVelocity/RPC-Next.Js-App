@@ -4,7 +4,7 @@ import React from "react";
 import ProjectCarousel from "./ProjectCard";
 import useBuilder from "@/app/hooks/useBuilder";
 import { capitalizeWords } from "@/app/utils/letters";
-import { boolean } from "yup";
+// import { boolean } from "yup";
 
 export default function NearByCarousel({
   projName,

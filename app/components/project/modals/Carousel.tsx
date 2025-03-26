@@ -1,14 +1,20 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { Button, Modal, rem, Image } from "@mantine/core";
-import { Carousel } from "@mantine/carousel";
+// import { Dispatch, SetStateAction, useState } from "react";
+import { Modal, Image } from "@mantine/core";
+// import { Carousel } from "@mantine/carousel";
 import {
   ZoomInIcon,
   ZoomOutIcon,
   emptyFilesIcon,
 } from "@/app/images/commonSvgs";
 import S from "@/app/styles/ModalCarousel.module.css";
-import { useAtom, useAtomValue } from "jotai";
-import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
+import {
+  // useAtom,
+  useAtomValue,
+} from "jotai";
+import {
+  // floorPlansArray,
+  selectedFloorAtom,
+} from "@/app/store/floor";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import { projectprops } from "@/app/data/projectDetails";
 import SharePopup from "../../atoms/SharePopup";
@@ -25,7 +31,10 @@ import ZoomInOut from "../actions/ZoomInOut";
 import Close from "../button/close";
 import { useMediaQuery } from "@mantine/hooks";
 
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+import {
+  // formatCurrency,
+  formatNumberWithSuffix,
+} from "@/app/utils/numbers";
 import { RightSection } from "./FloorplanModalRightSection";
 import { ImgNotAvail } from "@/app/data/project";
 
@@ -44,7 +53,7 @@ function CarouselModal({
   let DownloadFile = async () => {
     try {
       const response = await fetch(selectedFloor?.floorPlanUrl.split(",")[3]);
-      console.log(response);
+      // console.log(response);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
@@ -87,23 +96,26 @@ function CarouselModal({
           Floor Plan
         </div>
         <div className="flex justify-center items-center gap-5 mb-2">
-        {selectedFloor?.floorPlanUrl !== ImgNotAvail && (
-          <>
-          <button
-            onClick={handleDownload}
-            className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${
-              isMobile && "text-[12px] p-1"
-            }`}
-          >
-            {!isMobile ? "Download Floor Plan" : "Download"}
-          </button>
-         
-            <SharePopup
-              title="Share"
-            titleText="Share Floor Plan"
-              url={imageUrlParser(selectedFloor?.floorPlanUrl?.split(",")[3], "F")}
+          {selectedFloor?.floorPlanUrl !== ImgNotAvail && (
+            <>
+              <button
+                onClick={handleDownload}
+                className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${
+                  isMobile && "text-[12px] p-1"
+                }`}
+              >
+                {!isMobile ? "Download Floor Plan" : "Download"}
+              </button>
+
+              <SharePopup
+                title="Share"
+                titleText="Share Floor Plan"
+                url={imageUrlParser(
+                  selectedFloor?.floorPlanUrl?.split(",")[3],
+                  "F"
+                )}
               />
-              </>
+            </>
           )}
 
           <Close close={close} />
@@ -159,7 +171,7 @@ const MiddleSection = ({
         {propCgId != projectprops.plot &&
           selectedFloor?.superBuildUparea &&
           " | Area. " +
-            formatNumberWithSuffix(selectedFloor?.superBuildUparea,false) +
+            formatNumberWithSuffix(selectedFloor?.superBuildUparea, false) +
             " sq.ft"}
         {propCgId == projectprops.plot &&
           selectedFloor?.plotArea &&
@@ -194,7 +206,7 @@ const ImageContainer = ({ url }: any) => {
           justifyContent: "center",
           alignItems: "center",
         }}
-      > 
+      >
         <Image
           src={url.split(",")[0]}
           radius="md"

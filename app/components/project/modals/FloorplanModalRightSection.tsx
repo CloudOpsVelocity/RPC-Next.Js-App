@@ -2,11 +2,11 @@ import { projectprops } from "@/app/data/projectDetails";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { propertyDetailsSvgs } from "@/app/images/commonSvgs";
 import { selectedFloorAtom } from "@/app/store/floor";
-import { projectReqDataAtom } from "@/app/store/project/project.req";
+// import { projectReqDataAtom } from "@/app/store/project/project.req";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import clsx from "clsx";
 import { useAtomValue } from "jotai";
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 
 export const RightSection = ({ propCgId, className, postedData }: any) => {
   const data = useAtomValue(selectedFloorAtom);

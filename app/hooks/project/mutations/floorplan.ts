@@ -1,6 +1,6 @@
-import { getNearByLocations } from "@/app/utils/api/project";
+// import { getNearByLocations } from "@/app/utils/api/project";
 import axios from "axios";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { useMutation, useQuery } from "react-query";
 
 export default function useBhkType({ initialData, bhkType }: any) {

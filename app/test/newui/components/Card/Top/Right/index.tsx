@@ -155,7 +155,7 @@ export default function TopRightSection({
                         `/image?path=${
                           floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
                         }&type=F`,
-                        "_blank"
+                        "_self"
                       )
                     }
                     className="xm:px-[1px] sm:py-[1px] inline-flex flex-row justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
@@ -527,7 +527,7 @@ export default function TopRightSection({
                         `/image?path=${
                           floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
                         }&type=F`,
-                        "_blank"
+                        "_self"
                       )
                     }
                   >

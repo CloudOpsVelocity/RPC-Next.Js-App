@@ -9,27 +9,27 @@ import Feature from "@/app/components/project/feature";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
 import FirstBlock from "@/app/components/project/firstBlock";
-import Overview from "@/app/components/project/overview";
+// import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
-import ListingRentAvail from "@/app/components/project/listingRentAvail";
+// import ListingRentAvail from "@/app/components/project/listingRentAvail";
 import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
 import MasterPlan from "@/app/components/project/masterplan";
-import FloorplansBlock from "@/app/components/project/floorplansBlock";
+// import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Specifications from "@/app/components/project/specification";
 import Banner from "@/app/components/project/banner";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
-import FaqWithBg from "@/app/components/project/faq";
+// import FaqWithBg from "@/app/components/project/faq";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import PartialUnitData from "@/app/components/project/sections";
+// import PartialUnitData from "@/app/components/project/sections";
 import FAQJsonLdScript from "@/app/seo/Faqjson";
 import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
   ]);
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
 
-  console.log(data.projectName);
+  // console.log(data.projectName);
 
   return (
     <section className="w-full relative break-words">
@@ -160,7 +160,7 @@ export default async function Page({ params }: Props) {
         />
         {/* Property Details */}
         <ProjectDetailsP
-        projData={data}
+          projData={data}
           projName={data.projectName}
           data={data.phases}
           slug={slug}

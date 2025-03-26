@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { LocalBusiness, WithContext } from "schema-dts";
 const generateLocalBusinessJsonLd = (data: any) => {
   const jsonLd: WithContext<LocalBusiness> = {
@@ -32,7 +33,8 @@ const LocalBusinessJsonLdScript = ({ data }: any) => {
   const jsonLd = generateLocalBusinessJsonLd(data);
 
   return (
-    <script
+    <Script
+    id="localkScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

@@ -1,5 +1,5 @@
-import Header from "@/app/components/layouts/primary/header";
-import Footer from "@/app/components/layouts/primary/footer";
+// import Header from "@/app/components/layouts/primary/header";
+// import Footer from "@/app/components/layouts/primary/footer";
 import { ContactBackButtonIcon } from "@/app/images/HomePageIcons";
 import Link from "next/link";
 export default function Layout({ children }: { children: React.ReactNode }) {

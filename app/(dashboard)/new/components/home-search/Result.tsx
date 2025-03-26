@@ -7,7 +7,7 @@ import {
   mainSearchNoResult,
 } from "@/app/images/commonSvgs";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { ScrollArea } from "@mantine/core";
+// import { ScrollArea } from "@mantine/core";
 import { useAtom } from "jotai";
 import React from "react";
 import toast from "react-hot-toast";
@@ -42,7 +42,7 @@ export default function Results() {
   };
 
   const handlePush = async (type: string, data: any, apiData: any) => {
-    console.log("aa aa a a");
+    // console.log("aa aa a a");
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
       ["BuilderOwnerListing", "I"],
@@ -55,7 +55,7 @@ export default function Results() {
       case "project":
         addToRecent({ ...apiData, ct: "project" });
         if (apiData.type === "Project") {
-          window.open(apiData.stringUrl);
+          window.open(apiData.stringUrl, "_self");
         } else {
           const phase = "";
           window.open(
@@ -63,7 +63,8 @@ export default function Results() {
               apiData.stringId.split("_")[0]
             }-phaseId=${apiData.stringId.split("_")[1]}-projName=${
               apiData.name
-            }`
+            }`,
+            "_self"
           );
         }
 
@@ -91,7 +92,7 @@ export default function Results() {
                   .trim()}`
               : ""
           }`;
-          window.open(url);
+          window.open(url, "_self");
           /*   {
             let url;
             let localityName = apiData.name.split("-")[1] ? apiData.name.split("-")[1] : apiData.name.split(" in ")[1];
@@ -119,14 +120,14 @@ export default function Results() {
           }-listedBy=${AgentOwnerBuilderMap.get(
             apiData.type
           )}-projName=${projectName}`;
-          window.open("/search/listing?sf=" + url);
+          window.open("/search/listing?sf=" + url, "_self");
         }
         break;
       case "builder":
         {
           addToRecent({ ...apiData, ct: "builder" });
           if (apiData.type === "BuilderDetail") {
-            window.open(apiData.stringUrl);
+            window.open(apiData.stringUrl, "_self");
           } else {
             const url =
               encodeURIComponent(data.name) +
@@ -143,7 +144,8 @@ export default function Results() {
                 apiData.type !== "BuilderProject"
                   ? `-listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
-              }`
+              }`,
+              "_self"
             );
           }
         }

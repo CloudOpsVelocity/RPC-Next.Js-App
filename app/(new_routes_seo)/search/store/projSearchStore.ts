@@ -270,6 +270,7 @@ projSearchStore.onMount = (setAtom) => {
     });
   }
 };
+
 export const diffToProjFromListing = {
   proj: [
     "facings",

@@ -1,7 +1,7 @@
 import {
-  Shorlisted,
+  // Shorlisted,
   ShortListIcon,
-  shortlistIconSvg,
+  // shortlistIconSvg,
 } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
@@ -9,7 +9,7 @@ import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
-import useDynamicProj from "@/app/hooks/project/useDynamic";
+// import useDynamicProj from "@/app/hooks/project/useDynamic";
 import useDynamicProp from "@/app/hooks/property/useDyanamic";
 import { listingProps } from "@/app/data/projectDetails";
 
@@ -30,7 +30,7 @@ export default function ShortList({ cg, propTypeName }: any) {
     if (session) {
       mutate(2);
       toggleShortlist({
-          id: (slug || bhk_unit_type).split("-")[1],
+        id: (slug || bhk_unit_type).split("-")[1],
         status: data?.shortListed ? "N" : "Y",
         source: "prop",
       });

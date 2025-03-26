@@ -1,7 +1,7 @@
 import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import React from "react";
 import { useQuery } from "react-query";
-import { getShortIds } from "../../api";
+// import { getShortIds } from "../../api";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -58,10 +58,9 @@ export default function CompareShortListCount({ initialValue }: Props) {
   });
   return (
     !isLoading && (
-      <Link 
-      prefetch={false}
-
-      rel="noopener noreferrer"
+      <Link
+        prefetch={false}
+        rel="noopener noreferrer"
         href="/your-profile/shortlisted"
         className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#2D4657] bg-[#1a2733] fixed bottom-10 right-5 sm:text-sm xl:text-xl z-[1000]"
       >

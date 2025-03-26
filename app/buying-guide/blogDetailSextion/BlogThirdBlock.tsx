@@ -32,6 +32,7 @@ function BlogThirdBlock() {
                     height={630}
                     width={1200}
                     className='rounded-[10px] w-[94%] xl:w-[50%] mb-[10px] md:mb-0 border-[0.5px] border-gray border-solid rounded-l-0 max-w-[100%] md:max-w-[598px] xl:max-h-[284px] md:max-h-[200px] max-h-[200px] ' 
+                    priority 
                 />
             </div>
         </Link>

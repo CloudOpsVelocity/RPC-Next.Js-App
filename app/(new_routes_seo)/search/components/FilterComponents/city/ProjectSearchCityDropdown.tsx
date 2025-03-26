@@ -12,11 +12,11 @@ import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
-import { useAtom, useAtomValue } from "jotai";
-import { serverCityAtom } from "@/app/store/search/serverCity";
+import { useAtom } from "jotai";
+// import { serverCityAtom } from "@/app/store/search/serverCity";
 import { projSearchStore } from "../../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
-import { City } from "@/app/images/commonSvgs";
+// import { City } from "@/app/images/commonSvgs";
 
 interface ICity {
   id: number;

@@ -63,8 +63,6 @@ const overlayReducer = (
     return new Intl.NumberFormat("en-IN").format(Number(value));
   };
   
-  console.log(action);
-
   switch (action.type) {
     case "OPEN":
       if (action.conType === "otherCharges") {

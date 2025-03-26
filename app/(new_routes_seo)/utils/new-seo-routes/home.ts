@@ -60,12 +60,12 @@ export function extracHomePageApitLocation(path: string): Location | null {
     // If there are multiple segments, it's a city and locality
     const citySegment = segments[1]; // Get the city segment
     const localitySegment = segments.slice(2).join("/"); // Join remaining segments as locality
-    
+
     let res = {
       city: citySegment,
       ...(localitySegment && { locality: localitySegment.replace(/-/g, " ") }),
     };
-    return res 
+    return res;
   }
   return null; // Return null if the path is invalid
 }
@@ -74,7 +74,7 @@ export function getHomePageParamvalues(
   slug: string,
   type: "project" | "property"
 ) {
-  console.log(slug)
+  // console.log(slug)
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, `${type}SlugsHome.json`);
   const jsonData = fs.readFileSync(filePath, "utf8");
@@ -82,14 +82,18 @@ export function getHomePageParamvalues(
   // console.log(builderJsonData)
   for (const path in builderJsonData) {
     if (path.startsWith(slug)) {
-      if(builderJsonData[path].includes("_")){
+      if (builderJsonData[path].includes("_")) {
         return builderJsonData[path].split("_")[0];
       }
-        return builderJsonData[path];
+      return builderJsonData[path];
     }
   }
   return null;
 }
-export const extractCityName = (name:string) => {
-  return name.split("-in-").pop()?.replace(/-/g, " ").replace(/\b\w/g, str => str.toUpperCase());
-}
+export const extractCityName = (name: string) => {
+  return name
+    .split("-in-")
+    .pop()
+    ?.replace(/-/g, " ")
+    .replace(/\b\w/g, (str) => str.toUpperCase());
+};

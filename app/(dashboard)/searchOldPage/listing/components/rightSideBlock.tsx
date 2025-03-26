@@ -2,15 +2,18 @@
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 import MapSkeleton from "@/app/components/maps/Skeleton";
-import useSearchFilters from "@/app/hooks/search";
+// import useSearchFilters from "@/app/hooks/search";
 
 const RightSideBlock = ({ serverClientData }: any) => {
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/app/components/maps/search/ProjectSearchPageMap"), {
-        loading: () => <MapSkeleton />,
-        ssr: false,
-      }), // "use client";
+      dynamic(
+        () => import("@/app/components/maps/search/ProjectSearchPageMap"),
+        {
+          loading: () => <MapSkeleton />,
+          ssr: false,
+        }
+      ), // "use client";
     // import dynamic from "next/dynamic";
     // import React, { useMemo } from "react";
     // import MapSkeleton from "@/app/components/maps/Skeleton";
@@ -42,8 +45,6 @@ const RightSideBlock = ({ serverClientData }: any) => {
     // export { RightSideBlock };
     []
   );
-
-  console.log(serverClientData)
 
   return (
     <div

@@ -1,7 +1,8 @@
 "use client";
-import PriceBag, {
-  Phone,
-  SVGBackground,
+import {
+  // PriceBag,
+  // Phone,
+  // SVGBackground,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
 import React from "react";
@@ -9,10 +10,10 @@ import Button from "../../elements/button";
 import RequestCallBackModal from "../molecules/popups/req";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { Main } from "@/app/validations/property";
-import { calculatePerSqPrice } from "@/app/utils/price";
-import ListItem from "./pricingbreakup";
+// import { calculatePerSqPrice } from "@/app/utils/price";
+// import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 import { useMediaQuery } from "@mantine/hooks";
 import { parseOtherCharge } from "./pricingbreakup/PriceBreakup";
@@ -62,108 +63,116 @@ export default function PropertyOverviewBanner({
   );
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-      <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40">
-        {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
- */}
-            <img
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
-              width={800}
-              height={800}
-            alt="priceBagOverView"
-            className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"          />
+    <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40">
+      {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
+       */}
+      <img
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
+        width={800}
+        height={800}
+        alt="priceBagOverView"
+        className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
+      />
 
-        <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
-          <div className="flex  flex-col text-left">
-            <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
-              {" Total "}
-              {cg === "S" ? "Selling" : "Rent"} Price {otherPrice?.otherCharge&&<span className="sm:text-[16px] xl:text-[24px]">(Including Other Charges)</span>}
-            </p>
-            <p className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
-              <span className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
-                {cg === "S"
-                  ? formatCurrency(
-                      price + parseOtherCharge(otherPrice?.otherCharge) + sum
-                    )
-                  : formatCurrency(
-                      price + parseOtherCharge(otherPrice?.otherCharge) + sum
-                    )}
+      <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
+        <div className="flex  flex-col text-left">
+          <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+            {" Total "}
+            {cg === "S" ? "Selling" : "Rent"} Price{" "}
+            {otherPrice?.otherCharge && (
+              <span className="sm:text-[16px] xl:text-[24px]">
+                (Including Other Charges)
               </span>
-            </p>
-            <Button
-              title="Request  Callback"
-              buttonClass="  text-[#FFF] text-[12px] sm:text-[22px] xl:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-              onChange={() =>
-                open({
-                  title: `${bhkName ?? ""} ${propTypeName} For ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
-                  modal_type: "PROPERTY_REQ_CALLBACK",
-                  postedByName: get_posted_by(postedByType),
-                  postedId: postedById,
-                  reqId: propIdEnc,
-                  source: "propBanner",
-                })
-              }
+            )}
+          </p>
+          <p className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
+            <span className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
+              {cg === "S"
+                ? formatCurrency(
+                    price + parseOtherCharge(otherPrice?.otherCharge) + sum
+                  )
+                : formatCurrency(
+                    price + parseOtherCharge(otherPrice?.otherCharge) + sum
+                  )}
+            </span>
+          </p>
+          <Button
+            title="Request  Callback"
+            buttonClass="  text-[#FFF] text-[12px] sm:text-[22px] xl:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+            onChange={() =>
+              open({
+                title: `${bhkName ?? ""} ${propTypeName} For ${
+                  cg === "S" ? " Sell" : " Rent"
+                } In ${ltName}`,
+                modal_type: "PROPERTY_REQ_CALLBACK",
+                postedByName: get_posted_by(postedByType),
+                postedId: postedById,
+                reqId: propIdEnc,
+                source: "propBanner",
+              })
+            }
+          />
+        </div>
+        {!isMobile ? (
+          <div className="flex justify-end items-center flex-col mt-3">
+            {otherPrice && (
+              <button
+                onClick={toggle}
+                className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
+              >
+                {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
+                {/*   {config.priceIcon} */}
+              </button>
+            )}
+            <WhatsAppButton
+              className="cursor-pointer"
+              onClick={""}
+              name={`${bhkName ?? ""} ${propTypeName} For${
+                cg === "S" ? " Sell" : " Rent"
+              } ${propName ? `In ${propName}` : ""}`}
+              type="prop"
             />
           </div>
-          {!isMobile ? (
-            <div className="flex justify-end items-center flex-col mt-3">
-              {otherPrice && (
-                <button
-                  onClick={toggle}
-                  className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
-                >
-                  {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
-                  {/*   {config.priceIcon} */}
-                </button>
-              )}
-              <WhatsAppButton
-                className="cursor-pointer"
-                onClick={""}
-                name={`${bhkName ?? ""} ${propTypeName} For${
-                  cg === "S" ? " Sell" : " Rent"
-                } ${propName ? `In ${propName}` : ""}`}
-                type="prop"
-              />
-            </div>
-          ) : (
-            <>
-              <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
-                <Button
-                  title="Request  Callback"
-                  buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-                  onChange={() =>
-                    open({
-                      title: `${bhkName ?? ""} ${propTypeName} For
+        ) : (
+          <>
+            <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
+              <Button
+                title="Request  Callback"
+                buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+                onChange={() =>
+                  open({
+                    title: `${bhkName ?? ""} ${propTypeName} For
                 ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
-                      modal_type: "PROPERTY_REQ_CALLBACK",
-                      postedByName,
-                      postedId: postedById,
-                      reqId: propIdEnc,
-                      source: "propBanner",
-                    })
-                  }
-                />
-                <button
-                  onClick={toggle}
-                  className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-                >
-                  {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
-                  {config.priceIcon}
-                </button>
-              </div>
-              <WhatsAppButton
-                className="cursor-pointer"
-                onClick={""}
-                name={`${bhkName ?? ""} ${propTypeName} For${
-                  cg === "S" ? " Sell" : " Rent"
-                } ${propName ? `In ${propName}` : ""}`}
-                type="prop"
+                    modal_type: "PROPERTY_REQ_CALLBACK",
+                    postedByName,
+                    postedId: postedById,
+                    reqId: propIdEnc,
+                    source: "propBanner",
+                  })
+                }
               />
-            </>
-          )}
-        </div>
-
-        <RequestCallBackModal />
+              <button
+                onClick={toggle}
+                className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+              >
+                {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
+                {config.priceIcon}
+              </button>
+            </div>
+            <WhatsAppButton
+              className="cursor-pointer"
+              onClick={""}
+              name={`${bhkName ?? ""} ${propTypeName} For${
+                cg === "S" ? " Sell" : " Rent"
+              } ${propName ? `In ${propName}` : ""}`}
+              type="prop"
+            />
+          </>
+        )}
       </div>
+
+      <RequestCallBackModal />
+    </div>
   );
 }
 

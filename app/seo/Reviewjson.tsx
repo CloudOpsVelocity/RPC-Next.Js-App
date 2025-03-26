@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Review, WithContext } from "schema-dts";
 
 const generateReviewJsonLd = (data: any) => {
@@ -28,7 +29,8 @@ const generateReviewJsonLd = (data: any) => {
 const ReviewJsonLdScript = ({ data }: any) => {
   const jsonLd = generateReviewJsonLd(data);
   return (
-    <script
+    <Script
+    id="reviewScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

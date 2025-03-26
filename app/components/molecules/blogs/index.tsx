@@ -44,6 +44,7 @@ export default function Blogs() {
               alt="blog"
               width={700}
               height={300}
+              priority 
             />
             <div className="w-[90%] h-24 p-5 text-center flex justify-center items-center absolute bottom-5 left-10 bg-gradient-to-r from-[#B5BAC2] to-[#00223a] rounded-2xl shadow">
               <p className="  text-white text-2xl font-semibold font-['Montserrat'] ">
@@ -60,6 +61,7 @@ export default function Blogs() {
               alt="blog"
               width={700}
               height={300}
+              priority 
             />
             <div className="w-[90%] h-24 p-5 text-center flex justify-center items-center absolute bottom-5 left-10 bg-gradient-to-r from-[#B5BAC2] to-[#00223a] rounded-2xl shadow">
               <p className="  text-white text-2xl font-semibold font-['Montserrat'] ">

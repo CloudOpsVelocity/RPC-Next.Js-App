@@ -3,7 +3,7 @@ import useSearchFilters from "@/app/hooks/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { SearchLocationIcon } from "@/app/images/commonSvgs";
 import { ScrollArea } from "@mantine/core";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 
@@ -49,7 +49,7 @@ export default function Results() {
         break;
       case "projectListing":
         {
-          const url = `projIdEnc=${data.id}-listedBy=${data.type.split("")[0]}`; 
+          const url = `projIdEnc=${data.id}-listedBy=${data.type.split("")[0]}`;
           window.open("/search/listing?" + url);
         }
         break;

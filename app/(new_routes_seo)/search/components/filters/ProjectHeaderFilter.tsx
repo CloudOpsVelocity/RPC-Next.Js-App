@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent, memo } from "react";
 import {
   MdSearch,
   MdClose,
@@ -15,12 +15,17 @@ import { projSearchStore } from "../../store/projSearchStore";
 import { usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
-import SelectedFilters from "./SelectedFilters";
+// import SelectedFilters from "./SelectedFilters";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
-import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
-import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
+// import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
+// import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
+import dynamic from "next/dynamic";
 
-export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
+const SelectedFilters = dynamic(() => import("./SelectedFilters"));
+const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
+const ListingSearchTabs = dynamic(() => import("../../listing/components/ListingSearchTabs"));
+
+const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchError, setSearchError] = useState("");
@@ -131,7 +136,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
         break;
       case "projects":
         if (data.type === "Project") {
-          window.open(data.stringUrl);
+          typeof window !== "undefined" ? window.open(data.stringUrl) : ""
         } else {
           if (isListingSearch) {
             dispatch({
@@ -143,11 +148,11 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
               },
             });
           } else {
-            window.open(
+            typeof window !== "undefined" ? window.open(
               `/search/listing?sf=projIdEnc=${
                 data.stringId.split("_")[0]
               }-phaseId=${data.stringId.split("_")[1]}-projName=${data.name}`
-            );
+            ) : ""
           }
         }
 
@@ -202,7 +207,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                     .trim()}`
                 : ""
             }`;
-            window.open(url);
+            typeof window !== "undefined" ? window.open(url) : ""
           }
         }
         break;
@@ -214,24 +219,24 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
           }-listedBy=${AgentOwnerBuilderMap.get(
             data.type
           )}-projName=${projectName}`;
-          window.open("/search/listing?sf=" + url);
+          typeof window !== "undefined" ? window.open("/search/listing?sf=" + url) : ''
         }
         break;
       case "builders":
         if (data.type === "BuilderDetail") {
-          window.open(data.stringUrl);
+          typeof window !== "undefined" ? window.open(data.stringUrl) : ""
         } else {
           const url =
             encodeURIComponent(data.name) +
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
-          window.open(
+            typeof window !== "undefined" ? window.open(
             `/search?sf=builderIds=${url}${
               data.type !== "BuilderProject"
                 ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
                 : ""
             }`
-          );
+          ) : ''
         }
         break;
       default:
@@ -242,43 +247,48 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
   // crollyww
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const res = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BACKEND_URL
-      }/matcher/string?word=${searchQuery}&cityId=${
-        state.city?.split("+")[1] || 9
-      }`
-    );
-    const data = await res.json();
-    if (Object.hasOwn(data, "ids")) {
-      handleClearFilters("clearAll");
-      let ids = extractApiValues(data.ids);
-      if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
-        dispatch({
-          type: "update",
-          payload: {
-            ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
-            ...(ids.PT && { propType: parseInt(ids.PT as string) }),
-            ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-            ...(ids.PJ && {
-              projIdEnc: ids.PJ as string,
-              projName: searchQuery,
-              listedBy: !isListing ? "All" : null,
-            }),
-            ...(ids.CG && {
-              cg: String(ids.CG) ?? "S",
-              ...(ids.CG == "R" && {
-                listedBy: "All",
+
+    if(searchQuery !== ""){
+      const res = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/matcher/string?word=${searchQuery}&cityId=${
+          state.city?.split("+")[1] || 9
+        }`
+      );
+      const data = await res.json();
+      if (Object.hasOwn(data, "ids")) {
+        handleClearFilters("clearAll");
+        let ids = extractApiValues(data.ids);
+        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+          dispatch({
+            type: "update",
+            payload: {
+              ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
+              ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+              ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
+              ...(ids.PJ && {
+                projIdEnc: ids.PJ as string,
+                projName: searchQuery,
+                listedBy: !isListing ? "All" : null,
               }),
-            }),
-          },
-        });
+              ...(ids.CG && {
+                cg: String(ids.CG) ?? "S",
+                ...(ids.CG == "R" && {
+                  listedBy: "All",
+                }),
+              }),
+            },
+          });
+        }
+        handleApplyFilters();
+        handleResetQuery();
+        setIsSearchOpen(false);
+        setSearchQuery("");
+        return;
       }
-      handleApplyFilters();
-      handleResetQuery();
-      setIsSearchOpen(false);
-      setSearchQuery("");
-      return;
+    }else{
+      handleDropdownToggle("allFilters")
     }
   };
 
@@ -322,7 +332,7 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
                     title="Only letters, numbers, and spaces are allowed."
                   />
 
-                  <button type="submit">
+                  <button type="submit" name="projectHeaderSearchIcon">
                     <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                   </button>
                 </form>
@@ -475,4 +485,6 @@ export default function HeaderFilters({ isListing }: { isListing?: boolean }) {
       )}
     </>
   );
-}
+};
+
+export default memo(HeaderFilters);

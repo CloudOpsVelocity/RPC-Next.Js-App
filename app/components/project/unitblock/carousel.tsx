@@ -2,7 +2,7 @@ import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { Carousel } from "@mantine/carousel";
 import clsx from "clsx";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import React from "react";
 import styles from "@/app/styles/Carousel.module.css";
 import Image from "next/image";
@@ -81,6 +81,7 @@ export default function CarouselSuggestion({
                     className="w-[88px] h-[58px]   cursor-pointer "
                     style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                     onClick={() => selectImg(ind)}
+                    priority 
                   />
                 </div>
               </Carousel.Slide>

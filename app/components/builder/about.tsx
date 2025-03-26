@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import PropertyHeading from "../property/heading";
+// import PropertyHeading from "../property/heading";
 import ReadMore from "./readmore";
 import { useMediaQuery } from "@mantine/hooks";
 

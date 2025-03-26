@@ -1,5 +1,5 @@
-import { useDisclosure } from "@mantine/hooks";
-import { Drawer, Button } from "@mantine/core";
+// import { useDisclosure } from "@mantine/hooks";
+import { Drawer } from "@mantine/core";
 import useSearchFilters from "@/app/hooks/search";
 import S from "@/app/styles/seach/Drawer.module.css";
 import { MobileFilter } from "./filter";

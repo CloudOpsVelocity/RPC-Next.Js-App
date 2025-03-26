@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import { FlooringIcon, FloorsIcon, TowerIcon } from "../../images/commonSvgs";
-import { projectprops, propertyDetailsTypes } from "../../data/projectDetails";
+import {
+  projectprops,
+  // propertyDetailsTypes
+} from "../../data/projectDetails";
 import {
   apartmentCardImg,
   plotCardImg,
@@ -13,25 +16,28 @@ import Image from "next/image";
 import { useAtom, useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+// import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { parseUnits } from "@/app/utils/unitparser";
-import { QueryCache, useQuery } from "react-query";
-import { queryClient } from "@/app/utils/query";
 import {
-  getCachedProjectUnits,
+  // QueryCache,
+  useQuery,
+} from "react-query";
+// import { queryClient } from "@/app/utils/query";
+import {
+  // getCachedProjectUnits,
   getProjectUnits,
 } from "@/app/utils/api/project";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import clsx from "clsx";
 import ShowUnitsButton from "./button/showUnits";
 import { countPlots } from "@/app/utils/count/plot";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
 import RTK_CONFIG from "@/app/config/rtk";
-import { NumberFormatter } from "@mantine/core";
+// import { NumberFormatter } from "@mantine/core";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import Tooltip from "../atoms/Tooltip";
-import { PropertyUnit } from "./newFloorPlan/types/floor-plan";
+// import { PropertyUnit } from "./newFloorPlan/types/floor-plan";
 import { modalStateAtom } from "@/app/store/new-floor-plan-state";
 
 type Props = {
@@ -231,6 +237,7 @@ export default function PropertyTypeDetailsCrad({
             src={propName(propertyType, "img") as string}
             alt="Preview"
             className="w-[88%] h-[88%] object-cover rounded-[14px]"
+            priority 
           />
         </div>
         <div className="down mb-3">

@@ -1,6 +1,6 @@
 import Login from "@/app/components/molecules/auth/login";
-import { getQueryParam } from "@/app/hooks/custom/useRedirect";
-import Link from "next/link";
+// import { getQueryParam } from "@/app/hooks/custom/useRedirect";
+// import Link from "next/link";
 import LoginSignupTabs from "../Components/LoginSignup";
 
 export default function Page({ searchParams }: any) {

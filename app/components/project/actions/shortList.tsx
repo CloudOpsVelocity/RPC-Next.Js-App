@@ -1,10 +1,10 @@
 import {
-  Shorlisted,
+  // Shorlisted,
   ShortListIcon,
-  shortlistIconSvg,
+  // shortlistIconSvg,
 } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
@@ -12,7 +12,7 @@ import clsx from "clsx";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 import { queryClient } from "@/app/utils/query";
 
-export default function ShortList({slug}:{slug:string}) {
+export default function ShortList({ slug }: { slug: string }) {
   const { data: session } = useSession();
 
   const { toggleShortlist } = useShortlistAndCompare();
@@ -43,9 +43,9 @@ export default function ShortList({slug}:{slug:string}) {
     if (session) {
       handleShortlist();
     } else {
-      open(loginHandleShortList,{
-        type:"shortlist",
-        link:slug
+      open(loginHandleShortList, {
+        type: "shortlist",
+        link: slug,
       });
     }
   };

@@ -1,7 +1,7 @@
-import logger from "@/app/utils/logger";
+// import logger from "@/app/utils/logger";
 import { getServerSideSitemap } from "next-sitemap";
-import path from "path";
-import fs from "fs";
+// import path from "path";
+// import fs from "fs";
 export async function GET(request: Request) {
   return getServerSideSitemap([
     {

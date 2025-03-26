@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { FaBuilding, FaHome, FaHotel, FaLandmark } from "react-icons/fa";
-import { TabItem } from "../types/floor-plan";
+import { useEffect } from "react";
+// import { FaBuilding, FaHome, FaHotel, FaLandmark } from "react-icons/fa";
+// import { TabItem } from "../types/floor-plan";
 import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import getIcon from "@/app/(new_routes_seo)/residential/projects/utils/icons";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import Button from "@/app/elements/button";
 
-export function PropertyTabs({ types }: { types:any }) {
+export function PropertyTabs({ types }: { types: any }) {
   const [selectedPhase] = useAtom(currentPhaseAtom);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const allKeys = [35, 33, 31, 34, 32];
 
-  const checkProperty = (key: any) => { 
+  const checkProperty = (key: any) => {
     if (
       key == projectprops.apartment &&
       types != undefined &&
@@ -48,19 +48,20 @@ export function PropertyTabs({ types }: { types:any }) {
     }
   };
 
-  useEffect(()=>{
-    let list:any = [];
-    allKeys.forEach(each=>{
-      if(checkProperty(each)){
+  useEffect(() => {
+    let list: any = [];
+    allKeys.forEach((each) => {
+      if (checkProperty(each)) {
         list = [...list, each];
       }
-    })
+    });
     setPropCgId(list.length > 0 ? list[0] : 35);
   }, [selectedPhase]);
 
   return (
     <div className=" flex justify-start items-start flex-wrap !mt-0 md:mt-[3%] gap-[10px] md:gap-[20px] ">
-      {propertyDetailsTypes != undefined && propertyDetailsTypes != null &&
+      {propertyDetailsTypes != undefined &&
+        propertyDetailsTypes != null &&
         allKeys.map((keyName) => {
           let name =
             //@ts-ignore

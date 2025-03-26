@@ -7,7 +7,7 @@ import Image from "next/image";
 import React from "react";
 import { Svg } from "./heading";
 import ReadMore from "../atoms/readmore";
-import Button from "../atoms/buttons/variansts";
+// import Button from "../atoms/buttons/variansts";
 import Link from "../atoms/buttons/Link";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
@@ -56,6 +56,7 @@ export default function PropertyBanner({
         width={312}
         height={312}
         unoptimized
+        priority 
       />
       <div className=" inline-flex justify-center items-center ">
         {Svg}
@@ -75,7 +76,7 @@ export default function PropertyBanner({
             {((reraStatus as unknown) === "Recieved" ||
               (reraStatus as unknown) === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px] z-[1]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
               </p>
             )}
             <div className="w-[350px] h-[185px] relative">
@@ -85,7 +86,7 @@ export default function PropertyBanner({
                 className="flex items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] w-full h-full object-fill "
                 unoptimized
                 height={630}
-                width={1200}
+                width={1200} priority                                             
               />
             </div>
           </div>
@@ -154,6 +155,7 @@ function PropertyBannerForMobile({
               className="w-full h-auto xl:mb-4 md:w-auto md:mb-0"
               width={350}
               height={185}
+              priority 
             />
             <div className="md:mt-4">
               <h2 className="text-[#001F35] text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2">

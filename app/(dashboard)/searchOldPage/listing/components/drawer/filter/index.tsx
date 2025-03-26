@@ -1,13 +1,13 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { ListingSearchDetails, searchDetails } from "@/app/data/searchDetails";
+import { ListingSearchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
 import {
   DropDownIcon,
   fourStarIcon,
   lensSvg,
   miniItemsCrossIcon,
-  notificationIcon,
+  // notificationIcon,
 } from "@/app/images/commonSvgs";
 import {
   Checkbox,

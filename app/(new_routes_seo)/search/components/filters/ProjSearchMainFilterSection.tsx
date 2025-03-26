@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import ProjectFilters from "./ProjectHeaderFilter";
-import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
+// import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
 
 type Props = {
   isListing?: boolean;

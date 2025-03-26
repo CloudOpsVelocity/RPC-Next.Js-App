@@ -1,6 +1,7 @@
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
+import Script from "next/script";
 
 export const generateAllSchemas = (property: any) => {
   const availableFrom = convertToSchemaDate(property?.availableFrom);
@@ -194,13 +195,15 @@ export const ListingSearchSchema = ({ properties }: any) => {
 
   return (
     <>
-      <script
+      <Script
+      id="listingSearchScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
-      <script
+      <Script
+      id="listingSearchScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -230,7 +233,8 @@ export const ListingSearchSchema = ({ properties }: any) => {
         }}
       />
       {realEstateAgentSchemas.map((schema, index) => (
-        <script
+        <Script
+        id="listingSearchScript3"
           key={index}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -238,7 +242,8 @@ export const ListingSearchSchema = ({ properties }: any) => {
           }}
         />
       ))}
-      <script
+      <Script
+      id="listingSearchScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

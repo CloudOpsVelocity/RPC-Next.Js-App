@@ -1,12 +1,12 @@
-import { getPagesSlugs } from "@/app/seo/api";
-import React, { Suspense } from "react";
+// import { getPagesSlugs } from "@/app/seo/api";
+import React from "react";
 import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
 import ListingSearchPage from "../../searchOldPage/listing/Page/ListingSearchPage";
-import { useHydrate } from "react-query";
-import { searachFilterAtom } from "@/app/store/search";
-import { useHydrateAtoms } from "jotai/utils";
+// import { useHydrate } from "react-query";
+// import { searachFilterAtom } from "@/app/store/search";
+// import { useHydrateAtoms } from "jotai/utils";
 type Props = {
   params: { slug: string };
 };

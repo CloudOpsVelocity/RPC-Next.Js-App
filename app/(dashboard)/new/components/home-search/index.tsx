@@ -4,17 +4,17 @@ import { useState } from "react";
 import Tabs from "./tabs";
 import Alert from "./Alert";
 import QuickFilters from "./filters/QuickFilters";
-import Nearme from "./Nearme";
+// import Nearme from "./Nearme";
 import SearchSec from "./SearchSec";
 import { useMediaQuery } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { toQueryParams } from "../../utils/param";
-import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
+// import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
-import CompareShortListCount from "./CompareShortListCount";
+// import CompareShortListCount from "./CompareShortListCount";
 
 const HomeSearch = ({
   // count,
@@ -33,7 +33,7 @@ const HomeSearch = ({
       return;
     }
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
-    window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_blank", "noreferrer");
+    window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_self", "noreferrer");
   };
 
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
@@ -56,6 +56,7 @@ const HomeSearch = ({
           height={300}
           width={500}
           className="w-full h-full"
+          priority 
         />
       </div>
       <div className="w-full sm:max-w-[1066px] sm:ml-[20px] xl:ml-0 xl:mr-[20px] ">

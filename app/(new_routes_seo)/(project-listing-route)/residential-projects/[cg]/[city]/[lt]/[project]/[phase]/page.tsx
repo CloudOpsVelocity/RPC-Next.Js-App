@@ -1,8 +1,8 @@
-import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
+// import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
-  getNestedSlug,
+  // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
@@ -24,7 +24,7 @@ export default async function Page({ params }: Props) {
   const { cg, city, lt, project, phase } = params;
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}/${phase}`;
   const values = await findPathForProjectListing(pathname);
-  console.log(values);
+  // console.log(values);
   if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
   const severData = await getSearchData(
@@ -32,7 +32,7 @@ export default async function Page({ params }: Props) {
       filtersValues.PJ
     }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
   );
-  console.log(pathname);
+  // console.log(pathname);
   return (
     <NewListingSearchpage
       pageUrl={pathname}

@@ -13,6 +13,7 @@ const HomeSearch = () => {
           alt="home-search"
           height={300}
           width={500}
+          priority 
         />
       </div>
       <div className="flex items-center w-full">

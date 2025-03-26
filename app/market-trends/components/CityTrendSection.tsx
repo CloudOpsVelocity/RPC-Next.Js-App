@@ -1,17 +1,21 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { listingProps, projectprops } from '@/app/data/projectDetails';
-import { emptyFilesIcon, LikeIcon, strikeIconIcon } from '@/app/images/commonSvgs';
-import { useSearchParams } from 'next/navigation';
+"use client";
+import React, { useEffect, useState } from "react";
+import { listingProps } from "@/app/data/projectDetails";
+import {
+  emptyFilesIcon,
+  LikeIcon,
+  strikeIconIcon,
+} from "@/app/images/commonSvgs";
+import { useSearchParams } from "next/navigation";
 
-import Image from 'next/image';
-import { formatCurrency } from '@/app/utils/numbers';
-import { defaultCitySvg } from '@/app/images/commonSvgs';
-import { useAtom } from 'jotai';
-import { trendsFilterData } from '../data.ts/marketBlogalData';
-import { formatNumberWithCommas } from '@/app/seo/sitemap/const';
-import Loading from '@/app/components/atoms/Loader';
-import Link from 'next/link';
+import Image from "next/image";
+import { formatCurrency } from "@/app/utils/numbers";
+import { defaultCitySvg } from "@/app/images/commonSvgs";
+import { useAtom } from "jotai";
+import { trendsFilterData } from "../data.ts/marketBlogalData";
+import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
+import Loading from "@/app/components/atoms/Loader";
+import Link from "next/link";
 
 type Props = {
   cityName: string;
@@ -51,68 +55,108 @@ const filtersStaticData = {
   ],
 };
 
-const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filters:any}) => {
-    const [popupData, setPopupData] = useState({isOpen: false, data:null, boxId:null});
-    const onSelectBox = (identifier:string, data:any) => {
-      if(identifier === "OPEN"){
-        setPopupData({isOpen: true, data: data, boxId: data.propIdEnc})
-      }else{
-        setPopupData({isOpen: false, data:null, boxId:null})
-      }
+const PriceCard = ({
+  eachCity,
+  cityId,
+  filters,
+}: {
+  eachCity: any;
+  cityId: any;
+  filters: any;
+}) => {
+  const [popupData, setPopupData] = useState({
+    isOpen: false,
+    data: null,
+    boxId: null,
+  });
+  const onSelectBox = (identifier: string, data: any) => {
+    if (identifier === "OPEN") {
+      setPopupData({ isOpen: true, data: data, boxId: data.propIdEnc });
+    } else {
+      setPopupData({ isOpen: false, data: null, boxId: null });
     }
-    console.log(eachCity);
-    return(
-        <div 
-          key={eachCity.localityName}  
-          className='group px-[10px] md:px-[30px] w-full p-[10px] rounded-[10px] border-t-[1px] border-solid shadow-md hover:shadow-lg flex flex-col items-center justify-between transition-all duration-[0.5s]  '
-        >
-            {/* Top section */}
-            <div onClick={()=> onSelectBox(!popupData.isOpen ? "OPEN" : "CLOSE", eachCity)} className='flex items-center justify-between cursor-pointer w-full md:min-h-[124px] gap-[10px] md:gap-[20px] '>
-              <div className='flex items-center xl:flex-nowrap flex-wrap w-full gap-[20px]'>
-                  <div className='flex items-center gap-[10px] mr-[100%] md:mr-[0%] mb-[10px] md:mb-0 md:min-w-[270px] '>
-                    <div className=' min-w-[44px] md:min-w-[44px] w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-[50%] shadow-md border-t-[1px] border-solid '>
-                      {/* city image */}
-                      {eachCity.coverImage ?
-                      <Image
-                        className="w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-[50%] shadow-md"
-                        alt="Locality"
-                        src={eachCity.coverImage}
-                        width={64}
-                        height={64}
-                      />
-                      :
-                      defaultCitySvg
-                      }
-                    </div>
-                    <div>
-                        <p className='font-bold text-[12px] md:text-[16px] text-nowrap '>{eachCity.localityName}</p>
-                        <p className=' text-gray-700 first-letter: capitalize text-[12px] md:text-[16px] p-0 m-0'>{eachCity.cityName ? eachCity.cityName : ""}</p>
-                        <span className='text-[10px] text-white bg-gray-600 p-[2px] font-medium rounded-[4px] '>{eachCity.propTypeName === "Independent House/Building" ? "Independent House" : eachCity.propTypeName}</span>
-                    </div>
-                  </div>
+  };
+  // console.log(eachCity);
+  return (
+    <div
+      key={eachCity.localityName}
+      className="group px-[10px] md:px-[30px] w-full p-[10px] rounded-[10px] border-t-[1px] border-solid shadow-md hover:shadow-lg flex flex-col items-center justify-between transition-all duration-[0.5s]  "
+    >
+      {/* Top section */}
+      <div
+        onClick={() =>
+          onSelectBox(!popupData.isOpen ? "OPEN" : "CLOSE", eachCity)
+        }
+        className="flex items-center justify-between cursor-pointer w-full md:min-h-[124px] gap-[10px] md:gap-[20px] "
+      >
+        <div className="flex items-center xl:flex-nowrap flex-wrap w-full gap-[20px]">
+          <div className="flex items-center gap-[10px] mr-[100%] md:mr-[0%] mb-[10px] md:mb-0 md:min-w-[270px] ">
+            <div className=" min-w-[44px] md:min-w-[44px] w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-[50%] shadow-md border-t-[1px] border-solid ">
+              {/* city image */}
+              {eachCity.coverImage ? (
+                <Image
+                  className="w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-[50%] shadow-md"
+                  alt="Locality"
+                  src={eachCity.coverImage}
+                  width={64}
+                  height={64}
+                  priority 
+                />
+              ) : (
+                defaultCitySvg
+              )}
+            </div>
+            <div>
+              <p className="font-bold text-[12px] md:text-[16px] text-nowrap ">
+                {eachCity.localityName}
+              </p>
+              <p className=" text-gray-700 first-letter: capitalize text-[12px] md:text-[16px] p-0 m-0">
+                {eachCity.cityName ? eachCity.cityName : ""}
+              </p>
+              <span className="text-[10px] text-white bg-gray-600 p-[2px] font-medium rounded-[4px] ">
+                {eachCity.propTypeName === "Independent House/Building"
+                  ? "Independent House"
+                  : eachCity.propTypeName}
+              </span>
+            </div>
+          </div>
 
-                  <div className='md:min-w-[210px]'>
-                      <p className='text-gray-700 text-[12px] md:text-[16px] '>Rate on GetRightProperty</p>
-                      {filters.cg == "R" ?
-                      <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.price))}</p>
-                      :
-                      <p className='font-bold text-[12px] md:text-[16px] '>{formatCurrency(Number(eachCity.sqftPrice))} / sq.ft</p>
-                      }
-                  </div>
+          <div className="md:min-w-[210px]">
+            <p className="text-gray-700 text-[12px] md:text-[16px] ">
+              Rate on GetRightProperty
+            </p>
+            {filters.cg == "R" ? (
+              <p className="font-bold text-[12px] md:text-[16px] ">
+                {formatCurrency(Number(eachCity.price))}
+              </p>
+            ) : (
+              <p className="font-bold text-[12px] md:text-[16px] ">
+                {formatCurrency(Number(eachCity.sqftPrice))} / sq.ft
+              </p>
+            )}
+          </div>
 
-                  {filters.propType !== "Plot" &&
-                  <div className='md:min-w-[160px]'>
-                      <p className='text-gray-700 text-[12px] md:text-[16px] '>Super Buildup Area</p>  
-                      <p className='font-bold text-[12px] md:text-[16px] '>{formatNumberWithCommas(eachCity.sba)} sq.ft</p>
-                  </div>
-                  }
+          {filters.propType !== "Plot" && (
+            <div className="md:min-w-[160px]">
+              <p className="text-gray-700 text-[12px] md:text-[16px] ">
+                Super Buildup Area
+              </p>
+              <p className="font-bold text-[12px] md:text-[16px] ">
+                {formatNumberWithCommas(eachCity.sba)} sq.ft
+              </p>
+            </div>
+          )}
 
-                  {filters.propType === "Plot" &&
-                  <div className='md:min-w-[160px]'>
-                      <p className='text-gray-700 text-[12px] md:text-[16px] '>Plot Area</p>  
-                      <p className='font-bold text-[12px] md:text-[16px] '>{formatNumberWithCommas(eachCity.pa)} sq.ft</p>
-                  </div>
-                  }
+          {filters.propType === "Plot" && (
+            <div className="md:min-w-[160px]">
+              <p className="text-gray-700 text-[12px] md:text-[16px] ">
+                Plot Area
+              </p>
+              <p className="font-bold text-[12px] md:text-[16px] ">
+                {formatNumberWithCommas(eachCity.pa)} sq.ft
+              </p>
+            </div>
+          )}
 
           {filters.cg == "R" && eachCity.rate && (
             <div>
@@ -166,7 +210,8 @@ const PriceCard = ({eachCity, cityId, filters}: {eachCity:any, cityId:any, filte
             <div className=" flex flex-wrap gap-[10px] w-full ">
               {localityCheckList.map((each) => {
                 return (
-                  <Link rel="noopener noreferrer"
+                  <Link
+                    rel="noopener noreferrer"
                     key={each.name}
                     href={`/search?sf=city=${eachCity.cityName}%2B${cityId}-cg=${filters.cg}`}
                   >
@@ -424,7 +469,10 @@ interface City {
 
 function CityTrendSection({ cityName }: Props) {
   const [filters, setFilters] = useState(initialFilters);
-  const [AllLocalities, setAllLocalities] = useState({data:[], isLoading: true});
+  const [AllLocalities, setAllLocalities] = useState({
+    data: [],
+    isLoading: true,
+  });
 
   const [{ inputSearch }] = useAtom(trendsFilterData);
 
@@ -452,39 +500,55 @@ function CityTrendSection({ cityName }: Props) {
     | "Villament"
     | "Independent House/Building";
 
-  useEffect(()=>{
-    setAllLocalities(prev => ({...prev, isLoading: true}));
-    const propertyType: PropertyType = filters.propType as PropertyType;    
+  useEffect(() => {
+    setAllLocalities((prev) => ({ ...prev, isLoading: true }));
+    const propertyType: PropertyType = filters.propType as PropertyType;
     const fetchData = async () => {
       try {
-          const data:any = await getFilteredSearchData(cityId, null, filters.cg, `cg=${filters.cg}&propType=${listingProps[propertyType]}`);
-          setAllLocalities({data:data, isLoading:false});
+        const data: any = await getFilteredSearchData(
+          cityId,
+          null,
+          filters.cg,
+          `cg=${filters.cg}&propType=${listingProps[propertyType]}`
+        );
+        setAllLocalities({ data: data, isLoading: false });
       } catch (error) {
-          console.error("Error fetching data:", error);
-          setAllLocalities(prev => ({...prev, isLoading: false}));
+        console.error("Error fetching data:", error);
+        setAllLocalities((prev) => ({ ...prev, isLoading: false }));
       }
     };
 
-    fetchData(); 
-  },[cityId, filters.cg, filters.propType]);
+    fetchData();
+  }, [cityId, filters.cg, filters.propType]);
 
-  const filteredLocalities = AllLocalities?.data?.filter((city:any)=> (inputSearch === "" || city.localityName.toLowerCase().includes(inputSearch)));
+  const filteredLocalities = AllLocalities?.data?.filter(
+    (city: any) =>
+      inputSearch === "" ||
+      city.localityName.toLowerCase().includes(inputSearch)
+  );
 
-  if(AllLocalities.isLoading) return <div className='h-[30vh] flex justify-center items-center '><Loading /></div>
+  if (AllLocalities.isLoading)
+    return (
+      <div className="h-[30vh] flex justify-center items-center ">
+        <Loading />
+      </div>
+    );
 
-  return (  
-    <div className='w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col items-start justify-between overflow-y-auto relative px-[6px] max-w-[1200px]'>
-     
-      <div className=' flex flex-col '>
+  return (
+    <div className="w-[96%] md:w-[90%] xl:w-[70%] pb-[30px] gap-[20px] flex flex-col items-start justify-between overflow-y-auto relative px-[6px] max-w-[1200px]">
+      <div className=" flex flex-col ">
         <h2 className="font-bold mb-[4px] mr-auto text-[18px] ">
           Property Rates in {cityName}
         </h2>
         <p className="font-medium mr-auto text-[14px] text-gray-500  ">
-          {filteredLocalities && filteredLocalities?.length ? filteredLocalities?.length : 0 } Localities in {cityName}
+          {filteredLocalities && filteredLocalities?.length
+            ? filteredLocalities?.length
+            : 0}{" "}
+          Localities in {cityName}
         </p>
       </div>
 
-      <div className='flex justify-between w-full gap-[20px] flex-col md:flex-row relative '>
+      <div className="flex justify-between w-full gap-[20px] flex-col md:flex-row relative ">
         <div className="flex flex-col items-center order-2 md:order-1 ">
           {filteredLocalities && filteredLocalities?.length > 0 ? (
             <div className=" flex items-start justify-start flex-wrap gap-[20px] w-full relative">
@@ -496,24 +560,25 @@ function CityTrendSection({ cityName }: Props) {
                     cityId={cityId}
                     filters={filters}
                   />
-                )
+                );
               })}
             </div>
           ) : (
             <div className="flex w-full h-full justify-center items-center flex-col relative top-[-30px]">
-              <div className='flex justify-center items-center flex-col'>
-                <span className="max-h-[400px] max-w-[400px]">{emptyFilesIcon}</span>
+              <div className="flex justify-center items-center flex-col">
+                <span className="max-h-[400px] max-w-[400px]">
+                  {emptyFilesIcon}
+                </span>
                 No Matching Results Found!
                 <span className="relative left-[10%]">{strikeIconIcon}</span>
               </div>
-            </div>)
-          }
+            </div>
+          )}
         </div>
         <TrendFilters filters={filters} onFilterChange={onFilterChange} />
       </div>
-
     </div>
-  )
+  );
 }
 
 export default CityTrendSection;

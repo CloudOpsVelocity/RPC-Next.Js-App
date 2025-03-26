@@ -1,5 +1,6 @@
 import Link from "next/link";
-import React from "react";
+import Script from "next/script";
+import React, { memo } from "react";
 import { FaHome, FaChevronRight } from "react-icons/fa";
 interface BreadcrumbItem {
   label: string;
@@ -82,14 +83,13 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
         }),
   };
 
-  console.log(newParams)
-
   return (
     <nav
       aria-label="Project Search Breadcrumbs"
       className="w-full px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] xl:py-4 bg-gray-100 rounded-md shadow-sm max-w-[100%] overflow-x-auto "
     >
-      <script
+      <Script
+        id="ListingBreadCrumbsScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
@@ -97,7 +97,8 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
       />
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         <li>
-          <Link rel="noopener noreferrer"
+          <Link
+            rel="noopener noreferrer"
             href="/"
             className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
           >
@@ -139,4 +140,4 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   );
 };
 
-export default ProjectSearchBreadCrumbs;
+export default memo(ProjectSearchBreadCrumbs);

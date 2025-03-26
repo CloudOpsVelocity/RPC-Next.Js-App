@@ -5,10 +5,13 @@ import clsx from "clsx";
 import S from "@/app/styles/Rating.module.css";
 import Close from "../../button/close";
 import { useState } from "react";
-import { QnaSuccesssMessage, ReportSuccesssMessage } from "../../success";
-import Styles from "@/app/styles/Qna.module.css";
-import { useParams } from "next/navigation";
-export default function ReportModal({slug}:{slug:string}) {
+import {
+  // QnaSuccesssMessage,
+  ReportSuccesssMessage,
+} from "../../success";
+// import Styles from "@/app/styles/Qna.module.css";
+// import { useParams } from "next/navigation";
+export default function ReportModal({ slug }: { slug: string }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
@@ -86,7 +89,8 @@ export default function ReportModal({slug}:{slug:string}) {
                   Report Issues for Project
                 </p>
                 <p className="text-[#148B16]  text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
-                  Let us know your feedback this will allow us to serve you better!
+                  Let us know your feedback this will allow us to serve you
+                  better!
                 </p>
               </header>
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
@@ -111,7 +115,9 @@ export default function ReportModal({slug}:{slug:string}) {
                     classNames={{
                       input: S.ratingInput,
                     }}
-                    onChange={(e) => {setText(e.target.value), setStatus("idle")}}
+                    onChange={(e) => {
+                      setText(e.target.value), setStatus("idle");
+                    }}
                     value={text}
                   />
                 </div>

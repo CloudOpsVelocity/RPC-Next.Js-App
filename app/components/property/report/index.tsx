@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "@mantine/core";
+// import { Modal } from "@mantine/core";
 
 type Props = {};
 

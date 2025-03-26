@@ -4,9 +4,9 @@ import useAuth from "@/app/hooks/useAuth";
 import { resendOtp } from "@/app/utils/auth";
 import { hideMobileNumber } from "@/app/utils/parse";
 import { otpSchema } from "@/app/validations/auth";
-import { Box, Button, FocusTrap, Modal, PinInput, em } from "@mantine/core";
+import { Box, FocusTrap, PinInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
 
 type Props = {
@@ -133,7 +133,7 @@ const Resend = ({ userName }: any): JSX.Element => {
       setTimeRemaining({ minutes: 0, seconds: 30 });
       setTimerRunning(true);
     }
-    await resendOtp(userName,'pwd_change');
+    await resendOtp(userName, "pwd_change");
   };
 
   const { minutes, seconds } = timeRemaining;

@@ -5,10 +5,10 @@ import {
   VillaIcon,
   RowHouseIcon,
   ApartmentIcon,
-  ByTypeSvg,
-  ByUnitSvg,
-  ByBhkSvg,
-  PopupOpenSvg,
+  // ByTypeSvg,
+  // ByUnitSvg,
+  // ByBhkSvg,
+  // PopupOpenSvg,
 } from "@/app/images/commonSvgs";
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";

@@ -1,4 +1,4 @@
-import data from "@/app/data/auth";
+// import data from "@/app/data/auth";
 import clsx from "clsx";
 import Link from "next/link";
 import React from "react";

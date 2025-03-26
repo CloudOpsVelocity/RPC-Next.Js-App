@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/app/utils/numbers";
 import React from "react";
-import HeartButton from "./HeartButton";
+// import HeartButton from "./HeartButton";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 
 type Props = any;
@@ -22,9 +22,8 @@ export default function ProjData({
   bhkName,
   category,
   cityName,
-  postedByName
+  postedByName,
 }: Props) {
-  
   // console.log( minPrice,
   //   maxPrice,
   //   projName,
@@ -38,13 +37,13 @@ export default function ProjData({
   //   propName,
   //   localityName,
   //   propTypeName,
-    
+
   // )
 
-   let urlBuilder = generateBuilderUrl({
-      slug: postedByName,
-      city: city,
-    });
+  let urlBuilder = generateBuilderUrl({
+    slug: postedByName,
+    city: city,
+  });
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[12px] sm:text-[16px] xl:text-[18px] font-semibold break-words whitespace-normal min-w-0 ">
@@ -60,8 +59,6 @@ export default function ProjData({
         Posted By: <span className="font-bold">{builderName}</span>
       </p>
     </div>
-
-
   ) : (
     <div>
       <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize  not-italic font-medium">
@@ -78,16 +75,18 @@ export default function ProjData({
         {`${localityName}, ${cityName}`}
       </p>
       <p className="text-[#242424] cursor-pointer text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
-        Builder: 
-        <span 
+        Builder:
+        <span
           className="font-bold"
           onClick={(e) => {
             e.stopPropagation();
-            window.open(urlBuilder, "_blank");
+            window.open(urlBuilder, "_self");
           }}
-        >{postedByName}</span> 
+        >
+          {postedByName}
+        </span>
       </p>
-    </div> 
+    </div>
   );
 }
 function getTypeText(type: string) {
@@ -105,12 +104,12 @@ function getTypeText(type: string) {
 
   return text;
 }
- 
+
 export const projectprops = {
   villa: 31,
   plot: 32,
   rowHouse: 33,
   villament: 34,
   apartment: 35,
-  independent: 36
+  independent: 36,
 };

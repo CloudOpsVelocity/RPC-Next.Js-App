@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import Button from "@/app/elements/button";
-import { GradientLocation, Phone, ReraIcon } from "@/app/images/commonSvgs";
+// import Button from "@/app/elements/button";
+// import { GradientLocation, Phone, ReraIcon } from "@/app/images/commonSvgs";
 import { Search } from "@/app/validations/types/search";
-import { formatDateDDMMYYYY } from "@/app/utils/date";
-import Image from "next/image";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+// import { formatDateDDMMYYYY } from "@/app/utils/date";
+// import Image from "next/image";
+// import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import { formatCurrency } from "@/app/utils/numbers";
-import { calculatePerSqPrice } from "@/app/utils/price";
+// import { formatCurrency } from "@/app/utils/numbers";
+// import { calculatePerSqPrice } from "@/app/utils/price";
 import LeftSection from "./Top/LeftSection";
 import CenterTop from "./Top/Center";
 import CardDownSection from "./Down";
@@ -96,10 +96,10 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     Sh: state.shortListed,
   };
   const onClickRedirect = (projEncId: string) => {
-    if(data.type == "proj"){
-      window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
-    }else{
-      window.open(`/listing/banglore/${projEncId}`, "_blank");
+    if (data.type == "proj") {
+      window.open(`/abc/karnataka/banglore/${projEncId}`, "_self");
+    } else {
+      window.open(`/listing/banglore/${projEncId}`, "_self");
     }
   };
 
@@ -112,7 +112,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
       >
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
         {isMobile && (
-          <div className="flex   flex-col  justify-between">
+          <div className="flex flex-col justify-between">
             <TopRightSection
               data={newData}
               type={type}

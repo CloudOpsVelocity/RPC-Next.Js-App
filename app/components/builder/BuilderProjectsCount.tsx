@@ -7,7 +7,7 @@ import {
 } from "@/app/images/commonSvgs";
 import { getBuilderProjectsCount } from "@/app/utils/api/builder";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 import React from "react";
 import { useQuery } from "react-query";
@@ -99,8 +99,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.onGoing > 0 ? (
           <Link
-          prefetch={false}
-
+            prefetch={false}
             href={`/search?sf=projStatus=106-builderIds=${builderQueryNameAndId}`}
             rel="noopener noreferrer"
             className="block"

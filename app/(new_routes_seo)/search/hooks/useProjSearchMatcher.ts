@@ -1,8 +1,8 @@
 import RTK_CONFIG from "@/app/config/rtk";
-import { searachFilterAtom } from "@/app/store/search";
-import { serverCityAtom } from "@/app/store/search/serverCity";
+// import { searachFilterAtom } from "@/app/store/search";
+// import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useDebouncedValue } from "@mantine/hooks";
-import { atom, useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { projSearchStore } from "../store/projSearchStore";

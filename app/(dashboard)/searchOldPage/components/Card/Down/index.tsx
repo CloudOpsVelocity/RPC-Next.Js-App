@@ -4,13 +4,13 @@ import { NearByDataAtom } from "@/app/store/nearby";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { useSetAtom } from "jotai";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import React from "react";
 
 type Props = {
   a: number;
   o: number;
-  B:number;
+  B: number;
   type: "proj" | "prop";
   reqId: string;
 };
@@ -89,7 +89,13 @@ export default function CardDownSection({
       <div className=" right-1">
         <Button
           onChange={handleOpen}
-          title={`${type === "proj" ? (isMobile ? "Contact" : "Request Callback") : "Request Callback"}`}
+          title={`${
+            type === "proj"
+              ? isMobile
+                ? "Contact"
+                : "Request Callback"
+              : "Request Callback"
+          }`}
           buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
         />
       </div>
@@ -106,16 +112,19 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
   const handleAgentOwner = (type: "A" | "I" | "B") => {
     window.open(
       `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
-      "_blank"
+      "_self"
     );
   };
-
 
   return (
     value > 0 && (
       <button
         title={`Click to view ${type} Listing`}
-        onClick={() => handleAgentOwner(type === "Owner" ? "I" : type === "Builder" ? "B" : "A" )}
+        onClick={() =>
+          handleAgentOwner(
+            type === "Owner" ? "I" : type === "Builder" ? "B" : "A"
+          )
+        }
         className={clsx(
           "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",
           type === "Owner"

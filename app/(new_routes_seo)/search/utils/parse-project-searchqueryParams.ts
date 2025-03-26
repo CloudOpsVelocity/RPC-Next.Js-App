@@ -31,7 +31,6 @@ export const initialState: SearchFilter = {
 
 export default function parseProjectSearchQueryParams(params: string) {
   if (!params) return initialState;
-  console.log(params)
   const filters: any = {};
   const paramPairs = params.split("-");
   const pairsLength = paramPairs.length;

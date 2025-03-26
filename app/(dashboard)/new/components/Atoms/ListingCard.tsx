@@ -1,4 +1,4 @@
-import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
+// import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import { Divider } from "@mantine/core";
@@ -9,9 +9,7 @@ import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import Shortlist from "./Shortlist";
 import ListingReqBtn from "./ListingReqCallbackBtn";
-import ListingLink, {
-  generateListingLinkUrl,
-} from "@/app/utils/linkRouters/ListingLink";
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import Link from "next/link";
 type Props = {
   item: any;
@@ -63,6 +61,7 @@ export default function ListingCard({ item, sl }: Props) {
             width={490}
             height={276}
             className="object-cover w-full h-full"
+            priority 
           />
           <p className="absolute top-2 left-2 flex justify-center items-center gap-1 rounded p-1.5 bg-black/50 backdrop-blur-sm text-white text-[12px] not-italic font-semibold leading-[normal] capitalize border border-white/20">
             Posted Date: {formatDateDDMMYYYY(item.postedDate)}

@@ -8,7 +8,10 @@ import Style from "./Carouse.module.css";
 import { useAtom } from "jotai";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import Image from "next/image";
-import { FloorPlanNotAvail, ImgNotAvail } from "@/app/data/project";
+import {
+  FloorPlanNotAvail,
+  // ImgNotAvail
+} from "@/app/data/project";
 import clsx from "clsx";
 export default function CarouselModal({
   active,
@@ -52,6 +55,7 @@ export default function CarouselModal({
               "max-h-[40px] min-h-[40px]  sm:max-h-[60px] xl:max-h-[100px]  object-cover shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  ",
               active === index && "border-[3px] border-btnPrimary border-solid "
             )}
+            priority 
           />
         </Carousel.Slide>
       ))}

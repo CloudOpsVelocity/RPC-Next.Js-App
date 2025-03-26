@@ -46,7 +46,7 @@ import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/u
 import { useForm } from "@/app/context/floorplanContext";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
-import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+// import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 
 export default function FloorPlans({
   phases,
@@ -108,7 +108,7 @@ export default function FloorPlans({
     parkingType: "",
     totalNumberofBathroom: 0,
     totalNumberOfBalcony: 0,
-    totalBalconySize:0,
+    totalBalconySize: 0,
     noOfCarParking: 0,
     floorPlanUrl: "",
     gardenArea: "",
@@ -150,23 +150,38 @@ export default function FloorPlans({
           unitNumber: unitFilteredData[0].unitNumber
             ? unitFilteredData[0].unitNumber
             : "",
-          bhkName: unitFilteredData[0].bhkName !== null
-            ? unitFilteredData[0].bhkName
-            : "",
-          towerName: unitFilteredData[0].towerName !== null
-            ? unitFilteredData[0].towerName
-            : "",
-          floor: unitFilteredData[0].floor !== undefined && unitFilteredData[0].floor !== null && unitFilteredData[0].floor !== "" ? 
-            unitFilteredData[0].floor == 0 ? "G" : unitFilteredData[0].floor : "",
-          facingName: unitFilteredData[0].facingName !== null
-            ? unitFilteredData[0].facingName
-            : "",
-          block: unitFilteredData[0].block !== null ? unitFilteredData[0].block : "",
-          plotArea: unitFilteredData[0].plotArea !== null
-            ? unitFilteredData[0].plotArea
-            : "",
-          length: unitFilteredData[0].length !== null ? unitFilteredData[0].length : "",
-          width: unitFilteredData[0].width !== null ? unitFilteredData[0].width : "",
+          bhkName:
+            unitFilteredData[0].bhkName !== null
+              ? unitFilteredData[0].bhkName
+              : "",
+          towerName:
+            unitFilteredData[0].towerName !== null
+              ? unitFilteredData[0].towerName
+              : "",
+          floor:
+            unitFilteredData[0].floor !== undefined &&
+            unitFilteredData[0].floor !== null &&
+            unitFilteredData[0].floor !== ""
+              ? unitFilteredData[0].floor == 0
+                ? "G"
+                : unitFilteredData[0].floor
+              : "",
+          facingName:
+            unitFilteredData[0].facingName !== null
+              ? unitFilteredData[0].facingName
+              : "",
+          block:
+            unitFilteredData[0].block !== null ? unitFilteredData[0].block : "",
+          plotArea:
+            unitFilteredData[0].plotArea !== null
+              ? unitFilteredData[0].plotArea
+              : "",
+          length:
+            unitFilteredData[0].length !== null
+              ? unitFilteredData[0].length
+              : "",
+          width:
+            unitFilteredData[0].width !== null ? unitFilteredData[0].width : "",
         }));
       }
     } else {
@@ -263,7 +278,7 @@ export default function FloorPlans({
     setFullScreenModalState({ isOpen: true, unit: unit });
   };
   const handleReqcallBack = (unit: PropertyUnit) => {
-    if(!unit) return;
+    if (!unit) return;
     open({
       modal_type: "REQ_QUOTE",
       reqId: unit.unitIdEnc,
@@ -272,7 +287,7 @@ export default function FloorPlans({
       title: unit.unitNumber,
       postedId: postedById,
     });
-  }; 
+  };
 
   const handlePricingFloorPlanClick = (selBhk: any) => {
     if (selBhk.bhkName.includes("_")) {
@@ -336,7 +351,10 @@ export default function FloorPlans({
             handlePricingFloorPlanClick={handlePricingFloorPlanClick}
           />
         ))}{" "}
-      <div className="w-full md:w-[90%] mx-auto px-3 md:px-4 py-8" id="floor-plans">
+      <div
+        className="w-full md:w-[90%] mx-auto px-3 md:px-4 py-8"
+        id="floor-plans"
+      >
         <h2
           className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
           id="floorPlansdiv"
@@ -490,6 +508,7 @@ export default function FloorPlans({
                     width={800}
                     height={600}
                     className="w-full h-[250px] sm:h-[300px] md:h-[350px] xl:h-[530px] rounded-lg shadow-md cursor-pointer object-contain"
+                    priority 
                   />
                   <div className="absolute px-2 sm:px-5 cursor-pointer bottom-0 right-0 bg-black/50 py-1.5 sm:py-3 rounded-br-lg opacity-100 group-hover:opacity-100 transition-opacity">
                     <div className="flex items-center justify-center gap-1 sm:gap-2 text-white max-w-fit">
@@ -510,7 +529,7 @@ export default function FloorPlans({
             onClose={() => onClosingPopup()}
             initialUnit={rightSideUnit}
             units={projectUnitsData || []}
-            filters={unitFilters} 
+            filters={unitFilters}
             setFilters={setUnitFilters}
             filteredUnits={filteredUnits}
             options={options || {}}
