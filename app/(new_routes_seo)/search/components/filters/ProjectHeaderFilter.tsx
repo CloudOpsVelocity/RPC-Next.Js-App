@@ -247,43 +247,48 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   // crollyww
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const res = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BACKEND_URL
-      }/matcher/string?word=${searchQuery}&cityId=${
-        state.city?.split("+")[1] || 9
-      }`
-    );
-    const data = await res.json();
-    if (Object.hasOwn(data, "ids")) {
-      handleClearFilters("clearAll");
-      let ids = extractApiValues(data.ids);
-      if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
-        dispatch({
-          type: "update",
-          payload: {
-            ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
-            ...(ids.PT && { propType: parseInt(ids.PT as string) }),
-            ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-            ...(ids.PJ && {
-              projIdEnc: ids.PJ as string,
-              projName: searchQuery,
-              listedBy: !isListing ? "All" : null,
-            }),
-            ...(ids.CG && {
-              cg: String(ids.CG) ?? "S",
-              ...(ids.CG == "R" && {
-                listedBy: "All",
+
+    if(searchQuery !== ""){
+      const res = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/matcher/string?word=${searchQuery}&cityId=${
+          state.city?.split("+")[1] || 9
+        }`
+      );
+      const data = await res.json();
+      if (Object.hasOwn(data, "ids")) {
+        handleClearFilters("clearAll");
+        let ids = extractApiValues(data.ids);
+        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+          dispatch({
+            type: "update",
+            payload: {
+              ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
+              ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+              ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
+              ...(ids.PJ && {
+                projIdEnc: ids.PJ as string,
+                projName: searchQuery,
+                listedBy: !isListing ? "All" : null,
               }),
-            }),
-          },
-        });
+              ...(ids.CG && {
+                cg: String(ids.CG) ?? "S",
+                ...(ids.CG == "R" && {
+                  listedBy: "All",
+                }),
+              }),
+            },
+          });
+        }
+        handleApplyFilters();
+        handleResetQuery();
+        setIsSearchOpen(false);
+        setSearchQuery("");
+        return;
       }
-      handleApplyFilters();
-      handleResetQuery();
-      setIsSearchOpen(false);
-      setSearchQuery("");
-      return;
+    }else{
+      handleDropdownToggle("allFilters")
     }
   };
 
