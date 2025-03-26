@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "react-query";
 import {
-  FaChevronCircleDown,
+  // FaChevronCircleDown,
   FaSearch,
-  FaTruckLoading,
+  // FaTruckLoading,
   FaCheck,
 } from "react-icons/fa";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { FaChevronDown, FaLocationDot, FaSpinner } from "react-icons/fa6";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { CityData } from "../../../search";
 
@@ -73,7 +73,7 @@ export default function AutoCitySelectDropdown({
   } = useQuery<DefaultCityResponse, Error>({
     queryKey: ["my-location"],
     queryFn: async () => await getUserCity(cityData),
-     
+
     onSuccess: (data) => {
       if (data.status) {
         setCity({

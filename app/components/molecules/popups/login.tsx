@@ -3,7 +3,7 @@ import Logo from "../../atoms/Logo";
 import Link from "next/link";
 import LoginPopupForm from "../auth/popups/login";
 import usePathToOrigin from "@/app/hooks/custom/useRedirect";
-import { CloseButton } from "@mantine/core";
+// import { CloseButton } from "@mantine/core";
 export default function LoginPopup({
   type = "C/S",
   close,
@@ -13,7 +13,10 @@ export default function LoginPopup({
   close?: () => void;
   data?: any;
 }) {
-  const { redirectQueryParam } = usePathToOrigin({hash: type === "RATING" ? "#proj_rating" : `#${data?.type}`, link:data?.link});
+  const { redirectQueryParam } = usePathToOrigin({
+    hash: type === "RATING" ? "#proj_rating" : `#${data?.type}`,
+    link: data?.link,
+  });
   return (
     <div
       className={`flex justify-center m-1 items-start w-full pt-1 xl:pt-[10%] ${
@@ -73,7 +76,7 @@ export default function LoginPopup({
             <LoginPopupForm closePopup={close && close} />
           </div>
         </div>
-        <div className="relative"/>
+        <div className="relative" />
       </div>
     </div>
   );

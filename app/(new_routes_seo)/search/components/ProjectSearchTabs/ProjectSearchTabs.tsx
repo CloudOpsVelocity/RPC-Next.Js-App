@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom, useSetAtom } from "jotai";
-import React from "react";
+import React, { memo } from "react";
 import {
   diffToProjFromListing,
   initialState,
@@ -19,8 +19,8 @@ const tabs = [
   { id: "All", label: "All Listings" },
 ];
 
-export default function ProjectSearchTabs() {
-  const [state, dispath] = useAtom(projSearchStore);
+const ProjectSearchTabs = () => {
+  const [state, dispath] = useAtom(projSearchStore); 
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -72,7 +72,7 @@ export default function ProjectSearchTabs() {
 
   const handleTabsChange = (value: string | null) => {
     
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    typeof window !== "undefined" ? window.scrollTo({ top: 0, behavior: "smooth" }) : "";
     setSelected(null);
     setNearby((prev: any) => ({
       ...prev,
@@ -136,7 +136,7 @@ export default function ProjectSearchTabs() {
       type: "update",
     });
     handleApplyFilters();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    typeof window !== "undefined" ? window.scrollTo({ top: 0, behavior: "smooth" }) : ""
   };
   const getSortyByValue = (state: any): string => {
     if (
@@ -309,3 +309,5 @@ export default function ProjectSearchTabs() {
     </div>
   );
 }
+
+export default memo(ProjectSearchTabs);

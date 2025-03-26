@@ -3,7 +3,7 @@ import useNearby from "@/app/hooks/useNearby";
 import React, { Fragment } from "react";
 import useBuilder from "@/app/hooks/useBuilder";
 import ProjectCarousel from "../../project/ProjectCard";
-import { slugify } from "../BreadCrumb/ListingBreadcrumb";
+// import { slugify } from "../BreadCrumb/ListingBreadcrumb";
 
 export default function NearByCarouselProjProperty({
   projName,

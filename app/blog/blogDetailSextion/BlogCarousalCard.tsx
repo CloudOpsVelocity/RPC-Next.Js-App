@@ -24,7 +24,7 @@ function BlogCard({data, proviousPage}: Props) {
               quality={80}
               height={630}
               width={1200}
-              className='rounded-[10px] w-full max-h-[179px] border-[0.5px] border-gray border-solid mb-[16px] h-[280px]' 
+              className='rounded-[10px] w-full max-h-[179px] border-[0.5px] border-gray border-solid mb-[16px] h-[280px]'  priority 
           />
           <ContentBox
               heading={title}

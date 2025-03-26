@@ -2,7 +2,7 @@ import { LIstingResponse } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
 import { isValidSlugId } from "@/common/utils/slugUtils";
 import axios from "axios";
-import { notFound, permanentRedirect, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { generateListingLinkUrl } from "../../linkRouters/ListingLink";
 
 const getProjectDetails = async (slug: string): Promise<M | any> => {

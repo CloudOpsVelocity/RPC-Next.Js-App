@@ -1,5 +1,5 @@
 import Button from "@/app/elements/button";
-import { GradientLocation, SearchMapIcon } from "@/app/images/commonSvgs";
+// import { GradientLocation, SearchMapIcon } from "@/app/images/commonSvgs";
 import selectedSearchAtom from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
 import React from "react";

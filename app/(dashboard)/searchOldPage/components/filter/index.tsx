@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
-  MultiSelect,
+  // MultiSelect,
   Pill,
-  PillGroup,
+  // PillGroup,
   PillsInput,
-  RangeSlider,
+  // RangeSlider,
   Select,
   em,
 } from "@mantine/core";
@@ -159,8 +159,7 @@ const SearchDrawerHeader = ({
               rightSection={<DropDownIcon />}
               size="xs"
             />
-            )}
-
+          )}
           <div className="flex flex-wrap gap-2 items-center h-auto">
             {filters.locality?.map(
               (each, index) =>

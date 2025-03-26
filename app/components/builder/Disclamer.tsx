@@ -1,6 +1,6 @@
 import React from "react";
 import DisClamerReadMore from "./DisClamerReadMore";
-import { ref } from "yup";
+// import { ref } from "yup";
 
 type Props = {
   refUrls: string[];

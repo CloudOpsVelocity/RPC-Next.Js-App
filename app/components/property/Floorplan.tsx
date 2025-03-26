@@ -17,7 +17,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const setValue = useSetAtom(selectedFloorAtom);
   const type = listingProps[data.propTypeName as keyof typeof listingProps];
   const handleOpen = () => {
-    console.log("setting: ", data)
+    // console.log("setting: ", data)
     setValue({
       aptTypeName: data.aptTypeName,
       projIdEnc: "4f313de2f95cd9d761098b8f6c09417c",
@@ -82,33 +82,46 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               className="flex relative justify-center items-center h-[300px] lg:h-[420px] cursor-pointer self-center m-auto"
               onClick={handleOpen}
             >
-              {
-                data?.projMedia?.floorPlanUrl ? (
-                  <div className="">
-             <picture>
-                <source media="(max-width: 460px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[1]} />
-                <source media="(max-width: 768px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[2]} />
-                <source media="(min-width: 1200px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[3]} />
-                <Image
-                  alt="floor plan"
-                  title={data?.projMedia?.floorPlanUrl.split("/")[6].split(".")[0]}
-                  src={data?.projMedia?.floorPlanUrl}
-                  width={750}
-                  height={750}
-                  className=" m-auto h-[300px] lg:h-[420px]"
-                  unoptimized
-                />
-             </picture>
-                  </div>
-     
+              {data?.projMedia?.floorPlanUrl ? (
+                <div className="">
+                  <picture>
+                    <source
+                      media="(max-width: 460px)"
+                      srcSet={data?.projMedia?.floorPlanUrl.split(",")[1]}
+                    />
+                    <source
+                      media="(max-width: 768px)"
+                      srcSet={data?.projMedia?.floorPlanUrl.split(",")[2]}
+                    />
+                    <source
+                      media="(min-width: 1200px)"
+                      srcSet={data?.projMedia?.floorPlanUrl.split(",")[3]}
+                    />
+                    <Image
+                      alt="floor plan"
+                      title={
+                        data?.projMedia?.floorPlanUrl
+                          .split("/")[6]
+                          .split(".")[0]
+                      }
+                      src={data?.projMedia?.floorPlanUrl}
+                      width={750}
+                      height={750}
+                      className=" m-auto h-[300px] lg:h-[420px]"
+                      unoptimized
+                      priority 
+                    />
+                  </picture>
+                </div>
               ) : (
                 <Image
-                src={ImgNotAvail}
-                width={300}
-                height={300}
-                alt=""
-                className="h-full w-full m-auto "
-              />
+                  src={ImgNotAvail}
+                  width={300}
+                  height={300}
+                  alt=""
+                  className="h-full w-full m-auto "
+                  priority 
+                />
               )}
             </div>
             <button onClick={() => setOpened(true)}>

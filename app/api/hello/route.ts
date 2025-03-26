@@ -12,7 +12,7 @@ export async function GET(req: Request) {
       error: "Latitude, Longitude, and Type are required parameters",
     });
   }
-  console.log(type);
+  // console.log(type);
   // Define a mapping of types to corresponding keyword values
   const typeMappings: Record<string, string> = {
     Commute: "public transport",
@@ -37,7 +37,7 @@ export async function GET(req: Request) {
   }
   try {
     let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1000&rank=distance&type=${keyword}&keyword=${keyword}&maxResultCount=10&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
-    console.log(url);
+    // console.log(url);
     const res = await axios.get(url);
     console.log(res.data.results);
 

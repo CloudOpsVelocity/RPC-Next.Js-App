@@ -3,7 +3,7 @@ import "@mantine/carousel/styles.css";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
 import { OtherBuilder } from "@/app/validations/types/builder";
-import { BackgroundImage } from "@mantine/core";
+// import { BackgroundImage } from "@mantine/core";
 import {
   NextCarouselButton,
   PrevCarouselButton,
@@ -24,7 +24,7 @@ export default function BuildersBlock({
         <h2 className="text-black text-[32px] not-italic font-bold leading-[normal] uppercase">
           Builder’s in{" "}
           <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
-          Bengaluru
+            Bengaluru
           </span>
         </h2>
         <p className=" mt-2 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">

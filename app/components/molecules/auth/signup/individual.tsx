@@ -5,7 +5,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Box } from "@mantine/core";
 import { NumberInput, TextInput, PasswordInput } from "react-hook-form-mantine";
 import useAuth from "@/app/hooks/useAuth";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+  useRouter,
+  // useSearchParams
+} from "next/navigation";
 import Link from "next/link";
 import AuthPopup from "../authPopup";
 import { useDisclosure } from "@mantine/hooks";

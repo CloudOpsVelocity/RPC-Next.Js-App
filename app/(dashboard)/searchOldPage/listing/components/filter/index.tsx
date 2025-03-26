@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
-  MultiSelect,
+  // MultiSelect,
   Pill,
   PillsInput,
-  RangeSlider,
+  // RangeSlider,
   Select,
   em,
 } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
 import useSearchFilters from "@/app/hooks/search";
 import { DropDownIcon, SearchIcon } from "@/app/images/commonSvgs";
-import FilterSection from "./filter";
+// import FilterSection from "./filter";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import Results from "./results";
 import { useMediaQuery } from "@mantine/hooks";

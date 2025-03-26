@@ -22,7 +22,7 @@ import BrokerContactTag from "./BrokersFreindly";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
 import { useQuery } from "react-query";
-import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+// import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 type Props = {
   projectDetails: Main | null;
   projName: string;
@@ -124,19 +124,33 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   <picture>
                     <source
                       media="(max-width: 460px)"
-                      srcSet={imageUrl.split(",")[1]}
-                    />
+                      srcSet={imageUrl.split(",")[1] ?imageUrl.split(",")[1].includes("+") 
+                        ? imageUrl.split(",")[1].replace(/\+/g, "%2B")
+                        : imageUrl.split(",")[1] : imageUrl.split(",")[1]
+                    }
+                                        />
                     <source
                       media="(max-width: 768px)"
-                      srcSet={imageUrl.split(",")[2]}
+                      srcSet={imageUrl.split(",")[2] ?imageUrl.split(",")[2].includes("+") 
+                        ? imageUrl.split(",")[2].replace(/\+/g, "%2B")
+                        : imageUrl.split(",")[2] : imageUrl.split(",")[2]
+                    }
                     />
                     <source
                       media="(min-width: 1200px)"
-                      srcSet={imageUrl.split(",")[3]}
+                      srcSet={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
+                        ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
+                        : imageUrl.split(",")[3] : imageUrl.split(",")[3]
+                    }
+                      //srcSet={imageUrl.split(",")[3]}
                     />
                     <Image
                       alt="project image"
-                      src={imageUrl.split(",")[3]}
+                     // src={imageUrl.split(",")[3]}
+                     src={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
+                      ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
+                      : imageUrl.split(",")[3] : imageUrl.split(",")[3]
+                  }
                       // height={630}
                       // width={1200}
                       fill
@@ -144,6 +158,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                         index + 1
                       }`}
                       unoptimized
+                      priority 
                     />
                   </picture>
                 </Carousel.Slide>
@@ -171,7 +186,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 </div>
                 {projectDetails.projIdEnc ? (
                   <Link
-                  prefetch={false}
+                    prefetch={false}
                     href={projectUrl}
                     rel="noopener noreferrer"
                     className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
@@ -258,6 +273,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   src={"/abc/floorplan.png"}
                   alt="no of floors"
                   className="xl:h-[24px] xl:w-[24px] w-[16px] h-[16px] sm:h-[16px] sm:w-[16px] !mt-auto "
+                  priority 
                 />
                 Floor Plan
               </p>

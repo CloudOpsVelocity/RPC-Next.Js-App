@@ -6,9 +6,9 @@ import S from "@/app/styles/seach/Listing.module.css";
 import {
   DropDownIcon,
   fourStarIcon,
-  lensSvg, 
+  lensSvg,
   miniItemsCrossIcon,
-  notificationIcon,
+  // notificationIcon,
 } from "@/app/images/commonSvgs";
 import {
   Checkbox,
@@ -26,11 +26,11 @@ import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import clsx from "clsx";
-import { formatBudgetValue } from "./buget";
+// import { formatBudgetValue } from "./buget";
 import { toFormattedString } from "./buget/budget";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { MainSearchMultiSelect } from "./_ui/Multiselect";
-import { serverCityAtom } from "@/app/store/search/serverCity"; 
+import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useAtomValue } from "jotai";
 
 const FilterPopup = ({ close }: { close?: () => void }) => {
@@ -56,12 +56,14 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
   const serverCity = useAtomValue(serverCityAtom);
   const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc",filters.city ?? serverCity ?? ""),
+    queryFn: () =>
+      getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
   });
   const { isLoading: builderDataLoading, data: builderData } = useQuery({
-    queryFn: () => getData(builderSearch, "builders",filters.city ?? serverCity ?? ""),
+    queryFn: () =>
+      getData(builderSearch, "builders", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "builders" + builderSearch],
     enabled: builderSearch !== "",
   });
@@ -150,7 +152,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             Project Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            {SEARCH_FILTER_DATA.projectstatus.map(eachStatus => {
+            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus) => {
               return (
                 <Radio
                   key={eachStatus.cid}
@@ -227,7 +229,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
               }
               return (
                 <Radio
-                  key={"Property_Type_"+keyName}
+                  key={"Property_Type_" + keyName}
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}
@@ -247,35 +249,33 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
               );
             })}
           </div>
-
           {filters.propTypes !== 32 && (
-              <>
-                <h3
-                  className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                  id="BHK Type"
-                >
-                  BHK Type
-                </h3>
-                <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-                  {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
-                    return (
-                      <Checkbox
-                        className="my-2"
-                        label={eachStatus.title}
-                        color="green"
-                        key={eachStatus.title}
-                        onClick={() =>
-                          handleCheckboxClick("unitTypes", eachStatus.value)
-                        }
-                        checked={filters.unitTypes.includes(eachStatus.value)}
-                        size={isMobile ? "xs" : "md"}
-                      />
-                    );
-                  })}
-                </div>
-              </>
+            <>
+              <h3
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="BHK Type"
+              >
+                BHK Type
+              </h3>
+              <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
+                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                  return (
+                    <Checkbox
+                      className="my-2"
+                      label={eachStatus.title}
+                      color="green"
+                      key={eachStatus.title}
+                      onClick={() =>
+                        handleCheckboxClick("unitTypes", eachStatus.value)
+                      }
+                      checked={filters.unitTypes.includes(eachStatus.value)}
+                      size={isMobile ? "xs" : "md"}
+                    />
+                  );
+                })}
+              </div>
+            </>
           )}
-          
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Area"
@@ -285,7 +285,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
           <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600] mb-[2%] ml-[14px] md:ml-0 ">
             {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
           </p>
-        {/*   <div className="mb-6">
+          {/*   <div className="mb-6">
               
               <h3
               className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
@@ -333,7 +333,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             style={{ width: "80%" }}
             size={isMobile ? "xs" : "md"}
             className="ml-[14px] md:ml-0 "
-            classNames={{markLabel: S.sliderMarkLable}}
+            classNames={{ markLabel: S.sliderMarkLable }}
           />
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
@@ -361,7 +361,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             label={(value) => toFormattedString(value)}
             size={isMobile ? "xs" : "md"}
             className="ml-[14px] md:ml-0 "
-            classNames={{markLabel: S.sliderMarkLable}}
+            classNames={{ markLabel: S.sliderMarkLable }}
           />
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>

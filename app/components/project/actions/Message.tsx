@@ -1,11 +1,11 @@
 import useDynamicProj from "@/app/hooks/project/useDynamic";
-import { useShortlistAndCompare } from "@/app/hooks/storage";
+// import { useShortlistAndCompare } from "@/app/hooks/storage";
 import clsx from "clsx";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import React from "react";
 
-export default function Message({slug}:{slug:string}) {
+export default function Message({ slug }: { slug: string }) {
   const { data } = useDynamicProj(slug);
   const dynamicText = `${
     (data?.shortListed && data?.compareAdded && "Shortlisted and Compared") ||
@@ -28,7 +28,7 @@ export default function Message({slug}:{slug:string}) {
         )}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg" 
+          xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -50,7 +50,8 @@ export default function Message({slug}:{slug:string}) {
         </svg>{" "}
         <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal] sm:text-nowrap">
           Please check your{" "}
-          <Link rel="noopener noreferrer"
+          <Link
+            rel="noopener noreferrer"
             href={url}
             className="!text-[#0073C6] text-[12px] sm:text-base xl:text-lg  italic font-semibold leading-[normal] !underline"
           >

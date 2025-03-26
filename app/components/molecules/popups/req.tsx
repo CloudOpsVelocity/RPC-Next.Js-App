@@ -19,7 +19,7 @@ import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
-import { title } from "process";
+// import { title } from "process";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
@@ -119,6 +119,7 @@ const RequestCallBackModal = () => {
                     alt="Customer Support"
                     width={600}
                     height={534}
+                    priority 
                   />
                 </div>
               }
@@ -195,7 +196,7 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
     setStatus("success");
   };
 
-  console.log(popupState);
+  // console.log(popupState);
 
   return status === "otp" ? (
     <ReqOtpForm

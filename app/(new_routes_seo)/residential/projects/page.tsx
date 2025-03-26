@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 import Image from "next/image";
-import { FiMapPin } from "react-icons/fi";
+// import { FiMapPin } from "react-icons/fi";
 import Link from "next/link";
 
 const stateData = {
@@ -84,6 +84,7 @@ export default function Home() {
                           alt={property.name}
                           fill
                           className="object-cover"
+                          priority 
                         />
                       </div>
                       <div className="p-4">
@@ -110,7 +111,9 @@ export default function Home() {
             Connect with our property experts for personalized assistance in
             finding your dream home in Bangalore.
           </p>
-          <Link rel="noreferrer" target="_blank"
+          <Link
+            rel="noreferrer"
+            target="_blank"
             href={`https://api.whatsapp.com/send?phone=+918884440963&text=${encodeURIComponent(
               "Hello, I'm interested in finding a home in Bangalore. Can you help me with this?"
             )}`}

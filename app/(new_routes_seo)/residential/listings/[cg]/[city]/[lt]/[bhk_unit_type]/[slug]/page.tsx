@@ -1,23 +1,23 @@
 import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
 
-import { getPagesSlugs } from "@/app/seo/api";
+// import { getPagesSlugs } from "@/app/seo/api";
 import { getAmenties } from "@/app/utils/api/project";
 import {
   getListingDetails,
   getProjectDetails,
   getReportConstData,
 } from "@/app/utils/api/property";
-import { getStringPartByIndex } from "@/app/utils/dyanamic/projects";
+// import { getStringPartByIndex } from "@/app/utils/dyanamic/projects";
 import { notFound } from "next/navigation";
-import path from "path";
+// import path from "path";
 import React from "react";
-import fs from "fs";
-import getListingSLugs, {
-  findPathForProjectListing,
-  getNestedSlug,
-} from "@/app/(new_routes_seo)/in/utils/getSlugs";
+// import fs from "fs";
+// import getListingSLugs, {
+//   findPathForProjectListing,
+//   getNestedSlug,
+// } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import {
-  extractListingParamsValues,
+  // extractListingParamsValues,
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";

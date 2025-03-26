@@ -3,7 +3,7 @@ import { Carousel } from "@mantine/carousel";
 import React from "react";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
-import useIds from "../../useIds";
+// import useIds from "../../useIds";
 type Props = { data: any; active: number; shortIds: any };
 import Css from "../../../Style.module.css";
 import Card from "../../newly-added-projects/Card";
@@ -11,12 +11,14 @@ export default function CardCarousel({ data, shortIds, active }: Props) {
   return (
     <Carousel
       slideSize={{ base: "50%", sm: "36%", md: "28%" }}
-      slideGap={{ base: "8px",  sm: "12px", xl: "12px"}}
+      slideGap={{ base: "8px", sm: "12px", xl: "12px" }}
       align="start"
       slidesToScroll={1}
       mt={0}
       nextControlIcon={<CarouseSelArrowIcon title="Click to Forword" />}
-      previousControlIcon={<CarouseSelArrowIcon className="rotate-180" title="Click to Backword" />}
+      previousControlIcon={
+        <CarouseSelArrowIcon className="rotate-180" title="Click to Backword" />
+      }
       controlsOffset={"-10px"}
       classNames={Css}
       key={active}

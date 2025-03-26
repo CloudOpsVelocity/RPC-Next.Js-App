@@ -2,7 +2,7 @@
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
 import { setCookie } from "cookies-next";
-import crpto from "crypto"
+// import crpto from "crypto"
 import { encryptData } from "@/app/utils/auth/nodeCrypto";
 type Props = {};
 
@@ -17,14 +17,18 @@ export default function Nearme({}: Props) {
           let lat = position.coords.latitude;
           let lng = position.coords.longitude;
           window.open(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=lat=${lat}&lng=${lng}`, "_blank", "noreferrer"
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=lat=${lat}&lng=${lng}`,
+            "_self",
+            "noreferrer"
           );
-          const encryptedObject = encryptData(JSON.stringify({
-            lt: position.coords.latitude,
-            la: position.coords.longitude
-          }));
-          setCookie("ui", encryptedObject,{
-            expires: new Date(new Date().getTime() + 10 * 60 * 1000)
+          const encryptedObject = encryptData(
+            JSON.stringify({
+              lt: position.coords.latitude,
+              la: position.coords.longitude,
+            })
+          );
+          setCookie("ui", encryptedObject, {
+            expires: new Date(new Date().getTime() + 10 * 60 * 1000),
           });
           setError(null);
         },

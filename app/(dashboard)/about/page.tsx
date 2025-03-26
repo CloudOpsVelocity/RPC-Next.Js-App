@@ -74,6 +74,7 @@ export default function page({}: Props) {
             alt="about"
             className="w-[90%] hidden sm:block sm:w-[30%] h-[299.576px]"
             src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/about-getrightproperty.png`}
+            priority 
           />
           <Image
             width={387}
@@ -81,6 +82,7 @@ export default function page({}: Props) {
             alt="hero image"
             className="w-[90%] block sm:hidden sm:w-[30%] h-[299.576px]"
             src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us/hero-image.png`}
+            priority 
           />
         </div>
         {/* best services */}
@@ -92,6 +94,7 @@ export default function page({}: Props) {
               alt="hero image"
               className="hidden sm:block  w-[36%] h-[299.576px]"
               src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/best-service.png`}
+              priority 
             />
             <div className=" pt-[20px] pb-[20px] sm:pt-[60px] sm:pb-[60px]">
               <h1 className="text-[#2AA327]  text-center sm:text-left sm:text-[20px] mb-[16px] xl:text-[26px] not-italic font-bold leading-[normal] capitalize">
@@ -171,6 +174,7 @@ export default function page({}: Props) {
               alt="hero image"
               className="sm:w-[36%] w-[80%] h-[188px] sm:h-[318px]"
               src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/founder.png`}
+              priority 
             />
             <div className="flex flex-col justify-center items-center sm:items-start ">
               <h1 className="text-[#000]  text-[16px] text-center sm:text-left sm:text-[20px] xl:text-[24px] not-italic font-semibold leading-[normal] mb-1">
@@ -297,6 +301,7 @@ export default function page({}: Props) {
                         alt="profile"
                         className="w-[56px] h-[56px] rounded-full "
                         src={"/youtube.png"}
+                        priority 
                       />
                       <p className="text-[#003]  text-[16px] sm:text-[18px] not-italic font-bold  leading-[19.5px]">
                         {" "}

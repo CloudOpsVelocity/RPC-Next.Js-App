@@ -97,6 +97,7 @@ function NewsDetailsPage({}: Props) {
                     height={800}
                     alt="not found"
                     className=' w-full h-full '
+                    priority 
                 />
             </div>
 

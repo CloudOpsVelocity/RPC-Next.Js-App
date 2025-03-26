@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
-import MainCarousel from "../molecules/carousel/main";
-import { Carousel, CarouselSlide } from "@mantine/carousel";
+// import MainCarousel from "../molecules/carousel/main";
+// import { Carousel, CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
 import Button from "../../elements/button";
-import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
+import { Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useSession } from "next-auth/react";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
-import LoginPopup from "../project/modals/LoginPop";
+// import LoginPopup from "../project/modals/LoginPop";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import { useSetAtom } from "jotai";
-import { NearByDataAtom } from "@/app/store/nearby";
+// import { useSetAtom } from "jotai";
+// import { NearByDataAtom } from "@/app/store/nearby";
 import clsx from "clsx";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -73,18 +73,18 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
     });
   };
   const handleCardClick = () => {
-    console.log(cardData);
+    // console.log(cardData);
     const url = createProjectLinkUrl({
       city: cardData.cityName,
       slug: cardData.projectName,
       locality: cardData.localityName,
       projIdEnc: cardData.projIdEnc,
     });
-    window.open(url, "_blank", "noreferrer");
-    // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
+    window.open(url, "_self", "noreferrer");
+    // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_self");
   };
 
-  console.log(isItemInShortlist)
+  // console.log(isItemInShortlist);
 
   return (
     <div
@@ -127,7 +127,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
             (cardData.reraStatus === "Recieved" ||
               cardData.reraStatus === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
               </p>
             )}
 

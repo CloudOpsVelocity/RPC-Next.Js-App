@@ -66,5 +66,5 @@ import { diffToProjFromListing, initialState } from "@/app/store/search";
 import TabPanelSection from "./TabPanelSection";
 import SharePopup from "../SharePopup";
 import Dialog from "@/app/test/newui/components/modals/Proj_PropModal";
-import { projSearchStore } from "@/app/(new_routes_seo)/search/store/projSearchStore";
-import { useHydrateAtoms } from "jotai/utils";
+// import { projSearchStore } from "@/app/(new_routes_seo)/search/store/projSearchStore";
+// import { useHydrateAtoms } from "jotai/utils";

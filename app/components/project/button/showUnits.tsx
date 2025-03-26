@@ -1,5 +1,5 @@
 import { overviewAtom } from "@/app/store/overview";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import React from "react";
 
 export default function ShowUnitsButton({ cg }: any) {

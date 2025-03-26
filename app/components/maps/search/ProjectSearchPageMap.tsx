@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -22,14 +22,14 @@ import TooltipProp from "./ToolltipProp";
 import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 
-export const checkLatAndLang = (number:any) => {
+export const checkLatAndLang = (number: any) => {
   var invalidChars = ["e", "E", "W", "N", "S", "+", "°"];
-  if(number === undefined && number === null && number === "") return;
+  if (number === undefined && number === null && number === "") return;
   const finalNumber = number.toString();
-  const isIncluded = invalidChars.some(each => finalNumber.includes(each));
-  if(isIncluded){
-    return finalNumber.replace(/[^0-9.]/g, '');
-  }else{
+  const isIncluded = invalidChars.some((each) => finalNumber.includes(each));
+  if (isIncluded) {
+    return finalNumber.replace(/[^0-9.]/g, "");
+  } else {
     return finalNumber;
   }
 };
@@ -54,7 +54,9 @@ const RecenterButton = ({ center }: { center: any }) => {
     map.setView(position, 100);
 
     if (!allMarkerRefs) return;
-    const refKey = `${selected?.reqId}-${selected?.phaseId}-${selected?.propTypeName ? selected?.propTypeName : selected?.propType}`;
+    const refKey = `${selected?.reqId}-${selected?.phaseId}-${
+      selected?.propTypeName ? selected?.propTypeName : selected?.propType
+    }`;
 
     const marker = allMarkerRefs.current.get(refKey);
     if (marker) marker.openPopup();
@@ -147,19 +149,23 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   // 🔹 Event handlers for each marker
   const getEventHandlers = (itemId: string, item?: any) => ({
     mouseover: () => {
-      const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+      const refKey = `${itemId}-${item.phaseId}-${
+        item.propTypeName ? item.propTypeName : item.propType
+      }`;
       const marker = markerRefs.current.get(refKey);
       if (marker) marker.openPopup();
     },
     mouseout: () => {
       if (itemId !== selected?.reqId) {
-        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+        const refKey = `${itemId}-${item.phaseId}-${
+          item.propTypeName ? item.propTypeName : item.propType
+        }`;
         const marker = markerRefs.current.get(refKey);
         if (marker) marker.closePopup();
       }
     },
     click: () => {
-      if(selected?.reqId !== itemId && selected?.phaseId !== item?.phaseId ){
+      if (selected?.reqId !== itemId && selected?.phaseId !== item?.phaseId) {
         setSelectedValue((prev) => ({
           ...prev,
           reqId: itemId,
@@ -168,7 +174,9 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           lang: item?.lang,
           projOrPropName: item?.propName ? item?.propName : item?.projName,
         }));
-        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+        const refKey = `${itemId}-${item.phaseId}-${
+          item.propTypeName ? item.propTypeName : item.propType
+        }`;
         const marker = markerRefs.current.get(refKey);
         if (marker) marker.openPopup();
       }
@@ -183,7 +191,9 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
         parseFloat(selected.lang),
       ];
       map.setView(position, 100);
-      const refKey = `${selected?.reqId}-${selected?.phaseId}-${selected?.propTypeName ? selected?.propTypeName : selected?.propType}`;
+      const refKey = `${selected?.reqId}-${selected?.phaseId}-${
+        selected?.propTypeName ? selected?.propTypeName : selected?.propType
+      }`;
 
       const marker = markerRefs.current.get(refKey);
       if (marker && !isMobile) marker.openPopup();
@@ -210,8 +220,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       data &&
       data?.length > 0 &&
       nearbyData &&
-      Object.keys(nearbyData).length === 0 
-      && selected === null
+      Object.keys(nearbyData).length === 0 &&
+      selected === null
     ) {
       const bounds = L.latLngBounds(
         data.map((item: any) => [parseFloat(item?.lat), parseFloat(item?.lang)])
@@ -221,10 +231,16 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   }, [map, data, selected, nearbyData]);
 
   useEffect(() => {
-    if (nearbyData && Object.keys(nearbyData).length > 0 && Object.keys(selectedNearbyItem).length === 0 ) {
-      const finalCateg = category !== "" ? category : Object.keys(nearbyData)[0];
+    if (
+      nearbyData &&
+      Object.keys(nearbyData).length > 0 &&
+      Object.keys(selectedNearbyItem).length === 0
+    ) {
+      const finalCateg =
+        category !== "" ? category : Object.keys(nearbyData)[0];
       const nearByData = nearbyData[finalCateg];
-      const newData = selected !== null ? [...nearByData, selected] : [...nearByData];
+      const newData =
+        selected !== null ? [...nearByData, selected] : [...nearByData];
       const bounds = L.latLngBounds(
         newData.map((item: any) => [
           parseFloat(checkLatAndLang(item.lat)),
@@ -244,7 +260,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   //       markerRefs.current.get(selected.reqId)?.openPopup();
   //       return;
   //     }
-  
+
   //     // Recenter Nearby Marker
   //     if (selectedNearbyItem?.lat && selectedNearbyItem?.lang) {
   //       const position:any = [
@@ -254,7 +270,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   //       map.setView(position, 100);
   //       return;
   //     }
-  
+
   //     // Fit bounds for project data
   //     if (data?.length && nearbyData && Object.keys(nearbyData).length === 0 && !selected) {
   //       const bounds = L.latLngBounds(
@@ -263,7 +279,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   //       map.fitBounds(bounds, { padding: [50, 50] });
   //       return;
   //     }
-  
+
   //     // Fit bounds for nearby data
   //     if (nearbyData && Object.keys(nearbyData).length > 0 && Object.keys(selectedNearbyItem).length === 0) {
   //       const finalCateg = category || Object.keys(nearbyData)[0];
@@ -286,41 +302,48 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       const isProp = !!item?.propIdEnc;
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
       // const itemPropType = isProp ? item?.propTypeName : item?.propType;
-        
+
       if (
-        (selected && selected?.reqId === itemId &&
-          (
-            (selected?.phaseId === item.phaseId && (selected?.propType === item.propType || selected?.propType === item.propTypeName)) || 
-            (selected?.phaseId === item.phaseId && (!selected?.propType || !item.propType || !item.propTypeName)) || 
-            (!selected?.phaseId || !item.phaseId || !selected?.propType || !item.propType || !item.propTypeName)
-          )
-        ) || selected === null
+        (selected &&
+          selected?.reqId === itemId &&
+          ((selected?.phaseId === item.phaseId &&
+            (selected?.propType === item.propType ||
+              selected?.propType === item.propTypeName)) ||
+            (selected?.phaseId === item.phaseId &&
+              (!selected?.propType || !item.propType || !item.propTypeName)) ||
+            !selected?.phaseId ||
+            !item.phaseId ||
+            !selected?.propType ||
+            !item.propType ||
+            !item.propTypeName)) ||
+        selected === null
       ) {
         const phases = !isProp
-        ? {
-            [item.phaseName]: {
-              phaseName: item.phaseName,
-              propertyTypes: [
-                {
-                  propType: item.propType,
-                  minPrice: item.minPrice,
-                  maxPrice: item.maxPrice,
-                },
-                
-              ],
-            },
-          }
-        : null;
+          ? {
+              [item.phaseName]: {
+                phaseName: item.phaseName,
+                propertyTypes: [
+                  {
+                    propType: item.propType,
+                    minPrice: item.minPrice,
+                    maxPrice: item.maxPrice,
+                  },
+                ],
+              },
+            }
+          : null;
 
-        const refKey = `${itemId}-${item.phaseId}-${item.propTypeName ? item.propTypeName : item.propType}`;
+        const refKey = `${itemId}-${item.phaseId}-${
+          item.propTypeName ? item.propTypeName : item.propType
+        }`;
 
         return (
-          <>
+          <Fragment key={itemId + "proijMarkerTag" + index.toString()}>
             <Marker
               ref={(el) => {
                 if (el) markerRefs.current.set(refKey, el);
               }}
-              key={itemId + "proijMarkerTag" + index.toString()}
+              
               position={[
                 parseFloat(item?.lat || 0),
                 parseFloat(item?.lang || 0),
@@ -331,7 +354,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               <Popup>
                 {!isProp ? (
                   <TooltipProj
-                      data={{
+                    data={{
                       projName: item.projName,
                       city: item.city,
                       state: item.state,
@@ -355,7 +378,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               </Popup>
             </Marker>
             <NearbyMarkers />
-          </>
+          </Fragment>
         );
       }
     })
@@ -383,7 +406,6 @@ const NearbyMarkers = ({}) => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [setSelectedLocation]);
 
-
   if (!data || Object.keys(data).length === 0) return;
   const finalCategory = category !== "" ? category : Object.keys(data)[0];
   const selectedNearByData: any = data ? data[finalCategory] : "";
@@ -398,7 +420,10 @@ const NearbyMarkers = ({}) => {
       return (
         <Marker
           key={item?.lat + "markerTag" + index.toString()}
-          position={[parseFloat(checkLatAndLang(item?.lat)), parseFloat(checkLatAndLang(item?.lang))]}
+          position={[
+            parseFloat(checkLatAndLang(item?.lat)),
+            parseFloat(checkLatAndLang(item?.lang)),
+          ]}
           title={item.name}
           icon={Icon}
           zIndexOffset={100}

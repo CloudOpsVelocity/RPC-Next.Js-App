@@ -1,7 +1,10 @@
 "use client";
 import { useMediaQuery } from "@mantine/hooks";
 import { useEffect } from "react";
-import { CompareListingMessage, CompareMessage } from "../../project/success";
+import {
+  CompareListingMessage,
+  // CompareMessage
+} from "../../project/success";
 import { Modal } from "@mantine/core";
 import Close from "../../project/button/close";
 import S from "@/app/styles/Qna.module.css";

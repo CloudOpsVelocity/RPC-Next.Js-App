@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
-import { propertyDetailsTypes } from "@/app/data/projectDetails";
+// import { propertyDetailsTypes } from "@/app/data/projectDetails";
 
 interface BHKTypeDropdownProps {
   selectedFilters: { [key: string]: string[] };

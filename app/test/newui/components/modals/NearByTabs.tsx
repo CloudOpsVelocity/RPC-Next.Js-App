@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useRef,
   useState,
-  useMemo,
+  // useMemo,
 } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { throttle } from "lodash";
@@ -26,7 +26,7 @@ const Tabs: React.FC<TabsProps> = ({
   selectedCategory,
   categories,
 }) => {
-  const [canScrollLeft, setCanScrollLeft] = useState(false); 
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const tabContainerRef = useRef<HTMLDivElement>(null);
   const updateScrollButtons = useCallback(
@@ -111,4 +111,4 @@ const Tabs: React.FC<TabsProps> = ({
   );
 };
 
-export default Tabs; 
+export default Tabs;

@@ -1,16 +1,22 @@
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+import {
+  formatCurrency,
+  // formatNumberWithSuffix
+} from "@/app/utils/numbers";
 import React from "react";
-import { NewMapIcon } from "@/app/images/commongsSvgs2";
+// import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import { sortUnits } from "@/app/utils/unitparser";
 import { useSetAtom } from "jotai";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
-import selectedSearchAtom, {
+import {
+  // selectedSearchAtom,
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
-import BuilderLink, {
+import {
+  // BuilderLink,
   generateBuilderUrl,
 } from "@/app/utils/linkRouters/Builder";
-import ProjectLink, {
+import {
+  // ProjectLink,
   createProjectLinkUrl,
 } from "@/app/utils/linkRouters/ProjectLink";
 
@@ -230,7 +236,7 @@ export default function ProjData({
           {propName}{" "}
         </span>
       </p>
-      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-118px)]">
+      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-[130%] xl:w-[calc(100%-118px)]">
         Address: {address}
       </p>
       <p className=" text-gray-600 text-[12px] sm:text-[12px] xl:text-[14px] not-italic font-semibold ">

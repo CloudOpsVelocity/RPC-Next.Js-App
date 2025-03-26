@@ -1,15 +1,16 @@
-import exp from "constants";
+// import exp from "constants";
 import { atom } from "jotai";
 
 const BASE_URL = process.env.NEXT_PUBLIC_IMG_BASE;
 
 const initailState = {
-    allData: [
-        {
-            name:"Bengaluru Rapid Growth",
-            title:"Bengaluru’s Rapid Growth: A Hub of Opportunities and Innovation",
-            content:"Bengaluru, often referred to as India’s Silicon Valley, has undergone a remarkable transformation over the past few decades. From a city known for its mild climate and laid-back lifestyle to becoming one of the most dynamic urban centers globally, Bengaluru’s growth trajectory is nothing short of extraordinary. A magnet for professionals, entrepreneurs, businesses, and investors, the city’s thriving IT sector, robust infrastructure, and modern real estate market have firmly positioned it as a major player on the global stage.",
-            desc:`<p>Bengaluru, often referred to as India&rsquo;s Silicon Valley, has undergone a remarkable transformation over the past few decades. From a city known for its mild climate and laid-back lifestyle to becoming one of the most dynamic urban centers globally, Bengaluru&rsquo;s growth trajectory is nothing short of extraordinary. A magnet for professionals, entrepreneurs, businesses, and investors, the city&rsquo;s thriving IT sector, robust infrastructure, and modern real estate market have firmly positioned it as a major player on the global stage.</p>
+  allData: [
+    {
+      name: "Bengaluru Rapid Growth",
+      title: "Bengaluru’s Rapid Growth: A Hub of Opportunities and Innovation",
+      content:
+        "Bengaluru, often referred to as India’s Silicon Valley, has undergone a remarkable transformation over the past few decades. From a city known for its mild climate and laid-back lifestyle to becoming one of the most dynamic urban centers globally, Bengaluru’s growth trajectory is nothing short of extraordinary. A magnet for professionals, entrepreneurs, businesses, and investors, the city’s thriving IT sector, robust infrastructure, and modern real estate market have firmly positioned it as a major player on the global stage.",
+      desc: `<p>Bengaluru, often referred to as India&rsquo;s Silicon Valley, has undergone a remarkable transformation over the past few decades. From a city known for its mild climate and laid-back lifestyle to becoming one of the most dynamic urban centers globally, Bengaluru&rsquo;s growth trajectory is nothing short of extraordinary. A magnet for professionals, entrepreneurs, businesses, and investors, the city&rsquo;s thriving IT sector, robust infrastructure, and modern real estate market have firmly positioned it as a major player on the global stage.</p>
                     <p><strong>The Heart of Innovation and Opportunity</strong></p>
                     <p>At the core of Bengaluru&rsquo;s transformation lies its vibrant tech ecosystem. Known as the IT capital of India, Bengaluru is home to both established global giants like Infosys, Wipro, and IBM, as well as an exciting array of innovative startups across a wide range of industries, from fintech to artificial intelligence. The city&rsquo;s ever-growing presence in the global tech landscape has attracted not only the best and brightest minds but also investors and businesses seeking opportunities in one of the most lucrative markets in the world.</p>
                     <p><strong>The Talent Magnet</strong></p>
@@ -36,16 +37,19 @@ const initailState = {
                     <p><strong>Conclusion: Bengaluru&rsquo;s Promise for the Future</strong></p>
                     <p>Bengaluru&rsquo;s rapid growth story is far from over. As the city continues to innovate and modernize, its real estate market remains a promising arena for investors, homebuyers, and businesses. With its unmatched talent pool, state-of-the-art infrastructure, and commitment to sustainability, Bengaluru is well on its way to becoming one of the most livable, technologically advanced, and investor-friendly cities in the world.</p>
                     <p>For those looking to invest, buy a home, or simply be part of the city&rsquo;s growth story, Bengaluru offers unparalleled opportunities and the promise of a bright, future-ready destination. As the city evolves, it continues to be a beacon of innovation, a hub of opportunities, and a land of exciting prospects for all who call it home.</p>`,
-            url:`${BASE_URL}/staticmedia-images-icons/News/New-1.jpeg`,
-            section: "Technology",
-            user:"",
-            date:"Sep 03, 2024",
-            viewsCount:"2353"
-        },{
-            name:"Metro Expansion",
-            title:"Metro Expansion: A Game Changer for Bengaluru’s Real Estate Market",
-            content:"The expansion of Namma Metro has had a profound impact on Bengaluru’s real estate sector, providing an attractive proposition for both homebuyers and investors. The metro system has drastically reduced travel time across the city, making it easier for residents to access their workplaces, educational institutions, entertainment hubs, and commercial areas.",
-            desc:`<p>Bengaluru&rsquo;s real estate market is experiencing a monumental shift, and one of the most influential drivers of this transformation is the ongoing expansion of the Namma Metro network. Over the past few years, Bengaluru has witnessed the steady development of its metro infrastructure, which is revolutionizing the way people commute and reshaping property trends across the city. With multiple new metro corridors under construction and existing routes being extended, property prices along these transit routes have soared, making it a crucial factor in the current and future growth of Bengaluru&rsquo;s real estate market.</p>
+      url: `${BASE_URL}/staticmedia-images-icons/News/New-1.jpeg`,
+      section: "Technology",
+      user: "",
+      date: "Sep 03, 2024",
+      viewsCount: "2353",
+    },
+    {
+      name: "Metro Expansion",
+      title:
+        "Metro Expansion: A Game Changer for Bengaluru’s Real Estate Market",
+      content:
+        "The expansion of Namma Metro has had a profound impact on Bengaluru’s real estate sector, providing an attractive proposition for both homebuyers and investors. The metro system has drastically reduced travel time across the city, making it easier for residents to access their workplaces, educational institutions, entertainment hubs, and commercial areas.",
+      desc: `<p>Bengaluru&rsquo;s real estate market is experiencing a monumental shift, and one of the most influential drivers of this transformation is the ongoing expansion of the Namma Metro network. Over the past few years, Bengaluru has witnessed the steady development of its metro infrastructure, which is revolutionizing the way people commute and reshaping property trends across the city. With multiple new metro corridors under construction and existing routes being extended, property prices along these transit routes have soared, making it a crucial factor in the current and future growth of Bengaluru&rsquo;s real estate market.</p>
                     <p><strong>How Metro Expansion is Driving Property Growth</strong></p>
                     <p>The expansion of Namma Metro has had a profound impact on Bengaluru&rsquo;s real estate sector, providing an attractive proposition for both homebuyers and investors. The metro system has drastically reduced travel time across the city, making it easier for residents to access their workplaces, educational institutions, entertainment hubs, and commercial areas. In the past, commuting through Bengaluru's notorious traffic congestion could take hours, but the metro has created a faster, more reliable alternative that has significantly improved the quality of life for its residents.</p>
                     <p>The introduction of metro connectivity has made previously peripheral areas much more accessible, leading to an increased demand for both residential and commercial properties near metro stations. In particular, areas such as Whitefield, Yeshwanthpur, Sarjapur Road, and Kanakapura Road have seen a surge in real estate activity. Developers are now focusing on these areas, launching new projects and modern residential complexes to meet the growing demand.</p>
@@ -67,16 +71,19 @@ const initailState = {
                     <p>Bengaluru&rsquo;s metro expansion is undoubtedly one of the most significant catalysts driving the growth of the city&rsquo;s real estate market. The ongoing and upcoming metro developments will not only improve connectivity and ease of commute but also enhance the value of properties along these corridors. As the metro network continues to expand, investors and homebuyers alike are flocking to these metro-connected areas, making them some of the most promising and lucrative real estate hotspots in the city.</p>
                     <p>With the rapid pace of infrastructure development, Bengaluru is transforming into a more accessible, efficient, and well-connected city. The metro expansion is a game-changer for the city&rsquo;s real estate landscape, and those who invest now in properties along these transit routes are likely to reap the rewards in the form of higher property values and strong rental income in the years ahead.</p>
                     <p>In the coming years, as Bengaluru continues to grow, it will remain a hotbed for real estate investment, and the metro expansion will be a driving force in shaping the city&rsquo;s property trends. For anyone looking to capitalize on Bengaluru&rsquo;s real estate boom, investing in properties near metro corridors is a strategic and highly rewarding move.</p>`,
-            url:`${BASE_URL}/staticmedia-images-icons/News/News-2.jpeg`,
-            section: "Technology",
-            user:"",
-            date:"Sep 04, 2024",
-            viewsCount:"4653"
-        },{
-            name:"Bengaluru Rising Demand for Luxury Homes",
-            title:"Bengaluru’s Rising Demand for Luxury Homes: A New Era in Real Estate",
-            content:"Bengaluru, India’s Silicon Valley, has long been the heart of the country’s IT sector. However, in recent years, the city has also evolved into a hub for luxury living. The demand for high-end residential properties in Bengaluru has reached unprecedented heights, with affluent buyers and global investors flocking to the city for a taste of its opulence. Whether it's the serene luxury villas of Whitefield, the chic penthouses of Koramangala, or the plush apartments in the heart of MG Road, Bengaluru’s luxury real estate market is thriving like never before.",
-            desc:`<p><strong>Bengaluru: The Luxury Real Estate Capital of South India</strong></p>
+      url: `${BASE_URL}/staticmedia-images-icons/News/News-2.jpeg`,
+      section: "Technology",
+      user: "",
+      date: "Sep 04, 2024",
+      viewsCount: "4653",
+    },
+    {
+      name: "Bengaluru Rising Demand for Luxury Homes",
+      title:
+        "Bengaluru’s Rising Demand for Luxury Homes: A New Era in Real Estate",
+      content:
+        "Bengaluru, India’s Silicon Valley, has long been the heart of the country’s IT sector. However, in recent years, the city has also evolved into a hub for luxury living. The demand for high-end residential properties in Bengaluru has reached unprecedented heights, with affluent buyers and global investors flocking to the city for a taste of its opulence. Whether it's the serene luxury villas of Whitefield, the chic penthouses of Koramangala, or the plush apartments in the heart of MG Road, Bengaluru’s luxury real estate market is thriving like never before.",
+      desc: `<p><strong>Bengaluru: The Luxury Real Estate Capital of South India</strong></p>
                     <p>Bengaluru, India&rsquo;s Silicon Valley, has long been the heart of the country&rsquo;s IT sector. However, in recent years, the city has also evolved into a hub for luxury living. The demand for high-end residential properties in Bengaluru has reached unprecedented heights, with affluent buyers and global investors flocking to the city for a taste of its opulence. Whether it's the serene luxury villas of Whitefield, the chic penthouses of Koramangala, or the plush apartments in the heart of MG Road, Bengaluru&rsquo;s luxury real estate market is thriving like never before.</p>
                     <p>The IT boom, the influx of multinational corporations, and the city's growing reputation as a global tech hub have created an environment that attracts a sophisticated and affluent demographic. This trend is further bolstered by Bengaluru&rsquo;s excellent quality of life, cosmopolitan culture, and world-class amenities, which appeal to high-net-worth individuals (HNWI) from across the globe. As the city continues to grow economically, the demand for luxury homes in Bengaluru shows no signs of slowing down.</p>
                     <p><strong>Why Luxury Real Estate is Booming in Bengaluru</strong></p>
@@ -118,16 +125,18 @@ const initailState = {
                     <p><strong>The Future of Luxury Real Estate in Bengaluru</strong></p>
                     <p>Looking ahead, Bengaluru&rsquo;s luxury real estate market is expected to continue its growth trajectory. With increasing disposable incomes, a rise in the number of high-net-worth individuals, and the continued influx of global investors, the city is poised to become one of India&rsquo;s most attractive destinations for luxury real estate investment. The rise of remote work, the growing demand for sustainable homes, and the shift towards wellness-focused lifestyles will further fuel this trend.</p>
                     <p>As Bengaluru evolves, luxury living will continue to be at the forefront of the city&rsquo;s real estate developments. The future looks bright for luxury real estate in Bengaluru, with developers continuing to innovate and deliver homes that meet the sophisticated tastes and needs of today&rsquo;s elite buyers.</p>`,
-            url:`${BASE_URL}/staticmedia-images-icons/News/News-3.avif`,
-            section: "Technology",
-            user:"",
-            date:"Sep 04, 2024",
-            viewsCount:"353"
-        },{
-            name:"Bengaluru Real Estate Market",
-            title:"Bengaluru’s Real Estate Market: A Boon for First-Time Homebuyers",
-            content:"Bengaluru, often regarded as the IT capital of India, has long been a dream destination for tech professionals and entrepreneurs seeking career opportunities. But it’s not just the city’s thriving job market that attracts people—it’s also the growing potential for homeownership, particularly for first-time buyers. Over the past few years, the real estate market in Bengaluru has shifted to cater to the needs of young professionals, newlyweds, and families looking to take the first step on the property ladder.",
-            desc:`<p><strong>The Dream of Homeownership: How Bengaluru is Making it Possible for First-Time Buyers</strong></p>
+      url: `${BASE_URL}/staticmedia-images-icons/News/News-3.avif`,
+      section: "Technology",
+      user: "",
+      date: "Sep 04, 2024",
+      viewsCount: "353",
+    },
+    {
+      name: "Bengaluru Real Estate Market",
+      title: "Bengaluru’s Real Estate Market: A Boon for First-Time Homebuyers",
+      content:
+        "Bengaluru, often regarded as the IT capital of India, has long been a dream destination for tech professionals and entrepreneurs seeking career opportunities. But it’s not just the city’s thriving job market that attracts people—it’s also the growing potential for homeownership, particularly for first-time buyers. Over the past few years, the real estate market in Bengaluru has shifted to cater to the needs of young professionals, newlyweds, and families looking to take the first step on the property ladder.",
+      desc: `<p><strong>The Dream of Homeownership: How Bengaluru is Making it Possible for First-Time Buyers</strong></p>
                     <p>Bengaluru, often regarded as the IT capital of India, has long been a dream destination for tech professionals and entrepreneurs seeking career opportunities. But it&rsquo;s not just the city&rsquo;s thriving job market that attracts people&mdash;it&rsquo;s also the growing potential for homeownership, particularly for first-time buyers. Over the past few years, the real estate market in Bengaluru has shifted to cater to the needs of young professionals, newlyweds, and families looking to take the first step on the property ladder.</p>
                     <p>A combination of favorable government policies, affordable financing options, and an increasing supply of well-priced properties has made homeownership in Bengaluru a reality for many. The city&rsquo;s residential real estate sector, especially in the mid-range and affordable segments, has been experiencing rapid growth, providing a wide range of options for first-time buyers at various price points.</p>
                     <p><strong>Why First-Time Buyers are Flocking to Bengaluru</strong></p>
@@ -173,16 +182,18 @@ const initailState = {
                     <p><strong>The Future of Bengaluru&rsquo;s Affordable Housing Market</strong></p>
                     <p>Bengaluru&rsquo;s real estate market is set to continue evolving, with more focus on affordable and mid-range housing. With government initiatives, continued infrastructure development, and increasing access to financing, homeownership will continue to be a feasible option for first-time buyers in the city.</p>
                     <p>As the city expands and modernizes, the dream of owning a home in Bengaluru will remain a central goal for many young professionals and families. With the right support, the future looks bright for first-time buyers in Bengaluru&rsquo;s dynamic real estate market.</p>`,
-            url:`${BASE_URL}/staticmedia-images-icons/News/News-4.jpg`,
-            section: "Technology",
-            user:"",
-            date:"Sep 04, 2024",
-            viewsCount:"653"
-        },{
-            name:"Bengaluru Commercial Real Estate Surge",
-            title:"Bengaluru’s Commercial Real Estate Surge: The Future of Office Spaces",
-            content:`Bengaluru, once a quiet town, has transformed into India’s leading tech city and a global business hub. Often referred to as "India's Silicon Valley," Bengaluru is at the forefront of innovation, startups, and global enterprises. With the rapid expansion of the city's infrastructure, growing business opportunities, and a burgeoning workforce, Bengaluru’s commercial real estate market is witnessing an unprecedented surge.`,
-            desc:`<p><strong>Bengaluru: India&rsquo;s Premier Destination for Commercial Real Estate</strong></p>
+      url: `${BASE_URL}/staticmedia-images-icons/News/News-4.jpg`,
+      section: "Technology",
+      user: "",
+      date: "Sep 04, 2024",
+      viewsCount: "653",
+    },
+    {
+      name: "Bengaluru Commercial Real Estate Surge",
+      title:
+        "Bengaluru’s Commercial Real Estate Surge: The Future of Office Spaces",
+      content: `Bengaluru, once a quiet town, has transformed into India’s leading tech city and a global business hub. Often referred to as "India's Silicon Valley," Bengaluru is at the forefront of innovation, startups, and global enterprises. With the rapid expansion of the city's infrastructure, growing business opportunities, and a burgeoning workforce, Bengaluru’s commercial real estate market is witnessing an unprecedented surge.`,
+      desc: `<p><strong>Bengaluru: India&rsquo;s Premier Destination for Commercial Real Estate</strong></p>
                     <p>Bengaluru, once a quiet town, has transformed into India&rsquo;s leading tech city and a global business hub. Often referred to as "India's Silicon Valley," Bengaluru is at the forefront of innovation, startups, and global enterprises. With the rapid expansion of the city's infrastructure, growing business opportunities, and a burgeoning workforce, Bengaluru&rsquo;s commercial real estate market is witnessing an unprecedented surge. The demand for office spaces&mdash;both traditional and flexible&mdash;is stronger than ever, driven by the rise of technology, evolving work patterns, and expanding industries.</p>
                     <p>The commercial real estate landscape in Bengaluru is evolving rapidly, with significant changes in the type of spaces in demand, the locations seeing the highest growth, and the way businesses are using office spaces. This surge presents immense opportunities for both real estate investors and businesses, with the city poised to lead the way in shaping the future of office environments.</p>
                     <p><strong>Factors Driving Bengaluru&rsquo;s Commercial Real Estate Surge</strong></p>
@@ -244,16 +255,19 @@ const initailState = {
                     <p><strong>Conclusion: Bengaluru&rsquo;s Commercial Real Estate Market is Poised for Growth</strong></p>
                     <p>Bengaluru&rsquo;s commercial real estate market is experiencing a period of rapid expansion, driven by the city&rsquo;s growing tech sector, infrastructure development, and shifting work dynamics. With the rise of flexible office spaces, the push towards sustainability, and the integration of advanced technologies, the future of office spaces in Bengaluru looks promising.</p>
                     <p>For businesses and investors, Bengaluru offers a wealth of opportunities in the commercial real estate market. As the city continues to develop, it will remain a top choice for companies looking to expand their presence in India and across the globe. For those looking to tap into Bengaluru&rsquo;s thriving commercial real estate sector, now is the time to invest in the city&rsquo;s dynamic office space market.</p>`,
-            url:`${BASE_URL}/staticmedia-images-icons/News/News-5.avif`,
-            section: "Technology",
-            user:"",
-            date:"Sep 04, 2024",
-            viewsCount:"53"
-        },{
-            name:"Bengaluru Rising Popularity Among NRIs",
-            title:"Bengaluru’s Rising Popularity Among NRIs: A Lucrative Investment Opportunity",
-            content:"Bengaluru, often regarded as the Silicon Valley of India, has long been a prominent destination for tech professionals and entrepreneurs. However, in recent years, the city’s real estate market has seen a significant shift, with a growing number of Non-Resident Indians (NRIs) flocking to invest in properties here.",
-            desc:`<p><strong>Bengaluru: The City That Never Sleeps&mdash;A Global Investment Hub</strong></p>
+      url: `${BASE_URL}/staticmedia-images-icons/News/News-5.avif`,
+      section: "Technology",
+      user: "",
+      date: "Sep 04, 2024",
+      viewsCount: "53",
+    },
+    {
+      name: "Bengaluru Rising Popularity Among NRIs",
+      title:
+        "Bengaluru’s Rising Popularity Among NRIs: A Lucrative Investment Opportunity",
+      content:
+        "Bengaluru, often regarded as the Silicon Valley of India, has long been a prominent destination for tech professionals and entrepreneurs. However, in recent years, the city’s real estate market has seen a significant shift, with a growing number of Non-Resident Indians (NRIs) flocking to invest in properties here.",
+      desc: `<p><strong>Bengaluru: The City That Never Sleeps&mdash;A Global Investment Hub</strong></p>
                     <p>Bengaluru, often regarded as the Silicon Valley of India, has long been a prominent destination for tech professionals and entrepreneurs. However, in recent years, the city&rsquo;s real estate market has seen a significant shift, with a growing number of Non-Resident Indians (NRIs) flocking to invest in properties here. This surge in demand from NRIs is not only driven by Bengaluru&rsquo;s robust economic growth but also by its thriving IT ecosystem, excellent infrastructure, and the city&rsquo;s overall appeal as a global business hub.</p>
                     <p>For NRIs, Bengaluru presents a unique combination of factors&mdash;high returns on investment, a dynamic real estate market, and a growing demand for both residential and commercial properties. Whether it&rsquo;s for personal use, long-term capital appreciation, or rental income, investing in Bengaluru real estate offers numerous advantages. Let&rsquo;s explore why Bengaluru is increasingly becoming the city of choice for NRIs and how it represents a lucrative investment opportunity.</p>
                     <h3><strong>Factors Driving Bengaluru&rsquo;s Popularity Among NRIs</strong></h3>
@@ -319,16 +333,19 @@ const initailState = {
                     <p>Bengaluru continues to be one of the most attractive cities in India for real estate investment, and its popularity among NRIs is only set to grow. The city offers NRIs a combination of high rental yields, capital appreciation, strong infrastructure, and a growing economy&mdash;making it an excellent destination for real estate investment.</p>
                     <p>With its diverse property options, tax incentives, and favorable exchange rates, Bengaluru&rsquo;s real estate market is well-positioned to offer significant returns on investment for NRIs. Whether you&rsquo;re looking to purchase a home for personal use, invest in rental properties, or buy commercial spaces for long-term income, Bengaluru presents a wealth of opportunities that make it an attractive and lucrative investment choice.</p>
                     <p>Now is the perfect time for NRIs to consider Bengaluru as a key part of their real estate investment strategy. With the right property and strategic planning, investors can unlock significant wealth in one of India&rsquo;s most promising real estate markets.</p>`,
-            url:`${BASE_URL}/staticmedia-images-icons/News/News-6.avif`,
-            section: "Technology",
-            user:"",
-            date:"Sep 04, 2024",
-            viewsCount:"33"
-        },{
-            name:"Sustainable Real Estate in Bengaluru",
-            title:"Sustainable Real Estate in Bengaluru: Eco-Friendly Living on the Rise",
-            content:"Bengaluru, India’s tech and innovation capital, is experiencing a transformative shift in its real estate sector—one that’s not just about luxury, convenience, or style, but also about sustainability. As the city’s population grows and its infrastructure continues to expand, a new wave of eco-conscious living is sweeping across Bengaluru.",
-            desc:`<p><strong>Introduction: The Growing Trend of Sustainable Living in Bengaluru</strong></p>
+      url: `${BASE_URL}/staticmedia-images-icons/News/News-6.avif`,
+      section: "Technology",
+      user: "",
+      date: "Sep 04, 2024",
+      viewsCount: "33",
+    },
+    {
+      name: "Sustainable Real Estate in Bengaluru",
+      title:
+        "Sustainable Real Estate in Bengaluru: Eco-Friendly Living on the Rise",
+      content:
+        "Bengaluru, India’s tech and innovation capital, is experiencing a transformative shift in its real estate sector—one that’s not just about luxury, convenience, or style, but also about sustainability. As the city’s population grows and its infrastructure continues to expand, a new wave of eco-conscious living is sweeping across Bengaluru.",
+      desc: `<p><strong>Introduction: The Growing Trend of Sustainable Living in Bengaluru</strong></p>
                     <p>Bengaluru, India&rsquo;s tech and innovation capital, is experiencing a transformative shift in its real estate sector&mdash;one that&rsquo;s not just about luxury, convenience, or style, but also about sustainability. As the city&rsquo;s population grows and its infrastructure continues to expand, a new wave of eco-conscious living is sweeping across Bengaluru. Sustainable real estate is no longer a niche market, but an increasingly popular choice for homebuyers, developers, and investors looking to reduce their carbon footprint while enjoying a modern lifestyle.</p>
                     <p>Sustainable real estate in Bengaluru incorporates design principles and construction techniques that prioritize environmental conservation, energy efficiency, and the well-being of residents. From green building certifications to energy-efficient homes, the demand for eco-friendly properties is on the rise. As the city grapples with challenges like air pollution, waste management, and water scarcity, sustainable development offers a promising solution to ensure that urban growth and environmental preservation go hand in hand.</p>
                     <p>In this article, we will explore the key factors driving the rise of sustainable real estate in Bengaluru, the features of eco-friendly homes, and why investing in sustainable properties is not just good for the planet, but also offers long-term benefits for property owners.</p>
@@ -426,16 +443,19 @@ const initailState = {
                     <h3><strong>Conclusion: The Future of Sustainable Real Estate in Bengaluru</strong></h3>
                     <p>Bengaluru&rsquo;s real estate market is evolving to meet the demands of a more environmentally conscious population. As sustainable living becomes a priority for both developers and residents, Bengaluru is set to become a hub for eco-friendly real estate. The city&rsquo;s forward-thinking approach to sustainable development, coupled with growing government support, ensures that the trend toward green buildings will continue to gain momentum.</p>
                     <p>Investing in sustainable real estate in Bengaluru not only benefits the environment but also offers significant financial returns, making it an ideal choice for homebuyers, investors, and developers alike. As Bengaluru continues to grow, its real estate sector will become increasingly defined by eco-friendly innovations, setting the stage for a greener, more sustainable future.</p>`,
-            url:`${BASE_URL}/staticmedia-images-icons/News/News-7.avif`,
-            section: "Technology",
-            user:"",
-            date:"Sep 04, 2024",
-            viewsCount:"7653"
-        },{
-            name:"Bengaluru Real Estate Investment Trust (REIT) Market",
-            title:"Bengaluru’s Real Estate Investment Trust (REIT) Market: A Growing Opportunity for Investors",
-            content:"Bengaluru, India’s Silicon Valley, has always been a hotspot for real estate investments, attracting both domestic and international buyers. With its robust IT industry, rapidly growing economy, and world-class infrastructure, the city offers some of the best opportunities for property investments in India.",
-            desc:`<h4><strong>Introduction: The Rise of REITs in Bengaluru&rsquo;s Booming Real Estate Market</strong></h4>
+      url: `${BASE_URL}/staticmedia-images-icons/News/News-7.avif`,
+      section: "Technology",
+      user: "",
+      date: "Sep 04, 2024",
+      viewsCount: "7653",
+    },
+    {
+      name: "Bengaluru Real Estate Investment Trust (REIT) Market",
+      title:
+        "Bengaluru’s Real Estate Investment Trust (REIT) Market: A Growing Opportunity for Investors",
+      content:
+        "Bengaluru, India’s Silicon Valley, has always been a hotspot for real estate investments, attracting both domestic and international buyers. With its robust IT industry, rapidly growing economy, and world-class infrastructure, the city offers some of the best opportunities for property investments in India.",
+      desc: `<h4><strong>Introduction: The Rise of REITs in Bengaluru&rsquo;s Booming Real Estate Market</strong></h4>
                     <p>Bengaluru, India&rsquo;s Silicon Valley, has always been a hotspot for real estate investments, attracting both domestic and international buyers. With its robust IT industry, rapidly growing economy, and world-class infrastructure, the city offers some of the best opportunities for property investments in India. However, traditional real estate investment often requires substantial capital and comes with challenges such as property management, liquidity concerns, and regulatory complexities.</p>
                     <p>This is where&nbsp;<strong>Real Estate Investment Trusts (REITs)</strong>&nbsp;have emerged as a game-changing alternative for investors. REITs allow individuals to invest in income-generating real estate assets without directly owning or managing properties. The concept, which has been highly successful in developed markets like the US, Europe, and Singapore, is now gaining momentum in India&mdash;especially in Bengaluru.</p>
                     <p>With the introduction of SEBI-regulated REITs in India, Bengaluru&rsquo;s real estate market is witnessing a surge in institutional investments, offering a unique opportunity for both retail and institutional investors to earn steady rental income and long-term capital appreciation. This article explores the growing REIT market in Bengaluru, its benefits, key players, and why investors should consider this asset class for portfolio diversification.</p>
@@ -493,14 +513,13 @@ const initailState = {
                     <p>Bengaluru&rsquo;s&nbsp;<strong>Real Estate Investment Trust (REIT) market</strong>&nbsp;is emerging as a&nbsp;<strong>lucrative investment opportunity</strong>, offering stable&nbsp;<strong>rental income, capital appreciation, and diversification</strong>&nbsp;in a high-growth real estate market. With strong demand for commercial properties, institutional investments, and infrastructure advancements, REITs provide an&nbsp;<strong>affordable and low-risk way</strong>&nbsp;to participate in Bengaluru&rsquo;s booming real estate sector.</p>
                     <p>For investors looking to&nbsp;<strong>diversify their portfolios, generate passive income, and gain exposure to premium commercial real estate assets</strong>, Bengaluru&rsquo;s REIT market presents an excellent&nbsp;<strong>long-term growth opportunity</strong>. As more REITs enter the Indian market, investors can expect&nbsp;<strong>greater accessibility, enhanced returns, and a more mature real estate investment ecosystem</strong>&nbsp;in the coming years.</p>
                     <p><strong>Now is the time to explore REITs as a smart and future-ready investment option in Bengaluru&rsquo;s thriving real estate landscape.</strong></p>`,
-                                url:`${BASE_URL}/staticmedia-images-icons/News/News-8.png`,
-            section: "Technology",
-            user:"",
-            date:"Sep 04, 2024",
-            viewsCount:"2653"
-        }
-    ]
-}
-
+      url: `${BASE_URL}/staticmedia-images-icons/News/News-8.png`,
+      section: "Technology",
+      user: "",
+      date: "Sep 04, 2024",
+      viewsCount: "2653",
+    },
+  ],
+};
 
 export const newsData = atom(initailState);

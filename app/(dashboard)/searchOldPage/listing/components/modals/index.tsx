@@ -1,6 +1,6 @@
 "use client";
 import {
-  listingSearchAtom,
+  // listingSearchAtom,
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
 import { Modal } from "@mantine/core";

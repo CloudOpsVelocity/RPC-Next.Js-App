@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Select,  } from "@mantine/core";
+import { Select } from "@mantine/core";
 import {
   DropDownIcon,
   ImgCarouselIcon,
@@ -11,10 +11,10 @@ import { selectedFloorAtom } from "@/app/store/floor";
 import S from "@/app/styles/Floorplan.module.css";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import Image from "next/image";
-import Button from "../atoms/buttons/variansts";
+// import Button from "../atoms/buttons/variansts";
 import { SelectCreatable } from "./_ui/input/UnitINput";
-import RecentSearchedUnits from "./_ui/RecentSearchedUnits";
-import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
+// import RecentSearchedUnits from "./_ui/RecentSearchedUnits";
+// import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
 import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 interface UnitData {
   unitIdEnc: string;
@@ -49,12 +49,11 @@ export const unitFloorsAtom = atom([]);
 const Byunitblock: React.FC<Props> = ({
   propCgId,
   data,
-  form: { values, setValues, setFieldValue, getInputProps,reset },
-
+  form: { values, setValues, setFieldValue, getInputProps, reset },
 }: Props) => {
   const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
-  const {setPreviousFilers} = useRecentUnits()
+  const { setPreviousFilers } = useRecentUnits();
   const workerRef = useRef<Worker | null>(null);
   React.useEffect(() => {
     workerRef.current = new Worker(
@@ -93,7 +92,6 @@ const Byunitblock: React.FC<Props> = ({
   };
 
   const handleSearch = (key: string, type: "add" | "delete") => {
-
     const keysWithNonNullValues = Object.keys(values).filter(
       (key) => values[key] !== null
     );
@@ -164,29 +162,37 @@ const Byunitblock: React.FC<Props> = ({
   const showClearAll = Object.values(values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
-  const handlePreviousAppliedFilter = (filters:Object) => {
+  const handlePreviousAppliedFilter = (filters: Object) => {
     handleReset();
     setValues(filters);
-    
+
     // If unitNumber exists in filters, prefill all fields
-    if ('unitNumber' in filters && typeof filters.unitNumber === 'string') {
+    if ("unitNumber" in filters && typeof filters.unitNumber === "string") {
       const filteredData = data.filter((item: any) => {
         // Match exact unit number
-        return String(item.unitNumber).toLowerCase() === (filters.unitNumber as string).toLowerCase();
+        return (
+          String(item.unitNumber).toLowerCase() ===
+          (filters.unitNumber as string).toLowerCase()
+        );
       });
 
       if (filteredData.length > 0) {
         // Get first matching unit
         const unit = filteredData[0];
-        
+
         // Prefill all available fields from the unit
         const prefillValues = {};
         Object.keys(unit).forEach((key: string) => {
-          if (unit[key as keyof typeof unit] !== null && unit[key as keyof typeof unit] !== undefined) {
-            (prefillValues as Record<string, string>)[key] = String(unit[key as keyof typeof unit]);
+          if (
+            unit[key as keyof typeof unit] !== null &&
+            unit[key as keyof typeof unit] !== undefined
+          ) {
+            (prefillValues as Record<string, string>)[key] = String(
+              unit[key as keyof typeof unit]
+            );
           }
         });
-        
+
         setValues(prefillValues as typeof values);
         setFloor(unit);
         setFloorsArray(filteredData);
@@ -202,10 +208,10 @@ const Byunitblock: React.FC<Props> = ({
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
-    
+
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
-  }
+  };
   return (
     <div className="px-[1%] sm:px-[5%] py-[2%] w-full flex justify-start flex-col items-start   ">
       <h3 className="text-[#001F35] sm:text-2xl not-italic font-medium sm:mb-4">
@@ -262,6 +268,7 @@ const Byunitblock: React.FC<Props> = ({
                           alt="close"
                           width={14}
                           height={14}
+                          priority 
                           className="!w-[14px] !h-[14px]"
                         />
                       </button>
@@ -306,7 +313,7 @@ const Byunitblock: React.FC<Props> = ({
           />
         ) : null}
         <SelectCreatable
-        value={values.unitNumber}
+          value={values.unitNumber}
           rightSection={<DropDownIcon />}
           size="md"
           label="Unit Number"
@@ -321,7 +328,7 @@ const Byunitblock: React.FC<Props> = ({
           onChange={(value) => handleOnChange("unitNumber", value as string)}
           classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
         />
-      
+
         {propCgId !== projectprops.plot && (
           <Select
             rightSection={<DropDownIcon />}
@@ -480,10 +487,15 @@ const Byunitblock: React.FC<Props> = ({
         )}
       </div>
       <div className="flex justify-between items-start w-full">
-      <button className="bg-btnPrimary  text-base font-semibold text-white px-1 py-2 rounded-md  text-nowrap mr-4 mt-4" onClick={handleReset}>   Clear All Filters</button>
-      {/* <RecentSearchedUnits propCgId={propCgId} recentFiltersClick={handlePreviousAppliedFilter} className="mt-4" /> */}
+        <button
+          className="bg-btnPrimary  text-base font-semibold text-white px-1 py-2 rounded-md  text-nowrap mr-4 mt-4"
+          onClick={handleReset}
+        >
+          {" "}
+          Clear All Filters
+        </button>
+        {/* <RecentSearchedUnits propCgId={propCgId} recentFiltersClick={handlePreviousAppliedFilter} className="mt-4" /> */}
       </div>
-
     </div>
   );
 };

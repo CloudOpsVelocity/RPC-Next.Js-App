@@ -1,6 +1,6 @@
 import React, { Suspense, useState,  } from "react";
 import clsx from "clsx";
-import styles from "@/app/styles/Map.module.css";
+// import styles from "@/app/styles/Map.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import { Area, areasMap } from "./data";
 import { CustomLoading } from "@/app/images/commonSvgs";
@@ -8,7 +8,7 @@ import { CustomLoading } from "@/app/images/commonSvgs";
 const CustomScrollArea: React.FC<{
   areas: Area[];
   selected: string;
-  setSelected: (key: string) => void; 
+  setSelected: (key: string) => void;
   data: any;
 }> = ({ areas, selected, setSelected, data }) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -30,17 +30,20 @@ const CustomScrollArea: React.FC<{
     <div className="flex flex-col px-2 relative w-full sm:w-[92%] m-auto">
       <div
         className={clsx(
-          "flex flex-wrap gap-2  overflow-hidden relative",
-         // !isExpanded && "max-h-[calc(3*2.5rem)]"  Adjust height for 3 lines
+          "flex flex-wrap gap-2  overflow-hidden relative"
+          // !isExpanded && "max-h-[calc(3*2.5rem)]"  Adjust height for 3 lines
         )}
-        style={{ padding: isMobile ? "0" : "0 2rem", paddingLeft: isTab ? "0" : "0 2rem" }}
+        style={{
+          padding: isMobile ? "0" : "0 2rem",
+          paddingLeft: isTab ? "0" : "0 2rem",
+        }}
       >
         {items.map((key) => {
           const Icon = areasMap.get(key).Icon;
           const name = areasMap.get(key).name;
 
           return (
-            <div  
+            <div
               key={key}
               onClick={() => setSelected(key ?? "")}
               className={clsx(
@@ -64,13 +67,13 @@ const CustomScrollArea: React.FC<{
         })}
 
         {/* Gradient overlay for fade effect */}
-          {/* {!isExpanded && hiddenCount > 0 && (
+        {/* {!isExpanded && hiddenCount > 0 && (
             <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none" />
           )} */}
       </div>
 
       {/* Small "See More" Button */}
-     {/*  {hiddenCount > 0 && (
+      {/*  {hiddenCount > 0 && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="mt-2 text-[#0073C6] font-medium text-xs"

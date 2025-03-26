@@ -43,7 +43,7 @@ export default function ResidentialPage({ data }: { data: any }) {
       <section className="py-20 container mx-auto px-4">
         {!data ? (
           <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"/>
           </div>
         ) : (
           data &&
@@ -92,6 +92,7 @@ export default function ResidentialPage({ data }: { data: any }) {
                             alt={property.projName || "Property Image"}
                             fill
                             className="object-cover"
+                            priority 
                           />
                           <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
                             {property.projstatus || "Status Unknown"}

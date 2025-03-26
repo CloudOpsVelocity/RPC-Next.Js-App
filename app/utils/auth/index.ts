@@ -2,7 +2,14 @@ import { BACKEND_BASE_URL } from "@/app/env";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const resendOtp = async (mobile: number, type:"newregistration" | 'pwd_change' | 'requestCallbackOtp' | 'priceQouteOtp') => {
+const resendOtp = async (
+  mobile: number,
+  type:
+    | "newregistration"
+    | "pwd_change"
+    | "requestCallbackOtp"
+    | "priceQouteOtp"
+) => {
   if (!mobile) return;
   try {
     const res = await axios.post(
@@ -16,7 +23,7 @@ const resendOtp = async (mobile: number, type:"newregistration" | 'pwd_change' |
       toast.error(res.data.Message);
       return res.data;
     }
-    console.log(res.data);
+    // console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);

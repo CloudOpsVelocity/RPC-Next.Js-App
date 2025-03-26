@@ -8,7 +8,7 @@ import { Search } from "@/app/validations/types/search";
 import { useAtom, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
-import { useState } from "react";
+// import { useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
@@ -44,7 +44,7 @@ export default function useSearchFilters() {
     setFilters({ ...filters, propTypes: propertyType });
   };
   const setSingleType = (key: keyof SearchFilter, value: string) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
   type SearchFilter = {
     unitTypes: string;

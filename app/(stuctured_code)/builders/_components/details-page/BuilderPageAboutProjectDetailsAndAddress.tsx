@@ -3,11 +3,11 @@ import React from "react";
 import {
   TotalLandArea,
   callIconSvg,
-  completedProjIconSvg,
+  // completedProjIconSvg,
   emailIconSvg,
   lacationIconSvg,
-  newLaunchProjIconSvg,
-  onGoingProjIconSvg,
+  // newLaunchProjIconSvg,
+  // onGoingProjIconSvg,
 } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
 import Card from "./management-section/BuilderPageManagementCard";

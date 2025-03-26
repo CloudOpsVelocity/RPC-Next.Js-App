@@ -1,17 +1,20 @@
 "use client";
 import { Button, Modal, Rating, Textarea } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+// import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 import S from "@/app/styles/Rating.module.css";
 import { useForm, yupResolver } from "@mantine/form";
-import Flex from "../molecules/Utils/Flex";
+// import Flex from "../molecules/Utils/Flex";
 import { ratingSchema } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { IconSun, RatingStar, infoIcon } from "@/app/images/commonSvgs";
-import toast, { Toaster } from "react-hot-toast";
+import {
+  // toast,
+  Toaster,
+} from "react-hot-toast";
 import LoginPopup from "../molecules/popups/login";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import handleTrimAndReplace from "@/app/utils/input/validations";
@@ -81,6 +84,7 @@ export default function Banner({
             className="h-[320px] w-[320px] absolute -top-[87px] right-0"
             width={600}
             height={300}
+            priority 
           />
         </div>
         <AddRating

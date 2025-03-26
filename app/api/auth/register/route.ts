@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
-    console.log(data);
+    // console.log(data);
     const registrationResponse = await axios.post(
       `${process.env.BACKEND_URL}/user/v1/registerUser`,
       data

@@ -2,7 +2,7 @@ import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import React, { ReactNode } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importing React Icons for arrows
+// import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importing React Icons for arrows
 
 // Define the props type
 interface ColumnVirtualizerFixedProps {
@@ -13,7 +13,7 @@ interface ColumnVirtualizerFixedProps {
   width?: number; // Width of the container (default is 600px)
   height?: number; // Height of the container (default is 100px)
   renderItem?: (item: any, index: number) => ReactNode; // Function to render each item
-  position:"center" | "start" | "end"
+  position: "center" | "start" | "end";
 }
 
 const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
@@ -24,7 +24,7 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
   width = 610,
   height = 100,
   renderItem,
-  position
+  position,
 }) => {
   const parentRef = React.useRef<HTMLDivElement | null>(null);
   const columnVirtualizer = useVirtualizer({
@@ -73,9 +73,8 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
         }}
       >
         <div
-        className={`w-[300px] sm:w-[${columnVirtualizer.getTotalSize()}px]`}
+          className={`w-[300px] sm:w-[${columnVirtualizer.getTotalSize()}px]`}
           style={{
-            
             height: "100%",
             position: "relative",
           }}

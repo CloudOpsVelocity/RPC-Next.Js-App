@@ -50,6 +50,7 @@ export default function BuilderPageTopProfileBlock({
               className="object-contain h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px]"
               width={158}
               height={158}
+              priority 
             />
           </div>
           <div>

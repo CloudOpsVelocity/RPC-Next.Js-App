@@ -1,6 +1,6 @@
 import React from "react";
 import Feature from "@/app/components/project/feature";
-import Reviews from "@/app/components/project/reviews";
+// import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
 import FirstBlock from "@/app/components/project/firstBlock";
@@ -16,22 +16,22 @@ import {
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
-import ListingRentAvail from "@/app/components/project/listingRentAvail";
+// import ListingRentAvail from "@/app/components/project/listingRentAvail";
 import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
 import MasterPlan from "@/app/components/project/masterplan";
-import FloorplansBlock from "@/app/components/project/floorplansBlock";
+// import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Specifications from "@/app/components/project/specification";
 import Banner from "@/app/components/project/banner";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
-import FaqWithBg from "@/app/components/project/faq";
+// import FaqWithBg from "@/app/components/project/faq";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import axios from "axios";
-import PartialUnitData from "@/app/components/project/sections";
+// import PartialUnitData from "@/app/components/project/sections";
 import { Metadata } from "next";
 import type { ResolvingMetadata } from "next";
 import FAQJsonLdScript from "@/app/seo/Faqjson";
@@ -114,7 +114,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   if (!data.partialUnitData) {
     overview = await getOverViewData(slug);
   }
-  
+
   return (
     <section className="w-full relative break-words">
       {/* <!-- Facebook Meta Tags --> */}
@@ -160,13 +160,15 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-          <Link rel="noopener noreferrer" className="hover:underline cursor-pointer" href={"/"}>
+            <Link
+              rel="noopener noreferrer"
+              className="hover:underline cursor-pointer"
+              href={"/"}
+            >
               Home
             </Link>{" "}
             {" > "}
-            <Link 
-              rel={"noopener noreferrer"}
-            href={"/project/banglore"}>
+            <Link rel={"noopener noreferrer"} href={"/project/banglore"}>
               <span className="hover:underline cursor-pointer">
                 Projects In {data.cityName}
               </span>

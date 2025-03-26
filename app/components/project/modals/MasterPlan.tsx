@@ -1,5 +1,5 @@
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
-import { Flex, Image, Modal } from "@mantine/core";
+import { Image, Modal } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
@@ -103,6 +103,7 @@ export default function MasterPlanPopup({
         className="cursor-pointer shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
         alt={`${projName} Master Plan`}
         component={NextImage}
+        priority 
       />
       <button onClick={open}>
         <div className="sm:bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-7 right-1 sm:right-4 z-1 mb-[20px] sm:shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
@@ -135,6 +136,7 @@ const Content = ({ url }: { url: string }) => {
           component={NextImage}
           width={600}
           height={600}
+          priority 
         />
       </TransformComponent>
       <ZoomInOut className="right-5 xl:right-48 pb-2" />

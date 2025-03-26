@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { FAQPage, WithContext } from "schema-dts";
 
 const generateQAJsonLd = (data: any) => {
@@ -31,7 +32,8 @@ const QAJsonLdScript = ({ data }: any) => {
   const jsonLd = generateQAJsonLd(data);
 
   return (
-    <script
+    <Script
+    id="qnaScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

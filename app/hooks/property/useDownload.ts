@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import React from "react";
+// import React from "react";
 import { usePopShortList } from "../popups/useShortListCompare";
 
 export default function useDownload(name: string) {

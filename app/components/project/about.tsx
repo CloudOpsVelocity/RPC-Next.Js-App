@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ReadMore from "../atoms/readmore";
 import clsx from "clsx";
 import PropertyHeading from "../property/heading";

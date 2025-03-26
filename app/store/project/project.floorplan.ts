@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { atom, useAtom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 
 interface FloorPlanState {
   floorplans: any[];
@@ -105,7 +105,7 @@ export const useFloorPlanStore = () => {
   };
   const applyFilters = useCallback(() => {
     const { floorplans, selectedFilters } = state;
-    console.log(selectedFilters);
+    // console.log(selectedFilters);
     const filteredData = floorplans.filter((item: any) => {
       return Object.keys(selectedFilters).every((key) => {
         const filterValue = selectedFilters[key];
@@ -116,7 +116,7 @@ export const useFloorPlanStore = () => {
       });
     });
     dispatch({ type: "SET_FILTERED_FLOORPLANS", payload: filteredData });
-  }, [dispatch,state]);
+  }, [dispatch, state]);
 
   const getOptions = (property: string): string[] => {
     const { floorplans, selectedFilters } = state;

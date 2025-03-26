@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Product, WithContext } from "schema-dts";
 
 const generatePropertyJsonLd = (data: any) => {
@@ -24,7 +25,8 @@ const PropertyJsonLdScript = ({ data }: any) => {
   const jsonLd = generatePropertyJsonLd(data);
 
   return (
-    <script
+    <Script
+    id="productionScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

@@ -4,10 +4,10 @@ import {
   listingProps,
   Propertytopics as topics,
 } from "@/app/data/projectDetails";
-import useNearbyProjects from "@/app/hooks/useNearby";
+// import useNearbyProjects from "@/app/hooks/useNearby";
 import useNearby from "@/app/hooks/property/useNearBy";
 import useRatings from "@/app/hooks/useRatings";
-import { Main } from "@/app/validations/types/project";
+// import { Main } from "@/app/validations/types/project";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
@@ -178,6 +178,7 @@ export default function Navigation({
           width={41}
           height={64}
           onClick={() => handleArrowClick("L")}
+          priority 
         />
       )}
       <div
@@ -233,6 +234,7 @@ export default function Navigation({
         width={41}
         height={64}
         onClick={() => handleArrowClick("R")}
+        priority 
       />
     </div>
   );

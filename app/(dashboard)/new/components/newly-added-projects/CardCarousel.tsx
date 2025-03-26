@@ -6,7 +6,7 @@ import Card from "./Card";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import Css from "../../Style.module.css";
-import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCompare";
+// import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCompare";
 type Props = {
   data: any;
   shortIds: any;
@@ -20,8 +20,10 @@ export default function CardCarousel({ data, shortIds }: Props) {
       align="start"
       slidesToScroll={1}
       mt={20}
-      nextControlIcon={<CarouseSelArrowIcon title="Click to Forword"/>}
-      previousControlIcon={<CarouseSelArrowIcon className="rotate-180" title="Click to Backword" />}
+      nextControlIcon={<CarouseSelArrowIcon title="Click to Forword" />}
+      previousControlIcon={
+        <CarouseSelArrowIcon className="rotate-180" title="Click to Backword" />
+      }
       controlsOffset={"-10px"}
       classNames={Css}
     >

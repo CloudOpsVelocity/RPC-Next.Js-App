@@ -1,10 +1,13 @@
 import React from "react";
-import { BackgroundImage, Center, Box, Text } from "@mantine/core";
-import Button from "@/app/components/atoms/buttons/variansts";
+import {
+  BackgroundImage,
+  // , Center, Box, Text
+} from "@mantine/core";
+// import Button from "@/app/components/atoms/buttons/variansts";
 import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import Image from "next/image";
-import { ShareIcon } from "@/app/images/HomePageIcons";
+// import { ShareIcon } from "@/app/images/HomePageIcons";
 import ViewAllButton from "./ViewButton";
 import ShareBtn from "./ShareBtn";
 import ReqBtn from "./ReqBtn";
@@ -56,7 +59,7 @@ export default function Card({ item }: Props) {
         )} */}
           {(item.rerastatus === "Recieved" ||
             item.rerastatus === "Applied") && (
-            <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+            <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
           )}
 
           {/*  <p className="text-green-600">{item.rerastatus}</p> */}

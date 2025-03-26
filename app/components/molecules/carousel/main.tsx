@@ -6,8 +6,8 @@ import "@mantine/carousel/styles.css";
 import {
   DarkCarouseIcon,
   DarkNextCarouselButton,
-  NextCarouselButton,
-  PrevCarouselButton,
+  // NextCarouselButton,
+  // PrevCarouselButton,
 } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 

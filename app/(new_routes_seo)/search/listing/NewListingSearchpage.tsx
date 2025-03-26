@@ -2,10 +2,13 @@ import React from "react";
 import dynamic from "next/dynamic";
 const ListingSearhLeftSection = dynamic(() => import("./components/listingSearchTabs/listingSearchleftSection"));
 const ListingSearchRightSection = dynamic(() => import("./components/listingSearchTabs/listingSearchRightSection"));
-import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
+// import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
+const ProjectSearchBreadCrumbs = dynamic(() => import("../components/ProjSearchBreadCrums"));
 
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
-import ListingHeaderFilters from "./components/ListingSearchHeader";
+// import ListingHeaderFilters from "./components/ListingSearchHeader";
+
+const ListingHeaderFilters = dynamic(() => import("./components/ListingSearchHeader"));
 
 type Props = {
   serverData: any;

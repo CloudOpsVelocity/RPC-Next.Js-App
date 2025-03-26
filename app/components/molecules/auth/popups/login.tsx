@@ -1,18 +1,18 @@
 "use client";
 import { useForm, yupResolver } from "@mantine/form";
 import {
-  TextInput,
+  // TextInput,
   Button,
   Box,
   PasswordInput,
   em,
   NumberInput,
 } from "@mantine/core";
-import useAuth from "@/app/hooks/useAuth";
+// import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
 import * as yup from "yup";
-import S from "@/app/styles/Pass.module.css";
+// import S from "@/app/styles/Pass.module.css";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import toast from "react-hot-toast";
@@ -23,7 +23,7 @@ import CryptoJS from "crypto-js";
 import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 import StepCss from "@/app/styles/Stepper.module.css";
 import { usePathname } from "next/navigation";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 import axios from "axios";
 import { MAX_LENTH_TEXT } from "@/app/validations/auth";
 
@@ -187,5 +187,3 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
 }
 
 export default LoginPopupForm;
-
-

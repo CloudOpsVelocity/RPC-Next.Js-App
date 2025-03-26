@@ -51,14 +51,14 @@ function Footer() {
       links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
       hrefs: [
         "/search?sf=city=New+Delhi%2B683",
-        "/residential-projects/for-sale/bengaluru",
+        "/search?sf=city=Bengaluru%2B9-cg=S",
         "/search?sf=city=Chennai%2B580",
         "/search?sf=city=Mumbai%2B577",
         "/search?sf=city=Hyderabad%2B582",
       ],
       /*  rel="noopener noreferrer", */
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Properties",
@@ -83,7 +83,7 @@ function Footer() {
         "/foreclosures", */
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Resources",
@@ -104,7 +104,7 @@ function Footer() {
         // "/home-valuation",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Our Pages",
@@ -135,7 +135,7 @@ function Footer() {
         "/search",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Company",
@@ -156,7 +156,7 @@ function Footer() {
         // "/partnerships",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
     {
       title: "Legal",
@@ -177,7 +177,7 @@ function Footer() {
         // "/accessibility",
       ],
       rel: "noopener noreferrer",
-      target: "_blank",
+      target: "_self",
     },
   ];
   const pathname = usePathname();

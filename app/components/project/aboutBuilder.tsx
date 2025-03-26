@@ -2,10 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import useBuilder from "@/app/hooks/useBuilder";
-import { Svg } from "../property/heading";
+// import { Svg } from "../property/heading";
 import About from "./about";
 import Image from "next/image";
-import { TeleGramBlack } from "@/app/images/commonSvgs";
+// import { TeleGramBlack } from "@/app/images/commonSvgs";
 import { convertDateToMonthYear } from "@/app/utils/date";
 import { capitalizeWords } from "@/app/utils/letters";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
@@ -16,7 +16,7 @@ type Props = {
   type?: "prop" | "proj";
 };
 
-export default function AboutBuilder({ id, type = "proj" }: Props) { 
+export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
   const nzData = normalizeData(data, type);
   let urlBuilder = generateBuilderUrl({
@@ -24,7 +24,6 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
     city: nzData.city,
   });
 
-  console.log(nzData.builderAddress)
   return (
     <div
       className="w-[95%] md:w-[90%] scroll-mt-[150px] mb-[5%] !mt-[50px] sm:mb-[0%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8]  pt-4 pb-4 md:pb-6 sm:mt-0 sm:py-8 sm:pl-5 px-2 sm:px-0 "
@@ -49,11 +48,12 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
                 alt="logo"
                 className="object-contain max-h-[93px] w-[93px] sm:max-h-[100px] sm:w-[133px] xl:max-h-[150px] xl:w-[158px] relative"
                 unoptimized
+                priority 
               />
             </div>
             <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
               <Link
-               prefetch={false}
+                prefetch={false}
                 href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${urlBuilder}`}
                 about="builder details"
               >
@@ -83,11 +83,13 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           Builder Address{" "}
         </p>
         <p className=" text-[12px]  sm:text-[18px] xl:text-[20px]  sm:mt-[1%]  mb-[14px] font-medium  sm:italic text-[#202020]  xl:mb-[2%] ">
-          {nzData.builderAddress ? nzData.builderAddress.replaceAll(",", ", ") : ""}, {nzData.city}, {nzData.state},{" "}
-          {nzData.pincode}
+          {nzData.builderAddress
+            ? nzData.builderAddress.replaceAll(",", ", ")
+            : ""}
+          , {nzData.city}, {nzData.state}, {nzData.pincode}
         </p>
         <Link
-        prefetch={false}
+          prefetch={false}
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] xl:text-[20px] font-[700] p-[10px]  "
           href={urlBuilder}
           rel="noreferrer"

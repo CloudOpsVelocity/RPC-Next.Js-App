@@ -1,7 +1,7 @@
 "use client";
 import { readMoreAtom } from "@/app/store/drawer";
 import { useAtom } from "jotai";
-import React, { useState } from "react";
+import React from "react";
 
 interface ReadMoreProps {
   text: string;
@@ -37,7 +37,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
     return words?.slice(0, maxLines * 10).join(" ");
   };
 
-  const shouldShowReadMore =  text?.split(" ").length > 50;
+  const shouldShowReadMore = text?.split(" ").length > 50;
 
   return (
     <div className="w-full ">
@@ -49,13 +49,12 @@ const ReadMore: React.FC<ReadMoreProps> = ({
             className="text-[#0073C6] text-[14px]  sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer"
             onClick={handleReadMoreClick}
           >
-            {expanded ? "" : "Read More"} 
+            {expanded ? "" : "Read More"}
           </span>
         )}
       </p>
     </div>
   );
 };
-
 
 export default ReadMore;

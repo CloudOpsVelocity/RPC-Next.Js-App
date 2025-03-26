@@ -15,7 +15,7 @@ export const getCitiesBuilder = async ({
     }/user/v1/get-active-builder-list?page=${page}&sort=${sort}${
       query?.trim() ? `&searchName=${query}` : ""
     }${city ? `&city=${city}` : ""}`;
-    console.log(url);
+    // console.log(url);
     const response = await fetch(url, {
       cache: "no-cache",
     });

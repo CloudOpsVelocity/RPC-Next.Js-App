@@ -5,7 +5,7 @@ import {
   Locality,
   ProjectStatus,
   PropertyAvailable,
-  ReraIcon,
+  // ReraIcon,
   ReraStatusProj,
   StartDate,
   TotalLandArea,
@@ -21,7 +21,10 @@ import Message from "./actions/Message";
 import ReportSection from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { TOPIC_IDS } from "@/app/data/projectDetails";
-import { Main, MERGERPROJECT } from "@/app/validations/types/project";
+import {
+  Main,
+  // MERGERPROJECT
+} from "@/app/validations/types/project";
 import { useQuery } from "react-query";
 import Link from "next/link";
 export interface Props extends Main {
@@ -78,7 +81,8 @@ export default function Overview({
         </div>
         <div className="flex justify-center items-center sm:items-end sm:flex-col space-x-6">
           <Ratings slug={slug} />
-          <Link rel="noopener noreferrer"
+          <Link
+            rel="noopener noreferrer"
             href={`tel:${8884440963}`}
             className="text-[13px] sm:text-[20px]  mt-3  text-[#0073C6] xl:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-1.5 xl:p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
           >
@@ -158,26 +162,23 @@ export default function Overview({
 
           {phases?.length == 1 && (
             <>
-            <ProjBasicDetails
+              <ProjBasicDetails
                 Id="promoter-name"
                 key="promoter-name"
                 icon={<TotalLandArea />}
                 title="Promoter Name"
-                value={
-                  PhaseOverview[0]?.phasePromoter
-                }
-                  className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
+                value={PhaseOverview[0]?.phasePromoter}
+                className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
               />
               <ProjBasicDetails
-              Id={TOPIC_IDS.RERA_STATUS}
-              key="rerastatus"
-              icon={<ReraStatusProj />}
-              title="RERA Status"
-              value={PhaseOverview[0]?.rerastatus}
-              className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
-            />
+                Id={TOPIC_IDS.RERA_STATUS}
+                key="rerastatus"
+                icon={<ReraStatusProj />}
+                title="RERA Status"
+                value={PhaseOverview[0]?.rerastatus}
+                className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
+              />
             </>
-           
           )}
 
           {phases?.length == 1 &&

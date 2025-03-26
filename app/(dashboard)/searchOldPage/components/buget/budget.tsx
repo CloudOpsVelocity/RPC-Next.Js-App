@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import styles from "./Style.module.css";
 import { useAtom } from "jotai";
-import { homeSearchFiltersAtom } from "@/app/store/home";
+// import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
 import { searachFilterAtom } from "@/app/store/search";
 const MULTIPLIER_LAKH = 100000; // 1 Lakh = 100000

@@ -43,8 +43,8 @@ type Props = {
   icon: any;
 };
 const DataItem = ({ title, value, icon }: Props) => {
-  if(value === "" || value === "0" || value === 0 ) return;
-  
+  if (value === "" || value === "0" || value === 0) return;
+
   return (
     <div className="flex items-center gap-2 sm:gap-4 bg-[#F8FBFF] p-2 sm:p-3 rounded-lg">
       <div className="bg-[#ECF7FF] p-1.5 sm:p-2 rounded-lg">{icon}</div>
@@ -56,7 +56,7 @@ const DataItem = ({ title, value, icon }: Props) => {
       </div>
     </div>
   );
-}; 
+};
 
 export function FloorPlanModal({
   modalState,
@@ -85,23 +85,22 @@ export function FloorPlanModal({
     lg: 8,
   };
 
-
-    //this content ios and anirod
-    const [platform, setPlatform] = useState('');
-    const isMobile = useMediaQuery('(max-width: 768px)') 
-    console.log(currentUnit.noOfCarParking)
+  //this content ios and anirod
+  const [platform, setPlatform] = useState("");
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  // console.log(currentUnit.noOfCarParking)
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
     if (/iphone|ipod/.test(userAgent)) {
-      setPlatform('iOS');
+      setPlatform("iOS");
     } else if (/android/.test(userAgent)) {
-      setPlatform('Android');
+      setPlatform("Android");
     } else {
-      setPlatform('Unknown');
-  }
+      setPlatform("Unknown");
+    }
   }, []);
-  console.log(platform)
+  // console.log(platform);
 
   const propCgId = useAtomValue(propCgIdAtom);
 
@@ -280,6 +279,7 @@ export function FloorPlanModal({
                       height={600}
                       alt={`Floor Plan for ${currentUnit.bhkName}`}
                       className="w-full h-full max-h-[300px] sm:max-h-[600px] object-contain cursor-pointer"
+                      priority 
                     />
                     <button
                       // onClick={() => handleOpenFullScreenModal(currentUnit)}
@@ -288,11 +288,12 @@ export function FloorPlanModal({
                       <FaExpand className="w-5 h-5 text-gray-600" />
                     </button>
                   </div>
-                  
-                  <button 
-                   onClick={() => handleOpenFullScreenModal(currentUnit)}
-                  className=" sm:hidden underline text-right  text-base sm:text-lg font-semibold text-blue-500  p-1  bg-white  right-0">
-                   View All Details
+
+                  <button
+                    onClick={() => handleOpenFullScreenModal(currentUnit)}
+                    className=" sm:hidden underline text-right  text-base sm:text-lg font-semibold text-blue-500  p-1  bg-white  right-0"
+                  >
+                    View All Details
                   </button>
                   {filteredUnits.length > 2 && (
                     <div className="flex justify-between mt-4">
@@ -327,7 +328,6 @@ export function FloorPlanModal({
 
               {/* Unit Details */}
               <div className="bg-white p-3 sm:p-6 rounded-xl shadow-lg space-y-3 sm:space-y-6 h-[calc(100vh-300px)] md:h-auto overflow-y-auto !pt-0 ">
-             
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 sticky top-0 bg-white pt-3 sm:pt-6">
                   Area Details
                 </h4>
@@ -471,11 +471,11 @@ export function FloorPlanModal({
                           <FaTree className="text-[#0073C6] text-xl sm:text-2xl" />
                         }
                       />
-                    )}                
+                    )}
                 </div>
 
                 <h4 className="text-base sm:text-lg font-semibold text-[#303A42] border-b pb-2 mt-3 sm:mt-6 sticky top-[48px] bg-white">
-                  Unit Features 
+                  Unit Features
                 </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-4">
                   {(propCgId === projectprops.apartment ||
@@ -486,7 +486,13 @@ export function FloorPlanModal({
                           ? "Apartment Type"
                           : "Villament Type"
                       }
-                      value={currentUnit.aptTypeName ? currentUnit.aptTypeName : propCgId === projectprops.apartment ? "Apartment" : "Villament"}
+                      value={
+                        currentUnit.aptTypeName
+                          ? currentUnit.aptTypeName
+                          : propCgId === projectprops.apartment
+                          ? "Apartment"
+                          : "Villament"
+                      }
                       icon={
                         <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
                       }
@@ -531,21 +537,25 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  {propCgId !== projectprops.plot && currentUnit.totalBalconySize &&(
-                    <DataItem
-                      title="Balcony Size"
-                      value={`${currentUnit.totalBalconySize} sq.ft`}
-                      icon={
-                        <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
-                      }
-                    />
-                  )}
+                  {propCgId !== projectprops.plot &&
+                    currentUnit.totalBalconySize && (
+                      <DataItem
+                        title="Balcony Size"
+                        value={`${currentUnit.totalBalconySize} sq.ft`}
+                        icon={
+                          <FaHome className="text-[#0073C6] text-xl sm:text-2xl" />
+                        }
+                      />
+                    )}
 
                   {propCgId !== projectprops.plot && (
                     <DataItem
                       title="Car Parking"
                       value={`${currentUnit.noOfCarParking} ${
-                        (currentUnit.parkingType && currentUnit.parkingType != "None")? currentUnit.parkingType : ""
+                        currentUnit.parkingType &&
+                        currentUnit.parkingType != "None"
+                          ? currentUnit.parkingType
+                          : ""
                       }`}
                       icon={
                         <FaCar className="text-[#0073C6] text-xl sm:text-2xl" />
@@ -553,7 +563,6 @@ export function FloorPlanModal({
                     />
                   )}
 
-                  
                   {propCgId === projectprops.apartment && currentUnit.block && (
                     <DataItem
                       title="Block"
@@ -569,36 +578,39 @@ export function FloorPlanModal({
 
             {/* Bottom Carousel */}
             {visibleUnits && visibleUnits.length > 0 && (
-              <div className={`${platform == "iOS" ? "mb-28" : "" }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}>
+              <div
+                className={`${
+                  platform == "iOS" ? "mb-28" : ""
+                }  pb-[30px] sm:pb-[10px]  border-t bg-white p-[10px] md:p-4`}
+              >
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="text-sm font-semibold">
                     Filtered Units ({filteredUnits ? filteredUnits.length : 0})
                   </h4>
-                  {visibleUnits && visibleUnits.length > 1 &&
-                  <div className="flex gap-1">
-                    <button
-                      onClick={handlePrevUnit}
-                      disabled={currentIndex === 0}
-                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${
-                        currentIndex === 0 ? "cursor-not-allowed " : ""
-                      }`}
-                    >
-                      <FaChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={handleNextUnit}
-                      disabled={currentIndex === filteredUnits.length - 1}
-                      className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${
-                        currentIndex === filteredUnits.length - 1
-                          ? "cursor-not-allowed "
-                          : ""
-                      }`}
-                    >
-                      <FaChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                  }
-
+                  {visibleUnits && visibleUnits.length > 1 && (
+                    <div className="flex gap-1">
+                      <button
+                        onClick={handlePrevUnit}
+                        disabled={currentIndex === 0}
+                        className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${
+                          currentIndex === 0 ? "cursor-not-allowed " : ""
+                        }`}
+                      >
+                        <FaChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={handleNextUnit}
+                        disabled={currentIndex === filteredUnits.length - 1}
+                        className={`p-1 rounded-lg bg-[#ECF7FF] text-[#0073C6] disabled:opacity-50 ${
+                          currentIndex === filteredUnits.length - 1
+                            ? "cursor-not-allowed "
+                            : ""
+                        }`}
+                      >
+                        <FaChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2 scroll-smooth ">
                   {visibleUnits.map((unit) => (
@@ -617,6 +629,7 @@ export function FloorPlanModal({
                         src={unit?.floorPlanUrl?.split(",")[0] ?? ImgNotAvail}
                         alt={`Thumbnail for ${unit.bhkName}`}
                         className="w-full aspect-video object-cover rounded-md mb-1"
+                        priority 
                       />
                       <span className="text-xs font-semibold">
                         {unit.bhkName}

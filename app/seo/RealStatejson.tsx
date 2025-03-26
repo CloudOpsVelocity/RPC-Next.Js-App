@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { RealEstateListing, WithContext } from "schema-dts";
 
 const realEstateListingSchema: WithContext<RealEstateListing> = {
@@ -18,7 +19,8 @@ const realEstateListingSchema: WithContext<RealEstateListing> = {
 
 export default function RealStateJSONLD() {
   return (
-    <script
+    <Script
+    id="realEstateScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(realEstateListingSchema),

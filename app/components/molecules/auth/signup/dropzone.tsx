@@ -107,7 +107,7 @@ const Preview = ({ main, logo, setError }: any) => {
           width={64}
           height={64}
           style={{ aspectRatio: "64 / 64", objectFit: "cover" }}
-          onClick={open}
+          onClick={open} 
         />
       </div>
       <div className="flex flex-col flex-grow ml-4">
@@ -186,7 +186,7 @@ const ImagePreivewModal = ({ logo, opened, open, close }: any) => {
       className="h2 !min-w-16"
       alt="logo"
       height={630}
-      width={1200}
+      width={1200} 
     />
   );
 

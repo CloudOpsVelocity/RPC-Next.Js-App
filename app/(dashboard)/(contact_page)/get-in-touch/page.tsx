@@ -1,5 +1,5 @@
-import Footer from "@/app/components/layouts/primary/footer";
-import Header from "@/app/components/layouts/primary/header";
+// import Footer from "@/app/components/layouts/primary/footer";
+// import Header from "@/app/components/layouts/primary/header";
 import React from "react";
 import HeadBanner from "./components/HeadBanner";
 import MainContent from "./components/MainContent";

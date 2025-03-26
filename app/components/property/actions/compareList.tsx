@@ -1,5 +1,8 @@
 "use client";
-import { ComparingListIcon, comparingIcon } from "@/app/images/commonSvgs";
+import {
+  ComparingListIcon,
+  // comparingIcon
+} from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React from "react";
@@ -8,7 +11,7 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import useDynamicProp from "@/app/hooks/property/useDyanamic";
 import { listingProps } from "@/app/data/projectDetails";
-import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
+// import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 import { useErrorListing } from "@/app/hooks/property/useError";
 
 export default function CompareList({ cg, propTypeName }: any) {
@@ -54,4 +57,4 @@ export default function CompareList({ cg, propTypeName }: any) {
       {data?.compareAdded ? "Remove From" : "Add to"} Compare
     </button>
   );
-} 
+}

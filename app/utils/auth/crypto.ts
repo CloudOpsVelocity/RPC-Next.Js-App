@@ -1,5 +1,5 @@
 import CryptoJS from "crypto-js";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
 export async function decryptResumeSignupToken(slug: string) {
   const type = getType(slug);

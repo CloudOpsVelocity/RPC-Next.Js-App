@@ -1,7 +1,7 @@
-import { RangeSlider } from "@mantine/core";
+// import { RangeSlider } from "@mantine/core";
 import React from "react";
-import ClearAll from "../ClearAll";
-import useSearchFilters from "@/app/hooks/search";
+// import ClearAll from "../ClearAll";
+// import useSearchFilters from "@/app/hooks/search";
 import { BasicBudgetSelect } from "./budget";
 export function formatBudgetValue(value: number) {
   if (value < 1) {
@@ -16,7 +16,6 @@ export function formatBudgetValue(value: number) {
 export default function BugdetFilter({ close }: { close?: () => void }) {
   return (
     <div className="w-[330px] ">
-   
       <div className="p-3 w-full h-full">
         {" "}
         <div className=" mb-[3%] px-5 gap-[4%]   ">

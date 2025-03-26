@@ -23,6 +23,7 @@ function BlogDetailLeftSection() {
                 height={630}
                 width={1200}
               className='rounded-[10px] w-full xl:max-h-[269px] md:max-h-[200px] max-h-[210px] first-letter: border-[0.5px] border-gray border-solid mb-[16px] ' 
+              priority 
           />
           <ContentBox 
               key='BlogDetailLeftSectionContant'

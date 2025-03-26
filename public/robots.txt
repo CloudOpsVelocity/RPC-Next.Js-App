@@ -14,3 +14,6 @@ Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/1.xml
 Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/2.xml
 Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/3.xml
 Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/4.xml
+Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/5.xml
+Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/6.xml
+Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/7.xml

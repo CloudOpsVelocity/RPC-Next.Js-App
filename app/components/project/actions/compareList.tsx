@@ -1,7 +1,7 @@
 "use client";
 import { ComparingListIcon } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";

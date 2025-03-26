@@ -2,13 +2,13 @@
 import "@mantine/carousel/styles.css";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
-import { 
+import {
   NextCarouselButton,
   PrevCarouselButton,
   quotesIcon,
 } from "@/app/images/commonSvgs";
-import { Rating, em } from "@mantine/core";
-import { useParams } from "next/navigation";
+import { Rating } from "@mantine/core";
+// import { useParams } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import S from "@/app/styles/Rating.module.css";
@@ -68,7 +68,10 @@ export default function Reviews({
               withControls={isMobile ? true : data?.data.length > 3}
             >
               {data?.data?.map((eachData: any, i: number) => (
-                <Carousel.Slide key={`review_${eachData.name[i]}`} miw={isMobile ? "auto" : 487}>
+                <Carousel.Slide
+                  key={`review_${eachData.name[i]}`}
+                  miw={isMobile ? "auto" : 487}
+                >
                   <Review {...eachData} />
                 </Carousel.Slide>
               ))}

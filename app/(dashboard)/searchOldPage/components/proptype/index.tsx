@@ -1,5 +1,5 @@
-import { SEARCH_FILTER_DATA } from "@/app/data/search";
-import { Checkbox, Radio } from "@mantine/core";
+// import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { Radio } from "@mantine/core";
 import React from "react";
 import ClearAll from "../ClearAll";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
@@ -23,7 +23,7 @@ export default function PropTypeFilter({ close }: { close?: () => void }) {
             }
             return (
               <Radio
-                key={"PropertyType_"+keyName}
+                key={"PropertyType_" + keyName}
                 iconColor="dark.8"
                 color="green"
                 label={propertyDetailsTypes?.get(keyName)?.name}

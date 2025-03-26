@@ -13,7 +13,10 @@ import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
 import clsx from "clsx";
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+import {
+  // formatCurrency,
+  formatNumberWithSuffix,
+} from "@/app/utils/numbers";
 
 type Props = {
   propCgId?: any;
