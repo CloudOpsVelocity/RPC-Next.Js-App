@@ -62,205 +62,206 @@ const LeafMap: React.FC<{
   const [showMap, setShowMap] = useState(false)
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+
+  
+const LocationHeader = ({ projName, type }: { projName: string; type?: "proj" | "prop" }) => {
+  return (
+    <div>
+      {type === "prop" ? (
+        <PropertyHeading
+          title={<Fragment>Location Map Of <span className="text-[#148B16]">{projName}</span></Fragment>}
+          desc="Explore nearby convenient amenities, entertainment, and essential services"
+          className="sm:mb-[18px]"
+        />
+      ) : (
+        <div>
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
+            <span>Location Map Of </span>
+            <span className="text-[#148B16] font-bold">{projName} </span>
+          </h2>
+          <SubHeading
+            text="Explore nearby convenient amenities, entertainment, and essential services"
+            className="mt-2 mb-4 sm:mb-8"
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+
   const downData =
     mapData && mapData[selected] && mapData[selected].length > 0
       ? mapData[selected]
       : [];
       return (
-        !showMap ?(
-          <div className={"h-[291px] sm:h-[456px] xl:h-[600px] w-full relative"}>
-            {/* Semi-transparent map placeholder */}
-            <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
-              <img
-                src={isMobile? `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/mobile-default-map.webp`:`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
-                alt="Map preview"
-                className="w-full h-full object-cover opacity-70"
-              />
-            </div>
-    
-            {/* View Map button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <button
-              onClick={() => setShowMap(true)}
-                className="z-10 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
-              >
-                <span className="text-lg font-semibold">Click to View Location</span>
-              </button>
-            </div>
-    
-            {/* View larger map link */}
-            {/* <div className="absolute top-6 left-6">
-              <button className="bg-white px-4 py-2 rounded-md text-blue-400 shadow-sm">View larger map</button>
-            </div> */}
+       
+        <div className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing" id="location-map">
+          <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
+            <LocationHeader projName={projName} type={type} />
           </div>
-        )  : Object.keys(mapData).length > 0 ? (
-          <div
-            className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
-            id="location-map"
-          >
-            <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
-              {type === "prop" ? (
-                <PropertyHeading
-                  title={
-                    <Fragment>
-                      Location Map Of{" "}
-                      <span className="text-[#148B16]">{projName}</span>
-                    </Fragment>
-                  }
-                  desc="Explore nearby convenient amenities, entertainment, and essential services"
-                  className="sm:mb-[18px]"
+          
+          {!showMap ? (
+            <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative">
+              {/* Semi-transparent map placeholder */}
+              <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+                <img
+                  loading="lazy"
+                  src={isMobile
+                    ? `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/mobile-default-map.webp`
+                    : `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
+                  alt="Map preview"
+                  className="w-full h-full object-cover opacity-70"
                 />
-              ) : (
-                <div>
-                  <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
-                    <span>Location Map Of </span>
-                    <span className="text-[#148B16] font-bold">{projName} </span>
-                  </h2>
-                  <SubHeading
-                    text="Explore nearby convenient amenities, entertainment, and essential services"
-                    className="mt-2 mb-4 sm:mb-8"
-                  />
-                </div>
-              )}
-            </div>
+              </div>
       
-            <div className="flex gap-6 mb-5 mt-1 flex-wrap w-[95%] ml-0 md:ml-4">
-              <CustomScrollArea
-                areas={areas}
-                selected={selected}
-                setSelected={setSelected}
-                data={mapData}
-              />
+              {/* View Map button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <button
+                  onClick={() => setShowMap(true)}
+                  className="z-10 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
+                >
+                  <span className="text-lg font-semibold">Click to View Location</span>
+                </button>
+              </div>
             </div>
+          ) : Object.keys(mapData).length > 0 ? (
+            <div className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing" id="location-map">
+              <div className="flex gap-6 mb-5 mt-1 flex-wrap w-[95%] ml-0 md:ml-4">
+                <CustomScrollArea
+                  areas={areas}
+                  selected={selected}
+                  setSelected={setSelected}
+                  data={mapData}
+                />
+              </div>
       
-            <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[456px] xl:h-[620px] w-[95%] sm:w-[90%] mx-auto">
-              <section className="bg-white">
-                <div id="tabs">
-                  <Tabs defaultValue="public">
-                    <div className="bg-blue-50 p-2 sm:px-3 sm:py-2 xl:px-5 xl:py-4">
-                      <p className="text-[#001F35] text-[16px] xl:text-[22px] font-medium leading-[normal]">
-                        Explore Your Surroundings, Everywhere Nearby!
-                      </p>
+              <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[456px] xl:h-[620px] w-[95%] sm:w-[90%] mx-auto">
+                <section className="bg-white">
+                  <div id="tabs">
+                    <Tabs defaultValue="public">
+                      <div className="bg-blue-50 p-2 sm:px-3 sm:py-2 xl:px-5 xl:py-4">
+                        <p className="text-[#001F35] text-[16px] xl:text-[22px] font-medium leading-[normal]">
+                          Explore Your Surroundings, Everywhere Nearby!
+                        </p>
+                      </div>
+                    </Tabs>
+                    <div id="location-listing" className="grid gap-2">
+                      <ScrollArea
+                        max-h={isMobile ? "400" : "auto"}
+                        h={isMobile ? "auto" : 600}
+                        pb={isMobile ? 10 : 50}
+                        px={10}
+                      >
+                        {mapData[selected] && mapData[selected].length > 0 ? (
+                          mapData[selected]
+                            .map((location: any) => ({
+                              ...location,
+                              distance: location.distance,
+                            }))
+                            .sort(
+                              (a: any, b: any) =>
+                                Number(a.time?.split(" ")[0]) - Number(b.time?.split(" ")[0])
+                            )
+                            .map((location: any) => (
+                              <LocationList
+                                type="public"
+                                {...location}
+                                key={location.lat}
+                                origin={{
+                                  lat: Number(lat),
+                                  lng: Number(lang),
+                                }}
+                                isMobile={isMobile}
+                                isProj={type}
+                                onClick={setSelectedLocation}
+                                setDirection={showLocationOnMap}
+                                showLocationOnMap={showLocationOnMap}
+                              />
+                            ))
+                        ) : (
+                          <p>No locations found.</p>
+                        )}
+                      </ScrollArea>
                     </div>
-                  </Tabs>
-                  <div id="location-listing" className="grid gap-2">
-                    <ScrollArea
-                      max-h={isMobile ? "400" : "auto"}
-                      h={isMobile ? "auto" : 600}
-                      pb={isMobile ? 10 : 50}
-                      px={10}
-                    >
-                      {mapData[selected] && mapData[selected].length > 0 ? (
-                        mapData[selected]
-                          .map((location: any, index: any) => ({
-                            ...location,
-                            distance: location.distance,
-                          }))
-                          .sort(
-                            (a: any, b: any) =>
-                              Number(a.time?.split(" ")[0]) - Number(b.time?.split(" ")[0])
-                          )
-                          .map((location: any, index: any) => (
-                            <LocationList
-                              type="public"
-                              {...location}
-                              key={location.lat}
-                              origin={{
-                                lat: Number(lat),
-                                lng: Number(lang),
-                              }}
-                              isMobile={isMobile}
-                              isProj={type}
-                              onClick={setSelectedLocation}
-                              setDirection={showLocationOnMap}
-                              showLocationOnMap={showLocationOnMap}
-                            />
-                          ))
-                      ) : (
-                        <p>No locations found.</p>
-                      )}
-                    </ScrollArea>
+                  </div>
+                </section>
+      
+                <section>
+                  <Map
+                    key="leaflet2SearchPageMap"
+                    data={mapData && mapData[selected] ? mapData[selected] : []}
+                    selectedLocation={selectedLocation}
+                    projName={projName}
+                    lat={lat}
+                    lang={lang}
+                    selected={selected}
+                    setSelectedLocation={setSelectedLocation}
+                    type="proj"
+                  />
+                </section>
+              </div>
+      
+              {mapData[selected] && mapData[selected].length > 0 && (
+                <div className="mt-8 w-[90%] mx-auto hidden sm:block">
+                  <h2
+                    className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words scroll-mt-[180px]"
+                    id="near-by-projects"
+                  >
+                    Nearby <span className="text-[#148B16] ml-1">{projName} </span>
+                  </h2>
+                  <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
+                    {downData.map((item: any, index: number) => (
+                      <MapCard
+                        key={item.lat}
+                        {...item}
+                        origin={{
+                          lat: Number(lat),
+                          lng: Number(lang),
+                        }}
+                        type={type}
+                        showLocationOnMap={showLocationOnMap}
+                      />
+                    ))}
                   </div>
                 </div>
-              </section>
-      
-              <section>
-                <Map
-                  key="leaflet2SearchPageMap"
-                  data={mapData && mapData[selected] ? mapData[selected] : []}
-                  selectedLocation={selectedLocation}
-                  projName={projName}
-                  lat={lat}
-                  lang={lang}
-                  selected={selected}
-                  setSelectedLocation={setSelectedLocation}
-                  type="proj"
-                />
-              </section>
-            </div>
-      
-            {mapData[selected] && mapData[selected].length > 0 && (
-              <div className="mt-8 w-[90%] mx-auto hidden sm:block">
-                <h2
-                  className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words scroll-mt-[180px] "
-                  id="near-by-projects"
-                >
-                  Nearby <span className="text-[#148B16] ml-1">{projName} </span>
-                </h2>
-                <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
-                  {downData.map((item: any, index: number) => (
-                    <MapCard
-                      key={item.lat}
-                      {...item}
-                      origin={{
-                        lat: Number(lat),
-                        lng: Number(lang),
-                      }}
-                      type={type}
-                      showLocationOnMap={showLocationOnMap}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div
-            id="location-map"
-            className="w-[95%] md:w-[90%] scroll-mt-[180px] sm:mt-[20px] xl:mt-[50px] justify-center"
-          >
-            <div className="flex justify-between w-[90%] ">
-              {type === "prop" ? (
-                <PropertyHeading
-                  title=""
-                  desc=""
-                  className="mb-[40px]"
-                  projName={`Location Map Of  ${projName}`}
-                />
-              ) : (
-                <div>
-                  <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap ">
-                    <span>Location Map Of Project </span>
-                    <span className="text-[#148B16] ">{projName} </span>
-                  </h2>
-                </div>
               )}
             </div>
-            <Map
-              key="leaflet3SearchPageMap"
-              data={mapData && mapData[selected] ? mapData[selected] : []}
-              selectedLocation={selectedLocation}
-              projName={projName}
-              lat={lat}
-              lang={lang}
-              selected={selected}
-              setSelectedLocation={setSelectedLocation}
-              type="proj"
-            />
-          </div>
-        )
-      )
-};
+          ) : (
+            <div id="location-map" className="w-[95%] md:w-[90%] scroll-mt-[180px] sm:mt-[20px] xl:mt-[50px] justify-center">
+              <div className="flex justify-between w-[90%]">
+                {type === "prop" ? (
+                  <PropertyHeading
+                    title=""
+                    desc=""
+                    className="mb-[40px]"
+                    projName={`Location Map Of  ${projName}`}
+                  />
+                ) : (
+                  <div>
+                    <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap">
+                      <span>Location Map Of Project </span>
+                      <span className="text-[#148B16] ">{projName} </span>
+                    </h2>
+                  </div>
+                )}
+              </div>
+              <Map
+                key="leaflet3SearchPageMap"
+                data={mapData && mapData[selected] ? mapData[selected] : []}
+                selectedLocation={selectedLocation}
+                projName={projName}
+                lat={lat}
+                lang={lang}
+                selected={selected}
+                setSelectedLocation={setSelectedLocation}
+                type="proj"
+              />
+            </div>
+          )}
+        </div>
+      );
+    }      
 
 export default LeafMap;
 
