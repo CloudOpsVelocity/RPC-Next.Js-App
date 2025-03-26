@@ -67,7 +67,7 @@ export default function LeftSection({
           srcSet={src ? src.split(",")[2] : ""}
         />
         <Image
-          src={src}
+          src={src ? src.includes("+")? src.replace(/\+/g, "%2B") : src : src }
           width={304}
           height={214}
           alt="projectCard"
