@@ -51,7 +51,7 @@ function Footer() {
       links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
       hrefs: [
         "/search?sf=city=New+Delhi%2B683",
-        "/residential-projects/for-sale/bengaluru",
+        "/search?sf=city=Bengaluru%2B9-cg=S",
         "/search?sf=city=Chennai%2B580",
         "/search?sf=city=Mumbai%2B577",
         "/search?sf=city=Hyderabad%2B582",
