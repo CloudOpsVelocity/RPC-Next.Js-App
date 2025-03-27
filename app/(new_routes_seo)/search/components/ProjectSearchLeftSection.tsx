@@ -51,8 +51,6 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       ? true
       : serverData !== null && apiFilterQueryParams !== null
   );
-
-  // Create a separate ref for intersection observer
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   // let isTrue = pathname.includes("search")

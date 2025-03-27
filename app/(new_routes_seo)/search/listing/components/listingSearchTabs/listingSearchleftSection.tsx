@@ -45,11 +45,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
-    const setNearby = useSetAtom(selectedNearByAtom);
-  
-  let isTrue = pathname.includes("search")
-    ? true
-    : serverData !== null && apiFilterQueryParams !== null;
+  const setNearby = useSetAtom(selectedNearByAtom);
+  const [isTrue, setIsTrue] = useState(
+    pathname.includes("search")
+      ? true
+      : serverData !== null && apiFilterQueryParams !== null
+  );
+  // let isTrue = pathname.includes("search")
+  //   ? true
+  //   : serverData !== null && apiFilterQueryParams !== null;
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({
@@ -70,6 +74,12 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         }
         return nextPage;
       },
+      ...(serverData && {
+        initialData: {
+          pages: [serverData],
+          pageParams: [0],
+        },
+      }),
       cacheTime: 300000,
       enabled: isTrue,
       // ...RTK_CONFIG,
@@ -93,37 +103,37 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     },
   });
 
-    const loadMoreRef = useRef<HTMLDivElement>(null);
-  
-    // Enhanced infinite scroll logic
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const target = entries[0];
-          if (
-            target.isIntersecting &&
-            hasNextPage &&
-            shouldFetchMore &&
-            !isLoading
-          ) {
-            fetchNextPage();
-            setPage((prev) => prev + 1);
-          }
-        },
-        {
-          root: null,
-          rootMargin: "100px",
-          threshold: 0.1,
-        }
-      );
-  
-      if (loadMoreRef.current) {
-        observer.observe(loadMoreRef.current);
-      }
-  
-      return () => observer.disconnect();
-    }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
+  // Enhanced infinite scroll logic
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const target = entries[0];
+        if (
+          target.isIntersecting &&
+          hasNextPage &&
+          shouldFetchMore &&
+          !isLoading
+        ) {
+          setIsTrue(true);
+          fetchNextPage();
+          setPage((prev) => prev + 1);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "100px",
+        threshold: 0.1,
+      }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
 
   const renderProjectCard = useCallback(
     (virtualRow: any) => {
@@ -169,7 +179,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     return (
       <div className="flex items-center gap-2">
         <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
-        <span className="font-bold">Loading more results...</span> 
+        <span className="font-bold">Loading more results...</span>
       </div>
     );
   });
@@ -188,19 +198,26 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
 
-  useEffect(() => { 
-    if(isMobile) return;
-     const handleScroll = () => {
-       setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
-       dispatch({ type: "CLOSE" })
-       setSelected(null);
-     };
- 
-     window.addEventListener("scroll", handleScroll);
-     return () => window.removeEventListener("scroll", handleScroll);
-   }, [isMobile]);
+  useEffect(() => {
+    if (isMobile) return;
+    const handleScroll = () => {
+      setNearby((prev: any) => ({
+        ...prev,
+        category: "",
+        data: {},
+        selectedNearbyItem: {},
+        id: "",
+        isOpen: false,
+      }));
+      dispatch({ type: "CLOSE" });
+      setSelected(null);
+    };
 
-  return ( 
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobile]);
+
+  return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
@@ -239,8 +256,3 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 }
 
 export default memo(LeftSection);
-
-
-
-
-
