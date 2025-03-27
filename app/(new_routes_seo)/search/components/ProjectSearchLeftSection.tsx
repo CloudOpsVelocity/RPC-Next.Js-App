@@ -46,11 +46,15 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
-  const [isTrue, setIsTrue] = useState(
+  const [it, setIsTrue] = useState(
     pathname.includes("search")
       ? true
       : serverData !== null && apiFilterQueryParams !== null
   );
+  const isTrue =
+    it || pathname.includes("search")
+      ? true
+      : serverData !== null && apiFilterQueryParams !== null;
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   // let isTrue = pathname.includes("search")
