@@ -1,5 +1,4 @@
 function convertToSchemaDate(dateString: string): string {
-  console.log(dateString);
   // Parse date correctly
   const date = new Date(dateString.replace("IST", "GMT+0530"));
 

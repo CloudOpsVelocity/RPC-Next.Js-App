@@ -46,15 +46,20 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
+  const [isTrue, setIsTrue] = useState(
+    pathname.includes("search")
+      ? true
+      : serverData !== null && apiFilterQueryParams !== null
+  );
 
   // Create a separate ref for intersection observer
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  let isTrue = pathname.includes("search")
-    ? true
-    : serverData !== null && apiFilterQueryParams !== null;
+  // let isTrue = pathname.includes("search")
+  //   ? true
+  //   : serverData !== null && apiFilterQueryParams !== null;
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
@@ -66,10 +71,17 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         );
         return response;
       },
+
       getNextPageParam: (lastPage: any, allPages: any) => {
         // Only return next page if lastPage has full 20 items
         return lastPage?.length === 20 ? allPages.length : undefined;
       },
+      ...(serverData && {
+        initialData: {
+          pages: [serverData],
+          pageParams: [0],
+        },
+      }),
       cacheTime: 300000,
       enabled: isTrue,
       staleTime: 0, // Ensure fresh data on filter changes
@@ -139,6 +151,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
           shouldFetchMore &&
           !isLoading
         ) {
+          setIsTrue(true);
           fetchNextPage();
           setPage((prev) => prev + 1);
         }
