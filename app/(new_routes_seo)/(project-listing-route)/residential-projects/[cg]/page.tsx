@@ -1,18 +1,11 @@
-// import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
-import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
-import {
-  findPathForProjectListing,
-  // getNestedSlug,
-} from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
+import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
-import {
-  // BASE_PATH_LISTING,
-  BASE_PATH_PROJECT_LISTING,
-} from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -25,13 +18,14 @@ export default async function Page({ params: { cg } }: Props) {
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
-  const severData = await getProjSearchData(`cg=${slugValues.CG}`);
+  const severData = await getSearchData(`cg=${slugValues.CG}`);
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
   return (
     <NewSearchPage
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,
+        listedBy: "All",
       }}
       pageUrl={pageUrl}
     />
