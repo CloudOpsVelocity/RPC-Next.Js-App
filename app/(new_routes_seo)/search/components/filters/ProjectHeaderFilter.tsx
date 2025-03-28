@@ -101,8 +101,18 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     if (dropdownName == "allFiltersdes") {
       if (document.body.style.overflow === "hidden")
         document.body.style.overflow = "unset";
-    } else {
-      document.body.style.overflow = "hidden";
+      else {
+        document.body.style.overflow = "hidden";
+      }
+    }
+  };
+  const tested = () => {
+    if (openDropdown == "Buy") {
+      if (document.body.style.overflow == "hidden") {
+        document.body.style.overflow = "unset";
+      } else {
+        document.body.style.overflow = "hidden";
+      }
     }
   };
   const handleSearchChange = (e: any) => {
