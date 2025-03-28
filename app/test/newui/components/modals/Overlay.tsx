@@ -22,7 +22,6 @@ const Overlay: React.FC = () => {
     propId,
   });
   const overlayRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

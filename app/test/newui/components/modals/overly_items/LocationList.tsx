@@ -7,10 +7,11 @@ import React, {
 } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { throttle } from "lodash";
-import { useAtom, useSetAtom } from "jotai";
-import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import { useAtom } from "jotai";
+import { selectedNearByAtom } from "@/app/store/search/map";
+import { checkLatAndLang } from "../map.util";
 // import { useMap } from "react-leaflet";
-import { checkLatAndLang } from "@/app/components/maps/search/ProjectSearchPageMap";
+// import { checkLatAndLang } from "@/app/components/maps/search/ProjectSearchPageMap";
 
 // types.ts
 export interface LocationItem {
@@ -41,8 +42,6 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const tabContainerRef = useRef<HTMLDivElement>(null);
   const [{ selectedNearbyItem }, setNearby] = useAtom(selectedNearByAtom);
-
-  const setSelected = useSetAtom(selectedSearchAtom);
 
   const categories = useMemo(() => Object.keys(data), [data]);
 

@@ -343,7 +343,6 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
               ref={(el) => {
                 if (el) markerRefs.current.set(refKey, el);
               }}
-              
               position={[
                 parseFloat(item?.lat || 0),
                 parseFloat(item?.lang || 0),

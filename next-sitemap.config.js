@@ -37,6 +37,18 @@ module.exports = {
         lastmod: new Date().toISOString(),
       },
       {
+        loc: `${config.siteUrl}/dyanmic-sitemap/5.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemap/6.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemap/7.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
         loc: `${config.siteUrl}/residential-projects/for-sale`,
         lastmod: new Date().toISOString(),
       },
