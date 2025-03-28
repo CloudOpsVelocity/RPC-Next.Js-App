@@ -2,20 +2,17 @@
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 import MapSkeleton from "@/app/components/maps/Skeleton";
-
 import { useInfiniteQuery } from "react-query";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import RTK_CONFIG from "@/app/config/rtk";
-import { usePathname } from "next/navigation";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 import { useMediaQuery } from "@mantine/hooks";
 import { useAtom, useAtomValue } from "jotai";
 import { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
-// import Overlay from "@/app/test/newui/components/modals/Overlay";
 import LocationCard from "@/app/test/newui/components/modals/overly_items/LocationList";
 
-const RightSection = ({ serverData }: any) => {
+const RightSection = ({ serverData, isTrue }: any) => {
   const Map = useMemo(
     () =>
       dynamic(
@@ -28,10 +25,6 @@ const RightSection = ({ serverData }: any) => {
     []
   );
   const [apiFilterQueryParams] = useQueryState("sf");
-  const pathname = usePathname();
-  let isTrue = pathname.includes("search")
-    ? true
-    : serverData !== null && apiFilterQueryParams !== null;
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
   const {
@@ -67,8 +60,6 @@ const RightSection = ({ serverData }: any) => {
       enabled: false,
     });
   const apidata = !isTrue ? serverData : data?.pages?.flat() || [];
-
-  // console.log(nearByData, isOpen)
 
   return !isMobile ? (
     <div
@@ -113,7 +104,6 @@ const RightSection = ({ serverData }: any) => {
                 lang={(apidata && apidata[0]?.lang) ?? 15.34043}
                 data={apidata}
                 type={"proj"}
-                // styles="h-[calc(100vh-40vh)] w-full max-w-full"
                 styles={` z-1 w-full max-w-full ${
                   isOpen ? "h-[calc(100vh-60vh)]" : "h-[calc(100vh-30vh)]"
                 }`}

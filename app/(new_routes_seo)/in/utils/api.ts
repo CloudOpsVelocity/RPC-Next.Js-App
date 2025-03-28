@@ -112,7 +112,7 @@ export const getProjSearchData = async (filters: string): Promise<any> => {
 
 export const getNewProjSearchData = async (filters: string): Promise<any> => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0`;
     const url = `${baseUrl}${filters ? `${filters}` : ""}`;
     console.log(url);
     const res = await fetch(url, {
