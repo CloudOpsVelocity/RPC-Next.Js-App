@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from "react";
 import { Search } from "@/app/validations/types/search";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -15,7 +14,6 @@ import { overlayAtom } from "../../store/overlay";
 import Overlay from "../modals/Overlay";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
-// import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useRouter } from "next/navigation";
 
 type Props = {

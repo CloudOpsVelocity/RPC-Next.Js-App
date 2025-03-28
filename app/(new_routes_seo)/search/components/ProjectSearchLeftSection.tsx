@@ -46,15 +46,22 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
-
-  // Create a separate ref for intersection observer
+  const [it, setIsTrue] = useState(
+    pathname.includes("search")
+      ? true
+      : serverData !== null && apiFilterQueryParams !== null
+  );
+  const isTrue =
+    it || pathname.includes("search")
+      ? true
+      : serverData !== null && apiFilterQueryParams !== null;
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  let isTrue = pathname.includes("search") 
-    ? true
-    : serverData !== null && apiFilterQueryParams !== null;
+  // let isTrue = pathname.includes("search")
+  //   ? true
+  //   : serverData !== null && apiFilterQueryParams !== null;
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
@@ -66,10 +73,17 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         );
         return response;
       },
+
       getNextPageParam: (lastPage: any, allPages: any) => {
         // Only return next page if lastPage has full 20 items
         return lastPage?.length === 20 ? allPages.length : undefined;
       },
+      ...(serverData && {
+        initialData: {
+          pages: [serverData],
+          pageParams: [0],
+        },
+      }),
       cacheTime: 300000,
       enabled: isTrue,
       staleTime: 0, // Ensure fresh data on filter changes
@@ -91,34 +105,21 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     estimateSize: () => 300,
     overscan: 5, // Reduced overscan to improve performance
     enabled: true,
-    measureElement: (element) => { 
+    measureElement: (element) => {
       return element?.getBoundingClientRect().height || 300;
     },
   });
-  
+
   const setSelected = useSetAtom(selectedSearchAtom);
-  const [, dispatch] = useAtom(overlayAtom);  
+  const [, dispatch] = useAtom(overlayAtom);
 
-  useEffect(() => { 
-
-    if(isMobile) return;
+  useEffect(() => {
+    if (isMobile) return;
     const handleScroll = () => {
-
-      // if(allItems.length > 0){
-      //   allItems.forEach((item:any) => {
-      //     if (!allMarkerRefs) return;
-      //     const itemId = item.propIdEnc ? item.propIdEnc : item.projIdEnc;
-      //     const refKey = `${itemId}-${item?.phaseId}-${item?.propTypeName ? item?.propTypeName : item?.propType}`;
-        
-      //     const marker = allMarkerRefs.current.get(refKey);
-      //     if (marker) marker.closePopup();
-      //   });
-      // }
-
-      if(allMarkerRefs){
-        const keys = [...allMarkerRefs.current.keys()];      
-        if(keys.length > 0){
-          keys.forEach((refKey:string) => {
+      if (allMarkerRefs) {
+        const keys = [...allMarkerRefs.current.keys()];
+        if (keys.length > 0) {
+          keys.forEach((refKey: string) => {
             const marker = allMarkerRefs.current.get(refKey);
             if (marker) marker.closePopup();
           });
@@ -126,14 +127,20 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       }
 
       setSelected(null);
-      setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false}));
-      dispatch({ type: "CLOSE" })
+      setNearby((prev: any) => ({
+        ...prev,
+        category: "",
+        data: {},
+        selectedNearbyItem: {},
+        id: "",
+        isOpen: false,
+      }));
+      dispatch({ type: "CLOSE" });
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile, allItems]);
-
 
   // Enhanced infinite scroll logic
   useEffect(() => {
@@ -146,6 +153,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
           shouldFetchMore &&
           !isLoading
         ) {
+          setIsTrue(true);
           fetchNextPage();
           setPage((prev) => prev + 1);
         }
@@ -208,7 +216,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
     return (
       <div className="flex items-center gap-2">
         <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
-        <span className="font-bold">Loading more results...</span> 
+        <span className="font-bold">Loading more results...</span>
       </div>
     );
   });
@@ -222,7 +230,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         </h2>
       </div>
     </div>
-  ); 
+  );
 
   return (
     <div

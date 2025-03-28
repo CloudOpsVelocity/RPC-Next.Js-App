@@ -33,7 +33,7 @@ export async function GET(
 
   // Split the project slugs into chunks of 50,000
   const sitemapChunks = chunkArray(projectSlugs, chunkSize);
-
+  console.log(sitemapChunks.length);
   // Check if the requested index is within the valid range
   if (sitemapIndex >= sitemapChunks.length) {
     return NextResponse.json({ message: "Sitemap index out of range" });

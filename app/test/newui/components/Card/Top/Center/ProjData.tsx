@@ -236,7 +236,7 @@ export default function ProjData({
           {propName}{" "}
         </span>
       </p>
-      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-[130%] xl:w-[calc(100%-118px)]">
+      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-[130%] sm:w-[100%] xl:w-[calc(100%-118px)]">
         Address: {address}
       </p>
       <p className=" text-gray-600 text-[12px] sm:text-[12px] xl:text-[14px] not-italic font-semibold ">

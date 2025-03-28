@@ -20,7 +20,7 @@ export default function ProjectLoans({
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div className="bg-white pt-2 pb-4 sm:pt-screen-spacing w-[95%] md:w-[90%] mx-auto  h-auto  scroll-mt-[100px]" id="loans">
-      {type === "prop" ? (
+      {type === "prop" ? (  
         <PropertyHeading
           title= {<Fragment>Bank Approvals Of <span className="text-[#148B16]">{name}</span></Fragment>}
           desc="Unlock Your Dream Home with Hassle-Free Bank Approval Loans"

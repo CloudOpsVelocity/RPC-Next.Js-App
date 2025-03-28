@@ -111,7 +111,7 @@ export default function TopRightSection({
                 <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
                   {" "}
                   <span className="hidden md:flex">View on Map</span>{" "}
-                  <SearchMapIcon className="w-4 h-4" />
+                  {/* <SearchMapIcon className="w-4 h-4" /> */}
                 </div>
               </button>
             </div>
@@ -174,7 +174,7 @@ export default function TopRightSection({
               {" "}
               <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
                 {" "}
-                View on Map <SearchMapIcon className="w-4 h-4" />
+                {/* View on Map <SearchMapIcon className="w-4 h-4" /> */}
               </div>
             </button>
           </div>

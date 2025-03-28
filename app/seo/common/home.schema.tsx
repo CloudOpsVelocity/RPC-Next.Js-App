@@ -1,5 +1,3 @@
-import Script from "next/script";
-
 const homeLinksData = [
   {
     name: "Home",
@@ -283,44 +281,44 @@ const FaqSchema = {
 export const HomeSiteNavigationSchema = () => {
   return (
     <>
-      <Script
-      id="homeScript1"
+      <script
+        id="homeScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(homeSiteNavigationSchemaData),
         }}
       />
 
-      <Script
-      id="homeScript2"
+      <script
+        id="homeScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
         }}
       />
-      <Script
-      id="homesScript3"
+      <script
+        id="homesScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productSchema),
         }}
       />
-      <Script
-      id="homeScript4"
+      <script
+        id="homeScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(offerSchema),
         }}
       />
-      <Script
-      id="homeScript5"
+      <script
+        id="homeScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
-      <Script
-      id="homeScript6"
+      <script
+        id="homeScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(FaqSchema),

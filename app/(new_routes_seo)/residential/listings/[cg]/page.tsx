@@ -4,6 +4,7 @@ import {
   findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import {
   extractListingParamsValues,
@@ -22,7 +23,7 @@ export default async function Page({ params: { cg } }: Props) {
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
-  const severData = await getProjSearchData(`cg=${slugValues.CG}`);
+  const severData = await getSearchData(`cg=${slugValues.CG}`);
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}${pathname}`;
   return (
     <NewSearchPage
@@ -30,6 +31,7 @@ export default async function Page({ params: { cg } }: Props) {
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,
+        listedBy: "All",
       }}
     />
   );

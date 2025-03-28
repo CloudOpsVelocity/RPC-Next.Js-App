@@ -73,8 +73,8 @@ function Footer() {
         "Foreclosures", */
       ],
       hrefs: [
-        "/residential-projects/for-sale?sf=listedBy=All-cg=S",
-        "/search?sf=listedBy=All-cg=R",
+        "/residential-projects/for-sale",
+        "/residential-projects/for-rent",
         "/search?sf=projStatus=108",
         "/search?sf=projStatus=106",
         "/search?sf=projStatus=107",
@@ -191,62 +191,39 @@ function Footer() {
       "/forgot",
     ].includes(pathname) && (
       <footer className="bg-[#253F59] text-white relative z-30">
-      <div className="max-w-[95%] mx-auto pt-2 sm:pt-12 pb-6 px-1 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
-        <div className="xl:grid xl:grid-cols-4 xl:gap-8">
-          <div className="sm:space-y-6 xl:col-span-1">
-            <GrpDarkLogoSvg className="w-[130px] sm:w-[180px] sm:-ml-2" />
-            <p className="text-white text-sm sm:text-base mb-4 sm:mb-0">
-              We pride ourselves on delivering exceptional customer service &amp; building lasting relationships with our clients
-            </p>
-            <div className="flex space-x-6">
-              {socialIcons.map(({ name, icon, link }) => (
-                <Link
-                  rel="noreferrer"
-                  key={name}
-                  href={link}
-                  className="text-white hover:text-gray-300"
-                  target='_blank'
-                >
-                  <span className="sr-only">{name}</span>
-                  {icon}
-                </Link>
-              ))}
+        <div className="max-w-[95%] mx-auto pt-2 sm:pt-12 pb-6 px-1 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
+          <div className="xl:grid xl:grid-cols-4 xl:gap-8">
+            <div className="sm:space-y-6 xl:col-span-1">
+              <GrpDarkLogoSvg className="w-[130px] sm:w-[180px] sm:-ml-2" />
+              <p className="text-white text-sm sm:text-base mb-4 sm:mb-0">
+                We pride ourselves on delivering exceptional customer service
+                &amp; building lasting relationships with our clients
+              </p>
+              <div className="flex space-x-6">
+                {socialIcons.map(({ name, icon, link }) => (
+                  <Link
+                    rel="noreferrer"
+                    key={name}
+                    href={link}
+                    className="text-white hover:text-gray-300"
+                    target="_blank"
+                  >
+                    <span className="sr-only">{name}</span>
+                    {icon}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-    
-          <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(0, 2).map(({ title, links, hrefs, rel }) => (
-                <div key={title} className="min-h-[154px]">
-                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
-                    {title}
-                  </h3>
-                  <ul className="sm:mt-4 md:space-y-4">
-                    {links.map((link, index) => (
-                      <li key={link}>
-                        <Link
-                          href={hrefs[index]}
-                          rel={rel}
-                          className="text-xs sm:text-base text-gray-300 hover:text-white"
-                        >
-                          {link}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-    
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(2, 4).map(({ title, links, hrefs, rel }) => (
-                <div key={title} className="min-h-[154px]">
-                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
-                    {title}
-                  </h3>
-                  <ul className="sm:mt-4 md:space-y-4">
-                    {links.map((link, index) => (
-                      link && (
+
+            <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                {sections.slice(0, 2).map(({ title, links, hrefs, rel }) => (
+                  <div key={title} className="min-h-[154px]">
+                    <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
+                      {title}
+                    </h3>
+                    <ul className="sm:mt-4 md:space-y-4">
+                      {links.map((link, index) => (
                         <li key={link}>
                           <Link
                             href={hrefs[index]}
@@ -256,75 +233,107 @@ function Footer() {
                             {link}
                           </Link>
                         </li>
-                      )
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-    
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(4).map(({ title, links, hrefs, rel }) => (
-                <div key={title} className="min-h-[154px]">
-                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
-                    {title}
-                  </h3>
-                  <ul className="sm:mt-4 md:space-y-4">
-                    {links.map((link, index) => (
-                      <li key={link}>
-                        <Link
-                          href={hrefs[index]}
-                          rel={rel}
-                          className="text-xs sm:text-base text-gray-300 hover:text-white"
-                        >
-                          {link}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                {sections.slice(2, 4).map(({ title, links, hrefs, rel }) => (
+                  <div key={title} className="min-h-[154px]">
+                    <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
+                      {title}
+                    </h3>
+                    <ul className="sm:mt-4 md:space-y-4">
+                      {links.map(
+                        (link, index) =>
+                          link && (
+                            <li key={link}>
+                              <Link
+                                href={hrefs[index]}
+                                rel={rel}
+                                className="text-xs sm:text-base text-gray-300 hover:text-white"
+                              >
+                                {link}
+                              </Link>
+                            </li>
+                          )
+                      )}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                {sections.slice(4).map(({ title, links, hrefs, rel }) => (
+                  <div key={title} className="min-h-[154px]">
+                    <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
+                      {title}
+                    </h3>
+                    <ul className="sm:mt-4 md:space-y-4">
+                      {links.map((link, index) => (
+                        <li key={link}>
+                          <Link
+                            href={hrefs[index]}
+                            rel={rel}
+                            className="text-xs sm:text-base text-gray-300 hover:text-white"
+                          >
+                            {link}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-    
-        {/* Newsletter section */}
-        <div className="mt-4 sm:mt-12 border-t border-gray-700">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-            <div>
-              <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
-                Subscribe to our newsletter
-              </h3>
-              <p className="mt-1 sm:mt-4 text-xs sm:text-base text-gray-300">
-                Get the latest news, market trends, and hot property listings delivered to your inbox.
-              </p>
-              <Subscribe />
+
+          {/* Newsletter section */}
+          <div className="mt-4 sm:mt-12 border-t border-gray-700">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+              <div>
+                <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
+                  Subscribe to our newsletter
+                </h3>
+                <p className="mt-1 sm:mt-4 text-xs sm:text-base text-gray-300">
+                  Get the latest news, market trends, and hot property listings
+                  delivered to your inbox.
+                </p>
+                <Subscribe />
+              </div>
             </div>
           </div>
-        </div>
-    
-        {/* Footer info section */}
-        <div className="mt-2 sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
-          <div className="flex space-x-6 md:order-2">
-            <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
-              <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
-            </button>
-            <Link rel="noopener noreferrer" href={`tel:${8884440963}`} className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
-              <FaPhoneAlt className="mr-1" /> +91-8884440963
-            </Link>
+
+          {/* Footer info section */}
+          <div className="mt-2 sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
+            <div className="flex space-x-6 md:order-2">
+              <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
+                <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
+              </button>
+              <Link
+                rel="noopener noreferrer"
+                href={`tel:${8884440963}`}
+                className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
+              >
+                <FaPhoneAlt className="mr-1" /> +91-8884440963
+              </Link>
+            </div>
+            <p className="mt-1 text-xs sm:text-base text-white md:mt-0 md:order-1">
+              Copyright © 2024 GetRightProperty. All Rights Reserved.
+              <span>
+                <br />A Product By &quot;
+                <Link rel="noopener noreferrer" href="https://rpclan.com/">
+                  {" "}
+                  RPCLAN SERVICES PVT.LTD{" "}
+                </Link>
+                &quot;
+              </span>
+            </p>
           </div>
-          <p className="mt-1 text-xs sm:text-base text-white md:mt-0 md:order-1">
-            Copyright © 2024 GetRightProperty. All Rights Reserved.
-            <span>
-              <br />A Product By &quot;
-              <Link rel="noopener noreferrer" href="https://rpclan.com/"> RPCLAN SERVICES PVT.LTD </Link>
-              &quot;
-            </span>
-          </p>
         </div>
-      </div>
-    </footer>
-    
+      </footer>
     )
   );
 }

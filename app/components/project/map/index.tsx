@@ -97,7 +97,7 @@ const LocationHeader = ({ projName, type }: { projName: string; type?: "proj" | 
       return (
        
         <div className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing" id="location-map">
-          <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
+          <div className=" w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
             <LocationHeader projName={projName} type={type} />
           </div>
           
@@ -119,7 +119,7 @@ const LocationHeader = ({ projName, type }: { projName: string; type?: "proj" | 
               <div className="absolute inset-0 flex items-center justify-center">
                 <button
                   onClick={() => setShowMap(true)}
-                  className="z-10 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
+                  className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
                 >
                   <span className="text-lg font-semibold">Click to View Location</span>
                 </button>
