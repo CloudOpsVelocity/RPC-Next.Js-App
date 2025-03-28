@@ -1,5 +1,3 @@
-const { default: axios } = require("axios");
-
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_URL || "https://example.com",
@@ -10,6 +8,7 @@ module.exports = {
     "/tags/*",
     "/builders/*",
     "/test/*",
+    "/residential/projects/*",
   ],
   generateIndexSitemap: false,
   generateRobotsTxt: false,
@@ -70,23 +69,4 @@ module.exports = {
       },
     ];
   },
-  // robotsTxtOptions: {
-  //   policies: [
-  //     {
-  //       userAgent: "*",
-  //       allow: "/",
-  //     },
-  //   ],
-  //   additionalSitemaps: [
-  //     `${process.env.NEXT_PUBLIC_URL}/dashboard-sitemap.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/listing-sitemap.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/builder-sitemap.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/project-details-sitemap.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/0.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/1.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/2.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/3.xml`,
-  //     `${process.env.NEXT_PUBLIC_URL}/dyanmic-sitemap/4.xml`,
-  //   ],
-  // },
 };
