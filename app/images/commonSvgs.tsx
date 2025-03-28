@@ -4727,7 +4727,7 @@ export const WhatsAppButton = ({ name, type }: Props) => {
   const whatsappLink = `https://api.whatsapp.com/send?phone=+918884440963&text=${encodedMessage}`;
 
   return (
-    <Link aria-label="whatsappLink" rel="noreferrer" target="_blank" href={whatsappLink}>
+    <Link prefetch={false} aria-label="whatsappLink" rel="noreferrer" target="_blank" href={whatsappLink}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="255"

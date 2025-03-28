@@ -66,7 +66,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        <Link rel="noopener noreferrer"
+        <Link prefetch={false} rel="noopener noreferrer"
           href={`/`}
           className="hover:underline cursor-pointer capitalize"
         >
@@ -88,7 +88,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
           return (
             <React.Fragment key={`${key[index]}`}>
               {index < Object.keys(params).length - 1 ? (
-                <Link
+                <Link prefetch={false}
                   // href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
                   href={`${BASE_PATH_PROJECT_DETAILS}${redirectPath}`}
                   className="hover:underline cursor-pointer capitalize"

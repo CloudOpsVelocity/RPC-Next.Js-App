@@ -118,10 +118,10 @@ function BlogDetailsFirstBlock() {
                 })
               }
             />
-            <Link rel="noreferrer" href={facebookRedirectLink} target="_self">
+            <Link prefetch={false} rel="noreferrer" href={facebookRedirectLink} target="_self">
               <Facebook className={"w-[24px] h-[24px]"} />
             </Link>
-            <Link rel="noreferrer" href={whatsappRedirectLink} target="_self">
+            <Link prefetch={false} rel="noreferrer" href={whatsappRedirectLink} target="_self">
               <WhatsApp className={"w-[24px] h-[24px]"} />
             </Link>
           </div>

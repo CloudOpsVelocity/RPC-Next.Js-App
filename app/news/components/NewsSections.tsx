@@ -29,7 +29,7 @@ export const getClampedText = (text: string, maxLines: number) => {
 
 function Card({ data, cityName }: CradProps) {
   return (
-    <Link rel="noopener noreferrer"
+    <Link prefetch={false} rel="noopener noreferrer"
       href={`/news/${data.name.replaceAll(" ", "-")}`}
     >
       <div className="flex max-w-[600px] min-w-[240px] sm:w-[260px] md:w-[300px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-[4px] xl:rounded-[10px]  border-solid border-[#B9CFEB] hover:shadow-lg ">

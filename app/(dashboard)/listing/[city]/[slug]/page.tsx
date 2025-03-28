@@ -54,7 +54,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] mt-1 ">
             <span className="hover:underline cursor-pointer ">Home</span>{" "}
             {" > "}
-            <Link href={"/project/banglore"} className="text-nowrap">
+            <Link href={"/project/banglore"} className="text-nowrap" prefetch={false}>
               <span className="hover:underline cursor-pointer">
                 Property In {data.ctName}
               </span>

@@ -20,18 +20,18 @@ export default function TopProfileBlock({
     <div className="w-full flex justify-between items-center bg=[] relative">
       <div className="flex flex-col h-[100%]  lg:min-h-[250px]  justify-between items-start ml-[2%] ">
         <p className="text-[12px] md:text-[20px] text-[#565D70] font-[500] mt-2 sm:mt-0 sm:mb-[1%] ">
-          <Link rel="noopener noreferrer" className="hover:underline cursor-pointer" href={"/"}>
+          <Link prefetch={false} rel="noopener noreferrer" className="hover:underline cursor-pointer" href={"/"}>
             Home
           </Link>
           {" > "}
-          <Link rel="noopener noreferrer"
+          <Link prefetch={false} rel="noopener noreferrer"
             href={"/builders"}
             className="hover:underline cursor-pointer"
           >
             Builders
           </Link>
           {" > "}
-          <Link rel="noopener noreferrer"
+          <Link prefetch={false} rel="noopener noreferrer"
             href={`/builders/${builderCity}`}
             className="hover:underline cursor-pointer capitalize"
           >

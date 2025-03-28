@@ -63,7 +63,7 @@ function FeaturedBlogs() {
               ? each.heading.toLowerCase().replaceAll(" ", "-")
               : "";
           return (
-            <Link rel="noopener noreferrer"
+            <Link prefetch={false} rel="noopener noreferrer"
               key={`FeaturedBlogCard_${each.heading}`}
               href={`/blog/${pathName}`}
             >

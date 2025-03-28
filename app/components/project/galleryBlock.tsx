@@ -134,7 +134,6 @@ export default function GalleryBlock({
                       width={799}
                       height={400}
                       unoptimized
-                      priority 
                     />
                   </picture>
                 </div>
@@ -222,7 +221,6 @@ export default function GalleryBlock({
                     onClick={() => handleMediaClick(img, ind)}
                     unoptimized
                     fill
-                    priority 
                   />
                 </div>
               );
@@ -260,7 +258,6 @@ export default function GalleryBlock({
                       className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover"
                       alt="thumbnail"
                       onClick={() => handleMediaClick(img, ind)}
-                      priority 
                     />
                   ) : (
                     <video

@@ -72,7 +72,7 @@ export default function ListingLink({
   }, [routeParams]);
 
   return (
-    <Link {...rest} href={href}>
+    <Link prefetch={false} {...rest} href={href}>
       {children}
     </Link>
   );

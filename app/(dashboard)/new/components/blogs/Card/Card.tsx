@@ -11,7 +11,7 @@ export default function Card({ data }: Props) {
   const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return (
-    <Link rel="noopener noreferrer"
+    <Link rel="noopener noreferrer" prefetch={false}
       href={`blog/${pathName}`}
       className="hover:shadow-lg"
     >
