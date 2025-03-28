@@ -43,7 +43,7 @@ export const generateAllSchemas = (property: any) => {
       },
       {
         "@type": "Product",
-        name: `${property.bhkName} ${property.propTypeName} in ${property.localityName}`.trim(),
+        name: cardTitle,
         description,
         image:
           property.coverImage?.split(",")[0] ||

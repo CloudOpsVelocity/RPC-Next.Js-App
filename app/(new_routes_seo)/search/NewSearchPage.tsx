@@ -1,19 +1,9 @@
 import React from "react";
-import dynamic from "next/dynamic";
-const LeftSection = dynamic(
-  () => import("./components/ProjectSearchLeftSection")
-);
-const RightSection = dynamic(
-  () => import("./components/ProjectSearchRightSection")
-);
-// const ProjSearchMainFilterSection = dynamic(() => import("./components/filters/ProjSearchMainFilterSection"));
-// const ProjectSearchBreadCrumbs = dynamic(() => import("./components/ProjSearchBreadCrums"));
 import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
 import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 import Mainsection from "./components/Mainsection";
-// import LeftSection from "";
 type Props = {
   serverData: any;
   frontendFilters: any;
