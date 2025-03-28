@@ -120,11 +120,10 @@ export default function SearchSec({}: Props) {
           let URLReNew = URLCreater(ids);
           //alert(JSON.stringify(ids));
           if (URLReNew != "") {
-            const toRedirect= (f.propType === 36 || f.cg == "R" ) ? `/search/listing?sf=listedBy=All-${URLReNew}` : `/search?sf=listedBy=All-   ${URLReNew}`
+            const toRedirect= (f.propType === 36 || f.cg == "R" ) ? `/search/listing?sf=listedBy=All-${URLReNew}` : `/search?sf=listedBy=All-${URLReNew}`
          //alert(toRedirect)
-         router.push(toRedirect)       
+          router.push(toRedirect)       
           }
-          
         } else {
           console.log((f.propType === 36 || f.cg == "R" )? true : false)
           const whichPage = (f.propType === 36 || f.cg == "R" ) ? "/search/listing" : "/search"
@@ -133,6 +132,7 @@ export default function SearchSec({}: Props) {
       }
     };
     }
+  
    
 /*   const handleSearch = (projIdEnc?: string) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
