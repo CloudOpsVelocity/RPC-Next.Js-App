@@ -18,6 +18,7 @@ import MasterPlan from "@/app/components/project/masterplan";
 const ProjectDetailsP = dynamic(
   () => import("@/app/components/project/projectDetailsP")
 );
+
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Specifications from "@/app/components/project/specification";
 import Banner from "@/app/components/project/banner";
