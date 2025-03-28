@@ -21,14 +21,11 @@ import ProjSearchCityDropDown from "../../components/FilterComponents/city/Proje
 import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
 import dynamic from "next/dynamic";
 // import SelectedFilters from "../../components/filters/SelectedFilters";
-const SelectedFilters = dynamic(() => import("../../components/filters/SelectedFilters"));
+const SelectedFilters = dynamic(
+  () => import("../../components/filters/SelectedFilters")
+);
 
-
-const ListingHeaderFilters = ({
-  isListing,
-}: {
-  isListing?: boolean;
-}) => {
+const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
@@ -125,7 +122,7 @@ const ListingHeaderFilters = ({
         break;
       case "projects":
         if (data.type === "Project") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : ""
+          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
         } else {
           if (isListingSearch) {
             dispatch({
@@ -137,11 +134,15 @@ const ListingHeaderFilters = ({
               },
             });
           } else {
-            typeof window !== "undefined" ? window.open(
-              `/search/listing?sf=projIdEnc=${
-                data.stringId.split("_")[0]
-              }-phaseId=${data.stringId.split("_")[1]}-projName=${data.name}`
-            ) : ""
+            typeof window !== "undefined"
+              ? window.open(
+                  `/search/listing?sf=projIdEnc=${
+                    data.stringId.split("_")[0]
+                  }-phaseId=${data.stringId.split("_")[1]}-projName=${
+                    data.name
+                  }`
+                )
+              : "";
           }
         }
 
@@ -196,7 +197,7 @@ const ListingHeaderFilters = ({
                     .trim()}`
                 : ""
             }`;
-            typeof window !== "undefined" ? window.open(url) : ""
+            typeof window !== "undefined" ? window.open(url) : "";
           }
         }
         break;
@@ -208,24 +209,28 @@ const ListingHeaderFilters = ({
           }-listedBy=${AgentOwnerBuilderMap.get(
             data.type
           )}-projName=${projectName}`;
-          typeof window !== "undefined" ? window.open("/search/listing?sf=" + url) : ""
+          typeof window !== "undefined"
+            ? window.open("/search/listing?sf=" + url)
+            : "";
         }
         break;
       case "builders":
         if (data.type === "BuilderDetail") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : ''
+          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
         } else {
           const url =
             encodeURIComponent(data.name) +
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
-            typeof window !== "undefined" ? window.open(
-            `/search?sf=builderIds=${url}${
-              data.type !== "BuilderProject"
-                ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
-                : ""
-            }`
-          ) : ''
+          typeof window !== "undefined"
+            ? window.open(
+                `/search?sf=builderIds=${url}${
+                  data.type !== "BuilderProject"
+                    ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
+                    : ""
+                }`
+              )
+            : "";
         }
         break;
       default:
@@ -421,7 +426,6 @@ const ListingHeaderFilters = ({
           </div>
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             <ListingSearchTabs />
-
             <SelectedFilters />
           </div>
 

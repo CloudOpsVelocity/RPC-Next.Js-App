@@ -16,10 +16,10 @@ const tabs = [
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
   { id: "B", label: "Builder Listings" },
-  { id: null || "All", label: "All Listings" },
+  { id: null, label: "All Listings" },
 ];
 
- const ListingSearchTabs = () => {
+const ListingSearchTabs = () => {
   const [state, dispath] = useAtom(projSearchStore);
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
@@ -98,7 +98,9 @@ const tabs = [
       payload: updatedFilters,
     });
     handleApplyFilters();
-    typeof window !== "undefined" ? window.scrollTo({ top: 0, behavior: "smooth" }) : ""
+    typeof window !== "undefined"
+      ? window.scrollTo({ top: 0, behavior: "smooth" })
+      : "";
   };
 
   const handleSortBy = (option: any) => {
