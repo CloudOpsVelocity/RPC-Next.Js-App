@@ -23,22 +23,18 @@ type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
   frontendFilters?: any;
+  isTrue: boolean;
+  setIsTrue: any;
 };
 
-function LeftSection({ mutate, serverData, frontendFilters }: Props) {
-  useHydrateAtoms([
-    [
-      projSearchStore,
-      {
-        type: "update",
-        payload: {
-          ...frontendFilters,
-        },
-      },
-    ],
-  ]);
+function LeftSection({
+  mutate,
+  serverData,
+  frontendFilters,
+  isTrue: it,
+  setIsTrue,
+}: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
@@ -46,11 +42,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
-  const [it, setIsTrue] = useState(
-    pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null
-  );
+
   const isTrue =
     it || pathname.includes("search")
       ? true
@@ -100,7 +92,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
   const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
 
   const rowVirtualizer = useVirtualizer({
-    count: allItems.length,
+    count: allItems?.length || 0,
     getScrollElement: () => containerRef.current,
     estimateSize: () => 300,
     overscan: 5, // Reduced overscan to improve performance
@@ -238,9 +230,9 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       ref={containerRef}
     >
       <>
-        {isLoading ? (
+        {isLoading || !allItems ? (
           <LoadingBlock />
-        ) : allItems.length > 0 ? (
+        ) : allItems?.length > 0 ? (
           <div
             style={{
               height: `${rowVirtualizer.getTotalSize()}px`,

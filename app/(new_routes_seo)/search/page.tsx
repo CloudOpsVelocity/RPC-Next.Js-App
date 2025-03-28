@@ -3,6 +3,7 @@ import LeftSection from "./components/ProjectSearchLeftSection";
 import RightSection from "./components/ProjectSearchRightSection";
 import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
+import Mainsection from "./components/Mainsection";
 type Props = {};
 
 export default function Page({}: Props) {
@@ -17,9 +18,7 @@ export default function Page({}: Props) {
         />
       </div>
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
-        <LeftSection />
-        <div className="w-[100%] sm:w-[50%] -z-10" />
-        <RightSection key="projRightSection1" />
+        <Mainsection frontendFilters={{}} serverData={null} />
       </div>
     </main>
   );

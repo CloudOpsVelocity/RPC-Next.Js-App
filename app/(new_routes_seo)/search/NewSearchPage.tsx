@@ -12,6 +12,7 @@ import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
 import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
+import Mainsection from "./components/Mainsection";
 // import LeftSection from "";
 type Props = {
   serverData: any;
@@ -47,12 +48,10 @@ export default function NewSearchPage({
       </div>
 
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
-        <LeftSection
-          serverData={serverData}
+        <Mainsection
           frontendFilters={frontendFilters}
+          serverData={serverData}
         />
-        <div className="w-[100%] sm:w-[50%] -z-10" />
-        <RightSection serverData={serverData} key="projRightSection2" />
       </div>
     </main>
   );
