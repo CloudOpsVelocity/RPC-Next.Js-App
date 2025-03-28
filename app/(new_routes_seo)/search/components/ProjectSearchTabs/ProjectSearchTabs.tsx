@@ -20,7 +20,8 @@ const tabs = [
 ];
 
 const ProjectSearchTabs = () => {
-  const [state, dispath] = useAtom(projSearchStore); 
+  const [state, dispath] = useAtom(projSearchStore);
+
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -71,8 +72,9 @@ const ProjectSearchTabs = () => {
   const setNearby = useSetAtom(selectedNearByAtom);
 
   const handleTabsChange = (value: string | null) => {
-    
-    typeof window !== "undefined" ? window.scrollTo({ top: 0, behavior: "smooth" }) : "";
+    typeof window !== "undefined"
+      ? window.scrollTo({ top: 0, behavior: "smooth" })
+      : "";
     setSelected(null);
     setNearby((prev: any) => ({
       ...prev,
@@ -136,7 +138,9 @@ const ProjectSearchTabs = () => {
       type: "update",
     });
     handleApplyFilters();
-    typeof window !== "undefined" ? window.scrollTo({ top: 0, behavior: "smooth" }) : ""
+    typeof window !== "undefined"
+      ? window.scrollTo({ top: 0, behavior: "smooth" })
+      : "";
   };
   const getSortyByValue = (state: any): string => {
     if (
@@ -160,7 +164,6 @@ const ProjectSearchTabs = () => {
     ) {
       return "Price / sqft: Low to High";
     }
-
     return "Newest First";
   };
 
@@ -212,8 +215,6 @@ const ProjectSearchTabs = () => {
                   </svg>
 
                   <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
-                    {/*  {sortOptions.find((option) => option.value === sortBy)?.label ||
-                  "Sort By"} */}
                     {state.sortByfield != null && state.sortType != null
                       ? getSortyByValue(state)
                       : "Newest First"}
@@ -227,7 +228,6 @@ const ProjectSearchTabs = () => {
                         key={option.value}
                         onClick={(e) => {
                           e.stopPropagation();
-                          // setSortBy(option.value);
                           handleSortBy(option);
                           setIsDropdownOpen(false);
                         }}
@@ -308,6 +308,6 @@ const ProjectSearchTabs = () => {
       </div>
     </div>
   );
-}
+};
 
 export default memo(ProjectSearchTabs);

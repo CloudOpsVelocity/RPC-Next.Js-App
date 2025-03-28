@@ -6,6 +6,7 @@ export const getSearchData = async (page = 0, apiFilterQueryParams: string) => {
     url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}`;
   }
   let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
+  console.log({ queryparams });
   const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
   return res.data;
 };
@@ -21,6 +22,7 @@ export const getListingSearchData = async (
 
 const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
   // Directly process the input string in a single pass
+
   const transformedParams = apiFilterQueryParams
     .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern
     .replace(/budget=(\d+),(\d+)/, "minPrice=$1&maxPrice=$2") // Budget transformation
@@ -42,9 +44,13 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
     .replace(/-/g, "&"); // Replace dashes with ampersands
 
   // Append 'cg=S' if not already present and 'city=9' if city is not present
-  let updatedParams = transformedParams.includes("cg=")
-    ? transformedParams
+  let updatedParams = apiFilterQueryParams.includes("cg=")
+    ? `${transformedParams}&cg=${apiFilterQueryParams.split("cg=")[1]}`
     : `${transformedParams}&cg=S`;
+  console.log({
+    updatedParams,
+    apiFilterQueryParamsFromTest: apiFilterQueryParams,
+  });
   return updatedParams.includes("city=")
     ? updatedParams
     : `${updatedParams}&city=9`;
