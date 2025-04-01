@@ -56,8 +56,6 @@ export default function PriceBreakup({
   const [opened, { close }] = usePricingPop();
   const isMobile = useMediaQuery("(max-width: 601px)");
 
-  console.log(opened);
-
   // return (
   //   <Drawer
   //     opened={opened}
