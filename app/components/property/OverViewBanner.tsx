@@ -22,8 +22,8 @@ import Image from "next/image";
 export default function PropertyOverviewBanner({
   price,
   propTypeName,
-  plotArea,
-  sba,
+  // plotArea,
+  // sba,
   propName,
   bhkName,
   cg,
@@ -77,7 +77,7 @@ export default function PropertyOverviewBanner({
       />    
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
         <div className="flex  flex-col text-left">
-          <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+          <h4 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
             {" Total "}
             {cg === "S" ? "Selling" : "Rent"} Price{" "}
             {otherPrice?.otherCharge && (
@@ -85,7 +85,7 @@ export default function PropertyOverviewBanner({
                 (Including Other Charges)
               </span>
             )}
-          </p>
+          </h4 >
           <p className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
             <span className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {cg === "S"

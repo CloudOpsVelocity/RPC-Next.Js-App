@@ -19,9 +19,9 @@ export default function RoomBasicDetails({
     <div className={className}>
       <div className="flex justify-start items-center space-x-1 xl:space-x-3 ">
         {icon}
-        <p className="text-[#00487C]   text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
+        <h4 className="text-[#00487C]   text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
           {title}
-        </p>
+        </h4>
       </div>
 
       <p

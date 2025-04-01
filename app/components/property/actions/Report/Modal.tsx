@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import ReportButton from "./button";
 import clsx from "clsx";
@@ -194,7 +195,8 @@ export default function ReportModal({ issueData }: any) {
             onClose();
             document.body.style.overflow = "scroll";
             }} 
-            className="absolute top-3 right-1 z-10" />
+            className="absolute top-3 right-1 z-10"
+          />
 
           {status === "success" ? (
             <ReportSuccesssMessage close={()=>onClose()} />
@@ -262,10 +264,6 @@ export default function ReportModal({ issueData }: any) {
                     )}
                     placeholder="Start typing here"
                     rows={2}
-                    // error={
-                    //   text.length > 400 &&
-                    //   "Comment must be under 400 characters"
-                    // }
                     maxLength={401}
                     onChange={(e) => {
                       setText(e.target.value);

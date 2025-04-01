@@ -60,7 +60,7 @@ export default function PropertyBanner({
       />
       <div className=" inline-flex justify-center items-center ">
         {Svg}
-        <h1 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
+        <h2 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
           about{" "}
           <span className="text-[#148B16] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] capitalize">
             {projectName}
@@ -68,7 +68,7 @@ export default function PropertyBanner({
           <p className=" text-[#4D6677] text-h2  sm:text-[16px] xl:text-[24px] break-words italic font-medium leading-[normal] capitalize mt-2">
             About project get summarized perspective for the incredible listing
           </p>
-        </h1>
+        </h2>
       </div>
       <div>
         <div className="inline-flex mt-6">
@@ -92,12 +92,12 @@ export default function PropertyBanner({
           </div>
 
           <div className="ml-5">
-            <h2 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+            <h3 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               {projectName}
-            </h2>
-            <h3 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
-              {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </h3>
+            <h4 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
+              {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
+            </h4>
             <p className="text-[#242424] text-sm sm:text-[18px]  xl:text-[24px] not-italic font-medium leading-[normal] mb-2">
               Start- End Date: {formatDateDDMMYYYY(startDate)} -{" "}
               {formatDateDDMMYYYY(endDate)}

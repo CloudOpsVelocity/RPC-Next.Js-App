@@ -40,7 +40,7 @@ function ModalBox({children, isOpen, handleChange, containerClassStyle, hideCros
                 </button>
                 }
 
-                <div className='w-full rounded-[4px]'>
+                <div className='w-full rounded-[4px]'> 
                     {children}
                 </div>
             </div>
