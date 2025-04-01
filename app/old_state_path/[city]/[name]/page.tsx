@@ -117,13 +117,13 @@ export default async function Page({ params }: Props) {
             {" > "}
             <Link prefetch={false} href={"/project/banglore"}>
               <span className="hover:underline cursor-pointer">
-                Projects In {data.cityName}
+                {data.cityName}
               </span>
             </Link>{" "}
             {" > "}
             <Link prefetch={false} href={"/project/banglore/whitefield"}>
               <span className="hover:underline cursor-pointer">
-                Projects In {`${data.localityName} `}
+                {`${data.localityName} `}
               </span>
             </Link>{" "}
             {" > "}

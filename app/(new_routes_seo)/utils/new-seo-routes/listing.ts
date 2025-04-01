@@ -50,7 +50,7 @@ export async function generateSlugs(
 
       return result;
     } else if (
-      data.includes("/residential-projects") &&
+      data.includes("/residential-listings") &&
       type === "project-listing"
     ) {
       const [

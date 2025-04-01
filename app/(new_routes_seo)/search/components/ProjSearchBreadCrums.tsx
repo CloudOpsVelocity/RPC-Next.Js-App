@@ -33,8 +33,8 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   } else if (pageUrl.includes("/residential/projects/")) {
     trimmedUrl = trimFromWord(pageUrl, "/residential/projects/");
     newParams = trimmedUrl.split("/");
-  } else if (pageUrl.includes("/residential-projects/")) {
-    trimmedUrl = trimFromWord(pageUrl, "/residential-projects/");
+  } else if (pageUrl.includes("/residential-listings/")) {
+    trimmedUrl = trimFromWord(pageUrl, "/residential-listings/");
     newParams = trimmedUrl.split("/");
   } else if (pageUrl.includes("/residential/listings/")) {
     trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
@@ -115,7 +115,9 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
                 aria-hidden="true"
               />
               {index !== newParams.length - 1 ? (
-                <Link rel="noopener noreferrer" prefetch={false}
+                <Link
+                  rel="noopener noreferrer"
+                  prefetch={false}
                   target="_blank"
                   href={url}
                   className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
