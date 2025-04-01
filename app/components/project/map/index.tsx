@@ -15,6 +15,7 @@ import CustomScrollArea from "./ScrollPanel";
 import { isScrollingAtom as propScrollingAtom } from "../../property/Navigation";
 import SubHeading from "../headings/SubHeading";
 import { areas } from "./data";
+import Image from "next/image";
 
 export interface Area {
   name: string;
@@ -105,16 +106,41 @@ const LocationHeader = ({ projName, type }: { projName: string; type?: "proj" | 
             <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative">
               {/* Semi-transparent map placeholder */}
               <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
-                <img
+             {/*  <picture>
+                    <source
+                      media="(max-width: 600px)"
+                      srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/phone-default-map.webp`}
+                    />
+                     <img
                   loading="lazy"
-                  src={isMobile
-                    ? `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/mobile-default-map.webp`
-                    : `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
+                  src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
                   alt="Map preview"
-                  className="w-full h-full object-contain opacity-70"
+                  className="w-full h-full sm:object-contain opacity-70"
                 />
-              </div>
-      
+                 </picture> */}
+                            <picture>
+                                     <source
+                                       media="(max-width: 460px)"
+                                       srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/phone-default-map.webp`}
+                                     />
+                                     <source
+                                       media="(max-width: 768px)"
+                                       srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/default-map-laptop.webp`}
+                                     />
+                                     <source
+                                       media="(min-width: 1200px)"
+                                       srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
+                                     />
+                                     <Image
+                                       alt="project image"
+                                       src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
+                                       fill
+                                       className={`bg-gray-`}
+                                       unoptimized
+                                       priority 
+                                     />
+                                   </picture>
+                             </div>
               {/* View Map button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <button
