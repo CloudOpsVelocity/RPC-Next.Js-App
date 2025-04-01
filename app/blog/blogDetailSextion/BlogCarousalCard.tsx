@@ -16,7 +16,7 @@ function BlogCard({data, proviousPage}: Props) {
   const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return ( 
-      <Link rel="noopener noreferrer" href={`${path}/${pathName}`}>
+      <Link rel="noopener noreferrer" href={`${path}/${pathName}`} prefetch={false}>
       <div className='w-full shadow-[0px_4px_4px_0px_rgba(192,189,189,0.25)] rounded-[5px] bg-white min-w-[280px] min-h-[430px]'>
           <Image
               src={data?.coverImage} 

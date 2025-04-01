@@ -36,7 +36,7 @@ export default function Card({
       </div>
     </div>
   ) : (
-    <Link rel="noopener noreferrer" href={`${scheme}${content}`} className={clsx("cursor-pointer")}>
+    <Link prefetch={false} rel="noopener noreferrer" href={`${scheme}${content}`} className={clsx("cursor-pointer")}>
       <div className={clsx(styles.container, styles.text)}>
         {Icon} {title}
       </div>

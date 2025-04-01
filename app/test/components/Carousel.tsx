@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 'use client'
 
+import Image from 'next/image';
 import { useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
@@ -35,10 +36,12 @@ const Carousel: React.FC<CarouselProps> = ({ totalSlides, slidesPerView }) => {
                 id={`group-${Math.floor(index / slidesPerView)}`}
                 className="snap-start flex-shrink-0 w-1/3 p-2"
               >
-                <img
+                <Image
                   src={`/placeholder.svg?height=300&width=400&text=Slide ${index + 1}`}
                   alt={`Slide ${index + 1}`}
                   className="w-full h-full object-cover rounded-lg"
+                  width={237}
+                  height={263}
                 />
               </div>
             ))}

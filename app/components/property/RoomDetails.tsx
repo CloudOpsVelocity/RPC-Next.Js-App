@@ -75,7 +75,7 @@ export default function RoomDetails({ data }: { data: Main }) {
 const RoomSection = ({ data }: { data: Main }) => {
   return (
     <div className=" mb-[3%]  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]">
-      <h1 className={style.heading.h1}>Room Details</h1>
+      <h3 className={style.heading.h1}>Room Details</h3>
 
       <p className={style.heading.p}>
         See the rooms that are available in this property
@@ -127,7 +127,7 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
         className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:px-[53px] xl:py-[39px]"
         id="propertyDetails "
       >
-        <h1 className={style.heading.h1}>Parking Details</h1>
+        <h3 className={style.heading.h1}>Parking Details</h3>
 
         <p className={style.heading.p}>
           Check out the parking details for the listings
@@ -195,7 +195,7 @@ const OtherDetails = ({
       className=" shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] md:pt-[24px] "
       id="propertyDetails "
     >
-      <h1 className={style.heading.h1}>Other Details</h1>
+      <h3 className={style.heading.h1}>Other Details</h3>
 
       <p className={style.heading.p}>
         {propTypeName !== "Plot"
@@ -385,7 +385,7 @@ const UnitBlock = ({ data }: { data: Main }) => {
         className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]"
         id="propertyDetails "
       >
-        <h1 className={style.heading.h1}>Unit Details</h1>
+        <h3 className={style.heading.h1}>Unit Details</h3>
 
         <p className={style.heading.p}>
           {data.propTypeName !== "Plot"

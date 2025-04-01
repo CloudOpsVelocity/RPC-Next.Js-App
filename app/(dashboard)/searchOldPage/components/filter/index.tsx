@@ -41,7 +41,7 @@ const SearchDrawerHeader = ({
           Home
         </span>{" "}
         {" > "}
-        <Link href={"/project/banglore"}>
+        <Link href={"/project/banglore"} prefetch={false}>
           <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer">
             {DynamicText({
               cg: filters.cg as string,

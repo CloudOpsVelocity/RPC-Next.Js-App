@@ -109,7 +109,6 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                       height={750}
                       className=" m-auto h-[300px] lg:h-[420px]"
                       unoptimized
-                      priority 
                     />
                   </picture>
                 </div>
@@ -120,7 +119,6 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                   height={300}
                   alt=""
                   className="h-full w-full m-auto "
-                  priority 
                 />
               )}
             </div>

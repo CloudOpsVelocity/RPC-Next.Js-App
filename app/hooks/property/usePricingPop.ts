@@ -5,7 +5,10 @@ export const usePricingPop = () => {
   const [opened, setOpened] = useAtom(openedAtom);
 
   const open = () => setOpened(true);
-  const close = () => setOpened(false);
+  const close = () => {
+    document.body.style.overflow = "scroll";
+    setOpened(false);
+  };
 
   return [opened, { open, close }] as const;
 };

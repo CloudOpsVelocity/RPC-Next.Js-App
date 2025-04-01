@@ -106,16 +106,14 @@ const LocationHeader = ({ projName, type }: { projName: string; type?: "proj" | 
             <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative">
               {/* Semi-transparent map placeholder */}
               <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
-             {/*  <picture>
-                    <source
-                      media="(max-width: 600px)"
-                      srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/phone-default-map.webp`}
-                    />
-                     <img
-                  loading="lazy"
-                  src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
+                <Image
+                  src={isMobile
+                    ? `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/mobile-default-map.webp`
+                    : `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
                   alt="Map preview"
                   className="w-full h-full sm:object-contain opacity-70"
+                  width={237}
+                  height={263}
                 />
                  </picture> */}
                             <picture>

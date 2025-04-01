@@ -34,10 +34,10 @@ function ContentBox({ heading, text, content, date, type, href }: Props) {
                       url: `https://www.getrightproperty.com/blog${href ? `/${href}` : ""}`
                   })} 
                 />
-                <Link rel="noreferrer" href={facebookRedirectLink} target='_blank'>
+                <Link prefetch={false} rel="noreferrer" href={facebookRedirectLink} target='_blank'>
                   <Facebook className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
                 </Link>
-                <Link rel="noreferrer" href={whatsappRedirectLink} target='_blank'>
+                <Link prefetch={false} rel="noreferrer" href={whatsappRedirectLink} target='_blank'>
                   <WhatsApp className={type == "small" ? "w-[16px] h-[16px]" : "w-[24px] h-[24px]" } />
                 </Link>
             </div>

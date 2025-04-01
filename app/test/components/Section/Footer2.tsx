@@ -90,7 +90,7 @@ const EnhancedFooter2 = () => {
             </p>
             <div className="flex space-x-6">
               {socialIcons.map(({ name, icon }) => (
-                <Link rel="noreferrer"
+                <Link prefetch={false} rel="noreferrer"
                   key={name}
                   href="/"
                   className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
@@ -112,7 +112,7 @@ const EnhancedFooter2 = () => {
                   <ul className="mt-4 space-y-4">
                     {section.links.map((link) => (
                       <li key={link}>
-                        <Link rel="noopener noreferrer"
+                        <Link prefetch={false} rel="noopener noreferrer"
                           href="/"
                           className="hover:text-blue-300 transition-colors duration-300"
                         >
@@ -133,7 +133,7 @@ const EnhancedFooter2 = () => {
                   <ul className="mt-4 space-y-4">
                     {section.links.map((link) => (
                       <li key={link}>
-                        <Link rel="noopener noreferrer"
+                        <Link prefetch={false} rel="noopener noreferrer"
                           href="/"
                           className="hover:text-blue-300 transition-colors duration-300"
                         >
@@ -166,14 +166,14 @@ const EnhancedFooter2 = () => {
                 Get instant property alerts on the go.
               </p>
               <div className="mt-4 flex space-x-4">
-                <Link rel="noopener noreferrer"
+                <Link prefetch={false} rel="noopener noreferrer"
                   href="/"
                   className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
                 >
                   <FaAppStoreIos className="mr-2" />
                   App Store
                 </Link>
-                <Link rel="noopener noreferrer"
+                <Link prefetch={false} rel="noopener noreferrer"
                   href="/"
                   className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
                 >
@@ -189,7 +189,7 @@ const EnhancedFooter2 = () => {
             <button className="text-gray-400 hover:text-blue-400 inline-flex items-center">
               <FaLocationDot className="mr-2" /> Whitefield, Bengaluru-560066
             </button>
-            <Link rel="noopener noreferrer"
+            <Link prefetch={false} rel="noopener noreferrer"
               href="tel:+918884440963"
               className="text-gray-400 hover:text-blue-400 inline-flex items-center"
             >
@@ -198,7 +198,7 @@ const EnhancedFooter2 = () => {
           </div>
           <p className="mt-8 text-base md:mt-0 md:order-1">
             &copy; 2024 GetRightProperty. All rights reserved. A product of{" "}
-            <Link rel="noopener noreferrer"
+            <Link prefetch={false} rel="noopener noreferrer"
               href="https://rpclan.com/"
               className="text-blue-400 hover:text-blue-300"
             >

@@ -171,7 +171,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
                 key={subCategory}
                 className={`p-6 ${index !== getAvailableSubCategories(selectedCategory).length - 1 ? 'border-b border-gray-200' : ''}`}
               >
-                <h2 className="text-gray-800 text-xl font-semibold mb-4">{subCategory}</h2>
+                <h3 className="text-gray-800 text-xl font-semibold mb-4">{subCategory}</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {amenitiesInSubCategory.map((amenity: Amenity) => (
                     <div

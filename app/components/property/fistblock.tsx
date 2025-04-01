@@ -158,7 +158,6 @@ const PropertyFirstBlock: React.FC<Props> = ({
                         index + 1
                       }`}
                       unoptimized
-                      priority 
                     />
                   </picture>
                 </Carousel.Slide>
@@ -169,7 +168,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
                 <div className="flex justify-between items-start">
-                  <h3 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
+                  <h1 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     <span className="lowercase">
                       {projectDetails.propTypeName === "Plot"
                         ? formatNumberWithSuffix(
@@ -181,7 +180,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                     {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
                     {projectDetails.cg === "S" ? " Sale" : " Rent"} In{" "}
                     {projectDetails.ltName}{" "}
-                  </h3>
+                  </h1>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
                 {projectDetails.projIdEnc ? (
@@ -273,7 +272,6 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   src={"/abc/floorplan.png"}
                   alt="no of floors"
                   className="xl:h-[24px] xl:w-[24px] w-[16px] h-[16px] sm:h-[16px] sm:w-[16px] !mt-auto "
-                  priority 
                 />
                 Floor Plan
               </p>
