@@ -77,7 +77,7 @@ export default function ProjData({
   // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
-      <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap w-full xl:w-[calc(100%-210px)]">
+      <h2 className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap w-full xl:w-[calc(100%-210px)]">
         {projName}{" "}
         {phaseName && phaseCount !== undefined && phaseCount > 1 && (
           <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
@@ -112,7 +112,7 @@ export default function ProjData({
           }}
         /> */}
         {/* </button> */}
-      </p>
+      </h2>
 
       {/* {category == "Sale" || type === "proj" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24 sm:top-0 sm:right-[65px] w-full xl:w-[calc(100%-220px)] ">
@@ -124,11 +124,11 @@ export default function ProjData({
         </div>
       ) : null} */}
 
-      <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
+      <h3 className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
-      </p>
+      </h3>
 
-      <p
+      <h4
         className={`text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold w-full xl:w-[calc(100%-100px)]`}
       >
         <span>
@@ -163,7 +163,7 @@ export default function ProjData({
           </span>
         )}
         {` ${propType} For Sale in ${locality}, ${city}`}
-      </p>
+      </h4>
 
       <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-100px)]">
         Address: {address}
@@ -184,11 +184,11 @@ export default function ProjData({
     </div>
   ) : (
     <div>
-      <p
+      <h2
         className={`text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold w-full xl:w-[calc(100%-210px)]`}
       >
         {bhkName} {propTypeName} for {category} in {localityName}
-      </p>
+      </h2>
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(price))}{" "}
@@ -218,7 +218,7 @@ export default function ProjData({
         )}
       </p>
 
-      <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
+      <h3 className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         <span
           className={`font-bold ${
             projIdEnc != undefined ? "underline cursor-pointer" : ""
@@ -235,7 +235,7 @@ export default function ProjData({
           {/* {getTypeText(type)} */}
           {propName}{" "}
         </span>
-      </p>
+      </h3>
       <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-[130%] sm:w-[100%] xl:w-[calc(100%-118px)]">
         Address: {address}
       </p>

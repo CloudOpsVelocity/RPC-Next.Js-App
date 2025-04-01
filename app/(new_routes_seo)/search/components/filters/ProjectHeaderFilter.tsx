@@ -319,6 +319,16 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     document.body.style.overflow = "hidden";
   };
 
+  const getTitle = (pageUrl:string) => {
+    if (document.title !== "Get Right Property") {
+      return document.title;
+    } else if (pageUrl === "/search") {
+      return "Project Search";
+    } else if (pageUrl === "/search/listing") {
+      return "Listing Search";
+    }
+  };
+
   return (
     <>
       <div className="w-full max-w-[100%] max-h-[60vh] bg-white border-b relative md:sticky top-0 z-auto md:z-[11]">
@@ -465,6 +475,8 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
               Filters
             </button>
           </div>
+          <h1 className=" font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px]  ">{getTitle(path)}</h1>
+
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             {isListing ? <ListingSearchTabs /> : <ProjectSearchTabs />}
             <SelectedFilters />

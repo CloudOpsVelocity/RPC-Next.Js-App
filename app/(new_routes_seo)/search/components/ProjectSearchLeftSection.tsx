@@ -9,7 +9,7 @@ import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { projSearchStore } from "../store/projSearchStore";
+import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { useHydrateAtoms } from "jotai/utils";
@@ -104,10 +104,12 @@ function LeftSection({
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
+  const  setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   useEffect(() => {
     if (isMobile) return;
     const handleScroll = () => {
+      setIsMapLoaded(true);
       if (allMarkerRefs) {
         const keys = [...allMarkerRefs.current.keys()];
         if (keys.length > 0) {

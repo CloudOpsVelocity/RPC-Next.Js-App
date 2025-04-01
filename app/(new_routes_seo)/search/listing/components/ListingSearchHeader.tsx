@@ -11,7 +11,7 @@ import {
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 
@@ -20,6 +20,7 @@ import BuyRent from "../../components/FilterComponents/BuyRent";
 import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
 import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
 import dynamic from "next/dynamic";
+import { trimFromWord } from "../../components/ProjSearchBreadCrums";
 // import SelectedFilters from "../../components/filters/SelectedFilters";
 const SelectedFilters = dynamic(
   () => import("../../components/filters/SelectedFilters")
@@ -268,13 +269,24 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       return;
     }
   };
+
+  const getTitle = (pageUrl:string) => {
+    if (document.title !== "Get Right Property") {
+      return document.title;
+    } else if (pageUrl === "/search") {
+      return "Project Search";
+    } else if (pageUrl === "/search/listing") {
+      return "Listing Search";
+    }
+  };
+
   return (
     <>
       <div className="w-full max-w-[100%] max-h-[60vh] bg-white border-b relative md:sticky top-0 z-auto md:z-[11]">
         <div className=" px-1 ">
           <div
             ref={searchRef}
-            className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 max-w-[820px]"
+            className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 pb-[8px] max-w-[820px]"
           >
             <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
@@ -424,6 +436,9 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
               Filters
             </button>
           </div>
+
+          <h1 className=" font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] ">{getTitle(path)}</h1>
+
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             <ListingSearchTabs />
             <SelectedFilters />

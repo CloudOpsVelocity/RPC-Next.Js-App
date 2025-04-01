@@ -258,6 +258,8 @@ export const ProjSearchAppliedFiltersStore = atom(
   }
 );
 
+export const searchPageMapToggle = atom(false);
+
 export const projSearchStore = atomWithReducer(initialState, mapReducer);
 
 projSearchStore.onMount = (setAtom) => {

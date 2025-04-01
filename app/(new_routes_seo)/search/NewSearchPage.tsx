@@ -37,7 +37,7 @@ export default function NewSearchPage({
         />
       </div>
 
-      <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
+      <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[220px] ">
         <Mainsection
           frontendFilters={frontendFilters}
           serverData={serverData}

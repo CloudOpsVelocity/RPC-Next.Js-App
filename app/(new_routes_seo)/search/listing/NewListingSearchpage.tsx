@@ -6,6 +6,9 @@ const ListingSearchRightSection = dynamic(() => import("./components/listingSear
 const ProjectSearchBreadCrumbs = dynamic(() => import("../components/ProjSearchBreadCrums"));
 
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
+import Image from "next/image";
+import { useAtomValue } from "jotai";
+import { searchPageMapToggle } from "../store/projSearchStore";
 // import ListingHeaderFilters from "./components/ListingSearchHeader";
 
 const ListingHeaderFilters = dynamic(() => import("./components/ListingSearchHeader"));
@@ -21,7 +24,10 @@ export default function NewListingSearchpage({
   frontendFilters,
   pageUrl,
 }: Props) {
+  const isMapLoaded = useAtomValue(searchPageMapToggle);
   const isListing = true;
+
+  console.log(`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`)
 
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
@@ -36,16 +42,34 @@ export default function NewListingSearchpage({
           <ListingHeaderFilters key="newSearchFilter3" isListing={isListing} />
         </div>
       </div>
-      <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
+      <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[220px] ">
         <ListingSearhLeftSection
           serverData={serverData}
           frontendFilters={frontendFilters}
         />
         <div className="w-[100%] sm:w-[50%] -z-10" />
+
+        {isMapLoaded ? 
         <ListingSearchRightSection
           serverData={serverData}
           key="projListingSearchRightSection2"
         />
+        :
+        <div
+          className={` w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 border-[2px] border-black-500 border-solid 
+                    h-[calc(100vh-65vh)] md:h-[calc(100vh-255px)] w-full max-w-full`}
+          id="mobileMap" 
+        >
+          <Image
+              width={500}
+              height={500}
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+              alt=""
+              className="h-full w-full"
+            />
+        </div> 
+        }
+
       </div>
     </main>
   );

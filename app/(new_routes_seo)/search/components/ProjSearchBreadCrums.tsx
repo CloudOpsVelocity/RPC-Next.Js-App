@@ -12,15 +12,16 @@ interface BreadcrumbProps {
   pageUrl: string;
 }
 
+
+export const trimFromWord = (str: string, word: string) => {
+  const index = str.indexOf(word);
+  return index !== -1 ? str.substring(index + word.length) : "";
+}
+
 const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   function trimStringUrl(str: string, word: string) {
     const index = str.indexOf(word);
     return index !== -1 ? str.substring(0, index + word.length) : str;
-  }
-
-  function trimFromWord(str: string, word: string) {
-    const index = str.indexOf(word);
-    return index !== -1 ? str.substring(index + word.length) : "";
   }
 
   let trimmedUrl = "";
@@ -40,7 +41,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
     trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
     newParams = trimmedUrl.split("/");
   }
-
+ 
   if (!newParams || newParams.length === 0) {
     return null;
   }

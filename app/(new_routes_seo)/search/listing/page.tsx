@@ -16,16 +16,16 @@ export default function Page({}: Props) {
           pageUrl={"/search/listing"}
         />
 
-        <ProjSearchMainFilterSection
+        <ProjSearchMainFilterSection 
           key="newSearchFilter4"
           isListing={isListing}
         />
       </div>
-      <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
+      <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[220px] ">
         <ListingSearhLeftSection />
         <div className="w-[100%] sm:w-[50%] -z-10" />
-        <ListingSearchRightSection key="projListingSearchRightSection1" />
-      </div>
+          <ListingSearchRightSection key="projListingSearchRightSection1" />
+        </div>
     </main>
   );
 }
