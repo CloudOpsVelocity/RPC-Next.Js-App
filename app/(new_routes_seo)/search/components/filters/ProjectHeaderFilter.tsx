@@ -22,8 +22,11 @@ import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDr
 import dynamic from "next/dynamic";
 
 const SelectedFilters = dynamic(() => import("./SelectedFilters"));
-const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
-const ListingSearchTabs = dynamic(() => import("../../listing/components/ListingSearchTabs"));
+// const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
+import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
+const ListingSearchTabs = dynamic(
+  () => import("../../listing/components/ListingSearchTabs")
+);
 
 const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -95,11 +98,21 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
-    if(dropdownName == "allFiltersdes" ){
-      if( document.body.style.overflow === "hidden")
-      document.body.style.overflow = "unset";
-    }else{
-      document.body.style.overflow = "hidden";
+    if (dropdownName == "allFiltersdes") {
+      if (document.body.style.overflow === "hidden")
+        document.body.style.overflow = "unset";
+      else {
+        document.body.style.overflow = "hidden";
+      }
+    }
+  };
+  const tested = () => {
+    if (openDropdown == "Buy") {
+      if (document.body.style.overflow == "hidden") {
+        document.body.style.overflow = "unset";
+      } else {
+        document.body.style.overflow = "hidden";
+      }
     }
   };
   const handleSearchChange = (e: any) => {
@@ -136,7 +149,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
         break;
       case "projects":
         if (data.type === "Project") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : ""
+          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
         } else {
           if (isListingSearch) {
             dispatch({
@@ -148,11 +161,15 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
               },
             });
           } else {
-            typeof window !== "undefined" ? window.open(
-              `/search/listing?sf=projIdEnc=${
-                data.stringId.split("_")[0]
-              }-phaseId=${data.stringId.split("_")[1]}-projName=${data.name}`
-            ) : ""
+            typeof window !== "undefined"
+              ? window.open(
+                  `/search/listing?sf=projIdEnc=${
+                    data.stringId.split("_")[0]
+                  }-phaseId=${data.stringId.split("_")[1]}-projName=${
+                    data.name
+                  }`
+                )
+              : "";
           }
         }
 
@@ -207,7 +224,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
                     .trim()}`
                 : ""
             }`;
-            typeof window !== "undefined" ? window.open(url) : ""
+            typeof window !== "undefined" ? window.open(url) : "";
           }
         }
         break;
@@ -219,24 +236,28 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
           }-listedBy=${AgentOwnerBuilderMap.get(
             data.type
           )}-projName=${projectName}`;
-          typeof window !== "undefined" ? window.open("/search/listing?sf=" + url) : ''
+          typeof window !== "undefined"
+            ? window.open("/search/listing?sf=" + url)
+            : "";
         }
         break;
       case "builders":
         if (data.type === "BuilderDetail") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : ""
+          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
         } else {
           const url =
             encodeURIComponent(data.name) +
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
-            typeof window !== "undefined" ? window.open(
-            `/search?sf=builderIds=${url}${
-              data.type !== "BuilderProject"
-                ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
-                : ""
-            }`
-          ) : ''
+          typeof window !== "undefined"
+            ? window.open(
+                `/search?sf=builderIds=${url}${
+                  data.type !== "BuilderProject"
+                    ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
+                    : ""
+                }`
+              )
+            : "";
         }
         break;
       default:
@@ -248,7 +269,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if(searchQuery !== ""){
+    if (searchQuery !== "") {
       const res = await fetch(
         `${
           process.env.NEXT_PUBLIC_BACKEND_URL
@@ -287,17 +308,16 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
         setSearchQuery("");
         return;
       }
-    }else{
-      handleDropdownToggle("allFilters")
+    } else {
+      handleDropdownToggle("allFilters");
     }
   };
 
-  const handleOpenDropdown=()=>{
+  const handleOpenDropdown = () => {
     setIsDrawerOpen(true);
     setIsDrawerOpentest(true);
     document.body.style.overflow = "hidden";
-  }
-
+  };
 
   return (
     <>
@@ -439,8 +459,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
 
             <button
               className="md:hidden flex text-[14px] items-center h-[38px] md:h-[42px] xl:h-auto gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
-              onClick={() =>handleOpenDropdown()}
-              
+              onClick={() => handleOpenDropdown()}
             >
               <MdFilterList className="w-5 h-5" />
               Filters
@@ -459,10 +478,10 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-lg font-semibold">Filters</h2>
               <button
-              onClick={() => {
-                setIsDrawerOpen(false);
-                document.body.style.overflow = "unset";
-              }}
+                onClick={() => {
+                  setIsDrawerOpen(false);
+                  document.body.style.overflow = "unset";
+                }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >
                 <MdClose className="w-6 h-6" />
@@ -476,7 +495,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
                 isListing={isListing}
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
-                isOpen 
+                isOpen
                 onToggle={() => handleDropdownToggle("allFiltersdes")}
               />
             </div>

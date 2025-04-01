@@ -111,7 +111,7 @@ const LocationHeader = ({ projName, type }: { projName: string; type?: "proj" | 
                     ? `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/mobile-default-map.webp`
                     : `https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
                   alt="Map preview"
-                  className="w-full h-full object-cover opacity-70"
+                  className="w-full h-full object-contain opacity-70"
                   width={237}
                   height={263}
                 />
@@ -123,7 +123,7 @@ const LocationHeader = ({ projName, type }: { projName: string; type?: "proj" | 
                   onClick={() => setShowMap(true)}
                   className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
                 >
-                  <span className="text-lg font-semibold">Click to View Location</span>
+                  <span className="text-lg font-semibold">Click to View Location Details</span>
                 </button>
               </div>
             </div>

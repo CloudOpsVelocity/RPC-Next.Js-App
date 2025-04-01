@@ -21,6 +21,7 @@ interface FrontEndFilter {
   city?: string;
   bhk?: number[];
   localities?: string[];
+  listedBy: string;
 }
 
 interface SeoSearchResult {
@@ -50,11 +51,11 @@ const CaseSeoSearchService = async (
   }
   if (!searchParams.sf) {
     const url = createUrl(slugValues);
-    // console.log(url);
     severData = await getNewProjSearchData(url);
   }
   let city = `Bengaluru`;
   const frontEndFilter: FrontEndFilter = {
+    listedBy: "All",
     ...(slugValues.P ? { propType: parseInt(slugValues.P) } : {}),
     ...(slugValues.CG ? { cg: slugValues.CG } : {}),
     ...(slugValues.C ? { city: `${city}+${slugValues.C}` } : {}),

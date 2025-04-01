@@ -84,6 +84,7 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       enabled: isTrue,
       // ...RTK_CONFIG,
     });
+
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
     enabled: true,

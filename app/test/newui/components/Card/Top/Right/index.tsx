@@ -1,5 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import selectedSearchAtom, { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
+import selectedSearchAtom, {
+  modalPopup,
+  selectedNearByAtom,
+} from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
 import React from "react";
 import HeartButton from "../Center/HeartButton";
@@ -13,6 +16,7 @@ import DownloadBrocher from "../../DownloadBrocher";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+import Link from "next/link";
 
 type Props = any;
 
@@ -54,7 +58,6 @@ export default function TopRightSection({
   bhk,
   bhkName,
 }: Props) {
-
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
@@ -231,28 +234,37 @@ export default function TopRightSection({
                   <NewMapIcon className="w-6 h-6 " />
                 </div> */}
 
-                <button 
+                <button
                   title="Click to view on Map"
-                  className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
+                  className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none "
                   onClick={() => {
-                    setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"", isOpen: false }));
-                    setMapPopup((prev:any) => ({...prev, isOpen: true}));
+                    setNearby((prev: any) => ({
+                      ...prev,
+                      category: "",
+                      selectedNearbyItem: {},
+                      data: {},
+                      id: "",
+                      isOpen: false,
+                    }));
+                    setMapPopup((prev: any) => ({ ...prev, isOpen: true }));
                     setSelected({
                       agentListing,
                       ownerListing,
-                      projOrPropName, 
+                      projOrPropName,
                       lat,
                       lang,
                       type,
                       reqId: type === "proj" ? projIdEnc : propIdEnc,
                       propType: type === "proj" ? propType : propTypeName,
-                      phaseId: phaseId
-                    })}
-                  }
+                      phaseId: phaseId,
+                    });
+                  }}
                 >
-                    <span className=" px-[4px] h-full w-full text-white transition-[300ms] rounded-md bg-transparent">View Map</span>
+                  <span className=" px-[4px] h-full w-full text-white transition-[300ms] rounded-md bg-transparent">
+                    View Map
+                  </span>
                 </button>
-                
+
                 {/* 
                 <button
                   className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px] rounded text-[#242424] text-sm not-italic font-semibold sm:my-1 md:mb-1 xl:gradient"
@@ -297,27 +309,35 @@ export default function TopRightSection({
                 </div>
               </button> */}
 
-              <button 
-                className="group sm:flex hidden md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none " 
+              <button
+                className="group sm:flex hidden md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none "
                 title="Click to view on Map"
                 onClick={() => {
-                  setNearby((prev:any) => ({...prev, category: "", selectedNearbyItem:{}, data:{}, id:"", isOpen: false }));
+                  setNearby((prev: any) => ({
+                    ...prev,
+                    category: "",
+                    selectedNearbyItem: {},
+                    data: {},
+                    id: "",
+                    isOpen: false,
+                  }));
                   setSelected({
                     agentListing,
                     ownerListing,
-                    projOrPropName, 
+                    projOrPropName,
                     lat,
                     lang,
                     type,
                     reqId: type === "proj" ? projIdEnc : propIdEnc,
                     propType: type === "proj" ? propType : propTypeName,
-                    phaseId: phaseId
-                  })}
-                }
+                    phaseId: phaseId,
+                  });
+                }}
               >
-                  <span className="bg-white px-[6px] h-full w-full text-black group-hover:text-white transition-[300ms] rounded-md hover:bg-transparent">View on Map</span>
+                <span className="bg-white px-[6px] h-full w-full text-black group-hover:text-white transition-[300ms] rounded-md hover:bg-transparent">
+                  View on Map
+                </span>
               </button>
-
             </div>
 
             {/* <div className="flex items-end flex-col justify-between md:gap-2 mt-[2px]">
@@ -333,7 +353,9 @@ export default function TopRightSection({
                 {" "}
                 {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
                 <button
-                  title={`Click to view ${amenCount === 1 ? "" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                  title={`Click to view ${
+                    amenCount === 1 ? "" : "all"
+                  } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
                   className="bg-orange-500 text-white text-right max-w-fit px-[4px] py-[4px] md:py-[6px] sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs text-nowrap  inline-flex"
                   onClick={() =>
                     dispatch({
@@ -345,14 +367,22 @@ export default function TopRightSection({
                       pType: type,
                     })
                   }
-                > 
+                >
                   {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
                 </button>
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit font-bold px-[4px] py-[4px] sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                   title="Click to view all Near by Locations"
                   onClick={() => {
-                    setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
+                    setNearby((prev: any) => ({
+                      ...prev,
+                      category: "",
+                      data: {},
+                      selectedNearbyItem: {},
+                      id: "",
+                      isOpen: false,
+                      isLoader: true,
+                    }));
                     // setSelected(null);
                     setSelected({
                       lat: data.lat,
@@ -361,9 +391,10 @@ export default function TopRightSection({
                       reqId: !propIdEnc ? projIdEnc : propIdEnc,
                       propType: !propIdEnc ? propType : propTypeName,
                       projOrPropName: propName ? propName : projName,
-                      phaseId:phaseId
-                    })
-                    if(isMobile) setMapPopup((prev:any) => ({...prev, isOpen: true}));
+                      phaseId: phaseId,
+                    });
+                    if (isMobile)
+                      setMapPopup((prev: any) => ({ ...prev, isOpen: true }));
                     dispatch({
                       type: "OPEN",
                       content: [],
@@ -380,25 +411,24 @@ export default function TopRightSection({
                 >
                   Nearby
                 </button>
-
-
               </div>
             )}
             {(type === "proj" || type === null || category == "Sale") && (
-                <div className="text-xs flex xl:hidden sm:text-base font-semibold text-[#4f4f4f] mt-[4px] justify-end items-end ">
-                  <p className="text-right text-[12px] md:text-[14px] text-nowrap ">
-                    Avg Price:
-                    <span className="text-[#148B16]">₹{" "}
-                      {formatNumberWithSuffix(
-                        type === "proj" ? basePrice : sqftPrice
-                      )}
-                    </span>
-                  </p>
-                 {/*  <p className="text-right text-[12px] text-nowrap">
+              <div className="text-xs flex xl:hidden sm:text-base font-semibold text-[#4f4f4f] mt-[4px] justify-end items-end ">
+                <p className="text-right text-[12px] md:text-[14px] text-nowrap ">
+                  Avg Price:
+                  <span className="text-[#148B16]">
+                    ₹{" "}
+                    {formatNumberWithSuffix(
+                      type === "proj" ? basePrice : sqftPrice
+                    )}
+                  </span>
+                </p>
+                {/*  <p className="text-right text-[12px] text-nowrap">
                     {towerData ? towerData : "N/A"}
                   </p> */}
-                </div>
-              )}
+              </div>
+            )}
 
             {type !== "proj" && (
               <>
@@ -475,26 +505,35 @@ export default function TopRightSection({
               </div>
             </button> */}
 
-            <button 
-                className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold group-hover:outline-none active:outline-none " 
-                title="Click to view on Map"
-                onClick={() => {
-                  setNearby((prev:any) => ({...prev, category: "", isOpen: false, selectedNearbyItem:{}, data:{}, id:"" }));
-                  setSelected({
-                    agentListing,
-                    ownerListing,
-                    projOrPropName, 
-                    lat,
-                    lang,
-                    type,
-                    reqId: type === "proj" ? projIdEnc : propIdEnc,
-                    propType: type === "proj" ? propType : propTypeName,
-                    phaseId: phaseId
-                  })}
-                }
-              >
-                  <span className="bg-white h-full w-full px-[6px] text-black group-hover:text-white transition-[300ms] rounded-md group-hover:bg-transparent">View on Map</span>
-              </button>
+            <button
+              className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold group-hover:outline-none active:outline-none "
+              title="Click to view on Map"
+              onClick={() => {
+                setNearby((prev: any) => ({
+                  ...prev,
+                  category: "",
+                  isOpen: false,
+                  selectedNearbyItem: {},
+                  data: {},
+                  id: "",
+                }));
+                setSelected({
+                  agentListing,
+                  ownerListing,
+                  projOrPropName,
+                  lat,
+                  lang,
+                  type,
+                  reqId: type === "proj" ? projIdEnc : propIdEnc,
+                  propType: type === "proj" ? propType : propTypeName,
+                  phaseId: phaseId,
+                });
+              }}
+            >
+              <span className="bg-white h-full w-full px-[6px] text-black group-hover:text-white transition-[300ms] rounded-md group-hover:bg-transparent">
+                View on Map
+              </span>
+            </button>
 
             {type !== "proj" && (
               <>
@@ -519,20 +558,23 @@ export default function TopRightSection({
                   }
                 />
                 {floorPlan && (
-                  <button
+                  <Link
                     title="Click to view Floor Plan"
                     className="text-[14px]  text-btnPrimary  font-bold mt-2"
-                    onClick={() =>
-                      window.open(
-                        `/image?path=${
-                          floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
-                        }&type=F`,
-                        "_self"
-                      )
-                    }
+                    href={`/image?path=${
+                      floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
+                    }&type=F`}
+                    // onClick={() =>
+                    //   window.open(
+                    //     `/image?path=${
+                    //       floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
+                    //     }&type=F`,
+                    //     "_self"
+                    //   )
+                    // }
                   >
                     <span className="hidden sm:flex">View Floor Plan</span>
-                  </button>
+                  </Link>
                 )}
               </>
             )}
@@ -543,7 +585,9 @@ export default function TopRightSection({
               {amenCount && (
                 <button
                   className="bg-orange-500 text-white py-1 px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
-                  title={`Click to view ${amenCount === 1 ? "" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                  title={`Click to view ${
+                    amenCount === 1 ? "" : "all"
+                  } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
                   onClick={() =>
                     dispatch({
                       type: "OPEN",
@@ -565,7 +609,15 @@ export default function TopRightSection({
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 title="Click to view all Near by Locations"
                 onClick={() => {
-                  setNearby((prev:any) => ({...prev, category: "", data:{}, selectedNearbyItem:{}, id:"", isOpen: false, isLoader: true}));
+                  setNearby((prev: any) => ({
+                    ...prev,
+                    category: "",
+                    data: {},
+                    selectedNearbyItem: {},
+                    id: "",
+                    isOpen: false,
+                    isLoader: true,
+                  }));
                   // setSelected(null);
                   setSelected({
                     lat: data.lat,
@@ -574,13 +626,13 @@ export default function TopRightSection({
                     reqId: !propIdEnc ? projIdEnc : propIdEnc,
                     propType: !propIdEnc ? propType : propTypeName,
                     projOrPropName: propName ? propName : projName,
-                    phaseId: phaseId
-                  })
+                    phaseId: phaseId,
+                  });
                   dispatch({
                     type: "OPEN",
                     content: [
                       "Orion Mall",
-                      "Apollo Hospital", 
+                      "Apollo Hospital",
                       "Greenwood High International School",
                       "MG Road Metro Station",
                       "Major Bus Stop",
