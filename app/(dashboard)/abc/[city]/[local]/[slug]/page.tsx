@@ -170,13 +170,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             {" > "}
             <Link rel={"noopener noreferrer"} href={"/project/banglore"}>
               <span className="hover:underline cursor-pointer">
-                Projects In {data.cityName}
+                 {data.cityName}
               </span>
             </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"}>
               <span className="hover:underline cursor-pointer">
-                Projects In {`${data.localityName} `}
+                 {`${data.localityName} `}
               </span>
             </Link>{" "}
             {" > "}

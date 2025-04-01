@@ -42,7 +42,7 @@ function useGetPathTypeFromQueryParams(): string {
       exact: false,
     },
     {
-      path: "/residential-projects",
+      path: "/residential-listings",
       title: "Listing Details",
       exact: false,
     },

@@ -18,7 +18,7 @@ export const generateAllSchemas = (property: any) => {
     projName: property.projIdEnc && property.propName,
   });
   const cardTitle = `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`;
-  const description = property.usp.slice(0, 4800) || "";
+  const description = property?.usp?.slice(0, 4800) || "";
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [

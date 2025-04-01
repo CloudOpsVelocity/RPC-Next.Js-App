@@ -73,8 +73,8 @@ function Footer() {
         "Foreclosures", */
       ],
       hrefs: [
-        "/residential-projects/for-sale",
-        "/residential-projects/for-rent",
+        "/residential-listings/for-sale",
+        "/residential-listings/for-rent",
         "/search?sf=projStatus=108",
         "/search?sf=projStatus=106",
         "/search?sf=projStatus=107",

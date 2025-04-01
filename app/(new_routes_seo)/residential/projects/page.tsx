@@ -20,7 +20,7 @@ const stateData = {
         },
         {
           id: 2,
-          name: "Projects in Bangalore",
+          name: "Bangalore",
           image:
             "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop",
           link: "/search",
