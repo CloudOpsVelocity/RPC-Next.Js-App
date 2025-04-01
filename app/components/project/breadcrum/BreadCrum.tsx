@@ -7,8 +7,8 @@ import React from "react";
 export default function BreadCrumbs({ params }: { params: any }) {
   const allParams = Object.keys(params);
   const titleOfKeys = {
-    city: "Project in ",
-    lt: "Projects in ",
+    city: "",
+    lt: "",
   };
   let currentPath = "";
   const breadcrumsschema = {
@@ -59,14 +59,16 @@ export default function BreadCrumbs({ params }: { params: any }) {
       />
 
       <Script
-      id="BreadCrumbsScript2"
+        id="BreadCrumbsScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(siteNavigationSchema),
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        <Link rel="noopener noreferrer"
+        <Link
+          prefetch={false}
+          rel="noopener noreferrer"
           href={`/`}
           className="hover:underline cursor-pointer capitalize"
         >
@@ -89,6 +91,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
             <React.Fragment key={`${key[index]}`}>
               {index < Object.keys(params).length - 1 ? (
                 <Link
+                  prefetch={false}
                   // href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
                   href={`${BASE_PATH_PROJECT_DETAILS}${redirectPath}`}
                   className="hover:underline cursor-pointer capitalize"

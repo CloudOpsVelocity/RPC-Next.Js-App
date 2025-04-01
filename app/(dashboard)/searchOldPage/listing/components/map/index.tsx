@@ -54,7 +54,7 @@ const Map = ({ data }: any) => {
         zoom={10}
       >
         <TileLayer
-          attribution='&copy; <Link rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors'
+          attribution='&copy; <Link rel="noopener noreferrer" prefetch={false} href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 

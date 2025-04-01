@@ -13,7 +13,7 @@ function BlogDetailLeftSection() {
   const path = usePathname();
 
   return ( 
-    <Link rel="noopener noreferrer" href={`${path}/${pathName}`}>
+    <Link rel="noopener noreferrer" href={`${path}/${pathName}`} prefetch={false}>
       <div className='max-w-[617px] w-full '>
           <Image 
               src={data?.coverImage} 

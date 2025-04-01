@@ -22,10 +22,10 @@ export default function PropertyHeading({
       {Svg}{" "}
       <div>
         {" "}
-        <p className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize">
+        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize">
           {title}
           {projName && projName !== "" && <span className="text-[#148B16]">{projName} </span> }
-        </p>{" "}
+        </h2>{" "}
         <p className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2">
           {desc}
         </p>

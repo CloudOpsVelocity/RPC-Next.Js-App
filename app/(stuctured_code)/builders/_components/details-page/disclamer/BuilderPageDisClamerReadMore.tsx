@@ -15,7 +15,7 @@ export default function DisClamerReadMore({}: Props) {
       )}
     >
       from{" "}
-      <Link rel="noopener noreferrer"
+      <Link rel="noopener noreferrer" prefetch={false}
         href="https://www.getrightproperty.com"
         className="text-blue-600 underline"
       >

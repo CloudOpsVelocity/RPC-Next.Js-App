@@ -61,7 +61,7 @@ export default function page({}: Props) {
               to navigate property transactions and make informed decisions with
               ease.
             </p>
-            <Link rel="noopener noreferrer"
+            <Link rel="noopener noreferrer" prefetch={false}
               className="text-[#FFF] mt-[14px] px-[10px] py-[6px] text-[13px] sm:mt-[20px] xl:mt-[34px]  sm:text-[17px]  xl:text-[20px] not-italic font-bold leading-[normal] sm:px-[20.514px] sm:py-[13.676px] justify-center items-center gap-[7.598px] rounded-[4px] bg-[#0073C6]"
               href={url}
             >
@@ -225,7 +225,7 @@ export default function page({}: Props) {
                 projects. Explore innovative projects and find your perfect new
                 home today.{" "}
               </p>
-              <Link rel="noopener noreferrer"
+              <Link rel="noopener noreferrer" prefetch={false}
                 href="https://www.getrightproperty.com/search?sf=projStatus=108"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
@@ -244,7 +244,7 @@ export default function page({}: Props) {
                 homes ready for you. Discover quality craftsmanship and
                 move-in-ready projects now.{" "}
               </p>
-              <Link rel="noopener noreferrer"
+              <Link rel="noopener noreferrer" prefetch={false}
                 href="https://www.getrightproperty.com/search?sf=projStatus=107"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >
@@ -263,7 +263,7 @@ export default function page({}: Props) {
                 updated on construction progress and secure your ideal projects
                 early.{" "}
               </p>
-              <Link rel="noopener noreferrer"
+              <Link rel="noopener noreferrer" prefetch={false}
                 href="https://www.getrightproperty.com/search?sf=projStatus=106"
                 className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
               >

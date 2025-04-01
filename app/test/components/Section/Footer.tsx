@@ -70,8 +70,8 @@ export default function EnhancedFooter() {
         "Foreclosures", */
       ],
       hrefs: [
-        "/residential-projects/for-sale",
-        "/residential-projects/for-rent?listedBy=ALL&cg=R",
+        "/residential-listings/for-sale",
+        "/residential-listings/for-rent?listedBy=ALL&cg=R",
         "/search?sf=projStatus=108",
         "/search?sf=projStatus=106",
         "/search?sf=projStatus=107",
@@ -181,7 +181,7 @@ export default function EnhancedFooter() {
             </p>
             <div className="flex space-x-6">
               {socialIcons.map(({ name, icon, link }) => (
-                <Link
+                <Link prefetch={false}
                   rel="noreferrer"
                   key={name}
                   href={link}
@@ -205,7 +205,7 @@ export default function EnhancedFooter() {
                   <ul className="sm:mt-4  md:space-y-4">
                     {links.map((link, index) => (
                       <li key={link}>
-                        <Link
+                        <Link prefetch={false}
                           rel="noopener noreferrer"
                           href={hrefs[index]}
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -230,7 +230,7 @@ export default function EnhancedFooter() {
                       if (link !== "") {
                         return (
                           <li key={link}>
-                            <Link
+                            <Link prefetch={false}
                               rel="noopener noreferrer"
                               href={hrefs[index]}
                               className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -254,7 +254,7 @@ export default function EnhancedFooter() {
                   <ul className="sm:mt-4  md:space-y-4">
                     {links.map((link, index) => (
                       <li key={link}>
-                        <Link
+                        <Link prefetch={false}
                           rel="noopener noreferrer"
                           href={hrefs[index]}
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -290,7 +290,7 @@ export default function EnhancedFooter() {
             <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
               <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
             </button>
-            <Link
+            <Link prefetch={false}
               rel="noopener noreferrer"
               href={`tel:${8884440963}`}
               className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
@@ -302,7 +302,7 @@ export default function EnhancedFooter() {
             Copyright © 2024 GetRightProperty. All Rights Reserved.
             <span>
               <br />A Product By &quot;
-              <Link rel="noopener noreferrer" href="https://rpclan.com/">
+              <Link prefetch={false} rel="noopener noreferrer" href="https://rpclan.com/">
                 {" "}
                 RPCLAN SERVICES PVT.LTD
               </Link>

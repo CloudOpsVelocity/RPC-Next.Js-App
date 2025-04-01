@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox } from "@mantine/core";
+// import { Checkbox } from "@mantine/core";
 import clsx from "clsx";
 type Props = {
   issueData: any;
@@ -33,7 +33,7 @@ export default function ReportOptions({
               className="flex flex-row  justify-start items-center m-2"
               key={x.cid}
             >
-              <Checkbox
+              {/* <Checkbox
                 key={x.cid}
                 label={x.constDesc}
                 color={`${
@@ -42,14 +42,36 @@ export default function ReportOptions({
                 classNames={{
                   label: `text-[13px] leading-normal capitalize font-feature-settings-[clig off]  ${
                     reportStatus.find((item) => item === x.cid)
-                      ? /*  reportStatus.includes(x.cid) */
+                      ?
                         "!text-[#0073C6] !font-bold"
                       : "!text-[#242424]"
                   }`,
                 }}
                 checked={reportStatus.includes(x.cid)}
                 onClick={() => reportIssuseFun(x.cid)}
+              /> */}
+        
+              <input 
+                name="commonField" 
+                id={x.cid} 
+                type="checkbox"
+                checked={reportStatus.includes(x.cid)}
+                onClick={() => reportIssuseFun(x.cid)}
+                className=" select-none mr-[6px] "
               />
+
+              <label 
+                htmlFor={x.cid}
+                className={`text-[13px] leading-normal capitalize font-feature-settings-[clig off] select-none ${
+                    reportStatus.find((item) => item === x.cid)
+                      ? /*  reportStatus.includes(x.cid) */
+                        "!text-[#0073C6] !font-bold"
+                      : "!text-[#242424]"
+                  }`} 
+                style={{ color:`${ reportStatus.includes == x.cid ? "#0073C6" : "green"}` }}
+              >
+                {x.constDesc}
+              </label>
             </div>
           );
         })}

@@ -16,7 +16,7 @@ const ButtonLink = ({
   href,
 }: props) => {
   return (
-    <Link className={buttonConClass} href={href}>
+    <Link prefetch={false} className={buttonConClass} href={href}>
       <div className={buttonClass}>
         {icon}
         {title}

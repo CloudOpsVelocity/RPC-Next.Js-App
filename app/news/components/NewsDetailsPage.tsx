@@ -68,7 +68,7 @@ function NewsDetailsPage({}: Props) {
                 <div className="flex flex-wrap gap-[10px]">
                     {commonLinks.redirections.map((eachOne:any)=>{
                         return(
-                          <Link rel="noopener noreferrer" key={eachOne.name} href={eachOne.link} >
+                          <Link prefetch={false} rel="noopener noreferrer" key={eachOne.name} href={eachOne.link} >
                             <p className=" bg-gray-400 text-[10px] md:text-[12px] cursor-pointer text-white p-[2px] px-[4px] md:px-[6px] ">#{eachOne.name}</p>
                           </Link>
                         )
@@ -77,7 +77,7 @@ function NewsDetailsPage({}: Props) {
 
                 <div className="flex space-x-6 mt-[10px] gap-[10px] md:gap-[16px] md:mt-0 items-end justify-end max-h-[32px] ">
                     {commonLinks.socialIcons.map(({ name, icon, link }) => (
-                    <Link rel="noreferrer"
+                    <Link prefetch={false} rel="noreferrer"
                         key={name}
                         href={link}
                         className="text-white hover:text-gray-300 !m-0"

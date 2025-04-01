@@ -2,12 +2,13 @@ import { FaLinkedin, FaTwitter, FaEnvelope, FaFacebookF, FaInstagram } from "rea
 import { GiHouse } from "react-icons/gi"
 import { MdLocationOn } from "react-icons/md"
 import Link from "next/link";
+import Image from "next/image";
 
 const teamMembers = [
   {
     name: "Rahul Vishwakarma",
     role: "CEO & Founder",
-    image: "https://res.cloudinary.com/du0cg2eqm/image/upload/v1709121531/Image_20240228_122033_803_tx46q5.jpg",
+    image: "https://media.getrightproperty.com/staticmedia-images-icons/team/managing-director.jpg",
     bio: "With over 15 years of experience in Bangalore's real estate market, Rahul Vishwakarma leads our team with vision and expertise.",
     linkedin: "https://in.linkedin.com/in/rahul-vishwakarma-867a2318?trk=people-guest_people_search-card",
     twitter: "#",
@@ -16,7 +17,7 @@ const teamMembers = [
   {
     name: "Kumar Abhishek",
     role: "Head- Sales & Operations",
-    image: "https://res.cloudinary.com/du0cg2eqm/image/upload/v1709121529/Image_20240228_122033_856_lwocf8.jpg",
+    image: "https://media.getrightproperty.com/staticmedia-images-icons/team/sales-head.jpg",
     bio: "Abhishek's deep knowledge of Bangalore's neighborhoods helps clients find their perfect home.",
     linkedin: "#",
     twitter: "#",
@@ -92,10 +93,12 @@ export default function TeamPage() {
                   key={member.name}
                   className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105"
                 >
-                  <img
+                  <Image
                     className="w-full h-64 object-cover object-center"
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}
+                    width={64}
+                    height={64}
                   />
                   <div className="p-6">
                     <h3 className="text-2xl font-semibold text-gray-800">{member.name}</h3>

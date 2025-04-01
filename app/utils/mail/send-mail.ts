@@ -10,7 +10,7 @@ export async function sendEmail(mailerData: any, selectedJob: any) {
         <body>
             <p><strong>${mailerData.get(
               "fullName"
-            )}</strong> is applying with the email address <Link rel="noopener noreferrer" href="mailto:${mailerData.get(
+            )}</strong> is applying with the email address <Link prefetch={false} rel="noopener noreferrer" href="mailto:${mailerData.get(
     "email"
   )}">${mailerData.get("email")}</Link> and phone number ${mailerData.get(
     "phone"

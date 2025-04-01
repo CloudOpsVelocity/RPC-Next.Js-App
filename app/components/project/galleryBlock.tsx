@@ -134,7 +134,6 @@ export default function GalleryBlock({
                       width={799}
                       height={400}
                       unoptimized
-                      priority 
                     />
                   </picture>
                 </div>
@@ -173,9 +172,9 @@ export default function GalleryBlock({
         </div>
         {/* all media display con */}
         <div className="w-[100%] md:w-[47%] mt-3 sm:mt-0">
-          <h2 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%]">
+          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%]">
             Photos
-          </h2>
+          </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap relative">
             {images?.map((img, ind) => {
               if (img.includes("masterplan")) return null;
@@ -222,7 +221,6 @@ export default function GalleryBlock({
                     onClick={() => handleMediaClick(img, ind)}
                     unoptimized
                     fill
-                    priority 
                   />
                 </div>
               );
@@ -232,9 +230,9 @@ export default function GalleryBlock({
 
         {videos && videos.length > 0 && (
           <div className="w-[100%] md:w-[47%]">
-            <h2 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] scroll-mt-[400px]">
+            <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] scroll-mt-[400px]">
               Videos
-            </h2>
+            </h3>
             <div className="flex justify-start items-start w-full gap-[4%] flex-wrap">
               {videos?.map((img, ind) => (
                 <div
@@ -260,7 +258,6 @@ export default function GalleryBlock({
                       className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover"
                       alt="thumbnail"
                       onClick={() => handleMediaClick(img, ind)}
-                      priority 
                     />
                   ) : (
                     <video

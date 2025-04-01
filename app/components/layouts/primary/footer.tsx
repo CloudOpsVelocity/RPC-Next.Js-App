@@ -73,8 +73,8 @@ function Footer() {
         "Foreclosures", */
       ],
       hrefs: [
-        "/residential-projects/for-sale",
-        "/residential-projects/for-rent",
+        "/residential-listings/for-sale",
+        "/residential-listings/for-rent",
         "/search?sf=projStatus=108",
         "/search?sf=projStatus=106",
         "/search?sf=projStatus=107",
@@ -201,7 +201,7 @@ function Footer() {
               </p>
               <div className="flex space-x-6">
                 {socialIcons.map(({ name, icon, link }) => (
-                  <Link
+                  <Link prefetch={false}
                     rel="noreferrer"
                     key={name}
                     href={link}
@@ -225,7 +225,7 @@ function Footer() {
                     <ul className="sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <Link
+                          <Link prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -250,7 +250,7 @@ function Footer() {
                         (link, index) =>
                           link && (
                             <li key={link}>
-                              <Link
+                              <Link prefetch={false}
                                 href={hrefs[index]}
                                 rel={rel}
                                 className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -274,7 +274,7 @@ function Footer() {
                     <ul className="sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <Link
+                          <Link prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -312,7 +312,7 @@ function Footer() {
               <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
                 <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
               </button>
-              <Link
+              <Link prefetch={false}
                 rel="noopener noreferrer"
                 href={`tel:${8884440963}`}
                 className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
@@ -324,7 +324,7 @@ function Footer() {
               Copyright © 2024 GetRightProperty. All Rights Reserved.
               <span>
                 <br />A Product By &quot;
-                <Link rel="noopener noreferrer" href="https://rpclan.com/">
+                <Link prefetch={false} rel="noopener noreferrer" href="https://rpclan.com/">
                   {" "}
                   RPCLAN SERVICES PVT.LTD{" "}
                 </Link>

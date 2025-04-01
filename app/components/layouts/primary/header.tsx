@@ -34,7 +34,7 @@ export default function Header({}: Props) {
       <div
         className={`flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[30] `}
       >
-        <Link 
+        <Link prefetch={false} 
           prefetch={false}
           href={"/"}
           className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
@@ -163,7 +163,7 @@ function Dropdown() {
           </div>
         ) : (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
-            <Link
+            <Link prefetch={false}
               rel="noopener noreferrer"
               className=""
               href={{

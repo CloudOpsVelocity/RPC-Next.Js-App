@@ -26,8 +26,8 @@ export default function ListingBreadCrumbs({
   const allParams = Object.keys(params || {});
   const isIndependent = title.includes("Independent");
   const titleOfKeys = {
-    city: "Project In ",
-    lt: `${isIndependent ? "Independent Listings" : "Projects"} In `,
+    city: " ",
+    lt: `${isIndependent ? "Independent Listings" : ""} `,
   };
   let currentPath = "";
   let breadcrumbPath = "";

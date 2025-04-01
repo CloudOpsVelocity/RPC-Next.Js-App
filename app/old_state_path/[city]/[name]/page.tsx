@@ -115,15 +115,15 @@ export default async function Page({ params }: Props) {
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span className="hover:underline cursor-pointer ">Home</span>{" "}
             {" > "}
-            <Link href={"/project/banglore"}>
+            <Link prefetch={false} href={"/project/banglore"}>
               <span className="hover:underline cursor-pointer">
-                Projects In {data.cityName}
+                {data.cityName}
               </span>
             </Link>{" "}
             {" > "}
-            <Link href={"/project/banglore/whitefield"}>
+            <Link prefetch={false} href={"/project/banglore/whitefield"}>
               <span className="hover:underline cursor-pointer">
-                Projects In {`${data.localityName} `}
+                {`${data.localityName} `}
               </span>
             </Link>{" "}
             {" > "}

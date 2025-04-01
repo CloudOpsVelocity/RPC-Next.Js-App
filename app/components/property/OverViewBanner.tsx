@@ -18,11 +18,12 @@ import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 import { useMediaQuery } from "@mantine/hooks";
 import { parseOtherCharge } from "./pricingbreakup/PriceBreakup";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
+import Image from "next/image";
 export default function PropertyOverviewBanner({
   price,
   propTypeName,
-  plotArea,
-  sba,
+  // plotArea,
+  // sba,
   propName,
   bhkName,
   cg,
@@ -67,8 +68,7 @@ export default function PropertyOverviewBanner({
       {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
        */}
       
-      <img
-        loading="lazy"
+      <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
         width={237}
         height={263}
@@ -77,7 +77,7 @@ export default function PropertyOverviewBanner({
       />    
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
         <div className="flex  flex-col text-left">
-          <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+          <h4 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
             {" Total "}
             {cg === "S" ? "Selling" : "Rent"} Price{" "}
             {otherPrice?.otherCharge && (
@@ -85,7 +85,7 @@ export default function PropertyOverviewBanner({
                 (Including Other Charges)
               </span>
             )}
-          </p>
+          </h4 >
           <p className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
             <span className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {cg === "S"

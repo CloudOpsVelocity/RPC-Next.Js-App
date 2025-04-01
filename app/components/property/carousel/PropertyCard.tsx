@@ -148,13 +148,13 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] min-h-[212px] max-h-[212px]"
             width={300}
             height={212}
-            priority 
+             
           />
           {type == "proj" &&
             (cardData.rerastatus === "Recieved" ||
               cardData.rerastatus === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100}   />
               </p>
             )}
 
@@ -261,13 +261,13 @@ const ProjectCarousel = ({
     data?.length > 0 && (
       <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
         <div className=" ">
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize">
+          <h3 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}
             <span className="text-[#148B16] font-[700] uppercase ml-4 ">
               {projName}
             </span>
-          </h2>
+          </h3>
           <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">
             {content}
           </p>

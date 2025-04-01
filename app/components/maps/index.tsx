@@ -112,7 +112,7 @@ const Content: React.FC<any> = ({
   return (
     <>
       <TileLayer
-        attribution='&copy; <Link rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors'
+        attribution='&copy; <Link prefetch={false} rel="noopener noreferrer" href="https://www.openstreetmap.org/copyright">OpenStreetMap</Link> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {data &&

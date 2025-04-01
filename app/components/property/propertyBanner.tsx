@@ -56,11 +56,11 @@ export default function PropertyBanner({
         width={312}
         height={312}
         unoptimized
-        priority 
+        // priority 
       />
       <div className=" inline-flex justify-center items-center ">
         {Svg}
-        <h1 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
+        <h2 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
           about{" "}
           <span className="text-[#148B16] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] capitalize">
             {projectName}
@@ -68,7 +68,7 @@ export default function PropertyBanner({
           <p className=" text-[#4D6677] text-h2  sm:text-[16px] xl:text-[24px] break-words italic font-medium leading-[normal] capitalize mt-2">
             About project get summarized perspective for the incredible listing
           </p>
-        </h1>
+        </h2>
       </div>
       <div>
         <div className="inline-flex mt-6">
@@ -76,7 +76,7 @@ export default function PropertyBanner({
             {((reraStatus as unknown) === "Recieved" ||
               (reraStatus as unknown) === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px] z-[1]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100}  />
               </p>
             )}
             <div className="w-[350px] h-[185px] relative">
@@ -86,18 +86,18 @@ export default function PropertyBanner({
                 className="flex items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] w-full h-full object-fill "
                 unoptimized
                 height={630}
-                width={1200} priority                                             
+                width={1200}                                             
               />
             </div>
           </div>
 
           <div className="ml-5">
-            <h2 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+            <h3 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               {projectName}
-            </h2>
-            <h3 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
-              {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </h3>
+            <h4 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
+              {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
+            </h4>
             <p className="text-[#242424] text-sm sm:text-[18px]  xl:text-[24px] not-italic font-medium leading-[normal] mb-2">
               Start- End Date: {formatDateDDMMYYYY(startDate)} -{" "}
               {formatDateDDMMYYYY(endDate)}
@@ -155,7 +155,7 @@ function PropertyBannerForMobile({
               className="w-full h-auto xl:mb-4 md:w-auto md:mb-0"
               width={350}
               height={185}
-              priority 
+              // priority 
             />
             <div className="md:mt-4">
               <h2 className="text-[#001F35] text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2">

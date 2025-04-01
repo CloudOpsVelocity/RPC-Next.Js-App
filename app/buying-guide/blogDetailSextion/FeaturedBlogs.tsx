@@ -44,7 +44,7 @@ function FeaturedBlogs() {
                 {newList.map((each, index)=>{
                     const pathName = each && each.heading ? each.heading.toLowerCase().replaceAll(" ", "-") : ""; 
                     return(
-                        <Link rel="noopener noreferrer" key={`FeaturedBlogCard_${each.heading}`} href={`/buying-guide/${pathName}`}>
+                        <Link prefetch={false} rel="noopener noreferrer" key={`FeaturedBlogCard_${each.heading}`} href={`/buying-guide/${pathName}`}>
                             <FeaturedBlogCard  data={each} />
                         </Link>
                     )

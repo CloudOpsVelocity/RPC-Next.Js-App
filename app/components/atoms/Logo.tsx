@@ -8,7 +8,7 @@ type props = {
 
 const Logo = ({ styles }: props) => {
   return (
-    <Link href={"/"} className={styles}>
+    <Link prefetch={false} href={"/"} className={styles}>
       {/* <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`}
         alt="logo"

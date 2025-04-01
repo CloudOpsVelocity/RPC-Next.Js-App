@@ -119,10 +119,10 @@ function BlogDetailsFirstBlock() {
               }
               className={"w-[24px] h-[24px]"}
             />
-            <Link rel="noreferrer" href={facebookRedirectLink} target="_blank">
+            <Link prefetch={false} rel="noreferrer" href={facebookRedirectLink} target="_blank">
               <Facebook className={"w-[24px] h-[24px]"} />
             </Link>
-            <Link rel="noreferrer" href={whatsappRedirectLink} target="_blank">
+            <Link prefetch={false} rel="noreferrer" href={whatsappRedirectLink} target="_blank">
               <WhatsApp className={"w-[24px] h-[24px]"} />
             </Link>
           </div>
