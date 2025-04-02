@@ -288,6 +288,8 @@ export default async function page({ params }: Props) {
           projName={data.projectName}
           phaseOverviewData={phaseOverview}
           singleBroucher={data.media?.projBroucherUrl}
+          broucherImage={data.media?.projectPlanUrl }
+
         />
         <ErrorContainer data={data.specificationList}>
           <Specifications

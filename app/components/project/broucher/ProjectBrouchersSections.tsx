@@ -11,11 +11,16 @@ const ProjectBrouchersSection = ({
   projName,
   phaseOverviewData,
   singleBroucher,
+  broucherImage
 }: {
   projName: string;
   phaseOverviewData: PhaseOverview[];
   singleBroucher: string;
+  broucherImage:string 
+
 }): JSX.Element | null => {
+    console.log(broucherImage)
+
   const isBrocherAvail =
     singleBroucher || phaseOverviewData.some((phase) => phase.phaseBrochureUrl);
   if (!isBrocherAvail) return null;
@@ -24,6 +29,7 @@ const ProjectBrouchersSection = ({
       projName={projName}
       phaseOverviewData={phaseOverviewData}
       singleBrocher={singleBroucher}
+      broucherImage={broucherImage}
     />
   );
 };
