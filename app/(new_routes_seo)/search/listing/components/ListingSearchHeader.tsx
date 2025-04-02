@@ -21,6 +21,7 @@ import ProjSearchCityDropDown from "../../components/FilterComponents/city/Proje
 import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
 import dynamic from "next/dynamic";
 import { trimFromWord } from "../../components/ProjSearchBreadCrums";
+import PageTitle from "../../components/filters/PageTitle";
 // import SelectedFilters from "../../components/filters/SelectedFilters";
 const SelectedFilters = dynamic(
   () => import("../../components/filters/SelectedFilters")
@@ -270,15 +271,6 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     }
   };
 
-  const getTitle = (pageUrl:string) => {
-    if (document.title !== "Get Right Property") {
-      return document.title;
-    } else if (pageUrl === "/search") {
-      return "Project Search";
-    } else if (pageUrl === "/search/listing") {
-      return "Listing Search";
-    }
-  };
 
   return (
     <>
@@ -437,7 +429,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
             </button>
           </div>
 
-          <h1 className=" font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] ">{getTitle(path)}</h1>
+          <PageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             <ListingSearchTabs />

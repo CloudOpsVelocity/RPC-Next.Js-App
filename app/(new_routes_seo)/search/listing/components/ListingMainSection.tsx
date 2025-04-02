@@ -1,9 +1,10 @@
 import React from "react";
 import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSection";
 import dynamic from "next/dynamic";
-const ListingSearchRightSection = dynamic(
-  () => import("./listingSearchTabs/listingSearchRightSection")
-);
+import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
+// const ListingSearchRightSection = dynamic(
+//   () => import("./listingSearchTabs/listingSearchRightSection")
+// );
 type Props = {
   serverData: any;
   frontendFilters: any;
@@ -20,10 +21,12 @@ export default function ListingMainSection({
         frontendFilters={frontendFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
-      <ListingSearchRightSection
+      {/* <ListingSearchRightSection
         serverData={serverData}
         key="projListingSearchRightSection2"
-      />
+      /> */}
+
+      <ListingSearchMapSection serverData={serverData} />
     </>
   );
 }

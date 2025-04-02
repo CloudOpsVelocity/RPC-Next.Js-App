@@ -9,7 +9,7 @@ import { getListingSearchData } from "../../../utils/project-search-queryhelpers
 import { useQueryState } from "nuqs";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 /* import ListingSearchTabs from "../ListingSearchTabs"; */
-import { projSearchStore } from "../../../store/projSearchStore";
+import { projSearchStore, searchPageMapToggle } from "../../../store/projSearchStore";
 import { usePathname } from "next/navigation";
 import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
@@ -198,10 +198,13 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
+  const  setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   useEffect(() => {
     if (isMobile) return;
     const handleScroll = () => {
+      setIsMapLoaded(true);
+
       setNearby((prev: any) => ({
         ...prev,
         category: "",
@@ -223,7 +226,6 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      <>
         {isLoading ? (
           <LoadingBlock />
         ) : allItems.length > 0 ? (
@@ -249,7 +251,6 @@ function LeftSection({ mutate, serverData, frontendFilters }: Props) {
         )}
         <LoginPopup />
         <RequestCallBackModal />
-      </>
 
       <FloatingArrowIcon />
     </div>

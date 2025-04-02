@@ -12,7 +12,7 @@ import BuyRent from "../FilterComponents/BuyRent";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 // import SelectedFilters from "./SelectedFilters";
@@ -24,6 +24,7 @@ import dynamic from "next/dynamic";
 const SelectedFilters = dynamic(() => import("./SelectedFilters"));
 // const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
 import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
+import PageTitle from "./PageTitle";
 const ListingSearchTabs = dynamic(
   () => import("../../listing/components/ListingSearchTabs")
 );
@@ -319,15 +320,6 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     document.body.style.overflow = "hidden";
   };
 
-  const getTitle = (pageUrl:string) => {
-    if (document.title !== "Get Right Property") {
-      return document.title;
-    } else if (pageUrl === "/search") {
-      return "Project Search";
-    } else if (pageUrl === "/search/listing") {
-      return "Listing Search";
-    }
-  };
 
   return (
     <>
@@ -474,8 +466,8 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
               <MdFilterList className="w-5 h-5" />
               Filters
             </button>
-          </div>
-          <h1 className=" font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px]  ">{getTitle(path)}</h1>
+          </div> 
+          <PageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             {isListing ? <ListingSearchTabs /> : <ProjectSearchTabs />}

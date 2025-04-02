@@ -21,6 +21,7 @@ const tabs = [
 
 const ListingSearchTabs = () => {
   const [state, dispath] = useAtom(projSearchStore);
+
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
