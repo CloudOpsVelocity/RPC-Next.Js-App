@@ -2,7 +2,7 @@ import React from "react";
 // import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 // import { getPagesSlugs } from "@/app/seo/api";
 // import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
-import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -30,13 +30,14 @@ export default async function Page({ params: { cg, city } }: Props) {
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
-  const severData = await getProjSearchData(`cg=${slugValues.CG}`);
+  const severData = await getSearchData(`cg=${slugValues.CG}`);
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
   return (
     <NewSearchPage
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,
+        listedBy: "All",
       }}
       pageUrl={pageUrl}
     />

@@ -12,6 +12,7 @@ export default async function Page() {
       serverData={severData}
       frontendFilters={{
         listedBy: "All",
+        cg: "S",
       }}
     />
   );

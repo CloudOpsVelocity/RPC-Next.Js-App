@@ -1,6 +1,5 @@
 import React from "react";
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
-import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import NewSearchPage from "../../search/NewSearchPage";
 
 type Props = {
@@ -12,14 +11,16 @@ type Props = {
 };
 
 export default async function Page({ params: { cg, city } }: Props) {
-  const severData = await getProjSearchData(``);
+  const severData = await getSearchData(``);
   const pathname = `/residential/listings`;
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
   return (
     <NewSearchPage
       pageUrl={pageUrl}
       serverData={severData}
-      frontendFilters={{}}
+      frontendFilters={{
+        listedBy: "All",
+      }}
     />
   );
 }
