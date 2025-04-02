@@ -36,7 +36,6 @@ export default function Header({}: Props) {
       >
         <Link
           prefetch={false}
-          prefetch={false}
           href={"/"}
           className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
         >
