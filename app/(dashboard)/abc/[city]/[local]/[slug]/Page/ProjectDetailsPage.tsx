@@ -73,9 +73,12 @@ export default async function ProjectsDetailsPage({
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
   // console.log(params);
+
+  console.log({sdjkahljkgahlsjkghkljhasdglhsa : data.media })
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />
+      {/* CEHOUT  MEANS CHNAGE OR MERGE */}
       {/* <link rel="canonical" href={url} /> */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={desc} />
@@ -199,6 +202,7 @@ export default async function ProjectsDetailsPage({
           projName={data.projectName}
           phaseOverviewData={phaseOverview}
           singleBroucher={data.media?.projBroucherUrl}
+          broucherImage={data.media?.projectPlanUrl }
         />
         <ErrorContainer data={data.specificationList}>
           <Specifications

@@ -11,6 +11,7 @@ import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import Image from "next/image";
 
 // PDF worker setup
 pdfjs.GlobalWorkerOptions.workerSrc =
@@ -34,9 +35,10 @@ type Props = {
   projName: string;
   phaseOverviewData: PhaseOverview[];
   singleBrocher?: string;
+  broucherImage : string
 };
 
-function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
+function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBrocher }: Props) {
   const { data: session } = useSession();
   const [, { open: LoginOpen }] = usePopShortList();
   const pdfContainerRef = useRef<HTMLDivElement>(null);
@@ -229,6 +231,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
       setState((prev) => ({ ...prev, loading: false }));
     }
   };
+  const [showMap, setShowMap] = useState(false);
 
   const buttonClasses = (isActive: boolean) =>
     `px-1 py-1 text-xs sm:px-4 sm:py-2 sm:text-lg font-semibold rounded-lg transition-all duration-300 ${
@@ -239,6 +242,44 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   const isLargeBrochure = getBroucherSize(currentSize);
   if (singleBrocher) {
     return (
+      !showMap?    <div        // id="brochure"
+      className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+      <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0 bg-white/20  shadow-lg backdrop-blur-sm border border-white/30" >
+        <picture>
+          <source
+            media="(max-width: 460px)"
+            srcSet={broucherImage?.split(",")[0]}
+            />
+          <source
+            media="(max-width: 768px)"
+            srcSet={broucherImage?.split(",")[1]}
+            />
+          <source
+            media="(min-width: 1200px)"
+            srcSet={broucherImage?.split(",")[2]}
+            />
+          <Image
+            alt="project image"
+            src={broucherImage?.split(",")[3]}
+            fill
+            unoptimized
+            priority
+          />
+        </picture>
+      </div>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <button
+          onClick={() => setShowMap(true)}
+          className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
+        >
+          <span className="text-lg font-semibold">
+            Click to View Broucher
+          </span>
+        </button>
+      </div>
+    </div> 
+    :  
+
       <div
         className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]"
         id="brochure"
@@ -367,6 +408,45 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   }
 
   return (
+
+    !showMap ?    <div        // id="brochure"
+    className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+    <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0 ">
+      <picture>
+        <source
+            media="(max-width: 460px)"
+            srcSet={broucherImage?.split(",")[0]}
+            />
+          <source
+            media="(max-width: 768px)"
+            srcSet={broucherImage?.split(",")[1]}
+            />
+          <source
+            media="(min-width: 1200px)"
+            srcSet={broucherImage?.split(",")[2]}
+            />
+          <Image  
+            alt="project image"
+            src={broucherImage?.split(",")[3]}
+            fill
+            unoptimized
+            priority
+          />
+      </picture>
+    </div>
+    <div className="absolute inset-0 flex items-center justify-center">
+      <button
+        onClick={() => setShowMap(true)}
+        className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
+      >
+        <span className="text-lg font-semibold">
+          Click to View Location Details
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  :
     <div
       className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px] relative"
       id="brochure"

@@ -112,7 +112,9 @@ const LeafMap: React.FC<{
       </div>
 
       {!showMap ? (
-        <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative">
+        <div  
+        //id="location-map"
+         className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative ">
           <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
             <picture>
               <source
@@ -389,6 +391,7 @@ const LocationList: React.FC<{
   );
   const scrollToTopic = (id: string): void => {
     setIsScrolling(true);
+
 
     const element = document.getElementById(id);
     if (element) {
