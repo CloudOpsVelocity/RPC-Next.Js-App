@@ -181,21 +181,15 @@ export default function GalleryBlock({
 
               const imageUrl = img.split(",")[1];
               const imageName = imageUrl.split("/")[6]?.split(".")[0];
-
-              return (
-                <div
-                  className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
-                  key={`gallery_block_${ind}`}
-                >
-                  <Script
-                    id="galleryScript1"
-
+              const allSizesSchemas = img.split(",").map((url) => {
+                return (
+                  <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                       __html: JSON.stringify({
                         "@context": "https://schema.org/",
                         "@type": "ImageObject",
-                        contentUrl: imageUrl,
+                        contentUrl: url,
                         license:
                           "https://www.getrightproperty.com/privacy-policy",
                         acquireLicensePage:
@@ -203,12 +197,20 @@ export default function GalleryBlock({
                         creditText: imageName,
                         creator: {
                           "@type": "Person",
-                          name: "Get Right Property",
+                          name: projName?.split(" ")[0],
                         },
-                        copyrightNotice: "Get Right Property",
+                        copyrightNotice: projName?.split(" ")[0],
                       }),
                     }}
                   />
+                );
+              });
+              return (
+                <div
+                  className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
+                  key={`gallery_block_${ind}`}
+                >
+                  {allSizesSchemas}
                   <Image
                     src={imageUrl}
                     alt={imageName || ""}

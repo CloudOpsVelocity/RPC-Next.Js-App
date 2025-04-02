@@ -93,7 +93,7 @@ export default async function Page({ params }: Props) {
         localities: [`${lt}+${filtersValues.LT}`],
         bhk: [parseInt(filtersValues.BH as string)],
         propType: parseInt(filtersValues.PT as string),
-        cg: filtersValues.CG, 
+        cg: filtersValues.CG,
         projName: project,
         projIdEnc: filtersValues.PH,
         ...(filtersValues.PH && {
@@ -120,12 +120,11 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   if (!params.bhk_unit_type.includes("listing")) {
-
-    return { 
-      title: `${params.bhk_unit_type} ${params.lt}, for ${
+    return {
+      title: `${params.bhk_unit_type} ${params.lt} , for ${
         params.cg === "S" ? "Sale" : "Rent"
       } in ${params.project}, ${params.city} - Getrightproperty`,
-      description: `Looking for ${params.bhk_unit_type} properties for ${ 
+      description: `Looking for ${params.bhk_unit_type} properties for ${
         params.cg === "S" ? "sale" : "rent"
       } in ${params.project}, ${params.lt}, ${
         params.city
@@ -153,12 +152,12 @@ export async function generateMetadata(
     data.ltName
   }, ${data.ctName}, ${data.cg === "S" ? "Sale" : "Rent"}`;
   return {
-    title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+    title: `${data.bhkName ?? ""} ${data.propTypeName} ${data.propName}, for ${
       data.cg === "S" ? " Sale" : " Rent"
     } in ${data.ltName} - Getrightproperty`,
-    description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
-      data.cg === "S" ? " Sale" : " Rent"
-    } in ${
+    description: `Searching ${data.bhkName ?? ""} ${data.propTypeName} ${
+      data.propName
+    }, for ${data.cg === "S" ? " Sale" : " Rent"} in ${
       data.ltName
     }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
     applicationName: "Getrightproperty",

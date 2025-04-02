@@ -83,13 +83,13 @@ export async function generateMetadata(
   }, ${data.ctName}, ${data.cg === "S" ? "Sale" : "Rent"}`;
 
   return {
-    title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+    title: `${data.bhkName ?? ""} ${data.propTypeName} ${data.propName}, for ${
       data.cg === "S" ? " Sale" : " Rent"
     } in ${data.ltName} - Getrightproperty`,
     applicationName: "Getrightproperty",
-    description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
-      data.cg === "S" ? " Sale" : " Rent"
-    } in ${
+    description: `Searching ${data.bhkName ?? ""} ${data.propTypeName} ${
+      data.propName
+    }, for ${data.cg === "S" ? " Sale" : " Rent"} in ${
       data.ltName
     }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Find your dream home today!`,
     keywords: keywords, // Added keywords for SEO
