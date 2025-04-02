@@ -25,6 +25,7 @@ const SelectedFilters = dynamic(() => import("./SelectedFilters"));
 // const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
 import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
 import PageTitle from "./PageTitle";
+import { useRouter } from "next/navigation";
 const ListingSearchTabs = dynamic(
   () => import("../../listing/components/ListingSearchTabs")
 );
@@ -107,15 +108,16 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       }
     }
   };
-  const tested = () => {
-    if (openDropdown == "Buy") {
-      if (document.body.style.overflow == "hidden") {
-        document.body.style.overflow = "unset";
-      } else {
-        document.body.style.overflow = "hidden";
-      }
-    }
-  };
+
+  // const tested = () => {
+  //   if (openDropdown == "Buy") {
+  //     if (document.body.style.overflow == "hidden") {
+  //       document.body.style.overflow = "unset";
+  //     } else {
+  //       document.body.style.overflow = "hidden";
+  //     }
+  //   }
+  // };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
     if (/[^a-zA-Z0-9\s]/.test(value)) {
@@ -320,7 +322,6 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     document.body.style.overflow = "hidden";
   };
 
-
   return (
     <>
       <div className="w-full max-w-[100%] max-h-[60vh] bg-white border-b relative md:sticky top-0 z-auto md:z-[11]">
@@ -466,7 +467,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
               <MdFilterList className="w-5 h-5" />
               Filters
             </button>
-          </div> 
+          </div>
           <PageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">

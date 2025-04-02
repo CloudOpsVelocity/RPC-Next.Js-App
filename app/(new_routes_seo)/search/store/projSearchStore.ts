@@ -33,7 +33,7 @@ export const initialState: SearchFilter = {
   isUsed: null,
   projName: null,
   phaseId: [],
-}; 
+};
 let RENT_BUGDET_VALUE = [0, 100000];
 
 type Action =

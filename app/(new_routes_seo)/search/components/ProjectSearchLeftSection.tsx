@@ -19,6 +19,7 @@ import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
+import { number } from "yup";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -100,7 +101,7 @@ function LeftSection({
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
-  const  setIsMapLoaded = useSetAtom(searchPageMapToggle);
+  const setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   useEffect(() => {
     if (isMobile) return;
