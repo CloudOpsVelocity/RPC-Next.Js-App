@@ -45,9 +45,7 @@ function LeftSection({
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
 
   const isTrue =
-    it || pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null;
+    it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
