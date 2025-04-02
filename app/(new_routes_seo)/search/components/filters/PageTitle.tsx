@@ -23,15 +23,16 @@ function PageTitle({}: Props) {
   const getTitle = (pageUrl: string) => {
     if (paramsData && Object.keys(paramsData).length > 0) {
       if (paramsData.slug) {
-        const id = paramsData.slug?.split("-");
+        const slug = paramsData.slug as string;
+        const id = slug?.split("-");
         return cleanHeading(id);
       } else {
         const pageTitle = `Search Results For ${
           paramsData.bhk_unit_type ? paramsData.bhk_unit_type : ""
         } ${paramsData.lt ? paramsData.lt + " for" : ""} ${
           state.cg !== "S" ? "Rent" : "Sale"
-        } in ${paramsData.project ? paramsData.project : ""} ${
-          paramsData.city ? paramsData.city : paramsData.city
+        } in ${paramsData.project ? paramsData.project : "Bengaluru"} ${
+          paramsData.city ? paramsData.city : paramsData.city ?? ""
         }`;
         return pageTitle.replaceAll("-", " ");
       }
@@ -39,6 +40,8 @@ function PageTitle({}: Props) {
       return "Project Search";
     } else if (pageUrl === "/search/listing") {
       return "Listing Search";
+    } else if (pageUrl === "/residential-listings") {
+      return "Residential Projects";
     }
   };
 
