@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-// import { Drawer } from "@mantine/core";
-// import styles from "./PriceBreakup.module.css";
 import Card from "./Card";
 import {
   ApplicablePricing,
@@ -112,6 +110,7 @@ export default function PriceBreakup({
   if(opened){
     return(
     <DrawerBox 
+      key="priceBreakupDrawer"
       isOpen={opened}
       title="Price breakup"
       handleChange={close}

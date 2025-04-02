@@ -6,11 +6,12 @@ type Props = {
     children:React.ReactNode;
     isOpen?:boolean;
     handleChange?:any;
-    containerClassStyle?:string;
-    title?: string
+    containerClassStyle?:string; 
+    title?: string;
+    hideHeader?: boolean;
 }
 
-function DrawerBox({children, isOpen, handleChange, containerClassStyle, title}: Props) {
+function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, hideHeader}: Props) {
     const onMainConClick = (e:any) => {
         var baxEl = document.getElementById("modalDrawerPopupInnerCon");
         if (baxEl && !baxEl.contains(e.target)){
@@ -37,6 +38,7 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title}:
                     isOpen ? "translate-x-0" : "translate-x-full"}`
                     }`}
             >
+                {hideHeader !== true &&
                 <div className='flex justify-between items-center w-full px-[16px] mt-[16px] '>
                     <h3 className='text-[#001F35] sm:text-[20px] xl:text-[24px] font-[600]'>{title}</h3>
                     <Close 
@@ -44,6 +46,7 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title}:
                         className=" hover:bg-gray-100 rounded-full w-[30px] h-[30px]"
                     />
                 </div>
+                }
 
                 <div className='w-full rounded-[4px]'>
                     {children}
