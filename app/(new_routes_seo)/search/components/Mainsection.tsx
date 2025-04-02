@@ -6,7 +6,7 @@ import { useQueryState } from "nuqs";
 import React, { useState } from "react";
 import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import Image from "next/image";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 const LeftSection = dynamic(
   () => import("../components/ProjectSearchLeftSection")
 );
@@ -54,7 +54,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
         <RightSection
           serverData={apiFilterQueryParams === null ? serverData : null}
           key="projRightSection2"
-          isTrue={isTrue}
+          isTrue={it}
         />
       ) : (
         <div
