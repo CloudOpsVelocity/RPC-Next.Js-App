@@ -17,6 +17,7 @@ import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
+import { searchPageMapToggle } from "@/app/(new_routes_seo)/search/store/projSearchStore";
 
 type Props = any;
 
@@ -99,6 +100,7 @@ export default function TopRightSection({
   const [lat, lang] = location?.split(",") ?? [];
   const setNearby = useSetAtom(selectedNearByAtom);
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
+  const  setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   return (
     <div
@@ -238,6 +240,7 @@ export default function TopRightSection({
                   title="Click to view on Map"
                   className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none "
                   onClick={() => {
+                    
                     setNearby((prev: any) => ({
                       ...prev,
                       category: "",
@@ -313,6 +316,7 @@ export default function TopRightSection({
                 className="group sm:flex hidden md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none "
                 title="Click to view on Map"
                 onClick={() => {
+                  setIsMapLoaded(true);
                   setNearby((prev: any) => ({
                     ...prev,
                     category: "",
@@ -509,6 +513,7 @@ export default function TopRightSection({
               className="group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold group-hover:outline-none active:outline-none "
               title="Click to view on Map"
               onClick={() => {
+                setIsMapLoaded(true);
                 setNearby((prev: any) => ({
                   ...prev,
                   category: "",

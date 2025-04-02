@@ -186,7 +186,7 @@ const ProjectSearchTabs = () => {
                     state.listedBy === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
-                  }
+                    }
                   `}
                 >
                   {tab.label}

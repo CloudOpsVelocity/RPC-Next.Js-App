@@ -19,11 +19,15 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       dynamic(
         () => import("@/app/components/maps/search/ProjectSearchPageMap"),
         {
-          loading: () => <MapSkeleton />,
+          // loading: () => <MapSkeleton />,
+          loading: () => <div className=" flex justify-center items-center w-full h-[600px] flex-col ">
+              <div className="animate-spin rounded-full h-[50px] w-[50px] border-t-4 border-b-4 border-[#0073C6] border-t-transparent" />
+              <p className="font-[600] text-[20px] mt-[16px] ">Please wait Map is loading...</p>
+            </div>,
           ssr: false,
         }
       ),
-    []
+    [] 
   );
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -73,7 +77,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
         lang={(apidata && apidata[0]?.lang) ?? 15.34043}
         data={apidata}
         type={"prop"}
-        styles="h-[calc(100vh-65vh)] md:h-[calc(100vh-220px)] xl:h-[calc(100vh-262px)] w-full  max-w-full"
+        styles="h-[calc(100vh-65vh)] md:h-[calc(100vh-220px)] xl:h-[calc(100vh-232px)] w-full  max-w-full"
       />
     </div>
   ) : (

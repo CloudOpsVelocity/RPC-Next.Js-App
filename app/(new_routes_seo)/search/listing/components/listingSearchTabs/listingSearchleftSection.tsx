@@ -7,7 +7,10 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { projSearchStore } from "../../../store/projSearchStore";
+import {
+  projSearchStore,
+  searchPageMapToggle,
+} from "../../../store/projSearchStore";
 import { usePathname } from "next/navigation";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
@@ -189,10 +192,13 @@ function LeftSection({
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
+  const setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   useEffect(() => {
     if (isMobile) return;
     const handleScroll = () => {
+      setIsMapLoaded(true);
+
       setNearby((prev: any) => ({
         ...prev,
         category: "",
@@ -214,33 +220,31 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      <>
-        {isLoading ? (
-          <LoadingBlock />
-        ) : allItems.length > 0 ? (
-          <div
-            style={{
-              height: `${rowVirtualizer.getTotalSize()}px`,
-              width: "100%",
-              position: "relative",
-            }}
-          >
-            {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-          </div>
-        ) : (
-          <EmptyState />
-        )}
-        {hasNextPage && shouldFetchMore && (
-          <div
-            ref={loadMoreRef}
-            className="w-full py-8 flex justify-center items-center text-gray-600"
-          >
-            <LoadingSpinner />
-          </div>
-        )}
-        <LoginPopup />
-        <RequestCallBackModal />
-      </>
+      {isLoading ? (
+        <LoadingBlock />
+      ) : allItems.length > 0 ? (
+        <div
+          style={{
+            height: `${rowVirtualizer.getTotalSize()}px`,
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
+        </div>
+      ) : (
+        <EmptyState />
+      )}
+      {hasNextPage && shouldFetchMore && (
+        <div
+          ref={loadMoreRef}
+          className="w-full py-8 flex justify-center items-center text-gray-600"
+        >
+          <LoadingSpinner />
+        </div>
+      )}
+      <LoginPopup />
+      <RequestCallBackModal />
 
       <FloatingArrowIcon />
     </div>

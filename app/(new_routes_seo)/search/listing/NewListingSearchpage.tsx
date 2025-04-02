@@ -32,6 +32,8 @@ export default function NewListingSearchpage({
 }: Props) {
   const isListing = true;
 
+  // console.log(`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`)
+
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
       <link
@@ -41,6 +43,7 @@ export default function NewListingSearchpage({
       {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs key="newSearchPage3" pageUrl={pageUrl} />
+
         <div className="flex flex-row items-start gap-2">
           <ListingHeaderFilters key="newSearchFilter3" isListing={isListing} />
         </div>

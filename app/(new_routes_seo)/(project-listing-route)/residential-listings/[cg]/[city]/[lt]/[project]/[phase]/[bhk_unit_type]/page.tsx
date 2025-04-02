@@ -93,7 +93,7 @@ export default async function Page({ params }: Props) {
         localities: [`${lt}+${filtersValues.LT}`],
         bhk: [parseInt(filtersValues.BH as string)],
         propType: parseInt(filtersValues.PT as string),
-        cg: filtersValues.CG,
+        cg: filtersValues.CG, 
         projName: project,
         projIdEnc: filtersValues.PH,
         ...(filtersValues.PH && {
@@ -120,11 +120,12 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   if (!params.bhk_unit_type.includes("listing")) {
-    return {
+
+    return { 
       title: `${params.bhk_unit_type} ${params.lt}, for ${
         params.cg === "S" ? "Sale" : "Rent"
       } in ${params.project}, ${params.city} - Getrightproperty`,
-      description: `Looking for ${params.bhk_unit_type} properties for ${
+      description: `Looking for ${params.bhk_unit_type} properties for ${ 
         params.cg === "S" ? "sale" : "rent"
       } in ${params.project}, ${params.lt}, ${
         params.city

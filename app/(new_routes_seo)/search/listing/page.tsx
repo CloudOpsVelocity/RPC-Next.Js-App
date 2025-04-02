@@ -1,7 +1,7 @@
 import React from "react";
 import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFilterSection";
 import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
-import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
+// import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
 import ListingMainSection from "./components/ListingMainSection";
 

@@ -288,9 +288,9 @@ const DownSectionCard = ({
 }) => {
   return value ? (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
+      <h5 className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
         {Icon} {label}:
-      </p>
+      </h5>
       <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">
         {value}
       </p>

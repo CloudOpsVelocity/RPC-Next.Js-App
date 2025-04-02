@@ -6,9 +6,10 @@ import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 import { useHydrateAtoms } from "jotai/utils";
 import { projSearchStore } from "../../store/projSearchStore";
-const ListingSearchRightSection = dynamic(
-  () => import("./listingSearchTabs/listingSearchRightSection")
-);
+import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
+// const ListingSearchRightSection = dynamic(
+//   () => import("./listingSearchTabs/listingSearchRightSection")
+// );
 type Props = {
   serverData: any;
   frontendFilters: any;
@@ -47,11 +48,13 @@ export default function ListingMainSection({
         setIsTrue={setIsTrue}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
-      <ListingSearchRightSection
+      {/* <ListingSearchRightSection
         serverData={serverData}
         isTrue={isTrue}
         key="projListingSearchRightSection2"
-      />
+      /> */}
+
+      <ListingSearchMapSection serverData={serverData} />
     </>
   );
 }
