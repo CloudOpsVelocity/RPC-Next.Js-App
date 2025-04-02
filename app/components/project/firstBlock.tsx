@@ -90,7 +90,7 @@ const FirstBlock: React.FC<Props> = ({
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
 
-          <div className="relative w-full sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
+          <div className="relative w-full aspect-auto max-w-[1000px] 1000 x 463 ( sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
             <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}

@@ -114,7 +114,7 @@ const LeafMap: React.FC<{
       {!showMap ? (
         <div  
         //id="location-map"
-         className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative ">
+         className="h-[291px] sm:h-[486px] xl:h-[700px] max-w-[1202px] w-full relative ">
           <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
             <picture>
               <source
@@ -129,13 +129,13 @@ const LeafMap: React.FC<{
                 media="(min-width: 1200px)"
                 srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
               />
+
               <Image
                 alt="project image"
                 src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
                 fill
                 className={`bg-gray-`}
-                unoptimized
-                priority
+              
               />
             </picture>
           </div>

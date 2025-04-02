@@ -6,6 +6,7 @@ export default function Success() {
       <h1 className="text-[#148B16] font-[700] text-[32px] text-center w-[100%] !max-w-[500px] !mb-[1%]">
         Congratulations !
       </h1>
+      
       <p className="text-[#666] font-[500] text-[28px] text-center w-[100%] !max-w-[500px] !mb-[6%]">
         Your account for individual has been created successfully
       </p>

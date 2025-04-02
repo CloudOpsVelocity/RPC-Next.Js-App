@@ -336,7 +336,7 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
                 onClick={() => setShowMap(true)}
                 className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
               >
-                <span className="text-lg font-semibold">
+                <span className="text-sm md:text-base font-semibold">
                   Click to View Broucher
                 </span>
               </button>
@@ -484,7 +484,7 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <button onClick={() => setShowMap(true)} className="z-8 px-6 py-3 mx-2 text-left sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors">
-              <span className="text-lg font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
+              <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
             </button>
           </div>
         </div>

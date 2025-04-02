@@ -36,10 +36,11 @@ export default function Header({}: Props) {
       >
         <Link
           prefetch={false}
+          prefetch={false}
           href={"/"}
           className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
         >
-          <GrpLogoSvg className="h-[40px]   sm:h-[50px] w-[160px]" />
+          <GrpLogoSvg className="h-[40px]   sm:h-[50px] w-[160px] max-w-[160px]" />
         </Link>
         {isMobile ? (
           <div className="flex  sm:hidden mr-4 gap-4">
