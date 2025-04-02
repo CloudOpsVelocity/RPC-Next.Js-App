@@ -100,7 +100,7 @@ export default function TopRightSection({
   const [lat, lang] = location?.split(",") ?? [];
   const setNearby = useSetAtom(selectedNearByAtom);
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
-  const  setIsMapLoaded = useSetAtom(searchPageMapToggle);
+  const setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   return (
     <div

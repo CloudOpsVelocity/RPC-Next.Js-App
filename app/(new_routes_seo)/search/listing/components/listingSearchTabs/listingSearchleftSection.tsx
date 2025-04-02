@@ -32,7 +32,7 @@ type Props = {
 function LeftSection({
   mutate,
   serverData,
-  frontendFilters,
+  // frontendFilters,
   isTrue: it,
   setIsTrue,
   apiFilterQueryParams,

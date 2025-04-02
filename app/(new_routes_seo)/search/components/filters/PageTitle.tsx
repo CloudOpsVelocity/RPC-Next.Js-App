@@ -10,8 +10,6 @@ type Props = {};
 function PageTitle({}: Props) {
   const state = useAtomValue(projSearchStore);
 
-  console.log(state);
-
   const paramsData = useParams();
   const path = usePathname();
 
@@ -22,13 +20,10 @@ function PageTitle({}: Props) {
       .replace(/\s+/g, " ");
   }
 
-  console.log(paramsData);
-
   const getTitle = (pageUrl: string) => {
     if (paramsData && Object.keys(paramsData).length > 0) {
       if (paramsData.slug) {
-        const slug = paramsData.slug as string;
-        const id = slug?.split("-");
+        const id = paramsData.slug?.split("-");
         return cleanHeading(id);
       } else {
         const pageTitle = `Search Results For ${
