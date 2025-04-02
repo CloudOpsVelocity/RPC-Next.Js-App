@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef, useCallback, memo } from "react";
+import React, { useEffect, useState, useRef, useCallback, memo, Fragment } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import {
   FaChevronLeft,
@@ -12,6 +12,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Image from "next/image";
+import SubHeading from "../headings/SubHeading";
+import PropertyHeading from "../../property/heading";
 
 // PDF worker setup
 pdfjs.GlobalWorkerOptions.workerSrc =
@@ -199,6 +201,7 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
   };
 
   const loadPDF = async (phase: ProjectPhase) => {
+    setShowMap(true)
     if (state.activePhase.id === phase.id) return;
 
     setState((prev) => ({
@@ -233,245 +236,39 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
   };
   const [showMap, setShowMap] = useState(false);
 
-  const buttonClasses = (isActive: boolean) =>
-    `px-1 py-1 text-xs sm:px-4 sm:py-2 sm:text-lg font-semibold rounded-lg transition-all duration-300 ${
-      isActive
-        ? "bg-[#0073C6] !text-white shadow-lg"
-        : "bg-white text-[#0073C6] hover:bg-gray-50 border border-gray-300"
-    } focus:z-10 focus:ring-2 focus:ring-[#0073C6] focus:text-[#0073C6] hover:scale-105`;
-  const isLargeBrochure = getBroucherSize(currentSize);
-  if (singleBrocher) {
+  //for showing the buttons iniial render 
+  const BroucherHeader = ({
+    projName,
+    phaseOverviewData,
+    singlePhase
+  }: {
+    projName: string;
+    phaseOverviewData: PhaseOverview[];
+    singlePhase:boolean
+    }) => {
     return (
-      !showMap?    <div        // id="brochure"
-      className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
-      <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0 bg-white/20  shadow-lg backdrop-blur-sm border border-white/30" >
-        <picture>
-          <source
-            media="(max-width: 460px)"
-            srcSet={broucherImage?.split(",")[0]}
-            />
-          <source
-            media="(max-width: 768px)"
-            srcSet={broucherImage?.split(",")[1]}
-            />
-          <source
-            media="(min-width: 1200px)"
-            srcSet={broucherImage?.split(",")[2]}
-            />
-          <Image
-            alt="project image"
-            src={broucherImage?.split(",")[3]}
-            fill
-            unoptimized
-            priority
-          />
-        </picture>
-      </div>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <button
-          onClick={() => setShowMap(true)}
-          className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
-        >
-          <span className="text-lg font-semibold">
-            Click to View Broucher
-          </span>
-        </button>
-      </div>
-    </div> 
-    :  
-
-      <div
-        className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]"
-        id="brochure"
-      >
-        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
-          <span>Explore the Comprehensive Brochure of </span>
-          <span className="text-[#148B16] font-bold">{projName}</span>
-        </h2>
-
-        <div
-          className="bg-white relative rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto"
-          ref={pdfContainerRef}
-        >
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              if (singleBrocher) handleDownload(singleBrocher);
-            }}
-            className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 z-[1]"
-          >
-            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]" />
-          </button>
-          <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-            {state.loading ? (
-              <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
-            ) : state.errorMessage ? (
-              <p className="text-red-500">{state.errorMessage}</p>
-            ) : isLargeBrochure ? (
-              <Document
-                className={"overscroll-y-scroll"}
-                file={state.blobCache[0] || singleBrocher}
-                onLoadSuccess={async (document) => {
-                  const info = await document.getDownloadInfo();
-                  setCurrentSize(info.length);
-                  onDocumentLoadSuccess(document);
-                }}
-                loading={
-                  <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
-                }
-              >
-                <Page
-                  pageNumber={state.pageNumber}
-                  renderTextLayer={false}
-                  renderAnnotationLayer={false}
-                  className="shadow-md rounded overflow-y-auto"
-                  height={isMobile ? 300 : 520}
-                  loading={
-                    <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
-                  }
-                />
-              </Document>
-            ) : (
-              <iframe
-                src={singleBrocher}
-                className="w-full h-[600px] border-0"
-                title={`${projName} Brochure`}
-              />
-            )}
-          </div>
-
-          <div className="w-full flex items-center justify-center space-x-4 mt-4">
-            {isLargeBrochure ? (
-              <>
-                <button
-                  onClick={() => changePage(-1)}
-                  disabled={
-                    state.pageNumber <= 1 ||
-                    state.loading ||
-                    state.pageNumber === 0
-                  }
-                  className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full disabled:opacity-50 disabled:cursor-not-allowed ${
-                    state.loading ? "cursor-not-allowed" : "h-8 w-8"
-                  }`}
-                >
-                  <FaChevronLeft className="h-4 w-4" />
-                </button>
-                <div className="flex items-center space-x-4 relative group">
-                  <span className="text-gray-600 font-bold">
-                    Page {state.pageNumber} of {state.numPages || "--"}
-                  </span>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (singleBrocher) handleDownload(singleBrocher);
-                    }}
-                    className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
-                      state.loading ? "cursor-not-allowed" : ""
-                    }`}
-                    aria-label={`Download ${projName} brochure`}
-                  >
-                    <FaDownload className="h-4 w-4" />
-                    <span className="hidden sm:inline">Download Brochure</span>
-                  </button>
-                </div>
-                <button
-                  onClick={() => changePage(1)}
-                  disabled={
-                    state.pageNumber >= state.numPages! || state.loading
-                  }
-                  className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full disabled:opacity-50 disabled:cursor-not-allowed ${
-                    state.loading ? "cursor-not-allowed" : "h-8 w-8"
-                  }`}
-                >
-                  <FaChevronRight className="h-4 w-4" />
-                </button>
-              </>
-            ) : (
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (singleBrocher) handleDownload(singleBrocher);
-                }}
-                className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
-                  state.loading ? "cursor-not-allowed" : ""
-                }`}
-                aria-label={`Download ${projName} brochure`}
-              >
-                <FaDownload className="h-4 w-4" />
-                <span className="hidden sm:inline">Download Brochure</span>
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-
-    !showMap ?    <div        // id="brochure"
-    className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
-    <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0 ">
-      <picture>
-        <source
-            media="(max-width: 460px)"
-            srcSet={broucherImage?.split(",")[0]}
-            />
-          <source
-            media="(max-width: 768px)"
-            srcSet={broucherImage?.split(",")[1]}
-            />
-          <source
-            media="(min-width: 1200px)"
-            srcSet={broucherImage?.split(",")[2]}
-            />
-          <Image  
-            alt="project image"
-            src={broucherImage?.split(",")[3]}
-            fill
-            unoptimized
-            priority
-          />
-      </picture>
-    </div>
-    <div className="absolute inset-0 flex items-center justify-center">
-      <button
-        onClick={() => setShowMap(true)}
-        className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
-      >
-        <span className="text-lg font-semibold">
-          Click to View Location Details
-        </span>
-      </button>
-    </div>
-  </div>
-  
-  :
-    <div
-      className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px] relative"
-      id="brochure"
-    >
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          if (state.activePhase.brochure)
-            handleDownload(state.activePhase.brochure);
-        }}
-        className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[1]"
-      >
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
-      </button>
-      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
-        <span>Explore the Comprehensive Brochures of </span>
-        <span className="text-[#148B16] font-bold">{projName}</span>
-      </h2>
-
-      <div className="mb-1 flex-wrap pl-3">
+          <div            
+          id="brochure">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (state.activePhase.brochure)
+                  handleDownload(state.activePhase.brochure);
+              }}
+              className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[1]"
+            >
+              <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
+            </button>
+            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
+              <span>Explore the Comprehensive Brochures of </span>
+              <span className="text-[#148B16] font-bold">{projName} </span>
+            </h2>
+            <div className="mb-1 flex-wrap pl-3">
         <div
           className="inline-flex rounded-md shadow-sm space-x-2"
           role="group"
         >
-          {phaseOverviewData.map(
+          {singlePhase && phaseOverviewData.map(
             (phase) =>
               phase.phaseBrochureUrl && (
                 <button
@@ -499,115 +296,290 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
           )}
         </div>
       </div>
+          </div>
+    );
+  };
 
+
+
+
+  const buttonClasses = (isActive: boolean) =>
+    `px-1 py-1 text-xs sm:px-4 sm:py-2 sm:text-lg font-semibold rounded-lg transition-all duration-300 ${
+      isActive
+        ? "bg-[#0073C6] !text-white shadow-lg"
+        : "bg-white text-[#0073C6] hover:bg-gray-50 border border-gray-300"
+    } focus:z-10 focus:ring-2 focus:ring-[#0073C6] focus:text-[#0073C6] hover:scale-105`;
+  const isLargeBrochure = getBroucherSize(currentSize);
+  if (singleBrocher) {
+    return (
       <div
-        className="bg-white rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto"
-        ref={pdfContainerRef}
-      >
-        <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-          {state.loading ? (
-            <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
-          ) : state.errorMessage ? (
-            <p className="text-red-500">{state.errorMessage}</p>
-          ) : isLargeBrochure ? (
-            <Document
-              className={"overscroll-y-scroll"}
-              key={state.activePhase.id}
-              file={
-                state.blobCache[state.activePhase.id] ||
-                state.activePhase.brochure
-              }
-              onLoadSuccess={async (document) => {
-                const info = await document.getDownloadInfo();
-                setCurrentSize(info.length);
-                onDocumentLoadSuccess(document);
-              }}
-              loading={
-                <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
-              }
-            >
-              <Page
-                pageNumber={state.pageNumber}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-                className="shadow-md rounded "
-                loading={
-                  <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
-                }
-                height={isMobile ? 270 : 520}
-              />
-            </Document>
-          ) : (
-            <iframe
-              src={state.activePhase.brochure || ""}
-              className="w-full h-[500px] border-0"
-              title={`${projName} Brochure`}
-            />
-          )}
+        className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
+        id="brochure"
+        >
+        <div className="w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
+          <BroucherHeader projName={projName} phaseOverviewData={phaseOverviewData} singlePhase={false} />
         </div>
-
-        <div className="w-full flex items-center justify-center mt-4">
-          <div className="flex items-center space-x-4 relative group">
-            {isLargeBrochure ? (
-              <>
-                <button
-                  onClick={() => changePage(-1)}
-                  disabled={state.pageNumber <= 1 || state.loading}
-                  className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
-                    (state.pageNumber <= 1 || state.loading) &&
-                    "opacity-50 cursor-not-allowed"
-                  }`}
-                >
-                  <FaChevronLeft className="h-4 w-4" />
-                </button>
-                <span className="text-gray-600 font-bold">
-                  Page {state.pageNumber} of {state.numPages || "--"}
+        {!showMap ? (
+          <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+            <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0 bg-white/20 shadow-lg backdrop-blur-sm border border-white/30">
+              {/*<BroucherHeader projName={projName} singlePhase={true} phaseOverviewData={phaseOverviewData} />*/}
+  
+              <picture>
+                <source media="(max-width: 460px)" srcSet={broucherImage?.split(",")[0]} />
+                <source media="(max-width: 768px)" srcSet={broucherImage?.split(",")[1]} />
+                <source media="(min-width: 1200px)" srcSet={broucherImage?.split(",")[2]} />
+                <Image alt="project image" src={broucherImage?.split(",")[3]} fill unoptimized priority />
+              </picture>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <button
+                onClick={() => setShowMap(true)}
+                className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
+              >
+                <span className="text-lg font-semibold">
+                  Click to View Broucher
                 </span>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (state.activePhase.brochure)
-                      handleDownload(state.activePhase.brochure);
-                  }}
-                  className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
-                    state.loading ? "cursor-not-allowed" : ""
-                  }`}
-                  aria-label={`Download ${state.activePhase.name} brochure`}
-                >
-                  <FaDownload className="h-4 w-4" />
-                  <span className="hidden sm:inline">Download Brochure</span>
-                </button>
-                <button
-                  onClick={() => changePage(1)}
-                  disabled={
-                    state.pageNumber >= state.numPages! || state.loading
-                  }
-                  className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
-                    (state.pageNumber >= state.numPages! || state.loading) &&
-                    "opacity-50 cursor-not-allowed"
-                  }`}
-                >
-                  <FaChevronRight className="h-4 w-4" />
-                </button>
-              </>
-            ) : (
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div
+            className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]"
+            id="brochure"
+          >
+            <div
+              className="bg-white relative rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto"
+              ref={pdfContainerRef}
+            >
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  if (state.activePhase.brochure)
-                    handleDownload(state.activePhase.brochure);
+                  if (singleBrocher) handleDownload(singleBrocher);
                 }}
-                className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
-                  state.loading ? "cursor-not-allowed" : ""
-                }`}
+                className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 z-[1]"
               >
-                <FaDownload className="h-4 w-4" />
-                <span className="hidden sm:inline">Download Brochure</span>
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]" />
               </button>
-            )}
+              <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
+                {state.loading ? (
+                  <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
+                ) : state.errorMessage ? (
+                  <p className="text-red-500">{state.errorMessage}</p>
+                ) : isLargeBrochure ? (
+                  <Document
+                    className={"overscroll-y-scroll"}
+                    file={state.blobCache[0] || singleBrocher}
+                    onLoadSuccess={async (document) => {
+                      const info = await document.getDownloadInfo();
+                      setCurrentSize(info.length);
+                      onDocumentLoadSuccess(document);
+                    }}
+                    loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+                  >
+                    <Page
+                      pageNumber={state.pageNumber}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      className="shadow-md rounded overflow-y-auto"
+                      height={isMobile ? 300 : 520}
+                      loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+                    />
+                  </Document>
+                ) : (
+                  <iframe
+                    src={singleBrocher}
+                    className="w-full h-[600px] border-0"
+                    title={`${projName} Brochure`}
+                  />
+                )}
+              </div>
+  
+              <div className="w-full flex items-center justify-center space-x-4 mt-4">
+                {isLargeBrochure ? (
+                  <>
+                    <button
+                      onClick={() => changePage(-1)}
+                      disabled={
+                        state.pageNumber <= 1 || state.loading || state.pageNumber === 0
+                      }
+                      className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full disabled:opacity-50 disabled:cursor-not-allowed ${
+                        state.loading ? "cursor-not-allowed" : "h-8 w-8"
+                      }`}
+                    >
+                      <FaChevronLeft className="h-4 w-4" />
+                    </button>
+                    <div className="flex items-center space-x-4 relative group">
+                      <span className="text-gray-600 font-bold">
+                        Page {state.pageNumber} of {state.numPages || "--"}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (singleBrocher) handleDownload(singleBrocher);
+                        }}
+                        className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
+                          state.loading ? "cursor-not-allowed" : ""
+                        }`}
+                        aria-label={`Download ${projName} brochure`}
+                      >
+                        <FaDownload className="h-4 w-4" />
+                        <span className="hidden sm:inline">Download Brochure</span>
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => changePage(1)}
+                      disabled={state.pageNumber >= state.numPages! || state.loading}
+                      className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full disabled:opacity-50 disabled:cursor-not-allowed ${
+                        state.loading ? "cursor-not-allowed" : "h-8 w-8"
+                      }`}
+                    >
+                      <FaChevronRight className="h-4 w-4" />
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (singleBrocher) handleDownload(singleBrocher);
+                    }}
+                    className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
+                      state.loading ? "cursor-not-allowed" : ""
+                    }`}
+                    aria-label={`Download ${projName} brochure`}
+                  >
+                    <FaDownload className="h-4 w-4" />
+                    <span className="hidden sm:inline">Download Brochure</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
+
+
+
+
+
+
+  return (
+    <div className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing" id="location-map">
+      <div className="w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
+        {/* new implemented of brochure header */}
+        <BroucherHeader projName={projName} singlePhase={true} phaseOverviewData={phaseOverviewData} />
+      </div>
+  
+      {!showMap ? (
+        <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+          <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+            <picture>
+              <source media="(max-width: 460px)" srcSet={broucherImage?.split(",")[0]} />
+              <source media="(max-width: 768px)" srcSet={broucherImage?.split(",")[1]} />
+              <source media="(min-width: 1200px)" srcSet={broucherImage?.split(",")[2]} />
+              <Image alt="project image" src={broucherImage?.split(",")[3]} fill unoptimized priority />
+            </picture>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <button onClick={() => setShowMap(true)} className="z-8 px-6 py-3 mx-2 text-left sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors">
+              <span className="text-lg font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
+            </button>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px] relative" id="brochure">
+          <div className="bg-white rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto" ref={pdfContainerRef}>
+            <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
+              {state.loading ? (
+                <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
+              ) : state.errorMessage ? (
+                <p className="text-red-500">{state.errorMessage}</p>
+              ) : isLargeBrochure ? (
+                <Document
+                  className={"overscroll-y-scroll"}
+                  key={state.activePhase.id}
+                  file={state.blobCache[state.activePhase.id] || state.activePhase.brochure}
+                  onLoadSuccess={async (document) => {
+                    const info = await document.getDownloadInfo();
+                    setCurrentSize(info.length);
+                    onDocumentLoadSuccess(document);
+                  }}
+                  loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+                >
+                  <Page
+                    pageNumber={state.pageNumber}
+                    renderTextLayer={false}
+                    renderAnnotationLayer={false}
+                    className="shadow-md rounded "
+                    loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+                    height={isMobile ? 270 : 520}
+                  />
+                </Document>
+              ) : (
+                <iframe src={state.activePhase.brochure || ""} className="w-full h-[500px] border-0" title={`${projName} Brochure`} />
+              )}
+            </div>
+  
+            <div className="w-full flex items-center justify-center mt-4">
+              <div className="flex items-center space-x-4 relative group">
+                {isLargeBrochure ? (
+                  <>
+                    <button
+                      onClick={() => changePage(-1)}
+                      disabled={state.pageNumber <= 1 || state.loading}
+                      className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
+                        state.pageNumber <= 1 || state.loading ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    >
+                      <FaChevronLeft className="h-4 w-4" />
+                    </button>
+                    <span className="text-gray-600 font-bold">
+                      Page {state.pageNumber} of {state.numPages || "--"}
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
+                      }}
+                      className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
+                        state.loading ? "cursor-not-allowed" : ""
+                      }`}
+                      aria-label={`Download ${state.activePhase.name} brochure`}
+                    >
+                      <FaDownload className="h-4 w-4" />
+                      <span className="hidden sm:inline">Download Brochure</span>
+                    </button>
+                    <button
+                      onClick={() => changePage(1)}
+                      disabled={state.pageNumber >= state.numPages! || state.loading}
+                      className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
+                        state.pageNumber >= state.numPages! || state.loading ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    >
+                      <FaChevronRight className="h-4 w-4" />
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
+                    }}
+                    className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
+                      state.loading ? "cursor-not-allowed" : ""
+                    }`}
+                  >
+                    <FaDownload className="h-4 w-4" />
+                    <span className="hidden sm:inline">Download Brochure</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
