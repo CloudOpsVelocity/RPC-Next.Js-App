@@ -6,12 +6,9 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
-import { useQueryState } from "nuqs";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-/* import ListingSearchTabs from "../ListingSearchTabs"; */
 import { projSearchStore } from "../../../store/projSearchStore";
 import { usePathname } from "next/navigation";
-import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
@@ -77,7 +74,6 @@ function LeftSection({
       }),
       cacheTime: 300000,
       enabled: isTrue,
-      // ...RTK_CONFIG,
     });
 
   const { data: approvedData } = useQuery({

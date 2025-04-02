@@ -36,21 +36,20 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
       ? true
       : serverData !== null && apiFilterQueryParams !== null
   );
-  const isTrue = it || (serverData !== null && apiFilterQueryParams !== null);
 
   return (
     <>
       <LeftSection
         serverData={apiFilterQueryParams === null ? serverData : null}
         frontendFilters={frontendFilters}
-        isTrue={isTrue}
+        isTrue={it}
         setIsTrue={setIsTrue}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
       <RightSection
         serverData={apiFilterQueryParams === null ? serverData : null}
         key="projRightSection2"
-        isTrue={isTrue}
+        isTrue={it}
       />
     </>
   );

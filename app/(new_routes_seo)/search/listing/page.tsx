@@ -3,6 +3,7 @@ import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFil
 import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
 import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
+import ListingMainSection from "./components/ListingMainSection";
 
 type Props = {};
 
@@ -22,9 +23,7 @@ export default function Page({}: Props) {
         />
       </div>
       <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
-        <ListingSearhLeftSection />
-        <div className="w-[100%] sm:w-[50%] -z-10" />
-        <ListingSearchRightSection key="projListingSearchRightSection1" />
+        <ListingMainSection frontendFilters={{}} serverData={null} />
       </div>
     </main>
   );
