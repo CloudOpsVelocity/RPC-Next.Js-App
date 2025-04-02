@@ -315,7 +315,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           company={data.companyName}
         />
         <ProjectDrawer projName={data.projectName} />
-        <FloorplanDrawer />
+        <FloorplanDrawer /> 
         <LoginPopup />
         {/* <BaseSucess /> */}
       </div>

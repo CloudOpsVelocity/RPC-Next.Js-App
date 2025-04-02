@@ -209,6 +209,25 @@ const AddQnaForm = ({
               error: "!text-[12px] !sm:text-[18px]",
             }}
           />
+
+          {/* <textarea
+            id="question"
+            name="question"
+            placeholder="Type your question here . . . ."
+            className={clsx(
+              "placeholder:!text-[#4D6677] placeholder:!text-[18px]  font-medium leading-[23.784px]  rounded-[10px] ",
+              !errors.question && "!border !border-solid !border-[#737579]"
+            )}
+            rows={isMobile ? 2 : 4}
+            {...getInputProps("question")}
+
+       
+            value={text}
+          /> */}
+
+
+
+
         </div>
         <Button
           type="submit"

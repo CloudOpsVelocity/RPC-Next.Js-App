@@ -1,9 +1,9 @@
 "use client";
-import { Divider, Drawer } from "@mantine/core";
+import { Divider } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React from "react";
-import S from "./Style.module.css";
+// import S from "./Style.module.css";
 import {
   apartmentCardImg,
   plotCardImg,
@@ -29,6 +29,7 @@ import { BACKEND_PROP_TYPES, projectprops } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
 import { useDrag } from "@use-gesture/react";
+import DrawerBox from "../../property/pricingbreakup/DrawerBox";
 const iconStyles: string =
   " flex items-center justify-center w-[40px] h-[40px]  text-[#001F35]";
 export default function FloorplanDrawer() {
@@ -157,16 +158,24 @@ export default function FloorplanDrawer() {
     { axis: "x", pointer: { touch: true } }
   );
   return (
-    <Drawer
-      opened={Object.keys(cg).length > 0 ? true : false}
-      onClose={handleClose}
+    // <Drawer
+    //   opened={Object.keys(cg).length > 0 ? true : false}
+    //   onClose={handleClose}
+    //   title="property Details"
+    //   position="right"
+    //   zIndex={1000}
+    //   classNames={S}
+    //   {...bind()}
+    // >
+    (Object.keys(cg).length > 0) &&
+    <DrawerBox
+      key="floorplanDrawer"
+      isOpen={Object.keys(cg).length > 0}
       title="property Details"
-      position="right"
-      zIndex={1000}
-      classNames={S}
-      {...bind()}
+      handleChange={handleClose}
     >
-      <h3 className=" gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] md:text-[24px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
+
+      <h3 className="ml-[16px] gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] md:text-[24px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
         {getIcon(
           BACKEND_PROP_TYPES[
             cg?.propertyType as keyof typeof BACKEND_PROP_TYPES
@@ -174,9 +183,8 @@ export default function FloorplanDrawer() {
         )}{" "}
         {propName(cg.propertyType, "name")} details
       </h3>
-      <div>
         {/* Right */}
-        <div className="flex items-center space-x-4 mt-6">
+        <div className="flex items-center space-x-4 mt-6 ml-[16px]">
           {" "}
           <div className="max-w-[70px] lg:max-w-[115px] w-full h-[70px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee]  lg:bottom-[60px] ">
             <Image
@@ -198,8 +206,7 @@ export default function FloorplanDrawer() {
             </p>
           </div>
         </div>
-      </div>
-      <div className="inline-flex items-center gap-4 p-2 sideBarBg mt-5">
+      <div className="inline-flex items-center gap-4 p-2 sideBarBg mt-5 ml-[16px]">
         <div className="flex gap-x-[16px] flex-wrap  ">
           {cg?.propertyType == "apt" || cg?.propertyType == "vlmt" ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-center  ">
@@ -227,13 +234,13 @@ export default function FloorplanDrawer() {
       </div>
       <Table data={cg?.unitTypes} cg={cg} propertyType={cg?.propertyType} />
       {/* Drawer content */}
-    </Drawer>
+      </DrawerBox>
   );
 }
 
 const Table = ({ data, propertyType, cg }: any) => {
   return (
-    <div className="flex flex-col justify-center items-start gap-3.5 px-[9px] py-2.5 border rounded-[10px] border-solid border-[#9AB1BC] mt-5 max-w-[90%]">
+    <div className="flex flex-col justify-center items-start gap-3.5 px-[9px] py-2.5 border rounded-[10px] border-solid border-[#9AB1BC] mt-5 max-w-[90%] ml-[16px]">
       <h1 className="flex items-center gap-2.5 pl-2.5 w-full py-2.5 rounded-lg bg-[#ebeaff] text-[#001F35] text-[16px] xl:text-[21px] not-italic font-semibold leading-[normal] capitalize">
         <Marble /> Unit Types
       </h1>
