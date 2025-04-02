@@ -20,10 +20,14 @@ const RightSection = ({ serverData, isTrue }: any) => {
         () => import("@/app/components/maps/search/ProjectSearchPageMap"),
         {
           // loading: () => <MapSkeleton />,
-          loading: () => <div className=" flex justify-center items-center w-full h-[600px] flex-col ">
+          loading: () => (
+            <div className=" flex justify-center items-center w-full h-[600px] flex-col ">
               <div className="animate-spin rounded-full h-[50px] w-[50px] border-t-4 border-b-4 border-[#0073C6] border-t-transparent" />
-              <p className="font-[600] text-[20px] mt-[16px] ">Please wait Map is loading...</p>
-            </div>,
+              <p className="font-[600] text-[20px] mt-[16px] ">
+                Please wait Map is loading...
+              </p>
+            </div>
+          ),
           ssr: false,
         }
       ),
@@ -38,15 +42,12 @@ const RightSection = ({ serverData, isTrue }: any) => {
     isLoader,
   } = useAtomValue(selectedNearByAtom);
 
-  console.log(serverData);
-
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
-        
         if (!isTrue) {
           return serverData;
         }
@@ -67,8 +68,7 @@ const RightSection = ({ serverData, isTrue }: any) => {
       ...RTK_CONFIG,
       enabled: false,
     });
-  const apidata = !isTrue ? serverData : data?.pages?.flat() || [];
-
+  const apidata = data?.pages?.flat() || [];
   return !isMobile ? (
     <div
       className=" w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 "

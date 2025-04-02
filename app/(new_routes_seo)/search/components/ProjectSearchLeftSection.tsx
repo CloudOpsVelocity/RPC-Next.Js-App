@@ -47,8 +47,7 @@ function LeftSection({
   const isTrue =
     it || pathname.includes("search")
       ? true
-      // : serverData !== null && apiFilterQueryParams !== null;
-      : apiFilterQueryParams !== null;
+      : serverData !== null && apiFilterQueryParams !== null;
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
@@ -57,7 +56,6 @@ function LeftSection({
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
-        console.log("apiFilterQueryParams")
         const response = await getSearchData(
           pageParam,
           apiFilterQueryParams ?? ""
@@ -77,9 +75,9 @@ function LeftSection({
       }),
       cacheTime: 300000,
       enabled: isTrue,
-      staleTime: 0, // Ensure fresh data on filter changes
+      staleTime: 0,
       refetchOnWindowFocus: false,
-  });
+    });
 
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -88,13 +86,13 @@ function LeftSection({
     ...RTK_CONFIG,
   });
 
-  const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
+  const allItems = data?.pages?.flat() || [];
 
   const rowVirtualizer = useVirtualizer({
     count: allItems?.length || 0,
     getScrollElement: () => containerRef.current,
     estimateSize: () => 300,
-    overscan: 5, // Reduced overscan to improve performance
+    overscan: 5,
     enabled: true,
     measureElement: (element) => {
       return element?.getBoundingClientRect().height || 300;
@@ -167,7 +165,7 @@ function LeftSection({
 
   const renderProjectCard = useCallback(
     (virtualRow: any) => {
-      const eachOne = allItems[virtualRow.index];
+      const eachOne: any = allItems[virtualRow.index];
 
       return (
         <div
