@@ -252,6 +252,7 @@ const BuilderCarousel = ({
       <p className="ml-0 md:ml-2 mt-3 mb-0 sm:mb-[24px]  text-[#4D6677] text-[13px] sm:text-lg xl:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
         {content}
       </p>
+      
       <NewCarousel
         data={data}
         type="proj"
