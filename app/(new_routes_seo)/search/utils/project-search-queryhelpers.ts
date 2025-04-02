@@ -42,15 +42,9 @@ const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
     )
     .replace(/listedBy=All/g, "") // Remove 'listedBy=All'
     .replace(/-/g, "&"); // Replace dashes with ampersands
-
-  // Append 'cg=S' if not already present and 'city=9' if city is not present
   let updatedParams = apiFilterQueryParams.includes("cg=")
-    ? `${transformedParams}&cg=${apiFilterQueryParams.split("cg=")[1]}`
+    ? transformedParams
     : `${transformedParams}&cg=S`;
-  console.log({
-    updatedParams,
-    apiFilterQueryParamsFromTest: apiFilterQueryParams,
-  });
   return updatedParams.includes("city=")
     ? updatedParams
     : `${updatedParams}&city=9`;

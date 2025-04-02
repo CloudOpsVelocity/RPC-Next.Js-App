@@ -37,7 +37,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
       : serverData !== null && apiFilterQueryParams !== null
   );
   const isTrue = it || (serverData !== null && apiFilterQueryParams !== null);
-  console.log({ apiFilterQueryParams });
+
   return (
     <>
       <LeftSection

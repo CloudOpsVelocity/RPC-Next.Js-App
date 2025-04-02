@@ -49,10 +49,6 @@ function LeftSection({
       : serverData !== null && apiFilterQueryParams !== null;
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // let isTrue = pathname.includes("search")
-  //   ? true
-  //   : serverData !== null && apiFilterQueryParams !== null;
-
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [

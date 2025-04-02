@@ -24,36 +24,31 @@ type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
   frontendFilters?: any;
+  isTrue: boolean;
+  setIsTrue: any;
+  apiFilterQueryParams: string | null;
 };
 
-function LeftSection({ mutate, serverData, frontendFilters }: Props) {
-  useHydrateAtoms([
-    [
-      projSearchStore,
-      {
-        type: "update",
-        payload: {
-          ...frontendFilters,
-        },
-      },
-    ],
-  ]);
+function LeftSection({
+  mutate,
+  serverData,
+  frontendFilters,
+  isTrue: it,
+  setIsTrue,
+  apiFilterQueryParams,
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
-  const [apiFilterQueryParams] = useQueryState("sf");
+
   const pathname = usePathname();
+  const isTrue =
+    it || pathname.includes("search")
+      ? true
+      : serverData !== null && apiFilterQueryParams !== null;
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
-  const [isTrue, setIsTrue] = useState(
-    pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null
-  );
-  // let isTrue = pathname.includes("search")
-  //   ? true
-  //   : serverData !== null && apiFilterQueryParams !== null;
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
     useInfiniteQuery({

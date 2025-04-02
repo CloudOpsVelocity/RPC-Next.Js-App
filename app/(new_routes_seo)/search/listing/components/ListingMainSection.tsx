@@ -1,6 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSection";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
+import { useQueryState } from "nuqs";
+import { useHydrateAtoms } from "jotai/utils";
+import { projSearchStore } from "../../store/projSearchStore";
 const ListingSearchRightSection = dynamic(
   () => import("./listingSearchTabs/listingSearchRightSection")
 );
@@ -13,15 +18,38 @@ export default function ListingMainSection({
   frontendFilters,
   serverData,
 }: Props) {
+  useHydrateAtoms([
+    [
+      projSearchStore,
+      {
+        type: "update",
+        payload: {
+          ...frontendFilters,
+        },
+      },
+    ],
+  ]);
+  const pathname = usePathname();
+  const [apiFilterQueryParams] = useQueryState("sf");
+  const [isTrue, setIsTrue] = useState(
+    pathname.includes("search")
+      ? true
+      : serverData !== null && apiFilterQueryParams !== null
+  );
+
   return (
     <>
       <ListingSearchleftSection
         serverData={serverData}
         frontendFilters={frontendFilters}
+        isTrue={isTrue}
+        apiFilterQueryParams={apiFilterQueryParams}
+        setIsTrue={setIsTrue}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
       <ListingSearchRightSection
         serverData={serverData}
+        isTrue={isTrue}
         key="projListingSearchRightSection2"
       />
     </>

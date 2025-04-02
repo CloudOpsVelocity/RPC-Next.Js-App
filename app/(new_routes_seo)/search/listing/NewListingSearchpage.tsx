@@ -1,14 +1,23 @@
 import React from "react";
 import dynamic from "next/dynamic";
-const ListingSearhLeftSection = dynamic(() => import("./components/listingSearchTabs/listingSearchleftSection"));
-const ListingSearchRightSection = dynamic(() => import("./components/listingSearchTabs/listingSearchRightSection"));
+const ListingSearhLeftSection = dynamic(
+  () => import("./components/listingSearchTabs/listingSearchleftSection")
+);
+const ListingSearchRightSection = dynamic(
+  () => import("./components/listingSearchTabs/listingSearchRightSection")
+);
 // import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
-const ProjectSearchBreadCrumbs = dynamic(() => import("../components/ProjSearchBreadCrums"));
+const ProjectSearchBreadCrumbs = dynamic(
+  () => import("../components/ProjSearchBreadCrums")
+);
 
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
+import ListingMainSection from "./components/ListingMainSection";
 // import ListingHeaderFilters from "./components/ListingSearchHeader";
 
-const ListingHeaderFilters = dynamic(() => import("./components/ListingSearchHeader"));
+const ListingHeaderFilters = dynamic(
+  () => import("./components/ListingSearchHeader")
+);
 
 type Props = {
   serverData: any;
@@ -37,14 +46,9 @@ export default function NewListingSearchpage({
         </div>
       </div>
       <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[154px] xl:pt-[190px] ">
-        <ListingSearhLeftSection
-          serverData={serverData}
+        <ListingMainSection
           frontendFilters={frontendFilters}
-        />
-        <div className="w-[100%] sm:w-[50%] -z-10" />
-        <ListingSearchRightSection
           serverData={serverData}
-          key="projListingSearchRightSection2"
         />
       </div>
     </main>
