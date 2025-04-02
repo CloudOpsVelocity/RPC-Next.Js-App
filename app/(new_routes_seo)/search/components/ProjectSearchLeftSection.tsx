@@ -46,7 +46,8 @@ function LeftSection({
   const isTrue =
     it || pathname.includes("search")
       ? true
-      : serverData !== null && apiFilterQueryParams !== null;
+      // : serverData !== null && apiFilterQueryParams !== null;
+      : apiFilterQueryParams !== null;
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
@@ -55,6 +56,7 @@ function LeftSection({
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
+        console.log("apiFilterQueryParams")
         const response = await getSearchData(
           pageParam,
           apiFilterQueryParams ?? ""
@@ -76,7 +78,7 @@ function LeftSection({
       enabled: isTrue,
       staleTime: 0, // Ensure fresh data on filter changes
       refetchOnWindowFocus: false,
-    });
+  });
 
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],

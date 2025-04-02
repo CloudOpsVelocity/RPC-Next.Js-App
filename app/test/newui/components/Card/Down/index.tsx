@@ -9,6 +9,7 @@ import selectedSearchAtom, {
   modalPopup,
   selectedNearByAtom,
 } from "@/app/store/search/map";
+import { searchPageMapToggle } from "@/app/(new_routes_seo)/search/store/projSearchStore";
 
 export default function CardDownSection({
   a,
@@ -60,6 +61,8 @@ export default function CardDownSection({
   //   });
   // };
   const dispatch = useSetAtom(overlayAtom);
+  const setIsMapLoaded = useSetAtom(searchPageMapToggle);
+
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
       <div className="flex gap-[9px]">
@@ -145,6 +148,7 @@ export default function CardDownSection({
               className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out min-h-[28px] "
               title="Click to view Near by Locations"
               onClick={(e) => {
+                setIsMapLoaded(true);
                 title = "Click to view Near by Locations";
                 e.stopPropagation();
                 setNearby((prev: any) => ({

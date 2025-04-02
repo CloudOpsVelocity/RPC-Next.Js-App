@@ -38,12 +38,15 @@ const RightSection = ({ serverData, isTrue }: any) => {
     isLoader,
   } = useAtomValue(selectedNearByAtom);
 
+  console.log(serverData);
+
   const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
       queryFn: async ({ pageParam = 0 }) => {
+        
         if (!isTrue) {
           return serverData;
         }

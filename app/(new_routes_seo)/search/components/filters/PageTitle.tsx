@@ -10,8 +10,6 @@ type Props = {}
 function PageTitle({}: Props) {
     const state= useAtomValue(projSearchStore);
 
-    console.log(state);
-
     const paramsData = useParams();
     const path = usePathname();
 
@@ -21,8 +19,6 @@ function PageTitle({}: Props) {
           .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
           .replace(/\s+/g, " ");
     }
-
-    console.log(paramsData);
     
     const getTitle = (pageUrl:string) => {
       if (paramsData && Object.keys(paramsData).length > 0) { 

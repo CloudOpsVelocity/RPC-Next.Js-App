@@ -72,7 +72,8 @@ const ProjectSearchTabs = () => {
   const setNearby = useSetAtom(selectedNearByAtom);
 
   const handleTabsChange = (value: string | null) => {
-    typeof window !== "undefined"
+    console.log(value);
+    (typeof window !== "undefined")
       ? window.scrollTo({ top: 0, behavior: "smooth" })
       : "";
     setSelected(null);
@@ -122,6 +123,7 @@ const ProjectSearchTabs = () => {
               projStatus: null,
             }),
           };
+
     dispath({
       type: "update",
       payload: updatedFilters,
@@ -129,6 +131,7 @@ const ProjectSearchTabs = () => {
 
     handleApplyFilters();
   };
+  
   const handleSortBy = (option: any) => {
     dispath({
       payload: {
