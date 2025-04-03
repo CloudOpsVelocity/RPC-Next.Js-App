@@ -135,7 +135,7 @@ const LeafMap: React.FC<{
                 src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
                 fill
                 className={`bg-gray-`}
-                
+                unoptimized
               />
             </picture>
           </div>

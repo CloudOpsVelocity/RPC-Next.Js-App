@@ -217,6 +217,7 @@ export default function GalleryModalContent({}: Props) {
                     layout="fill"
                     priority 
                     objectFit="contain"
+                    unoptimized
                   />
                 </TransformComponent>
               </>
@@ -288,6 +289,7 @@ export default function GalleryModalContent({}: Props) {
                     layout="fill"
                     objectFit="cover"
                     priority 
+                    unoptimized
                   />
                 ) : (
                   <div className="w-full h-full bg-gray-800 flex items-center justify-center">

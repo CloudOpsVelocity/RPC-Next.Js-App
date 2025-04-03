@@ -119,6 +119,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                   height={300}
                   alt=""
                   className="h-full w-full m-auto "
+                  unoptimized
                 />
               )}
             </div>
