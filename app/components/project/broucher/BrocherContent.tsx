@@ -249,7 +249,7 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
     return (
           <div            
           id="brochure">
-            <button
+           {/*  <button
               onClick={(e) => {
                 e.preventDefault();
                 if (state.activePhase.brochure)
@@ -258,7 +258,7 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
               className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[1]"
             >
               <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
-            </button>
+            </button> */}
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
               <span>Explore the Comprehensive Brochures of </span>
               <span className="text-[#148B16] font-bold">{projName} </span>

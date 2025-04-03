@@ -74,6 +74,7 @@ export default function PropertyOverviewBanner({
         height={263}
         alt="priceBagOverView"
         className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
+        unoptimized
       />    
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
         <div className="flex  flex-col text-left">

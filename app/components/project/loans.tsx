@@ -65,7 +65,8 @@ export default function ProjectLoans({
                     width={140}
                     height={90}
                     className="max-w-[90px] sm:min-h-[70px] sm:w-[140px] aspect-video "
-                    priority 
+                    priority
+                    unoptimized
                   />
                   <p className="mt-3  text-[#242424] text-center text-[14px] sm:text-xl not-italic font-semibold leading-[normal] capitalize">
                     {bank.bankName}
@@ -94,6 +95,7 @@ export default function ProjectLoans({
                       height={70}
                       className="min-h-[30px] min-w-[70px] aspect-video "
                       priority 
+                      unoptimized
                     />
                     <p className="mt-3  text-[#242424] text-[13px] text-center  not-italic font-semibold leading-[normal] capitalize ">
                       {bank.bankName}
