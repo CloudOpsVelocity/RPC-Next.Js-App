@@ -1,7 +1,11 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
-import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
+const ProjSearchMainFilterSection = dynamic(
+  () => import("./components/filters/ProjSearchMainFilterSection")
+);
+// import ProjSearchMainFilterSection from "";
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 import Mainsection from "./components/Mainsection";
 type Props = {
@@ -37,10 +41,10 @@ export default function NewSearchPage({
       </div>
 
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[226px] ">
-        {/* <Mainsection
+        <Mainsection
           frontendFilters={frontendFilters}
           serverData={serverData}
-        /> */}
+        />
       </div>
     </main>
   );
