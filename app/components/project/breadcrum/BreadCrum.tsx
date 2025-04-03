@@ -4,7 +4,12 @@ import Link from "next/link";
 import Script from "next/script";
 import React from "react";
 
-export default function BreadCrumbs({ params }: { params: any }) {
+export default function BreadCrumbs({ params: routes }: { params: any }) {
+  const params = {
+    residential: "residential",
+    projects: "projects",
+    ...routes,
+  };
   const allParams = Object.keys(params);
   const titleOfKeys = {
     city: "",
@@ -50,6 +55,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
   };
   return (
     <>
+      {JSON.stringify(params)}
       <Script
         id="BreadCrumbsScript1"
         type="application/ld+json"
@@ -92,7 +98,6 @@ export default function BreadCrumbs({ params }: { params: any }) {
               {index < Object.keys(params).length - 1 ? (
                 <Link
                   prefetch={false}
-                  // href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
                   href={`${BASE_PATH_PROJECT_DETAILS}${redirectPath}`}
                   className="hover:underline cursor-pointer capitalize"
                 >
