@@ -6,7 +6,6 @@ export default async function Page() {
   const severData = await getSearchData(``);
   const pathname = `residential-listings`;
   const pageUrl = `${pathname}`;
-  console.log({ pageUrl });
   return (
     <NewSearchPage
       pageUrl={pageUrl}
