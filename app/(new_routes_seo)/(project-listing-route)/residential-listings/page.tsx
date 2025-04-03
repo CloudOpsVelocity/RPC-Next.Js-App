@@ -6,14 +6,16 @@ export default async function Page() {
   const severData = await getSearchData(``);
   const pathname = `residential-listings`;
   const pageUrl = `${pathname}`;
+
   return (
-    <NewSearchPage
-      pageUrl={pageUrl}
-      serverData={severData}
-      frontendFilters={{
-        listedBy: "All",
-        cg: "S",
-      }}
-    />
+    <div>sdfsdfs</div>
+    // <NewSearchPage
+    //   pageUrl={pageUrl}
+    //   serverData={severData}
+    //   frontendFilters={{
+    //     listedBy: "All",
+    //     cg: "S",
+    //   }}
+    // />
   );
 }
