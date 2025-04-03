@@ -1,17 +1,18 @@
 "use client";
 import dynamic from "next/dynamic";
-import React, { useMemo } from "react";
-import MapSkeleton from "@/app/components/maps/Skeleton";
+import React, { useEffect, useMemo } from "react";
+// import MapSkeleton from "@/app/components/maps/Skeleton";
 import { useInfiniteQuery } from "react-query";
 import { getSearchData } from "../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import RTK_CONFIG from "@/app/config/rtk";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 import { useMediaQuery } from "@mantine/hooks";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
 import LocationCard from "@/app/test/newui/components/modals/overly_items/LocationList";
-import { CustomLoading } from "@/app/images/commonSvgs";
+import { overlayAtom } from "@/app/test/newui/store/overlay";
+// import { CustomLoading } from "@/app/images/commonSvgs";
 
 const RightSection = ({ serverData, isTrue }: any) => {
   const Map = useMemo(
@@ -36,6 +37,8 @@ const RightSection = ({ serverData, isTrue }: any) => {
   const [apiFilterQueryParams] = useQueryState("sf");
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
+  const dispatch = useSetAtom(overlayAtom);
+  
   const {
     data: nearByData,
     isOpen,
@@ -69,6 +72,23 @@ const RightSection = ({ serverData, isTrue }: any) => {
       enabled: false,
     });
   const apidata = data?.pages?.flat() || [];
+
+  useEffect(() => {
+    if (mapPopup.isOpen && isMobile) {
+      // Push a new state to the history stack when the modal is opened
+      window.history.pushState("projeSearchModalModal", "");
+
+      const handlePopState = () => {
+        document.body.style.overflow = "scroll"; 
+        setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
+        dispatch({ type: "CLOSE" })
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
+  }, [mapPopup.isOpen]);
+
   return !isMobile ? (
     <div
       className=" w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 "
@@ -91,6 +111,7 @@ const RightSection = ({ serverData, isTrue }: any) => {
         handleChange={() => {
           document.body.style.overflow = "scroll";
           setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
+          dispatch({ type: "CLOSE" })
         }}
       >
         {isLoader ? (

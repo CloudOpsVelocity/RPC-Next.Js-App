@@ -240,7 +240,7 @@ export default function TopRightSection({
                   title="Click to view on Map"
                   className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none "
                   onClick={() => {
-                    
+                    setIsMapLoaded(true);
                     setNearby((prev: any) => ({
                       ...prev,
                       category: "",
@@ -378,6 +378,7 @@ export default function TopRightSection({
                   className="bg-teal-500 text-white text-right max-w-fit font-bold px-[4px] py-[4px] sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                   title="Click to view all Near by Locations"
                   onClick={() => {
+                    setIsMapLoaded(true);
                     setNearby((prev: any) => ({
                       ...prev,
                       category: "",
@@ -614,6 +615,7 @@ export default function TopRightSection({
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 title="Click to view all Near by Locations"
                 onClick={() => {
+                  setIsMapLoaded(true);
                   setNearby((prev: any) => ({
                     ...prev,
                     category: "",
