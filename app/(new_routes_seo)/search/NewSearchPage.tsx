@@ -5,15 +5,14 @@ import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
 const ProjSearchMainFilterSection = dynamic(
   () => import("./components/filters/ProjSearchMainFilterSection")
 );
-// import ProjSearchMainFilterSection from "";
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
-import Mainsection from "./components/Mainsection";
+// import Mainsection from "./components/Mainsection";
+const Mainsection = dynamic(() => import("./components/Mainsection"));
 type Props = {
   serverData: any;
   frontendFilters: any;
   pageUrl: string;
 };
-
 export default function NewSearchPage({
   serverData,
   frontendFilters,
