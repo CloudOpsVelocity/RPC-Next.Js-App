@@ -7,7 +7,7 @@ export const GrpLogoSvg = ({ className }: { className: string }) => (
     height={54}
     alt="getright logo"
     className={className}
-     
+    unoptimized
   />
 );
 
@@ -19,6 +19,7 @@ export const GrpDarkLogoSvg = ({ className }: { className: string }) => {
       height={64}
       alt="getright logo"
       className={className}
+      unoptimized
     />
   );
 };

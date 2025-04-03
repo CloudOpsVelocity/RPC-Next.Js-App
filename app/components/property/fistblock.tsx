@@ -100,7 +100,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
               />
             </div>
           </div>
-          <div className="relative w-full !rounded-[10px]">
+          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto ( sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
             <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -118,8 +118,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 <Carousel.Slide
                   key={`Listing_Carousel_${index}`}
                   className="relative"
-                  /*  h={750} */
-                  w={"full"}
+                  w={"auto"}
                 >
                   <picture>
                     <source
@@ -154,9 +153,11 @@ const PropertyFirstBlock: React.FC<Props> = ({
                       // height={630}
                       // width={1200}
                       fill
-                      className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
+                   /*    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
                         index + 1
-                      }`}
+                      }`} */
+                       className={`bg-gray-${index + 1} `}
+
                       unoptimized
                     />
                   </picture>
