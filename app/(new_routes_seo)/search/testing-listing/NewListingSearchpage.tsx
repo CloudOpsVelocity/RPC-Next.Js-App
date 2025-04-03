@@ -13,11 +13,11 @@ const ProjectSearchBreadCrumbs = dynamic(
 
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 import ListingMainSection from "./components/ListingMainSection";
-// import ListingHeaderFilters from "./components/ListingSearchHeader";
+import ListingHeaderFilters from "./components/ListingSearchHeader";
 
-const ListingHeaderFilters = dynamic(
-  () => import("./components/ListingSearchHeader")
-);
+// const ListingHeaderFilters = dynamic(
+//   () => import("./components/ListingSearchHeader")
+// );
 
 type Props = {
   serverData: any;
@@ -31,9 +31,6 @@ export default function NewListingSearchpage({
   pageUrl,
 }: Props) {
   const isListing = true;
-
-  // console.log(`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`)
-
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
       <link

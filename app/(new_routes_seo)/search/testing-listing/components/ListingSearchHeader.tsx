@@ -15,7 +15,7 @@ import { useParams, usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 
-import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
+import ListingSearchTabs from "../../testing-listing/components/ListingSearchTabs";
 import BuyRent from "../../components/FilterComponents/BuyRent";
 import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
 import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
@@ -41,7 +41,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
-  
+
   const {
     data: searchData,
     isLoading,
@@ -273,7 +273,6 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       return;
     }
   };
-  
 
   useEffect(() => {
     if (isDrawerOpen && isMobile) {
@@ -281,7 +280,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       window.history.pushState("projeSearchModalModal", "");
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
+        document.body.style.overflow = "scroll";
         setIsDrawerOpen(false);
         document.body.style.overflow = "unset";
       };
@@ -289,8 +288,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       window.addEventListener("popstate", handlePopState);
       return () => window.removeEventListener("popstate", handlePopState);
     }
-}, [isDrawerOpen]);
-
+  }, [isDrawerOpen]);
 
   return (
     <>

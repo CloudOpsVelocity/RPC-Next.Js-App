@@ -13,7 +13,7 @@ export const slugify = (name: string): string => {
 };
 
 export default function ListingBreadCrumbs({
-  params,
+  params: routes,
   isProject,
   title,
   pathname,
@@ -23,6 +23,10 @@ export default function ListingBreadCrumbs({
   title: string;
   pathname: string;
 }) {
+  const params = {
+    "residential-listings": "residential-listings",
+    ...routes,
+  };
   const allParams = Object.keys(params || {});
   const isIndependent = title.includes("Independent");
   const titleOfKeys = {
@@ -78,6 +82,7 @@ export default function ListingBreadCrumbs({
   // console.log(params, currentPath )
   return (
     <>
+      {JSON.stringify(breadcrumbSchema)}
       <Script
         id="ListingBreadCrumbsScript1"
         type="application/ld+json"
