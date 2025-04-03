@@ -98,6 +98,7 @@ export default function GalleryModalContent({}: Props) {
       };
     }
   }, [isOpen]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isOpen) return;
@@ -109,6 +110,7 @@ export default function GalleryModalContent({}: Props) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
+  
   // Swipe to close (on mobile)
   useEffect(() => {
     if (!isMobile) return;

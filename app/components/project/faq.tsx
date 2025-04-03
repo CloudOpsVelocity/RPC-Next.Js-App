@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Textarea, Button, Modal } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FAQ } from "@/app/validations/types/project";
 import { addQna } from "@/app/utils/api/actions/Qna";
@@ -157,6 +157,7 @@ const AddQnaForm = ({
     opened.type === "qna" && reset();
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
+
   return (
     <form
       className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2"
@@ -188,7 +189,7 @@ const AddQnaForm = ({
 
       <div className=" gap-4">
         <div className="flex-1">
-          <Textarea
+          {/* <Textarea
             id="question"
             name="question"
             placeholder="Type your question here . . . ."
@@ -208,35 +209,35 @@ const AddQnaForm = ({
               input: StepCscs.textAreaInput,
               error: "!text-[12px] !sm:text-[18px]",
             }}
-          />
+          /> */}
 
-          {/* <textarea
+          <textarea
             id="question"
             name="question"
             placeholder="Type your question here . . . ."
-            className={clsx(
-              "placeholder:!text-[#4D6677] placeholder:!text-[18px]  font-medium leading-[23.784px]  rounded-[10px] ",
-              !errors.question && "!border !border-solid !border-[#737579]"
-            )}
+            className={`placeholder:!text-[#4D6677] px-[10px] py-[6px] md:px-[16px] md:py-[10px] placeholder:!text-[14px] md:placeholder:!text-[18px] w-full resize-none leading-[23.784px] text-[14px] md:text-[16px] text-[#333] font-[500] rounded-[6px] md:rounded-[10px] focus:outline-none border border-solid border-[#737579] ${!errors.question ? "" : "border-[#F00]"} `}
             rows={isMobile ? 2 : 4}
             {...getInputProps("question")}
-
-       
-            value={text}
-          /> */}
-
-
-
+            onBlur={(e) =>
+              handleTrimAndReplace(e, "question", setFieldValue, "dis")
+            }
+          />
+          
+          {errors.question && (
+            <p className="text-[12px] sm:text-[14px] text-[#F00]">
+              {errors.question}
+            </p>
+          )}
 
         </div>
-        <Button
+        <button
           type="submit"
-          loading={status === "pending"}
-          size={isMobile ? "xs" : "md"}
-          className="bg-btnPrimary"
+          // loading={status === "pending"}
+          // size={isMobile ? "xs" : "md"}
+          className="bg-btnPrimary text-white text-[14px] md:text-[16px] py-[4px] px-[8px] md:py-[6px] md:px-[12px] rounded-[4px] font-[600] "
         >
           Submit
-        </Button>
+        </button>
       </div>
       <Success
         text={values.question}
