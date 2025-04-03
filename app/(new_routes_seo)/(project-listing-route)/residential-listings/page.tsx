@@ -8,14 +8,12 @@ export default async function Page() {
   const pageUrl = `${pathname}`;
 
   return (
-    <div>sdfsdfs</div>
-    // <NewSearchPage
-    //   pageUrl={pageUrl}
-    //   serverData={severData}
-    //   frontendFilters={{
-    //     listedBy: "All",
-    //     cg: "S",
-    //   }}
-    // />
+    <NewSearchPage
+      pageUrl={pageUrl}
+      serverData={severData}
+      frontendFilters={{
+        listedBy: "All",
+      }}
+    />
   );
 }
