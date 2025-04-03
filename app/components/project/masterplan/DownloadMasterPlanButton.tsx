@@ -17,7 +17,7 @@ export default function DownloadMasterPlanButton({ media }: Props) {
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
-      downloadLink.href = url;
+      downloadLink.href = url; 
       downloadLink.download = "masterplan.webp";
       document.body.appendChild(downloadLink);
       downloadLink.click();

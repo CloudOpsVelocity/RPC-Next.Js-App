@@ -5,7 +5,7 @@ import {
   // Phone,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
-import React from "react";
+import React, { useEffect } from "react";
 
 import Button from "../../elements/button";
 // import { useParams } from "next/navigation";
@@ -34,7 +34,20 @@ export default function OverviewBanner({
   builderId: number;
   slug: string;
 }) {
-  const [opened, { open }] = useReqCallPopup();
+  const [opened, { open, close }] = useReqCallPopup();
+  useEffect(() => {
+    if (opened) {
+      window.history.pushState("shearlModal", "");
+
+      const handlePopState = () => {
+        document.body.style.overflow = "scroll"; 
+        close();
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
+  }, [opened]);
   return (
     <div
       className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "

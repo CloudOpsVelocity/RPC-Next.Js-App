@@ -22,7 +22,7 @@ import Button from "../../atoms/buttons/variansts";
 // import { title } from "process";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
-  const isTab = useMediaQuery("(max-width: 1600px)");
+  const isTab = useMediaQuery("(max-width: 1600px)"); 
   const [opened, { close, source, MODAL_TYPE }] = useReqCallPopup();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"

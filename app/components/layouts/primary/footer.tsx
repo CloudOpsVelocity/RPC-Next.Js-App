@@ -112,16 +112,13 @@ function Footer() {
         "Home",
         "Projects",
         "Properties",
-        session !== undefined &&
-        session !== null &&
-        session.user?.userType === "B"
-          ? "Post Project"
-          : "",
+        session !== undefined && session !== null && session.user?.userType === "B" ? "Post Project" : "",
         "Post Property",
         "Builders",
         session === null ? "Login/Signup" : "",
         "Listing Search",
         "Project Search",
+        "Residential Listings"
       ],
       hrefs: [
         "/",
@@ -133,6 +130,8 @@ function Footer() {
         "/login",
         "/search/listing",
         "/search",
+        "/residential-listings"
+
       ],
       rel: "noopener noreferrer",
       target: "_self",

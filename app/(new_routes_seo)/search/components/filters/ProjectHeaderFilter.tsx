@@ -12,7 +12,7 @@ import BuyRent from "../FilterComponents/BuyRent";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 // import SelectedFilters from "./SelectedFilters";
@@ -25,7 +25,9 @@ const SelectedFilters = dynamic(() => import("./SelectedFilters"));
 // const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
 import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
 import PageTitle from "./PageTitle";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import { useMediaQuery } from "@mantine/hooks";
+
 const ListingSearchTabs = dynamic(
   () => import("../../listing/components/ListingSearchTabs")
 );
@@ -43,6 +45,8 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   const { handleApplyFilters, handleClearFilters } =
     useProjSearchAppliedFilters();
   const {
@@ -322,6 +326,22 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     document.body.style.overflow = "hidden";
   };
 
+  useEffect(() => {
+      if (isDrawerOpen && isMobile) {
+        // Push a new state to the history stack when the modal is opened
+        window.history.pushState("projeSearchModalModal", "");
+  
+        const handlePopState = () => {
+          document.body.style.overflow = "scroll"; 
+          setIsDrawerOpen(false);
+          document.body.style.overflow = "unset";
+        };
+  
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+      }
+  }, [isDrawerOpen]);
+
   return (
     <>
       <div className="w-full max-w-[100%] max-h-[60vh] bg-white border-b relative md:sticky top-0 z-auto md:z-[11]">
@@ -494,7 +514,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
             </div>
             <div
               onClick={(e) => e.stopPropagation()}
-              className="  max-h-[100vh]   overflow-y"
+              className="max-h-[100vh] overflow-y"
             >
               <ShowAllFiltersButton
                 isListing={isListing}

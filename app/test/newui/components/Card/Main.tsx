@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Search } from "@/app/validations/types/search";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
@@ -110,8 +110,23 @@ const MainBox = ({ data, refetch }: Props) => {
     }
   };
 
-  const [, { open }] = useReqCallPopup();
-  const overlayData = useAtomValue(overlayAtom);
+  const [opened, { open, close }] = useReqCallPopup(); 
+  const overlayData = useAtomValue(overlayAtom); 
+
+  useEffect(() => {
+    if (opened) {
+      // Push a new state to the history stack when the modal is opened
+      window.history.pushState("reqCallModal", "");
+
+      const handlePopState = () => {
+        document.body.style.overflow = "scroll"; 
+        close();
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
+  }, [opened]);
 
   const handleOpen = () => {
     open({

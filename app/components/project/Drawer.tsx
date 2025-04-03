@@ -16,6 +16,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
     setReadMore,
   ] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
+    document.body.style.overflow = "scroll"; 
     setReadMore((prev) => ({
       ...prev,
       expanded: false,
