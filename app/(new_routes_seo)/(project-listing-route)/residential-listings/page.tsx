@@ -4,8 +4,9 @@ import NewSearchPage from "../../search/NewSearchPage";
 
 export default async function Page() {
   const severData = await getSearchData(``);
-  const pathname = `/residential-listings`;
-  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${pathname}`;
+  const pathname = `residential-listings`;
+  const pageUrl = `${pathname}`;
+  console.log({ pageUrl });
   return (
     <NewSearchPage
       pageUrl={pageUrl}

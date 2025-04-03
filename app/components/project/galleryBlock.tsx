@@ -13,7 +13,6 @@ import VideoJsonLdScript from "@/app/seo/VideoJson";
 import { useAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
 import Image from "next/image";
-import Script from "next/script";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
