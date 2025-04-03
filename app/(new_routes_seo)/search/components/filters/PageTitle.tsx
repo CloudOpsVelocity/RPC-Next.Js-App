@@ -42,6 +42,8 @@ function PageTitle({}: Props) {
       return "Listing Search";
     } else if (pageUrl === "/residential-listings") {
       return "Residential Projects";
+    } else if (pageUrl === "/residential/projects") {
+      return "Search Results For 'Residential Projects In Bengaluru'";
     }
   };
 

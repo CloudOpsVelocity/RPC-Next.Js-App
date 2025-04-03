@@ -22,8 +22,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
     const index = str.indexOf(word);
     return index !== -1 ? str.substring(0, index + word.length) : str;
   }
-
-  let trimmedUrl = "";
+  // let trimmedUrl = "";
   let newParams: string[] = [];
 
   if (pageUrl === "/search") {
@@ -31,19 +30,20 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   } else if (pageUrl === "/search/listing") {
     newParams = ["Listing Search"];
   } else if (pageUrl.includes("/residential/projects/")) {
-    trimmedUrl = trimFromWord(pageUrl, "/residential/projects/");
-    newParams = trimmedUrl.split("/");
+    // trimmedUrl = trimFromWord(pageUrl, "/residential/projects/");
+    newParams = pageUrl.split("/").filter(Boolean);
   } else if (pageUrl.includes("/residential-listings/")) {
-    trimmedUrl = trimFromWord(pageUrl, "/residential-listings/");
-    newParams = trimmedUrl.split("/");
+    // trimmedUrl = trimFromWord(pageUrl, "/residential-listings/");
+    newParams = pageUrl.split("/").filter(Boolean);
   } else if (pageUrl.includes("/residential/listings/")) {
-    trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
-    newParams = trimmedUrl.split("/");
+    // trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
+    newParams = pageUrl.split("/").filter(Boolean);
+  } else if (pageUrl === "/residential-listings") {
+    newParams = ["Residential Listings"];
   }
-
-  if (!newParams || newParams.length === 0) {
-    return null;
-  }
+  // if (!newParams || newParams.length === 0) {
+  //   return null;
+  // }
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

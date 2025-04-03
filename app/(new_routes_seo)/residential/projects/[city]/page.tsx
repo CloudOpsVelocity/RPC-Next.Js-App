@@ -16,7 +16,7 @@ export default async function Page({ params: { city, lt } }: Props) {
   const pageUrl = `${process.env.NEXT_PUBLIC_URL}${pathname}`;
   return (
     <NewSearchPage
-      pageUrl={pageUrl}
+      pageUrl={pathname}
       frontendFilters={{}}
       serverData={serverData}
     />

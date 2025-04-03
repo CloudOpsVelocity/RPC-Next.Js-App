@@ -9,7 +9,7 @@ import { Metadata } from "next";
 
 export default async function Home() {
   const serverData = await getProjSearchData("");
-  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/residential/projects/`;
+  const pageUrl = `/residential/projects/`;
   return (
     <NewSearchPage
       pageUrl={pageUrl}

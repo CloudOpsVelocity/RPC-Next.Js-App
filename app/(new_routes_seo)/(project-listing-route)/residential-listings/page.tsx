@@ -4,7 +4,7 @@ import NewSearchPage from "../../search/NewSearchPage";
 
 export default async function Page() {
   const severData = await getSearchData(``);
-  const pathname = `residential-listings`;
+  const pathname = `/residential-listings`;
   const pageUrl = `${pathname}`;
 
   return (

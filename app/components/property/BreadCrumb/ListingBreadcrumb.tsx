@@ -52,7 +52,7 @@ export default function ListingBreadCrumbs({
           position: index + 2,
           name: params[key].replace(/-/g, " "),
           item: `${process.env.NEXT_PUBLIC_PROJECT_URL}${
-            isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
+            isProject ? "" : BASE_PATH_LISTING
           }${breadcrumbPath}`,
         };
       }),
@@ -73,16 +73,13 @@ export default function ListingBreadCrumbs({
       ...allParams.map((key) => ({
         "@type": "SiteNavigationElement",
         name: params[key].replace(/-/g, " "),
-        url: `${
-          isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
-        }${breadcrumbPath}`,
+        url: `${isProject ? "" : BASE_PATH_LISTING}${breadcrumbPath}`,
       })),
     ],
   };
-  // console.log(params, currentPath )
+
   return (
     <>
-      {JSON.stringify(breadcrumbSchema)}
       <Script
         id="ListingBreadCrumbsScript1"
         type="application/ld+json"
@@ -115,14 +112,12 @@ export default function ListingBreadCrumbs({
                 <>
                   <Link
                     prefetch={false}
-                    href={`${
-                      isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
-                    }${currentPath}${
+                    href={`${isProject ? "" : BASE_PATH_LISTING}${currentPath}${
                       currentPath.includes("for-sale")
                         ? "?sf=listedBy=All-cg=S"
                         : currentPath.includes("for-rent")
                         ? "?sf=listedBy=All-cg=R"
-                        : "'/"
+                        : "/"
                     }`}
                     target="_blank"
                     className="hover:underline cursor-pointer capitalize"
