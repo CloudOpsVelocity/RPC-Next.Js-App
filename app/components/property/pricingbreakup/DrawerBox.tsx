@@ -42,7 +42,10 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
                 <div className='flex justify-between items-center w-full px-[16px] mt-[16px] '>
                     <h3 className='text-[#001F35] sm:text-[20px] xl:text-[24px] font-[600]'>{title}</h3>
                     <Close 
-                        close={()=> handleChange(false)}
+                        close={()=> {
+                            handleChange(false);
+                            document.body.style.overflow = "scroll";
+                        }}
                         className=" hover:bg-gray-100 rounded-full w-[30px] h-[30px]"
                     />
                 </div>

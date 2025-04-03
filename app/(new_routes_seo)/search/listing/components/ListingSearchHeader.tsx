@@ -22,6 +22,7 @@ import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFilte
 import dynamic from "next/dynamic";
 import { trimFromWord } from "../../components/ProjSearchBreadCrums";
 import PageTitle from "../../components/filters/PageTitle";
+import { useMediaQuery } from "@mantine/hooks";
 // import SelectedFilters from "../../components/filters/SelectedFilters";
 const SelectedFilters = dynamic(
   () => import("../../components/filters/SelectedFilters")
@@ -39,6 +40,8 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
+  const isMobile = useMediaQuery("(max-width: 601px)");
+  
   const {
     data: searchData,
     isLoading,
@@ -270,6 +273,23 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       return;
     }
   };
+  
+
+  useEffect(() => {
+    if (isDrawerOpen && isMobile) {
+      // Push a new state to the history stack when the modal is opened
+      window.history.pushState("projeSearchModalModal", "");
+
+      const handlePopState = () => {
+        document.body.style.overflow = "scroll"; 
+        setIsDrawerOpen(false);
+        document.body.style.overflow = "unset";
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
+}, [isDrawerOpen]);
 
 
   return (

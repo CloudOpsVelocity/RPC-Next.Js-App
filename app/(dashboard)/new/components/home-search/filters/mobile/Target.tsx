@@ -7,6 +7,7 @@ type Props = {};
 
 export default function Target({}: Props) {
   const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <>
       <div className="flex sm:hidden items-center min-w-full" onClick={open}>

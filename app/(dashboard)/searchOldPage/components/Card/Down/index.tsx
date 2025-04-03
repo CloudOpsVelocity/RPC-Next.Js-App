@@ -5,7 +5,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { useSetAtom } from "jotai";
 // import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {
   a: number;
@@ -40,8 +40,24 @@ export default function CardDownSection({
       ? projName
       : `${bhkName ?? ""} ${propTypeName} for
     ${cg === "R" ? "Rent" : "Sale"} in ${ltName}`;
-  const [, { open }] = useReqCallPopup();
+  const [opened, { open, close }] = useReqCallPopup();
   const setPopReqData = useSetAtom(NearByDataAtom);
+
+  useEffect(() => {
+      if (opened) {
+        // Push a new state to the history stack when the modal is opened
+        window.history.pushState("reqCallIndexModal", "");
+  
+        const handlePopState = () => {
+          document.body.style.overflow = "scroll"; 
+          close();
+        };
+  
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+      }
+    }, [opened]);
+
   const handleOpen = () => {
     open({
       modal_type:

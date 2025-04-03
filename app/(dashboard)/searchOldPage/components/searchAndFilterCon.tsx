@@ -59,7 +59,7 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
 
   const [allFilterPopup, setAllFilterPopup] = useState(initialFilterObjState);
 
-  const [opened, { open: openMobileSearchDrawer, close }] =
+  const [, { open: openMobileSearchDrawer, close }] =
     useDisclosure(false);
   const showpopUp = () => {
     setShowAllLocalities(true);
