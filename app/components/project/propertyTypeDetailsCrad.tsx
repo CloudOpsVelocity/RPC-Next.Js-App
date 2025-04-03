@@ -237,7 +237,8 @@ export default function PropertyTypeDetailsCrad({
             src={propName(propertyType, "img") as string}
             alt="Preview"
             className="w-[88%] h-[88%] object-cover rounded-[14px]"
-            priority 
+            priority
+            unoptimized 
           />
         </div>
         <div className="down mb-3">

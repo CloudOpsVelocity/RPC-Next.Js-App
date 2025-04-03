@@ -20,6 +20,7 @@ export default function Page() {
             alt="not found"
             className="w-full h-full"
             priority 
+            unoptimized
           />
         </div>
 
