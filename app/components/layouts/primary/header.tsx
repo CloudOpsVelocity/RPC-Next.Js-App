@@ -111,7 +111,6 @@ const ForBuilders = () => {
             width={220}
             height={220}
             className="absolute right-0 bottom-0"
-            priority
           />
         </Menu.Dropdown>
       </Menu>

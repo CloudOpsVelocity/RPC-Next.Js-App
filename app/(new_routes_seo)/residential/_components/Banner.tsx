@@ -48,7 +48,6 @@ export default function Banner({ heroSlides, data }: Props) {
               alt={slide.name}
               fill
               className="object-cover brightness-75"
-              priority={index === 0}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-background/90">
               <div className="container mx-auto h-full flex items-end pb-32 px-4">

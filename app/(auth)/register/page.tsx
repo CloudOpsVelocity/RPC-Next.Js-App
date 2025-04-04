@@ -54,7 +54,6 @@ export default function Page({ searchParams }: any) {
                   src={each.src}
                   width={83}
                   height={83}
-                  priority 
                 />
 
                 <p

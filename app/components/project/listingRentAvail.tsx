@@ -110,7 +110,6 @@ const Card = ({
           width={100}
           height={100}
           className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px] "
-          priority 
         />
 
         <div className="pl-0">
@@ -133,7 +132,6 @@ const Card = ({
             alt="stock icon"
             width={24}
             height={23}
-            priority 
           />
         </div>
       </div>
@@ -146,5 +144,5 @@ let config = {
   rentLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.svg`,
   sellLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.svg`,
   rentMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.svg`,
-  sellMobileLogo:`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.svg`,
+  sellMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.svg`,
 };

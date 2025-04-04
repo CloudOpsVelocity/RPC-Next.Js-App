@@ -1008,7 +1008,6 @@ const MiddleSection = ({
               className="border-none w-full cursor-pointer"
               style={{ aspectRatio: "800 / 400", objectFit: "contain" }}
               onClick={open}
-              priority 
             />
           </picture>
         ) : (
@@ -1070,7 +1069,6 @@ const MiddleSection = ({
                     style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                     onClick={() => selectImg(index)}
                     unoptimized
-                    priority 
                   />
                 </div>
               )}

@@ -28,7 +28,6 @@ const CustomMarker: React.FC<CustomMarkerProps> = (props) => {
           width={500}
           height={500}
           alt="Wrong with images"
-          priority 
         />
         <div className="my-2">
           <div className="flex items-center justify-between">

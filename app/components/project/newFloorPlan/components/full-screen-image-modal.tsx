@@ -241,7 +241,6 @@ export function FullScreenImageModal({
               className={`max-w-full h-full  object-contain ${
                 platform == "iOS" ? " max-h-[100%] sm:max-h-[600px]" : ""
               } `}
-              priority 
             />
           </div>
 

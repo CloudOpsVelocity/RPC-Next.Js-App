@@ -8,7 +8,6 @@ export default function NotFound() {
         width={800}
         height={800}
         alt="not found"
-        priority 
       />
       <h1 className="text-[#06497A] text-center text-[64px] not-italic font-semibold leading-[normal] mb-[35px]">
         404! <br />{" "}

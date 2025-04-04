@@ -279,7 +279,6 @@ export function FloorPlanModal({
                       height={600}
                       alt={`Floor Plan for ${currentUnit.bhkName}`}
                       className="w-full h-full max-h-[300px] sm:max-h-[600px] object-contain cursor-pointer"
-                      priority 
                     />
                     <button
                       // onClick={() => handleOpenFullScreenModal(currentUnit)}
@@ -629,7 +628,6 @@ export function FloorPlanModal({
                         src={unit?.floorPlanUrl?.split(",")[0] ?? ImgNotAvail}
                         alt={`Thumbnail for ${unit.bhkName}`}
                         className="w-full aspect-video object-cover rounded-md mb-1"
-                        priority 
                       />
                       <span className="text-xs font-semibold">
                         {unit.bhkName}

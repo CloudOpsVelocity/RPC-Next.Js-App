@@ -56,7 +56,6 @@ const HomeSearch = ({
           height={300}
           width={500}
           className="w-full h-full"
-          priority 
         />
       </div>
       <div className="w-full sm:max-w-[1066px] sm:ml-[20px] xl:ml-0 xl:mr-[20px] ">

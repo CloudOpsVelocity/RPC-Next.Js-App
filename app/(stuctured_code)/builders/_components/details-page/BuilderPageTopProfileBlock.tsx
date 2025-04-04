@@ -17,18 +17,27 @@ export default function BuilderPageTopProfileBlock({
     <div className="w-full flex justify-between items-center bg=[] relative">
       <div className="flex flex-col h-[100%]  lg:min-h-[250px]  justify-between items-start ml-[2%] ">
         <p className="text-[12px] md:text-[20px] text-[#565D70] font-[500] mt-2 sm:mt-0 sm:mb-[1%] ">
-          <Link rel="noopener noreferrer" prefetch={false} className="hover:underline cursor-pointer" href={"/"}>
+          <Link
+            rel="noopener noreferrer"
+            prefetch={false}
+            className="hover:underline cursor-pointer"
+            href={"/"}
+          >
             Home
           </Link>
           {" > "}
-          <Link rel="noopener noreferrer" prefetch={false}
+          <Link
+            rel="noopener noreferrer"
+            prefetch={false}
             href={"/builders"}
             className="hover:underline cursor-pointer"
           >
             Builders
           </Link>
           {" > "}
-          <Link rel="noopener noreferrer" prefetch={false}
+          <Link
+            rel="noopener noreferrer"
+            prefetch={false}
             href={`/builders/${builderCity}`}
             className="hover:underline cursor-pointer capitalize"
           >
@@ -50,7 +59,6 @@ export default function BuilderPageTopProfileBlock({
               className="object-contain h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px]"
               width={158}
               height={158}
-              priority 
             />
           </div>
           <div>

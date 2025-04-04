@@ -29,7 +29,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpened(false);
-      } 
+      }
     };
 
     const handlePopState = () => {
@@ -140,7 +140,6 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   width={1200}
                   height={800}
                   className="max-w-full h-full object-contain"
-                  priority 
                 />
               </TransformComponent>
               {floorData.floorPlanUrl && (
@@ -160,10 +159,20 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                     { label: "Unit Type", value: floorData.bhkName ?? "" },
                     { label: "Unit Number", value: floorData.unitNumber ?? "" },
                     ...(floorData.aptTypeName &&
-                      (type === projectprops.apartment ||
-                        type === projectprops.villament)
-                        ? [{ label: "Property Type", value: floorData.aptTypeName.replace("Apartment", type === projectprops.apartment ? "Apartment" : "Villament") }]
-                        : []),
+                    (type === projectprops.apartment ||
+                      type === projectprops.villament)
+                      ? [
+                          {
+                            label: "Property Type",
+                            value: floorData.aptTypeName.replace(
+                              "Apartment",
+                              type === projectprops.apartment
+                                ? "Apartment"
+                                : "Villament"
+                            ),
+                          },
+                        ]
+                      : []),
                     ...(floorData.towerName &&
                     (type === projectprops.apartment ||
                       type === projectprops.villament)
@@ -435,12 +444,13 @@ const DetailCard = ({ icon, title, items }: DetailCardProps) => {
       </div>
       <div className="space-y-2">
         {items.map((item, index) => {
-          return(
-          <div key={item.label} className="flex justify-between text-sm">
-            <span className="text-[#4D6677]">{item.label}</span>
-            <span className="text-[#1A1A1A] font-semibold">{item.value}</span>
-          </div>
-        )})}
+          return (
+            <div key={item.label} className="flex justify-between text-sm">
+              <span className="text-[#4D6677]">{item.label}</span>
+              <span className="text-[#1A1A1A] font-semibold">{item.value}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

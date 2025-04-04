@@ -14,7 +14,6 @@ const YourList = () => {
           src="/home/yourListingRight.svg"
           width={371.81}
           height={443.03}
-          priority 
         />
         <div className="flex flex-col  relative flex-[0_0_auto] w-[85%]">
           <p className="relative text-[28px]  sm:mb-[20px] md:mb-[24px] lg:mb-[35px]  font-normal text-transparent sm:text-[28px] md:text-[36px] lg:text-[46px] tracking-[1.84px] ">

@@ -18,10 +18,9 @@ export default function MainCard({}: Props) {
           width={490}
           height={276}
           className="object-cover w-full h-full"
-          priority 
         />
         <p className="absolute top-[1px] left-[0.8px]">
-          <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
+          <Image src={"/r.svg"} alt="rera" width={100} height={100} />
         </p>
         <div className="absolute bottom-2 left-2 space-y-2">
           <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">

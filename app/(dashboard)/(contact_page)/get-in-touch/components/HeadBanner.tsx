@@ -21,7 +21,6 @@ export default function HeadBanner({}: Props) {
           width={387}
           height={300}
           className=" w-[330px] xl:w-[470px]"
-          priority 
         />
       </div>
     </div>

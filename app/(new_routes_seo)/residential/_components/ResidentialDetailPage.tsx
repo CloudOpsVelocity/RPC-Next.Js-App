@@ -43,7 +43,7 @@ export default function ResidentialPage({ data }: { data: any }) {
       <section className="py-20 container mx-auto px-4">
         {!data ? (
           <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"/>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
           </div>
         ) : (
           data &&
@@ -92,7 +92,6 @@ export default function ResidentialPage({ data }: { data: any }) {
                             alt={property.projName || "Property Image"}
                             fill
                             className="object-cover"
-                            priority 
                           />
                           <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
                             {property.projstatus || "Status Unknown"}
@@ -141,7 +140,9 @@ export default function ResidentialPage({ data }: { data: any }) {
                             >
                               View Details
                             </Link>
-                            <Link rel="noopener noreferrer" prefetch={false}
+                            <Link
+                              rel="noopener noreferrer"
+                              prefetch={false}
                               href="tel:+91-8884440963"
                               className="flex-1 border border-primary text-primary hover:bg-primary/10 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                             >
@@ -266,7 +267,9 @@ export default function ResidentialPage({ data }: { data: any }) {
             <button className="bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-lg font-medium transition-colors">
               Book a Site Visit
             </button>
-            <Link rel="noopener noreferrer" prefetch={false}
+            <Link
+              rel="noopener noreferrer"
+              prefetch={false}
               href="tel:+91-8884440963"
               className="bg-transparent border border-white hover:bg-white/10 px-6 py-3 rounded-lg font-medium transition-colors"
             >

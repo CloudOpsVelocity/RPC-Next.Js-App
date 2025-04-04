@@ -11,7 +11,9 @@ export default function Card({ data }: Props) {
   const pathName = title.toLowerCase().replaceAll(" ", "-");
 
   return (
-    <Link rel="noopener noreferrer" prefetch={false}
+    <Link
+      rel="noopener noreferrer"
+      prefetch={false}
       href={`blog/${pathName}`}
       className="hover:shadow-lg"
     >
@@ -22,7 +24,6 @@ export default function Card({ data }: Props) {
           className="min-h-[118px] max-h-[118px] sm:min-h-[142px] sm:max-h-[142px] xl:min-h-[196px] xl:max-h-[196px] rounded-t-[4px] xl:rounded-t-[4px]"
           src={data?.coverImage}
           alt={title}
-          priority 
         />
         <div className="flex flex-col h-auto gap-[6px] w-full justify-between items-start p-[12px]">
           <h2 className="text-[color:var(--Black,#000)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic leading-[150%] font-bold ">

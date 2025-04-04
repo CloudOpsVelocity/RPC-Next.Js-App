@@ -113,7 +113,6 @@ const FirstBlock: React.FC<Props> = ({
                     <source
                       media="(max-width: 460px)"
                       srcSet={imageUrl.split(",")[1]}
-                      
                     />
                     <source
                       media="(max-width: 768px)"
@@ -129,7 +128,6 @@ const FirstBlock: React.FC<Props> = ({
                       fill
                       className={`bg-gray-${index + 1} `}
                       unoptimized
-                      priority 
                     />
                   </picture>
                 </Carousel.Slide>
@@ -199,7 +197,6 @@ const FirstBlock: React.FC<Props> = ({
                   src={"/abc/floorplan.png"}
                   alt="no of floors"
                   className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
-                  priority 
                 />
                 {formatNumberWithSuffix(
                   projectDetails?.floorPlanCount,

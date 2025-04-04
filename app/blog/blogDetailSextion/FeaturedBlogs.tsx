@@ -13,7 +13,6 @@ function FeaturedBlogCard({ data }: { data: any }) {
         src={data?.coverImage}
         alt="blog Image"
         quality={80}
-        priority={data?.coverImage}
         height={630}
         width={1200}
         className="rounded-t-[10px] w-full h-[179px]"
@@ -63,7 +62,9 @@ function FeaturedBlogs() {
               ? each.heading.toLowerCase().replaceAll(" ", "-")
               : "";
           return (
-            <Link prefetch={false} rel="noopener noreferrer"
+            <Link
+              prefetch={false}
+              rel="noopener noreferrer"
               key={`FeaturedBlogCard_${each.heading}`}
               href={`/blog/${pathName}`}
             >

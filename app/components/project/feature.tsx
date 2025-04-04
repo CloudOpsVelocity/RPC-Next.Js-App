@@ -36,7 +36,6 @@ export default function Feature({
                 alt="Checked"
                 className="w-[12px] h-[12px] sm:max-w-[20px] max-h-[14px] sm:max-h-[20px] sm:h-[20px] sm:w-[20px] mt-[1.5px] sm:mt-[3.5px] xl:mt-[10px]"
                 src={"/abc/Checked.png"}
-                priority 
               />
               <p className="text-[12px] sm:text-[18px] xl:text-[24px]  m-0 text-[#212C33] font-medium sm:font-500 xl:font-700 ">
                 {each}

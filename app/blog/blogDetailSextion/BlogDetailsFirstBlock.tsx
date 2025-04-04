@@ -86,7 +86,6 @@ function BlogDetailsFirstBlock() {
           width={1200}
           alt="blog Image"
           className="rounded-[10px] w-full h-full relative max-h-[260px] md:max-h-[463px] bg-white z-1"
-          priority 
         />
       </div>
 
@@ -119,10 +118,20 @@ function BlogDetailsFirstBlock() {
               }
               className={"w-[24px] h-[24px]"}
             />
-            <Link prefetch={false} rel="noreferrer" href={facebookRedirectLink} target="_blank">
+            <Link
+              prefetch={false}
+              rel="noreferrer"
+              href={facebookRedirectLink}
+              target="_blank"
+            >
               <Facebook className={"w-[24px] h-[24px]"} />
             </Link>
-            <Link prefetch={false} rel="noreferrer" href={whatsappRedirectLink} target="_blank">
+            <Link
+              prefetch={false}
+              rel="noreferrer"
+              href={whatsappRedirectLink}
+              target="_blank"
+            >
               <WhatsApp className={"w-[24px] h-[24px]"} />
             </Link>
           </div>

@@ -19,7 +19,6 @@ const Card = () => {
           src="/youtube.png"
           alt="Ankita Soni"
           className="md:rounded-l-[10px] rounded-t-[10px] w-full md:w-[30%] h-[149px] "
-          priority 
         />
         <div className="flex justify-start p-[2%] items-center flex-col ml-[0px] md:ml-[20px] ">
           <div className=" flex justify-between w-full items-start flex-wrap">
@@ -68,7 +67,6 @@ export default function Testimonials({ projName }: { projName: string }) {
               src="/youtube.png"
               alt="Testimonials video"
               className="rounded-lg !w-[100%]"
-              priority 
             />
             <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full p-4">
               <svg

@@ -81,7 +81,6 @@ export default function CarouselSuggestion({
                     className="w-[88px] h-[58px]   cursor-pointer "
                     style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                     onClick={() => selectImg(ind)}
-                    priority 
                   />
                 </div>
               </Carousel.Slide>

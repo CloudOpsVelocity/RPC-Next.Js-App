@@ -20,7 +20,6 @@ const Form = () => {
               src="/auth/sideCoverImage.svg"
               alt=""
               className="!my-12"
-              priority 
             />
             <ul className="flex flex-col justify-center items-center space-y-1 text-neutral-600 text-base font-semibold">
               {data.map((item) => (

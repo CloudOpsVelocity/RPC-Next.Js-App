@@ -29,7 +29,9 @@ export const getClampedText = (text: string, maxLines: number) => {
 
 function Card({ data, cityName }: CradProps) {
   return (
-    <Link prefetch={false} rel="noopener noreferrer"
+    <Link
+      prefetch={false}
+      rel="noopener noreferrer"
       href={`/news/${data.name.replaceAll(" ", "-")}`}
     >
       <div className="flex max-w-[600px] min-w-[240px] sm:w-[260px] md:w-[300px] xl:w-[340px] min-h-[250px] md:min-h-[290px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] relative rounded-[4px] xl:rounded-[10px]  border-solid border-[#B9CFEB] hover:shadow-lg ">
@@ -43,7 +45,6 @@ function Card({ data, cityName }: CradProps) {
           className="h-[118px] sm:h-[142px] xl:h-[160px] rounded-t-[4px] xl:rounded-t-[10px] "
           src={data.url}
           alt=""
-          priority 
         />
         <div className="group flex flex-col h-[130px] gap-[6px] items-start p-[12px] transition-[height] duration-[1s] hover:h-full bottom-0 hover:absolute bg-white w-full rounded-[4px] xl:rounded-[10px] overflow-y-auto scrollbar-hide ">
           <div className="flex justify-between items-center w-full ">
@@ -55,11 +56,11 @@ function Card({ data, cityName }: CradProps) {
               {cityName}
             </p>
           </div>
-          {data.user &&
-          <p className="text-gray-600 text-[12px] not-italic font-normal ">
-            {data.user}
-          </p>
-          }
+          {data.user && (
+            <p className="text-gray-600 text-[12px] not-italic font-normal ">
+              {data.user}
+            </p>
+          )}
           <p className="text-[color:var(--Black,#000)] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-normal leading-[150%] ">
             {getClampedText(data.title, 2)}
           </p>

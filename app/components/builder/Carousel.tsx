@@ -127,7 +127,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
             (cardData.reraStatus === "Recieved" ||
               cardData.reraStatus === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} priority  />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
             )}
 

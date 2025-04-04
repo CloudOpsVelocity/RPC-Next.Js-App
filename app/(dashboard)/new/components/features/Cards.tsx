@@ -13,7 +13,6 @@ export default function Cards({}: Props) {
           height={500}
           alt=""
           className="w-[100px] h-[100px]"
-          priority 
         />
       </div>
       <div>

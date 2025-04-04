@@ -383,7 +383,6 @@ export default function PartialUnitModal({ data }: any) {
                     src={encodeURIComponent(imageUrl)}
                     alt={`Floor Plan ${index + 1}`}
                     className="w-full h-full object-cover"
-                    priority
                     unoptimized
                   />
                 </div>

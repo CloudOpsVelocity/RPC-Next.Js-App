@@ -110,7 +110,7 @@ export default function GalleryModalContent({}: Props) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
-  
+
   // Swipe to close (on mobile)
   useEffect(() => {
     if (!isMobile) return;
@@ -215,7 +215,6 @@ export default function GalleryModalContent({}: Props) {
                     src={currentItem}
                     alt={"ALT TEXT"}
                     layout="fill"
-                    priority 
                     objectFit="contain"
                     unoptimized
                   />
@@ -280,7 +279,6 @@ export default function GalleryModalContent({}: Props) {
                     layout="fill"
                     objectFit="cover"
                     unoptimized
-                    priority 
                   />
                 ) : item.includes("youtube") ? (
                   <Image
@@ -288,7 +286,6 @@ export default function GalleryModalContent({}: Props) {
                     alt={item}
                     layout="fill"
                     objectFit="cover"
-                    priority 
                     unoptimized
                   />
                 ) : (

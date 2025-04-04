@@ -100,7 +100,6 @@ const PriceCard = ({
                   src={eachCity.coverImage}
                   width={64}
                   height={64}
-                  priority 
                 />
               ) : (
                 defaultCitySvg

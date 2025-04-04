@@ -268,7 +268,6 @@ const Byunitblock: React.FC<Props> = ({
                           alt="close"
                           width={14}
                           height={14}
-                          priority 
                           className="!w-[14px] !h-[14px]"
                         />
                       </button>

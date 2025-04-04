@@ -190,7 +190,6 @@ export default function Navigation({
           width={40}
           height={40}
           onClick={() => handleArrowClick("L")}
-          priority 
         />
       )}
 
@@ -255,7 +254,6 @@ export default function Navigation({
         width={40}
         height={40}
         onClick={() => handleArrowClick("R")}
-        priority 
       />
     </div>
   );

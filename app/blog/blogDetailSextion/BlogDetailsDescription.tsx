@@ -8,10 +8,13 @@ import style from "../Blog.module.css";
 import Link from "next/link";
 
 function BlogMiniCard({ data }: { data: any }) {
-
   return (
     <div className=" flex justify-end items-end w-full ">
-      <Link rel="noopener noreferrer" href={`/buying-guide/${data.heading.replaceAll(" ", "-")}`} prefetch={false}>
+      <Link
+        rel="noopener noreferrer"
+        href={`/buying-guide/${data.heading.replaceAll(" ", "-")}`}
+        prefetch={false}
+      >
         <div
           className={`max-w-[500px] mt-[32px] flex justify-between items-center gap-[16px] p-[10px] md:p-[16px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[0.5px] border-solid 
              border-t-[1px]  hover:shadow-lg
@@ -24,7 +27,6 @@ function BlogMiniCard({ data }: { data: any }) {
             width={120}
             height={90}
             className=" min-w-[120px] h-[90px] border-gray shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#227FBC] "
-            priority 
           />
 
           <div className="w-full">

@@ -67,15 +67,15 @@ export default function LeftSection({
           srcSet={src ? src.split(",")[2] : ""}
         />
         <Image
-          src={src ? src.includes("+")? src.replace(/\+/g, "%2B") : src : src }
+          src={
+            src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : src
+          }
           width={304}
           height={214}
           alt="projectCard"
           className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
           quality={100}
           unoptimized
-          priority
-          // layout="intrinsic"
         />
       </picture>
       {/* <div>
@@ -124,7 +124,7 @@ export default function LeftSection({
 const Rera = () => {
   return (
     <p className="absolute top-0 left-[0.8px]">
-      <Image src={"/r.svg"} alt="rera" width={100} height={100} priority />
+      <Image src={"/r.svg"} alt="rera" width={100} height={100} />
     </p>
   );
 };

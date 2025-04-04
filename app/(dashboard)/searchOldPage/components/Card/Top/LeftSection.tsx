@@ -15,7 +15,6 @@ export default function LeftSection({ src, rera }: Props) {
         alt="projectCard"
         className="h-[162px] w-full  xl:h-[230px] xl:w-[304px] object-cover"
         quality={100}
-        priority 
       />
       {verified && <Rera />}
     </div>
@@ -25,7 +24,7 @@ export default function LeftSection({ src, rera }: Props) {
 const Rera = () => {
   return (
     <p className="absolute top-0 left-[0.8px]">
-      <Image src={"/r.svg"} alt="rera" width={100} height={100} priority />
+      <Image src={"/r.svg"} alt="rera" width={100} height={100} />
     </p>
   );
 };

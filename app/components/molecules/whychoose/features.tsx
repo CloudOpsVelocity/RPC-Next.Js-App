@@ -30,7 +30,6 @@ export function Card({ src, desc, name, index }: Props) {
               src={src}
               width={158.68}
               height={143.48}
-              priority 
             />
             <div className="relative w-[140.85px] h-[13.01px] bg-[#cbd4e138] rounded-[70.42px/6.51px] blur-[4.1px]" />
           </div>
