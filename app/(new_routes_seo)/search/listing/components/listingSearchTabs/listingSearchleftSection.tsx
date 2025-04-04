@@ -86,18 +86,23 @@ function LeftSection({
     queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
   });
-  const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
+  const allItems =
+    (data?.pages.length || 0) > 0
+      ? data?.pages.flat()
+      : !isTrue
+      ? serverData
+      : data?.pages?.flat() || [];
 
-  const rowVirtualizer = useVirtualizer({
-    count: allItems.length,
-    getScrollElement: () => containerRef.current,
-    estimateSize: () => 300,
-    overscan: 1,
-    enabled: true,
-    measureElement: (element) => {
-      return element?.getBoundingClientRect().height || 300;
-    },
-  });
+  // const rowVirtualizer = useVirtualizer({
+  //   count: allItems.length,
+  //   getScrollElement: () => containerRef.current,
+  //   estimateSize: () => 300,
+  //   overscan: 1,
+  //   enabled: true,
+  //   measureElement: (element) => {
+  //     return element?.getBoundingClientRect().height || 300;
+  //   },
+  // });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -131,35 +136,35 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
 
-  const renderProjectCard = useCallback(
-    (virtualRow: any) => {
-      const eachOne = allItems[virtualRow.index];
+  // const renderProjectCard = useCallback(
+  //   (virtualRow: any) => {
+  //     const eachOne = allItems[virtualRow.index];
 
-      return (
-        <div
-          key={virtualRow.key}
-          data-index={virtualRow.index}
-          ref={rowVirtualizer.measureElement}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            transform: `translateY(${virtualRow.start ?? 0}px)`,
-          }}
-        >
-          <ProjectCard
-            key={eachOne.projIdEnc + eachOne.propType}
-            refetch={refetch}
-            data={{ ...eachOne, type: "A" ?? "B" }}
-            index={virtualRow.index}
-            mutate={mutate}
-          />
-        </div>
-      );
-    },
-    [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
-  );
+  //     return (
+  //       <div
+  //         key={virtualRow.key}
+  //         data-index={virtualRow.index}
+  //         ref={rowVirtualizer.measureElement}
+  //         style={{
+  //           position: "absolute",
+  //           top: 0,
+  //           left: 0,
+  //           width: "100%",
+  //           transform: `translateY(${virtualRow.start ?? 0}px)`,
+  //         }}
+  //       >
+  //         <ProjectCard
+  //           key={eachOne.projIdEnc + eachOne.propType}
+  //           refetch={refetch}
+  //           data={{ ...eachOne, type: "A" ?? "B" }}
+  //           index={virtualRow.index}
+  //           mutate={mutate}
+  //         />
+  //       </div>
+  //     );
+  //   },
+  //   [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
+  // );
 
   const EmptyState = memo(function EmptyState() {
     return (
