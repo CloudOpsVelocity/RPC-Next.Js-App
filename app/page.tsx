@@ -3,14 +3,14 @@ import React from "react";
 import { getData, getHomeListingData } from "./(dashboard)/new/api";
 import HomeSearch from "./(dashboard)/new/components/home-search";
 import HomeFeatures from "./(dashboard)/new/components/features";
-
-const MiddleSection = dynamic(
-  () => import("./(dashboard)/new/components/MiddleSection"),
-  {
-    ssr: false,
-    loading: () => <div>Loading...</div>,
-  }
-);
+import MiddleSection from "./(dashboard)/new/components/MiddleSection";
+// const MiddleSection = dynamic(
+//   () => import("./(dashboard)/new/components/MiddleSection"),
+//   {
+//     ssr: true,
+//     loading: () => <div>Loading...</div>,
+//   }
+// );
 
 import dynamic from "next/dynamic";
 import { HomeSiteNavigationSchema } from "./seo/common/home.schema";
