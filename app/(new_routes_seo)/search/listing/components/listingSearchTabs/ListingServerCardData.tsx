@@ -1,7 +1,6 @@
-import ProjectCard from "@/app/test/newui/components/Card";
 import { SearchFilter } from "@/app/types/search";
 import React from "react";
-
+import ProjectCard from "@/app/test/newui/components/Card";
 type Props = {
   data: any;
   refetch: any;
@@ -9,10 +8,10 @@ type Props = {
   state: SearchFilter;
 };
 
-export default function ServerDataSection({
+export default function ListingServerCardData({
   data,
-  refetch,
   mutate,
+  refetch,
   state,
 }: Props) {
   return data.map((eachOne: any, index: number) => {
@@ -20,7 +19,7 @@ export default function ServerDataSection({
       <ProjectCard
         key={eachOne.projIdEnc + eachOne.propType}
         refetch={refetch}
-        data={{ ...eachOne, type: state.listedBy ?? "proj" }}
+        data={{ ...eachOne, type: state.listedBy ?? "B" }}
         index={index}
         mutate={mutate}
       />

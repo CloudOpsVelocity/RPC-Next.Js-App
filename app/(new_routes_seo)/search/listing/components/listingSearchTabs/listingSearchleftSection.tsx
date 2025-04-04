@@ -19,6 +19,7 @@ import FloatingArrowIcon from "../../../components/ProjectSearchTabs/FloatingArr
 import { useMediaQuery } from "@mantine/hooks";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
+import ListingServerCardData from "./ListingServerCardData";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -223,16 +224,22 @@ function LeftSection({
       {isLoading ? (
         <LoadingBlock />
       ) : allItems.length > 0 ? (
-        <div
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-        </div>
+        <ListingServerCardData
+          data={allItems}
+          refetch={refetch}
+          mutate={mutate}
+          state={state}
+        />
       ) : (
+        // <div
+        //   style={{
+        //     height: `${rowVirtualizer.getTotalSize()}px`,
+        //     width: "100%",
+        //     position: "relative",
+        //   }}
+        // >
+        //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
+        // </div>
         <EmptyState />
       )}
       {hasNextPage && shouldFetchMore && (

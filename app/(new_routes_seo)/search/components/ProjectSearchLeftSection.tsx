@@ -37,7 +37,7 @@ function LeftSection({
   setIsTrue,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
-  const containerRef = useRef<HTMLDivElement>(null);
+  // const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const pathname = usePathname();
@@ -84,7 +84,10 @@ function LeftSection({
     ...RTK_CONFIG,
   });
 
-  const allItems = serverData || data?.pages?.flat() || [];
+  const allItems =
+    (data?.pages?.length || 0) > 0
+      ? data?.pages.flat()
+      : serverData || data?.pages?.flat() || [];
 
   // const rowVirtualizer = useVirtualizer({
   //   count: allItems?.length || 0,
@@ -201,15 +204,6 @@ function LeftSection({
     );
   });
 
-  const LoadingSpinner = memo(function LoadingSpinner() {
-    return (
-      <div className="flex items-center gap-2">
-        <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
-        <span className="font-bold">Loading more results...</span>
-      </div>
-    );
-  });
-
   const LoadingBlock = () => (
     <div className="flex items-center justify-center h-full w-full pt-[15%]">
       <div className="text-center flex items-center justify-center flex-col ">
@@ -224,7 +218,7 @@ function LeftSection({
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
-      ref={containerRef}
+      // ref={containerRef}
     >
       <>
         {isLoading || !allItems ? (
@@ -232,10 +226,28 @@ function LeftSection({
         ) : allItems?.length > 0 ? (
           <ServerDataSection
             data={allItems}
-            mutate={mutate}
             refetch={refetch}
+            mutate={mutate}
+            state={state}
           />
         ) : (
+          // <ServerDataSection
+          //   data={allItems}
+          //   refetch={refetch}
+          //   mutate={mutate}
+          //   state={state}
+          // />
+          // allItems.map((eachOne: any, index: number) => {
+          //   return (
+          //     <ProjectCard
+          //       key={eachOne.projIdEnc + eachOne.propType}
+          //       refetch={refetch}
+          //       data={{ ...eachOne, type: state.listedBy ?? "proj" }}
+          //       index={index}
+          //       mutate={mutate}
+          //     />
+          //   );
+          // })
           // <div
           //   style={{
           //     height: `${rowVirtualizer.getTotalSize()}px`,
@@ -251,9 +263,9 @@ function LeftSection({
         {hasNextPage && shouldFetchMore && (
           <div
             ref={loadMoreRef}
-            className="w-full py-8 flex justify-center items-center text-gray-600"
+            className="text-center font-bold text-3xl py-3"
           >
-            <LoadingSpinner />
+            Loading...
           </div>
         )}
         <LoginPopup />
