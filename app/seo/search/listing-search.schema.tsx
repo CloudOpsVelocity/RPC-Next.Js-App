@@ -4,13 +4,13 @@ import { PHONE_NUMBER } from "../constants";
 export const generateAllSchemas = (property: any) => {
   if (!property) return [];
   const allSizesSchemas = property.coverImage.split(",").map((url: string) => {
-    const OrgName = property.projName?.split(" ")[0];
+    const OrgName = property.propName?.split(" ")[0];
     return {
       "@type": "ImageObject",
       contentUrl: url,
       license: "https://www.getrightproperty.com/privacy-policy",
       acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
-      creditText: `${property.projName} Cover Name`,
+      creditText: `${property.propName} Cover Name`,
       creator: {
         "@type": "Person",
         name: OrgName,
