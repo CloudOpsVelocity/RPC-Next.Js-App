@@ -259,7 +259,6 @@ export const ProjectSeachSchema = ({
   const address = pagetitle.split("In")[1];
   return (
     <>
-      {JSON.stringify(results)}
       <Script
         id="projSearchScript1"
         type="application/ld+json"
