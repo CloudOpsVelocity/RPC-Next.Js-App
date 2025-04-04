@@ -1,7 +1,7 @@
 // import { useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 // import { FiMapPin } from "react-icons/fi";
-import Link from "next/link";
+// import Link from "next/link";
 
 import NewSearchPage from "../../search/NewSearchPage";
 import { getProjSearchData } from "../../in/utils/api";
