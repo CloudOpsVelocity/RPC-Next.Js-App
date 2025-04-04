@@ -3,6 +3,21 @@ import { PHONE_NUMBER } from "../constants";
 
 export const generateAllSchemas = (property: any) => {
   if (!property) return [];
+  const allSizesSchemas = property.coverImage.split(",").map((url: string) => {
+    const OrgName = property.projName?.split(" ")[0];
+    return {
+      "@type": "ImageObject",
+      contentUrl: url,
+      license: "https://www.getrightproperty.com/privacy-policy",
+      acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
+      creditText: `${property.projName} Cover Name`,
+      creator: {
+        "@type": "Person",
+        name: OrgName,
+      },
+      copyrightNotice: OrgName,
+    };
+  });
   const PAGE_URL = generateListingLinkUrl({
     bhkUnitType: property.bhkName
       ? property.bhkName + "-" + property.propTypeName
@@ -155,6 +170,7 @@ export const generateAllSchemas = (property: any) => {
           priceCurrency: "INR",
         },
       },
+      ...allSizesSchemas,
     ],
   };
 

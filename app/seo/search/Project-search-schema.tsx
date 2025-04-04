@@ -26,6 +26,21 @@ export const generateAllSchemas = (
     locality: property.locality,
     projIdEnc: property.projIdEnc,
   });
+  const allSizesSchemas = property.coverUrl.split(",").map((url: string) => {
+    const OrgName = property.projName?.split(" ")[0];
+    return {
+      "@type": "ImageObject",
+      contentUrl: url,
+      license: "https://www.getrightproperty.com/privacy-policy",
+      acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
+      creditText: `${property.projName} Cover Name`,
+      creator: {
+        "@type": "Person",
+        name: OrgName,
+      },
+      copyrightNotice: OrgName,
+    };
+  });
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
@@ -171,44 +186,50 @@ export const generateAllSchemas = (
         "@type": "ViewAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: PAGE_URL
+          urlTemplate: PAGE_URL,
         },
         name: `View ${property.projName || "Property"} Details`,
-        description: `View detailed information about ${property.projName || "Property"} ${property.propType || ""} ${
+        description: `View detailed information about ${
+          property.projName || "Property"
+        } ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
-        } ${property.city ? `, ${property.city}` : ""}`.trim()
-      }
-      ,
+        } ${property.city ? `, ${property.city}` : ""}`.trim(),
+      },
       {
         "@type": "SellAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: PAGE_URL
+          urlTemplate: PAGE_URL,
         },
-        name: `Buy ${property.bhkNames.join(",") || "Property"} In ${property.projName || ""} ${
-          property.locality ? `in ${property.locality}` : ""
-        } ${property.city ? `, ${property.city}` : ""}`.trim(),
+        name: `Buy ${property.bhkNames.join(",") || "Property"} In ${
+          property.projName || ""
+        } ${property.locality ? `in ${property.locality}` : ""} ${
+          property.city ? `, ${property.city}` : ""
+        }`.trim(),
         priceSpecification: {
           "@type": "PriceSpecification",
           price: property.minPrice || "0",
-          priceCurrency: "INR"
-        }
+          priceCurrency: "INR",
+        },
       },
       {
         "@type": "RentAction",
         target: {
-          "@type": "EntryPoint", 
-          urlTemplate: PAGE_URL
+          "@type": "EntryPoint",
+          urlTemplate: PAGE_URL,
         },
-        name: `Rent ${property.bhkNames.join(",") || "Property"} In ${property.projName || ""} ${
-          property.locality ? `in ${property.locality}` : ""
-        } ${property.city ? `, ${property.city}` : ""}`.trim(),
+        name: `Rent ${property.bhkNames.join(",") || "Property"} In ${
+          property.projName || ""
+        } ${property.locality ? `in ${property.locality}` : ""} ${
+          property.city ? `, ${property.city}` : ""
+        }`.trim(),
         priceSpecification: {
           "@type": "PriceSpecification",
           price: property.minRentPrice || property.minPrice || "0",
-          priceCurrency: "INR"
-        }
+          priceCurrency: "INR",
+        },
       },
+      ...allSizesSchemas,
     ],
   };
 
@@ -238,15 +259,16 @@ export const ProjectSeachSchema = ({
   const address = pagetitle.split("In")[1];
   return (
     <>
+      {JSON.stringify(results)}
       <Script
-      id="projSearchScript1"
+        id="projSearchScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
       <Script
-      id="projSearchScript2"
+        id="projSearchScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -262,25 +284,27 @@ export const ProjectSeachSchema = ({
                 "@type": "Apartment",
                 name: property.projName,
                 description: property.projectAbout || "",
-                image: property.coverUrl?.split(",")[0] || "https://getrightproperty.com/default-property.jpg",
+                image:
+                  property.coverUrl?.split(",")[0] ||
+                  "https://getrightproperty.com/default-property.jpg",
                 url: createProjectLinkUrl({
                   city: property.city,
                   slug: property.projName,
-                  locality: property.locality, 
+                  locality: property.locality,
                   projIdEnc: property.projIdEnc,
                 }),
                 offers: {
                   "@type": "Offer",
                   price: property.minPrice || "0",
-                  priceCurrency: "INR"
-                }
-              }
-            }))
+                  priceCurrency: "INR",
+                },
+              },
+            })),
           }),
         }}
       />
       <Script
-      id="projSearchScript3"
+        id="projSearchScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -307,7 +331,7 @@ export const ProjectSeachSchema = ({
         }}
       />
       <Script
-      id="projSearchScript4"
+        id="projSearchScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -373,7 +397,7 @@ export const ProjectSeachSchema = ({
         }}
       />
       <Script
-      id="projSearchScript5"
+        id="projSearchScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -462,7 +486,7 @@ export const ProjectSeachSchema = ({
         }}
       />
       <Script
-      id="projSearchScript6"
+        id="projSearchScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -524,8 +548,8 @@ export const ProjectSeachSchema = ({
         }}
       />
 
-<Script
-id="projSearchScript7"
+      <Script
+        id="projSearchScript7"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

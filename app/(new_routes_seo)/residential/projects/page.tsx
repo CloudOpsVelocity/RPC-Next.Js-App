@@ -1,26 +1,38 @@
-// import { useState } from "react";
-// import Image from "next/image";
-// import { FiMapPin } from "react-icons/fi";
-// import Link from "next/link";
-
-import NewSearchPage from "../../search/NewSearchPage";
-import { getProjSearchData } from "../../in/utils/api";
-import { Metadata } from "next";
-
-export default async function Home() {
-  const serverData = await getProjSearchData("");
-  const pageUrl = `/residential/projects/`;
+import React from "react";
+import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+type Props = {
+  params: { city: string; lt: string };
+};
+export const dynamic = "force-dynamic";
+export default async function Page({ params: { city, lt } }: Props) {
+  const pathname = `${BASE_PATH_PROJECT_DETAILS}`;
+  const serverData = await getSearchData();
   return (
     <NewSearchPage
-      pageUrl={pageUrl}
+      pageUrl={pathname}
       frontendFilters={{}}
       serverData={serverData}
     />
   );
 }
 
-export const metadata: Metadata = {
-  title: "Residential Projects in Bangalore - Get Right Property",
-  description:
-    "Explore top residential projects in Bangalore with verified listings, premium amenities, and the best investment opportunities. Find your dream home with Get Right Property.",
+const getSearchData = async () => {
+  try {
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+
+    const url = `${baseUrl}`;
+
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      throw new Error(`Error fetching data: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };

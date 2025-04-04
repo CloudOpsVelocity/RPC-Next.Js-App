@@ -1,5 +1,3 @@
-import { cache } from "react";
-
 const builderSlugsMap = new Map<string, string>([
   ["B", "bhk"], //unitTypes
   ["L", "localities"], //localities

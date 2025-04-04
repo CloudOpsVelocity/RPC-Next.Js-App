@@ -13,7 +13,6 @@ export default async function Page({ params: { city, lt } }: Props) {
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const serverData = await getSearchData();
-  const pageUrl = `${process.env.NEXT_PUBLIC_URL}${pathname}`;
   return (
     <NewSearchPage
       pageUrl={pathname}

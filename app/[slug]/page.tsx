@@ -6,6 +6,7 @@ import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
 import { SlugsType } from "../common/constatns/slug.constants";
+import NewListingSearchpage from "../(new_routes_seo)/search/listing/NewListingSearchpage";
 
 type Props = {
   params: {
@@ -23,7 +24,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   return (
     <main>
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
-      <NewSearchPage
+      <NewListingSearchpage
         serverData={severData}
         frontendFilters={frontEndFilter}
         pageUrl={pageUrl}
