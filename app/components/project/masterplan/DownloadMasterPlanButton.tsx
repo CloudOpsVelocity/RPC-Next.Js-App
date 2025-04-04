@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Button from "@/app/elements/button";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function DownloadMasterPlanButton({ media }: Props) {
-  const [, { open: LoginOpen }] = usePopShortList();
+  const [opened, { open: LoginOpen, close }] = usePopShortList();
   const { data: session } = useSession();
   const downloadFn = async () => { 
     try {
@@ -37,6 +37,23 @@ export default function DownloadMasterPlanButton({ media }: Props) {
       });
     }
   };
+
+  console.log(opened)
+
+  // useEffect(() => {
+  //   if (opened) {
+  //     window.history.pushState("masterplanModal", "");
+
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       close();
+  //     };
+
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
+
   return (
     <Button
       icon={

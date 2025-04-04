@@ -2,7 +2,7 @@
 
 import { useAtom, useAtomValue } from "jotai";
 import { useParams, usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { projSearchStore } from "../../store/projSearchStore";
 
 type Props = {};
@@ -20,35 +20,94 @@ function PageTitle({}: Props) {
       .replace(/\s+/g, " ");
   }
 
+  // const getTitle = (pageUrl: string) => {
+  //   if (paramsData && Object.keys(paramsData).length > 0) {
+  //     if (paramsData.slug) {
+  //       const slug = paramsData.slug as string;
+  //       const id = slug?.split("-");
+  //       return cleanHeading(id);
+  //     } else {
+  //       const pageTitle = `Residential Projects For ${
+  //         paramsData.bhk_unit_type ? paramsData.bhk_unit_type : ""
+  //       } ${paramsData.lt ? paramsData.lt + " for" : ""} ${
+  //         state.cg !== "S" ? "Rent" : "Sale"
+  //       } in ${paramsData.project ? paramsData.project : "Bengaluru"} ${
+  //         paramsData.city ? paramsData.city : paramsData.city ?? ""
+  //       }`;
+  //       return pageTitle.replaceAll("-", " ");
+  //     }
+  //   } else if (pageUrl === "/search") {
+  //     return "Project Search";
+  //   } else if (pageUrl === "/search/listing") {
+  //     return "Listing Search";
+  //   } else if (pageUrl === "/residential-listings") {
+  //     return "Residential Projects";
+  //   } 
+  // };
+
   const getTitle = (pageUrl: string) => {
+    // /residential-listings/
+    const isListing = path.includes("/residential-listings/");
     if (paramsData && Object.keys(paramsData).length > 0) {
       if (paramsData.slug) {
         const slug = paramsData.slug as string;
         const id = slug?.split("-");
         return cleanHeading(id);
       } else {
-        const pageTitle = `Search Results For ${
-          paramsData.bhk_unit_type ? paramsData.bhk_unit_type : ""
-        } ${paramsData.lt ? paramsData.lt + " for" : ""} ${
-          state.cg !== "S" ? "Rent" : "Sale"
-        } in ${paramsData.project ? paramsData.project : "Bengaluru"} ${
+
+        let firstString = paramsData.bhk_unit_type ? paramsData.bhk_unit_type : `Residential ${isListing ? "Listings" : "Projects"}`
+        
+        const pageTitle = `${firstString} For ${
+          state.cg === "R" ? "Rent" : "Sale"
+        } in ${paramsData.project ? paramsData.project : ""} ${
+          paramsData.lt ? paramsData.lt : ""} ${
           paramsData.city ? paramsData.city : paramsData.city ?? ""
         }`;
+
         return pageTitle.replaceAll("-", " ");
       }
-    } else if (pageUrl === "/search") {
-      return "Project Search";
+    } else if (paramsData && Object.keys(paramsData).length === 0) {
+      let firstString = paramsData.bhk_unit_type ? paramsData.bhk_unit_type : `Residential ${isListing ? "Listings" : "Projects"}`
+
+      const pageTitle = `${firstString} For ${
+        state.cg === "R" ? "Rent" : "Sale"
+      } in Bengaluru`;
+      return pageTitle;
+
+    }else if (pageUrl === "/search") {
+      return "Search Results for";
     } else if (pageUrl === "/search/listing") {
-      return "Listing Search";
+      return "Search Results for";
     } else if (pageUrl === "/residential-listings") {
       return "Residential Projects";
     }
   };
 
+  const [hideHeading, setHideHeading] = useState(false);
+
+  // window.addEventListener("click", () => {
+  //   console.log("Window clicked!");
+  //   setHideHeading(true);
+  // });
+
+
+  useEffect(() => {
+    const handlePopState = () => {
+      console.log("Window clicked!");
+      setHideHeading(true);
+    };
+
+    window.addEventListener("click", handlePopState);
+    return () => window.removeEventListener("click", handlePopState);
+  }, []);
+
   return (
-    <h1 className="font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize ">
-      {getTitle(path)}
-    </h1>
+    !hideHeading &&
+    <div className=" text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[1px]  "> Search Results for
+      <h1 className="font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[6px]  ">
+        {`"${getTitle(path)}"`}
+      </h1>
+    </div>
   );
 }
 

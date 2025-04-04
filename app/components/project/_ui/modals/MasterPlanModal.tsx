@@ -24,7 +24,7 @@ export default function FullScreenMasterPlanModal({
   title = "Project Masterplan 2023",
 }: ZoomableMasterplanModalProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [, { open: LoginOpen }] = usePopShortList();
+  const [opened, { open: LoginOpen, close }] = usePopShortList();
   const { data: session } = useSession();
 
   const openModal = () => {
@@ -90,11 +90,25 @@ export default function FullScreenMasterPlanModal({
       handleShare();
     } else {
       LoginOpen(handleShare, {
-        type: "master-plan",
+        type: "master-plan", 
         link: imageUrl,
       });
     }
   };
+
+  // useEffect(() => {
+  //     if (opened) {
+  //       window.history.pushState("masterplanModal", "");
+  
+  //       const handlePopState = () => {
+  //         document.body.style.overflow = "scroll"; 
+  //         close();
+  //       };
+  
+  //       window.addEventListener("popstate", handlePopState);
+  //       return () => window.removeEventListener("popstate", handlePopState);
+  //     }
+  //   }, [opened]);
 
   return (
     <div>

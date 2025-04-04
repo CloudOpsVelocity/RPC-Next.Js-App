@@ -15,6 +15,7 @@ import RequestCallBackModal from "../molecules/popups/req";
 // import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import { NumberFormatter } from "@mantine/core";
 import Image from "next/image";
+import useHistoryBackHandler from "../molecules/popups/popupCloser";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -34,20 +35,24 @@ export default function OverviewBanner({
   builderId: number;
   slug: string;
 }) {
-  const [opened, { open, close }] = useReqCallPopup();
-  useEffect(() => {
-    if (opened) {
-      window.history.pushState("shearlModal", "");
+  const [, { open, close }] = useReqCallPopup();
 
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
+  // const pushHistory = useHistoryBackHandler(close);
 
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
+  // useEffect(() => {
+  //   if (opened) {
+  //     window.history.pushState("shearlModal", "");
+
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       close();
+  //     };
+
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
+
   return (
     <div
       className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "
@@ -88,7 +93,7 @@ export default function OverviewBanner({
             <Button
               title="Request  Callback"
               buttonClass=" text-[#FFF] text-[12px] sm:text-[20px] xl:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3 sm:mt-0"
-              onChange={() =>
+              onChange={() =>{
                 open({
                   modal_type: "PROJECT_REQ_CALLBACK",
                   postedByName: buiderName,
@@ -96,8 +101,9 @@ export default function OverviewBanner({
                   source: "projBanner",
                   title: name,
                   postedId: builderId,
-                })
-              }
+                });
+                // pushHistory();
+              }}
             />
             {/* <DownloadBroucher
               className="block py-2.5 !font-[600] sm:hidden"

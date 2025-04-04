@@ -82,22 +82,22 @@ export default function GalleryModalContent({}: Props) {
       : null;
   }
 
-  useEffect(() => {
-    if (isOpen && isMobile) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("modal", "");
+  // useEffect(() => {
+  //   if (isOpen && isMobile) {
+  //     // Push a new state to the history stack when the modal is opened
+  //     window.history.pushState("modal", "");
 
-      const handlePopState = () => {
-        closeModal();
-      };
+  //     const handlePopState = () => {
+  //       closeModal();
+  //     };
 
-      window.addEventListener("popstate", handlePopState);
+  //     window.addEventListener("popstate", handlePopState);
 
-      return () => {
-        window.removeEventListener("popstate", handlePopState);
-      };
-    }
-  }, [isOpen]);
+  //     return () => {
+  //       window.removeEventListener("popstate", handlePopState);
+  //     };
+  //   }
+  // }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

@@ -21,6 +21,7 @@ function ListingSearchMapSection({serverData}: Props) {
                 key="projListingSearchRightSection2"
             />
             :
+            (isMobile !== undefined && isMobile === false) &&
             <div
                 className={`relative w-full max-h-[70vh] sm:fixed right-0 flex justify-center items-center md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 border-[2px] border-black-500 border-solid h-[calc(100vh-65vh)] md:h-[calc(100vh-255px)] max-w-full`}
             >
