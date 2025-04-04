@@ -1,10 +1,7 @@
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { PHONE_NUMBER } from "../constants";
-import { convertToSchemaDate } from "@/common/utils/dateUtils";
-import Script from "next/script";
 
 export const generateAllSchemas = (property: any) => {
-  const availableFrom = convertToSchemaDate(property?.availableFrom);
   if (!property) return [];
   const PAGE_URL = generateListingLinkUrl({
     bhkUnitType: property.bhkName
