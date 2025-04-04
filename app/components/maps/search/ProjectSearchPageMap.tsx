@@ -110,14 +110,14 @@ export default Map;
 
 const MapContent = ({ data, type }: any): JSX.Element | null => {
   const MapIcon = L.icon({
-    iconUrl: "/searchmarker.png",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
     iconSize: [60, 60],
     iconAnchor: [19, 38],
     popupAnchor: [10, -34],
   });
 
   const MobileIcon = L.icon({
-    iconUrl: "/searchmarker.png",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
     iconSize: [50, 50],
     iconAnchor: [5, 38],
     popupAnchor: [20, -38],

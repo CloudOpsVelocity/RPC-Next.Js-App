@@ -8,6 +8,7 @@ import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
+import ProjectCard from "@/app/test/newui/components/Card";
 const LeftSection = dynamic(
   () => import("../components/ProjectSearchLeftSection")
 );
@@ -23,7 +24,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
-  
+
   useHydrateAtoms([
     [
       projSearchStore,
@@ -52,7 +53,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
         setIsTrue={setIsTrue}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
-      {(isMapLoaded || isMobile) ? (
+      {isMapLoaded || isMobile ? (
         <RightSection
           serverData={apiFilterQueryParams === null ? serverData : null}
           key="projRightSection2"
@@ -70,7 +71,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
             className="h-full w-full"
             quality={80}
           />
- 
+
           <button
             onClick={() => setIsMapLoaded(true)}
             className="absolute z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors "

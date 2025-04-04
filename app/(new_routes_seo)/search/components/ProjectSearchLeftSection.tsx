@@ -20,6 +20,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { number } from "yup";
+import ServerDataSection from "./ServerDataSection";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -62,7 +63,6 @@ function LeftSection({
       },
 
       getNextPageParam: (lastPage: any, allPages: any) => {
-        // Only return next page if lastPage has full 20 items
         return lastPage?.length === 20 ? allPages.length : undefined;
       },
       ...(serverData && {
@@ -84,18 +84,18 @@ function LeftSection({
     ...RTK_CONFIG,
   });
 
-  const allItems = data?.pages?.flat() || [];
+  const allItems = serverData || data?.pages?.flat() || [];
 
-  const rowVirtualizer = useVirtualizer({
-    count: allItems?.length || 0,
-    getScrollElement: () => containerRef.current,
-    estimateSize: () => 300,
-    overscan: 5,
-    enabled: true,
-    measureElement: (element) => {
-      return element?.getBoundingClientRect().height || 300;
-    },
-  });
+  // const rowVirtualizer = useVirtualizer({
+  //   count: allItems?.length || 0,
+  //   getScrollElement: () => containerRef.current,
+  //   estimateSize: () => 300,
+  //   overscan: 5,
+  //   enabled: true,
+  //   measureElement: (element) => {
+  //     return element?.getBoundingClientRect().height || 300;
+  //   },
+  // });
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
@@ -161,35 +161,35 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
 
-  const renderProjectCard = useCallback(
-    (virtualRow: any) => {
-      const eachOne: any = allItems[virtualRow.index];
+  // const renderProjectCard = useCallback(
+  //   (virtualRow: any) => {
+  //     const eachOne: any = allItems[virtualRow.index];
 
-      return (
-        <div
-          key={virtualRow.key}
-          data-index={virtualRow.index}
-          ref={rowVirtualizer.measureElement}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            transform: `translateY(${virtualRow.start ?? 0}px)`,
-          }}
-        >
-          <ProjectCard
-            key={eachOne.projIdEnc + eachOne.propType}
-            refetch={refetch}
-            data={{ ...eachOne, type: state.listedBy ?? "proj" }}
-            index={virtualRow.index}
-            mutate={mutate}
-          />
-        </div>
-      );
-    },
-    [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
-  );
+  //     return (
+  //       <div
+  //         key={virtualRow.key}
+  //         data-index={virtualRow.index}
+  //         ref={rowVirtualizer.measureElement}
+  //         style={{
+  //           position: "absolute",
+  //           top: 0,
+  //           left: 0,
+  //           width: "100%",
+  //           transform: `translateY(${virtualRow.start ?? 0}px)`,
+  //         }}
+  //       >
+  //         <ProjectCard
+  //           key={eachOne.projIdEnc + eachOne.propType}
+  //           refetch={refetch}
+  //           data={{ ...eachOne, type: state.listedBy ?? "proj" }}
+  //           index={virtualRow.index}
+  //           mutate={mutate}
+  //         />
+  //       </div>
+  //     );
+  //   },
+  //   [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
+  // );
 
   const EmptyState = memo(function EmptyState() {
     return (
@@ -230,16 +230,21 @@ function LeftSection({
         {isLoading || !allItems ? (
           <LoadingBlock />
         ) : allItems?.length > 0 ? (
-          <div
-            style={{
-              height: `${rowVirtualizer.getTotalSize()}px`,
-              width: "100%",
-              position: "relative",
-            }}
-          >
-            {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-          </div>
+          <ServerDataSection
+            data={allItems}
+            mutate={mutate}
+            refetch={refetch}
+          />
         ) : (
+          // <div
+          //   style={{
+          //     height: `${rowVirtualizer.getTotalSize()}px`,
+          //     width: "100%",
+          //     position: "relative",
+          //   }}
+          // >
+          //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
+          // </div>
           <EmptyState />
         )}
 
