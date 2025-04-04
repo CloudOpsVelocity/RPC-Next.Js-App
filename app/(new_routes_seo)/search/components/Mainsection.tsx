@@ -8,7 +8,7 @@ import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
-import ProjectCard from "@/app/test/newui/components/Card";
+// import ProjectCard from "@/app/test/newui/components/Card";
 const LeftSection = dynamic(
   () => import("../components/ProjectSearchLeftSection")
 );

@@ -93,17 +93,6 @@ function LeftSection({
       ? serverData
       : data?.pages?.flat() || [];
 
-  // const rowVirtualizer = useVirtualizer({
-  //   count: allItems.length,
-  //   getScrollElement: () => containerRef.current,
-  //   estimateSize: () => 300,
-  //   overscan: 1,
-  //   enabled: true,
-  //   measureElement: (element) => {
-  //     return element?.getBoundingClientRect().height || 300;
-  //   },
-  // });
-
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   // Enhanced infinite scroll logic
