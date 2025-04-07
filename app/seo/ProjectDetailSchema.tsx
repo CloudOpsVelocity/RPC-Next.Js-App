@@ -687,7 +687,7 @@ const generateSchema = (projectData: ProjectData) => {
 const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
   // <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
   <Script
-  id="projDetailsScript1"
+    id="projDetailsScript1"
     type="application/ld+json"
     dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
   />

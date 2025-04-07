@@ -14,7 +14,13 @@ function PageTitle({}: Props) {
   const path = usePathname();
 
   function cleanHeading(id: string[]) {
-    return id
+    const sanitizedName = id.map((part) => {
+      if (part.includes("PJ")) {
+        return;
+      }
+      return part;
+    });
+    return sanitizedName
       .join(" ")
       .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
       .replace(/\s+/g, " ");
@@ -42,7 +48,7 @@ function PageTitle({}: Props) {
   //     return "Listing Search";
   //   } else if (pageUrl === "/residential-listings") {
   //     return "Residential Projects";
-  //   } 
+  //   }
   // };
 
   const getTitle = (pageUrl: string) => {
@@ -52,29 +58,33 @@ function PageTitle({}: Props) {
       if (paramsData.slug) {
         const slug = paramsData.slug as string;
         const id = slug?.split("-");
-        return cleanHeading(id);
+        const isProject = !(slug.includes("rent") || slug.includes("sale"))
+          ? "Property For Sale | Rent"
+          : "";
+        return `${isProject}  ${cleanHeading(id)}`;
       } else {
+        let firstString = paramsData.bhk_unit_type
+          ? paramsData.bhk_unit_type
+          : `Residential ${isListing ? "Listings" : "Projects"}`;
 
-        let firstString = paramsData.bhk_unit_type ? paramsData.bhk_unit_type : `Residential ${isListing ? "Listings" : "Projects"}`
-        
         const pageTitle = `${firstString} For ${
           state.cg === "R" ? "Rent" : "Sale"
         } in ${paramsData.project ? paramsData.project : ""} ${
-          paramsData.lt ? paramsData.lt : ""} ${
-          paramsData.city ? paramsData.city : paramsData.city ?? ""
-        }`;
+          paramsData.lt ? paramsData.lt : ""
+        } ${paramsData.city ? paramsData.city : paramsData.city ?? ""}`;
 
         return pageTitle.replaceAll("-", " ");
       }
     } else if (paramsData && Object.keys(paramsData).length === 0) {
-      let firstString = paramsData.bhk_unit_type ? paramsData.bhk_unit_type : `Residential ${isListing ? "Listings" : "Projects"}`
+      let firstString = paramsData.bhk_unit_type
+        ? paramsData.bhk_unit_type
+        : `Residential ${isListing ? "Listings" : "Projects"}`;
 
       const pageTitle = `${firstString} For ${
         state.cg === "R" ? "Rent" : "Sale"
       } in Bengaluru`;
       return pageTitle;
-
-    }else if (pageUrl === "/search") {
+    } else if (pageUrl === "/search") {
       return "Search Results for";
     } else if (pageUrl === "/search/listing") {
       return "Search Results for";
@@ -92,7 +102,6 @@ function PageTitle({}: Props) {
   //   setHideHeading(true);
   // });
 
-
   useEffect(() => {
     const handlePopState = () => {
       console.log("Window clicked!");
@@ -104,12 +113,15 @@ function PageTitle({}: Props) {
   }, []);
 
   return (
-    !hideHeading &&
-    <div className=" text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[1px]  "> Search Results for
-      <h1 className="font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[6px]  ">
-        {`"${getTitle(path)}"`}
-      </h1>
-    </div>
+    !hideHeading && (
+      <div className=" text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[1px]  ">
+        {" "}
+        Search Results for
+        <h1 className="font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[6px]  ">
+          {`"${getTitle(path)}"`}
+        </h1>
+      </div>
+    )
   );
 }
 

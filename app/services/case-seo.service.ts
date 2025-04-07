@@ -9,6 +9,7 @@ interface SlugValues {
   B?: string;
   L?: string;
   count?: number;
+  PJ: string;
 }
 
 interface SearchParams {
@@ -35,7 +36,9 @@ const createUrl = (slugValues: SlugValues): string => {
     slugValues.C ? `&city=${slugValues.C}` : ""
   }&${slugValues.P ? `propType=${slugValues.P}` : ""}&${
     slugValues.B ? `bhk=${slugValues.B}` : ""
-  }&${slugValues.L ? `localities=${slugValues.L}` : ""}`;
+  }&${slugValues.L ? `localities=${slugValues.L}` : ""}${
+    slugValues.PJ ? `&projIdEnc=${slugValues.PJ}` : ""
+  }`;
   return url;
 };
 
@@ -63,6 +66,13 @@ const CaseSeoSearchService = async (
     ...(slugValues.L
       ? {
           localities: [`${slugValues.localityName}+${slugValues.L}`],
+        }
+      : {}),
+
+    ...(slugValues.PJ
+      ? {
+          projIdEnc: slugValues.PJ,
+          projName: slug.split("in")[0].split("-").join(" "),
         }
       : {}),
   };
