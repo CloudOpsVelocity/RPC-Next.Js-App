@@ -24,17 +24,17 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
     useEffect(()=>{
         isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
 
-        // if (isOpen) {
-        //     window.history.pushState("masterplanModal", "");
+        if (isOpen) {
+            window.history.pushState("masterplanModal", "");
       
-        //     const handlePopState = () => {
-        //       document.body.style.overflow = "scroll"; 
-        //       handleChange(false);
-        //     };
+            const handlePopState = () => {
+              document.body.style.overflow = "scroll"; 
+              handleChange(false);
+            };
       
-        //     window.addEventListener("popstate", handlePopState);
-        //     return () => window.removeEventListener("popstate", handlePopState);
-        // }
+            window.addEventListener("popstate", handlePopState);
+            return () => window.removeEventListener("popstate", handlePopState);
+        }
     }, [isOpen]);
 
     // w-[0px] transition-[width] duration-[1s] hover:h-[500px] right-0 hover:absolute overflow-y-auto scrollbar-hide
