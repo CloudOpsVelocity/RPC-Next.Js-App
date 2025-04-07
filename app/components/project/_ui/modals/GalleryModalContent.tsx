@@ -18,6 +18,7 @@ import { galleryStateAtom } from "@/app/store/project/gallery";
 import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { newIcons } from "@/app/images/commonSvgs";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 
 type Props = {};
 
@@ -38,11 +39,12 @@ export default function GalleryModalContent({}: Props) {
     dispatch({
       type: "CLOSE",
     });
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = "scroll";
     setIsPlaying(false);
-    if (window.history.state === "modal" && isMobile) {
-      window.history.back();
-    }
+    window.history.back();
+    // if (window.history.state === "modal" && isMobile) {
+    //   window.history.back();
+    // }
   };
 
   const nextItem = () => {
@@ -82,24 +84,7 @@ export default function GalleryModalContent({}: Props) {
       : null;
   }
 
-  // useEffect(() => {
-  //   if (isOpen && isMobile) {
-  //     // Push a new state to the history stack when the modal is opened
-  //     window.history.pushState("modal", "");
-
-  //     const handlePopState = () => {
-  //       closeModal();
-  //     };
-
-  //     window.addEventListener("popstate", handlePopState);
-
-  //     return () => {
-  //       window.removeEventListener("popstate", handlePopState);
-  //     };
-  //   }
-  // }, [isOpen]);
-
-  useEffect(() => {
+  useEffect(()=>{
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isOpen) return;
       if (event.key === "ArrowRight") nextItem();
@@ -108,8 +93,30 @@ export default function GalleryModalContent({}: Props) {
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    
+    if (isOpen) {
+      preventBackButton();
+        const handlePopState = () => {
+          closeModal();
+        };
+    
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+    }
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
+
+  // useEffect(() => {
+  //   const handleKeyDown = (event: KeyboardEvent) => {
+  //     if (!isOpen) return;
+  //     if (event.key === "ArrowRight") nextItem();
+  //     if (event.key === "ArrowLeft") prevItem();
+  //     if (event.key === "Escape") closeModal();
+  //   };
+
+  //   window.addEventListener("keydown", handleKeyDown);
+  //   return () => window.removeEventListener("keydown", handleKeyDown);
+  // }, [isOpen]);
 
   // Swipe to close (on mobile)
   useEffect(() => {

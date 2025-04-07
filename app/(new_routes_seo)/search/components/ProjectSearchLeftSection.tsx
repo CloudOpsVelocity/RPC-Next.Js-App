@@ -220,7 +220,7 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       // ref={containerRef}
     >
-      <>
+     
         {isLoading || !allItems ? (
           <LoadingBlock />
         ) : allItems?.length > 0 ? (
@@ -270,7 +270,7 @@ function LeftSection({
         )}
         <LoginPopup />
         <RequestCallBackModal />
-      </>
+     
 
       <FloatingArrowIcon />
     </div>

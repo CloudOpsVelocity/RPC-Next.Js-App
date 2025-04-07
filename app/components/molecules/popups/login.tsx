@@ -19,7 +19,7 @@ export default function LoginPopup({
   });
   return (
     <div
-      className={`flex justify-center m-1 items-start w-full pt-1 xl:pt-[10%] ${
+      className={`flex justify-center m-1 items-start w-full pt-1 xl:pt-[10%] ${ 
         type == "RATING" ? "md:pt-[8]%" : "md:pt-[0%]"
       }`}
     >
@@ -73,7 +73,7 @@ export default function LoginPopup({
           </div> */}
 
           <div className=" mt-0  xl:mt-3">
-            <LoginPopupForm closePopup={close && close} />
+            <LoginPopupForm closePopup={close && close} /> 
           </div>
         </div>
         <div className="relative" />
@@ -81,3 +81,4 @@ export default function LoginPopup({
     </div>
   );
 }
+ 

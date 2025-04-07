@@ -13,6 +13,7 @@ import VideoJsonLdScript from "@/app/seo/VideoJson";
 import { useAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
 import Image from "next/image";
+import { preventBackButton } from "../molecules/popups/req";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -167,7 +168,7 @@ export default function GalleryBlock({
                           ? isVideo
                             ? "Property Video"
                             : "Property Gallery"
-                          : isVideo
+                          : isVideo 
                           ? "Project Video"
                           : "Project Gallery",
                       activeIndex: isVideo
@@ -175,6 +176,7 @@ export default function GalleryBlock({
                         : images.indexOf(selectedMedia),
                     },
                   });
+                  preventBackButton();
                 }}
                 className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[6]"
               >

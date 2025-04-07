@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 const useHistoryBackHandler = (handleClose:any) => {
-  console.log("closer popup")
   useEffect(() => {
     const handlePopState = () => {
       document.body.style.overflow = "scroll";

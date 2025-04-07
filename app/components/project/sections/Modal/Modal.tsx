@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import React, { useState, useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { useResetAtom } from "jotai/utils";
@@ -25,6 +26,8 @@ import {
 import { BiMessage } from "react-icons/bi";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 // import { useMediaQuery } from "@mantine/hooks";
 
 const Modal = ({
@@ -156,6 +159,22 @@ export default function PartialUnitModal({ data }: any) {
     });
   };
 
+  useEffect(()=>{
+    if (opened) {
+        preventBackButton();
+        const handlePopState = () => {
+          document.body.style.overflow = "scroll";
+          handleReset();
+        };
+    
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+    }
+    // else{
+    //   allowBackButton();
+    // }
+  }, [opened]);
+
   const handleNext = () => {
     setActive((prev: number) => {
       if (prev < isData.others.length - 1) return prev + 1;
@@ -167,12 +186,12 @@ export default function PartialUnitModal({ data }: any) {
   }
 
 
-
   return (
     <Modal
-      isOpen={opened}
+      isOpen={opened}  
       onClose={handleReset}
     >
+
       <div className="flex flex-col h-full ">
         {/* Header */}
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">

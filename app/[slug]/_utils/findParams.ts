@@ -45,7 +45,7 @@ export function extractCaseSeoParams(values: string) {
     const letter = part.includes("PJ")
       ? "PJ"
       : part.replace(/[0-9]/g, "").toUpperCase();
-    console.log({ letter });
+    // console.log({ letter });
     const PJ = part.includes("PJ") ? part.split("PJ")[0] : "N/A";
 
     switch (letter) {

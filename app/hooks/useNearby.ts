@@ -29,7 +29,7 @@ export default function useNearby({
         company || ""
       }`
     );
-    console.log(res.data)
+    // console.log(res.data)
     return res.data;
   };
   const { isLoading, data } = useQuery({

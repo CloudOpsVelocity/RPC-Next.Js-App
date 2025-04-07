@@ -234,7 +234,7 @@ function Individual() {
                 const trimmedText = pastedText
                   .replace(/\D/g, "")
                   .replace(/^0+/, "");
-                console.log(trimmedText);
+                // console.log(trimmedText);
                 // Keep only the first 10 digits after processing
                 const first10Digits = trimmedText.slice(0, 10);
 

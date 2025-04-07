@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-boolean-value */
 "use client";
-import { Modal } from "@mantine/core";
+// import { Modal } from "@mantine/core";
 import {
   // useLocalStorage,
   useMediaQuery,
 } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import S from "@/app/styles/Rating.module.css";
+// import S from "@/app/styles/Rating.module.css";
 import { yupResolver } from "@mantine/form";
 import { ratingSchema, ratingSchema2 } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
@@ -24,6 +25,8 @@ import { FormProvider, useForm } from "@/app/context/rating";
 import { RatingMessage } from "./success";
 import Styles from "@/app/styles/Qna.module.css";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
+import { allowBackButton, preventBackButton } from "../molecules/popups/req";
+import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 export default function Banner({
   projName,
   projIdEnc,
@@ -72,11 +75,14 @@ export default function Banner({
             about
           </p>
           <button
-            onClick={() => onAddingRatings()}
+            onClick={() => {
+              onAddingRatings();
+              preventBackButton();
+            }}
             className="flex flex-col justify-center items-center gap-2.5 rounded text-white  text-[12px] sm:text-[14px]  xl:text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
           >
             Add Ratings
-          </button>
+          </button> 
         </div>
         <div className="hidden md:block flex-shrink-0 relative h-[200px] w-full sm:w-[30%] xl:w-[600px]">
           <Image
@@ -168,71 +174,86 @@ const AddRating = ({
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const isTab = useMediaQuery(`(max-width: 1600px)`);
   return (
-    <Modal
-      classNames={
-        isDataSubmitted.isSubmitted
-          ? {
-              title: Styles.title,
-              root: Styles.root,
-              close: Styles.close,
-              content: Styles.content,
-              overlay: Styles.overlay,
-              header: Styles.disabled,
-              body: Styles.body,
-            }
-          : {
-              title: S.title,
-              root: S.root,
-              close: S.close,
-              content: S.content,
-              overlay: S.overlay,
-              header: !session ? S.disabled : S.header,
-            }
-      }
-      opened={opened}
-      onClose={onClose}
-      centered
-      title={
-        isDataSubmitted.isRatingSubmitted
-          ? "Rate it Right: Your Review, Your Rating!"
-          : "Rate it Right: Your Review, Your Rating!"
-      }
-      size={
-        isMobile
-          ? "100%"
-          : session
-          ? isDataSubmitted.isSubmitted
-            ? isTab
-              ? "40%"
-              : "auto"
-            : "58%"
-          : "35%"
-      }
-    >
-      <FormProvider form={form}>
-        <div className="relative">
-          {(!session ||
-            status === "success" ||
-            isDataSubmitted.isSubmitted) && (
-            <Close close={onClose} className="absolute top-3 right-1 z-50" />
-          )}
-          {session ? (
-            status === "success" || isDataSubmitted.isSubmitted ? (
-              <RatingMessage close={onClose} />
+    // <Modal
+    //   classNames={
+    //     isDataSubmitted.isSubmitted
+    //       ? {
+    //           title: Styles.title,
+    //           root: Styles.root,
+    //           close: Styles.close,
+    //           content: Styles.content,
+    //           overlay: Styles.overlay,
+    //           header: Styles.disabled,
+    //           body: Styles.body,
+    //         }
+    //       : {
+    //           title: S.title,
+    //           root: S.root,
+    //           close: S.close,
+    //           content: S.content,
+    //           overlay: S.overlay,
+    //           header: !session ? S.disabled : S.header,
+    //         }
+    //   }
+    //   opened={opened}
+    //   onClose={onClose}
+    //   centered
+    //   title={
+    //     isDataSubmitted.isRatingSubmitted
+    //       ? "Rate it Right: Your Review, Your Rating!"
+    //       : "Rate it Right: Your Review, Your Rating!"
+    //   }
+    //   size={
+    //     isMobile
+    //       ? "100%"
+    //       : session
+    //       ? isDataSubmitted.isSubmitted
+    //         ? isTab
+    //           ? "40%"
+    //           : "auto"
+    //         : "58%"
+    //       : "35%"
+    //   }
+    // >
+
+    
+
+    opened &&
+    <ModalBox
+        isOpen={opened}
+        handleChange={() => {
+          document.body.style.overflow = "scroll";
+          onClose();
+          allowBackButton();
+        }}
+        containerClassStyle={` !rounded-[20px] !p-0 !pl-[10px] !pr-[10px] ${isMobile ? "w-[100%]" : session ? isDataSubmitted.isSubmitted ? isTab ? "w-[40%]" : "w-auto" : "w-[58%]" : "w-[35%]"} `}
+        hideCrossIcon={true}
+      >
+        <FormProvider form={form}>
+          <div className="relative">
+            {(!session ||
+              status === "success" ||
+              isDataSubmitted.isSubmitted) && (
+              <Close close={onClose} className="absolute top-3 right-1 z-50" /> 
+            )}
+            {session ? (
+              status === "success" || isDataSubmitted.isSubmitted ? (
+                <RatingMessage close={onClose} />
+              ) : (
+                <RatingForm
+                  projName={projName}  
+                  projIdEnc={projIdEnc}
+                  formSubmit={formSubmit}
+                  isSubmitted={isDataSubmitted.isRatingSubmitted}
+                />
+              )
             ) : (
-              <RatingForm
-                projName={projName}
-                projIdEnc={projIdEnc}
-                formSubmit={formSubmit}
-                isSubmitted={isDataSubmitted.isRatingSubmitted}
-              />
-            )
-          ) : (
-            <LoginPopup type="RATING" />
-          )}
-        </div>
-      </FormProvider>
-    </Modal>
+              <LoginPopup type="RATING" />
+            )}
+          </div>
+        </FormProvider>
+      </ModalBox>
+    // </Modal>
   );
 };
 
