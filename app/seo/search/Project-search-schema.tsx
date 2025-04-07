@@ -400,7 +400,7 @@ export const ProjectSeachSchema = ({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "http://schema.org",
+            "@context": "https://schema.org",
             "@type": "Dataset",
             name: "Real Estate Properties Dataset",
             description:
@@ -489,7 +489,7 @@ export const ProjectSeachSchema = ({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "http://schema.org",
+            "@context": "https://schema.org",
             "@type": "CollectionPage",
             name: `Available Properties in Bangalore - ${pagetitle}`,
 
@@ -508,7 +508,7 @@ export const ProjectSeachSchema = ({
                 },
                 image: PAGE_IMAGE,
                 url: pageUrl,
-                additionalType: "http://schema.org/RealEstateListing",
+                additionalType: "https://schema.org/RealEstateListing",
               },
             ],
             additionalProperty: [
