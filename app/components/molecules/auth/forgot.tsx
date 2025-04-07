@@ -15,7 +15,7 @@ import useAuth from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import S from "@/app/styles/Numinput.module.css";
 import * as yup from "yup";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { resendOtp, resetPasswordApi } from "@/app/utils/auth";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
@@ -44,20 +44,6 @@ function ForgotForm() {
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (opened) {
-  //     // Push a new state to the history stack when the modal is opened
-  //     window.history.pushState("shearlModal", "");
-
-  //     const handlePopState = () => {
-  //       document.body.style.overflow = "scroll";
-  //       close();
-  //     };
-
-  //     window.addEventListener("popstate", handlePopState);
-  //     return () => window.removeEventListener("popstate", handlePopState);
-  //   }
-  // }, [opened]);
 
   const form = useForm({
     initialValues: { mobile: null, otp: false },

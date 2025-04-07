@@ -11,7 +11,7 @@ import {
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 
@@ -20,7 +20,7 @@ import BuyRent from "../../components/FilterComponents/BuyRent";
 import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
 import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
 import dynamic from "next/dynamic";
-import { trimFromWord } from "../../components/ProjSearchBreadCrums";
+// import { trimFromWord } from "../../components/ProjSearchBreadCrums";
 import PageTitle from "../../components/filters/PageTitle";
 import { useMediaQuery } from "@mantine/hooks";
 // import SelectedFilters from "../../components/filters/SelectedFilters";

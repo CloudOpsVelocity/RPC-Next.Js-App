@@ -6,7 +6,7 @@ import {
   useMediaQuery,
 } from "@mantine/hooks";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import S from "@/app/styles/Rating.module.css";
 import { yupResolver } from "@mantine/form";
 import { ratingSchema, ratingSchema2 } from "@/app/validations/project";
@@ -23,7 +23,7 @@ import {
 } from "./success/rating";
 import { FormProvider, useForm } from "@/app/context/rating";
 import { RatingMessage } from "./success";
-import Styles from "@/app/styles/Qna.module.css";
+// import Styles from "@/app/styles/Qna.module.css";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 import { allowBackButton, preventBackButton } from "../molecules/popups/req";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
@@ -35,20 +35,6 @@ export default function Banner({
   projIdEnc: string;
 }) {
   const [opened, { open, close }] = usePopUpRatings();
-
-  // useEffect(() => {
-  //   if (opened) {
-  //     window.history.pushState("masterplanModal", "");
-
-  //     const handlePopState = () => {
-  //       document.body.style.overflow = "scroll"; 
-  //       close();
-  //     };
-
-  //     window.addEventListener("popstate", handlePopState);
-  //     return () => window.removeEventListener("popstate", handlePopState);
-  //   }
-  // }, [opened]);
 
   const onAddingRatings = () => {
     open();

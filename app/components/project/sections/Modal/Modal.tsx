@@ -82,20 +82,6 @@ export default function PartialUnitModal({ data }: any) {
 
   const opened = isData.main === 0 ? true : isData.main; 
 
-  // useEffect(() => {
-  //   if (opened) {
-  //     window.history.pushState("masterplanModal", "");
-
-  //     const handlePopState = () => {
-  //       document.body.style.overflow = "scroll"; 
-  //       handleReset();
-  //     };
-
-  //     window.addEventListener("popstate", handlePopState);
-  //     return () => window.removeEventListener("popstate", handlePopState);
-  //   }
-  // }, [opened]);
-
   const [platform, setPlatform] = useState("");
 
   useEffect(() => {

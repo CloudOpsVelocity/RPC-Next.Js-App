@@ -1,7 +1,7 @@
 "use client";
 import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Media } from "@/app/validations/types/project";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { getImageUrls } from "@/app/utils/image";
 // import { useGallery } from "@/app/hooks/useGallery";
@@ -20,7 +20,7 @@ export default function GalleryBlock({
   projName,
   media,
   projectVideoIUrl,
-  videoUrl,
+  // videoUrl,
   type = "proj",
 }: Media) {
   const images = getImageUrls(media);
@@ -44,25 +44,11 @@ export default function GalleryBlock({
   }
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
-  const [{opened}, dispatch] = useAtom(galleryStateAtom);
+  const [dispatch] = useAtom(galleryStateAtom);
   const handleMediaClick = (media: string, index: number) => {
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
-
-  // useEffect(() => {
-  //   if (opened) {
-  //     window.history.pushState("masterplanModal", "");
-
-  //     const handlePopState = () => {
-  //       document.body.style.overflow = "scroll"; 
-  //       dispatch({ type: "CLOSE"});
-  //     };
-
-  //     window.addEventListener("popstate", handlePopState);
-  //     return () => window.removeEventListener("popstate", handlePopState);
-  //   }
-  // }, [opened]);
 
   return (
     <div
@@ -197,6 +183,7 @@ export default function GalleryBlock({
               const imageUrl = img.split(",")[1];
               const imageName = imageUrl.split("/")[6]?.split(".")[0];
               const allSizesSchemas = img.split(",").map((url) => {
+                console.log(`galleryBlock_${ind.toString()}`)
                 return (
                   <script
                     key={`galleryBlock_${ind.toString()}`}

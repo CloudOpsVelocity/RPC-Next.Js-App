@@ -24,21 +24,6 @@ function ModalBox({children, isOpen, handleChange, containerClassStyle, hideCros
         }
     };
 
-    // useEffect(()=>{
-    //     isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
-
-    //     if (isOpen) {
-    //         window.history.pushState("masterplanModal", "");
-      
-    //         const handlePopState = () => {
-    //             onClosePopup();
-    //         };
-      
-    //         window.addEventListener("popstate", handlePopState);
-    //         return () => window.removeEventListener("popstate", handlePopState);
-    //     }
-    // }, [isOpen]); 
-
     useEffect(()=>{
         if (isOpen) {
             document.body.style.overflow = "hidden"

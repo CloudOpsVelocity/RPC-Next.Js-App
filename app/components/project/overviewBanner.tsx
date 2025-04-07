@@ -5,7 +5,7 @@ import {
   // Phone,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
-import React, { useEffect } from "react";
+import React from "react";
 
 import Button from "../../elements/button";
 // import { useParams } from "next/navigation";
@@ -15,14 +15,14 @@ import RequestCallBackModal from "../molecules/popups/req";
 // import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import { NumberFormatter } from "@mantine/core";
 import Image from "next/image";
-import useHistoryBackHandler from "../molecules/popups/popupCloser";
+// import useHistoryBackHandler from "../molecules/popups/popupCloser";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
   name,
   buiderName,
   basePrice,
-  brocherUrl,
+  // brocherUrl,
   builderId,
   slug,
 }: {
@@ -35,23 +35,7 @@ export default function OverviewBanner({
   builderId: number;
   slug: string;
 }) {
-  const [, { open, close }] = useReqCallPopup();
-
-  // const pushHistory = useHistoryBackHandler(close);
-
-  // useEffect(() => {
-  //   if (opened) {
-  //     window.history.pushState("shearlModal", "");
-
-  //     const handlePopState = () => {
-  //       document.body.style.overflow = "scroll"; 
-  //       close();
-  //     };
-
-  //     window.addEventListener("popstate", handlePopState);
-  //     return () => window.removeEventListener("popstate", handlePopState);
-  //   }
-  // }, [opened]);
+  const [, { open }] = useReqCallPopup();
 
   return (
     <div
