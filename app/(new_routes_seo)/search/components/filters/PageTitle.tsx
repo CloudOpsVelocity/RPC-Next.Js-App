@@ -96,9 +96,6 @@ function PageTitle({}: Props) {
 
   const [hideHeading, setHideHeading] = useState(false);
 
-  console.log(state);
-  console.log(paramsData);
-
   useEffect(() => {
     const handlePopState = () => {
       setHideHeading(true);
