@@ -6,7 +6,8 @@ const useHistoryBackHandler = (handleClose:any) => {
     const handlePopState = () => {
       document.body.style.overflow = "scroll";
       handleClose ? handleClose() : "";
-      window.history.replaceState(null, "", window.location.href);
+      // window.history.replaceState(null, "", window.location.href); 
+      window.history.back();
     };
 
     window.addEventListener("popstate", handlePopState);

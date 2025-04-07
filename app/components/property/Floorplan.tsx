@@ -11,6 +11,7 @@ import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { createPropertyString } from "@/app/utils/dyanamic/property";
 import { ImgNotAvail } from "@/app/data/project";
 import Image from "next/image";
+// import useHistoryBackHandler from "../molecules/popups/popupCloser";
 
 export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const [opened, setOpened] = useState(false);
@@ -55,6 +56,12 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
     });
     setOpened(true);
   };
+
+  const onClosePopup = () => {
+    setOpened(false)
+  }
+
+  // const pushHistory = useHistoryBackHandler(onClosePopup);
   return (
     <>
       <PFloorPlanModal data={data} opened={opened} setOpened={setOpened} />
@@ -123,7 +130,11 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                 />
               )}
             </div>
-            <button onClick={() => setOpened(true)}>
+            <button onClick={() => {
+              setOpened(true);
+              // pushHistory();
+              window.history.pushState(null, "", window.location.href);   
+            }}>
               <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-[1] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
                 <p className="text-[#0073C6] text-[12px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
                   Click on image to open floor plan

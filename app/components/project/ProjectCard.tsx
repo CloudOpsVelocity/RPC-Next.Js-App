@@ -83,6 +83,8 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
       source: "projCard",
       title: cardData.projName,
     });
+    window.history.pushState(null, "", window.location.href);  
+    document.body.style.overflow = "hidden"; 
   };
 
 //   useEffect(()=>{

@@ -24,20 +24,39 @@ function ModalBox({children, isOpen, handleChange, containerClassStyle, hideCros
         }
     };
 
-    useEffect(()=>{
-        isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
+    // useEffect(()=>{
+    //     isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
 
-        if (isOpen) {
-            window.history.pushState("masterplanModal", "");
+    //     if (isOpen) {
+    //         window.history.pushState("masterplanModal", "");
       
+    //         const handlePopState = () => {
+    //             onClosePopup();
+    //         };
+      
+    //         window.addEventListener("popstate", handlePopState);
+    //         return () => window.removeEventListener("popstate", handlePopState);
+    //     }
+    // }, [isOpen]); 
+
+    useEffect(()=>{
+        if (isOpen) {
+            document.body.style.overflow = "hidden"
+            window.history.pushState(null, "", window.location.href);   
             const handlePopState = () => {
-                onClosePopup();
+              document.body.style.overflow = "scroll";  
+              window.history.back();
+              handleChange(false);
             };
       
             window.addEventListener("popstate", handlePopState);
             return () => window.removeEventListener("popstate", handlePopState);
         }
-    }, [isOpen]); 
+        else{
+            document.body.style.overflow = "scroll";
+            window.history.back();
+        }
+    }, [isOpen]);
 
     return (
         <div 

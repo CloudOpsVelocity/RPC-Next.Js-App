@@ -17,23 +17,28 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
         var baxEl = document.getElementById("modalDrawerPopupInnerCon");
         if (baxEl && !baxEl.contains(e.target)){
             document.body.style.overflow = "scroll";
+            // window.history.replaceState(null, "", window.location.href);
+            window.history.back();
             handleChange(false);
         }
     };
 
     useEffect(()=>{
-        isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
-
         if (isOpen) {
-            window.history.pushState("masterplanModal", "");
-      
+            document.body.style.overflow = "hidden"
+            window.history.pushState(null, "", window.location.href);   
             const handlePopState = () => {
-              document.body.style.overflow = "scroll"; 
+              document.body.style.overflow = "scroll";  
+              window.history.back();
               handleChange(false);
             };
       
             window.addEventListener("popstate", handlePopState);
             return () => window.removeEventListener("popstate", handlePopState);
+        }
+        else{
+            document.body.style.overflow = "scroll";
+            window.history.back();
         }
     }, [isOpen]);
 
@@ -58,6 +63,8 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
                         close={()=> {
                             handleChange(false);
                             document.body.style.overflow = "scroll";
+                            // window.history.replaceState(null, "", window.location.href);
+                            window.history.back();
                         }}
                         className=" hover:bg-gray-100 rounded-full w-[30px] h-[30px]"
                     />
