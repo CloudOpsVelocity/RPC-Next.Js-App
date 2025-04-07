@@ -46,7 +46,6 @@ function PageTitle({}: Props) {
   // };
 
   const getTitle = (pageUrl: string) => {
-    // /residential-listings/
     const isListing = path.includes("/residential-listings/");
     if (paramsData && Object.keys(paramsData).length > 0) {
       if (paramsData.slug) {
@@ -54,8 +53,7 @@ function PageTitle({}: Props) {
         const id = slug?.split("-");
         return cleanHeading(id);
       } else {
-
-        let firstString = paramsData.bhk_unit_type ? paramsData.bhk_unit_type : `Residential ${isListing ? "Listings" : "Projects"}`
+        let firstString = paramsData.bhk_unit_type ? paramsData.bhk_unit_type : paramsData.phase ? paramsData.phase : `Residential ${isListing ? "Listings" : "Projects"}`
         
         const pageTitle = `${firstString} For ${
           state.cg === "R" ? "Rent" : "Sale"
@@ -67,7 +65,7 @@ function PageTitle({}: Props) {
         return pageTitle.replaceAll("-", " ");
       }
     } else if (paramsData && Object.keys(paramsData).length === 0) {
-      let firstString = paramsData.bhk_unit_type ? paramsData.bhk_unit_type : `Residential ${isListing ? "Listings" : "Projects"}`
+      let firstString = `Residential ${isListing ? "Listings" : "Projects"}`
 
       const pageTitle = `${firstString} For ${
         state.cg === "R" ? "Rent" : "Sale"
@@ -87,15 +85,11 @@ function PageTitle({}: Props) {
 
   const [hideHeading, setHideHeading] = useState(false);
 
-  // window.addEventListener("click", () => {
-  //   console.log("Window clicked!");
-  //   setHideHeading(true);
-  // });
-
+  console.log(state)
+  console.log(paramsData)
 
   useEffect(() => {
     const handlePopState = () => {
-      console.log("Window clicked!");
       setHideHeading(true);
     };
 

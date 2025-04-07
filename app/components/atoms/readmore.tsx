@@ -24,6 +24,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
 
   const handleReadMoreClick = () => {
     if (shouldShowReadMore) {
+      document.body.style.overflow = "hidden";
       setReadMore((prev) => ({
         ...prev,
         expanded: !prev.expanded,
