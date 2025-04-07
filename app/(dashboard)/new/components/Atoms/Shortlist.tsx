@@ -4,7 +4,7 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 // import { Shorlisted } from "@/app/images/commonSvgs";
 import { HeartIcon } from "@/app/images/HomePageIcons";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { useRouter } from "next/navigation";
 import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCompare";
 
@@ -16,7 +16,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const [state, setState] = useState(shortListed === "Y" ? true : false);
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
-  const [opened, { open: openLogin, close }] = usePopShortList();
+  const [, { open: openLogin }] = usePopShortList();
 
   const { mutate } = useOptimisticShortlistCompare();
  
@@ -37,20 +37,6 @@ export default function Shortlist({ reqId, shortListed }: Props) {
       //  () =>
     }
   };
-
-  useEffect(() => {
-      if (opened) {
-        window.history.pushState("shearlModal", "");
-  
-        const handlePopState = () => {
-          document.body.style.overflow = "scroll"; 
-          close();
-        };
-  
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
-      }
-    }, [opened]);
 
   return (
     <button onClick={onAddingShortList}>

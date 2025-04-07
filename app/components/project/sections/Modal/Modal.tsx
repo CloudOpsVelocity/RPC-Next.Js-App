@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
-import { projectReqDataAtom } from "@/app/store/project/project.req";
+// import { projectReqDataAtom } from "@/app/store/project/project.req";
 import Image from "next/image";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
@@ -37,8 +37,10 @@ const Modal = ({
   children: React.ReactNode;
 }) => {
   useEffect(() => {
+    window.history.pushState("masterplanModal", "");
+
     const handlePopState = () => {
-      onClose();
+      onClose(); 
     };
 
     if (isOpen) {
@@ -74,6 +76,22 @@ export default function PartialUnitModal({ data }: any) {
     setActive(0);
     reset();
   };
+
+  const opened = isData.main === 0 ? true : isData.main; 
+
+  // useEffect(() => {
+  //   if (opened) {
+  //     window.history.pushState("masterplanModal", "");
+
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       handleReset();
+  //     };
+
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
 
   const [platform, setPlatform] = useState("");
 
@@ -144,13 +162,15 @@ export default function PartialUnitModal({ data }: any) {
       return prev;
     });
   };
-  if (!(isData.main === 0 ? true : isData.main)) {
+  if (!opened) {
     return null;
   }
 
+
+
   return (
     <Modal
-      isOpen={isData.main === 0 ? true : isData.main}
+      isOpen={opened}
       onClose={handleReset}
     >
       <div className="flex flex-col h-full ">

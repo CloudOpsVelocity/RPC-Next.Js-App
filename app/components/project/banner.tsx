@@ -5,7 +5,7 @@ import {
   useMediaQuery,
 } from "@mantine/hooks";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import S from "@/app/styles/Rating.module.css";
 import { yupResolver } from "@mantine/form";
 import { ratingSchema, ratingSchema2 } from "@/app/validations/project";
@@ -32,6 +32,20 @@ export default function Banner({
   projIdEnc: string;
 }) {
   const [opened, { open, close }] = usePopUpRatings();
+
+  // useEffect(() => {
+  //   if (opened) {
+  //     window.history.pushState("masterplanModal", "");
+
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       close();
+  //     };
+
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
 
   const onAddingRatings = () => {
     open();

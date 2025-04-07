@@ -97,20 +97,20 @@ const Preview = ({ main, logo, setError }: any) => {
     }
   };
   const [opened, { open, close }] = useDisclosure(false);
-  useEffect(() => {
-    if (opened) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("shearlModal", "");
+  // useEffect(() => {
+  //   if (opened) {
+  //     // Push a new state to the history stack when the modal is opened
+  //     window.history.pushState("shearlModal", "");
 
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       close();
+  //     };
 
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
   return (
     <div className="flex items-center p-4 bg-white border border-gray-300 rounded-lg">
       <div className="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg">

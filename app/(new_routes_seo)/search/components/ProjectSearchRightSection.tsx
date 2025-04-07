@@ -73,21 +73,21 @@ const RightSection = ({ serverData, isTrue }: any) => {
     });
   const apidata = data?.pages?.flat() || [];
 
-  useEffect(() => {
-    if (mapPopup.isOpen && isMobile) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("projeSearchModalModal", "");
+  // useEffect(() => {
+  //   if (mapPopup.isOpen && isMobile) {
+  //     // Push a new state to the history stack when the modal is opened
+  //     window.history.pushState("projeSearchModalModal", "");
 
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
-        dispatch({ type: "CLOSE" })
-      };
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
+  //       dispatch({ type: "CLOSE" })
+  //     };
 
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [mapPopup.isOpen]);
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [mapPopup.isOpen]);
 
   return !isMobile ? (
     <div

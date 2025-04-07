@@ -43,20 +43,20 @@ export default function CardDownSection({
   const [opened, { open, close }] = useReqCallPopup();
   const setPopReqData = useSetAtom(NearByDataAtom);
 
-  useEffect(() => {
-      if (opened) {
-        // Push a new state to the history stack when the modal is opened
-        window.history.pushState("reqCallIndexModal", "");
+  // useEffect(() => {
+  //     if (opened) {
+  //       // Push a new state to the history stack when the modal is opened
+  //       window.history.pushState("reqCallIndexModal", "");
   
-        const handlePopState = () => {
-          document.body.style.overflow = "scroll"; 
-          close();
-        };
+  //       const handlePopState = () => {
+  //         document.body.style.overflow = "scroll"; 
+  //         close();
+  //       };
   
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
-      }
-    }, [opened]);
+  //       window.addEventListener("popstate", handlePopState);
+  //       return () => window.removeEventListener("popstate", handlePopState);
+  //     }
+  //   }, [opened]);
 
   const handleOpen = () => {
     open({

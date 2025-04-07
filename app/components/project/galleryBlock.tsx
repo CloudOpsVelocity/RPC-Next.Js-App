@@ -1,7 +1,7 @@
 "use client";
 import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Media } from "@/app/validations/types/project";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { getImageUrls } from "@/app/utils/image";
 // import { useGallery } from "@/app/hooks/useGallery";
@@ -43,11 +43,25 @@ export default function GalleryBlock({
   }
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
-  const [galleryState, dispatch] = useAtom(galleryStateAtom);
+  const [{opened}, dispatch] = useAtom(galleryStateAtom);
   const handleMediaClick = (media: string, index: number) => {
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
+
+  // useEffect(() => {
+  //   if (opened) {
+  //     window.history.pushState("masterplanModal", "");
+
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       dispatch({ type: "CLOSE"});
+  //     };
+
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
 
   return (
     <div
@@ -183,6 +197,7 @@ export default function GalleryBlock({
               const allSizesSchemas = img.split(",").map((url) => {
                 return (
                   <script
+                    key={`galleryBlock_${ind.toString()}`}
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                       __html: JSON.stringify({

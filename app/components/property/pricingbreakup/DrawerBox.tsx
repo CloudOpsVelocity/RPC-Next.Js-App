@@ -1,5 +1,6 @@
+"use client"
 import React, { useEffect } from 'react'
-import { MdClose } from 'react-icons/md';
+// import { MdClose } from 'react-icons/md';
 import Close from '../../project/button/close';
 
 type Props = {
@@ -20,9 +21,21 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
         }
     };
 
-    useEffect(()=>{
-        isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
-    }, [isOpen]);
+    // useEffect(()=>{
+    //     isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
+
+    //     if (isOpen) {
+    //         window.history.pushState("masterplanModal", "");
+      
+    //         const handlePopState = () => {
+    //           document.body.style.overflow = "scroll"; 
+    //           handleChange(false);
+    //         };
+      
+    //         window.addEventListener("popstate", handlePopState);
+    //         return () => window.removeEventListener("popstate", handlePopState);
+    //     }
+    // }, [isOpen]);
 
     // w-[0px] transition-[width] duration-[1s] hover:h-[500px] right-0 hover:absolute overflow-y-auto scrollbar-hide
 

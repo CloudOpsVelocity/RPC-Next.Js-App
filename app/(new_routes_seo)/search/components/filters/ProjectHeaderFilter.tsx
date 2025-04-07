@@ -329,7 +329,8 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   useEffect(() => {
       if (isDrawerOpen && isMobile) {
         // Push a new state to the history stack when the modal is opened
-        window.history.pushState("projeSearchModalModal", "");
+        // window.history.pushState("projeSearchModalModal", ""); 
+        window.history.pushState(null, "", window.location.href);
   
         const handlePopState = () => {
           document.body.style.overflow = "scroll"; 
@@ -506,6 +507,8 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
                 onClick={() => {
                   setIsDrawerOpen(false);
                   document.body.style.overflow = "unset";
+                  console.log("close")
+                  isMobile ? history.back() : ""
                 }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >

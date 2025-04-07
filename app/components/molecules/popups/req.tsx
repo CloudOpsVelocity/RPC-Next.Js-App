@@ -19,6 +19,7 @@ import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
+// import useHistoryBackHandler from "./popupCloser";
 // import { title } from "process";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
@@ -33,6 +34,26 @@ const RequestCallBackModal = () => {
       setStatus("idle");
     }, 500);
   };
+
+  // const pushHistory = useHistoryBackHandler(handleClose);
+  // pushHistory();
+
+  // console.log(opened)
+
+  // useEffect(()=>{
+  //   if (opened) {
+  //       window.history.pushState(null, "", window.location.href);
+  //       window.history.pushState("reqCallModal", "");
+  
+  //       const handlePopState = () => {
+  //         document.body.style.overflow = "scroll"; 
+  //         handleClose();
+  //       };
+  
+  //       window.addEventListener("popstate", handlePopState);
+  //       return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
 
   return (
     <Modal

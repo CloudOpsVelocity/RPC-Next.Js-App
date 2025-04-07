@@ -68,21 +68,21 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
 
   const apidata = !isTrue ? serverData : data?.pages.flat() || [];
 
-  useEffect(() => {
-      if (mapPopup.isOpen && isMobile) {
-        // Push a new state to the history stack when the modal is opened
-        window.history.pushState("listingSearchMapmodal", "");
+  // useEffect(() => {
+  //     if (mapPopup.isOpen && isMobile) {
+  //       // Push a new state to the history stack when the modal is opened
+  //       window.history.pushState("listingSearchMapmodal", "");
   
-        const handlePopState = () => {
-          document.body.style.overflow = "scroll"; 
-          setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
-          dispatch({ type: "CLOSE" })
-        };
+  //       const handlePopState = () => {
+  //         document.body.style.overflow = "scroll"; 
+  //         setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
+  //         dispatch({ type: "CLOSE" })
+  //       };
   
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
-      }
-    }, [mapPopup.isOpen]);
+  //       window.addEventListener("popstate", handlePopState);
+  //       return () => window.removeEventListener("popstate", handlePopState);
+  //     }
+  //   }, [mapPopup.isOpen]);
 
   return !isMobile ? (
     <div

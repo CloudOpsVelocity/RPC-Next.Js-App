@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Button from "../../elements/button";
 import { Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
@@ -47,7 +47,7 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
-  const [, { open }] = useReqCallPopup();
+  const [opened, { open, close }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
@@ -84,6 +84,20 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
       title: cardData.projName,
     });
   };
+
+//   useEffect(()=>{
+//     if (opened) {
+//         window.history.pushState("masterplanModal", "");
+  
+//         const handlePopState = () => {
+//           document.body.style.overflow = "scroll"; 
+//           close();
+//         };
+  
+//         window.addEventListener("popstate", handlePopState);
+//         return () => window.removeEventListener("popstate", handlePopState);
+//     }
+// }, [opened]);
 
   const URLRedirectionProj = createProjectLinkUrl({
     city: cardData.city,

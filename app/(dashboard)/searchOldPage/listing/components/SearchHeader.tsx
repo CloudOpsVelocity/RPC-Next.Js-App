@@ -88,20 +88,20 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     open();
   };
 
-  useEffect(() => {
-    if (opened) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("shearlModal", "");
+  // useEffect(() => {
+  //   if (opened) {
+  //     // Push a new state to the history stack when the modal is opened
+  //     window.history.pushState("shearlModal", "");
 
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
+  //     const handlePopState = () => {
+  //       document.body.style.overflow = "scroll"; 
+  //       close();
+  //     };
 
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [opened]);
 
   const shouldShowBudget = !(
     (filters.bugdetValue[0] === 500000 &&

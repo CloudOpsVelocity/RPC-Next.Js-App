@@ -278,7 +278,8 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   useEffect(() => {
     if (isDrawerOpen && isMobile) {
       // Push a new state to the history stack when the modal is opened
-      window.history.pushState("projeSearchModalModal", "");
+      // window.history.pushState("projeSearchModalModal", "");
+      window.history.pushState(null, "", window.location.href);
 
       const handlePopState = () => {
         document.body.style.overflow = "scroll"; 
@@ -287,7 +288,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       };
 
       window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState); 
     }
 }, [isDrawerOpen]);
 
