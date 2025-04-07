@@ -115,6 +115,7 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
   const getBroucherSize = (size: number) => {
     return !(size > 2 * 1024 * 1024);
   };
+  const [showMap, setShowMap] = useState(false);
 
   // If RAM is less than 4GB, render iframe instead
   if (ram && ram <= 4) {
@@ -124,12 +125,28 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
           <span>Explore the Comprehensive Brochure of </span>
           <span className="text-[#148B16] font-bold">{projName}</span>
         </h2>
-
-        <iframe
+        {!showMap ? (
+        <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+          <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+            <picture>
+              <source media="(max-width: 460px)" srcSet={broucherImage?.split(",")[0]} />
+              <source media="(max-width: 768px)" srcSet={broucherImage?.split(",")[1]} />
+              <source media="(min-width: 1200px)" srcSet={broucherImage?.split(",")[2]} />
+              <Image alt="project image" src={broucherImage?.split(",")[3]} fill unoptimized priority />
+            </picture>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <button onClick={() => setShowMap(true)} className="z-8 px-6 py-3 mx-2 text-left sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors">
+              <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
+            </button>
+          </div>
+        </div>
+      ) :
+       ( <iframe
           src={singleBrocher || phaseOverviewData[0]?.phaseBrochureUrl || ""}
           className="w-full h-[400px] border-0"
           title={`${projName} Brochure`}
-        />
+        />)}
       </div>
     );
   }
@@ -234,7 +251,6 @@ function BrocherContent({ phaseOverviewData, projName, broucherImage, singleBroc
       setState((prev) => ({ ...prev, loading: false }));
     }
   };
-  const [showMap, setShowMap] = useState(false);
 
   //for showing the buttons iniial render 
   const BroucherHeader = ({
