@@ -1,9 +1,9 @@
 "use client";
-import { Menu } from "@mantine/core";
+// import { Menu } from "@mantine/core";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import data, { unAuthorizedData } from "@/app/data/dropdown";
-import S from "@/app/styles/DropDown.module.css";
+// import S from "@/app/styles/DropDown.module.css";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import usePathToOrigin, { encryptUrl } from "@/app/hooks/custom/useRedirect";
@@ -65,58 +65,200 @@ export default function Header({}: Props) {
 }
 
 const ForBuilders = () => {
+  const [isHovered, setIsHovered] = useState(false);
   const { data: session } = useSession();
   const pathName = usePathname();
   return (
     !session && (
-      <Menu trigger="click-hover">
-        <Menu.Target>
-          <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
-            For Builders {config.chevron}
-          </button>
-        </Menu.Target>
-        <Menu.Dropdown
-          className="!p-0 cursor-pointer"
+      <div 
+        className="relative " 
+        onMouseEnter={() => setIsHovered(true)} 
+        // onMouseLeave={() => setIsHovered(false)} 
+      >
+        <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
+          For Builders {config.chevron}
+        </button>
+
+        {isHovered &&
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="!p-0 cursor-pointer w-full absolute min-w-[150px] top-[36px] "
           onClick={() =>
             typeof window !== "undefined"
               ? window.open(`/login?cc=${encryptUrl(pathName)}`)
               : ""
           }
         >
-          <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
-            <p className="text-[#F5AC44] text-lg not-italic font-bold">
-              Calling Builders!!!
-            </p>
-            <div className="text-[#242424] text-xs not-italic font-semibold">
-              To Post Project Free!
-            </div>
-            <ul className="ml-5 mt-3">
-              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
-                Free Posting
-              </li>
-              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
-                Multiple Images
-              </li>
-              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
-                Easy to post
-              </li>
-            </ul>
-            <button className="inline-flex justify-center items-center gap-2.5 rounded px-2.5 py-1 bg-[#0073C6] text-white text-xs not-italic font-bold mt-2">
-              Post Project
-            </button>
-          </div>
-          <Image
-            src={"/home/for_builder.svg"}
-            alt=""
-            width={220}
-            height={220}
-            className="absolute right-0 bottom-0"
-          />
-        </Menu.Dropdown>
-      </Menu>
+              <div className="relative w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
+                <p className="text-[#F5AC44] text-lg not-italic font-bold">
+                  Calling Builders!!!
+                </p>
+                <div className="text-[#242424] text-xs not-italic font-semibold">
+                  To Post Project Free!
+                </div>
+                <ul className="ml-5 mt-3">
+                  <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
+                    Free Posting
+                  </li>
+                  <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
+                    Multiple Images
+                  </li>
+                  <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
+                    Easy to post
+                  </li>
+                </ul>
+                <button className="inline-flex justify-center items-center gap-2.5 rounded px-2.5 py-1 bg-[#0073C6] text-white text-xs not-italic font-bold mt-2">
+                  Post Project
+                </button>
+
+                <Image
+                  src={"/home/for_builder.svg"}
+                  alt=""
+                  width={220}
+                  height={220}
+                  className="absolute right-0 bottom-0"
+                />
+              </div>
+          </div>}
+      </div>
     )
   );
 };
+
+// function Dropdown() {
+//   const handleLogout = async () => {
+//     try {
+//       if (process.env.NODE_ENV === "development") {
+//         await signOut();
+//         await axios.get(`${process.env.NEXT_PUBLIC_URL}/user/v1/logOut`);
+//       } else {
+//         await axios
+//           .get(`${process.env.NEXT_PUBLIC_URL}/user/v1/logOut`)
+//           .then(() => {
+//             signOut();
+//           });
+//       }
+//     } catch (error) {
+//       console.log("Something Went Wrong", error);
+//     }
+//   };
+
+//   const { redirectQueryParam } = usePathToOrigin();
+//   const { data: session } = useSession();
+//   return (
+//     <Menu width={200} shadow="md" trigger="click-hover">
+//       <Menu.Target>
+//         {session ? (
+//           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+//             <button className="inline-flex justify-center items-center gap-1 ">
+//               {config.getIcon(session.user.userType)}{" "}
+//               {
+//                 /* session.user.name.split(" ")[0].length >= 3
+//                 ? session.user.name.split(" ")[0]
+//                 : session.user.name.split(" ")[1] != undefined
+//                 ? session.user.name.split(" ")[1]
+//                 : session.user.name.split(" ")[0] */
+//                 session.user.name.slice(0, 10)
+//               }
+//               {`${session.user.name.length > 8 ? "..." : ""}`}
+//             </button>
+//             {config.blueChevron}
+//           </div>
+//         ) : (
+//           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+//             <Link
+//               prefetch={false}
+//               rel="noopener noreferrer"
+//               className=""
+//               href={{
+//                 pathname: `/register`,
+//                 search: redirectQueryParam,
+//               }}
+//               onClick={(e) => {
+//                 e.stopPropagation();
+//               }}
+//             >
+//               Login/ Sign up
+//             </Link>
+//             {config.blueChevron}
+//           </div>
+//         )}
+//       </Menu.Target>
+
+//       {session ? (
+//         <Menu.Dropdown
+//           className="!z-[1000]"
+//           classNames={{
+//             dropdown: S.dropdown,
+//           }}
+//         >
+//           <>
+//             {data.map((item, index) =>
+//               session.user?.userType !== "B" &&
+//               item.label === "Post Project" ? null : (
+//                 <Menu.Item
+//                   key={`dataCrad_${item.label + (index + 1)}`}
+//                   classNames={{
+//                     itemLabel: S.itemLabel,
+//                     item: S.item,
+//                   }}
+//                   component="a"
+//                   className=" text-gray-700 hover:text-green-500 transition-colors flex"
+//                   href={item.url}
+//                   // target="_self"
+//                 >
+//                   <div className="flex items-center gap-2">
+//                     {homePageSvgsMap.get(item.svg ?? "")}{" "}
+//                     <span>{item.label}</span>
+//                   </div>
+//                 </Menu.Item>
+//               )
+//             )}
+//             <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+//           </>
+
+//           <Menu.Item
+//             classNames={{
+//               itemLabel: S.itemLabel,
+//             }}
+//             component="button"
+//             className="block text-gray-700 hover:text-green-500 transition-colors"
+//             onClick={handleLogout}
+//           >
+//             <div className="flex items-center gap-2">
+//               {homePageSvgsMap.get("logout")} <span>Log Out</span>
+//             </div>
+//           </Menu.Item>
+//         </Menu.Dropdown>
+//       ) : (
+//         <Menu.Dropdown
+//           className="!z-[1000]"
+//           classNames={{
+//             dropdown: S.dropdown,
+//           }}
+//         >
+//           {unAuthorizedData.map((item, index) => (
+//             <Menu.Item
+//               key={item.url}
+//               classNames={{
+//                 itemLabel: S.itemLabel,
+//               }}
+//               component={Link}
+//               className="block text-gray-700 hover:text-green-500 transition-colors"
+//               href={{
+//                 pathname: item.url,
+//                 search: redirectQueryParam,
+//               }}
+//             >
+//               {item.label}
+//             </Menu.Item>
+//           ))}
+//         </Menu.Dropdown>
+//       )}
+//     </Menu>
+//   );
+// }
 
 function Dropdown() {
   const handleLogout = async () => {
@@ -138,9 +280,14 @@ function Dropdown() {
 
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <Menu width={200} shadow="md" trigger="click-hover">
-      <Menu.Target>
+    <div 
+      className="relative " 
+      onMouseEnter={() => setIsHovered(true)} 
+      onMouseLeave={() => setIsHovered(false)} 
+    >
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1 ">
@@ -176,26 +323,20 @@ function Dropdown() {
             {config.blueChevron}
           </div>
         )}
-      </Menu.Target>
+
       {session ? (
-        <Menu.Dropdown
-          className="!z-[1000]"
-          classNames={{
-            dropdown: S.dropdown,
-          }}
+        isHovered &&
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className=" w-full flex flex-col absolute min-w-[150px] top-[36px]  bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
         >
-          <>
             {data.map((item, index) =>
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : (
-                <Menu.Item
+                <Link
                   key={`dataCrad_${item.label + (index + 1)}`}
-                  classNames={{
-                    itemLabel: S.itemLabel,
-                    item: S.item,
-                  }}
-                  component="a"
-                  className=" text-gray-700 hover:text-green-500 transition-colors flex"
+                  className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
                   href={item.url}
                   // target="_self"
                 >
@@ -203,53 +344,45 @@ function Dropdown() {
                     {homePageSvgsMap.get(item.svg ?? "")}{" "}
                     <span>{item.label}</span>
                   </div>
-                </Menu.Item>
+                </Link>
               )
             )}
-            <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-          </>
+            <hr className=" border-[#768AA9] border-solid border-t-[1px] ml-[12px] w-full max-w-[90%]" />
 
-          <Menu.Item
-            classNames={{
-              itemLabel: S.itemLabel,
-            }}
-            component="button"
-            className="block text-gray-700 hover:text-green-500 transition-colors"
+          <div
+            className="block hover:text-green-500 transition-colors text-[#505050] font-[400] text-[14px] md:text-[18px] max-w-[150px] md:max-w-auto  "
             onClick={handleLogout}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer ">
               {homePageSvgsMap.get("logout")} <span>Log Out</span>
             </div>
-          </Menu.Item>
-        </Menu.Dropdown>
+          </div>
+        </div>
       ) : (
-        <Menu.Dropdown
-          className="!z-[1000]"
-          classNames={{
-            dropdown: S.dropdown,
-          }}
+        isHovered &&
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className=" w-full flex flex-col absolute min-w-[150px] top-[36px]  bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
         >
           {unAuthorizedData.map((item, index) => (
-            <Menu.Item
+            <Link
               key={item.url}
-              classNames={{
-                itemLabel: S.itemLabel,
-              }}
-              component={Link}
-              className="block text-gray-700 hover:text-green-500 transition-colors"
+              className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
               href={{
                 pathname: item.url,
                 search: redirectQueryParam,
               }}
             >
               {item.label}
-            </Menu.Item>
+            </Link>
           ))}
-        </Menu.Dropdown>
+        </div>
       )}
-    </Menu>
+    </div>
   );
 }
+
 const config = {
   chevron: (
     <svg
@@ -328,11 +461,15 @@ function MobileDropDown() {
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Menu width={200} shadow="md">
-      <Menu.Target>
-        {session ? (
+    <div 
+    className="relative " 
+    onMouseEnter={() => setIsHovered(true)} 
+    onMouseLeave={() => setIsHovered(false)} >
+      <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+          {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1">
               {config.getIcon(session.user.userType)}
@@ -344,15 +481,14 @@ function MobileDropDown() {
             <MenuBtn />
           </div>
         )}
-      </Menu.Target>
+      </div>
       {session ? (
-        <Menu.Dropdown
-          className="!z-[1000]"
-          classNames={{
-            dropdown: S.dropdown,
-          }}
+        isHovered &&
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className=" w-full flex flex-col absolute right-0 min-w-[150px] top-[48px]  bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
         >
-          <>
             {data.map((item, index) =>
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : index == 0 && isMobile ? (
@@ -382,14 +518,9 @@ function MobileDropDown() {
                     : session.user.name.split(" ")[0]}
                 </button>
               ) : (
-                <Menu.Item
+                <Link
                   key={`dataCrad_${item.label[index]}`}
-                  classNames={{
-                    itemLabel: S.itemLabel,
-                    item: S.item,
-                  }}
-                  component="a"
-                  className=" text-gray-700 hover:text-green-500 transition-colors flex"
+                  className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
                   href={item.url}
                   target="_self"
                   rel="noopener noreferrer"
@@ -398,50 +529,41 @@ function MobileDropDown() {
                     {homePageSvgsMap.get(item.svg ?? "")}{" "}
                     <span>{item.label}</span>
                   </div>
-                </Menu.Item>
+                </Link>
               )
             )}
             <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-          </>
 
-          <Menu.Item
-            classNames={{
-              itemLabel: S.itemLabel,
-            }}
-            component="button"
+          <div
             className="block text-gray-700 hover:text-green-500 transition-colors"
             onClick={handleLogout}
           >
             <div className="flex items-center gap-2">
               {homePageSvgsMap.get("logout")} <span>Log Out</span>
             </div>
-          </Menu.Item>
-        </Menu.Dropdown>
+          </div>
+        </div>
       ) : (
-        <Menu.Dropdown
-          className="!z-[1000]"
-          classNames={{
-            dropdown: S.dropdown,
-          }}
+        isHovered &&
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className=" w-full flex flex-col absolute right-0 min-w-[150px] top-[48px]  bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
         >
-          {unAuthorizedData.map((item, index) => (
-            <Menu.Item
+          {unAuthorizedData.map((item) => (
+            <Link
               key={item.url}
-              classNames={{
-                itemLabel: S.itemLabel,
-              }}
-              component={Link}
-              className="block text-gray-700 hover:text-green-500 transition-colors"
+              className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
               href={{
                 pathname: item.url,
                 search: redirectQueryParam,
               }}
             >
               {item.label}
-            </Menu.Item>
+            </Link>
           ))}
-        </Menu.Dropdown>
+        </div>
       )}
-    </Menu>
+    </div>
   );
 }

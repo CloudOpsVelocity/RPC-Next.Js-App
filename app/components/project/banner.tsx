@@ -212,7 +212,7 @@ const AddRating = ({
           onClose();
           allowBackButton();
         }}
-        containerClassStyle={` !rounded-[20px] !p-0 !pl-[10px] !pr-[10px] ${isMobile ? "w-[100%]" : session ? isDataSubmitted.isSubmitted ? isTab ? "w-[40%]" : "w-auto" : "w-[58%]" : "w-[35%]"} `}
+        containerClassStyle={`!rounded-[20px] !p-0 !w-[94%] md:!w-[40%] xl:!w-[35%] ${isMobile ? "!w-[100%]" : session ? isDataSubmitted.isSubmitted ? isTab ? "!w-[40%]" : "!w-auto" : "!w-[58%]" : "!w-[35%]"} `}
         hideCrossIcon={true}
       >
         <FormProvider form={form}>
