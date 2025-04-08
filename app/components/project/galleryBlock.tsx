@@ -10,7 +10,7 @@ import clsx from "clsx";
 import SubHeading from "./headings/SubHeading";
 import { useMediaQuery } from "@mantine/hooks";
 import VideoJsonLdScript from "@/app/seo/VideoJson";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
 import Image from "next/image";
 import { preventBackButton } from "../molecules/popups/req";
@@ -44,7 +44,7 @@ export default function GalleryBlock({
   }
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
-  const [dispatch] = useAtom(galleryStateAtom);
+  const dispatch = useSetAtom(galleryStateAtom);
   const handleMediaClick = (media: string, index: number) => {
     setSelectedMedia(media);
     setCurrentSlide(index);

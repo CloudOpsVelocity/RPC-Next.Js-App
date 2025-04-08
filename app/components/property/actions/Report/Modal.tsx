@@ -71,15 +71,19 @@ export default function ReportModal({ issueData }: any) {
     setreportStatus(updatedReportStatus);
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  
   const onClose = () => {
     console.log("close priouus popup")
     close();
+    document.body.style.overflow = "scroll";
+
     setTimeout(() => {
       setText("");
       setStatus("idle");
       setreportStatus([]);
       seterrorMsg(false);
-    }, 500);
+    }, 500000);
   };
   return (
     <>
@@ -184,21 +188,19 @@ export default function ReportModal({ issueData }: any) {
       </Modal> */}
       
       {opened &&
-      <ModalBox 
-        isOpen={opened} 
-        handleChange={onClose}  
+      <ModalBox
+        isOpen={opened}
+        handleChange={onClose}
         hideCrossIcon={true}
-        containerClassStyle={`w-[90%] md:w-[${status === "success" ? "32%" : "50%"}] !p-[10px] !rounded-[20px] `}
+        // containerClassStyle={`!w-[90%] !md:w-[${status !== "success" ? "32%" : "50%"}] !p-0 !rounded-[20px] `}
+        containerClassStyle={`!rounded-[20px] ${status == "success" ? "!p-0" : "!p-[10px]"} ${ isMobile ? "!w-[94%]" : isTab ? "!w-[45%]" : "!w-[30%]" } `}
       >
         <div className="relative">
-          <Close close={()=> {
-            onClose();
-            document.body.style.overflow = "scroll";
-            }} 
-            className="absolute top-3 right-1 z-10"
+          <Close close={()=> onClose()} 
+            className="absolute top-3 right-1 z-10 !max-w-[20px] !max-h-[20px] md:!max-w-[30px] md:!max-h-[30px] "
           />
 
-          {status === "success" ? (
+          {status == "success" ? (
             <ReportSuccesssMessage close={()=>onClose()} />
           ) : (
             <>
@@ -284,10 +286,11 @@ export default function ReportModal({ issueData }: any) {
 
                   {status === "error" && (
                     <p className="text-[12px] sm:text-[14px] text-[#F00]">
-                      Please add comment to submit issue
+                      {text.length === 0 ?  "Please add comment to submit issue" : "Something went wrong!"}
                     </p>
                   )}
                 </div>
+
                 <div className="flex justify-center items-center ">
                   <button
                     onClick={(e) => e.stopPropagation()}

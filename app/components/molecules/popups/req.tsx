@@ -35,8 +35,8 @@ export const allowBackButton = () => {
 };
 
 const RequestCallBackModal = () => {
-  // const isMobile = useMediaQuery("(max-width: 750px)");
-  // const isTab = useMediaQuery("(max-width: 1600px)");
+  const isMobile = useMediaQuery("(max-width: 750px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
   const [opened, { close, source, MODAL_TYPE }] = useReqCallPopup();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
@@ -64,6 +64,8 @@ const RequestCallBackModal = () => {
     //   allowBackButton();
     // }
   }, [opened]);
+
+  
 
   return (
     // <Modal
@@ -109,7 +111,7 @@ const RequestCallBackModal = () => {
           document.body.style.overflow = "scroll";
         }}
         hideCrossIcon={true}
-        containerClassStyle={`rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0`}
+        containerClassStyle={`!p-0 !rounded-[20px] ${ isMobile ? "!w-[94%]" : status !== "success" ? "!w-[65%]" : isTab ? "!w-[40%]" : "!w-[40%]" } `}
     >
         <div
           className={clsx(

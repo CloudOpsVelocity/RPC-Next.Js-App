@@ -227,7 +227,7 @@ const AddRating = ({
                 <RatingMessage close={onClose} />
               ) : (
                 <RatingForm
-                  projName={projName}  
+                  projName={projName}
                   projIdEnc={projIdEnc}
                   formSubmit={formSubmit}
                   isSubmitted={isDataSubmitted.isRatingSubmitted}

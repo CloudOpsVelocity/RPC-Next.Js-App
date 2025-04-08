@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-boolean-value */
 "use client";
 import React, { useEffect, useState } from "react";
-import { Modal } from "@mantine/core";
+// import { Modal } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FAQ } from "@/app/validations/types/project";
 import { addQna } from "@/app/utils/api/actions/Qna";
@@ -8,12 +9,12 @@ import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
 import { useSession } from "next-auth/react";
 import handleTrimAndReplace from "@/app/utils/input/validations";
-import clsx from "clsx";
+// import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import FaqReadMore from "../atoms/faq/FaqReadmore";
-import StepCscs from "@/app/styles/Stepper.module.css";
+// import StepCscs from "@/app/styles/Stepper.module.css";
 import { useMediaQuery } from "@mantine/hooks";
-import S from "@/app/styles/Qna.module.css";
+// import S from "@/app/styles/Qna.module.css";
 import Close from "./button/close";
 import {
   CompareMessage,
@@ -22,6 +23,7 @@ import {
   SellListingNotFoundMessage,
 } from "./success";
 import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
+import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 type FaqWithBgProps = {
   data: FAQ[];
   projName: string;
@@ -314,30 +316,47 @@ const Success = ({ text, opened, onClose, projName }: any) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
+      document.body.style.overflow = "scroll";
     }, 5000);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer); 
   }, [onClose]);
   return (
-    <Modal
-      classNames={{
-        title: S.title,
-        root: S.root,
-        close: S.close,
-        content: S.content,
-        overlay: S.overlay,
-        header: S.disabled,
-        body: S.body,
-      }}
-      opened={opened.status}
-      onClose={onClose}
-      centered
-      title="Add Rating"
-      size={isMobile ? "100%" : isTab ? "35%" : "auto"}
-    >
-      <Close close={onClose} className="absolute top-2 right-2 z-50" />
+    // <Modal
+    //   classNames={{
+    //     title: S.title,
+    //     root: S.root,
+    //     close: S.close,
+    //     content: S.content,
+    //     overlay: S.overlay, 
+    //     header: S.disabled,
+    //     body: S.body,
+    //   }}
+    //   opened={opened.status}
+    //   onClose={onClose}
+    //   centered
+    //   title="Add Rating"
+    //   size={isMobile ? "100%" : isTab ? "35%" : "auto"}
+    // >
+    opened.status &&
+    <ModalBox
+        isOpen={opened.status}
+        handleChange={() => {
+          document.body.style.overflow = "scroll";
+          onClose();
+        }}
+        hideCrossIcon={true}
+        containerClassStyle="w-[90%] md:w-[35%] xl:w-auto !p-0 !rounded-[20px] !min-w-[200px] md:!min-w-[500px] !max-w-[100%] md:!max-w-[500px] "
+      >
+      <Close 
+        close={() => {
+          document.body.style.overflow = "scroll";
+          onClose();
+        }} 
+        className="absolute top-2 right-2 z-50" 
+      />
 
       {ComponentTorender}
-    </Modal>
+    </ModalBox>
   );
 };
