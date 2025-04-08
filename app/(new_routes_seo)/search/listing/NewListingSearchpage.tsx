@@ -1,11 +1,11 @@
 import React from "react";
 import dynamic from "next/dynamic";
-const ListingSearhLeftSection = dynamic(
-  () => import("./components/listingSearchTabs/listingSearchleftSection")
-);
-const ListingSearchRightSection = dynamic(
-  () => import("./components/listingSearchTabs/listingSearchRightSection")
-);
+// const ListingSearhLeftSection = dynamic(
+//   () => import("./components/listingSearchTabs/listingSearchleftSection")
+// );
+// const ListingSearchRightSection = dynamic(
+//   () => import("./components/listingSearchTabs/listingSearchRightSection")
+// );
 // import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
 const ProjectSearchBreadCrumbs = dynamic(
   () => import("../components/ProjSearchBreadCrums")
@@ -23,17 +23,16 @@ type Props = {
   serverData: any;
   frontendFilters: any;
   pageUrl: string;
+  showProjectTab?: boolean;
 };
 
 export default function NewListingSearchpage({
   serverData,
   frontendFilters,
   pageUrl,
+  showProjectTab = false,
 }: Props) {
   const isListing = true;
-
-  // console.log(`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`)
-
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative">
       <link
@@ -41,11 +40,14 @@ export default function NewListingSearchpage({
         href={`${process.env.NEXT_PUBLIC_URL}/${pageUrl}`}
       />
       {serverData && <ListingSearchSchema properties={serverData} />}
-      <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
+      <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full">
         <ProjectSearchBreadCrumbs key="newSearchPage3" pageUrl={pageUrl} />
-
         <div className="flex flex-row items-start gap-2">
-          <ListingHeaderFilters key="newSearchFilter3" isListing={isListing} />
+          <ListingHeaderFilters
+            key="newSearchFilter3"
+            isListing={isListing}
+            showProjectTab={showProjectTab}
+          />
         </div>
       </div>
       <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[220px]  ">

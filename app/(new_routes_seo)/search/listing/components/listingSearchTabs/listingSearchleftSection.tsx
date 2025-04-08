@@ -1,8 +1,6 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
-import ProjectCard from "@/app/test/newui/components/Card";
-import { useVirtualizer } from "@tanstack/react-virtual";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
@@ -45,9 +43,8 @@ function LeftSection({
 
   const pathname = usePathname();
   const isTrue =
-    it || pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null;
+    it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
+  console.log({ it, isTrue });
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 

@@ -2,11 +2,11 @@ import React from "react";
 import { getPagesSlugs } from "../seo/api";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
-import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
+// import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
 import { SlugsType } from "../common/constatns/slug.constants";
-// import NewListingSearchpage from "../(new_routes_seo)/search/listing/NewListingSearchpage";
+import NewListingSearchpage from "../(new_routes_seo)/search/listing/NewListingSearchpage";
 
 type Props = {
   params: {
@@ -23,10 +23,11 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   const pageUrl = `${slug}`;
   return (
     <main>
-      <NewSearchPage
+      <NewListingSearchpage
         serverData={severData}
         frontendFilters={frontEndFilter}
         pageUrl={pageUrl}
+        showProjectTab
       />
     </main>
   );
