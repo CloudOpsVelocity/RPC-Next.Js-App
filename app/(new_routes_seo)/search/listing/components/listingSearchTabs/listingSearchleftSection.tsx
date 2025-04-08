@@ -40,11 +40,10 @@ function LeftSection({
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
-
   const pathname = usePathname();
   const isTrue =
     it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
-  console.log({ it, isTrue });
+
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 
