@@ -1,5 +1,7 @@
-"https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover.webp?v=1736937897904,
-https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-small.webp?v=1736937898699,
-https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-medium.webp?v=1736937898699,
-https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-large.webp?v=1736937898699,
-https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-extra-small.webp?v=1736937898699"
+[
+  "https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover.webp?v=1736937897904",
+  "https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-small.webp?v=1736937898699",
+  "https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-medium.webp?v=1736937898699",
+  "https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-large.webp?v=1736937898699",
+  "https://media.getrightproperty.com/residential-projects/bengaluru/490/tvs-emerald-cascadia-jakkur-cover-extra-small.webp?v=1736937898699"
+]

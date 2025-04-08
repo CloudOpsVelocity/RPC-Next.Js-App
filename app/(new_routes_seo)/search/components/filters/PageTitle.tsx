@@ -1,6 +1,6 @@
 "use client";
 
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { projSearchStore } from "../../store/projSearchStore";

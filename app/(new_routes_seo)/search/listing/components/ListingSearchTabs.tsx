@@ -8,18 +8,20 @@ import {
   projSearchStore,
 } from "../../store/projSearchStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
-// import { update } from "lodash";
 import { SearchFilter } from "@/app/types/search";
 
-const tabs = [
-  /*  { id: null, label: "Projects" }, */
-  { id: "I", label: "Owner Listings" },
-  { id: "A", label: "Agent Listings" },
-  { id: "B", label: "Builder Listings" },
-  { id: null, label: "All Listings" },
-];
-
-const ListingSearchTabs = () => {
+const ListingSearchTabs = ({
+  showProjectTab = false,
+}: {
+  showProjectTab?: boolean;
+}) => {
+  const tabs = [
+    ...(showProjectTab ? [{ id: "proj", label: "Projects" }] : []),
+    { id: "I", label: "Owner Listings" },
+    { id: "A", label: "Agent Listings" },
+    { id: "B", label: "Builder Listings" },
+    { id: null, label: "All Listings" },
+  ];
   const [state, dispath] = useAtom(projSearchStore);
 
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
@@ -141,6 +143,13 @@ const ListingSearchTabs = () => {
 
     return "Newest First";
   };
+  // useEffect(() => {
+  //   first;
+
+  //   return () => {
+  //     second;
+  //   };
+  // }, [state]);
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">

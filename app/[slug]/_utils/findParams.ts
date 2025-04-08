@@ -11,8 +11,6 @@ export async function findSeoParams(inputUrl: string) {
   const builderJsonData = JSON.parse(jsonData);
   for (const path in builderJsonData) {
     if (path == inputUrl) {
-      console.log(path, inputUrl);
-      // logger.info(`Found path: ${path} ${inputUrl}`);
       return builderJsonData[path];
     }
   }
@@ -23,7 +21,6 @@ export function extractCaseSeoParams(values: string) {
   const result: any = {};
   let count = 0;
 
-  // Split by hyphens and find locality
   const parts = values.split("-");
 
   const inIndex = parts.findIndex((p) => p.toLowerCase() === "in");
@@ -45,7 +42,7 @@ export function extractCaseSeoParams(values: string) {
     const letter = part.includes("PJ")
       ? "PJ"
       : part.replace(/[0-9]/g, "").toUpperCase();
-    console.log({ letter });
+
     const PJ = part.includes("PJ") ? part.split("PJ")[0] : "N/A";
 
     switch (letter) {
