@@ -12,7 +12,7 @@ import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters
 import { SearchFilter } from "@/app/types/search";
 
 const tabs = [
-  /*  { id: null, label: "Projects" }, */
+   { id: "proj", label: "Projects" },
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
   { id: "B", label: "Builder Listings" },
@@ -71,8 +71,8 @@ const ListingSearchTabs = () => {
   }, [isDropdownOpen]);
 
   const handleTabsChange = (value: string | null) => {
-    console.log(value);
-    const updatedFilters =
+/*     console.log(value);
+ */    const updatedFilters =
       value === null
         ? {
             ...state,
