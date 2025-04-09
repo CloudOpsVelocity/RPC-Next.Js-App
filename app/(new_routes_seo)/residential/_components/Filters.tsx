@@ -75,12 +75,10 @@ export default function Filters({}: Props) {
             </select>
           </div> */}
               <BasicSelect />
-                <div className="order-1 sm:order-none">
                   <BasicMultiSelect />
-                </div>
              {   <BasicBudgetSelect/>}
-            <div className="flex items-end">
-            <button onClick={onSearch} className="w-full bg-primary hover:bg-primary/90 p-3 rounded-lg font-medium flex items-center justify-center gap-2">
+            <div className="flex items-center ">
+            <button onClick={onSearch} className="w-[70%] bg-primary hover:bg-primary/90 p-3  flex items-center justify-center gap-2  bg-btnPrimary text-white text-[14px] md:text-[16px] py-[4px] px-[8px] md:py-[6px] md:px-[12px] rounded-[4px] font-[600]  ">
               <FaSearch /> Search Properties
             </button>
           </div>
