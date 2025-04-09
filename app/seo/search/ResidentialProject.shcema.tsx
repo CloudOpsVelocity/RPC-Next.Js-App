@@ -487,6 +487,7 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
+
       <Script
         id="projSearchScript6"
         type="application/ld+json"
