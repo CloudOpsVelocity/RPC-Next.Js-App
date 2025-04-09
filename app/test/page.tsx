@@ -5,8 +5,8 @@ import React, { useState, useEffect } from "react";
 export default function Page() {
   const [inputValue, setInputValue] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
-  const [iframeWidth, setIframeWidth] = useState(800);
-  const [iframeHeight, setIframeHeight] = useState(500);
+  const [iframeWidth, setIframeWidth] = useState(1200);
+  const [iframeHeight, setIframeHeight] = useState(700);
   const BIN_ID = "67f630178960c979a58135b1";
   const API_KEY =
     "$2a$10$qeQSzTvJm5U01Pt7L5mOvu9yhC05Ms2MjXE8/NA09.mUdbHuH.Eca";

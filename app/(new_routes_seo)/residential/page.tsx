@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import ResidentialPage from "./_components/ResidentialDetailPage";
 import axios from "axios";
 import { redirect } from "next/navigation";
+import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 
 type Props = {};
 
@@ -15,11 +16,15 @@ export default async function page({}: Props) {
     );
   });
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=0`;
-  try {
-    const { data } = await axios.get(url);
-    return data ? <ResidentialPage data={data} /> : <LoadingSpinner />;
-  } catch (error) {
-    console.log(error);
-    return <div>Error</div>;
-  }
+
+  const { data } = await axios.get(url);
+  return (
+    <>
+      <ResidentialProjectSchama
+        pageUrl="/residential"
+        properties={data?.data}
+      />
+      {data ? <ResidentialPage data={data} /> : <LoadingSpinner />}
+    </>
+  );
 }

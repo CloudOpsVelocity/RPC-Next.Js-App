@@ -1,7 +1,7 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
-import Script from "next/script";
+
 export const generateAllSchemas = (
   property: any,
   properties: any[],
@@ -261,15 +261,13 @@ export const ResidentialProjectSchama = ({
   const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
   return (
     <>
-      <Script
-        id="projSearchScript1"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
-      <Script
-        id="projSearchScript2"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -305,8 +303,7 @@ export const ResidentialProjectSchama = ({
         }}
       />
 
-      <Script
-        id="projSearchScript3"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -332,8 +329,7 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
-      <Script
-        id="projSearchScript4"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -398,8 +394,7 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
-      <Script
-        id="projSearchScript5"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -488,8 +483,7 @@ export const ResidentialProjectSchama = ({
         }}
       />
 
-      <Script
-        id="projSearchScript6"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -511,8 +505,7 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
-      <Script
-        id="projSearchScript6"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -574,8 +567,7 @@ export const ResidentialProjectSchama = ({
         }}
       />
 
-      <Script
-        id="projSearchScript7"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
