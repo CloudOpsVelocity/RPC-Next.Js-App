@@ -55,6 +55,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       ...(data.ba && { ba: data.ba }),
     });
     setOpened(true);
+    window.history.pushState(null, "", window.location.href);  
   };
 
   const onClosePopup = () => {

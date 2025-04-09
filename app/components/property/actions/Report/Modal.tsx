@@ -83,7 +83,7 @@ export default function ReportModal({ issueData }: any) {
       setStatus("idle");
       setreportStatus([]);
       seterrorMsg(false);
-    }, 500000);
+    }, 5000);
   };
   return (
     <>
