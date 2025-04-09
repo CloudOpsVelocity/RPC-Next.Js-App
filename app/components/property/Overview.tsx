@@ -26,7 +26,7 @@ export default function PropertyOverView({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
-          <p className="text-[18px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-bold capitalize">
+          <p className="text-[18px] sm:text-[24px] xl:text-[28px] text-[#001F35] font-bold capitalize">
             <strong>
               <span className="lowercase">
                 {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft" : ""}
@@ -35,7 +35,7 @@ export default function PropertyOverView({
               {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName}
             </strong>
           </p>
-          <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
+          <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-bold leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${data.address}, ${data.ltName}, ${data.ctName}, ${data?.stateName}, ${data.pinCode}`}
           </p>
         </div>

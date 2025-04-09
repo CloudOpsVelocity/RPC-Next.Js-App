@@ -116,7 +116,7 @@ const Card = ({
 
         <div className="pl-0">
           <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-[18px] xl:text-2xl not-italic font-medium leading-[31px]">
-            <span className="capitalize">{type}</span> Listings{" "}
+            <strong><span className="capitalize">{type}</span> Listings{" "}</strong>
           </h2>
         </div>
         <div
