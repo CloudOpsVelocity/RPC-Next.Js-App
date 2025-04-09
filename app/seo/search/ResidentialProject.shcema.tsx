@@ -1,12 +1,14 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
+import { baseURL } from "@/app/utils/api/api";
 
 export const generateAllSchemas = (
   property: any,
   properties: any[],
   index: number
 ) => {
+  const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
   const [launchDate, possassionDate] = [
     convertToSchemaDate(property?.launchDate || "Fri Mar 27 00:00:00 IST 2026"),
     convertToSchemaDate(
@@ -493,7 +495,7 @@ export const ResidentialProjectSchama = ({
                 "@type": "ListItem",
                 position: 1,
                 item: {
-                  "@id": "https://www.getrightproperty.com",
+                  "@id": baseURL,
                   name: "Home",
                 },
               },
@@ -501,8 +503,7 @@ export const ResidentialProjectSchama = ({
                 "@type": "ListItem",
                 position: 2,
                 item: {
-                  "@id":
-                    "https://www.getrightproperty.com/residential-listings/for-rent",
+                  "@id": `${baseURL}/residential-listings/for-rent`,
                   name: "for-rent",
                 },
               },

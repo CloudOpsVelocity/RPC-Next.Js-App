@@ -11,7 +11,6 @@ import {
   LOGO_URL,
 } from "./constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
-import Script from "next/script";
 
 interface ProjectData extends MERGERPROJECT {
   url: string;
@@ -686,8 +685,7 @@ const generateSchema = (projectData: ProjectData) => {
 
 const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
   // <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
-  <Script
-    id="projDetailsScript1"
+  <script
     type="application/ld+json"
     dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
   />
