@@ -8,6 +8,7 @@ import {
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { notFound } from "next/navigation";
 import React from "react";
+import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 
 type Props = {
   params: { cg: string };
@@ -21,12 +22,13 @@ export default async function Page({ params: { cg } }: Props) {
   const severData = await getSearchData(`cg=${slugValues.CG}`);
   const pageUrl = `/${pathname}`;
   return (
-    <NewSearchPage
+    <NewListingSearchpage
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,
-        listedBy: "All",
+        // listedBy: "All",
       }}
+      showProjectTab
       pageUrl={pageUrl}
     />
   );
