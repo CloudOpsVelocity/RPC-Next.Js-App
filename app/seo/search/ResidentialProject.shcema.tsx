@@ -492,6 +492,29 @@ export const ResidentialProjectSchama = ({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://www.example.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Residential",
+                item: "https://www.example.com/residential",
+              },
+            ],
+          }),
+        }}
+      />
+      <Script
+        id="projSearchScript6"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             name: `Available Properties in Bangalore - ${pagetitle}`,
