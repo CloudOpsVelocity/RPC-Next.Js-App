@@ -30,11 +30,13 @@ export default function ListingRentAvail({
       className="w-[95%] sm:w-[90%] mb-[3%] xl:mb-[0%]  sm:pt-[50px] m-auto sm:mb-[0%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
       id="listings-available"
     >
-      <h2 className="text-[20px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] sm:mb-[6px] xl:mb-[12px]">
-        Listings Available in{" "}
-        <span className="text-[#148B16] font-[700]  text-[20px] sm:text-[22px] xl:text-[32px]">
-          {projName}
-        </span>{" "}
+      <h2 className="text-[20px] sm:text-[22px] xl:text-[28px] font-bold mb-[12px] sm:mb-[6px] xl:mb-[12px]">
+        <strong>
+          <span className="text-[#001F35]">Listings Available in{" "}</span>
+          <span className="text-[#148B16]">
+            {projName}
+          </span>{" "}
+        </strong>
       </h2>
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />

@@ -134,7 +134,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
 
                     return (
                       <div key={subCategory}>
-                        <h3 className="text-gray-700 text-lg font-semibold mb-2">{subCategory}</h3>
+                        <p className="text-gray-700 text-lg font-semibold mb-2">{subCategory}</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {amenitiesInSubCategory.map((amenity: Amenity) => (
                             <div

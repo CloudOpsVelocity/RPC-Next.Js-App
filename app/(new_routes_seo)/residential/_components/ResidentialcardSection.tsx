@@ -114,12 +114,13 @@ export default function ResidentialCardSection({ data }: Props) {
                         className="object-cover"
                         priority
                       />
-                      <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
+                      <div className="absolute top-4 left-4 bg-primary px-3 py-1 text-sm flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
                         {property.projstatus || "Status Unknown"}
                       </div>
                     </div>
                     <div className="p-6">
                       <Link
+                        prefetch={false}
                         href={`/residential/projects/${
                           property.city?.toLowerCase() || "unknown"
                         }/${
@@ -159,6 +160,7 @@ export default function ResidentialCardSection({ data }: Props) {
                       </div>
                       <div className="flex gap-4">
                         <Link
+                          prefetch={false}
                           href={`/residential/projects/${
                             property.city?.toLowerCase() || "unknown"
                           }/${

@@ -14,9 +14,9 @@ export default function Feature({
       className="w-[90%] mt-[35px] scroll-mt-[180px] mb-[5%] sm:mb-0 sm:mt-0 sm:pt-screen-spacing"
       id="highlights"
     >
-      <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
+      <h2 className="sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
         Highlights Of{" "}
-        <span className="text-[#148B16]  font-[700]">{projName}</span>
+        <span className="text-[#148B16] ">{projName}</span>
       </h2>
       <SubHeading
         text="Key features: Elegant design, spacious layout, stunning views, modern amenities"
