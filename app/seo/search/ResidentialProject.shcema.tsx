@@ -482,24 +482,29 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
+            "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
               {
                 "@type": "ListItem",
                 position: 1,
-                name: "Home",
-                item: "/",
+                item: {
+                  "@id": "https://www.getrightproperty.com",
+                  name: "Home",
+                },
               },
               {
                 "@type": "ListItem",
                 position: 2,
-                name: "Residential",
-                item: "/residential",
+                item: {
+                  "@id":
+                    "https://www.getrightproperty.com/residential-listings/for-rent",
+                  name: "for-rent",
+                },
               },
             ],
           }),

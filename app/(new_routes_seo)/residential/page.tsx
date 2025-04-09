@@ -28,3 +28,5 @@ export default async function page({}: Props) {
     </>
   );
 }
+
+// export const dynamic = "force-dynamic";
