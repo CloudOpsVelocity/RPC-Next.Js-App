@@ -37,6 +37,8 @@ export default function Header({}: Props) {
         <Link
           prefetch={false}
           href={"/"}
+          title="Home"
+          aria-label="Home"
           className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
         >
           <GrpLogoSvg className="h-[40px]   sm:h-[50px] w-[160px] max-w-[160px]" />

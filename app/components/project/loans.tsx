@@ -35,9 +35,11 @@ export default function ProjectLoans({
         />
       ) : (
         <>
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[12px] capitalize">
-            Bank Approvals For{" "}
-            <span className="text-[#148B16] font-[700] ">{name}</span>
+          <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[10px] xl:mb-[12px] capitalize">
+            <strong>
+              <span className="text-[#001F35]">Bank Approvals For{" "}</span>
+              <span className="text-[#148B16]">{name}</span>
+            </strong>
           </h2>
           <SubHeading
             text=" Explore bank loan approvals options for your project with multiple

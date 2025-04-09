@@ -133,9 +133,11 @@ function BrocherContent({
   if (ram && ram <= 4) {
     return (
       <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
-        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
-          <span>Explore the Comprehensive Brochure of </span>
-          <span className="text-[#148B16] font-bold">{projName}</span>
+        <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words pl-3 pt-2">
+          <strong>
+            <span className="text-[#001F35]">Explore the Comprehensive Brochure of </span>
+            <span className="text-[#148B16]">{projName}</span>
+          </strong>
         </h2>
         {!showMap ? (
         <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
@@ -286,7 +288,7 @@ function BrocherContent({
             >
               <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
             </button> */}
-        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
+        <h2 className="sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
           <span>Explore the Comprehensive Brochures of </span>
           <span className="text-[#148B16] font-bold">{projName} </span>
         </h2>
