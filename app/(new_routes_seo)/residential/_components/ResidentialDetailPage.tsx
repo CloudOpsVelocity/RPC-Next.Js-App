@@ -41,7 +41,7 @@ const testimonials = [
 export default function ResidentialPage({ data }: { data: any }) {
   return (
     <div className="min-h-screen bg-background">
-{/*       <nav aria-label="residential Breadcrumbs" className="w-full  px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] mt-[70px] xl:py-4 bg-gray-100 rounded-md          shadow-sm max-w-[100%] overflow-x-auto ">   
+      <nav aria-label="residential Breadcrumbs" className="w-full  px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] mt-[70px] xl:py-4 bg-gray-100 rounded-md          shadow-sm max-w-[100%] overflow-x-auto ">   
         <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         <li>
           <Link
@@ -61,7 +61,7 @@ export default function ResidentialPage({ data }: { data: any }) {
         residential
         </li>
 
-        </ol></nav> */}
+        </ol></nav>
      
    {/*    <Banner heroSlides={data?.featured} data={data} /> */}
       <Filters />

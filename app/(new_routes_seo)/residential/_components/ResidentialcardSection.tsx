@@ -61,41 +61,6 @@ export default function ResidentialCardSection({ data }: Props) {
     );
   });
 
-  const generateJSONLD = (property: any) => {
-    const minPrice = property.minPrice ? parseInt(property.minPrice) : 0;
-    const maxPrice = property.maxPrice ? parseInt(property.maxPrice) : 0;
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "RealEstateListing",
-      "name": property.projName,
-      "description": `Find your dream property at ${property.projName} located in ${property.locality}, ${property.city}.`,
-      "url": `/residential/projects/${property.city.toLowerCase()}/${property.locality.toLowerCase()}/${property.projName.toLowerCase().replace(/ /g, '-')}-${property.projIdEnc}`,
-      "image": property.coverUrl.split(',')[0] || '/api/placeholder/60/60',
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": property.locality,
-        "addressLocality": property.locality,
-        "addressRegion": property.city,
-        "addressCountry": "IN"
-      },
-      "priceCurrency": "INR",
-      "price": minPrice.toString(),
-      "propertyType":  Array.isArray(property.propType) && property.propType.length > 0
-      ? property.propType.join(', ')
-      : property.propType,
-     /*  "floorSize": {
-        "@type": "QuantitativeValue",
-        "value": "1200", // Example: Replace with actual floor size if available
-        "unitCode": "SQFT"
-      },
-      "numberOfRooms": 3,  */// Example: Replace with the actual number of rooms if available
-      "reraStatus": property.rerastatus,
-      "availability": "InStock",
-      "datePosted": formatDate(property.possassionDate)
-    };
-  };
-
   return (
     <section className="py-20 container mx-auto px-4">
       {!properties || properties.length < 1 ? (
@@ -111,8 +76,7 @@ export default function ResidentialCardSection({ data }: Props) {
                 return null; // Handle case where property is undefined
               }
               
-              const jsonLD = generateJSONLD(property);
-              const jsonLDScript = <script type="application/ld+json">{JSON.stringify(jsonLD)}</script>;
+           
               const minPrice = property.minPrice ? parseInt(property.minPrice) : 0;
               const maxPrice = property.maxPrice ? parseInt(property.maxPrice) : 0;
               const possessionDate = property.possassionDate
@@ -130,7 +94,7 @@ export default function ResidentialCardSection({ data }: Props) {
                   key={property.projIdEnc}
                   className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow infinityItem"
                 >
-                                    {jsonLDScript}
+                                
 
                   <div className="relative h-64">
                     <Image
