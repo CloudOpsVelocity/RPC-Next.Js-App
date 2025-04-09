@@ -2,7 +2,6 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
 import Script from "next/script";
-
 export const generateAllSchemas = (
   property: any,
   properties: any[],
@@ -51,7 +50,7 @@ export const generateAllSchemas = (
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         } ${property.city ? `, ${property.city}` : ""}`.trim(),
-        description: property.projectAbout || "",
+        description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         url: PAGE_URL,
         datePosted: launchDate || new Date().toISOString(),
         postalCode: property.pincode || "",
@@ -74,7 +73,7 @@ export const generateAllSchemas = (
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         }`.trim(),
-        description: property.projectAbout.slice(0, 4800) || "",
+        description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
@@ -113,7 +112,7 @@ export const generateAllSchemas = (
         "@type": "WebPage",
         url: PAGE_URL,
         name: property.projName || "",
-        description: property.projectAbout || "",
+        description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         datePublished: launchDate || new Date().toISOString(),
         image:
           property.coverUrl?.split(",")[0] ||
@@ -203,7 +202,7 @@ export const generateAllSchemas = (
           "@type": "EntryPoint",
           urlTemplate: PAGE_URL,
         },
-        name: `Buy ${property.bhkNames.join(",") || "Property"} In ${
+        name: `Buy ${property?.bhkNames?.join(",") ?? "Property"} In ${
           property.projName || ""
         } ${property.locality ? `in ${property.locality}` : ""} ${
           property.city ? `, ${property.city}` : ""
@@ -220,7 +219,7 @@ export const generateAllSchemas = (
           "@type": "EntryPoint",
           urlTemplate: PAGE_URL,
         },
-        name: `Rent ${property.bhkNames.join(",") || "Property"} In ${
+        name: `Rent ${property?.bhkNames?.join(",") || "Property"} In ${
           property.projName || ""
         } ${property.locality ? `in ${property.locality}` : ""} ${
           property.city ? `, ${property.city}` : ""
@@ -238,7 +237,7 @@ export const generateAllSchemas = (
   return schemas;
 };
 
-export const ProjectSeachSchema = ({
+export const ResidentialProjectSchama = ({
   properties,
   pageUrl,
 }: {
@@ -259,6 +258,7 @@ export const ProjectSeachSchema = ({
   if (!results.length) return null;
   const pagetitle = cleanHeading(pageUrl);
   const address = pagetitle.split("In")[1];
+  const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
   return (
     <>
       <Script
@@ -276,7 +276,7 @@ export const ProjectSeachSchema = ({
             "@context": "https://schema.org",
             "@type": "ItemList",
             name: `Property Listings - ${pagetitle}`,
-            description: `Browse through our curated list of properties in ${pagetitle}`,
+            description: description,
             numberOfItems: properties.length,
             itemListElement: properties.map((property, index) => ({
               "@type": "ListItem",
@@ -284,7 +284,7 @@ export const ProjectSeachSchema = ({
               item: {
                 "@type": "Apartment",
                 name: property.projName,
-                description: property.projectAbout || "",
+                description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
                 image:
                   property.coverUrl?.split(",")[0] ||
                   "https://getrightproperty.com/default-property.jpg",
@@ -304,6 +304,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
+
       <Script
         id="projSearchScript3"
         type="application/ld+json"

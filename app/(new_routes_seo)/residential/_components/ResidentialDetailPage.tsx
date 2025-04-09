@@ -14,6 +14,8 @@ import Filters from "./Filters";
 
 import { FaChevronRight } from "react-icons/fa6";
 import ResidentialCardSection from "./ResidentialcardSection";
+
+import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 const testimonials = [
   {
     name: "Priya Sharma",
@@ -41,6 +43,10 @@ const testimonials = [
 export default function ResidentialPage({ data }: { data: any }) {
   return (
     <div className="min-h-screen bg-background">
+      <ResidentialProjectSchama
+        pageUrl="/residential"
+        properties={data?.data}
+      />
       <nav
         aria-label="residential Breadcrumbs"
         className="w-full  px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] mt-[70px] xl:py-4 bg-gray-100 rounded-md          shadow-sm max-w-[100%] overflow-x-auto "

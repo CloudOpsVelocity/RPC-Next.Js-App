@@ -6,24 +6,20 @@ import { redirect } from "next/navigation";
 type Props = {};
 
 export default async function page({}: Props) {
-  // return redirect("/");
-
-    const LoadingSpinner = memo(function LoadingSpinner() {
-      return (
-        <div className="flex items-center gap-2">
-          <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
-          <span className="font-bold">Loading  results...</span>
-        </div>
-      );
-    });
+  const LoadingSpinner = memo(function LoadingSpinner() {
+    return (
+      <div className="flex items-center gap-2">
+        <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
+        <span className="font-bold">Loading results...</span>
+      </div>
+    );
+  });
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=0`;
-//let url =`https://www.getrightproperty.com/srp/margdataurl/searchproj?page=0`
-try {
-  const { data } = await axios.get(url);
-  return data ? <ResidentialPage data={data} /> : <LoadingSpinner />;
-} catch (error) {
-  console.log(error);
-  return <div>Error</div>;
-}
-
+  try {
+    const { data } = await axios.get(url);
+    return data ? <ResidentialPage data={data} /> : <LoadingSpinner />;
+  } catch (error) {
+    console.log(error);
+    return <div>Error</div>;
+  }
 }
