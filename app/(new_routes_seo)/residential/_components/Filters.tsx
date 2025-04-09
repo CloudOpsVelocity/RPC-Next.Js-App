@@ -79,7 +79,7 @@ export default function Filters({}: Props) {
                   <BasicMultiSelect />
                 </div>
              {   <BasicBudgetSelect/>}
-          <div className="flex items-end">
+            <div className="flex items-end">
             <button onClick={onSearch} className="w-full bg-primary hover:bg-primary/90 p-3 rounded-lg font-medium flex items-center justify-center gap-2">
               <FaSearch /> Search Properties
             </button>

@@ -76,6 +76,7 @@ export default function ResidentialCardSection({ data }: Props) {
                 return null; // Handle case where property is undefined
               }
               
+           
               const minPrice = property.minPrice ? parseInt(property.minPrice) : 0;
               const maxPrice = property.maxPrice ? parseInt(property.maxPrice) : 0;
               const possessionDate = property.possassionDate
@@ -93,6 +94,8 @@ export default function ResidentialCardSection({ data }: Props) {
                   key={property.projIdEnc}
                   className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow infinityItem"
                 >
+                                
+
                   <div className="relative h-64">
                     <Image
                       src={property.coverUrl ? property.coverUrl.split(',')[0] : '/api/placeholder/60/60'}
