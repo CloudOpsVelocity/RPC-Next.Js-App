@@ -101,7 +101,6 @@ export default function OverviewBanner({
           id="download-brochure"
         >
           {/* <DownloadBroucher className="hidden sm:flex" url={brocherUrl} /> */}
-          <span className="hidden">WhatsApp</span>
           <WhatsAppButton
             className="cursor-pointer mt-2 sm:mt-4 "
             name={name}
