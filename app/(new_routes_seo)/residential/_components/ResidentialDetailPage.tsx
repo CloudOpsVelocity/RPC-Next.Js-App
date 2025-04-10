@@ -14,6 +14,7 @@ import Filters from "./Filters";
 
 import { FaChevronRight } from "react-icons/fa6";
 import ResidentialCardSection from "./ResidentialcardSection";
+import RequestCallBackModal from "@/app/components/molecules/popups/req";
 
 const testimonials = [
   {
@@ -187,6 +188,8 @@ export default function ResidentialPage({ data }: { data: any }) {
           </div>
         </div>
       </section>
+   
     </div>
+    
   );
 }
