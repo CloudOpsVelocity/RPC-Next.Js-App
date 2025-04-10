@@ -22,16 +22,15 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
     return index !== -1 ? str.substring(0, index + word.length) : str;
   }
 
-  // let trimmedUrl = "";
   let newParams: string[] = [];
-
   if (pageUrl === "/search") {
     newParams = ["Project Search"];
   } else if (pageUrl === "/search/listing") {
     newParams = ["Listing Search"];
   } else if (pageUrl.includes("/residential/projects/")) {
     // trimmedUrl = trimFromWord(pageUrl, "/residential/projects/");
-    newParams = pageUrl.split("/").filter(Boolean);
+
+    newParams = pageUrl.split("/");
   } else if (pageUrl.includes("/residential-listings/")) {
     // trimmedUrl = trimFromWord(pageUrl, "/residential-listings/");
     newParams = pageUrl.split("/").filter(Boolean);
@@ -41,17 +40,20 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   } else if (pageUrl === "/residential-listings") {
     newParams = ["Residential Listings"];
   }
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: newParams.map((item, index) => {
-      let url = trimStringUrl(pageUrl, item);
       return {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@id": url,
-          name: item.replaceAll("-", " ") || "Home",
+          "@id":
+            index === 0
+              ? process.env.NEXT_PUBLIC_URL
+              : `${process.env.NEXT_PUBLIC_URL}${trimStringUrl(pageUrl, item)}`,
+          name: item || "Home",
         },
       };
     }),
@@ -62,6 +64,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
       aria-label="Project Search Breadcrumbs"
       className="w-full px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] xl:py-4 bg-gray-100 rounded-md shadow-sm max-w-[100%] overflow-x-auto "
     >
+      {JSON.stringify(newParams)}
       <script
         id="ListingBreadCrumbsScript3"
         type="application/ld+json"
