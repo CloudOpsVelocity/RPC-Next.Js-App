@@ -67,7 +67,7 @@ export default function GalleryBlock({
             id="videos"
           >
             <strong>
-            <span className="text-[#001F35]">Gallery of{" "}</span>
+              <span className="text-[#001F35]">Gallery of{" "}</span>
               <span
                 className="text-[#148B16] scroll-mt-[260px]"
                 id="photos"

@@ -325,7 +325,7 @@ Props) {
           id="floorPlansdiv"
         >
           <strong>
-          <span className="text-[#001F35]">Floor Plans For{" "}</span>
+            <span className="text-[#001F35]">Floor Plans For{" "}</span>
             <span className="text-[#148B16]">{projName}</span>{" "}
           </strong>
         </h2>
