@@ -79,6 +79,7 @@ export default function Banner({
             className=" sm:h-[240px] sm:w-[240px] xl:h-[320px] xl:w-[320px] absolute sm:-top-[24px] xl:-top-[87px] right-0"
             width={600}
             height={300}
+            title="Project Rating Illustration"
           />
         </div>
         <AddRating

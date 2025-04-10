@@ -238,6 +238,7 @@ export default function PropertyTypeDetailsCrad({
             alt="Preview"
             className="w-[88%] h-[88%] object-cover rounded-[14px]"
             unoptimized
+            title="Preview"
           />
         </div>
         <div className="down mb-3">

@@ -146,7 +146,7 @@ function BrocherContent({
               <source media="(max-width: 460px)" srcSet={broucherImage?.split(",")[0]} />
               <source media="(max-width: 768px)" srcSet={broucherImage?.split(",")[1]} />
               <source media="(min-width: 1200px)" srcSet={broucherImage?.split(",")[2]} />
-              <Image alt="project image" src={broucherImage?.split(",")[3]} fill unoptimized priority />
+              <Image alt="project image" title="project image" src={broucherImage?.split(",")[3]} fill unoptimized priority />
             </picture>
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -288,9 +288,11 @@ function BrocherContent({
             >
               <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
             </button> */}
-        <h2 className="sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
-          <span>Explore the Comprehensive Brochures of </span>
-          <span className="text-[#148B16] font-bold">{projName} </span>
+        <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words ">
+          <strong>
+            <span className="text-[#001F35]">Explore the Comprehensive Brochures of </span>
+            <span className="text-[#148B16]">{projName} </span>
+          </strong>
         </h2>
         <div className="mb-1 flex-wrap pl-3">
           <div
@@ -373,6 +375,7 @@ function BrocherContent({
                 />
                 <Image
                   alt="project image"
+                  title="project image"
                   src={broucherImage?.split(",")[3]}
                   fill
                   unoptimized
@@ -549,6 +552,7 @@ function BrocherContent({
               />
               <Image
                 alt="project image"
+                title="project image"
                 src={broucherImage?.split(",")[3]}
                 fill
                 unoptimized

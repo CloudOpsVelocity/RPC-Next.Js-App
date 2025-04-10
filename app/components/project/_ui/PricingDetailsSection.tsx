@@ -34,9 +34,11 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
       className="sm:p-6 bg-white rounded-lg shadow-lg w-[90%] mx-auto mt-2 sm:mt-[100px] scroll-mt-[200px]"
       id="price-details"
     >
-      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold text-gray-800 mb-4">
-        Pricing Details of{" "}
-        <span className="text-greenPrimary font-extrabold">{projName}</span>
+      <h2 className="text-h2 sm:text-[22px] xl:text-[28px] font-bold text-gray-800 mb-4">
+        <strong>
+          <span className="text-[#001F35]">Pricing Details of{" "}</span>
+          <span className="text-greenPrimary">{projName}</span>
+        </strong>
       </h2>
       {phaseList?.length > 1 && (
         <>

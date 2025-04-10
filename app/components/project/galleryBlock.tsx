@@ -118,6 +118,9 @@ export default function GalleryBlock({
                     <Image
                       src={selectedMedia.split(",")[2]}
                       alt="Preview"
+                      title={type === "prop"
+                                ? "Property Gallery"
+                                : "Project Gallery"}
                       className="cursor-pointer object-contain"
                       onClick={() => {
                         dispatch({
@@ -221,7 +224,7 @@ export default function GalleryBlock({
                     alt={imageName || ""}
                     title={imageName || ""}
                     className={clsx(
-                      "!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300",
+                      "!rounded-[5px] shadow-md cursor-pointer border border-gray-300",
                       selectedMedia?.split("?")[0] === img.split("?")[0] &&
                         "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                     )}
@@ -264,6 +267,7 @@ export default function GalleryBlock({
                       src={getYouTubeThumbnailUrl(img) ?? ""}
                       className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover"
                       alt="thumbnail"
+                      title="thumbnail"
                       onClick={() => handleMediaClick(img, ind)}
                     />
                   ) : (
