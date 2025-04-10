@@ -159,7 +159,8 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
                     ? cardData.coverUrl.split(",")[1]
                     : cardData.projMedia.coverImageUrl.split(",")[1]
                 }
-                alt="Sobha Dream Acres"
+                alt={"card" + cardData?.propTypeName}
+                title={"card" + cardData?.propTypeName}
                 className="w-full"
                 // width={300}
                 // height={212}
@@ -174,7 +175,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
             (cardData.rerastatus === "Recieved" ||
               cardData.rerastatus === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100}   />
+                <Image src={"/r.svg"} alt="rera" title="rera" width={100} height={100}   />
               </p>
             )}
 
@@ -293,7 +294,7 @@ const ProjectCarousel = ({
   ct,
   id,
   builderLinkActive,
-  builderName,
+  // builderName,
   url,
 }: Props) => {
   return (
@@ -303,10 +304,12 @@ const ProjectCarousel = ({
         {...(id && { id })}
       >
         <div className=" px-3 sm:mx-auto sm:px-0">
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[12px] capitalize">
-            {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
-            {title}{" "}
-            <span className="text-[#148B16] font-[700]  ">{projName}</span>
+          <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[10px] xl:mb-[12px] capitalize">
+            <strong>
+              {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
+              <span className="text-[#001F35]">{title}{" "}</span>
+              <span className="text-[#148B16]">{projName}</span>
+            </strong>
           </h2>
           <p className="text-[13px]  sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] sm:mt-4">
             {content}

@@ -28,7 +28,13 @@ const SelectedFilters = dynamic(
   () => import("../../components/filters/SelectedFilters")
 );
 
-const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
+const ListingHeaderFilters = ({
+  isListing,
+  showProjectTab,
+}: {
+  isListing?: boolean;
+  showProjectTab: boolean;
+}) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
@@ -41,7 +47,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
-  
+
   const {
     data: searchData,
     isLoading,
@@ -273,25 +279,21 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       return;
     }
   };
-  
 
   useEffect(() => {
     if (isDrawerOpen && isMobile) {
-      // Push a new state to the history stack when the modal is opened
-      // window.history.pushState("projeSearchModalModal", "");
       window.history.pushState(null, "", window.location.href);
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
+        document.body.style.overflow = "scroll";
         setIsDrawerOpen(false);
         document.body.style.overflow = "unset";
       };
 
       window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState); 
+      return () => window.removeEventListener("popstate", handlePopState);
     }
-}, [isDrawerOpen]);
-
+  }, [isDrawerOpen]);
 
   return (
     <>
@@ -453,7 +455,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
           <PageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            <ListingSearchTabs />
+            <ListingSearchTabs showProjectTab={showProjectTab} />
             <SelectedFilters />
           </div>
 

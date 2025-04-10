@@ -31,8 +31,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
     >
       <div>
         <div className=" gap-[16px] sm:gap-[26px] justify-start  w-[100%] items-center">
-          <h2 className="text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4 ">
-            About Builder
+          <h2 className="text-[#242424]  sm:text-[24px] xl:text-[28px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4 ">
+          <span><strong>About Builder</strong></span>
           </h2>
 
           <div className="inline-flex justify-center items-center ">
@@ -45,12 +45,13 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
                 }
                 width={130}
                 height={130}
-                alt="logo"
+                alt="Builder logo"
+                title="Builder logo"
                 className="object-contain max-h-[93px] w-[93px] sm:max-h-[100px] sm:w-[133px] xl:max-h-[150px] xl:w-[158px] relative"
                 unoptimized
               />
             </div>
-            <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
+            <div className=" text-[#148B16]  sm:text-[20px] xl:text-[26px] font-[700] ml-3">
               <Link
                 prefetch={false}
                 href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${urlBuilder}`}

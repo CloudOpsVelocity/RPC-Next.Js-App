@@ -17,6 +17,7 @@ import {
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { notFound } from "next/navigation";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
+import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 
 type Props = {
   params: {
@@ -33,12 +34,13 @@ export default async function Page({ params: { cg, city } }: Props) {
   const severData = await getSearchData(`cg=${slugValues.CG}`);
   const pageUrl = `/${pathname}`;
   return (
-    <NewSearchPage
+    <NewListingSearchpage
       serverData={severData}
       frontendFilters={{
         cg: slugValues.CG,
-        listedBy: "All",
+        // listedBy: "All",
       }}
+      showProjectTab
       pageUrl={pageUrl}
     />
   );

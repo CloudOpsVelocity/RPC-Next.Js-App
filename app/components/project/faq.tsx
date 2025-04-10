@@ -45,10 +45,12 @@ export default function FaqWithBg({
       <div className="flex justify-center items-center text-center !w-[100%] !md:w-[90%] relative">
         {data?.length > 0 && (
           <>
-            <div className="hidden sm:block absolute   left-[2%] sm:left-[16%]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] " />
-            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
-              Frequently Asked Questions of{" "}
-              <span className="text-[#148B16] font-[700]  ">{projName}</span>{" "}
+            <div className="hidden sm:block absolute left-[2%] sm:left-[16%] sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] " />
+            <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
+              <strong>
+                <span className="text-[#001F35]">Frequently Asked Questions of{" "}</span>
+                <span className="text-[#148B16]">{projName}</span>{" "}
+              </strong>
             </h2>
           </>
         )}
@@ -180,7 +182,7 @@ const AddQnaForm = ({
             fill="#18B8F2"
           />
         </svg>{" "}
-        <span className="text-[#242424] text-h2 sm:text-[22px] xl:text-[32px] not-italic font-bold leading-[normal]">
+        <span className="text-[#242424] sm:text-[22px] xl:text-[32px] not-italic font-bold leading-[normal]">
           Have any Question? Ask Here 👇
         </span>
       </h2>

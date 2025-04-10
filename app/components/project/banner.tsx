@@ -48,11 +48,13 @@ export default function Banner({
       <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[95%] sm:w-[95%] xl:w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
-            Project Rating For{" "}
-            <span className="text-[#148B16] sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
-              {projName}
-            </span>
+          <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
+            <strong>
+              <span className="text-[#001F35]">Project Rating For{" "}</span>
+              <span className="text-[#148B16] sm:text-[24px] xl:text-[28px] not-italic leading-[normal] tracking-[1.28px]">
+                {projName}
+              </span>
+            </strong>
           </h2>
           <p className="text-black text-[13px] sm:text-[20px] xl:text-xl sm:px-1 not-italic font-medium leading-[normal] tracking-[0.96px] mb-4 sm:mb-4 xl:mb-8">
             Your headline should show readers how your review can help them
@@ -77,6 +79,7 @@ export default function Banner({
             className=" sm:h-[240px] sm:w-[240px] xl:h-[320px] xl:w-[320px] absolute sm:-top-[24px] xl:-top-[87px] right-0"
             width={600}
             height={300}
+            title="Project Rating Illustration"
           />
         </div>
         <AddRating

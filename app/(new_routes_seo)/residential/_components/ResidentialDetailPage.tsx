@@ -11,6 +11,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Banner from "./Banner";
 import Filters from "./Filters";
+
+import { FaChevronRight } from "react-icons/fa6";
+import ResidentialCardSection from "./ResidentialcardSection";
+
 const testimonials = [
   {
     name: "Priya Sharma",
@@ -38,128 +42,34 @@ const testimonials = [
 export default function ResidentialPage({ data }: { data: any }) {
   return (
     <div className="min-h-screen bg-background">
-      <Banner heroSlides={data?.featured} data={data} />
+      <nav
+        aria-label="residential Breadcrumbs"
+        className="w-full  px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] mt-[70px] xl:py-4 bg-gray-100 rounded-md          shadow-sm max-w-[100%] overflow-x-auto "
+      >
+        <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
+          <li>
+            <Link
+              rel="noopener noreferrer"
+              href="/"
+              className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
+            >
+              <FaHome className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+              <span className="sr-only">Home</span>
+            </Link>
+          </li>
+          <FaChevronRight
+            className="h-4 w-4 flex-shrink-0 text-gray-400"
+            aria-hidden="true"
+          />
+          <li className="ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize ">
+            residential
+          </li>
+        </ol>
+      </nav>
+
+      {/*    <Banner heroSlides={data?.featured} data={data} /> */}
       <Filters />
-      <section className="py-20 container mx-auto px-4">
-        {!data ? (
-          <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
-          </div>
-        ) : (
-          data &&
-          Object.entries(data).map(([category, properties]: any) => {
-            if (!Array.isArray(properties) || properties.length === 0) {
-              return null; // Handle case where properties is undefined or empty
-            }
-            return (
-              <div key={category} className="mb-16">
-                <h2 className="text-3xl font-bold mb-8 capitalize">
-                  {category}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {properties.map((property: any) => {
-                    if (!property) {
-                      return null; // Handle case where property is undefined
-                    }
-                    const minPrice = property.minPrice
-                      ? parseInt(property.minPrice)
-                      : 0;
-                    const maxPrice = property.maxPrice
-                      ? parseInt(property.maxPrice)
-                      : 0;
-                    const possessionDate = property.possassionDate
-                      ? new Date(property.possassionDate).getFullYear()
-                      : "N/A";
-                    const propertyType =
-                      Array.isArray(property.propTypes) &&
-                      property.propTypes.length > 0
-                        ? property.propTypes.join(", ")
-                        : "N/A";
-                    const reraStatus = property.rerastatus || "N/A";
-
-                    return (
-                      <div
-                        key={property.projIdEnc}
-                        className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-                      >
-                        <div className="relative h-64">
-                          <Image
-                            src={
-                              property.coverUrl
-                                ? property.coverUrl.split(",")[0]
-                                : "/api/placeholder/60/60"
-                            }
-                            alt={property.projName || "Property Image"}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
-                            {property.projstatus || "Status Unknown"}
-                          </div>
-                        </div>
-                        <div className="p-6">
-                          <h3 className="text-xl font-bold mb-2">
-                            {property.projName || "Unnamed Property"}
-                          </h3>
-                          <p className="text-muted-foreground flex items-center gap-2 mb-4">
-                            <FaMapMarkerAlt />{" "}
-                            {property.locality || "Unknown Locality"},{" "}
-                            {property.city || "Unknown City"}
-                          </p>
-                          <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-sm">
-                              <div className="font-semibold">Price Range</div>
-                              <div>
-                                ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
-                                {(maxPrice / 10000000).toFixed(2)} Cr
-                              </div>
-                            </div>
-                            <div className="text-sm">
-                              <div className="font-semibold">Property Type</div>
-                              <div>{propertyType}</div>
-                            </div>
-                            <div className="text-sm">
-                              <div className="font-semibold">Possession</div>
-                              <div>{possessionDate}</div>
-                            </div>
-                            <div className="text-sm">
-                              <div className="font-semibold">RERA Status</div>
-                              <div>{reraStatus}</div>
-                            </div>
-                          </div>
-                          <div className="flex gap-4">
-                            <Link
-                              href={`/residential/projects/${
-                                property.city?.toLowerCase() || "unknown"
-                              }/${
-                                property.locality?.toLowerCase() || "unknown"
-                              }/${property.projName
-                                ?.toLowerCase()
-                                .replace(/ /g, "-")}-${property.projIdEnc}`}
-                              className="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-center text-sm font-medium transition-colors"
-                            >
-                              View Details
-                            </Link>
-                            <Link
-                              rel="noopener noreferrer"
-                              prefetch={false}
-                              href="tel:+91-8884440963"
-                              className="flex-1 border border-primary text-primary hover:bg-primary/10 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                            >
-                              Enquire Now
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })
-        )}
-      </section>
-
+      <ResidentialCardSection data={data} />
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-16">
@@ -218,7 +128,6 @@ export default function ResidentialPage({ data }: { data: any }) {
           </div>
         </div>
       </section>
-
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-16">
