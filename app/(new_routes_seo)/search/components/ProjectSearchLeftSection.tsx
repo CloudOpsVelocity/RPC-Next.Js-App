@@ -86,17 +86,6 @@ function LeftSection({
       ? data?.pages.flat()
       : serverData || data?.pages?.flat() || [];
 
-  // const rowVirtualizer = useVirtualizer({
-  //   count: allItems?.length || 0,
-  //   getScrollElement: () => containerRef.current,
-  //   estimateSize: () => 300,
-  //   overscan: 5,
-  //   enabled: true,
-  //   measureElement: (element) => {
-  //     return element?.getBoundingClientRect().height || 300;
-  //   },
-  // });
-
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
   const setIsMapLoaded = useSetAtom(searchPageMapToggle);
@@ -217,57 +206,52 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       // ref={containerRef}
     >
-     
-        {isLoading || !allItems ? (
-          <LoadingBlock />
-        ) : allItems?.length > 0 ? (
-          <ServerDataSection
-            data={allItems}
-            refetch={refetch}
-            mutate={mutate}
-            state={state}
-          />
-        ) : (
-          // <ServerDataSection
-          //   data={allItems}
-          //   refetch={refetch}
-          //   mutate={mutate}
-          //   state={state}
-          // />
-          // allItems.map((eachOne: any, index: number) => {
-          //   return (
-          //     <ProjectCard
-          //       key={eachOne.projIdEnc + eachOne.propType}
-          //       refetch={refetch}
-          //       data={{ ...eachOne, type: state.listedBy ?? "proj" }}
-          //       index={index}
-          //       mutate={mutate}
-          //     />
-          //   );
-          // })
-          // <div
-          //   style={{
-          //     height: `${rowVirtualizer.getTotalSize()}px`,
-          //     width: "100%",
-          //     position: "relative",
-          //   }}
-          // >
-          //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-          // </div>
-          <EmptyState />
-        )}
+      {isLoading || !allItems ? (
+        <LoadingBlock />
+      ) : allItems?.length > 0 ? (
+        <ServerDataSection
+          data={allItems}
+          refetch={refetch}
+          mutate={mutate}
+          state={state}
+        />
+      ) : (
+        // <ServerDataSection
+        //   data={allItems}
+        //   refetch={refetch}
+        //   mutate={mutate}
+        //   state={state}
+        // />
+        // allItems.map((eachOne: any, index: number) => {
+        //   return (
+        //     <ProjectCard
+        //       key={eachOne.projIdEnc + eachOne.propType}
+        //       refetch={refetch}
+        //       data={{ ...eachOne, type: state.listedBy ?? "proj" }}
+        //       index={index}
+        //       mutate={mutate}
+        //     />
+        //   );
+        // })
+        // <div
+        //   style={{
+        //     height: `${rowVirtualizer.getTotalSize()}px`,
+        //     width: "100%",
+        //     position: "relative",
+        //   }}
+        // >
+        //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
+        // </div>
+        <EmptyState />
+      )}
 
-        {hasNextPage && shouldFetchMore && (
-          <div
-            ref={loadMoreRef}
-            className="text-center font-bold text-3xl py-3"
-          >
-            Loading...
-          </div>
-        )}
-        <LoginPopup />
-        <RequestCallBackModal />
-     
+      {hasNextPage && shouldFetchMore && (
+        <div ref={loadMoreRef} className="text-center font-bold text-3xl py-3">
+          Loading...
+        </div>
+      )}
+      <LoginPopup />
+      <RequestCallBackModal />
 
       <FloatingArrowIcon />
     </div>

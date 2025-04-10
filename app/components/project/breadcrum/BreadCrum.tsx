@@ -1,10 +1,11 @@
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
 import React from "react";
 
 export default function BreadCrumbs({ params: routes }: { params: any }) {
   const params = {
-    "/": "Home",
+    "/": "home",
     residential: "residential",
     projects: "projects",
     ...routes,
@@ -23,6 +24,9 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
       let name = params[key].replace(/-/g, " ");
       const newArray = name.split(" ").slice(0, -1);
       const newName = key !== "slug" ? name : newArray.join(" ");
+      if (index === 0) {
+        currentPath = "";
+      }
       return {
         "@type": "ListItem",
         position: index + 1,
@@ -39,6 +43,9 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
       let name = params[key].replace(/-/g, " ");
       const newArray = name.split(" ").slice(0, -1);
       const newName = key !== "slug" ? name : newArray.join(" ");
+      if (index === 0) {
+        currentPath = "";
+      }
       return {
         "@context": "https://schema.org",
         "@type": "SiteNavigationElement",
@@ -54,6 +61,7 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
   return (
     <>
       <script
+        id="BreadCrumbsScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumsschema),
@@ -61,13 +69,14 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
       />
 
       <script
+        id="BreadCrumbsScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(siteNavigationSchema),
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        <Link
+        {/* <Link
           prefetch={false}
           rel="noopener noreferrer"
           href={`/`}
@@ -75,7 +84,7 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
         >
           Home
         </Link>
-        {" > "}
+        {" > "} */}
 
         {allParams.map((key, index) => {
           currentPath2 += `/${slugify(params[key])}`;
