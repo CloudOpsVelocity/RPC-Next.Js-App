@@ -87,7 +87,7 @@ const productSchema = {
     reviewCount: "100",
   },
   image:
-    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
+    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
   category: "Real Estate Services",
 };
 

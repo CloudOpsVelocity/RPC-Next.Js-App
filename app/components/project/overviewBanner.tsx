@@ -50,6 +50,7 @@ export default function OverviewBanner({
         alt="priceBagOverView"
         className="w-[100px] h-[120px] sm:max-w-[151px] xl:max-w-[237px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
         unoptimized
+        title="priceBagOverView"
       />
 
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%]  flex-wrap">
@@ -99,6 +100,7 @@ export default function OverviewBanner({
           id="download-brochure"
         >
           {/* <DownloadBroucher className="hidden sm:flex" url={brocherUrl} /> */}
+          <span className="hidden">WhatsApp</span>
           <WhatsAppButton
             className="cursor-pointer mt-2 sm:mt-4 "
             name={name}
