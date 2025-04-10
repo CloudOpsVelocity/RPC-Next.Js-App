@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Script from "next/script";
 import React, { memo } from "react";
 import { FaHome, FaChevronRight } from "react-icons/fa";
 interface BreadcrumbItem {
@@ -63,7 +62,10 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
               "@type": "ListItem",
               position: index + 1,
               item: {
-                "@id": index === 0 ? process.env.NEXT_PUBLIC_URL : `${path}`,
+                "@id":
+                  index === 0
+                    ? process.env.NEXT_PUBLIC_URL
+                    : `${process.env.NEXT_PUBLIC_URL}/${path}`,
                 name: index === 0 ? "Home" : item,
               },
             };
@@ -88,7 +90,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
       aria-label="Project Search Breadcrumbs"
       className="w-full px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] xl:py-4 bg-gray-100 rounded-md shadow-sm max-w-[100%] overflow-x-auto "
     >
-      <Script
+      <script
         id="ListingBreadCrumbsScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

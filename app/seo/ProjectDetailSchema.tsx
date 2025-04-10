@@ -458,7 +458,7 @@ const generateSchema = (projectData: ProjectData) => {
       {
         "@type": "ApartmentComplex",
         name: basicData?.projectName,
-        description: basicData?.about,
+        description: desc,
         address: {
           "@type": "PostalAddress",
           addressLocality: basicData?.localityName,

@@ -13,14 +13,12 @@ const realEstateListingSchema: WithContext<RealEstateListing> = {
     priceCurrency: "USD",
     itemCondition: "NewCondition",
   },
-  image: "https://example.com/image.jpg",
-  url: "https://example.com/real-estate-listing",
 };
 
 export default function RealStateJSONLD() {
   return (
     <Script
-    id="realEstateScript1"
+      id="realEstateScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(realEstateListingSchema),

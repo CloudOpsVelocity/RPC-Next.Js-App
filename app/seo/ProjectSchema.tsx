@@ -6,8 +6,7 @@ const realEstateProject: WithContext<Project> = {
   name: "Beautiful Family Home in Suburb",
   description:
     "A charming 4-bedroom, 3-bathroom family home located in a quiet suburban neighborhood with excellent schools and amenities.",
-  image: "https://example.com/image.jpg",
-  url: "https://example.com/real-estate-listing",
+
   address: {
     "@type": "PostalAddress",
     streetAddress: "456 Elm Street",
@@ -20,14 +19,12 @@ const realEstateProject: WithContext<Project> = {
     "@type": "ContactPoint",
     contactType: "Sales",
     telephone: "+1-800-555-5555",
-    email: "info@example.com",
   },
   potentialAction: {
     "@type": "Action",
     name: "Schedule a Tour",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://example.com/schedule-tour",
     },
   },
   makesOffer: {
@@ -47,7 +44,6 @@ const realEstateProject: WithContext<Project> = {
       postalCode: "90210",
       addressCountry: "US",
     },
-    image: "https://example.com/image.jpg",
   },
 };
 

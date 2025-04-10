@@ -1,7 +1,6 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
-import Script from "next/script";
 
 export const generateAllSchemas = (
   property: any,
@@ -261,14 +260,14 @@ export const ProjectSeachSchema = ({
   const address = pagetitle.split("In")[1];
   return (
     <>
-      <Script
+      <script
         id="projSearchScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
-      <Script
+      <script
         id="projSearchScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -304,7 +303,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -331,7 +330,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -397,7 +396,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -486,7 +485,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -549,7 +548,7 @@ export const ProjectSeachSchema = ({
         }}
       />
 
-      <Script
+      <script
         id="projSearchScript7"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
