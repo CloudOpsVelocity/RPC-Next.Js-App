@@ -112,6 +112,7 @@ const Card = ({
           width={100}
           height={100}
           className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px] "
+          title="listing"
         />
 
         <div className="pl-0">
@@ -134,6 +135,7 @@ const Card = ({
             alt="stock icon"
             width={24}
             height={23}
+            title="stock icon"
           />
         </div>
       </div>

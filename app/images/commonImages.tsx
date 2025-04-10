@@ -391,8 +391,8 @@ export const BankDetailsList = new Map([
 ]);
 
 
-export const apartmentCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/apartment.png`
-export const rowhouseCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/rowhouse.png`
-export const villaCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/villa.png`
-export const villamentCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/villament.png`
-export const plotCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/plot.png`
+export const apartmentCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/apartment.webp`
+export const rowhouseCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/rowhouse.webp`
+export const villaCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/villa.webp`
+export const villamentCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/villament.webp`
+export const plotCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/plot.webp`

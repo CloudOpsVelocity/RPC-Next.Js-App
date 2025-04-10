@@ -167,8 +167,9 @@ const FirstBlock: React.FC<Props> = ({
                     })}
                     rel="noopener noreferrer"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
+                    aria-label={isLoading ? "Builder" : data?.data?.userName ? data?.data?.userName : "Builder"}
                   >
-                    {isLoading ? "Builder" : data?.data?.userName}
+                    {isLoading ? "Builder" : data?.data?.userName ? data?.data?.userName : "Builder"}
                   </Link>
                 </p>
               </div>

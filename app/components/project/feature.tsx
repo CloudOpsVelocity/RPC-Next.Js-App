@@ -14,9 +14,11 @@ export default function Feature({
       className="w-[90%] mt-[35px] scroll-mt-[180px] mb-[5%] sm:mb-0 sm:mt-0 sm:pt-screen-spacing"
       id="highlights"
     >
-      <h2 className="sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
-        Highlights Of{" "}
-        <span className="text-[#148B16] ">{projName}</span>
+      <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
+        <strong>
+          <span className="text-[#001F35]">Highlights Of{" "}</span>
+          <span className="text-[#148B16]">{projName}</span>
+        </strong>
       </h2>
       <SubHeading
         text="Key features: Elegant design, spacious layout, stunning views, modern amenities"
@@ -33,7 +35,8 @@ export default function Feature({
               <Image
                 width={20}
                 height={20}
-                alt="Checked"
+                alt={"Checked_" + (ind+1)}
+                title={"Checked_" + (ind+1)}
                 className="w-[12px] h-[12px] sm:max-w-[20px] max-h-[14px] sm:max-h-[20px] sm:h-[20px] sm:w-[20px] mt-[1.5px] sm:mt-[3.5px] xl:mt-[10px]"
                 src={"/abc/Checked.png"}
               />

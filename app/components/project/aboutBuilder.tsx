@@ -45,7 +45,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
                 }
                 width={130}
                 height={130}
-                alt="logo"
+                alt="Builder logo"
+                title="Builder logo"
                 className="object-contain max-h-[93px] w-[93px] sm:max-h-[100px] sm:w-[133px] xl:max-h-[150px] xl:w-[158px] relative"
                 unoptimized
               />
