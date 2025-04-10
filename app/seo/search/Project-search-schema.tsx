@@ -21,12 +21,12 @@ export const generateAllSchemas = (
         p.postedByName === property.postedByName
       );
     }) !== -1;
-  const PAGE_URL = createProjectLinkUrl({
+  const PAGE_URL = `${process.env.NEXT_PUBLIC_URL}createProjectLinkUrl({
     city: property.city,
     slug: property.projName,
     locality: property.locality,
     projIdEnc: property.projIdEnc,
-  });
+  })`;
   const allSizesSchemas = property.coverUrl.split(",").map((url: string) => {
     const OrgName = property.projName?.split(" ")[0];
     return {
