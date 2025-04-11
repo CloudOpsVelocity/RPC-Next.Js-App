@@ -30,7 +30,52 @@ export const generateAllSchemas = (property: any) => {
     projName: property.projIdEnc && property.propName,
   });
   const cardTitle = `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`;
-  const description = property?.usp?.slice(0, 4800) || "";
+  const description = `Looking to buy a premium ${
+    property.propTypeName
+  } for sale in ${property.localityName}, ${property.cityName}? This ${
+    property.facing
+  }-facing residential ${
+    property.propTypeName
+  } is a rare opportunity for home buyers and investors searching for a prime property in one of the most sought-after locations of ${
+    property.cityName
+  }, ${property.stateName}.
+
+  Located in the prestigious project ${property.propName}, ${
+    property.phaseName
+  }, this ready to move property for sale is ideal for those seeking a secure investment or a dream home in a well-developed locality. Spread across ${
+    property.pa
+  } sq.ft., this ${property.propTypeName} for sale in ${
+    property.localityName
+  } offers excellent connectivity to schools, hospitals, shopping malls, and IT hubs of ${
+    property.cityName
+  }.
+  
+  Priced competitively at ₹${property.price.toLocaleString()}, this verified property listing is offered directly by the ${
+    property.postedBy
+  }, ensuring a transparent and hassle-free buying process.
+  
+  Top Features:
+  - South Facing Plot for Sale
+  - Located in ${property.localityName}, ${
+    property.cityName
+  } — A High-Demand Residential Zone
+  - Ready to Move Property
+  - Perfect for Residential Investment or Custom Home Construction
+  - Excellent Location with Great Connectivity
+  - Close to Schools, Hospitals, Malls & IT Parks
+  
+  Possession is available from ${new Date(
+    property.availableFrom
+  ).toLocaleDateString()}, making it a quick move-in option for buyers.
+  
+  Invest in the best real estate property in ${
+    property.cityName
+  }. Explore this premium residential ${property.propTypeName} for sale in ${
+    property.localityName
+  }, perfect for families, investors, and builders looking for a future-ready location with high returns.
+  
+  Contact now to schedule a site visit and grab this exclusive property before it's gone!`;
+
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
