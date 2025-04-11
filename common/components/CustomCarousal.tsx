@@ -1,17 +1,20 @@
 "use client"
 
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { NextCarouselButton, PrevCarouselButton } from '@/app/images/commonSvgs';
 import "@mantine/carousel/styles.css";
+import { strict } from 'assert';
 
 type props = {
   dataLength?: number;
   allCards?: any;
+  containerClass?: string;
 };
 
-function CustomCarousal({dataLength, allCards}:props) {
+function CustomCarousal({dataLength, allCards, containerClass}:props) {
     // const isMobile = useMediaQuery(`(max-width: 750px)`);
     const containerRef = useRef<HTMLDivElement>(null);
+    const parentRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
@@ -44,8 +47,8 @@ function CustomCarousal({dataLength, allCards}:props) {
 
     const onScrollingLeftAndRight = (direction: string) => {
         if(container){
-            // const containerwidth = container.offsetWidth ? container.offsetWidth : 0;
-            const containerwidth = 1000;
+            const containerwidth = container.offsetWidth ? container.offsetWidth : 0;
+            // const containerwidth = 1000;
 
             console.log(containerwidth);
             console.log(container.scrollLeft)
@@ -57,28 +60,57 @@ function CustomCarousal({dataLength, allCards}:props) {
             }
         }
     };
+
+    useEffect(() => {
+        const parent = parentRef.current;
+        if (!parent) return;
+
+        const innerDivs = parent.querySelectorAll<HTMLDivElement>('.carousel-slide');
+        if (!innerDivs.length) return;
+
+        const resize = () => {
+            const parentWidth = parent.offsetWidth;
+
+            innerDivs.forEach((div) => {
+            div.style.minWidth = `${parentWidth}px`;
+            });
+        };
+
+        resize(); // Initial resize
+        window.addEventListener('resize', resize); // Listen to screen resize
+
+        return () => {
+            window.removeEventListener('resize', resize); // Cleanup
+        };
+    }, []);
+
     
     return (
-        <div className="flex justify-center items-center w-[94%] md:w-[90%] h-full relative " >
+        <div className={`relative flex justify-center items-center w-[94%] md:w-[90%] h-full relative ${containerClass ? containerClass : ""} `} >
             {dataLength != undefined && dataLength != null && dataLength >= 2 &&
             <PrevCarouselButton
                 className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute left-[10px] md:left-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("L")}
-                circle='#227FBC' iconColor='white'
+                circle='#CBD4E1' 
+                iconColor='#7C909D'
             />
             }
 
             <div 
                 ref={containerRef} 
-                className='flex justify-start items-center w-full h-full overflow-x-auto scroll-smooth cursor-grab '
-                onMouseDown={handleMouseDown}
-                onMouseLeave={handleMouseLeave}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
+                className='flex justify-start items-center w-full h-full overflow-x-auto scroll-smooth scrollbar-hide cursor-grab '
+                // onMouseDown={handleMouseDown}
+                // onMouseLeave={handleMouseLeave}
+                // onMouseUp={handleMouseUp}
+                // onMouseMove={handleMouseMove}
                 style={{ userSelect: "none" }}
             >
-                <div className='w-full flex justify-start items-start max-w-[1000px] h-full gap-[20px] '> 
+                <div ref={parentRef} className='w-full flex justify-start items-start max-w-[100%] h-full flex-nowrap  '> 
                     {allCards}
+                </div>
+
+                <div className='flex justify-center items-center '>
+                    {}
                 </div>
             </div>
 
@@ -86,7 +118,8 @@ function CustomCarousal({dataLength, allCards}:props) {
             <NextCarouselButton
                 className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute right-[10px] md:right-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("R")}
-                circle='#227FBC' iconColor='white'
+                circle='#CBD4E1' 
+                iconColor='#7C909D'
             />
             }
         </div>

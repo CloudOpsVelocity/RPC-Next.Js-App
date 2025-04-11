@@ -91,7 +91,7 @@ const FirstBlock: React.FC<Props> = ({
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
 
-          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto sm:!rounded-[10px] h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px] flex justify-center items-center ">
+          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
             {/* <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -137,7 +137,9 @@ const FirstBlock: React.FC<Props> = ({
 
             <CustomCarousal 
               dataLength={images?.length}
+              containerClass="max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px]"
               allCards={images.map((imageUrl, index) => (
+                <div key={`projDetailsCarosual_${index.toString()}`} className="carousel-slide h-full "> 
                     <Image
                       alt="project image"
                       title="project image"
@@ -145,14 +147,15 @@ const FirstBlock: React.FC<Props> = ({
                       // fill
                       width={1000}
                       height={300}
-                      className={`bg-gray-${index + 1} h-full min-w-[1000px] `}
+                      className={`bg-gray-${index + 1} w-full h-full  object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
                       unoptimized
                       quality={80}
                     />
+                </div>
               ))}
             />
           </div>
-          <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
+          {/* <div className="absolute bottom-0 sm:m-[1%] sm:mb-[4%] xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md sm:flex break-words sm:px-6 sm:py-2">
             <div className="w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
                 <div className="flex justify-between items-start">
@@ -224,7 +227,7 @@ const FirstBlock: React.FC<Props> = ({
                 Floor Plans
               </p>
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </div>
