@@ -1,7 +1,6 @@
 import { Place } from "schema-dts";
 import { DOMAIN, PRICE_CURRENY, PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
-import Script from "next/script";
 
 interface ListingSchemaProps {
   nearByLocations: any;
@@ -18,6 +17,12 @@ export const generateListingSchema = ({
   title,
   url,
 }: ListingSchemaProps) => {
+  const desc = `Searching ${listing.bhkName ?? ""} ${listing.propTypeName} ${
+    listing.propName
+  }, for ${listing.cg === "S" ? " Sale" : " Rent"} in ${
+    listing.ltName
+  }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Find your dream home today!`;
+
   const availableFrom = convertToSchemaDate(listing?.availableFrom);
   const nearByLocationsSchema: Place[] = [];
   if (nearByLocations) {
@@ -51,13 +56,13 @@ export const generateListingSchema = ({
         "@type": "WebPage",
         name: title || "N/A",
         url: url || "N/A",
-        description: listing?.usp || "N/A",
+        description: desc || "N/A",
         mainEntity: {
           "@type": "RealEstateListing",
           url: url || "N/A",
           datePosted: listing?.createdAt || new Date().toISOString(),
           availableFrom: availableFrom,
-          description: listing?.usp || "N/A",
+          description: desc || "N/A",
           name: title || "N/A",
           identifier: listing?.propIdEnc || "N/A",
           price: {
@@ -103,7 +108,7 @@ export const generateListingSchema = ({
             ? "ResidentialBuilding"
             : "Apartment",
         name: title || "N/A",
-        description: listing?.usp || "N/A",
+        description: desc || "N/A",
         numberOfRooms:
           listing?.propTypeName !== "Plot" ? listing?.nobt || "N/A" : "N/A",
         floorSize:
@@ -155,7 +160,7 @@ export const generateListingSchema = ({
       {
         "@type": "Product",
         name: title || "N/A",
-        description: listing?.usp || "N/A",
+        description: desc || "N/A",
         image: listing?.projMedia?.coverImageUrl?.split(",")[0] || "N/A",
         url: url || "N/A",
         brand: {
@@ -453,8 +458,8 @@ const ListingSchema = ({
   listingData: ListingSchemaProps;
 }) => {
   return (
-    <Script
-    id="listingScript1"
+    <script
+      id="listingScript1"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(generateListingSchema(listingData)),
