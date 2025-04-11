@@ -35,8 +35,8 @@ export default function Feature({
               <Image
                 width={20}
                 height={20}
-                alt={"Checked_" + (ind+1)}
-                title={"Checked_" + (ind+1)}
+                alt={"hightlights-" + (ind+1)}
+                title={"hightlights-" + (ind+1)}
                 className="w-[12px] h-[12px] sm:max-w-[20px] max-h-[14px] sm:max-h-[20px] sm:h-[20px] sm:w-[20px] mt-[1.5px] sm:mt-[3.5px] xl:mt-[10px]"
                 src={"/abc/Checked.png"}
               />

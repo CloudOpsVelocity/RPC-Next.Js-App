@@ -67,6 +67,8 @@ const FirstBlock: React.FC<Props> = ({
     setTimeout(() => setIsScrolling(false), 3000);
   }
 
+  console.log(projectDetails?.projectName)
+
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -123,7 +125,8 @@ const FirstBlock: React.FC<Props> = ({
                       srcSet={imageUrl.split(",")[3]}
                     />
                     <Image
-                      alt="project image"
+                      alt={projectDetails?.projectName}
+                      title={projectDetails?.projectName}
                       src={imageUrl.split(",")[3]}
                       fill
                       className={`bg-gray-${index + 1} `}

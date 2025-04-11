@@ -235,10 +235,10 @@ export default function PropertyTypeDetailsCrad({
             width={150}
             height={150}
             src={propName(propertyType, "img") as string}
-            alt="Preview"
+            alt={propName(propertyType, "name") as string}
             className="w-[88%] h-[88%] object-cover rounded-[14px]"
             unoptimized
-            title="Preview"
+            title={propName(propertyType, "name") as string}
           />
         </div>
         <div className="down mb-3">
