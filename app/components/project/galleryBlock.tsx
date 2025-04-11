@@ -117,7 +117,10 @@ export default function GalleryBlock({
                     />
                     <Image
                       src={selectedMedia.split(",")[2]}
-                      alt="Preview"
+                      alt={type === "prop"
+                                ? "Property Gallery"
+                                : "Project Gallery"}
+                                
                       title={type === "prop"
                                 ? "Property Gallery"
                                 : "Project Gallery"}
