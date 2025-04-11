@@ -8,55 +8,72 @@ import React, { useState, useEffect, useCallback, memo } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 
-type Props = { data: any };
+type Props = {
+  data: any;
+  setLoading: (loading: boolean) => void;
+  loading: boolean; 
+};
 
-export default function ResidentialCardSection({ data }: Props) {
+export default function ResidentialCardSection({ data, setLoading, loading }: Props) {
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(20);
-  const [loading, setLoading] = useState(false);
   const [opened, { open, close }] = useReqCallPopup(); 
-
+  
   const fetchMoreItems = useCallback(() => {
     if (properties.length > listItemsCount) {
       setLoading(true);
       setTimeout(() => {
-        setListItemsCount((prevCount) => prevCount + 20);
+        setListItemsCount((prevCount) => {
+          const newCount = prevCount + 20;
+  
+         
+          if ((newCount % 200 === 0 || newCount >= properties.length)) {
+            setTimeout(() => {
+              const targetItem = document.getElementById(`item-${newCount - 1}`);
+              if (targetItem) {
+                targetItem.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+            }, 100); // delay to ensure DOM is updated
+          }
+  
+          return newCount;
+        });
         setLoading(false);
       }, 500);
     }
   }, [listItemsCount, properties.length]);
-
+  
   useEffect(() => {
     if (listItemsCount >= properties.length) return;
-
+  
     const items = document.querySelectorAll(".infinityItem");
     if (items.length === 0) return;
-
+  
     const observerCallback = (entries: any, observer: any) => {
       entries.forEach((entry: any) => {
         if (
           entry.isIntersecting &&
           entry.target.id === `item-${items.length - 1}`
         ) {
-          fetchMoreItems(); // Trigger loading more items
-          items.forEach((item) => observer.unobserve(item)); // Unobserve items after fetching more
+          fetchMoreItems();
+          items.forEach((item) => observer.unobserve(item));
         }
       });
     };
-
+  
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
       rootMargin: "0px",
-      threshold: 0.1, // Trigger when 10% of the item is visible
+      threshold: 0.1,
     });
-
-    // Observe the last item
+  
     items.forEach((item) => observer.observe(item));
-
+  
     return () => {
       items.forEach((item) => observer.unobserve(item));
     };
   }, [listItemsCount, properties, fetchMoreItems]);
+  
 
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
@@ -67,6 +84,9 @@ export default function ResidentialCardSection({ data }: Props) {
     );
   });
   const type="proj"
+
+/*  */
+
 
   return (
     <section className="py-8 sm:py-14 container mx-auto px-4">

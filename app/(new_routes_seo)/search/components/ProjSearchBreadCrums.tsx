@@ -32,8 +32,8 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
 
     newParams = pageUrl.split("/");
   } else if (pageUrl.includes("/residential-listings/")) {
+    newParams = pageUrl.split("/");
     // trimmedUrl = trimFromWord(pageUrl, "/residential-listings/");
-    newParams = pageUrl.split("/").filter(Boolean);
   } else if (pageUrl.includes("/residential/listings/")) {
     // trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
     newParams = pageUrl.split("/").filter(Boolean);
@@ -53,7 +53,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
             index === 0
               ? process.env.NEXT_PUBLIC_URL
               : `${process.env.NEXT_PUBLIC_URL}${trimStringUrl(pageUrl, item)}`,
-          name: item || "Home",
+          name: item.replace("-", " ") || "Home",
         },
       };
     }),

@@ -434,7 +434,7 @@ export async function generateMetadata(
   // Constructing detailed and keyword-rich description
   const description = `${
     data.projectName
-  } offers exclusive ${data.availableProperties?.join(", ")} in ${
+  } ${data.availableProperties?.join(", ")} in ${
     data.localityName
   }, ${
     data.cityName

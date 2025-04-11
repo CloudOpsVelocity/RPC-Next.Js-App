@@ -122,7 +122,7 @@ function Footer() {
       ],
       hrefs: [
         "/",
-        "/search",
+        "/residential",
         "/search/listing",
         "/post-your-project",
         "/post-your-listing",
@@ -245,8 +245,9 @@ function Footer() {
                       {title}
                     </h3>
                     <ul className="sm:mt-4 md:space-y-4">
-                      {links.map(
-                        (link, index) =>
+                      {links.map((link, index) => {
+                        console.log(link)
+                        return(
                           link && (
                             <li key={link}>
                               <Link prefetch={false}
@@ -254,10 +255,10 @@ function Footer() {
                                 rel={rel}
                                 className="text-xs sm:text-base text-gray-300 hover:text-white"
                               >
-                                {link}
+                                {link}{(link === "Home" || link === "Projects") ? <span className="hidden">{" "}Page</span> : ""}
                               </Link>
                             </li>
-                          )
+                          ))}
                       )}
                     </ul>
                   </div>
@@ -293,7 +294,7 @@ function Footer() {
           <div className="mt-4 sm:mt-12 border-t border-gray-700">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
               <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
+                <h3 className="text-xs sm:text-sm font-[normal] text-white tracking-wider uppercase">
                   Subscribe to our newsletter
                 </h3>
                 <p className="mt-1 sm:mt-4 text-xs sm:text-base text-gray-300">

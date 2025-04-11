@@ -1,3 +1,4 @@
+"use client";
 import {
   FaHome,
   FaShieldAlt,
@@ -15,6 +16,7 @@ import Filters from "./Filters";
 import { FaChevronRight } from "react-icons/fa6";
 import ResidentialCardSection from "./ResidentialcardSection";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
+import { useState } from "react";
 
 const testimonials = [
   {
@@ -40,7 +42,10 @@ const testimonials = [
   },
 ];
 
+
 export default function ResidentialPage({ data }: { data: any }) {
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <nav
@@ -70,8 +75,9 @@ export default function ResidentialPage({ data }: { data: any }) {
 
       {/*    <Banner heroSlides={data?.featured} data={data} /> */}
       <Filters />
-      <ResidentialCardSection data={data} />
-      <section className="py-20 bg-muted/50">
+      <ResidentialCardSection data={data} setLoading={setLoading}  loading={loading}/>
+      { !loading &&
+      <><section className="py-20 bg-muted/50">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-16">
             Why Choose Our Residential Properties
@@ -177,18 +183,18 @@ export default function ResidentialPage({ data }: { data: any }) {
             {/* <button  className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors">
               Book a Site Visit
             </button> */}
-            <Link
+           {/*  <Link
               rel="noopener noreferrer"
               prefetch={false}
               href={`${process.env.NEXT_PUBLIC_URL}/${`get-in-touch`}`}
               className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Book a Site Visit
-            </Link>
+            </Link> */}
             <Link
               rel="noopener noreferrer"
               prefetch={false}
-              href="tel:+91-8884440963"
+              href={`${process.env.NEXT_PUBLIC_URL}/${`get-in-touch`}`}
               className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Contact Us
@@ -196,6 +202,7 @@ export default function ResidentialPage({ data }: { data: any }) {
           </div>
         </div>
       </section>
+      </>}
    
     </div>
     

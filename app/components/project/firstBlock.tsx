@@ -67,6 +67,8 @@ const FirstBlock: React.FC<Props> = ({
     setTimeout(() => setIsScrolling(false), 3000);
   }
 
+  console.log(projectDetails?.projectName)
+
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -123,7 +125,8 @@ const FirstBlock: React.FC<Props> = ({
                       srcSet={imageUrl.split(",")[3]}
                     />
                     <Image
-                      alt="project image"
+                      alt={projectDetails?.projectName}
+                      title={projectDetails?.projectName}
                       src={imageUrl.split(",")[3]}
                       fill
                       className={`bg-gray-${index + 1} `}
@@ -134,7 +137,7 @@ const FirstBlock: React.FC<Props> = ({
               ))}
             </Carousel>
           </div>
-          <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
+          {/* <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
             <div className="w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
                 <div className="flex justify-between items-start">
@@ -206,7 +209,7 @@ const FirstBlock: React.FC<Props> = ({
                 Floor Plans
               </p>
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </div>

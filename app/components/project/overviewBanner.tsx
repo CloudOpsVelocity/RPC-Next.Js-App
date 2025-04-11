@@ -47,10 +47,10 @@ export default function OverviewBanner({
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
         width={237}
         height={263}
-        alt="priceBagOverView"
+        alt="price OverView"
         className="w-[100px] h-[120px] sm:max-w-[151px] xl:max-w-[237px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
         unoptimized
-        title="priceBagOverView"
+        title="price OverView"
       />
 
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%]  flex-wrap">

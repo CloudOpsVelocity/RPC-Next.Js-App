@@ -265,7 +265,7 @@ export const ResidentialProjectSchama = ({
   const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
   return (
     <>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -283,7 +283,7 @@ export const ResidentialProjectSchama = ({
             },
           }),
         }}
-      />
+      /> */}
 
       <script
         type="application/ld+json"
