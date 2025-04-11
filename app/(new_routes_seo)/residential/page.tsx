@@ -15,15 +15,23 @@ export default async function page({}: Props) {
       </div>
     );
   });
-let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=0`;
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=0`;
   //let url = `https://www.getrightproperty.com/srp/margdataurl/searchproj?page=0`;
 
   const { data } = await axios.get(url);
+  const uniqueProperties = Array.from(
+    new Map(
+      data?.data?.map((property: any) => [
+        property.projIdEnc,
+        { ...property, projIdEnc: property.projIdEnc || null },
+      ])
+    ).values()
+  );
   return (
     <>
       <ResidentialProjectSchama
         pageUrl="/residential"
-        properties={data?.data}
+        properties={uniqueProperties}
         urls={data?.urls}
       />
       {data ? <ResidentialPage data={data} /> : <LoadingSpinner />}

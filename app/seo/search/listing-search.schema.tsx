@@ -4,13 +4,13 @@ import { PHONE_NUMBER } from "../constants";
 export const generateAllSchemas = (property: any) => {
   if (!property) return [];
   const allSizesSchemas = property.coverImage.split(",").map((url: string) => {
-    const OrgName = property.projName?.split(" ")[0];
+    const OrgName = property.postedByName;
     return {
       "@type": "ImageObject",
       contentUrl: url,
       license: "https://www.getrightproperty.com/privacy-policy",
       acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
-      creditText: `${property.projName} Cover Name`,
+      creditText: `${property.postedByName} Cover Name`,
       creator: {
         "@type": "Person",
         name: OrgName,
@@ -43,7 +43,7 @@ export const generateAllSchemas = (property: any) => {
   Located in the prestigious project ${property.propName}, ${
     property.phaseName
   }, this ready to move property for sale is ideal for those seeking a secure investment or a dream home in a well-developed locality. Spread across ${
-    property.pa
+    property.pa || property.sba
   } sq.ft., this ${property.propTypeName} for sale in ${
     property.localityName
   } offers excellent connectivity to schools, hospitals, shopping malls, and IT hubs of ${
@@ -55,7 +55,7 @@ export const generateAllSchemas = (property: any) => {
   }, ensuring a transparent and hassle-free buying process.
   
   Top Features:
-  - South Facing Plot for Sale
+  - ${property.facing} Facing ${property.propTypeName} for Sale
   - Located in ${property.localityName}, ${
     property.cityName
   } — A High-Demand Residential Zone
@@ -114,7 +114,7 @@ export const generateAllSchemas = (property: any) => {
             property.propStatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
-          priceValidUntil: property.endDate || "",
+          priceValidUntil: property.endDate || property.possassionDate || "",
         },
         review: {
           "@type": "Review",
@@ -224,7 +224,6 @@ export const generateAllSchemas = (property: any) => {
 
 export const ListingSearchSchema = ({ properties }: any) => {
   if (!Array.isArray(properties)) return null;
-
   const results = properties
     .map((property: any) => {
       return generateAllSchemas(property);
@@ -236,7 +235,7 @@ export const ListingSearchSchema = ({ properties }: any) => {
   ).filter(Boolean);
   const realEstateAgentSchemas = uniqueBuilders.map((builderName: string) => {
     const builderProperty = properties.find(
-      (p: any) => p.postedByName === builderName
+      (p: any) => p.postedByName === builderName && p.postedBy === "Builder"
     );
     return {
       "@context": "https://schema.org",
