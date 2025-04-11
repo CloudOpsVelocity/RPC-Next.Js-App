@@ -32,7 +32,7 @@ export default async function Page({ params: { cg, city } }: Props) {
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
   const severData = await getSearchData(`cg=${slugValues.CG}`);
-  const pageUrl = `/${pathname}`;
+  const pageUrl = `${pathname}`;
   return (
     <NewListingSearchpage
       serverData={severData}
