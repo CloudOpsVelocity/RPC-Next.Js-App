@@ -177,18 +177,18 @@ export default function ResidentialPage({ data }: { data: any }) {
             {/* <button  className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors">
               Book a Site Visit
             </button> */}
-            <Link
+           {/*  <Link
               rel="noopener noreferrer"
               prefetch={false}
               href={`${process.env.NEXT_PUBLIC_URL}/${`get-in-touch`}`}
               className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Book a Site Visit
-            </Link>
+            </Link> */}
             <Link
               rel="noopener noreferrer"
               prefetch={false}
-              href="tel:+91-8884440963"
+              href={`${process.env.NEXT_PUBLIC_URL}/${`get-in-touch`}`}
               className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Contact Us
