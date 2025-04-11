@@ -2,8 +2,6 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import { NextCarouselButton, PrevCarouselButton } from '@/app/images/commonSvgs';
-import "@mantine/carousel/styles.css";
-import { strict } from 'assert';
 
 type props = {
   dataLength?: number;

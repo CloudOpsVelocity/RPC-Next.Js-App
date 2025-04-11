@@ -1,26 +1,30 @@
 "use client";
 import React, { useRef } from "react";
-import { Carousel } from "@mantine/carousel";
+// import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
-  DarkCarouseIcon,
-  DarkNextCarouselButton,
+  // DarkCarouseIcon,
+  // DarkNextCarouselButton,
   ReraIcon,
 } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-import { formatDate } from "@/app/utils/date";
+// import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+// import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
-import styles from "@/app/styles/Carousel.module.css";
+// import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
 
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
-import Link from "next/link";
-import CustomCarousal from "@/common/components/CustomCarousal";
+import dynamic from "next/dynamic";
+// import Link from "next/link";
+
+const CustomCarousal = dynamic(
+  () => import("@/common/components/CustomCarousal")
+);
 
 type Props = {
   projectDetails: Main | null;
