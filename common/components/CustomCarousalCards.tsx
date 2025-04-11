@@ -11,7 +11,7 @@ type props = {
   containerClass?: string;
 };
 
-function CustomCarousal({dataLength, allCards, containerClass}:props) {
+function CustomCarousalCards({dataLength, allCards, containerClass}: props) {
     // const isMobile = useMediaQuery(`(max-width: 750px)`);
     const containerRef = useRef<HTMLDivElement>(null);
     const parentRef = useRef<HTMLDivElement>(null);
@@ -89,7 +89,7 @@ function CustomCarousal({dataLength, allCards, containerClass}:props) {
         <div className={`relative flex justify-center items-center w-[94%] md:w-[90%] h-full relative ${containerClass ? containerClass : ""} `} >
             {dataLength != undefined && dataLength != null && dataLength >= 2 &&
             <PrevCarouselButton
-                className={`w-[40px] h-[40px] cursor-pointer bottom-1 absolute left-[10px] md:left-[20px] top-[45%] z-10`}
+                className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute left-[10px] md:left-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("L")}
                 circle='#CBD4E1' 
                 iconColor='#7C909D'
@@ -116,7 +116,7 @@ function CustomCarousal({dataLength, allCards, containerClass}:props) {
 
             {dataLength != undefined && dataLength != null && dataLength >= 2 &&
             <NextCarouselButton
-                className={`w-[40px] h-[40px] cursor-pointer bottom-1 absolute right-[10px] md:right-[20px] top-[45%] z-10`}
+                className={`w-[32px] h-[32px] cursor-pointer bottom-1 absolute right-[10px] md:right-[-40px] top-[45%] z-10`}
                 onClick={() => onScrollingLeftAndRight("R")}
                 circle='#CBD4E1' 
                 iconColor='#7C909D'
@@ -126,4 +126,4 @@ function CustomCarousal({dataLength, allCards, containerClass}:props) {
     )
 }
 
-export default CustomCarousal;
+export default CustomCarousalCards;

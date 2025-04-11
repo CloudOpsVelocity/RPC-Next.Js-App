@@ -139,7 +139,7 @@ const FirstBlock: React.FC<Props> = ({
               dataLength={images?.length}
               containerClass="max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px]"
               allCards={images.map((imageUrl, index) => (
-                <div key={`projDetailsCarosual_${index.toString()}`} className="carousel-slide h-full "> 
+                <div key={`projDetailsCarosual_${index.toString()}`} className="carousel-slide h-full flex justify-center items-center "> 
                     <Image
                       alt="project image"
                       title="project image"
@@ -147,7 +147,7 @@ const FirstBlock: React.FC<Props> = ({
                       // fill
                       width={1000}
                       height={300}
-                      className={`bg-gray-${index + 1} w-full h-full  object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
+                      className={`bg-gray-${index + 1} w-full h-full object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
                       unoptimized
                       quality={80}
                     />
