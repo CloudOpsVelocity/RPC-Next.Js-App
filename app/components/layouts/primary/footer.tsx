@@ -122,7 +122,7 @@ function Footer() {
       ],
       hrefs: [
         "/",
-        "/search",
+        "/residential",
         "/search/listing",
         "/post-your-project",
         "/post-your-listing",

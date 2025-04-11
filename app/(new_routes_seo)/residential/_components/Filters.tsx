@@ -28,12 +28,16 @@ const locations = [
 export default function Filters({}: Props) {
   const router = useRouter();
     const [f, dispatch] = useAtom(homeSearchFiltersAtom);
-    const onSearch=()=>{
-     // alert(JSON.stringify(f))
-      const whichPage = (f.propType === 36) ? "/search/listing" : "/search"
-      router.push(`${whichPage}?sf=${toQueryParams(f)}`);          
-    }
 
+    const onSearch = () => {
+      //alert(JSON.stringify(f))
+      const whichPage = (f.propType === 36) ? "/search/listing" : "/search";
+      let redirectUrl = `${whichPage}?sf=${toQueryParams(f)}`;
+      redirectUrl = redirectUrl.replace(/-listedBy=All/g, "");
+      router.push(redirectUrl);  
+      //alert(redirectUrl)
+    };
+    
   return (
     <section className=" container sm:mx-auto  mt-6 sm:mt-16 px-1  sm:px-4">
       <div className="bg-card shadow-xl rounded-xl py-1 sm:p-6 z-[500] bg-white">

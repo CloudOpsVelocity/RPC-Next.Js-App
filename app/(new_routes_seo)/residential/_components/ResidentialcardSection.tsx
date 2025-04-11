@@ -8,12 +8,15 @@ import React, { useState, useEffect, useCallback, memo } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 
-type Props = { data: any };
+type Props = {
+  data: any;
+  setLoading: (loading: boolean) => void;
+  loading: boolean; 
+};
 
-export default function ResidentialCardSection({ data }: Props) {
+export default function ResidentialCardSection({ data, setLoading, loading }: Props) {
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(20);
-  const [loading, setLoading] = useState(false);
   const [opened, { open, close }] = useReqCallPopup(); 
   
   const fetchMoreItems = useCallback(() => {
