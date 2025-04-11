@@ -14,6 +14,7 @@ import Filters from "./Filters";
 
 import { FaChevronRight } from "react-icons/fa6";
 import ResidentialCardSection from "./ResidentialcardSection";
+import RequestCallBackModal from "@/app/components/molecules/popups/req";
 
 const testimonials = [
   {
@@ -165,28 +166,38 @@ export default function ResidentialPage({ data }: { data: any }) {
       </section>
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-black">
             Ready to Find Your Dream Home?
           </h2>
-          <p className="text-white/80 max-w-xl mx-auto mb-8">
+          <p className="text-black/80 max-w-xl mx-auto mb-8">
             Schedule a site visit or speak with our property experts to discover
             the perfect living space tailored to your needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-primary hover:bg-white/90 px-6 py-3 rounded-lg font-medium transition-colors">
+            {/* <button  className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors">
               Book a Site Visit
-            </button>
+            </button> */}
+            <Link
+              rel="noopener noreferrer"
+              prefetch={false}
+              href={`${process.env.NEXT_PUBLIC_URL}/${`get-in-touch`}`}
+              className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              Book a Site Visit
+            </Link>
             <Link
               rel="noopener noreferrer"
               prefetch={false}
               href="tel:+91-8884440963"
-              className="bg-transparent border border-white hover:bg-white/10 px-6 py-3 rounded-lg font-medium transition-colors"
+              className="bg-btnPrimary text-primary  px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Contact Us
             </Link>
           </div>
         </div>
       </section>
+   
     </div>
+    
   );
 }

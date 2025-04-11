@@ -15,7 +15,7 @@ export const GrpLogoSvg = ({ className }: { className: string }) => (
 export const GrpDarkLogoSvg = ({ className }: { className: string }) => {
   return (
     <Image
-      src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/grp-logo-FOOTER.png`}
+      src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/grp-logo-footer.webp`}
       width={182}
       height={64}
       alt="getright logo"

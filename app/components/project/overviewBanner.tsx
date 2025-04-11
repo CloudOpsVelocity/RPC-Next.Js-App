@@ -36,7 +36,6 @@ export default function OverviewBanner({
   slug: string;
 }) {
   const [, { open }] = useReqCallPopup();
-
   return (
     <div
       className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "
@@ -101,7 +100,6 @@ export default function OverviewBanner({
           id="download-brochure"
         >
           {/* <DownloadBroucher className="hidden sm:flex" url={brocherUrl} /> */}
-          <span className="hidden">WhatsApp</span>
           <WhatsAppButton
             className="cursor-pointer mt-2 sm:mt-4 "
             name={name}

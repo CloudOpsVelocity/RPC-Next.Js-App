@@ -32,6 +32,7 @@ export default function About({
     maxLines = 2;
   }
   const charLimit = maxLines * 100;
+  console.log(heading, projName);
   return (
     <div
       className={clsx(
@@ -49,12 +50,11 @@ export default function About({
           className="mb-[14px] sm:mb-[8px]"
         />
       ) : (
+        ((heading !== undefined && heading !== "") || (projName !== undefined && projName !== "")) &&
         <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[10px] xl:mb-[10px] capitalize ">
           <strong>
-            <span className="text-[#001F35] ">{heading}{" "}</span>
-            <span className={clsx(" text-[#148B16]  bg-white")}>
-              {projName}
-            </span>{" "}
+            {heading && <span className="text-[#001F35] ">{heading}{" "}</span>}
+            {projName && <span className={clsx(" text-[#148B16]  bg-white")}>{projName}{" "}</span>}
           </strong>
         </h2>
       )}

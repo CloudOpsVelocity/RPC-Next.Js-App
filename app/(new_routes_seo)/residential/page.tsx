@@ -23,6 +23,7 @@ export default async function page({}: Props) {
       <ResidentialProjectSchama
         pageUrl="/residential"
         properties={data?.data}
+        urls={data?.urls}
       />
       {data ? <ResidentialPage data={data} /> : <LoadingSpinner />}
     </>

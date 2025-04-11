@@ -159,14 +159,13 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
                     ? cardData.coverUrl.split(",")[1]
                     : cardData.projMedia.coverImageUrl.split(",")[1]
                 }
-                alt={"card" + cardData?.propTypeName}
-                title={"card" + cardData?.propTypeName}
+                alt={cardData.projName ? `${cardData.projName} Image` : "card"}
+                title={cardData.projName ? `${cardData.projName} Image` : "card"}
                 className="w-full"
                 // width={300}
                 // height={212}
                 unoptimized
                 fill
-                 
               />
             </Link>
           </div>

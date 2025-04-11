@@ -145,8 +145,8 @@ const Card = ({
 let config = {
   sellIcon: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/yellowarrow.png`,
   rentIcon: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/bluearrow.png`,
-  rentLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.svg`,
-  sellLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.svg`,
-  rentMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.svg`,
-  sellMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.svg`,
+  rentLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.webp`,
+  sellLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.webp`,
+  rentMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.webp`,
+  sellMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.webp`,
 };
