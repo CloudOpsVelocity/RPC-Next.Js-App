@@ -114,7 +114,11 @@ export const generateAllSchemas = (property: any) => {
             property.propStatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
-          priceValidUntil: property.endDate || property.possassionDate || "",
+          priceValidUntil:
+            property.endDate ||
+            property.possassionDate ||
+            property.availableFrom ||
+            "",
         },
         review: {
           "@type": "Review",
