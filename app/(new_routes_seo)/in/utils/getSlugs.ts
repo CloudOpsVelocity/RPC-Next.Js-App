@@ -31,7 +31,7 @@ export async function getNestedSlug(pathname: string, level?: number) {
     // Read the JSON file
     const jsonData = fs.readFileSync(filePath, "utf8");
     const builderJsonData = JSON.parse(jsonData);
-    console.log(pathname);
+    // console.log(pathname);
     // Find the exact matching path based on the truncated path
     const matchingPath = Object.keys(builderJsonData).find((key) => {
       // Compare the key up to the last segment

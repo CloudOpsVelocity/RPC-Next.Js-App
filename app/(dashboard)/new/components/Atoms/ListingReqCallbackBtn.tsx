@@ -2,7 +2,7 @@
 import Button from "@/app/components/atoms/buttons/variansts";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { CallIcon } from "@/app/images/commongsSvgs2";
-import React, { useEffect } from "react";
+import React from "react";
 
 type Props = {
   builderName: string;
@@ -17,33 +17,19 @@ export default function ListingReqBtn({
   reqId,
   builderId,
 }: Props) {
-  const [opened, { open, close }] = useReqCallPopup();
+  const [, { open }] = useReqCallPopup();
   const handleOpen = (e: any) => {
     e.preventDefault();
     open({
       modal_type: "PROPERTY_REQ_CALLBACK",
       postedByName: builderName,
       postedId: builderId,
-      reqId: reqId,
+      reqId: reqId, 
       source: "propCard",
       title: projName,
     });
   };
 
-  useEffect(() => {
-    if (opened) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("shearlModal", "");
-
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
-
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
 
   return (
     <>

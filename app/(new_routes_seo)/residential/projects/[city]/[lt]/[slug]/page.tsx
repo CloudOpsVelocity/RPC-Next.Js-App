@@ -383,7 +383,7 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  let slug = params.slug.split("-").at(-1);
+  let slug = params.slug.split("-").at(-1); 
   if (!slug || !isValidSlugId(slug)) {
     notFound();
   }
@@ -429,7 +429,7 @@ export async function generateMetadata(
   // Constructing SEO-friendly title
   const title = `${data?.projectName} ${data.availableProperties?.join(
     " "
-  )} for sale in ${data.localityName} ${data.cityName}`;
+  )} for sale ${data.localityName} ${data.cityName}`;
 
   // Constructing detailed and keyword-rich description
   const description = `${
@@ -438,7 +438,7 @@ export async function generateMetadata(
     data.localityName
   }, ${
     data.cityName
-  }. Explore Project Details, Pricing, Brochure PDF, Floor Plans, Reviews, Master Plan, Amenities, and Contact Information. Secure your future home now!`;
+  }. Project Details, Pricing, Brochure, Floor Plans, Reviews, Master Plan, Amenities & Contact Details`;
 
   // Get all relevant keywords
   const keywords = [

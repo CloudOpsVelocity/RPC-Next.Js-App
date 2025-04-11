@@ -62,7 +62,7 @@ export default function TopRightSection({
     projName: projName ? projName : projName,
   });
 
-  console.log("card 2");
+  // console.log("card 2");
   return (
     <div
       onClick={(e) => e.stopPropagation()}

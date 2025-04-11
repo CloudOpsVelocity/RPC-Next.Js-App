@@ -9,7 +9,6 @@ function BlogDetailLeftSection() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
   const data = allBlogData.filter((each) => each.id === selectedBlog.id)[0];
   const pathName = data && data.heading ? data.heading.toLowerCase() : "";
-  console.log(pathName);
   return (
     <div className="max-w-[617px] w-full ">
       <Image

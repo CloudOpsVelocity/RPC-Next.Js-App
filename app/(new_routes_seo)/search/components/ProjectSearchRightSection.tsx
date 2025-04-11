@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 // import MapSkeleton from "@/app/components/maps/Skeleton";
 import { useInfiniteQuery } from "react-query";
 import { getSearchData } from "../utils/project-search-queryhelpers";
@@ -72,22 +72,6 @@ const RightSection = ({ serverData, isTrue }: any) => {
       enabled: false,
     });
   const apidata = data?.pages?.flat() || [];
-
-  useEffect(() => {
-    if (mapPopup.isOpen && isMobile) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("projeSearchModalModal", "");
-
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
-        dispatch({ type: "CLOSE" })
-      };
-
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [mapPopup.isOpen]);
 
   return !isMobile ? (
     <div

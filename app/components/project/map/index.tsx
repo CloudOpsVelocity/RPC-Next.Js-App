@@ -84,9 +84,11 @@ const LeafMap: React.FC<{
           />
         ) : (
           <div>
-            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
-              <span>Location Map Of </span>
-              <span className="text-[#148B16] font-bold">{projName} </span>
+            <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words ">
+              <strong>
+                <span className="text-[#001F35]">Location Map Of </span>
+                <span className="text-[#148B16]">{projName}</span>
+              </strong>
             </h2>
             <SubHeading
               text="Explore nearby convenient amenities, entertainment, and essential services"
@@ -234,10 +236,12 @@ const LeafMap: React.FC<{
           {mapData[selected] && mapData[selected].length > 0 && (
             <div className="mt-8 w-[90%] mx-auto hidden sm:block">
               <h2
-                className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words scroll-mt-[180px]"
+                className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words scroll-mt-[180px]"
                 id="near-by-projects"
               >
-                Nearby <span className="text-[#148B16] ml-1">{projName} </span>
+                <strong>
+                  <span className="text-[#001F35]">Nearby</span> <span className="text-[#148B16] ml-1">{projName} </span>
+                </strong>
               </h2>
               <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
                 {downData.map((item: any, index: number) => (
@@ -271,7 +275,7 @@ const LeafMap: React.FC<{
               />
             ) : (
               <div>
-                <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap">
+                <h2 className="sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap">
                   <span>Location Map Of Project </span>
                   <span className="text-[#148B16] ">{projName} </span>
                 </h2>

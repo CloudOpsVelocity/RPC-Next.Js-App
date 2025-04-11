@@ -1,12 +1,14 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
+import { baseURL } from "@/app/utils/api/api";
 
 export const generateAllSchemas = (
   property: any,
   properties: any[],
   index: number
 ) => {
+  const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
   const [launchDate, possassionDate] = [
     convertToSchemaDate(property?.launchDate || "Fri Mar 27 00:00:00 IST 2026"),
     convertToSchemaDate(
@@ -21,12 +23,12 @@ export const generateAllSchemas = (
         p.postedByName === property.postedByName
       );
     }) !== -1;
-  const PAGE_URL = `${process.env.NEXT_PUBLIC_URL}${createProjectLinkUrl({
+  const PAGE_URL = createProjectLinkUrl({
     city: property.city,
     slug: property.projName,
     locality: property.locality,
     projIdEnc: property.projIdEnc,
-  })}`;
+  });
   const allSizesSchemas = property.coverUrl.split(",").map((url: string) => {
     const OrgName = property.projName?.split(" ")[0];
     return {
@@ -42,12 +44,6 @@ export const generateAllSchemas = (
       copyrightNotice: OrgName,
     };
   });
-  const desc = `${property.projName} for sale in ${property.locality}, ${
-    property.city
-  }. Explore ${property.projName} project offering ${property.bhkNames.join(
-    ", "
-  )} configurations with prices ranging from ₹${property.minPrice.toLocaleString()} to ₹${property.maxPrice.toLocaleString()}. View Project Details, Price, Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details.`;
-
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
@@ -56,7 +52,7 @@ export const generateAllSchemas = (
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         } ${property.city ? `, ${property.city}` : ""}`.trim(),
-        description: desc || "",
+        description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         url: PAGE_URL,
         datePosted: launchDate || new Date().toISOString(),
         postalCode: property.pincode || "",
@@ -79,7 +75,7 @@ export const generateAllSchemas = (
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         }`.trim(),
-        description: desc || "",
+        description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
@@ -118,7 +114,7 @@ export const generateAllSchemas = (
         "@type": "WebPage",
         url: PAGE_URL,
         name: property.projName || "",
-        description: desc || "",
+        description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         datePublished: launchDate || new Date().toISOString(),
         image:
           property.coverUrl?.split(",")[0] ||
@@ -208,7 +204,7 @@ export const generateAllSchemas = (
           "@type": "EntryPoint",
           urlTemplate: PAGE_URL,
         },
-        name: `Buy ${property.bhkNames.join(",") || "Property"} In ${
+        name: `Buy ${property?.bhkNames?.join(",") ?? "Property"} In ${
           property.projName || ""
         } ${property.locality ? `in ${property.locality}` : ""} ${
           property.city ? `, ${property.city}` : ""
@@ -225,7 +221,7 @@ export const generateAllSchemas = (
           "@type": "EntryPoint",
           urlTemplate: PAGE_URL,
         },
-        name: `Rent ${property.bhkNames.join(",") || "Property"} In ${
+        name: `Rent ${property?.bhkNames?.join(",") || "Property"} In ${
           property.projName || ""
         } ${property.locality ? `in ${property.locality}` : ""} ${
           property.city ? `, ${property.city}` : ""
@@ -243,12 +239,14 @@ export const generateAllSchemas = (
   return schemas;
 };
 
-export const ProjectSeachSchema = ({
+export const ResidentialProjectSchama = ({
   properties,
   pageUrl,
+  urls,
 }: {
   properties: any;
   pageUrl: string;
+  urls: string[];
 }) => {
   if (!Array.isArray(properties)) return null;
   let PAGE_IMAGE = "";
@@ -264,63 +262,72 @@ export const ProjectSeachSchema = ({
   if (!results.length) return null;
   const pagetitle = cleanHeading(pageUrl);
   const address = pagetitle.split("In")[1];
+  const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
   return (
     <>
       <script
-        id="projSearchScript1"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Residential Properties",
+            url: pageUrl,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: urls.map((url) => ({
+                "@type": "EntryPoint",
+                urlTemplate: url,
+              })),
+              query: "search term",
+            },
+          }),
+        }}
+      />
+
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
       <script
-        id="projSearchScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
             name: `Property Listings - ${pagetitle}`,
-            description: `Browse through our curated list of properties in ${pagetitle}`,
+            description: description,
             numberOfItems: properties.length,
-            itemListElement: properties.map((property, index) => {
-              const desc = `${property.projName} for sale in ${
-                property.locality
-              }, ${property.city}. Explore ${
-                property.projName
-              } project offering ${property.bhkNames.join(
-                ", "
-              )} configurations with prices ranging from ₹${property.minPrice.toLocaleString()} to ₹${property.maxPrice.toLocaleString()}. View Project Details, Price, Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details.`;
-
-              return {
-                "@type": "ListItem",
-                position: index + 1,
-                item: {
-                  "@type": "Apartment",
-                  name: property.projName,
-                  description: desc || "",
-                  image:
-                    property.coverUrl?.split(",")[0] ||
-                    "https://getrightproperty.com/default-property.jpg",
-                  url: createProjectLinkUrl({
-                    city: property.city,
-                    slug: property.projName,
-                    locality: property.locality,
-                    projIdEnc: property.projIdEnc,
-                  }),
-                  offers: {
-                    "@type": "Offer",
-                    price: property.minPrice || "0",
-                    priceCurrency: "INR",
-                  },
+            itemListElement: properties.map((property, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "Apartment",
+                name: property.projName,
+                description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
+                image:
+                  property.coverUrl?.split(",")[0] ||
+                  "https://getrightproperty.com/default-property.jpg",
+                url: createProjectLinkUrl({
+                  city: property.city,
+                  slug: property.projName,
+                  locality: property.locality,
+                  projIdEnc: property.projIdEnc,
+                }),
+                offers: {
+                  "@type": "Offer",
+                  price: property.minPrice || "0",
+                  priceCurrency: "INR",
                 },
-              };
-            }),
+              },
+            })),
           }),
         }}
       />
+
       <script
-        id="projSearchScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -347,7 +354,6 @@ export const ProjectSeachSchema = ({
         }}
       />
       <script
-        id="projSearchScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -413,7 +419,6 @@ export const ProjectSeachSchema = ({
         }}
       />
       <script
-        id="projSearchScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -502,7 +507,33 @@ export const ProjectSeachSchema = ({
         }}
       />
       <script
-        id="projSearchScript6"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                item: {
+                  "@id": baseURL,
+                  name: "Home",
+                },
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                item: {
+                  "@id": `${baseURL}/residential-listings/for-rent`,
+                  name: "for-rent",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -565,7 +596,6 @@ export const ProjectSeachSchema = ({
       />
 
       <script
-        id="projSearchScript7"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

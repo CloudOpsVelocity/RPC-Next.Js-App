@@ -1,5 +1,6 @@
+"use client"
 import React, { useEffect } from 'react'
-import { MdClose } from 'react-icons/md';
+// import { MdClose } from 'react-icons/md';
 import Close from '../../project/button/close';
 
 type Props = {
@@ -16,12 +17,29 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
         var baxEl = document.getElementById("modalDrawerPopupInnerCon");
         if (baxEl && !baxEl.contains(e.target)){
             document.body.style.overflow = "scroll";
+            // window.history.replaceState(null, "", window.location.href);
+            window.history.back();
             handleChange(false);
         }
     };
 
     useEffect(()=>{
-        isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
+        if (isOpen) {
+            document.body.style.overflow = "hidden"
+            window.history.pushState(null, "", window.location.href);   
+            const handlePopState = () => {
+              document.body.style.overflow = "scroll";  
+              window.history.back();
+              handleChange(false);
+            };
+      
+            window.addEventListener("popstate", handlePopState);
+            return () => window.removeEventListener("popstate", handlePopState);
+        }
+        else{
+            document.body.style.overflow = "scroll";
+            window.history.back();
+        }
     }, [isOpen]);
 
     // w-[0px] transition-[width] duration-[1s] hover:h-[500px] right-0 hover:absolute overflow-y-auto scrollbar-hide
@@ -45,6 +63,8 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
                         close={()=> {
                             handleChange(false);
                             document.body.style.overflow = "scroll";
+                            // window.history.replaceState(null, "", window.location.href);
+                            window.history.back();
                         }}
                         className=" hover:bg-gray-100 rounded-full w-[30px] h-[30px]"
                     />

@@ -14,7 +14,6 @@ import { filterParser } from "@/app/utils/search";
 import { createQueryString } from "@/app/utils/search/query";
 import { formatBudgetValue } from "@/app/(dashboard)/searchOldPage/components/buget";
 import Link from "next/link";
-import { useEffect } from "react";
 
 interface filters {
   bhks: string[];
@@ -69,21 +68,6 @@ const Searchbar = () => {
   const [opened, { close, toggle, open }] = useDisclosure(false);
   const wrapperRef = useClickOutside(() => close());
   const isTab = useMediaQuery("(max-width: 1600px)");
-
-  useEffect(() => {
-    if (opened) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("shearlModal", "");
-
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
-
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
 
   // styles
   const rangeSliderClasses = {

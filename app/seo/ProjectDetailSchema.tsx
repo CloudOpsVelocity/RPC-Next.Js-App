@@ -11,7 +11,6 @@ import {
   LOGO_URL,
 } from "./constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
-import Script from "next/script";
 
 interface ProjectData extends MERGERPROJECT {
   url: string;
@@ -45,7 +44,7 @@ const generateSchema = (projectData: ProjectData) => {
                   longitude: location.lang,
                 }
               : undefined,
-          additionalType: "http://schema.org/PropertyValue",
+          additionalType: "https://schema.org/PropertyValue",
           additionalProperty: {
             "@type": "PropertyValue",
             name: category,
@@ -82,7 +81,7 @@ const generateSchema = (projectData: ProjectData) => {
             },
             isFamilyFriendly: "https://schema.org/True",
             priceValidUntil: endDate,
-            itemCondition: "http://schema.org/NewCondition",
+            itemCondition: "https://schema.org/NewCondition",
           },
 
           review: {
@@ -146,7 +145,7 @@ const generateSchema = (projectData: ProjectData) => {
           price: basicData?.minPrice,
           validFrom: startDate,
           priceValidUntil: endDate,
-          availability: "http://schema.org/InStock",
+          availability: "https://schema.org/InStock",
           category: "RealEstate",
         },
         organizer: {
@@ -207,7 +206,7 @@ const generateSchema = (projectData: ProjectData) => {
           price: basicData?.minPrice,
           validFrom: startDate,
           priceValidUntil: endDate,
-          availability: "http://schema.org/InStock",
+          availability: "https://schema.org/InStock",
           category: "RealEstate",
         },
         organizer: {
@@ -268,7 +267,7 @@ const generateSchema = (projectData: ProjectData) => {
           price: basicData?.minPrice,
           validFrom: startDate,
           priceValidUntil: endDate,
-          availability: "http://schema.org/InStock",
+          availability: "https://schema.org/InStock",
           category: "RealEstate",
         },
         organizer: {
@@ -459,7 +458,7 @@ const generateSchema = (projectData: ProjectData) => {
       {
         "@type": "ApartmentComplex",
         name: basicData?.projectName,
-        description: basicData?.about,
+        description: desc,
         address: {
           "@type": "PostalAddress",
           addressLocality: basicData?.localityName,
@@ -484,8 +483,8 @@ const generateSchema = (projectData: ProjectData) => {
           "@type": "EntryPoint",
           urlTemplate: projectDetailsPageUrl,
           actionPlatform: [
-            "http://schema.org/DesktopWebPlatform",
-            "http://schema.org/MobileWebPlatform",
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform",
           ],
         },
         name: `View ${basicData?.projectName} Details`,
@@ -535,8 +534,8 @@ const generateSchema = (projectData: ProjectData) => {
             "@type": "EntryPoint",
             urlTemplate: projectDetailsPageUrl,
             actionPlatform: [
-              "http://schema.org/DesktopWebPlatform",
-              "http://schema.org/MobileWebPlatform",
+              "https://schema.org/DesktopWebPlatform",
+              "https://schema.org/MobileWebPlatform",
             ],
           },
         },
@@ -685,9 +684,7 @@ const generateSchema = (projectData: ProjectData) => {
 };
 
 const ProjectSchema = ({ projectData }: { projectData: ProjectData }) => (
-  // <div className="mt-[10%]  ">{generateSchema(projectData)}</div>
-  <Script
-  id="projDetailsScript1"
+  <script
     type="application/ld+json"
     dangerouslySetInnerHTML={{ __html: generateSchema(projectData) }}
   />

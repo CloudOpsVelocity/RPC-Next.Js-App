@@ -12,14 +12,12 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import { useHydrateAtoms } from "jotai/utils";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import { usePathname } from "next/navigation";
 import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
-import { number } from "yup";
 import ServerDataSection from "./ServerDataSection";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -37,7 +35,6 @@ function LeftSection({
   setIsTrue,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
-  // const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const pathname = usePathname();
@@ -88,17 +85,6 @@ function LeftSection({
     (data?.pages?.length || 0) > 0
       ? data?.pages.flat()
       : serverData || data?.pages?.flat() || [];
-
-  // const rowVirtualizer = useVirtualizer({
-  //   count: allItems?.length || 0,
-  //   getScrollElement: () => containerRef.current,
-  //   estimateSize: () => 300,
-  //   overscan: 5,
-  //   enabled: true,
-  //   measureElement: (element) => {
-  //     return element?.getBoundingClientRect().height || 300;
-  //   },
-  // });
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
@@ -220,57 +206,52 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       // ref={containerRef}
     >
-      <>
-        {isLoading || !allItems ? (
-          <LoadingBlock />
-        ) : allItems?.length > 0 ? (
-          <ServerDataSection
-            data={allItems}
-            refetch={refetch}
-            mutate={mutate}
-            state={state}
-          />
-        ) : (
-          // <ServerDataSection
-          //   data={allItems}
-          //   refetch={refetch}
-          //   mutate={mutate}
-          //   state={state}
-          // />
-          // allItems.map((eachOne: any, index: number) => {
-          //   return (
-          //     <ProjectCard
-          //       key={eachOne.projIdEnc + eachOne.propType}
-          //       refetch={refetch}
-          //       data={{ ...eachOne, type: state.listedBy ?? "proj" }}
-          //       index={index}
-          //       mutate={mutate}
-          //     />
-          //   );
-          // })
-          // <div
-          //   style={{
-          //     height: `${rowVirtualizer.getTotalSize()}px`,
-          //     width: "100%",
-          //     position: "relative",
-          //   }}
-          // >
-          //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-          // </div>
-          <EmptyState />
-        )}
+      {isLoading || !allItems ? (
+        <LoadingBlock />
+      ) : allItems?.length > 0 ? (
+        <ServerDataSection
+          data={allItems}
+          refetch={refetch}
+          mutate={mutate}
+          state={state}
+        />
+      ) : (
+        // <ServerDataSection
+        //   data={allItems}
+        //   refetch={refetch}
+        //   mutate={mutate}
+        //   state={state}
+        // />
+        // allItems.map((eachOne: any, index: number) => {
+        //   return (
+        //     <ProjectCard
+        //       key={eachOne.projIdEnc + eachOne.propType}
+        //       refetch={refetch}
+        //       data={{ ...eachOne, type: state.listedBy ?? "proj" }}
+        //       index={index}
+        //       mutate={mutate}
+        //     />
+        //   );
+        // })
+        // <div
+        //   style={{
+        //     height: `${rowVirtualizer.getTotalSize()}px`,
+        //     width: "100%",
+        //     position: "relative",
+        //   }}
+        // >
+        //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
+        // </div>
+        <EmptyState />
+      )}
 
-        {hasNextPage && shouldFetchMore && (
-          <div
-            ref={loadMoreRef}
-            className="text-center font-bold text-3xl py-3"
-          >
-            Loading...
-          </div>
-        )}
-        <LoginPopup />
-        <RequestCallBackModal />
-      </>
+      {hasNextPage && shouldFetchMore && (
+        <div ref={loadMoreRef} className="text-center font-bold text-3xl py-3">
+          Loading...
+        </div>
+      )}
+      <LoginPopup />
+      <RequestCallBackModal />
 
       <FloatingArrowIcon />
     </div>

@@ -261,12 +261,14 @@ const ProjectCarousel = ({
     data?.length > 0 && (
       <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
         <div className=" ">
-          <h3 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize">
-            {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
-            {title}
-            <span className="text-[#148B16] font-[700] uppercase ml-4 ">
-              {projName}
-            </span>
+          <h3 className="sm:text-[22px] xl:text-[28px] mb-[4px] sm:mb-[8px] xl:mb-[10px] font-bold capitalize">
+            <strong>
+              {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
+              <span className="text-[#001F35]">{title}</span>
+              <span className="text-[#148B16] uppercase ml-4 ">
+                {projName}
+              </span>
+            </strong>
           </h3>
           <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">
             {content}

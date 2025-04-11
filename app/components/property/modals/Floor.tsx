@@ -97,7 +97,11 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
               </>
             )}
             <button
-              onClick={() => setOpened(false)}
+              onClick={() => {
+                setOpened(false);
+                document.body.style.overflow = "scroll";  
+                window.history.back();
+              }}
               className="p-2 rounded-full hover:bg-gray-100 transition-colors bg-white"
             >
               <svg

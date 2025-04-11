@@ -35,6 +35,7 @@ export const getHomeListingData = async (
   const data = await res.json();
   return data;
 };
+
 export const getShortIds = async () => {
   const session = await getServerSession(options);
   if (session) {

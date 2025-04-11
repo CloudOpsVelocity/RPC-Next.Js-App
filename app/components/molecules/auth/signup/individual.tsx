@@ -17,7 +17,7 @@ import {
   MAX_LENGTH_EMAIL,
   MAX_LENTH_TEXT,
 } from "@/app/validations/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Success from "../success";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import {
@@ -37,20 +37,7 @@ function Individual() {
   const router = useRouter();
   const { register, login, saveStep } = useAuth({ type: "register" });
   const [opened, { open, close }] = useDisclosure(false);
-  useEffect(() => {
-    if (opened) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("shearlModal", "");
 
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
-
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
 
   const form = useForm({
     defaultValues: { name: "", email: "", password: "", mobile: undefined },
@@ -234,7 +221,7 @@ function Individual() {
                 const trimmedText = pastedText
                   .replace(/\D/g, "")
                   .replace(/^0+/, "");
-                console.log(trimmedText);
+                // console.log(trimmedText);
                 // Keep only the first 10 digits after processing
                 const first10Digits = trimmedText.slice(0, 10);
 

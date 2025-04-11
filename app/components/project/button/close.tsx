@@ -1,5 +1,5 @@
 import clsx from "clsx";
-const Close = ({ close, className }: { close: any; className?: string }) => {
+const Close = ({ close, className }: { close: any; className?: string}) => {
   return (
     <svg
       cursor={"pointer"}

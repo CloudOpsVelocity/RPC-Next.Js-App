@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 "use client";
 import {useMediaQuery} from "@mantine/hooks";
 import {em} from "@mantine/core";
@@ -54,7 +55,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
             </span>
           )}
         </h1>
-        <Close close={handleReadMoreClick} />
+        <Close close={handleReadMoreClick} className="w-[24px] h-[24px] md:w-[35px] md:h-[35px]" />
       </div>
 
       <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-1 pl-[10px] xl:pl-[57px] xl:pb-20 max-h-[calc(100vh-170px)] overflow-y-auto ">

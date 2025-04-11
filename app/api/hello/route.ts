@@ -39,7 +39,7 @@ export async function GET(req: Request) {
     let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1000&rank=distance&type=${keyword}&keyword=${keyword}&maxResultCount=10&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
     // console.log(url);
     const res = await axios.get(url);
-    console.log(res.data.results);
+    // console.log(res.data.results);
 
     const distanceUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&units=imperial&origins=${lat},${lng}&destinations=${res.data.results
       .map(
@@ -50,7 +50,7 @@ export async function GET(req: Request) {
       process.env.NEXT_PUBLIC_GOOGLE_API_KEY
     }`;
     const distanceRes = await axios.get(distanceUrl);
-    console.log(distanceRes.data);
+    // console.log(distanceRes.data);
 
     const combinedData = res.data.results.map((place: any, index: number) => {
       return {

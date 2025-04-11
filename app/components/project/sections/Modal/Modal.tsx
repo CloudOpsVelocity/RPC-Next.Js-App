@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-boolean-value */
 import React, { useState, useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
-import { projectReqDataAtom } from "@/app/store/project/project.req";
+// import { projectReqDataAtom } from "@/app/store/project/project.req";
 import Image from "next/image";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
@@ -25,6 +26,8 @@ import {
 import { BiMessage } from "react-icons/bi";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 // import { useMediaQuery } from "@mantine/hooks";
 
 const Modal = ({
@@ -37,8 +40,10 @@ const Modal = ({
   children: React.ReactNode;
 }) => {
   useEffect(() => {
+    window.history.pushState("masterplanModal", "");
+
     const handlePopState = () => {
-      onClose();
+      onClose(); 
     };
 
     if (isOpen) {
@@ -74,6 +79,8 @@ export default function PartialUnitModal({ data }: any) {
     setActive(0);
     reset();
   };
+
+  const opened = isData.main === 0 ? true : isData.main; 
 
   const [platform, setPlatform] = useState("");
 
@@ -138,21 +145,39 @@ export default function PartialUnitModal({ data }: any) {
     });
   };
 
+  useEffect(()=>{
+    if (opened) {
+        preventBackButton();
+        const handlePopState = () => {
+          document.body.style.overflow = "scroll";
+          handleReset();
+        };
+    
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+    }
+    // else{
+    //   allowBackButton();
+    // }
+  }, [opened]);
+
   const handleNext = () => {
     setActive((prev: number) => {
       if (prev < isData.others.length - 1) return prev + 1;
       return prev;
     });
   };
-  if (!(isData.main === 0 ? true : isData.main)) {
+  if (!opened) {
     return null;
   }
 
+
   return (
     <Modal
-      isOpen={isData.main === 0 ? true : isData.main}
+      isOpen={opened}  
       onClose={handleReset}
     >
+
       <div className="flex flex-col h-full ">
         {/* Header */}
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">

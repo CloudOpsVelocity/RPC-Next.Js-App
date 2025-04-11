@@ -5,7 +5,7 @@ import {
   // Phone,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
-import React, { useEffect } from "react";
+import React from "react";
 
 import Button from "../../elements/button";
 // import { useParams } from "next/navigation";
@@ -15,13 +15,14 @@ import RequestCallBackModal from "../molecules/popups/req";
 // import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import { NumberFormatter } from "@mantine/core";
 import Image from "next/image";
+// import useHistoryBackHandler from "../molecules/popups/popupCloser";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
   name,
   buiderName,
   basePrice,
-  brocherUrl,
+  // brocherUrl,
   builderId,
   slug,
 }: {
@@ -34,20 +35,7 @@ export default function OverviewBanner({
   builderId: number;
   slug: string;
 }) {
-  const [opened, { open, close }] = useReqCallPopup();
-  useEffect(() => {
-    if (opened) {
-      window.history.pushState("shearlModal", "");
-
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
-
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
+  const [, { open }] = useReqCallPopup();
   return (
     <div
       className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "
@@ -62,6 +50,7 @@ export default function OverviewBanner({
         alt="priceBagOverView"
         className="w-[100px] h-[120px] sm:max-w-[151px] xl:max-w-[237px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
         unoptimized
+        title="priceBagOverView"
       />
 
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%]  flex-wrap">
@@ -88,7 +77,7 @@ export default function OverviewBanner({
             <Button
               title="Request  Callback"
               buttonClass=" text-[#FFF] text-[12px] sm:text-[20px] xl:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3 sm:mt-0"
-              onChange={() =>
+              onChange={() =>{
                 open({
                   modal_type: "PROJECT_REQ_CALLBACK",
                   postedByName: buiderName,
@@ -96,8 +85,9 @@ export default function OverviewBanner({
                   source: "projBanner",
                   title: name,
                   postedId: builderId,
-                })
-              }
+                });
+                // pushHistory();
+              }}
             />
             {/* <DownloadBroucher
               className="block py-2.5 !font-[600] sm:hidden"

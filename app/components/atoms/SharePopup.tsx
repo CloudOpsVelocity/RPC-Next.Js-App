@@ -10,7 +10,7 @@ import {
 } from "@/app/images/commonSvgs";
 import { CopyButton, Modal, em } from "@mantine/core";
 import { useClipboard, useDisclosure, useMediaQuery } from "@mantine/hooks";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -38,23 +38,9 @@ export default function SharePopup({
   const CopiedUrl = url
     ? url
     : `${process.env.NEXT_PUBLIC_PROJECT_URL}${pathname}`;
-  const [opened, { open, close }] = useDisclosure(false); 
+  const [opened, { close }] = useDisclosure(false); 
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
-  useEffect(() => {
-    if (opened) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("shearlModal", "");
-
-      const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
-        close();
-      };
-
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
-  }, [opened]);
 
   return (
     <>

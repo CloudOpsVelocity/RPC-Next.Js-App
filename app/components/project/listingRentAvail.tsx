@@ -30,11 +30,13 @@ export default function ListingRentAvail({
       className="w-[95%] sm:w-[90%] mb-[3%] xl:mb-[0%]  sm:pt-[50px] m-auto sm:mb-[0%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
       id="listings-available"
     >
-      <h2 className="text-[20px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] sm:mb-[6px] xl:mb-[12px]">
-        Listings Available in{" "}
-        <span className="text-[#148B16] font-[700]  text-[20px] sm:text-[22px] xl:text-[32px]">
-          {projName}
-        </span>{" "}
+      <h2 className="text-[20px] sm:text-[22px] xl:text-[28px] font-bold mb-[12px] sm:mb-[6px] xl:mb-[12px]">
+        <strong>
+          <span className="text-[#001F35]">Listings Available in{" "}</span>
+          <span className="text-[#148B16]">
+            {projName}
+          </span>{" "}
+        </strong>
       </h2>
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />
@@ -110,11 +112,12 @@ const Card = ({
           width={100}
           height={100}
           className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px] "
+          title="listing"
         />
 
         <div className="pl-0">
           <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-[18px] xl:text-2xl not-italic font-medium leading-[31px]">
-            <span className="capitalize">{type}</span> Listings{" "}
+            <strong><span className="capitalize">{type}</span> Listings{" "}</strong>
           </h2>
         </div>
         <div
@@ -132,6 +135,7 @@ const Card = ({
             alt="stock icon"
             width={24}
             height={23}
+            title="stock icon"
           />
         </div>
       </div>
@@ -141,8 +145,8 @@ const Card = ({
 let config = {
   sellIcon: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/yellowarrow.png`,
   rentIcon: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/bluearrow.png`,
-  rentLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.svg`,
-  sellLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.svg`,
-  rentMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.svg`,
-  sellMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.svg`,
+  rentLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.webp`,
+  sellLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.webp`,
+  rentMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/rent.webp`,
+  sellMobileLogo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/sell.webp`,
 };

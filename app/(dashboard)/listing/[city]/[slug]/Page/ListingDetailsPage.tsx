@@ -148,7 +148,6 @@ export default function ListingDetailsPage({
             showProjName={false}
           />
         )}
-
         {/* Property Details */}
         <RoomDetails data={data} />
         {/* Floor Plan Block */}
@@ -188,7 +187,6 @@ export default function ListingDetailsPage({
             />
             {/* {data.postedById === projData.builderId && ( */}
             <>
-              {" "}
               <PropertyBanner
                 {...projData}
                 cityName={data.ctName}

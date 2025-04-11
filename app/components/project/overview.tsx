@@ -50,8 +50,8 @@ export default function Overview({
   state,
   basePrice,
   media,
-  postedByName,
-  phaseList,
+  // postedByName,
+  // phaseList,
   PhaseOverview,
   slug,
   projAuthorityNames,
@@ -61,6 +61,8 @@ export default function Overview({
     queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
     enabled: false,
   });
+
+  console.log(projAuthorityNames)
   return (
     <div
       className=" sm:pt-[2%] xl:pt-[2%] sm:scroll-mt-[138px] xl:scroll-mt-[150px] w-[95%] sm:[95%] xl:w-[90%] rounded-[24px] shadow-md mb-[5%] sm:mb-[0%]  mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -69,12 +71,12 @@ export default function Overview({
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div className="md:w-[80%]">
           <div className="">
-            <h2 className="text-[22px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap  w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
-              {projectName}
-            </h2>{" "}
+            <p className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
+            <strong>{projectName}</strong>
+            </p>{" "}
           </div>
 
-          <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
+          <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-bold leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             address:{" "}
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>

@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from 'react'
 import { MdClose } from 'react-icons/md';
 
@@ -10,16 +11,36 @@ type Props = {
 }
 
 function ModalBox({children, isOpen, handleChange, containerClassStyle, hideCrossIcon}: Props) {
+    const onClosePopup = () => {
+        document.body.style.overflow = "scroll";
+        handleChange(false);
+        history.back();
+    };
+
     const onMainConClick = (e:any) => {
         var baxEl = document.getElementById("modalPopupInnerCon");
         if (baxEl && !baxEl.contains(e.target)){
-            document.body.style.overflow = "scroll";
-            handleChange(false);
+            onClosePopup();
         }
     };
 
     useEffect(()=>{
-        isOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll";
+        if (isOpen) {
+            document.body.style.overflow = "hidden"
+            window.history.pushState(null, "", window.location.href);   
+            const handlePopState = () => {
+              document.body.style.overflow = "scroll";  
+              window.history.back();
+              handleChange(false);
+            };
+      
+            window.addEventListener("popstate", handlePopState);
+            return () => window.removeEventListener("popstate", handlePopState);
+        }
+        else{
+            document.body.style.overflow = "scroll";
+            window.history.back();
+        }
     }, [isOpen]);
 
     return (
@@ -33,10 +54,10 @@ function ModalBox({children, isOpen, handleChange, containerClassStyle, hideCros
             >
                 {hideCrossIcon !== true &&
                 <button
-                    onClick={() => handleChange(false)}
+                    onClick={() => onClosePopup()}
                     className="p-[4px] hover:bg-gray-100 rounded-full absolute top-0 right-0"
                 >
-                    <MdClose className="w-6 h-6" />
+                    <MdClose className="w-6 h-6" /> 
                 </button>
                 }
 

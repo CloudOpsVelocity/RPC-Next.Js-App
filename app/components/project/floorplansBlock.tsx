@@ -321,13 +321,17 @@ Props) {
         id="floor-plans"
       >
         <h2
-          className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
+          className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
           id="floorPlansdiv"
         >
-          Floor Plans For{" "}
-          <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
+          <strong>
+            <span className="text-[#001F35]">Floor Plans For{" "}</span>
+            <span className="text-[#148B16]">{projName}</span>{" "}
+          </strong>
         </h2>
-        <SubHeading text="See floor plans as per your selected property type" />
+        {/* <SubHeading text="See floor plans as per your selected property type" /> */}
+        <p className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2">See floor plans as per your selected property type</p>
+
         <div
           className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
             phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
@@ -646,6 +650,7 @@ Props) {
                               alt="image"
                               fill
                               unoptimized
+                              title="image"
                             />
                             {/* two ways to use it a global component and sencond USE GLOBAL VARIABLES I NEED 
                              TO KNOW SPLIT IT BEFORE GLOBAL COMPONENT IT WILL BE VERY TO DIFF TO DIFF
@@ -663,6 +668,7 @@ Props) {
                               src={ImgNotAvail}
                               className="w-[60%] sm:w-[60%] h-full cursor-pointer "
                               alt="image"
+                              title="image"
                             />
                           </div>
                         )}
@@ -764,6 +770,7 @@ Props) {
                             }
                             className="w-full h-full cursor-pointer  object-contain"
                             alt="image"
+                            title="image"
                             unoptimized
                           />
                         ) : (
@@ -793,6 +800,7 @@ Props) {
                                   : "lg:h-[450px]"
                               }`}
                               alt="image"
+                              title="image"
                             />
                           </div>
                         )}

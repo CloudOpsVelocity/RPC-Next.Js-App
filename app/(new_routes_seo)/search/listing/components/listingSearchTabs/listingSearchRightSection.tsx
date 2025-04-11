@@ -1,12 +1,12 @@
 "use client";
 import dynamic from "next/dynamic";
-import React, { useEffect, useMemo } from "react";
-import MapSkeleton from "@/app/components/maps/Skeleton";
+import React, { useMemo } from "react";
+// import MapSkeleton from "@/app/components/maps/Skeleton";
 import { useInfiniteQuery } from "react-query";
 import { getSearchData } from "../../../utils/project-search-queryhelpers";
 import { useQueryState } from "nuqs";
 import RTK_CONFIG from "@/app/config/rtk";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
@@ -30,7 +30,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       ),
     [] 
   );
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
   const dispatch = useSetAtom(overlayAtom);
@@ -67,22 +67,6 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
     });
 
   const apidata = !isTrue ? serverData : data?.pages.flat() || [];
-
-  useEffect(() => {
-      if (mapPopup.isOpen && isMobile) {
-        // Push a new state to the history stack when the modal is opened
-        window.history.pushState("listingSearchMapmodal", "");
-  
-        const handlePopState = () => {
-          document.body.style.overflow = "scroll"; 
-          setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
-          dispatch({ type: "CLOSE" })
-        };
-  
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
-      }
-    }, [mapPopup.isOpen]);
 
   return !isMobile ? (
     <div

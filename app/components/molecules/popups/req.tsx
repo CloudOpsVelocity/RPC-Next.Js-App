@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-boolean-value */
 "use client";
 import N from "@/app/styles/Numinput.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
-import { Modal, NumberInput, TextInput, em, Button as B } from "@mantine/core";
+import { NumberInput, TextInput, Button as B } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
 import { useForm, yupResolver } from "@mantine/form";
@@ -15,11 +16,24 @@ import Image from "next/image";
 import ReqOtpForm from "../../project/forms/otpform";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import { ReqcallbackMessage } from "../../project/success";
-import Styles from "@/app/styles/Qna.module.css";
+// import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
+import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
+// import useHistoryBackHandler from "./popupCloser";
 // import { title } from "process";
+
+export const preventBackButton = () => {
+  window.history.pushState(null, "", window.location.href);  
+  document.body.style.overflow = "hidden"; 
+};
+
+export const allowBackButton = () => {
+  window.history.back();
+  document.body.style.overflow = "scroll"; 
+};
+
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
@@ -27,50 +41,78 @@ const RequestCallBackModal = () => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
+
   const handleClose = () => {
     close();
     setTimeout(() => {
       setStatus("idle");
     }, 500);
+    allowBackButton();
   };
 
+  useEffect(()=>{
+    if (opened) {
+      preventBackButton();
+        const handlePopState = () => {
+          handleClose();
+        };
+    
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+    }
+    // else{
+    //   allowBackButton();
+    // }
+  }, [opened]);
+
+  
+
   return (
-    <Modal
-      opened={opened}
-      onClose={handleClose}
-      centered
-      size={
-        isMobile
-          ? "100%"
-          : status !== "success"
-          ? "65%"
-          : isTab
-          ? "40%"
-          : "auto"
-      }
-      className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0"
-      classNames={
-        status === "success"
-          ? {
-              title: Styles.title,
-              root: Styles.root,
-              close: Styles.close,
-              content: Styles.content,
-              overlay: Styles.overlay,
-              header: Styles.disabled,
-              body: Styles.body,
-            }
-          : {
-              close: S.close,
-              content: S.content,
-              body: S.body,
-              overlay: S.overlay,
-            }
-      }
-      zIndex={10000}
-      withCloseButton={false}
+    // <Modal
+    //   opened={opened}
+    //   onClose={handleClose}
+    //   centered
+    //   size={
+    //     isMobile
+    //       ? "100%"
+    //       : status !== "success"
+    //       ? "65%"
+    //       : isTab
+    //       ? "40%"
+    //       : "auto"
+    //   }
+    //   className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0"
+    //   classNames={
+    //     status === "success"
+    //       ? {
+    //           title: Styles.title, 
+    //           root: Styles.root,
+    //           close: Styles.close,
+    //           content: Styles.content,
+    //           overlay: Styles.overlay,
+    //           header: Styles.disabled,
+    //           body: Styles.body,
+    //         }
+    //       : {
+    //           close: S.close,
+    //           content: S.content,
+    //           body: S.body,
+    //           overlay: S.overlay,
+    //         }
+    //   }
+    //   zIndex={10000}
+    //   withCloseButton={false}
+    // >
+    opened &&
+    <ModalBox
+        isOpen={opened}
+        handleChange={() => {
+          handleClose();
+          document.body.style.overflow = "scroll";
+        }}
+        hideCrossIcon={true}
+        containerClassStyle={`!p-0 !rounded-[20px] ${ isMobile ? "!w-[94%]" : status !== "success" ? "!w-[65%]" : isTab ? "!w-[40%]" : "!w-[40%]" } `}
     >
-      {
         <div
           className={clsx(
             "bg-white relative rounded-lg  w-full overflow-hidden flex ",
@@ -125,8 +167,8 @@ const RequestCallBackModal = () => {
             </>
           )}
         </div>
-      }
-    </Modal>
+      </ModalBox>
+    // </Modal>
   );
 };
 export default RequestCallBackModal;

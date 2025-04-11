@@ -2,7 +2,7 @@ import React from "react";
 import { getPagesSlugs } from "../seo/api";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
-import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
+// import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
 import { SlugsType } from "../common/constatns/slug.constants";
@@ -20,14 +20,14 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
     sf: !!searchParams.sf,
   });
-  const pageUrl = `${process.env.NEXT_PUBLIC_URL}/${slug}`;
+  const pageUrl = `${slug}`;
   return (
     <main>
-      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/${slug}`} />
       <NewListingSearchpage
         serverData={severData}
         frontendFilters={frontEndFilter}
         pageUrl={pageUrl}
+        showProjectTab
       />
     </main>
   );
@@ -49,9 +49,13 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const id = params.slug.split("-");
   const heading = cleanHeading(id);
-
-  const twitterTitle = `${heading} - Getrightproperty`;
-  const twitterDescription = `Searching ${heading}, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`;
+  const isProject = !(
+    params.slug.includes("rent") || params.slug.includes("sale")
+  )
+    ? "Property For Sale And Rent"
+    : "";
+  const twitterTitle = `${isProject} ${heading}`;
+  const twitterDescription = `${isProject} ${heading}, Bangalore. Get a verified search without any charges on Getrightproperty.`;
   const imageUrl = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default.webp`;
   const url = `${process.env.NEXT_PUBLIC_SITE_URL}/${params.slug}`;
 
@@ -95,7 +99,13 @@ export async function generateMetadata(
 }
 
 function cleanHeading(id: string[]) {
-  return id
+  const sanitizedName = id.map((part) => {
+    if (part.includes("PJ")) {
+      return;
+    }
+    return part;
+  });
+  return sanitizedName
     .join(" ")
     .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
     .replace(/\s+/g, " ");

@@ -11,6 +11,10 @@ import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/Shar
 import { imageUrlParser } from "@/app/utils/image";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";
+import {
+  allowBackButton,
+  preventBackButton,
+} from "@/app/components/molecules/popups/req";
 
 interface ZoomableMasterplanModalProps {
   imageUrl: string;
@@ -24,28 +28,32 @@ export default function FullScreenMasterPlanModal({
   title = "Project Masterplan 2023",
 }: ZoomableMasterplanModalProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [, { open: LoginOpen }] = usePopShortList();
+  const [opened, { open: LoginOpen, close }] = usePopShortList();
   const { data: session } = useSession();
 
   const openModal = () => {
     document.body.style.overflow = "hidden";
     setIsOpen(true);
+    preventBackButton();
   };
   const closeModal = () => {
     document.body.style.overflow = "auto";
     setIsOpen(false);
+
+    document.body.style.overflow = "scroll";
+    allowBackButton();
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeModal();
-      }
-    };
+  // useEffect(() => {
+  //   const handleKeyDown = (event: KeyboardEvent) => {
+  //     if (event.key === "Escape") {
+  //       closeModal();
+  //     }
+  //   };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  //   window.addEventListener("keydown", handleKeyDown);
+  //   return () => window.removeEventListener("keydown", handleKeyDown);
+  // }, []);
 
   const handleShare = () => {
     navigator.share({ title: title, url: imageUrlParser(imageUrl, "M") });
@@ -96,6 +104,18 @@ export default function FullScreenMasterPlanModal({
     }
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      preventBackButton();
+      const handlePopState = () => {
+        closeModal();
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
+  }, [isOpen]);
+
   return (
     <div>
       <div className="relative max-h-[300px] min-h-[300px] sm:max-h-[600px]: sm:min-h-[600px]">
@@ -105,12 +125,12 @@ export default function FullScreenMasterPlanModal({
           <source media="(min-width: 1200px)" srcSet={imageUrl.split(",")[3]} />
           <Image
             alt={`${title} Master Plan`}
-            title={imageUrl.split(",")[3].split("/")[6].split(".")[0]}
             src={imageUrl.split(",")[3]}
             fill
             className="cursor-pointer max-h-[600px] object-contain shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
             onClick={openModal}
             unoptimized
+            title={`${title} Master Plan`}
           />
         </picture>
         <button

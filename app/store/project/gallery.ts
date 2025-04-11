@@ -19,7 +19,7 @@ interface GalleryAction {
   };
 }
 
-const INTITAL_VALUE: GalleryState = { items: [], title: "", opened: false,mediaType:"image",activeIndex:0 };
+const INTITAL_VALUE: GalleryState = { items: [], title: "", opened: false, mediaType:"image", activeIndex:0 };
 
 const galleryReducer = (state: GalleryState, action: GalleryAction): GalleryState => {
   switch (action.type) {

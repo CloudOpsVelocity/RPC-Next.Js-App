@@ -60,12 +60,14 @@ export default function PropertyBanner({
       />
       <div className=" inline-flex justify-center items-center ">
         {Svg}
-        <h2 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
-          about{" "}
-          <span className="text-[#148B16] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] capitalize">
-            {projectName}
-          </span>
-          <p className=" text-[#4D6677] text-h2  sm:text-[16px] xl:text-[24px] break-words italic font-medium leading-[normal] capitalize mt-2">
+        <h2 className="capitalize ml-6 mb-[14px] sm:text-[24px] xl:text-[28px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
+          <strong>
+            <span className="text-[#242424]">about{" "}</span>
+            <span className="text-[#148B16] not-italic">
+              {projectName}
+            </span>
+          </strong>
+          <p className=" text-[#4D6677] text-h2 sm:text-[16px] xl:text-[24px] break-words italic font-medium  mt-2">
             About project get summarized perspective for the incredible listing
           </p>
         </h2>

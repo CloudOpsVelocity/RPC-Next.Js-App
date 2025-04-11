@@ -11,7 +11,7 @@ import {
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 
@@ -20,7 +20,7 @@ import BuyRent from "../../components/FilterComponents/BuyRent";
 import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
 import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
 import dynamic from "next/dynamic";
-import { trimFromWord } from "../../components/ProjSearchBreadCrums";
+// import { trimFromWord } from "../../components/ProjSearchBreadCrums";
 import PageTitle from "../../components/filters/PageTitle";
 import { useMediaQuery } from "@mantine/hooks";
 // import SelectedFilters from "../../components/filters/SelectedFilters";
@@ -28,7 +28,13 @@ const SelectedFilters = dynamic(
   () => import("../../components/filters/SelectedFilters")
 );
 
-const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
+const ListingHeaderFilters = ({
+  isListing,
+  showProjectTab,
+}: {
+  isListing?: boolean;
+  showProjectTab: boolean;
+}) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
@@ -41,7 +47,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
-  
+
   const {
     data: searchData,
     isLoading,
@@ -273,15 +279,13 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       return;
     }
   };
-  
 
   useEffect(() => {
     if (isDrawerOpen && isMobile) {
-      // Push a new state to the history stack when the modal is opened
-      window.history.pushState("projeSearchModalModal", "");
+      window.history.pushState(null, "", window.location.href);
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
+        document.body.style.overflow = "scroll";
         setIsDrawerOpen(false);
         document.body.style.overflow = "unset";
       };
@@ -289,8 +293,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       window.addEventListener("popstate", handlePopState);
       return () => window.removeEventListener("popstate", handlePopState);
     }
-}, [isDrawerOpen]);
-
+  }, [isDrawerOpen]);
 
   return (
     <>
@@ -452,7 +455,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
           <PageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            <ListingSearchTabs />
+            <ListingSearchTabs showProjectTab={showProjectTab} />
             <SelectedFilters />
           </div>
 
