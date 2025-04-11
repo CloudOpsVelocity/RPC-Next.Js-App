@@ -15,7 +15,8 @@ export default async function page({}: Props) {
       </div>
     );
   });
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=0`;
+let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=0`;
+  //let url = `https://www.getrightproperty.com/srp/margdataurl/searchproj?page=0`;
 
   const { data } = await axios.get(url);
   return (
