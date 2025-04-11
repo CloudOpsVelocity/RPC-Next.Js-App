@@ -37,7 +37,8 @@ export default function Filters({}: Props) {
   return (
     <section className=" container sm:mx-auto  mt-6 sm:mt-16 px-1  sm:px-4">
       <div className="bg-card shadow-xl rounded-xl py-1 sm:p-6 z-[500] bg-white">
-        <div className="grid  grid-cols-[1fr_1fr_1fr_auto] md:grid-cols-4 gap-1 md:gap-4">
+        <div className="grid  grid-cols-[1fr_1fr_auto] md:grid-cols-4 gap-1 md:gap-4">
+      {/*   <div className="flex flex-row items-center gap-4 flex-wrap"> */}
           {/* <div>
             <label className="block text-sm font-medium mb-2">
               Property Type

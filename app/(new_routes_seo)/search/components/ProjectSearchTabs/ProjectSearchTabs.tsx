@@ -72,8 +72,7 @@ const ProjectSearchTabs = () => {
   const setNearby = useSetAtom(selectedNearByAtom);
 
   const handleTabsChange = (value: string | null) => {
-    console.log(value);
-    (typeof window !== "undefined")
+    typeof window !== "undefined"
       ? window.scrollTo({ top: 0, behavior: "smooth" })
       : "";
     setSelected(null);
@@ -131,7 +130,7 @@ const ProjectSearchTabs = () => {
 
     handleApplyFilters();
   };
-  
+
   const handleSortBy = (option: any) => {
     dispath({
       payload: {
@@ -189,7 +188,7 @@ const ProjectSearchTabs = () => {
                     state.listedBy === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
-                    }
+                  }
                   `}
                 >
                   {tab.label}

@@ -15,7 +15,6 @@ export default function UndoRedo({
   form: any;
   handleSearch: (data: any) => void;
 }) {
-  console.log(history.history);
   const isUno = history.history[history.current - 1] !== undefined;
   const isRedo = history.history[history.current + 1] !== undefined;
   const handleBack = () => {

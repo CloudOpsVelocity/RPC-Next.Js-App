@@ -73,7 +73,6 @@ const ListingSearchTabs = ({
   }, [isDropdownOpen]);
 
   const handleTabsChange = (value: string | null) => {
-    console.log(value);
     const updatedFilters =
       value === null
         ? {

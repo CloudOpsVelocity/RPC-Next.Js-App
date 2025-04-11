@@ -101,11 +101,9 @@ export default function SearchSec({}: Props) {
   };
 
   const handleKeyDown = async (event: any) => {
-   
-    if (!(/[^a-zA-Z0-9\s]/.test(name as string ))) {
+    if (!/[^a-zA-Z0-9\s]/.test(name as string)) {
       if (event.key === "Enter" || event.key === "click") {
-
-        if(!(event.key === "click")){
+        if (!(event.key === "click")) {
           event.preventDefault();
         }
         const res = await fetch(
@@ -120,21 +118,23 @@ export default function SearchSec({}: Props) {
           let URLReNew = URLCreater(ids);
           //alert(JSON.stringify(ids));
           if (URLReNew != "") {
-            const toRedirect= (f.propType === 36 || f.cg == "R" ) ? `/search/listing?sf=listedBy=All-${URLReNew}` : `/search?sf=listedBy=All-${URLReNew}`
-         //alert(toRedirect)
-          router.push(toRedirect)       
+            const toRedirect =
+              f.propType === 36 || f.cg == "R"
+                ? `/search/listing?sf=listedBy=All-${URLReNew}`
+                : `/search?sf=listedBy=All-${URLReNew}`;
+            //alert(toRedirect)
+            router.push(toRedirect);
           }
         } else {
-          console.log((f.propType === 36 || f.cg == "R" )? true : false)
-          const whichPage = (f.propType === 36 || f.cg == "R" ) ? "/search/listing" : "/search"
-          router.push(`${whichPage}?sf=${toQueryParams(f)}`);          
+          const whichPage =
+            f.propType === 36 || f.cg == "R" ? "/search/listing" : "/search";
+          router.push(`${whichPage}?sf=${toQueryParams(f)}`);
         }
       }
-    };
     }
-  
-   
-/*   const handleSearch = (projIdEnc?: string) => {
+  };
+
+  /*   const handleSearch = (projIdEnc?: string) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
 
     if (projIdEnc) {
@@ -168,96 +168,99 @@ export default function SearchSec({}: Props) {
 
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
 
-//console.log(name,  dropdownOpen ,searchError )
+  //console.log(name,  dropdownOpen ,searchError )
   return (
     <div className="realtive w-[100%] " ref={searchContainerRef}>
       <div
         onClick={() => setShowAllLocalities(!showAllLocalities)}
         className="w-[100%] sm:min-w-[49.9%] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start flex-wrap"
       >
-      <div className="flex justify-between items-center gap-[10px] w-full">
-      <div className="flex items-center w-full ">
-                <span className="cursor-pointer"  onClick={()=>handleKeyDown({key:"click"})}>{config.searchIcon}</span> 
-              
-        <div className="flex flex-wrap gap-2 items-center h-auto">
-          {f.locality?.map(
-            (each, index) =>
-              (showAllLocalities || index < (isTab ? 1 : 2)) && (
-                <Pill
-                  className="capitalize !text-[12px] !sm:text-[14px]"
-                  onRemove={() =>
-                    dispatch({ type: "REMOVE_LOCALITY", payload: each })
-                  }
-                  key={each}
-                  withRemoveButton
-                  classNames={{ root: classes.MultiSelectionPill }}
-                >
-                  {each.split("+")[0]}
-                </Pill>
-              )
-          )}
-          {f.locality?.length > (isTab ? 1 : 2) &&
-            !showAllLocalities &&
-            f.locality?.length > (isTab ? 1 : 2) && (
-              <Pill
-                className="capitalize cursor-pointer"
-                classNames={{ root: classes.MultiSelectionPill }}
-                onClick={() => setShowAllLocalities(true)}
-              >
-                {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
-              </Pill>
-            )}
+        <div className="flex justify-between items-center gap-[10px] w-full">
+          <div className="flex items-center w-full ">
+            <span
+              className="cursor-pointer"
+              onClick={() => handleKeyDown({ key: "click" })}
+            >
+              {config.searchIcon}
+            </span>
+
+            <div className="flex flex-wrap gap-2 items-center h-auto">
+              {f.locality?.map(
+                (each, index) =>
+                  (showAllLocalities || index < (isTab ? 1 : 2)) && (
+                    <Pill
+                      className="capitalize !text-[12px] !sm:text-[14px]"
+                      onRemove={() =>
+                        dispatch({ type: "REMOVE_LOCALITY", payload: each })
+                      }
+                      key={each}
+                      withRemoveButton
+                      classNames={{ root: classes.MultiSelectionPill }}
+                    >
+                      {each.split("+")[0]}
+                    </Pill>
+                  )
+              )}
+              {f.locality?.length > (isTab ? 1 : 2) &&
+                !showAllLocalities &&
+                f.locality?.length > (isTab ? 1 : 2) && (
+                  <Pill
+                    className="capitalize cursor-pointer"
+                    classNames={{ root: classes.MultiSelectionPill }}
+                    onClick={() => setShowAllLocalities(true)}
+                  >
+                    {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
+                  </Pill>
+                )}
+            </div>
+            <input
+              placeholder={
+                f.locality.length > 0
+                  ? "Add More"
+                  : "Search By Locality, Project, Listing"
+              }
+              onClick={handleFieldClick}
+              value={searchQuery ?? ""}
+              onChange={(e) => {
+                handleSearchChange(e);
+              }}
+              maxLength={80}
+              pattern="[a-zA-Z0-9\s]+"
+              title="Only letters, numbers, and spaces are allowed."
+              onKeyDown={handleKeyDown}
+              /* min-w-[234px]   sm:min-w-[255px] we change input width for full text visible in search main  */
+              className=" min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
+            />
+          </div>
+          <div className="flex gap-2">
+            <Nearme />
+            <div
+              onClick={() => handleKeyDown({ key: "click" })}
+              className={`flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6] cursor-pointer`}
+            >
+              {isMobileStarting ? config.searchBtnIcon : "Search"}
+            </div>
+          </div>
         </div>
-        <input
-          placeholder={
-            f.locality.length > 0
-              ? "Add More"
-              : "Search By Locality, Project, Listing"
-          }
-          onClick={handleFieldClick}
-          value={searchQuery ?? ""}
-          onChange={(e) => {
-            handleSearchChange(e)
-          }}
-          maxLength={80}
-           pattern="[a-zA-Z0-9\s]+"
-           title="Only letters, numbers, and spaces are allowed."
-          onKeyDown={handleKeyDown}
-          /* min-w-[234px]   sm:min-w-[255px] we change input width for full text visible in search main  */
-          className=" min-w-[100%] text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
-        />
       </div>
-      <div className="flex gap-2">
-                <Nearme />
-                <div
-                  onClick={()=>handleKeyDown({key:"click"})}
-                  className={`flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6] cursor-pointer`}
-                >
-                  {isMobileStarting ? config.searchBtnIcon : "Search"}
-                </div>
-      </div>
-      </div>
-      </div>
-        
-      {
-  ((name && dropdownOpen) || searchError !== '') && (
-    <div
-      className={`${
-        isMobile
-          ? 'min-w-[92%] max-w-[92%] w-full '
-          : 'max-w-[calc(100% - 70%)]'
-      } sm:max-w-[100%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] mt-2 bg-white shadow-xl absolute z-10 max-h-[400px] overflow-y-auto`}
-    >
-      <div className="flex items-center justify-between p-2 border-b">
-        {searchError !== '' ? (
-          <div className="p-3">{searchError}</div>
-        ) : (
-          <Results />
-        )}
-      </div>
+      {((name && dropdownOpen) || searchError !== "") && (
+        <div
+          className={`${
+            isMobile
+              ? "min-w-[92%] max-w-[92%] w-full "
+              : "max-w-[calc(100% - 70%)]"
+          } sm:max-w-[100%] !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%] mt-2 bg-white shadow-xl absolute z-10 max-h-[400px] overflow-y-auto`}
+        >
+          <div className="flex items-center justify-between p-2 border-b">
+            {searchError !== "" ? (
+              <div className="p-3">{searchError}</div>
+            ) : (
+              <Results />
+            )}
+          </div>
+        </div>
+      )}{" "}
     </div>
-  )
-}   </div>
   );
 }
 const config = {

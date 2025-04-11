@@ -67,11 +67,8 @@ export default function GalleryBlock({
             id="videos"
           >
             <strong>
-              <span className="text-[#001F35]">Gallery of{" "}</span>
-              <span
-                className="text-[#148B16] scroll-mt-[260px]"
-                id="photos"
-              >
+              <span className="text-[#001F35]">Gallery of </span>
+              <span className="text-[#148B16] scroll-mt-[260px]" id="photos">
                 {projName}
               </span>{" "}
             </strong>
@@ -118,9 +115,9 @@ export default function GalleryBlock({
                     <Image
                       src={selectedMedia.split(",")[2]}
                       alt="Preview"
-                      title={type === "prop"
-                                ? "Property Gallery"
-                                : "Project Gallery"}
+                      title={
+                        type === "prop" ? "Property Gallery" : "Project Gallery"
+                      }
                       className="cursor-pointer object-contain"
                       onClick={() => {
                         dispatch({
@@ -159,7 +156,7 @@ export default function GalleryBlock({
                           ? isVideo
                             ? "Property Video"
                             : "Property Gallery"
-                          : isVideo 
+                          : isVideo
                           ? "Project Video"
                           : "Project Gallery",
                       activeIndex: isVideo
@@ -188,7 +185,6 @@ export default function GalleryBlock({
               const imageUrl = img.split(",")[1];
               const imageName = imageUrl.split("/")[6]?.split(".")[0];
               const allSizesSchemas = img.split(",").map((url) => {
-                console.log(`galleryBlock_${ind.toString()}`)
                 return (
                   <script
                     key={`galleryBlock_${ind.toString()}`}
