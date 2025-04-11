@@ -19,19 +19,12 @@ export default async function page({}: Props) {
   //let url = `https://www.getrightproperty.com/srp/margdataurl/searchproj?page=0`;
 
   const { data } = await axios.get(url);
-  const uniqueProperties = Array.from(
-    new Map(
-      data?.data?.map((property: any) => [
-        property.projIdEnc,
-        { ...property, projIdEnc: property.projIdEnc || null },
-      ])
-    ).values()
-  );
+
   return (
     <>
       <ResidentialProjectSchama
         pageUrl="/residential"
-        properties={uniqueProperties}
+        properties={data?.data.slice(40)}
         urls={data?.urls}
       />
       {data ? <ResidentialPage data={data} /> : <LoadingSpinner />}
@@ -39,4 +32,4 @@ export default async function page({}: Props) {
   );
 }
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
