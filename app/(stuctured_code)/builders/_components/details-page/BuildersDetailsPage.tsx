@@ -20,6 +20,7 @@ type Props = { data: any; id: string };
 
 export default function BuilderDetailsPage({ data, id }: Props) {
   const refURls = data?.data?.sourceBuilderUrl?.split(",");
+  console.log(data)
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       <link
@@ -47,6 +48,7 @@ export default function BuilderDetailsPage({ data, id }: Props) {
                   ? data.data.cityName
                   : ""
               }
+              cityID={`  ${data?.data?.city}`}
               builderName={data?.data?.userName}
             />
             {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
