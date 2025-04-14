@@ -1,4 +1,39 @@
 const BASE_URL = process.env.NEXT_PUBLIC_URL;
+const viewActionConfigs = [
+  {
+    title: "Featured Projects",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search`,
+  },
+  {
+    title: "Ready to Move Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=s-propStatus=R`,
+  },
+  {
+    title: "Ready to Move Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=R-propStatus=R`,
+  },
+  {
+    title: "Featured Plot Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=32`,
+  },
+  {
+    title: "Under Construction Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U`,
+  },
+  {
+    title: "Under Construction Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U-cg=R`,
+  },
+  {
+    title: "Independent Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=S`,
+  },
+  {
+    title: "Independent Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=R`,
+  },
+];
+
 let homeLinksData = [
   {
     name: "Home",
@@ -103,8 +138,8 @@ let homeLinksData = [
     name: "Register Individual",
   },
 ];
-
-export const homeSiteNavigationSchemaData = {
+// const viewActionJsonLd = ;
+export const viewActionJsonLd = {
   "@context": "https://schema.org",
   "@graph": homeLinksData.map((item) => ({
     "@type": "SiteNavigationElement",
@@ -112,11 +147,20 @@ export const homeSiteNavigationSchemaData = {
     url: item.url,
   })),
 };
+export const homeSiteNavigationSchemaData = {
+  "@context": "https://schema.org",
+  "@graph": viewActionConfigs.map(({ title, url }) => ({
+    "@context": "https://schema.org",
+    "@type": "ViewAction",
+    name: title,
+    target: url,
+  })),
+};
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "GetRightProperty",
+  name: "Get Right Property",
   url: "https://getrightproperty.com",
   description:
     "Find your perfect property in Bangalore with GetRightProperty - Your trusted real estate partner",
@@ -124,7 +168,8 @@ const websiteSchema = {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://getrightproperty.com/search?q={search_term_string}",
+      urlTemplate:
+        "https://getrightproperty.com/search?sf={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   },
@@ -141,7 +186,10 @@ const productSchema = {
   "@type": "Product",
   name: "GetRightProperty",
   description:
-    "A comprehensive real estate platform for property search, listing and comparison in Bangalore",
+    "A comprehensive real estate platform for property search, listing, and comparison in Bangalore",
+  image:
+    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
+  category: "Real Estate Services",
   brand: {
     "@type": "Brand",
     name: "GetRightProperty",
@@ -159,9 +207,6 @@ const productSchema = {
     ratingValue: "4.5",
     reviewCount: "100",
   },
-  image:
-    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
-  category: "Real Estate Services",
 };
 
 const offerSchema = {
@@ -193,19 +238,31 @@ const offerSchema = {
   },
 };
 
-const breadcrumbSchema = {
+const webPageSchema = {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: homeLinksData.map((value, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    item: {
-      "@id": value.url,
-      name: value.name,
-      url: value.url,
-    },
-  })),
+  "@type": "WebPage",
+  name: "Homepage",
+  url: "https://www.getrightproperty.com",
+  description:
+    "Discover properties for sale and rent across India. Get Right Property offers a user-friendly platform to post listings, connect with buyers and sellers, and stay updated with the latest real estate trends.",
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://www.getrightproperty.com",
+  },
 };
+// const breadcrumbSchema = {
+//   "@context": "https://schema.org",
+//   "@type": "BreadcrumbList",
+//   itemListElement: homeLinksData.map((value, index) => ({
+//     "@type": "ListItem",
+//     position: index + 1,
+//     item: {
+//       "@id": value.url,
+//       name: value.name,
+//       url: value.url,
+//     },
+//   })),
+// };
 
 const FaqSchema = {
   "@context": "https://schema.org",
@@ -322,46 +379,59 @@ export const HomeSiteNavigationSchema = () => {
   return (
     <>
       <script
-        id="homeScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(homeSiteNavigationSchemaData),
         }}
       />
 
-      <script
-        id="homeScript2"
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
         }}
-      />
+      /> */}
       <script
-        id="homesScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productSchema),
         }}
       />
       <script
-        id="homeScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(offerSchema),
         }}
       />
-      <script
+      {/* <script
         id="homeScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
         }}
-      />
+      /> */}
       <script
-        id="homeScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(FaqSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(viewActionJsonLd),
         }}
       />
     </>

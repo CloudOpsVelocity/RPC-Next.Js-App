@@ -1,9 +1,10 @@
 import React from "react";
 import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFilterSection";
-import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
+// import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
 // import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
 import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
 import ListingMainSection from "./components/ListingMainSection";
+import { Metadata } from "next";
 
 type Props = {};
 
@@ -28,3 +29,24 @@ export default function Page({}: Props) {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Explore Properties for Sale & Rent in India | GetRightProperty",
+  description:
+    "Browse verified real estate listings across India. Find your perfect home or investment property with GetRightProperty's user-friendly search tools.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Explore Properties for Sale & Rent in India | GetRightProperty",
+    url: "https://www.getrightproperty.com/search/listing",
+    type: "website",
+    images:
+      "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
+    description:
+      "Browse verified real estate listings across India. Find your perfect home or investment property with GetRightProperty's user-friendly search tools.",
+  },
+};
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;

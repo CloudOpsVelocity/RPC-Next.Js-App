@@ -24,6 +24,7 @@ type Props = {
   location?: string;
   id?: string;
   builderName: string;
+  cityID:string;
 };
 
 type CardProps = {
@@ -225,6 +226,7 @@ const BuilderCarousel = ({
   projName,
   location,
   id,
+  cityID,
   builderName,
 }: Props) => {
   const getBuilderProjects = async () => {
@@ -232,6 +234,7 @@ const BuilderCarousel = ({
     const data = await axios.post(url);
     return data.data.projectBuilder;
   };
+  console.log(cityID)
   const { data, isLoading, refetch } = useQuery({
     queryFn: getBuilderProjects,
     queryKey: ["getBuilderProjects" + id],
@@ -242,6 +245,9 @@ const BuilderCarousel = ({
   if (!data || data?.length == 0) {
     return;
   }
+  const builderQueryNameAndId = encodeURIComponent(`${builderName}+${id}`);
+  const cityIdmaking=cityID.trim()
+  const cityQueryNameAndID=encodeURIComponent(`${location}+${cityIdmaking}`);
   return (
     <div className="w-full mb-[4%]">
       <h2 className="ml-0 md:ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold px-4 sm:px-0">
@@ -265,7 +271,7 @@ const BuilderCarousel = ({
         )}
         slidesToShow={4}
         gap={10}
-        url="/search"
+        url={`/search?sf=builderIds=${builderQueryNameAndId}-city=${cityQueryNameAndID}`}
       />
       {/* <MainCarousel
         paddings={{
