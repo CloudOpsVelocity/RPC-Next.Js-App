@@ -219,6 +219,7 @@ export default function SearchSec({}: Props) {
                   ? "Add More"
                   : "Search By Locality, Project, Listing"
               }
+              name="search_term_string"
               onClick={handleFieldClick}
               value={searchQuery ?? ""}
               onChange={(e) => {

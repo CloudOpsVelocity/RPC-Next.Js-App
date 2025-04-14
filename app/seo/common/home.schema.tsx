@@ -116,7 +116,7 @@ export const homeSiteNavigationSchemaData = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "GetRightProperty",
+  name: "Get Right Property",
   url: "https://getrightproperty.com",
   description:
     "Find your perfect property in Bangalore with GetRightProperty - Your trusted real estate partner",
@@ -124,7 +124,8 @@ const websiteSchema = {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://getrightproperty.com/search?q={search_term_string}",
+      urlTemplate:
+        "https://getrightproperty.com/search?sf={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   },
@@ -193,6 +194,18 @@ const offerSchema = {
   },
 };
 
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Homepage",
+  url: "https://www.getrightproperty.com",
+  description:
+    "Discover properties for sale and rent across India. Get Right Property offers a user-friendly platform to post listings, connect with buyers and sellers, and stay updated with the latest real estate trends.",
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://www.getrightproperty.com",
+  },
+};
 // const breadcrumbSchema = {
 //   "@context": "https://schema.org",
 //   "@type": "BreadcrumbList",
@@ -322,29 +335,25 @@ export const HomeSiteNavigationSchema = () => {
   return (
     <>
       <script
-        id="homeScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(homeSiteNavigationSchemaData),
         }}
       />
 
-      <script
-        id="homeScript2"
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
         }}
-      />
+      /> */}
       <script
-        id="homesScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productSchema),
         }}
       />
       <script
-        id="homeScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(offerSchema),
@@ -358,10 +367,21 @@ export const HomeSiteNavigationSchema = () => {
         }}
       /> */}
       <script
-        id="homeScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(FaqSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
         }}
       />
     </>
