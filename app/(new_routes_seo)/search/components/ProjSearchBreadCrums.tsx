@@ -9,6 +9,7 @@ interface BreadcrumbItem {
 interface BreadcrumbProps {
   items?: BreadcrumbItem[];
   pageUrl: string;
+  is2lakhUrls?: boolean;
 }
 
 export const trimFromWord = (str: string, word: string) => {
@@ -16,13 +17,16 @@ export const trimFromWord = (str: string, word: string) => {
   return index !== -1 ? str.substring(index + word.length) : "";
 };
 
-const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
+const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
+  pageUrl,
+  is2lakhUrls = false,
+}) => {
   function trimStringUrl(str: string, word: string) {
     const index = str.indexOf(word);
     return index !== -1 ? str.substring(0, index + word.length) : str;
   }
 
-  let newParams: string[] = [];
+  let newParams: string[] = is2lakhUrls ? ["Home", "Residentail Listings"] : [];
   if (pageUrl === "/search") {
     newParams = ["Project Search"];
   } else if (pageUrl === "/search/listing") {
@@ -40,7 +44,24 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
   } else if (pageUrl === "/residential-listings") {
     newParams = ["Residential Listings"];
   }
-
+  const Listing_data = newParams.reduceRight(
+    (intialValue, currentValue, index) => {
+      intialValue[index] = currentValue;
+      return intialValue;
+    },
+    {} as Partial<any>
+  );
+  let array = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "Residential Listing",
+      path: "/residential-liting",
+    },
+  ];
+  const data = array.keys();
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -72,16 +93,6 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({ pageUrl }) => {
         }}
       />
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
-        {/* <li>
-          <Link
-            rel="noopener noreferrer"
-            href="/"
-            className="flex items-center text-gray-600 hover:text-blue-600 transition-all duration-200"
-          >
-            <FaHome className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
-            <span className="sr-only">Home</span>
-          </Link>
-        </li> */}
         {newParams.map((item: any, index: number) => {
           let url = index === 0 ? "/" : trimStringUrl(pageUrl, item);
           return (

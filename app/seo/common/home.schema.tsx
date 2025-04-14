@@ -1,33 +1,106 @@
-const homeLinksData = [
+const BASE_URL = process.env.NEXT_PUBLIC_URL;
+let homeLinksData = [
   {
     name: "Home",
-    url: "/",
+    url: BASE_URL,
   },
   {
     name: "Post Property",
-    url: "/post-your-listing",
+    url: `${BASE_URL}/post-your-listing`,
   },
   {
     name: "Post Project",
-    url: "/post-your-project",
+    url: `${BASE_URL}/post-your-project`,
   },
-  { name: "About", url: "/about" },
   {
     name: "Compare Property And Projects",
-    url: "/your-profile/compares",
+    url: `${BASE_URL}/your-profile/compares`,
   },
-  { name: "Your Best Real Estate Guide", url: "/contact" },
+  { name: "Your Best Real Estate Guide", url: `${BASE_URL}/contact` },
   {
     name: "Individual Signup",
-    url: "/register/individual",
+    url: `${BASE_URL}/register/individual`,
   },
   {
     name: "Agent Signup",
-    url: "/register/agent",
+    url: `${BASE_URL}/register/agent`,
   },
   {
     name: "Builder Signup",
-    url: "/register/builder",
+    url: `${BASE_URL}/register/builder`,
+  },
+  {
+    url: "https://www.getrightproperty.com/buying-guide",
+    name: "Buying Guide",
+  },
+  { url: "https://www.getrightproperty.com/about", name: "About Us" },
+  { url: "https://www.getrightproperty.com/team", name: "Our Team" },
+  { url: "https://www.getrightproperty.com/careers", name: "Careers" },
+  { url: "https://www.getrightproperty.com/get-in-touch", name: "Contact Us" },
+  {
+    url: "https://www.getrightproperty.com/privacy-policy",
+    name: "Our Privacy Policy",
+  },
+  {
+    url: "https://www.getrightproperty.com/terms-and-conditions",
+    name: "Terms And Conditons",
+  },
+  {
+    url: "https://www.getrightproperty.com/blog",
+    name: "GetRight Property Blogs",
+  },
+  {
+    url: "https://www.getrightproperty.com/search",
+    name: "Projects Search",
+  },
+
+  { url: "https://www.getrightproperty.com/builders", name: "Builders" },
+  {
+    url: "https://www.getrightproperty.com/search/listing",
+    name: "Listings Search",
+  },
+  {
+    url: "https://www.getrightproperty.com/residential-listings",
+    name: "Residentail Listings",
+  },
+  {
+    url: "https://www.getrightproperty.com/residential",
+    name: "Residential Projects",
+  },
+
+  { url: "https://www.getrightproperty.com/forgot", name: "Forgot Us" },
+  {
+    url: "https://www.getrightproperty.com/abc/video",
+    name: "GetRright Properties Videos",
+  },
+  {
+    url: "https://www.getrightproperty.com/market-trends/locality-insights",
+    name: "Locality Insights",
+  },
+  {
+    url: "https://www.getrightproperty.com/market-trends/news",
+    name: "Our News",
+  },
+  {
+    url: "https://www.getrightproperty.com/selling-tips",
+    name: "Selling Tips",
+  },
+
+  { url: "https://www.getrightproperty.com/sitemap.xml", name: "SiteMap" },
+  { url: "https://www.getrightproperty.com/robots.txt", name: "Robots TXT" },
+  { url: "https://www.getrightproperty.com/login", name: "Login" },
+  { url: "https://www.getrightproperty.com/register", name: "Register" },
+  {
+    url: "https://www.getrightproperty.com/register/agent",
+    name: "Register Agent",
+  },
+  {
+    url: "https://www.getrightproperty.com/register/builder",
+    name: "Register Builder",
+  },
+  {
+    url: "https://www.getrightproperty.com/register/individual",
+    name: "Register Individual",
   },
 ];
 

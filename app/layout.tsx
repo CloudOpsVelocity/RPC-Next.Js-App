@@ -102,8 +102,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <Script
-        id="rootLayoutScript1"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(Organization_SCHEMA),

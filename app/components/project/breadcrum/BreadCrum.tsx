@@ -76,16 +76,6 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        {/* <Link
-          prefetch={false}
-          rel="noopener noreferrer"
-          href={`/`}
-          className="hover:underline cursor-pointer capitalize"
-        >
-          Home
-        </Link>
-        {" > "} */}
-
         {allParams.map((key, index) => {
           currentPath2 += `/${slugify(params[key])}`;
           let name = params[key].replace(/-/g, " ");

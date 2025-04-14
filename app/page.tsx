@@ -12,7 +12,7 @@ import MiddleSection from "./(dashboard)/new/components/MiddleSection";
 //   }
 // );
 
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import { HomeSiteNavigationSchema } from "./seo/common/home.schema";
 
 export default async function Page() {
