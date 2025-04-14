@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import ResidentialPage from "./_components/ResidentialDetailPage";
 import axios from "axios";
-import { redirect } from "next/navigation";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
 

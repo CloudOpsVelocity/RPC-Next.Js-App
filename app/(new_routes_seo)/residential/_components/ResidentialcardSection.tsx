@@ -149,44 +149,46 @@ export default function ResidentialCardSection({
                       </div>
                     </div>
                     <div className=" p-6">
-                      <Link
-                        prefetch={false}
-                        href={`/residential/projects/${
-                          property.city?.toLowerCase() || "unknown"
-                        }/${
-                          property.locality?.toLowerCase() || "unknown"
-                        }/${property.projName
-                          ?.toLowerCase()
-                          .replace(/ /g, "-")}-${property.projIdEnc}`}
-                        className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
-                      >
-                        {property.projName || "Unnamed Property"}
-                      </Link>
-                      <p className="text-muted-foreground flex items-center gap-2 mb-4">
+                      <h2>
+                        <Link
+                          prefetch={false}
+                          href={`/residential/projects/${
+                            property.city?.toLowerCase() || "unknown"
+                          }/${
+                            property.locality?.toLowerCase() || "unknown"
+                          }/${property.projName
+                            ?.toLowerCase()
+                            .replace(/ /g, "-")}-${property.projIdEnc}`}
+                          className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
+                        >
+                          {property.projName || "Unnamed Property"}
+                        </Link>
+                      </h2>
+                      <h3 className="text-muted-foreground flex items-center gap-2 mb-4">
                         <FaMapMarkerAlt />{" "}
                         {property.locality || "Unknown Locality"},{" "}
                         {property.city || "Unknown City"}
-                      </p>
+                      </h3>
                       <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="text-sm">
+                        <h3 className="text-sm">
                           <div className="font-semibold">Price Range</div>
                           <div>
                             ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
                             {(maxPrice / 10000000).toFixed(2)} Cr
                           </div>
-                        </div>
-                        <div className="text-sm">
+                        </h3>
+                        <h3 className="text-sm">
                           <div className="font-semibold">Property Type</div>
                           <div>{propertyType}</div>
-                        </div>
-                        <div className="text-sm">
+                        </h3>
+                        <h3 className="text-sm">
                           <div className="font-semibold">Possession</div>
                           <div>{possessionDate}</div>
-                        </div>
-                        <div className="text-sm">
+                        </h3>
+                        <h3 className="text-sm">
                           <div className="font-semibold">RERA Status</div>
                           <div>{reraStatus}</div>
-                        </div>
+                        </h3>
                       </div>
                       <div className="flex w-full  flex-row gap-4">
                         <Link
