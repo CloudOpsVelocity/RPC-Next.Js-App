@@ -193,19 +193,19 @@ const offerSchema = {
   },
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: homeLinksData.map((value, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    item: {
-      "@id": value.url,
-      name: value.name,
-      url: value.url,
-    },
-  })),
-};
+// const breadcrumbSchema = {
+//   "@context": "https://schema.org",
+//   "@type": "BreadcrumbList",
+//   itemListElement: homeLinksData.map((value, index) => ({
+//     "@type": "ListItem",
+//     position: index + 1,
+//     item: {
+//       "@id": value.url,
+//       name: value.name,
+//       url: value.url,
+//     },
+//   })),
+// };
 
 const FaqSchema = {
   "@context": "https://schema.org",
@@ -350,13 +350,13 @@ export const HomeSiteNavigationSchema = () => {
           __html: JSON.stringify(offerSchema),
         }}
       />
-      <script
+      {/* <script
         id="homeScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
         }}
-      />
+      /> */}
       <script
         id="homeScript6"
         type="application/ld+json"
