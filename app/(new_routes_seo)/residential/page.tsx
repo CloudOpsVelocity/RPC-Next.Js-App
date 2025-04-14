@@ -75,4 +75,7 @@ export const metadata: Metadata = {
     description:
       "Explore top-rated residential properties in Bangalore. Compare locations, prices, and amenities. Trusted by thousands of homebuyers.",
   },
+  alternates: {
+    canonical: "https://www.getrightproperty.com/residential",
+  },
 };

@@ -1,6 +1,6 @@
 "use client";
 import { formatDate } from "@/app/utils/date";
-import Button from "../../../elements/button"
+import Button from "../../../elements/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -11,44 +11,52 @@ import RequestCallBackModal from "@/app/components/molecules/popups/req";
 type Props = {
   data: any;
   setLoading: (loading: boolean) => void;
-  loading: boolean; 
+  loading: boolean;
 };
 
-export default function ResidentialCardSection({ data, setLoading, loading }: Props) {
+export default function ResidentialCardSection({
+  data,
+  setLoading,
+  loading,
+}: Props) {
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(20);
-  const [opened, { open, close }] = useReqCallPopup(); 
-  
+  const [opened, { open, close }] = useReqCallPopup();
+
   const fetchMoreItems = useCallback(() => {
     if (properties.length > listItemsCount) {
       setLoading(true);
       setTimeout(() => {
         setListItemsCount((prevCount) => {
           const newCount = prevCount + 20;
-  
-         
-          if ((newCount % 200 === 0 || newCount >= properties.length)) {
+
+          if (newCount % 200 === 0 || newCount >= properties.length) {
             setTimeout(() => {
-              const targetItem = document.getElementById(`item-${newCount - 1}`);
+              const targetItem = document.getElementById(
+                `item-${newCount - 1}`
+              );
               if (targetItem) {
-                targetItem.scrollIntoView({ behavior: "smooth", block: "start" });
+                targetItem.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
               }
             }, 100); // delay to ensure DOM is updated
           }
-  
+
           return newCount;
         });
         setLoading(false);
       }, 500);
     }
   }, [listItemsCount, properties.length]);
-  
+
   useEffect(() => {
     if (listItemsCount >= properties.length) return;
-  
+
     const items = document.querySelectorAll(".infinityItem");
     if (items.length === 0) return;
-  
+
     const observerCallback = (entries: any, observer: any) => {
       entries.forEach((entry: any) => {
         if (
@@ -60,20 +68,19 @@ export default function ResidentialCardSection({ data, setLoading, loading }: Pr
         }
       });
     };
-  
+
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
       rootMargin: "0px",
       threshold: 0.1,
     });
-  
+
     items.forEach((item) => observer.observe(item));
-  
+
     return () => {
       items.forEach((item) => observer.unobserve(item));
     };
   }, [listItemsCount, properties, fetchMoreItems]);
-  
 
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
@@ -83,10 +90,9 @@ export default function ResidentialCardSection({ data, setLoading, loading }: Pr
       </div>
     );
   });
-  const type="proj"
+  const type = "proj";
 
-/*Tested jios test */
-
+  /*Tested jios test */
 
   return (
     <section className="py-8 sm:py-14 container mx-auto px-4">
@@ -96,7 +102,6 @@ export default function ResidentialCardSection({ data, setLoading, loading }: Pr
         </div>
       ) : (
         <div className="mb-16">
-          <h2 className=" text-lg xl:text-3xl font-bold mb-8 capitalize">Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {properties
               .slice(0, listItemsCount)
@@ -200,25 +205,30 @@ export default function ResidentialCardSection({ data, setLoading, loading }: Pr
                         <Button
                           title="Request  Callback"
                           buttonConClass="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white px-4 sm:px-2 lg:px-4 py-2 rounded-lg text-center text-sm  sm:text-[10px] lg:text-sm font-medium transition-colors"
-                         buttonClass=""
-                         onChange={() =>{
-                          open({
-                            modal_type:
-                             true? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
-                            postedByName: true?property.projName : data.postedBy,
-                            postedId:true ?property.projIdEnc : data.postedById,
-                            reqId: property.projIdEnc,
-                            source: true ? "projCard" : "propCard",
-                            title:property.projName,
-                            /*  true
+                          buttonClass=""
+                          onChange={() => {
+                            open({
+                              modal_type: true
+                                ? "PROJECT_REQ_CALLBACK"
+                                : "PROPERTY_REQ_CALLBACK",
+                              postedByName: true
+                                ? property.projName
+                                : data.postedBy,
+                              postedId: true
+                                ? property.projIdEnc
+                                : data.postedById,
+                              reqId: property.projIdEnc,
+                              source: true ? "projCard" : "propCard",
+                              title: property.projName,
+                              /*  true
                                 ? projName
                                 : `${bhkName ?? ""} ${propTypeName} for
                             ${data.category === "Rent" ? "Rent" : "Sale"} in ${localityName}`, */
-                          });
-                          // pushHistory();
-                        }}
-                      />
-                       {/*  <Link
+                            });
+                            // pushHistory();
+                          }}
+                        />
+                        {/*  <Link
                           rel="noopener noreferrer"
                           prefetch={false}
                           href="tel:+91-8884440963"
@@ -239,8 +249,7 @@ export default function ResidentialCardSection({ data, setLoading, loading }: Pr
           )}
         </div>
       )}
-         <RequestCallBackModal />
+      <RequestCallBackModal />
     </section>
-    
   );
 }
