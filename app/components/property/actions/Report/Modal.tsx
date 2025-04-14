@@ -77,6 +77,7 @@ export default function ReportModal({ issueData }: any) {
     console.log("close priouus popup")
     close();
     document.body.style.overflow = "scroll";
+    console.log("relising scroll 2")
 
     setTimeout(() => {
       setText("");

@@ -44,6 +44,7 @@ const RequestCallBackModal = () => {
 
   const handleClose = () => {
     close();
+    document.body.style.overflow = "scroll";  
     setTimeout(() => {
       setStatus("idle");
     }, 500);

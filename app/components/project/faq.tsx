@@ -158,13 +158,14 @@ const AddQnaForm = ({
   };
   const onClose = () => {
     close();
+    document.body.style.overflow = "scroll";  
     opened.type === "qna" && reset();
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
 
   return (
     <form
-      className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2"
+      className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2 mb-[30px]"
       onSubmit={onSubmit(formSubmit)}
       id="have-any-question"
     >
@@ -319,10 +320,12 @@ const Success = ({ text, opened, onClose, projName }: any) => {
     const timer = setTimeout(() => {
       onClose();
       document.body.style.overflow = "scroll";
+      console.log("relising scroll 1")
+      console.log(opened)
     }, 5000);
 
     return () => clearTimeout(timer); 
-  }, [onClose]);
+  }, []);
   return (
     // <Modal
     //   classNames={{
