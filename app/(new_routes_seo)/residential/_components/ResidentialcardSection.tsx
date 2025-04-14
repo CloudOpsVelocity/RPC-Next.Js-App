@@ -85,7 +85,7 @@ export default function ResidentialCardSection({ data, setLoading, loading }: Pr
   });
   const type="proj"
 
-/*  */
+/*Tested jios test */
 
 
   return (
@@ -115,10 +115,10 @@ export default function ResidentialCardSection({ data, setLoading, loading }: Pr
                   ? formatDate(property.possassionDate)
                   : "N/A";
                 const propertyType =
-                  Array.isArray(property.propType) &&
-                  property.propType.length > 0
-                    ? property.propType.join(", ")
-                    : property.propType;
+                  Array.isArray(property.propTypes) &&
+                  property.propTypes.length > 0
+                    ? property.propTypes.join(", ")
+                    : property.propTypes;
                 const reraStatus = property.rerastatus || "N/A";
 
                 return (
