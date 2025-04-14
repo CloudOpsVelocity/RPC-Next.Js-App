@@ -275,4 +275,14 @@ li {
         height: 1rem;
     }
 
+    .carousel::before,
+    .carousel__prev {
+        left: -2rem;
+    }
+
+    .carousel::after,
+    .carousel__next {
+        right: -2rem;
+    }
+
 };
