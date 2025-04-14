@@ -4,9 +4,14 @@ import axios from "axios";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
 
-type Props = {};
+type Props = {
+  searchParams: {
+    page: number;
+  };
+};
 
-export default async function page({}: Props) {
+export default async function page({ searchParams: { page } }: Props) {
+  console.log(page);
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
       <div className="flex items-center gap-2">
@@ -50,6 +55,7 @@ export default async function page({}: Props) {
         properties={[]}
         urls={data?.urls}
       />
+      {JSON.stringify(page)}
       {data ? <ResidentialPage data={data} /> : <LoadingSpinner />}
     </>
   );

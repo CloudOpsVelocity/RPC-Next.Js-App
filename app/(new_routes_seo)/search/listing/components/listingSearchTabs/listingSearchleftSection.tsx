@@ -9,7 +9,7 @@ import {
   projSearchStore,
   searchPageMapToggle,
 } from "../../../store/projSearchStore";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
@@ -186,6 +186,7 @@ function LeftSection({
   const setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   useEffect(() => {
+    // isDataRenders(allItems);
     if (isMobile) return;
     const handleScroll = () => {
       setIsMapLoaded(true);
@@ -205,7 +206,7 @@ function LeftSection({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
-
+  console.log({ isLoading, allItems });
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
