@@ -48,3 +48,5 @@ export const metadata: Metadata = {
       "Browse verified real estate listings across India. Find your perfect home or investment property with GetRightProperty's user-friendly search tools.",
   },
 };
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
