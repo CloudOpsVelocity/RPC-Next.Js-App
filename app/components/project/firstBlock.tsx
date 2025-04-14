@@ -142,7 +142,7 @@ const FirstBlock: React.FC<Props> = ({
               ))}
             </Carousel> */}
 
-            <CustomCarousal 
+            {/* <CustomCarousal 
               dataLength={images?.length}
               containerClass="max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px]"
               allCards={images.map((imageUrl, index) => (
@@ -152,15 +152,18 @@ const FirstBlock: React.FC<Props> = ({
                       title="project image"
                       src={imageUrl.split(",")[3]}
                       // fill
-                      width={1000}
-                      height={300}
+                      width={1200}
+                      height={630}
                       className={`bg-gray-${index + 1} w-full h-full object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
                       unoptimized
-                      quality={80}
+                      quality={80} 
                     />
                 </div>
               ))}
-            />
+            /> */}
+
+            
+            
           </div>
           {/* <div className="absolute bottom-0 sm:m-[1%] sm:mb-[4%] xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md sm:flex break-words sm:px-6 sm:py-2">
 

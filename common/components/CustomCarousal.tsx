@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, {useEffect, useRef} from 'react';
 import { NextCarouselButton, PrevCarouselButton } from '@/app/images/commonSvgs';
@@ -10,16 +10,14 @@ type props = {
 };
 
 function CustomCarousal({dataLength, allCards, containerClass}:props) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const parentRef = useRef<HTMLDivElement>(null);
+
     // const isMobile = useMediaQuery(`(max-width: 750px)`);
 
     // const [isDragging, setIsDragging] = useState(false);
     // const [startX, setStartX] = useState(0);
     // const [scrollLeft, setScrollLeft] = useState(0);
-
-    const containerRef = useRef<HTMLDivElement>(null);
-    const parentRef = useRef<HTMLDivElement>(null);
-
-    const container = containerRef?.current;
 
     // const handleMouseDown = (e: any) => {
     //     setIsDragging(true);
@@ -45,15 +43,24 @@ function CustomCarousal({dataLength, allCards, containerClass}:props) {
     //     container.scrollLeft = scrollLeft - walk;
     // };
 
-    const onScrollingLeftAndRight = (direction: string) => {
+    const onScrollingLeftAndRight = (direction: any, index?:number) => {
+        const container = containerRef?.current;
+
         if(container){
             const containerwidth = container.offsetWidth ? container.offsetWidth : 0;
-            if (direction == "L") {
-                container.scrollLeft -= containerwidth;
-            } else {
-                container.scrollLeft += containerwidth;
+
+            if(index !== undefined && direction === ""){
+                console.log(index, index === 0 ? 0 :index * containerwidth)
+                container.scrollLeft = index * containerwidth;
+            }else{
+                if (direction == "L") {
+                    container.scrollLeft -= containerwidth;
+                } else {
+                    container.scrollLeft += containerwidth;
+                }
             }
-        }
+    
+        };
     };
 
     useEffect(() => {
@@ -76,7 +83,7 @@ function CustomCarousal({dataLength, allCards, containerClass}:props) {
     }, []);
     
     return (
-        <div className={`relative flex justify-center items-center w-[94%] md:w-[90%] h-full relative ${containerClass ? containerClass : ""} `} >
+        <div className={`relative flex justify-center items-end w-[94%] md:w-[90%] h-full relative ${containerClass ? containerClass : ""} `} >
             {dataLength != undefined && dataLength != null && dataLength >= 2 &&
             <PrevCarouselButton
                 className={`w-[40px] h-[40px] cursor-pointer bottom-1 absolute left-[10px] md:left-[20px] top-[45%] z-10`}
@@ -95,7 +102,7 @@ function CustomCarousal({dataLength, allCards, containerClass}:props) {
                 // onMouseMove={handleMouseMove}
                 style={{ userSelect: "none" }}
             >
-                <div ref={parentRef} className='w-full flex justify-start items-start max-w-[100%] h-full flex-nowrap'> 
+                <div ref={parentRef} className='w-full flex justify-start items-start max-w-[100%] h-full flex-nowrap '> 
                     {allCards}
                 </div>
             </div>
@@ -109,9 +116,9 @@ function CustomCarousal({dataLength, allCards, containerClass}:props) {
             />
             }
 
-            <div className='flex justify-center items-center gap-[14px] w-full absolute bottom-[30px] '>
+            <div className='flex justify-center items-center gap-[14px] w-full absolute bottom-[60px]  '>
                 {[...Array(dataLength)].map((_, index) => (
-                    <div key={index} className=" rounded-full w-[14px] h-[14px] bg-white ">
+                    <div key={index} className="rounded-full w-[14px] h-[14px] bg-white" onClick={() => onScrollingLeftAndRight("", index)}>
                         {/* {index + 1} */}
                     </div>
                 ))}
