@@ -63,7 +63,6 @@ export default function Overview({
     enabled: false,
   });
 
-  console.log(projAuthorityNames)
   return (
     <div
       className=" sm:pt-[2%] xl:pt-[2%] sm:scroll-mt-[138px] xl:scroll-mt-[150px] w-[95%] sm:[95%] xl:w-[90%] rounded-[24px] shadow-md mb-[5%] sm:mb-[0%]  mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -75,7 +74,6 @@ export default function Overview({
             <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             <strong>{projectName}</strong>
             </h1>{" "}
-
             <SharePopup className="text-sm p-[2px] mt-[2px] sm:hidden " />
           </div>
 
