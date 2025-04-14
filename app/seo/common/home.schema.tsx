@@ -186,7 +186,10 @@ const productSchema = {
   "@type": "Product",
   name: "GetRightProperty",
   description:
-    "A comprehensive real estate platform for property search, listing and comparison in Bangalore",
+    "A comprehensive real estate platform for property search, listing, and comparison in Bangalore",
+  image:
+    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
+  category: "Real Estate Services",
   brand: {
     "@type": "Brand",
     name: "GetRightProperty",
@@ -204,9 +207,6 @@ const productSchema = {
     ratingValue: "4.5",
     reviewCount: "100",
   },
-  image:
-    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
-  category: "Real Estate Services",
 };
 
 const offerSchema = {
