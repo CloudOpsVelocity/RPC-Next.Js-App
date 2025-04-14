@@ -1,4 +1,39 @@
 const BASE_URL = process.env.NEXT_PUBLIC_URL;
+const viewActionConfigs = [
+  {
+    title: "Featured Projects",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search`,
+  },
+  {
+    title: "Ready to Move Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=s-propStatus=R`,
+  },
+  {
+    title: "Ready to Move Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=R-propStatus=R`,
+  },
+  {
+    title: "Featured Plot Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=32`,
+  },
+  {
+    title: "Under Construction Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U`,
+  },
+  {
+    title: "Under Construction Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U-cg=R`,
+  },
+  {
+    title: "Independent Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=S`,
+  },
+  {
+    title: "Independent Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=R`,
+  },
+];
+
 let homeLinksData = [
   {
     name: "Home",
@@ -103,13 +138,22 @@ let homeLinksData = [
     name: "Register Individual",
   },
 ];
-
-export const homeSiteNavigationSchemaData = {
+// const viewActionJsonLd = ;
+export const viewActionJsonLd = {
   "@context": "https://schema.org",
   "@graph": homeLinksData.map((item) => ({
     "@type": "SiteNavigationElement",
     name: item.name,
     url: item.url,
+  })),
+};
+export const homeSiteNavigationSchemaData = {
+  "@context": "https://schema.org",
+  "@graph": viewActionConfigs.map(({ title, url }) => ({
+    "@context": "https://schema.org",
+    "@type": "ViewAction",
+    name: title,
+    target: url,
   })),
 };
 
@@ -382,6 +426,12 @@ export const HomeSiteNavigationSchema = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(viewActionJsonLd),
         }}
       />
     </>
