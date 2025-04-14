@@ -1,27 +1,32 @@
 "use client";
 import React, { useRef } from "react";
-import { Carousel } from "@mantine/carousel";
+// import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import {
-  DarkCarouseIcon,
-  DarkNextCarouselButton,
-} from "@/app/images/commonSvgs";
+// import {
+//   DarkCarouseIcon,
+//   DarkNextCarouselButton,
+// } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/property/index";
-import Image from "next/image";
+// import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-import { formatDate } from "@/app/utils/date";
+// import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+// import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
-import { calculatePerSqPrice } from "@/app/utils/price";
-import styles from "@/app/styles/Carousel.module.css";
-import { NumberFormatter } from "@mantine/core";
+// import { calculatePerSqPrice } from "@/app/utils/price";
+// import styles from "@/app/styles/Carousel.module.css";
+// import { NumberFormatter } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
-import { get_posted_by } from "@/app/utils/dyanamic/projects";
+// import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import BrokerContactTag from "./BrokersFreindly";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
-import Link from "next/link";
+// import Link from "next/link";
 import { useQuery } from "react-query";
+import dynamic from "next/dynamic";
+// import CustomCarousalCssOnly from "@/common/components/CustomCarousalCssOnly";
+const CustomCarousalCssOnly = dynamic(
+  () => import("@/common/components/CustomCarousalCssOnly")
+);
 // import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 type Props = {
   projectDetails: Main | null;
@@ -101,70 +106,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
             </div>
           </div>
           <div className="relative w-full aspect-auto max-w-[1000px] mx-auto ( sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
-            <Carousel
-              classNames={styles}
-              slideGap={{ base: 0, sm: "md" }}
-              withIndicators
-              slidesToScroll={1}
-              align="start"
-              dragFree
-              plugins={[autoplay.current]}
-              onMouseEnter={autoplay.current.stop}
-              onMouseLeave={autoplay.current.reset}
-              nextControlIcon={<DarkNextCarouselButton />}
-              previousControlIcon={<DarkCarouseIcon />}
-            >
-              {images.map((imageUrl, index) => (
-                <Carousel.Slide
-                  key={`Listing_Carousel_${index}`}
-                  className="relative"
-                  w={"auto"}
-                >
-                  <picture>
-                    <source
-                      media="(max-width: 460px)"
-                      srcSet={imageUrl.split(",")[1] ?imageUrl.split(",")[1].includes("+") 
-                        ? imageUrl.split(",")[1].replace(/\+/g, "%2B")
-                        : imageUrl.split(",")[1] : imageUrl.split(",")[1]
-                    }
-                                        />
-                    <source
-                      media="(max-width: 768px)"
-                      srcSet={imageUrl.split(",")[2] ?imageUrl.split(",")[2].includes("+") 
-                        ? imageUrl.split(",")[2].replace(/\+/g, "%2B")
-                        : imageUrl.split(",")[2] : imageUrl.split(",")[2]
-                    }
-                    />
-                    <source
-                      media="(min-width: 1200px)"
-                      srcSet={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
-                        ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
-                        : imageUrl.split(",")[3] : imageUrl.split(",")[3]
-                    }
-                      //srcSet={imageUrl.split(",")[3]}
-                    />
-                    <Image
-                      alt={projName}
-                      title={projName}
-                      // src={imageUrl.split(",")[3]}
-                      src={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
-                        ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
-                        : imageUrl.split(",")[3] : imageUrl.split(",")[3]
-                      }
-                      // height={630}
-                      // width={1200}
-                      fill
-                   /*    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
-                        index + 1
-                      }`} */
-                       className={`bg-gray-${index + 1} `}
-
-                      unoptimized
-                    />
-                  </picture>
-                </Carousel.Slide>
-              ))}
-            </Carousel>
+            <CustomCarousalCssOnly urlsData={images} />
           </div>
           {/* overview card removed from here and commented bottom of the component */}
         </>
@@ -174,6 +116,81 @@ const PropertyFirstBlock: React.FC<Props> = ({
 };
 
 export default PropertyFirstBlock;
+
+// <Carousel
+//               classNames={styles}
+//               slideGap={{ base: 0, sm: "md" }}
+//               withIndicators
+//               slidesToScroll={1}
+//               align="start"
+//               dragFree
+//               plugins={[autoplay.current]}
+//               onMouseEnter={autoplay.current.stop}
+//               onMouseLeave={autoplay.current.reset}
+//               nextControlIcon={<DarkNextCarouselButton />}
+//               previousControlIcon={<DarkCarouseIcon />}
+//             >
+//               {images.map((imageUrl, index) => (
+//                 <Carousel.Slide
+//                   key={`Listing_Carousel_${index}`}
+//                   className="relative"
+//                   w={"auto"}
+//                 >
+//                   <picture>
+//                     <source
+//                       media="(max-width: 460px)"
+//                       srcSet={imageUrl.split(",")[1] ?imageUrl.split(",")[1].includes("+") 
+//                         ? imageUrl.split(",")[1].replace(/\+/g, "%2B")
+//                         : imageUrl.split(",")[1] : imageUrl.split(",")[1]
+//                     }
+//                                         />
+//                     <source
+//                       media="(max-width: 768px)"
+//                       srcSet={imageUrl.split(",")[2] ?imageUrl.split(",")[2].includes("+") 
+//                         ? imageUrl.split(",")[2].replace(/\+/g, "%2B")
+//                         : imageUrl.split(",")[2] : imageUrl.split(",")[2]
+//                     }
+//                     />
+//                     <source
+//                       media="(min-width: 1200px)"
+//                       srcSet={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
+//                         ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
+//                         : imageUrl.split(",")[3] : imageUrl.split(",")[3]
+//                     }
+//                       //srcSet={imageUrl.split(",")[3]}
+//                     />
+//                     <Image
+//                       alt={projName}
+//                       title={projName}
+//                       // src={imageUrl.split(",")[3]}
+//                       src={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
+//                         ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
+//                         : imageUrl.split(",")[3] : imageUrl.split(",")[3]
+//                       }
+//                       // height={630}
+//                       // width={1200}
+//                       fill
+//                    /*    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
+//                         index + 1
+//                       }`} */
+//                        className={`bg-gray-${index + 1} `}
+
+//                       unoptimized
+//                     />
+//                   </picture>
+//                 </Carousel.Slide>
+//               ))}
+//             </Carousel>
+
+
+
+
+
+
+
+
+
+
 
   //  <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
   //           <div className=" w-full md:w-[60%]">

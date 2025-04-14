@@ -20,13 +20,13 @@ import { useSetAtom } from "jotai";
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 
-// import dynamic from "next/dynamic";
-import CustomCarousalCssOnly from "@/common/components/CustomCarousalCssOnly";
+import dynamic from "next/dynamic";
+// import CustomCarousalCssOnly from "@/common/components/CustomCarousalCssOnly";
 // import Link from "next/link";
 
-// const CustomCarousal = dynamic(
-//   () => import("@/common/components/CustomCarousal")
-// );
+const CustomCarousalCssOnly = dynamic(
+  () => import("@/common/components/CustomCarousalCssOnly")
+);
 
 type Props = {
   projectDetails: Main | null;
@@ -162,7 +162,7 @@ const FirstBlock: React.FC<Props> = ({
               ))}
             /> */}
 
-            <CustomCarousalCssOnly urlsData={images.map(each=>each.split(",")[3])} />
+            <CustomCarousalCssOnly urlsData={images} />
 
             
             
