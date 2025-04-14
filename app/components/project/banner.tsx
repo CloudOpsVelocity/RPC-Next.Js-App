@@ -134,6 +134,7 @@ const AddRating = ({
     setStatus("idle");
     // }
     close();
+    document.body.style.overflow = "scroll";  
   };
 
   const formSubmit = async (values: any) => {

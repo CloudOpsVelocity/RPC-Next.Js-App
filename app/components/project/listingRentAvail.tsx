@@ -82,15 +82,24 @@ const Card = ({
   slug: string;
 }) => {
   const router = useRouter();
-  const [, { open: openSuccesPopup }] = useMessagePopup(
+  const [, {close, open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
   );
   const handleBoxClick = (value: any, cg: "S" | "R") => {
-    value
-      ? openSuccesPopup()
-      : router.push(
+    if(value){
+      openSuccesPopup();
+
+      setTimeout(() => {
+        close();
+        document.body.style.overflow = "scroll";
+        console.log("relising scroll 6")
+      }, 5000);
+
+    }else{
+        router.push(
           `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`
         );
+    }
   };
 
   return (

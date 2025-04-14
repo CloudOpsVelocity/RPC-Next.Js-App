@@ -10,7 +10,7 @@ export default async function Page({ params: { city, lt } }: Props) {
   const serverData = await getSearchData();
   return (
     <NewSearchPage
-      pageUrl={pathname}
+      pageUrl={`residential/projects`}
       frontendFilters={{}}
       serverData={serverData}
     />

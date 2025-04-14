@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import ResidentialPage from "./_components/ResidentialDetailPage";
 import axios from "axios";
-import { redirect } from "next/navigation";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
 
@@ -74,5 +73,8 @@ export const metadata: Metadata = {
       "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
     description:
       "Explore top-rated residential properties in Bangalore. Compare locations, prices, and amenities. Trusted by thousands of homebuyers.",
+  },
+  alternates: {
+    canonical: "https://www.getrightproperty.com/residential",
   },
 };

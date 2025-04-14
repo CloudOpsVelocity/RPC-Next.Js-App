@@ -271,6 +271,77 @@ export const ResidentialProjectSchama = ({
       url: item,
     })),
   };
+  const FaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What types of residential properties are listed on GetRightProperty?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "GetRightProperty lists a wide range of residential properties in Bangalore, including apartments, villas, independent houses, and gated community projects. Both ready-to-move and under-construction options are available.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Are the residential projects on GetRightProperty verified?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, all listings go through a verification process. We collaborate with trusted builders and property owners to ensure authenticity and up-to-date information.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I compare multiple residential projects on the platform?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Absolutely. Our platform allows users to compare residential projects based on location, pricing, amenities, builder reputation, and construction status.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is there any fee for browsing residential properties?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No, browsing residential projects and property listings on GetRightProperty is completely free. You can explore, compare, and shortlist without any charges.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How does GetRightProperty assist in selecting the right residential property?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We offer personalized recommendations, in-depth property details, location-based filters, market trend insights, and access to site visits. Our expert support team is also available to guide you through the process.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I post my residential property on GetRightProperty?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes! Whether you are an individual owner, agent, or builder, you can post your residential property or project for free. We offer unlimited listings and promotional support.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does GetRightProperty support listings in all Bangalore localities?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, we cover all major and emerging localities in Bangalore including Whitefield, Electronic City, Sarjapur Road, Hebbal, HSR Layout, and many more.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I schedule a visit to a residential project through GetRightProperty?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, you can request a site visit directly from the property page. Our team coordinates with the seller or builder to arrange a convenient time for you.",
+        },
+      },
+    ],
+  };
+
   const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
   return (
     <>
@@ -306,6 +377,12 @@ export const ResidentialProjectSchama = ({
           __html: JSON.stringify(results),
         }}
       /> */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(FaqSchema),
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -539,8 +616,8 @@ export const ResidentialProjectSchama = ({
                 "@type": "ListItem",
                 position: 2,
                 item: {
-                  "@id": `${baseURL}/residential-listings/for-rent`,
-                  name: "for-rent",
+                  "@id": `${baseURL}/residential`,
+                  name: "Residential Projects",
                 },
               },
             ],
@@ -603,72 +680,6 @@ export const ResidentialProjectSchama = ({
                 name: "Parks and Recreation",
                 description:
                   "Details about parks and recreational areas nearby, promoting a healthy lifestyle.",
-              },
-            ],
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "What is the purpose of this page?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `The purpose of this page is to provide detailed information about the property titled ${pagetitle}, including its features, pricing, and availability.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What is the address of the property?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `The address of the property is${address}.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What documents do I need to buy a property?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "The essential documents needed are sale deed, property tax receipts, encumbrance certificate, approved building plan, and completion certificate. Additional documents may be required based on the property type and location.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "How can I find the best property prices in Bangalore?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "GetRightProperty helps you find the best property prices in Bangalore by comparing prices across different localities, providing market analysis, and connecting you with verified sellers. Our extensive database includes both ready-to-move and under-construction properties.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What are the benefits of using GetRightProperty for property search?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "GetRightProperty offers verified listings, transparent pricing, expert guidance, and a hassle-free property search experience. We provide detailed property information, high-quality images, and direct contact with property owners and agents.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Which are the top investment areas in Bangalore?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Popular investment areas in Bangalore include Whitefield, Electronic City, Sarjapur Road, and Hebbal. These areas offer good appreciation potential, infrastructure development, and proximity to IT hubs. GetRightProperty can help you find the best properties in these locations.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What price ranges are available for properties in Bangalore?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Property prices in Bangalore vary by location and type. Apartments range from ₹40 lakhs to ₹5 crores, while villas start from ₹1 crore. GetRightProperty offers options across all budget ranges with transparent pricing and negotiation assistance.",
-                },
               },
             ],
           }),

@@ -1,10 +1,10 @@
 "use client";
 import React, { useRef } from "react";
-import { Carousel } from "@mantine/carousel";
+// import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
-  DarkCarouseIcon,
-  DarkNextCarouselButton,
+  // DarkCarouseIcon,
+  // DarkNextCarouselButton,
   ReraIcon,
 } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
@@ -13,13 +13,20 @@ import SharePopup from "../atoms/SharePopup";
 // import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 // import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
-import styles from "@/app/styles/Carousel.module.css";
+// import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
 
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+
+// import dynamic from "next/dynamic";
+import CustomCarousalCssOnly from "@/common/components/CustomCarousalCssOnly";
 // import Link from "next/link";
+
+// const CustomCarousal = dynamic(
+//   () => import("@/common/components/CustomCarousal")
+// );
 
 type Props = {
   projectDetails: Main | null;
@@ -67,8 +74,6 @@ const FirstBlock: React.FC<Props> = ({
     setTimeout(() => setIsScrolling(false), 3000);
   }
 
-  console.log(projectDetails?.projectName)
-
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -92,8 +97,8 @@ const FirstBlock: React.FC<Props> = ({
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
 
-          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto ( sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
-            <Carousel
+          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
+            {/* <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
               withIndicators
@@ -107,14 +112,14 @@ const FirstBlock: React.FC<Props> = ({
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide
-                  key={imageUrl ?? imageUrl}
+                  key={imageUrl ?? imageUrl} 
                   className="relative"
                   w={"auto"}
                 >
                   <picture>
                     <source
                       media="(max-width: 460px)"
-                      srcSet={imageUrl.split(",")[1]}
+                      srcSet={imageUrl.split(",")[1]} 
                     />
                     <source
                       media="(max-width: 768px)"
@@ -135,9 +140,35 @@ const FirstBlock: React.FC<Props> = ({
                   </picture>
                 </Carousel.Slide>
               ))}
-            </Carousel>
+            </Carousel> */}
+
+            {/* <CustomCarousal 
+              dataLength={images?.length}
+              containerClass="max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px]"
+              allCards={images.map((imageUrl, index) => (
+                <div key={`projDetailsCarosual_${index.toString()}`} className="carousel-slide h-full flex justify-center items-center "> 
+                    <Image
+                      alt="project image"
+                      title="project image"
+                      src={imageUrl.split(",")[3]}
+                      // fill
+                      width={1200}
+                      height={630}
+                      className={`bg-gray-${index + 1} w-full h-full object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
+                      unoptimized
+                      quality={80} 
+                    />
+                </div>
+              ))}
+            /> */}
+
+            <CustomCarousalCssOnly urlsData={images.map(each=>each.split(",")[3])} />
+
+            
+            
           </div>
-          {/* <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
+          {/* <div className="absolute bottom-0 sm:m-[1%] sm:mb-[4%] xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md sm:flex break-words sm:px-6 sm:py-2">
+
             <div className="w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
                 <div className="flex justify-between items-start">

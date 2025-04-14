@@ -70,6 +70,10 @@ export default function Overview({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div className="md:w-[80%]">
+          {/* <div className="">
+            <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
+            <strong>{projectName}</strong>
+            </h1>{" "} */}
           <div className="flex justify-between items-start ">
             <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             <strong>{projectName}</strong>

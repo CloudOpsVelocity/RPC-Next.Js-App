@@ -31,15 +31,11 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     newParams = ["Project Search"];
   } else if (pageUrl === "/search/listing") {
     newParams = ["Listing Search"];
-  } else if (pageUrl.includes("/residential/")) {
-    // trimmedUrl = trimFromWord(pageUrl, "/residential/projects/");
-
+  } else if (pageUrl.includes("residential/")) {
     newParams = pageUrl.split("/");
-  } else if (pageUrl.includes("/residential-listings/")) {
-    newParams = pageUrl.split("/");
-    // trimmedUrl = trimFromWord(pageUrl, "/residential-listings/");
+  } else if (pageUrl.includes("/residential-listings")) {
+    newParams = ["Home", "residential-listings"];
   } else if (pageUrl.includes("/residential/listings/")) {
-    // trimmedUrl = trimFromWord(pageUrl, "/residential/listings/");
     newParams = pageUrl.split("/").filter(Boolean);
   } else if (pageUrl === "/residential-listings") {
     newParams = ["Residential Listings"];

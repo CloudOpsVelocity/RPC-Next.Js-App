@@ -15,11 +15,10 @@ export default async function Page({ params: { city, lt } }: Props) {
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
-
   const serverData = await getSearchData(filterValues.LT as string);
   return (
     <NewSearchPage
-      pageUrl={pathname}
+      pageUrl={`residential/projects/${city}/${lt}`}
       serverData={serverData}
       frontendFilters={{
         localities: [`${lt}+${filterValues.LT}`],
@@ -39,11 +38,6 @@ export async function generateStaticParams() {
     }
   }
   return slugs;
-  // const slugs = keys.map((data) => {
-  //   const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-  //   return { city, lt };
-  // });
-  // return slugs;
 }
 
 export const dynamic = "force-dynamic";
