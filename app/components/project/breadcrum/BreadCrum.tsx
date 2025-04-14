@@ -1,11 +1,10 @@
-import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
 import React from "react";
 
 export default function BreadCrumbs({ params: routes }: { params: any }) {
   const params = {
-    "/": "home",
+    "/": "",
     residential: "residential",
     projects: "projects",
     ...routes,
@@ -23,9 +22,10 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
       currentPath += `/${slugify(params[key])}`;
       let name = params[key].replace(/-/g, " ");
       const newArray = name.split(" ").slice(0, -1);
-      const newName = key !== "slug" ? name : newArray.join(" ");
+      let newName = key !== "slug" ? name : newArray.join(" ");
       if (index === 0) {
         currentPath = "";
+        newName = "Home";
       }
       return {
         "@type": "ListItem",
@@ -76,21 +76,12 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        {/* <Link
-          prefetch={false}
-          rel="noopener noreferrer"
-          href={`/`}
-          className="hover:underline cursor-pointer capitalize"
-        >
-          Home
-        </Link>
-        {" > "} */}
-
         {allParams.map((key, index) => {
           currentPath2 += `/${slugify(params[key])}`;
           let name = params[key].replace(/-/g, " ");
           const newArray = name.split(" ").slice(0, -1);
-          const newName = key !== "slug" ? name : newArray.join(" ");
+          const newName =
+            index === 0 ? "Home" : key !== "slug" ? name : newArray.join(" ");
           return (
             <React.Fragment key={`${key[index]}`}>
               {index < Object.keys(params).length - 1 ? (

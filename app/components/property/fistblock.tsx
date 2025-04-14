@@ -166,119 +166,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
               ))}
             </Carousel>
           </div>
-          <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
-            <div className=" w-full md:w-[60%]">
-              <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
-                <div className="flex justify-between items-start">
-                  <h1 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
-                    <span className="lowercase">
-                      {projectDetails.propTypeName === "Plot"
-                        ? formatNumberWithSuffix(
-                            projectDetails.plotArea,
-                            false
-                          ) + " sq.ft"
-                        : ""}
-                    </span>{" "}
-                    {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
-                    {projectDetails.cg === "S" ? " Sale" : " Rent"} In{" "}
-                    {projectDetails.ltName}{" "}
-                  </h1>
-                  <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
-                </div>
-                {projectDetails.projIdEnc ? (
-                  <Link
-                    prefetch={false}
-                    href={projectUrl}
-                    rel="noopener noreferrer"
-                    className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
-                      projectDetails.projIdEnc ? "underline text-blue-600" : ""
-                    } `}
-                  >
-                    {projName}
-                  </Link>
-                ) : (
-                  <span className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize">
-                    {projName}
-                  </span>
-                )}
-                <p className="text-[#242424]  text-sm sm:text-[18px] xl:text-[22px] not-italic font-semibold leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
-                  {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
-                </p>
-
-                <p className=" text-sm sm:text-[16px] mt-[10px] xl:mt-[14px] xl:text-[22px] font-[600] text-[#242424]">
-                  Available From:
-                  <span className="font-[600] text-[#202020]">
-                    {" "}
-                    {formatDate(projectDetails.availableFrom)}
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%] max-h-full">
-              <h2 className="iinline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
-                {`${
-                  projectDetails.cg === "R"
-                    ? formatCurrency(projectDetails.price)
-                    : formatCurrency(projectDetails.price)
-                }${projectDetails.cg === "R" ? " / Month" : ""}`}{" "}
-              </h2>
-              {projectDetails.cg === "S" && (
-                <p className="text-[16px] md:text-right sm:text-[14px] xl:text-[24px] font-[600]   text-[#00487C] ">
-                  <span className="text-[#001F35] sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
-                    ₹{" "}
-                    <NumberFormatter
-                      thousandSeparator
-                      value={calculatePerSqPrice(
-                        projectDetails.price,
-                        projectDetails.propTypeName === "Plot"
-                          ? projectDetails.plotArea
-                          : projectDetails.sba
-                      )}
-                      thousandsGroupStyle="lakh"
-                    />{" "}
-                    Base Price/sq.ft onwards
-                  </span>
-                </p>
-              )}
-              {totalPrice ? (
-                <p className=" mb-1 xl:mb-[13px]  text-[12px]  text-[#001F35] font-semibold md:font-bold ">
-                  Other Charges Applicable
-                </p>
-              ) : (
-                ""
-              )}
-
-              {/* {isBuilder ? (
-                <a
-                  target="_blank"
-                  href={builderUrl}
-                  className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]"
-                >
-                  Posted By:{" "}
-                  <span className="underline text-blue-600 cursor-pointer">
-                    {projectDetails.postedByName}
-                  </span>
-                </a>
-              ) : ( */}
-              <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px] mb-auto">
-                {get_posted_by(projectDetails.postedByType)}:{" "}
-                <span className="">{projectDetails.postedByName}</span>
-              </p>
-              <p
-                className="sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-auto self-end"
-                onClick={() => scrollToTopic("floorPlans")}
-              >
-                <Image
-                  width={100}
-                  height={100}
-                  src={"/abc/floorplan.png"}
-                  alt="no of floors"
-                  className="xl:h-[24px] xl:w-[24px] w-[16px] h-[16px] sm:h-[16px] sm:w-[16px] !mt-auto "
-                />
-                Floor Plan
-              </p>
-            </div>
-          </div>
+          {/* overview card removed from here and commented bottom of the component */}
         </>
       )}
     </div>
@@ -286,3 +174,117 @@ const PropertyFirstBlock: React.FC<Props> = ({
 };
 
 export default PropertyFirstBlock;
+
+  //  <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
+  //           <div className=" w-full md:w-[60%]">
+  //             <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
+  //               <div className="flex justify-between items-start">
+  //                 <h1 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
+  //                   <span className="lowercase">
+  //                     {projectDetails.propTypeName === "Plot"
+  //                       ? formatNumberWithSuffix(
+  //                           projectDetails.plotArea,
+  //                           false
+  //                         ) + " sq.ft"
+  //                       : ""}
+  //                   </span>{" "}
+  //                   {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
+  //                   {projectDetails.cg === "S" ? " Sale" : " Rent"} In{" "}
+  //                   {projectDetails.ltName}{" "}
+  //                 </h1>
+  //                 <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
+  //               </div>
+  //               {projectDetails.projIdEnc ? (
+  //                 <Link
+  //                   prefetch={false}
+  //                   href={projectUrl}
+  //                   rel="noopener noreferrer"
+  //                   className={`text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
+  //                     projectDetails.projIdEnc ? "underline text-blue-600" : ""
+  //                   } `}
+  //                 >
+  //                   {projName}
+  //                 </Link>
+  //               ) : (
+  //                 <span className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize">
+  //                   {projName}
+  //                 </span>
+  //               )}
+  //               <p className="text-[#242424]  text-sm sm:text-[18px] xl:text-[22px] not-italic font-semibold leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
+  //                 {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
+  //               </p>
+
+  //               <p className=" text-sm sm:text-[16px] mt-[10px] xl:mt-[14px] xl:text-[22px] font-[600] text-[#242424]">
+  //                 Available From:
+  //                 <span className="font-[600] text-[#202020]">
+  //                   {" "}
+  //                   {formatDate(projectDetails.availableFrom)}
+  //                 </span>
+  //               </p>
+  //             </div>
+  //           </div>
+  //           <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%] max-h-full">
+  //             <h2 className="iinline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
+  //               {`${
+  //                 projectDetails.cg === "R"
+  //                   ? formatCurrency(projectDetails.price)
+  //                   : formatCurrency(projectDetails.price)
+  //               }${projectDetails.cg === "R" ? " / Month" : ""}`}{" "}
+  //             </h2>
+  //             {projectDetails.cg === "S" && (
+  //               <p className="text-[16px] md:text-right sm:text-[14px] xl:text-[24px] font-[600]   text-[#00487C] ">
+  //                 <span className="text-[#001F35] sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
+  //                   ₹{" "}
+  //                   <NumberFormatter
+  //                     thousandSeparator
+  //                     value={calculatePerSqPrice(
+  //                       projectDetails.price,
+  //                       projectDetails.propTypeName === "Plot"
+  //                         ? projectDetails.plotArea
+  //                         : projectDetails.sba
+  //                     )}
+  //                     thousandsGroupStyle="lakh"
+  //                   />{" "}
+  //                   Base Price/sq.ft onwards
+  //                 </span>
+  //               </p>
+  //             )}
+  //             {totalPrice ? (
+  //               <p className=" mb-1 xl:mb-[13px]  text-[12px]  text-[#001F35] font-semibold md:font-bold ">
+  //                 Other Charges Applicable
+  //               </p>
+  //             ) : (
+  //               ""
+  //             )}
+
+  //             {/* {isBuilder ? (
+  //               <a
+  //                 target="_blank"
+  //                 href={builderUrl}
+  //                 className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]"
+  //               >
+  //                 Posted By:{" "}
+  //                 <span className="underline text-blue-600 cursor-pointer">
+  //                   {projectDetails.postedByName}
+  //                 </span>
+  //               </a>
+  //             ) : ( */}
+  //             <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px] mb-auto">
+  //               {get_posted_by(projectDetails.postedByType)}:{" "}
+  //               <span className="">{projectDetails.postedByName}</span>
+  //             </p>
+  //             <p
+  //               className="sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-auto self-end"
+  //               onClick={() => scrollToTopic("floorPlans")}
+  //             >
+  //               <Image
+  //                 width={100}
+  //                 height={100}
+  //                 src={"/abc/floorplan.png"}
+  //                 alt="no of floors"
+  //                 className="xl:h-[24px] xl:w-[24px] w-[16px] h-[16px] sm:h-[16px] sm:w-[16px] !mt-auto "
+  //               />
+  //               Floor Plan
+  //             </p>
+  //           </div>
+  //         </div>

@@ -24,6 +24,7 @@ type Props = {
   frontendFilters: any;
   pageUrl: string;
   showProjectTab?: boolean;
+  is2lakhUrls?: boolean;
 };
 
 export default function NewListingSearchpage({
@@ -31,6 +32,7 @@ export default function NewListingSearchpage({
   frontendFilters,
   pageUrl,
   showProjectTab = false,
+  is2lakhUrls = false,
 }: Props) {
   const isListing = true;
   return (
@@ -38,7 +40,11 @@ export default function NewListingSearchpage({
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
       {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full">
-        <ProjectSearchBreadCrumbs key="newSearchPage3" pageUrl={pageUrl} />
+        <ProjectSearchBreadCrumbs
+          key="newSearchPage3"
+          is2lakhUrls={is2lakhUrls}
+          pageUrl={pageUrl}
+        />
         <div className="flex flex-row items-start gap-2">
           <ListingHeaderFilters
             key="newSearchFilter3"

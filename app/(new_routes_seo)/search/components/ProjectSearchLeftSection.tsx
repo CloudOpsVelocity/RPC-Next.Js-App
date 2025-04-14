@@ -85,7 +85,7 @@ function LeftSection({
     (data?.pages?.length || 0) > 0
       ? data?.pages.flat()
       : serverData || data?.pages?.flat() || [];
-
+  // console.log({ allItems });
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
   const setIsMapLoaded = useSetAtom(searchPageMapToggle);
@@ -103,7 +103,6 @@ function LeftSection({
           });
         }
       }
-
       setSelected(null);
       setNearby((prev: any) => ({
         ...prev,
@@ -149,36 +148,6 @@ function LeftSection({
 
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
-
-  // const renderProjectCard = useCallback(
-  //   (virtualRow: any) => {
-  //     const eachOne: any = allItems[virtualRow.index];
-
-  //     return (
-  //       <div
-  //         key={virtualRow.key}
-  //         data-index={virtualRow.index}
-  //         ref={rowVirtualizer.measureElement}
-  //         style={{
-  //           position: "absolute",
-  //           top: 0,
-  //           left: 0,
-  //           width: "100%",
-  //           transform: `translateY(${virtualRow.start ?? 0}px)`,
-  //         }}
-  //       >
-  //         <ProjectCard
-  //           key={eachOne.projIdEnc + eachOne.propType}
-  //           refetch={refetch}
-  //           data={{ ...eachOne, type: state.listedBy ?? "proj" }}
-  //           index={virtualRow.index}
-  //           mutate={mutate}
-  //         />
-  //       </div>
-  //     );
-  //   },
-  //   [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
-  // );
 
   const EmptyState = memo(function EmptyState() {
     return (

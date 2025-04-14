@@ -10,8 +10,8 @@ import {
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-import { formatDate } from "@/app/utils/date";
+// import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+// import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
@@ -19,7 +19,7 @@ import { useSetAtom } from "jotai";
 
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
-import Link from "next/link";
+// import Link from "next/link";
 
 type Props = {
   projectDetails: Main | null;

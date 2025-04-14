@@ -11,6 +11,7 @@ import Message from "./actions/Message";
 import ReportSectionProperty from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import Link from "next/link";
+import SharePopup from "../atoms/SharePopup";
 
 export default function PropertyOverView({
   data,
@@ -26,15 +27,19 @@ export default function PropertyOverView({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
-          <p className="text-[18px] sm:text-[24px] xl:text-[28px] text-[#001F35] font-bold capitalize">
-            <strong>
-              <span className="lowercase">
-                {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft" : ""}
-              </span>{" "}
-              {data.bhkName} {data.propTypeName} For{" "}
-              {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName}
-            </strong>
-          </p>
+          <div className="flex justify-between items-start ">
+            <h1 className="text-[18px] sm:text-[24px] xl:text-[28px] text-[#001F35] font-bold capitalize">
+              <strong>
+                <span className="lowercase">
+                  {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft" : ""}
+                </span>{" "}
+                {data.bhkName} {data.propTypeName} For{" "}
+                {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName}
+              </strong>
+            </h1>
+            <SharePopup title="Share Listing" className="text-sm p-[2px] mt-[2px] sm:hidden " />
+          </div>
+          
           <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-bold leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${data.address}, ${data.ltName}, ${data.ctName}, ${data?.stateName}, ${data.pinCode}`}
           </p>
