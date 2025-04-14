@@ -216,7 +216,7 @@ li {
 .carousel__next {
     position: absolute;
     top: 0;
-    margin-top: 30%;
+    margin-top: 36%;
     width: 3rem;
     height: 3rem;
     transform: translateY(-50%);
@@ -259,6 +259,20 @@ li {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
 }
 
+@media only screen and (min-width: 602px) and (max-width: 1600px) {
+    .carousel__slide,
+    .carousel {
+        min-height: 545px;
+    }
+
+    .carousel::before,
+    .carousel::after,
+    .carousel__prev,
+    .carousel__next {
+        margin-top: 30%;
+    }
+}
+
 @media (max-width:600px) {
     .carousel__slide,
     .carousel {
@@ -277,12 +291,19 @@ li {
 
     .carousel::before,
     .carousel__prev {
-        left: -2rem;
+        left: 1rem;
     }
 
     .carousel::after,
     .carousel__next {
-        right: -2rem;
+        right: 1rem;
+    }
+
+    .carousel::before,
+    .carousel::after,
+    .carousel__prev,
+    .carousel__next {
+        margin-top: 25%;
     }
 
 };
