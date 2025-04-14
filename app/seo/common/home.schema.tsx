@@ -196,48 +196,15 @@ const offerSchema = {
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      item: {
-        "@id": "https://getrightproperty.com",
-        name: "Home",
-      },
+  itemListElement: homeLinksData.map((value, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@id": value.url,
+      name: value.name,
+      url: value.url,
     },
-    {
-      "@type": "ListItem",
-      position: 2,
-      item: {
-        "@id": "https://getrightproperty.com/search/listing",
-        name: "Properties",
-      },
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      item: {
-        "@id": "https://getrightproperty.com/search",
-        name: "Projects",
-      },
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      item: {
-        "@id": "https://getrightproperty.com/post-your-listing",
-        name: "Post Property",
-      },
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      item: {
-        "@id": "https://getrightproperty.com/register",
-        name: "Signup",
-      },
-    },
-  ],
+  })),
 };
 
 const FaqSchema = {
