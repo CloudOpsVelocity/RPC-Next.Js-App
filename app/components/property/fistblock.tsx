@@ -144,12 +144,13 @@ const PropertyFirstBlock: React.FC<Props> = ({
                       //srcSet={imageUrl.split(",")[3]}
                     />
                     <Image
-                      alt="project image"
-                     // src={imageUrl.split(",")[3]}
-                     src={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
-                      ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
-                      : imageUrl.split(",")[3] : imageUrl.split(",")[3]
-                  }
+                      alt={projName}
+                      title={projName}
+                      // src={imageUrl.split(",")[3]}
+                      src={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
+                        ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
+                        : imageUrl.split(",")[3] : imageUrl.split(",")[3]
+                      }
                       // height={630}
                       // width={1200}
                       fill

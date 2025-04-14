@@ -133,7 +133,8 @@ const LeafMap: React.FC<{
               />
 
               <Image
-                alt="project image"
+                alt={projName}
+                title={projName}
                 src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
                 fill
                 className={`bg-gray-`}

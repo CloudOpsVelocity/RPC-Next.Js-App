@@ -18,7 +18,7 @@ export default function ServerDataSection({
   return data.map((eachOne: any, index: number) => {
     return (
       <ProjectCard
-        key={eachOne.projIdEnc + eachOne.propType}
+        key={eachOne.projIdEnc + eachOne.propType + index}
         refetch={refetch}
         data={{ ...eachOne, type: state.listedBy ?? "proj" }}
         index={index}

@@ -16,13 +16,15 @@ export default async function page({}: Props) {
     );
   });
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=0`;
+  //let url = `https://www.getrightproperty.com/srp/margdataurl/searchproj?page=0`;
 
   const { data } = await axios.get(url);
+
   return (
     <>
       <ResidentialProjectSchama
         pageUrl="/residential"
-        properties={data?.data}
+        properties={data?.data.slice(40)}
         urls={data?.urls}
       />
       {data ? <ResidentialPage data={data} /> : <LoadingSpinner />}
@@ -30,4 +32,4 @@ export default async function page({}: Props) {
   );
 }
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";

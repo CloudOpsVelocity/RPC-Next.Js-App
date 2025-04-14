@@ -185,7 +185,8 @@ export default function Navigation({
       {leftScroll > 0 && (
         <Image
           src="/auth/arrow.svg"
-          alt="Left Scroll Icon"
+          alt="Scroll Left"
+          title="Scroll Left"
           className="rotate-180 cursor-pointer"
           width={40}
           height={40}
@@ -249,7 +250,8 @@ export default function Navigation({
       </div>
       <Image
         src="/auth/arrow.svg"
-        alt="Right Scroll Icon"
+        alt="Scroll Right"
+        title="Scroll Right"
         className="cursor-pointer"
         width={40}
         height={40}

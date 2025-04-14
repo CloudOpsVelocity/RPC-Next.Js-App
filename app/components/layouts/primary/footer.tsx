@@ -112,17 +112,21 @@ function Footer() {
         "Home",
         "Projects",
         "Properties",
-        session !== undefined && session !== null && session.user?.userType === "B" ? "Post Project" : "",
+        session !== undefined &&
+        session !== null &&
+        session.user?.userType === "B"
+          ? "Post Project"
+          : "",
         "Post Property",
         "Builders",
         session === null ? "Login/Signup" : "",
         "Listing Search",
         "Project Search",
-        "Residential Listings"
+        "Residential Listings",
       ],
       hrefs: [
         "/",
-        "/search",
+        "/residential",
         "/search/listing",
         "/post-your-project",
         "/post-your-listing",
@@ -130,8 +134,7 @@ function Footer() {
         "/login",
         "/search/listing",
         "/search",
-        "/residential-listings"
-
+        "/residential-listings",
       ],
       rel: "noopener noreferrer",
       target: "_self",
@@ -200,7 +203,8 @@ function Footer() {
               </p>
               <div className="flex space-x-6">
                 {socialIcons.map(({ name, icon, link }) => (
-                  <Link prefetch={false}
+                  <Link
+                    prefetch={false}
                     rel="noreferrer"
                     key={name}
                     href={link}
@@ -224,7 +228,8 @@ function Footer() {
                     <ul className="sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <Link prefetch={false}
+                          <Link
+                            prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -245,20 +250,27 @@ function Footer() {
                       {title}
                     </h3>
                     <ul className="sm:mt-4 md:space-y-4">
-                      {links.map(
-                        (link, index) =>
+                      {links.map((link, index) => {
+                        return (
                           link && (
                             <li key={link}>
-                              <Link prefetch={false}
+                              <Link
+                                prefetch={false}
                                 href={hrefs[index]}
                                 rel={rel}
                                 className="text-xs sm:text-base text-gray-300 hover:text-white"
                               >
                                 {link}
+                                {link === "Home" || link === "Projects" ? (
+                                  <span className="hidden"> Page</span>
+                                ) : (
+                                  ""
+                                )}
                               </Link>
                             </li>
                           )
-                      )}
+                        );
+                      })}
                     </ul>
                   </div>
                 ))}
@@ -273,7 +285,8 @@ function Footer() {
                     <ul className="sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
-                          <Link prefetch={false}
+                          <Link
+                            prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
                             className="text-xs sm:text-base text-gray-300 hover:text-white"
@@ -293,7 +306,7 @@ function Footer() {
           <div className="mt-4 sm:mt-12 border-t border-gray-700">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
               <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
+                <h3 className="text-xs sm:text-sm font-[normal] text-white tracking-wider uppercase">
                   Subscribe to our newsletter
                 </h3>
                 <p className="mt-1 sm:mt-4 text-xs sm:text-base text-gray-300">
@@ -311,7 +324,8 @@ function Footer() {
               <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
                 <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
               </button>
-              <Link prefetch={false}
+              <Link
+                prefetch={false}
                 rel="noopener noreferrer"
                 href={`tel:${8884440963}`}
                 className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
@@ -323,7 +337,11 @@ function Footer() {
               Copyright © 2024 GetRightProperty. All Rights Reserved.
               <span>
                 <br />A Product By &quot;
-                <Link prefetch={false} rel="noopener noreferrer" href="https://rpclan.com/">
+                <Link
+                  prefetch={false}
+                  rel="noopener noreferrer"
+                  href="https://rpclan.com/"
+                >
                   {" "}
                   RPCLAN SERVICES PVT.LTD{" "}
                 </Link>

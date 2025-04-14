@@ -27,6 +27,7 @@ import {
 } from "@/app/validations/types/project";
 import { useQuery } from "react-query";
 import Link from "next/link";
+import SharePopup from "../atoms/SharePopup";
 export interface Props extends Main {
   // Extend Main directly
   slug: string; // New property for the slug
@@ -69,10 +70,16 @@ export default function Overview({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div className="md:w-[80%]">
-          <div className="">
+          {/* <div className="">
             <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             <strong>{projectName}</strong>
-            </h1>{" "}
+            </h1>{" "} */}
+          <div className="flex justify-between items-start ">
+            <p className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
+              <strong>{projectName}</strong>
+            </p>{" "}
+
+            <SharePopup className="text-sm p-[2px] mt-[2px] sm:hidden " />
           </div>
 
           <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-bold leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">

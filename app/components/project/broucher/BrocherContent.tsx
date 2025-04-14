@@ -146,7 +146,7 @@ function BrocherContent({
               <source media="(max-width: 460px)" srcSet={broucherImage?.split(",")[0]} />
               <source media="(max-width: 768px)" srcSet={broucherImage?.split(",")[1]} />
               <source media="(min-width: 1200px)" srcSet={broucherImage?.split(",")[2]} />
-              <Image alt="project image" title="project image" src={broucherImage?.split(",")[3]} fill unoptimized priority />
+              <Image alt={`${projName} Brochure`} title={`${projName} Brochure`} src={broucherImage?.split(",")[3]} fill unoptimized priority />
             </picture>
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -374,8 +374,8 @@ function BrocherContent({
                   srcSet={broucherImage?.split(",")[2]}
                 />
                 <Image
-                  alt="project image"
-                  title="project image"
+                  alt={`${projName} Brochure`}
+                  title={`${projName} Brochure`}
                   src={broucherImage?.split(",")[3]}
                   fill
                   unoptimized
@@ -551,8 +551,8 @@ function BrocherContent({
                 srcSet={broucherImage?.split(",")[2]}
               />
               <Image
-                alt="project image"
-                title="project image"
+                alt={`${projName} Brochure`}
+                title={`${projName} Brochure`}
                 src={broucherImage?.split(",")[3]}
                 fill
                 unoptimized

@@ -100,19 +100,19 @@ const Card = ({
         " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer p-2 sm:p-0",
         type === "sell"
           ? "border border-solid border-[#FBE885]"
-          : "border border-solid border-[#B1DEFF] "
+          : "border border-solid border-[#B1DEFF]"
       )}
       onClick={() => handleBoxClick(block, type === "sell" ? "S" : "R")}
     >
       <AvailListSideSvg type={type} />
       <div className="flex justify-evenly sm:justify-center items-center gap-2 sm:gap-[22px] h-full ">
         <Image
-          alt="listing"
+          alt={type === "rent" ? "Rent Listing" : "Sale Listing"}
           src={type === "rent" ? config.rentMobileLogo : config.sellMobileLogo}
           width={100}
           height={100}
-          className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px] "
-          title="listing"
+          className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px]"
+          title={type === "rent" ? "Rent Listing" : "Sale Listing"}
         />
 
         <div className="pl-0">
@@ -132,10 +132,10 @@ const Card = ({
           <Image
             src={type === "rent" ? config.rentIcon : config.sellIcon}
             className="w-[24px] h-[23px]"
-            alt="stock icon"
+            alt="Price Rate"
             width={24}
             height={23}
-            title="stock icon"
+            title="Price Rate"
           />
         </div>
       </div>
