@@ -2,6 +2,7 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
 import { baseURL } from "@/app/utils/api/api";
+import WebPageSchama from "../common/WebPageSchama";
 
 export const generateAllSchemas = (
   property: any,
@@ -250,22 +251,37 @@ export const ResidentialProjectSchama = ({
 }) => {
   if (!Array.isArray(properties)) return null;
   let PAGE_IMAGE = "";
-  const results = properties
-    .map((property: any, index: number) => {
-      if (!PAGE_IMAGE) {
-        PAGE_IMAGE = property.coverUrl?.split(",")[0];
-      }
-      return generateAllSchemas(property, properties, index);
-    })
-    .filter(Boolean);
+  // const results = properties
+  //   .map((property: any, index: number) => {
+  //     if (!PAGE_IMAGE) {
+  //       PAGE_IMAGE = property.coverUrl?.split(",")[0];
+  //     }
+  //     return generateAllSchemas(property, properties, index);
+  //   })
+  //   .filter(Boolean);
 
-  if (!results.length) return null;
+  // if (!results.length) return null;
   const pagetitle = cleanHeading(pageUrl);
   const address = pagetitle.split("In")[1];
+  const viewActionJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": urls.map((item: any) => ({
+      "@type": "SiteNavigationElement",
+      name: item?.split("/").at(-1).split("-").slice(0, -1).join(" "),
+      url: item,
+    })),
+  };
   const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
   return (
     <>
+      <WebPageSchama path={pageUrl} />
       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(viewActionJsonLd),
+        }}
+      />
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -283,14 +299,13 @@ export const ResidentialProjectSchama = ({
             },
           }),
         }}
-      />
-
-      <script
+      /> */}
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
-      />
+      /> */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -326,7 +341,6 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -594,7 +608,6 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
