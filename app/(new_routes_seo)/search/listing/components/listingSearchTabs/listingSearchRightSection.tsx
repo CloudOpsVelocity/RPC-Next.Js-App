@@ -45,29 +45,28 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
   } = useAtomValue(selectedNearByAtom);
   const [apiFilterQueryParams] = useQueryState("sf");
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(
-          pageParam,
-          apiFilterQueryParams ? apiFilterQueryParams : ""
-        );
+  const { data } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getSearchData(
+        pageParam,
+        apiFilterQueryParams ? apiFilterQueryParams : ""
+      );
 
-        return response;
-      },
-      getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
-        return nextPage;
-      },
-      ...RTK_CONFIG,
-      enabled: false,
-    });
+      return response;
+    },
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      const nextPage = allPages.length;
+      if (lastPage.length < 20) {
+        return;
+      }
+      return nextPage;
+    },
+    ...RTK_CONFIG,
+    enabled: false,
+  });
 
   const apidata = data?.pages.flat() || [];
 
