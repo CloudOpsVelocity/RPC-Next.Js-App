@@ -8,15 +8,16 @@ import {
   FaHandSparkles,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import Image from "next/image";
+
 import Link from "next/link";
-import Banner from "./Banner";
+
 import Filters from "./Filters";
 
 import { FaChevronRight } from "react-icons/fa6";
 import ResidentialCardSection from "./ResidentialcardSection";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useState } from "react";
+import Pagination from "./Pagination";
 
 const testimonials = [
   {
@@ -42,7 +43,7 @@ const testimonials = [
   },
 ];
 
-export default function ResidentialPage({ data }: { data: any }) {
+export default function ResidentialPage({ data, totalCount }: { data: any, totalCount:number  }) {
   const [loading, setLoading] = useState(false);
   return (
     <div className="min-h-screen bg-background">
@@ -131,7 +132,9 @@ export default function ResidentialPage({ data }: { data: any }) {
         data={data}
         setLoading={setLoading}
         loading={loading}
+        totalCount={totalCount}
       />
+      <Pagination totalCount={totalCount}  />
       {!loading && (
         <>
           <section className="py-20 bg-muted/50">

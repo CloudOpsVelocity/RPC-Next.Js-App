@@ -89,6 +89,7 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
                   prefetch={false}
                   href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${currentPath2}`}
                   className="hover:underline cursor-pointer capitalize"
+                  target="_blank"
                 >
                   <span>{newName}</span>
                 </Link>
