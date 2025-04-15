@@ -5,22 +5,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import React, { useState, useEffect, useCallback, memo } from "react";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 
 type Props = {
   data: any;
   setLoading: (loading: boolean) => void;
   loading: boolean;
+  totalCount:Number
 };
 
 export default function ResidentialCardSection({
   data,
   setLoading,
   loading,
+  totalCount
 }: Props) {
   const properties = data.data || [];
-  const [listItemsCount, setListItemsCount] = useState(20);
+  const [listItemsCount, setListItemsCount] = useState(40);
   const [opened, { open, close }] = useReqCallPopup();
 
   const fetchMoreItems = useCallback(() => {
@@ -94,7 +96,13 @@ export default function ResidentialCardSection({
 
   /*Tested jios test */
 
+
+
+  
+
   return (
+    <>
+
     <section className="py-8 sm:py-14 container mx-auto px-4">
       {!properties || properties.length < 1 ? (
         <div className="flex justify-center">
@@ -253,5 +261,70 @@ export default function ResidentialCardSection({
       )}
       <RequestCallBackModal />
     </section>
+     {/* Pagination controls */}
+          {/* {totalPages > 1 && (
+            <div className="mt-10 flex justify-center">
+              <nav className="flex items-center gap-1">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 0}
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-input bg-background text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                  aria-label="Previous page"
+                >
+                  <FaChevronLeft className="h-4 w-4" />
+                </button>
+
+                {getPageNumbers().map((pageNum, index) => {
+                  // Handle ellipsis
+                  if (pageNum < 0) {
+                    return (
+                      <span key={`ellipsis-${index}`} className="px-3 py-2">
+                        ...
+                      </span>
+                    )
+                  }
+
+                  return (
+                    <button
+                      key={`page-${pageNum}`}
+                      onClick={() => 
+                        
+                        
+                        
+                        (pageNum)}
+                      className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-sm font-medium transition-colors ${
+                        currentPage === pageNum
+                          ? "bg-primary text-primary-foreground"
+                          : "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground"
+                      }`}
+                      aria-label={`Page ${pageNum + 1}`}
+                      aria-current={currentPage === pageNum ? "page" : undefined}
+                    >
+                      {pageNum + 1}
+                    </button>
+                  )
+                })}
+
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages - 1}
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-input bg-background text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                  aria-label="Next page"
+                >
+                  <FaChevronRight className="h-4 w-4" />
+                </button>
+              </nav>
+            </div>
+          )} */}
+
+          {/* Page information */}
+       {/*    {totalCount > 0 && (
+            <div className="mt-4 text-center text-sm text-muted-foreground">
+              Showing {currentPage * itemsPerPage + 1} to {Math.min((currentPage + 1) * itemsPerPage, totalCount)} of{" "}
+              {totalCount} results
+            </div>
+          )} */}
+    </>
+    
   );
 }

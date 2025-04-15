@@ -12,6 +12,8 @@ type Props = {
 
 export default async function page({ searchParams: { page } }: Props) {
   console.log(page);
+
+
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
       <div className="flex items-center gap-2">
@@ -19,8 +21,8 @@ export default async function page({ searchParams: { page } }: Props) {
         <span className="font-bold">Loading results...</span>
       </div>
     );
-  });
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/marg-project-details`;
+  })
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=${page?page==0?0:page-1:0}`;
   /* let url = `https://www.getrightproperty.com/common/marg-project-details`; */
 
   const { data } = await axios.get(url);
@@ -56,7 +58,7 @@ export default async function page({ searchParams: { page } }: Props) {
         urls={data?.urls}
       />
       {JSON.stringify(page)}
-      {data ? <ResidentialPage data={data} /> : <LoadingSpinner />}
+      {data ? <ResidentialPage data={data} totalCount={data?.totalCount} /> : <LoadingSpinner />}
     </>
   );
 }
