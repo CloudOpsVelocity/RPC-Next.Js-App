@@ -43,12 +43,51 @@ export default function OverviewBanner({
     >
       {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
        */}
+           {/*  <picture>
+              <source
+                media="(max-width: 460px)"
+                srcSet={broucherImage?.split(",")[0]}
+              />
+              <source
+                media="(max-width: 768px)"
+                srcSet={broucherImage?.split(",")[1]}
+              />
+              <source
+                media="(min-width: 1200px)"
+                srcSet={broucherImage?.split(",")[2]}
+              />
+              <Image
+                alt={`${projName} Brochure`}
+                title={`${projName} Brochure`}
+                src={broucherImage?.split(",")[3]}
+                fill
+                unoptimized
+              />
+            </picture> */}
+      <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-mobile.webp`}
+        width={100}
+        height={120}
+        alt="price OverView"
+        className="w-[100px] sm:hidden h-[120px] sm:h-[169px] mt-2 sm:mt-0"
+        unoptimized
+        title="price OverView"
+      />
+      <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-laptop.webp`}
+        width={151}
+        height={169}
+        alt="price OverView"
+        className=" sm:max-w-[151px] hidden sm:flex xl:hidden  sm:w-[151px]   sm:h-[169px] mt-2 sm:mt-0"
+        unoptimized
+        title="price OverView"
+      />
       <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
         width={237}
         height={263}
         alt="price OverView"
-        className="w-[100px] h-[120px] sm:max-w-[151px] xl:max-w-[237px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
+        className="   xl:max-w-[237px]  xl:w-[237px] xl:h-[263px] hidden xl:flex  mt-2 sm:mt-0"
         unoptimized
         title="price OverView"
       />
