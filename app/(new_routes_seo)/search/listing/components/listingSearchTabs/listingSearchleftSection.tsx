@@ -43,7 +43,7 @@ function LeftSection({
   const pathname = usePathname();
   const isTrue =
     it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
-
+  console.log(pathname.includes("search"));
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 
@@ -121,36 +121,6 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
 
-  // const renderProjectCard = useCallback(
-  //   (virtualRow: any) => {
-  //     const eachOne = allItems[virtualRow.index];
-
-  //     return (
-  //       <div
-  //         key={virtualRow.key}
-  //         data-index={virtualRow.index}
-  //         ref={rowVirtualizer.measureElement}
-  //         style={{
-  //           position: "absolute",
-  //           top: 0,
-  //           left: 0,
-  //           width: "100%",
-  //           transform: `translateY(${virtualRow.start ?? 0}px)`,
-  //         }}
-  //       >
-  //         <ProjectCard
-  //           key={eachOne.projIdEnc + eachOne.propType}
-  //           refetch={refetch}
-  //           data={{ ...eachOne, type: "A" ?? "B" }}
-  //           index={virtualRow.index}
-  //           mutate={mutate}
-  //         />
-  //       </div>
-  //     );
-  //   },
-  //   [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
-  // );
-
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -206,7 +176,6 @@ function LeftSection({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
-  console.log({ isLoading, allItems });
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
@@ -222,15 +191,6 @@ function LeftSection({
           state={state}
         />
       ) : (
-        // <div
-        //   style={{
-        //     height: `${rowVirtualizer.getTotalSize()}px`,
-        //     width: "100%",
-        //     position: "relative",
-        //   }}
-        // >
-        //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-        // </div>
         <EmptyState />
       )}
       {hasNextPage && shouldFetchMore && (

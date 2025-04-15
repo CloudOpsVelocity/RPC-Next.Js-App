@@ -31,22 +31,16 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     newParams = ["Project Search"];
   } else if (pageUrl === "/search/listing") {
     newParams = ["Listing Search"];
-  } else if (pageUrl.includes("residential/")) {
+  } else if (pageUrl.includes("/residential/")) {
     newParams = pageUrl.split("/");
-  } else if (pageUrl.includes("/residential-listings")) {
-    newParams = ["Home", "residential-listings"];
+  } else if (pageUrl === "/residential-listings") {
+    newParams = ["Home", "Residential Listings"];
+  } else if (pageUrl.includes("/residential-listings/")) {
+    newParams = pageUrl.split("/");
   } else if (pageUrl.includes("/residential/listings/")) {
     newParams = pageUrl.split("/").filter(Boolean);
-  } else if (pageUrl === "/residential-listings") {
-    newParams = ["Residential Listings"];
   }
-  const Listing_data = newParams.reduceRight(
-    (intialValue, currentValue, index) => {
-      intialValue[index] = currentValue;
-      return intialValue;
-    },
-    {} as Partial<any>
-  );
+
   let array = [
     {
       name: "Home",
@@ -88,6 +82,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
+
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         {newParams.map((item: any, index: number) => {
           let url = index === 0 ? "/" : trimStringUrl(pageUrl, item);
@@ -104,7 +99,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
                 <Link
                   rel="noopener noreferrer"
                   prefetch={false}
-                  // target="_blank"
+                  target="_blank"
                   href={url}
                   className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
                   aria-current={
