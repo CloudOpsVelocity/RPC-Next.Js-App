@@ -76,24 +76,24 @@ const ForBuilders = () => {
       <div 
         className="relative " 
         onMouseEnter={() => setIsHovered(true)} 
-        // onMouseLeave={() => setIsHovered(false)} 
+        onMouseLeave={() => setIsHovered(false)} 
       >
         <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
           For Builders {config.chevron}
         </button>
 
         {isHovered &&
-        <div
+        <div 
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="!p-0 cursor-pointer w-full absolute min-w-[150px] top-[36px] "
+          className="!p-0 cursor-pointer w-full absolute min-w-[150px] "
           onClick={() =>
             typeof window !== "undefined"
               ? window.open(`/login?cc=${encryptUrl(pathName)}`)
               : ""
           }
         >
-              <div className="relative w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
+            <div className="mt-[20px]  relative w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
                 <p className="text-[#F5AC44] text-lg not-italic font-bold">
                   Calling Builders!!!
                 </p>
@@ -122,8 +122,8 @@ const ForBuilders = () => {
                   height={220}
                   className="absolute right-0 bottom-0"
                 />
-              </div>
-          </div>}
+            </div>
+        </div>}
       </div>
     )
   );
@@ -332,8 +332,9 @@ function Dropdown() {
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className=" w-full flex flex-col absolute min-w-[150px] top-[36px]  bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
+          className="absolute"
         >
+          <div className="w-full flex flex-col min-w-[150px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg">
             {data.map((item, index) =>
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : (
@@ -352,12 +353,13 @@ function Dropdown() {
             )}
             <hr className=" border-[#768AA9] border-solid border-t-[1px] ml-[12px] w-full max-w-[90%]" />
 
-          <div
-            className="block hover:text-green-500 transition-colors text-[#505050] font-[400] text-[14px] md:text-[18px] max-w-[150px] md:max-w-auto  "
-            onClick={handleLogout}
-          >
-            <div className="flex items-center gap-2 cursor-pointer ">
-              {homePageSvgsMap.get("logout")} <span>Log Out</span>
+            <div
+              className="block hover:text-green-500 transition-colors text-[#505050] font-[400] text-[14px] md:text-[18px] max-w-[150px] md:max-w-auto  "
+              onClick={handleLogout}
+            >
+              <div className="flex items-center gap-2 cursor-pointer ">
+                {homePageSvgsMap.get("logout")} <span>Log Out</span>
+              </div>
             </div>
           </div>
         </div>
@@ -366,20 +368,25 @@ function Dropdown() {
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className=" w-full flex flex-col absolute min-w-[150px] top-[36px]  bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
+          className="absolute"
         >
-          {unAuthorizedData.map((item, index) => (
-            <Link
-              key={item.url}
-              className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
-              href={{
-                pathname: item.url,
-                search: redirectQueryParam,
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+
+          <div
+            className="w-full flex flex-col min-w-[150px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
+          >
+            {unAuthorizedData.map((item, index) => (
+              <Link
+                key={item.url}
+                className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
+                href={{
+                  pathname: item.url,
+                  search: redirectQueryParam,
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </div>

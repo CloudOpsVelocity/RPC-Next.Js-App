@@ -141,16 +141,29 @@ function CustomCarousel({ containerClass = "", images, projName }: Props) {
     [currentIndex, dataLength]
   );
 
+  const [stopAutoScroll, setStopAutoScroll ] = useState(false);
+
   // Auto-play every 4s
   useEffect(() => {
+    if (stopAutoScroll) return;
     const interval = setInterval(() => {
       handleScroll("R");
     }, 4000);
+
     return () => clearInterval(interval);
-  }, [handleScroll]);
+
+  }, [handleScroll, stopAutoScroll]);
+
+  const onClickBox = () => {
+    console.log("clicked")
+    setStopAutoScroll(true);
+    setTimeout(()=>{
+      setStopAutoScroll(false);
+    }, 30000)
+  }
 
   return (
-    <div className={`relative flex justify-center items-end w-[94%] md:w-[90%] h-full ${containerClass}`}>
+    <div className={`relative flex justify-center items-end w-[94%] md:w-[90%] h-full ${containerClass}`} onClick={onClickBox} >
       {dataLength >= 2 && (
         <PrevCarouselButton
           className="w-[40px] h-[40px] cursor-pointer absolute left-[10px] md:left-[20px] top-[45%] z-10"
@@ -162,7 +175,7 @@ function CustomCarousel({ containerClass = "", images, projName }: Props) {
 
       <div
         ref={containerRef}
-        className="relative flex w-full h-full overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-hide"
+        className="relative flex w-full h-full overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-hide pointer-events-no "
         style={{ userSelect: "none" }}
       >
         <div
@@ -211,7 +224,7 @@ function CustomCarousel({ containerClass = "", images, projName }: Props) {
         />
       )}
 
-      <div className="flex justify-center items-center gap-[14px] w-full absolute mb-[30px]">
+      <div className="hidden xl:flex justify-center items-center gap-[14px] w-full absolute mb-[30px]">
         {Array.from({ length: dataLength }).map((_, index) => (
           <div
             key={index}
