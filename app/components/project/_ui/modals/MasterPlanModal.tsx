@@ -104,16 +104,34 @@ export default function FullScreenMasterPlanModal({
     }
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      preventBackButton();
-      const handlePopState = () => {
-        closeModal();
-      };
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     preventBackButton();
+  //     const handlePopState = () => {
+  //       closeModal();
+  //     };
 
-      window.addEventListener("popstate", handlePopState);
-      return () => window.removeEventListener("popstate", handlePopState);
-    }
+  //     window.addEventListener("popstate", handlePopState);
+  //     return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  // }, [isOpen]);
+
+   useEffect(() => {
+        if (isOpen) {
+            preventBackButton();
+            const onPopState = () => closeModal();
+            const onKeyDown = (e: KeyboardEvent) => {
+              if (e.key === 'Escape') closeModal();
+            };
+
+            window.addEventListener('popstate', onPopState);
+            window.addEventListener('keydown', onKeyDown);
+
+            return () => {
+                window.removeEventListener('popstate', onPopState);
+                window.removeEventListener('keydown', onKeyDown);
+            };
+        }
   }, [isOpen]);
 
   return (

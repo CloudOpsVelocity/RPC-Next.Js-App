@@ -84,27 +84,31 @@ export default function GalleryModalContent({}: Props) {
       : null;
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isOpen) return;
-      if (event.key === "ArrowRight") nextItem();
-      if (event.key === "ArrowLeft") prevItem();
-      if (event.key === "Escape") closeModal();
+      if (event.key === 'ArrowRight') nextItem();
+      if (event.key === 'ArrowLeft') prevItem();
+      if (event.key === 'Escape') closeModal();
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    
+    const handlePopState = () => {
+      if (isOpen) closeModal();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
     if (isOpen) {
       preventBackButton();
-        const handlePopState = () => {
-          closeModal();
-        };
-    
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
+      window.addEventListener('popstate', handlePopState);
     }
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [isOpen, nextItem, prevItem, closeModal]);
+
 
   // useEffect(() => {
   //   const handleKeyDown = (event: KeyboardEvent) => {
