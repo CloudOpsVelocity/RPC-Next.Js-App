@@ -20,17 +20,10 @@ import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 // import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import BrokerContactTag from "./BrokersFreindly";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
-// import Link from "next/link";
 import { useQuery } from "react-query";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-// const CustomCarousalCssOnly = dynamic(
-//   () => import("@/common/components/CustomCarousalCssOnly")
-// );
-const CustomCarousal = dynamic(
-  () => import("@/common/components/CustomCarousal")
-);
-// import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+
+import CustomCarousal from "@/common/components/CustomCarousal";
+
 type Props = {
   projectDetails: Main | null;
   projName: string;

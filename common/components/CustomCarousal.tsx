@@ -189,9 +189,9 @@ function CustomCarousel({ containerClass = "", images, projName }: Props) {
                     alt={projName || "Project Image"}
                     title={projName || "Project Image"}
                     src={getUrl(3)}
-                    height={630}
-                    width={1200}
-                    className="w-full h-full object-cover min-h-[300px] sm:min-h-[545px] xl:min-h-[750px]"
+                    height={750}
+                    width={900}
+                    className="object-fit h-[300px] sm:h-[545px] xl:h-[750px]"
                     unoptimized
                     quality={80}
                   />
