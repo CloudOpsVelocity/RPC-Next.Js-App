@@ -31,7 +31,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
 
   return (
     <section
-      className="sm:p-6 bg-white rounded-lg shadow-lg w-[90%] mx-auto mt-2 sm:mt-[100px] scroll-mt-[200px]"
+      className="md:p-6 bg-white rounded-lg shadow-lg w-[90%] mt-2 sm:mt-[100px] scroll-mt-[200px]"
       id="price-details"
     >
       <h2 className="text-h2 sm:text-[22px] xl:text-[28px] font-bold text-gray-800 mb-4">

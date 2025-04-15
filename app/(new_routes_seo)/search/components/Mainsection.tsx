@@ -24,7 +24,6 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
-
   useHydrateAtoms([
     [
       projSearchStore,
@@ -39,9 +38,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
 
   const pathname = usePathname();
   const [it, setIsTrue] = useState(
-    pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null
+    pathname.includes("search") ? true : apiFilterQueryParams !== null
   );
 
   return (

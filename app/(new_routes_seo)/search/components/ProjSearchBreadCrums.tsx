@@ -28,36 +28,19 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
 
   let newParams: string[] = is2lakhUrls ? ["Home", "Residentail Listings"] : [];
   if (pageUrl === "/search") {
-    newParams = ["Project Search"];
+    newParams = ["Home", "Project Search"];
   } else if (pageUrl === "/search/listing") {
-    newParams = ["Listing Search"];
-  } else if (pageUrl.includes("residential/")) {
+    newParams = ["Home", "Listing Search"];
+  } else if (pageUrl.includes("/residential/")) {
     newParams = pageUrl.split("/");
-  } else if (pageUrl.includes("/residential-listings")) {
-    newParams = ["Home", "residential-listings"];
+  } else if (pageUrl === "/residential-listings") {
+    newParams = ["Home", "Residential Listings"];
+  } else if (pageUrl.includes("/residential-listings/")) {
+    newParams = pageUrl.split("/");
   } else if (pageUrl.includes("/residential/listings/")) {
     newParams = pageUrl.split("/").filter(Boolean);
-  } else if (pageUrl === "/residential-listings") {
-    newParams = ["Residential Listings"];
   }
-  const Listing_data = newParams.reduceRight(
-    (intialValue, currentValue, index) => {
-      intialValue[index] = currentValue;
-      return intialValue;
-    },
-    {} as Partial<any>
-  );
-  let array = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "Residential Listing",
-      path: "/residential-liting",
-    },
-  ];
-  const data = array.keys();
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -88,6 +71,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
+
       <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
         {newParams.map((item: any, index: number) => {
           let url = index === 0 ? "/" : trimStringUrl(pageUrl, item);
@@ -104,7 +88,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
                 <Link
                   rel="noopener noreferrer"
                   prefetch={false}
-                  // target="_blank"
+                  target="_blank"
                   href={url}
                   className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
                   aria-current={

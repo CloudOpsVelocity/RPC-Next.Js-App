@@ -21,10 +21,7 @@ export default function NewSearchPage({
   const isListing = false;
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative ">
-      <link
-        rel="canonical"
-        href={`${process.env.NEXT_PUBLIC_URL}/${pageUrl}`}
-      />
+      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
       {serverData &&
         (frontendFilters.listedBy == null ? (
           <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />
