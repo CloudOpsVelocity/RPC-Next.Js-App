@@ -19,13 +19,7 @@ import { useSetAtom } from "jotai";
 
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
-
-import dynamic from "next/dynamic";
-
-const CustomCarousal = dynamic(
-  () => import("@/common/components/CustomCarousal")
-);
-
+import CustomCarousal from "@/common/components/CustomCarousal";
 
 type Props = {
   projectDetails: Main | null;
