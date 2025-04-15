@@ -41,17 +41,6 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     newParams = pageUrl.split("/").filter(Boolean);
   }
 
-  let array = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "Residential Listing",
-      path: "/residential-liting",
-    },
-  ];
-  const data = array.keys();
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
