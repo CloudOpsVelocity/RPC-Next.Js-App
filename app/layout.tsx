@@ -28,6 +28,12 @@ export default function RootLayout(params: { children: React.ReactNode }) {
   return (
     <html data-mantine-color-scheme="light" lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(Organization_SCHEMA),
+          }}
+        />
         <ColorSchemeScript />
         {/* <meta
           name="viewport"
@@ -102,12 +108,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(Organization_SCHEMA),
-        }}
-      />
+
       {process.env.NODE_ENV !== "development" && (
         <GoogleTagManager gtmId="GTM-T7W6VL9F" />
       )}
