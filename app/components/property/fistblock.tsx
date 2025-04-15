@@ -101,7 +101,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
               />
             </div>
           </div>
-          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto ( sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
+          <div className="flex justify-center items-center relative w-full aspect-auto max-w-[1000px] mx-auto sm:!rounded-[10px]  h-[300px] sm:h-[545px]  xl:h-[750px]">
             {/* <CustomCarousalCssOnly urlsData={images} projName={projName} /> */}
             {/* <CustomCarousal
                   dataLength={images?.length}
