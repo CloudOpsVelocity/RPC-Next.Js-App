@@ -23,9 +23,12 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 // import Link from "next/link";
 import { useQuery } from "react-query";
 import dynamic from "next/dynamic";
-// import CustomCarousalCssOnly from "@/common/components/CustomCarousalCssOnly";
-const CustomCarousalCssOnly = dynamic(
-  () => import("@/common/components/CustomCarousalCssOnly")
+import Image from "next/image";
+// const CustomCarousalCssOnly = dynamic(
+//   () => import("@/common/components/CustomCarousalCssOnly")
+// );
+const CustomCarousal = dynamic(
+  () => import("@/common/components/CustomCarousal")
 );
 // import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 type Props = {
@@ -106,7 +109,32 @@ const PropertyFirstBlock: React.FC<Props> = ({
             </div>
           </div>
           <div className="relative w-full aspect-auto max-w-[1000px] mx-auto ( sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
-            <CustomCarousalCssOnly urlsData={images} />
+            {/* <CustomCarousalCssOnly urlsData={images} projName={projName} /> */}
+            {/* <CustomCarousal
+                  dataLength={images?.length}
+                  containerClass="max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px]"
+                  allCards={images.map((imageUrl, index) => (
+                    <div key={`projDetailsCarosual_${index.toString()}`} className="carousel-slide h-full flex justify-center items-center "> 
+                        <Image
+                          alt="project image"
+                          title="project image"
+                          src={imageUrl.split(",")[3]}
+                          // fill
+                          width={1200}
+                          height={630}
+                          className={`bg-gray-${index + 1} w-full h-full object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
+                          unoptimized
+                          quality={80} 
+                        />
+                    </div>
+                  ))}
+                /> */}
+
+             <CustomCarousal
+                images={images}
+                containerClass="min-h-[300px] sm:min-h-[545px] !xl:min-h-[750px] xl:min-h-[750px]"
+                projName={projName}
+              />
           </div>
           {/* overview card removed from here and commented bottom of the component */}
         </>

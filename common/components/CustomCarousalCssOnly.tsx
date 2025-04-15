@@ -3,10 +3,11 @@ import style from "@/app/styles/CustomCarousel.module.css";
 import Image from 'next/image';
 
 type Props = {
-  urlsData:any
+  urlsData:any;
+  projName?:string;
 };
 
-const CustomCarousalCssOnly = ({urlsData}: Props) => {
+const CustomCarousalCssOnly = ({urlsData, projName}: Props) => {
   const dataLength = urlsData.length;
   return (
     <section className={style.carousel} aria-label="Gallery">
@@ -18,17 +19,6 @@ const CustomCarousalCssOnly = ({urlsData}: Props) => {
           return(
               <li key={`customCarosual_${index.toString()}`} id={`carousel__slide${item}`} tabIndex={item} className={style.carousel__slide}>
                 <div className={style.carousel__snapper}> 
-                    {/* <Image
-                      alt={`project_image_${index.toString()}`}
-                      title={`project_image_${index.toString()}`}
-                      src={imageUrl}
-                      width={1200}
-                      height={630}
-                      className={` w-full h-full object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
-                      unoptimized
-                      quality={80} 
-                    /> */}
-
                     <picture>
                       <source
                         media="(max-width: 460px)"
@@ -39,7 +29,7 @@ const CustomCarousalCssOnly = ({urlsData}: Props) => {
                       />
                       <source
                         media="(max-width: 768px)"
-                        srcSet={imageUrl.split(",")[2] ?imageUrl.split(",")[2].includes("+") 
+                        srcSet={imageUrl.split(",")[2] ?imageUrl.split(",")[2].includes("+")
                           ? imageUrl.split(",")[2].replace(/\+/g, "%2B")
                           : imageUrl.split(",")[2] : imageUrl.split(",")[2]
                       }
@@ -53,8 +43,8 @@ const CustomCarousalCssOnly = ({urlsData}: Props) => {
                         //srcSet={imageUrl.split(",")[3]}
                       />
                       <Image
-                        alt={`project_image_${index.toString()}`}
-                        title={`project_image_${index.toString()}`}
+                        alt={projName ? projName : "Project Image"}
+                        title={projName ? projName : "Project Image"}
                         // src={imageUrl.split(",")[3]}
                         src={imageUrl.split(",")[3] ?imageUrl.split(",")[3].includes("+") 
                           ? imageUrl.split(",")[3].replace(/\+/g, "%2B")
@@ -62,7 +52,6 @@ const CustomCarousalCssOnly = ({urlsData}: Props) => {
                         }
                         height={630}
                         width={1200}
-                        // fill
                         className={` w-full h-full object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
                         unoptimized
                         quality={80} 
