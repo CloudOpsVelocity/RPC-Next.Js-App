@@ -17,7 +17,7 @@ export default function Pagination({ totalCount }: Props) {
 
   // Get page from URL or default to 0
   const pageParam = searchParams.get("page")
-  const initialPage = pageParam ? Number.parseInt(pageParam) : 0
+  const initialPage = pageParam? Number.parseInt(pageParam) < 0  || isNaN(pageParam)? 1 :  Number.parseInt(pageParam) : 1;
   const [currentPage, setCurrentPage] = useState(initialPage)
 //
   const itemsPerPage = 40
