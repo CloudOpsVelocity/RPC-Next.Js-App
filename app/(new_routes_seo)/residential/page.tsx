@@ -63,7 +63,7 @@ export default async function page({ searchParams: { page } }: Props) {
         pageUrl="/residential"
         properties={data?.data}
         urls={data?.urls}
-        page={page}
+        page={parseInt(page as any)}
         totalPages={data.totalCount}
       />
       {data ? (

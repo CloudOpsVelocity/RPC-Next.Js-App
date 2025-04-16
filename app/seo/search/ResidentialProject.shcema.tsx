@@ -377,7 +377,7 @@ export const ResidentialProjectSchama = ({
       page > 1
         ? `${process.env.NEXT_PUBLIC_URL}/residential?page=${page - 1}`
         : null, // URL for the previous page
-    currentPage: page, // Current page number
+    currentPage: `${process.env.NEXT_PUBLIC_URL}/residential?page=${page}`, // Current page number
   };
 
   return (
