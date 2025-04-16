@@ -54,7 +54,7 @@ export default async function page({ searchParams: { page } }: Props) {
 
       <ResidentialProjectSchama
         pageUrl="/residential"
-        properties={[]}
+        properties={data.data}
         urls={data?.urls}
       />
       {JSON.stringify(page)}

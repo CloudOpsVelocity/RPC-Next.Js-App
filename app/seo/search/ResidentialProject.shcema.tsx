@@ -13,7 +13,7 @@ export const generateAllSchemas = (
   const [launchDate, possassionDate] = [
     convertToSchemaDate(property?.launchDate || "Fri Mar 27 00:00:00 IST 2026"),
     convertToSchemaDate(
-      property?.possassionDate || "Fri Mar 27 00:00:00 IST 2026"
+      property?.possassionDate || "Mon Dec 31 00:00:00 IST 2029"
     ),
   ];
   if (!property) return [];
@@ -25,10 +25,10 @@ export const generateAllSchemas = (
       );
     }) !== -1;
   const PAGE_URL = createProjectLinkUrl({
-    city: property.city,
-    slug: property.projName,
-    locality: property.locality,
-    projIdEnc: property.projIdEnc,
+    city: property.city || "Bengaluru",
+    slug: property.projName || "Sobha Crystal Meadows",
+    locality: property.locality || "Varthur",
+    projIdEnc: property.projIdEnc || "4652e580b8cbc19c9f9a731042d315ea",
   });
   const allSizesSchemas = property.coverUrl.split(",").map((url: string) => {
     const OrgName = property.projName?.split(" ")[0];
@@ -50,9 +50,11 @@ export const generateAllSchemas = (
     "@graph": [
       {
         "@type": "RealEstateListing",
-        name: `${property.projName || ""} ${property.propType || ""} ${
-          property.locality ? `in ${property.locality}` : ""
-        } ${property.city ? `, ${property.city}` : ""}`.trim(),
+        name: `${property.projName || "Sobha Crystal Meadows"} ${
+          property.propType || "Row House"
+        } ${property.locality ? `in ${property.locality}` : ""} ${
+          property.city ? `, ${property.city}` : ""
+        }`.trim(),
         description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         url: PAGE_URL,
         datePosted: launchDate || new Date().toISOString(),
@@ -63,7 +65,7 @@ export const generateAllSchemas = (
           "https://getrightproperty.com/default-property.jpg",
         offers: {
           "@type": "Offer",
-          price: property.minPrice || "0",
+          price: property.minPrice || 104900000,
           priceCurrency: "INR",
           availability:
             property.projstatus?.toLowerCase() === "under construction"
@@ -73,9 +75,9 @@ export const generateAllSchemas = (
       },
       {
         "@type": "Product",
-        name: `${property.projName || ""} ${property.propType || ""} ${
-          property.locality ? `in ${property.locality}` : ""
-        }`.trim(),
+        name: `${property.projName || "Sobha Crystal Meadows"} ${
+          property.propType || "Row House"
+        } ${property.locality ? `in ${property.locality}` : ""}`.trim(),
         description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         image:
           property.coverUrl?.split(",")[0] ||
@@ -83,7 +85,7 @@ export const generateAllSchemas = (
         url: PAGE_URL,
         offers: {
           "@type": "Offer",
-          price: property.minPrice || "0",
+          price: property.minPrice || 104900000,
           priceCurrency: "INR",
           availability:
             property.projstatus?.toLowerCase() === "under construction"
@@ -114,7 +116,7 @@ export const generateAllSchemas = (
       {
         "@type": "WebPage",
         url: PAGE_URL,
-        name: property.projName || "",
+        name: property.projName || "Sobha Crystal Meadows",
         description: `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`,
         datePublished: launchDate || new Date().toISOString(),
         image:
@@ -152,7 +154,7 @@ export const generateAllSchemas = (
         address: {
           "@type": "PostalAddress",
           streetAddress: property.address || "",
-          addressLocality: property.locality || "",
+          addressLocality: property.locality || "Varthur",
           addressRegion: property.state || "",
           postalCode: property.pincode || "",
           addressCountry: "IN",
@@ -163,7 +165,7 @@ export const generateAllSchemas = (
         target: {
           "@type": "EntryPoint",
           urlTemplate: `https://getrightproperty.com/search?q={search_term_string}&location=${
-            property.locality || ""
+            property.locality || "Varthur"
           }`,
         },
         "query-input": "required name=search_term_string",
@@ -183,7 +185,11 @@ export const generateAllSchemas = (
       },
       {
         "@type": "SiteNavigationElement",
-        name: ["Home", "Properties", property.projName],
+        name: [
+          "Home",
+          "Properties",
+          property.projName || "Sobha Crystal Meadows",
+        ],
         url: [PAGE_URL],
       },
       {
@@ -195,7 +201,7 @@ export const generateAllSchemas = (
         name: `View ${property.projName || "Property"} Details`,
         description: `View detailed information about ${
           property.projName || "Property"
-        } ${property.propType || ""} ${
+        } ${property.propType || "Row House"} ${
           property.locality ? `in ${property.locality}` : ""
         } ${property.city ? `, ${property.city}` : ""}`.trim(),
       },
@@ -206,13 +212,13 @@ export const generateAllSchemas = (
           urlTemplate: PAGE_URL,
         },
         name: `Buy ${property?.bhkNames?.join(",") ?? "Property"} In ${
-          property.projName || ""
+          property.projName || "Sobha Crystal Meadows"
         } ${property.locality ? `in ${property.locality}` : ""} ${
           property.city ? `, ${property.city}` : ""
         }`.trim(),
         priceSpecification: {
           "@type": "PriceSpecification",
-          price: property.minPrice || "0",
+          price: property.minPrice || 104900000,
           priceCurrency: "INR",
         },
       },
@@ -223,7 +229,7 @@ export const generateAllSchemas = (
           urlTemplate: PAGE_URL,
         },
         name: `Rent ${property?.bhkNames?.join(",") || "Property"} In ${
-          property.projName || ""
+          property.projName || "Sobha Crystal Meadows"
         } ${property.locality ? `in ${property.locality}` : ""} ${
           property.city ? `, ${property.city}` : ""
         }`.trim(),
@@ -251,16 +257,16 @@ export const ResidentialProjectSchama = ({
 }) => {
   if (!Array.isArray(properties)) return null;
   let PAGE_IMAGE = "";
-  // const results = properties
-  //   .map((property: any, index: number) => {
-  //     if (!PAGE_IMAGE) {
-  //       PAGE_IMAGE = property.coverUrl?.split(",")[0];
-  //     }
-  //     return generateAllSchemas(property, properties, index);
-  //   })
-  //   .filter(Boolean);
+  const results = properties
+    .map((property: any, index: number) => {
+      if (!PAGE_IMAGE) {
+        PAGE_IMAGE = property.coverUrl?.split(",")[0];
+      }
+      return generateAllSchemas(property, properties, index);
+    })
+    .filter(Boolean);
 
-  // if (!results.length) return null;
+  if (!results.length) return null;
   const pagetitle = cleanHeading(pageUrl);
   const address = pagetitle.split("In")[1];
   const viewActionJsonLd = {
