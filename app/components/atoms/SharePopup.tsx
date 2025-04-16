@@ -99,6 +99,7 @@ export default function SharePopup({
       </Modal>
 
       <button
+       aria-label={title}
         onClick={() => {
           navigator.share({ title: title, url: CopiedUrl });
         }}
