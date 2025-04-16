@@ -104,18 +104,6 @@ export default function FullScreenMasterPlanModal({
     }
   };
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     preventBackButton();
-  //     const handlePopState = () => {
-  //       closeModal();
-  //     };
-
-  //     window.addEventListener("popstate", handlePopState);
-  //     return () => window.removeEventListener("popstate", handlePopState);
-  //   }
-  // }, [isOpen]);
-
    useEffect(() => {
         if (isOpen) {
             preventBackButton();
