@@ -81,7 +81,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
           {isOkWithBrokerContact ? (
             <BrokerContactTag
               isBrokerAllowed
-              className="absolute right-0 top-[35%]  sm:right-auto sm:bottom-auto sm:top-0 sm:left-0 z-[1]"
+              className="absolute right-0 sm:right-auto sm:bottom-auto sm:top-0 sm:left-0 z-[1] left-0 top-0 "
               isUsed={isUsed}
             />
           ) : null}

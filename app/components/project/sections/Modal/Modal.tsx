@@ -60,7 +60,7 @@ const Modal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {children}
@@ -412,7 +412,7 @@ export default function PartialUnitModal({ data }: any) {
               }
             >
               <BiMessage className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Request Quotation</span>
+              <span>Get Price Details</span>
             </button>
           </div>
         </div>

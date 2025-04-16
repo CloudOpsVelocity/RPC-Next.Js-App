@@ -74,9 +74,10 @@ const ForBuilders = () => {
   return (
     !session && (
       <div 
-        className="relative " 
+        className="relative" 
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)} 
+        onClick={()=> setIsHovered(prev => !prev)}
       >
         <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
           For Builders {config.chevron}
@@ -86,14 +87,14 @@ const ForBuilders = () => {
         <div 
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="!p-0 cursor-pointer w-full absolute min-w-[150px] "
+          className="!p-0 cursor-pointer w-full absolute min-w-[387px] "
           onClick={() =>
             typeof window !== "undefined"
               ? window.open(`/login?cc=${encryptUrl(pathName)}`)
               : ""
           }
         >
-            <div className="mt-[20px]  relative w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
+            <div className="mt-[20px] relative w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
                 <p className="text-[#F5AC44] text-lg not-italic font-bold">
                   Calling Builders!!!
                 </p>
@@ -293,7 +294,7 @@ function Dropdown() {
     >
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
-            <button className="inline-flex justify-center items-center gap-1 ">
+            <button className="inline-flex justify-center items-center gap-1 " onClick={()=> setIsHovered(prev => !prev)}>
               {config.getIcon(session.user.userType)}{" "}
               {
                 /* session.user.name.split(" ")[0].length >= 3
@@ -319,6 +320,7 @@ function Dropdown() {
               }}
               onClick={(e) => {
                 e.stopPropagation();
+                setIsHovered(prev => !prev);
               }}
             >
               Login/ Sign up
@@ -334,7 +336,7 @@ function Dropdown() {
           onMouseLeave={() => setIsHovered(false)}
           className="absolute"
         >
-          <div className="w-full flex flex-col min-w-[150px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg">
+          <div className="w-full flex flex-col min-w-[172px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg">
             {data.map((item, index) =>
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : (
@@ -372,7 +374,7 @@ function Dropdown() {
         >
 
           <div
-            className="w-full flex flex-col min-w-[150px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
+            className="w-full flex flex-col min-w-[172px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
           >
             {unAuthorizedData.map((item, index) => (
               <Link
@@ -481,13 +483,13 @@ function MobileDropDown() {
       <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
           {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
-            <button className="inline-flex justify-center items-center gap-1">
+            <button className="inline-flex justify-center items-center gap-1" onClick={()=> setIsHovered(prev => !prev)}>
               {config.getIcon(session.user.userType)}
             </button>
             {config.blueChevron}
           </div>
         ) : (
-          <div className="w-full min-h-full flex justify-center items-center">
+          <div className="w-full min-h-full flex justify-center items-center" onClick={()=> setIsHovered(prev => !prev)}>
             <MenuBtn />
           </div>
         )}
