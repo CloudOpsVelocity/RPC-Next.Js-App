@@ -4,6 +4,7 @@ import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { findPathForProjectDetails } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { notFound } from "next/navigation";
+import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: { city: string; lt: string };
 };
@@ -21,7 +22,33 @@ export default async function Page({ params: { city, lt } }: Props) {
     />
   );
 }
+export async function generateMetadata(
+  { params }: { params: { city: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { city } = params;
 
+  const cityFormatted = city.charAt(0).toUpperCase() + city.slice(1);
+
+  const title = `Residential Projects Available in  ${cityFormatted} - GRP`;
+  const description = `Find the best residential projects in ${cityFormatted}. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
+
+  const url = `https://www.getrightproperty.com/residential/projects/${city}`;
+
+  return {
+    title,
+    description,
+
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Get Right Property",
+      type: "website",
+      locale: "en_US",
+    },
+  };
+}
 export async function generateStaticParams() {
   const res = await getPagesSlugs("project-list");
   const keys = Object.keys(res);

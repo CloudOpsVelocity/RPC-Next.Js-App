@@ -95,14 +95,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
                     index === newParams.length - 1 ? "page" : undefined
                   }
                 >
-                  {item ? (
-                    item.replaceAll("-", " ")
-                  ) : (
-                    <FaHome
-                      className="h-5 w-5 flex-shrink-0"
-                      aria-hidden="true"
-                    />
-                  )}
+                  {item ? item.replaceAll("-", " ") : "Home"}
                 </Link>
               ) : (
                 <span

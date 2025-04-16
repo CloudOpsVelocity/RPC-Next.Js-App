@@ -53,7 +53,7 @@ export async function generateMetadata(
     .join(" ");
 
   const title = `Residential Projects Available in ${localityFormatted}, ${cityFormatted} - GRP`;
-  const description = `Find the best residential projects in Panathu${localityFormatted}, ${cityFormatted}. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
+  const description = `Find the best residential projects in ${localityFormatted}, ${cityFormatted}. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
 
   const url = `https://www.getrightproperty.com/residential/projects/${city}/${lt}`;
 
