@@ -3,7 +3,7 @@ const createMDX = require("@next/mdx");
 
 const withMDX = createMDX({
   options: {
-    // providerImportSource: "@mdx-js/react",
+    // providerImportSource: "@mdx-js/react ",
   },
 });
 
