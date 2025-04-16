@@ -183,7 +183,7 @@ function LeftSection({
     >
       {isLoading ? (
         <LoadingBlock />
-      ) : allItems.length > 0 ? (
+      ) : allItems.length ? (
         <ListingServerCardData
           data={allItems}
           refetch={refetch}

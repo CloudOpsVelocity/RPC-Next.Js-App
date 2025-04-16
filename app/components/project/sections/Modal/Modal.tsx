@@ -145,21 +145,48 @@ export default function PartialUnitModal({ data }: any) {
     });
   };
 
-  useEffect(()=>{
-    if (opened) {
-        preventBackButton();
-        const handlePopState = () => {
-          document.body.style.overflow = "scroll";
-          handleReset();
-        };
+  // useEffect(()=>{
+  //   if (opened) {
+  //       preventBackButton();
+  //       const handlePopState = () => {
+  //         document.body.style.overflow = "scroll";
+  //         handleReset();
+  //       };
     
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
-    }
-    // else{
-    //   allowBackButton();
-    // }
-  }, [opened]);
+  //       window.addEventListener("popstate", handlePopState);
+  //       return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  //   // else{
+  //   //   allowBackButton();
+  //   // }
+  // }, [opened]);
+
+      useEffect(() => {
+        const handleClose = () => {
+            document.body.style.overflow = 'scroll';
+            window.history.back();
+            handleReset();
+        };
+
+        if (opened) {
+            preventBackButton();
+
+            const onPopState = () => handleClose();
+            const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') handleClose();
+            };
+
+            window.addEventListener('popstate', onPopState);
+            window.addEventListener('keydown', onKeyDown);
+
+            return () => {
+                window.removeEventListener('popstate', onPopState);
+                window.removeEventListener('keydown', onKeyDown);
+            };
+        }
+    }, [opened]);
+
+
 
   const handleNext = () => {
     setActive((prev: number) => {
@@ -394,6 +421,8 @@ export default function PartialUnitModal({ data }: any) {
           <div className={`w-[95%] m-auto  inline-flex mb-4 `}>
             {isData.others.map((item: any, index: number) => {
               const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
+              console.log(imageUrl)
+              console.log(encodeURIComponent(imageUrl))
               return (
                 <div
                   key={`floorplan-${index}`}
@@ -405,7 +434,8 @@ export default function PartialUnitModal({ data }: any) {
                   <Image
                     width={80}
                     height={60}
-                    src={encodeURIComponent(imageUrl)}
+                    // src={encodeURIComponent(imageUrl)}
+                    src={imageUrl}
                     alt={`Floor Plan ${index + 1}`}
                     className="w-full h-full object-cover"
                     unoptimized

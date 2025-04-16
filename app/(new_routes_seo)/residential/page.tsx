@@ -3,17 +3,12 @@ import ResidentialPage from "./_components/ResidentialDetailPage";
 import axios from "axios";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
-
 type Props = {
   searchParams: {
     page: number;
   };
 };
-
 export default async function page({ searchParams: { page } }: Props) {
-  console.log(page);
-
-
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
       <div className="flex items-center gap-2">
@@ -21,15 +16,28 @@ export default async function page({ searchParams: { page } }: Props) {
         <span className="font-bold">Loading results...</span>
       </div>
     );
-  })
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/margdataurl/searchproj?page=${page?page==0?0:page-1:0}`;
+  });
+  const isValidPage = !isNaN(page) && page > 0;
   /* let url = `https://www.getrightproperty.com/common/marg-project-details`; */
+  let url = `${
+    process.env.NEXT_PUBLIC_BACKEND_URL
+  }/srp/margdataurl/searchproj?page=${
+    page ? (!isValidPage ? 0 : page - 1) : 0
+  }`;
 
   const { data } = await axios.get(url);
 
   return (
     <>
       <>
+        {page > 0 && (
+          <link
+            rel="canonical"
+            href={`https://www.getrightproperty.com/residential${
+              page ? `?page=${page}` : ""
+            }`}
+          />
+        )}
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:url"
@@ -51,14 +59,18 @@ export default async function page({ searchParams: { page } }: Props) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </>
-
       <ResidentialProjectSchama
         pageUrl="/residential"
-        properties={[]}
+        properties={data?.data}
         urls={data?.urls}
+        page={parseInt(page as any)}
+        totalPages={data.totalCount}
       />
-      {JSON.stringify(page)}
-      {data ? <ResidentialPage data={data} totalCount={data?.totalCount} /> : <LoadingSpinner />}
+      {data ? (
+        <ResidentialPage data={data} totalCount={data?.totalCount} />
+      ) : (
+        <LoadingSpinner />
+      )}
     </>
   );
 }
@@ -81,8 +93,5 @@ export const metadata: Metadata = {
       "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
     description:
       "Explore top-rated residential properties in Bangalore. Compare locations, prices, and amenities. Trusted by thousands of homebuyers.",
-  },
-  alternates: {
-    canonical: "https://www.getrightproperty.com/residential",
   },
 };

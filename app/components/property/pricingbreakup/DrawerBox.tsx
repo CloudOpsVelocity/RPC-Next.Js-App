@@ -23,26 +23,34 @@ function DrawerBox({children, isOpen, handleChange, containerClassStyle, title, 
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
+        const handleClose = () => {
+            document.body.style.overflow = 'scroll';
+            handleChange(false);
+            window.history.back();
+        };
+
         if (isOpen) {
-            document.body.style.overflow = "hidden"
-            window.history.pushState(null, "", window.location.href);   
-            const handlePopState = () => {
-              document.body.style.overflow = "scroll";  
-              window.history.back();
-              handleChange(false);
+            document.body.style.overflow = 'hidden';
+            window.history.pushState(null, '', window.location.href);
+
+            const onPopState = () => handleClose();
+            const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') handleClose();
             };
-      
-            window.addEventListener("popstate", handlePopState);
-            return () => window.removeEventListener("popstate", handlePopState);
-        }
-        else{
-            document.body.style.overflow = "scroll";
+
+            window.addEventListener('popstate', onPopState);
+            window.addEventListener('keydown', onKeyDown);
+
+            return () => {
+                window.removeEventListener('popstate', onPopState);
+                window.removeEventListener('keydown', onKeyDown);
+            };
+        } else {
+            document.body.style.overflow = 'scroll';
             window.history.back();
         }
-    }, [isOpen]);
-
-    // w-[0px] transition-[width] duration-[1s] hover:h-[500px] right-0 hover:absolute overflow-y-auto scrollbar-hide
+    }, [isOpen, handleChange]);
 
     return (
         <div 
