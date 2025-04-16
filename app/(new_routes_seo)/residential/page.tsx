@@ -3,14 +3,11 @@ import ResidentialPage from "./_components/ResidentialDetailPage";
 import axios from "axios";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
-import NotFound from "../not-found";
-
 type Props = {
   searchParams: {
     page: number;
   };
 };
-
 export default async function page({ searchParams: { page } }: Props) {
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
