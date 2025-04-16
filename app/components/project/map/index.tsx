@@ -117,7 +117,9 @@ const LeafMap: React.FC<{
         <div  
         //id="location-map"
          className="h-[291px] sm:h-[486px] xl:h-[700px] max-w-full w-full relative ">
-          <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+          <div 
+           onClick={() => setShowMap(true)}
+           className="absolute inset-0 cursor-pointer bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
             <picture>
               <source
                 media="(max-width: 460px)"

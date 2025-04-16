@@ -201,7 +201,7 @@ function BrocherContent({
       url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
     )}`;
     if (isMobile) {
-      if (!session) {
+      /* if (!session) {
         LoginOpen(
           () => {
             url && downloadBroucher(brocherPageUrl);
@@ -212,11 +212,11 @@ function BrocherContent({
           }
         );
         return;
-      }
+      } */
       downloadBroucher(brocherPageUrl);
       return;
     }
-    if (!session) {
+    /* if (!session) {
       LoginOpen(
         () => {
           url && window.open(brocherPageUrl, "_self", "noreferrer");
@@ -227,12 +227,12 @@ function BrocherContent({
         }
       );
       return;
-    }
-    window.open(brocherPageUrl, "_self", "noreferrer");
+    } */
+    window.open(brocherPageUrl, "_blank", "noreferrer");
   };
 
   const loadPDF = async (phase: ProjectPhase) => {
-    setShowMap(true);
+   
     if (state.activePhase.id === phase.id) return;
 
     setState((prev) => ({
@@ -384,7 +384,10 @@ function BrocherContent({
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <button
-                onClick={() => setShowMap(true)}
+               onClick={(e) => {
+                e.preventDefault();
+                if (singleBrocher) handleDownload(singleBrocher);
+              }}
                 className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
               >
                 <span className="text-sm md:text-base font-semibold">
@@ -561,7 +564,11 @@ function BrocherContent({
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <button
-              onClick={() => setShowMap(true)}
+              onClick={(e) => {
+                e.preventDefault();
+                if (state.activePhase.brochure)
+                  handleDownload(state.activePhase.brochure);
+              }}
               className="z-8 px-6 py-3 mx-2 text-left sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
             >
               <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
