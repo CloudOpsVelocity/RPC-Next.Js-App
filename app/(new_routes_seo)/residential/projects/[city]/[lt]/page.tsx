@@ -7,6 +7,7 @@ import {
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { notFound } from "next/navigation";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
+import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -39,7 +40,37 @@ export async function generateStaticParams() {
   }
   return slugs;
 }
+export async function generateMetadata(
+  { params }: { params: { city: string; lt: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { city, lt } = params;
 
+  const cityFormatted = city.charAt(0).toUpperCase() + city.slice(1);
+  const localityFormatted = lt
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  const title = `Residential Projects Available in ${localityFormatted}, ${cityFormatted} - GRP`;
+  const description = `Find the best residential projects in Panathu${localityFormatted}, ${cityFormatted}. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
+
+  const url = `https://www.getrightproperty.com/residential/projects/${city}/${lt}`;
+
+  return {
+    title,
+    description,
+
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Get Right Property",
+      type: "website",
+      locale: "en_US",
+    },
+  };
+}
 export const dynamic = "force-dynamic";
 const getSearchData = async (locality: string) => {
   try {
