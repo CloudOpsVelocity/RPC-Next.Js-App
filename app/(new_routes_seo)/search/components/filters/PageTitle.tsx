@@ -116,7 +116,7 @@ function PageTitle({}: Props) {
   ) : (
     <div className=" text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[1px]  ">
       <h1 className="font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[6px]  ">
-        Breing Time To health
+        Find your dream home, where comfort meets convenience.
       </h1>
     </div>
   );
