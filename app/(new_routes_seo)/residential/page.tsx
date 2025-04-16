@@ -62,6 +62,7 @@ export default async function page({ searchParams: { page } }: Props) {
         properties={data?.data}
         urls={data?.urls}
         page={page}
+        totalPages={data.totalCount}
       />
       {data ? (
         <ResidentialPage data={data} totalCount={data?.totalCount} />

@@ -251,11 +251,13 @@ export const ResidentialProjectSchama = ({
   pageUrl,
   urls,
   page,
+  totalPages,
 }: {
   properties: any;
   pageUrl: string;
   urls: string[];
   page: number;
+  totalPages: number;
 }) => {
   if (!Array.isArray(properties)) return null;
   let PAGE_IMAGE = "";
@@ -351,20 +353,28 @@ export const ResidentialProjectSchama = ({
   };
 
   const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
-  const totalResults = properties.length; // Assuming properties is the array of items
+  const totalResults = properties.length;
+
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${pagetitle}`,
+    name: pagetitle,
     description: description,
     numberOfItems: totalResults,
-    nextItem: `https://example.com/properties?page=${page + 1}`,
-    previousItem: `https://example.com/properties?page=${page - 1}`,
+    itemListOrder: "https://schema.org/ItemListOrderAscending", // Optional, but good practice
+    nextItem:
+      page < totalPages
+        ? `${process.env.NEXT_PUBLIC_BASE_URL}/properties?page=${page + 1}`
+        : undefined,
+    previousItem:
+      page > 1
+        ? `${process.env.NEXT_PUBLIC_BASE_URL}/properties?page=${page - 1}`
+        : undefined,
     itemListElement: properties.map((property, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
-        "@type": "Apartment",
+        "@type": "Apartment", // You could also use "Product" or "Place" depending on the schema strategy
         name: property.projName,
         description:
           property.description ||
@@ -372,10 +382,11 @@ export const ResidentialProjectSchama = ({
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
-        url: property.url || "#", // Assuming each property has a URL
+        url: property.url || "#",
       },
     })),
   };
+
   return (
     <>
       <WebPageSchama path={pageUrl} />
