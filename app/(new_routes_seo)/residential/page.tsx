@@ -3,6 +3,7 @@ import ResidentialPage from "./_components/ResidentialDetailPage";
 import axios from "axios";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
+import NotFound from "../not-found";
 
 type Props = {
   searchParams: {
@@ -11,7 +12,7 @@ type Props = {
 };
 
 export default async function page({ searchParams: { page } }: Props) {
-  console.log(page);
+
 
 
   const LoadingSpinner = memo(function LoadingSpinner() {
@@ -58,7 +59,17 @@ export default async function page({ searchParams: { page } }: Props) {
         urls={data?.urls}
       />
       {JSON.stringify(page)}
-      {data ? <ResidentialPage data={data} totalCount={data?.totalCount} /> : <LoadingSpinner />}
+      {data ? (
+        data.data && data.data.length < 1 ? (
+        <NotFound/>
+        ) : (
+          <ResidentialPage data={data} totalCount={data?.totalCount} />
+        )
+      ) : (
+        <LoadingSpinner />
+      )}
+
+
     </>
   );
 }

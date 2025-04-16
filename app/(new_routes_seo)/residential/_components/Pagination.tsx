@@ -83,7 +83,7 @@ export default function Pagination({ totalCount }: Props) {
 
    /*  window.scrollTo({ top: 25, behavior: "smooth" }) */
 
-    return `/residential?page=${page}`
+    return `/residential?page=${page +1}`
   }
 
   return (
@@ -96,7 +96,7 @@ export default function Pagination({ totalCount }: Props) {
             {/* Previous page */}
             <Link
              target="_top"
-              href={currentPage > 0 ? createPaginationLink(currentPage - 1) : "#"}
+              href={currentPage > 1 ? createPaginationLink(currentPage - 2) : "#"}
             /*   onClick={(e) => {
                 if (currentPage > 0) {
                   e.preventDefault()
@@ -126,13 +126,13 @@ export default function Pagination({ totalCount }: Props) {
                 <Link
                   target="_top"
                   key={`page-${pageNum}`}
-                  href={createPaginationLink(pageNum)}
+                  href={ currentPage !== pageNum +1 ? createPaginationLink(pageNum):  "#"}
                   /* onClick={(e) => {
                     e.preventDefault()
                     handlePageChange(pageNum)
                   }} */
                   className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-sm font-medium transition-colors ${
-                    currentPage === pageNum
+                    currentPage === pageNum +1
                       ? "bg-blue-600 text-white"
                       : "border border-blue-500 bg-white text-blue-600 hover:bg-blue-50"
                   }`}
@@ -147,7 +147,7 @@ export default function Pagination({ totalCount }: Props) {
             {/* Next page */}
             <Link
               target="_top"
-              href={currentPage < totalPages - 1 ? createPaginationLink(currentPage + 1) : "#"}
+              href={currentPage < totalPages - 1 ? createPaginationLink(currentPage ) : "#"}
              /*  onClick={(e) => {
                 if (currentPage < totalPages - 1) {
                   e.preventDefault()
