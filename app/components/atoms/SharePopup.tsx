@@ -99,7 +99,8 @@ export default function SharePopup({
       </Modal>
 
       <button
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           navigator.share({ title: title, url: CopiedUrl });
         }}
         className={clsx(

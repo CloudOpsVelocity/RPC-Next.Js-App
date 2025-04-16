@@ -20,6 +20,7 @@ import { useSetAtom } from "jotai";
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 import CustomCarousal from "@/common/components/CustomCarousal";
+import FirstImagesBlock from "@/common/components/FirstImagesBlock";
 
 type Props = {
   projectDetails: Main | null;
@@ -67,9 +68,11 @@ const FirstBlock: React.FC<Props> = ({
     setTimeout(() => setIsScrolling(false), 3000);
   }
 
+  // sm:h-[545px] xl:h-[750px] 
+
   return (
     <div
-      className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50 bg-cover flex justify-between items-start flex-col shadow-md break-words p-[10px] `}
     >
       {projectDetails && (
         <>
@@ -79,18 +82,9 @@ const FirstBlock: React.FC<Props> = ({
               RERA
             </p>
           )}
-          <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
-              Project Status:{" "}
-              <span className="text-[#148B16] text-[12px] sm:text-[16px]   xl:text-xl not-italic font-bold leading-[normal]">
-                {" "}
-                {projectDetails.projectStatus}
-              </span>{" "}
-            </p>
-            <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
-          </div>
+          
 
-          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
+          <div className="relative w-full aspect-auto  max-w-[100%] mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
             {/* <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -135,14 +129,18 @@ const FirstBlock: React.FC<Props> = ({
               ))}
             </Carousel> */}
 
-            <CustomCarousal
+            {/* <CustomCarousal
               images={images}
               containerClass="min-h-[300px] sm:min-h-[545px] !xl:min-h-[750px] xl:min-h-[750px]"
               projName={projectDetails?.projectName}
+            /> */}
+
+            <FirstImagesBlock 
+              images={images}
+              projName={projectDetails?.projectName}
+              type = "proj"
+              projectStatus={projectDetails.projectStatus}
             />
-
-            {/* <CustomCarousalCssOnly urlsData={images} projName={projectDetails?.projectName} /> */}
-
             
             
           </div>
