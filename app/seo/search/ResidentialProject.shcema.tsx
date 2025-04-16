@@ -239,6 +239,11 @@ export const generateAllSchemas = (
           priceCurrency: "INR",
         },
       },
+      {
+        "@type": "ListItem",
+        position: 1,
+        url: "https://example.com/peanut-butter-cookies.html",
+      },
       ...allSizesSchemas,
     ],
   };
@@ -355,37 +360,27 @@ export const ResidentialProjectSchama = ({
   const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
   const totalResults = totalPages;
 
-  const itemListSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: pagetitle,
-    description: description,
-    numberOfItems: totalResults,
-    itemListOrder: "https://schema.org/ItemListOrderAscending", // Optional, but good practice
-    nextItem:
-      page < totalPages
-        ? `${process.env.NEXT_PUBLIC_BASE_URL}/properties?page=${page + 1}`
-        : undefined,
-    previousItem:
-      page > 1
-        ? `${process.env.NEXT_PUBLIC_BASE_URL}/properties?page=${page - 1}`
-        : undefined,
-    itemListElement: properties.map((property, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Apartment", // You could also use "Product" or "Place" depending on the schema strategy
-        name: property.projName,
-        description:
-          property.description ||
-          "Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.",
-        image:
-          property.coverUrl?.split(",")[0] ||
-          "https://getrightproperty.com/default-property.jpg",
-        url: property.url || "#",
-      },
-    })),
-  };
+  // const itemListSchema = {
+  //   "@context": "https://schema.org",
+  //   "@type": "ItemList",
+  //   itemListElement: [
+  //     {
+  //       "@type": "ListItem",
+  //       position: 1,
+  //       url: "https://example.com/peanut-butter-cookies.html",
+  //     },
+  //     {
+  //       "@type": "ListItem",
+  //       position: 2,
+  //       url: "https://example.com/triple-chocolate-chunk.html",
+  //     },
+  //     {
+  //       "@type": "ListItem",
+  //       position: 3,
+  //       url: "https://example.com/snickerdoodles.html",
+  //     },
+  //   ],
+  // };
 
   return (
     <>
@@ -396,12 +391,12 @@ export const ResidentialProjectSchama = ({
           __html: JSON.stringify(viewActionJsonLd),
         }}
       />
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(itemListSchema),
         }}
-      />
+      /> */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
