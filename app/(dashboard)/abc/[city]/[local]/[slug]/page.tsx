@@ -168,15 +168,19 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               Home
             </Link>{" "}
             {" > "}
-            <Link rel={"noopener noreferrer"} href={"/project/banglore"} prefetch={false}>
+            <Link
+              rel={"noopener noreferrer"}
+              href={"/project/banglore"}
+              prefetch={false}
+            >
               <span className="hover:underline cursor-pointer">
-                 {data.cityName}
+                {data.cityName}
               </span>
             </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"} prefetch={false}>
               <span className="hover:underline cursor-pointer">
-                 {`${data.localityName} `}
+                {`${data.localityName} `}
               </span>
             </Link>{" "}
             {" > "}
@@ -315,7 +319,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           company={data.companyName}
         />
         <ProjectDrawer projName={data.projectName} />
-        <FloorplanDrawer /> 
+        <FloorplanDrawer />
         <LoginPopup />
         {/* <BaseSucess /> */}
       </div>
@@ -331,7 +335,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 //   const slugs = projResult.map((slug: string) => ({
 //     slug: slug,
 //   }));
-
 //   return slugs;
 // }
 

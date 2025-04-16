@@ -9,7 +9,7 @@ export const generateAllSchemas = (
   properties: any[],
   index: number
 ) => {
-  const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
+  // const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
   const [launchDate, possassionDate] = [
     convertToSchemaDate(property?.launchDate || "Fri Mar 27 00:00:00 IST 2026"),
     convertToSchemaDate(
@@ -250,10 +250,12 @@ export const ResidentialProjectSchama = ({
   properties,
   pageUrl,
   urls,
+  page,
 }: {
   properties: any;
   pageUrl: string;
   urls: string[];
+  page: number;
 }) => {
   if (!Array.isArray(properties)) return null;
   let PAGE_IMAGE = "";
@@ -349,6 +351,31 @@ export const ResidentialProjectSchama = ({
   };
 
   const description = `Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.`;
+  const totalResults = properties.length; // Assuming properties is the array of items
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${pagetitle}`,
+    description: description,
+    numberOfItems: totalResults,
+    nextItem: `https://example.com/properties?page=${page + 1}`,
+    previousItem: `https://example.com/properties?page=${page - 1}`,
+    itemListElement: properties.map((property, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Apartment",
+        name: property.projName,
+        description:
+          property.description ||
+          "Discover a wide range of residential properties including apartments, villas, independent houses, and gated communities. Find your perfect home in prime locations with the best amenities and lifestyle features.",
+        image:
+          property.coverUrl?.split(",")[0] ||
+          "https://getrightproperty.com/default-property.jpg",
+        url: property.url || "#", // Assuming each property has a URL
+      },
+    })),
+  };
   return (
     <>
       <WebPageSchama path={pageUrl} />
@@ -358,7 +385,13 @@ export const ResidentialProjectSchama = ({
           __html: JSON.stringify(viewActionJsonLd),
         }}
       />
-      {/* <script
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(itemListSchema),
+        }}
+      />
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -376,13 +409,13 @@ export const ResidentialProjectSchama = ({
             },
           }),
         }}
-      /> */}
-      {/* <script
+      />
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
-      /> */}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
