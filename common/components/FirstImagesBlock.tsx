@@ -17,24 +17,28 @@ function FirstImagesBlock({images, projName, type, projectStatus}: Props) {
     
     const getUrl = (urls:any, i: number) => urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
     const getImage = (index: number, className: string) => {
-        const urls = images[index].split(",");
-        return(
-            <picture>
-                <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
-                <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
-                <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
-                <Image
-                  alt={projName || "Project Image"}
-                  title={projName || "Project Image"}
-                  src={getUrl(urls, 3)}
-                  height={195}
-                  width={900}
-                  className={className}
-                  unoptimized
-                  quality={80}
-                />
-            </picture>
-        )
+        if(images[index]){
+            const urls = images[index].split(",");
+            return(
+                <picture>
+                    <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
+                    <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
+                    <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
+                    <Image
+                    alt={projName || "Project Image"}
+                    title={projName || "Project Image"}
+                    src={getUrl(urls, 3)}
+                    height={195}
+                    width={900}
+                    className={className}
+                    unoptimized
+                    quality={80}
+                    />
+                </picture>
+            )
+        }else{
+            return "";
+        }
     };
 
     const onSelect = () => {
