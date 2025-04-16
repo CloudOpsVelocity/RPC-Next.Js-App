@@ -19,7 +19,7 @@ export default function Pagination({ totalCount }: Props) {
   // Get page from URL or default to 0
   const pageParam = searchParams.get("page");
   const initialPage = pageParam
-    ? Number.parseInt(pageParam) < 0 || isNaN(pageParam)
+    ? Number.parseInt(pageParam) < 0 || isNaN(parseInt(pageParam))
       ? 1
       : Number.parseInt(pageParam)
     : 1;
