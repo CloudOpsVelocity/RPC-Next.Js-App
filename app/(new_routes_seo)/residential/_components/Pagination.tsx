@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
+import { useMediaQuery } from "@mantine/hooks"
 
 export const dynamic = "force-dynamic"
 
@@ -14,8 +15,8 @@ type Props = {
 export default function Pagination({ totalCount }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
-
-  // Get page from URL or default to 0
+  const isMobile = useMediaQuery("(max-width: 601px)");
+    // Get page from URL or default to 0
   const pageParam = searchParams.get("page")
   const initialPage = pageParam? Number.parseInt(pageParam) < 0  || isNaN(pageParam)? 1 :  Number.parseInt(pageParam) : 1;
   const [currentPage, setCurrentPage] = useState(initialPage)
@@ -41,7 +42,7 @@ export default function Pagination({ totalCount }: Props) {
   // Generate page numbers with ellipses when necessary
   const getPageNumbers = () => {
     const pageNumbers = []
-    const maxPagesToShow = 10
+    const maxPagesToShow = isMobile ? 5 :9
 
     if (totalPages <= maxPagesToShow) {
       for (let i = 0; i < totalPages; i++) {
