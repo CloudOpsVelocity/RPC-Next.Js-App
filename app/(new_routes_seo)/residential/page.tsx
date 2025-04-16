@@ -17,9 +17,14 @@ export default async function page({ searchParams: { page } }: Props) {
       </div>
     );
   });
+  const isValidPage = !isNaN(page) && page > 0;
+  /* let url = `https://www.getrightproperty.com/common/marg-project-details`; */
   let url = `${
     process.env.NEXT_PUBLIC_BACKEND_URL
-  }/srp/margdataurl/searchproj?page=${page ? (page == 0 ? 0 : page - 1) : 0}`;
+  }/srp/margdataurl/searchproj?page=${
+    page ? (!isValidPage ? 0 : page - 1) : 0
+  }`;
+
   const { data } = await axios.get(url);
 
   return (
