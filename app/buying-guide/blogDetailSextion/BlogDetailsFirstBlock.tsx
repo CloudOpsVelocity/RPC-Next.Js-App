@@ -39,15 +39,15 @@ function BlogDetailsFirstBlock() {
   return (
     <div className="w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  ">
       {/* <a href={pathHref} target="_self"> */}
-      <button
-        onClick={() => window.close()}
-        className="text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 flex justify-center items-center self-start "
+      <Link
+        href={`${process.env.NEXT_PUBLIC_PROJECT_URL}/buying-guide`}
+        className="text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 left-0 flex justify-center items-center self-start "
       >
         <span className=" bg-[#E8F3FF] w-[18px] h-[18px] xl:w-[32px] xl:h-[32px] rounded-[50%] flex justify-center items-center ">
           {backIcon}
         </span>
         Back
-      </button>
+      </Link>
       {/* </a> */}
 
       <div className="rounded-[10px] relative w-full md:w-[50%] max-h-[463px] border-[0.5px] border-gray border-solid  bg-white ">
