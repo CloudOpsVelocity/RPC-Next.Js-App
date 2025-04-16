@@ -84,7 +84,7 @@ const FirstBlock: React.FC<Props> = ({
           )}
           
 
-          <div className="relative w-full aspect-auto  max-w-[100%] mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
+          <div className="relative w-full aspect-auto mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
             {/* <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
