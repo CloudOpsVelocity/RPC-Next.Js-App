@@ -8,10 +8,11 @@ import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
+import LeftSection from "../components/ProjectSearchLeftSection";
 // import ProjectCard from "@/app/test/newui/components/Card";
-const LeftSection = dynamic(
-  () => import("../components/ProjectSearchLeftSection")
-);
+// const LeftSection = dynamic(
+//   () => import("../components/ProjectSearchLeftSection")
+// );
 const RightSection = dynamic(
   () => import("../components/ProjectSearchRightSection")
 );

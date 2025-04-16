@@ -85,7 +85,7 @@ function LeftSection({
     (data?.pages?.length || 0) > 0
       ? data?.pages.flat()
       : serverData || data?.pages?.flat() || [];
-  // console.log({ allItems });
+
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
   const setIsMapLoaded = useSetAtom(searchPageMapToggle);
