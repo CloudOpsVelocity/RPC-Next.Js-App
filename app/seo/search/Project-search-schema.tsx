@@ -34,7 +34,7 @@ export const generateAllSchemas = (
       contentUrl: url,
       license: "https://www.getrightproperty.com/privacy-policy",
       acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
-      creditText: `${property.projName} Cover Name`,
+      creditText: `${property.projName} Cover Image`,
       creator: {
         "@type": "Person",
         name: OrgName,

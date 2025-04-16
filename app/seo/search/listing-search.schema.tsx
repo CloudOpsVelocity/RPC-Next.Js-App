@@ -10,7 +10,7 @@ export const generateAllSchemas = (property: any) => {
       contentUrl: url,
       license: "https://www.getrightproperty.com/privacy-policy",
       acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
-      creditText: `${property.postedByName} Cover Name`,
+      creditText: `${property.postedByName} Cover Image`,
       creator: {
         "@type": "Person",
         name: OrgName,
