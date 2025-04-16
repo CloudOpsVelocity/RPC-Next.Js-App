@@ -74,7 +74,7 @@ function ModalBox({children, isOpen, handleChange, containerClassStyle, hideCros
 
     return (
         <div 
-            className="fixed w-full min-h-[calc(100vh-70px)] flex justify-center items-center overflow-hidden z-[100] left-0 top-[66px] bg-black/30" 
+            className="fixed w-full min-h-[calc(100vh-70px)] flex justify-center items-center overflow-hidden z-[1000] left-0 top-[66px] bg-black/30" 
             onClick={(e)=>onMainConClick(e)}
         >
             <div 
