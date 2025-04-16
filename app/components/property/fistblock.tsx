@@ -23,6 +23,7 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { useQuery } from "react-query";
 
 import CustomCarousal from "@/common/components/CustomCarousal";
+import FirstImagesBlock from "@/common/components/FirstImagesBlock";
 
 type Props = {
   projectDetails: Main | null;
@@ -73,7 +74,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
 
   return (
     <div
-      className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50 bg-cover flex justify-between items-start flex-col shadow-md break-words mb-[1rem] `}
     >
       {projectDetails && (
         <>
@@ -84,24 +85,8 @@ const PropertyFirstBlock: React.FC<Props> = ({
               isUsed={isUsed}
             />
           ) : null}
-          <div className="absolute m-[2%] z-10 right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
-              Listing Status:{" "}
-              <span className="text-[#148B16] text-[12px] sm:text-[16px]   xl:text-xl not-italic font-bold leading-[normal]">
-                {" "}
-                {projectDetails.availablityStatus === "U"
-                  ? "Under Construction"
-                  : "Ready to Move"}
-              </span>{" "}
-            </p>
-            <div className="mt-4">
-              <SharePopup
-                title="Share Listing"
-                className="text-sm   p-[4px]  sm:text-xl hidden sm:flex"
-              />
-            </div>
-          </div>
-          <div className="flex justify-center items-center relative w-full aspect-auto max-w-[1000px] mx-auto sm:!rounded-[10px]  h-[300px] sm:h-[545px]  xl:h-[750px]">
+     
+          <div className="flex justify-center items-center relative w-full aspect-auto mx-auto sm:!rounded-[10px] p-[10px]">
             {/* <CustomCarousalCssOnly urlsData={images} projName={projName} /> */}
             {/* <CustomCarousal
                   dataLength={images?.length}
@@ -123,11 +108,21 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   ))}
                 /> */}
 
-             <CustomCarousal
+              {/* <CustomCarousal
                 images={images}
                 containerClass="min-h-[300px] sm:min-h-[545px] !xl:min-h-[750px] xl:min-h-[750px]"
                 projName={projName}
+              /> */}
+
+              <FirstImagesBlock
+                images={images}
+                projName={projName}
+                type = "prop"
+                projectStatus={projectDetails.availablityStatus === "U"
+                  ? "Under Construction"
+                  : "Ready to Move"}
               />
+
           </div>
           {/* overview card removed from here and commented bottom of the component */}
         </>

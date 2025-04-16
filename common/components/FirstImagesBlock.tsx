@@ -25,14 +25,14 @@ function FirstImagesBlock({images, projName, type, projectStatus}: Props) {
                     <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
                     <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
                     <Image
-                    alt={projName || "Project Image"}
-                    title={projName || "Project Image"}
-                    src={getUrl(urls, 3)}
-                    height={195}
-                    width={900}
-                    className={className}
-                    unoptimized
-                    quality={80}
+                        alt={projName || "Project Image"}
+                        title={projName || "Project Image"}
+                        src={getUrl(urls, 3)}
+                        height={195}
+                        width={900}
+                        className={className}
+                        unoptimized
+                        quality={80}
                     />
                 </picture>
             )
@@ -54,22 +54,29 @@ function FirstImagesBlock({images, projName, type, projectStatus}: Props) {
             activeIndex: images.indexOf(images[0]),
           },
         });
-    }
+    };
 
     return (
         <div className='flex h-[300px] md:h-[400px] lg:h-[430px] w-full cursor-pointer gap-[10px]' onClick={onSelect} >
             <div className='relative h-full h-[300px] h-[400px] lg:h-[430px] w-full lg:w-[60%] bg-gray-600 shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] '>
+                
                 <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
                     <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
-                    Project Status:{" "}
-                    <span className="text-[#148B16] text-[12px] sm:text-[16px]   xl:text-xl not-italic font-bold leading-[normal]">
-                        {" "}
-                        {projectStatus}
-                    </span>{" "}
+                        {type === "proj" ? "Project" : "Listing"} Status:{" "}
+                        <span className="text-[#148B16] text-[12px] sm:text-[16px]   xl:text-xl not-italic font-bold leading-[normal]">
+                            {" "}
+                            {projectStatus}
+                        </span>{" "}
                     </p>
-                    <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
+                    <div className={type === "proj" ? "" : `mt-4`}>
+                        <SharePopup 
+                            title={type === "proj" ? "Share Project" : "Share Listing"}
+                            className="text-sm p-[4px] sm:text-xl hidden sm:flex" 
+                        />
+                    </div>
                 </div>
-                {getImage(1, "h-full w-full")}
+
+                {getImage(0, "h-full w-full")}
                 <span className='block lg:hidden absolute bottom-0 right-0 mr-[20px] mb-[20px] p-[10px] bg-black/30 backdrop-blur-lg rounded-[50%] z-10 '>
                     {imagesIcon}
                 </span>
@@ -77,12 +84,14 @@ function FirstImagesBlock({images, projName, type, projectStatus}: Props) {
 
             <div className='hidden lg:flex flex-col h-full h-[300px] md:h-[400px] lg:h-[430px] gap-[10px] w-[40%]'>
                 <div className='relative flex justify-center items-center w-full h-full max-h-[145px] md:max-h-[195px] lg:max-h-[210px] bg-gray-600 border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)]'>
-                    {getImage(2, "w-full h-full absolute top-0 left-0 ")}
+                    {getImage(1, "w-full h-full absolute top-0 left-0 ")}
                 </div>
                 <div className='group relative flex justify-center items-center w-full h-full max-h-[145px] md:max-h-[195px] lg:max-h-[210px] bg-gray-600 border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)]'>
-                    {getImage(3, "w-full h-full absolute top-0 left-0")}
+                    {getImage(2, "w-full h-full absolute top-0 left-0")}
                     <div className=' w-full h-full absolute top-0 left-0 bg-black/30 flex justify-center items-center z-10 '>
-                        <p className='text-white text-[18px] font-semibold border-solid border-[1px] border-white rounded-[20px] px-[10px] group-hover:bg-white group-hover:text-black'>View more {images.length - 3}+</p>
+                        <p className='text-white text-[18px] font-semibold border-solid border-[1px] border-white rounded-[20px] px-[10px] group-hover:bg-white group-hover:text-black'>
+                            {images.length > 2 ? `View more ${images.length - 3}+` : "View Gallery" }
+                        </p>
                     </div>
                 </div>
             </div>
