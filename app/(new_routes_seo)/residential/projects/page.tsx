@@ -40,8 +40,8 @@ const getSearchData = async () => {
   }
 };
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `Residential Projects Available in Banglore - GRP`;
-  const description = `Find the best residential projects in Banglore. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
+  const title = `Residential Projects Available in Bengaluru - GRP`;
+  const description = `Find the best residential projects in Bengaluru. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
   const url = `https://www.getrightproperty.com/residential/projects`;
   return {
     title,
