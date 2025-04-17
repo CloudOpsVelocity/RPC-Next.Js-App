@@ -162,6 +162,9 @@ export default async function page({ params }: Props) {
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const scrollId = undefined;
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
+
+  console.log(data);
+
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />
@@ -288,8 +291,7 @@ export default async function page({ params }: Props) {
           projName={data.projectName}
           phaseOverviewData={phaseOverview}
           singleBroucher={data.media?.projBroucherUrl}
-          broucherImage={data.media?.projectPlanUrl }
-
+          broucherImage={data.media?.projectPlanUrl}
         />
         <ErrorContainer data={data.specificationList}>
           <Specifications
@@ -383,7 +385,7 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  let slug = params.slug.split("-").at(-1); 
+  let slug = params.slug.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
   }
@@ -432,11 +434,9 @@ export async function generateMetadata(
   )} for sale ${data.localityName} ${data.cityName}`;
 
   // Constructing detailed and keyword-rich description
-  const description = `${
-    data.projectName
-  } ${data.availableProperties?.join(", ")} in ${
-    data.localityName
-  }, ${
+  const description = `${data.projectName} ${data.availableProperties?.join(
+    ", "
+  )} in ${data.localityName}, ${
     data.cityName
   }. Project Details, Pricing, Brochure, Floor Plans, Reviews, Master Plan, Amenities & Contact Details`;
 

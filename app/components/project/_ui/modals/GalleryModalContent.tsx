@@ -39,7 +39,7 @@ export default function GalleryModalContent({}: Props) {
     dispatch({
       type: "CLOSE",
     });
-    document.body.style.overflow = "scroll";
+    document.body.style.overflow = "unset";
     setIsPlaying(false);
     window.history.back();
     // if (window.history.state === "modal" && isMobile) {
@@ -87,28 +87,27 @@ export default function GalleryModalContent({}: Props) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isOpen) return;
-      if (event.key === 'ArrowRight') nextItem();
-      if (event.key === 'ArrowLeft') prevItem();
-      if (event.key === 'Escape') closeModal();
+      if (event.key === "ArrowRight") nextItem();
+      if (event.key === "ArrowLeft") prevItem();
+      if (event.key === "Escape") closeModal();
     };
 
     const handlePopState = () => {
       if (isOpen) closeModal();
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     if (isOpen) {
       preventBackButton();
-      window.addEventListener('popstate', handlePopState);
+      window.addEventListener("popstate", handlePopState);
     }
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("popstate", handlePopState);
     };
   }, [isOpen, nextItem, prevItem, closeModal]);
-
 
   // useEffect(() => {
   //   const handleKeyDown = (event: KeyboardEvent) => {

@@ -50,7 +50,7 @@ export default function Banner({
         <div>
           <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
             <strong>
-              <span className="text-[#001F35]">Project Rating For{" "}</span>
+              <span className="text-[#001F35]">Project Rating For </span>
               <span className="text-[#148B16] sm:text-[24px] xl:text-[28px] not-italic leading-[normal] tracking-[1.28px]">
                 {projName}
               </span>
@@ -70,7 +70,7 @@ export default function Banner({
             className="flex flex-col justify-center items-center gap-2.5 rounded text-white  text-[12px] sm:text-[14px]  xl:text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
           >
             Add Ratings
-          </button> 
+          </button>
         </div>
         <div className="hidden md:block flex-shrink-0 relative h-[200px] w-full sm:w-[30%] xl:w-[600px]">
           <Image
@@ -134,7 +134,7 @@ const AddRating = ({
     setStatus("idle");
     // }
     close();
-    document.body.style.overflow = "scroll";  
+    document.body.style.overflow = "unset";
   };
 
   const formSubmit = async (values: any) => {
@@ -206,17 +206,25 @@ const AddRating = ({
     //   }
     // >
 
-    
-
-    opened &&
-    <ModalBox
+    opened && (
+      <ModalBox
         isOpen={opened}
         handleChange={() => {
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
           onClose();
           allowBackButton();
         }}
-        containerClassStyle={`!rounded-[20px] !p-0 !w-[94%] md:!w-[40%] xl:!w-[35%] ${isMobile ? "!w-[100%]" : session ? isDataSubmitted.isSubmitted ? isTab ? "!w-[40%]" : "!w-auto" : "!w-[58%]" : "!w-[35%]"} `}
+        containerClassStyle={`!rounded-[20px] !p-0 !w-[94%] md:!w-[40%] xl:!w-[35%] ${
+          isMobile
+            ? "!w-[100%]"
+            : session
+            ? isDataSubmitted.isSubmitted
+              ? isTab
+                ? "!w-[40%]"
+                : "!w-auto"
+              : "!w-[58%]"
+            : "!w-[35%]"
+        } `}
         hideCrossIcon={true}
       >
         <FormProvider form={form}>
@@ -224,7 +232,7 @@ const AddRating = ({
             {(!session ||
               status === "success" ||
               isDataSubmitted.isSubmitted) && (
-              <Close close={onClose} className="absolute top-3 right-1 z-50" /> 
+              <Close close={onClose} className="absolute top-3 right-1 z-50" />
             )}
             {session ? (
               status === "success" || isDataSubmitted.isSubmitted ? (
@@ -243,6 +251,7 @@ const AddRating = ({
           </div>
         </FormProvider>
       </ModalBox>
+    )
     // </Modal>
   );
 };

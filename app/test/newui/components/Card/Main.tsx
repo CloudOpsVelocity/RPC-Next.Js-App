@@ -110,8 +110,8 @@ const MainBox = ({ data, refetch }: Props) => {
     }
   };
 
-  const [opened, { open, close }] = useReqCallPopup(); 
-  const overlayData = useAtomValue(overlayAtom); 
+  const [opened, { open, close }] = useReqCallPopup();
+  const overlayData = useAtomValue(overlayAtom);
 
   useEffect(() => {
     if (opened) {
@@ -119,7 +119,7 @@ const MainBox = ({ data, refetch }: Props) => {
       window.history.pushState("reqCallModal", "");
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
+        document.body.style.overflow = "unset";
         close();
       };
 

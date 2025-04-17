@@ -44,6 +44,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
 
     return () => {
       document.body.style.overflow = "unset";
+      console.log("scroll bbbb");
       window.removeEventListener("keydown", handleEscape);
       window.removeEventListener("popstate", handlePopState);
     };
@@ -99,7 +100,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
             <button
               onClick={() => {
                 setOpened(false);
-                document.body.style.overflow = "scroll";  
+                document.body.style.overflow = "unset";
                 window.history.back();
               }}
               className="p-2 rounded-full hover:bg-gray-100 transition-colors bg-white"

@@ -160,7 +160,7 @@ const AddQnaForm = ({
   };
   const onClose = () => {
     close();
-    document.body.style.overflow = "scroll";
+    document.body.style.overflow = "unset";
     opened.type === "qna" && reset();
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
@@ -321,8 +321,9 @@ const Success = ({ text, opened, onClose, projName }: any) => {
   const isTab = useMediaQuery(`(max-width: 1600px)`);
   useEffect(() => {
     const timer = setTimeout(() => {
+      console.log("scroll 1");
       onClose();
-      document.body.style.overflow = "scroll";
+      document.body.style.overflow = "unset";
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -348,7 +349,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       <ModalBox
         isOpen={opened.status}
         handleChange={() => {
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
           onClose();
         }}
         hideCrossIcon={true}
@@ -356,7 +357,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       >
         <Close
           close={() => {
-            document.body.style.overflow = "scroll";
+            document.body.style.overflow = "unset";
             onClose();
           }}
           className="absolute top-2 right-2 z-50"

@@ -76,7 +76,7 @@ export default function Overview({
             </h1>{" "} */}
           <div className="flex justify-between items-start ">
             <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
-            <strong>{projectName}</strong>
+              <strong>{projectName}</strong>
             </h1>{" "}
             <SharePopup className="text-sm p-[2px] mt-[2px] sm:hidden " />
           </div>

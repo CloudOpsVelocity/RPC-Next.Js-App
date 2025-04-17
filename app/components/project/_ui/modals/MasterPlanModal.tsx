@@ -39,8 +39,6 @@ export default function FullScreenMasterPlanModal({
   const closeModal = () => {
     document.body.style.overflow = "auto";
     setIsOpen(false);
-
-    document.body.style.overflow = "scroll";
     allowBackButton();
   };
 
@@ -104,22 +102,22 @@ export default function FullScreenMasterPlanModal({
     }
   };
 
-   useEffect(() => {
-        if (isOpen) {
-            preventBackButton();
-            const onPopState = () => closeModal();
-            const onKeyDown = (e: KeyboardEvent) => {
-              if (e.key === 'Escape') closeModal();
-            };
+  useEffect(() => {
+    if (isOpen) {
+      preventBackButton();
+      const onPopState = () => closeModal();
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") closeModal();
+      };
 
-            window.addEventListener('popstate', onPopState);
-            window.addEventListener('keydown', onKeyDown);
+      window.addEventListener("popstate", onPopState);
+      window.addEventListener("keydown", onKeyDown);
 
-            return () => {
-                window.removeEventListener('popstate', onPopState);
-                window.removeEventListener('keydown', onKeyDown);
-            };
-        }
+      return () => {
+        window.removeEventListener("popstate", onPopState);
+        window.removeEventListener("keydown", onKeyDown);
+      };
+    }
   }, [isOpen]);
 
   return (

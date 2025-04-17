@@ -114,12 +114,14 @@ const LeafMap: React.FC<{
       </div>
 
       {!showMap ? (
-        <div  
-        //id="location-map"
-         className="h-[291px] sm:h-[486px] xl:h-[700px] max-w-full w-full relative ">
-          <div 
-           onClick={() => setShowMap(true)}
-           className="absolute inset-0 cursor-pointer bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+        <div
+          //id="location-map"
+          className="h-[291px] sm:h-[486px] xl:h-[700px] max-w-full w-full relative "
+        >
+          <div
+            //  onClick={() => setShowMap(true)}
+            className="absolute inset-0 cursor-pointer bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0"
+          >
             <picture>
               <source
                 media="(max-width: 460px)"
@@ -144,7 +146,10 @@ const LeafMap: React.FC<{
               />
             </picture>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            onClick={() => setShowMap(true)}
+            className="absolute inset-0 flex items-center justify-center"
+          >
             <button
               onClick={() => setShowMap(true)}
               className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
@@ -243,7 +248,8 @@ const LeafMap: React.FC<{
                 id="near-by-projects"
               >
                 <strong>
-                  <span className="text-[#001F35]">Nearby</span> <span className="text-[#148B16] ml-1">{projName} </span>
+                  <span className="text-[#001F35]">Nearby</span>{" "}
+                  <span className="text-[#148B16] ml-1">{projName} </span>
                 </strong>
               </h2>
               <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
@@ -398,7 +404,6 @@ const LocationList: React.FC<{
   );
   const scrollToTopic = (id: string): void => {
     setIsScrolling(true);
-
 
     const element = document.getElementById(id);
     if (element) {

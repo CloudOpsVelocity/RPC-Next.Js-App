@@ -10,7 +10,7 @@ export const TOPIC_IDS = {
   AMENITIES: "amenities",
   LOCATION_MAP: "location-map",
   NEAR_BY: "near-by-projects",
-  BROCHURE: "brochure", 
+  BROCHURE: "brochure",
   SPECIFICATIONS: "specifications",
   HIGHLIGHTS: "highlights",
   PROJECT_RATINGS: "proj_rating",
@@ -104,7 +104,7 @@ export const propertyDetailsTypes = new Map([
 export const projectprops = {
   villa: 31,
   plot: 32,
-  rowHouse: 33, 
+  rowHouse: 33,
   villament: 34,
   apartment: 35,
   independent: 36,
@@ -208,6 +208,6 @@ export const filterKeysDetails = new Map([
   ["towerId", { name: "Tower ID" }],
   ["facingId", { name: "Facing ID" }],
   ["floorPlanUrl", { name: "FloorPlan URL" }],
-  ['totalBalconySize', {name: 'Balcony Size'}],
-  ['aptTypeName', {name: 'Apartment Type'}]
+  ["totalBalconySize", { name: "Balcony Size" }],
+  ["aptTypeName", { name: "Apartment Type" }],
 ]);

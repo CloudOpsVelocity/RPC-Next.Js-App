@@ -25,13 +25,13 @@ import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 // import { title } from "process";
 
 export const preventBackButton = () => {
-  window.history.pushState(null, "", window.location.href);  
-  document.body.style.overflow = "hidden"; 
+  window.history.pushState(null, "", window.location.href);
+  document.body.style.overflow = "hidden";
 };
 
 export const allowBackButton = () => {
   window.history.back();
-  document.body.style.overflow = "scroll"; 
+  document.body.style.overflow = "unset";
 };
 
 const RequestCallBackModal = () => {
@@ -44,29 +44,27 @@ const RequestCallBackModal = () => {
 
   const handleClose = () => {
     close();
-    document.body.style.overflow = "scroll";  
+    document.body.style.overflow = "unset";
     setTimeout(() => {
       setStatus("idle");
     }, 500);
     allowBackButton();
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (opened) {
       preventBackButton();
-        const handlePopState = () => {
-          handleClose();
-        };
-    
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
+      const handlePopState = () => {
+        handleClose();
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
     }
     // else{
     //   allowBackButton();
     // }
   }, [opened]);
-
-  
 
   return (
     // <Modal
@@ -86,7 +84,7 @@ const RequestCallBackModal = () => {
     //   classNames={
     //     status === "success"
     //       ? {
-    //           title: Styles.title, 
+    //           title: Styles.title,
     //           root: Styles.root,
     //           close: Styles.close,
     //           content: Styles.content,
@@ -104,16 +102,24 @@ const RequestCallBackModal = () => {
     //   zIndex={10000}
     //   withCloseButton={false}
     // >
-    opened &&
-    <ModalBox
+    opened && (
+      <ModalBox
         isOpen={opened}
         handleChange={() => {
           handleClose();
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
         }}
         hideCrossIcon={true}
-        containerClassStyle={`!p-0 !rounded-[20px] ${ isMobile ? "!w-[94%]" : status !== "success" ? "!w-[65%]" : isTab ? "!w-[40%]" : "!w-[40%]" } `}
-    >
+        containerClassStyle={`!p-0 !rounded-[20px] ${
+          isMobile
+            ? "!w-[94%]"
+            : status !== "success"
+            ? "!w-[65%]"
+            : isTab
+            ? "!w-[40%]"
+            : "!w-[40%]"
+        } `}
+      >
         <div
           className={clsx(
             "bg-white relative rounded-lg  w-full overflow-hidden flex ",
@@ -133,7 +139,7 @@ const RequestCallBackModal = () => {
                 className={`w-[100%] md:w-[50%] px-[3%] py-[3%] sm:py-[1%] xl:py-[3%]`}
               >
                 {status === "idle" && (
-                  <h2 className="text-[18px]  sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
+                  <h2 className="text-[18px] sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
                     {MODAL_TYPE === "REQ_QUOTE"
                       ? "Request Quotation"
                       : "Request Callback"}
@@ -169,6 +175,7 @@ const RequestCallBackModal = () => {
           )}
         </div>
       </ModalBox>
+    )
     // </Modal>
   );
 };

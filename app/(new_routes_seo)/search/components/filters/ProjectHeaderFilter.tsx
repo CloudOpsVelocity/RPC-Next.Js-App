@@ -333,7 +333,6 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       window.history.pushState(null, "", window.location.href);
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll";
         setIsDrawerOpen(false);
         document.body.style.overflow = "unset";
       };

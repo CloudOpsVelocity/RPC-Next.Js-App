@@ -90,7 +90,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       <ModalBox
         isOpen={mapPopup.isOpen}
         handleChange={() => {
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
           setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
           dispatch({ type: "CLOSE" });
         }}
