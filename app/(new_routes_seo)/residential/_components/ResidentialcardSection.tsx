@@ -7,6 +7,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import React, { useState, useEffect, useCallback, memo } from "react";
 import { FaMapMarkerAlt, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = {
   data: any;
@@ -24,6 +25,8 @@ export default function ResidentialCardSection({
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(40);
   const [opened, { open, close }] = useReqCallPopup();
+
+
 
   const fetchMoreItems = useCallback(() => {
     if (properties.length > listItemsCount) {
@@ -97,6 +100,7 @@ export default function ResidentialCardSection({
   /*Tested jios test */
 
 
+  
 
   
 
@@ -128,10 +132,10 @@ export default function ResidentialCardSection({
                   ? formatDate(property.possassionDate)
                   : "N/A";
                 const propertyType =
-                  Array.isArray(property.propTypes) &&
-                  property.propTypes.length > 0
-                    ? property.propTypes.join(", ")
-                    : property.propTypes;
+                  Array.isArray(property.propType) &&
+                  property.propType.length > 0
+                    ? property.propType.join(", ")
+                    : property.propType;
                 const reraStatus = property.rerastatus || "N/A";
 
                 return (
@@ -159,14 +163,21 @@ export default function ResidentialCardSection({
                     <div className=" p-6">
                       <h2>
                         <Link
+                        
                           prefetch={false}
-                          href={`/residential/projects/${
+                          href={ createProjectLinkUrl({
+                            city: property.city,
+                            locality: property.locality,
+                            slug: property.projName,
+                            projIdEnc: property.projIdEnc,
+                          })}
+                         /*  href={`/residential/projects/${
                             property.city?.toLowerCase() || "unknown"
                           }/${
                             property.locality?.toLowerCase() || "unknown"
                           }/${property.projName
                             ?.toLowerCase()
-                            .replace(/ /g, "-")}-${property.projIdEnc}`}
+                            .replace(/ /g, "-")}-${property.projIdEnc}`} */
                           className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
                         >
                           {property.projName || "Unnamed Property"}
