@@ -3,10 +3,10 @@ import React from "react";
 import { Main } from "@/app/validations/property/index";
 import { getImageUrls } from "@/app/utils/image";
 import { useSetAtom } from "jotai";
-import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
+// import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 import BrokerContactTag from "./BrokersFreindly";
-import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
-import { useQuery } from "react-query";
+// import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+// import { useQuery } from "react-query";
 
 import FirstImagesBlock from "@/common/components/FirstImagesBlock";
 import { galleryStateAtom } from "@/app/store/project/gallery";
@@ -23,41 +23,41 @@ type Props = {
 const PropertyFirstBlock: React.FC<Props> = ({
   projectDetails,
   projName,
-  totalPrice,
+  // totalPrice,
   isOkWithBrokerContact,
   isUsed,
 }) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
   const path = usePathname();
-  const setIsScrolling = useSetAtom(isScrollingAtom);
-  const setSticky = useSetAtom(stickyAtom);
-  const setC = useSetAtom(currentBlockAtom);
+  // const setIsScrolling = useSetAtom(isScrollingAtom);
+  // const setSticky = useSetAtom(stickyAtom);
+  // const setC = useSetAtom(currentBlockAtom);
 
-  function scrollToTopic(id: string): void {
-    setIsScrolling(true);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "center",
-      });
-      setSticky(true);
-    }
-    setC("floorPlans");
-    setTimeout(() => setIsScrolling(false), 3000);
-  }
-  const { data } = useQuery<any>({
-    queryKey: [`builder/${projectDetails?.postedById}&isBuilderPage=Nproj`],
-    enabled: false,
-  });
+  // function scrollToTopic(id: string): void {
+  //   setIsScrolling(true);
+  //   const element = document.getElementById(id);
+  //   if (element) {
+  //     element.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //       inline: "center",
+  //     });
+  //     setSticky(true);
+  //   }
+  //   setC("floorPlans");
+  //   setTimeout(() => setIsScrolling(false), 3000);
+  // }
+  // const { data } = useQuery<any>({
+  //   queryKey: [`builder/${projectDetails?.postedById}&isBuilderPage=Nproj`],
+  //   enabled: false,
+  // });
 
-  const projectUrl = createProjectLinkUrl({
-    city: projectDetails?.ctName as string,
-    locality: projectDetails?.ltName as string,
-    slug: projName as string,
-    projIdEnc: projectDetails?.projIdEnc as string,
-  });
+  // const projectUrl = createProjectLinkUrl({
+  //   city: projectDetails?.ctName as string,
+  //   locality: projectDetails?.ltName as string,
+  //   slug: projName as string,
+  //   projIdEnc: projectDetails?.projIdEnc as string,
+  // });
 
   const dispatch = useSetAtom(galleryStateAtom);
 
@@ -88,27 +88,6 @@ const PropertyFirstBlock: React.FC<Props> = ({
           ) : null}
 
           <div className="flex justify-center items-center relative w-full aspect-auto mx-auto sm:!rounded-[10px] p-[10px]">
-            {/* <CustomCarousalCssOnly urlsData={images} projName={projName} /> */}
-            {/* <CustomCarousal
-                  dataLength={images?.length}
-                  containerClass="max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px]"
-                  allCards={images.map((imageUrl, index) => (
-                    <div key={`projDetailsCarosual_${index.toString()}`} className="carousel-slide h-full flex justify-center items-center "> 
-                        <Image
-                          alt="project image"
-                          title="project image"
-                          src={imageUrl.split(",")[3]}
-                          // fill
-                          width={1200}
-                          height={630}
-                          className={`bg-gray-${index + 1} w-full h-full object-cover max-h-[300px] sm:max-h-[545px] !xl:max-h-[750px] xl:max-h-[750px] `}
-                          unoptimized
-                          quality={80} 
-                        />
-                    </div>
-                  ))}
-                /> */}
-
             <FirstImagesBlock
               onSelect={onSelect}
               data={{
