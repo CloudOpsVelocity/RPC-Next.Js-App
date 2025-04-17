@@ -6,8 +6,8 @@ const ProjSearchMainFilterSection = dynamic(
   () => import("./components/filters/ProjSearchMainFilterSection")
 );
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
-// import Mainsection from "./components/Mainsection";
-const Mainsection = dynamic(() => import("./components/Mainsection"));
+import Mainsection from "./components/Mainsection";
+// const Mainsection = dynamic(() => import("./components/Mainsection"));
 type Props = {
   serverData: any;
   frontendFilters: any;

@@ -14,7 +14,6 @@ type Props = {
 
 function FirstImagesBlock({ images, projName, type, projectStatus }: Props) {
   const dispatch = useSetAtom(galleryStateAtom);
-
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
   const getImage = (index: number, className: string) => {
