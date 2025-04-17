@@ -121,23 +121,49 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   if (!params.bhk_unit_type.includes("listing")) {
     return {
-      title: `${params.bhk_unit_type} ${params.lt} , for ${
-        params.cg === "S" ? "Sale" : "Rent"
-      } in ${params.project}, ${params.city} - Getrightproperty`,
-      description: `Looking for ${params.bhk_unit_type} properties for ${
-        params.cg === "S" ? "sale" : "rent"
-      } in ${params.project}, ${params.lt}, ${
-        params.city
-      }? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      title: `${params.bhk_unit_type.replace(/-/g, " ")} in ${params.lt.replace(
+        /-/g,
+        " "
+      )}, for ${
+        params.cg === "for-sale" ? "Sale" : "Rent"
+      } in ${params.project.replace(/-/g, " ")}, ${params.city.replace(
+        /-/g,
+        " "
+      )} - Getrightproperty`,
+      description: `Looking for ${params.bhk_unit_type.replace(
+        /-/g,
+        " "
+      )} properties for ${
+        params.cg === "for-sale" ? "sale" : "rent"
+      } in ${params.project.replace(/-/g, " ")}, ${params.lt.replace(
+        /-/g,
+        " "
+      )}, ${params.city.replace(
+        /-/g,
+        " "
+      )}? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
       openGraph: {
-        title: `${params.bhk_unit_type} ${params.lt}, for ${
+        title: `${params.bhk_unit_type.replace(
+          /-/g,
+          " "
+        )} in ${params.lt.replace(/-/g, " ")}, for ${
           params.cg === "S" ? "Sale" : "Rent"
-        } in ${params.project}, ${params.city} - Getrightproperty`,
-        description: `Looking for ${params.bhk_unit_type} properties for ${
+        } in ${params.project.replace(/-/g, " ")}, ${params.city.replace(
+          /-/g,
+          " "
+        )} - Getrightproperty`,
+        description: `Looking for ${params.bhk_unit_type.replace(
+          /-/g,
+          " "
+        )} properties for ${
           params.cg === "S" ? "sale" : "rent"
-        } in ${params.project}, ${params.lt}, ${
-          params.city
-        }? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+        } in ${params.project.replace(/-/g, " ")}, ${params.lt.replace(
+          /-/g,
+          " "
+        )}, ${params.city.replace(
+          /-/g,
+          " "
+        )}? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
       },
     };
   }
