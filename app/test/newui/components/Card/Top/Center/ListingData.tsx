@@ -288,12 +288,12 @@ const DownSectionCard = ({
 }) => {
   return value ? (
     <h5 className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
+      <span className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
         {Icon} {label}:
-      </p>
-      <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">
+      </span>
+      <span className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">
         {value}
-      </p>
+      </span>
     </h5>
   ) : null;
 };
