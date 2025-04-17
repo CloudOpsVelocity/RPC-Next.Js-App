@@ -85,10 +85,10 @@ export default function ProjData({
           )}
         </span>
 
-        <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
+        <span className="text-[#148B16] text-[14px] block sm:text-[18px] xl:text-xl not-italic font-bold relative">
           Price Range: {formatCurrency(Number(minPrice))} -{" "}
           {formatCurrency(Number(maxPrice))}
-        </p>
+        </span>
 
         <span
           className={`text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold w-full xl:w-[calc(100%-100px)]`}
