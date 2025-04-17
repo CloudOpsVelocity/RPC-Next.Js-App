@@ -1,101 +1,101 @@
 import dynamicImport from "next/dynamic";
-const Feature = dynamicImport(() => import("@/app/components/project/feature"));
-const Amenties = dynamicImport(
-  () => import("@/app/components/project/amenties")
-);
-const Loans = dynamicImport(() => import("@/app/components/project/loans"));
+// const Feature = dynamicImport(() => import("@/app/components/project/feature"));
+// const Amenties = dynamicImport(
+//   () => import("@/app/components/project/amenties")
+// );
+// const Loans = dynamicImport(() => import("@/app/components/project/loans"));
 
-const About = dynamicImport(() => import("@/app/components/project/about"));
-const Navigation = dynamicImport(
-  () => import("@/app/components/project/navigation")
-);
-const ProjectDrawer = dynamicImport(
-  () => import("@/app/components/project/Drawer")
-);
-const LeafMap = dynamicImport(() => import("@/app/components/project/map"));
-const ListingRentAvail = dynamicImport(
-  () => import("@/app/components/project/listingRentAvail")
-);
-const ErrorContainer = dynamicImport(
-  () => import("@/app/components/project/error/container")
-);
-const MobileHidden = dynamicImport(
-  () => import("@/app/components/molecules/MobileHidden")
-);
-const FloorplanDrawer = dynamicImport(
-  () => import("@/app/components/project/drawers/floorplan")
-);
+// const About = dynamicImport(() => import("@/app/components/project/about"));
+// const Navigation = dynamicImport(
+//   () => import("@/app/components/project/navigation")
+// );
+// const ProjectDrawer = dynamicImport(
+//   () => import("@/app/components/project/Drawer")
+// );
+// const LeafMap = dynamicImport(() => import("@/app/components/project/map"));
+// const ListingRentAvail = dynamicImport(
+//   () => import("@/app/components/project/listingRentAvail")
+// );
+// const ErrorContainer = dynamicImport(
+//   () => import("@/app/components/project/error/container")
+// );
+// const MobileHidden = dynamicImport(
+//   () => import("@/app/components/molecules/MobileHidden")
+// );
+// const FloorplanDrawer = dynamicImport(
+//   () => import("@/app/components/project/drawers/floorplan")
+// );
 
-const MasterPlan = dynamicImport(
-  () => import("@/app/components/project/masterplan")
-);
-const ProjectDetailsP = dynamicImport(
-  () => import("@/app/components/project/projectDetailsP")
-);
-const GalleryBlock = dynamicImport(
-  () => import("@/app/components/project/galleryBlock")
-);
-const Specifications = dynamicImport(
-  () => import("@/app/components/project/specification")
-);
-const Banner = dynamicImport(() => import("@/app/components/project/banner"));
-const AboutBuilder = dynamicImport(
-  () => import("@/app/components/project/aboutBuilder")
-);
-const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
-const NearByCarousel = dynamicImport(
-  () => import("@/app/components/project/NearByCarousel"),
-  {
-    ssr: false,
-  }
-);
-const LoginPopup = dynamicImport(
-  () => import("@/app/components/project/modals/LoginPop"),
-  {
-    ssr: false,
-  }
-);
-const Reviews = dynamicImport(
-  () => import("@/app/components/project/reviews"),
-  {
-    ssr: false,
-  }
-);
-const PartialUnitData = dynamicImport(
-  () => import("@/app/components/project/sections")
-);
-const PropertyDataDisplay = dynamicImport(
-  () => import("@/app/components/project/_ui/PricingDetailsSection")
-);
-const Disclamer = dynamicImport(
-  () => import("@/app/components/builder/Disclamer")
-);
+// const MasterPlan = dynamicImport(
+//   () => import("@/app/components/project/masterplan")
+// );
+// const ProjectDetailsP = dynamicImport(
+//   () => import("@/app/components/project/projectDetailsP")
+// );
+// const GalleryBlock = dynamicImport(
+//   () => import("@/app/components/project/galleryBlock")
+// );
+// const Specifications = dynamicImport(
+//   () => import("@/app/components/project/specification")
+// );
+// const Banner = dynamicImport(() => import("@/app/components/project/banner"));
+// const AboutBuilder = dynamicImport(
+//   () => import("@/app/components/project/aboutBuilder")
+// );
+// const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
+// const NearByCarousel = dynamicImport(
+//   () => import("@/app/components/project/NearByCarousel"),
+//   {
+//     ssr: false,
+//   }
+// );
+// const LoginPopup = dynamicImport(
+//   () => import("@/app/components/project/modals/LoginPop"),
+//   {
+//     ssr: false,
+//   }
+// );
+// const Reviews = dynamicImport(
+//   () => import("@/app/components/project/reviews"),
+//   {
+//     ssr: false,
+//   }
+// );
+// const PartialUnitData = dynamicImport(
+//   () => import("@/app/components/project/sections")
+// );
+// const PropertyDataDisplay = dynamicImport(
+//   () => import("@/app/components/project/_ui/PricingDetailsSection")
+// );
+// const Disclamer = dynamicImport(
+//   () => import("@/app/components/builder/Disclamer")
+// );
 const BreadCrumbs = dynamicImport(
   () => import("@/app/components/project/breadcrum/BreadCrum")
 );
-const FloorPlans = dynamicImport(
-  () => import("@/app/components/project/newFloorPlan/floor-plan")
-);
+// const FloorPlans = dynamicImport(
+//   () => import("@/app/components/project/newFloorPlan/floor-plan")
+// );
 const ProjectSchema = dynamicImport(
   () => import("@/app/seo/ProjectDetailSchema")
 );
 const FAQJsonLdScript = dynamicImport(() => import("@/app/seo/Faqjson"));
 
-const ProjectGallery = dynamicImport(
-  () => import("@/app/components/project/_ui/modals/GallerySectionModal")
-);
-const SharePopup = dynamicImport(
-  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup"),
-  {
-    ssr: false,
-  }
-);
-const ProjectBrouchersSection = dynamicImport(
-  () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
-  {
-    ssr: false,
-  }
-);
+// const ProjectGallery = dynamicImport(
+//   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
+// );
+// const SharePopup = dynamicImport(
+//   () => import("@/app/(dashboard)/searchOldPage/components/SharePopup"),
+//   {
+//     ssr: false,
+//   }
+// );
+// const ProjectBrouchersSection = dynamicImport(
+//   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
+//   {
+//     ssr: false,
+//   }
+// );
 import {
   getAmenties,
   getAuthorityNames,
@@ -110,7 +110,7 @@ import { isValidSlugId } from "@/common/utils/slugUtils";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import FirstBlock from "@/app/components/project/firstBlock";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import Overview from "@/app/components/project/overview";
+// import Overview from "@/app/components/project/overview";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -193,7 +193,7 @@ export default async function page({ params }: Props) {
           />
         </div>
         {/* Navigations Container */}
-        <MobileHidden>
+        {/* <MobileHidden>
           <Navigation
             isBrochure={
               !!data?.media?.projBroucherUrl ||
@@ -214,16 +214,16 @@ export default async function page({ params }: Props) {
           s={data.saleListing}
           slug={slug}
         />
-        {/* About */}
+
         <About
           id="about"
           heading="about"
           projName={data.projectName}
           content={data.about}
           maxLines={12}
-        />
-        {/* Property Details */}
-        <ProjectDetailsP
+        /> */}
+
+        {/* <ProjectDetailsP
           projName={data.projectName}
           data={data.phases}
           slug={slug}
@@ -344,7 +344,7 @@ export default async function page({ params }: Props) {
         <FloorplanDrawer />
         <LoginPopup />
         <ProjectGallery />
-        <SharePopup />
+        <SharePopup /> */}
       </div>
     </section>
   );
@@ -383,7 +383,7 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  let slug = params.slug.split("-").at(-1); 
+  let slug = params.slug.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
   }
@@ -432,11 +432,9 @@ export async function generateMetadata(
   )} for sale ${data.localityName} ${data.cityName}`;
 
   // Constructing detailed and keyword-rich description
-  const description = `${
-    data.projectName
-  } ${data.availableProperties?.join(", ")} in ${
-    data.localityName
-  }, ${
+  const description = `${data.projectName} ${data.availableProperties?.join(
+    ", "
+  )} in ${data.localityName}, ${
     data.cityName
   }. Project Details, Pricing, Brochure, Floor Plans, Reviews, Master Plan, Amenities & Contact Details`;
 
