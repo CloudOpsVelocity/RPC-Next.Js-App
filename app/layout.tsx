@@ -119,9 +119,9 @@ export default function RootLayout(params: { children: React.ReactNode }) {
             <SessionProvider>
               <ReactQueryProvider>
                 <Provider>
-                  <Header />
+                  {/* <Header /> */}
                   <Layout>{params.children}</Layout>
-                  <Footer />
+                  {/* <Footer /> */}
                 </Provider>
               </ReactQueryProvider>
             </SessionProvider>
