@@ -1,29 +1,16 @@
 "use client";
-import React, { useRef } from "react";
-// import { Carousel } from "@mantine/carousel";
-import Autoplay from "embla-carousel-autoplay";
-// import {
-//   DarkCarouseIcon,
-//   DarkNextCarouselButton,
-// } from "@/app/images/commonSvgs";
+import React from "react";
 import { Main } from "@/app/validations/property/index";
-// import Image from "next/image";
-import SharePopup from "../atoms/SharePopup";
-// import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-// import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
-// import { calculatePerSqPrice } from "@/app/utils/price";
-// import styles from "@/app/styles/Carousel.module.css";
-// import { NumberFormatter } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
-// import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import BrokerContactTag from "./BrokersFreindly";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { useQuery } from "react-query";
 
 import FirstImagesBlock from "@/common/components/FirstImagesBlock";
 import { galleryStateAtom } from "@/app/store/project/gallery";
+import { usePathname } from "next/navigation";
 
 type Props = {
   projectDetails: Main | null;
@@ -41,7 +28,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
   isUsed,
 }) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
-  const autoplay = useRef(Autoplay({ delay: 10000 }));
+  const path = usePathname();
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
@@ -126,7 +113,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
               onSelect={onSelect}
               data={{
                 type: "prop",
-                url: window.location.href,
+                url: path,
                 images: images,
                 projectStatus:
                   projectDetails.availablityStatus === "U"

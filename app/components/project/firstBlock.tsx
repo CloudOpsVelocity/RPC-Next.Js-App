@@ -1,6 +1,5 @@
 "use client";
-import React, { useRef } from "react";
-import Autoplay from "embla-carousel-autoplay";
+import React from "react";
 import { ReraIcon } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
 import { getImageUrls } from "@/app/utils/image";
@@ -10,6 +9,7 @@ import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 import FirstImagesBlock from "@/common/components/FirstImagesBlock";
 import { galleryStateAtom } from "@/app/store/project/gallery";
+import { usePathname } from "next/navigation";
 
 type Props = {
   projectDetails: Main | null;
@@ -28,10 +28,10 @@ const FirstBlock: React.FC<Props> = ({
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
   let urlBuilder = "/";
-  const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
+  const path = usePathname();
   const { data, isLoading, status } = useQuery<any>({
     queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
     enabled: false,
@@ -139,7 +139,7 @@ const FirstBlock: React.FC<Props> = ({
               onSelect={onSelect}
               data={{
                 type: "proj",
-                url: window.location.href,
+                url: path,
                 images: images,
                 projectStatus: projectDetails?.projectStatus,
                 projName: projectDetails?.projectName,
