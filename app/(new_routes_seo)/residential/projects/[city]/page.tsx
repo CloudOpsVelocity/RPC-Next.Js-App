@@ -68,7 +68,9 @@ const getSearchData = async () => {
 
     const url = `${baseUrl}`;
 
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      cache: "no-cache",
+    });
 
     if (!res.ok) {
       throw new Error(`Error fetching data: ${res.statusText}`);
