@@ -31,14 +31,13 @@ export default async function page({ searchParams: { page } }: Props) {
   return (
     <>
       <>
-        {page > 0 && (
-          <link
-            rel="canonical"
-            href={`https://www.getrightproperty.com/residential${
-              page ? `?page=${page}` : ""
-            }`}
-          />
-        )}
+        <link
+          rel="canonical"
+          href={`https://www.getrightproperty.com/residential${
+            page ? `?page=${page}` : ""
+          }`}
+        />
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:url"
@@ -69,7 +68,7 @@ export default async function page({ searchParams: { page } }: Props) {
       />
       {data ? (
         data.data && data.data.length < 1 ? (
-        <NotFound/>
+          <NotFound />
         ) : (
           <ResidentialPage data={data} totalCount={data?.totalCount} />
         )
