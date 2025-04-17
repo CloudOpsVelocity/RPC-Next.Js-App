@@ -21,7 +21,6 @@ export default function useNearby({
   const [projectReqData, setProjectReqData] = useAtom(projectReqDataAtom);
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
-    console.log(builderId, company)
     const res = await axios.get(
       `${BACKEND_BASE_URL}/api/project/nearbyProjects?lat=${lat}&lng=${lng}&projIdEnc=${
         projId || slug
@@ -29,7 +28,6 @@ export default function useNearby({
         company || ""
       }`
     );
-    // console.log(res.data)
     return res.data;
   };
   const { isLoading, data } = useQuery({
@@ -80,7 +78,6 @@ export default function useNearby({
         }
         return project;
       });
-      // console.log(updatedData);
       queryClient.setQueryData([`nearby` + projId || slug], {
         ...previousData,
         [type === "proj" ? "nearbyProj" : "builderProj"]: updatedData,
