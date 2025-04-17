@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import type { Metadata } from "next";
 import "./globals.css";
-import MantineTheme from "@/mantine.config";
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+// import MantineTheme from "@/mantine.config";
+// import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { GoogleTagManager } from "@next/third-parties/google";
 
 import SessionProvider from "./context/session";
@@ -34,7 +34,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
             __html: JSON.stringify(Organization_SCHEMA),
           }}
         />
-        <ColorSchemeScript />
+        {/* <ColorSchemeScript /> */}
         {/* <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
@@ -114,20 +114,20 @@ export default function RootLayout(params: { children: React.ReactNode }) {
       )}
 
       <body className={`${montserrat.className}  `}>
-        <MantineProvider theme={MantineTheme}>
-          <main>
-            <SessionProvider>
-              <ReactQueryProvider>
-                <Provider>
-                  {/* <Header /> */}
-                  <Layout>{params.children}</Layout>
-                  {/* <Footer /> */}
-                </Provider>
-              </ReactQueryProvider>
-            </SessionProvider>
-          </main>
-          {/* <Footer /> */}
-        </MantineProvider>
+        {/* <MantineProvider theme={MantineTheme}> */}
+        <main>
+          <SessionProvider>
+            <ReactQueryProvider>
+              <Provider>
+                {/* <Header /> */}
+                <Layout>{params.children}</Layout>
+                {/* <Footer /> */}
+              </Provider>
+            </ReactQueryProvider>
+          </SessionProvider>
+        </main>
+        {/* <Footer /> */}
+        {/* </MantineProvider> */}
       </body>
     </html>
   );
