@@ -44,8 +44,6 @@ function FirstImagesBlock({ onSelect, data }: Props) {
 
   const title = data.type === "proj" ? "Share Project" : "Share Listing";
 
-  console.log(data.type);
-
   return (
     <div className={styles.DetailsPageImagesMainCon} onClick={() => onSelect()}>
       {/* Left side section */}

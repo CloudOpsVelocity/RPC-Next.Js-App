@@ -48,7 +48,9 @@ export default function FaqWithBg({
             <div className="hidden sm:block absolute left-[2%] sm:left-[16%] sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] " />
             <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
               <strong>
-                <span className="text-[#001F35]">Frequently Asked Questions of{" "}</span>
+                <span className="text-[#001F35]">
+                  Frequently Asked Questions of{" "}
+                </span>
                 <span className="text-[#148B16]">{projName}</span>{" "}
               </strong>
             </h2>
@@ -158,7 +160,7 @@ const AddQnaForm = ({
   };
   const onClose = () => {
     close();
-    document.body.style.overflow = "scroll";  
+    document.body.style.overflow = "scroll";
     opened.type === "qna" && reset();
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
@@ -220,20 +222,21 @@ const AddQnaForm = ({
             id="question"
             name="question"
             placeholder="Type your question here . . . ."
-            className={`placeholder:!text-[#4D6677] px-[10px] py-[6px] md:px-[16px] md:py-[10px] placeholder:!text-[14px] md:placeholder:!text-[18px] w-full resize-none leading-[23.784px] text-[14px] md:text-[16px] text-[#333] font-[500] rounded-[6px] md:rounded-[10px] focus:outline-none border border-solid border-[#737579] ${!errors.question ? "" : "border-[#F00]"} `}
+            className={`placeholder:!text-[#4D6677] px-[10px] py-[6px] md:px-[16px] md:py-[10px] placeholder:!text-[14px] md:placeholder:!text-[18px] w-full resize-none leading-[23.784px] text-[14px] md:text-[16px] text-[#333] font-[500] rounded-[6px] md:rounded-[10px] focus:outline-none border border-solid border-[#737579] ${
+              !errors.question ? "" : "border-[#F00]"
+            } `}
             rows={isMobile ? 2 : 4}
             {...getInputProps("question")}
             onBlur={(e) =>
               handleTrimAndReplace(e, "question", setFieldValue, "dis")
             }
           />
-          
+
           {errors.question && (
             <p className="text-[12px] sm:text-[14px] text-[#F00]">
               {errors.question}
             </p>
           )}
-
         </div>
         <button
           type="submit"
@@ -320,11 +323,9 @@ const Success = ({ text, opened, onClose, projName }: any) => {
     const timer = setTimeout(() => {
       onClose();
       document.body.style.overflow = "scroll";
-      console.log("relising scroll 1")
-      console.log(opened)
     }, 5000);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, []);
   return (
     // <Modal
@@ -333,7 +334,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
     //     root: S.root,
     //     close: S.close,
     //     content: S.content,
-    //     overlay: S.overlay, 
+    //     overlay: S.overlay,
     //     header: S.disabled,
     //     body: S.body,
     //   }}
@@ -343,8 +344,8 @@ const Success = ({ text, opened, onClose, projName }: any) => {
     //   title="Add Rating"
     //   size={isMobile ? "100%" : isTab ? "35%" : "auto"}
     // >
-    opened.status &&
-    <ModalBox
+    opened.status && (
+      <ModalBox
         isOpen={opened.status}
         handleChange={() => {
           document.body.style.overflow = "scroll";
@@ -353,15 +354,16 @@ const Success = ({ text, opened, onClose, projName }: any) => {
         hideCrossIcon={true}
         containerClassStyle="w-[90%] md:w-[35%] xl:w-auto !p-0 !rounded-[20px] !min-w-[200px] md:!min-w-[500px] !max-w-[100%] md:!max-w-[500px] "
       >
-      <Close 
-        close={() => {
-          document.body.style.overflow = "scroll";
-          onClose();
-        }} 
-        className="absolute top-2 right-2 z-50" 
-      />
+        <Close
+          close={() => {
+            document.body.style.overflow = "scroll";
+            onClose();
+          }}
+          className="absolute top-2 right-2 z-50"
+        />
 
-      {ComponentTorender}
-    </ModalBox>
+        {ComponentTorender}
+      </ModalBox>
+    )
   );
 };
