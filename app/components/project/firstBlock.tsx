@@ -1,26 +1,15 @@
 "use client";
 import React, { useRef } from "react";
-// import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import {
-  // DarkCarouseIcon,
-  // DarkNextCarouselButton,
-  ReraIcon,
-} from "@/app/images/commonSvgs";
+import { ReraIcon } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
-import Image from "next/image";
-import SharePopup from "../atoms/SharePopup";
-// import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-// import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
-// import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
-
 import { useQuery } from "react-query";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
-import CustomCarousal from "@/common/components/CustomCarousal";
 import FirstImagesBlock from "@/common/components/FirstImagesBlock";
+import { galleryStateAtom } from "@/app/store/project/gallery";
 
 type Props = {
   projectDetails: Main | null;
@@ -32,10 +21,10 @@ type Props = {
 
 const FirstBlock: React.FC<Props> = ({
   projectDetails,
-  companyName,
+  // companyName,
   builderId,
   hasReraStatus,
-  scrollId,
+  // scrollId,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
   let urlBuilder = "/";
@@ -68,7 +57,19 @@ const FirstBlock: React.FC<Props> = ({
     setTimeout(() => setIsScrolling(false), 3000);
   }
 
-  // sm:h-[545px] xl:h-[750px] 
+  const dispatch = useSetAtom(galleryStateAtom);
+
+  const onSelect = () => {
+    dispatch({
+      type: "OPEN",
+      payload: {
+        items: images,
+        mediaType: "image",
+        title: "Project Gallery",
+        activeIndex: images.indexOf(images[0]),
+      },
+    });
+  };
 
   return (
     <div
@@ -82,7 +83,6 @@ const FirstBlock: React.FC<Props> = ({
               RERA
             </p>
           )}
-          
 
           <div className="relative w-full aspect-auto mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
             {/* <Carousel
@@ -135,14 +135,16 @@ const FirstBlock: React.FC<Props> = ({
               projName={projectDetails?.projectName}
             /> */}
 
-            <FirstImagesBlock 
-              images={images}
-              projName={projectDetails?.projectName}
-              type = "proj"
-              projectStatus={projectDetails.projectStatus}
+            <FirstImagesBlock
+              onSelect={onSelect}
+              data={{
+                type: "proj",
+                url: window.location.href,
+                images: images,
+                projectStatus: projectDetails?.projectStatus,
+                projName: projectDetails?.projectName,
+              }}
             />
-            
-            
           </div>
           {/* <div className="absolute bottom-0 sm:m-[1%] sm:mb-[4%] xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md sm:flex break-words sm:px-6 sm:py-2">
 
