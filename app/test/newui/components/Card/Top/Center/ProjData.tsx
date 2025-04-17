@@ -125,7 +125,8 @@ export default function ProjData({
       ) : null} */}
 
       <h3 className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
-        {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
+        Price Range: {formatCurrency(Number(minPrice))} -{" "}
+        {formatCurrency(Number(maxPrice))}
       </h3>
 
       <h4

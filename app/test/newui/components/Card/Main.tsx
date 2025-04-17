@@ -110,8 +110,8 @@ const MainBox = ({ data, refetch }: Props) => {
     }
   };
 
-  const [opened, { open, close }] = useReqCallPopup(); 
-  const overlayData = useAtomValue(overlayAtom); 
+  const [opened, { open, close }] = useReqCallPopup();
+  const overlayData = useAtomValue(overlayAtom);
 
   useEffect(() => {
     if (opened) {
@@ -119,7 +119,7 @@ const MainBox = ({ data, refetch }: Props) => {
       window.history.pushState("reqCallModal", "");
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
+        document.body.style.overflow = "scroll";
         close();
       };
 
@@ -194,6 +194,7 @@ const MainBox = ({ data, refetch }: Props) => {
             overlayData.id ? (
             <Overlay />
           ) : null}
+
           {isMobile && (
             <div className="flex   flex-col  justify-between relative">
               <TopRightSection
