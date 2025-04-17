@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { Fragment, useEffect, useState } from "react";
 import PropertyHeading from "../property/heading";
 import SubHeading from "./headings/SubHeading";
-import { Carousel } from "@mantine/carousel";
+// import { Carousel } from "@mantine/carousel";
 // import { useMediaQuery } from "@mantine/hooks";
 import Css from "@/app/styles/Loan.module.css";
 export default function ProjectLoans({
