@@ -1,6 +1,6 @@
 "use client";
-// import SharePopup from '@/app/components/atoms/SharePopup';
-// import { galleryStateAtom } from "@/app/store/project/gallery";
+import SharePopup from "@/app/components/atoms/SharePopup";
+import { galleryStateAtom } from "@/app/store/project/gallery";
 import { useSetAtom } from "jotai";
 import Image from "next/image";
 import React from "react";
@@ -13,7 +13,7 @@ type Props = {
 };
 
 function FirstImagesBlock({ images, projName, type, projectStatus }: Props) {
-  //   const dispatch = useSetAtom(galleryStateAtom);
+  const dispatch = useSetAtom(galleryStateAtom);
 
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
@@ -43,15 +43,15 @@ function FirstImagesBlock({ images, projName, type, projectStatus }: Props) {
   };
 
   const onSelect = () => {
-    // dispatch({
-    //   type: "OPEN",
-    //   payload: {
-    //     items: images,
-    //     mediaType: "image",
-    //     title: type === "prop" ? "Property Gallery" : "Project Gallery",
-    //     activeIndex: images.indexOf(images[0]),
-    //   },
-    // });
+    dispatch({
+      type: "OPEN",
+      payload: {
+        items: images,
+        mediaType: "image",
+        title: type === "prop" ? "Property Gallery" : "Project Gallery",
+        activeIndex: images.indexOf(images[0]),
+      },
+    });
   };
 
   return (
@@ -60,7 +60,7 @@ function FirstImagesBlock({ images, projName, type, projectStatus }: Props) {
       onClick={onSelect}
     >
       {/* Left side section */}
-      <div className="relative  h-[400px] lg:h-[430px] w-full lg:w-[60%] bg-gray-600 shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] ">
+      <div className="relative h-full h-[300px] h-[400px] lg:h-[430px] w-full lg:w-[60%] bg-gray-600 shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] ">
         {/* Project status and shear button */}
         <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
           <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
@@ -70,12 +70,12 @@ function FirstImagesBlock({ images, projName, type, projectStatus }: Props) {
               {projectStatus}
             </span>{" "}
           </p>
-          {/* <div className={type === "proj" ? "" : `mt-4`}>
+          <div className={type === "proj" ? "" : `mt-4`}>
             <SharePopup
               title={type === "proj" ? "Share Project" : "Share Listing"}
               className="text-sm p-[4px] sm:text-xl hidden sm:flex"
             />
-          </div> */}
+          </div>
         </div>
 
         {getImage(0, "h-full w-full")}
@@ -85,7 +85,7 @@ function FirstImagesBlock({ images, projName, type, projectStatus }: Props) {
       </div>
 
       {/* Right side section */}
-      <div className="hidden lg:flex flex-col  h-[300px] md:h-[400px] lg:h-[430px] gap-[10px] w-[40%]">
+      <div className="hidden lg:flex flex-col h-full h-[300px] md:h-[400px] lg:h-[430px] gap-[10px] w-[40%]">
         <div className="relative flex justify-center items-center w-full h-full max-h-[145px] md:max-h-[195px] lg:max-h-[210px] bg-gray-600 border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)]">
           {getImage(1, "w-full h-full absolute top-0 left-0 ")}
         </div>
