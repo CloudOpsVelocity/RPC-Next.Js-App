@@ -10,10 +10,10 @@ import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
 import { Provider } from "jotai";
 import montserrat from "@/font";
-import Header from "./components/layouts/primary/header";
-import Footer from "./components/layouts/primary/footer";
+// import Header from "./components/layouts/primary/header";
+// import Footer from "./components/layouts/primary/footer";
 import { Organization_SCHEMA } from "./seo/common/organisation-details";
-import Script from "next/script";
+// import Script from "next/script";
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
 //   weight: ['400'], // Required weight for Playball font
