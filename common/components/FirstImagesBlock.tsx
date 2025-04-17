@@ -60,7 +60,7 @@ function FirstImagesBlock({ images, projName, type, projectStatus }: Props) {
       onClick={onSelect}
     >
       {/* Left side section */}
-      <div className="relative h-[300px] h-[400px] lg:h-[430px] w-full lg:w-[60%] bg-gray-600 shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] ">
+      <div className="relative h-[300px] md:h-[400px] lg:h-[430px] w-full lg:w-[60%] bg-gray-600 shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] ">
         {/* Project status and shear button */}
         <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
           <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
