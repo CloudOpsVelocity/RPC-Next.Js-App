@@ -77,95 +77,56 @@ export default function ProjData({
   // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
-      <h2 className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap w-full xl:w-[calc(100%-210px)]">
-        {projName}{" "}
-        {phaseName && phaseCount !== undefined && phaseCount > 1 && (
-          <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
-        )}
-        {/* <button className="w-6 h-6 p-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 xl:hidden"> */}
-        {/*  <NewMapIcon
-          className="w-5 h-5 sm:hidden"
-          onClick={() => {
-            // handleClick();
-            // setSelected({max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold my-2 md:mb-1 gradient
-            //   agentListing,
-            //   ownerListing,
-            //   projOrPropName: type === "proj" ? projName : propName,
-            //   lat,
-            //   lang,
-            //   type,
-            //   reqId: type === "proj" ? projIdEnc : propIdEnc,
-            // });
-            mobileMapDispatch({
-              type: "open",
-              payload: {
-                title: type === "proj" ? projName : propName,
-                id: type === "proj" ? `${projIdEnc}` : propIdEnc,
-                opened: true,
-                type: "nearby",
-                content: {
-                  lat: lat,
-                  lang: lang,
-                },
-              },
-            });
-          }}
-        /> */}
-        {/* </button> */}
-      </h2>
-
-      {/* {category == "Sale" || type === "proj" ? (
-        <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24 sm:top-0 sm:right-[65px] w-full xl:w-[calc(100%-220px)] ">
-          Avg Price:{" "}
-          <span className="font-bold ml-1">
-            {" "}
-            ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
-          </span>
-        </div>
-      ) : null} */}
-
-      <h3 className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
-        Price Range: {formatCurrency(Number(minPrice))} -{" "}
-        {formatCurrency(Number(maxPrice))}
-      </h3>
-
-      <h4
-        className={`text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold w-full xl:w-[calc(100%-100px)]`}
-      >
-        <span>
-          {sortedBhks && sortedBhks.length > 5
-            ? sortedBhks
-                .filter(
-                  (bhk) => !bhk.includes(".5") && !bhk.includes("Servant")
-                )
-                .slice(0, 5)
-                .join(", ")
-            : sortedBhks && sortedBhks.join(", ")}
+      <h2>
+        <span className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap w-full xl:w-[calc(100%-210px)]">
+          {projName}{" "}
+          {phaseName && phaseCount !== undefined && phaseCount > 1 && (
+            <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
+          )}
         </span>
-        {sortedBhks && sortedBhks.length > 5 && (
-          <span
-            className="text-btnPrimary text-[12px] sm:text-[14px] underline ml-1 cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              dispatch({
-                type: "OPEN",
-                content: sortedBhks,
-                title: "Unit Types",
-                id: `${
-                  type === "proj" ? projIdEnc : propIdEnc
-                }+${propTypeId}+${phaseId}`,
-                conType: "bhk",
-                pType: type,
-              });
-              // Add your logic here to show all BHK types (e.g., open a modal)
-            }}
-          >
-            +{sortedBhks.length - 5} more
-          </span>
-        )}
-        {` ${propType} For Sale in ${locality}, ${city}`}
-      </h4>
 
+        <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
+          Price Range: {formatCurrency(Number(minPrice))} -{" "}
+          {formatCurrency(Number(maxPrice))}
+        </p>
+
+        <span
+          className={`text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold w-full xl:w-[calc(100%-100px)]`}
+        >
+          <span>
+            {sortedBhks && sortedBhks.length > 5
+              ? sortedBhks
+                  .filter(
+                    (bhk) => !bhk.includes(".5") && !bhk.includes("Servant")
+                  )
+                  .slice(0, 5)
+                  .join(", ")
+              : sortedBhks && sortedBhks.join(", ")}
+          </span>
+          {sortedBhks && sortedBhks.length > 5 && (
+            <span
+              className="text-btnPrimary text-[12px] sm:text-[14px] underline ml-1 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch({
+                  type: "OPEN",
+                  content: sortedBhks,
+                  title: "Unit Types",
+                  id: `${
+                    type === "proj" ? projIdEnc : propIdEnc
+                  }+${propTypeId}+${phaseId}`,
+                  conType: "bhk",
+                  pType: type,
+                });
+                // Add your logic here to show all BHK types (e.g., open a modal)
+              }}
+            >
+              +{sortedBhks.length - 5} more
+            </span>
+          )}
+          {` ${propType} For Sale in ${locality}, ${city}`}
+        </span>
+      </h2>
       <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-100px)]">
         Address: {address}
       </p>
