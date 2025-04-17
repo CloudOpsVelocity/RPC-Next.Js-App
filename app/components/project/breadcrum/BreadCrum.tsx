@@ -52,7 +52,7 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
         "@type": "SiteNavigationElement",
         position: index + 1,
         name: newName,
-        url: `${process.env.NEXT_PUBLIC_PROJECT_URL}${currentPath}`,
+        url: `${process.env.NEXT_PUBLIC_PROJECT_URL}${siteMapPath}`,
       };
     }),
   };
