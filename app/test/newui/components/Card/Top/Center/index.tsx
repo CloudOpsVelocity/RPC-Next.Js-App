@@ -2,6 +2,7 @@ import React from "react";
 import ProjData from "./ProjData";
 import ListingData from "./ListingData";
 import { useMediaQuery } from "@mantine/hooks";
+// import dynamic from "next/dynamic";
 
 type Props = {
   data: any;

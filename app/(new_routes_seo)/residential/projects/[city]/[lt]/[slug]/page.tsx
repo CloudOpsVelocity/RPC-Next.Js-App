@@ -7,7 +7,10 @@ const Loans = dynamicImport(() => import("@/app/components/project/loans"));
 
 const About = dynamicImport(() => import("@/app/components/project/about"));
 const Navigation = dynamicImport(
-  () => import("@/app/components/project/navigation")
+  () => import("@/app/components/project/navigation"),
+  {
+    ssr: false,
+  }
 );
 const ProjectDrawer = dynamicImport(
   () => import("@/app/components/project/Drawer")

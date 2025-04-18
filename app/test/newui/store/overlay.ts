@@ -1,7 +1,7 @@
 import { atomWithReducer } from "jotai/utils";
 import React from "react";
 // Define action types
-type OverlayAction =
+export type OverlayAction =
   | {
       type: "OPEN";
       content: any;
@@ -47,7 +47,7 @@ const initialState: OverlayState = {
   isOpen: false,
   content: null,
   id: null,
-  title: "", 
+  title: "",
   conType: "none",
   pType: "",
   propId: "",
@@ -62,7 +62,7 @@ const overlayReducer = (
     if (!value) return "";
     return new Intl.NumberFormat("en-IN").format(Number(value));
   };
-  
+
   switch (action.type) {
     case "OPEN":
       if (action.conType === "otherCharges") {
@@ -73,9 +73,9 @@ const overlayReducer = (
           ...(content.clubHouseCharge
             ? [
                 {
-                  label: "Club house Subscription", 
+                  label: "Club house Subscription",
                   value:
-                    content.clubHouseCharge === "A" 
+                    content.clubHouseCharge === "A"
                       ? "Lifetime"
                       : content.clubHouseTill
                       ? `₹${formatNumber(content.clubHouseCharge)} for ${

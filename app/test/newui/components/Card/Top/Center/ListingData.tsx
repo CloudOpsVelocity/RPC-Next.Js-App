@@ -44,7 +44,6 @@ export default function ListingData({
   projAuthority,
   approvedById,
 }: Props) {
-  const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
   const isRent = type === "Rent";
   const readMoreThreshold = 200;
@@ -297,3 +296,19 @@ const DownSectionCard = ({
     </h4>
   ) : null;
 };
+{
+  /* <Suspense fallback={<div>Loading</div>}>
+        <SearchReadMore
+          dispatch={dispatch}
+          isReadMoreNeeded={isReadMoreNeeded}
+          phaseId={phaseId}
+          projIdEnc={projIdEnc}
+          projectAbout={projectAbout}
+           propIdEnc={projIdEnc}
+           propTypeId={propTypeId}
+           propTypeName={propTypeName}
+           readMoreThreshold={readMoreThreshold}
+           type={type}
+        />
+      </Suspense> */
+}
