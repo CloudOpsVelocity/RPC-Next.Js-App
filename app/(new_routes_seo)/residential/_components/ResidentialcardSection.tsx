@@ -13,20 +13,18 @@ type Props = {
   data: any;
   setLoading: (loading: boolean) => void;
   loading: boolean;
-  totalCount:Number
+  totalCount: Number;
 };
 
 export default function ResidentialCardSection({
   data,
   setLoading,
   loading,
-  totalCount
+  totalCount,
 }: Props) {
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(40);
   const [opened, { open, close }] = useReqCallPopup();
-
-
 
   const fetchMoreItems = useCallback(() => {
     if (properties.length > listItemsCount) {
@@ -99,157 +97,149 @@ export default function ResidentialCardSection({
 
   /*Tested jios test */
 
-
-  
-
-  
-
   return (
     <>
+      <section className="py-8 sm:py-14 container mx-auto px-4">
+        {!properties || properties.length < 1 ? (
+          <div className="flex justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
+          </div>
+        ) : (
+          <div className="mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {properties
+                .slice(0, listItemsCount)
+                .map((property: any, index: any) => {
+                  if (!property) {
+                    return null; // Handle case where property is undefined
+                  }
 
-    <section className="py-8 sm:py-14 container mx-auto px-4">
-      {!properties || properties.length < 1 ? (
-        <div className="flex justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
-        </div>
-      ) : (
-        <div className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {properties
-              .slice(0, listItemsCount)
-              .map((property: any, index: any) => {
-                if (!property) {
-                  return null; // Handle case where property is undefined
-                }
+                  const minPrice = property.minPrice
+                    ? parseInt(property.minPrice)
+                    : 0;
+                  const maxPrice = property.maxPrice
+                    ? parseInt(property.maxPrice)
+                    : 0;
+                  const possessionDate = property.possassionDate
+                    ? formatDate(property.possassionDate)
+                    : "N/A";
+                  const propertyType =
+                    Array.isArray(property.propType) &&
+                    property.propType.length > 0
+                      ? property.propType.join(", ")
+                      : property.propType;
+                  const reraStatus = property.rerastatus || "N/A";
 
-                const minPrice = property.minPrice
-                  ? parseInt(property.minPrice)
-                  : 0;
-                const maxPrice = property.maxPrice
-                  ? parseInt(property.maxPrice)
-                  : 0;
-                const possessionDate = property.possassionDate
-                  ? formatDate(property.possassionDate)
-                  : "N/A";
-                const propertyType =
-                  Array.isArray(property.propType) &&
-                  property.propType.length > 0
-                    ? property.propType.join(", ")
-                    : property.propType;
-                const reraStatus = property.rerastatus || "N/A";
-
-                return (
-                  <div
-                    id={`item-${index}`}
-                    key={property.projIdEnc}
-                    className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow infinityItem"
-                  >
-                    <div className="relative h-64">
-                      <Image
-                        src={
-                          property.coverUrl
-                            ? property.coverUrl.split(",")[0]
-                            : "/api/placeholder/60/60"
-                        }
-                        alt={property.projName || "Property Image"}
-                        fill
-                        className="object-cover"
-                        priority
-                      />
-                      <div className="absolute top-4 left-4 bg-primary px-3 py-1 text-sm flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
-                        {property.projstatus || "Status Unknown"}
+                  return (
+                    <div
+                      id={`item-${index}`}
+                      key={property.projIdEnc}
+                      className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow infinityItem"
+                    >
+                      <div className="relative h-64">
+                        <Image
+                          src={
+                            property.coverUrl
+                              ? property.coverUrl.split(",")[0]
+                              : "/api/placeholder/60/60"
+                          }
+                          alt={property.projName || "Property Image"}
+                          fill
+                          className="object-cover"
+                          priority
+                        />
+                        <div className="absolute top-4 left-4 bg-primary px-3 py-1 text-sm flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
+                          {property.projstatus || "Status Unknown"}
+                        </div>
                       </div>
-                    </div>
-                    <div className=" p-6">
-                      <h2>
-                        <Link
-                        
-                          prefetch={false}
-                          href={ createProjectLinkUrl({
-                            city: property.city,
-                            locality: property.locality,
-                            slug: property.projName,
-                            projIdEnc: property.projIdEnc,
-                          })}
-                         /*  href={`/residential/projects/${
+                      <div className=" p-6">
+                        <h2>
+                          <Link
+                            prefetch={false}
+                            href={createProjectLinkUrl({
+                              city: property.city,
+                              locality: property.locality,
+                              slug: property.projName,
+                              projIdEnc: property.projIdEnc,
+                            })}
+                            /*  href={`/residential/projects/${
                             property.city?.toLowerCase() || "unknown"
                           }/${
                             property.locality?.toLowerCase() || "unknown"
                           }/${property.projName
                             ?.toLowerCase()
                             .replace(/ /g, "-")}-${property.projIdEnc}`} */
-                          className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
-                        >
-                          {property.projName || "Unnamed Property"}
-                        </Link>
-                      </h2>
-                      <h3 className="text-muted-foreground flex items-center gap-2 mb-4">
-                        <FaMapMarkerAlt />{" "}
-                        {property.locality || "Unknown Locality"},{" "}
-                        {property.city || "Unknown City"}
-                      </h3>
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <h3 className="text-sm">
-                          <div className="font-semibold">Price Range</div>
-                          <div>
-                            ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
-                            {(maxPrice / 10000000).toFixed(2)} Cr
-                          </div>
+                            className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
+                          >
+                            {property.projName || "Unnamed Property"}
+                          </Link>
+                        </h2>
+                        <h3 className="text-muted-foreground flex items-center gap-2 mb-4">
+                          <FaMapMarkerAlt />{" "}
+                          {property.locality || "Unknown Locality"},{" "}
+                          {property.city || "Unknown City"}
                         </h3>
-                        <h3 className="text-sm">
-                          <div className="font-semibold">Property Type</div>
-                          <div>{propertyType}</div>
-                        </h3>
-                        <h3 className="text-sm">
-                          <div className="font-semibold">Possession</div>
-                          <div>{possessionDate}</div>
-                        </h3>
-                        <h3 className="text-sm">
-                          <div className="font-semibold">RERA Status</div>
-                          <div>{reraStatus}</div>
-                        </h3>
-                      </div>
-                      <div className="flex w-full  flex-row gap-4">
-                        <Link
-                          prefetch={false}
-                          href={`/residential/projects/${
-                            property.city?.toLowerCase() || "unknown"
-                          }/${
-                            property.locality?.toLowerCase() || "unknown"
-                          }/${property.projName
-                            ?.toLowerCase()
-                            .replace(/ /g, "-")}-${property.projIdEnc}`}
-                          className="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white sm:px-4 py-2 rounded-lg text-center text-sm sm:text-[12px] lg:text-sm font-medium transition-colors"
-                        >
-                          View Details
-                        </Link>
-                        <Button
-                          title="Request  Callback"
-                          buttonConClass="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white px-4 sm:px-2 lg:px-4 py-2 rounded-lg text-center text-sm  sm:text-[10px] lg:text-sm font-medium transition-colors"
-                          buttonClass=""
-                          onChange={() => {
-                            open({
-                              modal_type: true
-                                ? "PROJECT_REQ_CALLBACK"
-                                : "PROPERTY_REQ_CALLBACK",
-                              postedByName: true
-                                ? property.projName
-                                : data.postedBy,
-                              postedId: true
-                                ? property.projIdEnc
-                                : data.postedById,
-                              reqId: property.projIdEnc,
-                              source: true ? "projCard" : "propCard",
-                              title: property.projName,
-                              /*  true
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                          <h3 className="text-sm">
+                            <div className="font-semibold">Price Range</div>
+                            <div>
+                              ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
+                              {(maxPrice / 10000000).toFixed(2)} Cr
+                            </div>
+                          </h3>
+                          <h3 className="text-sm">
+                            <div className="font-semibold">Property Type</div>
+                            <div>{propertyType}</div>
+                          </h3>
+                          <h3 className="text-sm">
+                            <div className="font-semibold">Possession</div>
+                            <div>{possessionDate}</div>
+                          </h3>
+                          <h3 className="text-sm">
+                            <div className="font-semibold">RERA Status</div>
+                            <div>{reraStatus}</div>
+                          </h3>
+                        </div>
+                        <div className="flex w-full  flex-row gap-4">
+                          <Link
+                            prefetch={false}
+                            href={createProjectLinkUrl({
+                              city: property.city,
+                              locality: property.locality,
+                              slug: property.projName,
+                              projIdEnc: property.projIdEnc,
+                            })}
+                            className="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white sm:px-4 py-2 rounded-lg text-center text-sm sm:text-[12px] lg:text-sm font-medium transition-colors"
+                          >
+                            View Details
+                          </Link>
+                          <Button
+                            title="Request  Callback"
+                            buttonConClass="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white px-4 sm:px-2 lg:px-4 py-2 rounded-lg text-center text-sm  sm:text-[10px] lg:text-sm font-medium transition-colors"
+                            buttonClass=""
+                            onChange={() => {
+                              open({
+                                modal_type: true
+                                  ? "PROJECT_REQ_CALLBACK"
+                                  : "PROPERTY_REQ_CALLBACK",
+                                postedByName: true
+                                  ? property.projName
+                                  : data.postedBy,
+                                postedId: true
+                                  ? property.projIdEnc
+                                  : data.postedById,
+                                reqId: property.projIdEnc,
+                                source: true ? "projCard" : "propCard",
+                                title: property.projName,
+                                /*  true
                                 ? projName
                                 : `${bhkName ?? ""} ${propTypeName} for
                             ${data.category === "Rent" ? "Rent" : "Sale"} in ${localityName}`, */
-                            });
-                            // pushHistory();
-                          }}
-                        />
-                        {/*  <Link
+                              });
+                              // pushHistory();
+                            }}
+                          />
+                          {/*  <Link
                           rel="noopener noreferrer"
                           prefetch={false}
                           href="tel:+91-8884440963"
@@ -257,23 +247,23 @@ export default function ResidentialCardSection({
                         >
                           Enquire Now
                         </Link> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-          </div>
-          {loading && (
-            <div className="w-full h-[10vh] py-8 flex justify-center items-center text-gray-600">
-              <LoadingSpinner />
+                  );
+                })}
             </div>
-          )}
-        </div>
-      )}
-      <RequestCallBackModal />
-    </section>
-     {/* Pagination controls */}
-          {/* {totalPages > 1 && (
+            {loading && (
+              <div className="w-full h-[10vh] py-8 flex justify-center items-center text-gray-600">
+                <LoadingSpinner />
+              </div>
+            )}
+          </div>
+        )}
+        <RequestCallBackModal />
+      </section>
+      {/* Pagination controls */}
+      {/* {totalPages > 1 && (
             <div className="mt-10 flex justify-center">
               <nav className="flex items-center gap-1">
                 <button
@@ -328,14 +318,13 @@ export default function ResidentialCardSection({
             </div>
           )} */}
 
-          {/* Page information */}
-       {/*    {totalCount > 0 && (
+      {/* Page information */}
+      {/*    {totalCount > 0 && (
             <div className="mt-4 text-center text-sm text-muted-foreground">
               Showing {currentPage * itemsPerPage + 1} to {Math.min((currentPage + 1) * itemsPerPage, totalCount)} of{" "}
               {totalCount} results
             </div>
           )} */}
     </>
-    
   );
 }
