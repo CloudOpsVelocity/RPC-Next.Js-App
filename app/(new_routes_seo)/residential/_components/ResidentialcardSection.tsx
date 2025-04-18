@@ -146,7 +146,7 @@ export default function ResidentialCardSection({
                           alt={property.projName || "Property Image"}
                           fill
                           className="object-cover"
-                          priority
+                          unoptimized
                         />
                         <div className="absolute top-4 left-4 bg-primary px-3 py-1 text-sm flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
                           {property.projstatus || "Status Unknown"}
