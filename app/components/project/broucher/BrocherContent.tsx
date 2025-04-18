@@ -221,6 +221,29 @@ function BrocherContent({
       });
   };
 
+
+  function downloadPDF(url: string, filename: string) {
+    fetch(url)
+      .then(response => response.blob())
+      .then(blob => {
+        const link = document.createElement('a');
+        const objectURL = URL.createObjectURL(blob);
+        link.href = objectURL;
+        link.download = filename || 'download.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+  
+        // Delay the revoke
+        setTimeout(() => URL.revokeObjectURL(objectURL), 1000);
+      })
+      .catch(console.error);
+  }
+  
+  
+  // Example usage:
+ 
+  
   const handleDownload = (url: string) => {
     const brocherPageUrl = `/pdf/${encodeURIComponent(
       url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
@@ -238,7 +261,8 @@ function BrocherContent({
         );
         return;
       } */
-      downloadBroucher(brocherPageUrl);
+        downloadPDF(url, `${projName}.pdf`);
+       // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
     }
     /* if (!session) {
@@ -416,8 +440,11 @@ function BrocherContent({
                 }}
                 className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
               >
-                <span className="text-sm md:text-base font-semibold">
+                <span className="hidden sm:flex text-sm md:text-base font-semibold">
                   Click to View Broucher
+                </span>
+                <span className="flex sm:hidden text-sm md:text-base font-semibold">
+                  Click to download Broucher
                 </span>
               </button>
             </div>

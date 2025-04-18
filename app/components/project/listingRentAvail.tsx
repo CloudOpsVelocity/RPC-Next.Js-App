@@ -115,9 +115,10 @@ const Card = ({
         <Image
           alt={type === "rent" ? "Rent Listing" : "Sale Listing"}
           src={type === "rent" ? config.rentMobileLogo : config.sellMobileLogo}
-          width={100}
-          height={100}
-          className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px]"
+          width={60}
+          height={60}
+        /*   className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px]" */
+         className="w-[60px] h-[60px]  block md:ml-[20px]"
           title={type === "rent" ? "Rent Listing" : "Sale Listing"}
         />
 

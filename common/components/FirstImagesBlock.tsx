@@ -1,5 +1,4 @@
 import { ShearIcon } from "@/app/images/commonSvgs";
-import clsx from "clsx";
 import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
 

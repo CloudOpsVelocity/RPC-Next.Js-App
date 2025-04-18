@@ -287,13 +287,13 @@ const DownSectionCard = ({
   Icon?: React.JSX.Element;
 }) => {
   return value ? (
-    <div className="flex flex-col justify-center items-start ">
-      <h5 className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
+    <h4 className="flex flex-col justify-center items-start ">
+      <span className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
         {Icon} {label}:
-      </h5>
-      <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">
+      </span>
+      <span className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">
         {value}
-      </p>
-    </div>
+      </span>
+    </h4>
   ) : null;
 };

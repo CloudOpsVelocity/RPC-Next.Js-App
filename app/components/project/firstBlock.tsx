@@ -12,7 +12,7 @@ import { galleryStateAtom } from "@/app/store/project/gallery";
 import { usePathname } from "next/navigation";
 
 type Props = {
-  projectDetails: Main | null;
+  projectDetails: any | null;
   companyName: string;
   builderId: number;
   hasReraStatus: boolean;

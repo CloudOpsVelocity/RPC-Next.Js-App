@@ -194,6 +194,7 @@ const MainBox = ({ data, refetch }: Props) => {
             overlayData.id ? (
             <Overlay />
           ) : null}
+
           {isMobile && (
             <div className="flex   flex-col  justify-between relative">
               <TopRightSection

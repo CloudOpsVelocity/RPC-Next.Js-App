@@ -3,6 +3,7 @@ import ResidentialPage from "./_components/ResidentialDetailPage";
 import axios from "axios";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
+import NotFound from "../not-found";
 type Props = {
   searchParams: {
     page: number;
@@ -30,14 +31,13 @@ export default async function page({ searchParams: { page } }: Props) {
   return (
     <>
       <>
-        {page > 0 && (
-          <link
-            rel="canonical"
-            href={`https://www.getrightproperty.com/residential${
-              page ? `?page=${page}` : ""
-            }`}
-          />
-        )}
+        <link
+          rel="canonical"
+          href={`https://www.getrightproperty.com/residential${
+            page ? `?page=${page}` : ""
+          }`}
+        />
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:url"
@@ -67,7 +67,11 @@ export default async function page({ searchParams: { page } }: Props) {
         totalPages={data.totalCount}
       />
       {data ? (
-        <ResidentialPage data={data} totalCount={data?.totalCount} />
+        data.data && data.data.length < 1 ? (
+          <NotFound />
+        ) : (
+          <ResidentialPage data={data} totalCount={data?.totalCount} />
+        )
       ) : (
         <LoadingSpinner />
       )}

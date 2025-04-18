@@ -3,21 +3,22 @@ import { PHONE_NUMBER } from "../constants";
 
 export const generateAllSchemas = (property: any) => {
   if (!property) return [];
-  const allSizesSchemas = property.coverImage.split(",").map((url: string) => {
-    const OrgName = property.postedByName;
-    return {
-      "@type": "ImageObject",
-      contentUrl: url,
-      license: "https://www.getrightproperty.com/privacy-policy",
-      acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
-      creditText: `${property.postedByName} Cover Image`,
-      creator: {
-        "@type": "Person",
-        name: OrgName,
-      },
-      copyrightNotice: OrgName,
-    };
-  });
+  const allSizesSchemas =
+    property?.coverImage?.split(",").map((url: string) => {
+      const OrgName = property.postedByName;
+      return {
+        "@type": "ImageObject",
+        contentUrl: url,
+        license: "https://www.getrightproperty.com/privacy-policy",
+        acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
+        creditText: `${property.postedByName} Cover Image`,
+        creator: {
+          "@type": "Person",
+          name: OrgName,
+        },
+        copyrightNotice: OrgName,
+      };
+    }) ?? [];
   const PAGE_URL = generateListingLinkUrl({
     bhkUnitType: property.bhkName
       ? property.bhkName + "-" + property.propTypeName

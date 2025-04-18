@@ -42,17 +42,16 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
       siteMapPath += `/${slugify(params[key])}`;
       let name = params[key].replace(/-/g, " ");
       const newArray = name.split(" ").slice(0, -1);
-      const newName = key !== "slug" ? name : newArray.join(" ");
+      let newName = key !== "slug" ? name : newArray.join(" ");
       if (index === 0) {
-        currentPath = "";
+        siteMapPath = "";
+        newName = "Home";
       }
       return {
         "@context": "https://schema.org",
         "@type": "SiteNavigationElement",
         position: index + 1,
-        name: titleOfKeys[key as keyof typeof titleOfKeys]
-          ? titleOfKeys[key as keyof typeof titleOfKeys] + newName
-          : newName,
+        name: newName,
         url: `${process.env.NEXT_PUBLIC_PROJECT_URL}${siteMapPath}`,
       };
     }),
@@ -80,8 +79,11 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
           currentPath2 += `/${slugify(params[key])}`;
           let name = params[key].replace(/-/g, " ");
           const newArray = name.split(" ").slice(0, -1);
-          const newName =
-            index === 0 ? "Home" : key !== "slug" ? name : newArray.join(" ");
+          let newName = key !== "slug" ? name : newArray.join(" ");
+          if (index === 0) {
+            currentPath2 = "";
+            newName = "Home";
+          }
           return (
             <React.Fragment key={`${key[index]}`}>
               {index < Object.keys(params).length - 1 ? (
