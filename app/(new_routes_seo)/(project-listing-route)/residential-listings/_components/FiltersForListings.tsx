@@ -33,7 +33,7 @@ export default function FiltersForListings({}: Props) {
     //alert(JSON.stringify(f))
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
     let redirectUrl = `${whichPage}?sf=${toQueryParams(f)}`;
-    redirectUrl = redirectUrl.replace(/-listedBy=All/g, "");
+
     router.push(redirectUrl);
     //alert(redirectUrl)
   };

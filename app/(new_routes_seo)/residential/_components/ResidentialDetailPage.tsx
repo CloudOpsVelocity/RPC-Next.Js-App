@@ -43,7 +43,13 @@ const testimonials = [
   },
 ];
 
-export default function ResidentialPage({ data, totalCount }: { data: any, totalCount:number  }) {
+export default function ResidentialPage({
+  data,
+  totalCount,
+}: {
+  data: any;
+  totalCount: number;
+}) {
   const [loading, setLoading] = useState(false);
   return (
     <div className="min-h-screen bg-background">
@@ -67,7 +73,7 @@ export default function ResidentialPage({ data, totalCount }: { data: any, total
             aria-hidden="true"
           />
           <li className="ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize ">
-            residential
+            Residential Projects
           </li>
         </ol>
       </nav>
@@ -134,7 +140,7 @@ export default function ResidentialPage({ data, totalCount }: { data: any, total
         loading={loading}
         totalCount={totalCount}
       />
-      <Pagination totalCount={totalCount}  />
+      <Pagination totalCount={totalCount} />
       {!loading && (
         <>
           <section className="py-20 bg-muted/50">

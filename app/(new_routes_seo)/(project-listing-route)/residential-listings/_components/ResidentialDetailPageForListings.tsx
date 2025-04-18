@@ -81,7 +81,7 @@ export default function ResidentialPageForListings({
             aria-hidden="true"
           />
           <li className="ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize ">
-            residential
+            Residential Listings
           </li>
         </ol>
       </nav>
