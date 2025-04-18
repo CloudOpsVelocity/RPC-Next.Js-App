@@ -1,7 +1,9 @@
 1.
+
 ### This is a [Next.js](https://nextjs.org/) Project Bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Just for Re-Deploying on 27/02/2025. 
+## Just for Re-Deploying on 27/02/2025.
+
 ## Getting Started.
 
 First, Run the Development Server:
@@ -10,6 +12,7 @@ First, Run the Development Server:
 npm run dev
 # or
 yarn dev
+
 # or
 pnpm dev
 # or
@@ -57,5 +60,3 @@ git push origin stable
 <!-- manish branch manishdev -->
 
 <!-- Vscode Server Testing by Siva on 26/09/2024 -->
-
-
