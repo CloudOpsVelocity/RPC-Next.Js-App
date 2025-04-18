@@ -72,12 +72,12 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
             rel="noopener noreferrer"
             className="block"
           >
-            <div className="flex justify-between items-center w-[90%]">
+            <p className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.newLaunch}
               </span>
               {newLaunchProjIconSvg}
-            </div>
+            </p>
             <span className="text-[#148B16] text-[13px] lg:text-[20px] font-[700]">
               New Launch {`Project${data?.newLaunch > 1 ? "s" : ""}`}
             </span>
@@ -104,12 +104,12 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
             rel="noopener noreferrer"
             className="block"
           >
-            <div className="flex justify-between items-center w-[90%]">
+            <p className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.onGoing}
               </span>
               {onGoingProjIconSvg}
-            </div>
+            </p>
             <span className="text-[#0073C6] text-[13px] lg:text-[20px] font-[700]">
               Ongoing <br className="block sm:hidden" />{" "}
               {`Project${data?.onGoing > 1 ? "s" : ""}`}
@@ -136,12 +136,12 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
             rel="noopener noreferrer"
             className="block"
           >
-            <div className="flex justify-between items-center w-[90%]">
+            <p className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.completed}
               </span>
               {completedProjIconSvg}
-            </div>
+            </p>
             <span className="text-[#E3AC00] text-[13px] lg:text-[20px] font-[700]">
               Completed {`Project${data?.completed > 1 ? "s" : ""}`}
             </span>

@@ -186,10 +186,10 @@ export default function GalleryBlock({
 
               const imageUrl = img.split(",")[1];
               const imageName = imageUrl.split("/")[6]?.split(".")[0];
-              const allSizesSchemas = img.split(",").map((url) => {
+              const allSizesSchemas = img.split(",").map((url, schemaIndex) => {
                 return (
                   <script
-                    key={`galleryBlock_${ind.toString()}`}
+                    key={`schema_${ind}_${schemaIndex}`}
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                       __html: JSON.stringify({
@@ -214,7 +214,7 @@ export default function GalleryBlock({
               return (
                 <div
                   className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
-                  key={`gallery_block_${ind}`}
+                  key={`gallery_block_${imageUrl}_${ind}`}
                 >
                   {allSizesSchemas}
                   <Image
