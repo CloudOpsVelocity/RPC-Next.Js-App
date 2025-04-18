@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useCallback, useMemo, Fragment } from "react";
-import { Tabs, ScrollArea } from "@mantine/core";
 import { Coordinates } from "@/app/utils/maps";
 import { useMediaQuery } from "@mantine/hooks";
 import { nearbyLocationIcon } from "@/app/images/commonSvgs";
@@ -114,12 +113,14 @@ const LeafMap: React.FC<{
       </div>
 
       {!showMap ? (
-        <div  
-        //id="location-map"
-         className="h-[291px] sm:h-[486px] xl:h-[700px] max-w-full w-full relative ">
-          <div 
-           onClick={() => setShowMap(true)}
-           className="absolute inset-0 cursor-pointer bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+        <div
+          //id="location-map"
+          className="h-[291px] sm:h-[486px] xl:h-[700px] max-w-full w-full relative "
+        >
+          <div
+            //  onClick={() => setShowMap(true)}
+            className="absolute inset-0 cursor-pointer bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0"
+          >
             <picture>
               <source
                 media="(max-width: 460px)"
@@ -144,7 +145,10 @@ const LeafMap: React.FC<{
               />
             </picture>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            onClick={() => setShowMap(true)}
+            className="absolute inset-0 flex items-center justify-center"
+          >
             <button
               onClick={() => setShowMap(true)}
               className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
@@ -168,55 +172,51 @@ const LeafMap: React.FC<{
               data={mapData}
             />
           </div>
-
+          {/* max-h-[calc(100% - 60px)] md:max-h-[calc(100% - 54px)] */}
           <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[456px] xl:h-[620px] w-[95%] sm:w-[90%] mx-auto">
             <section className="bg-white">
-              <div id="tabs">
-                <Tabs defaultValue="public">
-                  <div className="bg-blue-50 p-2 sm:px-3 sm:py-2 xl:px-5 xl:py-4">
-                    <p className="text-[#001F35] text-[16px] xl:text-[22px] font-medium leading-[normal]">
-                      Explore Your Surroundings, Everywhere Nearby!
-                    </p>
-                  </div>
-                </Tabs>
-                <div id="location-listing" className="grid gap-2">
-                  <ScrollArea
-                    max-h={isMobile ? "400" : "auto"}
-                    h={isMobile ? "auto" : 600}
-                    pb={isMobile ? 10 : 50}
-                    px={10}
-                  >
-                    {mapData[selected] && mapData[selected].length > 0 ? (
-                      mapData[selected]
-                        .map((location: any) => ({
-                          ...location,
-                          distance: location.distance,
-                        }))
-                        .sort(
-                          (a: any, b: any) =>
-                            Number(a.time?.split(" ")[0]) -
-                            Number(b.time?.split(" ")[0])
-                        )
-                        .map((location: any) => (
-                          <LocationList
-                            type="public"
-                            {...location}
-                            key={location.lat}
-                            origin={{
-                              lat: Number(lat),
-                              lng: Number(lang),
-                            }}
-                            isMobile={isMobile}
-                            isProj={type}
-                            onClick={setSelectedLocation}
-                            setDirection={showLocationOnMap}
-                            showLocationOnMap={showLocationOnMap}
-                          />
-                        ))
-                    ) : (
-                      <p>No locations found.</p>
-                    )}
-                  </ScrollArea>
+              <div className="overflow-y-auto overflow-x-hidden scroll-smooth h-full max-h-[600px] md:max-h-[456px] xl:max-h-[600px]  ">
+                <div className="bg-blue-50 p-2 sm:px-3 sm:py-2 xl:px-5 xl:py-4 sticky top-0 left-0 w-full min-w-[385px] ">
+                  <p className="text-[#001F35] text-[16px] xl:text-[22px] font-medium leading-[normal]  ">
+                    Explore Your Surroundings, Everywhere Nearby!
+                  </p>
+                </div>
+                <div
+                  id="location-listing"
+                  className={`grid gap-2 px-[10px] pb-[${
+                    isMobile ? 10 : 50
+                  }px] `}
+                >
+                  {mapData[selected] && mapData[selected].length > 0 ? (
+                    mapData[selected]
+                      .map((location: any) => ({
+                        ...location,
+                        distance: location.distance,
+                      }))
+                      .sort(
+                        (a: any, b: any) =>
+                          Number(a.time?.split(" ")[0]) -
+                          Number(b.time?.split(" ")[0])
+                      )
+                      .map((location: any) => (
+                        <LocationList
+                          type="public"
+                          {...location}
+                          key={location.lat}
+                          origin={{
+                            lat: Number(lat),
+                            lng: Number(lang),
+                          }}
+                          isMobile={isMobile}
+                          isProj={type}
+                          onClick={setSelectedLocation}
+                          setDirection={showLocationOnMap}
+                          showLocationOnMap={showLocationOnMap}
+                        />
+                      ))
+                  ) : (
+                    <p>No locations found.</p>
+                  )}
                 </div>
               </div>
             </section>
@@ -243,7 +243,8 @@ const LeafMap: React.FC<{
                 id="near-by-projects"
               >
                 <strong>
-                  <span className="text-[#001F35]">Nearby</span> <span className="text-[#148B16] ml-1">{projName} </span>
+                  <span className="text-[#001F35]">Nearby</span>{" "}
+                  <span className="text-[#148B16] ml-1">{projName} </span>
                 </strong>
               </h2>
               <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
@@ -398,7 +399,6 @@ const LocationList: React.FC<{
   );
   const scrollToTopic = (id: string): void => {
     setIsScrolling(true);
-
 
     const element = document.getElementById(id);
     if (element) {

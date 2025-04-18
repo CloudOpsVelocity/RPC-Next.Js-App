@@ -43,7 +43,7 @@ const Modal = ({
     window.history.pushState("masterplanModal", "");
 
     const handlePopState = () => {
-      onClose(); 
+      onClose();
     };
 
     if (isOpen) {
@@ -52,6 +52,7 @@ const Modal = ({
     }
 
     return () => {
+      console.log("scroll aaaaaa");
       document.body.style.overflow = "unset";
       window.removeEventListener("popstate", handlePopState);
     };
@@ -80,7 +81,7 @@ export default function PartialUnitModal({ data }: any) {
     reset();
   };
 
-  const opened = isData.main === 0 ? true : isData.main; 
+  const opened = isData.main === 0 ? true : isData.main;
 
   const [platform, setPlatform] = useState("");
 
@@ -149,10 +150,10 @@ export default function PartialUnitModal({ data }: any) {
   //   if (opened) {
   //       preventBackButton();
   //       const handlePopState = () => {
-  //         document.body.style.overflow = "scroll";
+  //         document.body.style.overflow = "unset";
   //         handleReset();
   //       };
-    
+
   //       window.addEventListener("popstate", handlePopState);
   //       return () => window.removeEventListener("popstate", handlePopState);
   //   }
@@ -161,32 +162,30 @@ export default function PartialUnitModal({ data }: any) {
   //   // }
   // }, [opened]);
 
-      useEffect(() => {
-        const handleClose = () => {
-            document.body.style.overflow = 'scroll';
-            window.history.back();
-            handleReset();
-        };
+  useEffect(() => {
+    const handleClose = () => {
+      document.body.style.overflow = "unset";
+      window.history.back();
+      handleReset();
+    };
 
-        if (opened) {
-            preventBackButton();
+    if (opened) {
+      preventBackButton();
 
-            const onPopState = () => handleClose();
-            const onKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') handleClose();
-            };
+      const onPopState = () => handleClose();
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") handleClose();
+      };
 
-            window.addEventListener('popstate', onPopState);
-            window.addEventListener('keydown', onKeyDown);
+      window.addEventListener("popstate", onPopState);
+      window.addEventListener("keydown", onKeyDown);
 
-            return () => {
-                window.removeEventListener('popstate', onPopState);
-                window.removeEventListener('keydown', onKeyDown);
-            };
-        }
-    }, [opened]);
-
-
+      return () => {
+        window.removeEventListener("popstate", onPopState);
+        window.removeEventListener("keydown", onKeyDown);
+      };
+    }
+  }, [opened]);
 
   const handleNext = () => {
     setActive((prev: number) => {
@@ -198,13 +197,8 @@ export default function PartialUnitModal({ data }: any) {
     return null;
   }
 
-
   return (
-    <Modal
-      isOpen={opened}  
-      onClose={handleReset}
-    >
-
+    <Modal isOpen={opened} onClose={handleReset}>
       <div className="flex flex-col h-full ">
         {/* Header */}
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
@@ -421,8 +415,8 @@ export default function PartialUnitModal({ data }: any) {
           <div className={`w-[95%] m-auto  inline-flex mb-4 `}>
             {isData.others.map((item: any, index: number) => {
               const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
-              console.log(imageUrl)
-              console.log(encodeURIComponent(imageUrl))
+              console.log(imageUrl);
+              console.log(encodeURIComponent(imageUrl));
               return (
                 <div
                   key={`floorplan-${index}`}

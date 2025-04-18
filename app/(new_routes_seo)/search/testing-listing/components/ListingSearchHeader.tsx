@@ -280,7 +280,6 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       window.history.pushState("projeSearchModalModal", "");
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll";
         setIsDrawerOpen(false);
         document.body.style.overflow = "unset";
       };

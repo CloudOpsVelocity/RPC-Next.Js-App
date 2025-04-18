@@ -162,6 +162,9 @@ export default async function page({ params }: Props) {
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const scrollId = undefined;
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
+
+  console.log(data);
+
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />

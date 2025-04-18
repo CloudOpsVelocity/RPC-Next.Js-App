@@ -32,10 +32,8 @@ export default function ListingRentAvail({
     >
       <h2 className="text-[20px] sm:text-[22px] xl:text-[28px] font-bold mb-[12px] sm:mb-[6px] xl:mb-[12px]">
         <strong>
-          <span className="text-[#001F35]">Listings Available in{" "}</span>
-          <span className="text-[#148B16]">
-            {projName}
-          </span>{" "}
+          <span className="text-[#001F35]">Listings Available in </span>
+          <span className="text-[#148B16]">{projName}</span>{" "}
         </strong>
       </h2>
 
@@ -82,23 +80,22 @@ const Card = ({
   slug: string;
 }) => {
   const router = useRouter();
-  const [, {close, open: openSuccesPopup }] = useMessagePopup(
+  const [, { close, open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
   );
   const handleBoxClick = (value: any, cg: "S" | "R") => {
-    if(value){
+    if (value) {
       openSuccesPopup();
 
       setTimeout(() => {
         close();
-        document.body.style.overflow = "scroll";
-        console.log("relising scroll 6")
+        document.body.style.overflow = "unset";
+        console.log("relising scroll 6");
       }, 5000);
-
-    }else{
-        router.push(
-          `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`
-        );
+    } else {
+      router.push(
+        `/search/listing?sf=projIdEnc=${slug}-cg=${cg}-projName=${projName}`
+      );
     }
   };
 
@@ -127,7 +124,9 @@ const Card = ({
 
         <div className="pl-0">
           <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-[18px] xl:text-2xl not-italic font-medium leading-[31px]">
-            <strong><span className="capitalize">{type}</span> Listings{" "}</strong>
+            <strong>
+              <span className="capitalize">{type}</span> Listings{" "}
+            </strong>
           </h2>
         </div>
         <div

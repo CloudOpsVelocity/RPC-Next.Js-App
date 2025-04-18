@@ -83,7 +83,7 @@ function FirstImagesBlock({ onSelect, data }: Props) {
           {getImage(2, styles.rightSectionImage)}
           <div className={styles.thirdImageCon}>
             <p className={styles.thirdImageText}>
-              {data.images.length > 2
+              {data.images.length > 2 && data.images.length !== 3
                 ? `View more ${data.images.length - 3}+`
                 : "View Gallery"}
             </p>

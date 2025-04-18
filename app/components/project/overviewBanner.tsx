@@ -43,7 +43,7 @@ export default function OverviewBanner({
     >
       {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
        */}
-           {/*  <picture>
+      {/*  <picture>
               <source
                 media="(max-width: 460px)"
                 srcSet={broucherImage?.split(",")[0]}
@@ -116,7 +116,7 @@ export default function OverviewBanner({
             <Button
               title="Request  Callback"
               buttonClass=" text-[#FFF] text-[12px] sm:text-[20px] xl:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3 sm:mt-0"
-              onChange={() =>{
+              onChange={() => {
                 open({
                   modal_type: "PROJECT_REQ_CALLBACK",
                   postedByName: buiderName,
@@ -124,6 +124,7 @@ export default function OverviewBanner({
                   source: "projBanner",
                   title: name,
                   postedId: builderId,
+                  cg: "",
                 });
                 // pushHistory();
               }}

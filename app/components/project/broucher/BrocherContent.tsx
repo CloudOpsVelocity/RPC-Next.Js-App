@@ -135,32 +135,57 @@ function BrocherContent({
       <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
         <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words pl-3 pt-2">
           <strong>
-            <span className="text-[#001F35]">Explore the Comprehensive Brochure of </span>
+            <span className="text-[#001F35]">
+              Explore the Comprehensive Brochure of{" "}
+            </span>
             <span className="text-[#148B16]">{projName}</span>
           </strong>
         </h2>
         {!showMap ? (
-        <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
-          <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
-            <picture>
-              <source media="(max-width: 460px)" srcSet={broucherImage?.split(",")[0]} />
-              <source media="(max-width: 768px)" srcSet={broucherImage?.split(",")[1]} />
-              <source media="(min-width: 1200px)" srcSet={broucherImage?.split(",")[2]} />
-              <Image alt={`${projName} Brochure`} title={`${projName} Brochure`} src={broucherImage?.split(",")[3]} fill unoptimized priority />
-            </picture>
+          <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+            <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+              <picture>
+                <source
+                  media="(max-width: 460px)"
+                  srcSet={broucherImage?.split(",")[0]}
+                />
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={broucherImage?.split(",")[1]}
+                />
+                <source
+                  media="(min-width: 1200px)"
+                  srcSet={broucherImage?.split(",")[2]}
+                />
+                <Image
+                  alt={`${projName} Brochure`}
+                  title={`${projName} Brochure`}
+                  src={broucherImage?.split(",")[3]}
+                  fill
+                  unoptimized
+                  priority
+                />
+              </picture>
+            </div>
+            <div
+              onClick={() => setShowMap(true)}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <button
+                onClick={() => setShowMap(true)}
+                className="z-8 px-6 py-3 mx-2 text-left  sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
+              >
+                <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
+              </button>
+            </div>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button onClick={() => setShowMap(true)} className="z-8 px-6 py-3 mx-2 text-left  sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors">
-              <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
-            </button>
-          </div>
-        </div>
-      ) :
-       ( <iframe
-          src={singleBrocher || phaseOverviewData[0]?.phaseBrochureUrl || ""}
-          className="w-full h-[400px] border-0"
-          title={`${projName} Brochure`}
-        />)}
+        ) : (
+          <iframe
+            src={singleBrocher || phaseOverviewData[0]?.phaseBrochureUrl || ""}
+            className="w-full h-[400px] border-0"
+            title={`${projName} Brochure`}
+          />
+        )}
       </div>
     );
   }
@@ -196,29 +221,26 @@ function BrocherContent({
       });
   };
 
-
   function downloadPDF(url: string, filename: string) {
     fetch(url)
-      .then(response => response.blob())
-      .then(blob => {
-        const link = document.createElement('a');
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
         const objectURL = URL.createObjectURL(blob);
         link.href = objectURL;
-        link.download = filename || 'download.pdf';
+        link.download = filename || "download.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-  
+
         // Delay the revoke
         setTimeout(() => URL.revokeObjectURL(objectURL), 1000);
       })
       .catch(console.error);
   }
-  
-  
+
   // Example usage:
- 
-  
+
   const handleDownload = (url: string) => {
     const brocherPageUrl = `/pdf/${encodeURIComponent(
       url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
@@ -236,8 +258,8 @@ function BrocherContent({
         );
         return;
       } */
-        downloadPDF(url, `${projName}.pdf`);
-       // window.open(brocherPageUrl, "_blank", "noreferrer");
+      downloadPDF(url, `${projName}.pdf`);
+      // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
     }
     /* if (!session) {
@@ -256,7 +278,6 @@ function BrocherContent({
   };
 
   const loadPDF = async (phase: ProjectPhase) => {
-   
     if (state.activePhase.id === phase.id) return;
 
     setState((prev) => ({
@@ -314,7 +335,9 @@ function BrocherContent({
             </button> */}
         <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words ">
           <strong>
-            <span className="text-[#001F35]">Explore the Comprehensive Brochures of </span>
+            <span className="text-[#001F35]">
+              Explore the Comprehensive Brochures of{" "}
+            </span>
             <span className="text-[#148B16]">{projName} </span>
           </strong>
         </h2>
@@ -380,7 +403,13 @@ function BrocherContent({
           />
         </div>
         {!showMap ? (
-          <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+          <div
+            onClick={(e) => {
+              e.preventDefault();
+              if (singleBrocher) handleDownload(singleBrocher);
+            }}
+            className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]"
+          >
             <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0 bg-white/20 shadow-lg backdrop-blur-sm border border-white/30">
               {/*<BroucherHeader projName={projName} singlePhase={true} phaseOverviewData={phaseOverviewData} />*/}
 
@@ -408,10 +437,10 @@ function BrocherContent({
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <button
-               onClick={(e) => {
-                e.preventDefault();
-                if (singleBrocher) handleDownload(singleBrocher);
-              }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (singleBrocher) handleDownload(singleBrocher);
+                }}
                 className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
               >
                 <span className="hidden sm:flex text-sm md:text-base font-semibold">

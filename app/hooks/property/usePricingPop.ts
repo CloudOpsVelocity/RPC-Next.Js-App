@@ -6,7 +6,7 @@ export const usePricingPop = () => {
 
   const open = () => setOpened(true);
   const close = () => {
-    document.body.style.overflow = "scroll";
+    document.body.style.overflow = "unset";
     setOpened(false);
   };
 
