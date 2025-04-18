@@ -28,6 +28,7 @@ import axios from "axios";
 import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
 import NotFound from "@/app/not-found";
+import ResidentialListingsSchema from "@/app/seo/search/ResidentialListings.schema";
 type Props = {
   searchParams: {
     page: number;
@@ -55,7 +56,7 @@ export default async function page({ searchParams: { page } }: Props) {
   return (
     <>
       <>
-        {page > 0 && (
+        {(
           <link
             rel="canonical"
             href={`https://www.getrightproperty.com/residential-listings${
@@ -84,13 +85,11 @@ export default async function page({ searchParams: { page } }: Props) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </>
-     {/*  <ResidentialProjectSchama
-        pageUrl="/residential-listings"
+      <ResidentialListingsSchema   pageUrl="/residential-listings"
         properties={data?.data}
         urls={data?.urls}
         page={parseInt(page as any)}
-        totalPages={data.totalCount}
-      /> */}
+        totalPages={data.totalCount} />
       {data ? (
         data.data && data.data.length < 1 ? (
         <NotFound/>
