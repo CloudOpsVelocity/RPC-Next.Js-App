@@ -1,7 +1,6 @@
 // import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { calculatePerSqPrice } from "@/app/utils/price";
-import { Divider } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import ShareBtn from "../newly-added-projects/ShareBtn";
@@ -122,17 +121,17 @@ export default function ListingCard({ item, sl }: Props) {
                     label="Plot Area"
                     value={`${formatNumberWithSuffix(item.pa, false)} sq.ft`}
                   />
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] mx-[2px] " />
                   <DownSectionCard
                     label={"Possesion Date"}
                     value={formatDate(item.possassionDate, true)}
                   />
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
                   <DownSectionCard
                     label={"Available From"}
                     value={formatDate(item.availableFrom, true)}
                   />
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
                   <DownSectionCard label={"Plot Facing"} value={item.facing} />
                 </>
               ) : item.propStatus === "Under Cunstruction" ? (
@@ -142,17 +141,17 @@ export default function ListingCard({ item, sl }: Props) {
                     value={`${formatNumberWithSuffix(item.sba, false)} sq.ft`}
                   />
                   {}
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
                   <DownSectionCard
                     label="Carpet Area"
                     value={`${formatNumberWithSuffix(item.ca, false)} sq.ft`}
                   />
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
                   <DownSectionCard
                     label={"Possesion Date"}
                     value={formatDate(item.possassionDate, true)}
                   />
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
                   <DownSectionCard
                     label={"Available From"}
                     value={formatDate(item.availableFrom, true)}
@@ -164,12 +163,12 @@ export default function ListingCard({ item, sl }: Props) {
                     label="Super Builtup Area"
                     value={`${formatNumberWithSuffix(item.sba, false)} sq.ft`}
                   />
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] mx-[10px] " />
                   <DownSectionCard
                     label="Carpet Area"
                     value={`${formatNumberWithSuffix(item.ca, false)} sq.ft`}
                   />
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
                   {item.propertyAge != null ? (
                     <DownSectionCard
                       label="Property Age"
@@ -181,7 +180,7 @@ export default function ListingCard({ item, sl }: Props) {
                       value={formatDate(item.possassionDate, true)}
                     />
                   )}
-                  <Divider orientation="vertical" color="#7BA0BB" />
+                  <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
                   <DownSectionCard
                     label={"Available From"}
                     value={formatDate(item.availableFrom, true)}
