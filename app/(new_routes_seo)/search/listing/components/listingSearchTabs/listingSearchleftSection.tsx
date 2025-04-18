@@ -43,7 +43,7 @@ function LeftSection({
   const pathname = usePathname();
   const isTrue =
     it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
-  console.log(pathname.includes("search"));
+
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 
