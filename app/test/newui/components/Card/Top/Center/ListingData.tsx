@@ -1,11 +1,16 @@
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { sqftToAcres } from "@/app/utils/landarea";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
-import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { useSetAtom } from "jotai";
 import React from "react";
 import { useQuery } from "react-query";
+import dynamic from "next/dynamic";
+// import SearchReadMoreContent from "./ReadMore";
+const SearchReadMoreContent = dynamic(() => import("./ReadMore"), {
+  ssr: false,
+});
+// import SearchReadMore from "";
 
 type Props = any;
 
@@ -234,10 +239,9 @@ export default function ListingData({
       >
         {projectAbout && (
           <div className="line-clamp-2 relative">
-            <span
-              dangerouslySetInnerHTML={{
-                __html: projectAbout.slice(0, readMoreThreshold),
-              }}
+            <SearchReadMoreContent
+              projectAbout={projectAbout}
+              readMoreThreshold={readMoreThreshold}
             />
             {isReadMoreNeeded && (
               <div className="absolute bottom-0 right-0 bg-white">
@@ -273,6 +277,18 @@ export default function ListingData({
           </div>
         )}
       </div>
+      {/* <SearchReadMore
+        dispatch={dispatch}
+        isReadMoreNeeded={isReadMoreNeeded}
+        phaseId={phaseId}
+        projIdEnc={projIdEnc}
+        projectAbout={projectAbout}
+        propIdEnc={projIdEnc}
+        propTypeId={propTypeId}
+        propTypeName={propTypeName}
+        readMoreThreshold={readMoreThreshold}
+        type={type}
+      /> */}
     </>
   );
 }

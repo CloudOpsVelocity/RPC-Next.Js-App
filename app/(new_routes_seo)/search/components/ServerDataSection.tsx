@@ -1,9 +1,4 @@
-import dynamic from "next/dynamic";
-
-const ProjectCard = dynamic(() => import("@/app/test/newui/components/Card"), {
-  loading: () => <div>Loading...</div>,
-  ssr: false,
-});
+import ProjectCard from "@/app/test/newui/components/Card";
 import { SearchFilter } from "@/app/types/search";
 import React from "react";
 
