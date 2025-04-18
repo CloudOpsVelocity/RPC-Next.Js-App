@@ -48,12 +48,12 @@ const RequestCallBackModal = () => {
     setTimeout(() => {
       setStatus("idle");
     }, 500);
-    allowBackButton();
+    // allowBackButton();
   };
 
   useEffect(() => {
     if (opened) {
-      preventBackButton();
+      // preventBackButton();
       const handlePopState = () => {
         handleClose();
       };

@@ -221,29 +221,26 @@ function BrocherContent({
       });
   };
 
-
   function downloadPDF(url: string, filename: string) {
     fetch(url)
-      .then(response => response.blob())
-      .then(blob => {
-        const link = document.createElement('a');
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
         const objectURL = URL.createObjectURL(blob);
         link.href = objectURL;
-        link.download = filename || 'download.pdf';
+        link.download = filename || "download.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-  
+
         // Delay the revoke
         setTimeout(() => URL.revokeObjectURL(objectURL), 1000);
       })
       .catch(console.error);
   }
-  
-  
+
   // Example usage:
- 
-  
+
   const handleDownload = (url: string) => {
     const brocherPageUrl = `/pdf/${encodeURIComponent(
       url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
@@ -261,8 +258,8 @@ function BrocherContent({
         );
         return;
       } */
-        downloadPDF(url, `${projName}.pdf`);
-       // window.open(brocherPageUrl, "_blank", "noreferrer");
+      downloadPDF(url, `${projName}.pdf`);
+      // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
     }
     /* if (!session) {
@@ -406,7 +403,13 @@ function BrocherContent({
           />
         </div>
         {!showMap ? (
-          <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+          <div
+            onClick={(e) => {
+              e.preventDefault();
+              if (singleBrocher) handleDownload(singleBrocher);
+            }}
+            className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]"
+          >
             <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0 bg-white/20 shadow-lg backdrop-blur-sm border border-white/30">
               {/*<BroucherHeader projName={projName} singlePhase={true} phaseOverviewData={phaseOverviewData} />*/}
 
