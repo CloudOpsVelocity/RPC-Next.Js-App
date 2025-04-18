@@ -1,13 +1,12 @@
 "use client";
 import { formatDate } from "@/app/utils/date";
-import Button from "../../../elements/button";
+import Button from "../../../../elements/button"
 import Image from "next/image";
 import Link from "next/link";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import React, { useState, useEffect, useCallback, memo } from "react";
 import { FaMapMarkerAlt, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
-import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = {
   data: any;
@@ -16,7 +15,7 @@ type Props = {
   totalCount:Number
 };
 
-export default function ResidentialCardSection({
+export default function ResidentialCardSectionForListings({
   data,
   setLoading,
   loading,
@@ -25,9 +24,9 @@ export default function ResidentialCardSection({
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(40);
   const [opened, { open, close }] = useReqCallPopup();
+console.log(properties)
 
-
-
+  
   const fetchMoreItems = useCallback(() => {
     if (properties.length > listItemsCount) {
       setLoading(true);
@@ -100,7 +99,6 @@ export default function ResidentialCardSection({
   /*Tested jios test */
 
 
-  
 
   
 
@@ -132,10 +130,10 @@ export default function ResidentialCardSection({
                   ? formatDate(property.possassionDate)
                   : "N/A";
                 const propertyType =
-                  Array.isArray(property.propType) &&
-                  property.propType.length > 0
-                    ? property.propType.join(", ")
-                    : property.propType;
+                  Array.isArray(property.propTypes) &&
+                  property.propTypes.length > 0
+                    ? property.propTypes.join(", ")
+                    : property.propTypes;
                 const reraStatus = property.rerastatus || "N/A";
 
                 return (
@@ -148,8 +146,8 @@ export default function ResidentialCardSection({
                       <Image
                         unoptimized
                         src={
-                          property.coverUrl
-                            ? property.coverUrl.split(",")[0]
+                          property.coverImage
+                            ? property.coverImage.split(",")[0]
                             : "/api/placeholder/60/60"
                         }
                         alt={property.projName || "Property Image"}
@@ -164,42 +162,37 @@ export default function ResidentialCardSection({
                     <div className=" p-6">
                       <h2>
                         <Link
-                        
                           prefetch={false}
-                          href={ createProjectLinkUrl({
-                            city: property.city,
-                            locality: property.locality,
-                            slug: property.projName,
-                            projIdEnc: property.projIdEnc,
-                          })}
-                         /*  href={`/residential/projects/${
+                          href={`/residential/projects/${
                             property.city?.toLowerCase() || "unknown"
                           }/${
                             property.locality?.toLowerCase() || "unknown"
                           }/${property.projName
                             ?.toLowerCase()
-                            .replace(/ /g, "-")}-${property.projIdEnc}`} */
+                            .replace(/ /g, "-")}-${property.projIdEnc}`}
                           className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
                         >
-                          {property.projName || "Unnamed Property"}
+                          {property.propName || "Unnamed Property"}
                         </Link>
                       </h2>
                       <h3 className="text-muted-foreground flex items-center gap-2 mb-4">
                         <FaMapMarkerAlt />{" "}
-                        {property.locality || "Unknown Locality"},{" "}
-                        {property.city || "Unknown City"}
+                        {/* {property.localityName || "Unknown Locality"},{" "}
+                        {property.cityName || "Unknown City"} */}
+                        {property.address || "Unknown Locality"}
                       </h3>
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <h3 className="text-sm">
-                          <div className="font-semibold">Price Range</div>
+                          <div className="font-semibold">Price </div>
                           <div>
-                            ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
-                            {(maxPrice / 10000000).toFixed(2)} Cr
+                            ₹{/* {(minPrice / 10000000).toFixed(2)} Cr - ₹
+                            {(maxPrice / 10000000).toFixed(2)} Cr */}
+                            {property.otherCharges.price || "00.000"}
                           </div>
                         </h3>
                         <h3 className="text-sm">
                           <div className="font-semibold">Property Type</div>
-                          <div>{propertyType}</div>
+                          <div>{property.propTypeName || "Unknown Propertype"}</div>
                         </h3>
                         <h3 className="text-sm">
                           <div className="font-semibold">Possession</div>
@@ -340,3 +333,10 @@ export default function ResidentialCardSection({
     
   );
 }
+
+
+
+
+
+
+
