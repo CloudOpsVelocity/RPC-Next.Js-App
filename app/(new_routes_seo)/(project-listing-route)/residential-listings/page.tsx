@@ -21,7 +21,6 @@ export const dynamic = "force-dynamic";
 export const dynamicParams = true;
  */
 
-
 import React, { memo } from "react";
 import ResidentialPageForListings from "./_components/ResidentialDetailPageForListings";
 import axios from "axios";
@@ -56,14 +55,14 @@ export default async function page({ searchParams: { page } }: Props) {
   return (
     <>
       <>
-        {(
+        {
           <link
             rel="canonical"
             href={`https://www.getrightproperty.com/residential-listings${
               page ? `?page=${page}` : ""
             }`}
           />
-        )}
+        }
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:url"
@@ -85,16 +84,21 @@ export default async function page({ searchParams: { page } }: Props) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </>
-      <ResidentialListingsSchema   pageUrl="/residential-listings"
+      <ResidentialListingsSchema
+        pageUrl="/residential-listings"
         properties={data?.data}
         urls={data?.urls}
         page={parseInt(page as any)}
-        totalPages={data.totalCount} />
+        totalPages={data.totalCount}
+      />
       {data ? (
         data.data && data.data.length < 1 ? (
-        <NotFound/>
+          <NotFound />
         ) : (
-          <ResidentialPageForListings data={data} totalCount={data?.totalCount} />
+          <ResidentialPageForListings
+            data={data}
+            totalCount={data?.totalCount}
+          />
         )
       ) : (
         <LoadingSpinner />
