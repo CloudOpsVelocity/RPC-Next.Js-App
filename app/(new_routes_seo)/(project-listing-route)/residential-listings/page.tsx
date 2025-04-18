@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 // import NewSearchPage from "../../search/NewSearchPage";
 import NewListingSearchpage from "../../search/listing/NewListingSearchpage";
@@ -19,3 +19,108 @@ export default async function Page() {
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
+ */
+
+
+import React, { memo } from "react";
+import ResidentialPageForListings from "./_components/ResidentialDetailPageForListings";
+import axios from "axios";
+import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
+import { Metadata } from "next";
+import NotFound from "@/app/not-found";
+type Props = {
+  searchParams: {
+    page: number;
+  };
+};
+export default async function page({ searchParams: { page } }: Props) {
+  const LoadingSpinner = memo(function LoadingSpinner() {
+    return (
+      <div className="flex items-center gap-2">
+        <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
+        <span className="font-bold">Loading results...</span>
+      </div>
+    );
+  });
+  const isValidPage = !isNaN(page) && page > 0;
+  /* let url = `https://www.getrightproperty.com/common/marg-project-details`; */
+  let url = `${
+    process.env.NEXT_PUBLIC_BACKEND_URL
+  }/srp/margdataurl/mrg-property-search-list?city=9&page=${
+    page ? (!isValidPage ? 0 : page - 1) : 0
+  }`;
+
+  const { data } = await axios.get(url);
+
+  return (
+    <>
+      <>
+        {page > 0 && (
+          <link
+            rel="canonical"
+            href={`https://www.getrightproperty.com/residential-listings${
+              page ? `?page=${page}` : ""
+            }`}
+          />
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:url"
+          content="https://www.getrightproperty.com/residential-listings"
+        />
+        <meta
+          name="twitter:title"
+          content="Top Residential Projects in Bangalore | Premium Apartments & Villas | Get Right Property"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore top-rated residential properties in Bangalore. Compare locations, prices, and amenities. Trusted by thousands of homebuyers."
+        />
+        <meta
+          name="twitter:image"
+          content="https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp"
+        />
+        {/* Viewport and Charset */}
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </>
+     {/*  <ResidentialProjectSchama
+        pageUrl="/residential-listings"
+        properties={data?.data}
+        urls={data?.urls}
+        page={parseInt(page as any)}
+        totalPages={data.totalCount}
+      /> */}
+      {data ? (
+        data.data && data.data.length < 1 ? (
+        <NotFound/>
+        ) : (
+          <ResidentialPageForListings data={data} totalCount={data?.totalCount} />
+        )
+      ) : (
+        <LoadingSpinner />
+      )}
+    </>
+  );
+}
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Top Residential Projects in Bangalore | Premium Apartments Villas",
+  description:
+    "Discover premium residential projects in Bangalore. Explore top apartments, villas & gated communities by trusted builders. Find your dream home with Get Right Property.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Top Residential Projects in Bangalore | Premium Apartments Villas",
+    url: "https://www.getrightproperty.com/residential",
+    type: "website",
+    images:
+      "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
+    description:
+      "Explore top-rated residential properties in Bangalore. Compare locations, prices, and amenities. Trusted by thousands of homebuyers.",
+  },
+};
