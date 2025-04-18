@@ -110,16 +110,16 @@ export default async function page({ searchParams: { page } }: Props) {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Top Residential Projects in Bangalore | Premium Apartments Villas",
+  title: "Top Residential Listings in Bangalore | Premium Apartments Villas",
   description:
-    "Discover premium residential projects in Bangalore. Explore top apartments, villas & gated communities by trusted builders. Find your dream home with Get Right Property.",
+    "Discover premium residential listings in Bangalore. Explore top apartments, villas & gated communities by trusted builders. Find your dream home with Get Right Property.",
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: "Top Residential Projects in Bangalore | Premium Apartments Villas",
-    url: "https://www.getrightproperty.com/residential",
+    title: "Top Residential Listings in Bangalore | Premium Apartments Villas",
+    url: "https://www.getrightproperty.com/residential-listings",
     type: "website",
     images:
       "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",

@@ -46,9 +46,19 @@ const testimonials = [
   },
 ];
 
-export default function ResidentialPageForListings({ data, totalCount }: { data: any, totalCount:number  }) {
+export default function ResidentialPageForListings({
+  data,
+  totalCount,
+}: {
+  data: any;
+  totalCount: number;
+}) {
   const [loading, setLoading] = useState(false);
-  let datafornew=data.data
+  let datafornew = data.data;
+  let formattedCity = "Bengaluru";
+  let joinedLocalities =
+    "Whitefield, Sarjapur Road, Electronic City, Hebbal, Marathahalli, HSR Layout, Indiranagar, Koramangala, Bellandur, Jayanagar, JP Nagar, Banashankari, Yelahanka, Rajajinagar, Malleshwaram, KR Puram, Thanisandra, Hennur, Horamavu, RT Nagar, Basavanagudi, Frazer Town, BTM Layout, Ulsoor, Nagarbhavi, Magadi Road, Tumkur Road, Bannerghatta Road, Devanahalli, Domlur, Kanakapura Road, Vidyaranyapura, Varthur, Kengeri, Mahadevapura, Nagawara, Chandapura, Harlur, Hoodi";
+
   return (
     <div className="min-h-screen bg-background">
       <nav
@@ -77,73 +87,77 @@ export default function ResidentialPageForListings({ data, totalCount }: { data:
       </nav>
       <section className="px-4 md:px-12 py-8 max-w-screen-xl mx-auto">
         <h1 className="text-2xl md:text-4xl font-bold mb-6 text-gray-800">
-          Explore Residential Projects in Bangalore – Apartments, Villas & More
+          Explore Residential Listings | Properties for Sale in {formattedCity}{" "}
+          – Apartments, Villas & More
         </h1>
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
-          Looking to buy your dream home in Bangalore? GetRightProperty brings
-          you an extensive collection of{" "}
+          Looking to buy your dream home in {formattedCity}? GetRightProperty
+          offers a wide range of{" "}
           <strong className="font-semibold text-gray-800">
-            residential projects
+            residential property listings
           </strong>{" "}
-          including premium apartments, luxurious villas, and affordable flats
-          in Bangalore’s most desirable neighborhoods.
+          including premium apartments, luxury villas, and affordable flats
+          across the most sought-after neighborhoods in {formattedCity}.
         </p>
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
-          Whether you're searching in{" "}
-          <strong>Whitefield, Sarjapur Road, Electronic City, Hebbal</strong> or
-          other top localities, our listings feature verified details,
-          transparent pricing, and real-time availability to help you make
-          smarter property decisions.
+          Whether you're searching in <strong>{joinedLocalities}</strong> or
+          other top residential hubs, our platform provides verified listings,
+          real-time availability, and transparent pricing to help you make
+          informed property decisions.
         </p>
 
         <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mt-8 mb-4">
-          Why Buy Residential Properties with GetRightProperty?
+          Why Choose GetRightProperty for Residential Listings in{" "}
+          {formattedCity}?
         </h2>
 
         <ul className="list-disc pl-6 text-base md:text-lg text-gray-600 space-y-2">
           <li>
-            <strong className="text-gray-800">Verified Listings:</strong> 100%
-            verified properties with accurate details and high-quality images.
+            <strong className="text-gray-800">Verified Listings:</strong> All
+            properties are 100% verified with accurate details, images, and
+            updated availability.
           </li>
           <li>
-            <strong className="text-gray-800">Compare Prices:</strong> Easily
-            compare pricing, amenities, and location benefits of different
-            projects.
+            <strong className="text-gray-800">Compare & Choose:</strong> Easily
+            compare flats, villas, and apartments based on location, amenities,
+            and pricing.
           </li>
           <li>
-            <strong className="text-gray-800">Locality Insights:</strong> Find
-            homes near IT parks, schools, hospitals, and metro stations.
+            <strong className="text-gray-800">Location Insights:</strong>{" "}
+            Discover homes near key landmarks including tech parks, metro
+            stations, schools, and hospitals.
           </li>
           <li>
-            <strong className="text-gray-800">Expert Support:</strong> Our
-            property advisors help you with site visits, negotiations, and
-            paperwork.
+            <strong className="text-gray-800">Expert Assistance:</strong> Our
+            property advisors assist with site visits, price negotiations, legal
+            paperwork, and more.
           </li>
         </ul>
 
         <p className="text-base md:text-lg text-gray-600 mt-6">
-          Start your search now and find the perfect residential project in
-          Bangalore that fits your lifestyle and budget. Whether you prefer a
-          peaceful suburban villa or a city-view apartment, GetRightProperty
-          makes it simple to own the home you deserve.
+          Start browsing now to find the perfect residential property for sale
+          in {formattedCity}. Whether you're interested in a serene villa, a
+          budget-friendly flat, or a modern apartment, GetRightProperty makes it
+          easy to buy a home that matches your lifestyle and budget.
         </p>
       </section>
+
       {/*    <Banner heroSlides={data?.featured} data={data} /> */}
       <FiltersForListings />
-     {/*  <ResidentialCardSectionForListings
+      {/*  <ResidentialCardSectionForListings
         data={data}
         setLoading={setLoading}
         loading={loading}
         totalCount={totalCount}
       /> */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[80%] mx-auto">
-      {datafornew.map((property:any, index:number) => (
-        <PropertyCard key={index} property={property} />
-      ))}
-    </div>
-      <PaginationForListings totalCount={totalCount}  />
+        {datafornew.map((property: any, index: number) => (
+          <PropertyCard key={index} property={property} />
+        ))}
+      </div>
+      <PaginationForListings totalCount={totalCount} />
       {!loading && (
         <>
           <section className="py-20 bg-muted/50">
