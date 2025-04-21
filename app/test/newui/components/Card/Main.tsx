@@ -74,10 +74,30 @@ const MainBox = ({ data, refetch }: Props) => {
       openLogin(() => refetch());
     }
   };
+  let url =
+    data.type == "proj"
+      ? createProjectLinkUrl({
+          city: data.city,
+          locality: data.locality,
+          slug: data.projName,
+          projIdEnc: projIdEnc,
+        })
+      : generateListingLinkUrl({
+          city: data.cityName,
+          locality: data.localityName,
+          projName: data.projIdEnc ? data.propName : null,
+          category: data.category === "Sale" ? "for-sale" : "for-rent",
+          phase: data.phaseName,
+          propIdEnc: data.propIdEnc,
+          bhkUnitType: data.bhkName
+            ? `${data.bhkName + " " + data.propTypeName}`
+            : "" + " " + data.propTypeName,
+        });
   const newData = {
     ...data,
     Com: state.compareAdded,
     Sh: state.shortListed,
+    pageUrl: url,
   };
 
   const onClickRedirect = (projEncId: string) => {
@@ -167,7 +187,7 @@ const MainBox = ({ data, refetch }: Props) => {
     <div
       // onMouseEnter={() => (isMobile ? "" : onHoverCard())}
 
-      onClick={() => onClickRedirect(reqId)}
+      // onClick={() => onClickRedirect(reqId)}
       className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]"
     >
       <div className="flex flex-col xl:flex-row justify-start w-full  xl:max-w-full relative">
@@ -185,6 +205,8 @@ const MainBox = ({ data, refetch }: Props) => {
           isUsed={isUsed}
           availableFrom={data.availableFrom}
           data={data}
+          projEncId={projIdEnc}
+          pageUrl={url}
         />
         <div className="relative w-full">
           {overlayData.id &&
