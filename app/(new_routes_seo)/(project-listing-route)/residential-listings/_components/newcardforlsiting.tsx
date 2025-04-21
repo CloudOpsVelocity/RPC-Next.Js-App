@@ -64,7 +64,7 @@ export function PropertyCard({ property }: any) {
   }).format(availableDate) */
 
   // Extract the first image URL from the comma-separated list
-  const coverImageUrl = property.coverImage.split(",")[0];
+  const coverImageUrl = property?.coverImage?.split(",")[0];
   let type = "prop";
   // Format price function
   const formatPrice = (price: number): string => {
