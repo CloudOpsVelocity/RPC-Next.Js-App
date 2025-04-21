@@ -175,7 +175,7 @@ function BrocherContent({
                 onClick={() => setShowMap(true)}
                 className="z-8 px-6 py-3 mx-2 text-left  sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
               >
-                <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
+                <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Brochure ${projName}`}</span>
               </button>
             </div>
           </div>
@@ -444,10 +444,10 @@ function BrocherContent({
                 className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
               >
                 <span className="hidden sm:flex text-sm md:text-base font-semibold">
-                  Click to View Broucher
+                  Click to View Brochure
                 </span>
                 <span className="flex sm:hidden text-sm md:text-base font-semibold">
-                  Click to download Broucher
+                  Click to download Brochure
                 </span>
               </button>
             </div>
@@ -627,7 +627,7 @@ function BrocherContent({
               }}
               className="z-8 px-6 py-3 mx-2 text-left sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
             >
-              <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Broucher ${projName}`}</span>
+              <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Brochure ${projName}`}</span>
             </button>
           </div>
         </div>

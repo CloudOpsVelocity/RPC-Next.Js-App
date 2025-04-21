@@ -137,7 +137,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               : "Under Construction"}
           </span>
         )}
-        <span className="relative  max-h-[212px]">
+        <div className="!relative max-h-[212px]">
           <Image
             src={
               type === "proj"
@@ -145,7 +145,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 : cardData.projMedia?.coverImageUrl?.split(",")[1]
             }
             alt="Sobha Dream Acres"
-            className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] min-h-[212px] max-h-[212px]"
+            className="w-full mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] min-h-[212px] max-h-[212px]"
             width={300}
             height={212}
           />
@@ -157,28 +157,26 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
 
-          <span className=" right-2 absolute ">
-            <button
-              className={clsx(
-                "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
-                cardData.shortListed === "Y"
-                  ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
-                  : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
-              )}
-              onClick={(e) => {
-                e.preventDefault();
-                onAddingShortList(e, cardData.propIdEnc);
-              }}
-            >
-              <span className=" w-[24px] h-[24px] ">
-                {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
-              </span>
-              {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
-            </button>
-          </span>
-        </span>
+          <button
+            className={clsx(
+              " !absolute bottom-[10px] right-[10px] rounded-[10px] z-10 p-[8px] text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
+              cardData.shortListed === "Y"
+                ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              onAddingShortList(e, cardData.propIdEnc);
+            }}
+          >
+            <span className=" w-[24px] h-[24px] ">
+              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
+            </span>
+            {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
+          </button>
+        </div>
 
-        <span className="text-sm">
+        <div className="text-sm">
           {type != "proj" && (
             <p className="mb-[4px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
               {cardData.propTypeName === "Plot"
@@ -220,14 +218,14 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 ${cardData.pinCode}`}
           </p>
           {type === "proj" && (
-            <span className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[16px]">
+            <p className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[16px]">
               <span className="text-black text-right text-base not-italic font-medium leading-[normal]">
                 Project Status:{" "}
               </span>
               <span className="text-[#148B16] text-base not-italic font-bold leading-[normal]">
                 {cardData.projstatus}
               </span>
-            </span>
+            </p>
           )}
           {type != "proj" && (
             <p className="text-[16px] font-[500] text-[#4D6677]">
@@ -240,7 +238,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             buttonClass=" text-[#FFF] mt-[12px] text-[12px] xl:text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
             onChange={q}
           />
-        </span>
+        </div>
       </h6>
     </Link>
   );
@@ -258,7 +256,7 @@ const ProjectCarousel = ({
 }: Props) => {
   return (
     data?.length > 0 && (
-      <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
+      <div className="w-[96%] md:w-[90%] mx-auto mb-1 sm:mb-[3%]">
         <div className=" ">
           <h3 className="sm:text-[22px] xl:text-[28px] mb-[4px] sm:mb-[8px] xl:mb-[10px] font-bold capitalize">
             <strong>
@@ -276,6 +274,7 @@ const ProjectCarousel = ({
           type={type}
           renderItem={(project: any, index) => (
             <PropertyCard
+              key={`NewCarousel_proj_${index.toString()}`}
               type={type}
               cardData={project}
               mutate={mutate}
