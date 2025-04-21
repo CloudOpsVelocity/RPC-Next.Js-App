@@ -38,6 +38,7 @@ export default function FiltersForListings({}: Props) {
     //alert(redirectUrl)
   };
 
+
   return (
     <section className=" container sm:mx-auto    px-1  sm:px-4">
       <div className="bg-card shadow-xl rounded-xl py-1 sm:p-6 z-[500] bg-white">

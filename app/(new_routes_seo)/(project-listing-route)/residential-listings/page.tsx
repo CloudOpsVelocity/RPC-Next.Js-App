@@ -80,9 +80,9 @@ export default async function page({ searchParams: { page } }: Props) {
           name="twitter:image"
           content="https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp"
         />
-        {/* Viewport and Charset */}
+        {/* Viewport and Charset 
         <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />*/}
       </>
       <ResidentialListingsSchema
         pageUrl="/residential-listings"

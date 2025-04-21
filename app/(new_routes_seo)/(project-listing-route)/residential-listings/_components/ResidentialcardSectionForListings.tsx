@@ -7,6 +7,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import React, { useState, useEffect, useCallback, memo } from "react";
 import { FaMapMarkerAlt, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 
 type Props = {
   data: any;
@@ -156,13 +157,27 @@ export default function ResidentialCardSectionForListings({
                         <h2>
                           <Link
                             prefetch={false}
-                            href={`/residential/projects/${
-                              property.city?.toLowerCase() || "unknown"
-                            }/${
-                              property.locality?.toLowerCase() || "unknown"
-                            }/${property.projName
-                              ?.toLowerCase()
-                              .replace(/ /g, "-")}-${property.projIdEnc}`}
+                            href={generateListingLinkUrl({
+                              bhkUnitType: property.bhkName
+                                ? property.bhkName + "-" + property.propTypeName
+                                : property.propTypeName,
+                              category:
+                                property.category === "Sale"
+                                  ? "for-sale"
+                                  : "for-rent",
+                              city: property.cityName,
+                              locality: property.localityName,
+                              propIdEnc: property.propIdEnc,
+                              phase: property.phaseName,
+                              projName: property.projIdEnc && property.propName,
+                            })}
+                            /*  href={`/residential/projects/${
+                            property.city?.toLowerCase() || "unknown"
+                          }/${
+                            property.locality?.toLowerCase() || "unknown"
+                          }/${property.projName
+                            ?.toLowerCase()
+                            .replace(/ /g, "-")}-${property.projIdEnc}`} */
                             className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
                           >
                             {property.propName || "Unnamed Property"}
@@ -202,13 +217,26 @@ export default function ResidentialCardSectionForListings({
                         <div className="flex w-full  flex-row gap-4">
                           <Link
                             prefetch={false}
-                            href={`/residential/projects/${
-                              property.city?.toLowerCase() || "unknown"
-                            }/${
-                              property.locality?.toLowerCase() || "unknown"
-                            }/${property.projName
-                              ?.toLowerCase()
-                              .replace(/ /g, "-")}-${property.projIdEnc}`}
+                            href={generateListingLinkUrl({
+                              bhkUnitType: property.bhkName
+                                ? property.bhkName + "-" + property.propTypeName
+                                : property.propTypeName,
+                              category:
+                                property.category === "Sale"
+                                  ? "for-sale"
+                                  : "for-rent",
+                              city: property.cityName,
+                              locality: property.localityName,
+                              propIdEnc: property.propIdEnc,
+                              phase: property.phaseName,
+                              projName: property.projIdEnc && property.propName,
+                            })} /*   href={`/residential/projects/${
+                            property.city?.toLowerCase() || "unknown"
+                          }/${
+                            property.locality?.toLowerCase() || "unknown"
+                          }/${property.projName
+                            ?.toLowerCase()
+                            .replace(/ /g, "-")}-${property.projIdEnc}`} */
                             className="flex-1 bg-bgSecondary bg-primary hover:bg-primary/90 text-white sm:px-4 py-2 rounded-lg text-center text-sm sm:text-[12px] lg:text-sm font-medium transition-colors"
                           >
                             View Details

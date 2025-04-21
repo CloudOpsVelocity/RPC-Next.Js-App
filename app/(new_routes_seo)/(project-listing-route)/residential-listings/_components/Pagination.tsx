@@ -89,6 +89,7 @@ export default function PaginationForListings({ totalCount }: Props) {
   };
 
   return (
+  
     <>
       <section className="py-8 sm:py-14 container mx-auto px-4">
         {/*  <noscript> */}

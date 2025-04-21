@@ -7,6 +7,7 @@ import {
   FaMapMarkerAlt,
   FaUsers,
   FaTimes,
+  FaChartLine,
 } from "react-icons/fa";
 import { BsBuildingsFill } from "react-icons/bs";
 import { MdWork, MdBusinessCenter, MdEmail, MdPhone } from "react-icons/md";
@@ -15,16 +16,42 @@ import { sendEmail } from "@/app/utils/mail/send-mail";
 function App() {
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
   const jobOpenings: JobOpening[] = [
-    /* {
+
+   
+  {
       id: 1,
-      title: 'Senior Sales Executive',
+      title: 'Relationship Manager',
       department: 'Sales',
-      location: 'New York, NY',
+      Experience : '0 to 6 months',
+      location: 'Bengaluru(Whitefield)',
       type: 'Full-time',
-      description: 'Drive business growth through strategic B2B sales initiatives and relationship building.',
+      description: `Call and arrange meetings with potential customers to generate new business.
+      Evaluate customer's needs and build productive long-lasting relationships.
+      Negotiate the terms of an agreement and close deals.
+      Challenge any objections with a view to getting the customer to buy.
+      Business/Revenue generation. Generate or follow through sales leads.
+      
+      Required Candidate Profile:
+      - Education: MBA Preferred (Any Specialisation)
+      - Language: Fluent English & Hindi
+      - An emphatic communicator with a pleasant personality.
+      - Self-driven, well-groomed, results-oriented professional with a positive outlook.
+      - Structured and process-oriented.
+      - Zeal for multitasking.
+      - Comprehensive towards facts and figures.
+      
+      Perks and Benefits:
+      - Performance Benefits & Salary review
+      - Attractive incentives
+      - Mobility across regions
+      - Fast-track growth
+      - Good incentives
+      - Fastest Growing Real Estate Platform
+      - Diversified role
+      - Travelling Allowance.`,
       icon: <FaChartLine className="w-5 h-5" />
     },
-    {
+      /* {
       id: 2,
       title: 'Account Manager',
       department: 'Sales',
@@ -45,6 +72,7 @@ function App() {
     {
       id: 4,
       title: "Backend Engineer (Java Developer)",
+      Experience : '4+ Years',
       department: "Tech",
       location: "Bengaluru India",
       type: "Full-time",
@@ -73,6 +101,7 @@ function App() {
     type: string;
     description: string;
     icon: React.ReactNode;
+    Experience:string
   }
 
   interface ApplicationForm {
@@ -218,7 +247,7 @@ function App() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-1 md:max-w-[60%]  gap-8 mx-auto">
           {/* Sales Openings */}
-          {false && (
+          {jobOpenings && (
             <div className="bg-white rounded-xl shadow-lg p-6">
               <div className="flex items-center gap-3 mb-6">
                 <FaDollarSign className="w-8 h-8 text-blue-600" />
@@ -239,7 +268,7 @@ function App() {
                         <div className="flex items-center gap-2">
                           {job.icon}
                           <h3 className="font-semibold text-lg text-gray-800">
-                            {job.title}
+                            {job.title}, Exp: {job.Experience}
                           </h3>
                         </div>
                         <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded flex items-center gap-1">
@@ -279,7 +308,7 @@ function App() {
                       <div className="flex items-center gap-2">
                         {job.icon}
                         <h3 className="font-semibold text-lg text-gray-800">
-                          {job.title}
+                          {job.title}, Exp: {job.Experience}
                         </h3>
                       </div>
                       <span className="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded flex items-center gap-1">

@@ -30,6 +30,7 @@ export default function NearByCarouselProjProperty({
     y: "N",
     type: "proj",
   });
+  const builderQueryNameAndId = encodeURIComponent(`${builderData?.data?.userName }+${builderId}`);
 
   return (
     <div
@@ -56,9 +57,7 @@ export default function NearByCarouselProjProperty({
         }
         mutate={mutate}
         ct="builder"
-        url={`/search?sf=builderIds=${builderData?.data?.userName ?? ""}${
-          builderId ?? ""
-        }`}
+        url={`/search?sf=builderIds=${builderQueryNameAndId}`}
       />
       <ProjectCarousel
         key={`nearby-projects-${builderData?.data?.userName}`}

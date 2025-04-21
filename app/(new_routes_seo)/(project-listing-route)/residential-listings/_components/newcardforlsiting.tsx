@@ -170,12 +170,11 @@ export function PropertyCard({ property }: any) {
             >
               {property.bhkName} {property.propTypeName} for {property.category}{" "}
               in {property.localityName}{" "}
-              {property.phaseName && (
-                <span className="text-gray-500 text-sm">
-                  {`${property.phaseName && "("}`} {property.phaseName}{" "}
-                  {`${property.phaseName && ")"}`}
-                </span>
-              )}
+              {property.phaseName
+                ? property.phaseName
+                : property.propName
+                ? property.propName
+                : ""}
             </Link>
           </h2>
           <p className="text-[#148B16] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
