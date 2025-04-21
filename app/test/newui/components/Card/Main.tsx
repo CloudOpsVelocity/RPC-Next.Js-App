@@ -15,6 +15,7 @@ import Overlay from "../modals/Overlay";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { useRouter } from "next/navigation";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 
 type Props = {
   type: any;
@@ -152,6 +153,7 @@ const MainBox = ({ data, refetch }: Props) => {
   }, [opened]);
 
   const handleOpen = () => {
+    preventBackButton();
     open({
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",

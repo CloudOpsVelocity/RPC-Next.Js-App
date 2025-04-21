@@ -1,6 +1,7 @@
 import { ShearIcon } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 
 type Props = {
   onSelect: () => void;
@@ -44,7 +45,13 @@ function FirstImagesBlock({ onSelect, data }: Props) {
   const title = data.type === "proj" ? "Share Project" : "Share Listing";
 
   return (
-    <div className={styles.DetailsPageImagesMainCon} onClick={() => onSelect()}>
+    <div
+      className={styles.DetailsPageImagesMainCon}
+      onClick={() => {
+        onSelect();
+        preventBackButton();
+      }}
+    >
       {/* Left side section */}
       <div className={styles.DetailsPageImagesLeftBlock}>
         {/* Project status and shear button */}
