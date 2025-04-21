@@ -660,7 +660,9 @@ export const ResidentialProjectSchama = ({
                 "@type": "ListItem",
                 position: 2,
                 item: {
-                  "@id": `${baseURL}/residential`,
+                  "@id": `${baseURL}/residential${
+                    page ? `?page=${page}` : page
+                  }`,
                   name: "Residential Projects",
                 },
               },

@@ -85,7 +85,9 @@ export default function ResidentialListingsSchema({
                 "@type": "ListItem",
                 position: 2,
                 item: {
-                  "@id": `${baseURL}/residential`,
+                  "@id": `${baseURL}/residential-listings${
+                    page ? `?page=${page}` : ""
+                  }`,
                   name: "Residential Projects",
                 },
               },
