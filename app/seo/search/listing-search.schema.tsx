@@ -30,7 +30,11 @@ export const generateAllSchemas = (property: any) => {
     phase: property.phaseName,
     projName: property.projIdEnc && property.propName,
   });
-  const cardTitle = `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`;
+  const cardTitle = `${property.bhkName ?? ""} ${property.facing} facing ${
+    property.propTypeName
+  } for ${property.category} ${property.postedBy} ${property.propName} ${
+    property.localityName
+  }`;
   const description = `Looking to buy a premium ${
     property.propTypeName
   } for sale in ${property.localityName}, ${property.cityName}? This ${
