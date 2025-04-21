@@ -144,7 +144,10 @@ export default function ResidentialCardSection({
                               ? property.coverUrl.split(",")[0]
                               : "/api/placeholder/60/60"
                           }
-                          alt={property.projName || "Property Image"}
+                          alt={
+                            `Cover Image Of ${property.projName}` ||
+                            "Property Image"
+                          }
                           fill
                           className="object-cover"
                           priority
