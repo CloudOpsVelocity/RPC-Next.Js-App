@@ -73,8 +73,6 @@ export default async function ProjectsDetailsPage({
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
 
-  console.log(data);
-
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />

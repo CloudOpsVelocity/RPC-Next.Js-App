@@ -28,6 +28,7 @@ import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
+import { useRouter } from "next/navigation";
 // import { useMediaQuery } from "@mantine/hooks";
 
 const Modal = ({
@@ -162,10 +163,12 @@ export default function PartialUnitModal({ data }: any) {
   //   // }
   // }, [opened]);
 
+  const router = useRouter();
   useEffect(() => {
     const handleClose = () => {
       document.body.style.overflow = "unset";
-      window.history.back();
+      // window.history.back();
+      router.back();
       handleReset();
     };
 

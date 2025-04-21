@@ -19,6 +19,7 @@ import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/Shar
 import { imageUrlParser } from "@/app/utils/image";
 import { newIcons } from "@/app/images/commonSvgs";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -35,13 +36,15 @@ export default function GalleryModalContent({}: Props) {
   const [currentIndex, setCurrentIndex] = useState(state.activeIndex);
   const [isPlaying, setIsPlaying] = useState(false);
   const openSharePopup = useSetAtom(searchShareAtom);
+  const router = useRouter();
   const closeModal = () => {
     dispatch({
       type: "CLOSE",
     });
     document.body.style.overflow = "unset";
     setIsPlaying(false);
-    window.history.back();
+    // window.history.back();
+    router.back();
     // if (window.history.state === "modal" && isMobile) {
     //   window.history.back();
     // }

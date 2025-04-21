@@ -12,7 +12,7 @@ import BuyRent from "../FilterComponents/BuyRent";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 // import SelectedFilters from "./SelectedFilters";
@@ -46,6 +46,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const router = useRouter();
 
   const { handleApplyFilters, handleClearFilters } =
     useProjSearchAppliedFilters();
@@ -507,7 +508,8 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
                   setIsDrawerOpen(false);
                   document.body.style.overflow = "unset";
                   console.log("close");
-                  isMobile ? window.history.back() : "";
+                  // isMobile ? window.history.back() : "";
+                  isMobile ? router.back() : "";
                 }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >
