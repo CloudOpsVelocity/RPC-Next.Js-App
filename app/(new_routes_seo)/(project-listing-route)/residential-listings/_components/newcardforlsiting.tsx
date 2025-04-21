@@ -120,7 +120,7 @@ let type="prop"
           </div>
         </div> */}
       </div>
-
+        
       <div className="p-4 border-b">
         <div className="space-y-1">
           <h2 className="font-bold text-xl text-wrap">
@@ -146,7 +146,7 @@ let type="prop"
                           .replace(/ /g, "-")}-${property.projIdEnc}`} */
                         className="text-xl font-bold mb-2 text-blue-600 hover:cursor-pointer"
                       >
-                        {property.bhkName} {property.propTypeName} for {property.category} in {property.localityName}  {property.phaseName && <span className="text-gray-500 text-sm">{`${property.phaseName && "("}`} {property.phaseName} {`${property.phaseName && ")"}`}</span>}
+                        {property.bhkName} {property.propTypeName} for {property.category} in {property.localityName} {property.phaseName ? property.phaseName : property.propName ?property.propName : "" }
           </Link>
             
           </h2>

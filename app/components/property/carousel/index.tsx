@@ -15,6 +15,7 @@ export default function NearByCarouselProperty({
   bhkId,
   builderName,
   builderId,
+ 
 }: {
   projName: string;
   lat: string;
@@ -25,6 +26,7 @@ export default function NearByCarouselProperty({
   bhkId: number;
   builderName: string;
   builderId: number;
+
 }) {
   const { data, mutate } = useNearby({
     lat,
@@ -35,6 +37,9 @@ export default function NearByCarouselProperty({
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
   const listingType = cg === "R" ? "Rent" : "Sale";
+  const builderQueryNameAndId = encodeURIComponent(`${builderName}+${builderId}`);
+/*   const cityIdmaking=cityID.trim()
+  const cityQueryNameAndID=encodeURIComponent(`${location}+${cityIdmaking}`); */
   return (
     <div
       className="flex flex-col justify-start items-start w-[100%] mt-[20px] sm:mt-[50px] scroll-mt-[220px]"
@@ -61,9 +66,11 @@ export default function NearByCarouselProperty({
         }
         mutate={mutate}
         ct="proj"
-        url={`/search/listing?sf=builderIds=${builderName ?? ""}${
+        url={`/search/listing?sf=builderIds=${builderName ?? ""}+${
           builderId ?? ""
         }`}
+       
+       /*  url={`/search?sf=builderIds=${builderQueryNameAndId}-city=${cityQueryNameAndID}`} */
       />
       <ProjectCarousel
         type="prop"
@@ -82,6 +89,7 @@ export default function NearByCarouselProperty({
         mutate={mutate}
         ct="other"
         url={`/search/listing?sf=lat=${lat}-lng=${lng}`}
+        
       />
     </div>
   );

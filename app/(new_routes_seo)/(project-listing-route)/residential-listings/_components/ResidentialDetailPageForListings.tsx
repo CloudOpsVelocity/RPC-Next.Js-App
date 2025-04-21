@@ -49,6 +49,7 @@ const testimonials = [
 export default function ResidentialPageForListings({ data, totalCount }: { data: any, totalCount:number  }) {
   const [loading, setLoading] = useState(false);
   let datafornew=data.data
+
   return (
     <div className="min-h-screen bg-background">
       <nav

@@ -247,6 +247,7 @@ export default function ListingDetailsPage({
           bhkId={data.bhkId ?? 41}
           builderName={data?.postedByName}
           builderId={projData?.builderId}
+         
           // query={""}
         />
         {/* {data.projIdEnc && data.postedById === projData.builderId && ( */}

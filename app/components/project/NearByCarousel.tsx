@@ -53,7 +53,7 @@ export default function NearByCarousel({
         builderName={builderData?.data?.userName ?? ""}
         ct="builder"
         id="similar-projects"
-        url={`/search/listing?builderIds=${builderData?.data?.userName ?? ""}${
+        url={`/search?builderIds=${builderData?.data?.userName ?? ""}+${
           builderId ?? ""
         }`}
       />

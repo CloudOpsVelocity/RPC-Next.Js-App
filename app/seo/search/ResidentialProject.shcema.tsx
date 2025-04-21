@@ -30,7 +30,7 @@ export const generateAllSchemas = (
     locality: property.locality || "Varthur",
     projIdEnc: property.projIdEnc || "4652e580b8cbc19c9f9a731042d315ea",
   });
-  alert(JSON.stringify(property))
+  /* alert(JSON.stringify(property)) */
   const allSizesSchemas = property.coverUrl.split(",").map((url: string) => {
     const OrgName = property.projName?.split(" ")[0];
     return {
