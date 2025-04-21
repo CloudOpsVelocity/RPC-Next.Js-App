@@ -36,15 +36,13 @@ export default function GalleryModalContent({}: Props) {
   const [currentIndex, setCurrentIndex] = useState(state.activeIndex);
   const [isPlaying, setIsPlaying] = useState(false);
   const openSharePopup = useSetAtom(searchShareAtom);
-  const router = useRouter();
   const closeModal = () => {
     dispatch({
       type: "CLOSE",
     });
     document.body.style.overflow = "unset";
     setIsPlaying(false);
-    // window.history.back();
-    router.back();
+    window.history.back();
     // if (window.history.state === "modal" && isMobile) {
     //   window.history.back();
     // }

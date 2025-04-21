@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 // import { MdClose } from 'react-icons/md';
 import Close from "../../project/button/close";
-import { useRouter } from "next/navigation";
 
 type Props = {
   children: React.ReactNode;
@@ -21,14 +20,12 @@ function DrawerBox({
   title,
   hideHeader,
 }: Props) {
-  const router = useRouter();
   const onMainConClick = (e: any) => {
     var baxEl = document.getElementById("modalDrawerPopupInnerCon");
     if (baxEl && !baxEl.contains(e.target)) {
       document.body.style.overflow = "unset";
       // window.history.replaceState(null, "", window.location.href);
-      // window.history.back();
-      router.back();
+      window.history.back();
       handleChange(false);
     }
   };
@@ -37,8 +34,7 @@ function DrawerBox({
     const handleClose = () => {
       document.body.style.overflow = "unset";
       handleChange(false);
-      // window.history.back();
-      router.back();
+      window.history.back();
     };
 
     if (isOpen) {
@@ -60,8 +56,7 @@ function DrawerBox({
     } else {
       document.body.style.overflow = "unset";
       console.log("scroll cccc");
-      // window.history.back();
-      router.back();
+      window.history.back();
     }
   }, [isOpen, handleChange]);
 
@@ -88,8 +83,7 @@ function DrawerBox({
                 handleChange(false);
                 document.body.style.overflow = "unset";
                 // window.history.replaceState(null, "", window.location.href);
-                // window.history.back();
-                router.back();
+                window.history.back();
               }}
               className=" hover:bg-gray-100 rounded-full w-[30px] h-[30px]"
             />

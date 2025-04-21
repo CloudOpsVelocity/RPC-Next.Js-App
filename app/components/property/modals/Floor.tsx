@@ -12,7 +12,6 @@ import ZoomInOut from "../../project/actions/ZoomInOut";
 import { ImgNotAvail } from "@/app/data/project";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 interface FloorPlanModalProps {
   data: Main;
@@ -25,7 +24,6 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
     listingProps[data.propTypeName.trim() as keyof typeof listingProps];
   const { handleDownload } = useDownload("floorPlan");
   const floorData = useAtomValue(selectedFloorAtom);
-  const router = useRouter();
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -103,8 +101,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
               onClick={() => {
                 setOpened(false);
                 document.body.style.overflow = "unset";
-                // window.history.back();
-                router.back();
+                window.history.back();
               }}
               className="p-2 rounded-full hover:bg-gray-100 transition-colors bg-white"
             >
