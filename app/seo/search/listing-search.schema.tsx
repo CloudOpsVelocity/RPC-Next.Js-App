@@ -23,7 +23,7 @@ export const generateAllSchemas = (property: any) => {
     bhkUnitType: property.bhkName
       ? property.bhkName + "-" + property.propTypeName
       : property.propTypeName,
-    category: property.cg === "S" ? "for-sale" : "for-rent",
+    category: property.category === "Sale" ? "for-sale" : "for-rent",
     city: property.cityName,
     locality: property.localityName,
     propIdEnc: property.propIdEnc,
