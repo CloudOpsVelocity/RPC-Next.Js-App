@@ -5,7 +5,7 @@ import { baseURL } from "@/app/utils/api/api";
 
 type Props = {
   properties: any;
-  page: number;
+  page: number | null;
   totalPages: number;
   urls: string[];
   pageUrl: string;
@@ -33,11 +33,11 @@ export default function ResidentialListingsSchema({
     })),
     totalItems: totalPages, // Total number of items
     nextPage:
-      page < totalPages
+      page && page < totalPages
         ? `${process.env.NEXT_PUBLIC_URL}/residential?page=${page + 1}`
         : null, // URL for the next page
     previousPage:
-      page > 1
+      page && page > 1
         ? `${process.env.NEXT_PUBLIC_URL}/residential?page=${page - 1}`
         : null, // URL for the previous page
     currentPage: `${process.env.NEXT_PUBLIC_URL}/residential?page=${page}`, // Current page number
