@@ -66,9 +66,7 @@ export default function NearByCarouselProperty({
         }
         mutate={mutate}
         ct="proj"
-        url={`/search/listing?sf=builderIds=${builderName ?? ""}+${
-          builderId ?? ""
-        }`}
+        url={`/search/listing?sf=builderIds=${builderQueryNameAndId}`}
        
        /*  url={`/search?sf=builderIds=${builderQueryNameAndId}-city=${cityQueryNameAndID}`} */
       />

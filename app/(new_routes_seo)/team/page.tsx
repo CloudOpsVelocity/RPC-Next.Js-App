@@ -94,6 +94,7 @@ export default function TeamPage() {
                   className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105"
                 >
                   <Image
+                  unoptimized
                     className="w-full h-64 object-cover object-center"
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}

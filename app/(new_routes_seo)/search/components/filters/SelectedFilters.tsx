@@ -28,8 +28,8 @@ const SelectedFilters = ({}: Props) => {
               category !== "cg" &&
               category !== "city" &&
               category !== "projIdEnc" &&
-              category !== "lat" &&
-              category !== "lng" &&
+         /*  category !== "lat" && */
+                 category !== "lng" && 
               (Array.isArray(values) ? (
                 values.map((value) => (
                   <div
@@ -88,9 +88,9 @@ const SelectedFilters = ({}: Props) => {
                       : category === "projName"
                       ? values
                       : category === "lat"
-                      ? "lat"
+                      ? "Near By lat&lang"
                       : category == "lng"
-                      ? "lng"
+                      ? "Near By lng"
                       : SelectedFiltersMap.get(values)}
                   </span>
                   <button

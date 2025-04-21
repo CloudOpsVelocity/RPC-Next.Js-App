@@ -33,6 +33,9 @@ export default function NearByCarousel({
     type: "proj",
   });
 
+  const builderQueryNameAndId = encodeURIComponent(`${builderData?.data?.userName }+${builderId}`);
+  /* const cityIdmaking=cityID.trim()
+  const cityQueryNameAndID=encodeURIComponent(`${location}+${cityIdmaking}`); */
   return (
     <div
       className="flex flex-col justify-start items-start w-full  mt-[4%] sm:mt-0 xl:pt-less-screen-spacing scroll-mt-28"
@@ -53,9 +56,7 @@ export default function NearByCarousel({
         builderName={builderData?.data?.userName ?? ""}
         ct="builder"
         id="similar-projects"
-        url={`/search?builderIds=${builderData?.data?.userName ?? ""}+${
-          builderId ?? ""
-        }`}
+        url={`/search?sf=builderIds=${builderQueryNameAndId}`}
       />
       <ProjectCarousel
         type="proj"
@@ -72,7 +73,7 @@ export default function NearByCarousel({
         builderName={builderData?.data?.companyName}
         ct="proj"
         id="other-projects"
-        url={`/search?lat=${lat}&lng=${lng}`}
+        url={`/search?sf=lat=${lat}-lng=${lng}`}
       />
     </div>
   );
