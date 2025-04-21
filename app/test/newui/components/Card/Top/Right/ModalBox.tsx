@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { MdClose } from "react-icons/md";
 
@@ -17,10 +18,12 @@ function ModalBox({
   containerClassStyle,
   hideCrossIcon,
 }: Props) {
+  const router = useRouter();
   const onClosePopup = () => {
     document.body.style.overflow = "unset";
     handleChange(false);
-    window.history.back();
+    // window.history.back();
+    router.back();
   };
 
   const onMainConClick = (e: any) => {
@@ -53,7 +56,8 @@ function ModalBox({
     const handleClose = () => {
       document.body.style.overflow = "unset";
       handleChange(false);
-      window.history.back();
+      // window.history.back();
+      router.back();
     };
 
     if (isOpen) {
@@ -75,7 +79,8 @@ function ModalBox({
     } else {
       document.body.style.overflow = "unset";
       console.log("scroll ddd");
-      window.history.back();
+      // window.history.back();
+      router.back();
     }
   }, [isOpen]);
 
