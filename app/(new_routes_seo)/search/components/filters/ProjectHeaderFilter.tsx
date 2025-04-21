@@ -507,7 +507,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
                   setIsDrawerOpen(false);
                   document.body.style.overflow = "unset";
                   console.log("close");
-                  isMobile ? history.back() : "";
+                  isMobile ? window.history.back() : "";
                 }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >

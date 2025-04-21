@@ -20,7 +20,7 @@ function ModalBox({
   const onClosePopup = () => {
     document.body.style.overflow = "unset";
     handleChange(false);
-    history.back();
+    window.history.back();
   };
 
   const onMainConClick = (e: any) => {
