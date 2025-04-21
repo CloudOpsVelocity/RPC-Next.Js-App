@@ -474,7 +474,7 @@ export async function generateMetadata(
       description,
       url: canonical,
       siteName: data.projectName,
-      images: data.media.coverImageUrl.split(",").map((url) => ({
+      images: data?.media?.coverImageUrl?.split(",")?.map((url) => ({
         url,
         width: 1200,
         height: 630,
