@@ -72,6 +72,9 @@
 .newSelectFieldMainCon {
   max-width: 130px;
   position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .newSelectdropdown {
@@ -98,6 +101,7 @@
 .newSelectdropdownOuterCon {
   position: absolute;
   top: 36px;
+  z-index: 2;
 }
 
 .newSelectdropdownCon {
@@ -141,6 +145,10 @@
   .newSelectdropdown {
     height: 30px;
   }
+
+  .newSelectdropdownOuterCon {
+    top: 26px;
+  }
 }
 
 /* MOBILE */
@@ -162,5 +170,9 @@
 
   .newSelectdropdown {
     height: 30px;
+  }
+
+  .newSelectdropdownOuterCon {
+    top: 26px;
   }
 }
