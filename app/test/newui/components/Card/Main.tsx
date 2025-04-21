@@ -38,6 +38,9 @@ const MainBox = ({ data, refetch }: Props) => {
     propTypeId,
     isUsed,
     phaseId,
+    category,
+    phaseName,
+    phaseCount,
   } = data;
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
@@ -182,6 +185,14 @@ const MainBox = ({ data, refetch }: Props) => {
   //   //   propType: type === "proj" ? propTypeId : propTypeName,
   //   // });
   // };
+  const imageAlt =
+    type === "proj"
+      ? `Cover Image Of  ${projName}${
+          phaseName && phaseCount !== undefined && phaseCount > 1
+            ? phaseName
+            : ""
+        }`
+      : `Cover Image Of ${bhkName} ${propTypeName} for ${category} in ${localityName}`;
   return (
     // <a href={onClickRedirect(reqId)} rel="noreferrer" target="_">
     <div
@@ -207,6 +218,7 @@ const MainBox = ({ data, refetch }: Props) => {
           data={data}
           projEncId={projIdEnc}
           pageUrl={url}
+          imageAlt={imageAlt}
         />
         <div className="relative w-full">
           {overlayData.id &&

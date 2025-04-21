@@ -119,6 +119,13 @@ export function PropertyCard({ property }: any) {
           } at ${property.propName}. Price: ₹${formatPrice(
             property.price
           )}. Address: ${property.address || property.localityName}`}
+          title={`Cover image of ${property.bhkName} ${
+            property.propTypeName
+          } for ${property.category} in ${property.localityName}, ${
+            property.cityName
+          } at ${property.propName}. Price: ₹${formatPrice(
+            property.price
+          )}. Address: ${property.address || property.localityName}`}
           fill
           className="object-cover"
         />

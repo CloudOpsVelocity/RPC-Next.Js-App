@@ -153,6 +153,15 @@ export default function ResidentialCardSection({
                               2
                             )} Cr` || "Property Image"
                           }
+                          title={
+                            `Cover Image Of ${property.projName} - ${
+                              property.locality
+                            }, ${property.city} - Price Range: ₹${(
+                              minPrice / 10000000
+                            ).toFixed(2)} Cr - ₹${(maxPrice / 10000000).toFixed(
+                              2
+                            )} Cr` || "Property Image"
+                          }
                           fill
                           className="object-cover"
                           priority

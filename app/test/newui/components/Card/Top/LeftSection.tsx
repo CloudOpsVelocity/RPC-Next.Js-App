@@ -25,6 +25,7 @@ type Props = {
   data: any;
   projEncId: string;
   pageUrl: string;
+  imageAlt: string;
 };
 
 export default function LeftSection({
@@ -43,6 +44,7 @@ export default function LeftSection({
   data,
   projEncId,
   pageUrl,
+  imageAlt,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
@@ -79,7 +81,8 @@ export default function LeftSection({
             }
             width={304}
             height={214}
-            alt="projectCard"
+            alt={imageAlt}
+            title={imageAlt}
             className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
             quality={100}
             unoptimized
