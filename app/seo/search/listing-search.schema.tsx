@@ -24,8 +24,8 @@ export const generateAllSchemas = (property: any) => {
       ? property.bhkName + "-" + property.propTypeName
       : property.propTypeName,
     category: property.cg === "S" ? "for-sale" : "for-rent",
-    city: property.ctName,
-    locality: property.ltName,
+    city: property.cityName,
+    locality: property.localityName,
     propIdEnc: property.propIdEnc,
     phase: property.phaseName,
     projName: property.projIdEnc && property.propName,
