@@ -257,7 +257,7 @@ export const ResidentialProjectSchama = ({
   properties: any;
   pageUrl: string;
   urls: string[];
-  page: number;
+  page: number | null;
   totalPages: number;
 }) => {
   if (!Array.isArray(properties)) return null;
@@ -371,14 +371,16 @@ export const ResidentialProjectSchama = ({
     })),
     totalItems: totalResults, // Total number of items
     nextPage:
-      page < totalPages
+      page && page < totalPages
         ? `${process.env.NEXT_PUBLIC_URL}/residential?page=${page + 1}`
         : null, // URL for the next page
     previousPage:
-      page > 1
+      page && page > 1
         ? `${process.env.NEXT_PUBLIC_URL}/residential?page=${page - 1}`
         : null, // URL for the previous page
-    currentPage: `${process.env.NEXT_PUBLIC_URL}/residential?page=${page}`, // Current page number
+    currentPage: page
+      ? `${process.env.NEXT_PUBLIC_URL}/residential?page=${page}`
+      : `${process.env.NEXT_PUBLIC_URL}/residential`, // Current page number
   };
 
   return (
