@@ -66,6 +66,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.newLaunch > 0 ? (
           <Link
+          prefetch={false}
             href={`/search?sf=projStatus=108-builderIds=${builderQueryNameAndId}`}
             className="block"
           >
@@ -128,6 +129,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
       <div className="w-[30%]">
         {data?.completed > 0 ? (
           <Link
+            prefetch={false}
             href={`/search?sf=projStatus=107-builderIds=${builderQueryNameAndId}`}
             className="block"
           >
