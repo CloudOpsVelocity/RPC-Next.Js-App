@@ -82,12 +82,7 @@ function LeftSection({
     queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
   });
-  const allItems =
-    (data?.pages.length || 0) > 0
-      ? data?.pages.flat()
-      : !isTrue
-      ? serverData
-      : data?.pages?.flat() || [];
+  const allItems = serverData;
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
