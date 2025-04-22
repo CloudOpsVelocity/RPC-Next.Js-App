@@ -88,9 +88,9 @@ const SelectedFilters = ({}: Props) => {
                       : category === "projName"
                       ? values
                       : category === "lat"
-                      ? "Near By lat&lang"
+                      ? "Near By"
                       : category == "lng"
-                      ? "Near By lng"
+                      ? "Near By"
                       : SelectedFiltersMap.get(values)}
                   </span>
                   <button
