@@ -6,6 +6,7 @@ import clsx from "clsx";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
+import RatingStars from "@/common/components/RatingStars";
 interface Props {
   review: string;
   rating: number;
@@ -28,7 +29,7 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
       </p>
       <div className="inline-flex flex-col justify-center items-start gap-[19px] px-4 py-[15px] rounded bg-[#cae9ff4d] ">
         <div className="flex md:justify-center items-center ">
-          <Rating
+          {/* <Rating
             value={form.values.rating || isSubmitted?.rating}
             readOnly
             classNames={{
@@ -44,6 +45,9 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
                 className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
               />
             }
+          /> */}
+          <RatingStars
+            onChange={(rating) => console.log("Selected:", rating)}
           />
         </div>
         {isSubmitted?.review && (
@@ -90,7 +94,7 @@ export const RatingForm = ({
               symbolBody: S.star,
             }}
             emptySymbol={
-              <IconSun  className="w-[45px] h-[45px]  sm:w-[50px] sm:h-[50px]  xl:w-[70px] xl:h-[70px]" />
+              <IconSun className="w-[45px] h-[45px]  sm:w-[50px] sm:h-[50px]  xl:w-[70px] xl:h-[70px]" />
             }
             fullSymbol={
               <IconSun
@@ -134,7 +138,7 @@ export const RatingForm = ({
 
       <div className=" gap-4 ">
         <div className="flex-1">
-          <Textarea
+          {/* <Textarea
             size="lg"
             name="review"
             w={"100%"}
@@ -153,15 +157,31 @@ export const RatingForm = ({
               input: S.ratingInput,
             }}
             onBlur={(e) => handleTrimAndReplace(e, "review", form)}
+          /> */}
+          <textarea
+            name="review"
+            id="review"
+            className={clsx(
+              "w-full rounded-[10px] text-[12px] md:text-[16px] p-[6px] md:p-[10px] placeholder:!text-[#4D6677] italic font-medium leading-[23.784px] focus:outline-none ",
+              !form.errors.review && "border-solid border-[#737579] border "
+            )}
+            placeholder="Start typing here"
+            rows={isTab ? 2 : 4}
+            maxLength={401}
+            {...form.getInputProps("review")}
+            // classNames={{
+            //   input: S.ratingInput,
+            // }}
+            onBlur={(e) => handleTrimAndReplace(e, "review", form)}
           />
         </div>
-        <Button
-          loading={status === "pending"}
+        <button
+          // loading={status === "pending"}
           type="submit"
           className="inline-flex items-center justify-center rounded-md text-[14px]  xl:text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 !bg-[#0073C6] text-white mt-6"
         >
           Submit
-        </Button>
+        </button>
       </div>
     </form>
   );
