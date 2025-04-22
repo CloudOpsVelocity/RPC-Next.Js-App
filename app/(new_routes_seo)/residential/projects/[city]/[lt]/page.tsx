@@ -1,6 +1,8 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import { unstable_noStore as noStore } from "next/cache";
+
 import {
   extractProjectParamsValues,
   findPathForProjectDetails,
@@ -9,6 +11,7 @@ import { notFound } from "next/navigation";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { Metadata, ResolvingMetadata } from "next";
 import logger from "@/app/utils/logger";
+
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -19,6 +22,7 @@ export default async function Page({ params: { city, lt } }: Props) {
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
   const serverData = await getSearchData(filterValues.LT as string);
+  console.log(serverData);
   return (
     <NewSearchPage
       pageUrl={pathname}
@@ -79,9 +83,7 @@ const getSearchData = async (locality: string) => {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
     // console.log(baseUrl);
     const url = `${baseUrl}`;
-    const res = await fetch(url, {
-      cache: "no-store",
-    });
+    const res = await fetch(url);
     if (!res.ok) {
       logger.error("data not fetched successfuly" + res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);
@@ -95,3 +97,5 @@ const getSearchData = async (locality: string) => {
     throw new Error("Something Went Wrong.");
   }
 };
+
+export const fetchCache = "force-no-store";
