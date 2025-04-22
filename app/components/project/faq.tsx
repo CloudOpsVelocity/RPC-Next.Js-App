@@ -300,9 +300,9 @@ const MobileFaqCard = ({
         </span>
       </button>
       <div className="px-4 pb-2 sm:px-6 sm:pb-6">
-        <p>
+        <div>
           <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={3} />
-        </p>
+        </div>
       </div>
     </div>
   );
