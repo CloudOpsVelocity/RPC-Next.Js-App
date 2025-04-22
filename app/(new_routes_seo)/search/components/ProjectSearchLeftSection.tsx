@@ -17,6 +17,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
+import { TbDeviceIpadHorizontalQuestion } from "react-icons/tb";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -35,6 +36,7 @@ function LeftSection({
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
+  const [mainData, setMainData] = useState<any>(serverData);
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
@@ -56,20 +58,25 @@ function LeftSection({
         );
         return response;
       },
-
       getNextPageParam: (lastPage: any, allPages: any) => {
         return lastPage?.length === 20 ? allPages.length : undefined;
       },
+
       ...(serverData && {
         initialData: {
           pages: [serverData],
           pageParams: [0],
         },
       }),
+
       cacheTime: 300000,
       enabled: isTrue,
       staleTime: 0,
       refetchOnWindowFocus: false,
+      onSuccess: (data: any) => {
+        console.log(data);
+        setMainData([...mainData, ...data.pages[data.pageParams.length - 1]]);
+      },
     });
 
   const { data: approvedData } = useQuery({
@@ -173,11 +180,11 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       // ref={containerRef}
     >
-      {isLoading || !allItems ? (
+      {isLoading || !mainData ? (
         <LoadingBlock />
-      ) : allItems?.length > 0 ? (
+      ) : mainData?.length > 0 ? (
         <ServerDataSection
-          data={serverData}
+          data={mainData}
           refetch={refetch}
           mutate={mutate}
           state={state}
