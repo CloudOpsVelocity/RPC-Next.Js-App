@@ -4,16 +4,13 @@ import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { GoogleTagManager } from "@next/third-parties/google";
-
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
-import { createStore, Provider } from "jotai";
 import montserrat from "@/font";
 import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
 import { Organization_SCHEMA } from "./seo/common/organisation-details";
-import Script from "next/script";
 import JotaiProvider from "./context/JotaiProvider";
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
