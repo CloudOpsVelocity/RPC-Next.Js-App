@@ -46,7 +46,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   return (
     <>
       <LeftSection
-        serverData={apiFilterQueryParams === null ? serverData : null}
+        serverData={serverData}
         frontendFilters={frontendFilters}
         isTrue={it}
         setIsTrue={setIsTrue}

@@ -82,7 +82,7 @@ function LeftSection({
   });
 
   const allItems =
-    (data?.pages?.length || 0) > 0
+    data && (data?.pages?.length || 0) > 0
       ? data?.pages.flat()
       : serverData || data?.pages?.flat() || [];
 
