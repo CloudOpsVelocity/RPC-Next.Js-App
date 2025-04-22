@@ -5,10 +5,11 @@ import { findPathForProjectDetails } from "@/app/(new_routes_seo)/utils/new-seo-
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
+
 type Props = {
   params: { city: string; lt: string };
 };
-export const dynamic = "force-dynamic";
+
 export default async function Page({ params: { city, lt } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}`;
   const value = await findPathForProjectDetails(pathname);
@@ -65,21 +66,20 @@ export async function generateStaticParams() {
 const getSearchData = async () => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
-
     const url = `${baseUrl}`;
-
-    const res = await fetch(url, {
-      cache: "no-cache",
-    });
-
+    const res = await fetch(url);
     if (!res.ok) {
+      console.log(res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);
     }
-
     const data = await res.json();
+    console.log(data);
     return data;
   } catch (error) {
+    console.log(error);
     console.error(error);
     return null;
   }
 };
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";

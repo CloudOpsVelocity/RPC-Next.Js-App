@@ -247,12 +247,14 @@ const AddQnaForm = ({
           Submit
         </button>
       </div>
-      <Success
-        text={values.question}
-        opened={opened}
-        onClose={onClose}
-        projName={projName}
-      />
+      {opened.status && (
+        <Success
+          text={values.question}
+          opened={opened.status}
+          onClose={onClose}
+          projName={projName}
+        />
+      )}
     </form>
   );
 };
@@ -298,9 +300,9 @@ const MobileFaqCard = ({
         </span>
       </button>
       <div className="px-4 pb-2 sm:px-6 sm:pb-6">
-        <p>
+        <div>
           <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={3} />
-        </p>
+        </div>
       </div>
     </div>
   );

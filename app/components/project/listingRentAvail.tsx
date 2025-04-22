@@ -13,6 +13,7 @@ import React from "react";
 import SubHeading from "./headings/SubHeading";
 import { TOPIC_IDS } from "@/app/data/projectDetails";
 import { useRouter } from "next/navigation";
+import { preventBackButton } from "../molecules/popups/req";
 // space fixed
 export default function ListingRentAvail({
   projName,
@@ -85,6 +86,7 @@ const Card = ({
   );
   const handleBoxClick = (value: any, cg: "S" | "R") => {
     if (value) {
+      preventBackButton();
       openSuccesPopup();
 
       setTimeout(() => {
@@ -117,8 +119,8 @@ const Card = ({
           src={type === "rent" ? config.rentMobileLogo : config.sellMobileLogo}
           width={60}
           height={60}
-        /*   className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px]" */
-         className="w-[60px] h-[60px]  block md:ml-[20px]"
+          /*   className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px]" */
+          className="w-[60px] h-[60px]  block md:ml-[20px]"
           title={type === "rent" ? "Rent Listing" : "Sale Listing"}
         />
 

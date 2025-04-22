@@ -10,6 +10,7 @@ import selectedSearchAtom, {
   selectedNearByAtom,
 } from "@/app/store/search/map";
 import { searchPageMapToggle } from "@/app/(new_routes_seo)/search/store/projSearchStore";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 
 export default function CardDownSection({
   a,

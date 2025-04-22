@@ -1,3 +1,4 @@
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 import Button from "@/app/elements/button";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { NearByDataAtom } from "@/app/store/nearby";
@@ -44,6 +45,7 @@ export default function CardDownSection({
   const setPopReqData = useSetAtom(NearByDataAtom);
 
   const handleOpen = () => {
+    preventBackButton();
     open({
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",

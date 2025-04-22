@@ -1,4 +1,5 @@
 // import { projectprops } from "@/app/(dashboard)/searchOldPage/components/Card/Top/Center/ProjData";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 import Button from "@/app/elements/button";
 import { CallIcon } from "@/app/images/commongsSvgs2";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
@@ -119,6 +120,7 @@ export default function LeftSection({
             <Button
               onChange={(e) => {
                 e.stopPropagation();
+                preventBackButton();
                 openReqCallback();
               }}
               icon={<CallIcon className="w-[16px] h-[16px]" />}

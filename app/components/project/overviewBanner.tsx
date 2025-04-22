@@ -11,7 +11,9 @@ import Button from "../../elements/button";
 // import { useParams } from "next/navigation";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import RequestCallBackModal from "../molecules/popups/req";
+import RequestCallBackModal, {
+  preventBackButton,
+} from "../molecules/popups/req";
 // import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import { NumberFormatter } from "@mantine/core";
 import Image from "next/image";
@@ -101,15 +103,7 @@ export default function OverviewBanner({
             {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             {", "}
             <span className="text-[#545353] text-xs sm:text-[20px] xl:text-[24px] text-wrap not-italic font-medium leading-[normal]">
-              ₹{" "}
-              {
-                <NumberFormatter
-                  thousandSeparator
-                  value={basePrice}
-                  thousandsGroupStyle="lakh"
-                />
-              }{" "}
-              Base Price/sq.ft
+              {formatCurrency(basePrice)} Base Price/sq.ft
             </span>
           </p>
           <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
@@ -117,6 +111,7 @@ export default function OverviewBanner({
               title="Request  Callback"
               buttonClass=" text-[#FFF] text-[12px] sm:text-[20px] xl:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3 sm:mt-0"
               onChange={() => {
+                preventBackButton();
                 open({
                   modal_type: "PROJECT_REQ_CALLBACK",
                   postedByName: buiderName,
