@@ -103,15 +103,7 @@ export default function OverviewBanner({
             {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             {", "}
             <span className="text-[#545353] text-xs sm:text-[20px] xl:text-[24px] text-wrap not-italic font-medium leading-[normal]">
-              ₹{" "}
-              {
-                <NumberFormatter
-                  thousandSeparator
-                  value={basePrice}
-                  thousandsGroupStyle="lakh"
-                />
-              }{" "}
-              Base Price/sq.ft
+              {formatCurrency(basePrice)} Base Price/sq.ft
             </span>
           </p>
           <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
