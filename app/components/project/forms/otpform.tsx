@@ -1,12 +1,13 @@
 "use client";
 
 import { otpSchema } from "@/app/validations/auth";
-import { Button, FocusTrap, PinInput } from "@mantine/core";
+// import { Button, FocusTrap, PinInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
-import S from "@/app/styles/Otp.module.css";
+// import S from "@/app/styles/Otp.module.css";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import clsx from "clsx";
+import OtpInput from "@/common/components/OtpField";
 
 type Props = {
   callback: () => void;
@@ -19,12 +20,18 @@ type Props = {
 export default function ReqOtpForm({
   callback,
   values,
-  builderName,
+  // builderName,
   title,
-  Posted_BY,
-}: Props) {
+}: // Posted_BY,
+Props) {
   const [error, setError] = useState(false);
   const ref = useRef(null);
+  const [otp, setOtp] = useState("");
+  console.log(otp);
+
+  const onChangeOtp = (name: string, value: string) => {
+    setOtp(value);
+  };
   const onSubmit = async (value: any) => {
     if (value.toString().length == 4) {
       const data = await sendContact({ ...values, otp: value });
@@ -102,28 +109,11 @@ export default function ReqOtpForm({
             {form.errors.otp}
           </p>
         )}
-        <FocusTrap active>
-          <PinInput
-            classNames={{
-              pinInput: S.pinInput,
-              input:
-                (error || form.errors.otp) &&
-                form.values.otp.toString().length == 4
-                  ? S.errorInput
-                  : S.input,
-            }}
-            name="otp"
-            size="xl"
-            {...form.getInputProps("otp")}
-            inputMode="numeric"
-            type={"number"}
-            placeholder=""
-          />
-        </FocusTrap>
+        <OtpInput name="otp" onChange={onChangeOtp} />
         <Resend userName={values.mobile} values={values} />
-        <Button type="submit" className="!bg-[#0073C6]">
+        <button type="submit" className="!bg-[#0073C6]">
           Submit
-        </Button>
+        </button>
       </form>
     </div>
   );
@@ -207,3 +197,24 @@ const Resend = ({ userName, values }: any): JSX.Element => {
     </div>
   );
 };
+
+{
+  /* <FocusTrap active>
+          <PinInput
+            classNames={{
+              pinInput: S.pinInput,
+              input:
+                (error || form.errors.otp) &&
+                form.values.otp.toString().length == 4
+                  ? S.errorInput
+                  : S.input,
+            }}
+            name="otp"
+            size="xl"
+            {...form.getInputProps("otp")}
+            inputMode="numeric"
+            type={"number"}
+            placeholder=""
+          />
+        </FocusTrap> */
+}

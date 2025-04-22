@@ -1,10 +1,6 @@
 /* eslint-disable react/jsx-boolean-value */
 "use client";
-// import { Modal } from "@mantine/core";
-import {
-  // useLocalStorage,
-  useMediaQuery,
-} from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 // import S from "@/app/styles/Rating.module.css";
