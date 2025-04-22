@@ -349,7 +349,7 @@ export default async function page({ params }: Props) {
         <FloorplanDrawer />
         <LoginPopup />
         <ProjectGallery />
-        <SharePopup />
+        {/* <SharePopup /> */}
       </div>
     </section>
   );
