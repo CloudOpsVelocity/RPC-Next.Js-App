@@ -30,20 +30,7 @@ export function SelectField() {
     .filter((item) => !(f.cg === "R" && item === "Plot"))
     .map((item) =>
       item === "Plot" && f.bhk.length > 0 ? null : (
-        <div
-          key={item}
-          className={styles.option}
-          id={`item_prop_${item}`}
-          onClick={() => {
-            dispatch({
-              type: "ADD_PROP_TYPE",
-              payload: parseDataProjectProps[
-                item.toLocaleLowerCase() as keyof typeof parseDataProjectProps
-              ] as number,
-            });
-            toggleDropdown();
-          }}
-        >
+        <div key={item} className={styles.option}>
           <input
             type="radio"
             checked={
@@ -55,6 +42,16 @@ export function SelectField() {
             color="green"
             readOnly
             className={styles.optionInnerFiled}
+            onChange={() => {
+              dispatch({
+                type: "ADD_PROP_TYPE",
+                payload: parseDataProjectProps[
+                  item.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+                ] as number,
+              });
+              toggleDropdown();
+            }}
+            id={`item_prop_${item}`}
           />{" "}
           <label htmlFor={`item_prop_${item}`} className="capitalize">
             {item}

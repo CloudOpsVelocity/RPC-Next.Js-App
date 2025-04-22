@@ -114,20 +114,20 @@ export default function RootLayout(params: { children: React.ReactNode }) {
       )}
 
       <body className={`${montserrat.className}  `}>
-        <MantineProvider theme={MantineTheme}>
-          <main>
-            <SessionProvider>
-              <ReactQueryProvider>
-                <Provider>
-                  <Header />
-                  <Layout>{params.children}</Layout>
-                  <Footer />
-                </Provider>
-              </ReactQueryProvider>
-            </SessionProvider>
-          </main>
-          {/* <Footer /> */}
-        </MantineProvider>
+        {/* <MantineProvider theme={MantineTheme}> */}
+        <main>
+          <SessionProvider>
+            <ReactQueryProvider>
+              <Provider>
+                <Header />
+                <Layout>{params.children}</Layout>
+                <Footer />
+              </Provider>
+            </ReactQueryProvider>
+          </SessionProvider>
+        </main>
+        {/* <Footer /> */}
+        {/* </MantineProvider> */}
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
 import Button from "@/app/elements/button";
 // import { GradientLocation, SearchMapIcon } from "@/app/images/commonSvgs";
 import selectedSearchAtom from "@/app/store/search/map";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import React from "react";
 import HeartButton from "../Center/HeartButton";
-import { searchShareAtom } from "../../../SharePopup";
+// import { searchShareAtom } from "../../../SharePopup";
 import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
@@ -35,7 +35,7 @@ export default function TopRightSection({
   phaseName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
-  const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
+  // const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const { filters } = useSearchFilters();
 
   // const url =
@@ -80,14 +80,22 @@ export default function TopRightSection({
                 />
                 <button
                   className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
-                  onClick={() =>
-                    setSharePopup({
-                      ...sharePopupData,
-                      opened: true,
-                      url,
-                      ...(type !== "proj" && { title: "Share Listing" }),
-                    })
-                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigator.share({
+                      title:
+                        type !== "proj" ? "Share Listing" : "Share Project",
+                      url: url,
+                    });
+                  }}
+                  // onClick={() =>
+                  //   setSharePopup({
+                  //     ...sharePopupData,
+                  //     opened: true,
+                  //     url,
+                  //     ...(type !== "proj" && { title: "Share Listing" }),
+                  //   })
+                  // }
                 >
                   <ShareIcon />
                 </button>
@@ -140,13 +148,19 @@ export default function TopRightSection({
               <button
                 className="space-x-2 flex flex-row justify-center"
                 onClick={() =>
-                  setSharePopup({
-                    ...sharePopupData,
-                    opened: true,
-                    url,
-                    ...(type !== "proj" && { title: "Share Listing" }),
+                  navigator.share({
+                    title: type !== "proj" ? "Share Listing" : "Share Project",
+                    url: url,
                   })
                 }
+                // onClick={() =>
+                //   setSharePopup({
+                //     ...sharePopupData,
+                //     opened: true,
+                //     url,
+                //     ...(type !== "proj" && { title: "Share Listing" }),
+                //   })
+                // }
               >
                 {config.shareIcon}
               </button>

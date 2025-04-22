@@ -26,6 +26,27 @@
   line-height: 24px; /* 150% */
 }
 
+.customMultiSelectionPill {
+  border-radius: 26px;
+  background: #cbe9ff;
+  box-shadow: 0px 4px 20px 0px rgba(112, 144, 176, 0.08);
+  color: #202020;
+  /* font-family: Montserrat; */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+
+  /* axtra added custom css */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 6px;
+  padding-right: 6px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
 .wrapperMultiSelection {
   min-height: 46px;
   max-width: 446px;
