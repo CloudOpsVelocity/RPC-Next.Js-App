@@ -43,7 +43,10 @@ const Specifications = dynamicImport(
 );
 const Banner = dynamicImport(() => import("@/app/components/project/banner"));
 const AboutBuilder = dynamicImport(
-  () => import("@/app/components/project/aboutBuilder")
+  () => import("@/app/components/project/aboutBuilder"),
+  {
+    ssr: false,
+  }
 );
 const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamicImport(
