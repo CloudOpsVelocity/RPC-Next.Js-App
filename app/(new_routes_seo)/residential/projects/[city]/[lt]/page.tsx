@@ -78,16 +78,13 @@ const getSearchData = async (locality: string) => {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
     // console.log(baseUrl);
     const url = `${baseUrl}`;
-
     const res = await fetch(url, {
       cache: "no-store",
     });
-
     if (!res.ok) {
       logger.error("data not fetched successfuly" + res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);
     }
-
     const data = await res.json();
     logger.debug(data);
     return data;

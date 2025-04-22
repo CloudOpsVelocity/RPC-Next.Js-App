@@ -79,7 +79,7 @@ const getSearchData = async () => {
     }
 
     const data = await res.json();
-    logger.error(data);
+    logger.debug(data);
     return data;
   } catch (error) {
     logger.error(error);
