@@ -9,7 +9,7 @@ import logger from "@/app/utils/logger";
 type Props = {
   params: { city: string; lt: string };
 };
-export const dynamic = "force-dynamic";
+
 export default async function Page({ params: { city, lt } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}`;
   const value = await findPathForProjectDetails(pathname);
@@ -77,7 +77,6 @@ const getSearchData = async () => {
       logger.error(res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);
     }
-
     const data = await res.json();
     logger.debug(data);
     return data;
@@ -87,3 +86,4 @@ const getSearchData = async () => {
     return null;
   }
 };
+export const dynamic = "force-dynamic";

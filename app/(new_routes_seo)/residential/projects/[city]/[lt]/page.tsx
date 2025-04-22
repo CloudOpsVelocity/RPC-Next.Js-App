@@ -12,6 +12,7 @@ import logger from "@/app/utils/logger";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
+export const dynamic = "force-dynamic";
 export default async function Page({ params: { city, lt } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}`;
   const value = await findPathForProjectDetails(pathname);
@@ -72,7 +73,7 @@ export async function generateMetadata(
     },
   };
 }
-export const dynamic = "force-dynamic";
+
 const getSearchData = async (locality: string) => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
@@ -91,6 +92,6 @@ const getSearchData = async (locality: string) => {
   } catch (error) {
     logger.error(error);
     console.error(error);
-    return null;
+    throw new Error("Something Went Wrong.");
   }
 };
