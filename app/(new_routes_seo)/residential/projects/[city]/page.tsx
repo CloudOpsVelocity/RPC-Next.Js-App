@@ -70,7 +70,7 @@ const getSearchData = async () => {
     const url = `${baseUrl}`;
 
     const res = await fetch(url, {
-      cache: "no-cache",
+      cache: "no-store",
     });
 
     if (!res.ok) {
