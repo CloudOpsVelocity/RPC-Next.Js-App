@@ -26,7 +26,6 @@ export default function About({
   builderName,
   maxLines = 6,
 }: Props) {
-  // const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   const isMobile = false;
   if (isMobile) {
     maxLines = 2;
@@ -67,8 +66,8 @@ export default function About({
       <div className="w-full">
         <div className="text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words">
           <div
-            className="prose-p:py-1 prose-no-break"
-            dangerouslySetInnerHTML={{ __html: content?.slice(0, charLimit) }}
+            className="prose-p:py-1 prose-no-break line-clamp-[12]"
+            dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
       </div>

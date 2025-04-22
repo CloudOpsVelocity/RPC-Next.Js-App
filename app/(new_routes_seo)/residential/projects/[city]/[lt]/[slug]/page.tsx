@@ -77,7 +77,10 @@ const BreadCrumbs = dynamicImport(
   () => import("@/app/components/project/breadcrum/BreadCrum")
 );
 const FloorPlans = dynamicImport(
-  () => import("@/app/components/project/newFloorPlan/floor-plan")
+  () => import("@/app/components/project/newFloorPlan/floor-plan"),
+  {
+    ssr: false,
+  }
 );
 const ProjectSchema = dynamicImport(
   () => import("@/app/seo/ProjectDetailSchema")
@@ -117,7 +120,7 @@ import Overview from "@/app/components/project/overview";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
-// let metadataCache: {title?: string, description?: string} = {};
+
 export default async function page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const slug = name.split("-").at(-1);
@@ -165,8 +168,6 @@ export default async function page({ params }: Props) {
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const scrollId = undefined;
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
-
-  console.log(data);
 
   return (
     <section className="w-full relative break-words ">
