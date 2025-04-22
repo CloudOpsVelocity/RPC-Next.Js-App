@@ -1,9 +1,7 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 
-import React, { useEffect, useRef, useState, memo, useCallback } from "react";
-import ProjectCard from "@/app/test/newui/components/Card";
-import { useVirtualizer } from "@tanstack/react-virtual";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
@@ -179,41 +177,14 @@ function LeftSection({
         <LoadingBlock />
       ) : allItems?.length > 0 ? (
         <ServerDataSection
-          data={allItems}
+          data={serverData}
           refetch={refetch}
           mutate={mutate}
           state={state}
         />
       ) : (
-        // <ServerDataSection
-        //   data={allItems}
-        //   refetch={refetch}
-        //   mutate={mutate}
-        //   state={state}
-        // />
-        // allItems.map((eachOne: any, index: number) => {
-        //   return (
-        //     <ProjectCard
-        //       key={eachOne.projIdEnc + eachOne.propType}
-        //       refetch={refetch}
-        //       data={{ ...eachOne, type: state.listedBy ?? "proj" }}
-        //       index={index}
-        //       mutate={mutate}
-        //     />
-        //   );
-        // })
-        // <div
-        //   style={{
-        //     height: `${rowVirtualizer.getTotalSize()}px`,
-        //     width: "100%",
-        //     position: "relative",
-        //   }}
-        // >
-        //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-        // </div>
         <EmptyState />
       )}
-
       {hasNextPage && shouldFetchMore && (
         <div ref={loadMoreRef} className="text-center font-bold text-3xl py-3">
           Loading...
