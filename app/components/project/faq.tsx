@@ -247,12 +247,14 @@ const AddQnaForm = ({
           Submit
         </button>
       </div>
-      <Success
-        text={values.question}
-        opened={opened}
-        onClose={onClose}
-        projName={projName}
-      />
+      {opened.status && (
+        <Success
+          text={values.question}
+          opened={opened.status}
+          onClose={onClose}
+          projName={projName}
+        />
+      )}
     </form>
   );
 };
