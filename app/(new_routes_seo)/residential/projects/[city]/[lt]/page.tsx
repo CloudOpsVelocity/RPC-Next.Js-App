@@ -8,6 +8,7 @@ import {
 import { notFound } from "next/navigation";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { Metadata, ResolvingMetadata } from "next";
+import logger from "@/app/utils/logger";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -83,12 +84,15 @@ const getSearchData = async (locality: string) => {
     });
 
     if (!res.ok) {
+      logger.error("data not fetched successfuly" + res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);
     }
 
     const data = await res.json();
+    logger.debug(data);
     return data;
   } catch (error) {
+    logger.error(error);
     console.error(error);
     return null;
   }

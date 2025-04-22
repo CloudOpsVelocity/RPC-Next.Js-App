@@ -5,6 +5,7 @@ import { findPathForProjectDetails } from "@/app/(new_routes_seo)/utils/new-seo-
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
+import logger from "@/app/utils/logger";
 type Props = {
   params: { city: string; lt: string };
 };
@@ -73,12 +74,15 @@ const getSearchData = async () => {
     });
 
     if (!res.ok) {
+      logger.error(res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);
     }
 
     const data = await res.json();
+    logger.error(data);
     return data;
   } catch (error) {
+    logger.error(error);
     console.error(error);
     return null;
   }
