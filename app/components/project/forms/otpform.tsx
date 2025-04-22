@@ -111,7 +111,10 @@ Props) {
         )}
         <OtpInput name="otp" onChange={onChangeOtp} />
         <Resend userName={values.mobile} values={values} />
-        <button type="submit" className="!bg-[#0073C6]">
+        <button
+          type="submit"
+          className="!bg-[#0073C6] h-[36px] text-white text-[14px] font-semibold rounded-[4px] px-[10px] "
+        >
           Submit
         </button>
       </form>

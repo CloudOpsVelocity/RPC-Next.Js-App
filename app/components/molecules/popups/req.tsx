@@ -409,11 +409,12 @@ const ReqForm = ({
             Contact Number
           </label>
           <input
-            type="number"
+            type="text"
             className={S.numInput}
             {...form.getInputProps("mobile")}
             id={`req_popup_input`}
             placeholder="Enter Your Mobile Number"
+            maxLength="10"
             onPaste={(event) => {
               const pastedText = event.clipboardData.getData("text/plain");
               const trimmedText = pastedText.replace(/\s/g, "");
