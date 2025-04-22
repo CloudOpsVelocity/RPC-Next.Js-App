@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useRef, ChangeEvent, KeyboardEvent } from "react";
-import { useForm } from "react-hook-form";
+import React, {
+  useRef,
+  ChangeEvent,
+  KeyboardEvent,
+  ClipboardEvent,
+} from "react";
 
 interface OtpInputProps {
   onChange: (name: string, value: string) => void;
-  name: string; // Name for the OTP field (for React Hook Form)
+  name: string; // Field name to identify in form
 }
 
 const OtpInput: React.FC<OtpInputProps> = ({ onChange, name }) => {
@@ -13,7 +17,7 @@ const OtpInput: React.FC<OtpInputProps> = ({ onChange, name }) => {
 
   const updateOtpValue = () => {
     const otp = inputsRef.current.map((input) => input?.value || "").join("");
-    onChange(name, otp); // Update the form value directly
+    onChange(name, otp); // Update form value
   };
 
   const handleChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +38,23 @@ const OtpInput: React.FC<OtpInputProps> = ({ onChange, name }) => {
     }
   };
 
+  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData
+      .getData("Text")
+      .replace(/\D/g, "")
+      .slice(0, 4); // only digits, max 4
+    pasteData.split("").forEach((char, i) => {
+      if (inputsRef.current[i]) {
+        inputsRef.current[i]!.value = char;
+      }
+    });
+    updateOtpValue();
+    if (inputsRef.current[pasteData.length - 1]) {
+      inputsRef.current[pasteData.length - 1]!.focus();
+    }
+  };
+
   return (
     <div style={styles.otpContainer}>
       {[0, 1, 2, 3].map((_, index) => (
@@ -41,10 +62,11 @@ const OtpInput: React.FC<OtpInputProps> = ({ onChange, name }) => {
           key={index}
           type="text"
           maxLength={1}
-          className="otp-input"
           ref={(el) => (inputsRef.current[index] = el)}
           onChange={(e) => handleChange(index, e)}
           onKeyDown={(e) => handleKeyDown(index, e)}
+          onPaste={handlePaste}
+          className="otp-input"
           style={styles.otpInput}
         />
       ))}
