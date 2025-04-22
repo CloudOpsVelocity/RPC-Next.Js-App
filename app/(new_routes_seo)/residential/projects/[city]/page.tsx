@@ -67,7 +67,9 @@ const getSearchData = async () => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
     const url = `${baseUrl}`;
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      cache: "no-store",
+    });
     if (!res.ok) {
       console.log(res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);

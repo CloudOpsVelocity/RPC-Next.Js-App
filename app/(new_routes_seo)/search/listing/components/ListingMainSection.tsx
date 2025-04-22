@@ -48,11 +48,7 @@ export default function ListingMainSection({
         setIsTrue={setIsTrue}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
-      {/* <ListingSearchRightSection
-        serverData={serverData}
-        isTrue={isTrue}
-        key="projListingSearchRightSection2"
-      /> */}
+
       <ListingSearchMapSection serverData={serverData} />
     </>
   );

@@ -1,4 +1,5 @@
-import { NumberFormatter } from "@mantine/core";
+import { formatCurrency } from "@/app/utils/numbers";
+/* import { NumberFormatter } from "@mantine/core"; */
 import React from "react";
 
 export default function SecurityDeposit({ otherPrice }: { otherPrice: any }) {
@@ -7,11 +8,14 @@ export default function SecurityDeposit({ otherPrice }: { otherPrice: any }) {
     <div className={styles.container}>
       {styles.icon}
       <h4 className={styles.textLite}>{type}</h4>
-      <h4 className={styles.textBold}>₹   <NumberFormatter
+      <h4 className={styles.textBold}>{/* ₹   <NumberFormatter
             thousandSeparator
             value={security }
             thousandsGroupStyle="lakh"
-          /></h4>
+            
+          /> */}
+                 {formatCurrency(security)}
+          </h4>
     </div>
   );
 }

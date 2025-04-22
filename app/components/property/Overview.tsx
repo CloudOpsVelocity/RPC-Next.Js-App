@@ -4,7 +4,7 @@ import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
 import PropertyOverviewBanner from "./OverViewBanner";
-import { EndDate, footerPhoneIcon } from "@/app/images/commonSvgs";
+import { EndDate, footerPhoneIcon, ShearIcon } from "@/app/images/commonSvgs";
 import CompareList from "./actions/compareList";
 import ShortList from "./actions/shortList";
 import Message from "./actions/Message";
@@ -12,6 +12,8 @@ import ReportSectionProperty from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import Link from "next/link";
 import SharePopup from "../atoms/SharePopup";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 export default function PropertyOverView({
   data,
@@ -20,6 +22,8 @@ export default function PropertyOverView({
   data: Main;
   issueData: any;
 }) {
+    const path = usePathname();
+    const title = "Share Listing";
   return (
     <div
       className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 relative"
@@ -27,7 +31,7 @@ export default function PropertyOverView({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
-          <div className="flex justify-between items-start ">
+          <div className="flex justify-between gap-1 items-start ">
             <h1 className="text-[18px] sm:text-[24px] xl:text-[28px] text-[#001F35] font-bold capitalize">
               <strong>
                 <span className="lowercase">
@@ -37,7 +41,22 @@ export default function PropertyOverView({
                 {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName}
               </strong>
             </h1>
-            <SharePopup title="Share Listing" className="text-sm p-[2px] mt-[2px] sm:hidden " />
+            {"  "}
+            <button
+              aria-label={title}
+              onClick={() => {
+                navigator.share({
+                  title: title,
+                  url: process.env.NEXT_PUBLIC_URL + path,
+                });
+              }}
+              className={clsx(
+                "sm:hidden  p-0.5 gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)]  rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6]  not-italic font-semibold leading-[normal] tracking-[0.4px]"
+              )}
+            >
+              <ShearIcon className=" sm:w-[20px] sm:h-[20px]  xl:w-[26px] xl:h-[26px]  h-[24px] w-[42px] " />
+            </button>
+            {/* <SharePopup title="Share Listing" className="text-sm p-[2px] mt-[2px] sm:hidden " /> */}
           </div>
           
           <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-bold leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">

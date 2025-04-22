@@ -14,7 +14,8 @@ import LeftSection from "../components/ProjectSearchLeftSection";
 //   () => import("../components/ProjectSearchLeftSection")
 // );
 const RightSection = dynamic(
-  () => import("../components/ProjectSearchRightSection")
+  () => import("../components/ProjectSearchRightSection"),
+  { ssr: false }
 );
 type Props = {
   serverData: any;
@@ -45,7 +46,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   return (
     <>
       <LeftSection
-        serverData={apiFilterQueryParams === null ? serverData : null}
+        serverData={serverData}
         frontendFilters={frontendFilters}
         isTrue={it}
         setIsTrue={setIsTrue}

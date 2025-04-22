@@ -272,7 +272,7 @@ export default function ListingDetailsPage({
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />
         <CompareError />
-        <SharePopup />
+      {/*   <SharePopup /> */}
       </div>
     </div>
   );

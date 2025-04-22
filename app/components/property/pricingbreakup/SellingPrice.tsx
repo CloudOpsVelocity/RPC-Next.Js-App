@@ -1,7 +1,8 @@
-import { NumberFormatter } from "@mantine/core";
+/* import { NumberFormatter } from "@mantine/core"; */
 import React from "react";
 import SecurityDeposit from "./SecurityDeposit";
 import { Main } from "@/app/validations/property";
+import { formatCurrency } from "@/app/utils/numbers";
 
 export default function SellingPrice({
   price,
@@ -25,12 +26,13 @@ export default function SellingPrice({
           `Total ${type} Price Including all the charges` : `Total ${type} Price`}
         </div>
         <h2 className="text-[#005202] text-[26px] ml-9 xl:m-0  xl:text-[34px] not-italic font-bold leading-[normal]">
-          ₹{" "}
-          <NumberFormatter
+         {/*  ₹{" "} */}
+          {/* <NumberFormatter
             thousandSeparator
             value={price}
             thousandsGroupStyle="lakh"
-          />
+          /> */}
+          {formatCurrency(price)}
         </h2>
       </div>
       {otherPrice.securetyType && (otherPrice.security || otherPrice.securityMonth) && (

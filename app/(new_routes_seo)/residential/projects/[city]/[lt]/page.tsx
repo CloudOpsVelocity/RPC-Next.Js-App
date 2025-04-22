@@ -1,7 +1,6 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import { unstable_noStore as noStore } from "next/cache";
 
 import {
   extractProjectParamsValues,
@@ -83,7 +82,9 @@ const getSearchData = async (locality: string) => {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
     // console.log(baseUrl);
     const url = `${baseUrl}`;
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      cache: "no-store",
+    });
     if (!res.ok) {
       logger.error("data not fetched successfuly" + res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);

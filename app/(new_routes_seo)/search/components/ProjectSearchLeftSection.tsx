@@ -1,9 +1,7 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 
-import React, { useEffect, useRef, useState, memo, useCallback } from "react";
-import ProjectCard from "@/app/test/newui/components/Card";
-import { useVirtualizer } from "@tanstack/react-virtual";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
@@ -19,6 +17,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
+import { TbDeviceIpadHorizontalQuestion } from "react-icons/tb";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -37,6 +36,7 @@ function LeftSection({
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
+  const [mainData, setMainData] = useState<any>(serverData);
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
@@ -58,20 +58,25 @@ function LeftSection({
         );
         return response;
       },
-
       getNextPageParam: (lastPage: any, allPages: any) => {
         return lastPage?.length === 20 ? allPages.length : undefined;
       },
+
       ...(serverData && {
         initialData: {
           pages: [serverData],
           pageParams: [0],
         },
       }),
+
       cacheTime: 300000,
       enabled: isTrue,
       staleTime: 0,
       refetchOnWindowFocus: false,
+      onSuccess: (data: any) => {
+        console.log(data);
+        setMainData([...mainData, ...data.pages[data.pageParams.length - 1]]);
+      },
     });
 
   const { data: approvedData } = useQuery({
@@ -82,7 +87,7 @@ function LeftSection({
   });
 
   const allItems =
-    (data?.pages?.length || 0) > 0
+    data && (data?.pages?.length || 0) > 0
       ? data?.pages.flat()
       : serverData || data?.pages?.flat() || [];
 
@@ -175,45 +180,18 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       // ref={containerRef}
     >
-      {isLoading || !allItems ? (
+      {isLoading || !mainData ? (
         <LoadingBlock />
-      ) : allItems?.length > 0 ? (
+      ) : mainData?.length > 0 ? (
         <ServerDataSection
-          data={allItems}
+          data={mainData}
           refetch={refetch}
           mutate={mutate}
           state={state}
         />
       ) : (
-        // <ServerDataSection
-        //   data={allItems}
-        //   refetch={refetch}
-        //   mutate={mutate}
-        //   state={state}
-        // />
-        // allItems.map((eachOne: any, index: number) => {
-        //   return (
-        //     <ProjectCard
-        //       key={eachOne.projIdEnc + eachOne.propType}
-        //       refetch={refetch}
-        //       data={{ ...eachOne, type: state.listedBy ?? "proj" }}
-        //       index={index}
-        //       mutate={mutate}
-        //     />
-        //   );
-        // })
-        // <div
-        //   style={{
-        //     height: `${rowVirtualizer.getTotalSize()}px`,
-        //     width: "100%",
-        //     position: "relative",
-        //   }}
-        // >
-        //   {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-        // </div>
         <EmptyState />
       )}
-
       {hasNextPage && shouldFetchMore && (
         <div ref={loadMoreRef} className="text-center font-bold text-3xl py-3">
           Loading...

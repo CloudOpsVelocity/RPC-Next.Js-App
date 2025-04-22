@@ -101,7 +101,7 @@ const Map = ({ data, lat, lang, type, styles }: any) => {
         {/* @ts-ignore */}
         <MapContent data={data} type={type} />
       </MapContainer>
-      <polyline />
+      {/* <polyline /> */}
     </>
   );
 };

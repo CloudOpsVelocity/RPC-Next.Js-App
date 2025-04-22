@@ -29,9 +29,6 @@ Props) {
   const [otp, setOtp] = useState("");
   console.log(otp);
 
-  const onChangeOtp = (name: string, value: string) => {
-    setOtp(value);
-  };
   const onSubmit = async (value: any) => {
     if (value.toString().length == 4) {
       const data = await sendContact({ ...values, otp: value });
@@ -56,7 +53,11 @@ Props) {
       }
     },
   });
-
+  const onChangeOtp = (name: string, value: string) => {
+    form.setValues({
+      otp: parseInt(value),
+    });
+  };
   return (
     <div>
       <form
