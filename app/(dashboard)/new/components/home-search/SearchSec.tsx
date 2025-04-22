@@ -10,10 +10,10 @@ import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
 import { toQueryParams } from "../../utils/param";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
-import { Pill } from "@mantine/core";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import Nearme from "./Nearme";
 import { useRouter } from "next/navigation";
+import { MiniCrossIcon } from "./filters/CustomBhkTypeSelect";
 
 type Props = {};
 export default function SearchSec({}: Props) {
@@ -188,29 +188,33 @@ export default function SearchSec({}: Props) {
               {f.locality?.map(
                 (each, index) =>
                   (showAllLocalities || index < (isTab ? 1 : 2)) && (
-                    <Pill
-                      className="capitalize !text-[12px] !sm:text-[14px]"
-                      onRemove={() =>
-                        dispatch({ type: "REMOVE_LOCALITY", payload: each })
-                      }
+                    <span
+                      // className="capitalize !text-[12px] !sm:text-[14px]"
+                      // onRemove={() =>
+                      //   dispatch({ type: "REMOVE_LOCALITY", payload: each })
+                      // }
                       key={each}
-                      withRemoveButton
-                      classNames={{ root: classes.MultiSelectionPill }}
+                      className={classes.customMultiSelectionPill}
                     >
                       {each.split("+")[0]}
-                    </Pill>
+                      <MiniCrossIcon
+                        onClick={() =>
+                          dispatch({ type: "REMOVE_LOCALITY", payload: each })
+                        }
+                      />
+                    </span>
                   )
               )}
               {f.locality?.length > (isTab ? 1 : 2) &&
                 !showAllLocalities &&
                 f.locality?.length > (isTab ? 1 : 2) && (
-                  <Pill
-                    className="capitalize cursor-pointer"
-                    classNames={{ root: classes.MultiSelectionPill }}
+                  <span
+                    // className="capitalize cursor-pointer"
+                    className={classes.customMultiSelectionPill}
                     onClick={() => setShowAllLocalities(true)}
                   >
                     {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
-                  </Pill>
+                  </span>
                 )}
             </div>
             <input

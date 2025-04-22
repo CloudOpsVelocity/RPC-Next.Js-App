@@ -1,7 +1,7 @@
 "use client";
-import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
+// import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { ShareIcon } from "@/app/images/HomePageIcons";
-import { useAtom } from "jotai";
+// import { useAtom } from "jotai";
 import React from "react";
 
 type Props = {
@@ -9,16 +9,22 @@ type Props = {
 };
 
 export default function ShareBtn({ url }: Props) {
-  const [shareAtomData, setShareAtomData] = useAtom(searchShareAtom);
+  // const [shareAtomData, setShareAtomData] = useAtom(searchShareAtom);
   return (
     <button
       onClick={() =>
-        setShareAtomData({
-          ...shareAtomData,
-          opened: true,
-          url,
+        navigator.share({
+          title: "Share Project",
+          url: url,
         })
       }
+      // onClick={() =>
+      //   setShareAtomData({
+      //     ...shareAtomData,
+      //     opened: true,
+      //     url,
+      //   })
+      // }
       className="cursor-pointer"
     >
       <ShareIcon />

@@ -6,8 +6,6 @@ import Image from "next/image";
 import { FiX, FiShare2, FiDownload, FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { newIcons, PopupOpenSvg } from "@/app/images/commonSvgs";
-import { useSetAtom } from "jotai";
-import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";

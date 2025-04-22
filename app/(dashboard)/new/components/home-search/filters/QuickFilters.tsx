@@ -4,6 +4,8 @@ import { BasicSelect } from "./Select";
 import { BasicBudgetSelect } from "./BugdetSelect";
 import { BasicMultiSelect } from "./BhkTypeSelect";
 import { SelectField } from "./SelectField";
+import { CustomBhkTypeSelect } from "./CustomBhkTypeSelect";
+import { CustomBugdetSelect } from "./CustomBugdetSelect";
 type Props = {};
 
 export default function QuickFilters({}: Props) {
@@ -14,9 +16,11 @@ export default function QuickFilters({}: Props) {
         {/* <BasicSelect /> */}
         <SelectField />
         <div className="order-1 sm:order-none">
-          <BasicMultiSelect />
+          {/* <BasicMultiSelect /> */}
+          <CustomBhkTypeSelect />
         </div>
-        <BasicBudgetSelect />
+        {/* <BasicBudgetSelect /> */}
+        <CustomBugdetSelect />
       </div>
     </div>
   );

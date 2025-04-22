@@ -34,7 +34,7 @@ export default function Card({ item }: Props) {
   // };
 
   return (
-    <div className="relative w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative">
+    <div className="relative w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0">
       <ProjectLink
         routeParams={{
           city: item.city,

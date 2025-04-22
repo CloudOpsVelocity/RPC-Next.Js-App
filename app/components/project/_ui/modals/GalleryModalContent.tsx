@@ -13,13 +13,11 @@ import {
 import ReactPlayer from "react-player";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 // import { GrPowerReset } from 'react-icons/gr'
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
-import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { newIcons } from "@/app/images/commonSvgs";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
-import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -35,7 +33,6 @@ export default function GalleryModalContent({}: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(state.activeIndex);
   const [isPlaying, setIsPlaying] = useState(false);
-  const openSharePopup = useSetAtom(searchShareAtom);
   const closeModal = () => {
     dispatch({
       type: "CLOSE",
@@ -66,11 +63,6 @@ export default function GalleryModalContent({}: Props) {
       title: state.mediaType === "image" ? "Share Image" : "Share Video",
       url: imageUrlParser(currentItem),
     });
-    /* openSharePopup({
-        opened: true,
-        title: state.mediaType === 'image' ? 'Share Image' : 'Share Video',
-        url: imageUrlParser(currentItem),
-    }) */
   };
   function getYouTubeThumbnailUrl(watchUrl: any) {
     // Match both /watch?v= and /embed/ formats

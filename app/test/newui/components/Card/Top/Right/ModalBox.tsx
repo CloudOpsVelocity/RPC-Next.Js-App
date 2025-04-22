@@ -92,7 +92,10 @@ function ModalBox({
       >
         {hideCrossIcon !== true && (
           <button
-            onClick={() => onClosePopup()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClosePopup();
+            }}
             className="p-[4px] hover:bg-gray-100 rounded-full absolute top-0 right-0"
           >
             <MdClose className="w-6 h-6" />

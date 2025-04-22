@@ -9,7 +9,6 @@ import HeartButton from "../Center/HeartButton";
 import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
-import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import DownloadBrocher from "../../DownloadBrocher";
@@ -60,7 +59,6 @@ export default function TopRightSection({
   bhkName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
-  const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
 
   // const url =
@@ -133,23 +131,15 @@ export default function TopRightSection({
                 />
                 <button
                   className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
-                  onClick={
-                    () => {
-                      navigator.share({
-                        title: type === "proj" ? projName : propName,
-                        text: `Check out this ${
-                          type === "proj" ? "project" : "property"
-                        }: ${type === "proj" ? projName : propName}`,
-                        url: url,
-                      });
-                    }
-                    // setSharePopup({
-                    //   ...sharePopupData,
-                    //   opened: true,
-                    //   url,
-                    //   ...(type !== "proj" && { title: "Share Listing" }),
-                    // })
-                  }
+                  onClick={() => {
+                    navigator.share({
+                      title: type === "proj" ? projName : propName,
+                      text: `Check out this ${
+                        type === "proj" ? "project" : "property"
+                      }: ${type === "proj" ? projName : propName}`,
+                      url: url,
+                    });
+                  }}
                 >
                   <ShareIcon />
                 </button>
@@ -466,22 +456,14 @@ export default function TopRightSection({
               />
               <button
                 className="space-x-2 flex flex-row justify-center"
-                onClick={
-                  () =>
-                    navigator.share({
-                      title: type === "proj" ? projName : propName,
-                      text: `Check out this ${
-                        type === "proj" ? "project" : "property"
-                      }: ${type === "proj" ? projName : propName}`,
-                      url: url,
-                    })
-
-                  // setSharePopup({
-                  //   ...sharePopupData,
-                  //   opened: true,
-                  //   url,
-                  //   ...(type !== "proj" && { title: "Share Listing" }),
-                  // })
+                onClick={() =>
+                  navigator.share({
+                    title: type === "proj" ? projName : propName,
+                    text: `Check out this ${
+                      type === "proj" ? "project" : "property"
+                    }: ${type === "proj" ? projName : propName}`,
+                    url: url,
+                  })
                 }
               >
                 {config.shareIcon}

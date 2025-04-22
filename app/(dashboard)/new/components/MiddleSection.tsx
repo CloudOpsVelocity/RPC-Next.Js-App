@@ -8,7 +8,7 @@ import ListbySection from "./ListedBy";
 import PostYourListing from "./post-your-listing";
 import BlogsSection from "./blogs";
 import Req from "./Req";
-import SharePopup from "../../searchOldPage/components/SharePopup";
+// import SharePopup from "../../searchOldPage/components/SharePopup";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import CompareShortListCount from "./home-search/CompareShortListCount";
 import { useQuery } from "react-query";
@@ -109,7 +109,7 @@ export default function MiddleSection({
       <PostYourListing />
       <BlogsSection />
       <LoginPopup />
-      <SharePopup />
+      {/* <SharePopup /> */}
       <Req />
     </>
   );
