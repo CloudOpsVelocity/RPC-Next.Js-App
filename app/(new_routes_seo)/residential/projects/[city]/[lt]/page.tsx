@@ -1,7 +1,6 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import { unstable_noStore as noStore } from "next/cache";
 
 import {
   extractProjectParamsValues,
