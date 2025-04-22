@@ -14,7 +14,8 @@ import LeftSection from "../components/ProjectSearchLeftSection";
 //   () => import("../components/ProjectSearchLeftSection")
 // );
 const RightSection = dynamic(
-  () => import("../components/ProjectSearchRightSection")
+  () => import("../components/ProjectSearchRightSection"),
+  { ssr: false }
 );
 type Props = {
   serverData: any;
