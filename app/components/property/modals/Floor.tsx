@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { propertyDetailsSvgs } from "@/app/images/commonSvgs";
+import { propertyDetailsSvgs, ShearIcon } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/property";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { useAtomValue } from "jotai";
@@ -86,7 +86,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   </svg>
                   <span className="hidden md:inline">Download Floor Plan</span>
                 </button>
-                <SharePopup
+                {/* <SharePopup
                   title="Share"
                   titleText="Share Floor Plan"
                   url={imageUrlParser(
@@ -94,7 +94,28 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                     "F"
                   )}
                   className="text-[#0073C6] font-medium"
-                />
+                /> */}
+
+                <button
+                  aria-label="Share"
+                  title="Share Floor Plan"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigator.share({
+                      title: "Share",
+                      url: imageUrlParser(
+                        data.projMedia.floorPlanUrl.split(",")[3],
+                        "F"
+                      ),
+                    });
+                  }}
+                  className="flex flex-nowrap justify-center items-center p-0.5 gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6] not-italic font-semibold leading-[normal] tracking-[0.4px] h-[36px] md:h-[40px] "
+                >
+                  <ShearIcon className=" sm:w-[20px] sm:h-[20px]  xl:w-[26px] xl:h-[26px]  h-[24px] w-[42px] " />
+                  <span className="hidden  h-4 w-4  sm:h-auto sm:text-[14px] xl:text-[20px]  sm:w-full sm:block">
+                    Share
+                  </span>
+                </button>
               </>
             )}
             <button
