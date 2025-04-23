@@ -49,7 +49,7 @@
 .starRating {
   direction: rtl;
   display: inline-flex;
-  font-size: 2rem;
+  font-size: 4rem;
 }
 
 .starRating input {
@@ -94,5 +94,9 @@
   }
   .bodyPadding {
     padding-bottom: 0px;
+  }
+
+  .starRating {
+    font-size: 3rem;
   }
 }

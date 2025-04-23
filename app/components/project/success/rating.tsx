@@ -1,6 +1,4 @@
 import { IconSun, RatingStar } from "@/app/images/commonSvgs";
-import { Button, Rating, Textarea } from "@mantine/core";
-import S from "@/app/styles/Rating.module.css";
 import { useFormContext } from "@/app/context/rating";
 import clsx from "clsx";
 import handleTrimAndReplace from "@/app/utils/input/validations";
@@ -47,7 +45,7 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
             }
           /> */}
           <RatingStars
-            onChange={(rating) => console.log("Selected:", rating)}
+            initialRating={form.values.rating || isSubmitted?.rating}
           />
         </div>
         {isSubmitted?.review && (
@@ -82,13 +80,13 @@ export const RatingForm = ({
     <form
       onSubmit={form.onSubmit(formSubmit)}
       className={clsx(
-        "max-w-[100%] mt-[1%] xl:mt-[2%] xl:mx-9 xl:my-8 p-2  rounded-lg space-y-2 xl:p-5 ratingCardBg",
+        "max-w-[100%] p-2 rounded-lg space-y-2 xl:p-5 ratingCardBg",
         isSubmitted && "!px-5 pb-5 !mt-0 "
       )}
     >
       {!isSubmitted && (
         <div className="flex md:justify-center items-center  xl:mb-[32px] flex-col">
-          <Rating
+          {/* <Rating
             classNames={{
               starSymbol: S.star,
               symbolBody: S.star,
@@ -104,6 +102,11 @@ export const RatingForm = ({
             }
             onChange={(value) => form.setFieldValue("rating", value)}
             value={form.values.rating}
+          /> */}
+
+          <RatingStars
+            initialRating={form.values.rating}
+            onChange={(value) => form.setFieldValue("rating", value)}
           />
 
           <p className="text-[#F00] text-[12px] xl:text-xl italic font-normal leading-[23.784px] mt-5">
@@ -138,31 +141,11 @@ export const RatingForm = ({
 
       <div className=" gap-4 ">
         <div className="flex-1">
-          {/* <Textarea
-            size="lg"
-            name="review"
-            w={"100%"}
-            h={"100%"}
-            id="review"
-            className={clsx(
-              " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] ",
-              !form.errors.review && "border-solid border-[#737579] border "
-            )}
-            placeholder="Start typing here"
-            radius={"10px"}
-            rows={isTab ? 2 : 4}
-            maxLength={401}
-            {...form.getInputProps("review")}
-            classNames={{
-              input: S.ratingInput,
-            }}
-            onBlur={(e) => handleTrimAndReplace(e, "review", form)}
-          /> */}
           <textarea
             name="review"
             id="review"
             className={clsx(
-              "w-full rounded-[10px] text-[12px] md:text-[16px] p-[6px] md:p-[10px] placeholder:!text-[#4D6677] italic font-medium leading-[23.784px] focus:outline-none ",
+              "w-full resize-none rounded-[10px] text-[12px] md:text-[16px] p-[6px] md:p-[10px] placeholder:!text-[#4D6677] italic font-medium leading-[23.784px] focus:outline-none ",
               !form.errors.review && "border-solid border-[#737579] border "
             )}
             placeholder="Start typing here"
