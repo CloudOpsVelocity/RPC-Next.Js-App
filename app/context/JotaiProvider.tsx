@@ -1,5 +1,5 @@
 "use client";
-import { createStore, Provider } from "jotai";
+import { Provider } from "jotai";
 
 import React from "react";
 
