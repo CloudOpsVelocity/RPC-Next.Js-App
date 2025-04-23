@@ -135,6 +135,8 @@ export default function BuildersDirectory({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  console.log(resultArray);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
       {/* Fixed Header */}
@@ -200,7 +202,7 @@ export default function BuildersDirectory({
                 </form>
               </div>
 
-              <Select
+              {/* <Select
                 ref={selectRef}
                 data={resultArray}
                 searchable
@@ -217,7 +219,32 @@ export default function BuildersDirectory({
                 }}
                 maxLength={20}
                 rightSection={<span />}
-              />
+              /> */}
+
+              <select
+                ref={selectRef}
+                value={filterCity}
+                className="w-full text-base md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-0 px-4 sm:py-2 pr-8 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onChange={(e) => {
+                  e && setFilterCity(e.target.value);
+                  setSearchInput("");
+                  setSearchTerm("");
+                  setPage(0);
+                  isMobile && setShowFilter(false);
+                }}
+                maxLength={20}
+              >
+                <option value="" disabled hidden>
+                  All Cities
+                </option>
+                {resultArray.map((item: any) => {
+                  return (
+                    <option key={item.label} value={item.value}>
+                      {item.label}
+                    </option>
+                  );
+                })}
+              </select>
 
               <select
                 className="w-full text-base md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-0 px-4 sm:py-2 pr-8 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
