@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-const HeaderActions = dynamic(() => import("./HeaderActions"), {
-  ssr: false,
-});
+// const HeaderActions = dynamic(() => import("./HeaderActions"));
 import MainSection from "./Main";
 import { useAtomValue } from "jotai";
 import { currentPhaseAtom } from "@/app/store/vewfloor";
 import NoProperties from "../notfound";
+import HeaderActions from "./HeaderActions";
 
 type Props = {
   partialUnitData: any;

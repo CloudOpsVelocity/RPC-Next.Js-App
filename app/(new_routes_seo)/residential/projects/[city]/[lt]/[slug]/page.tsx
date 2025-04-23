@@ -186,14 +186,11 @@ export default async function page({ params }: Props) {
       <meta name="twitter:image" content={imageUrl || ""} />
       <FAQJsonLdScript data={data} />
       <ProjectSchema projectData={{ ...projResponse, url, desc }} />
-      {/* <QAJsonLdScript data={data} />
-      <PropertyJsonLdScript data={data} />
-      <ArticleJsonLdScript data={data} /> */}
+
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <BreadCrumbs params={params} />
 
-          {/* Top Cover Image Card */}
           <FirstBlock
             projectDetails={data}
             companyName={data.postedByName}
@@ -202,7 +199,7 @@ export default async function page({ params }: Props) {
             scrollId={scrollId}
           />
         </div>
-        {/* Navigations Container */}
+
         <MobileHidden>
           <Navigation
             isBrochure={
