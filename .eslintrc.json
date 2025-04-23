@@ -26,17 +26,17 @@
   "rules": {
     "react/no-array-index-key": "warn", // Avoid using array indices as keys
     "no-restricted-syntax": [
-    "error",
-    {
-      "selector": "JSXAttribute[key.name='key'][value.expression.name='index']",
-      "message": "Do not use the array index directly as a key. Use a string prefix, e.g., `uniqueKey_${index}`."
-    },
-    {
-      "selector": "JSXAttribute[key.name='key'][value.expression.type='TemplateLiteral'] > TemplateElement[value.raw='']",
-      "message": "A string prefix is required before the index in keys (e.g., `uniqueKey_${index}`)."
-    }
-  ],
-    "no-unused-vars": "off",
+      "error",
+      {
+        "selector": "JSXAttribute[key.name='key'][value.expression.name='index']",
+        "message": "Do not use the array index directly as a key. Use a string prefix, e.g., `uniqueKey_${index}`."
+      },
+      {
+        "selector": "JSXAttribute[key.name='key'][value.expression.type='TemplateLiteral'] > TemplateElement[value.raw='']",
+        "message": "A string prefix is required before the index in keys (e.g., `uniqueKey_${index}`)."
+      }
+    ],
+    // "no-unused-vars": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "no-undef": "off",
     "no-empty-pattern": "off",
