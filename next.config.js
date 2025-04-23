@@ -65,6 +65,7 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  poweredByHeader: false,
 };
 
 module.exports = withMDX(nextConfig);

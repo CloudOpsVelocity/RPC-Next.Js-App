@@ -114,6 +114,7 @@ export default function ProjectLoans({
                       `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/Bank-projectproperty.png`
                     }
                     alt={bank.bankName}
+                    title={bank.bankName}
                     width={140}
                     height={90}
                     className="max-w-[90px] sm:min-h-[70px] sm:w-[140px] aspect-video "
