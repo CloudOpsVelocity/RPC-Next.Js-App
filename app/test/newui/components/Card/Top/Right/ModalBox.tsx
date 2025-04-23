@@ -81,7 +81,7 @@ function ModalBox({
 
   return (
     <div
-      className="fixed w-full min-h-[calc(100vh-70px)] flex justify-center items-center overflow-hidden z-[1000] left-0 top-[66px] bg-black/30"
+      className="fixed w-full min-h-[calc(100vh-70px)] flex justify-center items-center overflow-hidden left-0 top-[66px] bg-black/30 !z-[1000]"
       onClick={(e) => onMainConClick(e)}
     >
       <div

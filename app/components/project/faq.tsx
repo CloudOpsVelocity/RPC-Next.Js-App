@@ -250,7 +250,8 @@ const AddQnaForm = ({
       {opened.status && (
         <Success
           text={values.question}
-          opened={opened.status}
+          // opened={opened.status}
+          opened={opened}
           onClose={onClose}
           projName={projName}
         />
@@ -319,8 +320,8 @@ const Success = ({ text, opened, onClose, projName }: any) => {
 
   const ComponentTorender =
     renderComponent[opened.type as RenderComponentKeys] || null;
-  const isMobile = useMediaQuery(`(max-width: 750px)`);
-  const isTab = useMediaQuery(`(max-width: 1600px)`);
+  // const isMobile = useMediaQuery(`(max-width: 750px)`);
+  // const isTab = useMediaQuery(`(max-width: 1600px)`);
   useEffect(() => {
     const timer = setTimeout(() => {
       console.log("scroll 1");
@@ -330,6 +331,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     // <Modal
     //   classNames={{
