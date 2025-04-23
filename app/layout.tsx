@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 import type { Metadata } from "next";
 import "./globals.css";
-import MantineTheme from "@/mantine.config";
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+
 import { GoogleTagManager } from "@next/third-parties/google";
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
@@ -24,7 +23,7 @@ export const metadata: Metadata = {
 };
 export default function RootLayout(params: { children: React.ReactNode }) {
   return (
-    <html data-mantine-color-scheme="light" lang="en">
+    <html lang="en">
       <head>
         {/* <script
           type="application/ld+json"
@@ -32,7 +31,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
             __html: JSON.stringify(Organization_SCHEMA),
           }}
         /> */}
-        <ColorSchemeScript />
+
         {/* <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
@@ -111,7 +110,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <GoogleTagManager gtmId="GTM-T7W6VL9F" />
       )}
 
-      <body className={`${montserrat.className}  `}>
+      <body className={montserrat.className}>
         {/* <MantineProvider theme={MantineTheme}> */}
         <main>
           <SessionProvider>
