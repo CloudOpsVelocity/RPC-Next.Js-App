@@ -123,7 +123,7 @@ export default function BuildersDirectory({
     }
   }
 
-  const selectRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -232,7 +232,6 @@ export default function BuildersDirectory({
                   setPage(0);
                   isMobile && setShowFilter(false);
                 }}
-                maxLength={20}
               >
                 <option value="" disabled hidden>
                   All Cities
