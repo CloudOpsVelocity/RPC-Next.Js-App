@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaRedoAlt } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useQuery } from "react-query";
-import { Pagination, Select } from "@mantine/core";
+// import { Pagination, Select } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import BuilderDetailsCard from "./BuilderDetailsCard";
 import { useMediaQuery } from "@mantine/hooks";
@@ -329,7 +329,7 @@ export default function BuildersDirectory({
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && (
+        {/* {totalPages > 1 && (
           <div className="flex justify-center mt-8">
             <Pagination
               total={totalPages}
@@ -342,7 +342,7 @@ export default function BuildersDirectory({
               }}
             />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
