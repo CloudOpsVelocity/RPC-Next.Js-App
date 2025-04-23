@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 
 type Props = {
   containerClass?: string;
@@ -11,7 +12,6 @@ type Props = {
   otherProps?: any;
   onBlur?: any;
   placeholder?: string;
-  type?: string;
   errorMsg?: any;
   errorMsgClass?: string;
   inputMode?: string;
@@ -20,7 +20,7 @@ type Props = {
   name?: string;
 };
 
-function InputField({
+function PasswordInputField({
   containerClass,
   inputClass,
   onChange,
@@ -28,7 +28,6 @@ function InputField({
   otherProps,
   placeholder,
   id,
-  type,
   label,
   labelClass,
   errorMsg,
@@ -38,6 +37,7 @@ function InputField({
   maxLength,
   name,
 }: Props) {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className={containerClass}>
       <label htmlFor={id} className={labelClass}>
@@ -47,7 +47,7 @@ function InputField({
       <input
         required={required}
         name={name}
-        type={type}
+        type={showPassword ? "text" : "password"}
         inputMode={inputMode}
         className={inputClass}
         id={id}
@@ -58,9 +58,15 @@ function InputField({
         onBlur={onBlur}
         {...otherProps}
       />
+      <span
+        onClick={() => setShowPassword(!showPassword)}
+        className=" absolute top-0 mt-[40px] right-[10px] cursor-pointer translate-y-[50%] "
+      >
+        {showPassword ? <EyeOpen /> : <EyeClosed />}
+      </span>
       {errorMsg && <p className={errorMsgClass}>{errorMsg}</p>}
     </div>
   );
 }
 
-export default InputField;
+export default PasswordInputField;
