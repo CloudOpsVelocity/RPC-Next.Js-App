@@ -287,7 +287,7 @@ const LeafMap: React.FC<{
             )}
           </div>
           <Map
-            key="leaflet3SearchPageMap"
+            // key="leaflet3SearchPageMap"
             data={mapData && mapData[selected] ? mapData[selected] : []}
             selectedLocation={selectedLocation}
             projName={projName}

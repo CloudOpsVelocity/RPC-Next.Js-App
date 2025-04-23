@@ -12436,7 +12436,7 @@ export const CarouselScrollButton = ({
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
-      enable-background="new 0 0 50 50"
+      enableBackground="new 0 0 50 50"
     >
       <path
         fill="#231F20"
@@ -17786,7 +17786,7 @@ export const LikeIcon = ({ className }: { className?: string }) => {
       width="800px"
       height="800px"
       viewBox="0 0 52 52"
-      enable-background="new 0 0 52 52"
+      enableBackground="new 0 0 52 52"
     >
       <g>
         <path

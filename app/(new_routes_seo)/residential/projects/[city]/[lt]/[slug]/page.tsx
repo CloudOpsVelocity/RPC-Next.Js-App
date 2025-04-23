@@ -77,7 +77,10 @@ const PartialUnitData = dynamicImport(
   }
 );
 const PropertyDataDisplay = dynamicImport(
-  () => import("@/app/components/project/_ui/PricingDetailsSection")
+  () => import("@/app/components/project/_ui/PricingDetailsSection"),
+  {
+    ssr: false,
+  }
 );
 const Disclamer = dynamicImport(
   () => import("@/app/components/builder/Disclamer")
