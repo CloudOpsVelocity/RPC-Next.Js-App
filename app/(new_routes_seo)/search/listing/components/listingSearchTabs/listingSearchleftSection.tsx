@@ -40,6 +40,7 @@ function LeftSection({
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
+  const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
   const isTrue =
     it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
@@ -74,6 +75,10 @@ function LeftSection({
       }),
       cacheTime: 300000,
       enabled: isTrue,
+      onSuccess: (data: any) => {
+        const newData = data.pages[data.pageParams.length - 1];
+        setMainData((prev: any) => [...prev, ...newData]);
+      },
     });
 
   const { data: approvedData } = useQuery({
@@ -115,7 +120,10 @@ function LeftSection({
 
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
-
+  const dataToUse =
+    pathname.includes("/search") || apiFilterQueryParams
+      ? data?.pages.flat()
+      : mainData;
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -178,9 +186,9 @@ function LeftSection({
     >
       {isLoading ? (
         <LoadingBlock />
-      ) : allItems.length ? (
+      ) : dataToUse?.length ? (
         <ListingServerCardData
-          data={allItems}
+          data={dataToUse}
           refetch={refetch}
           mutate={mutate}
           state={state}
