@@ -414,7 +414,7 @@ const ReqForm = ({
             {...form.getInputProps("mobile")}
             id={`req_popup_input`}
             placeholder="Enter Your Mobile Number"
-            maxLength="10"
+            maxLength={10}
             onPaste={(event) => {
               const pastedText = event.clipboardData.getData("text/plain");
               const trimmedText = pastedText.replace(/\s/g, "");
@@ -424,7 +424,9 @@ const ReqForm = ({
             style={{ borderColor: form.errors.mobile ? "#F00" : "" }}
           />
           <span className={S.countryCodeText}>+ 91</span>
-          {form.errors.mobile && <p className={S.error}>Mobile is required</p>}
+          {form.errors.mobile && (
+            <p className={S.error}>Mobile Number is required</p>
+          )}
         </div>
 
         <div className={S.inputContainer}>
