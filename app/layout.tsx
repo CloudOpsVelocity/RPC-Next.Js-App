@@ -10,7 +10,7 @@ import Layout from "@/app/components/layouts/primary";
 import montserrat from "@/font";
 import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
-// import { Organization_SCHEMA } from "./seo/common/organisation-details";
+import { Organization_SCHEMA } from "./seo/common/organisation-details";
 import JotaiProvider from "./context/JotaiProvider";
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
@@ -26,12 +26,12 @@ export default function RootLayout(params: { children: React.ReactNode }) {
   return (
     <html data-mantine-color-scheme="light" lang="en">
       <head>
-        {/* <script
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(Organization_SCHEMA),
           }}
-        /> */}
+        />
         <ColorSchemeScript />
         {/* <meta
           name="viewport"
