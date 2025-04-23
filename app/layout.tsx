@@ -25,6 +25,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <meta name="next-size-adjust" content="100%" />
         {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -4924,9 +4924,10 @@ export const WhatsAppButton = ({ name, type }: Props) => {
             y2="16"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#00991B" />
-            <stop offset="1" stopColor="#00B60E" />
+            <stop offset="0%" stopColor="#00991B" />
+            <stop offset="100%" stopColor="#00B60E" />
           </linearGradient>
+
           <linearGradient
             id="paint1_linear_138_18368"
             x1="3634.12"
@@ -4935,8 +4936,8 @@ export const WhatsAppButton = ({ name, type }: Props) => {
             y2="16"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#F9F9F9" />
-            <stop offset="1" stopColor="white" />
+            <stop offset="0%" stopColor="#F9F9F9" />
+            <stop offset="100%" stopColor="white" />
           </linearGradient>
         </defs>
       </svg>

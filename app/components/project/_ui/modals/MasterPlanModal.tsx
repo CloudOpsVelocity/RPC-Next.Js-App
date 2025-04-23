@@ -139,12 +139,12 @@ export default function FullScreenMasterPlanModal({
           aria-label="Click to open the master plan image"
           onClick={openModal}
         >
-          <div className="sm:bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-2 right-1 sm:right-4 z-1 mb-  [20px] sm:shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
+          <p className="sm:bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-2 right-1 sm:right-4 z-1 mb-  [20px] sm:shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
             <p className="text-[#0073C6] hidden sm:block sm:text-[14px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
               Click on image to open master plan
             </p>
             <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
-          </div>{" "}
+          </p>{" "}
         </button>
       </div>
       {isOpen && (

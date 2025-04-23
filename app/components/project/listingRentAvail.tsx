@@ -103,7 +103,6 @@ const Card = ({
 
   return (
     <div
-      id={id}
       className={clsx(
         " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer p-2 sm:p-0",
         type === "sell"
