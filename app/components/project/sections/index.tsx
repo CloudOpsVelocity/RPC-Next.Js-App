@@ -1,6 +1,9 @@
 "use client";
 import React from "react";
-import HeaderActions from "./HeaderActions";
+import dynamic from "next/dynamic";
+const HeaderActions = dynamic(() => import("./HeaderActions"), {
+  ssr: false,
+});
 import MainSection from "./Main";
 import { useAtomValue } from "jotai";
 import { currentPhaseAtom } from "@/app/store/vewfloor";

@@ -1,29 +1,11 @@
 "use client";
-// import { Carousel } from "@mantine/carousel";
 import React from "react";
-// import Style from "./Carouse.module.css";
-// import InfoCard from "./InfoCard";
-// import {
-//   DarkCarouseIcon,
-//   DarkNextCarouselButton,
-// } from "@/app/images/commonSvgs";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import {
-  // parital_unit_atom,
-  selectedPartialUnitAtom,
-} from "@/app/store/partialsUnits";
+import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-// import RTK_CONFIG from "@/app/config/rtk";
-// import { getPropId } from "../propertyTypeDetailsCrad";
-// import { useQuery } from "react-query";
-// import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
-// import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
-// import { useForm } from "@/app/context/floorplanContext";
-// import { setPropertyValues } from "@/app/utils/dyanamic/projects";
-// import { projectReqDataAtom } from "@/app/store/project/project.req";
 
 type Props = {
   partialUnitData: any;
@@ -217,32 +199,5 @@ export default function InFoCarousel({ partialUnitData }: Props) {
         </tbody>
       </table>
     </div>
-
-    /* Uncomment the Carousel component if you intend to use it
-    <Carousel
-      classNames={Style}
-      slideSize="20.333333%"
-      slideGap="md"
-      align="start"
-      slidesToScroll={1}
-      mt={20}
-      nextControlIcon={<DarkNextCarouselButton />}
-      previousControlIcon={<DarkCarouseIcon />}
-      mih={120}
-    >
-      {data &&
-        sortUnits(Object.keys(data)).map((item: any, index: number) => (
-          <InfoCard
-            {...{
-              active: selected === index,
-              ...data[item],
-              label: item,
-              propCgId: propCgId,
-            }}
-            cardClick={() => handleCardClick(index)}
-          />
-        ))}
-    </Carousel>
-    */
   );
 }

@@ -42,6 +42,7 @@ const OtpInput: React.FC<OtpInputProps> = ({ onChange, name }) => {
           type="text"
           maxLength={1}
           className="otp-input"
+          // @ts-ignore
           ref={(el) => (inputsRef.current[index] = el)}
           onChange={(e) => handleChange(index, e)}
           onKeyDown={(e) => handleKeyDown(index, e)}
