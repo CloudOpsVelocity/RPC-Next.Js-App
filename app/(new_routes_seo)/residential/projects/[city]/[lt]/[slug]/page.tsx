@@ -135,8 +135,9 @@ type Props = {
 
 export default async function page({ params }: Props) {
   const { city, lt, slug: name } = params;
+  console.log(name);
   const slug = name.split("-").at(-1);
-  if (!slug) {
+  if (!slug || !isValidSlugId(slug)) {
     notFound();
   }
 
@@ -522,4 +523,4 @@ export async function generateMetadata(
 }
 
 export const dynamicParams = true;
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
