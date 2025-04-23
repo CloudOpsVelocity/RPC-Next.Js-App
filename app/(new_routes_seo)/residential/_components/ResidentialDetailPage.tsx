@@ -133,7 +133,7 @@ export default function ResidentialPage({
         </p>
       </section>
       {/*    <Banner heroSlides={data?.featured} data={data} /> */}
-      <Filters />
+      {/* <Filters /> */}
       <ResidentialCardSection
         data={data}
         setLoading={setLoading}
