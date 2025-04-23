@@ -7,9 +7,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import dynamic from "next/dynamic";
 // import SearchReadMoreContent from "./ReadMore";
-const SearchReadMoreContent = dynamic(() => import("./ReadMore"), {
-  ssr: false,
-});
+// const SearchReadMoreContent = dynamic(() => import("./ReadMore"));
 // import SearchReadMore from "";
 
 type Props = any;
@@ -239,9 +237,11 @@ export default function ListingData({
       >
         {projectAbout && (
           <div className="line-clamp-2 relative">
-            <SearchReadMoreContent
-              projectAbout={projectAbout}
-              readMoreThreshold={readMoreThreshold}
+            <span
+              className="line-clamp-2"
+              dangerouslySetInnerHTML={{
+                __html: projectAbout,
+              }}
             />
             {isReadMoreNeeded && (
               <div className="absolute bottom-0 right-0 bg-white">

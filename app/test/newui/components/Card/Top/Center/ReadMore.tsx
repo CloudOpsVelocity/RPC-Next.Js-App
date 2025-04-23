@@ -7,14 +7,12 @@ type Props = {
   readMoreThreshold: number;
 };
 
-export default function SearchReadMoreContent({
-  projectAbout,
-  readMoreThreshold,
-}: Props) {
+export default function SearchReadMoreContent({ projectAbout }: Props) {
   return (
     <span
+      className="line-clamp-2"
       dangerouslySetInnerHTML={{
-        __html: projectAbout.slice(0, readMoreThreshold),
+        __html: projectAbout,
       }}
     />
   );
