@@ -33,7 +33,10 @@ const MasterPlan = dynamicImport(
   () => import("@/app/components/project/masterplan")
 );
 const ProjectDetailsP = dynamicImport(
-  () => import("@/app/components/project/projectDetailsP")
+  () => import("@/app/components/project/projectDetailsP"),
+  {
+    ssr: false,
+  }
 );
 const GalleryBlock = dynamicImport(
   () => import("@/app/components/project/galleryBlock")
@@ -68,7 +71,10 @@ const Reviews = dynamicImport(
   }
 );
 const PartialUnitData = dynamicImport(
-  () => import("@/app/components/project/sections")
+  () => import("@/app/components/project/sections"),
+  {
+    ssr: false,
+  }
 );
 const PropertyDataDisplay = dynamicImport(
   () => import("@/app/components/project/_ui/PricingDetailsSection")
