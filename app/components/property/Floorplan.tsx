@@ -71,10 +71,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
         id="floorPlans"
         onClick={handleOpen}
       >
-        <div
-          className="w-[90%] mb-[10px] xl:mb-[8px] space-y-4"
-          id="propertyDetails"
-        >
+        <div className="w-[90%] mb-[10px] xl:mb-[8px] space-y-4">
           <PropertyHeading
             title="Floor Plan"
             desc="See floor plan of your selected property"
