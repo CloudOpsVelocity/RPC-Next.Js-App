@@ -13719,7 +13719,7 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
           y2="43"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#C0E6FF" />
+          <stop offset="0" stopColor="#C0E6FF" />
           <stop offset="0.745" stopColor="#CAE9FF" stopOpacity="0" />
         </linearGradient>
       </defs>
