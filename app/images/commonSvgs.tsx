@@ -12434,7 +12434,6 @@ export const CarouselScrollButton = ({
       height="50px"
       width="50px"
       version="1.1"
-      id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
       enableBackground="new 0 0 50 50"
