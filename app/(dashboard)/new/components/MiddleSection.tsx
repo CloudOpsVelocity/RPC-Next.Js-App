@@ -97,7 +97,7 @@ export default function MiddleSection({
         cityId={cityData?.data?.cityId}
         dataKey="i_Sale"
       />{" "}
-      {/* <ListbySection /> */}
+      <ListbySection />
       <DynamicListing
         title="Independent Rent Listings"
         content="Discover Your Ideal Rental: Independent Listings, Endless Options."
