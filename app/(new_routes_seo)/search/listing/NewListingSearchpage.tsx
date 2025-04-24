@@ -50,6 +50,7 @@ export default function NewListingSearchpage({
             key="newSearchFilter3"
             isListing={isListing}
             showProjectTab={showProjectTab}
+            frontendFilters={frontendFilters}
           />
         </div>
       </div>

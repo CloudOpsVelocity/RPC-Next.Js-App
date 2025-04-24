@@ -31,9 +31,11 @@ const SelectedFilters = dynamic(
 const ListingHeaderFilters = ({
   isListing,
   showProjectTab,
+  frontendFilters,
 }: {
   isListing?: boolean;
   showProjectTab: boolean;
+  frontendFilters: Record<string, any>;
 }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -307,6 +309,7 @@ const ListingHeaderFilters = ({
                 <BuyRent
                   openDropdown={openDropdown}
                   handleDropdownToggle={handleDropdownToggle}
+                  frontendFilters={frontendFilters}
                 />
                 <form
                   onSubmit={handleFormSubmit}
@@ -451,7 +454,7 @@ const ListingHeaderFilters = ({
             </button>
           </div>
 
-          <PageTitle />
+          <PageTitle serverFilterData={frontendFilters} />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             <ListingSearchTabs showProjectTab={showProjectTab} />
