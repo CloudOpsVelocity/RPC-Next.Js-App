@@ -33,6 +33,15 @@ export default function PaginationForBuilder({  totalCount,
   const totalPages = totalCount;
 
 
+  // const searchParams = useSearchParams();
+  // const isMobile = useMediaQuery("(max-width: 601px)");
+  // // Get page from URL or default to 0
+
+  
+  // const currentPage=value;
+  // //
+  // const itemsPerPage = 20;
+  // const totalPages = totalCount;
 
 
 
@@ -44,6 +53,10 @@ export default function PaginationForBuilder({  totalCount,
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxPagesToShow = isMobile ? 5 : 7;
+
+
+
+
 
     if (totalPages <= maxPagesToShow) {
       for (let i = 0; i < totalPages; i++) {
