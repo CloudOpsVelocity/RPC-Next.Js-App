@@ -32,6 +32,7 @@ const LeafMap: React.FC<{
   projId?: string;
   mapData: any;
 }> = ({ lat, lang, projName, type, projId, mapData }) => {
+  console.log(projName)
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps"), {
@@ -40,6 +41,7 @@ const LeafMap: React.FC<{
       }),
     []
   );
+  
   const [selected, setSelected] = useState<string>(Object.keys(mapData)[0]);
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;

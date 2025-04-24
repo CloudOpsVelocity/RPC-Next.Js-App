@@ -85,23 +85,23 @@ export async function generateMetadata(
   return {
     title: `${data.bhkName ?? ""} ${data.propTypeName} ${data.propName}, for ${
       data.cg === "S" ? " Sale" : " Rent"
-    } in ${data.ltName} - Getrightproperty`,
+    } in ${data.ltName} `,
     applicationName: "Getrightproperty",
     description: `Searching ${data.bhkName ?? ""} ${data.propTypeName} ${
       data.propName
     }, for ${data.cg === "S" ? " Sale" : " Rent"} in ${
       data.ltName
-    }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Find your dream home today!`,
+    }, Bangalore.  Get a verified search on Get Right property. New Age Property Portal.`,
     keywords: keywords, // Added keywords for SEO
     openGraph: {
-      title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+      title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
         data.cg === "S" ? " Sale" : " Rent"
-      } in ${data.ltName} - Getrightproperty`,
+      } in ${data.ltName} `,
       description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
       } in ${
         data.ltName
-      }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Explore listings now!`,
+      }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
       url: data.projMedia.coverImageUrl,
       type: "website",
       // site_name: "Getrightproperty",
@@ -110,9 +110,9 @@ export async function generateMetadata(
           url: data.projMedia.coverImageUrl,
           width: 800,
           height: 600,
-          alt: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+          alt: `${data.bhkName ?? ""} ${data.propTypeName} for ${
             data.cg === "S" ? " Sale" : " Rent"
-          } in ${data.ltName} - Getrightproperty`,
+          } in ${data.ltName}`,
         },
       ],
       locale: "en_US",
@@ -124,9 +124,9 @@ export async function generateMetadata(
     twitter: {
       card: "summary_large_image",
       site: "@Getrightproperty",
-      title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+      title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
         data.cg === "S" ? " Sale" : " Rent"
-      } in ${data.ltName} - Getrightproperty`,
+      } in ${data.ltName}`,
       description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
       } in ${
