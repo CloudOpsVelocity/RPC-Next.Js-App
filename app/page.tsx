@@ -38,8 +38,8 @@ export default async function Page() {
           cityName: cityData?.data?.city ?? "",
         }}
       />
-      {/* <HomeFeatures />
-      <MiddleSection
+      <HomeFeatures />
+      {/* <MiddleSection
         data={data}
         listingData={listingData}
         cityData={cityData}
