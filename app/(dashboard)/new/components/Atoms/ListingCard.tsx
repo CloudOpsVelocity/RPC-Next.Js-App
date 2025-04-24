@@ -55,7 +55,8 @@ export default function ListingCard({ item, sl }: Props) {
           </button>
 
           <Image
-            alt="test"
+            alt={title}
+            title={title}
             src={images[0]}
             width={490}
             height={276}

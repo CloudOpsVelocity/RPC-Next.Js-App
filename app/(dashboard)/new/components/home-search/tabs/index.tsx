@@ -95,7 +95,7 @@ const config = {
           y2="-4.85565e-07"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#8CC53F" />
+          <stop offset="0" stopColor="#8CC53F" />
           <stop offset="1" stopColor="#148B16" />
         </linearGradient>
       </defs>
