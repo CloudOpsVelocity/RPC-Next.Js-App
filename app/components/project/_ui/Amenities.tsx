@@ -74,7 +74,7 @@ export default function AmenitiesDisplay({
                   selectedCategory === category ? "bg-green-50" : ""
                 }`}
               >
-                <p
+                <span
                   className={`w-1 h-8 ${
                     selectedCategory === category
                       ? "bg-green-600"
