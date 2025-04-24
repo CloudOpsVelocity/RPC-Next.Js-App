@@ -51,7 +51,7 @@ export default function MiddleSection({
         cityId={cityData?.data?.cityId}
         dataKey="r_Sale"
       />
-      {/* <TopLocalities />
+      <TopLocalities />
       <DynamicListing
         title="Ready to Move Rent Listings"
         content="Find Your Perfect Home, Ready to Move In - Rent Today!"
@@ -75,13 +75,13 @@ export default function MiddleSection({
         shortIds={shortIds}
         cityId={cityData?.data?.cityId}
         dataKey="u_Sale"
-      /> */}
+      />
       <HandPickedProjects
         data={data}
         shortIds={shortIds}
         cityId={cityData?.data?.cityId}
       />
-      {/* <DynamicListing
+      <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"
         data={listingData["u_Rent"]}
@@ -97,7 +97,7 @@ export default function MiddleSection({
         cityId={cityData?.data?.cityId}
         dataKey="i_Sale"
       />{" "}
-      <ListbySection />
+      {/* <ListbySection /> */}
       <DynamicListing
         title="Independent Rent Listings"
         content="Discover Your Ideal Rental: Independent Listings, Endless Options."
@@ -106,10 +106,9 @@ export default function MiddleSection({
         cityId={cityData?.data?.cityId}
         dataKey="i_Rent"
       />
-      <PostYourListing />
-      <BlogsSection />
-      <LoginPopup /> */}
-      {/* <SharePopup /> */}
+      {/* <PostYourListing />
+      <BlogsSection /> */}
+      <LoginPopup />
       <Req />
     </>
   );
