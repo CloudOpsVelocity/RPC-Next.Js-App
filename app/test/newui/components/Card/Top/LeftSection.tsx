@@ -65,17 +65,17 @@ export default function LeftSection({
           </p>
         </>
       )}
+      <Link href={pageUrl}>
+        <picture>
+          <source
+            media="(max-width: 460px)"
+            srcSet={src ? src.split(",")[1] : ""}
+          />
+          <source
+            media="(max-width: 800px)"
+            srcSet={src ? src.split(",")[2] : ""}
+          />
 
-      <picture>
-        <source
-          media="(max-width: 460px)"
-          srcSet={src ? src.split(",")[1] : ""}
-        />
-        <source
-          media="(max-width: 800px)"
-          srcSet={src ? src.split(",")[2] : ""}
-        />
-        <Link href={pageUrl}>
           <Image
             src={
               src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : src
@@ -88,8 +88,8 @@ export default function LeftSection({
             quality={100}
             unoptimized
           />
-        </Link>
-      </picture>
+        </picture>
+      </Link>
       {/* <div>
         
       </div> */}
