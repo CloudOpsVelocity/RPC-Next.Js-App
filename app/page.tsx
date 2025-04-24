@@ -39,11 +39,11 @@ export default async function Page() {
         }}
       />
       <HomeFeatures />
-      {/* <MiddleSection
+      <MiddleSection
         data={data}
         listingData={listingData}
         cityData={cityData}
-      /> */}
+      />
     </div>
   );
 }

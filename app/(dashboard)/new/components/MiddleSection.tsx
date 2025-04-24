@@ -43,7 +43,7 @@ export default function MiddleSection({
         shortIds={shortIds}
         cityId={cityData?.data?.cityId}
       />
-      <DynamicListing
+      {/* <DynamicListing
         title="Ready to Move Sale Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
@@ -75,13 +75,13 @@ export default function MiddleSection({
         shortIds={shortIds}
         cityId={cityData?.data?.cityId}
         dataKey="u_Sale"
-      />
+      /> */}
       <HandPickedProjects
         data={data}
         shortIds={shortIds}
         cityId={cityData?.data?.cityId}
       />
-      <DynamicListing
+      {/* <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"
         data={listingData["u_Rent"]}
@@ -108,7 +108,7 @@ export default function MiddleSection({
       />
       <PostYourListing />
       <BlogsSection />
-      <LoginPopup />
+      <LoginPopup /> */}
       {/* <SharePopup /> */}
       <Req />
     </>
