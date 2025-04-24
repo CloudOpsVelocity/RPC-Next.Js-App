@@ -125,7 +125,7 @@ export default function BuildersDirectory({
     }
   }
 
-/*   const selectRef = useRef<HTMLInputElement>(null); */
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,16 +137,11 @@ export default function BuildersDirectory({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
-
   //method
-  const settingCurrentValue=(value:number)=>{
-      window.scrollTo(0, 0);
-      setPage(value );
-
-  }
-  console.log(resultArray);
-  const selectRef = useRef<HTMLSelectElement>(null);
+  const settingCurrentValue = (value: number) => {
+    window.scrollTo(0, 0);
+    setPage(value);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
@@ -243,7 +238,6 @@ export default function BuildersDirectory({
                   setPage(0);
                   isMobile && setShowFilter(false);
                 }}
-                //maxLength={20}
               >
                 <option value="" disabled hidden>
                   All Cities
@@ -355,8 +349,6 @@ export default function BuildersDirectory({
               total={totalPages}
               
             /> */}
-          </div>
-        )} */}
       </div>
     </div>
   );
