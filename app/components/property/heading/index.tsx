@@ -25,7 +25,9 @@ export default function PropertyHeading({
         <h2 className="text-h2 sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize">
           <strong>
             <span className="text-[#001F35]">{title}</span>
-            {projName && projName !== "" && <span className="text-[#148B16]">{projName} </span>}
+            {projName && projName !== "" && (
+              <span className="text-[#148B16]">{projName} </span>
+            )}
           </strong>
         </h2>{" "}
         <p className="text-[13px] sm:text-[16px] xl:text-2xl text-[#344273] italic leading-[normal] mb-2">
@@ -44,7 +46,6 @@ const Svg = (
     viewBox="0 0 6 72"
     fill="none"
     className="h-[36px] xl:h-[54px] xl:w-[14px]"
-
   >
     <path
       d="M3 2.5L3 69.5"
@@ -61,7 +62,7 @@ const Svg = (
         y2="0.499999"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#B3DFFF" />
+        <stop offset={"0"} stopColor="#B3DFFF" />
         <stop offset="1" stopColor="#0094FF" />
       </linearGradient>
     </defs>
