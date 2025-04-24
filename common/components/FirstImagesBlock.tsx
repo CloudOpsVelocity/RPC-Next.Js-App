@@ -18,10 +18,8 @@ function FirstImagesBlock({ onSelect, data }: Props) {
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
   const getImage = (index: number, className: string) => {
-    
     if (data.images[index]) {
       const urls = data.images[index].split(",");
-
       return (
         <picture>
           <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
