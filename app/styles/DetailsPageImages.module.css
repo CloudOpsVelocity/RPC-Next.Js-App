@@ -11,7 +11,7 @@
 .DetailsPageImagesLeftBlock {
   position: relative;
   width: 100%;
-  background-image: radial-gradient(circle, gray, white, gray);
+  background-image: rgba(255, 0, 0, 0);
   height: 300px;
 }
 
@@ -119,7 +119,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle, gray, white, gray);
+  background-image: rgba(255, 0, 0, 0);
   max-height: 145px;
 }
 
