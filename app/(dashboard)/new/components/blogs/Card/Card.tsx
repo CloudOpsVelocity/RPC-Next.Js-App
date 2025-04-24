@@ -33,9 +33,9 @@ export default function Card({ data }: Props) {
             {data && data.text ? data.text : ""}
           </p>
 
-          <button className=" absolute bottom-[10px] right-[10px] inline-flex mt-auto gap-1 justify-center items-center text-[color:var(--Secondary-Blue-1,#006EBE)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic font-bold leading-[150%]">
+          <span className=" absolute bottom-[10px] right-[10px] inline-flex mt-auto gap-1 justify-center items-center text-[color:var(--Secondary-Blue-1,#006EBE)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic font-bold leading-[150%]">
             Read {config.readMoreIcon}
-          </button>
+          </span>
         </div>
       </div>
     </Link>
