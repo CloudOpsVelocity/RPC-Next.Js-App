@@ -38,12 +38,12 @@ export default async function Page() {
           cityName: cityData?.data?.city ?? "",
         }}
       />
-      <HomeFeatures />
+      {/* <HomeFeatures />
       <MiddleSection
         data={data}
         listingData={listingData}
         cityData={cityData}
-      />
+      /> */}
     </div>
   );
 }
