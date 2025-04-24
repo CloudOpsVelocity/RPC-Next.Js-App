@@ -199,23 +199,23 @@ export default function ResidentialCardSection({
                         </h3>
                         <div className="grid grid-cols-2 gap-4 mb-6">
                           <h3 className="text-sm">
-                            <div className="font-semibold">Price Range</div>
-                            <div>
+                            <p className="font-semibold">Price Range</p>
+                            <p>
                               ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
                               {(maxPrice / 10000000).toFixed(2)} Cr
-                            </div>
+                            </p>
                           </h3>
                           <h3 className="text-sm">
-                            <div className="font-semibold">Property Type</div>
-                            <div>{propertyType}</div>
+                            <p className="font-semibold">Property Type</p>
+                            <p>{propertyType}</p>
                           </h3>
                           <h3 className="text-sm">
-                            <div className="font-semibold">Possession</div>
-                            <div>{possessionDate}</div>
+                            <p className="font-semibold">Possession</p>
+                            <p>{possessionDate}</p>
                           </h3>
                           <h3 className="text-sm">
-                            <div className="font-semibold">RERA Status</div>
-                            <div>{reraStatus}</div>
+                            <p className="font-semibold">RERA Status</p>
+                            <p>{reraStatus}</p>
                           </h3>
                         </div>
                         <div className="flex w-full  flex-row gap-4">
