@@ -124,12 +124,12 @@ export async function generateMetadata(
       title: `${params.bhk_unit_type.replace(/-/g, " ")} in ${params.lt.replace(
         /-/g,
         " "
-      )}, for ${
+      )} for ${
         params.cg === "for-sale" ? "Sale" : "Rent"
       } in ${params.project.replace(/-/g, " ")}, ${params.city.replace(
         /-/g,
         " "
-      )} - Getrightproperty`,
+      )} `,
       description: `Looking for ${params.bhk_unit_type.replace(
         /-/g,
         " "
@@ -146,12 +146,12 @@ export async function generateMetadata(
         title: `${params.bhk_unit_type.replace(
           /-/g,
           " "
-        )} in ${params.lt.replace(/-/g, " ")}, for ${
+        )} in ${params.lt.replace(/-/g, " ")} for ${
           params.cg === "S" ? "Sale" : "Rent"
         } in ${params.project.replace(/-/g, " ")}, ${params.city.replace(
           /-/g,
           " "
-        )} - Getrightproperty`,
+        )}`,
         description: `Looking for ${params.bhk_unit_type.replace(
           /-/g,
           " "
@@ -178,25 +178,25 @@ export async function generateMetadata(
     data.ltName
   }, ${data.ctName}, ${data.cg === "S" ? "Sale" : "Rent"}`;
   return {
-    title: `${data.bhkName ?? ""} ${data.propTypeName} ${data.propName}, for ${
+    title: `${data.bhkName ?? ""} ${data.propTypeName} ${data.propName} for ${
       data.cg === "S" ? " Sale" : " Rent"
-    } in ${data.ltName} - Getrightproperty`,
+    } in ${data.ltName}`,
     description: `Searching ${data.bhkName ?? ""} ${data.propTypeName} ${
       data.propName
     }, for ${data.cg === "S" ? " Sale" : " Rent"} in ${
       data.ltName
-    }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+    }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
     applicationName: "Getrightproperty",
     keywords: keywords,
     openGraph: {
-      title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+      title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
         data.cg === "S" ? " Sale" : " Rent"
-      } in ${data.ltName} - Getrightproperty`,
+      } in ${data.ltName} `,
       description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
       } in ${
         data.ltName
-      }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Explore listings now!`,
+      }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
       url: data.projMedia.coverImageUrl,
       type: "website",
       images: [
@@ -204,9 +204,9 @@ export async function generateMetadata(
           url: data.projMedia.coverImageUrl,
           width: 800,
           height: 600,
-          alt: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+          alt: `${data.bhkName ?? ""} ${data.propTypeName} for ${
             data.cg === "S" ? " Sale" : " Rent"
-          } in ${data.ltName} - Getrightproperty`,
+          } in ${data.ltName} `,
         },
       ],
       locale: "en_US",
@@ -218,9 +218,9 @@ export async function generateMetadata(
     twitter: {
       card: "summary_large_image",
       site: "@Getrightproperty",
-      title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+      title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
         data.cg === "S" ? " Sale" : " Rent"
-      } in ${data.ltName} - Getrightproperty`,
+      } in ${data.ltName}`,
       description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
       } in ${
