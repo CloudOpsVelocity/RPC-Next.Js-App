@@ -1,7 +1,10 @@
 "use client";
 import { BasicMultiSelect } from "@/app/(dashboard)/new/components/home-search/filters/BhkTypeSelect";
 import { BasicBudgetSelect } from "@/app/(dashboard)/new/components/home-search/filters/BugdetSelect";
+import { CustomBhkTypeSelect } from "@/app/(dashboard)/new/components/home-search/filters/CustomBhkTypeSelect";
+import { CustomBugdetSelect } from "@/app/(dashboard)/new/components/home-search/filters/CustomBugdetSelect";
 import { BasicSelect } from "@/app/(dashboard)/new/components/home-search/filters/Select";
+import { SelectField } from "@/app/(dashboard)/new/components/home-search/filters/SelectField";
 import { toQueryParams } from "@/app/(dashboard)/new/utils/param";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useAtom } from "jotai";
@@ -79,10 +82,12 @@ export default function Filters({}: Props) {
               ))}
             </select>
           </div> */}
-          <BasicSelect />
-          <BasicMultiSelect />
-          {<BasicBudgetSelect />}
-
+          <SelectField />
+          <CustomBhkTypeSelect />
+          <CustomBugdetSelect />
+          <div>
+            
+          </div>
           <div
             onClick={onSearch}
             className="flex sm:hidden justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6] cursor-pointer"
