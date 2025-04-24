@@ -77,11 +77,8 @@ export default function ListingCard({ item, sl }: Props) {
       </div>
 
       <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
-        <Link
-          href={listingLink}
-          className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between"
-        >
-          <div className="space-y-1  ">
+        <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
+          <Link href={listingLink} className="space-y-1  ">
             <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
                 `${formatNumberWithSuffix(item.pa, false)} sq.ft`}{" "}
@@ -111,13 +108,13 @@ export default function ListingCard({ item, sl }: Props) {
             <p className="text-[#242424] text-[12px] not-italic font-semibold leading-[normal] capitalize">
               {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
-          </div>
+          </Link>
           <div className="hidden  justify-start items-start gap-[8px] ">
             <Shortlist reqId={item.propIdEnc} shortListed={sl} />
             {/* <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px]" /> */}
             <ShareBtn url={listingLink} type="prop" />
           </div>
-        </Link>
+        </div>
         {/* by default new sortBy */}
         <div className="pl-3 mr-[14px] sm:mr-[4px] sm:ml-[0px] h-full gap-auto">
           <div className="inline-flex flex-wrap w-auto items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
