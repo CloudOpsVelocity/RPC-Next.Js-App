@@ -7,7 +7,7 @@ import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters
 type Props = {
   openDropdown: string | null;
   handleDropdownToggle: (dropdownName: string) => void;
-  frontendFilters: Record<string, any>;
+  frontendFilters?: Record<string, any>;
 };
 
 export default function BuyRent({
@@ -33,7 +33,7 @@ export default function BuyRent({
         className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2  bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
         onClick={() => handleDropdownToggle("buy")}
       >
-        {frontendFilters.cg === "R" || state.cg === "R" ? "Rent" : "Buy"}
+        {frontendFilters?.cg === "R" || state.cg === "R" ? "Rent" : "Buy"}
         <MdKeyboardArrowDown className="w-5 h-5" />
       </button>
       {openDropdown === "buy" && (
