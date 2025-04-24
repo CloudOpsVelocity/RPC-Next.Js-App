@@ -28,7 +28,7 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
     ...RTK_CONFIG,
   });
 
-  const cardsData = isEnabled ? newlyAddedProjects["featured"] : data;
+  const cardsData = isEnabled ? newlyAddedProjects?.featured ?? [] : data;
 
   return isLoading ? (
     <div> Loading...</div>
