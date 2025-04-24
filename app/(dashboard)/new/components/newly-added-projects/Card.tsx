@@ -35,21 +35,16 @@ export default function Card({ item }: Props) {
 
   return (
     <div className="relative w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0">
-      <ProjectLink
-        routeParams={{
-          city: item.city,
-          locality: item.locality,
-          slug: item.projName,
-          projIdEnc: item.projIdEnc,
-        }}
-      >
-        <>
-          <Image
-            src={item.coverUrl}
-            alt={item.projName}
-            fill
-            className=" absolute top-0 left-0 pointer-events-none z-0 "
-          />
+      <div>
+        <div>
+          <div className="z-[100]">
+            <Image
+              src={item.coverUrl}
+              alt={item.projName}
+              fill
+              className=" absolute top-0 left-0  z-0 "
+            />
+          </div>
           {/*  {item.builderLogo && (
           <img
             src={item.builderLogo}
@@ -81,21 +76,22 @@ export default function Card({ item }: Props) {
 
                   <ShareBtn url={url} type="proj" />
                 </div>{" "}
-                {item.projName}
+                <Link href={url}>{item.projName}</Link>
               </div>
+              <Link href={url}>
+                <span className=" block text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
+                  {formatCurrency(item.minPrice)} -{" "}
+                  {formatCurrency(item.maxPrice)}
+                </span>
+                <span className=" block text-white text-[12px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
+                  {item.propTypes?.join(", ")}
+                </span>
 
-              <p className="text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
-                {formatCurrency(item.minPrice)} -{" "}
-                {formatCurrency(item.maxPrice)}
-              </p>
-              <p className="text-white text-[12px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
-                {item.propTypes?.join(", ")}
-              </p>
-
-              <p className="text-white space-x-2 justify-end items-center inline-flex text-[12px] xl:text-[15px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
-                <FaLocationDot className="mr-1 " size={12} />
-                {item.city} - {item.locality}
-              </p>
+                <span className=" block text-white space-x-2 justify-end items-center  text-[12px] xl:text-[15px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
+                  <FaLocationDot className="mr-1 " size={12} />
+                  {item.city} - {item.locality}
+                </span>
+              </Link>
             </div>
             <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
               <div className="space-y-2">
@@ -133,8 +129,8 @@ export default function Card({ item }: Props) {
             </div>
           </div>
           {/* </BackgroundImage> */}
-        </>
-      </ProjectLink>
+        </div>
+      </div>
     </div>
   );
 }
