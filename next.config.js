@@ -23,6 +23,7 @@ const nextConfig = {
     // removeConsole: process.env.NODE_ENV === 'production',
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       { hostname: "d2sa15fzpcbn0k.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
