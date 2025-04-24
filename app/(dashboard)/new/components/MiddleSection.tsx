@@ -43,7 +43,7 @@ export default function MiddleSection({
         shortIds={shortIds}
         cityId={cityData?.data?.cityId}
       />
-      {/* <DynamicListing
+      <DynamicListing
         title="Ready to Move Sale Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
@@ -51,7 +51,7 @@ export default function MiddleSection({
         cityId={cityData?.data?.cityId}
         dataKey="r_Sale"
       />
-      <TopLocalities />
+      {/* <TopLocalities />
       <DynamicListing
         title="Ready to Move Rent Listings"
         content="Find Your Perfect Home, Ready to Move In - Rent Today!"
