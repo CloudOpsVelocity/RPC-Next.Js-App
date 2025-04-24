@@ -55,7 +55,6 @@ const Svg = (
     />
     <defs>
       <linearGradient
-        id="paint0_linear_342_34781"
         x1="3.00001"
         y1="72"
         x2="3"

@@ -13164,7 +13164,7 @@ export const Status = ({ className }: { className?: string }) => {
         />
       </g>
       <defs>
-        <clipPath id="clip0_2012_61131">
+        <clipPath>
           <rect width="32" height="32" fill="white" />
         </clipPath>
       </defs>
