@@ -104,6 +104,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
+        <meta name="google-adsense-account" content="ca-pub-9243707404617437" />
       </head>
 
       {process.env.NODE_ENV !== "development" && (
