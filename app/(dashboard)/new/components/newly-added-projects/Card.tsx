@@ -87,7 +87,7 @@ export default function Card({ item }: Props) {
                   {item.propTypes?.join(", ")}
                 </span>
 
-                <span className=" block text-white space-x-2 justify-end items-center  text-[12px] xl:text-[15px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
+                <span className=" flex text-white space-x-2 justify-end items-center  text-[12px] xl:text-[15px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
                   <FaLocationDot className="mr-1 " size={12} />
                   {item.city} - {item.locality}
                 </span>
@@ -128,7 +128,6 @@ export default function Card({ item }: Props) {
               </div>
             </div>
           </div>
-          {/* </BackgroundImage> */}
         </div>
       </div>
     </div>
