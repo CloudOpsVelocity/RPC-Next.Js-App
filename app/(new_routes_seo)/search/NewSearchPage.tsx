@@ -20,7 +20,7 @@ export default function NewSearchPage({
 }: Props) {
   const isListing = false;
   return (
-    <main className="pt-[70px] min-h-[calc(100vh)] relative ">
+    <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
       {serverData &&
         (frontendFilters.listedBy == null ? (
@@ -42,6 +42,6 @@ export default function NewSearchPage({
           serverData={serverData}
         />
       </div>
-    </main>
+    </section>
   );
 }

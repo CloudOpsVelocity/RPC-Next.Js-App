@@ -36,7 +36,7 @@ export default function NewListingSearchpage({
 }: Props) {
   const isListing = true;
   return (
-    <main className="pt-[70px] min-h-[calc(100vh)] relative">
+    <section className="pt-[70px] min-h-[calc(100vh)] relative">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
       {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full">
@@ -59,6 +59,6 @@ export default function NewListingSearchpage({
           serverData={serverData}
         />
       </div>
-    </main>
+    </section>
   );
 }
