@@ -32,7 +32,8 @@ function FirstImagesBlock({ onSelect, data }: Props) {
             height={195}
             width={900}
             className={className}
-            unoptimized
+            priority={true}
+            unoptimized={true}
             quality={80}
           />
         </picture>
