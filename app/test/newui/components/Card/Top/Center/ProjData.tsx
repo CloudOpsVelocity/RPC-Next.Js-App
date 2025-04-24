@@ -58,6 +58,7 @@ export default function ProjData({
   basePrice,
   postedBy,
   pageUrl,
+  cg,
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
@@ -127,7 +128,9 @@ export default function ProjData({
                 +{sortedBhks.length - 5} more
               </span>
             )}
-            {` ${propType} For Sale in ${locality}, ${city}`}
+            {` ${propType} For ${
+              cg === "R" ? "Rent" : "Sale"
+            } in ${locality}, ${city}`}
           </span>
         </h2>
         <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 w-full xl:w-[calc(100%-100px)]">

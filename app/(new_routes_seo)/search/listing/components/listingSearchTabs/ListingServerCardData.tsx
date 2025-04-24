@@ -19,7 +19,7 @@ export default function ListingServerCardData({
       <ProjectCard
         key={eachOne.projIdEnc + eachOne.propType + index}
         refetch={refetch}
-        data={{ ...eachOne, type: state.listedBy ?? "B" }}
+        data={{ ...eachOne, type: state.listedBy ?? "B", cg: state.cg }}
         index={index}
         mutate={mutate}
       />
