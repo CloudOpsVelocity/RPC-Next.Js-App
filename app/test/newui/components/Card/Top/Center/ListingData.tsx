@@ -237,7 +237,7 @@ export default function ListingData({
       >
         {projectAbout && (
           <div className="line-clamp-2 relative">
-            <span
+            <div
               className="line-clamp-2"
               dangerouslySetInnerHTML={{
                 __html: projectAbout,
