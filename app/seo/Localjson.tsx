@@ -93,11 +93,6 @@ const generateLocalBusinessJsonLd = (
       latitude: "12.9699", // Example latitude for Bengaluru - replace with actual if known
       longitude: "77.7497", // Example longitude for Bengaluru - replace with actual if known
     },
-    // Consider adding these if applicable
-    // priceRange: "₹₹", // Example price range
-    // servesCuisine: [],
-    // menu: "https://www.getrightproperty.com/menu", // If you have a menu of services
-    // acceptsReservations: false,
   };
 
   return jsonLd;
@@ -121,7 +116,7 @@ const LocalBusinessJsonLdScript: React.FC<LocalBusinessJsonLdScriptProps> = ({
       addressCountry: "IN",
     },
     contactPoint: {
-      telephone: "+91 8884440963",
+      telephone: "+91 8884440963", // Added the missing telephone here
       email: "info@getrightproperty.com", // Added a placeholder email - replace with actual
     },
     openingHours: ["Mo-Sa 09:00-18:00"],
