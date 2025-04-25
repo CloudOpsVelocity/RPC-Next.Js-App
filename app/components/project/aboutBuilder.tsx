@@ -57,7 +57,6 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               <Link
                 prefetch={false}
                 href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${urlBuilder}`}
-                about="builder details"
               >
                 {nzData.userName}
               </Link>

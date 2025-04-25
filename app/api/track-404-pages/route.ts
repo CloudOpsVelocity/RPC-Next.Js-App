@@ -7,7 +7,7 @@ interface ErrorResponse {
 }
 
 const BATCH_SIZE = 25; // Increased batch size for better throughput
-const BASE_URL = `https://www.getrightproperty.com` || "";
+const BASE_URL = `https://www.getrightproperty.com`;
 
 // Function to process a batch of URLs with optimized error handling
 async function checkUrlBatch(urls: { url: string; path: string }[]) {

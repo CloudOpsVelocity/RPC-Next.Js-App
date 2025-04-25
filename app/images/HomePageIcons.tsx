@@ -1,4 +1,10 @@
-export const CarouseSelArrowIcon = ({ className, title }: { className?: string, title?: string }) => {
+export const CarouseSelArrowIcon = ({
+  className,
+  title,
+}: {
+  className?: string;
+  title?: string;
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +34,7 @@ export const HeartIcon = ({ className }: { className?: string }) => {
       fill="none"
       className={className}
     >
-      <title>Click to Like</title>
+      {/* <title>Click to Like</title> */}
       <path
         d="M32.75 16C32.75 24.6913 25.4819 31.75 16.5 31.75C7.51807 31.75 0.25 24.6913 0.25 16C0.25 7.30871 7.51807 0.25 16.5 0.25C25.4819 0.25 32.75 7.30871 32.75 16Z"
         fill="#ECF0F3"

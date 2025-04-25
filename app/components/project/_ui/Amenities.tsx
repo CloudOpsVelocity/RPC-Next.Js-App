@@ -64,7 +64,7 @@ export default function AmenitiesDisplay({
       >
         <div className="space-y-2">
           {availableCategories.map((category: string) => (
-            <p
+            <div
               key={category}
               className="mb-4 bg-white shadow-sm hover:shadow-md transition-shadow duration-200 rounded-lg p-3"
             >
@@ -74,7 +74,7 @@ export default function AmenitiesDisplay({
                   selectedCategory === category ? "bg-green-50" : ""
                 }`}
               >
-                <p
+                <span
                   className={`w-1 h-8 ${
                     selectedCategory === category
                       ? "bg-green-600"
@@ -104,7 +104,7 @@ export default function AmenitiesDisplay({
                   </li>
                 ))}
               </ul>
-            </p>
+            </div>
           ))}
         </div>
       </div>

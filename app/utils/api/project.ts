@@ -12,7 +12,7 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
       {
         next: { tags: [slug] },
-        // cache: "force-cache",
+        // cache: "no-store",
       }
     );
 

@@ -216,11 +216,11 @@ const ProjectSearchTabs = () => {
                     />
                   </svg>
 
-                  <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
+                  <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                     {state.sortByfield != null && state.sortType != null
                       ? getSortyByValue(state)
                       : "Newest First"}
-                  </div>
+                  </span>
                 </button>
 
                 {isDropdownOpen && (
@@ -272,11 +272,11 @@ const ProjectSearchTabs = () => {
                 />
               </svg>
 
-              <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
+              <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                 {state.sortByfield != null && state.sortType != null
                   ? getSortyByValue(state)
                   : "Newest First"}
-              </div>
+              </span>
             </button>
 
             {isDropdownOpen && (

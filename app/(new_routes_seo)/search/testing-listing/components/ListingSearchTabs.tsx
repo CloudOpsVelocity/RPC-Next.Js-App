@@ -12,7 +12,7 @@ import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters
 import { SearchFilter } from "@/app/types/search";
 
 const tabs = [
-   { id: "proj", label: "Projects" },
+  { id: "proj", label: "Projects" },
   { id: "I", label: "Owner Listings" },
   { id: "A", label: "Agent Listings" },
   { id: "B", label: "Builder Listings" },
@@ -71,8 +71,8 @@ const ListingSearchTabs = () => {
   }, [isDropdownOpen]);
 
   const handleTabsChange = (value: string | null) => {
-/*     console.log(value);
- */    const updatedFilters =
+    /*     console.log(value);
+     */ const updatedFilters =
       value === null
         ? {
             ...state,
@@ -189,11 +189,11 @@ const ListingSearchTabs = () => {
                     />
                   </svg>
 
-                  <div className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
+                  <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                     {state.sortByfield != null && state.sortType != null
                       ? getSortyByValue(state)
                       : "Newest First"}
-                  </div>
+                  </span>
                 </button>
 
                 {isDropdownOpen && (

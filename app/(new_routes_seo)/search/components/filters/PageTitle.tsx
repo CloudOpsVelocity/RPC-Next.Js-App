@@ -5,9 +5,11 @@ import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { projSearchStore } from "../../store/projSearchStore";
 
-type Props = {};
+type Props = {
+  serverFilterData?: Record<string, any>;
+};
 
-function PageTitle({}: Props) {
+function PageTitle({ serverFilterData }: Props) {
   const state = useAtomValue(projSearchStore);
 
   const paramsData = useParams();
@@ -67,12 +69,11 @@ function PageTitle({}: Props) {
           : paramsData.phase
           ? paramsData.phase
           : `Residential ${isListing ? "Listings" : "Projects"}`;
-
         const pageTitle = `${firstString} For ${
-          state.cg === "R" ? "Rent" : "Sale"
-        } in ${paramsData.project ? paramsData.project : ""} ${
-          paramsData.lt ? paramsData.lt : ""
-        } ${paramsData.city ? paramsData.city : paramsData.city ?? ""}`;
+          serverFilterData?.cg === "R" || state.cg === "R" ? "Rent" : "Sale"
+        } in ${paramsData.project ?? ""} ${paramsData.lt ?? ""} ${
+          paramsData.city ?? "Bengaluru"
+        }`;
 
         return pageTitle.replaceAll("-", " ");
       }

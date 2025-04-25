@@ -22,15 +22,13 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   });
   const pageUrl = `/${slug}`;
   return (
-    <main>
-      <NewListingSearchpage
-        serverData={severData}
-        frontendFilters={frontEndFilter}
-        pageUrl={pageUrl}
-        is2lakhUrls
-        showProjectTab
-      />
-    </main>
+    <NewListingSearchpage
+      serverData={severData}
+      frontendFilters={frontEndFilter}
+      pageUrl={pageUrl}
+      is2lakhUrls
+      showProjectTab
+    />
   );
 }
 

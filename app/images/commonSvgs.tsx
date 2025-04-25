@@ -12434,7 +12434,6 @@ export const CarouselScrollButton = ({
       height="50px"
       width="50px"
       version="1.1"
-      id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
       enableBackground="new 0 0 50 50"
@@ -13164,7 +13163,7 @@ export const Status = ({ className }: { className?: string }) => {
         />
       </g>
       <defs>
-        <clipPath id="clip0_2012_61131">
+        <clipPath>
           <rect width="32" height="32" fill="white" />
         </clipPath>
       </defs>
@@ -13719,7 +13718,7 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
           y2="43"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#C0E6FF" />
+          <stop offset="0" stopColor="#C0E6FF" />
           <stop offset="0.745" stopColor="#CAE9FF" stopOpacity="0" />
         </linearGradient>
       </defs>
@@ -13746,7 +13745,7 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
           y2="42.5"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFF8D5" />
+          <stop offset="0" stopColor="#FFF8D5" />
           <stop offset="0.885" stopColor="#FFD600" stopOpacity="0" />
         </linearGradient>
       </defs>

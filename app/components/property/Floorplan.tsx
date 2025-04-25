@@ -55,12 +55,12 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       ...(data.ba && { ba: data.ba }),
     });
     setOpened(true);
-    window.history.pushState(null, "", window.location.href);  
+    window.history.pushState(null, "", window.location.href);
   };
 
   const onClosePopup = () => {
-    setOpened(false)
-  }
+    setOpened(false);
+  };
 
   // const pushHistory = useHistoryBackHandler(onClosePopup);
   return (
@@ -71,10 +71,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
         id="floorPlans"
         onClick={handleOpen}
       >
-        <div
-          className="w-[90%] mb-[10px] xl:mb-[8px] space-y-4"
-          id="propertyDetails "
-        >
+        <div className="w-[90%] mb-[10px] xl:mb-[8px] space-y-4">
           <PropertyHeading
             title="Floor Plan"
             desc="See floor plan of your selected property"
@@ -131,17 +128,19 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                 />
               )}
             </div>
-            <button onClick={() => {
-              setOpened(true);
-              // pushHistory();
-              window.history.pushState(null, "", window.location.href);   
-            }}>
-              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-[1] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
-                <p className="text-[#0073C6] text-[12px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
+            <button
+              onClick={() => {
+                setOpened(true);
+                // pushHistory();
+                window.history.pushState(null, "", window.location.href);
+              }}
+            >
+              <span className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-[1] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
+                <span className="text-[#0073C6] text-[12px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
                   Click on image to open floor plan
-                </p>
+                </span>
                 <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
-              </div>{" "}
+              </span>{" "}
             </button>
           </div>
         </div>

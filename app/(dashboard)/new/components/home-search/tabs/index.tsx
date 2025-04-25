@@ -32,9 +32,9 @@ export default function Tabs({}: Props) {
         >
           <Box active={activeTab === "S"} Icon={HomeIcon} />
           Buy
-          <div className="h-[2px] sm:h-[4px] ">
+          <span className="h-[2px] sm:h-[4px] ">
             {activeTab === "S" && config.underLine}
-          </div>
+          </span>
         </button>
         {filters.propType != 32 && (
           <button
@@ -47,9 +47,9 @@ export default function Tabs({}: Props) {
           >
             <Box active={activeTab === "R"} Icon={RentIcon} />
             Rent
-            <div className="h-[2px] sm:h-[4px] ">
+            <span className="h-[2px] sm:h-[4px] ">
               {activeTab === "R" && config.underLine}
-            </div>
+            </span>
           </button>
         )}
       </div>
@@ -62,7 +62,7 @@ type BoxProps = {
 };
 const Box = ({ active, Icon }: BoxProps) => {
   return (
-    <div
+    <span
       className={clsx(
         "flex h-[40px] sm:h-[54px] justify-center items-center self-stretch rounded shadow-[0px_4px_36.5px_0px_rgba(194,194,194,0.60)] p-[6px] sm:p-[11px] border-[0.5px] border-solid border-[#8EA8CF] bg-[#fcfcfc] absolute top-[-40px] left-[8px] sm:left-0 sm:top-[-56px] w-[40px] sm:w-[54px]",
         active &&
@@ -70,7 +70,7 @@ const Box = ({ active, Icon }: BoxProps) => {
       )}
     >
       <Icon fill={active ? "#148B16" : "#2B333F"} />
-    </div>
+    </span>
   );
 };
 const config = {
@@ -95,7 +95,7 @@ const config = {
           y2="-4.85565e-07"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#8CC53F" />
+          <stop offset="0" stopColor="#8CC53F" />
           <stop offset="1" stopColor="#148B16" />
         </linearGradient>
       </defs>
