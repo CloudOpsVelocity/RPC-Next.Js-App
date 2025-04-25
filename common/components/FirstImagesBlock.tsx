@@ -2,6 +2,7 @@ import { ShearIcon } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
+import Head from "next/head";
 
 type Props = {
   onSelect: () => void;
@@ -20,6 +21,20 @@ function FirstImagesBlock({ onSelect, data }: Props) {
   const getImage = (index: number, className: string) => {
     if (data.images[index]) {
       const urls = data.images[index].split(",");
+      <Head>
+      {/* Preconnect to image domain */}
+      <link rel="preconnect" href="https://media.getrightproperty.com" crossOrigin="anonymous" />
+
+      {/* Preload image with srcSet and sizes */}
+      <link
+        rel="preload"
+        as="image"
+        href={getUrl(urls, 3)}
+        // @ts-ignore to skip type error
+        imagesrcset={`${getUrl(urls, 1)} 460w, ${getUrl(urls, 2)} 768w, ${getUrl(urls, 3)} 1200w`}
+        imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
+      />
+    </Head>
       return (
         <picture>
           <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
