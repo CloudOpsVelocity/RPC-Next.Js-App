@@ -6,8 +6,11 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
-import montserrat from "@/font";
-
+// import montserrat from "@/font";
+import { Montserrat } from "next/font/google";
+const font = Montserrat({
+  preload: false,
+});
 // import { Organization_SCHEMA } from "./seo/common/organisation-details";
 
 // const playball = Playball({
@@ -110,7 +113,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <GoogleTagManager gtmId="GTM-T7W6VL9F" />
       )}
 
-      <body className={montserrat.className}>
+      <body className={font.className}>
         {/* <MantineProvider theme={MantineTheme}> */}
         <main>
           <SessionProvider>
