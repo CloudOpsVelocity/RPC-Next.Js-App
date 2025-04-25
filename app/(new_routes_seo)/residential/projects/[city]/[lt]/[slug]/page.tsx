@@ -102,12 +102,7 @@ const FAQJsonLdScript = dynamicImport(() => import("@/app/seo/Faqjson"));
 const ProjectGallery = dynamicImport(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
-const SharePopup = dynamicImport(
-  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup"),
-  {
-    ssr: false,
-  }
-);
+
 const ProjectBrouchersSection = dynamicImport(
   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
   {
