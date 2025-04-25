@@ -1,3 +1,5 @@
+import LocalBusinessJsonLdScript from "@/app/seo/Localjson";
+import OrganizationSchema from "@/app/seo/OraganisationSchema";
 const BASE_URL = process.env.NEXT_PUBLIC_URL;
 const viewActionConfigs = [
   {
@@ -410,6 +412,8 @@ export const HomeSiteNavigationSchema = () => {
           __html: JSON.stringify(breadcrumbSchema),
         }}
       /> */}
+      <OrganizationSchema />
+      <LocalBusinessJsonLdScript />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
