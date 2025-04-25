@@ -7,7 +7,10 @@ const Loans = dynamicImport(() => import("@/app/components/project/loans"));
 
 const About = dynamicImport(() => import("@/app/components/project/about"));
 const Navigation = dynamicImport(
-  () => import("@/app/components/project/navigation")
+  () => import("@/app/components/project/navigation"),
+  {
+    ssr: false,
+  }
 );
 const ProjectDrawer = dynamicImport(
   () => import("@/app/components/project/Drawer")
@@ -30,7 +33,10 @@ const MasterPlan = dynamicImport(
   () => import("@/app/components/project/masterplan")
 );
 const ProjectDetailsP = dynamicImport(
-  () => import("@/app/components/project/projectDetailsP")
+  () => import("@/app/components/project/projectDetailsP"),
+  {
+    ssr: false,
+  }
 );
 const GalleryBlock = dynamicImport(
   () => import("@/app/components/project/galleryBlock")
@@ -40,21 +46,41 @@ const Specifications = dynamicImport(
 );
 const Banner = dynamicImport(() => import("@/app/components/project/banner"));
 const AboutBuilder = dynamicImport(
-  () => import("@/app/components/project/aboutBuilder")
+  () => import("@/app/components/project/aboutBuilder"),
+  {
+    ssr: false,
+  }
 );
 const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamicImport(
-  () => import("@/app/components/project/NearByCarousel")
+  () => import("@/app/components/project/NearByCarousel"),
+  {
+    ssr: false,
+  }
 );
 const LoginPopup = dynamicImport(
-  () => import("@/app/components/project/modals/LoginPop")
+  () => import("@/app/components/project/modals/LoginPop"),
+  {
+    ssr: false,
+  }
 );
-const Reviews = dynamicImport(() => import("@/app/components/project/reviews"));
+const Reviews = dynamicImport(
+  () => import("@/app/components/project/reviews"),
+  {
+    ssr: false,
+  }
+);
 const PartialUnitData = dynamicImport(
-  () => import("@/app/components/project/sections")
+  () => import("@/app/components/project/sections"),
+  {
+    ssr: false,
+  }
 );
 const PropertyDataDisplay = dynamicImport(
-  () => import("@/app/components/project/_ui/PricingDetailsSection")
+  () => import("@/app/components/project/_ui/PricingDetailsSection"),
+  {
+    ssr: false,
+  }
 );
 const Disclamer = dynamicImport(
   () => import("@/app/components/builder/Disclamer")
@@ -63,7 +89,10 @@ const BreadCrumbs = dynamicImport(
   () => import("@/app/components/project/breadcrum/BreadCrum")
 );
 const FloorPlans = dynamicImport(
-  () => import("@/app/components/project/newFloorPlan/floor-plan")
+  () => import("@/app/components/project/newFloorPlan/floor-plan"),
+  {
+    ssr: false,
+  }
 );
 const ProjectSchema = dynamicImport(
   () => import("@/app/seo/ProjectDetailSchema")
@@ -73,9 +102,17 @@ const FAQJsonLdScript = dynamicImport(() => import("@/app/seo/Faqjson"));
 const ProjectGallery = dynamicImport(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
-
+const SharePopup = dynamicImport(
+  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup"),
+  {
+    ssr: false,
+  }
+);
 const ProjectBrouchersSection = dynamicImport(
-  () => import("@/app/components/project/broucher/ProjectBrouchersSections")
+  () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
+  {
+    ssr: false,
+  }
 );
 import {
   getAmenties,
@@ -93,10 +130,11 @@ import FirstBlock from "@/app/components/project/firstBlock";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import Overview from "@/app/components/project/overview";
 type Props = {
-  params: { city: string; lt: string; slug: string };
+  params: Promise<{ city: string; lt: string; slug: string }>;
 };
 
-export default async function page({ params }: Props) {
+export default async function page(props: Props) {
+  const params = await props.params;
   const { city, lt, slug: name } = params;
   console.log(name);
   const slug = name.split("-").at(-1);
@@ -354,14 +392,15 @@ export async function generateStaticParams() {
 }
 
 type SeoProps = {
-  params: { city: string; lt: string; slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ city: string; lt: string; slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata(
-  { params }: SeoProps,
+  props: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const params = await props.params;
   let slug = params.slug.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
@@ -486,4 +525,4 @@ export async function generateMetadata(
 }
 
 export const dynamicParams = true;
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
