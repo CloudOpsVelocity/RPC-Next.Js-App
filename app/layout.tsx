@@ -7,10 +7,9 @@ import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
 import montserrat from "@/font";
-import Header from "./components/layouts/primary/header";
-import Footer from "./components/layouts/primary/footer";
+
 // import { Organization_SCHEMA } from "./seo/common/organisation-details";
-import JotaiProvider from "./context/JotaiProvider";
+
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
 //   weight: ['400'], // Required weight for Playball font
@@ -116,11 +115,11 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <main>
           <SessionProvider>
             <ReactQueryProvider>
-              <JotaiProvider>
-                <Header />
-                <Layout>{params.children}</Layout>
-                <Footer />
-              </JotaiProvider>
+              {/* <JotaiProvider> */}
+              {/* <Header /> */}
+              <Layout>{params.children}</Layout>
+              {/* <Footer /> */}
+              {/* </JotaiProvider> */}
             </ReactQueryProvider>
           </SessionProvider>
         </main>

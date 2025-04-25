@@ -1,5 +1,5 @@
-// import Footer from "./footer";
-// import Header from "./header";
+import Footer from "./footer";
+import Header from "./header";
 
 interface Props {
   children: React.ReactNode;
@@ -8,9 +8,9 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }) => {
   return (
     <div className="w-full">
-      {/* <Header /> */}
+      <Header />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
