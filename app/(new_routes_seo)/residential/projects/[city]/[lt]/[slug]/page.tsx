@@ -119,7 +119,7 @@ import {
   getAuthorityNames,
   getProjectDetails,
 } from "@/app/utils/api/project";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getPagesSlugs } from "@/app/seo/api";
 import { Metadata, ResolvingMetadata } from "next";
 import redisService from "@/app/utils/redis/redis.service";

@@ -21,7 +21,7 @@ export default async function Page({ params: { city, lt } }: Props) {
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
   const serverData = await getSearchData(filterValues.LT as string);
-  console.log(serverData);
+
   return (
     <NewSearchPage
       pageUrl={pathname}

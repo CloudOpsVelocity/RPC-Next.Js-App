@@ -96,8 +96,8 @@ const getListingDetails = async (
     return { ...data, totalPrice: ac + otherCharges };
   } catch (error: any) {
     // console.log(error);
-    // notFound();
-    permanentRedirect(error.message as string);
+    notFound();
+    // permanentRedirect(error.message as string);
   }
 };
 
