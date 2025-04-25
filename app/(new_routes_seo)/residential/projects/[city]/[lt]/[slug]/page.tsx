@@ -160,13 +160,7 @@ export default async function page(props: Props) {
     projectSlug !== projectNameSlug ||
     city !== projResponse.basicData.cityName.toLowerCase()
   ) {
-    const path = createProjectLinkUrl({
-      city: projResponse.basicData.cityName,
-      slug: projResponse.basicData.projectName,
-      locality: projResponse.basicData.localityName,
-      projIdEnc: projResponse.basicData.projIdEnc,
-    });
-    return permanentRedirect(path);
+    return notFound();
   }
   if (projResponse.basicData.projAuthorityId) {
     const authorityNames = await getAuthorityNames(
