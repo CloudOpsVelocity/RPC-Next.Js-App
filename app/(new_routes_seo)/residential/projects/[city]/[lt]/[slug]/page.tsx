@@ -7,10 +7,7 @@ const Loans = dynamicImport(() => import("@/app/components/project/loans"));
 
 const About = dynamicImport(() => import("@/app/components/project/about"));
 const Navigation = dynamicImport(
-  () => import("@/app/components/project/navigation"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/navigation")
 );
 const ProjectDrawer = dynamicImport(
   () => import("@/app/components/project/Drawer")
@@ -33,10 +30,7 @@ const MasterPlan = dynamicImport(
   () => import("@/app/components/project/masterplan")
 );
 const ProjectDetailsP = dynamicImport(
-  () => import("@/app/components/project/projectDetailsP"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/projectDetailsP")
 );
 const GalleryBlock = dynamicImport(
   () => import("@/app/components/project/galleryBlock")
@@ -46,41 +40,21 @@ const Specifications = dynamicImport(
 );
 const Banner = dynamicImport(() => import("@/app/components/project/banner"));
 const AboutBuilder = dynamicImport(
-  () => import("@/app/components/project/aboutBuilder"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/aboutBuilder")
 );
 const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamicImport(
-  () => import("@/app/components/project/NearByCarousel"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/NearByCarousel")
 );
 const LoginPopup = dynamicImport(
-  () => import("@/app/components/project/modals/LoginPop"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/modals/LoginPop")
 );
-const Reviews = dynamicImport(
-  () => import("@/app/components/project/reviews"),
-  {
-    ssr: false,
-  }
-);
+const Reviews = dynamicImport(() => import("@/app/components/project/reviews"));
 const PartialUnitData = dynamicImport(
-  () => import("@/app/components/project/sections"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/sections")
 );
 const PropertyDataDisplay = dynamicImport(
-  () => import("@/app/components/project/_ui/PricingDetailsSection"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/_ui/PricingDetailsSection")
 );
 const Disclamer = dynamicImport(
   () => import("@/app/components/builder/Disclamer")
@@ -89,10 +63,7 @@ const BreadCrumbs = dynamicImport(
   () => import("@/app/components/project/breadcrum/BreadCrum")
 );
 const FloorPlans = dynamicImport(
-  () => import("@/app/components/project/newFloorPlan/floor-plan"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/newFloorPlan/floor-plan")
 );
 const ProjectSchema = dynamicImport(
   () => import("@/app/seo/ProjectDetailSchema")
@@ -104,10 +75,7 @@ const ProjectGallery = dynamicImport(
 );
 
 const ProjectBrouchersSection = dynamicImport(
-  () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/broucher/ProjectBrouchersSections")
 );
 import {
   getAmenties,
