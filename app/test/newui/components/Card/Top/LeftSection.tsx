@@ -49,7 +49,7 @@ export default function LeftSection({
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
-
+ 
   return (
     <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
@@ -65,31 +65,45 @@ export default function LeftSection({
           </p>
         </>
       )}
+      
+     {/* Preconnect to image domain */}
+      <link
+        rel="preconnect"
+        href="https://media.getrightproperty.com"
+        crossOrigin="anonymous"
+      />;
+
+      {/* Preload image with srcSet and sizes */}
+      <link
+        rel="preload"
+        as="image"
+        href={src ? (src.includes(",") ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src).split(",")[1] : "") : ""}
+        />
+
       <Link href={pageUrl}>
         <picture>
           <source
             media="(max-width: 460px)"
-            srcSet={src ? src.split(",")[1] : ""}
-          />
+            srcSet={src ? (src.includes(",") ? src.split(",")[1] : "") : ""}
+      />
           <source
             media="(max-width: 800px)"
-            srcSet={src ? src.split(",")[2] : ""}
-          />
+            srcSet={src ? (src.includes(",") ? src.split(",")[2] : "") : ""}
+      />
 
           <Image
-            src={
-              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : src
-            }
+            src={src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""}
             width={304}
             height={214}
             alt={imageAlt}
             title={imageAlt}
-            className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
+            className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
             quality={100}
             unoptimized
           />
         </picture>
       </Link>
+
       {/* <div>
         
       </div> */}
