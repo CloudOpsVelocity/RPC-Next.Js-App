@@ -11,8 +11,8 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
       {
-        // next: { tags: [slug] },
-        cache: "no-store",
+        next: { tags: [slug] },
+        // cache: "no-store",
       }
     );
 
