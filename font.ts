@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 
 const montserrat = localFont({
-  preload: true,
+  preload: false,
   adjustFontFallback: false,
   src: [
     {
