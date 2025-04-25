@@ -16,6 +16,7 @@ import MiddleSection from "./(dashboard)/new/components/MiddleSection";
 // import dynamic from "next/dynamic";
 import { HomeSiteNavigationSchema } from "./seo/common/home.schema";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export default async function Page() {
   const cityData = {
@@ -34,7 +35,6 @@ export default async function Page() {
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
       <link rel="preload" as="image" href={"/home/home-search.svg"} />
-
       <HomeSiteNavigationSchema />
       <HomeSearch
         cityData={{
@@ -82,36 +82,4 @@ export const metadata: Metadata = {
     ], // Replace with actual image
   },
   metadataBase: new URL("https://www.getrightproperty.com"),
-  other: {
-    "application/ld+json": JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      name: "Your Local Business Name",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "123 Main Street",
-        addressLocality: "Bengaluru",
-        addressRegion: "Karnataka",
-        postalCode: "560001",
-        addressCountry: "IN",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: "YOUR_LATITUDE",
-        longitude: "YOUR_LONGITUDE",
-      },
-      telephone: "+91 XXXXXXXXXX",
-      url: "https://yourwebsite.com",
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "17:00",
-        },
-        // Add other days as needed
-      ],
-      // ... other LocalBusiness properties
-    }),
-  },
 };
