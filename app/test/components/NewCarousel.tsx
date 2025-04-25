@@ -133,7 +133,7 @@ function NewCarousel<T>({
     <div className="relative group mt-2">
       <div
         ref={containerRef}
-        className={`relative  scrollbar-hide`}
+        className={`relative  scrollbar-hide overflow-x-auto`}
         style={{ margin: isMobile ? 0 : `0 ${gap / 2}px` }}
       >
         <div
