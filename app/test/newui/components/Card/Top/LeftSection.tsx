@@ -85,6 +85,7 @@ export default function LeftSection({
             className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
             quality={100}
             unoptimized
+            loading="eager"
           />
         </picture>
       </Link>

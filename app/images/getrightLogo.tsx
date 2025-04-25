@@ -12,7 +12,7 @@ export const GrpLogoSvg = ({ className }: { className: string }) => (
   />
 );
 
-export const GrpLogoSvgMobile = ({ className }: { className: string }) => (
+/* export const GrpLogoSvgMobile = ({ className }: { className: string }) => (
   <Image
     src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/grp-logo-mobile.webp`}
     width={160}
@@ -22,7 +22,7 @@ export const GrpLogoSvgMobile = ({ className }: { className: string }) => (
     className={className}
     unoptimized
   />
-);
+); */
 
 
 export const GrpDarkLogoSvg = ({ className }: { className: string }) => {

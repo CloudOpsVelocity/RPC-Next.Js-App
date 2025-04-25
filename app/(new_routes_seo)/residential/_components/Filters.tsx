@@ -83,8 +83,8 @@ export default function Filters({}: Props) {
             </select>
           </div> */}
           <SelectField />
-          {/* <CustomBhkTypeSelect />
-          <CustomBugdetSelect /> */}
+          <CustomBhkTypeSelect />
+          <CustomBugdetSelect />
           <div>
             
           </div>
