@@ -48,13 +48,18 @@ function Footer() {
   const sections = [
     {
       title: "New Projects",
-      links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
+      links: [
+        // "New Delhi",
+        "Bangalore",
+
+        // "Chennai", "Mumbai", "Hyderabad"
+      ],
       hrefs: [
-        "/search?sf=city=New+Delhi%2B683",
+        // "/search?sf=city=New+Delhi%2B683",
         "/search?sf=city=Bengaluru%2B9-cg=S",
-        "/search?sf=city=Chennai%2B580",
-        "/search?sf=city=Mumbai%2B577",
-        "/search?sf=city=Hyderabad%2B582",
+        // "/search?sf=city=Chennai%2B580",
+        // "/search?sf=city=Mumbai%2B577",
+        // "/search?sf=city=Hyderabad%2B582",
       ],
       /*  rel="noopener noreferrer", */
       rel: "noopener noreferrer",
