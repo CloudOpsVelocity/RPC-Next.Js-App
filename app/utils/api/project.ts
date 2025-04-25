@@ -17,13 +17,12 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
     );
 
     if (!response.ok) {
-      throw new Error(
-        `Time:${new Date().toLocaleTimeString()} StatusCode:${
-          response.status
-        }-${
-          response.statusText
-        } ${await response.text()} Failed to fetch project details for slug: ${slug}`
-      );
+      const errorMessage = `\x1b[31m[ERROR]\x1b[0m Time: ${new Date().toLocaleTimeString()} | Status: ${
+        response.status
+      } ${
+        response.statusText
+      }\nDetails: ${await response.text()}\nSlug: ${slug}`;
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
