@@ -82,4 +82,36 @@ export const metadata: Metadata = {
     ], // Replace with actual image
   },
   metadataBase: new URL("https://www.getrightproperty.com"),
+  other: {
+    "application/ld+json": JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: "Your Local Business Name",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "123 Main Street",
+        addressLocality: "Bengaluru",
+        addressRegion: "Karnataka",
+        postalCode: "560001",
+        addressCountry: "IN",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: "YOUR_LATITUDE",
+        longitude: "YOUR_LONGITUDE",
+      },
+      telephone: "+91 XXXXXXXXXX",
+      url: "https://yourwebsite.com",
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "09:00",
+          closes: "17:00",
+        },
+        // Add other days as needed
+      ],
+      // ... other LocalBusiness properties
+    }),
+  },
 };
