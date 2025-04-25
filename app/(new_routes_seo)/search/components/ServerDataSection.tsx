@@ -15,6 +15,7 @@ export default function ServerDataSection({
   mutate,
   state,
 }: Props) {
+   
   return data.map((eachOne: any, index: number) => {
     return (
       <ProjectCard

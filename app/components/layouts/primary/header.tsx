@@ -13,7 +13,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import Btn from "@/app/(dashboard)/new/components/post-your-listing/Btn";
 import PostProjectBtn from "@/app/(dashboard)/new/components/PostProjectBtn";
 import MenuBtn from "@/app/(dashboard)/new/components/home-search/header/Menu";
-import { GrpLogoSvg } from "@/app/images/getrightLogo";
+import { GrpLogoSvg, GrpLogoSvgMobile } from "@/app/images/getrightLogo";
 import { usePathname } from "next/navigation";
 import { homePageSvgsMap } from "@/app/images/commongsSvgs2";
 
@@ -42,7 +42,8 @@ export default function Header({}: Props) {
           className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
         >
           <span className="hidden">Home Logo</span>
-          <GrpLogoSvg className="h-[54px] sm:h-[50px] w-[160px] max-w-[160px]" />
+          <GrpLogoSvgMobile className="h-[50px] w-[160px] sm:hidden"/>
+          <GrpLogoSvg className="h-[54px] w-[160px] hidden sm:block"/>
         </Link>
         {isMobile ? (
           <div className="flex sm:hidden mr-4 gap-4">

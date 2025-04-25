@@ -31,6 +31,7 @@ export default async function Page() {
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
+      <link rel="preload" as="image" href={"/home/home-search.svg" }/>
       <HomeSiteNavigationSchema />
       <HomeSearch
         cityData={{
