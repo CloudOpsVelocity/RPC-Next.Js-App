@@ -4,6 +4,8 @@ import { getData, getHomeListingData } from "./(dashboard)/new/api";
 import HomeSearch from "./(dashboard)/new/components/home-search";
 import HomeFeatures from "./(dashboard)/new/components/features";
 import MiddleSection from "./(dashboard)/new/components/MiddleSection";
+import LocalBusinessJsonLdScript from "@/app/seo/Localjson";
+import OrganizationSchema from "@/app/seo/OraganisationSchema";
 // const MiddleSection = dynamic(
 //   () => import("./(dashboard)/new/components/MiddleSection"),
 //   {
@@ -33,6 +35,8 @@ export default async function Page() {
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
       <link rel="preload" as="image" href={"/home/home-search.svg"} />
+      <OrganizationSchema />
+      <LocalBusinessJsonLdScript />
       <HomeSiteNavigationSchema />
       <HomeSearch
         cityData={{
