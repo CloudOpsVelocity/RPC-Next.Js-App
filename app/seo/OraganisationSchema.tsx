@@ -89,13 +89,8 @@ const generatePropertyJsonLd = (): WithContext<Organization> => {
   return jsonLd;
 };
 
-interface OrganizationSchemaProps {
-  data: any; // Consider a more specific type for your data if available
-}
-
-const OrganizationSchema: React.FC<OrganizationSchemaProps> = ({ data }) => {
+const OrganizationSchema: React.FC = () => {
   const jsonLd = generatePropertyJsonLd();
-
   return (
     <script
       type="application/ld+json"
