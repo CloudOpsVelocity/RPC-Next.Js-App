@@ -65,21 +65,6 @@ export default function LeftSection({
           </p>
         </>
       )}
-      
-     {/* Preconnect to image domain */}
-      <link
-        rel="preconnect"
-        href="https://media.getrightproperty.com"
-        crossOrigin="anonymous"
-      />;
-
-      {/* Preload image with srcSet and sizes */}
-      <link
-        rel="preload"
-        as="image"
-        href={src ? (src.includes(",") ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src).split(",")[1] : "") : ""}
-        />
-
       <Link href={pageUrl}>
         <picture>
           <source

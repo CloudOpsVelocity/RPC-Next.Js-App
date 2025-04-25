@@ -180,6 +180,30 @@ function LeftSection({
         <LoadingBlock />
       ) : dataToUse?.length > 0 ? (
         <>
+    {/* Image use below */}
+      {( dataToUse[0].coverUrl) && (
+        <>
+            <link
+              rel="preconnect"
+              href="https://media.getrightproperty.com"
+              crossOrigin="anonymous"
+            />
+        
+            {/* Preload image with srcSet and sizes */}
+            {dataToUse?.[0]?.coverUrl?.includes(",") && (
+              <link
+                rel="preload"
+                as="image"
+                href={
+                  dataToUse[0].coverUrl.includes("+")
+                    ? dataToUse[0].coverUrl.replace(/\+/g, "%2B").split(",")[1]
+                    : dataToUse[0].coverUrl.split(",")[1]
+                }
+              />
+            )}
+          </>
+          )}
+        {/* Image Use above*/}
           <ServerDataSection
             data={dataToUse}
             refetch={refetch}
