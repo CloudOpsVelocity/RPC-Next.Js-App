@@ -145,7 +145,7 @@ export default function ResidentialPageForListings({
       </section>
 
       {/*    <Banner heroSlides={data?.featured} data={data} /> */}
-      {/* <FiltersForListings /> */}
+      <FiltersForListings />
       {/*  <ResidentialCardSectionForListings
         data={data}
         setLoading={setLoading}

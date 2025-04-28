@@ -76,9 +76,9 @@ export default function Card({ item }: Props) {
 
                   <ShareBtn url={url} type="proj" />
                 </div>{" "}
-                <Link href={url}>{item.projName}</Link>
+                <Link prefetch={false} href={url}>{item.projName}</Link>
               </div>
-              <Link href={url}>
+              <Link prefetch={false} href={url}>
                 <span className=" block text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
                   {formatCurrency(item.minPrice)} -{" "}
                   {formatCurrency(item.maxPrice)}
@@ -98,6 +98,7 @@ export default function Card({ item }: Props) {
                 <span className=" no-underline text-[#ffff]">Builder: </span>
                 <Link
                   href={urlBuilder}
+                  prefetch={false}
                   // onClick={(e) => builderiRedirect(e)}
                   className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"
                 >
