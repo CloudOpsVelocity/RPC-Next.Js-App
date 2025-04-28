@@ -6,6 +6,7 @@ import { useQueryState } from "nuqs";
 import { useHydrateAtoms } from "jotai/utils";
 import { projSearchStore } from "../../store/projSearchStore";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
+import { initialState } from "@/app/store/search";
 // import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
 // const ListingSearchRightSection = dynamic(
 //   () => import("./listingSearchTabs/listingSearchRightSection")
@@ -26,6 +27,7 @@ export default function ListingMainSection({
         {
           type: "update",
           payload: {
+            ...initialState,
             ...frontendFilters,
           },
         },
