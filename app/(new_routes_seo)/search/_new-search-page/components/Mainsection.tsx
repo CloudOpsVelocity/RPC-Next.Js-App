@@ -26,7 +26,7 @@ type Props = {
 export default function Mainsection({
   frontendFilters,
   serverData,
-  preAppliedFilters,
+  preAppliedFilters = null,
 }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
@@ -49,10 +49,9 @@ export default function Mainsection({
       dangerouslyForceHydrate: true,
     }
   );
-
-  const pathname = usePathname();
+  console.log({ apiFilterQueryParams, preAppliedFilters });
   const [it, setIsTrue] = useState(apiFilterQueryParams !== preAppliedFilters);
-
+  console.log({});
   return (
     <>
       <LeftSection
@@ -60,6 +59,7 @@ export default function Mainsection({
         frontendFilters={frontendFilters}
         isTrue={it}
         setIsTrue={setIsTrue}
+        preAppliedFilters={preAppliedFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
 
