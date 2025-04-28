@@ -65,7 +65,9 @@ export default function LeftSection({
           </p>
         </>
       )}
-      <Link href={pageUrl}>
+      <Link
+      
+      href={pageUrl}>
         <picture>
           <source
             media="(min-width: 1200px)"
@@ -83,7 +85,7 @@ export default function LeftSection({
             src={src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""}
             alt={imageAlt}
             title={imageAlt}
-            style={{ width: '100%', height: 'auto' }}
+            className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
           />
         </picture>
       </Link>
