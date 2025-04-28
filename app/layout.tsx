@@ -27,20 +27,35 @@ export default function RootLayout(params: { children: React.ReactNode }) {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Get Right Property",
-    url: "https://www.getrightproperty.com",
-    logo: "https://www.getrightproperty.com/logo.png", // Replace with your actual logo URL
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+91-XXXXXXXXXX", // Add your real customer care number here
-      contactType: "Customer Support",
-      areaServed: "IN",
-      availableLanguage: ["English", "Hindi"],
+    name: "Magicbricks Realty Services Limited",
+    url: "https://www.magicbricks.com/",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://cdn.staticmb.com/mbimages/appimages/mailers/mb-logo-web.webp",
+      width: 600,
+      height: 60,
     },
     sameAs: [
-      "https://www.facebook.com/GetRightProperty", // Replace with your real social links
-      "https://www.instagram.com/GetRightProperty",
-      "https://www.linkedin.com/company/getrightproperty",
+      "https://www.facebook.com/magicbricks",
+      "https://www.twitter.com/magicbricks",
+      "https://www.youtube.com/user/magicbricksvideo",
+      "https://www.linkedin.com/company/magicbricks/",
+    ],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress:
+        "Magicbricks Realty Services Limited (magicbricks.com), Times Centre (Digital Content Production Facility),FC - 6, (Third Floor), Sector 16 A, Film City",
+      addressLocality: "Noida",
+      addressRegion: "India",
+      postalCode: "201301",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+91 120-6866600",
+        contactType: "Customer Service",
+        areaServed: "India",
+      },
     ],
   };
   return (
