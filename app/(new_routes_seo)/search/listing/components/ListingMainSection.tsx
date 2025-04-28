@@ -20,6 +20,7 @@ export default function ListingMainSection({
   frontendFilters,
   serverData,
 }: Props) {
+  console.log({ initialState, frontendFilters });
   useHydrateAtoms(
     [
       [
