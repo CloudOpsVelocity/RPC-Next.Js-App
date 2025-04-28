@@ -1,7 +1,7 @@
 import Footer from "./footer";
 import Header from "./header";
-import LocalBusinessJsonLdScript from "@/app/seo/Localjson";
-import OrganizationSchema from "@/app/seo/OraganisationSchema";
+// import LocalBusinessJsonLdScript from "@/app/seo/Localjson";
+// import OrganizationSchema from "@/app/seo/OraganisationSchema";
 
 interface Props {
   children: React.ReactNode;

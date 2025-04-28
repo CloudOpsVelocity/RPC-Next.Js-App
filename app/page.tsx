@@ -33,48 +33,9 @@ export default async function Page() {
   ]);
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Magicbricks Realty Services Limited",
-            url: "https://www.magicbricks.com/",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://cdn.staticmb.com/mbimages/appimages/mailers/mb-logo-web.webp",
-              width: 600,
-              height: 60,
-            },
-            sameAs: [
-              "https://www.facebook.com/magicbricks",
-              "https://www.twitter.com/magicbricks",
-              "https://www.youtube.com/user/magicbricksvideo",
-              "https://www.linkedin.com/company/magicbricks/",
-            ],
-            address: {
-              "@type": "PostalAddress",
-              streetAddress:
-                "Magicbricks Realty Services Limited (magicbricks.com), Times Centre (Digital Content Production Facility),FC - 6, (Third Floor), Sector 16 A, Film City",
-              addressLocality: "Noida",
-              addressRegion: "India",
-              postalCode: "201301",
-            },
-            contactPoint: [
-              {
-                "@type": "ContactPoint",
-                telephone: "+91 120-6866600",
-                contactType: "Customer Service",
-                areaServed: "India",
-              },
-            ],
-          }),
-        }}
-      />
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}/`} />
       <link rel="preload" as="image" href={"/home/home-search.svg"} />
-      {/* <HomeSiteNavigationSchema />
+      <HomeSiteNavigationSchema />
       <HomeSearch
         cityData={{
           cityId: cityData?.data?.cityId ?? "",
@@ -86,7 +47,7 @@ export default async function Page() {
         data={data}
         listingData={listingData}
         cityData={cityData}
-      /> */}
+      />
     </div>
   );
 }

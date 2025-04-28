@@ -52,6 +52,8 @@ export default function ResidentialListingsSchema({
   };
   return (
     <>
+      <OrganizationSchema />
+      <LocalBusinessJsonLdScript />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

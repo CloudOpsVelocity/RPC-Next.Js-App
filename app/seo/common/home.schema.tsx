@@ -412,8 +412,8 @@ export const HomeSiteNavigationSchema = () => {
           __html: JSON.stringify(breadcrumbSchema),
         }}
       /> */}
-      {/* <OrganizationSchema />
-      <LocalBusinessJsonLdScript /> */}
+      <OrganizationSchema />
+      <LocalBusinessJsonLdScript />
 
       <script
         type="application/ld+json"
