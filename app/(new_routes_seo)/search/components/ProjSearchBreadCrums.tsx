@@ -88,7 +88,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
                 <Link
                   rel="noopener noreferrer"
                   prefetch={false}
-                  target="_blank"
+                  // target="_blank"
                   href={url}
                   className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
                   aria-current={

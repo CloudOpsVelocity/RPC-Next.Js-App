@@ -40,7 +40,9 @@ export default function ProjectDetailsP({
   slug,
   projData,
 }: Props) {
-  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]]);
+  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]], {
+    dangerouslyForceHydrate: true,
+  });
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
   const handlePhaseChange = (phaseId: number) => {
     setFloorPhase(phaseId);
@@ -68,7 +70,7 @@ export default function ProjectDetailsP({
     >
       <h2 className="text-h2 sm:text-[22px] xl:text-[28px] font-bold mb-[12px] break-words  ">
         <strong>
-          <span className="text-[#001F35]">Property Details Of{" "}</span>
+          <span className="text-[#001F35]">Property Details Of </span>
           <span className="text-[#148B16]">{projName}</span>{" "}
         </strong>
       </h2>

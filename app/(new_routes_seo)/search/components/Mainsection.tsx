@@ -22,17 +22,22 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
-  useHydrateAtoms([
+  useHydrateAtoms(
     [
-      projSearchStore,
-      {
-        type: "update",
-        payload: {
-          ...frontendFilters,
+      [
+        projSearchStore,
+        {
+          type: "update",
+          payload: {
+            ...frontendFilters,
+          },
         },
-      },
+      ],
     ],
-  ]);
+    {
+      dangerouslyForceHydrate: true,
+    }
+  );
 
   const pathname = usePathname();
   const [it, setIsTrue] = useState(

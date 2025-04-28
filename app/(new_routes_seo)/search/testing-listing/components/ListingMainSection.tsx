@@ -18,17 +18,22 @@ export default function ListingMainSection({
   frontendFilters,
   serverData,
 }: Props) {
-  useHydrateAtoms([
+  useHydrateAtoms(
     [
-      projSearchStore,
-      {
-        type: "update",
-        payload: {
-          ...frontendFilters,
+      [
+        projSearchStore,
+        {
+          type: "update",
+          payload: {
+            ...frontendFilters,
+          },
         },
-      },
+      ],
     ],
-  ]);
+    {
+      dangerouslyForceHydrate: true,
+    }
+  );
   const pathname = usePathname();
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isTrue, setIsTrue] = useState(
