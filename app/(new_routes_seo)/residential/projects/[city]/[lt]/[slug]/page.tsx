@@ -371,7 +371,9 @@ export async function generateStaticParams() {
     const data = projectRes[i];
     if ((data.match(/\//g) || []).length === 5) {
       const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-      slugs.push({ city, lt, slug });
+      if (slug) {
+        slugs.push({ city, lt, slug });
+      }
     }
   }
   return slugs;
