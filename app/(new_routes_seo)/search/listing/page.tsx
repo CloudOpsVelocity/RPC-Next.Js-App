@@ -51,5 +51,5 @@ export const metadata: Metadata = {
     canonical: "https://www.getrightproperty.com/search/listing",
   },
 };
-// export const dynamic = "force-dynamic";
-// export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
