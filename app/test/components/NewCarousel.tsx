@@ -78,6 +78,7 @@ function NewCarousel<T>({
 
   const DefaultViewMore = () => (
     <Link
+    prefetch={false}
       href={url ?? "/"}
       target="_blank"
       // onClick={() => (url ? window.open(url, "_self", "noreferrer") : "")}

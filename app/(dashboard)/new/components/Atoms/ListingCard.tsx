@@ -49,12 +49,15 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
 
         <Link
+          prefetch={false}
           href={listingLink}
           className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 " /* z-[1000] */
         >
           View Details
         </Link>
-        <Link href={listingLink}>
+        <Link
+        prefetch={false}
+        href={listingLink}>
           <Image
             alt={title}
             title={title}
@@ -78,7 +81,9 @@ export default function ListingCard({ item, sl }: Props) {
 
       <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
-          <Link href={listingLink} className="space-y-1  ">
+          <Link 
+          prefetch={false}
+          href={listingLink} className="space-y-1  ">
             <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
                 `${formatNumberWithSuffix(item.pa, false)} sq.ft`}{" "}
