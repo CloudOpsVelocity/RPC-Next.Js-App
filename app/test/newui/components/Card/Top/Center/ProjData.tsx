@@ -80,7 +80,7 @@ export default function ProjData({
   // console.log(postedByName, type, category,  "of poste by in buyilfder poste card")
   return type === "proj" ? (
     <div className="flex flex-col">
-      <Link href={pageUrl}>
+      <Link href={pageUrl} prefetch={false}>
         <h2>
           <span className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap w-full xl:w-[calc(100%-210px)]">
             {projName}{" "}
@@ -140,6 +140,7 @@ export default function ProjData({
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
         {postedBy ?? "Builder"}:{" "}
         <Link
+          prefetch={false}
           href={urlBuilder}
           title="Click to view Builder"
           className="font-bold underline cursor-pointer"
@@ -154,7 +155,7 @@ export default function ProjData({
     </div>
   ) : (
     <div>
-      <Link href={pageUrl}>
+      <Link href={pageUrl} prefetch={false}>
         <h2
           className={`text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold w-full xl:w-[calc(100%-210px)]`}
         >
@@ -192,6 +193,7 @@ export default function ProjData({
       <h3 className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         {projIdEnc != undefined ? (
           <Link
+            prefetch={false}
             className={`font-bold underline cursor-pointer`}
             href={projectUrl}
           >

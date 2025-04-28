@@ -49,7 +49,7 @@ export default function LeftSection({
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
- 
+
   return (
     <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
@@ -65,13 +65,13 @@ export default function LeftSection({
           </p>
         </>
       )}
-      <Link
-      
-      href={pageUrl}>
+      <Link prefetch={false} href={pageUrl}>
         <picture>
           <source
             media="(min-width: 1200px)"
-            srcSet={src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""}
+            srcSet={
+              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
+            }
           />
           <source
             media="(max-width: 768px)"
@@ -82,14 +82,15 @@ export default function LeftSection({
             srcSet={src ? (src.includes(",") ? src.split(",")[1] : "") : ""}
           />
           <img
-            src={src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""}
+            src={
+              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
+            }
             alt={imageAlt}
             title={imageAlt}
             className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
           />
         </picture>
       </Link>
-
 
       {/* <div>
         

@@ -377,7 +377,7 @@ export async function generateStaticParams() {
       }
     }
   }
-  logger.info(slugs);
+
   return slugs;
 
   // Extract project names from the keys
