@@ -10,8 +10,8 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }) => {
   return (
     <div className="w-full">
-      <OrganizationSchema />
-      <LocalBusinessJsonLdScript />
+      {/* <OrganizationSchema />
+      <LocalBusinessJsonLdScript /> */}
       <Header />
       {children}
       <Footer />
