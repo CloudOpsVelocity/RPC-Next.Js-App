@@ -7,7 +7,7 @@ import {
   initialState,
   projSearchStore,
 } from "../../../store/newSearchProjectStore";
-import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 

@@ -1,11 +1,9 @@
 "use client";
 import { useHydrateAtoms } from "jotai/utils";
 import dynamic from "next/dynamic";
-import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 import React, { useState } from "react";
 import {
-  initialState,
   projSearchStore,
   searchPageMapToggle,
 } from "../../store/newSearchProjectStore";
@@ -39,7 +37,6 @@ export default function Mainsection({
         {
           type: "update",
           payload: {
-            // ...initialState,
             ...frontendFilters,
           },
         },
@@ -49,9 +46,9 @@ export default function Mainsection({
       dangerouslyForceHydrate: true,
     }
   );
-  console.log({ apiFilterQueryParams, preAppliedFilters });
+
   const [it, setIsTrue] = useState(apiFilterQueryParams !== preAppliedFilters);
-  console.log({});
+
   return (
     <>
       <LeftSection

@@ -50,36 +50,43 @@ function LeftSection({
   const isTrue = it || apiFilterQueryParams !== preAppliedFilters;
   console.log({ isTrue });
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(
-          pageParam,
-          apiFilterQueryParams ?? ""
-        );
-        return response;
-      },
-      getNextPageParam: (lastPage: any) => {
-        return lastPage?.length === 20 ? page + 1 : undefined;
-      },
-      initialData: serverData
-        ? {
-            pages: [serverData],
-            pageParams: [0],
-          }
-        : undefined,
-      cacheTime: 300000,
-      enabled: isTrue,
-      staleTime: 0,
-      refetchOnWindowFocus: false,
-      onSuccess: (data: any) => {
-        const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
-      },
-    });
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+    isFetchedAfterMount,
+    isFetching,
+  } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getSearchData(
+        pageParam,
+        apiFilterQueryParams ?? ""
+      );
+      return response;
+    },
+    getNextPageParam: (lastPage: any) => {
+      return lastPage?.length === 20 ? page + 1 : undefined;
+    },
+    initialData: serverData
+      ? {
+          pages: [serverData],
+          pageParams: [0],
+        }
+      : undefined,
+    cacheTime: 300000,
+    enabled: isTrue,
+    staleTime: 0,
+    refetchOnWindowFocus: false,
+    onSuccess: (data: any) => {
+      const newData = data.pages[data.pageParams.length - 1];
+      setMainData((prev: any) => [...prev, ...newData]);
+    },
+  });
 
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -181,7 +188,7 @@ function LeftSection({
 
   return (
     <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
-      {isLoading && !dataToUse?.length ? (
+      {(isLoading && !dataToUse?.length) || isFetching ? (
         <LoadingBlock />
       ) : dataToUse?.length > 0 ? (
         <>
