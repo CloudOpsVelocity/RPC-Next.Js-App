@@ -34,6 +34,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
         {
           type: "update",
           payload: {
+            // ...initialState,
             ...frontendFilters,
           },
         },
@@ -48,7 +49,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   const [it, setIsTrue] = useState(
     pathname.includes("search") ? true : apiFilterQueryParams !== null
   );
-
+  console.log({ frontendFilters, initialState });
   return (
     <>
       <LeftSection

@@ -129,6 +129,7 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import FirstBlock from "@/app/components/project/firstBlock";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import Overview from "@/app/components/project/overview";
+import logger from "@/app/utils/logger";
 type Props = {
   params: Promise<{ city: string; lt: string; slug: string }>;
 };
@@ -136,7 +137,7 @@ type Props = {
 export default async function page(props: Props) {
   const params = await props.params;
   const { city, lt, slug: name } = params;
-  console.log(name);
+
   const slug = name.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
@@ -376,6 +377,7 @@ export async function generateStaticParams() {
       }
     }
   }
+  logger.info(slugs);
   return slugs;
 
   // Extract project names from the keys
