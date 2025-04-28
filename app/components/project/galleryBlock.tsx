@@ -10,7 +10,7 @@ import clsx from "clsx";
 import SubHeading from "./headings/SubHeading";
 import { useMediaQuery } from "@mantine/hooks";
 import VideoJsonLdScript from "@/app/seo/VideoJson";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
 import Image from "next/image";
 import { preventBackButton } from "../molecules/popups/req";
