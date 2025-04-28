@@ -23,7 +23,9 @@ export const getListingSearchData = async (
   return res.data;
 };
 
-const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
+export const parseApiFilterQueryParams = (
+  apiFilterQueryParams: string
+): string => {
   // Directly process the input string in a single pass
 
   const transformedParams = apiFilterQueryParams

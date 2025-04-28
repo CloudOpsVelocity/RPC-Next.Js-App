@@ -20,9 +20,14 @@ const RightSection = dynamic(
 type Props = {
   serverData: any;
   frontendFilters: any;
+  preAppliedFilters: any;
 };
 
-export default function Mainsection({ frontendFilters, serverData }: Props) {
+export default function Mainsection({
+  frontendFilters,
+  serverData,
+  preAppliedFilters,
+}: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -46,10 +51,8 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   );
 
   const pathname = usePathname();
-  const [it, setIsTrue] = useState(
-    pathname.includes("search") ? true : apiFilterQueryParams !== null
-  );
-  console.log({ frontendFilters, initialState });
+  const [it, setIsTrue] = useState(apiFilterQueryParams !== preAppliedFilters);
+
   return (
     <>
       <LeftSection

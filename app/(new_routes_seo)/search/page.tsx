@@ -4,10 +4,15 @@ import { Metadata } from "next";
 import ProjSearchMainFilterSection from "./_new-search-page/components/filters/ProjSearchMainFilterSection";
 import Mainsection from "./_new-search-page/components/Mainsection";
 import ProjectSearchBreadCrumbs from "./_new-search-page/components/ProjSearchBreadCrums";
-type Props = {};
+import {
+  getSearchData,
+  parseApiFilterQueryParams,
+} from "./utils/project-search-queryhelpers";
 
-export default function Page({}: Props) {
+export default async function Page(params: any) {
   const isListing = false;
+  const apiFilters = parseApiFilterQueryParams(params.searchParams.sf);
+  const data = await getSearchData(0, apiFilters);
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <meta name="robots" content="index, follow" />
@@ -19,7 +24,11 @@ export default function Page({}: Props) {
         />
       </div>
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[226px] ">
-        <Mainsection frontendFilters={{}} serverData={null} />
+        <Mainsection
+          frontendFilters={{}}
+          serverData={data}
+          preAppliedFilters={apiFilters}
+        />
       </div>
     </section>
   );
