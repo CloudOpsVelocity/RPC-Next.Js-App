@@ -4,7 +4,11 @@ import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 import React, { useState } from "react";
-import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
+import {
+  initialState,
+  projSearchStore,
+  searchPageMapToggle,
+} from "../store/projSearchStore";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
@@ -29,6 +33,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
         {
           type: "update",
           payload: {
+            ...initialState,
             ...frontendFilters,
           },
         },
