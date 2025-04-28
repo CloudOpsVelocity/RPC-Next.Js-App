@@ -34,7 +34,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
         {
           type: "update",
           payload: {
-            // ...initialState,
+            ...initialState,
             ...frontendFilters,
           },
         },
