@@ -111,7 +111,7 @@ export default function ListingBreadCrumbs({
                   <Link
                     prefetch={false}
                     href={`${isProject ? "" : BASE_PATH_LISTING}${currentPath}`}
-                    target="_blank"
+                    // target="_blank"
                     className="hover:underline cursor-pointer capitalize"
                   >
                     {/* <a onTouchStart={() => {}}></a> */}
