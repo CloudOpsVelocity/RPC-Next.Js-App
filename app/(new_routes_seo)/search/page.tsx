@@ -1,8 +1,9 @@
 import React from "react";
-import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
-import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
-import Mainsection from "./components/Mainsection";
+
 import { Metadata } from "next";
+import ProjSearchMainFilterSection from "./_new-search-page/components/filters/ProjSearchMainFilterSection";
+import Mainsection from "./_new-search-page/components/Mainsection";
+import ProjectSearchBreadCrumbs from "./_new-search-page/components/ProjSearchBreadCrums";
 type Props = {};
 
 export default function Page({}: Props) {
