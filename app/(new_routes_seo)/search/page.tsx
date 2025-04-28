@@ -16,9 +16,9 @@ export default async function Page(params: any) {
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
   const data = await getSearchData(0, apiFilters ?? "");
-  const frontendFilters = parseProjectSearchQueryParams(
-    params.searchParams.sf ?? ""
-  );
+  // const frontendFilters = parseProjectSearchQueryParams(
+  //   params.searchParams.sf ?? ""
+  // );
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <meta name="robots" content="index, follow" />
@@ -31,7 +31,7 @@ export default async function Page(params: any) {
       </div>
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[226px] ">
         <Mainsection
-          frontendFilters={frontendFilters}
+          frontendFilters={{}}
           serverData={data}
           preAppliedFilters={params.searchParams.sf}
         />
