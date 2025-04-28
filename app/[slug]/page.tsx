@@ -3,9 +3,9 @@ import { getPagesSlugs } from "../seo/api";
 import { Metadata } from "next";
 import { ResolvingMetadata } from "next";
 // import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
-import redisService from "../utils/redis/redis.service";
+// import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
-import { SlugsType } from "../common/constatns/slug.constants";
+// import { SlugsType } from "../common/constatns/slug.constants";
 import NewListingSearchpage from "../(new_routes_seo)/search/listing/NewListingSearchpage";
 
 type Props = {
@@ -34,8 +34,6 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 
 export const generateStaticParams = async () => {
   const res = await getPagesSlugs("case-seo");
-  await redisService.saveSeoSlug(SlugsType.SEO, res);
-
   if (process.env.ENVIRONMENT === "production" && process.env.LAKH_URLS) {
     return res.map((slug: string) => ({ slug }));
   }
