@@ -26,6 +26,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
+  // const filtersData = Object.assign(frontendFilters, initialState);
   useHydrateAtoms(
     [
       [
@@ -33,7 +34,6 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
         {
           type: "update",
           payload: {
-            ...initialState,
             ...frontendFilters,
           },
         },
