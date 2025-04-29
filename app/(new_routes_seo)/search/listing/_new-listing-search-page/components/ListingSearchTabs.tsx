@@ -12,7 +12,6 @@ import { SearchFilter } from "@/app/types/search";
 
 const ListingSearchTabs = ({
   showProjectTab = false,
-  frontendFilters,
 }: {
   showProjectTab?: boolean;
   frontendFilters: Record<string, any>;
@@ -167,13 +166,8 @@ const ListingSearchTabs = ({
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
-                    typeof window === "undefined"
-                      ? frontendFilters.listedBy === tab.id ||
-                        (frontendFilters.listedBy === "All" && tab.id === null)
-                        ? "bg-[#0073C6] text-white shadow-md"
-                        : "text-black hover:bg-[#0073C6] hover:text-white"
-                      : state.listedBy === tab.id ||
-                        (state.listedBy === "All" && tab.id === null)
+                    state.listedBy === tab.id ||
+                    (state.listedBy == "All" && tab.id == null)
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }
