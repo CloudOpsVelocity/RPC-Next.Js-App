@@ -212,6 +212,9 @@ function LeftSection({
             mutate={mutate}
             state={state}
           />
+         {/*  {hasNextPage && shouldFetchMore && (
+           <search totalCount={totalCount} />
+          )} */}
           {hasNextPage && shouldFetchMore && (
             <div
               ref={loadMoreRef}

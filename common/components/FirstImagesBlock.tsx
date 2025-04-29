@@ -2,6 +2,7 @@ import { ShearIcon } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
+import Head from "next/head";
 
 type Props = {
   onSelect: () => void;
@@ -30,26 +31,32 @@ function FirstImagesBlock({ onSelect, data }: Props) {
         crossOrigin="anonymous"
       />;
 
-      {
-        /* Preload image with srcSet and sizes */
-      }
-      <link
-        rel="preload"
-        as="image"
-        href={getUrl(urls, 3)}
-        // @ts-ignore to skip type error
-        imagesrcset={`${getUrl(urls, 1)} 460w, ${getUrl(
-          urls,
-          2
-        )} 768w, ${getUrl(urls, 3)} 1200w`}
-        imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
-      />;
+       {/* Preconnect to image domain */}
+          <Head>
+            <link
+              rel="preconnect"
+              href="https://media.getrightproperty.com"
+              crossOrigin="anonymous"
+            />
+            {/* Preload image with srcSet and sizes */}
+            <link
+              rel="preload"
+              as="image"
+              href={getUrl(urls, 3)}
+              type="image/webp" // Specify the image type (e.g., webp)
+              // @ts-ignore to skip type error
+              fetchpriority="high" // Ensure the image is fetched with high priority
+              imagesrcset={`${getUrl(urls, 1)} 460w, ${getUrl(urls, 2)} 768w, ${getUrl(urls, 3)} 1200w`}
+              imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
+            />
+          </Head>
 
       return (
         <picture>
           <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
           <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
           <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
+       
           <Image
             alt={data.projName || "Project Image"}
             title={data.projName || "Project Image"}
