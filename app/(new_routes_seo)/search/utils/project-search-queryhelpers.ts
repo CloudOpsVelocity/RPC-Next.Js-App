@@ -20,7 +20,7 @@ export const getListingSearchData = async (
   }
   let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
   const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
-  return res.data;
+  return res.data.results;
 };
 
 export const parseApiFilterQueryParams = (

@@ -77,9 +77,8 @@ function LeftSection({
       cacheTime: 300000,
       enabled: isTrue,
       onSuccess: (data: any) => {
-        console.log(data);
         const newData = data.pages[data.pageParams.length - 1];
-        // setMainData((prev: any) => [...prev, ...newData]);
+        setMainData((prev: any) => [...prev, ...newData]);
       },
     });
 
@@ -89,7 +88,6 @@ function LeftSection({
     queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
   });
-  // const allItems = serverData;
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -123,9 +121,7 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
   const dataToUse =
-    pathname.includes("/search") || apiFilterQueryParams
-      ? data?.pages.flat()
-      : mainData;
+    apiFilterQueryParams !== preAppliedFilters ? data?.pages.flat() : mainData;
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
