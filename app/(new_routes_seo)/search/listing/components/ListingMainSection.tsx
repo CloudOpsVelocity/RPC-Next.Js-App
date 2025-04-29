@@ -28,7 +28,7 @@ export default function ListingMainSection({
         {
           type: "update",
           payload: {
-            // ...initialState,
+            ...initialState,
             ...frontendFilters,
           },
         },
