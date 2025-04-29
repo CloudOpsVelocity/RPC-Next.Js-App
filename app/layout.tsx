@@ -32,7 +32,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9243707404617437"
           crossOrigin="anonymous"
         ></script>
-
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {/* <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
