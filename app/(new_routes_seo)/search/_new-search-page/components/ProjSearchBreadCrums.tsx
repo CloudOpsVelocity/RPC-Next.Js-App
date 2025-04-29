@@ -17,7 +17,7 @@ export const trimFromWord = (str: string, word: string) => {
   return index !== -1 ? str.substring(index + word.length) : "";
 };
 
-const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
+const ListingSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   pageUrl,
   is2lakhUrls = false,
 }) => {
@@ -117,4 +117,4 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
   );
 };
 
-export default memo(ProjectSearchBreadCrumbs);
+export default memo(ListingSearchBreadCrumbs);

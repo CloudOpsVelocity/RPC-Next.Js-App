@@ -11,12 +11,11 @@ import {
   MdExpandMore,
   MdExpandLess,
 } from "react-icons/md";
-import { toFormattedString } from "./buget/budget";
 
 import { useAtom, useAtomValue } from "jotai";
-import { projSearchStore } from "../../../store/newSearchProjectStore";
-import LocalitySearch from "./city/searchInputSearch";
-import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
+import { projSearchStore } from "../../../../store/newListingStore";
+// import LocalitySearch
+import useProjSearchAppliedFilters from "./../../hooks/useProjSearchAppliedFilters";
 import { useDebouncedState } from "@mantine/hooks";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useQuery } from "react-query";
@@ -24,6 +23,8 @@ import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import RTK_CONFIG from "@/app/config/rtk";
 import CustomRangeSlider from "@/app/components/atoms/RangeSlider";
+import { toFormattedString } from "@/app/(new_routes_seo)/search/_new-search-page/components/FilterComponents/buget/budget";
+import ListingDynamicSearch from "../ListingDynamicSearch";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
@@ -298,7 +299,7 @@ export default function ShowAllFiltersButton({
           <div className="flex flex-col justify-start max-h-[66vh] mb-10 sm:mb-0 overflow-y-auto">
             {!state.projIdEnc && (
               <div className="flex flex-col mb-6 ml-4 gap-6 sm:mT-6">
-                <LocalitySearch<Location>
+                <ListingDynamicSearch<Location>
                   data={localitydata || []}
                   displayKey="name"
                   loading={isLoading}
@@ -349,7 +350,7 @@ export default function ShowAllFiltersButton({
                   6
                 )}
               {isproject && (
-                <LocalitySearch<Location>
+                <ListingDynamicSearch<Location>
                   data={builderData || []}
                   displayKey="name"
                   valueKey="stringId"

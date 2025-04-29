@@ -4,7 +4,7 @@ import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSecti
 import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 import { useHydrateAtoms } from "jotai/utils";
-import { initialState, projSearchStore } from "../../store/projSearchStore";
+import { initialState, projSearchStore } from "../../../store/newListingStore";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
 
 // import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
@@ -27,7 +27,7 @@ export default function ListingMainSection({
         {
           type: "update",
           payload: {
-            ...initialState,
+            // ...initialState,
             ...frontendFilters,
           },
         },

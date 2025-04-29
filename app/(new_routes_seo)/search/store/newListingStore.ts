@@ -1,7 +1,7 @@
 import { SearchFilter } from "@/app/types/search";
-
+import { filterParser } from "@/app/utils/search";
 import { atom } from "jotai";
-import { atomWithReducer } from "jotai/utils";
+import { atomWithReducer, selectAtom } from "jotai/utils";
 import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
 import { projectprops } from "@/app/data/projectDetails";
 
