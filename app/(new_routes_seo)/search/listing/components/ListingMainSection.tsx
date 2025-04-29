@@ -44,7 +44,7 @@ export default function ListingMainSection({
       ? true
       : serverData !== null && apiFilterQueryParams !== null
   );
-
+  console.log({ initialState, frontendFilters });
   return (
     <>
       <ListingSearchleftSection
