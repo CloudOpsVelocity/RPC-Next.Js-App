@@ -20,7 +20,7 @@ type Props = {
 export default function ListingMainSection({
   frontendFilters,
   serverData,
-  preAppliedFilters,
+  preAppliedFilters = null,
 }: Props) {
   useHydrateAtoms(
     [
