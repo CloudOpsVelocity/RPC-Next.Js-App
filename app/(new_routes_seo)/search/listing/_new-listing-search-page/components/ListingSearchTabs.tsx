@@ -6,7 +6,7 @@ import {
   diffToProjFromListing,
   initialState,
   projSearchStore,
-} from "../../../store/projSearchStore";
+} from "../../../store/newListingStore";
 import useProjSearchAppliedFilters from "./../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
 

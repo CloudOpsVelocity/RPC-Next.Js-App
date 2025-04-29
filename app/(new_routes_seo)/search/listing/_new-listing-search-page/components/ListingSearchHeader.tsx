@@ -24,7 +24,7 @@ import dynamic from "next/dynamic";
 // import PageTitle from "../../components/filters/PageTitle";
 import { useMediaQuery } from "@mantine/hooks";
 import BuyRent from "./BuyRent";
-import ProjSearchCityDropDown from "../../../_new-search-page/components/FilterComponents/city/ProjectSearchCityDropdown";
+// import ProjSearchCityDropDown from "../../../_new-search-page/components/FilterComponents/city/ProjectSearchCityDropdown";
 import ListingSearchCityDropDown from "./ListingSearchCityDropdown";
 import ShowAllFiltersButton from "../../../_new-search-page/components/FilterComponents/ShowAllFiltersButton";
 import PageTitle from "../../../components/filters/PageTitle";
