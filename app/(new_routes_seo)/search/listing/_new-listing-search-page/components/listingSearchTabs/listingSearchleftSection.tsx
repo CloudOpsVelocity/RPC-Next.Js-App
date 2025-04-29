@@ -37,6 +37,7 @@ function LeftSection({
   setIsTrue,
   apiFilterQueryParams,
   preAppliedFilters,
+  frontendFilters,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
@@ -190,6 +191,7 @@ function LeftSection({
           refetch={refetch}
           mutate={mutate}
           state={state}
+          frontendFilters={frontendFilters}
         />
       ) : (
         <EmptyState />

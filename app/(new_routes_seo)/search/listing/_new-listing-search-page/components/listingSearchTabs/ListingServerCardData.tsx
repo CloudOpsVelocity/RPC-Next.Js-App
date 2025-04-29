@@ -6,6 +6,7 @@ type Props = {
   refetch: any;
   mutate: any;
   state: SearchFilter;
+  frontendFilters: Record<string, any>;
 };
 
 export default function ListingServerCardData({
@@ -13,13 +14,21 @@ export default function ListingServerCardData({
   mutate,
   refetch,
   state,
+  frontendFilters,
 }: Props) {
   return data.map((eachOne: any, index: number) => {
     return (
       <ProjectCard
         key={eachOne.projIdEnc + eachOne.propType + index}
         refetch={refetch}
-        data={{ ...eachOne, type: state.listedBy ?? "B", cg: state.cg }}
+        data={{
+          ...eachOne,
+          type:
+            typeof window === "undefined"
+              ? frontendFilters?.listedBy ?? "B"
+              : state.listedBy ?? "B",
+          cg: typeof window === "undefined" ? frontendFilters?.cg : state.cg,
+        }}
         index={index}
         mutate={mutate}
       />
