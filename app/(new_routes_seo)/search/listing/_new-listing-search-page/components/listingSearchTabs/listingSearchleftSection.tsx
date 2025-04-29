@@ -67,17 +67,19 @@ function LeftSection({
         }
         return nextPage;
       },
-      ...(serverData && {
-        initialData: {
-          pages: [serverData],
-          pageParams: [0],
-        },
-      }),
+      ...(serverData &&
+        !isTrue && {
+          initialData: {
+            pages: [serverData],
+            pageParams: [0],
+          },
+        }),
       cacheTime: 300000,
       enabled: isTrue,
       onSuccess: (data: any) => {
+        console.log(data);
         const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
+        // setMainData((prev: any) => [...prev, ...newData]);
       },
     });
 
@@ -87,7 +89,7 @@ function LeftSection({
     queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
   });
-  const allItems = serverData;
+  // const allItems = serverData;
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
 

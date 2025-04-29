@@ -10,7 +10,10 @@ const ProjectSearchBreadCrumbs = dynamicImport(
   () => import("../components/ProjSearchBreadCrums")
 );
 
-import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import { parseApiFilterQueryParams } from "../utils/project-search-queryhelpers";
 
 export default async function Page(params: any) {
@@ -18,7 +21,10 @@ export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
-  const data = await getSearchData(apiFilters ?? "");
+  const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+  const data = isProj
+    ? await getProjSearchData(apiFilters ?? "")
+    : await getSearchData(apiFilters ?? "");
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative">
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
