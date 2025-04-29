@@ -27,6 +27,12 @@ export default async function Page(params: any) {
     : await getSearchData(apiFilters ?? "");
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative">
+      <link
+        rel="canonical"
+        href={`${process.env.NEXT_PUBLIC_URL}/search/listing${
+          apiFilters ? `?sf=${apiFilters}` : ""
+        }`}
+      />
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs
           key="newSearchPage4"
@@ -68,9 +74,9 @@ export const metadata: Metadata = {
     description:
       "Browse verified real estate listings across India. Find your perfect home or investment property with GetRightProperty's user-friendly search tools.",
   },
-  alternates: {
-    canonical: "https://www.getrightproperty.com/search/listing",
-  },
+  // alternates: {
+  //   canonical: "https://www.getrightproperty.com/search/listing",
+  // },
 };
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
