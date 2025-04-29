@@ -5,7 +5,7 @@ import { useDebouncedValue } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { projSearchStore } from "../store/projSearchStore";
+import { projSearchStore } from "../../store/newSearchProjectStore";
 export default function useProjSearchMatcher() {
   const [name, setName] = useState("");
   const [debounced] = useDebouncedValue(name, 700);

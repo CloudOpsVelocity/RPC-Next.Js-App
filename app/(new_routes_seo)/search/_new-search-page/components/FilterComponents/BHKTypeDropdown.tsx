@@ -1,7 +1,7 @@
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { useAtom } from "jotai";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { projSearchStore } from "../../store/projSearchStore";
+import { projSearchStore } from "../../../store/newSearchProjectStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 // import { propertyDetailsTypes } from "@/app/data/projectDetails";
 

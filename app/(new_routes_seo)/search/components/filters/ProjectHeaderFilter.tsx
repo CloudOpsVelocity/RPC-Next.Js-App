@@ -493,7 +493,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             {isListing ? <ListingSearchTabs /> : <ProjectSearchTabs />}
-            <SelectedFilters />
+            <SelectedFilters frontendFilters={{}} />
           </div>
         </div>
       </div>

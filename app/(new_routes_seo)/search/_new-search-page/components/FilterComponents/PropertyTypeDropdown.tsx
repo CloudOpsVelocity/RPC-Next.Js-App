@@ -7,7 +7,7 @@ import {
   MdMapsHomeWork,
   MdLandscape,
 } from "react-icons/md";
-import { projSearchStore } from "../../store/projSearchStore";
+import { projSearchStore } from "../../../store/newSearchProjectStore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 

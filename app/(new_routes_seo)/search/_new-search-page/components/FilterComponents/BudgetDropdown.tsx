@@ -3,14 +3,13 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import SearchProjBugdetFilter from "./buget";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import { useAtom } from "jotai";
-import { projSearchStore } from "../../store/projSearchStore";
+import { projSearchStore } from "../../../store/newSearchProjectStore";
 import { toFormattedString } from "./buget/budget";
 
 interface BudgetDropdownProps {
   isOpen: boolean;
   onToggle: () => void;
 }
-
 
 export default function BudgetDropdown({
   isOpen,
@@ -38,34 +37,34 @@ export default function BudgetDropdown({
   const { handleApplyFilters, handleClearFilters } =
     useProjSearchAppliedFilters();
 
-    const shouldShowBudget = !(
-      (state.bugdetValue[0] === 500000 &&
-        state.bugdetValue[1] === 600000000) ||
-      (state.bugdetValue[0] === 0 && state.bugdetValue[1] === 100000)
-    );
-
-
+  const shouldShowBudget = !(
+    (state.bugdetValue[0] === 500000 && state.bugdetValue[1] === 600000000) ||
+    (state.bugdetValue[0] === 0 && state.bugdetValue[1] === 100000)
+  );
 
   return (
     <div className="relative">
       <button
         className={`flex items-center gap-2 px-4 py-2 border-2 
-          ${(state.bugdetValue.length>1 && shouldShowBudget) ? "border-[#148B16] text-[#148B16] font-bold"
-            : "border-[#0073C6] text-[#0073C6]"}
+          ${
+            state.bugdetValue.length > 1 && shouldShowBudget
+              ? "border-[#148B16] text-[#148B16] font-bold"
+              : "border-[#0073C6] text-[#0073C6]"
+          }
              rounded-full hover:bg-[#0073C6]/5`}
         onClick={onToggle}
       >
-         {shouldShowBudget &&
-                  ((state.bugdetValue[0] !== undefined &&
-                    state.bugdetValue[0] !== 0 &&
-                    state.bugdetValue[0].toString() !== "") ||
-                    (state.bugdetValue[1] !== undefined &&
-                      state.bugdetValue[1] !== 0 &&
-                      state.bugdetValue[1].toString() !== ""))
-                    ? `${toFormattedString(state.bugdetValue[0])}  ${
-                        "- " + toFormattedString(state.bugdetValue[1])
-                      }`
-                    : " Add Budget"}
+        {shouldShowBudget &&
+        ((state.bugdetValue[0] !== undefined &&
+          state.bugdetValue[0] !== 0 &&
+          state.bugdetValue[0].toString() !== "") ||
+          (state.bugdetValue[1] !== undefined &&
+            state.bugdetValue[1] !== 0 &&
+            state.bugdetValue[1].toString() !== ""))
+          ? `${toFormattedString(state.bugdetValue[0])}  ${
+              "- " + toFormattedString(state.bugdetValue[1])
+            }`
+          : " Add Budget"}
         {/* {state.bugdetValue.length>1  ?  `${toFormattedString(state.bugdetValue[0])} - ${toFormattedString(state.bugdetValue[1])}`:"Budget"} */}
         <MdKeyboardArrowDown
           className={`w-5 h-5 transition-transform ${
