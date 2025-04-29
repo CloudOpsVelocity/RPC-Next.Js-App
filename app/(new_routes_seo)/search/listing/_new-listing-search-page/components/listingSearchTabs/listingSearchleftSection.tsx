@@ -26,6 +26,7 @@ type Props = {
   isTrue: boolean;
   setIsTrue: any;
   apiFilterQueryParams: string | null;
+  preAppliedFilters: any;
 };
 
 function LeftSection({
@@ -35,6 +36,7 @@ function LeftSection({
   isTrue: it,
   setIsTrue,
   apiFilterQueryParams,
+  preAppliedFilters,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
@@ -42,13 +44,11 @@ function LeftSection({
   const state = useAtomValue(projSearchStore);
   const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
-  const isTrue =
-    it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
-
+  const isTrue = it || apiFilterQueryParams !== preAppliedFilters;
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
@@ -184,7 +184,7 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <ListingServerCardData

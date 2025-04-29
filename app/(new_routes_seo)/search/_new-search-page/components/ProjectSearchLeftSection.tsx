@@ -48,7 +48,6 @@ function LeftSection({
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   const isTrue = it || apiFilterQueryParams !== preAppliedFilters;
-  console.log({ isTrue });
 
   const {
     data,

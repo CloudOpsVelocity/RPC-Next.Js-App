@@ -14,11 +14,13 @@ import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection
 type Props = {
   serverData: any;
   frontendFilters: any;
+  preAppliedFilters: any;
 };
 
 export default function ListingMainSection({
   frontendFilters,
   serverData,
+  preAppliedFilters,
 }: Props) {
   useHydrateAtoms(
     [
@@ -37,12 +39,10 @@ export default function ListingMainSection({
       dangerouslyForceHydrate: true,
     }
   );
-  const pathname = usePathname();
+
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isTrue, setIsTrue] = useState(
-    pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null
+    apiFilterQueryParams !== preAppliedFilters
   );
 
   return (
@@ -53,6 +53,7 @@ export default function ListingMainSection({
         isTrue={isTrue}
         apiFilterQueryParams={apiFilterQueryParams}
         setIsTrue={setIsTrue}
+        preAppliedFilters={preAppliedFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
 

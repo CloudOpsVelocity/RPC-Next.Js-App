@@ -62,7 +62,7 @@ export default function Mainsection({
 
       {isMapLoaded || isMobile ? (
         <RightSection
-          serverData={apiFilterQueryParams === null ? serverData : null}
+          serverData={serverData}
           key="projRightSection2"
           isTrue={it}
         />

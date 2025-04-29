@@ -35,7 +35,11 @@ export default async function Page(params: any) {
         />
       </div>
       <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[220px]  ">
-        <ListingMainSection frontendFilters={{}} serverData={data} />
+        <ListingMainSection
+          frontendFilters={{}}
+          serverData={data}
+          preAppliedFilters={params.searchParams.sf}
+        />
       </div>
     </section>
   );
