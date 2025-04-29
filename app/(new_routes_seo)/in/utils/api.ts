@@ -120,7 +120,7 @@ export const getNewProjSearchData = async (filters: string): Promise<any> => {
     }
 
     const data = await res.json();
-    return data;
+    return data.results;
   } catch (error) {
     console.error(error);
     return null;
