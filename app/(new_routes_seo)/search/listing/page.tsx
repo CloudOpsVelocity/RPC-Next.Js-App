@@ -15,12 +15,14 @@ import {
   getSearchData,
 } from "@/app/(new_routes_seo)/in/utils/api";
 import { parseApiFilterQueryParams } from "../utils/project-search-queryhelpers";
+import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
 
 export default async function Page(params: any) {
   const isListing = true;
   const apiFilters = params.searchParams.sf
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
+  const frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
   const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
   const data = isProj
     ? await getProjSearchData(apiFilters ?? "")
@@ -43,12 +45,12 @@ export default async function Page(params: any) {
           key="newSearchFilter3"
           isListing={isListing}
           showProjectTab={true}
-          frontendFilters={{}}
+          frontendFilters={frontendFilters}
         />
       </div>
       <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[220px]  ">
         <ListingMainSection
-          frontendFilters={{}}
+          frontendFilters={frontendFilters}
           serverData={data}
           preAppliedFilters={params.searchParams.sf}
         />

@@ -465,8 +465,11 @@ const ListingHeaderFilters = ({
           <PageTitle serverFilterData={frontendFilters} />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            <ListingSearchTabs showProjectTab={showProjectTab} />
-            <ListingSelectedFilters />
+            <ListingSearchTabs
+              frontendFilters={frontendFilters}
+              showProjectTab={showProjectTab}
+            />
+            <ListingSelectedFilters frontendFilters={frontendFilters} />
           </div>
 
           {/* Selected Filters */}
