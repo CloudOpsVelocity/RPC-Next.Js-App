@@ -7,11 +7,11 @@ import {
 import { SpecificationList } from "@/app/validations/types/project";
 import {
   // Box, Group, Paper,
-  ScrollArea,
-  Stack,
+  // ScrollArea,
+  // Stack,
 } from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
-import styles from "@/app/styles/Scrollbar.module.css";
+// import styles from "@/app/styles/Scrollbar.module.css";
 import clsx from "clsx";
 // import { redirect } from "next/dist/server/api-utils";
 export default function Specifications({
@@ -35,10 +35,13 @@ export default function Specifications({
       const titleElement = selectedElement.querySelector("h2");
       const titleHeight = titleElement?.offsetHeight || 0;
       const position = selectedElement.offsetTop - titleHeight;
+
       viewport.current!.scrollTo({
         top: position - 20,
         behavior: "smooth",
       });
+
+      selectedElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: "center" });
     }
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
@@ -85,56 +88,50 @@ export default function Specifications({
             })}
           </div>
         </div>
-
-        <div className="flex-1 bg-gray-50 rounded-lg ">
-          <Stack align="center">
-            <ScrollArea
-              w={"100%"}
-              h={
+          <div 
+            className={`rounded-lg pb-[20px] w-full !overflow-y-auto bg-gray-50 max-h-[358px]`}
+            ref={viewport}
+            style={{
+              maxHeight: `${
                 458 > data?.length * (isMobile ? 120 : 270)
                   ? data.length * (isMobile ? 120 : 270)
                   : isMobile
                   ? 280
                   : 358
-              }
-              viewportRef={viewport}
-              classNames={styles}
-              pb={20}
-            >
-              {data?.map((spec, index) => (
-                <div
-                  key={spec.specName}
-                  // @ts-ignore
-                  id={spec.specName.toLowerCase()}
-                  className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
+              }px`}}
+          >
+            {data?.map((spec, index) => (
+              <div
+                key={spec.specName}
+                // @ts-ignore
+                id={spec.specName.toLowerCase()}
+                className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
+              >
+                <span
+                  className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[18px] xl:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
+                    selectedSpecIndex == index
+                      ? "specification"
+                      : "specificationRemove"
+                  }  `}
                 >
-                  <span
-                    className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[18px] xl:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
-                      selectedSpecIndex == index
-                        ? "specification"
-                        : "specificationRemove"
-                    }  `}
-                  >
-                    {specificationsList?.get(spec?.specId)?.url}{" "}
-                    <span className="">{spec.specName}</span>
-                  </span>
-                  <div>
-                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
-                      {spec.values.map(
-                        (value, valueIndex) =>
-                          value && (
-                            <li className="break-words max-w-full" key={value}>
-                              {value}
-                            </li>
-                          )
-                      )}
-                    </ul>
-                  </div>
+                  {specificationsList?.get(spec?.specId)?.url}{" "}
+                  <span className="">{spec.specName}</span>
+                </span>
+                <div>
+                  <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
+                    {spec.values.map(
+                      (value) =>
+                        value && (
+                          <li className="break-words max-w-full" key={value}>
+                            {value}
+                          </li>
+                        )
+                    )}
+                  </ul>
                 </div>
-              ))}
-            </ScrollArea>
-          </Stack>
-        </div>
+              </div>
+            ))}
+          </div>
       </div>
     </div>
   );
