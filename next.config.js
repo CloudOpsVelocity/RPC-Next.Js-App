@@ -1,15 +1,15 @@
 /** @type {import('next').NextConfig} */
 
-// const createMDX = require("@next/mdx");
+const createMDX = require("@next/mdx");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-// const withMDX = createMDX({
-//   options: {
-//     // providerImportSource: "@mdx-js/react",
-//   },
-// });
+const withMDX = createMDX({
+  options: {
+    // providerImportSource: "@mdx-js/react",
+  },
+});
 
 const nextConfig = {
   eslint: {
@@ -88,4 +88,4 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = withBundleAnalyzer(withMDX(nextConfig));

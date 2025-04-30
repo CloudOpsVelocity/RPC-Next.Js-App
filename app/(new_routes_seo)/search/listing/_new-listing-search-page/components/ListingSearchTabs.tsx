@@ -223,9 +223,19 @@ const ListingSearchTabs = ({
     ),
     [isDropdownOpen, currentSortLabel, sortOptions, handleSortBy]
   );
+   const tabsSelected = useMemo(() => {
+    //  if(state.listedBy)
+    return (
+      typeof window === 'undefined' || !Object.entries(state).some(([_, value]) => (Array.isArray(value) && value.length > 0) || value !== null)
+        ? frontendFilters.listedBy
+        : state.listedBy
+    );
+  }, [state.listedBy, frontendFilters.listedBy]);
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">
+   {JSON.stringify(tabsSelected)}
+   {JSON.stringify({client:state.listedBy})}
       <div className="w-full pb-[6px] pt-[10px] sm:px-[10px]">
         <div className="flex flex-col gap-[10px] md:flex-row md:items-center md:justify-between">
           <div
