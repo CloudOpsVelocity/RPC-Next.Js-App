@@ -11,13 +11,6 @@ import { Montserrat } from "next/font/google";
 const font = Montserrat({
   preload: false,
 });
-// import { Organization_SCHEMA } from "./seo/common/organisation-details";
-
-// const playball = Playball({
-//   subsets: ['latin'], // Specify the subset you need
-//   weight: ['400'], // Required weight for Playball font
-//   display: 'swap', // Same as the `display=swap` in Google Fonts
-// });
 
 export const metadata: Metadata = {
   title: "Get Right Property",
@@ -28,13 +21,11 @@ export default function RootLayout(params: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script
-          defer
+        <Script
+          strategy="afterInteractive"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9243707404617437"
           crossOrigin="anonymous"
-        ></script>
-        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
-
+        />
         <link
           rel="apple-touch-icon"
           sizes="57x57"
@@ -105,8 +96,8 @@ export default function RootLayout(params: { children: React.ReactNode }) {
       </head>
 
       {process.env.NODE_ENV !== "development" && (
-        <script
-          defer
+        <Script
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -137,6 +128,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
   );
 }
 import type { Viewport } from "next";
+import Script from "next/script";
 
 export const viewport: Viewport = {
   width: "device-width",

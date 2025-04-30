@@ -108,11 +108,10 @@ import { Metadata, ResolvingMetadata } from "next";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { isValidSlugId } from "@/common/utils/slugUtils";
-import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import FirstBlock from "@/app/components/project/firstBlock";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import Overview from "@/app/components/project/overview";
-import logger from "@/app/utils/logger";
+
 type Props = {
   params: Promise<{ city: string; lt: string; slug: string }>;
 };
