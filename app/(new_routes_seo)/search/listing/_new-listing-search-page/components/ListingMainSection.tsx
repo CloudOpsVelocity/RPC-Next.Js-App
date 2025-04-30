@@ -5,12 +5,13 @@ import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 import { useHydrateAtoms } from "jotai/utils";
 import { initialState, projSearchStore } from "../../../store/newListingStore";
-import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
+import dynamic from "next/dynamic";
+// import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
 
 // import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
-// const ListingSearchRightSection = dynamic(
-//   () => import("./listingSearchTabs/listingSearchRightSection")
-// );
+const ListingSearchMapSection = dynamic(
+  () => import("./listingSearchTabs/ListingSearchMapSection")
+);
 type Props = {
   serverData: any;
   frontendFilters: any;
