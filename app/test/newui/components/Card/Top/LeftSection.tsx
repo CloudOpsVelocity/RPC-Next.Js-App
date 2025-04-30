@@ -27,6 +27,7 @@ type Props = {
   projEncId: string;
   pageUrl: string;
   imageAlt: string;
+  index:number
 };
 
 export default function LeftSection({
@@ -46,6 +47,7 @@ export default function LeftSection({
   projEncId,
   pageUrl,
   imageAlt,
+  index
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
@@ -89,7 +91,7 @@ export default function LeftSection({
                     alt={imageAlt}
                     title={imageAlt}
                     className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
-                    priority={true}
+                    priority={index == 0 ? true : false}
                     unoptimized={true}
                     quality={80}
                   />
