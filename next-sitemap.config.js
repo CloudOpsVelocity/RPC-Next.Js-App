@@ -47,38 +47,38 @@ module.exports = {
         loc: `https://www.getrightproperty.com/residential-listings`,
         lastmod: new Date().toISOString(),
       },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/0.xml`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/1.xml`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/2.xml`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/3.xml`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/4.xml`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/5.xml`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/6.xml`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/dyanmic-sitemap/7.xml`,
-        lastmod: new Date().toISOString(),
-      },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/0.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/1.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/2.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/3.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/4.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/5.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/6.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/dyanmic-sitemap/7.xml`,
+      //   lastmod: new Date().toISOString(),
+      // },
       {
         loc: `${config.siteUrl}/search?sf=projStatus=106`,
         lastmod: new Date().toISOString(),
