@@ -14,7 +14,7 @@ import {
 import { toFormattedString } from "./buget/budget";
 
 import { useAtom, useAtomValue } from "jotai";
-import { projSearchStore } from "../../../store/newSearchProjectStore";
+import { projSearchStore } from "../../../store/newListingStore";
 import LocalitySearch from "./city/searchInputSearch";
 import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
 import { useDebouncedState } from "@mantine/hooks";

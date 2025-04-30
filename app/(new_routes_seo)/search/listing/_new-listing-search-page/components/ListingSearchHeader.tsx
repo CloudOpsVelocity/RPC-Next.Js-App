@@ -464,7 +464,7 @@ const ListingHeaderFilters = ({
               frontendFilters={frontendFilters}
               showProjectTab={showProjectTab}
             />
-            {/* <ListingSelectedFilters frontendFilters={frontendFilters} /> */}
+            <ListingSelectedFilters frontendFilters={frontendFilters} />
           </div>
 
           {/* Selected Filters */}

@@ -15,14 +15,24 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
 
   // Fallback to frontendFilters if JS is disabled (or state is empty)
   const filtersSource = React.useMemo(
-    () =>
-      typeof window === "undefined" || // SSR or JS disabled
-      !Object.entries(state).some(
-        ([_, value]) =>
-          (Array.isArray(value) && value.length > 0) || value !== null
-      )
-        ? frontendFilters
-        : state,
+    () =>{
+      if (state.listedBy === undefined) {
+        return frontendFilters
+      }
+      return !Object.entries(state).some(
+          ([_, value]) =>
+            (Array.isArray(value) && value.length > 0) || value !== null
+        )
+          ? frontendFilters
+          : state
+      // typeof window === "undefined" || // SSR or JS disabled
+      // !Object.entries(state).some(
+      //   ([_, value]) =>
+      //     (Array.isArray(value) && value.length > 0) || value !== null
+      // )
+      //   ? frontendFilters
+      //   : state
+    },
     [state, frontendFilters]
   );
 

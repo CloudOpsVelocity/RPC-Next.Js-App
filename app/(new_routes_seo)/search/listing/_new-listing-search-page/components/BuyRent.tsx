@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import React from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-import useProjSearchAppliedFilters from "../../../_new-search-page/hooks/useProjSearchAppliedFilters";
+import useProjSearchAppliedFilters from "../hooks/useProjSearchAppliedFilters";
 import { projSearchStore } from "../../../store/newListingStore";
 
 type Props = {
