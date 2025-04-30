@@ -119,7 +119,6 @@ export const get_posted_by = (str?: string) => {
       return "Owner";
     case "A":
       return "Agent";
-
     default:
       return "Builder";
   }

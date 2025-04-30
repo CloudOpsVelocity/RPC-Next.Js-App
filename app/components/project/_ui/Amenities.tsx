@@ -102,26 +102,24 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
           <div key={category} className="bg-white rounded-lg shadow-sm overflow-hidden">
              <div className='bg-gray-100 hover:bg-gray-200'    onClick={() => toggleCategory(category)}>
              <button
-           
-              className="flex w-full items-center justify-between px-4 pt-3  transition duration-200"
-            >
-             
-              <span className="text-start text-[16px] font-medium text-gray-800">{category}</span>
-              {expandedCategory === category ? (
-                <IoChevronUpOutline className="h-5 w-5 text-gray-600" />
-              ) : (
-                <IoChevronDownOutline className="h-5 w-5 text-gray-600" />
-              )}
-            
-            </button>
-            <ul className="ml-8 pb-1">
-                  {getAvailableSubCategories(category).map((subCategory) => (
-                    <li key={subCategory} className="text-btnPrimary font-medium text-sm list-disc hover:text-gray-900 transition  bg-white">
-                      {subCategory}
-                    </li>
-                  ))}
-                </ul>
-                </div>
+                className="flex w-full items-center justify-between px-4 pt-3  transition duration-200"
+              >
+                <span className="text-start text-[16px] font-medium text-gray-800">{category}</span>
+                {expandedCategory === category ? (
+                  <IoChevronUpOutline className="h-5 w-5 text-gray-600" />
+                ) : (
+                  <IoChevronDownOutline className="h-5 w-5 text-gray-600" />
+                )}
+              
+              </button>
+              <ul className="ml-8 pb-1">
+                {getAvailableSubCategories(category).map((subCategory) => (
+                  <li key={subCategory} className="text-btnPrimary font-medium text-sm list-disc hover:text-gray-900 transition">
+                    {subCategory}
+                  </li>
+                ))}
+              </ul>
+            </div>
            
             {expandedCategory === category && (
               <div className="p-4 max-h-[420px] overflow-y-auto">
@@ -134,7 +132,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
 
                     return (
                       <div key={subCategory}>
-                        <h3 className="text-gray-700 text-lg font-semibold mb-2">{subCategory}</h3>
+                        <p className="text-gray-700 text-lg font-semibold mb-2">{subCategory}</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {amenitiesInSubCategory.map((amenity: Amenity) => (
                             <div

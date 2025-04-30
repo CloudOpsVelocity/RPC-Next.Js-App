@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  BackgroundImage,
-  // , Center, Box, Text
-} from "@mantine/core";
-// import Button from "@/app/components/atoms/buttons/variansts";
 import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import Image from "next/image";
-// import { ShareIcon } from "@/app/images/HomePageIcons";
 import ViewAllButton from "./ViewButton";
 import ShareBtn from "./ShareBtn";
 import ReqBtn from "./ReqBtn";
@@ -40,7 +34,7 @@ export default function Card({ item }: Props) {
   // };
 
   return (
-    <div className="w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative">
+    <div className="relative w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0">
       <ProjectLink
         routeParams={{
           city: item.city,
@@ -49,7 +43,13 @@ export default function Card({ item }: Props) {
           projIdEnc: item.projIdEnc,
         }}
       >
-        <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
+        <>
+          <Image
+            src={item.coverUrl}
+            alt={item.projName}
+            fill
+            className=" absolute top-0 left-0 pointer-events-none z-0 "
+          />
           {/*  {item.builderLogo && (
           <img
             src={item.builderLogo}
@@ -59,7 +59,13 @@ export default function Card({ item }: Props) {
         )} */}
           {(item.rerastatus === "Recieved" ||
             item.rerastatus === "Applied") && (
-            <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+            <Image
+              src={"/r.svg"}
+              alt="rera"
+              width={100}
+              height={100}
+              className="absolute top-0 left-0 z-[10]"
+            />
           )}
 
           {/*  <p className="text-green-600">{item.rerastatus}</p> */}
@@ -126,7 +132,8 @@ export default function Card({ item }: Props) {
               </div>
             </div>
           </div>
-        </BackgroundImage>
+          {/* </BackgroundImage> */}
+        </>
       </ProjectLink>
     </div>
   );

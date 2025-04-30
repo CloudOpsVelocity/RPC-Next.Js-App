@@ -38,8 +38,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           width={500}
           height={500}
           src="/auth/login.svg"
-          alt=""
           className="sm:mt-10  h-[100vh] sm:max-h-[340px] sm:w-[70%] xl:max-w-[490px]  xl:w-auto xl:mt-20"
+          alt="not found"
         />
       </div>
       <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative max-h-[100vh] overflow-y-auto ">

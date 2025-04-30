@@ -1,37 +1,145 @@
-const homeLinksData = [
+const BASE_URL = process.env.NEXT_PUBLIC_URL;
+const viewActionConfigs = [
   {
-    name: "Home",
-    url: "/",
+    title: "Featured Projects",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search`,
   },
   {
-    name: "Post Property",
-    url: "/post-your-listing",
+    title: "Ready to Move Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=s-propStatus=R`,
   },
   {
-    name: "Post Project",
-    url: "/post-your-project",
-  },
-  { name: "About", url: "/about" },
-  {
-    name: "Compare Property And Projects",
-    url: "/your-profile/compares",
-  },
-  { name: "Your Best Real Estate Guide", url: "/contact" },
-  {
-    name: "Individual Signup",
-    url: "/register/individual",
+    title: "Ready to Move Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=R-propStatus=R`,
   },
   {
-    name: "Agent Signup",
-    url: "/register/agent",
+    title: "Featured Plot Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=32`,
   },
   {
-    name: "Builder Signup",
-    url: "/register/builder",
+    title: "Under Construction Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U`,
+  },
+  {
+    title: "Under Construction Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propStatus=U-cg=R`,
+  },
+  {
+    title: "Independent Sale Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=S`,
+  },
+  {
+    title: "Independent Rent Listings",
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=propType=36-cg=R`,
   },
 ];
 
-export const homeSiteNavigationSchemaData = {
+let homeLinksData = [
+  {
+    name: "Home",
+    url: BASE_URL,
+  },
+  {
+    name: "Post Property",
+    url: `${BASE_URL}/post-your-listing`,
+  },
+  {
+    name: "Post Project",
+    url: `${BASE_URL}/post-your-project`,
+  },
+  {
+    name: "Compare Property And Projects",
+    url: `${BASE_URL}/your-profile/compares`,
+  },
+  { name: "Your Best Real Estate Guide", url: `${BASE_URL}/contact` },
+  {
+    name: "Individual Signup",
+    url: `${BASE_URL}/register/individual`,
+  },
+  {
+    name: "Agent Signup",
+    url: `${BASE_URL}/register/agent`,
+  },
+  {
+    name: "Builder Signup",
+    url: `${BASE_URL}/register/builder`,
+  },
+  {
+    url: "https://www.getrightproperty.com/buying-guide",
+    name: "Buying Guide",
+  },
+  { url: "https://www.getrightproperty.com/about", name: "About Us" },
+  { url: "https://www.getrightproperty.com/team", name: "Our Team" },
+  { url: "https://www.getrightproperty.com/careers", name: "Careers" },
+  { url: "https://www.getrightproperty.com/get-in-touch", name: "Contact Us" },
+  {
+    url: "https://www.getrightproperty.com/privacy-policy",
+    name: "Our Privacy Policy",
+  },
+  {
+    url: "https://www.getrightproperty.com/terms-and-conditions",
+    name: "Terms And Conditons",
+  },
+  {
+    url: "https://www.getrightproperty.com/blog",
+    name: "GetRight Property Blogs",
+  },
+  {
+    url: "https://www.getrightproperty.com/search",
+    name: "Projects Search",
+  },
+
+  { url: "https://www.getrightproperty.com/builders", name: "Builders" },
+  {
+    url: "https://www.getrightproperty.com/search/listing",
+    name: "Listings Search",
+  },
+  {
+    url: "https://www.getrightproperty.com/residential-listings",
+    name: "Residentail Listings",
+  },
+  {
+    url: "https://www.getrightproperty.com/residential",
+    name: "Residential Projects",
+  },
+
+  { url: "https://www.getrightproperty.com/forgot", name: "Forgot Us" },
+  {
+    url: "https://www.getrightproperty.com/abc/video",
+    name: "GetRright Properties Videos",
+  },
+  {
+    url: "https://www.getrightproperty.com/market-trends/locality-insights",
+    name: "Locality Insights",
+  },
+  {
+    url: "https://www.getrightproperty.com/market-trends/news",
+    name: "Our News",
+  },
+  {
+    url: "https://www.getrightproperty.com/selling-tips",
+    name: "Selling Tips",
+  },
+
+  { url: "https://www.getrightproperty.com/sitemap.xml", name: "SiteMap" },
+  { url: "https://www.getrightproperty.com/robots.txt", name: "Robots TXT" },
+  { url: "https://www.getrightproperty.com/login", name: "Login" },
+  { url: "https://www.getrightproperty.com/register", name: "Register" },
+  {
+    url: "https://www.getrightproperty.com/register/agent",
+    name: "Register Agent",
+  },
+  {
+    url: "https://www.getrightproperty.com/register/builder",
+    name: "Register Builder",
+  },
+  {
+    url: "https://www.getrightproperty.com/register/individual",
+    name: "Register Individual",
+  },
+];
+// const viewActionJsonLd = ;
+export const viewActionJsonLd = {
   "@context": "https://schema.org",
   "@graph": homeLinksData.map((item) => ({
     "@type": "SiteNavigationElement",
@@ -39,11 +147,20 @@ export const homeSiteNavigationSchemaData = {
     url: item.url,
   })),
 };
+export const homeSiteNavigationSchemaData = {
+  "@context": "https://schema.org",
+  "@graph": viewActionConfigs.map(({ title, url }) => ({
+    "@context": "https://schema.org",
+    "@type": "ViewAction",
+    name: title,
+    target: url,
+  })),
+};
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "GetRightProperty",
+  name: "Get Right Property",
   url: "https://getrightproperty.com",
   description:
     "Find your perfect property in Bangalore with GetRightProperty - Your trusted real estate partner",
@@ -51,7 +168,8 @@ const websiteSchema = {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://getrightproperty.com/search?q={search_term_string}",
+      urlTemplate:
+        "https://getrightproperty.com/search?sf={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   },
@@ -68,7 +186,10 @@ const productSchema = {
   "@type": "Product",
   name: "GetRightProperty",
   description:
-    "A comprehensive real estate platform for property search, listing and comparison in Bangalore",
+    "A comprehensive real estate platform for property search, listing, and comparison in Bangalore",
+  image:
+    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
+  category: "Real Estate Services",
   brand: {
     "@type": "Brand",
     name: "GetRightProperty",
@@ -86,9 +207,6 @@ const productSchema = {
     ratingValue: "4.5",
     reviewCount: "100",
   },
-  image:
-    "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
-  category: "Real Estate Services",
 };
 
 const offerSchema = {
@@ -120,52 +238,31 @@ const offerSchema = {
   },
 };
 
-const breadcrumbSchema = {
+const webPageSchema = {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      item: {
-        "@id": "https://getrightproperty.com",
-        name: "Home",
-      },
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      item: {
-        "@id": "https://getrightproperty.com/search/listing",
-        name: "Properties",
-      },
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      item: {
-        "@id": "https://getrightproperty.com/search",
-        name: "Projects",
-      },
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      item: {
-        "@id": "https://getrightproperty.com/post-your-listing",
-        name: "Post Property",
-      },
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      item: {
-        "@id": "https://getrightproperty.com/register",
-        name: "Signup",
-      },
-    },
-  ],
+  "@type": "WebPage",
+  name: "Homepage",
+  url: "https://www.getrightproperty.com",
+  description:
+    "Discover properties for sale and rent across India. Get Right Property offers a user-friendly platform to post listings, connect with buyers and sellers, and stay updated with the latest real estate trends.",
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://www.getrightproperty.com",
+  },
 };
+// const breadcrumbSchema = {
+//   "@context": "https://schema.org",
+//   "@type": "BreadcrumbList",
+//   itemListElement: homeLinksData.map((value, index) => ({
+//     "@type": "ListItem",
+//     position: index + 1,
+//     item: {
+//       "@id": value.url,
+//       name: value.name,
+//       url: value.url,
+//     },
+//   })),
+// };
 
 const FaqSchema = {
   "@context": "https://schema.org",
@@ -282,46 +379,59 @@ export const HomeSiteNavigationSchema = () => {
   return (
     <>
       <script
-        id="homeScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(homeSiteNavigationSchemaData),
         }}
       />
 
-      <script
-        id="homeScript2"
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
         }}
-      />
+      /> */}
       <script
-        id="homesScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productSchema),
         }}
       />
       <script
-        id="homeScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(offerSchema),
         }}
       />
-      <script
+      {/* <script
         id="homeScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
         }}
-      />
+      /> */}
       <script
-        id="homeScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(FaqSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webPageSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(viewActionJsonLd),
         }}
       />
     </>

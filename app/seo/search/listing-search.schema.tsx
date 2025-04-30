@@ -3,34 +3,84 @@ import { PHONE_NUMBER } from "../constants";
 
 export const generateAllSchemas = (property: any) => {
   if (!property) return [];
-  const allSizesSchemas = property.coverImage.split(",").map((url: string) => {
-    const OrgName = property.projName?.split(" ")[0];
-    return {
-      "@type": "ImageObject",
-      contentUrl: url,
-      license: "https://www.getrightproperty.com/privacy-policy",
-      acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
-      creditText: `${property.projName} Cover Name`,
-      creator: {
-        "@type": "Person",
-        name: OrgName,
-      },
-      copyrightNotice: OrgName,
-    };
-  });
+  const allSizesSchemas =
+    property?.coverImage?.split(",").map((url: string) => {
+      const OrgName = property.postedByName;
+      return {
+        "@type": "ImageObject",
+        contentUrl: url,
+        license: "https://www.getrightproperty.com/privacy-policy",
+        acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
+        creditText: `${property.postedByName} Cover Image`,
+        creator: {
+          "@type": "Person",
+          name: OrgName,
+        },
+        copyrightNotice: OrgName,
+      };
+    }) ?? [];
   const PAGE_URL = generateListingLinkUrl({
     bhkUnitType: property.bhkName
       ? property.bhkName + "-" + property.propTypeName
       : property.propTypeName,
-    category: property.cg === "S" ? "for-sale" : "for-rent",
-    city: property.ctName,
-    locality: property.ltName,
+    category: property.category === "Sale" ? "for-sale" : "for-rent",
+    city: property.cityName,
+    locality: property.localityName,
     propIdEnc: property.propIdEnc,
     phase: property.phaseName,
     projName: property.projIdEnc && property.propName,
   });
-  const cardTitle = `${property.bhkName} ${property.facing} facing ${property.propTypeName} for ${property.category} ${property.postedBy} ${property.propName} ${property.localityName}`;
-  const description = property?.usp?.slice(0, 4800) || "";
+  const cardTitle = `${property.bhkName ?? ""} ${property.facing} facing ${
+    property.propTypeName
+  } for ${property.category} ${property.postedBy} ${property.propName} ${
+    property.localityName
+  }`;
+  const description = `Looking to buy a premium ${
+    property.propTypeName
+  } for sale in ${property.localityName}, ${property.cityName}? This ${
+    property.facing
+  }-facing residential ${
+    property.propTypeName
+  } is a rare opportunity for home buyers and investors searching for a prime property in one of the most sought-after locations of ${
+    property.cityName
+  }, ${property.stateName}.
+
+  Located in the prestigious project ${property.propName}, ${
+    property.phaseName
+  }, this ready to move property for sale is ideal for those seeking a secure investment or a dream home in a well-developed locality. Spread across ${
+    property.pa || property.sba
+  } sq.ft., this ${property.propTypeName} for sale in ${
+    property.localityName
+  } offers excellent connectivity to schools, hospitals, shopping malls, and IT hubs of ${
+    property.cityName
+  }.
+  
+  Priced competitively at ₹${property.price.toLocaleString()}, this verified property listing is offered directly by the ${
+    property.postedBy
+  }, ensuring a transparent and hassle-free buying process.
+  
+  Top Features:
+  - ${property.facing} Facing ${property.propTypeName} for Sale
+  - Located in ${property.localityName}, ${
+    property.cityName
+  } — A High-Demand Residential Zone
+  - Ready to Move Property
+  - Perfect for Residential Investment or Custom Home Construction
+  - Excellent Location with Great Connectivity
+  - Close to Schools, Hospitals, Malls & IT Parks
+  
+  Possession is available from ${new Date(
+    property.availableFrom
+  ).toLocaleDateString()}, making it a quick move-in option for buyers.
+  
+  Invest in the best real estate property in ${
+    property.cityName
+  }. Explore this premium residential ${property.propTypeName} for sale in ${
+    property.localityName
+  }, perfect for families, investors, and builders looking for a future-ready location with high returns.
+  
+  Contact now to schedule a site visit and grab this exclusive property before it's gone!`;
+
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
@@ -69,7 +119,11 @@ export const generateAllSchemas = (property: any) => {
             property.propStatus?.toLowerCase() === "under construction"
               ? "PreOrder"
               : "InStock",
-          priceValidUntil: property.endDate || "",
+          priceValidUntil:
+            property.endDate ||
+            property.possassionDate ||
+            property.availableFrom ||
+            "",
         },
         review: {
           "@type": "Review",
@@ -179,7 +233,6 @@ export const generateAllSchemas = (property: any) => {
 
 export const ListingSearchSchema = ({ properties }: any) => {
   if (!Array.isArray(properties)) return null;
-
   const results = properties
     .map((property: any) => {
       return generateAllSchemas(property);
@@ -191,7 +244,7 @@ export const ListingSearchSchema = ({ properties }: any) => {
   ).filter(Boolean);
   const realEstateAgentSchemas = uniqueBuilders.map((builderName: string) => {
     const builderProperty = properties.find(
-      (p: any) => p.postedByName === builderName
+      (p: any) => p.postedByName === builderName && p.postedBy === "Builder"
     );
     return {
       "@context": "https://schema.org",
@@ -233,8 +286,8 @@ export const ListingSearchSchema = ({ properties }: any) => {
                     ? property.bhkName + "-" + property.propTypeName
                     : property.propTypeName,
                   category: property.cg === "S" ? "for-sale" : "for-rent",
-                  city: property.ctName,
-                  locality: property.ltName,
+                  city: property.cityName,
+                  locality: property.localityName,
                   propIdEnc: property.propIdEnc,
                   phase: property.phaseName,
                   projName: property.projIdEnc && property.propName,

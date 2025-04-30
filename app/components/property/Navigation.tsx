@@ -181,7 +181,7 @@ export default function Navigation({
         />
       )}
       <div
-        className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14 z-30"
+        className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14 z-30 border-solid border-t-[1px] "
         ref={scrollContainerRef}
       >
         {topics.map((topic) => {

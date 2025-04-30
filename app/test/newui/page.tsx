@@ -20,7 +20,7 @@ export default function Page() {
     return r;
   };
   const output = removeDuplicated(arr);
-  console.log(output);
+
   return (
     <div className="flex justify-center items-center flex-wrap w-[100%] sm:max-w-[50%]">
       {/* {fakeData.map((eachOne, index: number) => {

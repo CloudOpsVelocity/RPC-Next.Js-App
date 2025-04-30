@@ -6,6 +6,7 @@ import { useQueryState } from "nuqs";
 import { useHydrateAtoms } from "jotai/utils";
 import { projSearchStore } from "../../store/projSearchStore";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
+// import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
 // const ListingSearchRightSection = dynamic(
 //   () => import("./listingSearchTabs/listingSearchRightSection")
 // );
@@ -47,11 +48,6 @@ export default function ListingMainSection({
         setIsTrue={setIsTrue}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
-      {/* <ListingSearchRightSection
-        serverData={serverData}
-        isTrue={isTrue}
-        key="projListingSearchRightSection2"
-      /> */}
 
       <ListingSearchMapSection serverData={serverData} />
     </>

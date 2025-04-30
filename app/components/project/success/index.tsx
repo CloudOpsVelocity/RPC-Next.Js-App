@@ -9,6 +9,7 @@ export const RatingMessage = ({ close }: { close: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       close();
+      console.log("closing 3");
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -68,6 +69,7 @@ export const ReportSuccesssMessage = ({ close }: { close: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       close();
+      console.log("closing 4");
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -102,10 +104,13 @@ export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       close();
+      console.log("closing 5");
     }, 5000);
 
     return () => clearTimeout(timer);
   }, [close]);
+
+  console.log(data);
 
   return (
     <VersaMessage
@@ -263,4 +268,3 @@ export const CompareListingMessage = () => (
     }
   />
 );
- 

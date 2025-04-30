@@ -20,17 +20,20 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       dynamic(
         () => import("@/app/components/maps/search/ProjectSearchPageMap"),
         {
-          // loading: () => <MapSkeleton />,
-          loading: () => <div className=" flex justify-center items-center w-full h-[600px] flex-col ">
+          loading: () => (
+            <div className=" flex justify-center items-center w-full h-[600px] flex-col ">
               <div className="animate-spin rounded-full h-[50px] w-[50px] border-t-4 border-b-4 border-[#0073C6] border-t-transparent" />
-              <p className="font-[600] text-[20px] mt-[16px] ">Please wait Map is loading...</p>
-            </div>,
+              <p className="font-[600] text-[20px] mt-[16px] ">
+                Please wait Map is loading...
+              </p>
+            </div>
+          ),
           ssr: false,
         }
       ),
-    [] 
+    []
   );
-  // const pathname = usePathname();
+
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
   const dispatch = useSetAtom(overlayAtom);
@@ -42,31 +45,30 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
   } = useAtomValue(selectedNearByAtom);
   const [apiFilterQueryParams] = useQueryState("sf");
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(
-          pageParam,
-          apiFilterQueryParams ? apiFilterQueryParams : ""
-        );
+  const { data } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getSearchData(
+        pageParam,
+        apiFilterQueryParams ? apiFilterQueryParams : ""
+      );
 
-        return response;
-      },
-      getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
-        return nextPage;
-      },
-      ...RTK_CONFIG,
-      enabled: false,
-    });
+      return response;
+    },
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      const nextPage = allPages.length;
+      if (lastPage.length < 20) {
+        return;
+      }
+      return nextPage;
+    },
+    ...RTK_CONFIG,
+    enabled: false,
+  });
 
-  const apidata = !isTrue ? serverData : data?.pages.flat() || [];
+  const apidata = data?.pages.flat() || [];
 
   return !isMobile ? (
     <div
@@ -76,7 +78,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       <Map
         key="liastingTabsSearchPageMap"
         projName={"Searched Location"}
-        lat={(apidata && apidata[0]?.lat) ?? 47.46489} 
+        lat={(apidata && apidata[0]?.lat) ?? 47.46489}
         lang={(apidata && apidata[0]?.lang) ?? 15.34043}
         data={apidata}
         type={"prop"}
@@ -88,9 +90,9 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       <ModalBox
         isOpen={mapPopup.isOpen}
         handleChange={() => {
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
           setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
-          dispatch({ type: "CLOSE" })
+          dispatch({ type: "CLOSE" });
         }}
       >
         {isLoader ? (
@@ -106,7 +108,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
               } right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 relative `}
             >
               <Map
-                key="listingTabsRightSearchPageMap"
+                // key="listingTabsRightSearchPageMap"
                 projName={"Searched Location"}
                 lat={(apidata && apidata[0]?.lat) ?? 47.46489}
                 lang={(apidata && apidata[0]?.lang) ?? 15.34043}

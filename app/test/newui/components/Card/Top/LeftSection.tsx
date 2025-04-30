@@ -1,10 +1,13 @@
 // import { projectprops } from "@/app/(dashboard)/searchOldPage/components/Card/Top/Center/ProjData";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 import Button from "@/app/elements/button";
 import { CallIcon } from "@/app/images/commongsSvgs2";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isReraverified } from "@/app/utils/dyanamic/projects";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -21,6 +24,9 @@ type Props = {
   isUsed: string;
   availableFrom: string;
   data: any;
+  projEncId: string;
+  pageUrl: string;
+  imageAlt: string;
 };
 
 export default function LeftSection({
@@ -37,10 +43,13 @@ export default function LeftSection({
   isUsed,
   availableFrom,
   data,
+  projEncId,
+  pageUrl,
+  imageAlt,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
-  // console.log(src)
+
   return (
     <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
@@ -66,17 +75,20 @@ export default function LeftSection({
           media="(max-width: 800px)"
           srcSet={src ? src.split(",")[2] : ""}
         />
-        <Image
-          src={
-            src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : src
-          }
-          width={304}
-          height={214}
-          alt="projectCard"
-          className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
-          quality={100}
-          unoptimized
-        />
+        <Link href={pageUrl}>
+          <Image
+            src={
+              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : src
+            }
+            width={304}
+            height={214}
+            alt={imageAlt}
+            title={imageAlt}
+            className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
+            quality={100}
+            unoptimized
+          />
+        </Link>
       </picture>
       {/* <div>
         
@@ -108,6 +120,7 @@ export default function LeftSection({
             <Button
               onChange={(e) => {
                 e.stopPropagation();
+                preventBackButton();
                 openReqCallback();
               }}
               icon={<CallIcon className="w-[16px] h-[16px]" />}

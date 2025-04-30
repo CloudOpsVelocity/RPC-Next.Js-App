@@ -4,16 +4,14 @@ import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { GoogleTagManager } from "@next/third-parties/google";
-
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
-import { Provider } from "jotai";
 import montserrat from "@/font";
 import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
 import { Organization_SCHEMA } from "./seo/common/organisation-details";
-import Script from "next/script";
+import JotaiProvider from "./context/JotaiProvider";
 // const playball = Playball({
 //   subsets: ['latin'], // Specify the subset you need
 //   weight: ['400'], // Required weight for Playball font
@@ -28,6 +26,12 @@ export default function RootLayout(params: { children: React.ReactNode }) {
   return (
     <html data-mantine-color-scheme="light" lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(Organization_SCHEMA),
+          }}
+        />
         <ColorSchemeScript />
         {/* <meta
           name="viewport"
@@ -102,32 +106,26 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <Script
-        id="rootLayoutScript1"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(Organization_SCHEMA),
-        }}
-      />
+
       {process.env.NODE_ENV !== "development" && (
         <GoogleTagManager gtmId="GTM-T7W6VL9F" />
       )}
 
       <body className={`${montserrat.className}  `}>
-        <MantineProvider theme={MantineTheme}>
-          <main>
-            <SessionProvider>
-              <ReactQueryProvider>
-                <Provider>
-                  <Header />
-                  <Layout>{params.children}</Layout>
-                  <Footer />
-                </Provider>
-              </ReactQueryProvider>
-            </SessionProvider>
-          </main>
-          {/* <Footer /> */}
-        </MantineProvider>
+        {/* <MantineProvider theme={MantineTheme}> */}
+        <main>
+          <SessionProvider>
+            <ReactQueryProvider>
+              <JotaiProvider>
+                <Header />
+                <Layout>{params.children}</Layout>
+                <Footer />
+              </JotaiProvider>
+            </ReactQueryProvider>
+          </SessionProvider>
+        </main>
+        {/* <Footer /> */}
+        {/* </MantineProvider> */}
       </body>
     </html>
   );

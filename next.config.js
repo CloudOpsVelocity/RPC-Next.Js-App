@@ -3,7 +3,7 @@ const createMDX = require("@next/mdx");
 
 const withMDX = createMDX({
   options: {
-    // providerImportSource: "@mdx-js/react",
+    // providerImportSource: "@mdx-js/react ",
   },
 });
 
@@ -65,6 +65,7 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  poweredByHeader: false,
 };
 
 module.exports = withMDX(nextConfig);

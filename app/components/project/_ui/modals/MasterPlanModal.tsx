@@ -6,12 +6,13 @@ import Image from "next/image";
 import { FiX, FiShare2, FiDownload, FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { newIcons, PopupOpenSvg } from "@/app/images/commonSvgs";
-import { useSetAtom } from "jotai";
-import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";
-import { allowBackButton, preventBackButton } from "@/app/components/molecules/popups/req";
+import {
+  allowBackButton,
+  preventBackButton,
+} from "@/app/components/molecules/popups/req";
 
 interface ZoomableMasterplanModalProps {
   imageUrl: string;
@@ -20,7 +21,7 @@ interface ZoomableMasterplanModalProps {
 }
 
 export default function FullScreenMasterPlanModal({
-  imageUrl = "/placeholder.svg?height=1080&width=1920", 
+  imageUrl = "/placeholder.svg?height=1080&width=1920",
   altText = "Masterplan",
   title = "Project Masterplan 2023",
 }: ZoomableMasterplanModalProps) {
@@ -36,8 +37,6 @@ export default function FullScreenMasterPlanModal({
   const closeModal = () => {
     document.body.style.overflow = "auto";
     setIsOpen(false);
-
-    document.body.style.overflow = "scroll";
     allowBackButton();
   };
 
@@ -95,21 +94,27 @@ export default function FullScreenMasterPlanModal({
       handleShare();
     } else {
       LoginOpen(handleShare, {
-        type: "master-plan", 
+        type: "master-plan",
         link: imageUrl,
       });
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isOpen) {
       preventBackButton();
-        const handlePopState = () => {
-          closeModal();
-        };
-    
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
+      const onPopState = () => closeModal();
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") closeModal();
+      };
+
+      window.addEventListener("popstate", onPopState);
+      window.addEventListener("keydown", onKeyDown);
+
+      return () => {
+        window.removeEventListener("popstate", onPopState);
+        window.removeEventListener("keydown", onKeyDown);
+      };
     }
   }, [isOpen]);
 
@@ -122,17 +127,17 @@ export default function FullScreenMasterPlanModal({
           <source media="(min-width: 1200px)" srcSet={imageUrl.split(",")[3]} />
           <Image
             alt={`${title} Master Plan`}
-            title={imageUrl.split(",")[3].split("/")[6].split(".")[0]}
             src={imageUrl.split(",")[3]}
             fill
             className="cursor-pointer max-h-[600px] object-contain shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
             onClick={openModal}
             unoptimized
+            title={`${title} Master Plan`}
           />
         </picture>
         <button
           aria-label="Click to open the master plan image"
-          onClick={openModal} 
+          onClick={openModal}
         >
           <div className="sm:bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-2 right-1 sm:right-4 z-1 mb-  [20px] sm:shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
             <p className="text-[#0073C6] hidden sm:block sm:text-[14px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">

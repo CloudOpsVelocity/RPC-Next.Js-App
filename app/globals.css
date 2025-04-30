@@ -353,7 +353,7 @@
   border-radius: 4px; /* Rounded corners for the thumb */
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover { 
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker shade on hover */
 }
 

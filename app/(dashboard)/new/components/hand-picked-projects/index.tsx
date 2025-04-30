@@ -2,18 +2,23 @@
 import React from "react";
 import MainHeading from "../heading";
 import SideTabs from "./Sidetabs";
-import CardCarousel from "./Card/CardCarousel";
 import { useAtomValue } from "jotai";
 import { useQuery } from "react-query";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { getHomePageProjectData } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
 import RTK_CONFIG from "@/app/config/rtk";
 import Link from "next/link";
+import CardsCarousal from "@/common/components/CardsCarousal";
+import Card from "../newly-added-projects/Card";
+import styles from "@/app/styles/Carousel.module.css";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = { data: any; shortIds: any; cityId?: string };
 
 export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
   const [active, setActive] = React.useState(0);
+  const isTab = useMediaQuery("(max-width: 1600px)");
+
   const url =
     active == 0
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=projStatus=108`
@@ -32,6 +37,8 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
     ...RTK_CONFIG,
   });
 
+  const cardsData = data?.[config[active]];
+
   return isLoading ? (
     <div> Loading...</div>
   ) : (
@@ -44,7 +51,9 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
               content="Discover Your Dream Home with Handpicked Projects – Where Quality Meets Elegance"
               url={url}
             />
-            <Link rel="noopener noreferrer" prefetch={false}
+            <Link
+              rel="noopener noreferrer"
+              prefetch={false}
               className="hidden  xl:block text-[#0073C6] text-nowrap  text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
               href={url}
             >
@@ -55,7 +64,9 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
           <div className=" w-full flex flex-col xl:flex-row justify-start items-start mt-2 xl:mt-10 flex-nowrap sm:gap-6 ">
             <div className=" w-full flex flex-row justify-between  items-end  xl:hidden ">
               <SideTabs className="" active={active} setActive={setActive} />
-              <Link rel="noopener noreferrer" prefetch={false}
+              <Link
+                rel="noopener noreferrer"
+                prefetch={false}
                 className="  text-[#0073C6] text-nowrap  text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
                 href={url}
               >
@@ -68,11 +79,33 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
               setActive={setActive}
             />
 
-            <div className=" max-w-[600px] sm:max-w-full xl:max-w-[1590px] mt-[16px] sm:mt-0 ">
-              <CardCarousel
+            <div className="w-full max-w-full xl:max-w-[80%] mt-[16px] sm:mt-0 ">
+              {/* <div className="w-full md:w-[80%] mt-[16px] sm:mt-0 "> */}
+              {/* <CardCarousel
                 data={data?.[config[active]]}
                 active={active}
-                shortIds={shortIds}
+                shortIds={shortIds} 
+              /> */}
+
+              <CardsCarousal
+                key="handPickedProjectsCon"
+                allCards={cardsData?.map((item: any, index: number) => (
+                  <Card
+                    key={`home-project-data-${index}`}
+                    item={{
+                      ...item,
+                      shortListed:
+                        shortIds?.projIds &&
+                        shortIds?.projIds?.includes(item.projIdEnc)
+                          ? "Y"
+                          : "N",
+                    }}
+                  />
+                ))}
+                dataLength={cardsData.length}
+                scrollSize={isTab ? 503 : 631}
+                gap={20}
+                containerClass={styles.carouselOuterCon}
               />
             </div>
           </div>

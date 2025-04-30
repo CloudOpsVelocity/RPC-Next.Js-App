@@ -3,7 +3,6 @@
 import N from "@/app/styles/Numinput.module.css";
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
-import { NumberInput, TextInput, Button as B } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
 import { useForm, yupResolver } from "@mantine/form";
@@ -21,17 +20,19 @@ import clsx from "clsx";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
+import { json } from "stream/consumers";
+import { stringify } from "querystring";
 // import useHistoryBackHandler from "./popupCloser";
 // import { title } from "process";
 
 export const preventBackButton = () => {
-  window.history.pushState(null, "", window.location.href);  
-  document.body.style.overflow = "hidden"; 
+  window.history.pushState(null, "", window.location.href);
+  document.body.style.overflow = "hidden";
 };
 
 export const allowBackButton = () => {
   window.history.back();
-  document.body.style.overflow = "scroll"; 
+  document.body.style.overflow = "unset";
 };
 
 const RequestCallBackModal = () => {
@@ -44,28 +45,27 @@ const RequestCallBackModal = () => {
 
   const handleClose = () => {
     close();
+    document.body.style.overflow = "unset";
     setTimeout(() => {
       setStatus("idle");
     }, 500);
-    allowBackButton();
+    // allowBackButton();
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (opened) {
-      preventBackButton();
-        const handlePopState = () => {
-          handleClose();
-        };
-    
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
+      // preventBackButton();
+      const handlePopState = () => {
+        handleClose();
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
     }
     // else{
     //   allowBackButton();
     // }
   }, [opened]);
-
-  
 
   return (
     // <Modal
@@ -85,7 +85,7 @@ const RequestCallBackModal = () => {
     //   classNames={
     //     status === "success"
     //       ? {
-    //           title: Styles.title, 
+    //           title: Styles.title,
     //           root: Styles.root,
     //           close: Styles.close,
     //           content: Styles.content,
@@ -103,16 +103,24 @@ const RequestCallBackModal = () => {
     //   zIndex={10000}
     //   withCloseButton={false}
     // >
-    opened &&
-    <ModalBox
+    opened && (
+      <ModalBox
         isOpen={opened}
         handleChange={() => {
           handleClose();
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
         }}
         hideCrossIcon={true}
-        containerClassStyle={`!p-0 !rounded-[20px] ${ isMobile ? "!w-[94%]" : status !== "success" ? "!w-[65%]" : isTab ? "!w-[40%]" : "!w-[40%]" } `}
-    >
+        containerClassStyle={`!p-0 !rounded-[20px] ${
+          isMobile
+            ? "!w-[94%]"
+            : status !== "success"
+            ? "!w-[65%]"
+            : isTab
+            ? "!w-[40%]"
+            : "!w-[40%]"
+        } `}
+      >
         <div
           className={clsx(
             "bg-white relative rounded-lg  w-full overflow-hidden flex ",
@@ -132,7 +140,7 @@ const RequestCallBackModal = () => {
                 className={`w-[100%] md:w-[50%] px-[3%] py-[3%] sm:py-[1%] xl:py-[3%]`}
               >
                 {status === "idle" && (
-                  <h2 className="text-[18px]  sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
+                  <h2 className="text-[18px] sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
                     {MODAL_TYPE === "REQ_QUOTE"
                       ? "Request Quotation"
                       : "Request Callback"}
@@ -168,6 +176,7 @@ const RequestCallBackModal = () => {
           )}
         </div>
       </ModalBox>
+    )
     // </Modal>
   );
 };
@@ -324,6 +333,7 @@ const ReqForm = ({
   let Posted_BY =
     popupState.MODAL_TYPE == "PROPERTY_REQ_CALLBACK" ? "Posted By" : "Builder";
   const formSubmit = async (values: any) => {
+    console.log(values);
     setStatus("pending");
     const data = await addContact({
       ...values,
@@ -378,80 +388,74 @@ const ReqForm = ({
         Your Details
       </h2>
       <div className="flex flex-col max-w-sm">
-        <TextInput
-          size={isTab ? "md" : "lg"}
-          label="Enter Your Name Here"
-          {...form.getInputProps("name")}
-          placeholder="Enter Your Name Here"
-          classNames={{
-            input: S.input,
-            label: N.label,
-            error: S.error,
-            wrapper: S.wrapper,
-          }}
-          onBlur={(e) => handleTrimAndReplace(e, "name", form)}
-        />
-        <NumberInput
-          mt={isTab ? "xs" : "lg"}
-          classNames={{
-            input: S.numInput,
-            label: N.label,
-            error: S.error,
-            wrapper: S.wrapper,
-          }}
-          hideControls
-          size={isTab ? "md" : "lg"}
-          className="w-[100%]  "
-          label="Contact Number"
-          placeholder="Enter Your Mobile Number"
-          {...form.getInputProps("mobile")}
-          maxLength={10}
-          onPaste={(event) => {
-            const pastedText = event.clipboardData.getData("text/plain");
-            const trimmedText = pastedText.replace(/\s/g, "");
-            const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
-            form.setFieldValue("mobile", first10Digits as any);
-          }}
-        />
-        <p
-          className={`focus:outline-none min-w-[30px] max-w-[70px] border-t-0 border-l-0 h-[27px] border-b-0 border-r-[#4D6677] border-[2px] border-solid self-start relative mt-[2%] pl-2 pr-3 ${
-            (form.errors.mobile != undefined && form.errors.mobile != null) ||
-            status === "error"
-              ? "bottom-[65px]"
-              : "bottom-[41px] sm:bottom-[40px] xl:bottom-[45px]"
-          }  ml-[2px]`}
-        >
-          + 91
-        </p>
+        <div className={S.inputContainer}>
+          <label htmlFor={`req_popup_username`} className={N.label}>
+            Enter Your Name Here
+          </label>
+          <input
+            type="text"
+            className={S.input}
+            {...form.getInputProps("name")}
+            id={`req_popup_username`}
+            placeholder="Enter Your Name Here"
+            onBlur={(e) => handleTrimAndReplace(e, "name", form)}
+            style={{ borderColor: form.errors.name ? "#F00" : "" }}
+          />
+          {form.errors.name && <p className={S.error}>Name is required</p>}
+        </div>
 
-        <TextInput
-          size={isTab ? "md" : "lg"}
-          label="Enter Your Email Here"
-          {...form.getInputProps("email")}
-          placeholder="Enter Your Email Here"
-          type="email"
-          style={{ marginTop: isTab ? "-22px" : "-10px" }}
-          classNames={{
-            input: S.input,
-            label: N.label,
-            error: S.error,
-            wrapper: S.wrapper,
-          }}
-          onBlur={(e) => handleTrimAndReplace(e, "email", form)}
-        />
+        <div className={S.inputContainer} style={{ position: "relative" }}>
+          <label htmlFor={`req_popup_input`} className={N.label}>
+            Contact Number
+          </label>
+          <input
+            type="text"
+            className={S.numInput}
+            {...form.getInputProps("mobile")}
+            id={`req_popup_input`}
+            placeholder="Enter Your Mobile Number"
+            maxLength={10}
+            onPaste={(event) => {
+              const pastedText = event.clipboardData.getData("text/plain");
+              const trimmedText = pastedText.replace(/\s/g, "");
+              const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
+              form.setFieldValue("mobile", first10Digits as any);
+            }}
+            style={{ borderColor: form.errors.mobile ? "#F00" : "" }}
+          />
+          <span className={S.countryCodeText}>+ 91</span>
+          {form.errors.mobile && (
+            <p className={S.error}>Mobile Number is required</p>
+          )}
+        </div>
+
+        <div className={S.inputContainer}>
+          <label htmlFor={`req_popup_email`} className={N.label}>
+            Enter Your Email Here
+          </label>
+          <input
+            type="email"
+            className={S.input}
+            {...form.getInputProps("email")}
+            id={`req_popup_email`}
+            placeholder="Enter Your Email Here"
+            onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+            style={{ borderColor: form.errors.email ? "#F00" : "" }}
+          />
+          {form.errors.email && <p className={S.error}>Email is required</p>}
+        </div>
       </div>
-      <B
-        className="!bg-[#0073C6]"
+
+      <button
+        className="!bg-[#0073C6] text-[14px] md:text-[16px] text-white h-[36px] px-[10px] rounded-[4px] border-none font-semibold "
         type="submit"
         color="#0073C6"
-        /* leftSection={<Phone />} */
-        mt={"md"}
-        loading={status === "pending"}
+        // loading={status === "pending"}
       >
         {popupState.MODAL_TYPE === "REQ_QUOTE"
           ? "Request Quotation"
           : "Request Callback"}
-      </B>
+      </button>
     </form>
   );
 };
@@ -465,9 +469,9 @@ const Success = ({ close }: { close: any }) => {
       <p className="text-[#202020]  xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
         Please wait for callback !
       </p>
-      <B maw={150} onClick={close} className="!bg-[#0073C6] mt-[5%] ">
+      <button onClick={close} className="!bg-[#0073C6] mt-[5%] ">
         Go To Project
-      </B>
+      </button>
     </div>
   );
 };

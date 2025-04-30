@@ -1,41 +1,15 @@
-"use client";
-import useCarouselData from "@/app/hooks/useCarouselData";
-import React, { useCallback, useState } from "react";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+import React from "react";
 
-export default function Page() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { isLoading, data, pageCount } = useCarouselData(currentPage);
-  const totalPages = Math.ceil(pageCount ?? 0 / 4);
+type Props = {};
 
-  const handleLoadNextData = useCallback(() => {
-    setCurrentPage((prevPage) => {
-      return prevPage < totalPages ? prevPage + 1 : prevPage;
-    });
-  }, [totalPages]);
+export default function Page({}: Props) {
+  const url = createProjectLinkUrl({
+    city: "Bengaluru",
+    locality: "AECS Layout",
+    projIdEnc: "a4730855bf19cbae8597612360eb4c4c",
+    slug: "Rohan Mihira Apartment",
+  });
 
-  const handleLoadPrevData = useCallback(() => {
-    setCurrentPage((prevPage) => {
-      return prevPage > 1 ? prevPage - 1 : prevPage;
-    });
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div className="mt-20">
-      {JSON.stringify(data)}
-      {JSON.stringify({ pageCount })}
-      <button onClick={handleLoadPrevData} disabled={currentPage === 1}>
-        Prev Page
-      </button>
-      <button
-        onClick={handleLoadNextData}
-        disabled={currentPage === totalPages}
-      >
-        Load Next Page
-      </button>
-    </div>
-  );
+  return <div className="mt-[30%]">{JSON.stringify(url)}</div>;
 }

@@ -3,7 +3,6 @@ import { Carousel } from "@mantine/carousel";
 import React from "react";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
-// import useIds from "../../useIds";
 type Props = { data: any; active: number; shortIds: any };
 import Css from "../../../Style.module.css";
 import Card from "../../newly-added-projects/Card";

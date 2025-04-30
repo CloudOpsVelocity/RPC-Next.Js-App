@@ -1,9 +1,5 @@
-import {
-  BASE_PATH_LISTING,
-  BASE_PATH_PROJECT_LISTING,
-} from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import Link from "next/link";
-import Script from "next/script";
 import React from "react";
 export const slugify = (name: string): string => {
   return name
@@ -46,11 +42,12 @@ export default function ListingBreadCrumbs({
         item: process.env.NEXT_PUBLIC_PROJECT_URL,
       },
       ...allParams.map((key, index) => {
+        const isLast = index === allParams.length - 1;
         breadcrumbPath += `/${slugify(params[key])}`;
         return {
           "@type": "ListItem",
           position: index + 2,
-          name: params[key].replace(/-/g, " "),
+          name: isLast ? title : params[key].replace(/-/g, " "),
           item: `${process.env.NEXT_PUBLIC_PROJECT_URL}${
             isProject ? "" : BASE_PATH_LISTING
           }${breadcrumbPath}`,
@@ -80,14 +77,14 @@ export default function ListingBreadCrumbs({
 
   return (
     <>
-      <Script
+      <script
         id="ListingBreadCrumbsScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
-      <Script
+      <script
         id="ListingBreadCrumbsScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -106,19 +103,14 @@ export default function ListingBreadCrumbs({
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;
           const isLast = index === allParams.length - 1;
+
           return (
             <React.Fragment key={`${key[index]}`}>
               {!isLast ? (
                 <>
                   <Link
                     prefetch={false}
-                    href={`${isProject ? "" : BASE_PATH_LISTING}${currentPath}${
-                      currentPath.includes("for-sale")
-                        ? "?sf=listedBy=All-cg=S"
-                        : currentPath.includes("for-rent")
-                        ? "?sf=listedBy=All-cg=R"
-                        : "/"
-                    }`}
+                    href={`${isProject ? "" : BASE_PATH_LISTING}${currentPath}`}
                     target="_blank"
                     className="hover:underline cursor-pointer capitalize"
                   >

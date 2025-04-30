@@ -1,11 +1,10 @@
-import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
-import Script from "next/script";
 import React from "react";
 
 export default function BreadCrumbs({ params: routes }: { params: any }) {
   const params = {
+    "/": "",
     residential: "residential",
     projects: "projects",
     ...routes,
@@ -23,7 +22,11 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
       currentPath += `/${slugify(params[key])}`;
       let name = params[key].replace(/-/g, " ");
       const newArray = name.split(" ").slice(0, -1);
-      const newName = key !== "slug" ? name : newArray.join(" ");
+      let newName = key !== "slug" ? name : newArray.join(" ");
+      if (index === 0) {
+        currentPath = "";
+        newName = "Home";
+      }
       return {
         "@type": "ListItem",
         position: index + 1,
@@ -39,14 +42,16 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
       siteMapPath += `/${slugify(params[key])}`;
       let name = params[key].replace(/-/g, " ");
       const newArray = name.split(" ").slice(0, -1);
-      const newName = key !== "slug" ? name : newArray.join(" ");
+      let newName = key !== "slug" ? name : newArray.join(" ");
+      if (index === 0) {
+        siteMapPath = "";
+        newName = "Home";
+      }
       return {
         "@context": "https://schema.org",
         "@type": "SiteNavigationElement",
         position: index + 1,
-        name: titleOfKeys[key as keyof typeof titleOfKeys]
-          ? titleOfKeys[key as keyof typeof titleOfKeys] + newName
-          : newName,
+        name: newName,
         url: `${process.env.NEXT_PUBLIC_PROJECT_URL}${siteMapPath}`,
       };
     }),
@@ -54,7 +59,7 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
   let currentPath2 = "";
   return (
     <>
-      <Script
+      <script
         id="BreadCrumbsScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -62,7 +67,7 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
         }}
       />
 
-      <Script
+      <script
         id="BreadCrumbsScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -70,21 +75,15 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
         }}
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-        <Link
-          prefetch={false}
-          rel="noopener noreferrer"
-          href={`/`}
-          className="hover:underline cursor-pointer capitalize"
-        >
-          Home
-        </Link>
-        {" > "}
-
         {allParams.map((key, index) => {
           currentPath2 += `/${slugify(params[key])}`;
           let name = params[key].replace(/-/g, " ");
           const newArray = name.split(" ").slice(0, -1);
-          const newName = key !== "slug" ? name : newArray.join(" ");
+          let newName = key !== "slug" ? name : newArray.join(" ");
+          if (index === 0) {
+            currentPath2 = "";
+            newName = "Home";
+          }
           return (
             <React.Fragment key={`${key[index]}`}>
               {index < Object.keys(params).length - 1 ? (
@@ -92,6 +91,7 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
                   prefetch={false}
                   href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${currentPath2}`}
                   className="hover:underline cursor-pointer capitalize"
+                  target="_blank"
                 >
                   <span>{newName}</span>
                 </Link>
@@ -106,33 +106,6 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
             </React.Fragment>
           );
         })}
-        {/* {allParams.map((key, index) => {
-          path += `/${slugify(params[key])}`;
-          let name = params[key].replace(/-/g, " ");
-          const newArray = name.split(" ").slice(0, -1);
-          const newName = key !== "slug" ? name : newArray.join(" ");
-
-          return (
-            <React.Fragment key={`${key[index]}`}>
-              {index < Object.keys(params).length - 1 ? (
-                <Link
-                  prefetch={false}
-                  href={`${process.env.NEXT_PUBLIC_PROJECT_URL}${siteMapPath}`}
-                  className="hover:underline cursor-pointer capitalize"
-                >
-                  <span>{newName}</span>
-                </Link>
-              ) : (
-                <>
-                  <span className="capitalize">
-                    {newName.replace("undefined ", "")}
-                  </span>
-                </>
-              )}
-              {index < Object.keys(params).length - 1 && " > "}
-            </React.Fragment>
-          );
-        })} */}
       </p>
     </>
   );

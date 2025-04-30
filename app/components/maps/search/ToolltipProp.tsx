@@ -35,6 +35,7 @@ export default function TooltipProp({ data }: Props) {
           height={630}
           width={1200}
           className=" w-[80px] xl:w-[100px] h-[80px] xl:h-[100px] border-[0.5px] border-gray border-solid rounded-[10px] "
+          unoptimized
         />
         <div className="w-full mt-0 pt-0">
           <p className="text-[#001F35] text-[12px] xl:text-[14px] not-italic font-semibold capitalize !m-0 !p-0 mb-[4px]">

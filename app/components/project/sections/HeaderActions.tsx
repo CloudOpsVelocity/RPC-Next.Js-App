@@ -83,13 +83,20 @@ export default function HeaderActions({
     <div>
       {" "}
       <h2
-        className="text-h2 sm:text-[22px] lg:text-[32px] mt-[3%] xl:mt-[100px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
+        className="sm:text-[22px] lg:text-[28px] mt-[3%] xl:mt-[100px] font-bold mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
-        {type == "overview" ? "Price " : "Floor Plans "} For{" "}
-        <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
+        <strong>
+          <span className="text-[#001F35]">
+            {type == "overview" ? "Price " : "Floor Plans "} For{" "}
+          </span>
+          <span className="text-[#148B16]">{projName}</span>{" "}
+        </strong>
       </h2>
-      <SubHeading text="See floor plans as per your selected property type" />
+      {/* <SubHeading text="See floor plans as per your selected property type" /> */}
+      <p className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2">
+        See floor plans as per your selected property type
+      </p>
       <div
         className={`flex justify-start items-start md:items-center  mb-[8px] flex-col md:flex-row  ${
           phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
@@ -115,7 +122,7 @@ export default function HeaderActions({
                       setCurrentPhase(each.phaseId);
                       setSelected(0);
                     }}
-                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]
+                    buttonClass={`mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]
                         ${
                           currentPhase == each.phaseId
                             ? " font-[600] border-solid border-[1px] border-[#0073C6] "

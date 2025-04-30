@@ -167,9 +167,9 @@ function Agent({ encriptedData }: any) {
   };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-  const displayCountryCode = (value: any) => {
-    console.log(value);
-  };
+  // const displayCountryCode = (value: any) => {
+  //   console.log(value);
+  // };
   const logo = form.watch("companyLogo");
 
   const queryParam = getQueryParamClient();

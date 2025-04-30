@@ -2,7 +2,7 @@ export const REALESTATEAGENT_SCHEMA = {
   "@type": "RealEstateAgent",
   name: "GET RIGHT PROPERTY",
   url: "https://www.getrightproperty.com",
-  logo: "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
+  logo: "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
   sameAs: [
     "https://www.facebook.com/getrightproperty",
     "https://twitter.com/getrightproperty",

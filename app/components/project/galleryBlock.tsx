@@ -63,16 +63,15 @@ export default function GalleryBlock({
       ) : (
         <>
           <h2
-            className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%] scroll-mt-[260px]"
+            className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words text-wrap w-[78%] scroll-mt-[260px]"
             id="videos"
           >
-            Gallery of{" "}
-            <span
-              className="text-[#148B16] font-[700] scroll-mt-[260px]"
-              id="photos"
-            >
-              {projName}
-            </span>{" "}
+            <strong>
+              <span className="text-[#001F35]">Gallery of </span>
+              <span className="text-[#148B16] scroll-mt-[260px]" id="photos">
+                {projName}
+              </span>{" "}
+            </strong>
           </h2>
 
           <SubHeading
@@ -115,7 +114,12 @@ export default function GalleryBlock({
                     />
                     <Image
                       src={selectedMedia.split(",")[2]}
-                      alt="Preview"
+                      alt={
+                        type === "prop" ? "Property Gallery" : "Project Gallery"
+                      }
+                      title={
+                        type === "prop" ? "Property Gallery" : "Project Gallery"
+                      }
                       className="cursor-pointer object-contain"
                       onClick={() => {
                         dispatch({
@@ -154,7 +158,7 @@ export default function GalleryBlock({
                           ? isVideo
                             ? "Property Video"
                             : "Property Gallery"
-                          : isVideo 
+                          : isVideo
                           ? "Project Video"
                           : "Project Gallery",
                       activeIndex: isVideo
@@ -182,11 +186,10 @@ export default function GalleryBlock({
 
               const imageUrl = img.split(",")[1];
               const imageName = imageUrl.split("/")[6]?.split(".")[0];
-              const allSizesSchemas = img.split(",").map((url) => {
-                console.log(`galleryBlock_${ind.toString()}`)
+              const allSizesSchemas = img.split(",").map((url, schemaIndex) => {
                 return (
                   <script
-                    key={`galleryBlock_${ind.toString()}`}
+                    key={`schema_${ind}_${schemaIndex}`}
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                       __html: JSON.stringify({
@@ -211,7 +214,7 @@ export default function GalleryBlock({
               return (
                 <div
                   className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
-                  key={`gallery_block_${ind}`}
+                  key={`gallery_block_${imageUrl}_${ind}`}
                 >
                   {allSizesSchemas}
                   <Image
@@ -219,7 +222,7 @@ export default function GalleryBlock({
                     alt={imageName || ""}
                     title={imageName || ""}
                     className={clsx(
-                      "!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300",
+                      "!rounded-[5px] shadow-md cursor-pointer border border-gray-300",
                       selectedMedia?.split("?")[0] === img.split("?")[0] &&
                         "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                     )}
@@ -262,6 +265,7 @@ export default function GalleryBlock({
                       src={getYouTubeThumbnailUrl(img) ?? ""}
                       className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover"
                       alt="thumbnail"
+                      title="thumbnail"
                       onClick={() => handleMediaClick(img, ind)}
                     />
                   ) : (

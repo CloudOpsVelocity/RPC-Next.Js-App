@@ -34,27 +34,27 @@ function LoginPopup() {
     //   size={isMobile ? "100%" : isTab ? "45%" : "30%"}
     //   zIndex={1000}
     // >
-    opened &&
-    <ModalBox
+    opened && (
+      <ModalBox
         isOpen={opened}
         handleChange={() => {
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
           close();
         }}
         containerClassStyle={`w-full md:w-[45%] xl:w-[30%] !rounded-[20px] !p-0 !pl-[10px] !pr-[10px] `}
-
         // containerClassStyle={` !rounded-[20px] !p-0 !pl-[10px] !pr-[10px] ${isMobile ? "w-[100%]" : session ? isDataSubmitted.isSubmitted ? isTab ? "w-[40%]" : "w-auto" : "w-[58%]" : "w-[35%]"} `}
         hideCrossIcon={true}
       >
-      <Close
-        className="absolute  right-3 top-3 size-6 cursor-pointer "
-        close={()=>{
-          close();
-          allowBackButton();
-        }}
-      />
-      <LoginPop close={close} data={data} />
-    </ModalBox>
+        <Close
+          className="absolute  right-3 top-3 size-6 cursor-pointer "
+          close={() => {
+            close();
+            allowBackButton();
+          }}
+        />
+        <LoginPop close={close} data={data} />
+      </ModalBox>
+    )
     // </Modal>
   );
 }

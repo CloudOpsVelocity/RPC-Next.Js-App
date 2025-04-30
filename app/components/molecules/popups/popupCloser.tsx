@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 
-const useHistoryBackHandler = (handleClose:any) => {
+const useHistoryBackHandler = (handleClose: any) => {
   useEffect(() => {
     const handlePopState = () => {
-      document.body.style.overflow = "scroll";
+      document.body.style.overflow = "unset";
       handleClose ? handleClose() : "";
-      // window.history.replaceState(null, "", window.location.href); 
+      // window.history.replaceState(null, "", window.location.href);
       window.history.back();
     };
 
@@ -21,6 +21,5 @@ const useHistoryBackHandler = (handleClose:any) => {
 
   return pushHistory;
 };
-
 
 export default useHistoryBackHandler;

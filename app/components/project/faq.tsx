@@ -45,10 +45,14 @@ export default function FaqWithBg({
       <div className="flex justify-center items-center text-center !w-[100%] !md:w-[90%] relative">
         {data?.length > 0 && (
           <>
-            <div className="hidden sm:block absolute   left-[2%] sm:left-[16%]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] " />
-            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
-              Frequently Asked Questions of{" "}
-              <span className="text-[#148B16] font-[700]  ">{projName}</span>{" "}
+            <div className="hidden sm:block absolute left-[2%] sm:left-[16%] sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] " />
+            <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
+              <strong>
+                <span className="text-[#001F35]">
+                  Frequently Asked Questions of{" "}
+                </span>
+                <span className="text-[#148B16]">{projName}</span>{" "}
+              </strong>
             </h2>
           </>
         )}
@@ -156,13 +160,14 @@ const AddQnaForm = ({
   };
   const onClose = () => {
     close();
+    document.body.style.overflow = "unset";
     opened.type === "qna" && reset();
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
 
   return (
     <form
-      className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2"
+      className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2 mb-[30px]"
       onSubmit={onSubmit(formSubmit)}
       id="have-any-question"
     >
@@ -180,7 +185,7 @@ const AddQnaForm = ({
             fill="#18B8F2"
           />
         </svg>{" "}
-        <span className="text-[#242424] text-h2 sm:text-[22px] xl:text-[32px] not-italic font-bold leading-[normal]">
+        <span className="text-[#242424] sm:text-[22px] xl:text-[32px] not-italic font-bold leading-[normal]">
           Have any Question? Ask Here 👇
         </span>
       </h2>
@@ -217,20 +222,21 @@ const AddQnaForm = ({
             id="question"
             name="question"
             placeholder="Type your question here . . . ."
-            className={`placeholder:!text-[#4D6677] px-[10px] py-[6px] md:px-[16px] md:py-[10px] placeholder:!text-[14px] md:placeholder:!text-[18px] w-full resize-none leading-[23.784px] text-[14px] md:text-[16px] text-[#333] font-[500] rounded-[6px] md:rounded-[10px] focus:outline-none border border-solid border-[#737579] ${!errors.question ? "" : "border-[#F00]"} `}
+            className={`placeholder:!text-[#4D6677] px-[10px] py-[6px] md:px-[16px] md:py-[10px] placeholder:!text-[14px] md:placeholder:!text-[18px] w-full resize-none leading-[23.784px] text-[14px] md:text-[16px] text-[#333] font-[500] rounded-[6px] md:rounded-[10px] focus:outline-none border border-solid border-[#737579] ${
+              !errors.question ? "" : "border-[#F00]"
+            } `}
             rows={isMobile ? 2 : 4}
             {...getInputProps("question")}
             onBlur={(e) =>
               handleTrimAndReplace(e, "question", setFieldValue, "dis")
             }
           />
-          
+
           {errors.question && (
             <p className="text-[12px] sm:text-[14px] text-[#F00]">
               {errors.question}
             </p>
           )}
-
         </div>
         <button
           type="submit"
@@ -241,12 +247,15 @@ const AddQnaForm = ({
           Submit
         </button>
       </div>
-      <Success
-        text={values.question}
-        opened={opened}
-        onClose={onClose}
-        projName={projName}
-      />
+      {opened.status && (
+        <Success
+          text={values.question}
+          // opened={opened.status}
+          opened={opened}
+          onClose={onClose}
+          projName={projName}
+        />
+      )}
     </form>
   );
 };
@@ -292,9 +301,9 @@ const MobileFaqCard = ({
         </span>
       </button>
       <div className="px-4 pb-2 sm:px-6 sm:pb-6">
-        <p>
+        <div>
           <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={3} />
-        </p>
+        </div>
       </div>
     </div>
   );
@@ -311,16 +320,18 @@ const Success = ({ text, opened, onClose, projName }: any) => {
 
   const ComponentTorender =
     renderComponent[opened.type as RenderComponentKeys] || null;
-  const isMobile = useMediaQuery(`(max-width: 750px)`);
-  const isTab = useMediaQuery(`(max-width: 1600px)`);
+  // const isMobile = useMediaQuery(`(max-width: 750px)`);
+  // const isTab = useMediaQuery(`(max-width: 1600px)`);
   useEffect(() => {
     const timer = setTimeout(() => {
+      console.log("scroll 1");
       onClose();
-      document.body.style.overflow = "scroll";
+      document.body.style.overflow = "unset";
     }, 5000);
 
-    return () => clearTimeout(timer); 
-  }, [onClose]);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     // <Modal
     //   classNames={{
@@ -328,7 +339,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
     //     root: S.root,
     //     close: S.close,
     //     content: S.content,
-    //     overlay: S.overlay, 
+    //     overlay: S.overlay,
     //     header: S.disabled,
     //     body: S.body,
     //   }}
@@ -338,25 +349,26 @@ const Success = ({ text, opened, onClose, projName }: any) => {
     //   title="Add Rating"
     //   size={isMobile ? "100%" : isTab ? "35%" : "auto"}
     // >
-    opened.status &&
-    <ModalBox
+    opened.status && (
+      <ModalBox
         isOpen={opened.status}
         handleChange={() => {
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
           onClose();
         }}
         hideCrossIcon={true}
         containerClassStyle="w-[90%] md:w-[35%] xl:w-auto !p-0 !rounded-[20px] !min-w-[200px] md:!min-w-[500px] !max-w-[100%] md:!max-w-[500px] "
       >
-      <Close 
-        close={() => {
-          document.body.style.overflow = "scroll";
-          onClose();
-        }} 
-        className="absolute top-2 right-2 z-50" 
-      />
+        <Close
+          close={() => {
+            document.body.style.overflow = "unset";
+            onClose();
+          }}
+          className="absolute top-2 right-2 z-50"
+        />
 
-      {ComponentTorender}
-    </ModalBox>
+        {ComponentTorender}
+      </ModalBox>
+    )
   );
 };

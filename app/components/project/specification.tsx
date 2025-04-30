@@ -1,17 +1,8 @@
 "use client";
 import React, { useRef, useState } from "react";
-import {
-  useMediaQuery,
-  // useScrollIntoView
-} from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import { SpecificationList } from "@/app/validations/types/project";
-import {
-  // Box, Group, Paper,
-  // ScrollArea,
-  // Stack,
-} from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
-// import styles from "@/app/styles/Scrollbar.module.css";
 import clsx from "clsx";
 // import { redirect } from "next/dist/server/api-utils";
 export default function Specifications({
@@ -31,13 +22,23 @@ export default function Specifications({
   const scrollWhereIsSelected = (index: number) => {
     const selectedSpecId = data[index]?.specName.toLowerCase();
     const selectedElement = document.getElementById(selectedSpecId);
-    if (selectedElement) {
-      const titleElement = selectedElement.querySelector("h2");
-      const titleHeight = titleElement?.offsetHeight || 0;
-      const position = selectedElement.offsetTop - titleHeight;
+    const container = viewport.current;
 
-      viewport.current!.scrollTo({
-        top: position - 20,
+    if (selectedElement && container) {
+      // const titleElement = selectedElement.querySelector("h2");
+      // const titleHeight = titleElement?.offsetHeight || 0;
+      // const position = selectedElement.offsetTop - titleHeight;
+      // viewport.current!.scrollTo({
+      //   top: position - 20,
+      //   behavior: "smooth",
+      // });
+
+      const offset = selectedElement.offsetTop - container.offsetTop;
+      const scroll =
+        offset - container.clientHeight / 2 + selectedElement.clientHeight / 2;
+
+      container.scrollTo({
+        top: scroll,
         behavior: "smooth",
       });
 
@@ -88,11 +89,12 @@ export default function Specifications({
             })}
           </div>
         </div>
-          <div 
-            className={`rounded-lg pb-[20px] w-full !overflow-y-auto bg-gray-50 max-h-[358px]`}
-            ref={viewport}
-            style={{
-              maxHeight: `${
+
+        {/* <div className="flex-1 bg-gray-50 rounded-lg ">
+          <Stack align="center">
+            <ScrollArea
+              w={"100%"}
+              h={
                 458 > data?.length * (isMobile ? 120 : 270)
                   ? data.length * (isMobile ? 120 : 270)
                   : isMobile
@@ -129,9 +131,56 @@ export default function Specifications({
                     )}
                   </ul>
                 </div>
+              ))}
+            </ScrollArea>
+          </Stack>
+        </div> */}
+
+        <div
+          ref={viewport}
+          className="w-full h-full flex-1 bg-gray-50 rounded-lg pb-[20px] overflow-y-auto overflow-x-hidden scroll-smooth "
+          style={{
+            maxHeight: `${
+              458 > data?.length * (isMobile ? 120 : 270)
+                ? data.length * (isMobile ? 120 : 270)
+                : isMobile
+                ? 280
+                : 358
+            }px`,
+          }}
+        >
+          {data?.map((spec, index) => (
+            <div
+              key={spec.specName}
+              // @ts-ignore
+              id={spec.specName.toLowerCase()}
+              className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
+            >
+              <span
+                className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[18px] xl:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
+                  selectedSpecIndex == index
+                    ? "specification"
+                    : "specificationRemove"
+                }  `}
+              >
+                {specificationsList?.get(spec?.specId)?.url}{" "}
+                <span className="">{spec.specName}</span>
+              </span>
+              <div>
+                <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
+                  {spec.values.map(
+                    (value) =>
+                      value && (
+                        <li className="break-words max-w-full" key={value}>
+                          {value}
+                        </li>
+                      )
+                  )}
+                </ul>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

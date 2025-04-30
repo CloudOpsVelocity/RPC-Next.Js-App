@@ -1,7 +1,6 @@
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
-import Script from "next/script";
 
 export const generateAllSchemas = (
   property: any,
@@ -9,8 +8,10 @@ export const generateAllSchemas = (
   index: number
 ) => {
   const [launchDate, possassionDate] = [
-    convertToSchemaDate(property?.launchDate),
-    convertToSchemaDate(property?.possassionDate),
+    convertToSchemaDate(property?.launchDate || "Fri Mar 27 00:00:00 IST 2026"),
+    convertToSchemaDate(
+      property?.possassionDate || "Fri Mar 27 00:00:00 IST 2026"
+    ),
   ];
   if (!property) return [];
   const builderAlreadyExists =
@@ -20,12 +21,12 @@ export const generateAllSchemas = (
         p.postedByName === property.postedByName
       );
     }) !== -1;
-  const PAGE_URL = createProjectLinkUrl({
+  const PAGE_URL = `${process.env.NEXT_PUBLIC_URL}${createProjectLinkUrl({
     city: property.city,
     slug: property.projName,
     locality: property.locality,
     projIdEnc: property.projIdEnc,
-  });
+  })}`;
   const allSizesSchemas = property.coverUrl.split(",").map((url: string) => {
     const OrgName = property.projName?.split(" ")[0];
     return {
@@ -33,7 +34,7 @@ export const generateAllSchemas = (
       contentUrl: url,
       license: "https://www.getrightproperty.com/privacy-policy",
       acquireLicensePage: "https://www.getrightproperty.com/privacy-policy",
-      creditText: `${property.projName} Cover Name`,
+      creditText: `${property.projName} Cover Image`,
       creator: {
         "@type": "Person",
         name: OrgName,
@@ -41,6 +42,12 @@ export const generateAllSchemas = (
       copyrightNotice: OrgName,
     };
   });
+  const desc = `${property.projName} for sale in ${property.locality}, ${
+    property.city
+  }. Explore ${property.projName} project offering ${property.bhkNames.join(
+    ", "
+  )} configurations with prices ranging from ₹${property.minPrice.toLocaleString()} to ₹${property.maxPrice.toLocaleString()}. View Project Details, Price, Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details.`;
+
   const schemas = {
     "@context": "https://schema.org",
     "@graph": [
@@ -49,7 +56,7 @@ export const generateAllSchemas = (
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         } ${property.city ? `, ${property.city}` : ""}`.trim(),
-        description: property.projectAbout || "",
+        description: desc || "",
         url: PAGE_URL,
         datePosted: launchDate || new Date().toISOString(),
         postalCode: property.pincode || "",
@@ -72,7 +79,7 @@ export const generateAllSchemas = (
         name: `${property.projName || ""} ${property.propType || ""} ${
           property.locality ? `in ${property.locality}` : ""
         }`.trim(),
-        description: property.projectAbout.slice(0, 4800) || "",
+        description: desc || "",
         image:
           property.coverUrl?.split(",")[0] ||
           "https://getrightproperty.com/default-property.jpg",
@@ -111,7 +118,7 @@ export const generateAllSchemas = (
         "@type": "WebPage",
         url: PAGE_URL,
         name: property.projName || "",
-        description: property.projectAbout || "",
+        description: desc || "",
         datePublished: launchDate || new Date().toISOString(),
         image:
           property.coverUrl?.split(",")[0] ||
@@ -259,14 +266,14 @@ export const ProjectSeachSchema = ({
   const address = pagetitle.split("In")[1];
   return (
     <>
-      <Script
+      <script
         id="projSearchScript1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(results),
         }}
       />
-      <Script
+      <script
         id="projSearchScript2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -276,33 +283,43 @@ export const ProjectSeachSchema = ({
             name: `Property Listings - ${pagetitle}`,
             description: `Browse through our curated list of properties in ${pagetitle}`,
             numberOfItems: properties.length,
-            itemListElement: properties.map((property, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              item: {
-                "@type": "Apartment",
-                name: property.projName,
-                description: property.projectAbout || "",
-                image:
-                  property.coverUrl?.split(",")[0] ||
-                  "https://getrightproperty.com/default-property.jpg",
-                url: createProjectLinkUrl({
-                  city: property.city,
-                  slug: property.projName,
-                  locality: property.locality,
-                  projIdEnc: property.projIdEnc,
-                }),
-                offers: {
-                  "@type": "Offer",
-                  price: property.minPrice || "0",
-                  priceCurrency: "INR",
+            itemListElement: properties.map((property, index) => {
+              const desc = `${property.projName} for sale in ${
+                property.locality
+              }, ${property.city}. Explore ${
+                property.projName
+              } project offering ${property.bhkNames.join(
+                ", "
+              )} configurations with prices ranging from ₹${property.minPrice.toLocaleString()} to ₹${property.maxPrice.toLocaleString()}. View Project Details, Price, Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details.`;
+
+              return {
+                "@type": "ListItem",
+                position: index + 1,
+                item: {
+                  "@type": "Apartment",
+                  name: property.projName,
+                  description: desc || "",
+                  image:
+                    property.coverUrl?.split(",")[0] ||
+                    "https://getrightproperty.com/default-property.jpg",
+                  url: createProjectLinkUrl({
+                    city: property.city,
+                    slug: property.projName,
+                    locality: property.locality,
+                    projIdEnc: property.projIdEnc,
+                  }),
+                  offers: {
+                    "@type": "Offer",
+                    price: property.minPrice || "0",
+                    priceCurrency: "INR",
+                  },
                 },
-              },
-            })),
+              };
+            }),
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript3"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -329,7 +346,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript4"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -395,7 +412,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript5"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -484,7 +501,7 @@ export const ProjectSeachSchema = ({
           }),
         }}
       />
-      <Script
+      <script
         id="projSearchScript6"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -547,7 +564,7 @@ export const ProjectSeachSchema = ({
         }}
       />
 
-      <Script
+      <script
         id="projSearchScript7"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

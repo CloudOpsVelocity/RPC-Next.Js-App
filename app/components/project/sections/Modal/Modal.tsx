@@ -26,7 +26,7 @@ import {
 import { BiMessage } from "react-icons/bi";
 import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
-import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
+// import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 // import { useMediaQuery } from "@mantine/hooks";
 
@@ -43,7 +43,7 @@ const Modal = ({
     window.history.pushState("masterplanModal", "");
 
     const handlePopState = () => {
-      onClose(); 
+      onClose();
     };
 
     if (isOpen) {
@@ -52,6 +52,7 @@ const Modal = ({
     }
 
     return () => {
+      console.log("scroll aaaaaa");
       document.body.style.overflow = "unset";
       window.removeEventListener("popstate", handlePopState);
     };
@@ -60,7 +61,7 @@ const Modal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {children}
@@ -80,7 +81,7 @@ export default function PartialUnitModal({ data }: any) {
     reset();
   };
 
-  const opened = isData.main === 0 ? true : isData.main; 
+  const opened = isData.main === 0 ? true : isData.main;
 
   const [platform, setPlatform] = useState("");
 
@@ -145,20 +146,45 @@ export default function PartialUnitModal({ data }: any) {
     });
   };
 
-  useEffect(()=>{
+  // useEffect(()=>{
+  //   if (opened) {
+  //       preventBackButton();
+  //       const handlePopState = () => {
+  //         document.body.style.overflow = "unset";
+  //         handleReset();
+  //       };
+
+  //       window.addEventListener("popstate", handlePopState);
+  //       return () => window.removeEventListener("popstate", handlePopState);
+  //   }
+  //   // else{
+  //   //   allowBackButton();
+  //   // }
+  // }, [opened]);
+
+  useEffect(() => {
+    const handleClose = () => {
+      document.body.style.overflow = "unset";
+      window.history.back();
+      handleReset();
+    };
+
     if (opened) {
-        preventBackButton();
-        const handlePopState = () => {
-          document.body.style.overflow = "scroll";
-          handleReset();
-        };
-    
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
+      preventBackButton();
+
+      const onPopState = () => handleClose();
+      const onKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") handleClose();
+      };
+
+      window.addEventListener("popstate", onPopState);
+      window.addEventListener("keydown", onKeyDown);
+
+      return () => {
+        window.removeEventListener("popstate", onPopState);
+        window.removeEventListener("keydown", onKeyDown);
+      };
     }
-    // else{
-    //   allowBackButton();
-    // }
   }, [opened]);
 
   const handleNext = () => {
@@ -171,13 +197,8 @@ export default function PartialUnitModal({ data }: any) {
     return null;
   }
 
-
   return (
-    <Modal
-      isOpen={opened}  
-      onClose={handleReset}
-    >
-
+    <Modal isOpen={opened} onClose={handleReset}>
       <div className="flex flex-col h-full ">
         {/* Header */}
         <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
@@ -385,7 +406,7 @@ export default function PartialUnitModal({ data }: any) {
               }
             >
               <BiMessage className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Request Quotation</span>
+              <span>Get Price Details</span>
             </button>
           </div>
         </div>
@@ -394,6 +415,8 @@ export default function PartialUnitModal({ data }: any) {
           <div className={`w-[95%] m-auto  inline-flex mb-4 `}>
             {isData.others.map((item: any, index: number) => {
               const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
+              console.log(imageUrl);
+              console.log(encodeURIComponent(imageUrl));
               return (
                 <div
                   key={`floorplan-${index}`}
@@ -405,7 +428,8 @@ export default function PartialUnitModal({ data }: any) {
                   <Image
                     width={80}
                     height={60}
-                    src={encodeURIComponent(imageUrl)}
+                    // src={encodeURIComponent(imageUrl)}
+                    src={imageUrl}
                     alt={`Floor Plan ${index + 1}`}
                     className="w-full h-full object-cover"
                     unoptimized

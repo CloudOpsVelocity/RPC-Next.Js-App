@@ -26,9 +26,10 @@ export default function PostProjectBtn({}: Props) {
           src="/home/free.svg"
           width={36}
           height={36}
-          alt="post"
+          alt="post your Project"
           className="absolute h-[31px] sm:h-[36] right-0 text-[16px]  "
           unoptimized
+          title="post your Project"
         />
       </Link>
     )

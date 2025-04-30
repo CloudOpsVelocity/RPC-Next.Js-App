@@ -2,6 +2,7 @@
 import { readMoreAtom } from "@/app/store/drawer";
 import { useAtom } from "jotai";
 import React from "react";
+import { preventBackButton } from "../molecules/popups/req";
 
 interface ReadMoreProps {
   text: string;
@@ -24,6 +25,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
 
   const handleReadMoreClick = () => {
     if (shouldShowReadMore) {
+      preventBackButton();
       document.body.style.overflow = "hidden";
       setReadMore((prev) => ({
         ...prev,

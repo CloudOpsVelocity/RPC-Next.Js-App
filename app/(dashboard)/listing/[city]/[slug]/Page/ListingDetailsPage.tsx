@@ -148,7 +148,6 @@ export default function ListingDetailsPage({
             showProjName={false}
           />
         )}
-
         {/* Property Details */}
         <RoomDetails data={data} />
         {/* Floor Plan Block */}
@@ -188,7 +187,6 @@ export default function ListingDetailsPage({
             />
             {/* {data.postedById === projData.builderId && ( */}
             <>
-              {" "}
               <PropertyBanner
                 {...projData}
                 cityName={data.ctName}
@@ -249,6 +247,7 @@ export default function ListingDetailsPage({
           bhkId={data.bhkId ?? 41}
           builderName={data?.postedByName}
           builderId={projData?.builderId}
+         
           // query={""}
         />
         {/* {data.projIdEnc && data.postedById === projData.builderId && ( */}
@@ -273,7 +272,7 @@ export default function ListingDetailsPage({
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />
         <CompareError />
-        <SharePopup />
+      {/*   <SharePopup /> */}
       </div>
     </div>
   );

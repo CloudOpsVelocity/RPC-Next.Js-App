@@ -21,14 +21,18 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
         () => import("@/app/components/maps/search/ProjectSearchPageMap"),
         {
           // loading: () => <MapSkeleton />,
-          loading: () => <div className=" flex justify-center items-center w-full h-[600px] flex-col ">
+          loading: () => (
+            <div className=" flex justify-center items-center w-full h-[600px] flex-col ">
               <div className="animate-spin rounded-full h-[50px] w-[50px] border-t-4 border-b-4 border-[#0073C6] border-t-transparent" />
-              <p className="font-[600] text-[20px] mt-[16px] ">Please wait Map is loading...</p>
-            </div>,
+              <p className="font-[600] text-[20px] mt-[16px] ">
+                Please wait Map is loading...
+              </p>
+            </div>
+          ),
           ssr: false,
         }
       ),
-    [] 
+    []
   );
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -69,20 +73,20 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
   const apidata = !isTrue ? serverData : data?.pages.flat() || [];
 
   useEffect(() => {
-      if (mapPopup.isOpen && isMobile) {
-        // Push a new state to the history stack when the modal is opened
-        window.history.pushState("listingSearchMapmodal", "");
-  
-        const handlePopState = () => {
-          document.body.style.overflow = "scroll"; 
-          setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
-          dispatch({ type: "CLOSE" })
-        };
-  
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
-      }
-    }, [mapPopup.isOpen]);
+    if (mapPopup.isOpen && isMobile) {
+      // Push a new state to the history stack when the modal is opened
+      window.history.pushState("listingSearchMapmodal", "");
+
+      const handlePopState = () => {
+        document.body.style.overflow = "unset";
+        setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
+        dispatch({ type: "CLOSE" });
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    }
+  }, [mapPopup.isOpen]);
 
   return !isMobile ? (
     <div
@@ -92,7 +96,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       <Map
         key="liastingTabsSearchPageMap"
         projName={"Searched Location"}
-        lat={(apidata && apidata[0]?.lat) ?? 47.46489} 
+        lat={(apidata && apidata[0]?.lat) ?? 47.46489}
         lang={(apidata && apidata[0]?.lang) ?? 15.34043}
         data={apidata}
         type={"prop"}
@@ -104,9 +108,9 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       <ModalBox
         isOpen={mapPopup.isOpen}
         handleChange={() => {
-          document.body.style.overflow = "scroll";
+          document.body.style.overflow = "unset";
           setMapPopup((prev: any) => ({ ...prev, isOpen: false }));
-          dispatch({ type: "CLOSE" })
+          dispatch({ type: "CLOSE" });
         }}
       >
         {isLoader ? (

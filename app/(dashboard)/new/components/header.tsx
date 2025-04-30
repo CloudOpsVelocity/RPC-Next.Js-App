@@ -156,6 +156,7 @@ function Dropdown() {
               }}
               onClick={(e) => {
                 e.stopPropagation();
+                
               }}
             >
               Login/ Sign up

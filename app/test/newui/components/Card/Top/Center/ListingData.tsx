@@ -1,11 +1,14 @@
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { sqftToAcres } from "@/app/utils/landarea";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
-import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { useSetAtom } from "jotai";
 import React from "react";
 import { useQuery } from "react-query";
+import dynamic from "next/dynamic";
+// import SearchReadMoreContent from "./ReadMore";
+// const SearchReadMoreContent = dynamic(() => import("./ReadMore"));
+// import SearchReadMore from "";
 
 type Props = any;
 
@@ -44,7 +47,6 @@ export default function ListingData({
   projAuthority,
   approvedById,
 }: Props) {
-  const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
   const isRent = type === "Rent";
   const readMoreThreshold = 200;
@@ -236,8 +238,9 @@ export default function ListingData({
         {projectAbout && (
           <div className="line-clamp-2 relative">
             <span
+              className="line-clamp-2"
               dangerouslySetInnerHTML={{
-                __html: projectAbout.slice(0, readMoreThreshold),
+                __html: projectAbout,
               }}
             />
             {isReadMoreNeeded && (
@@ -274,6 +277,18 @@ export default function ListingData({
           </div>
         )}
       </div>
+      {/* <SearchReadMore
+        dispatch={dispatch}
+        isReadMoreNeeded={isReadMoreNeeded}
+        phaseId={phaseId}
+        projIdEnc={projIdEnc}
+        projectAbout={projectAbout}
+        propIdEnc={projIdEnc}
+        propTypeId={propTypeId}
+        propTypeName={propTypeName}
+        readMoreThreshold={readMoreThreshold}
+        type={type}
+      /> */}
     </>
   );
 }
@@ -287,13 +302,29 @@ const DownSectionCard = ({
   Icon?: React.JSX.Element;
 }) => {
   return value ? (
-    <div className="flex flex-col justify-center items-start ">
-      <h5 className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
+    <h4 className="flex flex-col justify-center items-start ">
+      <span className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
         {Icon} {label}:
-      </h5>
-      <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">
+      </span>
+      <span className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">
         {value}
-      </p>
-    </div>
+      </span>
+    </h4>
   ) : null;
 };
+{
+  /* <Suspense fallback={<div>Loading</div>}>
+        <SearchReadMore
+          dispatch={dispatch}
+          isReadMoreNeeded={isReadMoreNeeded}
+          phaseId={phaseId}
+          projIdEnc={projIdEnc}
+          projectAbout={projectAbout}
+           propIdEnc={projIdEnc}
+           propTypeId={propTypeId}
+           propTypeName={propTypeName}
+           readMoreThreshold={readMoreThreshold}
+           type={type}
+        />
+      </Suspense> */
+}

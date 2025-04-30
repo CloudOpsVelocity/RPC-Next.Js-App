@@ -8,12 +8,14 @@ import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
+import LeftSection from "../components/ProjectSearchLeftSection";
 // import ProjectCard from "@/app/test/newui/components/Card";
-const LeftSection = dynamic(
-  () => import("../components/ProjectSearchLeftSection")
-);
+// const LeftSection = dynamic(
+//   () => import("../components/ProjectSearchLeftSection")
+// );
 const RightSection = dynamic(
-  () => import("../components/ProjectSearchRightSection")
+  () => import("../components/ProjectSearchRightSection"),
+  { ssr: false }
 );
 type Props = {
   serverData: any;
@@ -24,7 +26,6 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
-
   useHydrateAtoms([
     [
       projSearchStore,
@@ -39,15 +40,13 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
 
   const pathname = usePathname();
   const [it, setIsTrue] = useState(
-    pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null
+    pathname.includes("search") ? true : apiFilterQueryParams !== null
   );
 
   return (
     <>
       <LeftSection
-        serverData={apiFilterQueryParams === null ? serverData : null}
+        serverData={serverData}
         frontendFilters={frontendFilters}
         isTrue={it}
         setIsTrue={setIsTrue}

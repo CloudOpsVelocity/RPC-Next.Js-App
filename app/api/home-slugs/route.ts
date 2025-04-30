@@ -71,8 +71,6 @@ export async function POST(req: Request): Promise<Response> {
     const allLocalities: Locality[] = await getAllLocalitiesDetails(); // Fetch all localities
     const mappedUrls = mapUrls(cities, allLocalities, type); // Call the centralized function
 
-    console.log(mappedUrls); // Check the output in the console
-
     return NextResponse.json({
       data: mappedUrls,
       count: Object.keys(mappedUrls).length,

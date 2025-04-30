@@ -23,14 +23,15 @@ export default function Btn({ text }: Props) {
       href={url}
       prefetch={false}
     >
-      Post Property <span className="flex sm:hidden">{text}</span>
+      Post Property <span className="flex sm:hidden">{text}</span><span className="hidden">Button</span>
       <Image
         src="/home/free.svg"
         width={36}
         height={36}
-        alt="post"
+        alt="post your Property"
         className="absolute h-[31px] sm:h-[36] right-0 text-[16px]  "
         unoptimized
+        title="post your Property"
       />
     </Link>
   );

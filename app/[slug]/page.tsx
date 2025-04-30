@@ -20,13 +20,14 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
   const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
     sf: !!searchParams.sf,
   });
-  const pageUrl = `${slug}`;
+  const pageUrl = `/${slug}`;
   return (
     <main>
       <NewListingSearchpage
         serverData={severData}
         frontendFilters={frontEndFilter}
         pageUrl={pageUrl}
+        is2lakhUrls
         showProjectTab
       />
     </main>

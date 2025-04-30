@@ -1,22 +1,27 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+
 import {
   extractProjectParamsValues,
   findPathForProjectDetails,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { notFound } from "next/navigation";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
+import { Metadata, ResolvingMetadata } from "next";
+import logger from "@/app/utils/logger";
+
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
+export const dynamic = "force-dynamic";
 export default async function Page({ params: { city, lt } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
-
   const serverData = await getSearchData(filterValues.LT as string);
+  console.log(serverData);
   return (
     <NewSearchPage
       pageUrl={pathname}
@@ -39,30 +44,59 @@ export async function generateStaticParams() {
     }
   }
   return slugs;
-  // const slugs = keys.map((data) => {
-  //   const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-  //   return { city, lt };
-  // });
-  // return slugs;
+}
+export async function generateMetadata(
+  { params }: { params: { city: string; lt: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { city, lt } = params;
+
+  const cityFormatted = city.charAt(0).toUpperCase() + city.slice(1);
+  const localityFormatted = lt
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  const title = `Residential Projects Available in ${localityFormatted}, ${cityFormatted} - GRP`;
+  const description = `Find the best residential projects in ${localityFormatted}, ${cityFormatted}. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
+
+  const url = `https://www.getrightproperty.com/residential/projects/${city}/${lt}`;
+
+  return {
+    title,
+    description,
+
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Get Right Property",
+      type: "website",
+      locale: "en_US",
+    },
+  };
 }
 
-export const dynamic = "force-dynamic";
 const getSearchData = async (locality: string) => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
     // console.log(baseUrl);
     const url = `${baseUrl}`;
-
-    const res = await fetch(url);
-
+    const res = await fetch(url, {
+      cache: "no-store",
+    });
     if (!res.ok) {
+      logger.error("data not fetched successfuly" + res.statusText);
       throw new Error(`Error fetching data: ${res.statusText}`);
     }
-
     const data = await res.json();
+    logger.debug(data);
     return data;
   } catch (error) {
+    logger.error(error);
     console.error(error);
-    return null;
+    throw new Error("Something Went Wrong.");
   }
 };
+
+export const fetchCache = "force-no-store";

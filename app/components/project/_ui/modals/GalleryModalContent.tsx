@@ -13,9 +13,8 @@ import {
 import ReactPlayer from "react-player";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 // import { GrPowerReset } from 'react-icons/gr'
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
-import { searchShareAtom } from "@/app/(dashboard)/searchOldPage/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { newIcons } from "@/app/images/commonSvgs";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
@@ -34,12 +33,11 @@ export default function GalleryModalContent({}: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(state.activeIndex);
   const [isPlaying, setIsPlaying] = useState(false);
-  const openSharePopup = useSetAtom(searchShareAtom);
   const closeModal = () => {
     dispatch({
       type: "CLOSE",
     });
-    document.body.style.overflow = "scroll";
+    document.body.style.overflow = "unset";
     setIsPlaying(false);
     window.history.back();
     // if (window.history.state === "modal" && isMobile) {
@@ -65,11 +63,6 @@ export default function GalleryModalContent({}: Props) {
       title: state.mediaType === "image" ? "Share Image" : "Share Video",
       url: imageUrlParser(currentItem),
     });
-    /* openSharePopup({
-        opened: true,
-        title: state.mediaType === 'image' ? 'Share Image' : 'Share Video',
-        url: imageUrlParser(currentItem),
-    }) */
   };
   function getYouTubeThumbnailUrl(watchUrl: any) {
     // Match both /watch?v= and /embed/ formats
@@ -84,7 +77,7 @@ export default function GalleryModalContent({}: Props) {
       : null;
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isOpen) return;
       if (event.key === "ArrowRight") nextItem();
@@ -92,19 +85,22 @@ export default function GalleryModalContent({}: Props) {
       if (event.key === "Escape") closeModal();
     };
 
+    const handlePopState = () => {
+      if (isOpen) closeModal();
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-    
+
     if (isOpen) {
       preventBackButton();
-        const handlePopState = () => {
-          closeModal();
-        };
-    
-        window.addEventListener("popstate", handlePopState);
-        return () => window.removeEventListener("popstate", handlePopState);
+      window.addEventListener("popstate", handlePopState);
     }
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [isOpen, nextItem, prevItem, closeModal]);
 
   // useEffect(() => {
   //   const handleKeyDown = (event: KeyboardEvent) => {

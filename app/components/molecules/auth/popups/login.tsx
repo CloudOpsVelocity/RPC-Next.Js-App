@@ -1,19 +1,11 @@
 "use client";
 import { useForm, yupResolver } from "@mantine/form";
-import {
-  // TextInput,
-  Button,
-  Box,
-  PasswordInput,
-  em,
-  NumberInput,
-} from "@mantine/core";
+
 // import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
 import * as yup from "yup";
 // import S from "@/app/styles/Pass.module.css";
-import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
@@ -26,6 +18,9 @@ import { usePathname } from "next/navigation";
 // import { revalidatePath } from "next/cache";
 import axios from "axios";
 import { MAX_LENTH_TEXT } from "@/app/validations/auth";
+import ButtonElement from "@/common/components/CustomButton";
+import InputField from "@/common/components/InputField";
+import PasswordInputField from "@/common/components/PasswordInputField";
 
 const schema = yup.object().shape({
   username: yup
@@ -105,15 +100,15 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
     await login(values);
     setState("success");
   };
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isMobile = useMediaQuery(`(max-width: ${750 / 16}em)`);
   const { redirectQueryParam } = usePathToOrigin();
   return (
-    <Box maw={420} mx="auto">
+    <div className=" max-w-[420px] mx-auto ">
       <form
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center mt-2 items-center flex-col "
       >
-        <NumberInput
+        {/* <NumberInput
           mt={"xs"}
           required
           classNames={{
@@ -129,8 +124,53 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
           placeholder="Enter Your Mobile Number"
           {...form.getInputProps("username")}
           maxLength={10}
+        /> */}
+
+        {/* <div
+          className={StepCss.inputContainer}
+          style={{ position: "relative" }}
+        >
+          <label
+            htmlFor={`login_username_popup_input`}
+            className={StepCss.custlabelOfNumpop}
+          >
+            Mobile Number <span className={StepCss.errorMsg}>*</span>
+          </label>
+          <input
+            required
+            type="text"
+            inputMode="numeric"
+            className={StepCss.newTextInput}
+            {...form.getInputProps("username")}
+            id="login_username_popup_input"
+            placeholder="Enter Your Mobile Number"
+            maxLength={10}
+            style={{ borderColor: form.errors.mobile ? "#F00" : "" }}
+          />
+          {form.errors.username && (
+            <p className={StepCss.errorMsg}>{form.errors.username}</p>
+          )}
+        </div> */}
+
+        <InputField
+          key="login_username_popup_input"
+          required={true}
+          name="username"
+          type="text"
+          inputMode="numeric"
+          labelClass={StepCss.custlabelOfNumpop}
+          errorMsg={form.errors.username}
+          placeholder="Enter Your Mobile Number"
+          containerClass={StepCss.inputContainer}
+          inputClass={StepCss.newTextInput}
+          errorMsgClass={StepCss.errorMsg}
+          label="Mobile Number"
+          maxLength={10}
+          id="login_username_popup_input"
+          otherProps={{ ...form.getInputProps("username") }}
         />
-        <PasswordInput
+
+        {/* <PasswordInput
           classNames={{
             root: StepCss.inputRoot,
             error: StepCss.errorMsg,
@@ -149,6 +189,24 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
           {...form.getInputProps("password")}
           onBlur={(e) => handleTrimAndReplace(e, "password", form)}
           maxLength={MAX_LENTH_TEXT}
+        /> */}
+
+        <PasswordInputField
+          key="login_password_popup_input"
+          id="login_password_popup_input"
+          required={true}
+          name="password"
+          inputMode="password"
+          labelClass={StepCss.custlabelOfNumpop}
+          errorMsg={form.errors.password}
+          placeholder="Enter Your Password"
+          containerClass={StepCss.inputContainer}
+          inputClass={StepCss.newTextInput}
+          errorMsgClass={StepCss.errorMsg}
+          label="Password"
+          otherProps={{ ...form.getInputProps("password") }}
+          onBlur={(e: any) => handleTrimAndReplace(e, "password", form)}
+          maxLength={MAX_LENTH_TEXT}
         />
 
         <Link
@@ -162,14 +220,22 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
           Forgot Password ?
         </Link>
 
-        <Button
-          loading={state === "pending"}
+        {/* <button
+          // loading={state === "pending"}
           type="submit"
-          size={isMobile ? "compact-xs" : "md"}
-          className=" !w-[95%] !h-[35px]  xl:!h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] !text-[20px] xl:text-[20px]"
+          // size={isMobile ? "compact-xs" : "md"}
+          className=" !w-[95%] !h-[35px] text-white font-semibold xl:!h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] !text-[20px] xl:text-[20px]"
         >
           LOGIN
-        </Button>
+        </button> */}
+        <ButtonElement
+          name="loginButton"
+          buttonConClass="w-full"
+          title="LOGIN"
+          buttonClass=" !w-[95%] !h-[35px] text-white font-semibold xl:!h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] !text-[20px] xl:text-[20px]"
+          type="submit"
+          loading={state === "pending"}
+        />
         <div className="text-center mt-4 ">
           <Link
             href={{ pathname: "/register", search: redirectQueryParam }}
@@ -182,7 +248,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
           </Link>
         </div>
       </form>
-    </Box>
+    </div>
   );
 }
 

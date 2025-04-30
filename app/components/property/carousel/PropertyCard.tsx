@@ -108,7 +108,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       )}
     >
       {type == "proj" && (
-        <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
+        <span className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
           <Link
             prefetch={false}
             rel="noopener noreferrer"
@@ -117,7 +117,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
           >
             {cardData.propName}
           </Link>
-          <div className="text-xs font-semibold  ">
+          <span className="text-xs font-semibold  ">
             <span className="text-[16px] font-[700] text-[#148B16]">
               {formatCurrency(cardData.minPrice)}
             </span>{" "}
@@ -125,19 +125,19 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             <span className="text-[16px] font-[700] text-[#148B16]">
               {formatCurrency(cardData.maxPrice)}
             </span>
-          </div>
-        </div>
+          </span>
+        </span>
       )}
 
-      <div className="px-3 pb-3 relative">
+      <h6 className="px-3 pb-3 relative">
         {type != "proj" && (
-          <p className="absolute flex  h-[33px] justify-center items-center gap-2 shrink-0 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] p-2 rounded-[18px] border-[0.5px] border-solid border-[#92B2C8] bg-gradient-to-br from-[#EFF5FF] to-[#F2FAFF] top-2 left-5 z-10 text-[#148B16] text-sm not-italic font-bold">
+          <span className="absolute flex  h-[33px] justify-center items-center gap-2 shrink-0 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] p-2 rounded-[18px] border-[0.5px] border-solid border-[#92B2C8] bg-gradient-to-br from-[#EFF5FF] to-[#F2FAFF] top-2 left-5 z-10 text-[#148B16] text-sm not-italic font-bold">
             {cardData.availablityStatus == "R"
               ? "Ready to move"
               : "Under Construction"}
-          </p>
+          </span>
         )}
-        <div className="relative  max-h-[212px]">
+        <div className="!relative max-h-[212px]">
           <Image
             src={
               type === "proj"
@@ -145,38 +145,35 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 : cardData.projMedia?.coverImageUrl?.split(",")[1]
             }
             alt="Sobha Dream Acres"
-            className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] min-h-[212px] max-h-[212px]"
+            className="w-full mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] min-h-[212px] max-h-[212px]"
             width={300}
             height={212}
-             
           />
           {type == "proj" &&
             (cardData.rerastatus === "Recieved" ||
               cardData.rerastatus === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100}   />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
             )}
 
-          <div className=" right-2 absolute ">
-            <button
-              className={clsx(
-                "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
-                cardData.shortListed === "Y"
-                  ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
-                  : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
-              )}
-              onClick={(e) => {
-                e.preventDefault();
-                onAddingShortList(e, cardData.propIdEnc);
-              }}
-            >
-              <span className=" w-[24px] h-[24px] ">
-                {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
-              </span>
-              {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
-            </button>
-          </div>
+          <button
+            className={clsx(
+              " !absolute bottom-[10px] right-[10px] rounded-[10px] z-10 p-[8px] text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
+              cardData.shortListed === "Y"
+                ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              onAddingShortList(e, cardData.propIdEnc);
+            }}
+          >
+            <span className=" w-[24px] h-[24px] ">
+              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
+            </span>
+            {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
+          </button>
         </div>
 
         <div className="text-sm">
@@ -221,14 +218,14 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 ${cardData.pinCode}`}
           </p>
           {type === "proj" && (
-            <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[16px]">
+            <p className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[16px]">
               <span className="text-black text-right text-base not-italic font-medium leading-[normal]">
                 Project Status:{" "}
               </span>
               <span className="text-[#148B16] text-base not-italic font-bold leading-[normal]">
                 {cardData.projstatus}
               </span>
-            </div>
+            </p>
           )}
           {type != "proj" && (
             <p className="text-[16px] font-[500] text-[#4D6677]">
@@ -242,7 +239,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             onChange={q}
           />
         </div>
-      </div>
+      </h6>
     </Link>
   );
 }
@@ -259,14 +256,14 @@ const ProjectCarousel = ({
 }: Props) => {
   return (
     data?.length > 0 && (
-      <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
+      <div className="w-[96%] md:w-[90%] mx-auto mb-1 sm:mb-[3%]">
         <div className=" ">
-          <h3 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize">
-            {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
-            {title}
-            <span className="text-[#148B16] font-[700] uppercase ml-4 ">
-              {projName}
-            </span>
+          <h3 className="sm:text-[22px] xl:text-[28px] mb-[4px] sm:mb-[8px] xl:mb-[10px] font-bold capitalize">
+            <strong>
+              {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
+              <span className="text-[#001F35]">{title}</span>
+              <span className="text-[#148B16] uppercase ml-4 ">{projName}</span>
+            </strong>
           </h3>
           <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">
             {content}
@@ -277,6 +274,7 @@ const ProjectCarousel = ({
           type={type}
           renderItem={(project: any, index) => (
             <PropertyCard
+              key={`NewCarousel_proj_${index.toString()}`}
               type={type}
               cardData={project}
               mutate={mutate}

@@ -62,7 +62,7 @@ export const topics = [
   { label: "Gallery", id: TOPIC_IDS.GALLERY },
   { label: "Amenities", id: TOPIC_IDS.AMENITIES },
   { label: "Location Map", id: TOPIC_IDS.LOCATION_MAP },
-  { label: "Near By", id: TOPIC_IDS.NEAR_BY },
+  // { label: "Near By", id: TOPIC_IDS.NEAR_BY },
   { label: "Brochure", id: TOPIC_IDS.BROCHURE },
   { label: "Specifications", id: TOPIC_IDS.SPECIFICATIONS },
   { label: "Highlights", id: TOPIC_IDS.HIGHLIGHTS },
@@ -104,7 +104,7 @@ export const propertyDetailsTypes = new Map([
 export const projectprops = {
   villa: 31,
   plot: 32,
-  rowHouse: 33, 
+  rowHouse: 33,
   villament: 34,
   apartment: 35,
   independent: 36,
@@ -208,6 +208,6 @@ export const filterKeysDetails = new Map([
   ["towerId", { name: "Tower ID" }],
   ["facingId", { name: "Facing ID" }],
   ["floorPlanUrl", { name: "FloorPlan URL" }],
-  ['totalBalconySize', {name: 'Balcony Size'}],
-  ['aptTypeName', {name: 'Apartment Type'}]
+  ["totalBalconySize", { name: "Balcony Size" }],
+  ["aptTypeName", { name: "Apartment Type" }],
 ]);

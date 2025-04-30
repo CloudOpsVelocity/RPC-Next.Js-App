@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_URL || "https://example.com",
+  siteUrl: process.env.NEXT_PUBLIC_URL,
   exclude: [
     "/icon.svg",
     "/apple-icon.png",
@@ -15,6 +15,38 @@ module.exports = {
 
   additionalPaths: async (config) => {
     return [
+      {
+        loc: `https://www.getrightproperty.com/residential/projects/bengaluru`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential-listings/for-sale/bengaluru`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential-listings/for-rent`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential-listings/for-rent/bengaluru`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential-listings/for-sale`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential/projects`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential-listings`,
+        lastmod: new Date().toISOString(),
+      },
       {
         loc: `${config.siteUrl}/dyanmic-sitemap/0.xml`,
         lastmod: new Date().toISOString(),

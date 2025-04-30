@@ -38,9 +38,8 @@ export default function SharePopup({
   const CopiedUrl = url
     ? url
     : `${process.env.NEXT_PUBLIC_PROJECT_URL}${pathname}`;
-  const [opened, { close }] = useDisclosure(false); 
+  const [opened, { close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-
 
   return (
     <>
@@ -99,6 +98,7 @@ export default function SharePopup({
       </Modal>
 
       <button
+        aria-label={title}
         onClick={() => {
           navigator.share({ title: title, url: CopiedUrl });
         }}

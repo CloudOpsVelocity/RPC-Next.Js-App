@@ -1,28 +1,18 @@
 "use client";
-import React, { useRef } from "react";
-import { Carousel } from "@mantine/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  DarkCarouseIcon,
-  DarkNextCarouselButton,
-  ReraIcon,
-} from "@/app/images/commonSvgs";
+import React from "react";
+import { ReraIcon } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
-import Image from "next/image";
-import SharePopup from "../atoms/SharePopup";
-import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
-import styles from "@/app/styles/Carousel.module.css";
-import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
+// import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
-
-import { useQuery } from "react-query";
-import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
-import Link from "next/link";
+// import { useQuery } from "react-query";
+// import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+import FirstImagesBlock from "@/common/components/FirstImagesBlock";
+import { galleryStateAtom } from "@/app/store/project/gallery";
+import { usePathname } from "next/navigation";
 
 type Props = {
-  projectDetails: Main | null;
+  projectDetails: any | null;
   companyName: string;
   builderId: number;
   hasReraStatus: boolean;
@@ -31,45 +21,59 @@ type Props = {
 
 const FirstBlock: React.FC<Props> = ({
   projectDetails,
-  companyName,
+  // companyName,
   builderId,
   hasReraStatus,
-  scrollId,
+  // scrollId,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
-  let urlBuilder = "/";
-  const autoplay = useRef(Autoplay({ delay: 10000 }));
-  const setIsScrolling = useSetAtom(isScrollingAtom);
-  const setSticky = useSetAtom(stickyAtom);
-  const setC = useSetAtom(currentBlockAtom);
-  const { data, isLoading, status } = useQuery<any>({
-    queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
-    enabled: false,
-    onSuccess(data) {
-      urlBuilder = generateBuilderUrl({
-        slug: data?.data?.userName,
-        city: data.data?.cityName,
-      });
-    },
-  });
-  function scrollToTopic(id: string): void {
-    setIsScrolling(true);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "center",
-      });
-      setSticky(true);
-    }
-    setC("floorPlans");
-    setTimeout(() => setIsScrolling(false), 3000);
-  }
+  // let urlBuilder = "/";
+  // const setIsScrolling = useSetAtom(isScrollingAtom);
+  // const setSticky = useSetAtom(stickyAtom);
+  // const setC = useSetAtom(currentBlockAtom);
+  const path = usePathname();
+  // const { data, isLoading, status } = useQuery<any>({
+  //   queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
+  //   enabled: false,
+  //   onSuccess(data) {
+  //     urlBuilder = generateBuilderUrl({
+  //       slug: data?.data?.userName,
+  //       city: data.data?.cityName,
+  //     });
+  //   },
+  // });
+  // function scrollToTopic(id: string): void {
+  //   setIsScrolling(true);
+  //   const element = document.getElementById(id);
+  //   if (element) {
+  //     element.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //       inline: "center",
+  //     });
+  //     setSticky(true);
+  //   }
+  //   setC("floorPlans");
+  //   setTimeout(() => setIsScrolling(false), 3000);
+  // }
+
+  const dispatch = useSetAtom(galleryStateAtom);
+
+  const onSelect = () => {
+    dispatch({
+      type: "OPEN",
+      payload: {
+        items: images,
+        mediaType: "image",
+        title: "Project Gallery",
+        activeIndex: images.indexOf(images[0]),
+      },
+    });
+  };
 
   return (
     <div
-      className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50 bg-cover flex justify-between items-start flex-col shadow-md break-words p-[10px] `}
     >
       {projectDetails && (
         <>
@@ -79,19 +83,9 @@ const FirstBlock: React.FC<Props> = ({
               RERA
             </p>
           )}
-          <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
-              Project Status:{" "}
-              <span className="text-[#148B16] text-[12px] sm:text-[16px]   xl:text-xl not-italic font-bold leading-[normal]">
-                {" "}
-                {projectDetails.projectStatus}
-              </span>{" "}
-            </p>
-            <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
-          </div>
 
-          <div className="relative w-full aspect-auto max-w-[1000px] mx-auto ( sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
-            <Carousel
+          <div className="relative w-full aspect-auto mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
+            {/* <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
               withIndicators
@@ -105,14 +99,14 @@ const FirstBlock: React.FC<Props> = ({
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide
-                  key={imageUrl ?? imageUrl}
+                  key={imageUrl ?? imageUrl} 
                   className="relative"
                   w={"auto"}
                 >
                   <picture>
                     <source
                       media="(max-width: 460px)"
-                      srcSet={imageUrl.split(",")[1]}
+                      srcSet={imageUrl.split(",")[1]} 
                     />
                     <source
                       media="(max-width: 768px)"
@@ -123,7 +117,8 @@ const FirstBlock: React.FC<Props> = ({
                       srcSet={imageUrl.split(",")[3]}
                     />
                     <Image
-                      alt="project image"
+                      alt={projectDetails?.projectName}
+                      title={projectDetails?.projectName}
                       src={imageUrl.split(",")[3]}
                       fill
                       className={`bg-gray-${index + 1} `}
@@ -132,18 +127,36 @@ const FirstBlock: React.FC<Props> = ({
                   </picture>
                 </Carousel.Slide>
               ))}
-            </Carousel>
+            </Carousel> */}
+
+            {/* <CustomCarousal
+              images={images}
+              containerClass="min-h-[300px] sm:min-h-[545px] !xl:min-h-[750px] xl:min-h-[750px]"
+              projName={projectDetails?.projectName}
+            /> */}
+
+            <FirstImagesBlock
+              onSelect={onSelect}
+              data={{
+                type: "proj",
+                url: path,
+                images: images,
+                projectStatus: projectDetails?.projectStatus,
+                projName: projectDetails?.projectName,
+              }}
+            />
           </div>
-          <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
+          {/* <div className="absolute bottom-0 sm:m-[1%] sm:mb-[4%] xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md sm:flex break-words sm:px-6 sm:py-2">
+
             <div className="w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
                 <div className="flex justify-between items-start">
-                  <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
+                  <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-bold text-[#001F35] break-words text-wrap w-full">
                     {projectDetails.projectName}
                   </h1>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-                <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
+                <p className="text-[#242424] text-sm sm:text-[18px] xl:text-[22px] not-italic font-semibold leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   address:{" "}
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
@@ -167,8 +180,9 @@ const FirstBlock: React.FC<Props> = ({
                     })}
                     rel="noopener noreferrer"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
+                    aria-label={isLoading ? "Builder" : data?.data?.userName ? data?.data?.userName : "Builder"}
                   >
-                    {isLoading ? "Builder" : data?.data?.userName}
+                    {isLoading ? "Builder" : data?.data?.userName ? data?.data?.userName : "Builder"}
                   </Link>
                 </p>
               </div>
@@ -205,7 +219,7 @@ const FirstBlock: React.FC<Props> = ({
                 Floor Plans
               </p>
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </div>

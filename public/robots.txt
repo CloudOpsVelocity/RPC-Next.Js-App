@@ -3,17 +3,4 @@ User-agent: *
 Allow: /
 
 
-# Sitemaps
-Sitemap: https://www.getrightproperty.com/sitemap.xml
-Sitemap: https://www.getrightproperty.com/dashboard-sitemap.xml
-Sitemap: https://www.getrightproperty.com/listing-sitemap.xml
-Sitemap: https://www.getrightproperty.com/builder-sitemap.xml
-Sitemap: https://www.getrightproperty.com/project-details-sitemap.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/0.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/1.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/2.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/3.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/4.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/5.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/6.xml
-Sitemap: https://www.getrightproperty.com/dyanmic-sitemap/7.xml
+

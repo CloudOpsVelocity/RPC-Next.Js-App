@@ -15,6 +15,7 @@ import Overlay from "../modals/Overlay";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { useRouter } from "next/navigation";
+import { preventBackButton } from "@/app/components/molecules/popups/req";
 
 type Props = {
   type: any;
@@ -38,6 +39,9 @@ const MainBox = ({ data, refetch }: Props) => {
     propTypeId,
     isUsed,
     phaseId,
+    category,
+    phaseName,
+    phaseCount,
   } = data;
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
@@ -74,10 +78,30 @@ const MainBox = ({ data, refetch }: Props) => {
       openLogin(() => refetch());
     }
   };
+  let url =
+    data.type == "proj"
+      ? createProjectLinkUrl({
+          city: data.city,
+          locality: data.locality,
+          slug: data.projName,
+          projIdEnc: projIdEnc,
+        })
+      : generateListingLinkUrl({
+          city: data.cityName,
+          locality: data.localityName,
+          projName: data.projIdEnc ? data.propName : null,
+          category: data.category === "Sale" ? "for-sale" : "for-rent",
+          phase: data.phaseName,
+          propIdEnc: data.propIdEnc,
+          bhkUnitType: data.bhkName
+            ? `${data.bhkName + " " + data.propTypeName}`
+            : "" + " " + data.propTypeName,
+        });
   const newData = {
     ...data,
     Com: state.compareAdded,
     Sh: state.shortListed,
+    pageUrl: url,
   };
 
   const onClickRedirect = (projEncId: string) => {
@@ -110,8 +134,8 @@ const MainBox = ({ data, refetch }: Props) => {
     }
   };
 
-  const [opened, { open, close }] = useReqCallPopup(); 
-  const overlayData = useAtomValue(overlayAtom); 
+  const [opened, { open, close }] = useReqCallPopup();
+  const overlayData = useAtomValue(overlayAtom);
 
   useEffect(() => {
     if (opened) {
@@ -119,7 +143,7 @@ const MainBox = ({ data, refetch }: Props) => {
       window.history.pushState("reqCallModal", "");
 
       const handlePopState = () => {
-        document.body.style.overflow = "scroll"; 
+        document.body.style.overflow = "unset";
         close();
       };
 
@@ -129,6 +153,7 @@ const MainBox = ({ data, refetch }: Props) => {
   }, [opened]);
 
   const handleOpen = () => {
+    preventBackButton();
     open({
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
@@ -162,12 +187,20 @@ const MainBox = ({ data, refetch }: Props) => {
   //   //   propType: type === "proj" ? propTypeId : propTypeName,
   //   // });
   // };
+  const imageAlt =
+    type === "proj"
+      ? `Cover Image Of  ${projName}${
+          phaseName && phaseCount !== undefined && phaseCount > 1
+            ? phaseName
+            : ""
+        }`
+      : `Cover Image Of ${bhkName} ${propTypeName} for ${category} in ${localityName}`;
   return (
     // <a href={onClickRedirect(reqId)} rel="noreferrer" target="_">
     <div
       // onMouseEnter={() => (isMobile ? "" : onHoverCard())}
 
-      onClick={() => onClickRedirect(reqId)}
+      // onClick={() => onClickRedirect(reqId)}
       className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]"
     >
       <div className="flex flex-col xl:flex-row justify-start w-full  xl:max-w-full relative">
@@ -185,6 +218,9 @@ const MainBox = ({ data, refetch }: Props) => {
           isUsed={isUsed}
           availableFrom={data.availableFrom}
           data={data}
+          projEncId={projIdEnc}
+          pageUrl={url}
+          imageAlt={imageAlt}
         />
         <div className="relative w-full">
           {overlayData.id &&
@@ -194,6 +230,7 @@ const MainBox = ({ data, refetch }: Props) => {
             overlayData.id ? (
             <Overlay />
           ) : null}
+
           {isMobile && (
             <div className="flex   flex-col  justify-between relative">
               <TopRightSection

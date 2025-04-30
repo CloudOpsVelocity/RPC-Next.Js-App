@@ -6,7 +6,7 @@ export const Organization_SCHEMA = {
   url: "https://www.getrightproperty.com",
   logo: {
     "@type": "ImageObject",
-    url: "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.png",
+    url: "https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp",
   },
   contactPoint: [
     {

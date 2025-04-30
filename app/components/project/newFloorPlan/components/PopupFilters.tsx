@@ -9,11 +9,11 @@ import { PropertyUnit } from "../types/floor-plan";
 type Props = {
   options: any;
   dataFilters: any;
-  setDataFilters: any; 
+  setDataFilters: any;
   showFilters: any;
   setShowFilters: any;
-  filteredUnits:any;
-  modalState?:any;
+  filteredUnits: any;
+  modalState?: any;
 };
 
 export default function PopupFilters({
@@ -23,7 +23,7 @@ export default function PopupFilters({
   showFilters,
   setShowFilters,
   filteredUnits,
-  modalState
+  modalState,
 }: Props) {
   const [filters, setFilters] = useState(dataFilters);
   const [backupFilters, setBackupFilters] = useState({
@@ -43,10 +43,10 @@ export default function PopupFilters({
     noOfCarParking: "",
     parkingType: "",
     terraceArea: "",
-    totalBalconySize:"",
-    aptTypeName:"",
+    totalBalconySize: "",
+    aptTypeName: "",
     gardenArea: "",
-    parkingArea:"",
+    parkingArea: "",
   });
 
   const propCgId = useAtomValue(propCgIdAtom);
@@ -68,39 +68,84 @@ export default function PopupFilters({
     return value !== value;
   }
 
-  const handleUnitFilterChange = ( name: string | number | symbol,  value: string | number) => {
-    if(name === "unitNumber" && value !== ""){
-      const unitFilteredData = filteredUnits.filter((item:any) => item.unitNumber === value);
-      if(unitFilteredData && unitFilteredData.length > 0){
-        // setUnitFilters(unitFilteredData[0]); 
+  const handleUnitFilterChange = (
+    name: string | number | symbol,
+    value: string | number
+  ) => {
+    if (name === "unitNumber" && value !== "") {
+      const unitFilteredData = filteredUnits.filter(
+        (item: any) => item.unitNumber === value
+      );
+      if (unitFilteredData && unitFilteredData.length > 0) {
+        // setUnitFilters(unitFilteredData[0]);
         let data = {
-          unitNumber: unitFilteredData[0].unitNumber ? unitFilteredData[0].unitNumber : "",
-          bhkName: unitFilteredData[0].bhkName ? unitFilteredData[0].bhkName : "",
-          towerName: unitFilteredData[0].towerName ? unitFilteredData[0].towerName : "",
-          floor: unitFilteredData[0].floor !== null ? unitFilteredData[0].floor : "",
-          facingName: unitFilteredData[0].facingName ? unitFilteredData[0].facingName : "",
-          block: unitFilteredData[0].block !== null ? unitFilteredData[0].block : "",
-          plotArea: unitFilteredData[0].plotArea !== null ? unitFilteredData[0].plotArea : "",
+          unitNumber: unitFilteredData[0].unitNumber
+            ? unitFilteredData[0].unitNumber
+            : "",
+          bhkName: unitFilteredData[0].bhkName
+            ? unitFilteredData[0].bhkName
+            : "",
+          towerName: unitFilteredData[0].towerName
+            ? unitFilteredData[0].towerName
+            : "",
+          floor:
+            unitFilteredData[0].floor !== null ? unitFilteredData[0].floor : "",
+          facingName: unitFilteredData[0].facingName
+            ? unitFilteredData[0].facingName
+            : "",
+          block:
+            unitFilteredData[0].block !== null ? unitFilteredData[0].block : "",
+          plotArea:
+            unitFilteredData[0].plotArea !== null
+              ? unitFilteredData[0].plotArea
+              : "",
           length: unitFilteredData[0].length ? unitFilteredData[0].length : "",
           width: unitFilteredData[0].width ? unitFilteredData[0].width : "",
-          parkingArea: unitFilteredData[0].parkingArea !== null ? unitFilteredData[0].parkingArea : "",
-          gardenArea: unitFilteredData[0].gardenArea !== null ? unitFilteredData[0].gardenArea : "",
-          parkingType: unitFilteredData[0].parkingType ? unitFilteredData[0].parkingType : "",
-          terraceArea: unitFilteredData[0].terraceArea !== null ? unitFilteredData[0].terraceArea : "",
-          caretarea: unitFilteredData[0].caretarea ? unitFilteredData[0].caretarea : "",
-          superBuildUparea: unitFilteredData[0].superBuildUparea ? unitFilteredData[0].superBuildUparea : "",
-          totalNumberofBathroom: unitFilteredData[0].totalNumberofBathroom !== null ? unitFilteredData[0].totalNumberofBathroom : "",
-          totalNumberOfBalcony: unitFilteredData[0].totalNumberOfBalcony ? unitFilteredData[0].totalNumberOfBalcony : "",
-          noOfCarParking: unitFilteredData[0].noOfCarParking ? unitFilteredData[0].noOfCarParking : "",
-          totalBalconySize: unitFilteredData[0].totalBalconySize !== null ? unitFilteredData[0].totalBalconySize : "",
-          aptTypeName: unitFilteredData[0].aptTypeName ? unitFilteredData[0].aptTypeName : "",
-        }
+          parkingArea:
+            unitFilteredData[0].parkingArea !== null
+              ? unitFilteredData[0].parkingArea
+              : "",
+          gardenArea:
+            unitFilteredData[0].gardenArea !== null
+              ? unitFilteredData[0].gardenArea
+              : "",
+          parkingType: unitFilteredData[0].parkingType
+            ? unitFilteredData[0].parkingType
+            : "",
+          terraceArea:
+            unitFilteredData[0].terraceArea !== null
+              ? unitFilteredData[0].terraceArea
+              : "",
+          caretarea: unitFilteredData[0].caretarea
+            ? unitFilteredData[0].caretarea
+            : "",
+          superBuildUparea: unitFilteredData[0].superBuildUparea
+            ? unitFilteredData[0].superBuildUparea
+            : "",
+          totalNumberofBathroom:
+            unitFilteredData[0].totalNumberofBathroom !== null
+              ? unitFilteredData[0].totalNumberofBathroom
+              : "",
+          totalNumberOfBalcony: unitFilteredData[0].totalNumberOfBalcony
+            ? unitFilteredData[0].totalNumberOfBalcony
+            : "",
+          noOfCarParking: unitFilteredData[0].noOfCarParking
+            ? unitFilteredData[0].noOfCarParking
+            : "",
+          totalBalconySize:
+            unitFilteredData[0].totalBalconySize !== null
+              ? unitFilteredData[0].totalBalconySize
+              : "",
+          aptTypeName: unitFilteredData[0].aptTypeName
+            ? unitFilteredData[0].aptTypeName
+            : "",
+        };
 
         setDataFilters(data);
         setFilters(data);
         setBackupFilters(data);
       }
-    }else{
+    } else {
       setDataFilters((prev: PropertyUnit) => ({
         ...prev,
         [name]: isActualNaN(value) ? "" : value,
@@ -140,19 +185,20 @@ export default function PopupFilters({
     });
   };
 
-  console.log(filters)
-
   const renderFilter = (
     key: keyof typeof filters,
     placeholder: string,
     title: string
   ) => {
-    if(filteredOptions(key).length === 1 && (filteredOptions(key)[0] == 0 || filteredOptions(key)[0] === "") ){
+    if (
+      filteredOptions(key).length === 1 &&
+      (filteredOptions(key)[0] == 0 || filteredOptions(key)[0] === "")
+    ) {
       console.log(filteredOptions(key), key);
       return;
     }
     return (
-      <div key={String(key)+"input"} className="relative mb-[10px]">
+      <div key={String(key) + "input"} className="relative mb-[10px]">
         <label
           className="block text-sm font-medium text-gray-700 mb-1"
           htmlFor="tower"
@@ -161,7 +207,11 @@ export default function PopupFilters({
         </label>
         <FilterInput
           value={
-            placeholder == "Select Floor" ? filters[key] == "0" ? "G" : filters[key] : filters[key] || ""
+            placeholder == "Select Floor"
+              ? filters[key] == "0"
+                ? "G"
+                : filters[key]
+              : filters[key] || ""
           }
           onChange={(value: any) => handleFilterChange(key, value)}
           options={filteredOptions(key)}
@@ -183,8 +233,6 @@ export default function PopupFilters({
     }
   };
 
-
-
   return (
     <div
       className={`${
@@ -200,20 +248,23 @@ export default function PopupFilters({
           Clear All
         </button>
       </div>
- 
-      
+
       <div className="h-[calc(100vh-120px)] overflow-y-auto p-3 custom-scrollbar">
         <div className="flex flex-col">
           {/* Basic Details */}
           {options?.aptTypeName &&
             options?.aptTypeName.length > 0 &&
-            (propCgId === projectprops.apartment || propCgId === projectprops.villament) &&
+            (propCgId === projectprops.apartment ||
+              propCgId === projectprops.villament) &&
             renderFilter(
-              "aptTypeName", 
-              propCgId === projectprops.apartment ? "Search Apartment type" : "Search Villament type", 
-              propCgId === projectprops.apartment ? "Apartment type" : "Villament type", 
-            )
-          }
+              "aptTypeName",
+              propCgId === projectprops.apartment
+                ? "Search Apartment type"
+                : "Search Villament type",
+              propCgId === projectprops.apartment
+                ? "Apartment type"
+                : "Villament type"
+            )}
 
           {options?.towerName &&
             options?.towerName.length > 0 &&
@@ -234,10 +285,16 @@ export default function PopupFilters({
             options?.floor.length > 0 &&
             propCgId !== projectprops.plot &&
             renderFilter(
-              "floor", 
-              (propCgId === projectprops.villa || propCgId === projectprops.rowHouse) ? "Select Elevation" : "Select Floor", 
-              (propCgId === projectprops.villa || propCgId === projectprops.rowHouse) ? "At Elevation" : "At Floor")
-            }
+              "floor",
+              propCgId === projectprops.villa ||
+                propCgId === projectprops.rowHouse
+                ? "Select Elevation"
+                : "Select Floor",
+              propCgId === projectprops.villa ||
+                propCgId === projectprops.rowHouse
+                ? "At Elevation"
+                : "At Floor"
+            )}
 
           {options?.unitNumber &&
             options?.unitNumber.length > 0 &&
@@ -251,9 +308,9 @@ export default function PopupFilters({
           {/* Area Details */}
           {options?.plotArea &&
             options?.plotArea.length > 0 &&
-            propCgId !== projectprops.apartment && propCgId !== projectprops.villament &&
-            renderFilter("plotArea", "Select Plot Area", "Plot Area (sq.ft)")
-          }
+            propCgId !== projectprops.apartment &&
+            propCgId !== projectprops.villament &&
+            renderFilter("plotArea", "Select Plot Area", "Plot Area (sq.ft)")}
 
           {options?.caretarea &&
             options?.caretarea.length > 0 &&
@@ -269,7 +326,7 @@ export default function PopupFilters({
               "superBuildUparea",
               "Select Super Built-up Area",
               "Super Built-up Area (sq.ft)"
-          )}
+            )}
 
           {options?.terraceArea &&
             options?.terraceArea.length > 0 &&
@@ -277,25 +334,27 @@ export default function PopupFilters({
               "terraceArea",
               "Select Terrace Area",
               "Terrace Area (sq.ft)"
-          )}
-          
+            )}
+
           {options?.gardenArea &&
             options?.gardenArea.length > 0 &&
-            propCgId !== projectprops.apartment && propCgId !== projectprops.plot &&
+            propCgId !== projectprops.apartment &&
+            propCgId !== projectprops.plot &&
             renderFilter(
               "gardenArea",
               "Select Garden Area",
               "Garden Area (sq.ft)"
-          )}
+            )}
 
           {options?.parkingArea &&
             options?.parkingArea.length > 0 &&
-            propCgId !== projectprops.apartment && propCgId !== projectprops.plot &&
+            propCgId !== projectprops.apartment &&
+            propCgId !== projectprops.plot &&
             renderFilter(
               "parkingArea",
               "Select Parking Area",
               "Parking Area (sq.ft)"
-          )}
+            )}
 
           {/* Unit Features */}
           {options?.totalNumberofBathroom &&
@@ -312,16 +371,16 @@ export default function PopupFilters({
               "totalNumberOfBalcony",
               "Select Number of Balconies",
               "Number of Balconies"
-          )}
+            )}
 
           {options?.totalBalconySize &&
             options?.totalBalconySize.length > 0 &&
-            propCgId === projectprops.villament && 
+            propCgId === projectprops.villament &&
             renderFilter(
               "totalBalconySize",
               "Select Balconie Size",
               "Balconie Size"
-          )}
+            )}
 
           {options?.noOfCarParking &&
             options?.noOfCarParking.length > 0 &&
@@ -333,9 +392,9 @@ export default function PopupFilters({
 
           {options?.parkingType &&
             options?.parkingType.length > 0 &&
-            (propCgId === projectprops.apartment || propCgId === projectprops.villament) &&
-            renderFilter("parkingType", "Select Parking Type", "Parking Type")
-          }
+            (propCgId === projectprops.apartment ||
+              propCgId === projectprops.villament) &&
+            renderFilter("parkingType", "Select Parking Type", "Parking Type")}
 
           {/* Plot Dimensions */}
           {options?.length &&

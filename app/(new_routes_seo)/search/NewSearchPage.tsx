@@ -6,8 +6,8 @@ const ProjSearchMainFilterSection = dynamic(
   () => import("./components/filters/ProjSearchMainFilterSection")
 );
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
-// import Mainsection from "./components/Mainsection";
-const Mainsection = dynamic(() => import("./components/Mainsection"));
+import Mainsection from "./components/Mainsection";
+// const Mainsection = dynamic(() => import("./components/Mainsection"));
 type Props = {
   serverData: any;
   frontendFilters: any;
@@ -21,10 +21,7 @@ export default function NewSearchPage({
   const isListing = false;
   return (
     <main className="pt-[70px] min-h-[calc(100vh)] relative ">
-      <link
-        rel="canonical"
-        href={`${process.env.NEXT_PUBLIC_URL}/${pageUrl}`}
-      />
+      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
       {serverData &&
         (frontendFilters.listedBy == null ? (
           <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />

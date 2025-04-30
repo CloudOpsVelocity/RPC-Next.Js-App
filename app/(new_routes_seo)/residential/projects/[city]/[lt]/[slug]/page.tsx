@@ -7,7 +7,10 @@ const Loans = dynamicImport(() => import("@/app/components/project/loans"));
 
 const About = dynamicImport(() => import("@/app/components/project/about"));
 const Navigation = dynamicImport(
-  () => import("@/app/components/project/navigation")
+  () => import("@/app/components/project/navigation"),
+  {
+    ssr: false,
+  }
 );
 const ProjectDrawer = dynamicImport(
   () => import("@/app/components/project/Drawer")
@@ -40,7 +43,10 @@ const Specifications = dynamicImport(
 );
 const Banner = dynamicImport(() => import("@/app/components/project/banner"));
 const AboutBuilder = dynamicImport(
-  () => import("@/app/components/project/aboutBuilder")
+  () => import("@/app/components/project/aboutBuilder"),
+  {
+    ssr: false,
+  }
 );
 const FaqWithBg = dynamicImport(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamicImport(
@@ -74,7 +80,10 @@ const BreadCrumbs = dynamicImport(
   () => import("@/app/components/project/breadcrum/BreadCrum")
 );
 const FloorPlans = dynamicImport(
-  () => import("@/app/components/project/newFloorPlan/floor-plan")
+  () => import("@/app/components/project/newFloorPlan/floor-plan"),
+  {
+    ssr: false,
+  }
 );
 const ProjectSchema = dynamicImport(
   () => import("@/app/seo/ProjectDetailSchema")
@@ -114,7 +123,7 @@ import Overview from "@/app/components/project/overview";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
-// let metadataCache: {title?: string, description?: string} = {};
+
 export default async function page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const slug = name.split("-").at(-1);
@@ -162,6 +171,7 @@ export default async function page({ params }: Props) {
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const scrollId = undefined;
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
+
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />
@@ -176,14 +186,11 @@ export default async function page({ params }: Props) {
       <meta name="twitter:image" content={imageUrl || ""} />
       <FAQJsonLdScript data={data} />
       <ProjectSchema projectData={{ ...projResponse, url, desc }} />
-      {/* <QAJsonLdScript data={data} />
-      <PropertyJsonLdScript data={data} />
-      <ArticleJsonLdScript data={data} /> */}
+
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <BreadCrumbs params={params} />
 
-          {/* Top Cover Image Card */}
           <FirstBlock
             projectDetails={data}
             companyName={data.postedByName}
@@ -192,7 +199,7 @@ export default async function page({ params }: Props) {
             scrollId={scrollId}
           />
         </div>
-        {/* Navigations Container */}
+
         <MobileHidden>
           <Navigation
             isBrochure={
@@ -288,8 +295,7 @@ export default async function page({ params }: Props) {
           projName={data.projectName}
           phaseOverviewData={phaseOverview}
           singleBroucher={data.media?.projBroucherUrl}
-          broucherImage={data.media?.projectPlanUrl }
-
+          broucherImage={data.media?.projectPlanUrl}
         />
         <ErrorContainer data={data.specificationList}>
           <Specifications
@@ -344,7 +350,7 @@ export default async function page({ params }: Props) {
         <FloorplanDrawer />
         <LoginPopup />
         <ProjectGallery />
-        <SharePopup />
+        {/* <SharePopup /> */}
       </div>
     </section>
   );
@@ -429,16 +435,14 @@ export async function generateMetadata(
   // Constructing SEO-friendly title
   const title = `${data?.projectName} ${data.availableProperties?.join(
     " "
-  )} for sale in ${data.localityName} ${data.cityName}`;
+  )} for sale ${data.localityName} ${data.cityName}`;
 
   // Constructing detailed and keyword-rich description
-  const description = `${
-    data.projectName
-  } offers exclusive ${data.availableProperties?.join(", ")} in ${
-    data.localityName
-  }, ${
+  const description = `${data.projectName} ${data.availableProperties?.join(
+    ", "
+  )} in ${data.localityName}, ${
     data.cityName
-  }. Explore Project Details, Pricing, Brochure PDF, Floor Plans, Reviews, Master Plan, Amenities, and Contact Information. Secure your future home now!`;
+  }. Project Details, Pricing, Brochure, Floor Plans, Reviews, Master Plan, Amenities & Contact Details`;
 
   // Get all relevant keywords
   const keywords = [
@@ -471,7 +475,7 @@ export async function generateMetadata(
       description,
       url: canonical,
       siteName: data.projectName,
-      images: data.media.coverImageUrl.split(",").map((url) => ({
+      images: data?.media?.coverImageUrl?.split(",")?.map((url) => ({
         url,
         width: 1200,
         height: 630,

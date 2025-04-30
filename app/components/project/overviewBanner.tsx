@@ -11,7 +11,9 @@ import Button from "../../elements/button";
 // import { useParams } from "next/navigation";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import RequestCallBackModal from "../molecules/popups/req";
+import RequestCallBackModal, {
+  preventBackButton,
+} from "../molecules/popups/req";
 // import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import { NumberFormatter } from "@mantine/core";
 import Image from "next/image";
@@ -36,7 +38,6 @@ export default function OverviewBanner({
   slug: string;
 }) {
   const [, { open }] = useReqCallPopup();
-
   return (
     <div
       className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "
@@ -44,13 +45,53 @@ export default function OverviewBanner({
     >
       {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
        */}
+      {/*  <picture>
+              <source
+                media="(max-width: 460px)"
+                srcSet={broucherImage?.split(",")[0]}
+              />
+              <source
+                media="(max-width: 768px)"
+                srcSet={broucherImage?.split(",")[1]}
+              />
+              <source
+                media="(min-width: 1200px)"
+                srcSet={broucherImage?.split(",")[2]}
+              />
+              <Image
+                alt={`${projName} Brochure`}
+                title={`${projName} Brochure`}
+                src={broucherImage?.split(",")[3]}
+                fill
+                unoptimized
+              />
+            </picture> */}
+      <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-mobile.webp`}
+        width={100}
+        height={120}
+        alt="price OverView"
+        className="w-[100px] sm:hidden h-[120px] sm:h-[169px] mt-2 sm:mt-0"
+        unoptimized
+        title="price OverView"
+      />
+      <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-laptop.webp`}
+        width={151}
+        height={169}
+        alt="price OverView"
+        className=" sm:max-w-[151px] hidden sm:flex xl:hidden  sm:w-[151px]   sm:h-[169px] mt-2 sm:mt-0"
+        unoptimized
+        title="price OverView"
+      />
       <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
         width={237}
         height={263}
-        alt="priceBagOverView"
-        className="w-[100px] h-[120px] sm:max-w-[151px] xl:max-w-[237px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0"
+        alt="price OverView"
+        className="   xl:max-w-[237px]  xl:w-[237px] xl:h-[263px] hidden xl:flex  mt-2 sm:mt-0"
         unoptimized
+        title="price OverView"
       />
 
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%]  flex-wrap">
@@ -62,22 +103,15 @@ export default function OverviewBanner({
             {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             {", "}
             <span className="text-[#545353] text-xs sm:text-[20px] xl:text-[24px] text-wrap not-italic font-medium leading-[normal]">
-              ₹{" "}
-              {
-                <NumberFormatter
-                  thousandSeparator
-                  value={basePrice}
-                  thousandsGroupStyle="lakh"
-                />
-              }{" "}
-              Base Price/sq.ft
+              {formatCurrency(basePrice)} Base Price/sq.ft
             </span>
           </p>
           <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
             <Button
               title="Request  Callback"
               buttonClass=" text-[#FFF] text-[12px] sm:text-[20px] xl:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3 sm:mt-0"
-              onChange={() =>{
+              onChange={() => {
+                preventBackButton();
                 open({
                   modal_type: "PROJECT_REQ_CALLBACK",
                   postedByName: buiderName,
@@ -85,6 +119,7 @@ export default function OverviewBanner({
                   source: "projBanner",
                   title: name,
                   postedId: builderId,
+                  cg: "",
                 });
                 // pushHistory();
               }}

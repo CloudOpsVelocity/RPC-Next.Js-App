@@ -6,7 +6,6 @@ import Alert from "./Alert";
 import QuickFilters from "./filters/QuickFilters";
 // import Nearme from "./Nearme";
 import SearchSec from "./SearchSec";
-import { useMediaQuery } from "@mantine/hooks";
 import { useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { toQueryParams } from "../../utils/param";
@@ -35,8 +34,6 @@ const HomeSearch = ({
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
     window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_self", "noreferrer");
   };
-
-  const isMobileStarting = useMediaQuery("(max-width: 760px)");
 
   return (
     <div

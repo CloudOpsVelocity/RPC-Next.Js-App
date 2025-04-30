@@ -23,6 +23,7 @@ import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import RTK_CONFIG from "@/app/config/rtk";
+import CustomRangeSlider from "@/app/components/atoms/RangeSlider";
 
 interface ShowAllFiltersButtonProps {
   selectedFilters: { [key: string]: string[] };
@@ -228,16 +229,15 @@ export default function ShowAllFiltersButton({
     );
   };
 
-  useEffect(()=>{
-    if(isOpen){
+  useEffect(() => {
+    if (isOpen) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       document.body.style.overflow = "hidden";
-    }else{
+    } else {
       document.body.style.overflow = "unset";
     }
-  }, [isOpen])
+  }, [isOpen]);
 
-  
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
   const serverCity = useAtomValue(serverCityAtom);
@@ -380,7 +380,7 @@ export default function ShowAllFiltersButton({
               <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
                 {state.areaValue[0]} sq.ft - {state.areaValue[1]} sq.ft
               </p>
-              <RangeSlider
+              <CustomRangeSlider
                 color="green"
                 marks={
                   window.innerWidth > 768
@@ -405,7 +405,7 @@ export default function ShowAllFiltersButton({
                 }
                 style={{ width: "80%" }}
                 className="ml-[14px] md:ml-4 "
-                mb={"5%"}
+                // mb={"5%"}
               />
             </div>
 
@@ -416,11 +416,11 @@ export default function ShowAllFiltersButton({
               >
                 Budget
               </h3>
-              <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600] mb-[2%] ml-[14px] md:ml-0  ">
+              <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600]  ml-[14px] md:ml-0  ">
                 ₹ {toFormattedString(state.bugdetValue[0])} - ₹{" "}
                 {toFormattedString(state.bugdetValue[1])}
               </p>
-              <RangeSlider
+              <CustomRangeSlider
                 color="green"
                 key="budgetSlider"
                 onChange={(value) => {
