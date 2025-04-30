@@ -91,6 +91,9 @@ const ProjectGallery = dynamicImport(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
 
+const FirstBlock = dynamicImport(
+  () => import("@/app/components/project/firstBlock")
+);
 const ProjectBrouchersSection = dynamicImport(
   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
   {
@@ -108,7 +111,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { isValidSlugId } from "@/common/utils/slugUtils";
-import FirstBlock from "@/app/components/project/firstBlock";
+/* import FirstBlock from "@/app/components/project/firstBlock"; */
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import Overview from "@/app/components/project/overview";
 
