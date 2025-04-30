@@ -218,7 +218,6 @@ const config = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <title>Click to Shear</title>
       <circle
         cx="13"
         cy="13"
@@ -261,6 +260,7 @@ function parseDateString(dateString: string): Date {
     "Nov",
     "Dec",
   ];
+  // eslint-disable-next-line no-unused-vars
   const [_, monthStr, day, time, , year] = dateString.split(" ");
   const [hours, minutes, seconds] = time.split(":").map(Number);
   const month = months.indexOf(monthStr);
