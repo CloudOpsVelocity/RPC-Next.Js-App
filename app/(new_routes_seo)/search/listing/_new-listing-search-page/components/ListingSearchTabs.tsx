@@ -224,7 +224,9 @@ const ListingSearchTabs = ({
     [isDropdownOpen, currentSortLabel, sortOptions, handleSortBy]
   );
    const tabsSelected = useMemo(() => {
-    //  if(state.listedBy)
+     if(state.listedBy === null){
+      return frontendFilters.listedBy
+     }
     return (
       typeof window === 'undefined' || !Object.entries(state).some(([_, value]) => (Array.isArray(value) && value.length > 0) || value !== null)
         ? frontendFilters.listedBy
