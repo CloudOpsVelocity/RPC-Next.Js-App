@@ -21,10 +21,6 @@ const ListingSearchTabs = ({
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
-  const cachedFrontendFilters = useMemo(
-    () => frontendFilters,
-    [frontendFilters]
-  );
 
   const tabs = useMemo(
     () => [
