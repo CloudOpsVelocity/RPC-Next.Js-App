@@ -22,7 +22,7 @@ function ListingSearchMapSection({ serverData }: Props) {
         height={630}
         width={1200}
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
-        alt="search page map Image"
+        alt="Search Page Map for Real Estate Properties | Projects in India"
         className="h-full w-full"
         quality={80}
       />
