@@ -14,14 +14,17 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
   const { handleApplyFilters } = useProjSearchAppliedFilters();
 
   // Fallback to frontendFilters if JS is disabled (or state is empty)
-  const filtersSource =
-    typeof window === "undefined" || // SSR or JS disabled
-    !Object.entries(state).some(
-      ([_, value]) =>
-        (Array.isArray(value) && value.length > 0) || value !== null
-    )
-      ? frontendFilters
-      : state;
+  const filtersSource = React.useMemo(
+    () =>
+      typeof window === "undefined" || // SSR or JS disabled
+      !Object.entries(state).some(
+        ([_, value]) =>
+          (Array.isArray(value) && value.length > 0) || value !== null
+      )
+        ? frontendFilters
+        : state,
+    [state, frontendFilters]
+  );
 
   const hasFilters = Object.entries(filtersSource).some(
     ([_, value]) => (Array.isArray(value) && value.length > 0) || value !== null
@@ -59,7 +62,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
                       ? `${value} ${category}`
                       : SelectedFiltersMap.get(value)}
                   </span>
-                  {typeof window !== "undefined" && (
+                  {/* {typeof window !== "undefined" && ( */}
                     <button
                       onClick={() => {
                         dispatch({
@@ -80,7 +83,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
                     >
                       <MdClose className="w-4 h-4" />
                     </button>
-                  )}
+                  {/* ``)} */}
                 </div>
               ))
             ) : (
@@ -105,7 +108,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
                     ? "Near By"
                     : SelectedFiltersMap.get(values) ?? ""}
                 </span>
-                {typeof window !== "undefined" && (
+                {/* {typeof window !== "undefined" && ( */}
                   <button
                     onClick={() => {
                       dispatch({
@@ -124,7 +127,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
                   >
                     <MdClose className="w-4 h-4" />
                   </button>
-                )}
+                {/* )} */}
               </div>
             ))
         )}

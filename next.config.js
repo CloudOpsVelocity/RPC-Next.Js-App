@@ -45,7 +45,7 @@ const nextConfig = {
     // legacyBrowsers is not needed
   },
   images: {
-    unoptimized: true,
+    // unoptimized: true,
     remotePatterns: [
       { hostname: "d2sa15fzpcbn0k.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },

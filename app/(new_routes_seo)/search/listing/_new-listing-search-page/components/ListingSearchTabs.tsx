@@ -224,20 +224,20 @@ const ListingSearchTabs = ({
     [isDropdownOpen, currentSortLabel, sortOptions, handleSortBy]
   );
    const tabsSelected = useMemo(() => {
-     if(state.listedBy === null){
+     if(typeof window === 'undefined'){
       return frontendFilters.listedBy
      }
-    return (
-      typeof window === 'undefined' || !Object.entries(state).some(([_, value]) => (Array.isArray(value) && value.length > 0) || value !== null)
-        ? frontendFilters.listedBy
-        : state.listedBy
-    );
+else{
+  // need to compare frontendFiltres with state when state initialized means typeof window !== "undefined"
+  return state.listedBy === frontendFilters.listedBy ? state.listedBy : state.listedBy ?? initialState.listedBy ?? frontendFilters.listedBy;
+    
+    
+}
   }, [state.listedBy, frontendFilters.listedBy]);
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">
-   {JSON.stringify(tabsSelected)}
-   {JSON.stringify({client:state.listedBy})}
+
       <div className="w-full pb-[6px] pt-[10px] sm:px-[10px]">
         <div className="flex flex-col gap-[10px] md:flex-row md:items-center md:justify-between">
           <div
@@ -251,12 +251,7 @@ const ListingSearchTabs = ({
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
-                    (typeof window === "undefined"
-                      ? frontendFilters.listedBy === tab.id
-                      : state.listedBy === tab.id) ||
-                    (typeof window === "undefined"
-                      ? frontendFilters.listedBy == "All"
-                      : state.listedBy == "All" && tab.id == null)
+                    tabsSelected === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }`}
