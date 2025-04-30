@@ -63,7 +63,7 @@
 /* left-[10px] md:left-[-40px] z-[10] rotate-180 */
 .srcollButtonLeft {
   left: -25px;
-  z-index: 2;
+  z-index: 3;
   transform: rotate(180deg);
 }
 
