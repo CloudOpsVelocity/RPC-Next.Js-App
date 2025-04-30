@@ -15,7 +15,7 @@ type Props = {
 };
 
 function FirstImagesBlock({ onSelect, data }: Props) {
- /*  console.log(data) */
+  /* console.log(data) */
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
   const getImage = (index: number, className: string) => {
@@ -27,30 +27,14 @@ function FirstImagesBlock({ onSelect, data }: Props) {
       <>
       <Head>
         <link rel="preconnect" href="https://media.getrightproperty.com" />
-       {/*  <link
+        <link
           rel="preload"
           as="image"
           href={getUrl(data.images, 3)}
              // @ts-ignore to skip type error
           imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(data.images, 2)} 768w, ${getUrl(data.images, 3)} 1200w`}
           imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
-        /> */}
-
-
-
-
-       {/* testingh */}
-        <link
-        rel="preload"
-        as="image"
-        href="https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-large.webp?v=1745587268461"
-          // @ts-ignore to skip type error
-        imagesrcset="
-          https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-small.webp?v=1745587268461 460w,
-          https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-medium.webp?v=1745587268461 768w,
-          https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-large.webp?v=1745587268461 1200w"
-        imagesizes="100vw"
-      />
+        />
       </Head>
 
       {/* JSX for your component */}
@@ -58,36 +42,21 @@ function FirstImagesBlock({ onSelect, data }: Props) {
 
       return (
         <picture>
-        <source
-          media="(max-width: 460px)"
-          
-          // @ts-ignore to skip type error
-          srcset="https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-small.webp?v=1745587268461"
-        />
-        <source
-          media="(max-width: 768px)"
-
-          // @ts-ignore to skip type error
-          srcset="https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-medium.webp?v=1745587268461"
-        />
-        <source
-          media="(min-width: 1200px)"
-          // @ts-ignore to skip type error
-          srcset="https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-large.webp?v=1745587268461"
-        />
-        <img
-          alt="Affinity Gardenia"
-          title="Affinity Gardenia"
-          src="https://media.getrightproperty.com/residential-projects/bengaluru/1183/affinity-gardenia-yelahanka-cover-large.webp?v=1745587268461"
-          width="900"
-          height="195"
-          loading="eager"
-          // @ts-ignore to skip type error
-          fetchpriority="high"
-          decoding="async"
-          class="DetailsPageImages_firstImage__6CDSv"
-        />
-      </picture>
+          <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
+          <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
+          <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
+          <Image
+            alt={data.projName || "Project Image"}
+            title={data.projName || "Project Image"}
+            src={getUrl(urls, 3)}
+            height={195}
+            width={900}
+            className={className}
+            priority={index == 0 ? true : false}
+            unoptimized={true}
+            quality={80}
+          />
+        </picture>
       );
     } else {
       return "";
@@ -122,7 +91,7 @@ function FirstImagesBlock({ onSelect, data }: Props) {
               e.stopPropagation();
               navigator.share({ title: title, url: data.url });
             }}
-            className={`${styles.projectStatusText} ${styles.projectShearText} `}
+            className={`${styles.projectStatusText} ${styles.projectShearText}`}
           >
             <ShearIcon className={styles.detailsSherBtnIcon} />
             <span className={styles.detailsSherBtnText}>{title}</span>
