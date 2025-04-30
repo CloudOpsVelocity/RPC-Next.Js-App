@@ -15,7 +15,7 @@ type Props = {
 };
 
 function FirstImagesBlock({ onSelect, data }: Props) {
-  console.log(data)
+ /*  console.log(data) */
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
   const getImage = (index: number, className: string) => {
@@ -49,9 +49,9 @@ function FirstImagesBlock({ onSelect, data }: Props) {
             alt={data.projName || "Project Image"}
             title={data.projName || "Project Image"}
             src={getUrl(urls, 3)}
-           /*  height={195}
-            width={900} */
-            className={`${className}  ${styles.responsiveImgFirstBlockImage}`}
+            height={195}
+            width={900}
+            className={`${className}  `}
             priority={index == 0 ? true : false}
             unoptimized={true}
             quality={80}
