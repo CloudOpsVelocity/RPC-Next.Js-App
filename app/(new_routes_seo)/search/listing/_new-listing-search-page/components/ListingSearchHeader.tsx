@@ -19,7 +19,7 @@ import useProjSearchMatcher from "../hooks/useProjSearchMatcher";
 // import BuyRent from "../../components/FilterComponents/BuyRent";
 // import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
 // import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 // import { trimFromWord } from "../../components/ProjSearchBreadCrums";
 // import PageTitle from "../../components/filters/PageTitle";
 import { useMediaQuery } from "@mantine/hooks";
@@ -30,11 +30,6 @@ import ShowAllFiltersButton from "../../../_new-search-page/components/FilterCom
 import PageTitle from "../../../components/filters/PageTitle";
 import ListingSearchTabs from "./ListingSearchTabs";
 import ListingSelectedFilters from "./ListingSelectedFilters";
-
-// import SelectedFilters from "../../components/filters/SelectedFilters";
-// const SelectedFilters = dynamic(
-//   () => import("../../components/filters/SelectedFilters")
-// );
 
 const ListingHeaderFilters = ({
   isListing,

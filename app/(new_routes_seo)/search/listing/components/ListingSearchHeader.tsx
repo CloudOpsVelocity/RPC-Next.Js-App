@@ -23,10 +23,13 @@ import dynamic from "next/dynamic";
 // import { trimFromWord } from "../../components/ProjSearchBreadCrums";
 import PageTitle from "../../components/filters/PageTitle";
 import { useMediaQuery } from "@mantine/hooks";
-import SelectedFilters from "../../components/filters/SelectedFilters";
-// const SelectedFilters = dynamic(
-//   () => import("../../components/filters/SelectedFilters")
-// );
+// import SelectedFilters from "../../components/filters/SelectedFilters";
+const SelectedFilters = dynamic(
+  () => import("../../components/filters/SelectedFilters"),
+  {
+    ssr: false,
+  }
+);
 
 const ListingHeaderFilters = ({
   isListing,

@@ -1,10 +1,10 @@
 import React from "react";
 import dynamicImport from "next/dynamic";
 import { Metadata } from "next";
-
-const ListingHeaderFilters = dynamicImport(
-  () => import("./_new-listing-search-page/components/ListingSearchHeader")
-);
+import ListingHeaderFilters from "./_new-listing-search-page/components/ListingSearchHeader";
+// const ListingHeaderFilters = dynamicImport(
+//   () => import("./_new-listing-search-page/components/ListingSearchHeader")
+// );
 import ListingMainSection from "./_new-listing-search-page/components/ListingMainSection";
 const ProjectSearchBreadCrumbs = dynamicImport(
   () => import("../components/ProjSearchBreadCrums")
@@ -36,13 +36,9 @@ export default async function Page(params: any) {
         }`}
       />
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
-        <ProjectSearchBreadCrumbs
-          key="newSearchPage4"
-          pageUrl={"/search/listing"}
-        />
+        <ProjectSearchBreadCrumbs pageUrl={"/search/listing"} />
 
         <ListingHeaderFilters
-          key="newSearchFilter3"
           isListing={isListing}
           showProjectTab={true}
           frontendFilters={frontendFilters}

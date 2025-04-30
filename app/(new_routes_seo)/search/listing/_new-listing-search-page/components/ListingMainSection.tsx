@@ -22,23 +22,23 @@ export default function ListingMainSection({
   serverData,
   preAppliedFilters = null,
 }: Props) {
-  useHydrateAtoms(
-    [
-      [
-        projSearchStore,
-        {
-          type: "update",
-          payload: {
-            // ...initialState,
-            ...frontendFilters,
-          },
-        },
-      ],
-    ],
-    {
-      dangerouslyForceHydrate: true,
-    }
-  );
+  // useHydrateAtoms(
+  //   [
+  //     [
+  //       projSearchStore,
+  //       {
+  //         type: "update",
+  //         payload: {
+  //           // ...initialState,
+  //           ...frontendFilters,
+  //         },
+  //       },
+  //     ],
+  //   ],
+  //   {
+  //     dangerouslyForceHydrate: true,
+  //   }
+  // );
 
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isTrue, setIsTrue] = useState(
