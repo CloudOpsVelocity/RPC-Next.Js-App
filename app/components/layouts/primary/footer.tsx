@@ -73,6 +73,9 @@ function Footer() {
         "New Launch Projects",
         "On-Going Projects",
         "Completed Projects",
+        "Ready to Move Listings",
+        "Under Construction Listings",
+
         /*  "Commercial",
         "Vacation Rentals",
         "Foreclosures", */
@@ -83,6 +86,8 @@ function Footer() {
         "/search?sf=projStatus=108",
         "/search?sf=projStatus=106",
         "/search?sf=projStatus=107",
+        "/search/listing?sf=propStatus=R",
+        "/search/listing?sf=propStatus=U",
         /* "/commercial",
         "/vacation-rentals",
         "/foreclosures", */
