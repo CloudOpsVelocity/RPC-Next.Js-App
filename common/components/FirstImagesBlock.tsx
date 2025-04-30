@@ -41,10 +41,10 @@ function FirstImagesBlock({ onSelect, data }: Props) {
     </>
 
       return (
-        <picture>
-          <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
-          <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
-          <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
+        // <picture>
+        //   <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
+        //   <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
+        //   <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
           <Image
             alt={data.projName || "Project Image"}
             title={data.projName || "Project Image"}
@@ -52,11 +52,11 @@ function FirstImagesBlock({ onSelect, data }: Props) {
             height={195}
             width={900}
             className={`${className}  `}
-
+           sizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
             priority={index == 0 ? true : false}
-            quality={80}
+            quality={50}
           />
-        </picture>
+        // </picture>
       );
     } else {
       return "";

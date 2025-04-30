@@ -46,6 +46,7 @@ const nextConfig = {
   },
   images: {
     // unoptimized: true,
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       { hostname: "d2sa15fzpcbn0k.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },

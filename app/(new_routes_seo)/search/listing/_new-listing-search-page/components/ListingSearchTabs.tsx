@@ -234,7 +234,7 @@ else{
     
 }
   }, [state.listedBy, frontendFilters.listedBy]);
-
+   console.log({listedBy:state.listedBy,windowType: typeof document})
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">
 
