@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
-const createMDX = require("@next/mdx");
 
-const withMDX = createMDX({
-  options: {
-    // providerImportSource: "@mdx-js/react ",
-  },
+// const createMDX = require("@next/mdx");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
 });
+
+// const withMDX = createMDX({
+//   options: {
+//     // providerImportSource: "@mdx-js/react",
+//   },
+// });
 
 const nextConfig = {
   eslint: {
@@ -38,7 +42,7 @@ const nextConfig = {
     ],
     mdxRs: true,
     optimizeCss: true,
-    // removeConsole: process.env.NODE_ENV === 'production',
+    // legacyBrowsers is not needed
   },
   images: {
     unoptimized: true,
@@ -54,9 +58,6 @@ const nextConfig = {
       },
       {
         hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
-      },
-      {
-        hostname: "d24ksaw8earfo7.cloudfront.net",
       },
       {
         hostname: "d24ksaw8earfo7.cloudfront.net",
@@ -87,4 +88,4 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
-module.exports = withMDX(nextConfig);
+module.exports = withBundleAnalyzer(nextConfig);
