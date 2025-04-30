@@ -1,14 +1,26 @@
 import React from "react";
-import ProjSearchMainFilterSection from "./components/filters/ProjSearchMainFilterSection";
-import ProjectSearchBreadCrumbs from "./components/ProjSearchBreadCrums";
-import Mainsection from "./components/Mainsection";
-import { Metadata } from "next";
-type Props = {};
 
-export default function Page({}: Props) {
+import { Metadata } from "next";
+import ProjSearchMainFilterSection from "./_new-search-page/components/filters/ProjSearchMainFilterSection";
+import Mainsection from "./_new-search-page/components/Mainsection";
+import ProjectSearchBreadCrumbs from "./_new-search-page/components/ProjSearchBreadCrums";
+import {
+  getSearchData,
+  parseApiFilterQueryParams,
+} from "./utils/project-search-queryhelpers";
+import parseProjectSearchQueryParams from "./utils/parse-project-searchqueryParams";
+
+export default async function Page(params: any) {
   const isListing = false;
+  const apiFilters = params.searchParams.sf
+    ? parseApiFilterQueryParams(params.searchParams.sf)
+    : null;
+  const data = await getSearchData(0, apiFilters ?? "");
+  // const frontendFilters = parseProjectSearchQueryParams(
+  //   params.searchParams.sf ?? ""
+  // );
   return (
-    <main className="pt-[70px] min-h-[calc(100vh)] relative ">
+    <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <meta name="robots" content="index, follow" />
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs key="newSearchPage2" pageUrl={"/search"} />
@@ -18,9 +30,13 @@ export default function Page({}: Props) {
         />
       </div>
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[226px] ">
-        <Mainsection frontendFilters={{}} serverData={null} />
+        <Mainsection
+          frontendFilters={{}}
+          serverData={data}
+          preAppliedFilters={params.searchParams.sf}
+        />
       </div>
-    </main>
+    </section>
   );
 }
 

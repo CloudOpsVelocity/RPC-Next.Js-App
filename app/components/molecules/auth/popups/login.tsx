@@ -77,6 +77,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
       }
       callback && callback();
       close();
+      document.body.style.overflow = "unset";
     } else {
       const errorsParam =
         res?.error === "Please enter correct password"

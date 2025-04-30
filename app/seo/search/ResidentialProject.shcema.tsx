@@ -3,6 +3,8 @@ import { PHONE_NUMBER } from "../constants";
 import { convertToSchemaDate } from "@/common/utils/dateUtils";
 import { baseURL } from "@/app/utils/api/api";
 import WebPageSchama from "../common/WebPageSchama";
+import OrganizationSchema from "../OraganisationSchema";
+import LocalBusinessJsonLdScript from "../Localjson";
 
 export const generateAllSchemas = (
   property: any,
@@ -731,6 +733,8 @@ export const ResidentialProjectSchama = ({
           }),
         }}
       />
+      <OrganizationSchema />
+      <LocalBusinessJsonLdScript />
     </>
   );
 };

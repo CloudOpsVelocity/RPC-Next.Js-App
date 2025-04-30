@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaRedoAlt } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useQuery } from "react-query";
-import { Pagination, Select } from "@mantine/core";
+// import { Pagination, Select } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import BuilderDetailsCard from "./BuilderDetailsCard";
 import { useMediaQuery } from "@mantine/hooks";
@@ -11,6 +11,8 @@ import {
   getAllCititesForBuilders,
   getCitiesBuilder,
 } from "../../services/builder-client.service";
+import PaginationForListings from "@/app/(new_routes_seo)/(project-listing-route)/residential-listings/_components/Pagination";
+import PaginationForBuilder from "./paginationBuilder";
 
 export default function BuildersDirectory({
   city,
@@ -123,7 +125,7 @@ export default function BuildersDirectory({
     }
   }
 
-  const selectRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,7 +137,11 @@ export default function BuildersDirectory({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  console.log(resultArray);
+  //method
+  const settingCurrentValue = (value: number) => {
+    window.scrollTo(0, 0);
+    setPage(value);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
@@ -232,7 +238,6 @@ export default function BuildersDirectory({
                   setPage(0);
                   isMobile && setShowFilter(false);
                 }}
-                maxLength={20}
               >
                 <option value="" disabled hidden>
                   All Cities
@@ -330,20 +335,20 @@ export default function BuildersDirectory({
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && (
+        {/* {totalPages > 1 && (
           <div className="flex justify-center mt-8">
-            <Pagination
-              total={totalPages}
+       
+          <PaginationForBuilder
+              totalCount={totalPages} 
               onNextPage={onNextPage}
               onPreviousPage={onBackPage}
               value={page + 1}
-              onChange={(value) => {
-                window.scrollTo(0, 0);
-                setPage(value - 1);
-              }}
-            />
-          </div>
-        )}
+              currentPagefun={settingCurrentValue} 
+          />
+            {/* <Pagination
+              total={totalPages}
+              
+            /> */}
       </div>
     </div>
   );

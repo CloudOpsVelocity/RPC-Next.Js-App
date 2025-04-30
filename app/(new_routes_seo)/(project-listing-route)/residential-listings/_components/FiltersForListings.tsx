@@ -1,7 +1,11 @@
 "use client";
 import { BasicMultiSelect } from "@/app/(dashboard)/new/components/home-search/filters/BhkTypeSelect";
 import { BasicBudgetSelect } from "@/app/(dashboard)/new/components/home-search/filters/BugdetSelect";
+import { CustomBhkTypeSelect } from "@/app/(dashboard)/new/components/home-search/filters/CustomBhkTypeSelect";
+import { CustomBugdetSelect } from "@/app/(dashboard)/new/components/home-search/filters/CustomBugdetSelect";
+import QuickFilters from "@/app/(dashboard)/new/components/home-search/filters/QuickFilters";
 import { BasicSelect } from "@/app/(dashboard)/new/components/home-search/filters/Select";
+import { SelectField } from "@/app/(dashboard)/new/components/home-search/filters/SelectField";
 import { toQueryParams } from "@/app/(dashboard)/new/utils/param";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useAtom } from "jotai";
@@ -42,7 +46,7 @@ export default function FiltersForListings({}: Props) {
   return (
     <section className=" container sm:mx-auto    px-1  sm:px-4">
       <div className="bg-card shadow-xl rounded-xl py-1 sm:p-6 z-[500] bg-white">
-        <div className="grid  grid-cols-[1fr_1fr_auto] md:grid-cols-4 gap-1 md:gap-4">
+        <div className="flex  flex-row mt-2 sm:mt-0  items-start gap-2.5 rounded p-1.5 sm:border-[0.5px] border-solid border-[#819CA9] bg-white">
           {/*   <div className="flex flex-row items-center gap-4 flex-wrap"> */}
           {/* <div>
             <label className="block text-sm font-medium mb-2">
@@ -80,10 +84,9 @@ export default function FiltersForListings({}: Props) {
               ))}
             </select>
           </div> */}
-          <BasicSelect />
-          <BasicMultiSelect />
-          {<BasicBudgetSelect />}
-
+          <SelectField />
+          <CustomBhkTypeSelect />
+          <CustomBugdetSelect />
           <div
             onClick={onSearch}
             className="flex sm:hidden justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6] cursor-pointer"
@@ -105,8 +108,8 @@ export default function FiltersForListings({}: Props) {
           </div>
           <button
             onClick={onSearch}
-            className="md:w-[70%] hidden sm:flex bg-primary hover:bg-primary/90 p-3 items-center justify-center gap-2  bg-btnPrimary text-white text-[14px] md:text-[16px] py-[4px] px-[8px] md:py-[6px] md:px-[12px] rounded-[4px] font-[600]"
-          >
+            className="md:w-[40%] hidden sm:flex bg-primary hover:bg-primary/90 p-3 items-center justify-center gap-2  bg-btnPrimary text-white text-[14px] md:text-[16px] py-[4px] px-[8px] md:py-[6px] md:px-[12px] rounded-[4px] font-[600]"
+            > 
             <FaSearch />
             <span className=" text-[14px] md:text-[12px] lg:text-[14px] text-nowrap">
               Search Properties

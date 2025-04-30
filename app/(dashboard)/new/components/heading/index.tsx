@@ -22,14 +22,14 @@ export default function MainHeading({
   return (
     <div className="flex flex-row  items-center justify-between">
       <div className=" flex flex-col  max-w-[80%] sm:max-w-full items-start justify-start gap-1">
-        <h1
+        <h2
           className={clsx(
             "text-[#148B16] text-[16px] sm:text-xl xl:text-[24px] not-italic font-bold",
             className?.title
           )}
         >
           {title}
-        </h1>
+        </h2>
         <h4
           className={clsx(
             "text-black  text-[12px] sm:text-[14px] xl:text-xl not-italic font-medium sm:mt-1",

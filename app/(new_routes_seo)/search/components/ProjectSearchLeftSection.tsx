@@ -16,6 +16,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
+import SearchPagination from "./searchPagination";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -45,7 +46,7 @@ function LeftSection({
   const isTrue =
     it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch } =
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
@@ -176,16 +177,45 @@ function LeftSection({
 
   return (
     <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
-      {isLoading && !dataToUse?.length ? (
+      {(isLoading && !dataToUse?.length) || isFetching ? (
         <LoadingBlock />
       ) : dataToUse?.length > 0 ? (
         <>
+          {/* Image use below */}
+          {dataToUse[0].coverUrl && (
+            <>
+              <link
+                rel="preconnect"
+                href="https://media.getrightproperty.com"
+                crossOrigin="anonymous"
+              />
+
+              {/* Preload image with srcSet and sizes */}
+              {dataToUse?.[0]?.coverUrl?.includes(",") && (
+                <link
+                  rel="preload"
+                  as="image"
+                  href={
+                    dataToUse[0].coverUrl.includes("+")
+                      ? dataToUse[0].coverUrl
+                          .replace(/\+/g, "%2B")
+                          .split(",")[1]
+                      : dataToUse[0].coverUrl.split(",")[1]
+                  }
+                />
+              )}
+            </>
+          )}
+          {/* Image Use above*/}
           <ServerDataSection
             data={dataToUse}
             refetch={refetch}
             mutate={mutate}
             state={state}
           />
+         {/*  {hasNextPage && shouldFetchMore && (
+           <SearchPagination totalCount />
+          )} */}
           {hasNextPage && shouldFetchMore && (
             <div
               ref={loadMoreRef}

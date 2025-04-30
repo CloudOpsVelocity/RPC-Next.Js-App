@@ -109,7 +109,6 @@ export default function MiddleSection({
       <PostYourListing />
       <BlogsSection />
       <LoginPopup />
-      {/* <SharePopup /> */}
       <Req />
     </>
   );

@@ -198,26 +198,26 @@ export default function ResidentialCardSection({
                           {property.city || "Unknown City"}
                         </h3>
                         <div className="grid grid-cols-2 gap-4 mb-6">
-                          <h3 className="text-sm">
-                            <div className="font-semibold">Price Range</div>
-                            <div>
-                              ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
-                              {(maxPrice / 10000000).toFixed(2)} Cr
-                            </div>
-                          </h3>
-                          <h3 className="text-sm">
-                            <div className="font-semibold">Property Type</div>
-                            <div>{propertyType}</div>
-                          </h3>
-                          <h3 className="text-sm">
-                            <div className="font-semibold">Possession</div>
-                            <div>{possessionDate}</div>
-                          </h3>
-                          <h3 className="text-sm">
-                            <div className="font-semibold">RERA Status</div>
-                            <div>{reraStatus}</div>
-                          </h3>
+                        <div className="text-sm">
+                          <p className="font-semibold">Price Range</p>
+                          <p>
+                            ₹{(minPrice / 10000000).toFixed(2)} Cr - ₹
+                            {(maxPrice / 10000000).toFixed(2)} Cr
+                          </p>
                         </div>
+                        <div className="text-sm">
+                          <p className="font-semibold">Property Type</p>
+                          <p>{propertyType}</p>
+                        </div>
+                        <div className="text-sm">
+                          <p className="font-semibold">Possession</p>
+                          <p>{possessionDate}</p>
+                        </div>
+                        <div className="text-sm">
+                          <p className="font-semibold">RERA Status</p>
+                          <p>{reraStatus}</p>
+                        </div>
+                      </div>
                         <div className="flex w-full  flex-row gap-4">
                           <Link
                             prefetch={false}

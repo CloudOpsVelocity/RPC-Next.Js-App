@@ -7,41 +7,45 @@ import {
   MdFilterList,
   MdBusiness,
 } from "react-icons/md";
-
+import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
+import BuyRent from "../FilterComponents/BuyRent";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
-import { projSearchStore } from "../../store/projSearchStore";
-import { useParams, usePathname } from "next/navigation";
-import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
-import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
-
-import ListingSearchTabs from "../../testing-listing/components/ListingSearchTabs";
-import BuyRent from "../../components/FilterComponents/BuyRent";
-import ProjSearchCityDropDown from "../../components/FilterComponents/city/ProjectSearchCityDropdown";
-import ShowAllFiltersButton from "../../components/FilterComponents/ShowAllFiltersButton";
+import { projSearchStore } from "../../../store/newSearchProjectStore";
+import { usePathname, useRouter } from "next/navigation";
+import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
+import useProjSearchMatcher from "../../../hooks/useProjSearchMatcher";
+// import SelectedFilters from "./SelectedFilters";
+import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
+// import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
+// import ListingSearchTabs from "../../listing/components/ListingSearchTabs";
 import dynamic from "next/dynamic";
-// import { trimFromWord } from "../../components/ProjSearchBreadCrums";
-import PageTitle from "../../components/filters/PageTitle";
-import { useMediaQuery } from "@mantine/hooks";
-// import SelectedFilters from "../../components/filters/SelectedFilters";
-const SelectedFilters = dynamic(
-  () => import("../../components/filters/SelectedFilters")
-);
 
-const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
+const SelectedFilters = dynamic(() => import("./SelectedFilters"));
+// const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
+import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
+import PageTitle from "./PageTitle";
+// import { useRouter } from "next/navigation";
+import { useMediaQuery } from "@mantine/hooks";
+
+const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchError, setSearchError] = useState("");
   const [state, dispatch] = useAtom(projSearchStore);
   const path = usePathname();
   const [selectedFilters, setSelectedFilters] = useState<{
     [key: string]: string[];
   }>({});
+  const [isDrawerOpentest, setIsDrawerOpentest] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const router = useRouter();
 
+  const { handleApplyFilters, handleClearFilters } =
+    useProjSearchAppliedFilters();
   const {
     data: searchData,
     isLoading,
@@ -97,11 +101,33 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
+    if (dropdownName == "allFiltersdes") {
+      if (document.body.style.overflow === "hidden")
+        document.body.style.overflow = "unset";
+      else {
+        document.body.style.overflow = "hidden";
+      }
+    }
   };
+
+  // const tested = () => {
+  //   if (openDropdown == "Buy") {
+  //     if (document.body.style.overflow == "hidden") {
+  //       document.body.style.overflow = "unset";
+  //     } else {
+  //       document.body.style.overflow = "hidden";
+  //     }
+  //   }
+  // };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
+    if (/[^a-zA-Z0-9\s]/.test(value)) {
+      setSearchError("Special characters are not allowed.");
+    } else {
+      setSearchError("");
+      onSearchChange(value);
+    }
     setSearchQuery(value);
-    onSearchChange(value);
   };
   const isListingSearch = path.includes("listing");
   const AgentOwnerBuilderMap = new Map([
@@ -241,43 +267,67 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
       default:
         break;
     }
+    setSearchQuery("");
   };
+  // crollyww
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const res = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BACKEND_URL
-      }/matcher/string?word=${searchQuery}&cityId=${
-        state.city?.split("+")[1] || 9
-      }`
-    );
-    const data = await res.json();
-    if (Object.hasOwn(data, "ids")) {
-      let ids = extractApiValues(data.ids);
-      if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
-        dispatch({
-          type: "update",
-          payload: {
-            ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
-            ...(ids.PT && { propType: parseInt(ids.PT as string) }),
-            ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-            ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
-          },
-        });
-      }
 
-      handleApplyFilters();
-      handleResetQuery();
-      setIsSearchOpen(false);
-      // myClientLogger("info", data);
-      return;
+    if (searchQuery !== "") {
+      const res = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/matcher/string?word=${searchQuery}&cityId=${
+          state.city?.split("+")[1] || 9
+        }`
+      );
+      const data = await res.json();
+      if (Object.hasOwn(data, "ids")) {
+        handleClearFilters("clearAll");
+        let ids = extractApiValues(data.ids);
+        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+          dispatch({
+            type: "update",
+            payload: {
+              ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
+              ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+              ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
+              ...(ids.PJ && {
+                projIdEnc: ids.PJ as string,
+                projName: searchQuery,
+                listedBy: !isListing ? "All" : null,
+              }),
+              ...(ids.CG && {
+                cg: String(ids.CG) ?? "S",
+                ...(ids.CG == "R" && {
+                  listedBy: "All",
+                }),
+              }),
+            },
+          });
+        }
+        handleApplyFilters();
+        handleResetQuery();
+        setIsSearchOpen(false);
+        setSearchQuery("");
+        return;
+      }
+    } else {
+      handleDropdownToggle("allFilters");
     }
+  };
+
+  const handleOpenDropdown = () => {
+    setIsDrawerOpen(true);
+    setIsDrawerOpentest(true);
+    document.body.style.overflow = "hidden";
   };
 
   useEffect(() => {
     if (isDrawerOpen && isMobile) {
       // Push a new state to the history stack when the modal is opened
-      window.history.pushState("projeSearchModalModal", "");
+      // window.history.pushState("projeSearchModalModal", "");
+      window.history.pushState(null, "", window.location.href);
 
       const handlePopState = () => {
         setIsDrawerOpen(false);
@@ -295,7 +345,7 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
         <div className=" px-1 ">
           <div
             ref={searchRef}
-            className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 pb-[8px] max-w-[820px]"
+            className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 max-w-[820px]"
           >
             <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
@@ -317,8 +367,14 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
                       setIsSearchOpen(true);
                       setOpenDropdown(null);
                     }}
+                    maxLength={50}
+                    pattern="[a-zA-Z0-9\s]+"
+                    title="Only letters, numbers, and spaces are allowed."
                   />
-                  <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+
+                  <button type="submit" name="projectHeaderSearchIcon">
+                    <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                  </button>
                 </form>
               </div>
               {isLoading ? (
@@ -328,10 +384,12 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
               ) : (
                 isSearchOpen && (
                   <div className="absolute min-w-[100%] bg-white mt-1 rounded-lg shadow-lg border z-50 max-h-[400px] overflow-y-auto">
-                    {searchData.loc?.length > 0 ||
-                    searchData.builders?.length > 0 ||
-                    searchData.projects?.length > 0 ||
-                    searchData.listing?.length > 0 ? (
+                    {searchError ? (
+                      <div className="p-3">{searchError}</div>
+                    ) : searchData.loc?.length > 0 ||
+                      searchData.builders?.length > 0 ||
+                      searchData.projects?.length > 0 ||
+                      searchData.listing?.length > 0 ? (
                       <>
                         {["loc", "listing", "projects", "builders"].map(
                           (type) =>
@@ -410,24 +468,6 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
               />
             </div>
             <div className="hidden md:flex items-center gap-2 order-2">
-              {/*  <PropertyTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "propertyType"}
-                onToggle={() => handleDropdownToggle("propertyType")}
-              />
-              <BHKTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "bhkType"}
-                onToggle={() => handleDropdownToggle("bhkType")}
-              />
-              <BudgetDropdown
-                isOpen={openDropdown === "budget"}
-                onToggle={() => handleDropdownToggle("budget")}
-              /> */}
               <ShowAllFiltersButton
                 isListing={isListing}
                 selectedFilters={selectedFilters}
@@ -439,21 +479,18 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
 
             <button
               className="md:hidden flex text-[14px] items-center h-[38px] md:h-[42px] xl:h-auto gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
-              onClick={() => setIsDrawerOpen(true)}
+              onClick={() => handleOpenDropdown()}
             >
               <MdFilterList className="w-5 h-5" />
               Filters
             </button>
           </div>
-
           <PageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            <ListingSearchTabs />
+            {<ProjectSearchTabs />}
             <SelectedFilters />
           </div>
-
-          {/* Selected Filters */}
         </div>
       </div>
 
@@ -463,7 +500,13 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-lg font-semibold">Filters</h2>
               <button
-                onClick={() => setIsDrawerOpen(false)}
+                onClick={() => {
+                  setIsDrawerOpen(false);
+                  document.body.style.overflow = "unset";
+                  console.log("close");
+
+                  isMobile ? router.back() : "";
+                }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >
                 <MdClose className="w-6 h-6" />
@@ -471,32 +514,14 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
             </div>
             <div
               onClick={(e) => e.stopPropagation()}
-              className="  max-h-[100vh]   overflow-y"
+              className="max-h-[100vh] overflow-y"
             >
-              {/* <PropertyTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "propertyType"}
-                onToggle={() => handleDropdownToggle("propertyType")}
-              />
-              <BHKTypeDropdown
-                selectedFilters={selectedFilters}
-                toggleFilter={toggleFilter}
-                handleClear={handleClear}
-                isOpen={openDropdown === "bhkType"}
-                onToggle={() => handleDropdownToggle("bhkType")}
-              />
-              <BudgetDropdown
-                isOpen={openDropdown === "budget"}
-                onToggle={() => handleDropdownToggle("budget")}
-              /> */}
               <ShowAllFiltersButton
                 isListing={isListing}
                 selectedFilters={selectedFilters}
                 toggleFilter={toggleFilter}
                 isOpen
-                onToggle={() => handleDropdownToggle("allFilters")}
+                onToggle={() => handleDropdownToggle("allFiltersdes")}
               />
             </div>
           </div>
@@ -506,4 +531,4 @@ const ListingHeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   );
 };
 
-export default memo(ListingHeaderFilters);
+export default memo(HeaderFilters);

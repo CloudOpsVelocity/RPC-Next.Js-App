@@ -91,23 +91,23 @@ export async function generateMetadata(
     totalPrice,
   } = await getListingDetails(id as string);
   return {
-    title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+    title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
       data.cg === "S" ? " Sale" : " Rent"
-    } in ${data.ltName} - Getrightproperty`,
+    } in ${data.ltName}`,
     description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
       data.cg === "S" ? " Sale" : " Rent"
     } in ${
       data.ltName
-    }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+    }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
     openGraph: {
-      title: `${data.bhkName ?? ""} ${data.propTypeName}, for ${
+      title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
         data.cg === "S" ? " Sale" : " Rent"
-      } in ${data.ltName} - Getrightproperty`,
+      } in ${data.ltName}`,
       description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
         data.cg === "S" ? " Sale" : " Rent"
       } in ${
         data.ltName
-      }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application`,
+      }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
     },
   };
 }

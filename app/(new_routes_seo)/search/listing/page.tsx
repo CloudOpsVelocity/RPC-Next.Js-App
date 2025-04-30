@@ -1,32 +1,57 @@
 import React from "react";
-import ProjSearchMainFilterSection from "../components/filters/ProjSearchMainFilterSection";
-// import ListingSearhLeftSection from "./components/listingSearchTabs/listingSearchleftSection";
-// import ListingSearchRightSection from "./components/listingSearchTabs/listingSearchRightSection";
-import ProjectSearchBreadCrumbs from "../components/ProjSearchBreadCrums";
-import ListingMainSection from "./components/ListingMainSection";
+import dynamicImport from "next/dynamic";
 import { Metadata } from "next";
+import ListingHeaderFilters from "./_new-listing-search-page/components/ListingSearchHeader";
+// const ListingHeaderFilters = dynamicImport(
+//   () => import("./_new-listing-search-page/components/ListingSearchHeader")
+// );
+import ListingMainSection from "./_new-listing-search-page/components/ListingMainSection";
+const ProjectSearchBreadCrumbs = dynamicImport(
+  () => import("../components/ProjSearchBreadCrums")
+);
 
-type Props = {};
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
+import { parseApiFilterQueryParams } from "../utils/project-search-queryhelpers";
+import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
 
-export default function Page({}: Props) {
+export default async function Page(params: any) {
   const isListing = true;
+  const apiFilters = params.searchParams.sf
+    ? parseApiFilterQueryParams(params.searchParams.sf)
+    : null;
+  const frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
+  const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+  const data = isProj
+    ? await getProjSearchData(apiFilters ?? "")
+    : await getSearchData(apiFilters ?? "");
   return (
-    <main className="pt-[70px] min-h-[calc(100vh)] relative">
+    <section className="pt-[70px] min-h-[calc(100vh)] relative">
+      <link
+        rel="canonical"
+        href={`${process.env.NEXT_PUBLIC_URL}/search/listing${
+          apiFilters ? `?sf=${apiFilters}` : ""
+        }`}
+      />
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
-        <ProjectSearchBreadCrumbs
-          key="newSearchPage4"
-          pageUrl={"/search/listing"}
-        />
+        <ProjectSearchBreadCrumbs pageUrl={"/search/listing"} />
 
-        <ProjSearchMainFilterSection
-          key="newSearchFilter4"
+        <ListingHeaderFilters
           isListing={isListing}
+          showProjectTab={true}
+          frontendFilters={frontendFilters}
         />
       </div>
       <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[220px]  ">
-        <ListingMainSection frontendFilters={{}} serverData={null} />
+        <ListingMainSection
+          frontendFilters={frontendFilters}
+          serverData={data}
+          preAppliedFilters={params.searchParams.sf}
+        />
       </div>
-    </main>
+    </section>
   );
 }
 
@@ -47,9 +72,9 @@ export const metadata: Metadata = {
     description:
       "Browse verified real estate listings across India. Find your perfect home or investment property with GetRightProperty's user-friendly search tools.",
   },
-  alternates: {
-    canonical: "https://www.getrightproperty.com/search/listing",
-  },
+  // alternates: {
+  //   canonical: "https://www.getrightproperty.com/search/listing",
+  // },
 };
-// export const dynamic = "force-dynamic";
-// export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;

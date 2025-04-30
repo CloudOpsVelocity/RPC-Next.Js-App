@@ -1,13 +1,19 @@
 /** @type {import('next').NextConfig} */
+
 const createMDX = require("@next/mdx");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const withMDX = createMDX({
   options: {
-    // providerImportSource: "@mdx-js/react ",
+    // providerImportSource: "@mdx-js/react",
   },
 });
 
 const nextConfig = {
+  swcMinify: true, 
+  compress: true,  
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -17,12 +23,32 @@ const nextConfig = {
       process.env.ENVIRONMENT === "test",
   },
   experimental: {
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+    optimizePackageImports: [
+      "@mantine/core",
+      "@mantine/hooks",
+      "@mantine/dates",
+      "@mantine/form",
+      "@mantine/carousel",
+      "@mantine/dropzone",
+      "@mantine/modals",
+      "@tanstack/react-query",
+      "@tanstack/react-query-devtools",
+      "@tanstack/react-virtual",
+      "@react-google-maps/api",
+      "react-leaflet",
+      "react-leaflet-cluster",
+      "react-pdf",
+      "react-player",
+      "react-share",
+      "react-zoom-pan-pinch",
+    ],
     mdxRs: true,
-    // optimizeCss: true,
-    // removeConsole: process.env.NODE_ENV === 'production',
+    optimizeCss: true,
+    // legacyBrowsers is not needed
   },
   images: {
+    unoptimized: true,
+    // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       { hostname: "d2sa15fzpcbn0k.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
@@ -35,9 +61,6 @@ const nextConfig = {
       },
       {
         hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
-      },
-      {
-        hostname: "d24ksaw8earfo7.cloudfront.net",
       },
       {
         hostname: "d24ksaw8earfo7.cloudfront.net",
@@ -68,4 +91,4 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
-module.exports = withMDX(nextConfig);
+module.exports = withBundleAnalyzer(withMDX(nextConfig));

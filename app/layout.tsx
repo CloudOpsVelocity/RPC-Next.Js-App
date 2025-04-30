@@ -1,22 +1,16 @@
 /* eslint-disable no-undef */
 import type { Metadata } from "next";
 import "./globals.css";
-import MantineTheme from "@/mantine.config";
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { GoogleTagManager } from "@next/third-parties/google";
+
+// import { GoogleTagManager } from "@next/third-parties/google";
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
-import montserrat from "@/font";
-import Header from "./components/layouts/primary/header";
-import Footer from "./components/layouts/primary/footer";
-import { Organization_SCHEMA } from "./seo/common/organisation-details";
-import JotaiProvider from "./context/JotaiProvider";
-// const playball = Playball({
-//   subsets: ['latin'], // Specify the subset you need
-//   weight: ['400'], // Required weight for Playball font
-//   display: 'swap', // Same as the `display=swap` in Google Fonts
-// });
+// import montserrat from "@/font";
+import { Montserrat } from "next/font/google";
+const font = Montserrat({
+  preload: false,
+});
 
 export const metadata: Metadata = {
   title: "Get Right Property",
@@ -24,20 +18,14 @@ export const metadata: Metadata = {
 };
 export default function RootLayout(params: { children: React.ReactNode }) {
   return (
-    <html data-mantine-color-scheme="light" lang="en">
+    <html lang="en">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(Organization_SCHEMA),
-          }}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <Script
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9243707404617437"
+          crossOrigin="anonymous"
         />
-        <ColorSchemeScript />
-        {/* <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
-        /> */}
-        {/* <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=0,maximum-scale=1"/> */}
         <link
           rel="apple-touch-icon"
           sizes="57x57"
@@ -104,23 +92,32 @@ export default function RootLayout(params: { children: React.ReactNode }) {
         />
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="google-adsense-account" content="ca-pub-9243707404617437" />
       </head>
 
       {process.env.NODE_ENV !== "development" && (
-        <GoogleTagManager gtmId="GTM-T7W6VL9F" />
+        <Script
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-T7W6VL9F');`,
+          }}
+        />
       )}
 
-      <body className={`${montserrat.className}  `}>
+      <body className={font.className}>
         {/* <MantineProvider theme={MantineTheme}> */}
         <main>
           <SessionProvider>
             <ReactQueryProvider>
-              <JotaiProvider>
-                <Header />
-                <Layout>{params.children}</Layout>
-                <Footer />
-              </JotaiProvider>
+              {/* <JotaiProvider> */}
+              {/* <Header /> */}
+              <Layout>{params.children}</Layout>
+              {/* <Footer /> */}
+              {/* </JotaiProvider> */}
             </ReactQueryProvider>
           </SessionProvider>
         </main>
@@ -130,3 +127,13 @@ export default function RootLayout(params: { children: React.ReactNode }) {
     </html>
   );
 }
+import type { Viewport } from "next";
+import Script from "next/script";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#ffffff",
+};

@@ -12,12 +12,17 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
       {
         next: { tags: [slug] },
-        // cache: "force-cache",
+        // cache: "no-store",
       }
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch project details for slug: ${slug}`);
+      const errorMessage = `\x1b[31m[ERROR]\x1b[0m Time: ${new Date().toLocaleTimeString()} | Status: ${
+        response.status
+      } ${
+        response.statusText
+      }\nDetails: ${await response.text()}\nSlug: ${slug}`;
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();

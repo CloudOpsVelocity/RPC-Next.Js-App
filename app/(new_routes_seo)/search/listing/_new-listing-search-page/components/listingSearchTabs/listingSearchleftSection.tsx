@@ -1,24 +1,23 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
-import ProjectCard from "@/app/test/newui/components/Card";
-import { useVirtualizer } from "@tanstack/react-virtual";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
-import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
+import { getListingSearchData } from "../../../../utils/project-search-queryhelpers";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   projSearchStore,
   searchPageMapToggle,
-} from "../../../store/projSearchStore";
-import { usePathname } from "next/navigation";
+} from "../../../../store/projSearchStore";
+import { usePathname, useSearchParams } from "next/navigation";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import FloatingArrowIcon from "../../../components/ProjectSearchTabs/FloatingArrowIcon";
+import FloatingArrowIcon from "../../../../components/ProjectSearchTabs/FloatingArrowIcon";
 import { useMediaQuery } from "@mantine/hooks";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
+import ListingServerCardData from "./ListingServerCardData";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -27,6 +26,7 @@ type Props = {
   isTrue: boolean;
   setIsTrue: any;
   apiFilterQueryParams: string | null;
+  preAppliedFilters: any;
 };
 
 function LeftSection({
@@ -36,21 +36,20 @@ function LeftSection({
   isTrue: it,
   setIsTrue,
   apiFilterQueryParams,
+  preAppliedFilters,
+  frontendFilters,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
-
+  const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
-  const isTrue =
-    it || pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null;
+  const isTrue = it || apiFilterQueryParams !== preAppliedFilters;
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
@@ -69,14 +68,19 @@ function LeftSection({
         }
         return nextPage;
       },
-      ...(serverData && {
-        initialData: {
-          pages: [serverData],
-          pageParams: [0],
-        },
-      }),
+      ...(serverData &&
+        !isTrue && {
+          initialData: {
+            pages: [serverData],
+            pageParams: [0],
+          },
+        }),
       cacheTime: 300000,
       enabled: isTrue,
+      onSuccess: (data: any) => {
+        const newData = data.pages[data.pageParams.length - 1];
+        setMainData((prev: any) => [...prev, ...newData]);
+      },
     });
 
   const { data: approvedData } = useQuery({
@@ -84,18 +88,6 @@ function LeftSection({
     enabled: true,
     queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
-  });
-  const allItems = !isTrue ? serverData : data?.pages?.flat() || [];
-
-  const rowVirtualizer = useVirtualizer({
-    count: allItems.length,
-    getScrollElement: () => containerRef.current,
-    estimateSize: () => 300,
-    overscan: 1,
-    enabled: true,
-    measureElement: (element) => {
-      return element?.getBoundingClientRect().height || 300;
-    },
   });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -129,37 +121,8 @@ function LeftSection({
 
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
-
-  const renderProjectCard = useCallback(
-    (virtualRow: any) => {
-      const eachOne = allItems[virtualRow.index];
-
-      return (
-        <div
-          key={virtualRow.key}
-          data-index={virtualRow.index}
-          ref={rowVirtualizer.measureElement}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            transform: `translateY(${virtualRow.start ?? 0}px)`,
-          }}
-        >
-          <ProjectCard
-            key={eachOne.projIdEnc + eachOne.propType}
-            refetch={refetch}
-            data={{ ...eachOne, type: "A" ?? "B" }}
-            index={virtualRow.index}
-            mutate={mutate}
-          />
-        </div>
-      );
-    },
-    [allItems, mutate, refetch, rowVirtualizer.measureElement, state.listedBy]
-  );
-
+  const dataToUse =
+    apiFilterQueryParams !== preAppliedFilters ? data?.pages.flat() : mainData;
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -195,6 +158,7 @@ function LeftSection({
   const setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   useEffect(() => {
+    // isDataRenders(allItems);
     if (isMobile) return;
     const handleScroll = () => {
       setIsMapLoaded(true);
@@ -214,24 +178,21 @@ function LeftSection({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
-
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <LoadingBlock />
-      ) : allItems.length > 0 ? (
-        <div
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map(renderProjectCard)}
-        </div>
+      ) : dataToUse?.length ? (
+        <ListingServerCardData
+          data={dataToUse}
+          refetch={refetch}
+          mutate={mutate}
+          state={state}
+          frontendFilters={frontendFilters}
+        />
       ) : (
         <EmptyState />
       )}

@@ -29,13 +29,13 @@ export default function Card({ data }: Props) {
           <h2 className="text-[color:var(--Black,#000)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic leading-[150%] font-bold ">
             {title}
           </h2>
-          <p className="text-[color:var(--Black,#000)] text-[12px] sm:text-[16px] xl:text-[18px] not-italic font-normal leading-[150%] mb-auto ">
+          <span className="text-[color:var(--Black,#000)] text-[12px] sm:text-[16px] xl:text-[18px] not-italic font-normal leading-[150%] mb-auto ">
             {data && data.text ? data.text : ""}
-          </p>
+          </span>
 
-          <button className=" absolute bottom-[10px] right-[10px] inline-flex mt-auto gap-1 justify-center items-center text-[color:var(--Secondary-Blue-1,#006EBE)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic font-bold leading-[150%]">
+          <span className=" absolute bottom-[10px] right-[10px] inline-flex mt-auto gap-1 justify-center items-center text-[color:var(--Secondary-Blue-1,#006EBE)] text-[12px] sm:text-[16px] xl:text-[20px] not-italic font-bold leading-[150%]">
             Read {config.readMoreIcon}
-          </button>
+          </span>
         </div>
       </div>
     </Link>

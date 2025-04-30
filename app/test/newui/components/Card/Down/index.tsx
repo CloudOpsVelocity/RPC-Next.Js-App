@@ -260,13 +260,13 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
             : "text-gray-400 border-[#5e5f5e] opacity-50 cursor-none"
         )}
       >
-        <p
+        <span
           className={`text-[12px] text-nowrap  xl:text-xs not-italic font-bold leading-[normal] ${
             value > 0 ? "underline" : ""
           }`}
         >
           {type} Listing : {value}
-        </p>
+        </span>
       </button>
     )
   );

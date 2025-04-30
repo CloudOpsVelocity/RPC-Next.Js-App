@@ -57,9 +57,7 @@ const ListingBreadCrumbs = dynamic(
 const ProjectGallery = dynamic(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
-const SharePopup = dynamic(
-  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup")
-);
+
 type Props = {
   data: any;
   totalPrice: number;
@@ -247,7 +245,7 @@ export default function ListingDetailsPage({
           bhkId={data.bhkId ?? 41}
           builderName={data?.postedByName}
           builderId={projData?.builderId}
-         
+
           // query={""}
         />
         {/* {data.projIdEnc && data.postedById === projData.builderId && ( */}
@@ -272,7 +270,7 @@ export default function ListingDetailsPage({
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />
         <CompareError />
-      {/*   <SharePopup /> */}
+        {/*   <SharePopup /> */}
       </div>
     </div>
   );

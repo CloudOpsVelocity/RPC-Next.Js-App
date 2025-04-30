@@ -25,15 +25,20 @@ import PageTitle from "../../components/filters/PageTitle";
 import { useMediaQuery } from "@mantine/hooks";
 // import SelectedFilters from "../../components/filters/SelectedFilters";
 const SelectedFilters = dynamic(
-  () => import("../../components/filters/SelectedFilters")
+  () => import("../../components/filters/SelectedFilters"),
+  {
+    ssr: false,
+  }
 );
 
 const ListingHeaderFilters = ({
   isListing,
   showProjectTab,
+  frontendFilters,
 }: {
   isListing?: boolean;
   showProjectTab: boolean;
+  frontendFilters: Record<string, any>;
 }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -302,11 +307,13 @@ const ListingHeaderFilters = ({
             ref={searchRef}
             className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 pb-[8px] max-w-[820px]"
           >
+            {" "}
             <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
                   openDropdown={openDropdown}
                   handleDropdownToggle={handleDropdownToggle}
+                  frontendFilters={frontendFilters}
                 />
                 <form
                   onSubmit={handleFormSubmit}
@@ -414,6 +421,7 @@ const ListingHeaderFilters = ({
                 handleDropdownToggle={handleDropdownToggle}
               />
             </div>
+            <code className="max-w-[350px]"></code>
             <div className="hidden md:flex items-center gap-2 order-2">
               {/*  <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
@@ -441,7 +449,6 @@ const ListingHeaderFilters = ({
                 onToggle={() => handleDropdownToggle("allFilters")}
               />
             </div>
-
             <button
               className="md:hidden flex text-[14px] items-center h-[38px] md:h-[42px] xl:h-auto gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
               onClick={() => setIsDrawerOpen(true)}
@@ -451,11 +458,11 @@ const ListingHeaderFilters = ({
             </button>
           </div>
 
-          <PageTitle />
+          <PageTitle serverFilterData={frontendFilters} />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             <ListingSearchTabs showProjectTab={showProjectTab} />
-            <SelectedFilters />
+            <SelectedFilters frontendFilters={frontendFilters} />
           </div>
 
           {/* Selected Filters */}

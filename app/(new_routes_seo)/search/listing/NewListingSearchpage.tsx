@@ -36,20 +36,16 @@ export default function NewListingSearchpage({
 }: Props) {
   const isListing = true;
   return (
-    <main className="pt-[70px] min-h-[calc(100vh)] relative">
+    <section className="pt-[70px] min-h-[calc(100vh)] relative">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
       {serverData && <ListingSearchSchema properties={serverData} />}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full">
-        <ProjectSearchBreadCrumbs
-          key="newSearchPage3"
-          is2lakhUrls={is2lakhUrls}
-          pageUrl={pageUrl}
-        />
+        <ProjectSearchBreadCrumbs is2lakhUrls={is2lakhUrls} pageUrl={pageUrl} />
         <div className="flex flex-row items-start gap-2">
           <ListingHeaderFilters
-            key="newSearchFilter3"
             isListing={isListing}
             showProjectTab={showProjectTab}
+            frontendFilters={frontendFilters}
           />
         </div>
       </div>
@@ -59,6 +55,6 @@ export default function NewListingSearchpage({
           serverData={serverData}
         />
       </div>
-    </main>
+    </section>
   );
 }

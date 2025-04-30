@@ -58,6 +58,7 @@ export default function GalleryModalContent({}: Props) {
   };
 
   const currentItem = items[currentIndex];
+
   const handleShare = () => {
     navigator.share({
       title: state.mediaType === "image" ? "Share Image" : "Share Video",
@@ -152,6 +153,7 @@ export default function GalleryModalContent({}: Props) {
       {/* Header */}
       <div className="absolute top-0 left-0 z-[100] right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
         <h2 className="text-xl font-bold">{title}</h2>
+
         <div className="flex items-center space-x-2">
           <button
             onClick={handleShare}
@@ -169,6 +171,7 @@ export default function GalleryModalContent({}: Props) {
           </button>
         </div>
       </div>
+
       {/* Main Media Preview */}
       <div className="absolute inset-0 flex items-center justify-center">
         {state.mediaType === "image" ? (

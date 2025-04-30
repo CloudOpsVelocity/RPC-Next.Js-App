@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { useMediaQuery } from "@mantine/hooks";
+import Link from "next/link";
 import React, { useState, useRef, useMemo, memo, useCallback } from "react";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
@@ -76,9 +77,12 @@ function NewCarousel<T>({
   const canGoPrev = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const DefaultViewMore = () => (
-    <button
-      onClick={() => (url ? window.open(url, "_self", "noreferrer") : "")}
-      className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 "
+    <Link
+    prefetch={false}
+      href={url ?? "/"}
+      target="_blank"
+      // onClick={() => (url ? window.open(url, "_self", "noreferrer") : "")}
+      className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600  hover:shadow-xl cursor-pointer transition-all duration-300 "
     >
       <div className="h-full w-full rounded-lg bg-white p-4 flex flex-col items-center justify-center space-y-4">
         <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-3 animate-pulse">
@@ -123,14 +127,14 @@ function NewCarousel<T>({
           </svg>
         </div>
       </div>
-    </button>
+    </Link>
   );
 
   return (
     <div className="relative group mt-2">
       <div
         ref={containerRef}
-        className={`relative overflow-x-auto scrollbar-hide`}
+        className={`relative  scrollbar-hide overflow-x-auto`}
         style={{ margin: isMobile ? 0 : `0 ${gap / 2}px` }}
       >
         <div
@@ -198,8 +202,6 @@ function NewCarousel<T>({
               <IoChevronForwardOutline className="w-6 h-6" />
             </button>
           )}
-
-
 
           {/* <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
             {Array.from({ length: maxIndex + 1 }).map((_, index) => (

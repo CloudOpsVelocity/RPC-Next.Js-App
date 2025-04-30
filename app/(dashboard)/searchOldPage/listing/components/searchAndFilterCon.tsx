@@ -35,9 +35,12 @@ import SearchHeader from "./SearchHeader";
 /* import { getCommonData } from "@/app/utils/api/property"; */
 
 const SearchAndFilterCon = ({ frontendFilters }: any) => {
-  useHydrateAtoms([
-    [searachFilterAtom, { ...initialState, ...frontendFilters }],
-  ]);
+  useHydrateAtoms(
+    [[searachFilterAtom, { ...initialState, ...frontendFilters }]],
+    {
+      dangerouslyForceHydrate: true,
+    }
+  );
   const [, { open, close }] = useDisclosure(false);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
 

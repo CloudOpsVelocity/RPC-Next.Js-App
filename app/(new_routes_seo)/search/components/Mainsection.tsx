@@ -4,15 +4,15 @@ import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 import React, { useState } from "react";
-import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
+import {
+  initialState,
+  projSearchStore,
+  searchPageMapToggle,
+} from "../store/projSearchStore";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
 import LeftSection from "../components/ProjectSearchLeftSection";
-// import ProjectCard from "@/app/test/newui/components/Card";
-// const LeftSection = dynamic(
-//   () => import("../components/ProjectSearchLeftSection")
-// );
 const RightSection = dynamic(
   () => import("../components/ProjectSearchRightSection"),
   { ssr: false }
@@ -26,17 +26,24 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
-  useHydrateAtoms([
+  // const filtersData = Object.assign(frontendFilters, initialState);
+  useHydrateAtoms(
     [
-      projSearchStore,
-      {
-        type: "update",
-        payload: {
-          ...frontendFilters,
+      [
+        projSearchStore,
+        {
+          type: "update",
+          payload: {
+            ...initialState,
+            ...frontendFilters,
+          },
         },
-      },
+      ],
     ],
-  ]);
+    {
+      dangerouslyForceHydrate: true,
+    }
+  );
 
   const pathname = usePathname();
   const [it, setIsTrue] = useState(
@@ -66,6 +73,7 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
             className={`relative w-full max-h-[70vh] sm:fixed right-0 flex justify-center items-center md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0 border-[2px] border-black-500 border-solid h-[calc(100vh-65vh)] md:h-[calc(100vh-255px)] max-w-full`}
           >
             <Image
+              priority={true}
               height={630}
               width={1200}
               src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}

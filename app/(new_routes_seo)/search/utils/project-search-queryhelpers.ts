@@ -20,10 +20,12 @@ export const getListingSearchData = async (
   }
   let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
   const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
-  return res.data;
+  return res.data.results;
 };
 
-const parseApiFilterQueryParams = (apiFilterQueryParams: string): string => {
+export const parseApiFilterQueryParams = (
+  apiFilterQueryParams: string
+): string => {
   // Directly process the input string in a single pass
 
   const transformedParams = apiFilterQueryParams

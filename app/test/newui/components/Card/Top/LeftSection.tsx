@@ -65,31 +65,33 @@ export default function LeftSection({
           </p>
         </>
       )}
-
-      <picture>
-        <source
-          media="(max-width: 460px)"
-          srcSet={src ? src.split(",")[1] : ""}
-        />
-        <source
-          media="(max-width: 800px)"
-          srcSet={src ? src.split(",")[2] : ""}
-        />
-        <Link href={pageUrl}>
-          <Image
-            src={
-              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : src
+      <Link prefetch={false} href={pageUrl}>
+        <picture>
+          <source
+            media="(min-width: 1200px)"
+            srcSet={
+              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
             }
-            width={304}
-            height={214}
+          />
+          <source
+            media="(max-width: 768px)"
+            srcSet={src ? (src.includes(",") ? src.split(",")[2] : "") : ""}
+          />
+          <source
+            media="(max-width: 460px)"
+            srcSet={src ? (src.includes(",") ? src.split(",")[1] : "") : ""}
+          />
+          <img
+            src={
+              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
+            }
             alt={imageAlt}
             title={imageAlt}
-            className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
-            quality={100}
-            unoptimized
+            className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
           />
-        </Link>
-      </picture>
+        </picture>
+      </Link>
+
       {/* <div>
         
       </div> */}

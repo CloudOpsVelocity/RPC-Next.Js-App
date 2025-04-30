@@ -21,7 +21,7 @@ export const generateListingSchema = ({
     listing.propName
   }, for ${listing.cg === "S" ? " Sale" : " Rent"} in ${
     listing.ltName
-  }, Bangalore. Get a verified search without any charges on Getrightproperty. Property Search Application. Find your dream home today!`;
+  }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`;
 
   const availableFrom = convertToSchemaDate(listing?.availableFrom);
   const nearByLocationsSchema: Place[] = [];

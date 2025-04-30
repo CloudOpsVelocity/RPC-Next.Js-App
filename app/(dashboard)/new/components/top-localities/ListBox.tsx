@@ -1,5 +1,6 @@
 import React from "react";
 import Box from "./Box";
+import { CDN_BASE_URL } from "@/app/env";
 
 type Props = {};
 
@@ -19,38 +20,37 @@ const config = {
       name: "Marathahalli",
       id: 397,
       type: "L",
-      url: "/marathalli.jpg"
+      url: `${CDN_BASE_URL}/staticmedia-images-icons/homepage/marathalli.webp`,
     },
     {
-      name: "koramangala", 
+      name: "koramangala",
       id: 354,
       type: "L",
-      url: "/koramangala.webp"
+      url: `${CDN_BASE_URL}/staticmedia-images-icons/homepage/koramangala.webp`,
     },
     {
       name: "jp nagar",
       id: 298,
       type: "L",
-      url: "/jpnagar.jpg"
+      url: `${CDN_BASE_URL}/staticmedia-images-icons/homepage/jpnagar.webp`,
     },
     {
       name: "whitefield",
       id: 563,
       type: "L",
-      url: "/whitefiled.jpg"
+      url: `${CDN_BASE_URL}/staticmedia-images-icons/homepage/whitefield.webp`,
     },
     {
       name: "Rajajinagar",
       id: 458,
       type: "L",
-      url: "/mgroad.jpg"
+      url: `${CDN_BASE_URL}/staticmedia-images-icons/homepage/rajajinagar.webp`,
     },
     {
       name: "indira nagar",
       id: 261,
       type: "L",
-      url: "/Indiranagar.jpg"
+      url: `${CDN_BASE_URL}/staticmedia-images-icons/homepage/Indiranagar.webp`,
     },
-    
   ],
 };

@@ -56,20 +56,18 @@ export default function PropertyBanner({
         width={312}
         height={312}
         unoptimized
-        // priority 
+        // priority
       />
       <div className=" inline-flex justify-center items-center ">
         {Svg}
         <h2 className="capitalize ml-6 mb-[14px] sm:text-[24px] xl:text-[28px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
           <strong>
-            <span className="text-[#242424]">about{" "}</span>
-            <span className="text-[#148B16] not-italic">
-              {projectName}
-            </span>
+            <span className="text-[#242424]">about </span>
+            <span className="text-[#148B16] not-italic">{projectName}</span>
           </strong>
-          <p className=" text-[#4D6677] text-h2 sm:text-[16px] xl:text-[24px] break-words italic font-medium  mt-2">
+          <span className=" text-[#4D6677] text-h2 sm:text-[16px] xl:text-[24px] break-words italic font-medium  mt-2 block">
             About project get summarized perspective for the incredible listing
-          </p>
+          </span>
         </h2>
       </div>
       <div>
@@ -78,7 +76,7 @@ export default function PropertyBanner({
             {((reraStatus as unknown) === "Recieved" ||
               (reraStatus as unknown) === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px] z-[1]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100}  />
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
             )}
             <div className="w-[350px] h-[185px] relative">
@@ -88,7 +86,7 @@ export default function PropertyBanner({
                 className="flex items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] w-full h-full object-fill "
                 unoptimized
                 height={630}
-                width={1200}                                             
+                width={1200}
               />
             </div>
           </div>
@@ -157,7 +155,7 @@ function PropertyBannerForMobile({
               className="w-full h-auto xl:mb-4 md:w-auto md:mb-0"
               width={350}
               height={185}
-              // priority 
+              // priority
             />
             <div className="md:mt-4">
               <h2 className="text-[#001F35] text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2">

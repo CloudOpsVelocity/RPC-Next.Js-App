@@ -1,7 +1,8 @@
 "use client";
-import { Image } from "@mantine/core";
+
 import React from "react";
 import NextImage from "next/image";
+import Image from "next/image";
 // import { useSearchParams } from "next/navigation";
 type Props = { searchParams: { path: string; type: "M" | "F" } };
 export default function Page({ searchParams: { path, type } }: Props) {
@@ -51,14 +52,10 @@ export default function Page({ searchParams: { path, type } }: Props) {
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:items-start mt-6 m-4 h-[60vh] md:mt-[6%]">
       <Image
-        radius="md"
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}${path}`}
         height={650}
         width={700}
-        w="auto"
-        fit="contain"
         alt="post"
-        component={NextImage}
         className="h-full"
       />
       <button

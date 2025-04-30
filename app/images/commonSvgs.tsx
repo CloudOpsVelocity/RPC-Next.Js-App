@@ -4924,9 +4924,10 @@ export const WhatsAppButton = ({ name, type }: Props) => {
             y2="16"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#00991B" />
-            <stop offset="1" stopColor="#00B60E" />
+            <stop offset="0%" stopColor="#00991B" />
+            <stop offset="100%" stopColor="#00B60E" />
           </linearGradient>
+
           <linearGradient
             id="paint1_linear_138_18368"
             x1="3634.12"
@@ -4935,8 +4936,8 @@ export const WhatsAppButton = ({ name, type }: Props) => {
             y2="16"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#F9F9F9" />
-            <stop offset="1" stopColor="white" />
+            <stop offset="0%" stopColor="#F9F9F9" />
+            <stop offset="100%" stopColor="white" />
           </linearGradient>
         </defs>
       </svg>
@@ -12433,10 +12434,9 @@ export const CarouselScrollButton = ({
       height="50px"
       width="50px"
       version="1.1"
-      id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
-      enable-background="new 0 0 50 50"
+      enableBackground="new 0 0 50 50"
     >
       <path
         fill="#231F20"
@@ -13163,7 +13163,7 @@ export const Status = ({ className }: { className?: string }) => {
         />
       </g>
       <defs>
-        <clipPath id="clip0_2012_61131">
+        <clipPath>
           <rect width="32" height="32" fill="white" />
         </clipPath>
       </defs>
@@ -13718,7 +13718,7 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
           y2="43"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#C0E6FF" />
+          <stop offset="0" stopColor="#C0E6FF" />
           <stop offset="0.745" stopColor="#CAE9FF" stopOpacity="0" />
         </linearGradient>
       </defs>
@@ -13745,7 +13745,7 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
           y2="42.5"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FFF8D5" />
+          <stop offset="0" stopColor="#FFF8D5" />
           <stop offset="0.885" stopColor="#FFD600" stopOpacity="0" />
         </linearGradient>
       </defs>
@@ -17786,7 +17786,7 @@ export const LikeIcon = ({ className }: { className?: string }) => {
       width="800px"
       height="800px"
       viewBox="0 0 52 52"
-      enable-background="new 0 0 52 52"
+      enableBackground="new 0 0 52 52"
     >
       <g>
         <path

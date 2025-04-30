@@ -80,10 +80,7 @@ const BreadCrumbs = dynamicImport(
   () => import("@/app/components/project/breadcrum/BreadCrum")
 );
 const FloorPlans = dynamicImport(
-  () => import("@/app/components/project/newFloorPlan/floor-plan"),
-  {
-    ssr: false,
-  }
+  () => import("@/app/components/project/newFloorPlan/floor-plan")
 );
 const ProjectSchema = dynamicImport(
   () => import("@/app/seo/ProjectDetailSchema")
@@ -93,12 +90,8 @@ const FAQJsonLdScript = dynamicImport(() => import("@/app/seo/Faqjson"));
 const ProjectGallery = dynamicImport(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
-const SharePopup = dynamicImport(
-  () => import("@/app/(dashboard)/searchOldPage/components/SharePopup"),
-  {
-    ssr: false,
-  }
-);
+
+
 const ProjectBrouchersSection = dynamicImport(
   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
   {
@@ -110,22 +103,24 @@ import {
   getAuthorityNames,
   getProjectDetails,
 } from "@/app/utils/api/project";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getPagesSlugs } from "@/app/seo/api";
 import { Metadata, ResolvingMetadata } from "next";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { isValidSlugId } from "@/common/utils/slugUtils";
-import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import FirstBlock from "@/app/components/project/firstBlock";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import Overview from "@/app/components/project/overview";
+
 type Props = {
-  params: { city: string; lt: string; slug: string };
+  params: Promise<{ city: string; lt: string; slug: string }>;
 };
 
-export default async function page({ params }: Props) {
+export default async function page(props: Props) {
+  const params = await props.params;
   const { city, lt, slug: name } = params;
+
   const slug = name.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();
@@ -149,13 +144,7 @@ export default async function page({ params }: Props) {
     projectSlug !== projectNameSlug ||
     city !== projResponse.basicData.cityName.toLowerCase()
   ) {
-    const path = createProjectLinkUrl({
-      city: projResponse.basicData.cityName,
-      slug: projResponse.basicData.projectName,
-      locality: projResponse.basicData.localityName,
-      projIdEnc: projResponse.basicData.projIdEnc,
-    });
-    return permanentRedirect(path);
+    return notFound();
   }
   if (projResponse.basicData.projAuthorityId) {
     const authorityNames = await getAuthorityNames(
@@ -366,9 +355,12 @@ export async function generateStaticParams() {
     const data = projectRes[i];
     if ((data.match(/\//g) || []).length === 5) {
       const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-      slugs.push({ city, lt, slug });
+      if (slug) {
+        slugs.push({ city, lt, slug });
+      }
     }
   }
+
   return slugs;
 
   // Extract project names from the keys
@@ -381,14 +373,15 @@ export async function generateStaticParams() {
 }
 
 type SeoProps = {
-  params: { city: string; lt: string; slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ city: string; lt: string; slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata(
-  { params }: SeoProps,
+  props: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const params = await props.params;
   let slug = params.slug.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
     notFound();

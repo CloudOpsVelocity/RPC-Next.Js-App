@@ -4,37 +4,45 @@ import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSecti
 import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
 import { useHydrateAtoms } from "jotai/utils";
-import { projSearchStore } from "../../store/projSearchStore";
+import { initialState, projSearchStore } from "../../../store/newListingStore";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
+
+// import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
 // const ListingSearchRightSection = dynamic(
 //   () => import("./listingSearchTabs/listingSearchRightSection")
 // );
 type Props = {
   serverData: any;
   frontendFilters: any;
+  preAppliedFilters: any;
 };
 
 export default function ListingMainSection({
   frontendFilters,
   serverData,
+  preAppliedFilters = null,
 }: Props) {
-  useHydrateAtoms([
-    [
-      projSearchStore,
-      {
-        type: "update",
-        payload: {
-          ...frontendFilters,
-        },
-      },
-    ],
-  ]);
-  const pathname = usePathname();
+  // useHydrateAtoms(
+  //   [
+  //     [
+  //       projSearchStore,
+  //       {
+  //         type: "update",
+  //         payload: {
+  //           // ...initialState,
+  //           ...frontendFilters,
+  //         },
+  //       },
+  //     ],
+  //   ],
+  //   {
+  //     dangerouslyForceHydrate: true,
+  //   }
+  // );
+
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isTrue, setIsTrue] = useState(
-    pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null
+    apiFilterQueryParams !== preAppliedFilters
   );
 
   return (
@@ -45,13 +53,9 @@ export default function ListingMainSection({
         isTrue={isTrue}
         apiFilterQueryParams={apiFilterQueryParams}
         setIsTrue={setIsTrue}
+        preAppliedFilters={preAppliedFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
-      {/* <ListingSearchRightSection
-        serverData={serverData}
-        isTrue={isTrue}
-        key="projListingSearchRightSection2"
-      /> */}
 
       <ListingSearchMapSection serverData={serverData} />
     </>

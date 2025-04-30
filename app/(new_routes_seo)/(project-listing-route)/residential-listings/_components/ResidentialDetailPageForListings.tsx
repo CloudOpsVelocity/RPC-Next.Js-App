@@ -65,8 +65,8 @@ export default function ResidentialPageForListings({
         aria-label="residential Breadcrumbs"
         className="w-full  px-[8px] sm:px-[10px] lg:px-[14px] py-[6px] md:py-[10px] mt-[70px] xl:py-4 bg-gray-100 rounded-md          shadow-sm max-w-[100%] overflow-x-auto "
       >
-        <ol className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
-          <li>
+        <div className="flex items-center space-x-1 md:space-x-3  text-sm text-gray-600 pr-[10px] ">
+          <div>
             <Link
               rel="noopener noreferrer"
               href="/"
@@ -75,15 +75,15 @@ export default function ResidentialPageForListings({
               <FaHome className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </Link>
-          </li>
+          </div>
           <FaChevronRight
             className="h-4 w-4 flex-shrink-0 text-gray-400"
             aria-hidden="true"
           />
-          <li className="ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize ">
+          <div className="ml-2 text-sm font-semibold text-gray-800 hover:text-blue-600 transition-all duration-200 text-nowrap first-letter:capitalize ">
             Residential Listings
-          </li>
-        </ol>
+          </div>
+        </div>
       </nav>
       <section className="px-4 md:px-12 py-8 max-w-screen-xl mx-auto">
         <h1 className="text-2xl md:text-4xl font-bold mb-6 text-gray-800">

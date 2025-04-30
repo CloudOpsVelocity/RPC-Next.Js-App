@@ -50,7 +50,7 @@ export default function Card({ item }: Props) {
             <div className="space-y-2">
               <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto mt-1 sm:mt-0">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/unit.png`}
+                  src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/unit.webp`}
                   alt=""
                   width={16}
                   height={16}

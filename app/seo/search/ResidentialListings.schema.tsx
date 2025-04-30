@@ -2,6 +2,8 @@ import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import WebPageSchama from "../common/WebPageSchama";
 import { ListingSearchSchema } from "./listing-search.schema";
 import { baseURL } from "@/app/utils/api/api";
+import OrganizationSchema from "../OraganisationSchema";
+import LocalBusinessJsonLdScript from "../Localjson";
 
 type Props = {
   properties: any;
@@ -52,6 +54,8 @@ export default function ResidentialListingsSchema({
   };
   return (
     <>
+      <OrganizationSchema />
+      <LocalBusinessJsonLdScript />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

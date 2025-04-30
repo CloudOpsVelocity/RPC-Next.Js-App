@@ -46,6 +46,6 @@ const imageUrlParser = (originalUrl: string, type?: string) => {
       type ? `&type=${type}` : ""
     }`;
   }
-  return modifiedUrl;
+  return modifiedUrl.replace(",", "");
 };
 export { getImageUrls, imageUrlParser };
