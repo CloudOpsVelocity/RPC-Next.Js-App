@@ -236,7 +236,7 @@ const ListingSearchTabs = ({
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">
-      {JSON.stringify(state)}
+      
       <div className="w-full pb-[6px] pt-[10px] sm:px-[10px]">
         <div className="flex flex-col gap-[10px] md:flex-row md:items-center md:justify-between">
           <div

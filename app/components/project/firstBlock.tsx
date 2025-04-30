@@ -85,6 +85,7 @@ const FirstBlock: React.FC<Props> = ({
                 title={projectDetails?.projectName}
                 src={images[0].split(",")[3]}
                 fill
+                priority={true}
                 className="bg-gray-100"
                 unoptimized
               />

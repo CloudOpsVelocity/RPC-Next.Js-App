@@ -78,8 +78,9 @@ function LeftSection({
       cacheTime: 300000,
       enabled: isTrue,
       onSuccess: (data: any) => {
-        const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
+        console.log((data))
+        // const newData = data.pages[data.pageParams.length - 1];
+        // setMainData((prev: any) => [...prev, ...newData]);
       },
     });
 
@@ -183,7 +184,8 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading || isFetching ? (
+      {JSON.stringify(dataToUse)}
+      {/* {isLoading || isFetching ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <ListingServerCardData
@@ -203,7 +205,7 @@ function LeftSection({
         >
           <LoadingSpinner />
         </div>
-      )}
+      )} */}
       <LoginPopup />
       <RequestCallBackModal />
 
