@@ -164,7 +164,6 @@ export default function TopRightSection({
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <title>Click to view Floorplan</title>
                           <rect
                             width="24"
                             height="24"
@@ -691,7 +690,6 @@ const config = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <title>Click to Shear</title>
       <circle
         cx="13"
         cy="13"
