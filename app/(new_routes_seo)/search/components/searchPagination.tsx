@@ -17,7 +17,7 @@ type Props = {
   };
   
 
-export default function PaginationForBuilder({  totalCount,
+export default function SearchPagination({  totalCount,
     onNextPage,
     onPreviousPage,
     currentPagefun,

@@ -14,7 +14,8 @@ export default function Box({ id, name, url }: Props) {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=localities=${name}%2B${id}-listedBy=All`
       )} */
         href={
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=${encodeURIComponent(`localities=${name}+${id}-listedBy=All`)}`
+          /* `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=${encodeURIComponent(`localities=${name}+${id}-listedBy=All`)}` */
+           `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=${encodeURIComponent(`localities=${name}+${id}`)}`
         }
     >
        
