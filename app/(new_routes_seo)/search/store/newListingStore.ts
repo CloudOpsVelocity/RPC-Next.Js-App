@@ -13,7 +13,7 @@ export const initialState: SearchFilter = {
   bathroom: [],
   parking: [],
   amenities: [],
-  listedBy: null,
+  listedBy: undefined,
   reraVerified: [],
   areaValue: [0, 5000],
   bugdetValue: [500000, 600000000],

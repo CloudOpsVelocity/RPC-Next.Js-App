@@ -9,6 +9,7 @@ import {
 } from "../../../store/newListingStore";
 import useProjSearchAppliedFilters from "./../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
+import { useIsFirstRender, useIsomorphicEffect } from "@mantine/hooks";
 
 const ListingSearchTabs = ({
   showProjectTab = false,
@@ -223,15 +224,16 @@ const ListingSearchTabs = ({
     ),
     [isDropdownOpen, currentSortLabel, sortOptions, handleSortBy]
   );
-   const tabsSelected = useMemo(() => {
-     if(typeof window === 'undefined'){
-      return frontendFilters.listedBy
-     }
-  else{
-  return state.listedBy === frontendFilters.listedBy ? state.listedBy : state.listedBy ?? initialState.listedBy ?? frontendFilters.listedBy;  
-}
-  }, [state.listedBy, frontendFilters.listedBy]);
-   console.log({listedBy:state.listedBy,windowType: typeof document})
+ 
+  const tabsSelected = useCallback(() => {
+    if (state.listedBy === undefined) {
+      return frontendFilters.listedBy;
+    }
+    return state.listedBy === frontendFilters.listedBy
+      ? frontendFilters.listedBy
+      : state.listedBy;
+  }, [state, frontendFilters]);
+
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">
 
@@ -248,7 +250,7 @@ const ListingSearchTabs = ({
                   key={tab.id}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
-                    tabsSelected === tab.id
+                    tabsSelected() === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }`}

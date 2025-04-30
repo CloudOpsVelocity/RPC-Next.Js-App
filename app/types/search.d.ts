@@ -6,7 +6,7 @@ export interface SearchFilter {
   bathroom: number[];
   parking: number[];
   amenities: number[];
-  listedBy: null | string;
+  listedBy?: null | string;
   reraVerified: number[];
   areaValue: [number, number];
   bugdetValue: [number, number];
