@@ -19,7 +19,7 @@ export interface SearchFilter {
   pnb: number | null;
   sortByfield: string | null;
   sortType: number | null;
-  cg: string | null;
+  cg?: string | null;
   projIdEnc: string | null;
   lat: number | null;
   lng: number | null;

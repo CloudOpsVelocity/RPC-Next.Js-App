@@ -1,5 +1,5 @@
 import { SearchFilter } from "@/app/types/search";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import ProjectCard from "@/app/test/newui/components/Card";
 
 type Props = {
@@ -17,15 +17,23 @@ export default function ListingServerCardData({
   state,
   frontendFilters,
 }: Props) {
-  const listedBy = useMemo(() => {
-    return typeof window === "undefined"
-      ? frontendFilters?.listedBy ?? "B"
-      : state.listedBy ?? "B";
-  }, [frontendFilters?.listedBy, state.listedBy]);
-
   const cg = useMemo(() => {
-    return typeof window === "undefined" ? frontendFilters?.cg : state.cg;
-  }, [frontendFilters?.cg, state.cg]);
+    if (state.cg === undefined) {
+      return frontendFilters.cg;
+    }
+    return state.cg === frontendFilters.cg
+      ? frontendFilters.cg
+      : state.cg;
+  }, [state, frontendFilters]);
+
+  const listedBy = useCallback(() => {
+    if (state.listedBy === undefined) {
+      return frontendFilters.listedBy;
+    }
+    return state.listedBy === frontendFilters.listedBy
+      ? frontendFilters.listedBy
+      : state.listedBy;
+  }, [state, frontendFilters]);
 
   return data.map((eachOne: any, index: number) => (
     <ProjectCard
@@ -33,7 +41,7 @@ export default function ListingServerCardData({
       refetch={refetch}
       data={{
         ...eachOne,
-        type: listedBy,
+        type: listedBy(),
         cg: cg,
       }}
       index={index}

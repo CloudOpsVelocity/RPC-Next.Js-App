@@ -26,7 +26,7 @@ export const initialState: SearchFilter = {
   pnb: null,
   sortByfield: null,
   sortType: null,
-  cg: null,
+  cg: undefined,
   projIdEnc: null,
   lat: null,
   lng: null,

@@ -8,7 +8,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   projSearchStore,
   searchPageMapToggle,
-} from "../../../../store/projSearchStore";
+} from "../../../../store/newListingStore";
 import { usePathname, useSearchParams } from "next/navigation";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
@@ -78,9 +78,8 @@ function LeftSection({
       cacheTime: 300000,
       enabled: isTrue,
       onSuccess: (data: any) => {
-        console.log((data))
-        // const newData = data.pages[data.pageParams.length - 1];
-        // setMainData((prev: any) => [...prev, ...newData]);
+        const newData = data.pages[data.pageParams.length - 1];
+        setMainData((prev: any) => [...prev, ...newData]);
       },
     });
 
@@ -184,8 +183,7 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {JSON.stringify(dataToUse)}
-      {/* {isLoading || isFetching ? (
+      {isLoading || isFetching ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <ListingServerCardData
@@ -205,7 +203,7 @@ function LeftSection({
         >
           <LoadingSpinner />
         </div>
-      )} */}
+      )}
       <LoginPopup />
       <RequestCallBackModal />
 

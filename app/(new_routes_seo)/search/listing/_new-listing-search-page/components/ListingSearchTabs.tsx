@@ -9,7 +9,7 @@ import {
 } from "../../../store/newListingStore";
 import useProjSearchAppliedFilters from "./../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
-import { useIsFirstRender, useIsomorphicEffect } from "@mantine/hooks";
+
 
 const ListingSearchTabs = ({
   showProjectTab = false,
