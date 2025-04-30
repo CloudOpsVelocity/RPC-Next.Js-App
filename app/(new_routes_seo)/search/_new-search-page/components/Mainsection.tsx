@@ -51,6 +51,24 @@ export default function Mainsection({
 
   return (
     <>
+     {!isMobile  && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://media.getrightproperty.com"
+              crossOrigin="anonymous"
+            />
+
+            {/* Preload image with srcSet and sizes */}
+         
+              <link
+                rel="preload"
+                as="image"
+                href={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+              />
+           
+          </>
+        )}
       <LeftSection
         serverData={serverData}
         frontendFilters={frontendFilters}

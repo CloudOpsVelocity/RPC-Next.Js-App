@@ -187,12 +187,41 @@ function LeftSection({
       {isLoading ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
+        <>
+        {/* Image use below */}
+        {isMobile && dataToUse[0].coverImage && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://media.getrightproperty.com"
+              crossOrigin="anonymous"
+            />
+
+            {/* Preload image with srcSet and sizes */}
+            {dataToUse?.[0]?.coverImage?.includes(",") && (
+              <link
+                rel="preload"
+                as="image"
+                href={
+                  dataToUse[0].coverImage.includes("+")
+                    ? dataToUse[0].coverImage
+                        .replace(/\+/g, "%2B")
+                        .split(",")[1]
+                    : dataToUse[0].coverImage.split(",")[1]
+                }
+              />
+            )}
+          </>
+        )}
+        {/* Image Use above*/}
+        
         <ListingServerCardData
           data={dataToUse}
           refetch={refetch}
           mutate={mutate}
           state={state}
         />
+        </>
       ) : (
         <EmptyState />
       )}
