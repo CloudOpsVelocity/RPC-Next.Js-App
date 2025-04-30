@@ -227,11 +227,8 @@ const ListingSearchTabs = ({
      if(typeof window === 'undefined'){
       return frontendFilters.listedBy
      }
-else{
-  // need to compare frontendFiltres with state when state initialized means typeof window !== "undefined"
-  return state.listedBy === frontendFilters.listedBy ? state.listedBy : state.listedBy ?? initialState.listedBy ?? frontendFilters.listedBy;
-    
-    
+  else{
+  return state.listedBy === frontendFilters.listedBy ? state.listedBy : state.listedBy ?? initialState.listedBy ?? frontendFilters.listedBy;  
 }
   }, [state.listedBy, frontendFilters.listedBy]);
    console.log({listedBy:state.listedBy,windowType: typeof document})

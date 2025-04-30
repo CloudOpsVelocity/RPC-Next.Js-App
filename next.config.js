@@ -12,6 +12,8 @@ const withMDX = createMDX({
 });
 
 const nextConfig = {
+  swcMinify: true, 
+  compress: true,  
   eslint: {
     ignoreDuringBuilds: true,
   },
