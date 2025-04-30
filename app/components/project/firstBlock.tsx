@@ -10,6 +10,7 @@ import { useSetAtom } from "jotai";
 import FirstImagesBlock from "@/common/components/FirstImagesBlock";
 import { galleryStateAtom } from "@/app/store/project/gallery";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 type Props = {
   projectDetails: any | null;
@@ -84,7 +85,29 @@ const FirstBlock: React.FC<Props> = ({
             </p>
           )}
 
-          <div className="relative w-full aspect-auto mx-auto sm:!rounded-[10px] h-full flex justify-center items-center ">
+          <div className="relative w-[60%] aspect-auto mx-auto sm:!rounded-[10px]  h-[400px]  max-h-full flex justify-center items-center ">
+          <picture>
+                    <source
+                      media="(max-width: 460px)"
+                      srcSet={images[0].split(",")[1]} 
+                    />
+                    <source
+                      media="(max-width: 768px)"
+                      srcSet={images[0].split(",")[2]}
+                    />
+                    <source
+                      media="(min-width: 1200px)"
+                      srcSet={images[0].split(",")[3]}
+                    />
+                    <Image
+                      alt={projectDetails?.projectName}
+                      title={projectDetails?.projectName}
+                      src={images[0].split(",")[3]}
+                      fill
+                      className={`bg-gray-${  1} `}
+                      unoptimized
+                    />
+                  </picture>
             {/* <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -135,7 +158,7 @@ const FirstBlock: React.FC<Props> = ({
               projName={projectDetails?.projectName}
             /> */}
 
-            <FirstImagesBlock
+            {/* <FirstImagesBlock
               onSelect={onSelect}
               data={{
                 type: "proj",
@@ -144,7 +167,7 @@ const FirstBlock: React.FC<Props> = ({
                 projectStatus: projectDetails?.projectStatus,
                 projName: projectDetails?.projectName,
               }}
-            />
+            /> */}
           </div>
           {/* <div className="absolute bottom-0 sm:m-[1%] sm:mb-[4%] xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md sm:flex break-words sm:px-6 sm:py-2">
 
