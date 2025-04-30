@@ -121,13 +121,13 @@ export default function SearchSec({}: Props) {
             const toRedirect =
               f.propType === 36 || f.cg == "R"
                 ? `/search/listing?sf=listedBy=All-${URLReNew}`
-                : `/search?sf=listedBy=All-${URLReNew}`;
+                : `/search/listing?sf=${URLReNew}`;
             //alert(toRedirect)
             router.push(toRedirect);
           }
         } else {
           const whichPage =
-            f.propType === 36 || f.cg == "R" ? "/search/listing" : "/search";
+            f.propType === 36 || f.cg == "R" ? "/search/listing" : "/search/listing";
           router.push(`${whichPage}?sf=${toQueryParams(f)}`);
         }
       }

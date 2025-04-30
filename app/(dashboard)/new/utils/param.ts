@@ -145,9 +145,9 @@ function toQueryParams(params: QueryParams): string {
   }
 
   // Add listedBy=ALL if cg=R
-  if (params.cg === "R" || params.cg === "S") {
+/*   if (params.cg === "R" || params.cg === "S") {
     queryEntries.push("listedBy=All");
-  }
+  } */
 
   return queryEntries.join("-");
 }

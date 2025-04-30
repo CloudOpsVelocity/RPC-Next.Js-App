@@ -16,6 +16,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
+import SearchPagination from "./searchPagination";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -213,7 +214,7 @@ function LeftSection({
             state={state}
           />
          {/*  {hasNextPage && shouldFetchMore && (
-           <search totalCount={totalCount} />
+           <SearchPagination totalCount />
           )} */}
           {hasNextPage && shouldFetchMore && (
             <div
