@@ -3,6 +3,7 @@
 const createMDX = require("@next/mdx");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
+openAnalyzer:false
 });
 
 const withMDX = createMDX({
