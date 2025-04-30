@@ -13,6 +13,7 @@ import { toQueryParams } from "../../utils/param";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
+import { Routes } from "@/app/common/constatns/routes.constants";
 // import CompareShortListCount from "./CompareShortListCount";
 
 const HomeSearch = ({
@@ -31,7 +32,8 @@ const HomeSearch = ({
       setIsOpen(true);
       return;
     }
-    const whichPage = f.propType === 36 ? "/search/listing" : "/search";
+    const whichPage =
+      f.propType === 36 ? Routes.listingSearch : Routes.projectSearch;
     window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_self", "noreferrer");
   };
 

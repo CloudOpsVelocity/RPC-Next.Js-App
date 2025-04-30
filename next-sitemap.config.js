@@ -9,6 +9,7 @@ module.exports = {
     "/builders/*",
     "/test/*",
     "/residential/projects/*",
+    "/api/*"
   ],
   generateIndexSitemap: false,
   generateRobotsTxt: false,
@@ -47,10 +48,10 @@ module.exports = {
         loc: `https://www.getrightproperty.com/residential-listings`,
         lastmod: new Date().toISOString(),
       },
-      // {
-      //   loc: `${config.siteUrl}/dyanmic-sitemap/0.xml`,
-      //   lastmod: new Date().toISOString(),
-      // },
+      {
+        loc: `${config.siteUrl}/dyanmic-sitemaps.xml`,
+        lastmod: new Date().toISOString(),
+      },
       // {
       //   loc: `${config.siteUrl}/dyanmic-sitemap/1.xml`,
       //   lastmod: new Date().toISOString(),
