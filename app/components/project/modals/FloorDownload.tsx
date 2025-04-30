@@ -4,12 +4,12 @@
 import React from "react";
 import SharePopup from "../../atoms/SharePopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
-import { useAtomValue } from "jotai";
-import { selectedFloorAtom } from "@/app/store/floor";
+// import { useAtomValue } from "jotai";
+// import { selectedFloorAtom } from "@/app/store/floor";
 
 export default function FloorDownload() {
   const [opened, { close }] = useSubFloorPlanPopup();
-  const data = useAtomValue(selectedFloorAtom);
+  // const data = useAtomValue(selectedFloorAtom);
   const handleDownload = async () => {
     // var link = document.createElement("a");
     // link.href = "images.jpg";

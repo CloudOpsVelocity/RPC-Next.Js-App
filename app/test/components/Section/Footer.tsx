@@ -197,7 +197,7 @@ export default function EnhancedFooter() {
 
           <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(0, 2).map(({ title, links, hrefs, target }) => (
+              {sections.slice(0, 2).map(({ title, links, hrefs }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
@@ -220,7 +220,7 @@ export default function EnhancedFooter() {
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(2, 4).map(({ title, links, hrefs, target }) => (
+              {sections.slice(2, 4).map(({ title, links, hrefs }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
@@ -246,7 +246,7 @@ export default function EnhancedFooter() {
               ))}
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(4).map(({ title, links, hrefs, target }) => (
+              {sections.slice(4).map(({ title, links, hrefs }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}

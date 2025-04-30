@@ -9,7 +9,7 @@ import { useAtom, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
 // import { useState } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
   localities: parseAsString,

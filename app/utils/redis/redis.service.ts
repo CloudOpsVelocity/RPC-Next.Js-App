@@ -142,15 +142,15 @@ class RedisService {
       console.log(type);
       switch (key) {
         case SlugsType.BUILDER:
-          const res = await getPagesSlugs("builder-list");
+          var res = await getPagesSlugs("builder-list");
           this.saveSlug(type, key, res);
           return res;
-          break;
+          // break;
         case SlugsType.LISTING: {
-          const res = await getPagesSlugs("listing-search-seo");
-          this.saveSlug(type, key, res);
-          return res;
-          break;
+          var resp = await getPagesSlugs("listing-search-seo");
+          this.saveSlug(type, key, resp);
+          return resp;
+          // break;
         }
         case SlugsType.PROJECT: {
           const res = await getPagesSlugs("project-list");

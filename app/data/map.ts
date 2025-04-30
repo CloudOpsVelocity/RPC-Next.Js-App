@@ -1,4 +1,4 @@
-import L, { svg } from "leaflet";
+import L from "leaflet";
 export const areas = [
   {
     name: "commute",

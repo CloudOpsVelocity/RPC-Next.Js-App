@@ -27,7 +27,7 @@ export default function ReportOptions({
       </p>
 
       <div className="flex flex-row flex-wrap my-[1%] justify-start items-start gap-[1%] w-full ">
-        {issueData?.map((x: any, i: number) => {
+        {issueData?.map((x: any) => {
           return (
             <div
               className="flex flex-row  justify-start items-center m-2"

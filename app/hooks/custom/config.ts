@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum PathType {
   Project = "project",
   Property = "property",

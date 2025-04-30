@@ -4,7 +4,7 @@ import Button from "@/app/elements/button";
 import { CallIcon } from "@/app/images/commongsSvgs2";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isReraverified } from "@/app/utils/dyanamic/projects";
-import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+// import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,7 +43,6 @@ export default function LeftSection({
   isUsed,
   availableFrom,
   data,
-  projEncId,
   pageUrl,
   imageAlt,
 }: Props) {

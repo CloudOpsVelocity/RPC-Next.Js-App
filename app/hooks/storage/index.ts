@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useLocalStorage } from "@mantine/hooks";
 import { addShortList } from "@/app/utils/api/actions/shortlist";
 

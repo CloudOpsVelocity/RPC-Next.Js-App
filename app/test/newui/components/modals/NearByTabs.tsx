@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {
   useCallback,
@@ -10,8 +11,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { throttle } from "lodash";
 
 interface TabsProps {
-  data: any;
-  onTabClick: (category: string) => void;
+  onTabClick: (category?: string) => void ;
   selectedCategory: string;
   categories: string[];
 }
@@ -21,7 +21,6 @@ const formatCategoryName = (category: string) => {
 };
 
 const Tabs: React.FC<TabsProps> = ({
-  data,
   onTabClick,
   selectedCategory,
   categories,

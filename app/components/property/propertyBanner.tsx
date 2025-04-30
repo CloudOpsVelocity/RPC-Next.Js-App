@@ -137,7 +137,6 @@ function PropertyBannerForMobile({
   minPrice,
   maxPrice,
   about,
-  projIdEnc,
   url,
 }: any) {
   return (

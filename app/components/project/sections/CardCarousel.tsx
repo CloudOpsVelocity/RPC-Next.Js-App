@@ -13,7 +13,6 @@ import {
   parital_unit_atom,
   selectedPartialUnitAtom,
 } from "@/app/store/partialsUnits";
-import Loading from "../../atoms/Loader";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useMediaQuery } from "@mantine/hooks";
 

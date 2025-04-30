@@ -7,10 +7,10 @@ import React from "react";
 import { sortUnits } from "@/app/utils/unitparser";
 import { useSetAtom } from "jotai";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
-import {
-  // selectedSearchAtom,
-  mobileSearchPageMapModalReducerAtom,
-} from "@/app/store/search/map";
+// import {
+//   // selectedSearchAtom,
+//   mobileSearchPageMapModalReducerAtom,
+// } from "@/app/store/search/map";
 import {
   // BuilderLink,
   generateBuilderUrl,
@@ -44,25 +44,18 @@ export default function ProjData({
   phaseName,
   projIdEnc,
   propTypeId,
-  agentListing,
-  ownerListing,
-  projOrPropName,
-  lat,
-  lang,
   propIdEnc,
   otherCharges,
   phaseCount,
   phaseId,
   builderCity,
-  sqftPrice,
-  basePrice,
   postedBy,
   pageUrl,
   cg,
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
-  const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
+  // const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
 
   let urlBuilder = generateBuilderUrl({
     slug: postedByName,

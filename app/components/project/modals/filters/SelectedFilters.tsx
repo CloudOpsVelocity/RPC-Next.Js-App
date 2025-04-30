@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useRef } from "react";
 import Image from "next/image";
 import clsx from "clsx";

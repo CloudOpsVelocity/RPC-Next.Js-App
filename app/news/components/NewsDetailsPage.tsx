@@ -59,7 +59,7 @@ function NewsDetailsPage({}: Props) {
     (each: any) => each?.name === currentBlog
   )[0];
   if (!data) return;
-  const { name, title, desc, url, section, user, date, viewsCount } = data;
+  const {  title, desc, url } = data;
 
   return (
     <div className=" flex flex-col  w-[96%] md:w-[80%] xl:w-[50%] py-[30px] ">

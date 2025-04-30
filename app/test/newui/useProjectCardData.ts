@@ -21,7 +21,7 @@ export default function useProjectCardData({
   lang,
   propId,
 }: Props) {
-  const [{ id: projId, data: nearData, isLoader }, setNearby] =
+  const [{ data: nearData, isLoader }, setNearby] =
     useAtom(selectedNearByAtom);
   const queryConfig = getQueryConfig(
     conType,

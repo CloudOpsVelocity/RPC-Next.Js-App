@@ -43,7 +43,7 @@ export default function Navigation({
 }) {
   const isTab = useMediaQuery("(max-width: 1600px)");
   const { data } = useRatings("dc766148701f46debedb4f9cf3a18809");
-  const [projectReqData, setProjectReqData] = useAtom(projectReqDataAtom);
+  const [projectReqData] = useAtom(projectReqDataAtom);
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useAtom(stickyAtom);

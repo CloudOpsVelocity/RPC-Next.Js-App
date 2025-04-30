@@ -69,7 +69,7 @@ const Card = ({
   s,
   projName,
   block,
-  id,
+  // id,
   slug,
 }: {
   type: "sell" | "rent";

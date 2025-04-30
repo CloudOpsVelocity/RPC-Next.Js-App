@@ -34,7 +34,7 @@ export default function PropertyOverviewBanner({
   propIdEnc,
   postedById,
 }: Main) {
-  const [opened, { open, close, source }] = useReqCallPopup();
+  const [, { open }] = useReqCallPopup();
   const [collapsed, { open: toggle }] = usePricingPop();
   const filterOtherDetails =
     otherPrice &&
@@ -362,22 +362,23 @@ export default function PropertyOverviewBanner({
 //   );
 // };
 
-const OtherSideCard = ({ price }: { price: number }) => {
-  return (
-    <div
-      className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
-  background: var(--White-2, #fafafa) flex-col text-center ml-auto mt-4"
-    >
-      <p className="text-[#343A44] text-center text-[20px] not-italic font-medium leading-[normal]">
-        The sum of total of your other charges you included in the &rdquo;Other
-        Charges Applicable&rdquo; is
-      </p>
-      <div className="text-[#148B16] text-[32px] not-italic font-semibold leading-[normal]">
-        <span className="text-3xl font-bold mt-1">₹ {price}</span>
-      </div>
-    </div>
-  );
-};
+// const OtherSideCard = ({ price }: { price: number }) => {
+//   return (
+//     <div
+//       className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
+//   background: var(--White-2, #fafafa) flex-col text-center ml-auto mt-4"
+//     >
+//       <p className="text-[#343A44] text-center text-[20px] not-italic font-medium leading-[normal]">
+//         The sum of total of your other charges you included in the &rdquo;Other
+//         Charges Applicable&rdquo; is
+//       </p>
+//       <div className="text-[#148B16] text-[32px] not-italic font-semibold leading-[normal]">
+//         <span className="text-3xl font-bold mt-1">₹ {price}</span>
+//       </div>
+//     </div>
+//   );
+// };
+
 // type DisplayNameMap = {
 //   [key: string]: string;
 // };

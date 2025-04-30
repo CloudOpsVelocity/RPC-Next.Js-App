@@ -6,7 +6,6 @@ import useProjectCardData from "../../useProjectCardData";
 import LocationCard from "./overly_items/LocationList";
 import OtherChargesList from "./overly_items/OtherChargesListOverlay";
 import PropertyHighlights from "./overly_items/PropertyHightilights";
-import { useMediaQuery } from "@mantine/hooks";
 
 const Overlay: React.FC = () => {
   const [overlayState, dispatch] = useAtom(overlayAtom);

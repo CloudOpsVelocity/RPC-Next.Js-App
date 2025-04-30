@@ -16,17 +16,17 @@ import {
 
 interface ZoomableMasterplanModalProps {
   imageUrl: string;
-  altText: string;
+  // altText: string;
   title: string;
 }
 
 export default function FullScreenMasterPlanModal({
   imageUrl = "/placeholder.svg?height=1080&width=1920",
-  altText = "Masterplan",
+  // altText = "Masterplan",
   title = "Project Masterplan 2023",
 }: ZoomableMasterplanModalProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [opened, { open: LoginOpen, close }] = usePopShortList();
+  const [, { open: LoginOpen }] = usePopShortList();
   const { data: session } = useSession();
 
   const openModal = () => {

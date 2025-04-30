@@ -27,7 +27,7 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
       case "applicableprice":
         return (
           <ul className="w-full">
-            {data.map((key: any, i: number) => {
+            {data.map((key: any) => {
               return (
                 <ListItem
                   key={key}

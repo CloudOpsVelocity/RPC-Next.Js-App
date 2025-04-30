@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import React from "react";
 import Head from "next/head";
@@ -85,7 +86,7 @@ const FirstBlock: React.FC<Props> = ({
                 title={projectDetails?.projectName}
                 src={images[0].split(",")[3]}
                 fill
-                priority={true}
+                priority
                 className="bg-gray-100"
                 unoptimized
               />

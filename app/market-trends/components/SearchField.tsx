@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai';
 import React from 'react';
 import { trendsFilterData } from '../data.ts/marketBlogalData';
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 
 type Props = {}
 
@@ -14,7 +14,7 @@ function SearchField({}: Props) {
     setFilterData(prev => ({ ...prev, inputSearch: e.target.value }));
   };
 
-  const path = usePathname();
+  // const path = usePathname();
 
   return (
       <div className='flex justify-between border-t-[1px] border-solid shadow-md rounded-[4px] max-w-[600px] w-[90%] p-[4px] md:p-[6px] pl-[10px] gap-[6px] mb-[20px] mt-[0px] md:mb-[30px] md:mt-[20px] '>

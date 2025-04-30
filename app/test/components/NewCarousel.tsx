@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 import { useMediaQuery } from "@mantine/hooks";
 import Link from "next/link";

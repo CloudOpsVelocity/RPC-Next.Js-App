@@ -28,7 +28,7 @@ import {
 } from "@/app/validations/types/project";
 import { useQuery } from "react-query";
 import Link from "next/link";
-import SharePopup from "../atoms/SharePopup";
+// import SharePopup from "../atoms/SharePopup";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 export interface Props extends Main {
@@ -61,7 +61,7 @@ export default function Overview({
   projAuthorityNames,
   phases,
 }: Props) {
-  const { data, isLoading, status } = useQuery<any>({
+  const { data } = useQuery<any>({
     queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
     enabled: false,
   });

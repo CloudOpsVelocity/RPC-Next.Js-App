@@ -11,7 +11,6 @@ import Message from "./actions/Message";
 import ReportSectionProperty from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import Link from "next/link";
-import SharePopup from "../atoms/SharePopup";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 

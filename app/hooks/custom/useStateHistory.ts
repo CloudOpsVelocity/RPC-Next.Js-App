@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useCallback, useMemo, useState } from "react";
 
 export interface UseStateHistoryHandlers<T> {

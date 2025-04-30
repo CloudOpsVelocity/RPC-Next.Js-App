@@ -6,13 +6,11 @@ import ProjectCarousel from "../../project/ProjectCard";
 // import { slugify } from "../BreadCrumb/ListingBreadcrumb";
 
 export default function NearByCarouselProjProperty({
-  projName,
   lat,
   lng,
   projId,
   builderId,
   company,
-  nearBy,
 }: {
   projName: string;
   lat: string;

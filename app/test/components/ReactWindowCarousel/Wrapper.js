@@ -22,7 +22,7 @@ const Wrapper = (
   }, [initialSlide, activeSlide]);
 
   const moveWrapper = useCallback(
-    (newOffset, duration = 0.5) => {
+    (newOffset) => {
       ref.current.style.transform = `translateX(${newOffset}px)`;
     },
     [ref]

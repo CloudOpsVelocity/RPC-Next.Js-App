@@ -5,6 +5,7 @@ import { convertToSchemaDate } from "@/common/utils/dateUtils";
 export const generateAllSchemas = (
   property: any,
   properties: any[],
+  // eslint-disable-next-line no-unused-vars
   index: number
 ) => {
   const [launchDate, possassionDate] = [

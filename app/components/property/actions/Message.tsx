@@ -8,7 +8,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function Message({ cg, propTypeName }: any) {
-  const { data, mutate } = useDynamicProp({
+  const { data } = useDynamicProp({
     cg,
     propId: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });

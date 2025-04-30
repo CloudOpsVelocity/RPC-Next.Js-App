@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
-import logger from "@/app/utils/logger";
-import { headers } from "next/headers";
+// import logger from "@/app/utils/logger";
+// import { headers } from "next/headers";
 
 export async function findSeoParams(inputUrl: string) {
   console.time("dynamic");

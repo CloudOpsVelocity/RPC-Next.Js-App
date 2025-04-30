@@ -2,12 +2,11 @@
 "use client";
 import {
   // useDisclosure,
-  useMediaQuery,
 } from "@mantine/hooks";
 // import { Modal } from "@mantine/core";
 // import { comparingIcon, tagIcon } from "@/app/images/commonSvgs";
 import LoginPop from "@/app/components/molecules/popups/login";
-import S from "@/app/styles/Rating.module.css";
+// import S from "@/app/styles/Rating.module.css";
 
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Close from "../button/close";
@@ -15,8 +14,8 @@ import { allowBackButton } from "../../molecules/popups/req";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 function LoginPopup() {
   const [opened, { close, data }] = usePopShortList();
-  const isMobile = useMediaQuery(`(max-width: 601px)`);
-  const isTab = useMediaQuery(`(max-width: 1600px)`);
+  // const isMobile = useMediaQuery(`(max-width: 601px)`);
+  // const isTab = useMediaQuery(`(max-width: 1600px)`);
   return (
     // <Modal
     //   opened={opened}

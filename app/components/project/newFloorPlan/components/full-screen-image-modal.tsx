@@ -21,7 +21,7 @@ import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { FiShare2 } from "react-icons/fi";
 // import { imageUrlParser } from "@/app/utils/image";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 
 interface FullScreenImageModalProps {
   isOpen: boolean;
@@ -89,7 +89,7 @@ export function FullScreenImageModal({
 
   //this content ios and anirod
   const [platform, setPlatform] = useState("");
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  // const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();

@@ -10,10 +10,8 @@ export default function ProjData({
   maxPrice,
   projName,
   city,
-  state,
   locality,
   builderName,
-  shortListed,
   type,
   price,
   propName,
@@ -89,21 +87,21 @@ export default function ProjData({
     </div>
   );
 }
-function getTypeText(type: string) {
-  let text;
+// function getTypeText(type: string) {
+//   let text;
 
-  if (type === "proj") {
-    text = "Builder";
-  } else if (type === "I") {
-    text = "Owner";
-  } else if (type === "A") {
-    text = "Agent";
-  } else {
-    text = "Unknown";
-  }
+//   if (type === "proj") {
+//     text = "Builder";
+//   } else if (type === "I") {
+//     text = "Owner";
+//   } else if (type === "A") {
+//     text = "Agent";
+//   } else {
+//     text = "Unknown";
+//   }
 
-  return text;
-}
+//   return text;
+// }
 
 export const projectprops = {
   villa: 31,

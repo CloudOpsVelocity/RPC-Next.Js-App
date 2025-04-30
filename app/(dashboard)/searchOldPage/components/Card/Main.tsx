@@ -21,36 +21,38 @@ type Props = {
 } & Search &
   any;
 
-const MainBox = ({ data, refetch, index, mutate }: Props) => {
+const MainBox = ({ data, refetch, 
+  // index, mutate 
+}: Props) => {
   const {
     type,
-    projName,
-    minPrice,
-    maxPrice,
-    launchDate,
-    possassionDate,
-    agentListing,
-    ownerListing,
+    // projName,
+    // minPrice,
+    // maxPrice,
+    // launchDate,
+    // possassionDate,
+    // agentListing,
+    // ownerListing,
+    // postedDate,
+    // propTypes,
+    // lat = 22.176912,
+    // lang = 75.66009,
+    // availableFrom,
+    // ca,
+    // sba,
+    // propName,
+        // propTypeName,
+    // category,
+    // localityName,
+    // price,
+    // propStatus,
+    // pa,
+    // projstatus,
     coverUrl,
-    postedDate,
     projIdEnc,
-    propTypes,
-    lat = 22.176912,
-    lang = 75.66009,
-    availableFrom,
     coverImage,
-    ca,
-    sba,
-    propName,
     bhkName,
-    propTypeName,
-    category,
-    localityName,
-    price,
-    propStatus,
     propIdEnc,
-    pa,
-    projstatus,
     rerastatus,
     compareAdded,
     shortListed,
@@ -61,7 +63,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   });
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
-  const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
+  const { toggleShortlist, toggleCompare } =
     useShortlistAndCompare();
   const reqId = type === "proj" ? projIdEnc : propIdEnc;
 

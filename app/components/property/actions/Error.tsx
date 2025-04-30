@@ -6,13 +6,12 @@ import {
   CompareListingMessage,
   // CompareMessage
 } from "../../project/success";
-import { Modal } from "@mantine/core";
 import Close from "../../project/button/close";
-import S from "@/app/styles/Qna.module.css";
+// import S from "@/app/styles/Qna.module.css";
 import { useErrorListing } from "@/app/hooks/property/useError";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 const CompareError = () => {
-  const [opened, { close, open: openSuccesPopup }] = useErrorListing();
+  const [opened, { close }] = useErrorListing();
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   useEffect(() => {
     const timer = setTimeout(() => {

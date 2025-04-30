@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+
 import "./globals.css";
 
 // import { GoogleTagManager } from "@next/third-parties/google";
@@ -127,7 +128,6 @@ export default function RootLayout(params: { children: React.ReactNode }) {
     </html>
   );
 }
-import type { Viewport } from "next";
 import Script from "next/script";
 
 export const viewport: Viewport = {

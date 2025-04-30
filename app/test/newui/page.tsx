@@ -44,6 +44,7 @@ export default function Home() {
           src={src}
           {...imgProps}
           style={{ width: "100%", height: "auto" }}
+          alt={common.alt}
         />
       </picture>
     </div>

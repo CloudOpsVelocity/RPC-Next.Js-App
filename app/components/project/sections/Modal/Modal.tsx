@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-boolean-value */
 import React, { useState, useEffect } from "react";
 import { useAtomValue } from "jotai";
@@ -115,8 +116,6 @@ export default function PartialUnitModal({ data }: any) {
 
   const {
     data: builderData,
-    isLoading,
-    status,
   } = useQuery<any>({
     queryKey: [`builder/${data.builderId}&isBuilderPage=Nproj`],
     enabled: false,
@@ -419,7 +418,7 @@ export default function PartialUnitModal({ data }: any) {
               console.log(encodeURIComponent(imageUrl));
               return (
                 <div
-                  key={`floorplan-${index}`}
+                  key={`floorplan-${index.toString()}`}
                   onClick={() => setActive(index)}
                   className={`relative min-w-[80px] h-[60px] rounded-lg border-2 transition-colors ${
                     active === index ? "border-[#0073C6]" : "border-transparent"

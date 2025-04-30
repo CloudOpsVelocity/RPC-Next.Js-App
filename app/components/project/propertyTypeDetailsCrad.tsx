@@ -76,7 +76,7 @@ export default function PropertyTypeDetailsCrad({
   slug,
 }: Props) {
   // const [, { open }] = useFloorPlanPopup();
-  const [modalState, setModalState] = useAtom(modalStateAtom);
+  const [, setModalState] = useAtom(modalStateAtom);
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
@@ -84,7 +84,7 @@ export default function PropertyTypeDetailsCrad({
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
-  const { data: projectUnitsData, isLoading } = useQuery({
+  const { data: projectUnitsData } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
     ...RTK_CONFIG,

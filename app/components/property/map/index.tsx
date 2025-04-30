@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 "use client";
 import React, { useState, useCallback, useMemo, Fragment } from "react";
@@ -11,7 +12,6 @@ import {
   // Skeleton,
 } from "@mantine/core";
 
-import { clsx } from "clsx";
 import {
   Coordinates,
   // calculateDistance,
@@ -63,7 +63,7 @@ const LeafMap: React.FC<{
   type?: "proj" | "prop";
   projId?: string;
   mapData: any;
-}> = ({ lat, lang, projName, type, projId, mapData }) => {
+}> = ({ lat, lang, projName, type, mapData }) => {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps"), {
@@ -151,7 +151,7 @@ const LeafMap: React.FC<{
               >
                 {mapData[selected] && mapData[selected].length > 0 ? (
                   mapData[selected]
-                    .map((location: any, index: any) => ({
+                    .map((location: any) => ({
                       ...location,
                       distance: location.distance,
                     }))
@@ -160,7 +160,7 @@ const LeafMap: React.FC<{
                         Number(a.time?.split(" ")[0]) -
                         Number(b.time?.split(" ")[0])
                     )
-                    .map((location: any, index: any) => (
+                    .map((location: any) => (
                       <LocationList
                         type="public"
                         {...location}
@@ -204,7 +204,7 @@ const LeafMap: React.FC<{
             {selected.split("_").join(" ")} Nearby
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap gap-x-5">
-            {downData.map((item: any, index: number) => (
+            {downData.map((item: any) => (
               <MapCard
                 key={`Nearby_${item?.name}`}
                 {...item}
@@ -269,11 +269,10 @@ const MapCard = ({
   showLocationOnMap,
   lat,
   lang,
-  origin,
   distance,
   time,
 }: any) => {
-  const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
+  const [, setIsScrolling] = useAtom(isScrollingAtom);
   const handleClick = () => {
     showLocationOnMap({
       position: {

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
 import { useCallback, useEffect } from "react";
 

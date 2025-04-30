@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useRef, useMemo } from "react";
 import { Combobox, InputBase, useCombobox } from "@mantine/core";
 import { useVirtualizer } from "@tanstack/react-virtual";

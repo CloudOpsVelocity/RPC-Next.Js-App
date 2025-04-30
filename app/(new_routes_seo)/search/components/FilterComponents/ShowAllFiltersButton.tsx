@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import React, { useEffect, useState } from "react";
 import {
@@ -12,7 +13,6 @@ import {
   MdExpandLess,
 } from "react-icons/md";
 import { toFormattedString } from "./buget/budget";
-import { RangeSlider } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import LocalitySearch from "./city/searchInputSearch";

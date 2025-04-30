@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
@@ -84,7 +84,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
         </thead>
         <tbody className="bg-white">
           {data &&
-            sortUnits(Object.keys(data)).map((item: string, index: number) => {
+            sortUnits(Object.keys(data)).map((item: string) => {
               const units = data[item].unitDataDtoList;
               return (
                 <tr

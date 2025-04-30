@@ -9,6 +9,7 @@ import LocalBusinessJsonLdScript from "../Localjson";
 export const generateAllSchemas = (
   property: any,
   properties: any[],
+  // eslint-disable-next-line no-unused-vars
   index: number
 ) => {
   // const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;

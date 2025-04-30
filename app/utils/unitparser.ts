@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const SQUARE_FOOT_SUFFIX = " sq.ft";
 
 const bhkMap = new Map([

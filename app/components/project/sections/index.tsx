@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import React from "react";
-import dynamic from "next/dynamic";
 // const HeaderActions = dynamic(() => import("./HeaderActions"));
 import MainSection from "./Main";
 import { useAtomValue } from "jotai";

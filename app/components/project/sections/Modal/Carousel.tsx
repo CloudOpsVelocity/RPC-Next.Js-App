@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   DarkCarouseIcon,
   DarkNextCarouselButton,
@@ -5,7 +6,7 @@ import {
 import React from "react";
 import { Carousel } from "@mantine/carousel";
 import Style from "./Carouse.module.css";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import Image from "next/image";
 import {
@@ -20,7 +21,7 @@ export default function CarouselModal({
   active: number;
   setActive: (number: number) => void;
 }) {
-  const [isData, setIsData] = useAtom(selectedPartialUnitAtom);
+  const isData = useAtomValue(selectedPartialUnitAtom);
   const handleImageClick = (index: number) => {
     if (active === index) return;
     setActive(index);

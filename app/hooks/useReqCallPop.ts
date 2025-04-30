@@ -32,7 +32,6 @@ export const useReqCallPopup = () => {
     title,
     postedId,
     projUnitIdEnc,
-    cg,
   }: {
     reqId: string;
     source: "projBanner" | "projCard" | "propCard" | "propBanner";

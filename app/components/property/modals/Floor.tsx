@@ -4,7 +4,6 @@ import { Main } from "@/app/validations/property";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { useAtomValue } from "jotai";
 import { listingProps, projectprops } from "@/app/data/projectDetails";
-import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import useDownload from "@/app/hooks/property/useDownload";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
@@ -469,7 +468,7 @@ const DetailCard = ({ icon, title, items }: DetailCardProps) => {
         <h3 className="text-[#303A42] font-semibold">{title}</h3>
       </div>
       <div className="space-y-2">
-        {items.map((item, index) => {
+        {items.map((item) => {
           return (
             <div key={item.label} className="flex justify-between text-sm">
               <span className="text-[#4D6677]">{item.label}</span>
