@@ -143,7 +143,7 @@ function LeftSection({
   });
 
   const LoadingBlock = () => (
-    <div className="flex items-center justify-center h-full w-full ">
+    <div className="flex items-center justify-center h-screen w-full ">
       <div className="text-center flex items-center justify-center flex-col ">
         <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
         <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">
