@@ -22,7 +22,7 @@ type Props = {
 } & Search &
   any;
 
-const MainBox = ({ data, refetch }: Props) => {
+const MainBox = ({ data, refetch, index }: Props) => {
   const {
     type,
     projName,
@@ -52,7 +52,7 @@ const MainBox = ({ data, refetch }: Props) => {
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, toggleCompare } = useShortlistAndCompare();
   const reqId = type === "proj" ? projIdEnc : propIdEnc;
-
+/* console.log(index) */
   const onAddingShortList = () => {
     if (session) {
       setState({ ...state, shortListed: !state.shortListed });

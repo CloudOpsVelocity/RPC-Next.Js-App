@@ -51,7 +51,7 @@ export default function LeftSection({
   const isMobile = useMediaQuery("(max-width: 1600px)");
 
   return (
-    <div className="relative xl:min-w-[257px] max-h-[250px]">
+    <div className="relative xl:min-w-[257px] min-h-[250px] max-h-[250px]">
       {type !== "proj" && (
         <>
           {isUsed === "N" && (
@@ -81,15 +81,47 @@ export default function LeftSection({
             media="(max-width: 460px)"
             srcSet={src ? (src.includes(",") ? src.split(",")[1] : "") : ""}
           />
-          <img
-            src={
+         <Image
+                   src={
+                    src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
+                  }
+                  fill
+                    alt={imageAlt}
+                    title={imageAlt}
+                    className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
+                    priority={true}
+                    unoptimized={true}
+                    quality={80}
+                  />
+                  
+        </picture>
+   {/*      <picture>
+        <source
+            media="(min-width: 1200px)"
+            srcSet={
               src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
             }
-            alt={imageAlt}
-            title={imageAlt}
-            className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
           />
-        </picture>
+          <source
+            media="(max-width: 768px)"
+            srcSet={src ? (src.includes(",") ? src.split(",")[2] : "") : ""}
+          />
+          <source
+            media="(max-width: 460px)"
+            srcSet={src ? (src.includes(",") ? src.split(",")[1] : "") : ""}
+          />
+                  <Image
+                   src={
+                    src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
+                  }
+                    alt={imageAlt}
+                    title={imageAlt}
+                    className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
+                    priority={true}
+                    unoptimized={true}
+                    quality={80}
+                  />
+                </picture> */}
       </Link>
 
       {/* <div>

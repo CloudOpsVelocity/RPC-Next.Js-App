@@ -182,7 +182,7 @@ function LeftSection({
       ) : dataToUse?.length > 0 ? (
         <>
           {/* Image use below */}
-          {dataToUse[0].coverUrl && (
+          {isMobile && dataToUse[0].coverUrl && (
             <>
               <link
                 rel="preconnect"
