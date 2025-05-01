@@ -1,8 +1,8 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-vars */
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useMediaQuery } from "@mantine/hooks";
 

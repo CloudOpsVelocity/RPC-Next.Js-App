@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { filterParser } from "@/app/utils/search";
 import { convertToOriginalState } from "@/app/utils/search/transform";
 import { atom } from "jotai";

@@ -77,7 +77,7 @@ function formatArray(value: any[]): string {
 //   return queryEntries.join("-");
 // }
 
-let RENT_BUGDET_VALUE = [0, 100000];
+// let RENT_BUGDET_VALUE = [0, 100000];
 
 function toQueryParams(params: QueryParams): string {
   const queryEntries: string[] = [];

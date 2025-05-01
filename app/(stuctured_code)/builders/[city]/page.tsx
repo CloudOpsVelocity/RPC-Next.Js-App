@@ -39,7 +39,8 @@ export async function generateStaticParams() {
   // Prepare the slugs for static generation
   const builderRess = Object.keys(res);
   const slugs = builderRess.map((data) => {
-    const [staticPath, staticPath2, city, slug] = data.split("/");
+    // const [staticPath, staticPath2, city, slug] = data.split("/");
+    const [ city ] = data.split("/");
     return { city };
   });
   return slugs;

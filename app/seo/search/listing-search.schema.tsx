@@ -304,7 +304,7 @@ export const ListingSearchSchema = ({ properties }: any) => {
       />
       {realEstateAgentSchemas.map((schema, index) => (
         <script
-          key={index}
+          key={`${index.toString()}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schema),

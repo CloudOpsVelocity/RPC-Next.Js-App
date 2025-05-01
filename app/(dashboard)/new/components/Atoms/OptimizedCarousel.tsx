@@ -7,6 +7,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 type CarouselProps<T> = {
   items: T[];
+  // eslint-disable-next-line no-unused-vars
   renderItem: (item: T, index: number) => React.ReactNode;
   itemWidth: number;
   gap?: number;

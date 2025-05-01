@@ -10,13 +10,13 @@ import React, { useEffect, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
 
 type Props = {
-  userName: string;
+  userName?: string;
   close: () => void;
   callback: () => void;
   mobile?: number | null;
 };
 
-export default function OtpBox({ userName, close, callback, mobile }: Props) {
+export default function OtpBox({ close, callback, mobile }: Props) {
   const { verifyOtp } = useAuth({ type: "otp" });
   const [error, setError] = useState(false);
   const onSubmit = async (value: any) => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-boolean-value */
 "use client";
 import N from "@/app/styles/Numinput.module.css";
@@ -20,8 +21,8 @@ import clsx from "clsx";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
-import { json } from "stream/consumers";
-import { stringify } from "querystring";
+// import { json } from "stream/consumers";
+// import { stringify } from "querystring";
 // import useHistoryBackHandler from "./popupCloser";
 // import { title } from "process";
 
@@ -65,6 +66,7 @@ const RequestCallBackModal = () => {
     // else{
     //   allowBackButton();
     // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [opened]);
 
   return (

@@ -135,7 +135,7 @@ export default function SortBy({ typeProp, ActivitiesType }: Props) {
         >
           Newest First
         </Menu.Item>
-        {config.map((eachItem, index) => {
+        {config.map((eachItem) => {
           return (
             <Menu.Item
               classNames={{

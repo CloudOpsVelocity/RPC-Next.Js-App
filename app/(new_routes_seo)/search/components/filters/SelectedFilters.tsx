@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { useAtom } from "jotai";
-import React, { memo } from "react";
+import React from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
 import { SEARCH_FILTER_DATA, SelectedFiltersMap } from "@/app/data/search";

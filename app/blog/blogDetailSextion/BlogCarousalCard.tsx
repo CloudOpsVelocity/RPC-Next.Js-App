@@ -7,10 +7,10 @@ import Link from "next/link";
 
 type Props = {
   data: any;
-  proviousPage?: String;
+  // proviousPage?: String;
 };
 
-function BlogCard({ data, proviousPage }: Props) {
+function BlogCard({ data }: Props) {
   const path = usePathname();
   const title = data && data.heading ? data.heading : "";
   const pathName = title.toLowerCase().replaceAll(" ", "-");

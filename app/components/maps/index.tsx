@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -10,7 +11,7 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { LatLngTuple } from "leaflet";
+import L, { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
 import {
@@ -22,7 +23,6 @@ import {
 import { RecenterIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
-import L from "leaflet";
 
 const Map = ({
   data,
@@ -38,7 +38,6 @@ const Map = ({
   const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
   
   return (
-   
     <MapContainer
       zoom={13}
       center={position}

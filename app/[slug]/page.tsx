@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { getPagesSlugs } from "../seo/api";
 import { Metadata, ResolvingMetadata } from "next";

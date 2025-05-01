@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
-import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
-import { FaChevronRight } from "react-icons/fa";
 
 type Props = {
   heroSlides: any;
@@ -38,7 +37,7 @@ export default function Banner({ heroSlides, data }: Props) {
       <section className="relative h-[90vh] w-full">
         {data?.featured?.map((slide: any, index: number) => (
           <div
-            key={index}
+            key={`featured_data_${index.toString()}`}
             className={`absolute inset-0 transition-opacity duration-1000 ${
               index === activeSlide ? "opacity-100" : "opacity-0"
             }`}
@@ -67,7 +66,7 @@ export default function Banner({ heroSlides, data }: Props) {
         <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {data?.featured?.map((_: any, index: number) => (
             <button
-              key={index}
+              key={`featured_data_2_${index.toString()}`}
               className={`w-3 h-3 rounded-full transition-all ${
                 index === activeSlide ? "bg-primary w-6" : "bg-white/50"
               }`}

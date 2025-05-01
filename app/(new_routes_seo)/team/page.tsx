@@ -1,4 +1,5 @@
-import { FaLinkedin, FaTwitter, FaEnvelope, FaFacebookF, FaInstagram } from "react-icons/fa"
+/* eslint-disable react/no-unescaped-entities */
+// import { FaLinkedin, FaTwitter, FaEnvelope, FaFacebookF, FaInstagram } from "react-icons/fa"
 import { GiHouse } from "react-icons/gi"
 import { MdLocationOn } from "react-icons/md"
 import Link from "next/link";

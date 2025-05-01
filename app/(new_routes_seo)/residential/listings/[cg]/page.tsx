@@ -1,8 +1,5 @@
-import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
-import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
-  getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";

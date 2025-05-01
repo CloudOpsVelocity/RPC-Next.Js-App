@@ -1,10 +1,10 @@
 import logger from "@/app/utils/logger";
 import { getServerSideSitemap } from "next-sitemap";
-import path from "path";
-import fs from "fs";
+// import path from "path";
+// import fs from "fs";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
-export async function GET(request: Request) {
+export async function GET() {
   // const filePath = path.join(process.cwd(), "static", `projectSlugs.json`);
   logger.info(`Project Details Sitemap: Reading projectSlugs.json file`);
   // const data = fs.readFileSync(filePath, "utf-8");

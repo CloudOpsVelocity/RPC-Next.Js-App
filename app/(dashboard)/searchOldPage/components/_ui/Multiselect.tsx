@@ -13,6 +13,7 @@ import useNewsearch from "@/app/hooks/search/useNewSearch";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useMediaQuery } from "@mantine/hooks";
 
+// eslint-disable-next-line no-unused-vars
 export function MainSearchMultiSelect({ type }: { type: string }) {
   const isMobile = useMediaQuery("(max-width: 601px)");
 

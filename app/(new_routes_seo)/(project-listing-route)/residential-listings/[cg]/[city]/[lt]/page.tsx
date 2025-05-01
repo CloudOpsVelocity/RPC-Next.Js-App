@@ -16,7 +16,6 @@ import {
   BASE_PATH_PROJECT_LISTING,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { notFound } from "next/navigation";
-import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { Metadata, ResolvingMetadata } from "next";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
@@ -81,6 +80,7 @@ export async function generateStaticParams() {
 }
 export async function generateMetadata(
   { params }: { params: { cg: string; city: string; lt: string } },
+  // eslint-disable-next-line no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { cg, city, lt } = params;

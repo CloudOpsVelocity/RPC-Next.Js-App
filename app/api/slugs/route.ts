@@ -10,7 +10,7 @@ const typeMapping = {
   B: "builder",
 };
 
-export async function POST(request: Request, response: Response) {
+export async function POST(request: Request) {
   try {
     let { type, slug, id, action, slugs } = await request.json();
     logger.info(

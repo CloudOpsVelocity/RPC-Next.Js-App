@@ -5,7 +5,7 @@ import ClearAll from "../ClearAll";
 import useSearchFilters from "@/app/hooks/search";
 
 export default function BhkFilter({ close }: { close?: () => void }) {
-  const { filters, handleCheckboxClick, params } = useSearchFilters();
+  const { filters, handleCheckboxClick } = useSearchFilters();
   return (
     <div className="max-w-[860px] ">
       <ClearAll type="unitType" close={close} />
@@ -14,7 +14,7 @@ export default function BhkFilter({ close }: { close?: () => void }) {
           BHK Type
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-2 gap-x-10">
-          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => (
+          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem) => (
             <Checkbox
               key={eachItem.value}
               color="green"

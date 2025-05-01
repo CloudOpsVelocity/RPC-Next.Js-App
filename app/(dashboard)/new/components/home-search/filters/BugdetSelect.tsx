@@ -179,12 +179,12 @@ export function BasicBudgetSelect() {
       dispatch({ type: "SET_BUGDET_VALUE", payload: [minValue, "" as any] });
     }
   };
-  const handleMinBlur = () => {
-    if (maxValue > minValue) {
-      // setMinValue("" as any);
-      dispatch({ type: "SET_BUGDET_VALUE", payload: ["" as any, maxValue] });
-    }
-  };
+  // const handleMinBlur = () => {
+  //   if (maxValue > minValue) {
+  //     // setMinValue("" as any);
+  //     dispatch({ type: "SET_BUGDET_VALUE", payload: ["" as any, maxValue] });
+  //   }
+  // };
   const shouldShowBudget = !(
     (f.bugdetValue[0] === 500000 && f.bugdetValue[1] === 600000000) ||
     (f.bugdetValue[0] === 0 && f.bugdetValue[1] === 100000) ||

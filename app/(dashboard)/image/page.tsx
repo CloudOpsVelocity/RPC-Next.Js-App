@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import NextImage from "next/image";
 import Image from "next/image";
 // import { useSearchParams } from "next/navigation";
 type Props = { searchParams: { path: string; type: "M" | "F" } };

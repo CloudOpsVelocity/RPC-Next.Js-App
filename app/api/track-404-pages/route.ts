@@ -30,9 +30,9 @@ async function checkUrlBatch(urls: { url: string; path: string }[]) {
 }
 
 // Optimized function to remove unique ID from listing path
-function getBaseListingPath(path: string): { key: string; value: string } {
-  return { key: path.split("/").pop() || "", value: path };
-}
+// function getBaseListingPath(path: string): { key: string; value: string } {
+//   return { key: path.split("/").pop() || "", value: path };
+// }
 
 // Generator function to process paths in chunks
 async function* processPathsInChunks(paths: string[], batchSize: number) {

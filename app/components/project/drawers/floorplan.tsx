@@ -28,7 +28,7 @@ import {
 import { BACKEND_PROP_TYPES, projectprops } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
-import { useDrag } from "@use-gesture/react";
+// import { useDrag } from "@use-gesture/react";
 import DrawerBox from "../../property/pricingbreakup/DrawerBox";
 const iconStyles: string =
   " flex items-center justify-center w-[40px] h-[40px]  text-[#001F35]";
@@ -146,17 +146,17 @@ export default function FloorplanDrawer() {
     close();
     setData({});
   };
-  const bind = useDrag(
-    ({ movement: [mx], direction: [dx], memo = mx, cancel }) => {
-      // If the user is swiping left (negative direction)
-      if (dx === 1 && mx > 50) {
-        handleClose();
-        cancel();
-      }
-      return memo;
-    },
-    { axis: "x", pointer: { touch: true } }
-  );
+  // const bind = useDrag(
+  //   ({ movement: [mx], direction: [dx], memo = mx, cancel }) => {
+  //     // If the user is swiping left (negative direction)
+  //     if (dx === 1 && mx > 50) {
+  //       handleClose();
+  //       cancel();
+  //     }
+  //     return memo;
+  //   },
+  //   { axis: "x", pointer: { touch: true } }
+  // );
   return (
     // <Drawer
     //   opened={Object.keys(cg).length > 0 ? true : false}
@@ -298,6 +298,7 @@ interface PlotTableProps {
 }
 
 const PlotTable: React.FC<PlotTableProps> = ({
+  // eslint-disable-next-line no-unused-vars
   data,
   propertyType,
   cg,

@@ -43,7 +43,7 @@ function ListingSearchMapSection({ serverData }: Props) {
           </>
         )}
         <Image
-          priority={true}
+          priority
           height={630}
           width={1200}
           src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}

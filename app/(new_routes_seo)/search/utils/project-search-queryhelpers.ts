@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 
 export const getSearchData = async (page = 0, apiFilterQueryParams: string) => {

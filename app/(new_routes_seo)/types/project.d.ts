@@ -37,6 +37,7 @@ type PhaseOverview = {
     };
   };
   
+  // eslint-disable-next-line no-unused-vars
   type ProjectData = {
     phaseOverview: PhaseOverview[];
   };

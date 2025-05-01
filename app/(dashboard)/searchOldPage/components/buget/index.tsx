@@ -13,6 +13,7 @@ export function formatBudgetValue(value: number) {
     return `${croreValue}Cr`;
   }
 }
+// eslint-disable-next-line no-unused-vars
 export default function BugdetFilter({ close }: { close?: () => void }) {
   return (
     <div className="w-[330px] ">

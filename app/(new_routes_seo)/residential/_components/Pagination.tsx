@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useMediaQuery } from "@mantine/hooks";
 
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export default function Pagination({ totalCount }: Props) {
-  const router = useRouter();
+  // const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 601px)");
   // Get page from URL or default to 0
@@ -29,16 +30,16 @@ export default function Pagination({ totalCount }: Props) {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   // Handle page change and update URL using router.push()
-  const handlePageChange = (newPage: number) => {
-    if (newPage >= 0 && newPage < totalPages) {
-      setCurrentPage(newPage);
+  // const handlePageChange = (newPage: number) => {
+  //   if (newPage >= 0 && newPage < totalPages) {
+  //     setCurrentPage(newPage);
 
-      const updatedParams = new URLSearchParams(searchParams.toString());
-      updatedParams.set("page", newPage.toString());
+  //     const updatedParams = new URLSearchParams(searchParams.toString());
+  //     updatedParams.set("page", newPage.toString());
 
-      router.push(`?${updatedParams.toString()}`);
-    }
-  };
+  //     router.push(`?${updatedParams.toString()}`);
+  //   }
+  // };
 
   // Generate page numbers with ellipses when necessary
   const getPageNumbers = () => {
@@ -121,7 +122,7 @@ export default function Pagination({ totalCount }: Props) {
                 if (pageNum < 0) {
                   return (
                     <span
-                      key={`ellipsis-${index}`}
+                      key={`ellipsis-${index.toString()}`}
                       className="px-3 py-2 text-gray-500"
                     >
                       ...

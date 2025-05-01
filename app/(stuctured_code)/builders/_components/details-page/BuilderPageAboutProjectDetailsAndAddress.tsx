@@ -14,25 +14,25 @@ import Card from "./management-section/BuilderPageManagementCard";
 import BuilderProjectsCount from "../common/BuilderProjectsCount";
 import About from "@/app/components/project/about";
 
-type Props = {};
+// type Props = {};
 
 export default function BuilderPageAboutProjectDetailsAndAddress({
   mission,
-  companyName,
   builderAddress,
   officecontact,
-  newProject,
-  onGoingProject,
-  completedProject,
   email,
-  mobile,
   stateName,
   cityName,
   pinCode,
   userName,
-  localityName,
   citiesName,
-  builderProjects,
+  // localityName,
+  // mobile,
+  // companyName,
+  // newProject,
+  // onGoingProject,
+  // completedProject,
+  // builderProjects,
   id,
 }: Data) {
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
@@ -21,7 +22,7 @@ import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
 
 type Props = {
-  mutate?: ({ index, type }: { type: string; index: number }) => void;
+  mutate?: ({}: { type?: string; index?: number }) => void;
   serverData?: any;
   frontendFilters?: any;
   isTrue: boolean;
@@ -32,7 +33,7 @@ type Props = {
 function LeftSection({
   mutate,
   serverData,
-  frontendFilters,
+  // frontendFilters,
   isTrue: it,
   setIsTrue,
   preAppliedFilters,

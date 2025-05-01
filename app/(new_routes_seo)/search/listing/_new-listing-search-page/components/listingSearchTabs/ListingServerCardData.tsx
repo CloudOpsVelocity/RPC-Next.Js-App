@@ -37,7 +37,7 @@ export default function ListingServerCardData({
 
   return data.map((eachOne: any, index: number) => (
     <ProjectCard
-      key={eachOne.projIdEnc + eachOne.propType + index}
+      key={eachOne.projIdEnc + eachOne.propType + index.toString()}
       refetch={refetch}
       data={{
         ...eachOne,

@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import SearchProjBugdetFilter from "./buget";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { projSearchStore } from "../../store/projSearchStore";
 import { toFormattedString } from "./buget/budget";
 
@@ -17,7 +17,7 @@ export default function BudgetDropdown({
   onToggle,
 }: BudgetDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [state, dispath] = useAtom(projSearchStore);
+  const state = useAtomValue(projSearchStore);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (

@@ -10,10 +10,10 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
     ...routes,
   };
   const allParams = Object.keys(params);
-  const titleOfKeys = {
-    city: "",
-    lt: "",
-  };
+  // const titleOfKeys = {
+  //   city: "",
+  //   lt: "",
+  // };
   let currentPath = "";
   const breadcrumsschema = {
     "@context": "https://schema.org",
@@ -96,11 +96,9 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
                   <span>{newName}</span>
                 </Link>
               ) : (
-                <>
                   <span className="capitalize">
                     {newName.replace("undefined ", "")}
                   </span>
-                </>
               )}
               {index < Object.keys(params).length - 1 && " > "}
             </React.Fragment>

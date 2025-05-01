@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 // import Button from "@/app/elements/button";
 // import { GradientLocation, Phone, ReraIcon } from "@/app/images/commonSvgs";
 import { Search } from "@/app/validations/types/search";
 // import { formatDateDDMMYYYY } from "@/app/utils/date";
 // import Image from "next/image";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+// import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
@@ -20,39 +21,40 @@ type Props = {
 
 const ProjectDetailsCard = ({ data }: Props) => {
   const {
-    type,
-    projName,
-    minPrice,
-    maxPrice,
-    launchDate,
-    possassionDate,
-    agentListing,
-    ownerListing,
-    coverUrl,
-    postedDate,
     projIdEnc,
-    propTypes,
-    lat = 22.176912,
-    lang = 75.66009,
-    availableFrom,
-    coverImage,
-    ca,
-    sba,
-    propName,
-    bhkName,
-    propTypeName,
-    category,
-    localityName,
-    price,
-    propStatus,
+    type,
     propIdEnc,
-    pa,
-    projstatus,
-    rerastatus,
+
+    // projName,
+    // minPrice,
+    // maxPrice,
+    // launchDate,
+    // possassionDate,
+    // agentListing,
+    // ownerListing,
+    // coverUrl,
+    // postedDate,
+    // propTypes,
+    // lat = 22.176912,
+    // lang = 75.66009,
+    // availableFrom,
+    // coverImage,
+    // ca,
+    // sba,
+    // propName,
+    // bhkName,
+    // propTypeName,
+    // category,
+    // localityName,
+    // price,
+    // propStatus,
+    // pa,
+    // projstatus,
+    // rerastatus,
   } = data;
   const { data: session } = useSession();
 
-  const [, { open }] = useReqCallPopup();
+  // const [, { open }] = useReqCallPopup();
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
@@ -258,18 +260,18 @@ const ProjectDetailsCard = ({ data }: Props) => {
 };
 
 export default ProjectDetailsCard;
-function getTypeText(type: string) {
-  let text;
+// function getTypeText(type: string) {
+//   let text;
 
-  if (type === "proj") {
-    text = "Builder";
-  } else if (type === "I") {
-    text = "Owner";
-  } else if (type === "A") {
-    text = "Agent";
-  } else {
-    text = "Unknown";
-  }
+//   if (type === "proj") {
+//     text = "Builder";
+//   } else if (type === "I") {
+//     text = "Owner";
+//   } else if (type === "A") {
+//     text = "Agent";
+//   } else {
+//     text = "Unknown";
+//   }
 
-  return text;
-}
+//   return text;
+// }

@@ -1,19 +1,19 @@
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
 // import path from "path";
 // import fs from "fs";
 import { getServerSideSitemap } from "next-sitemap";
-import redisService from "@/app/utils/redis/redis.service";
-import { SlugsType } from "@/app/common/constatns/slug.constants";
+// import redisService from "@/app/utils/redis/redis.service";
+// import { SlugsType } from "@/app/common/constatns/slug.constants";
 import axios from "axios";
 
 // Utility function to split the array into chunks
-const chunkArray = (array: any[], chunkSize: number) => {
-  const chunks = [];
-  for (let i = 0; i < array.length; i += chunkSize) {
-    chunks.push(array.slice(i, i + chunkSize));
-  }
-  return chunks;
-};
+// const chunkArray = (array: any[], chunkSize: number) => {
+//   const chunks = [];
+//   for (let i = 0; i < array.length; i += chunkSize) {
+//     chunks.push(array.slice(i, i + chunkSize));
+//   }
+//   return chunks;
+// };
 
 export async function GET(
   request: Request,

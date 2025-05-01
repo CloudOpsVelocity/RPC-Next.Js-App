@@ -5,7 +5,7 @@ import { TextInput } from "react-hook-form-mantine";
 import { FaPlus } from "react-icons/fa";
 import { randomId } from "@mantine/hooks";
 import StepCss from "@/app/styles/Stepper.module.css";
-import handleTrimAndReplace, {
+import {
   handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";
 import { CrossIcon } from "@/app/images/commonSvgs";
@@ -16,13 +16,14 @@ type Props = {
   placeholder: string;
   label: string;
   form: any;
+  // eslint-disable-next-line no-unused-vars
   scrollToBottom: (customValue?: number) => void;
 };
-type Item = {
-  name: string;
-  active: boolean;
-  key: string;
-};
+// type Item = {
+//   name: string;
+//   active: boolean;
+//   key: string;
+// };
 
 export default function AddmoreInput({
   id,

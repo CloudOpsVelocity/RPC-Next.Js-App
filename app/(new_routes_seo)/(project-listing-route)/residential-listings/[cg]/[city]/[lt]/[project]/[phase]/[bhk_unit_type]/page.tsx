@@ -117,6 +117,7 @@ export async function generateMetadata(
       bhk_unit_type: string;
     };
   },
+  // eslint-disable-next-line no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   if (!params.bhk_unit_type.includes("listing")) {
@@ -171,8 +172,6 @@ export async function generateMetadata(
   const id = params.bhk_unit_type.split("-")[1];
   const {
     listing: data,
-    nearByLocations,
-    totalPrice,
   } = await getListingDetails(id as string);
   const keywords = `${data.bhkName ?? ""}, ${data.propTypeName}, ${
     data.ltName

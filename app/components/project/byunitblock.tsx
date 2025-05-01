@@ -16,29 +16,29 @@ import { SelectCreatable } from "./_ui/input/UnitINput";
 // import RecentSearchedUnits from "./_ui/RecentSearchedUnits";
 // import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
 import useRecentUnits from "@/app/hooks/project/useRecentUnits";
-interface UnitData {
-  unitIdEnc: string;
-  projIdEnc: string;
-  phaseId: number;
-  propType: number;
-  bhk: number;
-  bhkName: string;
-  towerName: string;
-  towerId: number;
-  block: string;
-  floor: number;
-  unitNumber: string;
-  facingId: number;
-  facingName: string;
-  caretarea: string;
-  superBuildUparea: string;
-  terraceArea: string;
-  parkingType: string;
-  totalNumberofBathroom: number;
-  totalNumberOfBalcony: number;
-  noOfCarParking: number;
-  floorPlanUrl: string;
-}
+// interface UnitData {
+//   unitIdEnc: string;
+//   projIdEnc: string;
+//   phaseId: number;
+//   propType: number;
+//   bhk: number;
+//   bhkName: string;
+//   towerName: string;
+//   towerId: number;
+//   block: string;
+//   floor: number;
+//   unitNumber: string;
+//   facingId: number;
+//   facingName: string;
+//   caretarea: string;
+//   superBuildUparea: string;
+//   terraceArea: string;
+//   parkingType: string;
+//   totalNumberofBathroom: number;
+//   totalNumberOfBalcony: number;
+//   noOfCarParking: number;
+//   floorPlanUrl: string;
+// }
 
 type Props = {
   propCgId: any;
@@ -49,8 +49,9 @@ export const unitFloorsAtom = atom([]);
 const Byunitblock: React.FC<Props> = ({
   propCgId,
   data,
-  form: { values, setValues, setFieldValue, getInputProps, reset },
+  form: { values, setValues, setFieldValue, getInputProps },
 }: Props) => {
+  // eslint-disable-next-line no-unused-vars
   const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { setPreviousFilers } = useRecentUnits();
@@ -159,59 +160,59 @@ const Byunitblock: React.FC<Props> = ({
   };
   const isAppliedFilters =
     Object.values(values).filter((each) => each != null).length > 0;
-  const showClearAll = Object.values(values).some(
-    (value) => value !== null && value !== "" && value !== 0
-  );
-  const handlePreviousAppliedFilter = (filters: Object) => {
-    handleReset();
-    setValues(filters);
+  // const showClearAll = Object.values(values).some(
+  //   (value) => value !== null && value !== "" && value !== 0
+  // );
+  // const handlePreviousAppliedFilter = (filters: Object) => {
+  //   handleReset();
+  //   setValues(filters);
 
-    // If unitNumber exists in filters, prefill all fields
-    if ("unitNumber" in filters && typeof filters.unitNumber === "string") {
-      const filteredData = data.filter((item: any) => {
-        // Match exact unit number
-        return (
-          String(item.unitNumber).toLowerCase() ===
-          (filters.unitNumber as string).toLowerCase()
-        );
-      });
+  //   // If unitNumber exists in filters, prefill all fields
+  //   if ("unitNumber" in filters && typeof filters.unitNumber === "string") {
+  //     const filteredData = data.filter((item: any) => {
+  //       // Match exact unit number
+  //       return (
+  //         String(item.unitNumber).toLowerCase() ===
+  //         (filters.unitNumber as string).toLowerCase()
+  //       );
+  //     });
 
-      if (filteredData.length > 0) {
-        // Get first matching unit
-        const unit = filteredData[0];
+  //     if (filteredData.length > 0) {
+  //       // Get first matching unit
+  //       const unit = filteredData[0];
 
-        // Prefill all available fields from the unit
-        const prefillValues = {};
-        Object.keys(unit).forEach((key: string) => {
-          if (
-            unit[key as keyof typeof unit] !== null &&
-            unit[key as keyof typeof unit] !== undefined
-          ) {
-            (prefillValues as Record<string, string>)[key] = String(
-              unit[key as keyof typeof unit]
-            );
-          }
-        });
+  //       // Prefill all available fields from the unit
+  //       const prefillValues = {};
+  //       Object.keys(unit).forEach((key: string) => {
+  //         if (
+  //           unit[key as keyof typeof unit] !== null &&
+  //           unit[key as keyof typeof unit] !== undefined
+  //         ) {
+  //           (prefillValues as Record<string, string>)[key] = String(
+  //             unit[key as keyof typeof unit]
+  //           );
+  //         }
+  //       });
 
-        setValues(prefillValues as typeof values);
-        setFloor(unit);
-        setFloorsArray(filteredData);
-        return;
-      }
-    }
+  //       setValues(prefillValues as typeof values);
+  //       setFloor(unit);
+  //       setFloorsArray(filteredData);
+  //       return;
+  //     }
+  //   }
 
-    // Default filtering if no unit number or no match found
-    const filteredData = data.filter((item: any) => {
-      return Object.keys(values).every(
-        (key) =>
-          !values[key] ||
-          String(item[key]).toLowerCase() === values[key].toLowerCase()
-      );
-    });
+  //   // Default filtering if no unit number or no match found
+  //   const filteredData = data.filter((item: any) => {
+  //     return Object.keys(values).every(
+  //       (key) =>
+  //         !values[key] ||
+  //         String(item[key]).toLowerCase() === values[key].toLowerCase()
+  //     );
+  //   });
 
-    setFloor(filteredData[0]);
-    setFloorsArray(filteredData);
-  };
+  //   setFloor(filteredData[0]);
+  //   setFloorsArray(filteredData);
+  // };
   return (
     <div className="px-[1%] sm:px-[5%] py-[2%] w-full flex justify-start flex-col items-start   ">
       <h3 className="text-[#001F35] sm:text-2xl not-italic font-medium sm:mb-4">

@@ -54,9 +54,9 @@ function Login({ params }: any) {
   const {
     control,
     handleSubmit,
+    // eslint-disable-next-line no-unused-vars
     formState: { isLoading },
     setValue,
-    watch,
     clearErrors,
   } = useForm({
     defaultValues: { username: undefined, password: "" },

@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
-import React, { useEffect, useRef, useState, memo, useCallback } from "react";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
@@ -9,7 +11,7 @@ import {
   projSearchStore,
   searchPageMapToggle,
 } from "../../../store/projSearchStore";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";

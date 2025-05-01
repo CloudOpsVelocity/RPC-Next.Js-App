@@ -17,7 +17,7 @@ export default function PropTypeFilter({ close }: { close?: () => void }) {
           Property Type
         </h3>
         <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">
-          {keys.map((keyName, index) => {
+          {keys.map((keyName) => {
             if (isShowPlot && keyName === 32) {
               return null;
             }

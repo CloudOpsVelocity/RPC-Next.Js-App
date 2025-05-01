@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "react-query";
 import {
-  // FaChevronCircleDown,
   FaSearch,
-  // FaTruckLoading,
   FaCheck,
 } from "react-icons/fa";
 import RTK_CONFIG from "@/app/config/rtk";
@@ -42,7 +40,7 @@ export default function AutoCitySelectDropdown({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const [globalState, setCity] = useAtom(homeSearchFiltersAtom);
+  const [, setCity] = useAtom(homeSearchFiltersAtom);
   const getUserCity = async (
     cityData?: CityData
   ): Promise<DefaultCityResponse> => {
@@ -68,6 +66,7 @@ export default function AutoCitySelectDropdown({
   };
   const {
     data: DefaultCity,
+    // eslint-disable-next-line no-unused-vars
     isLoading: defaultCityLoading,
     error: defaultCityError,
   } = useQuery<DefaultCityResponse, Error>({

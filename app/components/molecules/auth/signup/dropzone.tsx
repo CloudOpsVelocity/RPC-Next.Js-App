@@ -6,10 +6,10 @@ import { Dropzone } from "@mantine/dropzone";
 import { useRef, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import S from "@/app/styles/Share.module.css";
-interface DropZoneProps extends Partial<any> {
-  onLogoSelect: (logo: File) => void;
-  logo?: File;
-}
+// interface DropZoneProps extends Partial<any> {
+//   onLogoSelect: (logo: File) => void;
+//   logo?: File;
+// }
 const IMAGE_MIME_TYPE = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 export function DropZone(props: Partial<any>) {
   const [error, setError] = useState("");
@@ -33,6 +33,7 @@ export function DropZone(props: Partial<any>) {
             props.onLogoSelect && props.onLogoSelect(logoFile);
             setError("");
           }}
+          // eslint-disable-next-line no-unused-vars
           onReject={(files) =>
             setError("File size must not exceed more than 10 MB")
           }

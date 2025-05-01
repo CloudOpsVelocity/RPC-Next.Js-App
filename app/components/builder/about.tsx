@@ -18,10 +18,10 @@ type Props = {
 
 export default function About({
   heading,
-  projName,
   content,
   id,
-  type,
+  // projName,
+  // type,
   className,
   showProjName,
   builderName,

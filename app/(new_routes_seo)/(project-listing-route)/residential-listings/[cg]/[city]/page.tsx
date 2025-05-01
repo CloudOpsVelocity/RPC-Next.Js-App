@@ -16,7 +16,6 @@ import {
   // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { notFound } from "next/navigation";
-import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { Metadata, ResolvingMetadata } from "next";
 
@@ -63,6 +62,7 @@ export async function generateStaticParams() {
 }
 export async function generateMetadata(
   { params }: { params: { cg: string; city: string } },
+  // eslint-disable-next-line no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { cg, city } = params;

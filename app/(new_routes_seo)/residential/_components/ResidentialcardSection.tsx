@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-constant-condition */
 "use client";
 import { formatDate } from "@/app/utils/date";
 import Button from "../../../elements/button";
@@ -5,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import React, { useState, useEffect, useCallback, memo } from "react";
-import { FaMapMarkerAlt, FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { FaMapMarkerAlt} from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
@@ -24,7 +27,7 @@ export default function ResidentialCardSection({
 }: Props) {
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(40);
-  const [opened, { open, close }] = useReqCallPopup();
+  const [, { open }] = useReqCallPopup();
 
   const fetchMoreItems = useCallback(() => {
     if (properties.length > listItemsCount) {

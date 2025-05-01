@@ -30,7 +30,7 @@ export default function BuilderDetailsCard({
   userName,
   isTab,
   isMobile,
-  builderCity,
+  // builderCity,
   branchCities,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState<{

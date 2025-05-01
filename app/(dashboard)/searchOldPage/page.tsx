@@ -2,6 +2,7 @@
 import DefaultSearchPage from "./Page/DefaultSearchPage";
 // import { headers } from "next/headers";
 type Props = { searchParams: {} };
+// eslint-disable-next-line no-unused-vars
 const SearchingPage = async ({ searchParams }: Props) => {
   // const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
   // const data = await getUserCity(undefined,ip);

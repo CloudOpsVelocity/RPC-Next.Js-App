@@ -18,6 +18,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { DynamicText } from "../../../utils/text";
 
 const SearchDrawerHeader = ({
+  // eslint-disable-next-line no-unused-vars
   open,
   close,
   showAllLocalities,
@@ -28,7 +29,7 @@ const SearchDrawerHeader = ({
     filters,
     handleAppliedFilters,
     remnoveSearchOptions,
-    setFilters,
+    // setFilters,
     setSingleType,
     params,
   } = useSearchFilters();

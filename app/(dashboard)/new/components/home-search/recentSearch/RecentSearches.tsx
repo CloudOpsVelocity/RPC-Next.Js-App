@@ -17,7 +17,7 @@ export default function RecentSearches({}: Props) {
           Your Recent Projects, builders, Listings Searches: Find Homes You’ve Viewed
         </p>
         <div className=" mt-1  flex gap-1  sm:flex  flex-nowrap xl:flex-wrap overflow-x-scroll max-w-[100%] scrollbar-hide">
-          {recentSearches.map((item: any, index) => (
+          {recentSearches.map((item: any) => (
             <Box key={item.name} item={item} />
           ))}
         </div>

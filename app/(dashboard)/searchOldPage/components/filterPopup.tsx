@@ -28,29 +28,29 @@ import { getData } from "@/app/utils/api/search";
 import clsx from "clsx";
 // import { formatBudgetValue } from "./buget";
 import { toFormattedString } from "./buget/budget";
-import useQsearch from "@/app/hooks/search/useQsearch";
+// import useQsearch from "@/app/hooks/search/useQsearch";
 import { MainSearchMultiSelect } from "./_ui/Multiselect";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useAtomValue } from "jotai";
 
 const FilterPopup = ({ close }: { close?: () => void }) => {
   const [current, setCurrent] = useState("Search");
-  const {
-    data: searchData,
-    isLoading,
-    handleResetQuery,
-    onSearchChange,
-    debounced,
-    name,
-  } = useQsearch();
-  const {
-    localities,
-    builders,
-    cities,
-    projects,
-    listing: listings,
-    projectListing,
-  } = searchData;
+  // const {
+  //   data: searchData,
+  //   isLoading,
+  //   handleResetQuery,
+  //   onSearchChange,
+  //   debounced,
+  //   name,
+  // } = useQsearch();
+  // const {
+  //   localities,
+  //   builders,
+  //   cities,
+  //   projects,
+  //   listing: listings,
+  //   projectListing,
+  // } = searchData;
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
@@ -75,7 +75,6 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
     handleCheckboxClick,
     setPropTypes,
     setStatus,
-    handleBooleanCheck,
     handleSliderChange,
     setFilters,
     remnoveSearchOptions,
@@ -110,7 +109,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
           Quick Filters
         </p>
         <div className="w-full ">
-          {filteredSearchDetails.map((eachItem, index) => {
+          {filteredSearchDetails.map((eachItem) => {
             return (
               <Button
                 key={eachItem}
@@ -223,7 +222,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             Property Type{/*  {notificationIcon} */}
           </h3>
           <div className="flex  mb-[1%] justify-start items-start flex-wrap gap-[4%]">
-            {propKeys.map((keyName, i) => {
+            {propKeys.map((keyName) => {
               if (keyName === 32 && filters.unitTypes.length > 0) {
                 return null;
               }
@@ -258,7 +257,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                 BHK Type
               </h3>
               <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus) => {
                   return (
                     <Checkbox
                       className="my-2"
@@ -395,7 +394,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             Amenities
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+            {SEARCH_FILTER_DATA.amenities.map((i) => {
               return (
                 <Checkbox
                   className="my-2"
@@ -440,7 +439,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             RERA
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.rerastatus.map((i, ind) => {
+            {SEARCH_FILTER_DATA.rerastatus.map((i) => {
               return (
                 <Checkbox
                   className="my-2"

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import {
   FaHome,
@@ -6,7 +7,6 @@ import {
   FaBolt,
   FaThumbsUp,
   FaHandSparkles,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
 
 import Link from "next/link";
@@ -15,7 +15,6 @@ import Filters from "./Filters";
 
 import { FaChevronRight } from "react-icons/fa6";
 import ResidentialCardSection from "./ResidentialcardSection";
-import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useState } from "react";
 import Pagination from "./Pagination";
 
@@ -188,7 +187,7 @@ export default function ResidentialPage({
                   },
                 ].map((feature, index) => (
                   <div
-                    key={index}
+                    key={`feature_${index.toString()}`}
                     className="p-8 rounded-xl bg-card hover:shadow-lg transition-all"
                   >
                     <div className="mb-6 text-primary bg-primary/10 inline-block p-4 rounded-full">
@@ -213,7 +212,7 @@ export default function ResidentialPage({
               <div className="grid md:grid-cols-3 gap-8">
                 {testimonials?.map((testimonial, index) => (
                   <div
-                    key={index}
+                    key={`testimonials_${index.toString()}`}
                     className="bg-card p-8 rounded-xl shadow hover:shadow-md transition-all"
                   >
                     <div className="flex items-center mb-6">

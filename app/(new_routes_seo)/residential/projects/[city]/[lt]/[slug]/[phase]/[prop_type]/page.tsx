@@ -1,7 +1,7 @@
 // import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
-import fs from "fs";
-import path from "path";
+// import fs from "fs";
+// import path from "path";
 // import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
@@ -22,29 +22,29 @@ type Props = {
     prop_type: string;
   };
 };
-async function getProjectSlug(pathname: string) {
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
-  console.time("getProjectSlugs");
+// async function getProjectSlug(pathname: string) {
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "projectSlugs.json");
+//   console.time("getProjectSlugs");
 
-  try {
-    const jsonData = fs.readFileSync(filePath, "utf8");
-    const builderJsonData = JSON.parse(jsonData);
+//   try {
+//     const jsonData = fs.readFileSync(filePath, "utf8");
+//     const builderJsonData = JSON.parse(jsonData);
 
-    // Find the exact matching path based on the truncated path
-    const matchingPath = Object.keys(builderJsonData).find(
-      (key) => key.split("/").slice(0, -1).join("/") === pathname
-    );
+//     // Find the exact matching path based on the truncated path
+//     const matchingPath = Object.keys(builderJsonData).find(
+//       (key) => key.split("/").slice(0, -1).join("/") === pathname
+//     );
 
-    // Return the ID for the exact match found
-    return matchingPath ? builderJsonData[matchingPath] : null;
-  } catch (error) {
-    console.log(error);
-    return null;
-  } finally {
-    console.timeEnd("getProjectSlugs");
-  }
-}
+//     // Return the ID for the exact match found
+//     return matchingPath ? builderJsonData[matchingPath] : null;
+//   } catch (error) {
+//     console.log(error);
+//     return null;
+//   } finally {
+//     console.timeEnd("getProjectSlugs");
+//   }
+// }
 export default async function Page({ params }: Props) {
   const { city, lt, slug, phase, prop_type } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${slug}/${phase}/${prop_type}`;
@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   let serverData = null;
-  const { PJ, LT, PT, ID, count } = extractProjectParamsValues(value);
+  const { PJ, LT, PT, count } = extractProjectParamsValues(value);
   if (count == 6) {
     serverData = await getSearchData(`projIdEnc=${PJ}&propType=${PT}`);
   } else {

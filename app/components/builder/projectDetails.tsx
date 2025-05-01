@@ -3,9 +3,9 @@ import About from "../project/about";
 import {
   TotalLandArea,
   callIconSvg,
-  // completedProjIconSvg,
   emailIconSvg,
   lacationIconSvg,
+  // completedProjIconSvg,
   // newLaunchProjIconSvg,
   // onGoingProjIconSvg,
 } from "@/app/images/commonSvgs";
@@ -13,26 +13,27 @@ import { Data } from "@/app/validations/types/builder";
 import Card from "./BuilderDetails/Card";
 import BuilderProjectsCount from "./BuilderProjectsCount";
 
-type Props = {};
+// type Props = {};
 
 export default function ProjectDetails({
   mission,
-  companyName,
   builderAddress,
   officecontact,
-  newProject,
-  onGoingProject,
-  completedProject,
   email,
-  mobile,
   stateName,
   cityName,
   pinCode,
   userName,
-  localityName,
   citiesName,
-  builderProjects,
   id,
+
+  // localityName,
+  // mobile,
+  // companyName,
+  // newProject,
+  // onGoingProject,
+  // completedProject,
+  // builderProjects,
 }: Data) {
   return (
     <React.Fragment>
@@ -46,8 +47,7 @@ export default function ProjectDetails({
         maxLines={7}
       />
       <div
-        className="flex w-full flex-col justify-center items-start gap-3.5 sm:gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-5 sm:mb-[40px] xl:mb-[80px]
-  "
+        className="flex w-full flex-col justify-center items-start gap-3.5 sm:gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-5 sm:mb-[40px] xl:mb-[80px]"
       >
         <div className="flex flex-row sm:flex-row gap-3.5 xl:justify-center xl:items-center sm:gap-10 xl:gap-16 flex-wrap ">
           <Card

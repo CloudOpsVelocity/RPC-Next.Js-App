@@ -29,8 +29,8 @@ export const searchShareAtom = atom({
 });
 export default function SharePopup({
   title = "Share Project",
-  url,
-  className,
+  // url,
+  // className,
   titleText,
 }: {
   title?: string;

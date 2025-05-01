@@ -7,6 +7,7 @@ import { encryptData } from "@/app/utils/auth/nodeCrypto";
 type Props = {};
 
 export default function Nearme({}: Props) {
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState<string | null>(null);
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
 

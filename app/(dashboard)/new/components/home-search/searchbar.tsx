@@ -15,21 +15,21 @@ import { createQueryString } from "@/app/utils/search/query";
 import { formatBudgetValue } from "@/app/(dashboard)/searchOldPage/components/buget";
 import Link from "next/link";
 
-interface filters {
-  bhks: string[];
-  postedBy: string;
-  houseType: string[];
-  propertyType: string;
-  priceRange: [number, number];
-}
+// interface filters {
+//   bhks: string[];
+//   postedBy: string;
+//   houseType: string[];
+//   propertyType: string;
+//   priceRange: [number, number];
+// }
 
-const initialFilters: filters = {
-  bhks: [],
-  postedBy: "",
-  houseType: [],
-  propertyType: "",
-  priceRange: [0, 100],
-};
+// const initialFilters: filters = {
+//   bhks: [],
+//   postedBy: "",
+//   houseType: [],
+//   propertyType: "",
+//   priceRange: [0, 100],
+// };
 
 const Searchbar = () => {
   const {
@@ -70,10 +70,10 @@ const Searchbar = () => {
   const isTab = useMediaQuery("(max-width: 1600px)");
 
   // styles
-  const rangeSliderClasses = {
-    bar: "!bg-transparent",
-    thumb: "!bg-green-600 !border-none",
-  };
+  // const rangeSliderClasses = {
+  //   bar: "!bg-transparent",
+  //   thumb: "!bg-green-600 !border-none",
+  // };
 
   const keys = [35, 33, 31, 34, 32];
   const handleSearch = () => {

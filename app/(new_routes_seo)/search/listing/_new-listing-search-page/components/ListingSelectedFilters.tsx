@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useAtom } from "jotai";
 import React, { memo } from "react";
 import { MdClose } from "react-icons/md";

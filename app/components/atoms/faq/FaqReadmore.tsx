@@ -10,7 +10,7 @@ interface ReadMoreProps {
 const FaqReadMore: React.FC<ReadMoreProps> = ({
   text,
   maxLines = 4,
-  title,
+  // title,
   showReadMoreButton = true,
 }) => {
   const [isReadMore, setIsReadMore] = useState(false);

@@ -195,14 +195,14 @@ function Builder({ encriptedData }: any) {
     saveStep(2);
     setActive(1);
   };
-  const onError = (errors: any) => {
-    const errorsKeys = Object.keys(errors);
-    if (active === 2 && errorsKeys[0]) {
-      scrollWhereIsSelected(errorsKeys[0]);
-      return;
-    }
-    return;
-  };
+  // const onError = (errors: any) => {
+  //   const errorsKeys = Object.keys(errors);
+  //   if (active === 2 && errorsKeys[0]) {
+  //     scrollWhereIsSelected(errorsKeys[0]);
+  //     return;
+  //   }
+  //   return;
+  // };
   const nextStep = async (values: any) => {
     try {
       switch (active) {
@@ -266,6 +266,7 @@ function Builder({ encriptedData }: any) {
             const year = date.getFullYear();
             const formattedDate = `${day}/${month}/${year}`;
             // API call for the third step
+            // eslint-disable-next-line no-unused-vars
             const otherDetailsData = await registerOtherDetails(
               // @ts-ignore
               registerOtherParser({
@@ -273,7 +274,7 @@ function Builder({ encriptedData }: any) {
                 branch: values.branch.map((item: any) => parseInt(item)),
                 companyStartDate: formattedDate,
               })
-            ).then(async (res) => {
+            ).then(async () => {
               await saveStep(5);
               await login({
                 password: form.values.password,
@@ -302,9 +303,9 @@ function Builder({ encriptedData }: any) {
   const logo = newForm.watch("companyLogo");
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-  const displayCountryCode = (value: any) => {
-    console.log(value);
-  };
+  // const displayCountryCode = (value: any) => {
+  //   console.log(value);
+  // };
   const handleStateChange = (state: string) => {
     newForm.setValue("state", state);
     // Clear the city field when the state changes
@@ -316,39 +317,39 @@ function Builder({ encriptedData }: any) {
       top: customValue ?? viewport.current!.scrollHeight,
       behavior: "smooth",
     });
-  const scrollWhereIsSelected = (item: string) => {
-    const data = [
-      "companyName",
-      "branch",
-      "ceoName",
-      "foundedBy",
-      "managingDirectorName",
-      "officeContact",
-      "companyStartDate",
-    ];
-    const TOP_MULTIPLIER = 60;
+  // const scrollWhereIsSelected = (item: string) => {
+  //   const data = [
+  //     "companyName",
+  //     "branch",
+  //     "ceoName",
+  //     "foundedBy",
+  //     "managingDirectorName",
+  //     "officeContact",
+  //     "companyStartDate",
+  //   ];
+  //   const TOP_MULTIPLIER = 60;
 
-    const selectedElement = document.getElementById(item);
+  //   const selectedElement = document.getElementById(item);
 
-    if (selectedElement && viewport.current) {
-      if (item === "officeContact") {
-        // Scroll to the bottom for 'officeContact'
-        viewport.current.scrollTo({
-          top: selectedElement.scrollHeight, // Scroll to the bottom of the element
-          behavior: "smooth",
-        });
-      } else {
-        // Calculate the position based on TOP_MULTIPLIER for other elements
-        const errorPosition =
-          data.findIndex((element) => element === item) * TOP_MULTIPLIER;
+  //   if (selectedElement && viewport.current) {
+  //     if (item === "officeContact") {
+  //       // Scroll to the bottom for 'officeContact'
+  //       viewport.current.scrollTo({
+  //         top: selectedElement.scrollHeight, // Scroll to the bottom of the element
+  //         behavior: "smooth",
+  //       });
+  //     } else {
+  //       // Calculate the position based on TOP_MULTIPLIER for other elements
+  //       const errorPosition =
+  //         data.findIndex((element) => element === item) * TOP_MULTIPLIER;
 
-        viewport.current.scrollTo({
-          top: errorPosition,
-          behavior: "smooth",
-        });
-      }
-    }
-  };
+  //       viewport.current.scrollTo({
+  //         top: errorPosition,
+  //         behavior: "smooth",
+  //       });
+  //     }
+  //   }
+  // };
   const handleBuilderNameCallback = (isSpecialCharacters: boolean) => {
     if (isSpecialCharacters) {
       newForm.setError("builderName", {

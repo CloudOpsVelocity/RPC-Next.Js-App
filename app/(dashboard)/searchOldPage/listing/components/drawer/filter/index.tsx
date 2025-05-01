@@ -20,7 +20,7 @@ import classes from "@/app/styles/search.module.css";
 import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
-import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
+import { useDebouncedState } from "@mantine/hooks";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import ClearAll from "../../ClearAll";
@@ -31,9 +31,9 @@ import { toFormattedString } from "@/app/(dashboard)/searchOldPage/components/bu
 import { useAtomValue } from "jotai";
 import { serverCityAtom } from "@/app/store/search/serverCity";
 
-const styles = {
-  heading: "",
-};
+// const styles = {
+//   heading: "",
+// };
 const ListingMobileFilter = ({ close }: any) => {
   const [current, setCurrent] = useState("Project Status");
   const propKeys = [35, 33, 31, 34, 32];
@@ -44,7 +44,7 @@ const ListingMobileFilter = ({ close }: any) => {
     handleCheckboxClick,
     setPropTypes,
     setStatus,
-    handleBooleanCheck,
+    // handleBooleanCheck,
     handleSliderChange,
     setFilters,
     remnoveSearchOptions,
@@ -67,7 +67,7 @@ const ListingMobileFilter = ({ close }: any) => {
 
   const path = usePathname();
   const viewport = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery("(max-width: 601px)");
+  // const isMobile = useMediaQuery("(max-width: 601px)");
 
   const scrollWhereIsSelected = (item: string) => {
     setCurrent(item);
@@ -97,7 +97,7 @@ const ListingMobileFilter = ({ close }: any) => {
           Quick Filters
         </p>
         <div className="w-full ">
-          {filteredSearchDetails.map((eachItem, index) => {
+          {filteredSearchDetails.map((eachItem) => {
             return (
               <Button
                 key={eachItem}
@@ -137,7 +137,7 @@ const ListingMobileFilter = ({ close }: any) => {
                 BHK
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
-                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus) => {
                   return (
                     <Checkbox
                       label={eachStatus.title}
@@ -219,7 +219,7 @@ const ListingMobileFilter = ({ close }: any) => {
           <div className="flex mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {SEARCH_FILTER_DATA.listedBy
               .filter(({ value }) => !(value === "B" && path === "/search"))
-              .map(({ value, constDesc }, i) => (
+              .map(({ value, constDesc }) => (
                 <Radio
                   id={`listedByRadio_${value}`}
                   key={`listedBy_${constDesc}`}
@@ -390,7 +390,7 @@ const ListingMobileFilter = ({ close }: any) => {
             Photos & Videos
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%] ">
-            {SEARCH_FILTER_DATA.photoAvail.map(({ title, value }, i) => {
+            {SEARCH_FILTER_DATA.photoAvail.map(({ title, value }) => {
               return (
                 <Radio
                   id={`mediaRadio_${value}`}
@@ -421,7 +421,7 @@ const ListingMobileFilter = ({ close }: any) => {
               Furnishing
             </h3>
             <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
-              {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
+              {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }) => {
                 return (
                   <Radio
                     id={`furnishRadio_${cid}`}
@@ -446,7 +446,7 @@ const ListingMobileFilter = ({ close }: any) => {
             Amenities
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+            {SEARCH_FILTER_DATA.amenities.map((i) => {
               return (
                 <Checkbox
                   className="my-2"

@@ -9,6 +9,7 @@ type Props = {
   data: any;
   setValues: any;
   bhk: string;
+  // eslint-disable-next-line no-unused-vars
   setBhk: (value: string) => void;
   selectedPhase: any;
 };

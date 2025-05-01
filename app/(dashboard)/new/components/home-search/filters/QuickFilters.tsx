@@ -1,8 +1,8 @@
 import React from "react";
 
-import { BasicSelect } from "./Select";
-import { BasicBudgetSelect } from "./BugdetSelect";
-import { BasicMultiSelect } from "./BhkTypeSelect";
+// import { BasicSelect } from "./Select";
+// import { BasicBudgetSelect } from "./BugdetSelect";
+// import { BasicMultiSelect } from "./BhkTypeSelect";
 import { SelectField } from "./SelectField";
 import { CustomBhkTypeSelect } from "./CustomBhkTypeSelect";
 import { CustomBugdetSelect } from "./CustomBugdetSelect";

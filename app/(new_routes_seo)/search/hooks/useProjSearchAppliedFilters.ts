@@ -3,11 +3,11 @@ import { ProjSearchAppliedFiltersStore } from "../store/projSearchStore";
 import { useQueryState } from "nuqs";
 // import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
 
-type Props = {};
+// type Props = {};
 
 export default function useProjSearchAppliedFilters() {
   const setAppliedFilters = useSetAtom(ProjSearchAppliedFiltersStore);
-  const [name, setName] = useQueryState("sf");
+  const [ setName] = useQueryState("sf");
   const handleApplyFilters = (callback?: () => void) => {
     setAppliedFilters(setName, "add");
     callback?.();

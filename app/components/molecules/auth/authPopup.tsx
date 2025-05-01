@@ -12,6 +12,7 @@ type props = {
   mobile?: number | null;
 };
 
+// eslint-disable-next-line no-unused-vars
 function AuthPopup({ opened, close, userName, callback, mobile }: props) {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
@@ -27,7 +28,7 @@ function AuthPopup({ opened, close, userName, callback, mobile }: props) {
     >
       <OtpBox
         callback={callback}
-        userName={userName}
+        // userName={userName}
         close={close}
         mobile={mobile}
       />

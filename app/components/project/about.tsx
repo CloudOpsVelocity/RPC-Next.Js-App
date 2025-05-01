@@ -30,7 +30,7 @@ export default function About({
   if (isMobile) {
     maxLines = 2;
   }
-  const charLimit = maxLines * 100;
+  // const charLimit = maxLines * 100;
 
   return (
     <div

@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "react-query";
 
-type Props = {
-  initialValue?: {
-    total: number;
-    propIds: string[];
-    projIds: string[];
-  };
-};
+// type Props = {
+//   initialValue?: {
+//     total: number;
+//     propIds: string[];
+//     projIds: string[];
+//   };
+// };
 
 export default function useOptimisticShortlistCompare() {
   const queryClient = useQueryClient();

@@ -54,7 +54,7 @@ export default function BuildersBlock({
           >
             {data
               ?.filter((builder) => builder.name !== name)
-              .map((builder, index) => {
+              .map((builder) => {
                 const logo =
                   builder.logo === "null"
                     ? `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`

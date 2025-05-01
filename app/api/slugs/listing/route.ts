@@ -227,7 +227,7 @@ export async function PUT(request: Request) {
 //     { status: 200 }
 //   );
 // }
-export async function GET(request: Request) {
+export async function GET() {
   const data = await redisService.getListingSlug(SlugsType.LISTING);
   return NextResponse.json(data, { status: 200 });
 }

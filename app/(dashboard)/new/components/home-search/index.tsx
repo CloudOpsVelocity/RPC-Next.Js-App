@@ -8,12 +8,12 @@ import QuickFilters from "./filters/QuickFilters";
 import SearchSec from "./SearchSec";
 import { useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { toQueryParams } from "../../utils/param";
+// import { toQueryParams } from "../../utils/param";
 // import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
-import { Routes } from "@/app/common/constatns/routes.constants";
+// import { Routes } from "@/app/common/constatns/routes.constants";
 // import CompareShortListCount from "./CompareShortListCount";
 
 const HomeSearch = ({
@@ -27,15 +27,15 @@ const HomeSearch = ({
 }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const [isOpen, setIsOpen] = useState(false);
-  const handleSearch = () => {
-    if (!f.city) {
-      setIsOpen(true);
-      return;
-    }
-    const whichPage =
-      f.propType === 36 ? Routes.listingSearch : Routes.projectSearch;
-    window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_self", "noreferrer");
-  };
+  // const handleSearch = () => {
+  //   if (!f.city) {
+  //     setIsOpen(true);
+  //     return;
+  //   }
+  //   const whichPage =
+  //     f.propType === 36 ? Routes.listingSearch : Routes.projectSearch;
+  //   window.open(`${whichPage}?sf=${toQueryParams(f)}`, "_self", "noreferrer");
+  // };
 
   return (
     <div

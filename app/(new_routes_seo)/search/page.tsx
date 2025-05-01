@@ -8,7 +8,6 @@ import {
   getSearchData,
   parseApiFilterQueryParams,
 } from "./utils/project-search-queryhelpers";
-import parseProjectSearchQueryParams from "./utils/parse-project-searchqueryParams";
 
 export default async function Page(params: any) {
   const isListing = false;

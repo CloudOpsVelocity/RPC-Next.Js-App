@@ -9,7 +9,7 @@ import Link from "next/link";
 type Props = {};
 
 export default function ShortListed({}: Props) {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["shortListed"],
     queryFn: getShortIds,
   });

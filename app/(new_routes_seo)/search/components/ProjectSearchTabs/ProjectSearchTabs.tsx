@@ -58,7 +58,7 @@ const ProjectSearchTabs = () => {
     },
   ];
   React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = () => {
       if (isDropdownOpen) {
         setIsDropdownOpen(false);
       }

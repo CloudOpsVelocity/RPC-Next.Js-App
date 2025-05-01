@@ -6,6 +6,7 @@ type Props = {
   link: string;
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
 };
+// eslint-disable-next-line no-unused-vars
 const Card = ({ label, link, type, Icon }: Props) => {
    
                           

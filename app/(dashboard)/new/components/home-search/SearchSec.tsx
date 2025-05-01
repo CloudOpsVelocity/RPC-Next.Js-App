@@ -9,7 +9,7 @@ import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
 import { toQueryParams } from "../../utils/param";
-import { SEARCH_FILTER_DATA } from "@/app/data/search";
+// import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import Nearme from "./Nearme";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,7 @@ import { MiniCrossIcon } from "./filters/CustomBhkTypeSelect";
 type Props = {};
 export default function SearchSec({}: Props) {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
-  const { onSearchChange, name, data } = useQsearch();
+  const { onSearchChange, name } = useQsearch();
   const isTab = useMediaQuery("(max-width: 1600px)");
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,9 +30,9 @@ export default function SearchSec({}: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const router = useRouter();
 
-  const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map((each) =>
-    each.value.toString()
-  );
+  // const allBhksIds = SEARCH_FILTER_DATA.bhkDetails.map((each) =>
+  //   each.value.toString()
+  // );
 
   // Handle outside clicks
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function SearchSec({}: Props) {
         );
         const data = await res.json();
         if (data && data.ids) {
-          const bhk = data.ids.split("*")[0];
+          // const bhk = data.ids.split("*")[0];
           let ids = extractApiValues(data.ids);
           let URLReNew = URLCreater(ids);
           //alert(JSON.stringify(ids));

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useState, useEffect, useRef, FormEvent, memo } from "react";
 import {
@@ -358,7 +359,7 @@ const ListingHeaderFilters = ({
                                 {searchData[type].map(
                                   (item: any, index: number) => (
                                     <div
-                                      key={index}
+                                      key={`${index.toString()}`}
                                       className="flex items-center gap-2 px-2 py-1  hover:bg-gray-50 cursor-pointer"
                                       onClick={() => {
                                         setSearchQuery(item.name); // Set the item name as search query

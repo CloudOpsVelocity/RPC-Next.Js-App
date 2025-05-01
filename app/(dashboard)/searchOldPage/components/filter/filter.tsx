@@ -6,6 +6,7 @@ import { RangeSlider } from "@mantine/core";
 import S from "@/app/styles/search.module.css";
 // import { formatBudgetValue } from "../buget";
 import { toFormattedString } from "../buget/budget";
+// eslint-disable-next-line no-unused-vars
 const FilterSection = ({ open, close }: any) => {
   const { filters, handleSliderChange, setPropTypes, handleCheckboxClick } =
     useSearchFilters();

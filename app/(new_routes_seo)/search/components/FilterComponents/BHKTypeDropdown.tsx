@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { useAtom } from "jotai";
 import { MdKeyboardArrowDown } from "react-icons/md";

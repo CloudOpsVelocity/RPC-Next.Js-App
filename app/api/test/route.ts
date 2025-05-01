@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 // import redis from "@/app/utils/redis/redis.connection";
 // import redisService from "@/app/utils/redis/redis.service";
 
-export async function GET(req: Request, res: NextResponse) {
+export async function GET() {
   try {
     // const data = await redisService.getSeoSlug("case-seo");
     return NextResponse.json({});

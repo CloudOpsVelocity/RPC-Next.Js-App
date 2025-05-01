@@ -17,13 +17,13 @@ type Props = {
 
 export default function BuilderPageAbout({
   heading,
-  projName,
   content,
   id,
-  type,
   className,
   showProjName,
   builderName,
+  // projName,
+  // type,
 }: Props) {
   const isMobile = useMediaQuery(`(max-width: 600px)`);
   return (

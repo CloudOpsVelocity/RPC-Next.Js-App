@@ -57,7 +57,7 @@ export default function Results() {
         if (apiData.type === "Project") {
           window.open(apiData.stringUrl, "_self");
         } else {
-          const phase = "";
+          // const phase = "";
           window.open(
             `/search/listing?sf=projIdEnc=${
               apiData.stringId.split("_")[0]

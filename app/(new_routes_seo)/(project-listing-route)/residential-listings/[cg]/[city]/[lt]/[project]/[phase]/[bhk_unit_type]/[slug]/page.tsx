@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
 import { getAmenties, getAuthorityNames } from "@/app/utils/api/project";
 import {
@@ -74,8 +75,6 @@ export async function generateMetadata(
   const id = params?.slug?.split("-")[1];
   const {
     listing: data,
-    nearByLocations,
-    totalPrice,
   } = await getListingDetails(id as string);
 
   const keywords = `${data.bhkName ?? ""}, ${data.propTypeName}, ${

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 "use client";
 import { useState, useEffect, useRef, FormEvent, memo } from "react";
 import {
@@ -409,7 +411,7 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
                                 {searchData[type].map(
                                   (item: any, index: number) => (
                                     <div
-                                      key={index}
+                                      key={`searchData3_${index.toString()}`}
                                       className="flex items-center gap-2 px-2 py-1  hover:bg-gray-50 cursor-pointer"
                                       onClick={() => {
                                         setSearchQuery(item.name); // Set the item name as search query

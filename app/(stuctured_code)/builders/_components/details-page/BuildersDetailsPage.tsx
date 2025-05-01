@@ -53,7 +53,9 @@ export default function BuilderDetailsPage({ data, id }: Props) {
             />
             {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
           </div>
-          <Reqcallback builderName={data.data?.userName} />
+          {/* <Reqcallback builderName={data.data?.userName} /> */}
+          <Reqcallback />
+
           <ProjectDrawer projName={data?.data?.userName} />
           <LoginPopup />
         </>

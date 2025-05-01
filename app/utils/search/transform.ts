@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { SearchFilterOld } from "@/app/store/search";
 
 const convertToOriginalState = (data: any): SearchFilterOld => {

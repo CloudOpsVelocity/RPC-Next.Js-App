@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 "use client";
 
 import type React from "react";
@@ -175,7 +177,7 @@ export default function RangeSlider({
                 left: `${getPercentage(mark.value)}%`,
               }}
             >
-              <div className="w-0.5 h-2 bg-gray-400 mb-1"></div>
+              <div className="w-0.5 h-2 bg-gray-400 mb-1"/>
               <span className="text-xs text-gray-600 whitespace-nowrap">
                 {mark.label}
               </span>

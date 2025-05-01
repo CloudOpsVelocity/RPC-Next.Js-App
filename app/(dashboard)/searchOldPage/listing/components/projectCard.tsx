@@ -8,10 +8,10 @@ import {
   Wallet,
   // shortlistIconSvg,
 } from "@/app/images/commonSvgs";
-import { Search } from "@/app/validations/types/search";
+// import { Search } from "@/app/validations/types/search";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import Image from "next/image";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+// import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
@@ -22,9 +22,9 @@ import { listingSearchAtom } from "@/app/store/search/map";
 import Link from "next/link";
 import { calculatePerSqPrice } from "@/app/utils/price";
 
-type Props = {
-  type: any;
-} & Search;
+// type Props = {
+//   type: any;
+// } & Search;
 
 const ProjectDetailsCard = ({
   category,
@@ -35,7 +35,7 @@ const ProjectDetailsCard = ({
   propName,
   propStatus,
   propTypeName,
-  propertyIdEnc,
+  // propertyIdEnc,
   bhkName,
   pa,
   ca,
@@ -50,7 +50,7 @@ const ProjectDetailsCard = ({
 }: any) => {
   const { data: session } = useSession();
 
-  const [, { open }] = useReqCallPopup();
+  // const [, { open }] = useReqCallPopup();
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
@@ -251,7 +251,7 @@ const MobileDetails = ({
   lang,
   price,
 }: any) => {
-  const [, { open }] = useReqCallPopup();
+  // const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
