@@ -91,7 +91,7 @@ export default function LeftSection({
                     title={imageAlt}
                     className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
                     priority={index == 0 ? true : false}
-                    unoptimized={true}
+                    unoptimized
                     quality={80}
                   />
                   
