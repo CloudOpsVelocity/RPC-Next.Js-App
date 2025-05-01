@@ -19,6 +19,7 @@ import { notFound } from "next/navigation";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { Metadata, ResolvingMetadata } from "next";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 // import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 type Props = {
   params: {
@@ -35,32 +36,35 @@ export default async function Page({ params: { cg, city, lt }, searchParams }: P
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
+  let serverData = null;
+  let frontendFilters = null
   if(searchParams.sf){
-      const apiFilters = searchParams.sf
-        ? parseApiFilterQueryParams(searchParams.sf)
-        : null;
-      // const frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+      const apiFilters = parseApiFilterQueryParams(searchParams.sf)
       const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
       // eslint-disable-next-line no-unused-vars
       const data = isProj
         ? await getProjSearchData(apiFilters ?? "")
         : await getSearchData(apiFilters ?? "");
+      serverData = data;
+         frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
   }
-  // else{
-    
-  // }
-  const slugValues = extractListingParamsValues(values);
-  const severData = await getSearchData(`localities=${slugValues.LT}`);
+  else{
+    const slugValues = extractListingParamsValues(values);
+    serverData = await getSearchData(`localities=${slugValues.LT}`);
+    frontendFilters = {
+      localities: [`${lt}+${slugValues.LT}`],
+      cg: slugValues.CG,
+      listedBy: "All",
+    }
+  }
+
   return (
     <NewListingSearchpage
-      serverData={severData}
-      frontendFilters={{
-        localities: [`${lt}+${slugValues.LT}`],
-        cg: slugValues.CG,
-        listedBy: "All",
-      }}
+      serverData={serverData}
+      frontendFilters={frontendFilters}
       pageUrl={pathname}
       showProjectTab
+
     />
   );
 }
