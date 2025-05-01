@@ -30,7 +30,7 @@ export default function ShareBtn({ url, type }: Props) {
     }); */
   };
   return (
-    <button onClick={handleClick} className="cursor-pointer">
+    <button name="share" onClick={handleClick} className="cursor-pointer">
       <ShareIcon
         className={"cursor-pointer w-[22px] h-[22px] xl:w-[26px] xl:h-[26px] "}
       />

@@ -26,7 +26,7 @@ export default function Tabs({}: Props) {
           onClick={() => setActiveTab("S")}
           className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative bg-transparent ${
             activeTab === "S"
-              ? "!text-[#148B16] font-semibold text-[12px] sm:text-[18px] f5fff6]"
+              ? "!text-brand-green-900 font-semibold text-[12px] sm:text-[18px] f5fff6]"
               : ""
           }`}
         >
@@ -41,7 +41,7 @@ export default function Tabs({}: Props) {
             onClick={() => setActiveTab("R")}
             className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative ${
               activeTab === "R"
-                ? "!text-[#148B16] font-semibold text-[12px] sm:text-[18px] f5fff6]"
+                ? "!text-brand-green-900 font-semibold text-[12px] sm:text-[18px] f5fff6]"
                 : ""
             }`}
           >

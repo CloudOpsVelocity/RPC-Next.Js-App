@@ -35,7 +35,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
     }
   };
   return (
-    <button onClick={(e) => onAddingShortList(e)}>
+    <button name="shorlist" onClick={(e) => onAddingShortList(e)}>
       {state ? (
         config.trueIcon
       ) : (

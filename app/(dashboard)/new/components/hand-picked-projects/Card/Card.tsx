@@ -70,7 +70,7 @@ export default function Card({ item }: Props) {
               </p>
             </div>
             <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
-              <ViewAllButton url={url} />
+              <ViewAllButton name={item.projName} url={url} />
               <ReqBtn
                 builderName={item.builderName}
                 projName={item.projName}

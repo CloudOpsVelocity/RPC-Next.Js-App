@@ -37,49 +37,64 @@ const HomeSearch = ({
 
   return (
     <div
-      className="px-1 sm:px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-10 bg-white pt-[100px] sm:pt-[100px] xl:pb-4 xl:py-28  relative mt-[70px] "
-      style={{
-        backgroundImage: "url(/home/clouds.svg)",
-      }}
-    >
-      <Alert />
-      {/* shortlisted */}
-      {/* <ShortListed /> */}
-
-      <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
-        <Image
-          src={"/home/home-search.svg"}
-          alt="home-search"
-          height={300}
-          width={500}
-          className="w-full h-full"
-        />
-      </div>
-      <div className="w-full sm:max-w-[1066px] sm:ml-[20px] xl:ml-0 xl:mr-[20px] ">
-        <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] !h-auto rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full mb-2 sm:mb-0">
-          <Tabs />
-          <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
-            {config.homeIcon} All Residential
-          </p>
-          <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">
-            <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] xl:text-[14px] not-italic font-medium text-[12px]">
-              {config.homeIcon}{" "}
-              <div className="text-nowrap">All Residential</div>
-            </div>
-            <div className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] absolute  top-[25%] right-[5%] sm:static max-w-fit sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
-              <AutoCitySelectDropDown
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                cityData={cityData}
-              />
-            </div>
-            <SearchSec />
-          </div>
-          {f.showFilter && <QuickFilters />}
-        </div>
-        <RecentSearches />
-      </div>
+    className="px-1 sm:px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-10 bg-white pt-[100px] sm:pt-[100px] xl:pb-4 xl:py-28 relative mt-[70px]"
+  >
+    {/* ✅ Refactored background image for better LCP */}
+    <img
+      src="/home/clouds.svg"
+      alt="Clouds background"
+      fetchPriority="high"
+      loading="eager"
+      decoding="async"
+      className="absolute inset-0 w-full h-full object-cover -z-10"
+    />
+  
+    <Alert />
+  
+    {/* Image block */}
+    <div className="items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
+      <Image
+        src="/home/home-search.svg"
+        alt="home-search"
+        height={300}
+        width={500}
+        className="w-full h-full"
+      />
     </div>
+  
+    {/* Main content */}
+    <div className="w-full sm:max-w-[1066px] sm:ml-[20px] xl:ml-0 xl:mr-[20px]">
+      <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] !h-auto rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full mb-2 sm:mb-0">
+        <Tabs />
+  
+        <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
+          {config.homeIcon} All Residential
+        </p>
+  
+        <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">
+          <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] xl:text-[14px] not-italic font-medium text-[12px]">
+            {config.homeIcon}
+            <div className="text-nowrap">All Residential</div>
+          </div>
+  
+          <div className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] absolute top-[25%] right-[5%] sm:static max-w-fit sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3]">
+            <AutoCitySelectDropDown
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              cityData={cityData}
+            />
+          </div>
+  
+          <SearchSec />
+        </div>
+  
+        {f.showFilter && <QuickFilters />}
+      </div>
+  
+      <RecentSearches />
+    </div>
+  </div>
+  
   );
 };
 

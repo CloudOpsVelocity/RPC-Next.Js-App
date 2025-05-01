@@ -42,6 +42,7 @@ export default function Nearme({}: Props) {
   };
   return (
     <button
+    name="Near Me"
       className="flex items-center gap-1 rounded p-1 bg-[#f0ffdc] text-[#148B16] text-[12px] not-italic font-medium cursor-pointer text-nowrap "
       onClick={getLocation}
     >
