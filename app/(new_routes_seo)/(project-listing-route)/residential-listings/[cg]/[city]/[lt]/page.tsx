@@ -19,7 +19,7 @@ import { notFound } from "next/navigation";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { Metadata, ResolvingMetadata } from "next";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
-import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
+// import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 type Props = {
   params: {
     cg: string;
@@ -39,15 +39,16 @@ export default async function Page({ params: { cg, city, lt }, searchParams }: P
       const apiFilters = searchParams.sf
         ? parseApiFilterQueryParams(searchParams.sf)
         : null;
-      const frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+      // const frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
       const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+      // eslint-disable-next-line no-unused-vars
       const data = isProj
         ? await getProjSearchData(apiFilters ?? "")
         : await getSearchData(apiFilters ?? "");
   }
-  else{
+  // else{
     
-  }
+  // }
   const slugValues = extractListingParamsValues(values);
   const severData = await getSearchData(`localities=${slugValues.LT}`);
   return (

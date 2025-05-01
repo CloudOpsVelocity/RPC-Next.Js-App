@@ -8,7 +8,6 @@ import React from "react";
 import HeartButton from "../Center/HeartButton";
 import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
-import { ShareIcon } from "@/app/images/HomePageIcons";
 import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import DownloadBrocher from "../../DownloadBrocher";
