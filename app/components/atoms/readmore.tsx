@@ -40,7 +40,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   };
 
   return (
-    <button onClick={handleReadMoreClick}>
+    <button aria-label="Read More" name="Read More" title="Read More" onClick={handleReadMoreClick}>
       {/* {!expanded && shouldShowReadMore && "... "} */}
       {shouldShowReadMore && (
         <span className="text-[#0073C6] text-[14px] sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer underline">

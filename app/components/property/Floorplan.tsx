@@ -129,6 +129,9 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               )}
             </div>
             <button
+            aria-label={"Click on image to open floor plan"}
+            name={"Click on image to open floor plan"} 
+            title={"Click on image to open floor plan"}
               onClick={() => {
                 setOpened(true);
                 // pushHistory();

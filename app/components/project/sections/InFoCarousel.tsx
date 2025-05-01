@@ -172,6 +172,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                     border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
                   >
                     <button
+                      aria-label="View Floor Plan" name="View Floor Plan" title="View Floor Plan"
                       className="text-[#0073C6] text-[12px] sm:text-[16px] font-semibold 
                       leading-normal font-Montserrat"
                       onClick={() => handleCardClick(units, item)}

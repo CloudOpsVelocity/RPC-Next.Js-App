@@ -239,6 +239,7 @@ const AddQnaForm = ({
           )}
         </div>
         <button
+        aria-label="Submit Question" name="Submit Question" title="Submit Question"
           type="submit"
           // loading={status === "pending"}
           // size={isMobile ? "xs" : "md"}

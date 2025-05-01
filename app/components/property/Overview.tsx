@@ -43,6 +43,8 @@ export default function PropertyOverView({
             {"  "}
             <button
               aria-label={title}
+              name={title} 
+              title={title}
               onClick={() => {
                 navigator.share({
                   title: title,

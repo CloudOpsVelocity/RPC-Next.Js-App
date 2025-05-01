@@ -29,6 +29,7 @@ export default function Subscribe({}: Props) {
       <div className="mt-2 sm:mt-0 sm:ml-3 sm:flex-shrink-0">
         <button
           type="submit"
+          aria-label="Subscribe" name="Subscribe" title="Subscribe"
           className="w-full bg-blue-600 border border-transparent rounded-md py-1 px-2 sm:py-2 flex items-center justify-center text-xs sm:text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500"
         >
           Subscribe

@@ -18,6 +18,8 @@ const Button = ({
   return (
     <div className={buttonConClass || ""}>
       <button
+        aria-label={title}
+        name={title}
         title={"Click to "+title}
         className={buttonClass || ""}
         onClick={(e) =>{

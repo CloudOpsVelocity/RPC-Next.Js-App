@@ -301,10 +301,13 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
       <p className="text-[#202020] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
         Email: {session?.user.email}
       </p>
-      <Button variant="blue" className="sm:!py-1.5" onClick={onSubmit}>
-        {popupState.MODAL_TYPE === "REQ_QUOTE"
-          ? "Request Quotation"
-          : "Request Callback"}
+      <Button 
+        aria-label={popupState.MODAL_TYPE === "REQ_QUOTE" ? "Request Quotation" : "Request Callback"} 
+        title={popupState.MODAL_TYPE === "REQ_QUOTE" ? "Request Quotation" : "Request Callback"} 
+        variant="blue" 
+        className="sm:!py-1.5" onClick={onSubmit}
+      >
+        {popupState.MODAL_TYPE === "REQ_QUOTE" ? "Request Quotation" : "Request Callback"}
       </Button>
     </div>
   );
@@ -452,6 +455,9 @@ const ReqForm = ({
         className="!bg-[#0073C6] text-[14px] md:text-[16px] text-white h-[36px] px-[10px] rounded-[4px] border-none font-semibold "
         type="submit"
         color="#0073C6"
+        aria-label={popupState.MODAL_TYPE === "REQ_QUOTE" ? "Request Quotation" : "Request Callback"} 
+        name={popupState.MODAL_TYPE === "REQ_QUOTE" ? "Request Quotation" : "Request Callback"} 
+        title={popupState.MODAL_TYPE === "REQ_QUOTE" ? "Request Quotation" : "Request Callback"}
         // loading={status === "pending"}
       >
         {popupState.MODAL_TYPE === "REQ_QUOTE"
@@ -471,7 +477,7 @@ const Success = ({ close }: { close: any }) => {
       <p className="text-[#202020]  xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
         Please wait for callback !
       </p>
-      <button onClick={close} className="!bg-[#0073C6] mt-[5%] ">
+      <button aria-label="Go To Project" name="Go To Project" title="Go To Project" onClick={close} className="!bg-[#0073C6] mt-[5%] ">
         Go To Project
       </button>
     </div>
