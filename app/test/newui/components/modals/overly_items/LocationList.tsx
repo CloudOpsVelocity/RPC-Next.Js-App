@@ -52,7 +52,7 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
       category: category,
       selectedNearbyItem: {},
     }));
-  }, [setNearby]);
+  }, []);
 
   const updateScrollButtons = throttle(() => {
     if (tabContainerRef.current) {
