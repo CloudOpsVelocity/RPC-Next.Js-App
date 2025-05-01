@@ -411,6 +411,7 @@ const config = {
   ),
   blueChevron: (
     <svg
+      className="pointer-events-none"
       xmlns="http://www.w3.org/2000/svg"
       width="10"
       height="6"
@@ -442,7 +443,7 @@ const config = {
     return (
       <span
         className={clsx(
-          "flex flex-col justify-center items-center gap-2.5 rounded px-1 text-white",
+          "flex flex-col justify-center items-center gap-2.5 rounded px-1 text-white pointer-events-none ",
           `${data[type as keyof typeof data].color}`
         )}
       >
@@ -480,15 +481,14 @@ function MobileDropDown() {
   return (
     <div
       className="relative "
-      onMouseEnter={() => setIsHovered(true)}
+      // onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
         {session ? (
-          <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+          <div onClick={() => setIsHovered((prev) => !prev)} className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button
-              className="inline-flex justify-center items-center gap-1"
-              onClick={() => setIsHovered((prev) => !prev)}
+              className="inline-flex justify-center items-center gap-1 pointer-events-none "
             >
               {config.getIcon(session.user.userType)}
             </button>
@@ -507,7 +507,7 @@ function MobileDropDown() {
         ? isHovered && (
             <div
               onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+              // onMouseLeave={() => setIsHovered(false)}
               className=" w-full flex flex-col absolute right-0 min-w-[150px] top-[48px]  bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg"
             >
               {data.map((item, index) =>
@@ -554,13 +554,13 @@ function MobileDropDown() {
                   </Link>
                 )
               )}
-              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+              <hr className=" border-[#768AA9] border border-b-[1px] h-[0.5px] max-w-[90%] w-full m-auto" />
 
               <div
-                className="block text-gray-700 hover:text-green-500 transition-colors"
+                className="block text-gray-700 hover:text-green-500 transition-colors  "
                 onClick={handleLogout}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 text-[14px] pl-3">
                   {homePageSvgsMap.get("logout")} <span>Log Out</span>
                 </div>
               </div>
