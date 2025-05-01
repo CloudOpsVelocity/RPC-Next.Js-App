@@ -5,16 +5,16 @@ type Props = {};
 
 export default function HomeFeatures({}: Props) {
   return (
-    <div className="w-full pb-[10px] pl-[4%] m-auto pt-[10px] sm:mt-0 sm:pb-16 md:pt-8 bg-[#EEF4F9] ">
+    <div className="w-full pb-[10px] pl-[4%] m-auto pt-[10px] sm:mt-0 sm:pb-16 md:pt-8  bg-[#EEF4F9] ">
       <div className=" text-[#202020] text-left md:text-center  text-[14px] md:text-[20px] xl:text-[24px] not-italic font-bold m-0 ">
         Why Choose{" "}
-        <h1 className=" text-[color:var(--Brand-green-primary,#148B16)] text-[14px] md:text-[20px] xl:text-[24px] not-italic font-bold">
+        <h1 className=" text-green-700 text-[14px] md:text-[20px] xl:text-[24px] not-italic font-bold">
           {" "}
           Get Right Property
         </h1>
         ?
       </div>
-      <p className=" text-[#242424] text-left md:text-center  text-[12px] md:text-[14px] xl:text-[16px] not-italic font-semibold leading-normal md:leading-[20px] xl: mt-[11px] xl:mt-[16px]">
+      <p className=" text-black text-left md:text-center  text-[12px] md:text-[14px] xl:text-[16px] not-italic font-semibold leading-normal md:leading-[20px] xl: mt-[11px] xl:mt-[16px]">
         Choose us for real estate because we offer expert guidance, a vast
         property selection and commitment to your dreams.
       </p>

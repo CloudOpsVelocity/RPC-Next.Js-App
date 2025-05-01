@@ -77,9 +77,9 @@ export default function Card({ item }: Props) {
 
                   <ShareBtn url={url} type="proj" />
                 </div>{" "}
-                <Link prefetch={false} href={url}>{item.projName}</Link>
+                <Link aria-label={`View details for ${item.projName}`} prefetch={false} href={url}>{item.projName}</Link>
               </div>
-              <Link prefetch={false} href={url}>
+              <Link  aria-label={`View details for ${item.projName}`} prefetch={false} href={url}>
                 <span className=" block text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
                   {formatCurrency(item.minPrice)} -{" "}
                   {formatCurrency(item.maxPrice)}
@@ -98,6 +98,7 @@ export default function Card({ item }: Props) {
               <div className="space-y-2">
                 <span className=" no-underline text-[#ffff]">Builder: </span>
                 <Link
+                 aria-label={`View details for ${item.postedByName}`}
                   href={urlBuilder}
                   prefetch={false}
                   // onClick={(e) => builderiRedirect(e)}
@@ -120,7 +121,7 @@ export default function Card({ item }: Props) {
                 </p>
               </div>
               <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
-                <ViewAllButton url={url} />
+                <ViewAllButton name={item.name} url={url} />
                 <ReqBtn
                   builderName={item.postedByName}
                   projName={item.projName}
