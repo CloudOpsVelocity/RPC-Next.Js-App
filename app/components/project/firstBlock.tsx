@@ -2,7 +2,7 @@
 "use client";
 import React from "react";
 import { ReraIcon } from "@/app/images/commonSvgs";
-import { Main } from "@/app/validations/types/project";
+
 import { getImageUrls } from "@/app/utils/image";
 // import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
