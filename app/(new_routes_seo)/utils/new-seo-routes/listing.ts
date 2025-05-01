@@ -54,8 +54,8 @@ export async function generateSlugs(
       type === "project-listing"
     ) {
       const [
-        // emptyPath,
-        // country,
+        ,
+        ,
         cg,
         city,
         lt,

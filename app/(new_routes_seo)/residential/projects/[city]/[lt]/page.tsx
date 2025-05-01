@@ -39,7 +39,7 @@ export async function generateStaticParams() {
   for (let i = 0; i < keys.length; i++) {
     const data = keys[i];
     if ((data.match(/\//g) || []).length === 4) {
-      const [city, lt] = data.split("/");
+      const [, , , city, lt] = data.split("/");
       slugs.push({ city, lt });
     }
   }

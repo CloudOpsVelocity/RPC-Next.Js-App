@@ -9,6 +9,7 @@ import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { findPathForBuilderDetails } from "../services/builder-server.service";
 import { getCitiesBuilder } from "../services/builder-client.service";
 import { BASE_PATH_BUILDER_DETAILS } from "../builder.constant";
+import logger from "@/app/utils/logger";
 type Props = {
   params: {
     city: string;
@@ -40,8 +41,9 @@ export async function generateStaticParams() {
   const builderRess = Object.keys(res);
   const slugs = builderRess.map((data) => {
     // const [staticPath, staticPath2, city, slug] = data.split("/");
-    const [ city ] = data.split("/");
+    const [, , city] = data.split("/");
     return { city };
-  });
+  })
+
   return slugs;
 }

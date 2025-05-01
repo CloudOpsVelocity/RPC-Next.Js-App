@@ -354,7 +354,7 @@ export async function generateStaticParams() {
   for (let i = 0; i < projectRes.length; i++) {
     const data = projectRes[i];
     if ((data.match(/\//g) || []).length === 5) {
-      const [ city, lt, slug] = data.split("/");
+      const [, , , city, lt, slug] = data.split("/");
       if (slug) {
         slugs.push({ city, lt, slug });
       }
