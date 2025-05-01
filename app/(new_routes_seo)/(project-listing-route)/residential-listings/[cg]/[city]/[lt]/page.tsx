@@ -40,9 +40,29 @@ export default async function Page({
   params: { cg, city, lt },
   searchParams,
 }: Props) {
+  console.log(lt);
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}`;
+  // if (Number.isInteger(parseInt(lt))) {
+  //   return (
+  //     <div>
+  //       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque fugiat
+  //       earum tempora quis corrupti error quasi facilis eius id enim numquam
+  //       similique veritatis aperiam alias explicabo exercitationem, cupiditate
+  //       ut consequatur minima? Sunt iste amet, minima impedit tempora ipsa iusto
+  //       quaerat eaque cupiditate earum porro voluptate! Similique quibusdam
+  //       iusto perferendis officia cumque minus corrupti rem, ipsa quia numquam
+  //       veniam quis tenetur praesentium at minima, ipsam ab enim error et
+  //       assumenda expedita incidunt? Consectetur quis eligendi esse repudiandae
+  //       exercitationem veniam quod tenetur rem quibusdam enim, est ut aliquam,
+  //       atque quos hic! Voluptatibus nihil nam laborum quis ea error voluptas
+  //       omnis illo esse.
+  //     </div>
+  //   );
+  // }
   const values = await findPathForProjectListing(pathname);
+
   if (!values) return notFound();
+
   let serverData = null;
   let frontendFilters = null;
   if (searchParams.sf) {

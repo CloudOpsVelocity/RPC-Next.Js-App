@@ -54,6 +54,7 @@ export default async function Page({ params, searchParams }: Props) {
       }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
     );
     frontendFilters = {
+      listedBy: null,
       localities: [`${lt}+${filtersValues.LT}`],
       cg: filtersValues.CG,
       projName: project,
@@ -66,7 +67,6 @@ export default async function Page({ params, searchParams }: Props) {
         : {}),
       ...(filtersValues.PH && {
         phaseId: [`${params.phase}+${filtersValues.PH}`],
-        listedBy: null,
       }),
     };
   }

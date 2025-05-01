@@ -19,30 +19,31 @@ function FirstImagesBlock({ onSelect, data }: Props) {
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
   const getImage = (index: number, className: string) => {
-   
-
     if (data.images[index]) {
       const urls = data.images[index].split(",");
 
       <>
-      <Head>
-        <link rel="preconnect" href="https://media.getrightproperty.com" />
-        <link
-          rel="preload"
-          as="image"
-          href={getUrl(data.images, 3)}
-             // @ts-ignore to skip type error
-          imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(data.images, 2)} 768w, ${getUrl(data.images, 3)} 1200w`}
-          imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
-        />
-      </Head>
+        <Head>
+          <link rel="preconnect" href="https://media.getrightproperty.com" />
+          <link
+            rel="preload"
+            as="image"
+            href={getUrl(data.images, 3)}
+            // @ts-ignore to skip type error
+            imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(
+              data.images,
+              2
+            )} 768w, ${getUrl(data.images, 3)} 1200w`}
+            imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
+          />
+        </Head>
 
-      {/* JSX for your component */}
-    </>
+        {/* JSX for your component */}
+      </>;
 
       return (
         <picture>
-          <source media="(max-width: 460px)" srcSet={getUrl(urls, 1)} />
+          <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
           <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
           <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
           <Image
@@ -52,9 +53,9 @@ function FirstImagesBlock({ onSelect, data }: Props) {
             height={195}
             width={900}
             className={className}
-            priority={index == 0 ? true : false}
+            // priority={index == 0 ? true : false}
             unoptimized={true}
-            quality={80}
+            // quality={80}
           />
         </picture>
       );
@@ -87,7 +88,7 @@ function FirstImagesBlock({ onSelect, data }: Props) {
           </p>
           <button
             aria-label={title}
-            name={title} 
+            name={title}
             title={title}
             onClick={(e) => {
               e.stopPropagation();
