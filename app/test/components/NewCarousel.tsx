@@ -179,6 +179,7 @@ function NewCarousel<T>({
         <>
           {canGoPrev && (
             <button
+            aria-label="Scroll left"
               onClick={prev}
               className="absolute -left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-50"
             >
@@ -198,7 +199,7 @@ function NewCarousel<T>({
             <button
               onClick={next}
               className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-50"
-              aria-label="Next"
+              aria-label="Scroll Next"
             >
               <IoChevronForwardOutline className="w-6 h-6" />
             </button>

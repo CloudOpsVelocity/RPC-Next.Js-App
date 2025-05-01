@@ -30,14 +30,14 @@ export default function MainHeading({
         >
           {title}
         </h2>
-        <h4
+        <h3
           className={clsx(
             "text-black  text-[12px] sm:text-[14px] xl:text-xl not-italic font-medium sm:mt-1",
             className?.content
           )}
         >
           {content}
-        </h4>
+        </h3>
       </div>
       {title != "Handpicked Projects" &&
         title != "Top Localities" &&
