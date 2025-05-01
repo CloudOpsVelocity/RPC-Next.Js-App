@@ -22,7 +22,7 @@ interface FrontEndFilter {
   city?: string;
   bhk?: number[];
   localities?: string[];
-  listedBy: string;
+  listedBy: string | null;
 }
 
 interface SeoSearchResult {
@@ -58,7 +58,7 @@ const CaseSeoSearchService = async (
   }
   let city = `Bengaluru`;
   const frontEndFilter: FrontEndFilter = {
-    listedBy: "All",
+    listedBy: null,
     ...(slugValues.P ? { propType: parseInt(slugValues.P) } : {}),
     ...(slugValues.CG ? { cg: slugValues.CG } : {}),
     ...(slugValues.C ? { city: `${city}+${slugValues.C}` } : {}),

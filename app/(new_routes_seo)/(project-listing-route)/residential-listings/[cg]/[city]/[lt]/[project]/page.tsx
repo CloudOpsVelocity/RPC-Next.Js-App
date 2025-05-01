@@ -1,6 +1,9 @@
 // import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
-import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
-  import {
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
+import {
   findPathForProjectListing,
   // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
@@ -29,23 +32,21 @@ export default async function Page({
   params: { cg, city, lt, project },
   searchParams,
 }: Props) {
-
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   let serverData = null;
-  let frontendFilters = null
-  if(searchParams.sf){
-      const apiFilters = parseApiFilterQueryParams(searchParams.sf)
-      const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
-      // eslint-disable-next-line no-unused-vars
-      const data = isProj
-        ? await getProjSearchData(apiFilters ?? "")
-        : await getSearchData(apiFilters ?? "");
-      serverData = data;
-         frontendFilters = parseApiFilterQueryParams(searchParams.sf);
-  }
-  else{
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+  } else {
     const filtersValues = extractListingParamsValues(values);
     serverData = await getSearchData(
       `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
@@ -55,7 +56,8 @@ export default async function Page({
       cg: filtersValues.CG,
       projName: project,
       projIdEnc: filtersValues.PJ,
-    }
+      listedBy: null,
+    };
   }
 
   return (

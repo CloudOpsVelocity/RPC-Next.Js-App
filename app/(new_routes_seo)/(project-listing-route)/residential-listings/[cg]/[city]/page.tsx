@@ -56,6 +56,7 @@ export default async function Page({
     serverData = await getSearchData(`cg=${slugValues.CG}`);
     frontendFilters = {
       cg: slugValues.CG,
+      listedBy: null,
     };
   }
 

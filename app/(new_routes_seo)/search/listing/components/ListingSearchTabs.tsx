@@ -216,10 +216,10 @@ const ListingSearchTabs = ({
 
   const tabsSelected = useCallback(() => {
     if (state.listedBy === undefined) {
-      return frontendFilters.listedBy;
+      return frontendFilters?.listedBy;
     }
     return state.listedBy === frontendFilters.listedBy
-      ? frontendFilters.listedBy
+      ? frontendFilters?.listedBy
       : state.listedBy;
   }, [state, frontendFilters]);
 

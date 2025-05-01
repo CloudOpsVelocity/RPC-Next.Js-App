@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -23,30 +26,29 @@ export default async function Page({ params: { cg }, searchParams }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
-    let serverData = null;
-    let frontendFilters = null
-    if(searchParams.sf){
-        const apiFilters = parseApiFilterQueryParams(searchParams.sf)
-        const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
-        // eslint-disable-next-line no-unused-vars
-        const data = isProj
-          ? await getProjSearchData(apiFilters ?? "")
-          : await getSearchData(apiFilters ?? "");
-        serverData = data;
-           frontendFilters = parseApiFilterQueryParams(searchParams.sf);
-    }
-    else{
-      const slugValues = extractListingParamsValues(values);
-      serverData = await getSearchData(`cg=${slugValues.CG}`);
-      frontendFilters = {
-        cg: slugValues.CG,
-  
-      }
-    }
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+  } else {
+    const slugValues = extractListingParamsValues(values);
+    serverData = await getSearchData(`cg=${slugValues.CG}`);
+    frontendFilters = {
+      cg: slugValues.CG,
+      listedBy: null,
+    };
+  }
   return (
     <NewListingSearchpage
       serverData={serverData}
-      frontendFilters={frontendFilters  }
+      frontendFilters={frontendFilters}
       showProjectTab
       pageUrl={pathname}
       preDefinedFilters={searchParams.sf}

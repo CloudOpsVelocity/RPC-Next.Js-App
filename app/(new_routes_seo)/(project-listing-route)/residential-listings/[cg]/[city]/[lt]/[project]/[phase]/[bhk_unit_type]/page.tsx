@@ -1,5 +1,8 @@
 import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
-import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
@@ -37,18 +40,17 @@ export default async function Page({ params, searchParams }: Props) {
   let isProjectListing = bhk_unit_type.includes("listing");
   let serverData = null;
   let filtersValues: any = {};
-   let frontendFilters = null
-   if(searchParams.sf){
-    const apiFilters = parseApiFilterQueryParams(searchParams.sf)
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
     const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
     // eslint-disable-next-line no-unused-vars
     serverData = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
 
-       frontendFilters = parseApiFilterQueryParams(searchParams.sf);
-  }
-  else{
+    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+  } else {
     if (!isProjectListing) {
       const values = await findPathForProjectListing(pathname);
       // console.log(values);
@@ -70,8 +72,9 @@ export default async function Page({ params, searchParams }: Props) {
         projIdEnc: filtersValues.PH,
         ...(filtersValues.PH && {
           phaseId: [`${params.phase}+${filtersValues.PH}`],
-        })
-      }
+        }),
+        listedBy: null,
+      };
     } else {
       const {
         listing: data,
@@ -81,7 +84,7 @@ export default async function Page({ params, searchParams }: Props) {
         (bhk_unit_type.split("-").at(-1) as string) ?? "",
         pathname
       );
-  
+
       const [projData, issueData, amenities] = await Promise.all([
         getProjectDetails(data.projIdEnc),
         getReportConstData(),
@@ -95,7 +98,7 @@ export default async function Page({ params, searchParams }: Props) {
         ? data.propName
         : `${data.bhkName ?? ""} ${data.propTypeName} For
       ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName}`;
-  
+
       serverData = {
         TITLE_OF_PROP,
         data,
@@ -107,14 +110,13 @@ export default async function Page({ params, searchParams }: Props) {
       };
     }
   }
-  
 
   return !isProjectListing ? (
     <NewListingSearchpage
       pageUrl={pathname}
       serverData={serverData}
-       frontendFilters={frontendFilters}
-       preDefinedFilters={searchParams.sf}
+      frontendFilters={frontendFilters}
+      preDefinedFilters={searchParams.sf}
     />
   ) : (
     <ListingDetailsPage params={params} {...serverData} pathname={pathname} />
@@ -185,9 +187,7 @@ export async function generateMetadata(
   }
 
   const id = params.bhk_unit_type.split("-")[1];
-  const {
-    listing: data,
-  } = await getListingDetails(id as string);
+  const { listing: data } = await getListingDetails(id as string);
   const keywords = `${data.bhkName ?? ""}, ${data.propTypeName}, ${
     data.ltName
   }, ${data.ctName}, ${data.cg === "S" ? "Sale" : "Rent"}`;

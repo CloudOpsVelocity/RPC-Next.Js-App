@@ -52,6 +52,22 @@ export default async function Page({ params, searchParams }: Props) {
         filtersValues.PJ
       }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
     );
+    frontendFilters = {
+      localities: [`${lt}+${filtersValues.LT}`],
+      cg: filtersValues.CG,
+      projName: project,
+      projIdEnc: filtersValues.PJ,
+      ...(filtersValues.count === 7
+        ? {
+            bhk: [parseInt(filtersValues.BH as string)],
+            propType: parseInt(filtersValues.PT as string),
+          }
+        : {}),
+      ...(filtersValues.PH && {
+        phaseId: [`${params.phase}+${filtersValues.PH}`],
+        listedBy: null,
+      }),
+    };
   }
   return (
     <NewListingSearchpage
