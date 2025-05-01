@@ -3,7 +3,7 @@ import { homeSearchFiltersAtom } from "@/app/store/home";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { truncateText } from "@/app/utils/letters";
 // import { Tooltip } from "@mantine/core";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -27,7 +27,7 @@ type Props = {
 // }`;
 
 export default function Box({ item }: Props) {
-  const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
+  const filters = useAtomValue(homeSearchFiltersAtom);
   const router = useRouter();
 
   const handlePush = async (type: string, data: any, apiData: any) => {
@@ -134,7 +134,7 @@ export default function Box({ item }: Props) {
   return (
     <Tooltip text={item.name}>
       <div
-        onClick={(e) => handlePush(item.ct, item, item)}
+        onClick={() => handlePush(item.ct, item, item)}
         className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-[#4B77C1] text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200"
       >
         {truncateText(item?.name, 36)} {config.icon}

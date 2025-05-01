@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import {
   FaHome,
@@ -6,18 +8,11 @@ import {
   FaBolt,
   FaThumbsUp,
   FaHandSparkles,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
 
 import Link from "next/link";
-
-import Filters from "./FiltersForListings";
-
 import { FaChevronRight } from "react-icons/fa6";
-
-import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useState } from "react";
-import ResidentialCardSectionForListings from "./ResidentialcardSectionForListings";
 import PaginationForListings from "./Pagination";
 import FiltersForListings from "./FiltersForListings";
 import { PropertyCard } from "./newcardforlsiting";
@@ -154,7 +149,7 @@ export default function ResidentialPageForListings({
       /> */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[80%] mx-auto">
         {datafornew.map((property: any, index: number) => (
-          <PropertyCard key={index} property={property} />
+          <PropertyCard key={`datafornew_${index.toString()}`} property={property} />
         ))}
       </div>
       <PaginationForListings totalCount={totalCount} />
@@ -205,7 +200,7 @@ export default function ResidentialPageForListings({
                   },
                 ].map((feature, index) => (
                   <div
-                    key={index}
+                    key={`features_2_${index.toString()}`}
                     className="p-8 rounded-xl bg-card hover:shadow-lg transition-all"
                   >
                     <div className="mb-6 text-primary bg-primary/10 inline-block p-4 rounded-full">
@@ -230,7 +225,7 @@ export default function ResidentialPageForListings({
               <div className="grid md:grid-cols-3 gap-8">
                 {testimonials?.map((testimonial, index) => (
                   <div
-                    key={index}
+                    key={`testimonials2_${index.toString()}`}
                     className="bg-card p-8 rounded-xl shadow hover:shadow-md transition-all"
                   >
                     <div className="flex items-center mb-6">

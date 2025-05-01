@@ -113,6 +113,7 @@ export default function SearchCitySelectDropdown() {
           break;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isOpen, filteredCities, activeIndex]
   );
 
@@ -123,6 +124,7 @@ export default function SearchCitySelectDropdown() {
     setIsOpen(false);
     setFilters((prev) => ({ ...prev, city: `${city.name}+${city.id}` }));
     handleAppliedFilters();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

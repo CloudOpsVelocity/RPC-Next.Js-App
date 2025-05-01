@@ -11,6 +11,7 @@ interface ColumnVirtualizerFixedProps {
   gapSize?: number;
   overscan?: number;
   height?: number;
+  // eslint-disable-next-line no-unused-vars
   renderItem?: (item: any, index: number) => React.ReactNode;
 }
 

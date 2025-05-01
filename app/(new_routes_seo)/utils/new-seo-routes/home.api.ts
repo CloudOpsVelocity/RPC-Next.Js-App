@@ -32,10 +32,10 @@ const getUserCity = async (
 };
 export const getHomePageProjectData = async (
   city?: number | string,
-  coordinates?: {
-    lat: number;
-    lng: number;
-  }
+  // coordinates?: {
+  //   lat: number;
+  //   lng: number;
+  // }
 ) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/project`;
   if (city) {

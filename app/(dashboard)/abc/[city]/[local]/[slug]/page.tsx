@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import Feature from "@/app/components/project/feature";
 // import Reviews from "@/app/components/project/reviews";
@@ -30,7 +31,7 @@ import AboutBuilder from "@/app/components/project/aboutBuilder";
 // import FaqWithBg from "@/app/components/project/faq";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import axios from "axios";
+// import axios from "axios";
 // import PartialUnitData from "@/app/components/project/sections";
 import { Metadata } from "next";
 import type { ResolvingMetadata } from "next";
@@ -338,11 +339,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 //   return slugs;
 // }
 
-async function getParams() {
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
-  let data = await axios.get(url);
-  return data.data;
-}
+// async function getParams() {
+//   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
+//   let data = await axios.get(url);
+//   return data.data;
+// }
 
 type SeoProps = {
   params: { slug: string };

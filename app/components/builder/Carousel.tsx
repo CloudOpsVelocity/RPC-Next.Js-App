@@ -227,7 +227,7 @@ const BuilderCarousel = ({
   content,
   title,
   projName,
-  location,
+  // location,
   id,
   builderName,
 }: Props) => {
@@ -259,7 +259,7 @@ const BuilderCarousel = ({
       <NewCarousel
         data={data}
         type="proj"
-        renderItem={(item: any, index) => (
+        renderItem={(item: any) => (
           <ProjectCard
             type={type}
             cardData={{ ...item, postedByName: builderName }}

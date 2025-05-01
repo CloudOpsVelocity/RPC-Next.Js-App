@@ -12,10 +12,10 @@ import SharePopup from "../components/SharePopup";
 const SearchingPage = async () => {
   // const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
   // const data = await getUserCity(undefined,ip);
-  const data = {
-    city: "Bengaluru",
-    cityId: "9",
-  };
+  // const data = {
+  //   city: "Bengaluru",
+  //   cityId: "9",
+  // };
   return (
     <div>
       <Header />

@@ -1,36 +1,36 @@
 "use client";
-import { BasicMultiSelect } from "@/app/(dashboard)/new/components/home-search/filters/BhkTypeSelect";
-import { BasicBudgetSelect } from "@/app/(dashboard)/new/components/home-search/filters/BugdetSelect";
+// import { BasicMultiSelect } from "@/app/(dashboard)/new/components/home-search/filters/BhkTypeSelect";
+// import { BasicBudgetSelect } from "@/app/(dashboard)/new/components/home-search/filters/BugdetSelect";
 import { CustomBhkTypeSelect } from "@/app/(dashboard)/new/components/home-search/filters/CustomBhkTypeSelect";
 import { CustomBugdetSelect } from "@/app/(dashboard)/new/components/home-search/filters/CustomBugdetSelect";
-import { BasicSelect } from "@/app/(dashboard)/new/components/home-search/filters/Select";
+// import { BasicSelect } from "@/app/(dashboard)/new/components/home-search/filters/Select";
 import { SelectField } from "@/app/(dashboard)/new/components/home-search/filters/SelectField";
 import { toQueryParams } from "@/app/(dashboard)/new/utils/param";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import { FaSearch } from "react-icons/fa";
 
 type Props = {};
-const propertyTypes = ["All", "Villa", "Apartment", "Villament", "Plot"];
-const priceRanges = [
-  "All",
-  "Under ₹80 Lakhs",
-  "₹80L - ₹1.2 Cr",
-  "Above ₹1.2 Cr",
-];
-const locations = [
-  "All",
-  "Kengeri",
-  "Electronic City",
-  "Whitefield",
-  "Sarjapur Road",
-];
+// const propertyTypes = ["All", "Villa", "Apartment", "Villament", "Plot"];
+// const priceRanges = [
+//   "All",
+//   "Under ₹80 Lakhs",
+//   "₹80L - ₹1.2 Cr",
+//   "Above ₹1.2 Cr",
+// ];
+// const locations = [
+//   "All",
+//   "Kengeri",
+//   "Electronic City",
+//   "Whitefield",
+//   "Sarjapur Road",
+// ];
 
 export default function Filters({}: Props) {
   const router = useRouter();
-  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const [f] = useAtom(homeSearchFiltersAtom);
 
   const onSearch = () => {
     //alert(JSON.stringify(f))
@@ -106,7 +106,7 @@ export default function Filters({}: Props) {
                 stroke-width="2"
                 d="M11.6849 12.6267C11.9533 12.895 12.3674 12.4808 12.0991 12.2183L9.91161 10.025C10.6791 9.1761 11.1033 8.07196 11.1016 6.92751C11.1016 4.36668 9.01911 2.28418 6.45827 2.28418C3.89744 2.28418 1.81494 4.36668 1.81494 6.92751C1.81494 9.48835 3.89744 11.5708 6.45827 11.5708C7.61328 11.5708 8.68078 11.145 9.49744 10.4392L11.6849 12.6267ZM2.39769 6.92751C2.39769 4.68751 4.22352 2.86751 6.45769 2.86751C8.69769 2.86751 10.5177 4.68751 10.5177 6.92751C10.5177 9.16751 8.69769 10.9875 6.45769 10.9875C4.22352 10.9875 2.39769 9.16751 2.39769 6.92751Z"
                 fill="#FFFFFF"
-              ></path>
+              />
             </svg>
           </div>
           <button

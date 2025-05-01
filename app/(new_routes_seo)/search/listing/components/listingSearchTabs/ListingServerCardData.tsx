@@ -17,7 +17,7 @@ export default function ListingServerCardData({
   return data.map((eachOne: any, index: number) => {
     return (
       <ProjectCard
-        key={eachOne.projIdEnc + eachOne.propType + index}
+        key={eachOne.projIdEnc + eachOne.propType + index.toString()}
         refetch={refetch}
         data={{ ...eachOne, type: state.listedBy ?? "B", cg: state.cg }}
         index={index}

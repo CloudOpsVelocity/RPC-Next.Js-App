@@ -8,6 +8,7 @@ interface TooltipProps {
   position?: 'top' | 'right' | 'bottom' | 'left'
 }
 
+// eslint-disable-next-line no-unused-vars
 export default function Tooltip({ text, children, position = 'top' }: TooltipProps) {
   return (
     <div className="group relative inline-block">

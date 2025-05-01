@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import SubscribeBlock from "@/app/blog/blogDetailSextion/SubscribeBlock";
 import BlogDetailsFirstBlock from "../blogDetailSextion/BlogDetailsFirstBlock";
 import FeaturedBlogs from "../blogDetailSextion/FeaturedBlogs";

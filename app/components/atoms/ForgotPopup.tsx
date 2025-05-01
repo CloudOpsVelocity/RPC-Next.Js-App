@@ -17,7 +17,7 @@ type props = {
 
 function ForgotAuthPopup({
   opened,
-  open,
+  // open,
   close,
   userName,
   callback,

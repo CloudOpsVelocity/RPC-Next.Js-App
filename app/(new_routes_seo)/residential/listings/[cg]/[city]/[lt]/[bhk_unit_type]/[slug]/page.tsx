@@ -81,13 +81,12 @@ export async function generateStaticParams() {
 }
 export async function generateMetadata(
   { params }: any,
+  // eslint-disable-next-line no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const id = params?.slug?.split("-")[1];
   const {
     listing: data,
-    nearByLocations,
-    totalPrice,
   } = await getListingDetails(id as string);
 
   const keywords = `${data.bhkName ?? ""}, ${data.propTypeName}, ${

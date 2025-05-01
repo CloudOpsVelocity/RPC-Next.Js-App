@@ -10,22 +10,22 @@ import {
 import useQsearch from "@/app/hooks/search/useQsearch";
 import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
-import { usePathname } from "next/navigation";
 // import fakeData from "@/app/data/listing";
 import { projectprops } from "@/app/data/projectDetails";
 
 // For Listings
 
+// eslint-disable-next-line no-unused-vars
 export function MainSearchMultiSelect({ type }: { type: string }) {
   const {
     data: searchData,
     isLoading,
     handleResetQuery,
     onSearchChange,
-    debounced,
-    name,
+    // debounced,
+    // name,
   } = useQsearch();
-  const path = usePathname();
+  // const path = usePathname();
   const { filters, setFilters, remnoveSearchOptions } = useSearchFilters();
   //
   // setFIlter({...filters,key:value})

@@ -6,6 +6,7 @@ import useSearchFilters from "@/app/hooks/search";
 // import { projectprops } from "@/app/data/projectDetails";
 
 export default function BhkFilter({ close }: { close: () => void }) {
+  // eslint-disable-next-line no-unused-vars
   const { filters, handleCheckboxClick, params } = useSearchFilters();
   return (
     <div className="max-w-[860px] ">
@@ -15,7 +16,7 @@ export default function BhkFilter({ close }: { close: () => void }) {
           BHK Type
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-2 gap-x-10">
-          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => (
+          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem) => (
             <Checkbox
               key={"bhk_" + eachItem.value}
               color="green"

@@ -24,7 +24,6 @@ export const dynamicParams = true;
 import React, { memo } from "react";
 import ResidentialPageForListings from "./_components/ResidentialDetailPageForListings";
 import axios from "axios";
-import { ResidentialProjectSchama } from "@/app/seo/search/ResidentialProject.shcema";
 import { Metadata } from "next";
 import NotFound from "@/app/not-found";
 import ResidentialListingsSchema from "@/app/seo/search/ResidentialListings.schema";

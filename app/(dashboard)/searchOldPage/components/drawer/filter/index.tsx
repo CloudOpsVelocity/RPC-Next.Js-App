@@ -39,16 +39,17 @@ const MobileFilter = ({ close }: any) => {
   const [builderSearch, setBuilderSearch] = useDebouncedState("w", 500);
   const {
     data: searchData,
-    isLoading,
-    handleResetQuery,
     onSearchChange,
-    debounced,
     name,
+
+    // isLoading,
+    // handleResetQuery,
+    // debounced,
   } = useQsearch();
   const {
     localities,
     builders,
-    cities,
+    // cities,
     projects,
     listing: listings,
     projectListing,
@@ -58,7 +59,7 @@ const MobileFilter = ({ close }: any) => {
     handleCheckboxClick,
     setPropTypes,
     setStatus,
-    handleBooleanCheck,
+    // handleBooleanCheck,
     handleSliderChange,
     setFilters,
     remnoveSearchOptions,
@@ -172,7 +173,7 @@ const MobileFilter = ({ close }: any) => {
               {
                 group: "Project Listings",
                 items:
-                  projectListing?.map((item: any, i: number) => {
+                  projectListing?.map((item: any) => {
                     return {
                       value: `${item.id}+${item.type}`,
                       label: item.name,
@@ -188,7 +189,7 @@ const MobileFilter = ({ close }: any) => {
               },
             ]}
             onSearchChange={(e) => onSearchChange(e)}
-            onChange={(e) => alert("workign")}
+            onChange={() => alert("workign")}
             searchValue={name ?? ""}
             mb={"10px"}
             withScrollArea={false}
@@ -272,7 +273,7 @@ const MobileFilter = ({ close }: any) => {
             Property Type {/* {notificationIcon} */}
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {propKeys.map((keyName, i) => {
+            {propKeys.map((keyName) => {
               if (keyName === 32 && filters.unitTypes.length > 0) {
                 return null;
               }
@@ -412,7 +413,7 @@ const MobileFilter = ({ close }: any) => {
             Amenities
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+            {SEARCH_FILTER_DATA.amenities.map((i) => {
               return (
                 <Checkbox
                   className="my-2"
@@ -458,7 +459,7 @@ const MobileFilter = ({ close }: any) => {
             RERA
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.rerastatus.map((i, ind) => {
+            {SEARCH_FILTER_DATA.rerastatus.map((i) => {
               return (
                 <Checkbox
                   className="my-2"

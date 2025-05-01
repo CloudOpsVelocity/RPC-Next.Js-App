@@ -1,11 +1,12 @@
 import React from "react";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 type Props = {
   params: { city: string; lt: string };
 };
 export const dynamic = "force-dynamic";
+// eslint-disable-next-line no-unused-vars
 export default async function Page({ params: { city, lt } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}`;
   const serverData = await getSearchData();

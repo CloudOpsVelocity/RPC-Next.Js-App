@@ -18,7 +18,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { DynamicText } from "../../utils/text";
 
 const SearchDrawerHeader = ({
-  open,
+  // open,
   close,
   setShowAllLocalities,
   showAllLocalities,
@@ -29,7 +29,7 @@ const SearchDrawerHeader = ({
     filters,
     handleAppliedFilters,
     remnoveSearchOptions,
-    setFilters,
+    // setFilters,
     setSingleType,
   } = useSearchFilters();
   const isMobile = useMediaQuery(em("max-width: 768px"));

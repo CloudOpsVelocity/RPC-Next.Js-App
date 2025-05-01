@@ -22,7 +22,7 @@ import SearchCitySelectDropdown from "./_ui/CityDropDown/SearchCitySelectDropdow
 import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useAtomValue } from "jotai";
 import Link from "next/link";
-const SearchAndFilterCon = ({ frontendFilters, cityData }: any) => {
+const SearchAndFilterCon = ({ frontendFilters }: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
   ]);
@@ -37,10 +37,10 @@ const SearchAndFilterCon = ({ frontendFilters, cityData }: any) => {
 };
 export default SearchAndFilterCon;
 
-const SearchHeader = ({ setShowAllLocalities, city }: any) => {
+const SearchHeader = ({ city }: any) => {
   const { filters, remnoveSearchOptions, handleAppliedFilters, params } =
     useSearchFilters();
-  const isMobile = useMediaQuery("(max-width: 601px)");
+  // const isMobile = useMediaQuery("(max-width: 601px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
 
   type FilterObjState = {
@@ -59,12 +59,12 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
 
   const [allFilterPopup, setAllFilterPopup] = useState(initialFilterObjState);
 
-  const [, { open: openMobileSearchDrawer, close }] =
+  const [, { close }] =
     useDisclosure(false);
-  const showpopUp = () => {
-    setShowAllLocalities(true);
-    open();
-  };
+  // const showpopUp = () => {
+  //   setShowAllLocalities(true);
+  //   open();
+  // };
 
   const maxDisplay = 3;
 

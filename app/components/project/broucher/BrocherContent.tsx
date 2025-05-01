@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 "use client";
 import React, {
   useEffect,
@@ -16,11 +17,11 @@ import {
 } from "react-icons/fa";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
-import { useSession } from "next-auth/react";
-import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+// import { useSession } from "next-auth/react";
+// import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Image from "next/image";
-import SubHeading from "../headings/SubHeading";
-import PropertyHeading from "../../property/heading";
+// import SubHeading from "../headings/SubHeading";
+// import PropertyHeading from "../../property/heading";
 
 // PDF worker setup
 pdfjs.GlobalWorkerOptions.workerSrc =
@@ -53,8 +54,8 @@ function BrocherContent({
   broucherImage,
   singleBrocher,
 }: Props) {
-  const { data: session } = useSession();
-  const [, { open: LoginOpen }] = usePopShortList();
+  // const { data: session } = useSession();
+  // const [, { open: LoginOpen }] = usePopShortList();
   const pdfContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 660px)");
   const [currentSize, setCurrentSize] = useState<number>(0);
@@ -194,32 +195,32 @@ function BrocherContent({
     setState((prev) => ({ ...prev, pageNumber: prev.pageNumber + offset }));
   };
 
-  const downloadBroucher = (url: string) => {
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            `Network response was not ok: ${response.statusText}`
-          );
-        }
-        return response.blob();
-      })
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "brochure.pdf";
-        document.body.appendChild(link);
+  // const downloadBroucher = (url: string) => {
+  //   fetch(url)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(
+  //           `Network response was not ok: ${response.statusText}`
+  //         );
+  //       }
+  //       return response.blob();
+  //     })
+  //     .then((blob) => {
+  //       const url = window.URL.createObjectURL(blob);
+  //       const link = document.createElement("a");
+  //       link.href = url;
+  //       link.download = "brochure.pdf";
+  //       document.body.appendChild(link);
 
-        link.click();
+  //       link.click();
 
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      })
-      .catch((error) => {
-        console.error("Error fetching or downloading the file:", error);
-      });
-  };
+  //       document.body.removeChild(link);
+  //       window.URL.revokeObjectURL(url);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching or downloading the file:", error);
+  //     });
+  // };
 
   function downloadPDF(url: string, filename: string) {
     fetch(url)

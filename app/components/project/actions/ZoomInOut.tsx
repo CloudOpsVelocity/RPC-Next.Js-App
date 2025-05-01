@@ -11,7 +11,7 @@ import { useControls } from "react-zoom-pan-pinch";
 type Props = { className?: string };
 
 export default function ZoomInOut({ className }: Props) {
-  const { zoomIn, zoomOut, resetTransform, instance } = useControls();
+  const { zoomIn, zoomOut, resetTransform } = useControls();
   const handleButtonClick = (type: string) => {
     switch (type) {
       case "zoomIn":
@@ -32,7 +32,7 @@ export default function ZoomInOut({ className }: Props) {
         className
       )}
     >
-      {config.buttons.map((item, index) => (
+      {config.buttons.map((item) => (
         <button
           key={item.title}
           className={config.styles}

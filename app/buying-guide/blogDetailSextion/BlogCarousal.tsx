@@ -2,7 +2,7 @@
 
 import React, {useRef, useState} from 'react';
 import { NextCarouselButton, PrevCarouselButton } from '@/app/images/commonSvgs';
-import { useMediaQuery } from '@mantine/hooks';
+// import { useMediaQuery } from '@mantine/hooks';
 import { useAtom } from 'jotai';
 import { blogDetails } from '@/app/hooks/blog';
 import "@mantine/carousel/styles.css";
@@ -10,7 +10,7 @@ import BlogCard from '@/app/blog/blogDetailSextion/BlogCarousalCard';
 
 function BlogCarousal() {
     const [{ allBlogData, selectedBlog }] = useAtom(blogDetails);
-    const isMobile = useMediaQuery(`(max-width: 750px)`);
+    // const isMobile = useMediaQuery(`(max-width: 750px)`);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);

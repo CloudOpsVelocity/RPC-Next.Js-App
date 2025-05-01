@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-boolean-value */
 "use client";
-import { useMediaQuery } from "@mantine/hooks";
-import { em } from "@mantine/core";
+// import { useMediaQuery } from "@mantine/hooks";
+// import { em } from "@mantine/core";
 import { useAtom } from "jotai";
 import { readMoreAtom } from "@/app/store/drawer";
 // import S from "@/app/styles/Drawer.module.css";
@@ -9,7 +9,7 @@ import { AmenityList } from "@/app/validations/types/project";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
 import React, { Fragment } from "react";
 import Close from "./button/close";
-import { useDrag } from "@use-gesture/react";
+// import { useDrag } from "@use-gesture/react";
 import DrawerBox from "../property/pricingbreakup/DrawerBox";
 function ProjectDrawer({ projName }: { projName: string }) {
   const [
@@ -24,18 +24,18 @@ function ProjectDrawer({ projName }: { projName: string }) {
       builderName: "",
     }));
   };
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-  const bind = useDrag(
-    ({ movement: [mx], direction: [dx], memo = mx, cancel }) => {
-      // If the user is swiping left (negative direction)
-      if (dx === 1 && mx > 50) {
-        handleReadMoreClick();
-        cancel();
-      }
-      return memo;
-    },
-    { axis: "x", pointer: { touch: true } }
-  );
+  // const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  // const bind = useDrag(
+  //   ({ movement: [mx], direction: [dx], memo = mx, cancel }) => {
+  //     // If the user is swiping left (negative direction)
+  //     if (dx === 1 && mx > 50) {
+  //       handleReadMoreClick();
+  //       cancel();
+  //     }
+  //     return memo;
+  //   },
+  //   { axis: "x", pointer: { touch: true } }
+  // );
 
   return (
     expanded && (
@@ -69,14 +69,14 @@ function ProjectDrawer({ projName }: { projName: string }) {
             />
           ) : (
             <div className="flex flex-wrap w-full">
-              {content.data.map((eachItem: AmenityList, index: number) => {
+              {content.data.map((eachItem: AmenityList) => {
                 if (amenitiesGroupList.get(eachItem.id) != null) {
                   const amenitiesFromDB = content.amenitiesFromDB;
                   return (
                     <Fragment key={`aminityCon_${eachItem.id}`}>
                       {amenitiesFromDB != undefined &&
                         amenitiesFromDB != null &&
-                        Object.keys(amenitiesFromDB).map((group, ind) => {
+                        Object.keys(amenitiesFromDB).map((group) => {
                           return (
                             <Fragment key={`aminityGroupCon_${eachItem.id}`}>
                               {amenitiesFromDB != undefined &&
@@ -85,7 +85,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
                                 amenitiesFromDB[`${group}`] != null &&
                                 amenitiesFromDB[`${group}`].length != 0 &&
                                 amenitiesFromDB[group].map(
-                                  (eachOne: any, index: number) => {
+                                  (eachOne: any) => {
                                     if (eachOne.cid == eachItem.id) {
                                       return (
                                         <div

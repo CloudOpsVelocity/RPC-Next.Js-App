@@ -17,7 +17,7 @@ export default function FurnishOptions({}: Props) {
         Furnishing
       </h3>
       <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-        {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
+        {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }) => {
           return (
             <div key={constDesc + cid}>
               <Radio

@@ -1,13 +1,12 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { ListingSearchDetails, searchDetails } from "@/app/data/searchDetails";
+import { ListingSearchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
 import {
   DropDownIcon,
   fourStarIcon,
   lensSvg,
   miniItemsCrossIcon,
-  notificationIcon,
 } from "@/app/images/commonSvgs";
 import {
   Checkbox,
@@ -84,7 +83,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
           Quick Filters
         </p>
         <div className="w-full ">
-          {filteredSearchDetails.map((eachItem, index) => {
+          {filteredSearchDetails.map((eachItem) => {
             return (
               <Button
                 key={eachItem}
@@ -131,7 +130,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                 BHK Type
               </h3>
               <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus) => {
                   return (
                     <Checkbox
                       className="my-2"
@@ -155,7 +154,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             Property Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            {SEARCH_FILTER_DATA.listingStatus.map((eachStatus, index) => {
+            {SEARCH_FILTER_DATA.listingStatus.map((eachStatus) => {
               return (
                 <Radio
                   key={eachStatus.cid}
@@ -177,7 +176,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             Property Type {/* {notificationIcon} */}
           </h3>
           <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-            {propKeys.map((keyName, i) => {
+            {propKeys.map((keyName) => {
               if (keyName === 32 && filters.unitTypes.length > 0) {
                 return null;
               }
@@ -285,7 +284,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                 Facing
               </h3>
               <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-                {SEARCH_FILTER_DATA.facing.map((x, i) => {
+                {SEARCH_FILTER_DATA.facing.map((x) => {
                   return (
                     <Checkbox
                       className="my-1"
@@ -407,7 +406,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             Amenities
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+            {SEARCH_FILTER_DATA.amenities.map((i) => {
               return (
                 <Checkbox
                   className="my-2"

@@ -88,11 +88,11 @@ export default function Banner({
     </div>
   );
 }
-interface Props {
-  review: string;
-  rating: number;
-  proj: string;
-}
+// interface Props {
+//   review: string;
+//   rating: number;
+//   proj: string;
+// }
 const AddRating = ({
   opened,
   close,

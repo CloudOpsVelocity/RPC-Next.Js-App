@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useState, useEffect, useRef, FormEvent, memo } from "react";
 import {
@@ -359,7 +360,7 @@ const ListingHeaderFilters = ({
                                 {searchData[type].map(
                                   (item: any, index: number) => (
                                     <div
-                                      key={index}
+                                      key={`searchData2_${index.toString()}`}
                                       className="flex items-center gap-2 px-2 py-1  hover:bg-gray-50 cursor-pointer"
                                       onClick={() => {
                                         setSearchQuery(item.name); // Set the item name as search query
@@ -421,7 +422,7 @@ const ListingHeaderFilters = ({
                 handleDropdownToggle={handleDropdownToggle}
               />
             </div>
-            <code className="max-w-[350px]"></code>
+            <code className="max-w-[350px]"/>
             <div className="hidden md:flex items-center gap-2 order-2">
               {/*  <PropertyTypeDropdown
                 selectedFilters={selectedFilters}

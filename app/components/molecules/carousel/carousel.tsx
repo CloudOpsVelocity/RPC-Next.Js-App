@@ -15,7 +15,7 @@ import {
   formatDate,
   // formatDateDDMMYYYY
 } from "@/app/utils/date";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+// import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useSession } from "next-auth/react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
@@ -45,7 +45,7 @@ const HomeCarousel = () => {
       }
       px={10}
     >
-      {data?.project?.map((post, index) => (
+      {data?.project?.map((post) => (
         <Carousel.Slide key={post.projName}>
           <ProjectCard type="proj" cardData={post} />
         </Carousel.Slide>
@@ -63,7 +63,7 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
-  const [, { open }] = useReqCallPopup();
+  // const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();

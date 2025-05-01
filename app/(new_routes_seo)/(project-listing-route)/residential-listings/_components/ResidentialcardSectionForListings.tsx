@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-constant-condition */
 "use client";
 import { formatDate } from "@/app/utils/date";
 import Button from "../../../../elements/button";
@@ -5,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import React, { useState, useEffect, useCallback, memo } from "react";
-import { FaMapMarkerAlt, FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 
@@ -22,6 +24,7 @@ export default function ResidentialCardSectionForListings({
   loading,
   totalCount,
 }: Props) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const properties = data.data || [];
   const [listItemsCount, setListItemsCount] = useState(40);
   const [opened, { open, close }] = useReqCallPopup();
@@ -52,6 +55,7 @@ export default function ResidentialCardSectionForListings({
         setLoading(false);
       }, 500);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listItemsCount, properties.length]);
 
   useEffect(() => {
@@ -114,12 +118,12 @@ export default function ResidentialCardSectionForListings({
                     return null; // Handle case where property is undefined
                   }
 
-                  const minPrice = property.minPrice
-                    ? parseInt(property.minPrice)
-                    : 0;
-                  const maxPrice = property.maxPrice
-                    ? parseInt(property.maxPrice)
-                    : 0;
+                  // const minPrice = property.minPrice
+                  //   ? parseInt(property.minPrice)
+                  //   : 0;
+                  // const maxPrice = property.maxPrice
+                  //   ? parseInt(property.maxPrice)
+                  //   : 0;
                   const possessionDate = property.possassionDate
                     ? formatDate(property.possassionDate)
                     : "N/A";

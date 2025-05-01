@@ -5,11 +5,10 @@ import clsx from "clsx";
 import React, { useState } from "react";
 
 type props = {
-  onSelect: any;
   className: string;
 };
 
-export default function CountryInput({ onSelect, className }: props) {
+export default function CountryInput({ className }: props) {
   const [selected, setSelected] = useState("+91");
   return (
     <select
@@ -22,7 +21,7 @@ export default function CountryInput({ onSelect, className }: props) {
       <option value="ISD" hidden>
         +91
       </option>
-      {isdDetailsList.map((eachOne, ind) => {
+      {isdDetailsList.map((eachOne) => {
         return (
           <option
             key={`country_${eachOne.id}`}

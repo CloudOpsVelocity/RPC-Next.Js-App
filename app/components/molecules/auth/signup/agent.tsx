@@ -141,9 +141,10 @@ function Agent({ encriptedData }: any) {
     }
     if (active === 1) {
       // if (form.formState.isValid) {
+      // eslint-disable-next-line no-unused-vars
       const data = await registerOtherDetails(
         registerOtherParser({ ...values })
-      ).then((res) => {
+      ).then(() => {
         saveStep(3);
         login({
           password: values.password,
@@ -159,18 +160,18 @@ function Agent({ encriptedData }: any) {
       setActive((current) => (current < 3 ? current + 1 : current));
     }
   };
-  type LogoFile = File | null;
+  // type LogoFile = File | null;
 
-  const handleLogoSelect = (logo: LogoFile): void => {
-    // @ts-ignore
-    form.setValue("companyLogo", logo);
-  };
+  // const handleLogoSelect = (logo: LogoFile): void => {
+  //   // @ts-ignore
+  //   form.setValue("companyLogo", logo);
+  // };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   // const displayCountryCode = (value: any) => {
   //   console.log(value);
   // };
-  const logo = form.watch("companyLogo");
+  // const logo = form.watch("companyLogo");
 
   const queryParam = getQueryParamClient();
   return (

@@ -52,6 +52,7 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
       category: category,
       selectedNearbyItem: {},
     }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateScrollButtons = throttle(() => {

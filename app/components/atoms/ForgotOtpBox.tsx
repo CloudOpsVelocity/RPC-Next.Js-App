@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function ForgotOtpBox({
-  userName,
+  // userName,
   close,
   callback,
   mobile,

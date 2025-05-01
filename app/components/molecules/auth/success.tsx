@@ -1,12 +1,13 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import { getPathTypeFromQueryParams } from "@/app/hooks/custom/useRedirect";
 import clsx from "clsx";
 import Image from "next/image";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function Success() {
-  const P = useParams();
+  // const P = useParams();
   const path = usePathname();
   return (
     <div

@@ -107,7 +107,7 @@ function Dropdown() {
           }}
         >
           <>
-            {data.map((item, index) =>
+            {data.map((item) =>
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : (
                 <Menu.Item
@@ -145,7 +145,7 @@ function Dropdown() {
             dropdown: S.dropdown,
           }}
         >
-          {unAuthorizedData.map((item, index) => (
+          {unAuthorizedData.map((item) => (
             <Menu.Item
               key={"unAuthorizedData_" + item.label}
               classNames={{

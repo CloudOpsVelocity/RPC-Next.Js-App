@@ -146,6 +146,7 @@ const ListingSearchTabs = ({
   );
 
   React.useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     const handleClickOutside = (event: MouseEvent) => {
       if (isDropdownOpen) {
         setIsDropdownOpen(false);

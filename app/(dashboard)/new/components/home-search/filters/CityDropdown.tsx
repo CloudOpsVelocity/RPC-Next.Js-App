@@ -11,7 +11,7 @@ import {
 const keys = ["Bengaluru"];
 
 export function CityDropdown() {
-  const { filters: f, setFilters } = useSearchFilters();
+  const { filters: f } = useSearchFilters();
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),

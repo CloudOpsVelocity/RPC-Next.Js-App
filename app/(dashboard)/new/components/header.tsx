@@ -173,7 +173,7 @@ function Dropdown() {
           }}
         >
           <>
-            {data.map((item, index) =>
+            {data.map((item) =>
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : (
                 <Menu.Item
@@ -211,7 +211,7 @@ function Dropdown() {
             dropdown: S.dropdown,
           }}
         >
-          {unAuthorizedData.map((item, index) => (
+          {unAuthorizedData.map((item) => (
             <Menu.Item
               key={item.label}
               classNames={{
@@ -336,7 +336,7 @@ function MobileDropDown() {
           }}
         >
           <>
-            {data.map((item, index) =>
+            {data.map((item) =>
               session.user?.userType !== "B" &&
               item.label === "Post Project" ? null : (
                 <Menu.Item
@@ -374,7 +374,7 @@ function MobileDropDown() {
             dropdown: S.dropdown,
           }}
         >
-          {unAuthorizedData.map((item, index) => (
+          {unAuthorizedData.map((item) => (
             <Menu.Item
               key={item.url}
               classNames={{

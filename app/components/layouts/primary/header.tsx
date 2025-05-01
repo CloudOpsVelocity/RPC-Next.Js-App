@@ -378,7 +378,7 @@ function Dropdown() {
               className="absolute"
             >
               <div className="w-full flex flex-col min-w-[172px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg">
-                {unAuthorizedData.map((item, index) => (
+                {unAuthorizedData.map((item) => (
                   <Link
                     key={item.url}
                     className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "

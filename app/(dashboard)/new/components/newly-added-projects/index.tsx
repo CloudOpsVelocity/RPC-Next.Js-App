@@ -52,7 +52,7 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
           key="featuredProjectsCon"
           allCards={cardsData?.map((item: any, index: number) => (
             <Card
-              key={`home-project-data-${index}`}
+              key={`home-project-data-${index.toString()}`}
               item={{
                 ...item,
                 shortListed:

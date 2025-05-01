@@ -11,6 +11,7 @@ type Props = {
   url:string
 };
 
+// eslint-disable-next-line no-unused-vars
 export default function ListingCarousel({ shortIds, data ,dataKey,url}: Props) {
   const isMobile = useMediaQuery('(max-width: 768px)');
   return (
@@ -57,7 +58,7 @@ export default function ListingCarousel({ shortIds, data ,dataKey,url}: Props) {
     url={url} 
     data={data} 
     type="prop"
-    renderItem={(item:any, index) => (
+    renderItem={(item:any) => (
     <ListingCard
       item={item}
       sl={

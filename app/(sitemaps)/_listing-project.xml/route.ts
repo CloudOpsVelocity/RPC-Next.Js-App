@@ -2,7 +2,7 @@ import logger from "@/app/utils/logger";
 import { getServerSideSitemap } from "next-sitemap";
 import path from "path";
 import fs from "fs";
-export async function GET(request: Request) {
+export async function GET() {
   const filePath = path.join(process.cwd(), "static", `case-seo.json`);
   logger.info(`Project Details Sitemap: Reading case-seo.json file`);
   const data = fs.readFileSync(filePath, "utf-8");

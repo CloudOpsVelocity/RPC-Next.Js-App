@@ -5,11 +5,11 @@ import { decryptResumeSignupToken } from "@/app/utils/auth/crypto";
 // import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import React from "react";
-interface Props {
-  params: {
-    slug: string;
-  };
-}
+// interface Props {
+//   params: {
+//     slug: string;
+//   };
+// }
 
 type PageType = {
   individual: React.ReactElement;

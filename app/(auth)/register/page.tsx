@@ -38,7 +38,7 @@ export default function Page({ searchParams }: any) {
           New user, Select how you want to sign up as
         </p>
         <div className="w-full flex justify-between items-center mt-[4%]">
-          {data.map((each, ind) => {
+          {data.map((each) => {
             return (
               <Link
                 href={{

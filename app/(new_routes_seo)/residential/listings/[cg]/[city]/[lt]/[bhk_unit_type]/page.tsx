@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 // import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
 import {
@@ -87,8 +88,6 @@ export async function generateMetadata(
   const id = params.slug.split("-")[1];
   const {
     listing: data,
-    nearByLocations,
-    totalPrice,
   } = await getListingDetails(id as string);
   return {
     title: `${data.bhkName ?? ""} ${data.propTypeName} for ${

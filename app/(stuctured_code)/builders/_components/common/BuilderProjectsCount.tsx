@@ -16,7 +16,7 @@ type Props = {
 };
 
 export default function BuilderProjectsCount({ id, builderName }: Props) {
-  const { data, isLoading, status } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [`BuilderProjectsCount`, id],
     queryFn: async () => {
       const response = await getBuilderProjectsCount(id);

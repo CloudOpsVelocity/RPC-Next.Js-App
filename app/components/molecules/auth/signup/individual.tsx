@@ -35,7 +35,10 @@ function Individual() {
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const router = useRouter();
-  const { register, login, saveStep } = useAuth({ type: "register" });
+  const { 
+    register, saveStep, 
+    // login
+  } = useAuth({ type: "register" });
   const [opened, { open, close }] = useDisclosure(false);
 
 
@@ -73,10 +76,10 @@ function Individual() {
     close();
   };
   const OtpCallback = async () => {
-    const data = await login({
-      password: values.password,
-      username: values.mobile as unknown as string,
-    });
+    // const data = await login({
+    //   password: values.password,
+    //   username: values.mobile as unknown as string,
+    // });
     form.reset();
     setStatus("success");
     saveStep(2);
@@ -228,7 +231,7 @@ function Individual() {
                 form.setValue("mobile", Number(first10Digits) as any);
               }}
               allowNegative={false}
-              onBlurCapture={(e) =>
+              onBlurCapture={() =>
                 (values.mobile as any) === "" &&
                 form.setValue("mobile", undefined as any)
               }

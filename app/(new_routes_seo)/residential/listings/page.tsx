@@ -10,6 +10,7 @@ type Props = {
   };
 };
 
+// eslint-disable-next-line no-unused-vars
 export default async function Page({ params: { cg, city } }: Props) {
   const severData = await getSearchData(``);
   const pathname = `/residential/listings`;

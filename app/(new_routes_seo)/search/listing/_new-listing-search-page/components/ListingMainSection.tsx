@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSection";
-import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
-import { useHydrateAtoms } from "jotai/utils";
-import { initialState, projSearchStore } from "../../../store/newListingStore";
+// import { useHydrateAtoms } from "jotai/utils";
+// import { initialState, projSearchStore } from "../../../store/newListingStore";
+// import { usePathname } from "next/navigation";
+
 import dynamic from "next/dynamic";
 // import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
 

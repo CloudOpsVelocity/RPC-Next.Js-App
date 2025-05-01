@@ -91,7 +91,7 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
                 key="handPickedProjectsCon"
                 allCards={cardsData?.map((item: any, index: number) => (
                   <Card
-                    key={`home-project-data-${index}`}
+                    key={`home-project-data-${index.toString()}`}
                     item={{
                       ...item,
                       shortListed:

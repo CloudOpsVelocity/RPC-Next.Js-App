@@ -11,7 +11,7 @@ export function formatBudgetValue(value: number) {
     return `${croreValue}Cr`;
   }
 }
-export default function SearchProjBugdetFilter({ close }: { close?: () => void }) {
+export default function SearchProjBugdetFilter() {
   return (
     <div className="w-[330px] ">
    

@@ -6,7 +6,7 @@ import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import NewTabCon from "./newtabCon";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
-const LeftSideBlock = ({ serverData, frontendFilters }: any) => {
+const LeftSideBlock = ({ serverData }: any) => {
   const {
     searchProps: { mutate },
     handleAppliedFilters,

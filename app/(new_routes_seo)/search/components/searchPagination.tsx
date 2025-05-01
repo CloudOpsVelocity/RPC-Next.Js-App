@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -118,7 +119,7 @@ export default function SearchPagination({  totalCount,
                 if (pageNum < 0) {
                   return (
                     <span
-                      key={`ellipsis-${index}`}
+                      key={`ellipsis-${index.toString()}`}
                       className="px-3 py-2 text-gray-500"
                     >
                       ...
@@ -128,7 +129,7 @@ export default function SearchPagination({  totalCount,
 
                 return (
                     <button
-                    key={`builderpage_${index}`}
+                    key={`builderpage_${index.toString()}`}
                     onClick={()=>currentPagefun(pageNum)}
                     className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-sm font-medium transition-colors ${
                         currentPage === pageNum + 1

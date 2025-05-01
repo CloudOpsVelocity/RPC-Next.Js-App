@@ -22,7 +22,7 @@ export default function CardCarousel({ data, shortIds, active }: Props) {
       classNames={Css}
       key={active}
     >
-      {data?.map((item: any, index: number) => (
+      {data?.map((item: any) => (
         <Carousel.Slide key={item.projIdEnc}>
           <Card
             item={{

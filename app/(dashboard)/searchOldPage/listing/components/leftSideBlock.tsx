@@ -9,6 +9,7 @@ import useSearchFilters from "@/app/hooks/search";
 import NewTabCon from "../../components/leftsection/newtabCon";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 type Props = {
+  // eslint-disable-next-line no-unused-vars
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
 };
@@ -19,7 +20,7 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
     handleReset,
     handleAppliedFilters,
     params,
-    countAppliedFilters,
+    // countAppliedFilters,
     countAppliedFiltersFromQuery,
 
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
@@ -122,21 +123,21 @@ import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 import { RightSideBlock } from "./rightSideBlock";
 import ProjectCard from "@/app/test/newui/components/Card";
 
-const TabData = [
-  {
-    label: "ALL",
-    value: "All",
-  },
-  {
-    label: "Owner Listing",
-    value: "I",
-  },
-  {
-    label: "Agent Listing",
-    value: "A",
-  },
-  {
-    label: "Builder Listing",
-    value: "B",
-  },
-];
+// const TabData = [
+//   {
+//     label: "ALL",
+//     value: "All",
+//   },
+//   {
+//     label: "Owner Listing",
+//     value: "I",
+//   },
+//   {
+//     label: "Agent Listing",
+//     value: "A",
+//   },
+//   {
+//     label: "Builder Listing",
+//     value: "B",
+//   },
+// ];

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";

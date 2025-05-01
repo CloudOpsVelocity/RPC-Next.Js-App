@@ -354,7 +354,7 @@ export async function generateStaticParams() {
   for (let i = 0; i < projectRes.length; i++) {
     const data = projectRes[i];
     if ((data.match(/\//g) || []).length === 5) {
-      const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
+      const [ city, lt, slug] = data.split("/");
       if (slug) {
         slugs.push({ city, lt, slug });
       }
@@ -379,6 +379,7 @@ type SeoProps = {
 
 export async function generateMetadata(
   props: SeoProps,
+  // eslint-disable-next-line no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const params = await props.params;

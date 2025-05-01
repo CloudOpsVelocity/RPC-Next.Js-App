@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import { Loader } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import useSearchFilters from "@/app/hooks/search";
 import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { searachFilterAtom } from "@/app/store/search";
 import { useQuery } from "react-query";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
@@ -18,7 +19,7 @@ type Props = {
 
 export default function TabPanelSection({ mutate, serverData }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [filters, setFilters] = useAtom(searachFilterAtom);
+  const filters = useAtomValue(searachFilterAtom);
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
     // filters,

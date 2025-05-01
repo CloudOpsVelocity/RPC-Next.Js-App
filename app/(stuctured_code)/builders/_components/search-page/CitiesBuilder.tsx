@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { FaSearch, FaRedoAlt } from "react-icons/fa";
@@ -11,8 +12,6 @@ import {
   getAllCititesForBuilders,
   getCitiesBuilder,
 } from "../../services/builder-client.service";
-import PaginationForListings from "@/app/(new_routes_seo)/(project-listing-route)/residential-listings/_components/Pagination";
-import PaginationForBuilder from "./paginationBuilder";
 
 export default function BuildersDirectory({
   city,
@@ -68,19 +67,19 @@ export default function BuildersDirectory({
     ...RTK_CONFIG,
   });
 
-  const totalPages = cachedBuilderCount
-    ? Math.ceil(cachedBuilderCount / 20) // Use cached builder count
-    : 0;
+  // const totalPages = cachedBuilderCount
+  //   ? Math.ceil(cachedBuilderCount / 20) // Use cached builder count
+  //   : 0;
 
-  const onNextPage = () => {
-    window.scrollTo(0, 0);
-    setPage((page) => page + 1);
-  };
+  // const onNextPage = () => {
+  //   window.scrollTo(0, 0);
+  //   setPage((page) => page + 1);
+  // };
 
-  const onBackPage = () => {
-    window.scrollTo(0, 0);
-    setPage((page) => page - 1);
-  };
+  // const onBackPage = () => {
+  //   window.scrollTo(0, 0);
+  //   setPage((page) => page - 1);
+  // };
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value); // Update only the input field

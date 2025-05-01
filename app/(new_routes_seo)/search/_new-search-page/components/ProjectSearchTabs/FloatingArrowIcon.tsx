@@ -1,12 +1,12 @@
 "use client";
-import { useMediaQuery } from '@mantine/hooks';
+// import { useMediaQuery } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 type Props = {}
 
 function FloatingArrowIcon({}: Props) {
-    const isMobile = useMediaQuery("(max-width: 601px)");
+    // const isMobile = useMediaQuery("(max-width: 601px)");
     const [isScrolling, setIsScrolling] = useState(false);
 
     const handleScroll = () => {

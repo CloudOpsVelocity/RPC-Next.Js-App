@@ -56,7 +56,7 @@ function FeaturedBlogs() {
         </span>
       </h2>
       <div className=" flex justify-between items-start xl:gap-[20px] gap-[10px] p-[8px] overflow-x-auto ">
-        {newList.map((each, index) => {
+        {newList.map((each) => {
           const pathName =
             each && each.heading
               ? each.heading.toLowerCase().replaceAll(" ", "-")

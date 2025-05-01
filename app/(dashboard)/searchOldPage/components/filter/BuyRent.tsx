@@ -7,11 +7,12 @@ import { useMediaQuery } from "@mantine/hooks";
 export default function BuyRent() {
   const {
     filters,
-    setSingleType,
     handleAppliedFilters,
-    params,
-    handleSliderChange,
     setFilters,
+
+    // setSingleType,
+    // params,
+    // handleSliderChange,
   } = useSearchFilters();
   const handleChnage = (value: string) => {
     if (value == "R") {

@@ -12,10 +12,10 @@ import { queryClient } from "@/app/utils/query";
 
 export default function CompareList({ slug }: { slug: string }) {
   const { data: session } = useSession();
-  const { toggleCompare, compareItems } = useShortlistAndCompare();
+  const { toggleCompare } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
   const { data, mutate, getData } = useDynamicProj(slug);
-  const [opened, { close, open: openSuccesPopup }] = useMessagePopup("compare");
+  const [, { open: openSuccesPopup }] = useMessagePopup("compare");
   const handleCompare = () => {
     mutate(3);
     toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });

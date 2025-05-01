@@ -6,10 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
+// type Props = {};
 
 export default function TopProfileBlock({
-  ceoName,
+  // ceoName,
   companyName,
   companyStartDate,
   logoUrl,

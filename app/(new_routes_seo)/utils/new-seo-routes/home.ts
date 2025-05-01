@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { cwd } from "process";
+// import { cwd } from "process";
 
 type Type = "property" | "project";
 const getPageSlugs = async (type: Type) => {

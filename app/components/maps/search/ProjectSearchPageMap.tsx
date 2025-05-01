@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-useless-fragment */
 "use client";
 import React, { Fragment, useEffect, useRef } from "react";
@@ -34,7 +35,7 @@ export const checkLatAndLang = (number: any) => {
   }
 };
 
-const RecenterButton = ({ center }: { center: any }) => {
+const RecenterButton = ({}: { center?: any }) => {
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
   const { allMarkerRefs } = useAtomValue(selectedNearByAtom);
   const map = useMap();
@@ -108,7 +109,7 @@ const Map = ({ data, lat, lang, type, styles }: any) => {
 
 export default Map;
 
-const MapContent = ({ data, type }: any): JSX.Element | null => {
+const MapContent = ({ data }: any): JSX.Element | null => {
   const MapIcon = L.icon({
     iconUrl: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/map-pointer.png`,
     iconSize: [60, 60],
@@ -126,9 +127,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
   const [
     {
-      isOpen,
       selectedNearbyItem,
-      id,
       allMarkerRefs,
       data: nearbyData,
       category,
@@ -385,11 +384,11 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
 };
 
 const NearbyMarkers = ({}) => {
-  const [{ category, data, isOpen, selectedNearbyItem }, setSelectedLocation] =
+  const [{ category, data, selectedNearbyItem }, setSelectedLocation] =
     useAtom(selectedNearByAtom);
 
   const isMobile = useMediaQuery("(max-width: 601px)");
-  const map = useMap();
+  // const map = useMap();
 
   useEffect(() => {
     if (Object.keys(selectedNearbyItem).length === 0) return;

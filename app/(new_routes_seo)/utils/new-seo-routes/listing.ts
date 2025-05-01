@@ -38,7 +38,7 @@ export async function generateSlugs(
 
   const slugs = keys.map((data) => {
     if (data.includes("/residential/listings") && type === "solo-listing") {
-      const [emptyPath, country, , cg, city, lt, bhk_unit_type, slug] =
+      const [ cg, city, lt, bhk_unit_type, slug] =
         data.split("/");
       const result: Partial<SlugParams> = {
         cg,
@@ -54,9 +54,8 @@ export async function generateSlugs(
       type === "project-listing"
     ) {
       const [
-        emptyPath,
-        country,
-        ,
+        // emptyPath,
+        // country,
         cg,
         city,
         lt,

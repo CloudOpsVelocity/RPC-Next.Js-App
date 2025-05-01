@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useAtom } from "jotai";
 import React from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";

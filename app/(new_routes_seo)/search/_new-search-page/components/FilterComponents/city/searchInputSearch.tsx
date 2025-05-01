@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 
 import { useAtom } from "jotai";
@@ -20,15 +21,15 @@ interface DynamicSearchProps<T> {
 
 export default function DynamicSearch<T extends Record<string, any>>({
   data,
-  displayKey,
   valueKey,
-  multiple = false,
-  onChange,
   placeholder = "Search...",
   label = "Search",
   setQuery,
   loading,
   category,
+  // displayKey,
+  // multiple = false,
+  // onChange,
 }: DynamicSearchProps<T>) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);

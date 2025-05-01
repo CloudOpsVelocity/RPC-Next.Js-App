@@ -202,7 +202,7 @@ const validationSchema = yup.object().shape({
     })
     .max(40, "Password should not exceed 40 characters"),
 });
-const Form = ({ status, setStatus, mobile }: any) => {
+const Form = ({ setStatus, mobile }: any) => {
   const form = useFormHook({
     defaultValues: {
       password: "",
@@ -217,7 +217,8 @@ const Form = ({ status, setStatus, mobile }: any) => {
   const { login } = useAuth({ type: "login" });
   const onSubmit = async (values: any) => {
     try {
-      const data = await resetPasswordApi(values.password).then((res) => {
+      // eslint-disable-next-line no-unused-vars
+      const data = await resetPasswordApi(values.password).then(() => {
         login({
           password: values.password,
           username: mobile as string,

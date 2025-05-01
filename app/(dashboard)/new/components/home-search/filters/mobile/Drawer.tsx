@@ -93,7 +93,7 @@ function AppDrawer({ close, opened }: Props) {
                       {f.city.split("+")[0]}
                     </Pill>
                   )}
-                  {f.locality?.map((each, index) => (
+                  {f.locality?.map((each) => (
                     <Pill
                       className="capitalize"
                       onRemove={() => remnoveSearchOptions(each, "locality")}

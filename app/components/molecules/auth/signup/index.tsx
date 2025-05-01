@@ -1,22 +1,24 @@
-import React, { useState, ChangeEvent } from "react";
+import React, {
+  // ChangeEvent 
+} from "react";
 
-interface AgentOption {
-  value: string;
-  label: string;
-}
+// interface AgentOption {
+//   value: string;
+//   label: string;
+// }
 
 const AgentBuilderForm: React.FC = () => {
-  const [selectedAgent, setSelectedAgent] = useState<string | null>(null);
+  // const [selectedAgent, setSelectedAgent] = useState<string | null>(null);
 
-  const agentOptions: AgentOption[] = [
-    { value: "individual", label: "Individual" },
-    { value: "option2", label: "Option 2" },
-    // Add more agent options as needed
-  ];
+  // const agentOptions: AgentOption[] = [
+  //   { value: "individual", label: "Individual" },
+  //   { value: "option2", label: "Option 2" },
+  //   // Add more agent options as needed
+  // ];
 
-  const handleAgentChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedAgent(e.target.value);
-  };
+  // const handleAgentChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  //   setSelectedAgent(e.target.value);
+  // };
 
   // const renderFormFields = () => {
   //   // Map your form fields based on the selected agent

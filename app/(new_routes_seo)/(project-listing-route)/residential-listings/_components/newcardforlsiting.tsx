@@ -2,61 +2,58 @@ import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import Image from "next/image";
 import {
-  FaBuilding,
   FaMapMarkerAlt,
-  FaCompass,
-  FaCalendarAlt,
-  FaCar,
-  FaBath,
-  FaExpandArrowsAlt,
+  // FaBuilding,
+  // FaCompass,
+  // FaCalendarAlt,
+  // FaCar,
+  // FaBath,
+  // FaExpandArrowsAlt,
 } from "react-icons/fa";
-import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import Button from "../../../../elements/button";
 
-import ListingReqBtn from "@/app/(dashboard)/new/components/Atoms/ListingReqCallbackBtn";
-import { createPropertyString } from "@/app/utils/dyanamic/property";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import Link from "next/link";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 
-interface PropertyCardProps {
-  property: {
-    propName: string;
-    phaseName?: string;
-    localityName: string;
-    cityName: string;
-    stateName: string;
-    price: number;
-    sba: string;
-    ca: string;
-    propStatus: string;
-    facing: string;
-    bhkName: string;
-    propTypeName: string;
-    coverImage: string;
-    parking: number;
-    bathroom: number;
-    propertyAge: string;
-    postedByName: string;
-    sqftPrice: number;
-    availableFrom: string;
-    category: string;
-    pa: string;
-    ownership: string;
-    availableFor: string;
-    balcony: string;
-    approvedById: string;
-    coverParking: string;
-    propIdEnc: string;
-    postedBy: string;
-    postedById: number;
-    projIdEnc: string | null;
-  };
-}
+// interface PropertyCardProps {
+//   property: {
+//     propName: string;
+//     phaseName?: string;
+//     localityName: string;
+//     cityName: string;
+//     stateName: string;
+//     price: number;
+//     sba: string;
+//     ca: string;
+//     propStatus: string;
+//     facing: string;
+//     bhkName: string;
+//     propTypeName: string;
+//     coverImage: string;
+//     parking: number;
+//     bathroom: number;
+//     propertyAge: string;
+//     postedByName: string;
+//     sqftPrice: number;
+//     availableFrom: string;
+//     category: string;
+//     pa: string;
+//     ownership: string;
+//     availableFor: string;
+//     balcony: string;
+//     approvedById: string;
+//     coverParking: string;
+//     propIdEnc: string;
+//     postedBy: string;
+//     postedById: number;
+//     projIdEnc: string | null;
+//   };
+// }
 
 export function PropertyCard({ property }: any) {
   // Format the available from date
-  const availableDate = new Date(property.availableFrom);
+  // const availableDate = new Date(property.availableFrom);
   /*   const formattedDate = new Intl.DateTimeFormat("en-IN", {
     day: "numeric",
     month: "short",
@@ -76,18 +73,18 @@ export function PropertyCard({ property }: any) {
       return price.toLocaleString("en-IN");
     }
   };
-  const getApprovedFirstName = (item: string) => {
-    if (item.includes(" - ")) {
-      return item.split(" - ")[0];
-    } else if (item.includes(" – ")) {
-      return item.split(" – ")[0];
-    } else if (item.includes("–")) {
-      return item.split("–")[0];
-    } else if (item.includes("-")) {
-      return item.split("-")[0];
-    }
-  };
-  const [opened, { open, close }] = useReqCallPopup();
+  // const getApprovedFirstName = (item: string) => {
+  //   if (item.includes(" - ")) {
+  //     return item.split(" - ")[0];
+  //   } else if (item.includes(" – ")) {
+  //     return item.split(" – ")[0];
+  //   } else if (item.includes("–")) {
+  //     return item.split("–")[0];
+  //   } else if (item.includes("-")) {
+  //     return item.split("-")[0];
+  //   }
+  // };
+  const [, { open }] = useReqCallPopup();
   /*   const getApproveNames = () => {
     let idsString = property.approvedById ? property.approvedById.split(",") : [];
     if (!approvedData) return "N/A";

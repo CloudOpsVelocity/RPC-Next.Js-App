@@ -22,7 +22,7 @@ type Props = {
 };
 
 export default async function Page({
-  params: { bhk_unit_type, cg, city, lt, project },
+  params: { cg, city, lt, project },
 }: Props) {
   // console.log(bhk_unit_type);
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
@@ -50,6 +50,7 @@ export async function generateMetadata(
   {
     params,
   }: { params: { cg: string; city: string; lt: string; project: string } },
+  // eslint-disable-next-line no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { cg, city, lt, project } = params;

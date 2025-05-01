@@ -6,7 +6,7 @@ type Props = {};
 export default function CardSection({}: Props) {
   return (
     <div className=" relative mt-[86px] sm:top-0 flex justify-center items-center sm:justify-start sm:items-start gap-[14px]  sm:gap-[6%] self-stretch sm:mt-[2%] sm:pl-[4%] flex-wrap">
-      {config.data.map((item, index) => (
+      {config.data.map((item) => (
         <Box key={item.title} {...item} />
       ))}
     </div>

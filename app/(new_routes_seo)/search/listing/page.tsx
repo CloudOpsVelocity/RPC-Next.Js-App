@@ -40,7 +40,7 @@ export default async function Page(params: any) {
 
         <ListingHeaderFilters
           isListing={isListing}
-          showProjectTab={true}
+          showProjectTab
           frontendFilters={frontendFilters}
         />
       </div>

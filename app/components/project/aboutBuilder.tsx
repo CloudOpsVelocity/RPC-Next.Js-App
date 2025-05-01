@@ -102,6 +102,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 function normalizeData(data: any, type: string) {
   return {
     propertyName: data?.data?.propertyName,

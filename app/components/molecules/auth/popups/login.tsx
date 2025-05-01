@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import * as yup from "yup";
 // import S from "@/app/styles/Pass.module.css";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import handleTrimAndReplace from "@/app/utils/input/validations";
@@ -49,7 +49,7 @@ interface Login {
   password: string;
 }
 function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
-  const [opened, { close, callback }] = usePopShortList();
+  const [, { close, callback }] = usePopShortList();
   const path = usePathname();
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
@@ -101,7 +101,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
     await login(values);
     setState("success");
   };
-  const isMobile = useMediaQuery(`(max-width: ${750 / 16}em)`);
+  // const isMobile = useMediaQuery(`(max-width: ${750 / 16}em)`);
   const { redirectQueryParam } = usePathToOrigin();
   return (
     <div className=" max-w-[420px] mx-auto ">
@@ -155,7 +155,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
 
         <InputField
           key="login_username_popup_input"
-          required={true}
+          required
           name="username"
           type="text"
           inputMode="numeric"
@@ -195,7 +195,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
         <PasswordInputField
           key="login_password_popup_input"
           id="login_password_popup_input"
-          required={true}
+          required
           name="password"
           inputMode="password"
           labelClass={StepCss.custlabelOfNumpop}
