@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
-import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -11,27 +13,45 @@ import { notFound } from "next/navigation";
 import React from "react";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { Metadata, ResolvingMetadata } from "next";
+import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 
 type Props = {
   params: { cg: string };
+  searchParams: {
+    sf: string;
+  };
 };
 
-export default async function Page({ params: { cg } }: Props) {
+export default async function Page({ params: { cg }, searchParams }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
-  const slugValues = extractListingParamsValues(values);
-  const severData = await getSearchData(`cg=${slugValues.CG}`);
-  const pageUrl = `${pathname}`;
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+  } else {
+    const slugValues = extractListingParamsValues(values);
+    serverData = await getSearchData(`cg=${slugValues.CG}`);
+    frontendFilters = {
+      cg: slugValues.CG,
+      listedBy: null,
+    };
+  }
   return (
     <NewListingSearchpage
-      serverData={severData}
-      frontendFilters={{
-        cg: slugValues.CG,
-        // listedBy: "All",
-      }}
+      serverData={serverData}
+      frontendFilters={frontendFilters}
       showProjectTab
-      pageUrl={pageUrl}
+      pageUrl={pathname}
+      preDefinedFilters={searchParams.sf}
     />
   );
 }

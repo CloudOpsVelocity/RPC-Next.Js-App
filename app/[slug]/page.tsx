@@ -7,6 +7,11 @@ import { Metadata, ResolvingMetadata } from "next";
 import CaseSeoSearchService from "../services/case-seo.service";
 // import { SlugsType } from "../common/constatns/slug.constants";
 import NewListingSearchpage from "../(new_routes_seo)/search/listing/NewListingSearchpage";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "../(new_routes_seo)/in/utils/api";
+import { parseApiFilterQueryParams } from "../(new_routes_seo)/search/utils/project-search-queryhelpers";
 
 type Props = {
   params: {
@@ -17,15 +22,32 @@ type Props = {
   };
 };
 export default async function Page({ params: { slug }, searchParams }: Props) {
-  const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
-    sf: !!searchParams.sf,
-  });
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+  } else {
+    const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
+      sf: !!searchParams.sf,
+    });
+    frontendFilters = frontEndFilter;
+    serverData = severData;
+  }
+
   const pageUrl = `/${slug}`;
   return (
     <NewListingSearchpage
-      serverData={severData}
-      frontendFilters={frontEndFilter}
+      serverData={serverData}
+      frontendFilters={frontendFilters}
       pageUrl={pageUrl}
+      preDefinedFilters={searchParams.sf}
       is2lakhUrls
       showProjectTab
     />
@@ -42,7 +64,7 @@ export const generateStaticParams = async () => {
 
 export async function generateMetadata(
   { params }: any,
-parent: ResolvingMetadata
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const id = params.slug.split("-");
   const heading = cleanHeading(id);

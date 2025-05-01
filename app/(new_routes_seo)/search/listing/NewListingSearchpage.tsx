@@ -25,6 +25,7 @@ type Props = {
   pageUrl: string;
   showProjectTab?: boolean;
   is2lakhUrls?: boolean;
+  preDefinedFilters: string | null;
 };
 
 export default function NewListingSearchpage({
@@ -33,6 +34,7 @@ export default function NewListingSearchpage({
   pageUrl,
   showProjectTab = false,
   is2lakhUrls = false,
+  preDefinedFilters = null
 }: Props) {
   const isListing = true;
   return (
@@ -53,6 +55,7 @@ export default function NewListingSearchpage({
         <ListingMainSection
           frontendFilters={frontendFilters}
           serverData={serverData}
+          preDefinedFilters={preDefinedFilters}
         />
       </div>
     </section>

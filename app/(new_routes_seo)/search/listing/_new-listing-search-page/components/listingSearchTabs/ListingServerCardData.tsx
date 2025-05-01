@@ -19,11 +19,9 @@ export default function ListingServerCardData({
 }: Props) {
   const cg = useMemo(() => {
     if (state.cg === undefined) {
-      return frontendFilters.cg;
+      return frontendFilters?.cg;
     }
-    return state.cg === frontendFilters.cg
-      ? frontendFilters.cg
-      : state.cg;
+    return state.cg === frontendFilters.cg ? frontendFilters.cg : state.cg;
   }, [state, frontendFilters]);
 
   const listedBy = useCallback(() => {

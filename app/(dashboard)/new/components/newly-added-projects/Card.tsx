@@ -39,6 +39,30 @@ export default function Card({ item }: Props) {
       <div>
         <div>
           <div className="z-[100]">
+          <picture>
+              <source
+                media="(min-width: 1200px)"
+                srcSet={item.coverUrl ? item.coverUrl.split(",")[3] : ""}
+              />
+              <source
+                media="(max-width: 768px)"
+                srcSet={item.coverUrl ? item.coverUrl.split(",")[2] : ""}
+              />
+              <source
+                media="(max-width: 460px)"
+                srcSet={item.coverUrl ? item.coverUrl.split(",")[1] : ""}
+              />
+              <Image
+                priority={true}
+
+                src={item.coverUrl}
+                alt={item.projName}
+                width={490}
+                height={276}
+                className="object-cover w-full h-full"
+              />
+            </picture>
+
             <Image
               src={item.coverUrl}
               alt={item.projName}
@@ -56,6 +80,7 @@ export default function Card({ item }: Props) {
           {(item.rerastatus === "Recieved" ||
             item.rerastatus === "Applied") && (
             <Image
+             priority={true}
               src={"/r.svg"}
               alt="rera"
               width={100}

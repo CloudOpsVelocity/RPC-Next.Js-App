@@ -133,7 +133,7 @@ import Script from "next/script";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
   userScalable: false,
   themeColor: "#ffffff",
 };

@@ -26,10 +26,7 @@ import PageTitle from "../../components/filters/PageTitle";
 import { useMediaQuery } from "@mantine/hooks";
 // import SelectedFilters from "../../components/filters/SelectedFilters";
 const SelectedFilters = dynamic(
-  () => import("../../components/filters/SelectedFilters"),
-  {
-    ssr: false,
-  }
+  () => import("../../components/filters/SelectedFilters")
 );
 
 const ListingHeaderFilters = ({
@@ -422,7 +419,7 @@ const ListingHeaderFilters = ({
                 handleDropdownToggle={handleDropdownToggle}
               />
             </div>
-            <code className="max-w-[350px]"/>
+            <code className="max-w-[350px]" />
             <div className="hidden md:flex items-center gap-2 order-2">
               {/*  <PropertyTypeDropdown
                 selectedFilters={selectedFilters}
@@ -462,7 +459,10 @@ const ListingHeaderFilters = ({
           <PageTitle serverFilterData={frontendFilters} />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            <ListingSearchTabs showProjectTab={showProjectTab} />
+            <ListingSearchTabs
+              showProjectTab={showProjectTab}
+              frontendFilters={frontendFilters}
+            />
             <SelectedFilters frontendFilters={frontendFilters} />
           </div>
 

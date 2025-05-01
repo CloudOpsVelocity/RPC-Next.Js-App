@@ -53,7 +53,7 @@ const MainBox = ({ data, refetch, index }: Props) => {
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, toggleCompare } = useShortlistAndCompare();
   const reqId = type === "proj" ? projIdEnc : propIdEnc;
-console.log(index === 0 ? coverImage : "notjrtkojh;skljfgsj;klghkl;sjg")
+
   const onAddingShortList = () => {
     if (session) {
       setState({ ...state, shortListed: !state.shortListed });
