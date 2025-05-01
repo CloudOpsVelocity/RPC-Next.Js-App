@@ -85,6 +85,12 @@ export default function ListingDetailsPage({
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName}${data?.projIdEnc ? `, ${data?.propName}` : ""}`;
 
+  console.log(title)
+
+  const newTitle = `${data?.bhkName ?? ""} ${data?.propTypeName} For
+  ${data?.cg === "S" ? " Sale" : " Rent"} In
+  ${data?.ltName} at ${data.propName}`;
+
   return (
     <div className="w-full">
       <ListingSchema
@@ -144,6 +150,7 @@ export default function ListingDetailsPage({
             projName={"Listing"}
             content={data.usp}
             showProjName={false}
+            newTitle={newTitle}
           />
         )}
         {/* Property Details */}
@@ -161,6 +168,7 @@ export default function ListingDetailsPage({
           projectPlanUrl={""}
           walkThrowVideoUrl={""}
           projBroucherUrl={""}
+          newTitle={newTitle}
         />
         {data?.amenities?.length > 0 && (
           <Amenties

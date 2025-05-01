@@ -13,6 +13,7 @@ type Props = {
   showProjName?: boolean;
   builderName?: string;
   maxLines?: number;
+  newTitle?:string;
 };
 
 export default function About({
@@ -25,6 +26,7 @@ export default function About({
   showProjName,
   builderName,
   maxLines = 6,
+  newTitle
 }: Props) {
   const isMobile = false;
   if (isMobile) {
@@ -43,9 +45,7 @@ export default function About({
       {type === "prop" ? (
         <PropertyHeading
           title={heading}
-          desc={
-            "About listing get summarized perspective for the incredible listing"
-          }
+          desc={ `About listing get summarized perspective for ${newTitle}`}
           className="mb-[14px] sm:mb-[8px]"
         />
       ) : (

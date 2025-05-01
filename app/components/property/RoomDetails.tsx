@@ -48,6 +48,9 @@ const style = {
   },
 };
 export default function RoomDetails({ data }: { data: Main }) {
+  const newTitle = `${data?.bhkName ?? ""} ${data?.propTypeName} For
+  ${data?.cg === "S" ? " Sale" : " Rent"} In
+  ${data?.ltName} at ${data.propName}`;
   return (
     <div
       className="scroll-mt-[220px] sm:mt-[50px] m-auto w-[95%] md:w-[90%]  sm:mb-5 sm:block"
@@ -55,12 +58,7 @@ export default function RoomDetails({ data }: { data: Main }) {
     >
       <PropertyHeading
         title="Listing details"
-        desc={`Check the details For ${
-          data.propTypeName === "Plot"
-            ? formatNumberWithSuffix(data.plotArea, false) + " sq.ft"
-            : ""
-        } ${data.bhkName ?? ""} ${data.propTypeName} For
-        ${data.cg === "S" ? " Sale" : " Rent"}`}
+        desc={`Check the details For ${newTitle}`}
         className="mb-[10px] xl:mb-[8px]"
       />
       <UnitBlock data={data} />
