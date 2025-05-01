@@ -56,6 +56,9 @@ const HomeSearch = ({
     {/* Image block */}
     <div className="items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
       <Image
+        priority={true}
+          loading="eager"
+      decoding="async"
         src="/home/home-search.svg"
         alt="home-search"
         height={300}
