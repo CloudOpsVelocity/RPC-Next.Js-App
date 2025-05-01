@@ -202,19 +202,9 @@ const ProjectSearchTabs = () => {
                   }}
                   className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[13px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
                 >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M7 16V4m0 0L3 8m4-4l4 4m-4 8v-4m10 4v-4m0 4l-4-4m4 4l4-4"
-                    />
-                  </svg>
+                 <p>
+                  ↑ &nbsp;&nbsp; ↓ 
+                </p>
 
                   <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                     {state.sortByfield != null && state.sortType != null

@@ -125,11 +125,15 @@ export default function TopRightSection({
           <div className="flex flex-col justify-between">
             <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  justify-end">
               <div className="gap-2 xl:gap-1 inline-flex justify-end">
-                <HeartButton
+               {/*  <HeartButton
                   shortListed={Sh}
                   onAddingShortList={onAddingShortList}
-                />
+                /> */}
+                 <button onClick={onAddingShortList}>
+      {       Sh ? <p> ❤️ </p>: <p className="text-sm text-gray-700"> 🤍 </p> }
+            </button>
                 <button
+                name="share Project"
                   className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
                   onClick={() => {
                     navigator.share({
@@ -141,7 +145,7 @@ export default function TopRightSection({
                     });
                   }}
                 >
-                  <ShareIcon />
+              🔗
                 </button>
                 {floorPlan && type !== "proj" && (
                   <div
@@ -155,7 +159,7 @@ export default function TopRightSection({
                     }
                     className="xm:px-[1px] sm:py-[1px] inline-flex flex-row justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded hover:cursor-pointer"
                   >
-                    <div className="flex items-center justify-center">
+                   {/*  <div className="flex items-center justify-center">
                       <div className="flex flex-col items-center">
                         <svg
                           width="24"
@@ -201,7 +205,8 @@ export default function TopRightSection({
                           Floor Plan
                         </span>
                       </div>
-                    </div>
+                    </div> */}
+               
                   </div>
                 )}
                 {/* <div
@@ -440,6 +445,7 @@ export default function TopRightSection({
                   }
                   value={atFloor == 0 ? "G" : atFloor}
                 />
+              
               </>
             )}
           </div>

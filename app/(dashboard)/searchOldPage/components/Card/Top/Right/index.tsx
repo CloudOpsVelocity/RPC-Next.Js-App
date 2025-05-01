@@ -79,6 +79,7 @@ export default function TopRightSection({
                   onAddingShortList={onAddingShortList}
                 />
                 <button
+                name="share Project"
                   className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
                   onClick={(e) => {
                     e.stopPropagation();
