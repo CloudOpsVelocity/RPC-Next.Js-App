@@ -27,7 +27,6 @@ export default function RootLayout(params: { children: React.ReactNode }) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9243707404617437"
           crossOrigin="anonymous"
         />
-        <link rel="preload" href="/fonts/your-font.woff2" as="font" type="font/woff2"     crossOrigin="anonymous"/>
         <link
           rel="apple-touch-icon"
           sizes="57x57"
