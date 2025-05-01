@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Modal, Image } from "@mantine/core";
 import {
@@ -29,7 +30,6 @@ type GalleryProps = {
 };
 
 const Gallery: React.FC<GalleryProps> = ({
-  selectedMedia,
   images,
   videos,
   isImage,

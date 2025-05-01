@@ -20,9 +20,9 @@ export default function CompareList({ cg, propTypeName }: any) {
     slug: string;
     bhk_unit_type: string;
   }>();
-  const { toggleCompare, compareItems } = useShortlistAndCompare();
+  const { toggleCompare } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const [opened, { close, open: openSuccesPopup }] = useErrorListing();
+  const [, {  open: openSuccesPopup }] = useErrorListing();
   const { data, mutate } = useDynamicProp({
     cg,
     propId: listingProps[propTypeName.trim() as keyof typeof listingProps],

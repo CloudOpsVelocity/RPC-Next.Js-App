@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import React, { useState, useCallback, useMemo, Fragment } from "react";
 import { Coordinates } from "@/app/utils/maps";
@@ -31,7 +32,7 @@ const LeafMap: React.FC<{
   type?: "proj" | "prop";
   projId?: string;
   mapData: any;
-}> = ({ lat, lang, projName, type, projId, mapData }) => {
+}> = ({ lat, lang, projName, type, mapData }) => {
   //console.log(projName)
   const Map = useMemo(
     () =>
@@ -250,7 +251,7 @@ const LeafMap: React.FC<{
                 </strong>
               </h2>
               <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
-                {downData.map((item: any, index: number) => (
+                {downData.map((item: any) => (
                   <MapCard
                     key={item.lat}
                     {...item}

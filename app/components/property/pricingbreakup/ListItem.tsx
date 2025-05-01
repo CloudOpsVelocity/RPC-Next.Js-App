@@ -29,9 +29,9 @@ export default function ListItem({ label, value, className }: Props) {
   );
 }
 
-const config = {
-  hidePriceItems: ["Lifetime", "As Per Actuals", "Already Included"],
-};
+// const config = {
+//   hidePriceItems: ["Lifetime", "As Per Actuals", "Already Included"],
+// };
 
 function formatCurrency(input: number | string): string {
   // Convert input to a number if it is a string

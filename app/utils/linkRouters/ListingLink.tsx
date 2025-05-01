@@ -3,7 +3,7 @@ import {
   BASE_PATH_PROJECT_LISTING,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 // import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import React, { ReactNode, useMemo } from "react";
 
 // Simple slugify function without memoization

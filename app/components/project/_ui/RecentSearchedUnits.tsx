@@ -6,6 +6,7 @@ import Tooltip from "../../atoms/Tooltip";
 type Props = {
   propCgId: number;
   className?: string;
+  // eslint-disable-next-line no-unused-vars
   recentFiltersClick: (filters: any) => void;
 };
 
@@ -20,13 +21,13 @@ export default function RecentSearchedUnits({
       <div className={className ?? ""}>
         <h3 className="text-lg font-semibold mb-1">Last Searches:</h3>
         <ul className="flex flex-wrap gap-2">
-          {recentUnits.reverse().map((unit: any, i: number) => {
+          {recentUnits.reverse().map((unit: any) => {
             // Extract key-value pairs
             const entries = Object.entries(unit);
 
             // Get the first two non-null filters
             const firstTwoNonNullableEntries = entries
-              .filter(([key, value]) => value !== null)
+              .filter(([, value]) => value !== null)
               .slice(0, 2);
 
             // Prepare display label

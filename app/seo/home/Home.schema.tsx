@@ -5,6 +5,6 @@ type Props = {
   listingData: any;
 };
 
-export default function HomgePageSchema({ projectData, listingData }: Props) {
+export default function HomgePageSchema({}: Props) {
   return <div>home.schema</div>;
 }

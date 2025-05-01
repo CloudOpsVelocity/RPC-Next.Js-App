@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import SubHeading from "../headings/SubHeading";
 import Button from "@/app/elements/button";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { useAtom, useSetAtom } from "jotai";
@@ -138,7 +137,7 @@ export default function HeaderActions({
         )}
       </div>
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
-        {sortedPropTypes?.map((each: string, index: any) => {
+        {sortedPropTypes?.map((each: string) => {
           const whichPropToUse =
             type == "overview" ? parseDataProjectProps : listingProps;
           const whichKeyname = type === "overview" ? "apiProp" : "name";

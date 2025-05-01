@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { TOPIC_IDS, topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
@@ -34,7 +35,7 @@ export default function Navigation({
   const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [leftScroll, setLeftScroll] = useState(0);
-  const [opened, { open }] = useReqCallPopup();
+  const [, { open }] = useReqCallPopup();
 
   useEffect(() => {
     function handleScroll() {

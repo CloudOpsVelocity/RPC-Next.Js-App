@@ -10,7 +10,7 @@ import selectedSearchAtom, {
   selectedNearByAtom,
 } from "@/app/store/search/map";
 import { searchPageMapToggle } from "@/app/(new_routes_seo)/search/store/projSearchStore";
-import { preventBackButton } from "@/app/components/molecules/popups/req";
+// import { preventBackButton } from "@/app/components/molecules/popups/req";
 
 export default function CardDownSection({
   a,
@@ -35,7 +35,7 @@ export default function CardDownSection({
 }: any) {
   const [lat, lang] = location?.split(",") ?? [];
   const isMobile = useMediaQuery("(max-width: 1600px)");
-  const [mapPopup, setMapPopup] = useAtom(modalPopup);
+  const [, setMapPopup] = useAtom(modalPopup);
   const setNearby = useSetAtom(selectedNearByAtom);
   const setSelected = useSetAtom(selectedSearchAtom);
 

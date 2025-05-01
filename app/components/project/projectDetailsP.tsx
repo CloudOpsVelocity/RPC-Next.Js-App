@@ -38,7 +38,6 @@ export default function ProjectDetailsP({
   data: phaseList,
   isPartialData,
   slug,
-  projData,
 }: Props) {
   useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]], {
     dangerouslyForceHydrate: true,
@@ -86,7 +85,7 @@ export default function ProjectDetailsP({
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start flex-wrap gap-[10px] mt-1 sm:mt-0">
-              {PhaseOverview?.map((phase: any, index: any) => {
+              {PhaseOverview?.map((phase: any) => {
                 return (
                   <Button
                     key={phase.phaseId}

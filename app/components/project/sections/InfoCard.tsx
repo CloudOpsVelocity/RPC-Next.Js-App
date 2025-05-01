@@ -2,7 +2,7 @@ import { formatCurrency } from "@/app/utils/numbers";
 import clsx from "clsx";
 import React from "react";
 
-type Props = {};
+// type Props = {};
 
 export default function InfoCard(data: any) {
   return (

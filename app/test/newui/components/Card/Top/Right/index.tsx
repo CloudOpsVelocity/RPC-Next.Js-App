@@ -35,10 +35,8 @@ export default function TopRightSection({
   propName,
   basePrice,
   brochureUrl,
-  propertyAge,
   facing,
   propTypeId,
-  price,
   towerName,
   atFloor,
   sqftPrice,
@@ -51,11 +49,9 @@ export default function TopRightSection({
   location,
   city,
   cityName,
-  towerData,
   locality,
   localityName,
   phaseName,
-  bhk,
   bhkName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
@@ -68,13 +64,13 @@ export default function TopRightSection({
 
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const projOrPropName = type === "proj" ? projName : propName;
-  const handleClick = () => {
-    // Get the div by ID and scroll to it
-    const element = document.getElementById("mobileMap");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // const handleClick = () => {
+  //   // Get the div by ID and scroll to it
+  //   const element = document.getElementById("mobileMap");
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
 
   const url =
     type === "proj"
@@ -97,7 +93,7 @@ export default function TopRightSection({
         });
   const [lat, lang] = location?.split(",") ?? [];
   const setNearby = useSetAtom(selectedNearByAtom);
-  const [mapPopup, setMapPopup] = useAtom(modalPopup);
+  const [, setMapPopup] = useAtom(modalPopup);
   const setIsMapLoaded = useSetAtom(searchPageMapToggle);
 
   return (

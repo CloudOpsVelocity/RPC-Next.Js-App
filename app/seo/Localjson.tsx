@@ -52,6 +52,7 @@ interface LocalBusinessData {
 }
 
 const generateLocalBusinessJsonLd = (
+  // eslint-disable-next-line no-unused-vars
   data: LocalBusinessData
 ): WithContext<LocalBusiness> => {
   const jsonLd: WithContext<LocalBusiness> = {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import NewsDetailsPage from "../components/NewsDetailsPage";
 
 type Params = {

@@ -74,7 +74,7 @@ export default function Reviews({
               withControls={isMobile ? true : data?.reviewDataList.length > 3}
             >
               {data?.reviewDataList
-                ?.filter((item: any) => item.userReview).map((eachData: any, i: number) => (
+                ?.filter((item: any) => item.userReview).map((eachData: any) => (
                   <Carousel.Slide key={"review__" + eachData.userName} miw={isMobile ? "95%" : 487}>
                     <Review {...eachData} />
                   </Carousel.Slide>

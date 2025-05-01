@@ -1,7 +1,6 @@
 import React from "react";
 import { getPagesSlugs } from "../seo/api";
-import { Metadata } from "next";
-import { ResolvingMetadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 // import NewSearchPage from "../(new_routes_seo)/search/NewSearchPage";
 // import redisService from "../utils/redis/redis.service";
 import CaseSeoSearchService from "../services/case-seo.service";
@@ -42,7 +41,7 @@ export const generateStaticParams = async () => {
 
 export async function generateMetadata(
   { params }: any,
-  parent: ResolvingMetadata
+parent: ResolvingMetadata
 ): Promise<Metadata> {
   const id = params.slug.split("-");
   const heading = cleanHeading(id);

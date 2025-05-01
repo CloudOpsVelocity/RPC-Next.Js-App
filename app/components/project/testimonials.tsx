@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const videos = [1, 2, 3, 4, 5, 6, 7, 8];
 
-type Props = {};
+// type Props = {};
 
 const Card = () => {
   return (
@@ -98,7 +98,7 @@ export default function Testimonials({ projName }: { projName: string }) {
               className=" w-full overflow-y-auto max-h-[360px] lg:max-h-[563px] flex justify-start items-start flex-col "
             >
               {/* single card */}
-              {videos.map((each, ind) => {
+              {videos.map((each) => {
                 return <Card key={`videosSingleCard_${each}`} />;
               })}
             </div>

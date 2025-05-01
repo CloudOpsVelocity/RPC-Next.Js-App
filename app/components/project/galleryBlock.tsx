@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Media } from "@/app/validations/types/project";
@@ -189,7 +190,7 @@ export default function GalleryBlock({
               const allSizesSchemas = img.split(",").map((url, schemaIndex) => {
                 return (
                   <script
-                    key={`schema_${ind}_${schemaIndex}`}
+                    key={`schema_${ind.toString()}_${schemaIndex.toString()}`}
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                       __html: JSON.stringify({
@@ -214,7 +215,7 @@ export default function GalleryBlock({
               return (
                 <div
                   className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
-                  key={`gallery_block_${imageUrl}_${ind}`}
+                  key={`gallery_block_${imageUrl}_${ind.toString()}`}
                 >
                   {allSizesSchemas}
                   <Image
@@ -244,7 +245,7 @@ export default function GalleryBlock({
             <div className="flex justify-start items-start w-full gap-[4%] flex-wrap">
               {videos?.map((img, ind) => (
                 <div
-                  key={`gallery_block_video_${ind}`}
+                  key={`gallery_block_video_${ind.toString()}`}
                   className={clsx(
                     "relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px] bg-white rounded-[5px] mb-[4%] cursor-pointer",
                     selectedMedia === img &&

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { useState } from "react";
 import { propCgIdAtom } from "@/app/store/vewfloor";
@@ -23,7 +24,6 @@ export default function PopupFilters({
   showFilters,
   setShowFilters,
   filteredUnits,
-  modalState,
 }: Props) {
   const [filters, setFilters] = useState(dataFilters);
   const [backupFilters, setBackupFilters] = useState({

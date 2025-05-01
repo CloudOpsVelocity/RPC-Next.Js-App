@@ -15,7 +15,7 @@ import RequestCallBackModal, {
   preventBackButton,
 } from "../molecules/popups/req";
 // import DownloadBroucher from "@/app/components/project/downloadBroucher";
-import { NumberFormatter } from "@mantine/core";
+// import { NumberFormatter } from "@mantine/core";
 import Image from "next/image";
 // import useHistoryBackHandler from "../molecules/popups/popupCloser";
 export default function OverviewBanner({

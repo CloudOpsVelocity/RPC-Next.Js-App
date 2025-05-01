@@ -5,12 +5,12 @@ import {
   emptyFilesIcon,
   LikeIcon,
   strikeIconIcon,
+  defaultCitySvg
 } from "@/app/images/commonSvgs";
 import { useSearchParams } from "next/navigation";
 
 import Image from "next/image";
 import { formatCurrency } from "@/app/utils/numbers";
-import { defaultCitySvg } from "@/app/images/commonSvgs";
 import { useAtom } from "jotai";
 import { trendsFilterData } from "../data.ts/marketBlogalData";
 import { formatNumberWithCommas } from "@/app/seo/sitemap/const";
@@ -456,15 +456,15 @@ const TrendFilters = ({
   );
 };
 
-interface Locality {
-  id: string;
-  name: string;
-}
+// interface Locality {
+//   id: string;
+//   name: string;
+// }
 
-interface City {
-  id: string;
-  name: string;
-}
+// interface City {
+//   id: string;
+//   name: string;
+// }
 
 function CityTrendSection({ cityName }: Props) {
   const [filters, setFilters] = useState(initialFilters);

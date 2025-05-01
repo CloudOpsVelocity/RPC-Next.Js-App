@@ -51,7 +51,6 @@ let config = {
       security,
       securityMonth = 1,
       price,
-      type,
     } = otherPrice;
     let total =
       securetyType === "M" ? securityMonth * price  : security;

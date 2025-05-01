@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import {
   propertyDetailsTypes,
@@ -49,7 +50,7 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { Divider } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
-import SubHeading from "./headings/SubHeading";
+// import SubHeading from "./headings/SubHeading";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
 import { useMediaQuery } from "@mantine/hooks";
@@ -83,7 +84,7 @@ Props) {
   const [floorPlanType, setFloorPlanType] = useState("type");
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
-  const [, { open, type }] = useFloorPlanPopup();
+  const [, { open }] = useFloorPlanPopup();
   const form = useForm();
   const byUnitForm = useForm();
   const handleUnitFormClear = () => {
@@ -343,7 +344,7 @@ Props) {
                 Select one of the phase to see Floor Plans
               </p>
               <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-                {phaseList?.map((each: any, index: any) => {
+                {phaseList?.map((each: any) => {
                   return (
                     <Button
                       key={each.phaseId}
@@ -492,7 +493,7 @@ Props) {
 
             <div
               className={clsx(
-                "h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center h-[550px]  ",
+                "sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center h-[550px]  ",
                 floorPlanType === "bhk" && "h-[550px]"
               )}
               onClick={handleContainerClick}

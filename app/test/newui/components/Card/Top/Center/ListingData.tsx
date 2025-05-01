@@ -5,7 +5,6 @@ import clsx from "clsx";
 import { useSetAtom } from "jotai";
 import React from "react";
 import { useQuery } from "react-query";
-import dynamic from "next/dynamic";
 // import SearchReadMoreContent from "./ReadMore";
 // const SearchReadMoreContent = dynamic(() => import("./ReadMore"));
 // import SearchReadMore from "";
@@ -13,8 +12,6 @@ import dynamic from "next/dynamic";
 type Props = any;
 
 export default function ListingData({
-  propTypes,
-  postedBy,
   landArea,
   type,
   ca,
@@ -29,7 +26,6 @@ export default function ListingData({
   minCa,
   maxCa,
   noOfUnits,
-  noOfTowers,
   parking,
   balcony,
   bathroom,
@@ -53,7 +49,7 @@ export default function ListingData({
   const isReadMoreNeeded = projectAbout?.length > readMoreThreshold;
   const dispatch = useSetAtom(overlayAtom);
 
-  const { data: approvedData, isLoading } = useQuery({
+  const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
     enabled: false,
   });

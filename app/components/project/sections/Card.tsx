@@ -3,7 +3,7 @@ import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import React from "react";
 
-type Props = {};
+// type Props = {};
 
 export default function Card(data: any) {
   return (

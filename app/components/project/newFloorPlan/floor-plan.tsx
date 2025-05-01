@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-useless-fragment */
 "use client";
 import React, { useCallback, useState, useEffect } from "react";
@@ -15,7 +17,7 @@ import {
 } from "@/app/store/new-floor-plan-state";
 
 import { projectprops } from "@/app/data/projectDetails";
-import SubHeading from "../headings/SubHeading";
+// import SubHeading from "../headings/SubHeading";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import Button from "@/app/elements/button";
 import { useQuery } from "react-query";
@@ -62,7 +64,7 @@ export default function FloorPlans({
   const [selectedView, setSelectedView] = useState("type");
   const [modalState, setModalState] = useAtom(modalStateAtom);
 
-  const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
+  const [, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const form = useForm();
 

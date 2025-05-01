@@ -16,7 +16,7 @@ import MiddleSection from "./(dashboard)/new/components/MiddleSection";
 // import dynamic from "next/dynamic";
 import { HomeSiteNavigationSchema } from "./seo/common/home.schema";
 import { Metadata } from "next";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default async function Page() {
   const cityData = {

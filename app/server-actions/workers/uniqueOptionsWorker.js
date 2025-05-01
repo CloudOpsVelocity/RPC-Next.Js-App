@@ -1,6 +1,6 @@
 // workers/dataWorker.js
 self.onmessage = (event) => {
-  const { type, data, properties, key, action, values } = event.data;
+  const { type, data, properties, values } = event.data;
   // console.log(type);
   switch (type) {
     case "getUniqueOptions": {

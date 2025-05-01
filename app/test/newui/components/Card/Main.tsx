@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Search } from "@/app/validations/types/search";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -14,7 +15,7 @@ import { overlayAtom } from "../../store/overlay";
 import Overlay from "../modals/Overlay";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 
 type Props = {
@@ -48,7 +49,7 @@ const MainBox = ({ data, refetch, index }: Props) => {
     shortListed: shortListed === "Y" ? true : false,
   });
   const { data: session } = useSession();
-  const router = useRouter();
+  // const router = useRouter();
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, toggleCompare } = useShortlistAndCompare();
   const reqId = type === "proj" ? projIdEnc : propIdEnc;
@@ -104,35 +105,35 @@ console.log(index === 0 ? coverImage : "notjrtkojh;skljfgsj;klghkl;sjg")
     pageUrl: url,
   };
 
-  const onClickRedirect = (projEncId: string) => {
-    let url;
-    if (data.type == "proj") {
-      url = createProjectLinkUrl({
-        city: data.city,
-        locality: data.locality,
-        slug: data.projName,
-        projIdEnc: projEncId,
-      });
-      router.push(url);
-      // window.open(url, "_blank", "noreferrer");
-      // return url;
-    } else {
-      url = generateListingLinkUrl({
-        city: data.cityName,
-        locality: data.localityName,
-        projName: data.projIdEnc ? data.propName : null,
-        category: data.category === "Sale" ? "for-sale" : "for-rent",
-        phase: data.phaseName,
-        propIdEnc: data.propIdEnc,
-        bhkUnitType: data.bhkName
-          ? `${data.bhkName + " " + data.propTypeName}`
-          : "" + " " + data.propTypeName,
-      });
-      router.push(url);
-      // window.open(url, "_blank", "noreferrer");
-      // return url;
-    }
-  };
+  // const onClickRedirect = (projEncId: string) => {
+  //   let url;
+  //   if (data.type == "proj") {
+  //     url = createProjectLinkUrl({
+  //       city: data.city,
+  //       locality: data.locality,
+  //       slug: data.projName,
+  //       projIdEnc: projEncId,
+  //     });
+  //     router.push(url);
+  //     // window.open(url, "_blank", "noreferrer");
+  //     // return url;
+  //   } else {
+  //     url = generateListingLinkUrl({
+  //       city: data.cityName,
+  //       locality: data.localityName,
+  //       projName: data.projIdEnc ? data.propName : null,
+  //       category: data.category === "Sale" ? "for-sale" : "for-rent",
+  //       phase: data.phaseName,
+  //       propIdEnc: data.propIdEnc,
+  //       bhkUnitType: data.bhkName
+  //         ? `${data.bhkName + " " + data.propTypeName}`
+  //         : "" + " " + data.propTypeName,
+  //     });
+  //     router.push(url);
+  //     // window.open(url, "_blank", "noreferrer");
+  //     // return url;
+  //   }
+  // };
 
   const [opened, { open, close }] = useReqCallPopup();
   const overlayData = useAtomValue(overlayAtom);

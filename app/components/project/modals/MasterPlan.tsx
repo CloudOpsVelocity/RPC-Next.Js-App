@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { Image, Modal } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";

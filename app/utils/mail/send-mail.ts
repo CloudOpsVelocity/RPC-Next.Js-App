@@ -2,31 +2,31 @@ import axios from "axios";
 // import Link from "next/link";
 
 const baseUrl = "https://info.getrightproperty.com/send_email";
-const endpoint = ""; // API endpoint
+// const endpoint = ""; // API endpoint
 
 export async function sendEmail(mailerData: any, selectedJob: any) {
-  const message = `
-    <html>
-        <body>
-            <p><strong>${mailerData.get(
-              "fullName"
-            )}</strong> is applying with the email address <Link prefetch={false} rel="noopener noreferrer" href="mailto:${mailerData.get(
-    "email"
-  )}">${mailerData.get("email")}</Link> and phone number ${mailerData.get(
-    "phone"
-  )}.</p>
-            <p>They have ${mailerData.get(
-              "experience"
-            )} years of experience.</p>
-            <p><strong>Cover Letter:</strong> ${mailerData.get(
-              "coverLetter"
-            )}</p>
-            <p><strong>Resume Link:</strong> <a href="${mailerData.get(
-              "resumeUrl"
-            )}">${mailerData.get("resumeUrl")}</a></p>
-        </body>
-    </html>
-`;
+//   const message = `
+//     <html>
+//         <body>
+//             <p><strong>${mailerData.get(
+//               "fullName"
+//             )}</strong> is applying with the email address <Link prefetch={false} rel="noopener noreferrer" href="mailto:${mailerData.get(
+//     "email"
+//   )}">${mailerData.get("email")}</Link> and phone number ${mailerData.get(
+//     "phone"
+//   )}.</p>
+//             <p>They have ${mailerData.get(
+//               "experience"
+//             )} years of experience.</p>
+//             <p><strong>Cover Letter:</strong> ${mailerData.get(
+//               "coverLetter"
+//             )}</p>
+//             <p><strong>Resume Link:</strong> <a href="${mailerData.get(
+//               "resumeUrl"
+//             )}">${mailerData.get("resumeUrl")}</a></p>
+//         </body>
+//     </html>
+// `;
 
   // Attach the HTML message
 

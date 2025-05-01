@@ -1,20 +1,20 @@
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import Button from "@/app/elements/button";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { NearByDataAtom } from "@/app/store/nearby";
+// import { NearByDataAtom } from "@/app/store/nearby";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
-import { useSetAtom } from "jotai";
+// import { useSetAtom } from "jotai";
 // import { useSearchParams } from "next/navigation";
 import React from "react";
 
-type Props = {
-  a: number;
-  o: number;
-  B: number;
-  type: "proj" | "prop";
-  reqId: string;
-};
+// type Props = {
+//   a: number;
+//   o: number;
+//   B: number;
+//   type: "proj" | "prop";
+//   reqId: string;
+// };
 
 export default function CardDownSection({
   a,
@@ -26,7 +26,7 @@ export default function CardDownSection({
   builderName,
   bhkName,
   propTypeName,
-  ltName,
+  // ltName,
   cg,
   builderId,
   // postedById,
@@ -36,13 +36,13 @@ export default function CardDownSection({
   projIdEnc,
 }: any) {
   const isMobile = useMediaQuery("(max-width: 601px)");
-  const name =
-    type === "proj"
-      ? projName
-      : `${bhkName ?? ""} ${propTypeName} for
-    ${cg === "R" ? "Rent" : "Sale"} in ${ltName}`;
+  // const name =
+  //   type === "proj"
+  //     ? projName
+  //     : `${bhkName ?? ""} ${propTypeName} for
+  //   ${cg === "R" ? "Rent" : "Sale"} in ${ltName}`;
   const [, { open }] = useReqCallPopup();
-  const setPopReqData = useSetAtom(NearByDataAtom);
+  // const setPopReqData = useSetAtom(NearByDataAtom);
 
   const handleOpen = () => {
     preventBackButton();

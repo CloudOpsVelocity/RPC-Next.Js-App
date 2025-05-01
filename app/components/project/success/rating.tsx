@@ -1,4 +1,4 @@
-import { IconSun, RatingStar } from "@/app/images/commonSvgs";
+import { RatingStar } from "@/app/images/commonSvgs";
 import { useFormContext } from "@/app/context/rating";
 import clsx from "clsx";
 import handleTrimAndReplace from "@/app/utils/input/validations";
@@ -12,7 +12,7 @@ interface Props {
 }
 export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
   const form = useFormContext();
-  const [value, setValue] = useLocalStorage<Props[]>({
+  const [value] = useLocalStorage<Props[]>({
     key: "ur",
     defaultValue: [],
   });
@@ -70,7 +70,6 @@ export const RatingForm = ({
   projName,
   formSubmit,
   isSubmitted,
-  mutate,
   projIdEnc,
 }: any) => {
   const form = useFormContext();

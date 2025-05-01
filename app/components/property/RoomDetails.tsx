@@ -184,7 +184,6 @@ const OtherDetails = ({
   cunstructionStatus,
   cunstructionType,
   boundryWallEnclose,
-  isUsed,
   foodAllowedType,
 }: Main) => {
   return (

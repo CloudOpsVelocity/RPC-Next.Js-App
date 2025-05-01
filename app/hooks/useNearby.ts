@@ -18,7 +18,7 @@ export default function useNearby({
   builderId?: number;
   company?: string;
 }) {
-  const [projectReqData, setProjectReqData] = useAtom(projectReqDataAtom);
+  const [, setProjectReqData] = useAtom(projectReqDataAtom);
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
     const res = await axios.get(

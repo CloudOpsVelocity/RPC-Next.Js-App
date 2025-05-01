@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Script from "next/script";
 import { VideoObject, WithContext } from "schema-dts";
 

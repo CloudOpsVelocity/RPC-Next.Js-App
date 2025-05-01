@@ -1,7 +1,6 @@
 import {
   Compass,
   Furnishing,
-  Marble,
   Others,
   OwnerShip,
   PhaseIcon,

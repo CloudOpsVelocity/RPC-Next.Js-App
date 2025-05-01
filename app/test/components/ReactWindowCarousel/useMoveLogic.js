@@ -67,7 +67,7 @@ const useMoveLogic = (ref, carouselRef) => {
       setCarouselMoved(true);
     };
 
-    const moveEnd = e => {
+    const moveEnd = () => {
       boundaryCheck();
 
       events.move.forEach(eventMove =>

@@ -9,7 +9,7 @@ import {
 import { Main } from "@/app/validations/property";
 import SellingPrice from "./SellingPrice";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 import DrawerBox from "./DrawerBox";
 export default function PriceBreakup({
   otherPrice,
@@ -52,7 +52,7 @@ export default function PriceBreakup({
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
   const [opened, { close }] = usePricingPop();
-  const isMobile = useMediaQuery("(max-width: 601px)");
+  // const isMobile = useMediaQuery("(max-width: 601px)");
 
   // return (
   //   <Drawer

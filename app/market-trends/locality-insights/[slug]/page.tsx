@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import CityTrendSection from "../../components/CityTrendSection";
 
 type Params = {

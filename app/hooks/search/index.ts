@@ -442,7 +442,7 @@ const getFilteredData = async (
 
   let cityId = "9"; // Default city ID
   if (city) {
-    const [_, cityIdFromParam] = city.split("+");
+    const [, cityIdFromParam] = city.split("+");
     if (cityIdFromParam) {
       cityId = cityIdFromParam;
     }

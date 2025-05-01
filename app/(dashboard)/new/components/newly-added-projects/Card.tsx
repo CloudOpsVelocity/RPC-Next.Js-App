@@ -6,7 +6,7 @@ import ViewAllButton from "./ViewButton";
 import ShareBtn from "./ShareBtn";
 import ReqBtn from "./ReqBtn";
 import Shortlist from "./Shortlist";
-import ProjectLink, {
+import {
   createProjectLinkUrl,
 } from "@/app/utils/linkRouters/ProjectLink";
 import { FaLocationDot } from "react-icons/fa6";

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import { useVirtualizer } from "@tanstack/react-virtual";

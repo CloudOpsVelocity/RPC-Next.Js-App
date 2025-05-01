@@ -187,7 +187,7 @@ function FloorPlanModal({
 
 export default FloorPlanModal;
 const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
-  const [floornPlanArray, setFloorsArray] = useAtom(floorPlansArray);
+  const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
   const { setPreviousFilers } = useRecentUnits();
@@ -869,7 +869,7 @@ const MiddleSection = ({
   projName,
   propCgId,
   allUnits,
-  handleReset,
+  // handleReset,
 }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   const { setValues } = useFormContext();
@@ -907,32 +907,32 @@ const MiddleSection = ({
     // @ts-ignore
     setFloorsArray(filteredFloors);
   };
-  const recentFiltersClick = (activeFilters: any) => {
-    handleReset();
-    setValues(activeFilters);
-    const filteredData = allUnits.filter((item: any) => {
-      return Object.keys(activeFilters).every(
-        (key) =>
-          !activeFilters[key] ||
-          String(item[key]).toLowerCase() === activeFilters[key].toLowerCase()
-      );
-    });
-    setFloor({
-      ...filteredData[0],
-      floorPlanUrl: filteredData[0]?.floorPlanUrl ?? ImgNotAvail,
-    });
-    // @ts-ignore
-    setFloorsArray(filteredData);
+  // const recentFiltersClick = (activeFilters: any) => {
+  //   handleReset();
+  //   setValues(activeFilters);
+  //   const filteredData = allUnits.filter((item: any) => {
+  //     return Object.keys(activeFilters).every(
+  //       (key) =>
+  //         !activeFilters[key] ||
+  //         String(item[key]).toLowerCase() === activeFilters[key].toLowerCase()
+  //     );
+  //   });
+  //   setFloor({
+  //     ...filteredData[0],
+  //     floorPlanUrl: filteredData[0]?.floorPlanUrl ?? ImgNotAvail,
+  //   });
+  //   // @ts-ignore
+  //   setFloorsArray(filteredData);
 
-    if (activeFilters.unitNumber && filteredData.length > 0) {
-      const filteredItem = filteredData[0];
-      const filteredValues: { [key: string]: string } = {};
-      Object.keys(filteredItem).forEach((prop) => {
-        filteredValues[prop] = String(filteredItem[prop]);
-      });
-      setValues(setPropertyValues(filteredValues, propCgId));
-    }
-  };
+  //   if (activeFilters.unitNumber && filteredData.length > 0) {
+  //     const filteredItem = filteredData[0];
+  //     const filteredValues: { [key: string]: string } = {};
+  //     Object.keys(filteredItem).forEach((prop) => {
+  //       filteredValues[prop] = String(filteredItem[prop]);
+  //     });
+  //     setValues(setPropertyValues(filteredValues, propCgId));
+  //   }
+  // };
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
       <p className=" w-full  mb-[1%] text-[#001F35] text-[12px] text-center p-2 xl:text-right xl:text-sm not-italic font-medium leading-[normal] tracking-[0.56px] ">

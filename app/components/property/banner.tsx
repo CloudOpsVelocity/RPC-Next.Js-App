@@ -10,7 +10,7 @@ import { ratingSchema } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 // import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { IconSun, RatingStar, infoIcon } from "@/app/images/commonSvgs";
+import { IconSun, RatingStar } from "@/app/images/commonSvgs";
 import {
   // toast,
   Toaster,

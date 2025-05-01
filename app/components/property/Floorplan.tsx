@@ -58,9 +58,9 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
     window.history.pushState(null, "", window.location.href);
   };
 
-  const onClosePopup = () => {
-    setOpened(false);
-  };
+  // const onClosePopup = () => {
+  //   setOpened(false);
+  // };
 
   // const pushHistory = useHistoryBackHandler(onClosePopup);
   return (

@@ -528,7 +528,7 @@ function PointsBlock({}: Props) {
               {eachPoint.points.map((eachOne: any, ind: number) => {
                 return (
                   <p
-                    key={`points_${ind}`}
+                    key={`points_${ind.toString()}`}
                     className={`w-full text-gray-600 font-normal text-[12px] md:text-[14px] xl:text-[16px] ${
                       index % 2 !== 0 ? "text-right" : "text-left"
                     } `}
