@@ -58,16 +58,42 @@ export default function ListingCard({ item, sl }: Props) {
         </Link>
         <Link
         aria-label={`View details for ${title}`}
-        prefetch={false}
-        href={listingLink}>
-          <Image
+          prefetch={false}
+          href={listingLink}>
+          {/* <Image
+            priority={true}
             alt={title}
             title={title}
             src={images[0]}
             width={490}
             height={276}
             className="object-cover w-full h-full"
-          />
+            
+          /> */}
+          <picture>
+        <source
+          media="(min-width: 1200px)"
+          srcSet={images[0] ? images[0].split(",")[3] : ""}
+        />
+        <source
+          media="(max-width: 768px)"
+          srcSet={images[0] ? images[0].split(",")[2] : ""}
+        />
+        <source
+          media="(max-width: 460px)"
+          srcSet={images[0] ? images[0].split(",")[1] : ""}
+        />
+        <Image
+          priority={true}
+          alt={title}
+          title={title}
+          src={images[0] ? images[0].split(",")[0] : ""}
+          width={490}
+          height={276}
+          className="object-cover w-full h-full"
+        />
+</picture>
+
         </Link>
         <p className="absolute top-2 left-2 flex justify-center items-center gap-1 rounded p-1.5 bg-black/50 backdrop-blur-sm text-white text-[12px] not-italic font-semibold leading-[normal] capitalize border border-white/20">
           Posted Date: {formatDateDDMMYYYY(item.postedDate)}
