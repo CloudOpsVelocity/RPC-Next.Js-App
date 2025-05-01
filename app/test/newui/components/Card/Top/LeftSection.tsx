@@ -66,64 +66,28 @@ export default function LeftSection({
           </p>
         </>
       )}
+
+
+
+
       <Link prefetch={false} href={pageUrl}>
-        <picture>
-          <source
-            media="(min-width: 1200px)"
-            srcSet={
+        <div className="relative h-[162px] w-full xl:h-full xl:max-w-[257px]">
+          <Image
+            src={
               src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
             }
+            alt={imageAlt}
+            title={imageAlt}
+            fill
+            className="object-cover"
+            priority={index === 0}
+            quality={80}
+            sizes="(max-width: 460px) 100vw, (max-width: 768px) 50vw, 257px"
           />
-          <source
-            media="(max-width: 768px)"
-            srcSet={src ? (src.includes(",") ? src.split(",")[2] : "") : ""}
-          />
-          <source
-            media="(max-width: 460px)"
-            srcSet={src ? (src.includes(",") ? src.split(",")[1] : "") : ""}
-          />
-         <Image
-                   src={
-                    src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
-                  }
-                  fill
-                    alt={imageAlt}
-                    title={imageAlt}
-                    className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
-                    priority={index == 0 ? true : false}
-                    unoptimized={true}
-                    quality={80}
-                  />
-                  
-        </picture>
-   {/*      <picture>
-        <source
-            media="(min-width: 1200px)"
-            srcSet={
-              src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
-            }
-          />
-          <source
-            media="(max-width: 768px)"
-            srcSet={src ? (src.includes(",") ? src.split(",")[2] : "") : ""}
-          />
-          <source
-            media="(max-width: 460px)"
-            srcSet={src ? (src.includes(",") ? src.split(",")[1] : "") : ""}
-          />
-                  <Image
-                   src={
-                    src ? (src.includes("+") ? src.replace(/\+/g, "%2B") : src) : ""
-                  }
-                    alt={imageAlt}
-                    title={imageAlt}
-                    className="h-[162px] w-full xl:h-full xl:max-w-[257px] object-cover"
-                    priority={true}
-                    unoptimized={true}
-                    quality={80}
-                  />
-                </picture> */}
+        </div>
       </Link>
+
+   
 
       {/* <div>
         

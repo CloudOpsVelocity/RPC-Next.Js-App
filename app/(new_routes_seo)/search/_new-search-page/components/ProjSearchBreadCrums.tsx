@@ -90,7 +90,7 @@ const ListingSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
                   prefetch={false}
                   // target="_blank"
                   href={url}
-                  className={`ml-2 text-sm font-semibold text-gray-500 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
+                  className={`ml-2 text-sm font-semibold text-gray-700 hover:text-blue-500 transition-all duration-200 text-nowrap first-letter:capitalize `}
                   aria-current={
                     index === newParams.length - 1 ? "page" : undefined
                   }
