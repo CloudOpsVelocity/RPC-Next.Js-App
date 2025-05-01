@@ -166,7 +166,7 @@ export default function Specifications({
                 {specificationsList?.get(spec?.specId)?.url}{" "}
                 <span className="">{spec.specName}</span>
               </span>
-              <div>
+              {/* <div> */}
                 <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
                   {spec.values.map(
                     (value) =>
@@ -177,7 +177,7 @@ export default function Specifications({
                       )
                   )}
                 </ul>
-              </div>
+              {/* </div> */}
             </div>
           ))}
         </div>

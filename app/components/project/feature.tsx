@@ -30,7 +30,7 @@ export default function Feature({
           return (
             <li
               key={`hightlights-${each}`}
-              className="  inline-flex gap-[1%] xl:gap-[0.5%] mb-[1%] "
+              className="inline-flex gap-[1%] xl:gap-[0.5%] mb-[1%]"
             >
               <Image
                 width={20}
