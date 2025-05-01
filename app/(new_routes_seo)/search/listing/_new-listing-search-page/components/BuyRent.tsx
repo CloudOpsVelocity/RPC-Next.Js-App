@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import React from "react";
+import React, { useMemo } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 import useProjSearchAppliedFilters from "../hooks/useProjSearchAppliedFilters";
@@ -18,6 +18,12 @@ export default function BuyRent({
 }: Props) {
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
+  const cg = useMemo(() => {
+    if (state.cg === undefined) {
+      return frontendFilters?.cg;
+    }
+    return state.cg === frontendFilters?.cg ? frontendFilters.cg : state.cg;
+  }, [state, frontendFilters]);
   const handleValueChange = (value: string) => {
     dispatch({
       type: "update",
@@ -34,7 +40,7 @@ export default function BuyRent({
         className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2  bg-[#0073C6] text-white rounded-full hover:bg-[#0073C6]/90 transition-colors"
         onClick={() => handleDropdownToggle("buy")}
       >
-        {frontendFilters?.cg === "R" || state.cg === "R" ? "Rent" : "Buy"}
+        {cg === "R" ? "Rent" : "Buy"}
         <MdKeyboardArrowDown className="w-5 h-5" />
       </button>
       {openDropdown === "buy" && (
