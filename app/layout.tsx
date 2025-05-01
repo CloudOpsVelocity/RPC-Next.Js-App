@@ -23,7 +23,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9243707404617437"
           crossOrigin="anonymous"
         />
@@ -98,7 +98,7 @@ export default function RootLayout(params: { children: React.ReactNode }) {
 
       {process.env.NODE_ENV !== "development" && (
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

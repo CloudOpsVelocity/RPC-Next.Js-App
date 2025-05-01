@@ -6,7 +6,7 @@ import {
   findPathForProjectListing,
   // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -19,18 +19,36 @@ import { notFound } from "next/navigation";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { Metadata, ResolvingMetadata } from "next";
+import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 type Props = {
   params: {
     cg: string;
     city: string;
     lt: string;
   };
+  searchParams: {
+    sf: string;
+  };
 };
 
-export default async function Page({ params: { cg, city, lt } }: Props) {
+export default async function Page({ params: { cg, city, lt }, searchParams }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
+  if(searchParams.sf){
+      const apiFilters = searchParams.sf
+        ? parseApiFilterQueryParams(searchParams.sf)
+        : null;
+      const frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+      const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+      const data = isProj
+        ? await getProjSearchData(apiFilters ?? "")
+        : await getSearchData(apiFilters ?? "");
+  }
+  else{
+    
+  }
   const slugValues = extractListingParamsValues(values);
   const severData = await getSearchData(`localities=${slugValues.LT}`);
   return (
