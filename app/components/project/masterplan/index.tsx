@@ -21,10 +21,10 @@ export default function MasterPlan({
       >
         <div>
           <h2 className=" sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words text-wrap sm:text-nowrap w-[85%]">
-              <strong>
-                <span className="text-[#001F35]">Master Plan Of</span> {" "}
-                <span className="text-[#148B16]">{projName}</span>
-              </strong> 
+            <strong>
+              <span className="text-[#001F35]">Master Plan Of</span>{" "}
+              <span className="text-[#148B16]">{projName}</span>
+            </strong>
           </h2>
 
           <SubHeading text="Crafting tomorrow's landscapes, today's masterpiece: your vision, our expertise." />
@@ -55,7 +55,7 @@ export default function MasterPlan({
         <FullScreenMasterPlanModal
           imageUrl={media}
           title={`${projName}`}
-          altText={`Master Plan of ${projName}`}
+          // altText={`Master Plan of ${projName}`}
         />
         {/* <MasterPlanPopup
           url={media}
