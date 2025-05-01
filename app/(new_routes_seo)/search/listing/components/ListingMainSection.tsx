@@ -1,10 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSection";
-import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
-import { useHydrateAtoms } from "jotai/utils";
-import { initialState, projSearchStore } from "../../store/projSearchStore";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
 
 // import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
@@ -14,37 +11,36 @@ import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection
 type Props = {
   serverData: any;
   frontendFilters: any;
+  preDefinedFilters: string | null;
 };
 
 export default function ListingMainSection({
   frontendFilters,
   serverData,
+  preDefinedFilters,
 }: Props) {
-  useHydrateAtoms(
-    [
-      [
-        projSearchStore,
-        {
-          type: "update",
-          payload: {
-            ...initialState,
-            ...frontendFilters,
-          },
-        },
-      ],
-    ],
-    {
-      dangerouslyForceHydrate: true,
-    }
-  );
-  const pathname = usePathname();
+  // useHydrateAtoms(
+  //   [
+  //     [
+  //       projSearchStore,
+  //       {
+  //         type: "update",
+  //         payload: {
+  //           ...initialState,
+  //           ...frontendFilters,
+  //         },
+  //       },
+  //     ],
+  //   ],
+  //   {
+  //     dangerouslyForceHydrate: true,
+  //   }
+  // );
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isTrue, setIsTrue] = useState(
-    pathname.includes("search")
-      ? true
-      : serverData !== null && apiFilterQueryParams !== null
+    apiFilterQueryParams !== preDefinedFilters
   );
-  console.log({ initialState, frontendFilters });
+
   return (
     <>
       <ListingSearchleftSection
@@ -53,6 +49,7 @@ export default function ListingMainSection({
         isTrue={isTrue}
         apiFilterQueryParams={apiFilterQueryParams}
         setIsTrue={setIsTrue}
+        preDefinedFilters={preDefinedFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
 

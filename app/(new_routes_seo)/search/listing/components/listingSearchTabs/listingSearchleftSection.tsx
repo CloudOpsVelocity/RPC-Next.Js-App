@@ -28,6 +28,7 @@ type Props = {
   isTrue: boolean;
   setIsTrue: any;
   apiFilterQueryParams: string | null;
+  preDefinedFilters: string | null;
 };
 
 function LeftSection({
@@ -37,6 +38,7 @@ function LeftSection({
   isTrue: it,
   setIsTrue,
   apiFilterQueryParams,
+  preDefinedFilters,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
@@ -45,12 +47,12 @@ function LeftSection({
   const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
   const isTrue =
-    it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
+     apiFilterQueryParams !== preDefinedFilters;
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, status } =
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
@@ -89,7 +91,7 @@ function LeftSection({
     queryFn: () => getAllAuthorityNames(),
     ...RTK_CONFIG,
   });
-  const allItems = serverData;
+
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -123,9 +125,7 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
   const dataToUse =
-    pathname.includes("/search") || apiFilterQueryParams
-      ? data?.pages.flat()
-      : mainData;
+  apiFilterQueryParams !== preDefinedFilters ? data?.pages.flat() : mainData;
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -146,7 +146,7 @@ function LeftSection({
   });
 
   const LoadingBlock = () => (
-    <div className="flex items-center justify-center h-full w-full ">
+    <div className="flex items-center justify-center h-screen w-full ">
       <div className="text-center flex items-center justify-center flex-col ">
         <div className="w-[20px] h-[20px] md:w-[26px] md:h-[26px] xl:w-[30px] xl:h-[30px] border-t-4 border-blue-500 border-solid rounded-full animate-spin" />
         <h2 className="text-[16px] md:text-[18px] xl:text-[20px] font-semibold text-gray-700 mt-[14px] ">
@@ -181,12 +181,13 @@ function LeftSection({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
+
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <>

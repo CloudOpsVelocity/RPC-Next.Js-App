@@ -48,13 +48,14 @@ export const parseApiFilterQueryParams = (
     )
     .replace(
       /city=([^\s&]*)(\+(\d+))?/,
-      (_, baseCity, __, cityId) => `city=${baseCity.split("+")[1] ?? "9"}`
+      (_, baseCity, __, ) => `city=${baseCity.split("+")[1] ?? "9"}`
     )
     .replace(/listedBy=All/g, "") // Remove 'listedBy=All'
     .replace(/-/g, "&"); // Replace dashes with ampersands
   let updatedParams = apiFilterQueryParams.includes("cg=")
     ? transformedParams
     : `${transformedParams}&cg=S`;
+    console.log({updatedParams})
   return updatedParams.includes("city=")
     ? updatedParams
     : `${updatedParams}&city=9`;

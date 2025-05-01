@@ -18,8 +18,9 @@ import {
 import { notFound } from "next/navigation";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import { Metadata, ResolvingMetadata } from "next";
-import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
+
 import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
+import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 // import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 type Props = {
   params: {
@@ -63,6 +64,7 @@ export default async function Page({ params: { cg, city, lt }, searchParams }: P
       serverData={serverData}
       frontendFilters={frontendFilters}
       pageUrl={pathname}
+      preDefinedFilters={searchParams.sf}
       showProjectTab
 
     />
