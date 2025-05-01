@@ -2,7 +2,10 @@ import React from "react";
 // import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
 // import { getPagesSlugs } from "@/app/seo/api";
 // import ProjectSearchPage from "@/app/(dashboard)/searchOldPage/Page/ProjectSearchPage";
-import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -30,29 +33,30 @@ type Props = {
     sf: string;
   };
 };
-export default async function Page({ params: { cg, city }, searchParams }: Props) {
+export default async function Page({
+  params: { cg, city },
+  searchParams,
+}: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   let serverData = null;
-  let frontendFilters = null
-  if(searchParams.sf){
-      const apiFilters = parseApiFilterQueryParams(searchParams.sf)
-      const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
-      // eslint-disable-next-line no-unused-vars
-      const data = isProj
-        ? await getProjSearchData(apiFilters ?? "")
-        : await getSearchData(apiFilters ?? "");
-      serverData = data;
-         frontendFilters = parseApiFilterQueryParams(searchParams.sf);
-  }
-  else{
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+  } else {
     const slugValues = extractListingParamsValues(values);
     serverData = await getSearchData(`cg=${slugValues.CG}`);
     frontendFilters = {
       cg: slugValues.CG,
-
-    }
+    };
   }
 
   return (

@@ -1,5 +1,8 @@
 // import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
-import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
   // getNestedSlug,
@@ -32,34 +35,33 @@ export default async function Page({ params, searchParams }: Props) {
   // console.log(values);
   if (!values) return notFound();
   let serverData = null;
-  let frontendFilters = null
-  if(searchParams.sf){
-    const apiFilters = parseApiFilterQueryParams(searchParams.sf)
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
     const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
     // eslint-disable-next-line no-unused-vars
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
     serverData = data;
-       frontendFilters = parseApiFilterQueryParams(searchParams.sf);
-  }
-  else{
+    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+  } else {
     const filtersValues = extractListingParamsValues(values);
     serverData = await getSearchData(
       `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${
         filtersValues.PJ
       }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
-  );
+    );
+  }
   return (
     <NewListingSearchpage
-       pageUrl={pathname}
+      pageUrl={pathname}
       serverData={serverData}
-       frontendFilters={frontendFilters}
+      frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
-      
     />
   );
-}}
+}
 export async function generateMetadata({
   params,
 }: {
