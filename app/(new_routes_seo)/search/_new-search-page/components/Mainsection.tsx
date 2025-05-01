@@ -101,6 +101,7 @@ export default function Mainsection({
             />
 
             <button
+              aria-label="Click to View Location Details" name="Click to View Location Details" title="Click to View Location Details"
               onClick={() => setIsMapLoaded(true)}
               className="absolute z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors "
             >

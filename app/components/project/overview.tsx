@@ -84,6 +84,8 @@ export default function Overview({
             </h1>{" "}
             <button
               aria-label={title}
+              name={title} 
+              title={title}
               onClick={() => {
                 navigator.share({
                   title: title,

@@ -136,6 +136,8 @@ export default function FullScreenMasterPlanModal({
           />
         </picture>
         <button
+          name="Click to open the master plan image" 
+          title="Click to open the master plan image"
           aria-label="Click to open the master plan image"
           onClick={openModal}
         >
@@ -160,6 +162,7 @@ export default function FullScreenMasterPlanModal({
                 onClick={handleShearMasterplan}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Share"
+                name="Share" title="Share"
               >
                 <FiShare2 className="w-5 h-5" />
               </button>
@@ -167,6 +170,7 @@ export default function FullScreenMasterPlanModal({
                 onClick={handleDownloadMasterplan}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Download"
+                name="Download" title="Download"
               >
                 <FiDownload className="w-5 h-5" />
               </button>
@@ -174,6 +178,7 @@ export default function FullScreenMasterPlanModal({
                 onClick={closeModal}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Close modal"
+                name="Close modal" title="Close modal"
               >
                 <FiX className="w-6 h-6" />
               </button>
@@ -194,6 +199,7 @@ export default function FullScreenMasterPlanModal({
                       onClick={() => zoomIn()}
                       className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                       aria-label="Zoom in"
+                      name="Zoom in" title="Zoom in"
                     >
                       <FiZoomIn className="w-5 h-5" color="white" />
                     </button>
@@ -201,6 +207,7 @@ export default function FullScreenMasterPlanModal({
                       onClick={() => zoomOut()}
                       className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                       aria-label="Zoom out"
+                      name="Zoom out" title="Zoom out"
                     >
                       <FiZoomOut className="w-5 h-5" color="white" />
                     </button>
@@ -208,6 +215,7 @@ export default function FullScreenMasterPlanModal({
                       onClick={() => resetTransform()}
                       className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                       aria-label="Reset zoom"
+                      name="Reset zoom" title="Reset zoom"
                     >
                       {newIcons.get("resetIconWhite")}
                     </button>

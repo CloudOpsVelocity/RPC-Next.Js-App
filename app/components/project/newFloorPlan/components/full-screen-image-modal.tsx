@@ -188,6 +188,8 @@ export function FullScreenImageModal({
                 onClick={() => handleShearMasterplan()}
                 className={`flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors`}
                 title="Click to Download Floorplan"
+                aria-label="Click to Download Floorplan" 
+                name="Click to Download Floorplan"
               >
                 <FiShare2 className="w-5 h-5" />
                 <span className="hidden md:inline">Shear Floor Plan</span>
@@ -205,6 +207,16 @@ export function FullScreenImageModal({
                   ? "Click to Download Floorplan"
                   : "Floorplan not Available"
               }
+                aria-label={
+                unit.floorPlanUrl?.split(",")[0]
+                  ? "Click to Download Floorplan"
+                  : "Floorplan not Available"
+              }
+                name={
+                unit.floorPlanUrl?.split(",")[0]
+                  ? "Click to Download Floorplan"
+                  : "Floorplan not Available"
+              }
             >
               <FaDownload className="w-4 h-4" />
               <span className="hidden md:inline">Download Floor Plan</span>
@@ -215,6 +227,7 @@ export function FullScreenImageModal({
                 handleReqcallBack(unit);
               }}
               className="flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
+            aria-label="Reqcall Back" name="Reqcall Back" title="Reqcall Back"
             >
               <FaMessage className="w-4 h-4" />
               <span className="text-xs md:text-sm">Request Quotation</span>
@@ -222,6 +235,7 @@ export function FullScreenImageModal({
             <button
               onClick={onClose}
               className="p-2 rounded-full hover:bg-gray-100transition-colors"
+              aria-label="Close" name="Close" title="Close"
             >
               <FaTimes className="w-4 h-4 text-gray-600" />
             </button>

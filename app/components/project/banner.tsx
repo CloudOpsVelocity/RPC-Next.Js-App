@@ -59,6 +59,7 @@ export default function Banner({
             about
           </p>
           <button
+            aria-label="Add Ratings" name="Add Ratings" title="Add Ratings"
             onClick={() => {
               onAddingRatings();
               preventBackButton();

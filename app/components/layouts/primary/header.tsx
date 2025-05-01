@@ -80,7 +80,7 @@ const ForBuilders = () => {
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsHovered((prev) => !prev)}
       >
-        <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
+        <button aria-label="For Builders" name="For Builders" title="For Builders" className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
           For Builders {config.chevron}
         </button>
 

@@ -87,6 +87,8 @@ function FirstImagesBlock({ onSelect, data }: Props) {
           </p>
           <button
             aria-label={title}
+            name={title} 
+            title={title}
             onClick={(e) => {
               e.stopPropagation();
               navigator.share({ title: title, url: data.url });

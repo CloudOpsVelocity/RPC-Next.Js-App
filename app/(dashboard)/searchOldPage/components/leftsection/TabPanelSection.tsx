@@ -81,7 +81,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
             position: "relative",
           }}
         >
-          {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
+          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
             const eachOne = serverClientData[virtualRow.index];
             return (
               <div
