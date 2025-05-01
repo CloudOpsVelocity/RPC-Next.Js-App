@@ -35,7 +35,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
     }
   };
   return (
-    <button name="shorlist" onClick={(e) => onAddingShortList(e)}>
+    <button aria-label="Shortlist this property" onClick={(e) => onAddingShortList(e)}>
       {state ? (
         config.trueIcon
       ) : (

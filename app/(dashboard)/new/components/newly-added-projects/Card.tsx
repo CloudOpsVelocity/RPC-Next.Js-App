@@ -35,7 +35,7 @@ export default function Card({ item }: Props) {
 
   return (
     <div className="relative w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0">
-      <Link prefetch={false} href={url}><div className=" absolute top-0 left-0 h-full w-[170px] md:w-[40%] z-[2] ">{`${``}`}</div></Link>
+      <Link aria-label={`View details for ${item.projName}`}  prefetch={false} href={url}><div className=" absolute top-0 left-0 h-full w-[170px] md:w-[40%] z-[2] ">{`${``}`}</div></Link>
       <div>
         <div>
           <div className="z-[100]">
