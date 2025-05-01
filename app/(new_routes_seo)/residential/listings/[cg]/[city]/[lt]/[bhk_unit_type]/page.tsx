@@ -27,25 +27,34 @@ type Props = {
     lt: string;
     bhk_unit_type: string;
   };
+  searchParams: {
+    sf: string;
+  };
 };
 // 50 , 16
 export default async function Page({
   params: { bhk_unit_type, cg, city, lt },
+  searchParams,
 }: Props) {
   const pathname = `${BASE_PATH_LISTING}/${cg}/${city}/${lt}/${bhk_unit_type}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const { CG, BH, PT, LT } = extractListingParamsValues(values);
   let severData;
-  if (PT === "36") {
-    severData = await getSearchData(
-      `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
-    );
+  let frontendFilters = null;
+  if (searchParams.sf) {
   } else {
-    severData = await getProjSearchData(
-      `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
-    );
+    if (PT === "36") {
+      severData = await getSearchData(
+        `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
+      );
+    } else {
+      severData = await getProjSearchData(
+        `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
+      );
+    }
   }
+
   return PT === "36" ? (
     <NewListingSearchpage
       pageUrl={pathname}
@@ -56,6 +65,7 @@ export default async function Page({
         propType: parseInt(PT as string),
         cg: CG,
       }}
+      preDefinedFilters={searchParams.sf}
     />
   ) : (
     <NewSearchPage
@@ -86,9 +96,7 @@ export async function generateMetadata(
     };
   }
   const id = params.slug.split("-")[1];
-  const {
-    listing: data,
-  } = await getListingDetails(id as string);
+  const { listing: data } = await getListingDetails(id as string);
   return {
     title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
       data.cg === "S" ? " Sale" : " Rent"
