@@ -9,14 +9,17 @@ type Props = {
 export default function ProjectContent({ data }: Props) {
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/app/(dashboard)/searchOldPage/listing/components/map"), {
-        loading: () => <MapSkeleton />,
-        ssr: false,
-      }),
+      dynamic(
+        () => import("@/app/(dashboard)/searchOldPage/listing/components/map"),
+        {
+          loading: () => <MapSkeleton />,
+          ssr: false,
+        }
+      ),
     []
   );
   const categories = useMemo(() => Object.keys(data), [data]);
-  const [selectedCategory, setSelectedCategory] = useState<string>(  
+  const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0]
   );
   const onTabClick = useCallback((category: string) => {
@@ -27,14 +30,16 @@ export default function ProjectContent({ data }: Props) {
     <>
       {categories.length > 0 && (
         <Tabs
-          data={data[selectedCategory]} 
           onTabClick={onTabClick}
           selectedCategory={selectedCategory}
           categories={categories}
         />
       )}
 
-      <Map key="leafletProContent2SearchPageMap" data={data[selectedCategory]} />
+      <Map
+        key="leafletProContent2SearchPageMap"
+        data={data[selectedCategory]}
+      />
     </>
   );
 }

@@ -11,7 +11,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { throttle } from "lodash";
 
 interface TabsProps {
-  onTabClick: (category?: string) => void ;
+  onTabClick: (category: string) => void;
   selectedCategory: string;
   categories: string[];
 }
