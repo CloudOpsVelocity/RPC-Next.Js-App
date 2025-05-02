@@ -26,6 +26,7 @@ export async function GET(
       process.env.NEXT_PUBLIC_BACKEND_URL
     }/common/case-seo-page?size=30000&page=${sitemapIndex - 1}`
   );
+  //
   const requestedSitemap = res.data.seoUrls;
 
   const sitemap = requestedSitemap.map((slug: any) => ({
