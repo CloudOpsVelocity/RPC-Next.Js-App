@@ -25,7 +25,7 @@ export default function Box({ content, image, link, title }: Props) {
           height={126}
           className="absolute h-[64px] w-[64px] sm:h-[99px] sm:w-[99px] xl:h-[126px] xl:w-[126px] left-0 sm:left-[-60px] bottom-[114px] sm:bottom-0"
         />
-        <p className="text-green-700 text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-bold">
+        <p className="text-[#148B16] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-bold">
           {title}
         </p>
         <p className="text-black text-[12px] sm:text-[12px] xl:text-[14px] not-italic font-medium leading-[normal] xl:leading-[24px]">

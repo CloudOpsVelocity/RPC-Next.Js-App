@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSection";
 import { useQueryState } from "nuqs";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
+import { useHydrateAtoms } from "jotai/utils";
 
 // import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
 // const ListingSearchRightSection = dynamic(

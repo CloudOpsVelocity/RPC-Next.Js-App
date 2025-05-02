@@ -49,7 +49,6 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
 
         <Link
-        aria-label={`View details for ${title}`}
           prefetch={false}
           href={listingLink}
           className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 " /* z-[1000] */
@@ -57,9 +56,10 @@ export default function ListingCard({ item, sl }: Props) {
           View Details
         </Link>
         <Link
-        aria-label={`View details for ${title}`}
+          aria-label={`View details for ${title}`}
           prefetch={false}
-          href={listingLink}>
+          href={listingLink}
+        >
           {/* <Image
             priority={true}
             alt={title}
@@ -71,29 +71,28 @@ export default function ListingCard({ item, sl }: Props) {
             
           /> */}
           <picture>
-        <source
-          media="(min-width: 1200px)"
-          srcSet={images[0] ? images[0].split(",")[3] : ""}
-        />
-        <source
-          media="(max-width: 768px)"
-          srcSet={images[0] ? images[0].split(",")[2] : ""}
-        />
-        <source
-          media="(max-width: 460px)"
-          srcSet={images[0] ? images[0].split(",")[1] : ""}
-        />
-        <Image
-          priority={true}
-          alt={title}
-          title={title}
-          src={images[0] ? images[0].split(",")[0] : ""}
-          width={490}
-          height={276}
-          className="object-cover w-full h-full"
-        />
-</picture>
-
+            <source
+              media="(min-width: 1200px)"
+              srcSet={images[0] ? images[0].split(",")[3] : ""}
+            />
+            <source
+              media="(max-width: 768px)"
+              srcSet={images[0] ? images[0].split(",")[2] : ""}
+            />
+            <source
+              media="(max-width: 460px)"
+              srcSet={images[0] ? images[0].split(",")[1] : ""}
+            />
+            <Image
+              priority={true}
+              alt={title}
+              title={title}
+              src={images[0] ? images[0].split(",")[0] : ""}
+              width={490}
+              height={276}
+              className="object-cover w-full h-full"
+            />
+          </picture>
         </Link>
         <p className="absolute top-2 left-2 flex justify-center items-center gap-1 rounded p-1.5 bg-black/50 backdrop-blur-sm text-white text-[12px] not-italic font-semibold leading-[normal] capitalize border border-white/20">
           Posted Date: {formatDateDDMMYYYY(item.postedDate)}
@@ -109,10 +108,7 @@ export default function ListingCard({ item, sl }: Props) {
 
       <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
-          <Link 
-          aria-label={`View details for ${item.projName}`}
-          prefetch={false}
-          href={listingLink} className="space-y-1  ">
+          <Link prefetch={false} href={listingLink} className="space-y-1  ">
             <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
                 `${formatNumberWithSuffix(item.pa, false)} sq.ft`}{" "}
@@ -120,7 +116,7 @@ export default function ListingCard({ item, sl }: Props) {
               {item.localityName}
             </p>
 
-            <p className="text-green-700 text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
+            <p className="text-[#148B16] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
               {formatCurrency(item.price)}
               {item.category === "Rent" ? "" : ","}{" "}
               {item.category !== "Rent" && (

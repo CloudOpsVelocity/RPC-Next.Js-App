@@ -71,6 +71,7 @@ export default function Specifications({
 
               return (
                 <button
+                aria-label={spec.specName} name={spec.specName} title={spec.specName}
                   key={spec.specName}
                   className={clsx(
                     `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[15px] xl:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
@@ -166,7 +167,7 @@ export default function Specifications({
                 {specificationsList?.get(spec?.specId)?.url}{" "}
                 <span className="">{spec.specName}</span>
               </span>
-              <div>
+              {/* <div> */}
                 <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
                   {spec.values.map(
                     (value) =>
@@ -177,7 +178,7 @@ export default function Specifications({
                       )
                   )}
                 </ul>
-              </div>
+              {/* </div> */}
             </div>
           ))}
         </div>

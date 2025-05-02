@@ -1,10 +1,15 @@
 // import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
-import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
   // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
+import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { Metadata } from "next";
@@ -19,40 +24,58 @@ type Props = {
     bhk_unit_type: string;
     project: string;
   };
+  searchParams: {
+    sf: string;
+  };
 };
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
   const { cg, city, lt, project, phase } = params;
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}/${phase}`;
   const values = await findPathForProjectListing(pathname);
   // console.log(values);
   if (!values) return notFound();
-  const filtersValues = extractListingParamsValues(values);
-  const severData = await getSearchData(
-    `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${
-      filtersValues.PJ
-    }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
-  );
-  // console.log(pathname);
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+  } else {
+    const filtersValues = extractListingParamsValues(values);
+    serverData = await getSearchData(
+      `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${
+        filtersValues.PJ
+      }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
+    );
+    frontendFilters = {
+      listedBy: null,
+      localities: [`${lt}+${filtersValues.LT}`],
+      cg: filtersValues.CG,
+      projName: project,
+      projIdEnc: filtersValues.PJ,
+      ...(filtersValues.count === 7
+        ? {
+            bhk: [parseInt(filtersValues.BH as string)],
+            propType: parseInt(filtersValues.PT as string),
+          }
+        : {}),
+      ...(filtersValues.PH && {
+        phaseId: [`${params.phase}+${filtersValues.PH}`],
+      }),
+    };
+  }
   return (
     <NewListingSearchpage
       pageUrl={pathname}
-      serverData={severData}
-      frontendFilters={{
-        localities: [`${lt}+${filtersValues.LT}`],
-        cg: filtersValues.CG,
-        projName: project,
-        projIdEnc: filtersValues.PJ,
-        ...(filtersValues.count === 7
-          ? {
-              bhk: [parseInt(filtersValues.BH as string)],
-              propType: parseInt(filtersValues.PT as string),
-            }
-          : {}),
-        ...(filtersValues.PH && {
-          phaseId: [`${params.phase}+${filtersValues.PH}`],
-        }),
-      }}
+      serverData={serverData}
+      frontendFilters={frontendFilters}
+      preDefinedFilters={searchParams.sf}
     />
   );
 }

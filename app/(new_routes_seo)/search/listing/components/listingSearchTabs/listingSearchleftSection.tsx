@@ -39,6 +39,7 @@ function LeftSection({
   setIsTrue,
   apiFilterQueryParams,
   preDefinedFilters,
+  frontendFilters,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
@@ -46,8 +47,7 @@ function LeftSection({
   const state = useAtomValue(projSearchStore);
   const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
-  const isTrue =
-     apiFilterQueryParams !== preDefinedFilters;
+  const isTrue = apiFilterQueryParams !== preDefinedFilters;
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
@@ -92,7 +92,6 @@ function LeftSection({
     ...RTK_CONFIG,
   });
 
-
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   // Enhanced infinite scroll logic
@@ -125,7 +124,7 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
   const dataToUse =
-  apiFilterQueryParams !== preDefinedFilters ? data?.pages.flat() : mainData;
+    apiFilterQueryParams !== preDefinedFilters ? data?.pages.flat() : mainData;
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -191,39 +190,40 @@ function LeftSection({
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <>
-        {/* Image use below */}
-        {isMobile && dataToUse[0].coverImage && (
-          <>
-            <link
-              rel="preconnect"
-              href="https://media.getrightproperty.com"
-              crossOrigin="anonymous"
-            />
-
-            {/* Preload image with srcSet and sizes */}
-            {dataToUse?.[0]?.coverImage?.includes(",") && (
+          {/* Image use below */}
+          {isMobile && dataToUse[0].coverImage && (
+            <>
               <link
-                rel="preload"
-                as="image"
-                href={
-                  dataToUse[0].coverImage.includes("+")
-                    ? dataToUse[0].coverImage
-                        .replace(/\+/g, "%2B")
-                        .split(",")[1]
-                    : dataToUse[0].coverImage.split(",")[1]
-                }
+                rel="preconnect"
+                href="https://media.getrightproperty.com"
+                crossOrigin="anonymous"
               />
-            )}
-          </>
-        )}
-        {/* Image Use above*/}
-        
-        <ListingServerCardData
-          data={dataToUse}
-          refetch={refetch}
-          mutate={mutate}
-          state={state}
-        />
+
+              {/* Preload image with srcSet and sizes */}
+              {dataToUse?.[0]?.coverImage?.includes(",") && (
+                <link
+                  rel="preload"
+                  as="image"
+                  href={
+                    dataToUse[0].coverImage.includes("+")
+                      ? dataToUse[0].coverImage
+                          .replace(/\+/g, "%2B")
+                          .split(",")[1]
+                      : dataToUse[0].coverImage.split(",")[1]
+                  }
+                />
+              )}
+            </>
+          )}
+          {/* Image Use above*/}
+
+          <ListingServerCardData
+            data={dataToUse}
+            refetch={refetch}
+            mutate={mutate}
+            state={state}
+            frontendFilters={frontendFilters}
+          />
         </>
       ) : (
         <EmptyState />

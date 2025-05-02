@@ -438,6 +438,7 @@ function BrocherContent({
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <button
+                aria-label="Click to download Brochure" name="Click to download Brochure" title="Click to download Brochure"
                 onClick={(e) => {
                   e.preventDefault();
                   if (singleBrocher) handleDownload(singleBrocher);

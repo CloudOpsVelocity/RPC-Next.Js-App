@@ -46,6 +46,9 @@ export default function CompareList({ cg, propTypeName }: any) {
 
   return (
     <button
+    aria-label={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`}
+              name={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`} 
+              title={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`}
       onClick={() => onAddingCompare()}
       className={clsx(
         "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] xl:mt-3 border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] sm:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] sm:tracking-[0.4px] xl:tracking-[0.96px] mt-0 text-[12px] text-nowrap mb-[10px] md:mb-0",

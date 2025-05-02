@@ -48,6 +48,7 @@ export default function CompareList({ slug }: { slug: string }) {
   return (
     <button
       id="compare"
+      aria-label={`${data?.shortListed ? "Remove From" : "Add to"} Compare}`}
       onClick={() => onAddingCompare()}
       className={clsx(
         "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] mt-3 border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] sm:text-base xl:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] sm:tracking-[0.4px]  xl:tracking-[0.96px]   sm:mt-2 xl:mt-5 text-[12px] text-nowrap scroll-mt-[400px]",

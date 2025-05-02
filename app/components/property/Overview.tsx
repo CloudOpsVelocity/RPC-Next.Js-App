@@ -23,6 +23,7 @@ export default function PropertyOverView({
 }) {
     const path = usePathname();
     const title = "Share Listing";
+    console.log(data)
   return (
     <div
       className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 relative"
@@ -32,17 +33,27 @@ export default function PropertyOverView({
         <div className="md:w-[80%]">
           <div className="flex justify-between gap-1 items-start ">
             <h1 className="text-[18px] sm:text-[24px] xl:text-[28px] text-[#001F35] font-bold capitalize">
-              <strong>
+              {/* <strong>
                 <span className="lowercase">
                   {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft" : ""}
                 </span>{" "}
                 {data.bhkName} {data.propTypeName} For{" "}
                 {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName}
+              </strong> */}
+
+              <strong>
+                <span className="lowercase">
+                  {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft" : ""}
+                </span>{" "}
+                {data.bhkName} {data.propTypeName} For{" "}
+                {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName} <span className="lowercase">at</span> {data.propName}, {data.ctName}
               </strong>
             </h1>
             {"  "}
             <button
               aria-label={title}
+              name={title} 
+              title={title}
               onClick={() => {
                 navigator.share({
                   title: title,

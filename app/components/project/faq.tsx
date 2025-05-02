@@ -89,8 +89,7 @@ const MainCard = ({
 }) => {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
-    <div>
-      {isMobile ? (
+      isMobile ? (
         <MobileFaqCard
           faqQuestion={faq.faqQuestion}
           faqAnswer={faq.faqAnswer}
@@ -103,8 +102,7 @@ const MainCard = ({
           key={faq.faqAnswer}
           last={index === data.length - 1}
         />
-      )}
-    </div>
+      )
   );
 };
 const AddQnaForm = ({
@@ -241,6 +239,7 @@ const AddQnaForm = ({
           )}
         </div>
         <button
+        aria-label="Submit Question" name="Submit Question" title="Submit Question"
           type="submit"
           // loading={status === "pending"}
           // size={isMobile ? "xs" : "md"}
@@ -272,7 +271,7 @@ const FaqCard = ({
   last: boolean;
 }) => {
   return (
-    <div>
+    <>
       <h3 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-0 capitalize">
         {faqQuestion}
       </h3>
@@ -280,7 +279,7 @@ const FaqCard = ({
       {/*  {!last && ( */}
       <hr className="bg-[#00000080] my-4 sm:my-[18px] h-[2px]" />
       {/*   )} */}
-    </div>
+    </>
   );
 };
 const MobileFaqCard = ({

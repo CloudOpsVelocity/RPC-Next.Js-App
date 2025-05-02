@@ -68,6 +68,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
             {data?.projMedia?.floorPlanUrl && (
               <>
                 <button
+                aria-label="Download Floor Plan" name="Download Floor Plan" title="Download Floor Plan"
                   onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
                   className="flex items-center gap-1 md:gap-2 p-2 md:px-4 md:py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors"
                 >
@@ -98,6 +99,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                 <button
                   aria-label="Share"
                   title="Share Floor Plan"
+                  name="Share Floor Plan"
                   onClick={(e) => {
                     e.stopPropagation();
                     navigator.share({
@@ -118,6 +120,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
               </>
             )}
             <button
+            aria-label="Click to Open Floorplan" name="Click to Open Floorplan" title="Click to Open Floorplan"
               onClick={() => {
                 setOpened(false);
                 document.body.style.overflow = "unset";

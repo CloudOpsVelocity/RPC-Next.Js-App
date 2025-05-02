@@ -160,6 +160,7 @@ export default function GalleryModalContent({}: Props) {
             onClick={handleShare}
             className="p-2 hover:bg-gray-800 rounded-full transition-colors"
             aria-label="Share"
+            name="Share" title="Share"
           >
             <FiShare2 className="w-5 h-5" />
           </button>
@@ -167,6 +168,7 @@ export default function GalleryModalContent({}: Props) {
             onClick={closeModal}
             className="p-2 hover:bg-gray-800 rounded-full transition-colors"
             aria-label="Close modal"
+            name="Close modal" title="Close modal"
           >
             <FiX className="w-6 h-6" />
           </button>
@@ -188,6 +190,7 @@ export default function GalleryModalContent({}: Props) {
                     onClick={() => zoomIn()}
                     className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                     aria-label="Zoom in"
+                    name="Zoom in" title="Zoom in"
                   >
                     <FiZoomIn className="w-5 h-5" color="white" />
                   </button>
@@ -195,6 +198,7 @@ export default function GalleryModalContent({}: Props) {
                     onClick={() => zoomOut()}
                     className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                     aria-label="Zoom out"
+                    name="Zoom out" title="Zoom out"
                   >
                     <FiZoomOut className="w-5 h-5" color="white" />
                   </button>
@@ -202,6 +206,7 @@ export default function GalleryModalContent({}: Props) {
                     onClick={() => resetTransform()}
                     className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                     aria-label="Reset zoom"
+                    name="Reset zoom" title="Reset zoom"
                   >
                     {newIcons.get("resetIconWhite")}
                   </button>
@@ -249,6 +254,7 @@ export default function GalleryModalContent({}: Props) {
             onClick={prevItem}
             className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-colors"
             aria-label="Previous item"
+            name="Previous item" title="Previous item"
           >
             <FiChevronLeft className="w-6 h-6" />
           </button>
@@ -258,6 +264,7 @@ export default function GalleryModalContent({}: Props) {
             onClick={nextItem}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-colors"
             aria-label="Next item"
+            name="Next item" title="Next item"
           >
             <FiChevronRight className="w-6 h-6" />
           </button>

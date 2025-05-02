@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useAtom } from "jotai";
-import React from "react";
+import React, { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../store/projSearchStore";
 import { SEARCH_FILTER_DATA, SelectedFiltersMap } from "@/app/data/search";
@@ -10,19 +10,22 @@ type Props = {
   frontendFilters: any;
 };
 
-const SelectedFilters = ({ frontendFilters }: Props) => {
+const ListingSelectedFilters = ({ frontendFilters }: Props) => {
   const [state, dispatch] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
 
   // Fallback to frontendFilters if JS is disabled (or state is empty)
-  const filtersSource =
-    typeof window === "undefined" || // SSR or JS disabled
-    !Object.entries(state).some(
+  const filtersSource = React.useMemo(() => {
+    if (state.listedBy === undefined) {
+      return frontendFilters;
+    }
+    return !Object.entries(state).some(
       ([_, value]) =>
         (Array.isArray(value) && value.length > 0) || value !== null
     )
       ? frontendFilters
       : state;
+  }, [state, frontendFilters]);
 
   const hasFilters = Object.entries(filtersSource).some(
     ([_, value]) => (Array.isArray(value) && value.length > 0) || value !== null
@@ -60,28 +63,28 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
                       ? `${value} ${category}`
                       : SelectedFiltersMap.get(value)}
                   </span>
-                  {typeof window !== "undefined" && (
-                    <button
-                      onClick={() => {
-                        dispatch({
-                          type: "update",
-                          payload: {
-                            [category]: Array.isArray(
-                              state[category as keyof typeof state]
-                            )
-                              ? (
-                                  state[category as keyof typeof state] as any[]
-                                ).filter((item: any) => item !== value)
-                              : null,
-                          },
-                        });
-                        handleApplyFilters();
-                      }}
-                      className="text-[#0073C6] hover:text-[#0073C6]/70"
-                    >
-                      <MdClose className="w-4 h-4" />
-                    </button>
-                  )}
+                  {/* {typeof window !== "undefined" && ( */}
+                  <button
+                    onClick={() => {
+                      dispatch({
+                        type: "update",
+                        payload: {
+                          [category]: Array.isArray(
+                            state[category as keyof typeof state]
+                          )
+                            ? (
+                                state[category as keyof typeof state] as any[]
+                              ).filter((item: any) => item !== value)
+                            : null,
+                        },
+                      });
+                      handleApplyFilters();
+                    }}
+                    className="text-[#0073C6] hover:text-[#0073C6]/70"
+                  >
+                    <MdClose className="w-4 h-4" />
+                  </button>
+                  {/* ``)} */}
                 </div>
               ))
             ) : (
@@ -106,26 +109,26 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
                     ? "Near By"
                     : SelectedFiltersMap.get(values) ?? ""}
                 </span>
-                {typeof window !== "undefined" && (
-                  <button
-                    onClick={() => {
-                      dispatch({
-                        type: "update",
-                        payload: {
-                          [category]: null,
-                          ...(category === "projName" && {
-                            projIdEnc: null,
-                            phaseId: [],
-                          }),
-                        },
-                      });
-                      handleApplyFilters();
-                    }}
-                    className="text-[#0073C6] hover:text-[#0073C6]/70"
-                  >
-                    <MdClose className="w-4 h-4" />
-                  </button>
-                )}
+                {/* {typeof window !== "undefined" && ( */}
+                <button
+                  onClick={() => {
+                    dispatch({
+                      type: "update",
+                      payload: {
+                        [category]: null,
+                        ...(category === "projName" && {
+                          projIdEnc: null,
+                          phaseId: [],
+                        }),
+                      },
+                    });
+                    handleApplyFilters();
+                  }}
+                  className="text-[#0073C6] hover:text-[#0073C6]/70"
+                >
+                  <MdClose className="w-4 h-4" />
+                </button>
+                {/* )} */}
               </div>
             ))
         )}
@@ -134,4 +137,4 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
   );
 };
 
-export default SelectedFilters;
+export default memo(ListingSelectedFilters);

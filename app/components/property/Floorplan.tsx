@@ -17,6 +17,9 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const [opened, setOpened] = useState(false);
   const setValue = useSetAtom(selectedFloorAtom);
   const type = listingProps[data.propTypeName as keyof typeof listingProps];
+  const newTitle = `${data?.bhkName ?? ""} ${data?.propTypeName} For
+  ${data?.cg === "S" ? " Sale" : " Rent"} In
+  ${data?.ltName} at ${data.propName}`;
   const handleOpen = () => {
     // console.log("setting: ", data)
     setValue({
@@ -74,8 +77,8 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
         <div className="w-[90%] mb-[10px] xl:mb-[8px] space-y-4">
           <PropertyHeading
             title="Floor Plan"
-            desc="See floor plan of your selected property"
-          />
+            desc={`See floor plan of your selected property ${newTitle}`}
+          /> 
         </div>
 
         <div className=" h-[405px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center p-2 pt-0 sm:pt-2 xl:items-center flex-col ">
@@ -129,6 +132,9 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               )}
             </div>
             <button
+            aria-label={"Click on image to open floor plan"}
+            name={"Click on image to open floor plan"} 
+            title={"Click on image to open floor plan"}
               onClick={() => {
                 setOpened(true);
                 // pushHistory();

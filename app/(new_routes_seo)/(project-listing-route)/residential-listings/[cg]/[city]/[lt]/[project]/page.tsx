@@ -1,10 +1,15 @@
 // import ListingSearchPage from "@/app/(dashboard)/searchOldPage/listing/Page/ListingSearchPage";
-import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   findPathForProjectListing,
   // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
+import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { Metadata, ResolvingMetadata } from "next";
@@ -19,29 +24,50 @@ type Props = {
     bhk_unit_type: string;
     project: string;
   };
+  searchParams: {
+    sf: string;
+  };
 };
 
 export default async function Page({
   params: { cg, city, lt, project },
+  searchParams,
 }: Props) {
-  // console.log(bhk_unit_type);
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
-  const filtersValues = extractListingParamsValues(values);
-  const severData = await getSearchData(
-    `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
-  );
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+  } else {
+    const filtersValues = extractListingParamsValues(values);
+    serverData = await getSearchData(
+      `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
+    );
+    frontendFilters = {
+      localities: [`${lt}+${filtersValues.LT}`],
+      cg: filtersValues.CG,
+      projName: project,
+      projIdEnc: filtersValues.PJ,
+      listedBy: null,
+    };
+  }
+
   return (
     <NewListingSearchpage
       pageUrl={pathname}
-      serverData={severData}
-      frontendFilters={{
-        localities: [`${lt}+${filtersValues.LT}`],
-        cg: filtersValues.CG,
-        projName: project,
-        projIdEnc: filtersValues.PJ,
-      }}
+      serverData={serverData}
+      frontendFilters={frontendFilters}
+      preDefinedFilters={searchParams.sf}
+      showProjectTab
     />
   );
 }

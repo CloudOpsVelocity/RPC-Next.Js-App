@@ -6,7 +6,10 @@ import {
   findPathForProjectListing,
   // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -33,32 +36,58 @@ type Props = {
   };
 };
 
-export default async function Page({ params: { cg, city, lt }, searchParams }: Props) {
-  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}`;
-  const values = await findPathForProjectListing(pathname);
-  if (!values) return notFound();
-  let serverData = null;
-  let frontendFilters = null
-  if(searchParams.sf){
-      const apiFilters = parseApiFilterQueryParams(searchParams.sf)
-      const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
-      // eslint-disable-next-line no-unused-vars
-      const data = isProj
-        ? await getProjSearchData(apiFilters ?? "")
-        : await getSearchData(apiFilters ?? "");
-      serverData = data;
-         frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+export default async function Page({
+  params: { cg, city, lt },
+  searchParams,
+}: Props) {
+  let pathname;
+  if (lt.includes("page-")) {
+    pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}`;
+  } else {
+    pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}`;
   }
-  else{
+
+  const values = await findPathForProjectListing(pathname);
+
+  if (!values) return notFound();
+
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getSearchData(apiFilters ?? "");
+    serverData = data;
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+  } else {
     const slugValues = extractListingParamsValues(values);
     serverData = await getSearchData(`localities=${slugValues.LT}`);
     frontendFilters = {
       localities: [`${lt}+${slugValues.LT}`],
       cg: slugValues.CG,
-      listedBy: "All",
-    }
+      listedBy: null,
+    };
   }
-
+  if (Number.isInteger(parseInt(lt))) {
+    return (
+      <div>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque fugiat
+        earum tempora quis corrupti error quasi facilis eius id enim numquam
+        similique veritatis aperiam alias explicabo exercitationem, cupiditate
+        ut consequatur minima? Sunt iste amet, minima impedit tempora ipsa iusto
+        quaerat eaque cupiditate earum porro voluptate! Similique quibusdam
+        iusto perferendis officia cumque minus corrupti rem, ipsa quia numquam
+        veniam quis tenetur praesentium at minima, ipsam ab enim error et
+        assumenda expedita incidunt? Consectetur quis eligendi esse repudiandae
+        exercitationem veniam quod tenetur rem quibusdam enim, est ut aliquam,
+        atque quos hic! Voluptatibus nihil nam laborum quis ea error voluptas
+        omnis illo esse.
+      </div>
+    );
+  }
   return (
     <NewListingSearchpage
       serverData={serverData}
@@ -66,7 +95,6 @@ export default async function Page({ params: { cg, city, lt }, searchParams }: P
       pageUrl={pathname}
       preDefinedFilters={searchParams.sf}
       showProjectTab
-
     />
   );
 }

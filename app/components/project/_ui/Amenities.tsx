@@ -69,6 +69,7 @@ export default function AmenitiesDisplay({
               className="mb-4 bg-white shadow-sm hover:shadow-md transition-shadow duration-200 rounded-lg p-3"
             >
               <button
+              aria-label={category} name={category} title={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`flex w-full items-center gap-3 text-left px-4 py-2 rounded-md transition duration-200 hover:bg-green-100 ${
                   selectedCategory === category ? "bg-green-50" : ""
@@ -120,7 +121,7 @@ export default function AmenitiesDisplay({
               className="bg-gray-100 hover:bg-gray-200"
               onClick={() => toggleCategory(category)}
             >
-              <button className="flex w-full items-center justify-between px-4 pt-3  transition duration-200">
+              <button aria-label={category} name={category} title={category} className="flex w-full items-center justify-between px-4 pt-3  transition duration-200">
                 <span className="text-start text-[16px] font-medium text-gray-800">
                   {category}
                 </span>

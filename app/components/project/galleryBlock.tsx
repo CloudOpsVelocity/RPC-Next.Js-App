@@ -21,6 +21,7 @@ export default function GalleryBlock({
   projName,
   media,
   projectVideoIUrl,
+  newTitle,
   // videoUrl,
   type = "proj",
 }: Media) {
@@ -59,7 +60,7 @@ export default function GalleryBlock({
       {type === "prop" ? (
         <PropertyHeading
           title="Gallery"
-          desc="Gallery Highlights : A Glimpse into good property"
+          desc={`Gallery Highlights : A Glimpse into good property ${newTitle}`}
         />
       ) : (
         <>
@@ -144,7 +145,9 @@ export default function GalleryBlock({
                 </div>
               )}
               <button
-                aria-label="OPEN"
+                aria-label="Open Gallery"
+                name="Open Gallery" 
+                title="Open Gallery"
                 onClick={() => {
                   const isVideo =
                     selectedMedia.includes(".mp4") ||

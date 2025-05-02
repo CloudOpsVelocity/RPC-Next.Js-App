@@ -159,6 +159,9 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
           <button
+            aria-label={`${cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}`} 
+            name={`${cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}`} 
+            title={`${cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}`}
             className={clsx(
               " !absolute bottom-[10px] right-[10px] rounded-[10px] z-10 p-[8px] text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
               cardData.shortListed === "Y"

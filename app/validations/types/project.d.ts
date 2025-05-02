@@ -78,6 +78,7 @@ export interface Media {
   videoUrl?: string;
   media: any;
   type?: "proj" | "prop";
+  newTitle?:string;
 }
 
 export interface PhaseList {

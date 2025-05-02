@@ -119,7 +119,7 @@ export default function PropertyOverviewBanner({
           </p>
           <Button
             title="Request  Callback"
-            buttonClass="  text-[#FFF] text-[12px] sm:text-[22px] xl:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+            buttonClass="text-[#FFF] text-[12px] sm:text-[22px] xl:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
             onChange={() =>
               open({
                 title: `${bhkName ?? ""} ${propTypeName} For ${
@@ -138,8 +138,11 @@ export default function PropertyOverviewBanner({
           <div className="flex justify-end items-center flex-col mt-3">
             {otherPrice && (
               <button
+              aria-label={collapsed ? "Hide Price Break Up" : "Show Price Break Up"}
+              name={collapsed ? "Hide Price Break Up" : "Show Price Break Up"} 
+              title={collapsed ? "Hide Price Break Up" : "Show Price Break Up"}
                 onClick={toggle}
-                className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
+                className="text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
               >
                 {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
                 {/*   {config.priceIcon} */}
@@ -173,6 +176,9 @@ export default function PropertyOverviewBanner({
                 }
               />
               <button
+              aria-label={collapsed ? "Hide Price Break Up" : "Show Price Break Up"}
+              name={collapsed ? "Hide Price Break Up" : "Show Price Break Up"} 
+              title={collapsed ? "Hide Price Break Up" : "Show Price Break Up"}
                 onClick={toggle}
                 className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
               >

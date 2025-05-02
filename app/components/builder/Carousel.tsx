@@ -133,6 +133,9 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
 
           <div className=" right-2 absolute ">
             <button
+            aria-label={isItemInShortlist ? "Shortlisted" : "Shortlist"} 
+            name={isItemInShortlist ? "Shortlisted" : "Shortlist"} 
+            title={isItemInShortlist ? "Shortlisted" : "Shortlist"}
               className={clsx(
                 "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
                 isItemInShortlist
