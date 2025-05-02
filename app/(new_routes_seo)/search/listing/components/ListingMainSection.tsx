@@ -4,6 +4,7 @@ import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSecti
 import { useQueryState } from "nuqs";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
 import { useHydrateAtoms } from "jotai/utils";
+import { projSearchStore } from "../../store/projSearchStore";
 
 // import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
 // const ListingSearchRightSection = dynamic(
@@ -20,23 +21,22 @@ export default function ListingMainSection({
   serverData,
   preDefinedFilters,
 }: Props) {
-  // useHydrateAtoms(
-  //   [
-  //     [
-  //       projSearchStore,
-  //       {
-  //         type: "update",
-  //         payload: {
-  //           ...initialState,
-  //           ...frontendFilters,
-  //         },
-  //       },
-  //     ],
-  //   ],
-  //   {
-  //     dangerouslyForceHydrate: true,
-  //   }
-  // );
+  useHydrateAtoms(
+    [
+      [
+        projSearchStore,
+        {
+          type: "update",
+          payload: {
+            ...frontendFilters,
+          },
+        },
+      ],
+    ]
+    // {
+    //   dangerouslyForceHydrate: true,
+    // }
+  );
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isTrue, setIsTrue] = useState(
     apiFilterQueryParams !== preDefinedFilters

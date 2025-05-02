@@ -40,7 +40,7 @@ export default async function Page({ params, searchParams }: Props) {
   ]
     .filter(Boolean)
     .join("/");
-  console.log({ listing });
+
   // console.log(params);
   let isProjectListing = listing ? true : bhk_unit_type?.includes("listing");
 
@@ -69,9 +69,13 @@ export default async function Page({ params, searchParams }: Props) {
         }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
       );
       frontendFilters = {
-        localities: [`${lt}+${filtersValues.LT}`],
-        bhk: [parseInt(filtersValues.BH as string)],
-        propType: parseInt(filtersValues.PT as string),
+        ...(lt && { localities: [`${lt}+${filtersValues.LT}`] }),
+        ...((bhk_unit_type || phase) && {
+          bhk: [parseInt(filtersValues.BH as string)],
+        }),
+        ...((bhk_unit_type || phase) && {
+          propType: parseInt(filtersValues.PT as string),
+        }),
         cg: filtersValues.CG,
         projName: project,
         projIdEnc: filtersValues.PH,
@@ -117,7 +121,7 @@ export default async function Page({ params, searchParams }: Props) {
       };
     }
   }
-
+  console.log({ cg, city, lt, project, phase, bhk_unit_type, listing });
   return !isProjectListing ? (
     <NewListingSearchpage
       pageUrl={pathname}
