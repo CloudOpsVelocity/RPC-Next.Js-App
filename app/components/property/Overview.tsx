@@ -30,7 +30,7 @@ export default function PropertyOverView({
     // >
     <div
       id="overview"
-      className="pt-4 sm:scroll-mt-[150px]  min-h-[250px] rounded-[24px] shadow-md mt-4 bg-gradient-to-r from-[#F6F6F6]/0 via-[#FFF]/45 to-[#FEFFFF]/100 relative"
+      className="pt-4 sm:scroll-mt-[150px] sm:w-[90%] min-h-[250px] rounded-[24px] shadow-md mt-4 bg-gradient-to-r from-[#F6F6F6]/0 via-[#FFF]/45 to-[#FEFFFF]/100 relative"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
