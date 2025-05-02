@@ -21,9 +21,13 @@ export async function GET(
 ) {
   const slug = (await params).slug; // Get the 'slug' param, which is the index
   const sitemapIndex = parseInt(slug);
-  const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/common/case-seo-page?size=30000&page=${sitemapIndex}`)
- const requestedSitemap = res.data.seoUrls
- 
+  const res = await axios.post(
+    `${
+      process.env.NEXT_PUBLIC_BACKEND_URL
+    }/common/case-seo-page?size=30000&page=${sitemapIndex - 1}`
+  );
+  const requestedSitemap = res.data.seoUrls;
+
   const sitemap = requestedSitemap.map((slug: any) => ({
     loc: `${process.env.NEXT_PUBLIC_URL}/${slug}`,
     lastmod: new Date().toISOString(),
