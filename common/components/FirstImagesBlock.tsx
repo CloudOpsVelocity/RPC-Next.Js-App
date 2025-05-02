@@ -42,22 +42,16 @@ function FirstImagesBlock({ onSelect, data }: Props) {
       </>;
 
       return (
-        <picture>
-          <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
-          <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
-          <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
-          <Image
-            alt={data.projName || "Project Image"}
-            title={data.projName || "Project Image"}
-            src={getUrl(urls, 3)}
-            height={195}
-            width={900}
-            className={className}
-            // priority={index == 0 ? true : false}
-            unoptimized={true}
-            // quality={80}
-          />
-        </picture>
+        // import Image from 'next/image';
+
+        <Image
+          src="https://media.getrightproperty.com/residential-projects/bengaluru/1025/sowparnika-rhythm-of-rain-samethanahalli-cover-large.webp?v=1740836856086"
+          alt="Sowparnika Rhythm of Rain"
+          fill
+          sizes="(max-width: 500px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
+          style={{ objectFit: "cover" }}
+        />
       );
     } else {
       return "";
