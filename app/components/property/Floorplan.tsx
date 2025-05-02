@@ -105,7 +105,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                       media="(min-width: 1200px)"
                       srcSet={data?.projMedia?.floorPlanUrl.split(",")[3]}
                     />
-                    <Image
+                    {/* <Image
                       alt="floor plan"
                       title={
                         data?.projMedia?.floorPlanUrl
@@ -117,7 +117,24 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                       height={750}
                       className=" m-auto h-[300px] lg:h-[420px]"
                       unoptimized
+                    /> */}
+
+                    <img
+                      alt="floor plan"
+                      title={
+                        data?.projMedia?.floorPlanUrl
+                          .split("/")[6]
+                          .split(".")[0]
+                      }
+                      src={data?.projMedia?.floorPlanUrl.split(",")[3]} // fallback image
+                      width={750}
+                      height={750}
+                      className="m-auto h-[300px] lg:h-[420px] object-contain block"
+                      loading="lazy"
+                      decoding="async"
+                      // fetchPriority={undefined}
                     />
+                  
                   </picture>
                 </div>
               ) : (

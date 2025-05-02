@@ -24,9 +24,13 @@ export default function PropertyOverView({
     const path = usePathname();
     const title = "Share Listing";
   return (
-    <div
-      className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 relative"
-      id="overview"
+    // <div
+    //   className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 relative"
+    //   id="overview"
+    // >
+    <div 
+      id="overview" 
+      className="pt-4 sm:scroll-mt-[150px] mx-[2rem] min-h-[250px] rounded-[24px] shadow-md mt-4 bg-gradient-to-r from-[#F6F6F6]/0 via-[#FFF]/45 to-[#FEFFFF]/100 relative"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
@@ -83,7 +87,9 @@ export default function PropertyOverView({
         </div>
       </div>
 
-      <div className="pl-[2%] pr-[2%] flex justify-start xl:justify-between items-start xl:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col xl:flex-row relative">
+      {/* <div className="pl-[2%] pr-[2%] flex justify-start xl:justify-between items-start xl:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col xl:flex-row relative"> */}
+      <div className="pl-4 pr-4 flex justify-between items-start xl:items-end w-full min-h-[250px] mb-6 sm:mb-4 xl:mb-4 mt-6 sm:mt-4 xl:mt-4 flex-col xl:flex-row relative
+">
         <div className="flex justify-start items-start flex-wrap w-[100%] xl:w-[78%] ">
           {generatePropertyOverViewData(
             data,

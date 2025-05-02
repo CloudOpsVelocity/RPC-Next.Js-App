@@ -39,33 +39,50 @@ export default function PropertyHeading({
 }
 
 const Svg = (
+  // <svg
+  //   xmlns="http://www.w3.org/2000/svg"
+  //   width="6"
+  //   height="72"
+  //   viewBox="0 0 6 72"
+  //   fill="none"
+  //   className="h-[36px] xl:h-[54px] xl:w-[14px]"
+  // >
+  //   <path
+  //     d="M3 2.5L3 69.5"
+  //     stroke="url(#paint0_linear_342_34781)"
+  //     strokeWidth="5"
+  //     strokeLinecap="round"
+  //   />
+  //   <defs>
+  //     <linearGradient
+  //       x1="3.00001"
+  //       y1="72"
+  //       x2="3"
+  //       y2="0.499999"
+  //       gradientUnits="userSpaceOnUse"
+  //     >
+  //       <stop offset="0" stopColor="#B3DFFF" />
+  //       <stop offset="1" stopColor="#0094FF" />
+  //     </linearGradient>
+  //   </defs>
+  // </svg>
+
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="6"
-    height="72"
-    viewBox="0 0 6 72"
-    fill="none"
-    className="h-[36px] xl:h-[54px] xl:w-[14px]"
-  >
-    <path
-      d="M3 2.5L3 69.5"
-      stroke="url(#paint0_linear_342_34781)"
-      strokeWidth="5"
-      strokeLinecap="round"
-    />
-    <defs>
-      <linearGradient
-        x1="3.00001"
-        y1="72"
-        x2="3"
-        y2="0.499999"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop offset="0" stopColor="#B3DFFF" />
-        <stop offset="1" stopColor="#0094FF" />
-      </linearGradient>
-    </defs>
+      xmlns="http://www.w3.org/2000/svg"
+      width="6"
+      height="72"
+      viewBox="0 0 6 72"
+      fill="none"
+      className="h-[36px] xl:h-[54px] xl:w-[14px]"
+    >
+      <path
+        d="M3 2.5L3 69.5"
+        stroke="#0094FF"  // Solid blue color
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
   </svg>
+
 );
 
 export { Svg };
