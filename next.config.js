@@ -48,10 +48,8 @@ const nextConfig = {
     // legacyBrowsers is not needed
   },
   images: {
-    // unoptimized: true,
+    unoptimized: true,
     // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    deviceSizes: [250, 250, 250], // define breakpoints for responsive images
-    imageSizes: [16, 32, 64, 128, 256], // optional: for non-full-width images
     remotePatterns: [
       { hostname: "d2sa15fzpcbn0k.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
