@@ -61,6 +61,7 @@ export default async function Page({ params, searchParams }: Props) {
       const values = await findPathForProjectListing(pathname);
       if (!values) return notFound();
       filtersValues = extractListingParamsValues(values);
+
       serverData = await getSearchData(
         `${filtersValues.BH ? `bhk=${filtersValues.BH}&` : ""}propType=${
           filtersValues.PT
@@ -121,7 +122,6 @@ export default async function Page({ params, searchParams }: Props) {
       };
     }
   }
-  console.log({ cg, city, lt, project, phase, bhk_unit_type, listing });
   return !isProjectListing ? (
     <NewListingSearchpage
       pageUrl={pathname}

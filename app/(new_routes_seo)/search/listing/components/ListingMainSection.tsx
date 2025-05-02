@@ -17,24 +17,36 @@ export default function ListingMainSection({
   serverData,
   preDefinedFilters,
 }: Props) {
+  const setStore = useSetAtom(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const shouldHydrate = apiFilterQueryParams !== preDefinedFilters;
+  // useHydrateAtoms(hydrationValues as any);
+  // useEffect(() => {
+  //   // if (shouldHydrate) {
+  //   setStore({
+  //     type: "update",
+  //     payload: {
+  //       ...frontendFilters,
+  //     },
+  //   });
+  //   // }
+  // }, [shouldHydrate]);
 
-  const hydrationValues = shouldHydrate
-    ? [
-        [
-          projSearchStore,
-          {
-            type: "update",
-            payload: {
-              ...frontendFilters,
-            },
-          },
-        ],
-      ]
-    : [];
+  // const hydrationValues = shouldHydrate
+  //   ? [
+  //       [
+  //         projSearchStore,
+  //         {
+  //           type: "update",
+  //           payload: {
+  //             ...frontendFilters,
+  //           },
+  //         },
+  //       ],
+  //     ]
+  //   : [];
 
-  useHydrateAtoms(hydrationValues as any);
+  // useHydrateAtoms(hydrationValues as any);
 
   const [isTrue, setIsTrue] = useState(
     apiFilterQueryParams !== preDefinedFilters
@@ -56,4 +68,3 @@ export default function ListingMainSection({
     </>
   );
 }
-

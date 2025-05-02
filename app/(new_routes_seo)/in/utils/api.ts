@@ -71,7 +71,7 @@ export const getSearchData = async (filters?: string): Promise<any> => {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0&city=9`;
 
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
-
+    console.log(url);
     // console.log(url);
     const res = await fetch(url, {
       cache: "no-cache",
