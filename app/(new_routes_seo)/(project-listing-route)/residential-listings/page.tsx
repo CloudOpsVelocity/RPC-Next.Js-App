@@ -27,6 +27,7 @@ import axios from "axios";
 import { Metadata } from "next";
 import NotFound from "@/app/not-found";
 import ResidentialListingsSchema from "@/app/seo/search/ResidentialListings.schema";
+import Head from "next/head";
 type Props = {
   searchParams: {
     page: number;
@@ -53,7 +54,17 @@ export default async function page({ searchParams: { page } }: Props) {
 
   return (
     <>
+    <Head>
+              <link rel="prev" href={`https://www.getrightproperty.com/residential${
+                    page ? `?page=${page-1}` : ""
+                  }`} />
+              <link rel="next" href={`https://www.getrightproperty.com/residential${
+                    page ? `?page=${page+1}` : ""
+                  }`} />
+              </Head>
+    
       <>
+      
         {
           <link
             rel="canonical"
