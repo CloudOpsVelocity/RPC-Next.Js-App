@@ -74,9 +74,11 @@ const PropertyFirstBlock: React.FC<Props> = ({
   };
 
   return (
-    <div
-      className={`relative rounded-[10px] w-full m-auto bg-gray-50 bg-cover flex justify-between items-start flex-col shadow-md break-words mb-[1rem] `}
-    >
+    // <div
+    //   className={`relative rounded-[10px] w-full m-auto bg-gray-300 bg-cover flex justify-between items-start flex-col shadow-md break-words mb-[1rem] `}
+    // >
+    <div className="relative rounded-[10px] w-full m-auto bg-gray-800 text-white bg-cover flex justify-between items-start flex-col shadow-md break-words mb-[1rem]">
+
       {projectDetails && (
         <>
           {isOkWithBrokerContact ? (

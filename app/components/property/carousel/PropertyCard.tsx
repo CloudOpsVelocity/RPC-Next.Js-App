@@ -104,8 +104,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       href={redirect(reqId)}
       key={reqId}
       className={clsx(
-        "border text-card-foreground min-w-[310px] max-w-full   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
-        type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
+        "border text-card-foreground min-w-[310px] max-w-full min-h-[400px] overflow-hidden shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+        type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFFFF] pt-4"
       )}
     >
       {type == "proj" && (
@@ -119,11 +119,11 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             {cardData.propName}
           </Link>
           <span className="text-xs font-semibold  ">
-            <span className="text-[16px] font-[700] text-[#148B16]">
+            <span className="text-[16px] font-[700] text-[#0C5F0E]">
               {formatCurrency(cardData.minPrice)}
             </span>{" "}
             -{" "}
-            <span className="text-[16px] font-[700] text-[#148B16]">
+            <span className="text-[16px] font-[700] text-[#0C5F0E]">
               {formatCurrency(cardData.maxPrice)}
             </span>
           </span>
@@ -132,7 +132,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
       <h6 className="px-3 pb-3 relative">
         {type != "proj" && (
-          <span className="absolute flex  h-[33px] justify-center items-center gap-2 shrink-0 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] p-2 rounded-[18px] border-[0.5px] border-solid border-[#92B2C8] bg-gradient-to-br from-[#EFF5FF] to-[#F2FAFF] top-2 left-5 z-10 text-[#148B16] text-sm not-italic font-bold">
+          <span className="absolute flex  h-[33px] justify-center items-center gap-2 shrink-0 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] p-2 rounded-[18px] border-[0.5px] border-solid border-[#92B2C8] bg-gradient-to-br from-[#EFF5FF] to-[#F2FAFF] top-2 left-5 z-10 text-[#0C5F0E] text-sm not-italic font-bold">
             {cardData.availablityStatus == "R"
               ? "Ready to move"
               : "Under Construction"}
@@ -165,7 +165,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             className={clsx(
               " !absolute bottom-[10px] right-[10px] rounded-[10px] z-10 p-[8px] text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
               cardData.shortListed === "Y"
-                ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                ? "bg-[rgb(231,245,255)] text-[#0C5F0E] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
                 : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
             )}
             onClick={(e) => {
@@ -189,7 +189,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               {cardData.bhkName} {cardData.propTypeName} for{" "}
               {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName}{" "}
               <br />
-              <span className="text-[18px] font-[700] text-[#148B16] ">
+              <span className="text-[18px] font-[700] text-[#0C5F0E] ">
                 {" "}
                 {formatCurrency(cardData.price)}
               </span>{" "}
@@ -226,7 +226,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               <span className="text-black text-right text-base not-italic font-medium leading-[normal]">
                 Project Status:{" "}
               </span>
-              <span className="text-[#148B16] text-base not-italic font-bold leading-[normal]">
+              <span className="text-[#0C5F0E] text-base not-italic font-bold leading-[normal]">
                 {cardData.projstatus}
               </span>
             </p>
@@ -266,7 +266,7 @@ const ProjectCarousel = ({
             <strong>
               {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
               <span className="text-[#001F35]">{title}</span>
-              <span className="text-[#148B16] uppercase ml-4 ">{projName}</span>
+              <span className="text-[#0C5F0E] uppercase ml-4 ">{projName}</span>
             </strong>
           </h3>
           <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">

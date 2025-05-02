@@ -62,7 +62,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
   }
 
   return (
-    <div className="sm:rounded-[20px] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[1%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
+    <div className="sm:rounded-[20px] flex justify-between items-center bg-[#FFFFFF] shadow-md w-[100%] mb-[1%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.newLaunch > 0 ? (
           <Link
@@ -76,7 +76,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
               </span>
               {newLaunchProjIconSvg}
             </p>
-            <span className="text-[#148B16] text-[13px] lg:text-[20px] font-[700]">
+            <span className="0C5F0E] text-[13px] lg:text-[20px] font-[700]">
               New Launch {`Project${data?.newLaunch > 1 ? "s" : ""}`}
             </span>
           </Link>
@@ -87,7 +87,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
                 0
               </span>
             </div>
-            <p className="text-[#148B16] text-[13px] lg:text-[20px] font-[700]">
+            <p className="text-[#0C5F0E] text-[13px] lg:text-[20px] font-[700]">
               New Launch Projects
             </p>
           </div>
@@ -139,7 +139,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
               </span>
               {completedProjIconSvg}
             </div>
-            <span className="text-[#E3AC00] text-[13px] lg:text-[20px] font-[700]">
+            <span className="text-[#A07600] text-[13px] lg:text-[20px] font-[700]">
               Completed {`Project${data?.completed > 1 ? "s" : ""}`}
             </span>
           </Link>
@@ -150,7 +150,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
                 0
               </span>
             </div>
-            <p className="text-[#E3AC00] text-[13px] lg:text-[20px] font-[700]">
+            <p className="text-[#A07600] text-[13px] lg:text-[20px] font-[700]">
               Completed Projects
             </p>
           </div>

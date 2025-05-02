@@ -203,7 +203,7 @@ const ListingSearchTabs = ({
                 className={`block w-full text-left px-4 py-2 text-sm transition-colors ${
                   currentSortLabel === option.label
                     ? "text-white bg-[#0073C6]"
-                    : "text-gray-700 hover:bg-[#0073C6] hover:text-white"
+                    : "text-gray-800 hover:bg-[#0073C6] hover:text-white"
                 }`}
               >
                 {option.label}
