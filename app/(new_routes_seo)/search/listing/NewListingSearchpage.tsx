@@ -34,7 +34,7 @@ export default function NewListingSearchpage({
   pageUrl,
   showProjectTab = false,
   is2lakhUrls = false,
-  preDefinedFilters = null
+  preDefinedFilters = null,
 }: Props) {
   const isListing = true;
   return (

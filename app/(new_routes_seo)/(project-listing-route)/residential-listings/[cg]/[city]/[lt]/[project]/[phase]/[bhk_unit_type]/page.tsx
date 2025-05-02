@@ -5,6 +5,7 @@ import {
 } from "@/app/(new_routes_seo)/in/utils/api";
 import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
@@ -49,7 +50,7 @@ export default async function Page({ params, searchParams }: Props) {
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
 
-    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
   } else {
     if (!isProjectListing) {
       const values = await findPathForProjectListing(pathname);

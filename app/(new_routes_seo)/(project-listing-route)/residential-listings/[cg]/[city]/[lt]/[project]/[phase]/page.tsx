@@ -8,6 +8,7 @@ import {
   // getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
@@ -44,7 +45,7 @@ export default async function Page({ params, searchParams }: Props) {
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
     serverData = data;
-    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
   } else {
     const filtersValues = extractListingParamsValues(values);
     serverData = await getSearchData(
@@ -53,6 +54,7 @@ export default async function Page({ params, searchParams }: Props) {
       }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
     );
     frontendFilters = {
+      listedBy: null,
       localities: [`${lt}+${filtersValues.LT}`],
       cg: filtersValues.CG,
       projName: project,
@@ -65,7 +67,6 @@ export default async function Page({ params, searchParams }: Props) {
         : {}),
       ...(filtersValues.PH && {
         phaseId: [`${params.phase}+${filtersValues.PH}`],
-        listedBy: null,
       }),
     };
   }
