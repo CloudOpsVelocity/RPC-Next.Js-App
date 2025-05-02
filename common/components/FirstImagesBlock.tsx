@@ -22,26 +22,41 @@ function FirstImagesBlock({ onSelect, data }: Props) {
     if (data.images[index]) {
       const urls = data.images[index].split(",");
 
-      <>
-        <Head>
+      return (
+        <>
+          {/*         <Head>
+           */}{" "}
           <link rel="preconnect" href="https://media.getrightproperty.com" />
           <link
             rel="preload"
             as="image"
             href={getUrl(data.images, 3)}
-            // @ts-ignore to skip type error
-            imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(
+            imageSrcSet={`${getUrl(data.images, 1)} 460w, ${getUrl(
               data.images,
               2
             )} 768w, ${getUrl(data.images, 3)} 1200w`}
-            imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
+            imageSizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
           />
-        </Head>
-
-        {/* JSX for your component */}
-      </>;
-
-      return (
+          <picture>
+            <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
+            <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
+            <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
+            <img
+              src={getUrl(urls, 3)}
+              alt={data.projName || "Project Image"}
+              title={data.projName || "Project Image"}
+              className={`firstImage ${className} block`}
+              width={900}
+              height={195}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={index === 0 ? "high" : undefined}
+            />
+          </picture>
+          {/*         </Head>
+           */}
+          {/* JSX for your component */}
+        </>
         // <picture>
         //   <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
         //   <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
@@ -70,26 +85,8 @@ function FirstImagesBlock({ onSelect, data }: Props) {
         //     decoding="async" // Helps reduce render-blocking
         //   />
         // </picture>
-
-
-        <picture>
-          <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
-          <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
-          <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
-          <img
-            src={getUrl(urls, 3)}
-            alt={data.projName || "Project Image"}
-            title={data.projName || "Project Image"}
-            className={`firstImage ${className} block`}
-            width={900}
-            height={195}
-            loading={index === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-            fetchPriority={index === 0 ? 'high' : undefined}
-          />
-        </picture>
       );
-    } else { 
+    } else {
       return "";
     }
   };
