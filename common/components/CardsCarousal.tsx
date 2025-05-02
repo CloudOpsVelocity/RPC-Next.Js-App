@@ -42,6 +42,7 @@ function CardsCarousal({
           <button
             className={`${styles.srcollButton} ${styles.srcollButtonLeft}`}
             onClick={() => onScrollingLeftAndRight("L")}
+             aria-label="Scroll carousel left"
           >
             <CarouselScrollButton className={styles.srcollButtonIcons} />
           </button>
@@ -63,6 +64,7 @@ function CardsCarousal({
           <button
             className={`${styles.srcollButton} ${styles.srcollButtonRight}`}
             onClick={() => onScrollingLeftAndRight("R")}
+             aria-label="Scroll carousel Right"
           >
             <CarouselScrollButton className={styles.srcollButtonIcons} />
           </button>

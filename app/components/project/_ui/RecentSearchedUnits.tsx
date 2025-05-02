@@ -95,7 +95,8 @@ export default function RecentSearchedUnits({
                   </div>
                 }
               >
-                <div className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-[#4B77C1] text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200">
+              <div className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-blue-700 text-[13px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200">
+             
                   {label} {/* Show the first two filters */}
                   {hasMoreFilters && (
                     <span className="text-gray-500"> ...</span>

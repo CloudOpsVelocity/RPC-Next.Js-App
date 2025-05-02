@@ -133,9 +133,9 @@ export default function Box({ item }: Props) {
 
   return (
     <Tooltip text={item.name}>
-      <div
+     <div
         onClick={() => handlePush(item.ct, item, item)}
-        className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-[#4B77C1] text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200"
+        className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-blue-800 text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200"
       >
         {truncateText(item?.name, 36)} {config.icon}
       </div>
