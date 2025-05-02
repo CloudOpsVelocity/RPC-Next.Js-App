@@ -51,17 +51,10 @@ export default async function page({ searchParams: { page } }: Props) {
   }`;
 
   const { data } = await axios.get(url);
+  let totalpages= Math.ceil(data?.totalCount / 40)
 
   return (
     <>
-    <Head>
-              <link rel="prev" href={`https://www.getrightproperty.com/residential${
-                    page ? `?page=${page-1}` : ""
-                  }`} />
-              <link rel="next" href={`https://www.getrightproperty.com/residential${
-                    page ? `?page=${page+1}` : ""
-                  }`} />
-              </Head>
     
       <>
       
@@ -90,6 +83,14 @@ export default async function page({ searchParams: { page } }: Props) {
           name="twitter:image"
           content="https://media.getrightproperty.com/staticmedia-images-icons/grp-logo/grp-logo-tm.webp"
         />
+        {page != 0  && <link rel="prev" href={`https://www.getrightproperty.com/residential${
+                     page ? `?page=${Number(page) - 1}` : ''
+              }`} />}
+          {page != totalpages &&<link rel="next" href={`https://www.getrightproperty.com/residential${
+     
+             page ? `?page=${Number(page) + 1}` : ''
+
+              }`} />}
         {/* Viewport and Charset 
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />*/}

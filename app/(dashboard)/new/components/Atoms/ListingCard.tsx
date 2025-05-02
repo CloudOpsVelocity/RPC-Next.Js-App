@@ -106,7 +106,7 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
       </div>
 
-      <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
+      <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border border-gray-600 bg-white text-gray-800">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
           <Link prefetch={false} href={listingLink} className="space-y-1  ">
             <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
@@ -116,11 +116,11 @@ export default function ListingCard({ item, sl }: Props) {
               {item.localityName}
             </p>
 
-            <p className="text-[#148B16] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
+            <p className="text-green-700 text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-normal capitalize">
               {formatCurrency(item.price)}
               {item.category === "Rent" ? "" : ","}{" "}
               {item.category !== "Rent" && (
-                <span className="text-[#616D75] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
+                <span className="text-gray-700 text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-normal capitalize">
                   ₹{" "}
                   {calculatePerSqPrice(
                     item.price,
@@ -130,6 +130,7 @@ export default function ListingCard({ item, sl }: Props) {
                 </span>
               )}
             </p>
+
 
             <p className="text-[#001F35] text-[12px] xl:text-[14px] not-italic font-semibold leading-[normal] capitalize">
               {item.propName}
@@ -147,8 +148,8 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
         {/* by default new sortBy */}
         <div className="pl-3 mr-[14px] sm:mr-[4px] sm:ml-[0px] h-full gap-auto">
-          <div className="inline-flex flex-wrap w-auto items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
-            {item.propTypeName === "Plot" ? (
+        <div className="inline-flex flex-wrap items-center gap-1 self-stretch rounded border border-gray-400 bg-gray-100 p-1">
+        {item.propTypeName === "Plot" ? (
               <>
                 <DownSectionCard
                   label="Plot Area"
@@ -174,17 +175,17 @@ export default function ListingCard({ item, sl }: Props) {
                   value={`${formatNumberWithSuffix(item.sba, false)} sq.ft`}
                 />
                 {}
-                <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
+                <hr className="border-r border-gray-400 h-[38px] w-[1px] mx-2" />
                 <DownSectionCard
                   label="Carpet Area"
                   value={`${formatNumberWithSuffix(item.ca, false)} sq.ft`}
                 />
-                <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
+                <hr className="border-r border-gray-400 h-[38px] w-[1px] mx-2" />
                 <DownSectionCard
                   label={"Possesion Date"}
                   value={formatDate(item.possassionDate, true)}
-                />
-                <hr className=" border border-r-[1px] border-[#7BA0BB] h-[38px] w-[1px] " />
+                    />
+                <hr className="border-r border-gray-400 h-[38px] w-[1px] mx-2" />
                 <DownSectionCard
                   label={"Available From"}
                   value={formatDate(item.availableFrom, true)}
