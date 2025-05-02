@@ -1,63 +1,50 @@
-/* eslint-disable no-unused-vars */
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useMediaQuery } from "@mantine/hooks";
 
 export const dynamic = "force-dynamic";
 
 type Props = {
-    totalCount: number;
-    onNextPage: () => void;
-    onPreviousPage: () => void;
-    currentPagefun: (page: number) => void;
-    value: number;
-  };
-  
+  totalCount: number;
+};
 
-export default function SearchPagination({  totalCount,
-    onNextPage,
-    onPreviousPage,
-    currentPagefun,
-    value, }: Props) {
+export default function PaginationForListings({ totalCount }: Props) {
+  // const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 601px)");
   // Get page from URL or default to 0
-
-  
-  const currentPage=value;
+  const pageParam = searchParams.get("page");
+  const initialPage = pageParam
+    ? Number.parseInt(pageParam) < 0 || isNaN(parseInt(pageParam))
+      ? 1
+      : Number.parseInt(pageParam)
+    : 1;
+  // eslint-disable-next-line no-unused-vars
+  const [currentPage, setCurrentPage] = useState(initialPage);
   //
-  const itemsPerPage = 20;
-  const totalPages = totalCount;
+  const itemsPerPage = 40;
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
 
+  // Handle page change and update URL using router.push()
+  // const handlePageChange = (newPage: number) => {
+  //   if (newPage >= 0 && newPage < totalPages) {
+  //     setCurrentPage(newPage);
 
-  // const searchParams = useSearchParams();
-  // const isMobile = useMediaQuery("(max-width: 601px)");
-  // // Get page from URL or default to 0
+  //     const updatedParams = new URLSearchParams(searchParams.toString());
+  //     updatedParams.set("page", newPage.toString());
 
-  
-  // const currentPage=value;
-  // //
-  // const itemsPerPage = 20;
-  // const totalPages = totalCount;
-
-
-
-
-
-
+  //     router.push(`?${updatedParams.toString()}`);
+  //   }
+  // };
 
   // Generate page numbers with ellipses when necessary
   const getPageNumbers = () => {
     const pageNumbers = [];
-    const maxPagesToShow = isMobile ? 5 : 7;
-
-
-
-
+    const maxPagesToShow = isMobile ? 5 : 9;
 
     if (totalPages <= maxPagesToShow) {
       for (let i = 0; i < totalPages; i++) {
@@ -91,6 +78,16 @@ export default function SearchPagination({  totalCount,
     return pageNumbers;
   };
 
+  // Build the pagination URL for a given page number
+  const createPaginationLink = (page: number) => {
+    /*   const updatedParams = new URLSearchParams(searchParams.toString())
+    updatedParams.set("page", page.toString())
+    return `?${updatedParams.toString()}` */
+
+    /*  window.scrollTo({ top: 25, behavior: "smooth" }) */
+
+    return `/residential-listings?page=${page + 1}`;
+  };
 
   return (
   
@@ -98,21 +95,28 @@ export default function SearchPagination({  totalCount,
       <section className="py-8 sm:py-14 container mx-auto px-4">
         {/*  <noscript> */}
         {totalPages > 1 && (
-          <div
-        
-          className="mt-10 flex justify-center">
-            <div
-             className="flex items-center gap-1">
+          <div className="mt-10 flex justify-center">
+            <nav className="flex items-center gap-1">
               {/* Previous page */}
-              
-              <button
-               disabled={value==1}
-              onClick={onPreviousPage}
-              className={`inline-flex items-center justify-center h-10 w-10 rounded-md border border-blue-500 bg-white text-blue-600 text-sm font-medium shadow-sm transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 ${
-                  currentPage === 0 ? "pointer-events-none opacity-50" : "" 
-                } ${value ==1 ?`hover:cursor-not-allowed`:""}`}>
-                       <FaChevronLeft className="h-4 w-4" />
-              </button>
+              <Link
+                target="_top"
+                href={
+                  currentPage > 1 ? createPaginationLink(currentPage - 2) : "#"
+                }
+                /*   onClick={(e) => {
+                if (currentPage > 0) {
+                  e.preventDefault()
+                  handlePageChange(currentPage - 1)
+                }
+              }} */
+                className={`inline-flex items-center justify-center h-10 w-10 rounded-md border border-blue-500 bg-white text-blue-600 text-sm font-medium shadow-sm transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 ${
+                  currentPage === 0 ? "pointer-events-none opacity-50" : ""
+                }`}
+                aria-label="Previous page"
+                tabIndex={currentPage === 0 ? -1 : 0}
+              >
+                <FaChevronLeft className="h-4 w-4" />
+              </Link>
 
               {/* Page numbers */}
               {getPageNumbers().map((pageNum, index) => {
@@ -128,41 +132,64 @@ export default function SearchPagination({  totalCount,
                 }
 
                 return (
-                    <button
-                    key={`builderpage_${index.toString()}`}
-                    onClick={()=>currentPagefun(pageNum)}
+                  <Link
+                    target="_top"
+                    key={`page-${pageNum}`}
+                    href={
+                      currentPage !== pageNum + 1
+                        ? createPaginationLink(pageNum)
+                        : "#"
+                    }
+                    /* onClick={(e) => {
+                    e.preventDefault()
+                    handlePageChange(pageNum)
+                  }} */
                     className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-sm font-medium transition-colors ${
-                        currentPage === pageNum + 1
-                          ? "bg-blue-600 text-white"
-                          : "border border-blue-500 bg-white text-blue-600 hover:bg-blue-50"
-                      }`}>
-                         {pageNum + 1}
-                    </button>
-               
+                      currentPage === pageNum + 1
+                        ? "bg-blue-600 text-white"
+                        : "border border-blue-500 bg-white text-blue-600 hover:bg-blue-50"
+                    }`}
+                    aria-label={`Page ${pageNum + 1}`}
+                    aria-current={currentPage === pageNum ? "page" : undefined}
+                  >
+                    {pageNum + 1}
+                  </Link>
                 );
               })}
 
               {/* Next page */}
-              <button
-              disabled={currentPage == totalPages}
-              onClick={onNextPage}
-              className={`inline-flex items-center justify-center h-10 w-10 rounded-md border border-blue-500 bg-white text-blue-600 text-sm font-medium shadow-sm transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 ${
+              <Link
+                target="_top"
+                href={
+                  currentPage < totalPages - 1
+                    ? createPaginationLink(currentPage)
+                    : "#"
+                }
+                /*  onClick={(e) => {
+                if (currentPage < totalPages - 1) {
+                  e.preventDefault()
+                  handlePageChange(currentPage + 1)
+                }
+              }} */
+                className={`inline-flex items-center justify-center h-10 w-10 rounded-md border border-blue-500 bg-white text-blue-600 text-sm font-medium shadow-sm transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 ${
                   currentPage === totalPages - 1
                     ? "pointer-events-none opacity-50"
                     : ""
-                }${currentPage == totalPages ?`hover:cursor-not-allowed`:""}`} >
-                     <FaChevronRight className="h-4 w-4" />
-              </button>
-             
-            </div>
+                }`}
+                aria-label="Next page"
+                tabIndex={currentPage === totalPages - 1 ? -1 : 0}
+              >
+                <FaChevronRight className="h-4 w-4" />
+              </Link>
+            </nav>
           </div>
         )}
         {/* Page info */}
         {totalCount > 0 && (
           <div className="mt-4 text-center text-sm text-gray-600">
             Showing {currentPage * itemsPerPage + 1} to{" "}
-            {Math.min((currentPage + 1) * itemsPerPage, totalCount*20)} of{" "}
-            {totalCount*20} results
+            {Math.min((currentPage + 1) * itemsPerPage, totalCount)} of{" "}
+            {totalCount} results
           </div>
         )}
         {/*     </noscript> */}
