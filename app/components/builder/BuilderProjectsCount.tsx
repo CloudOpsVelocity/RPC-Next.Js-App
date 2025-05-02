@@ -78,7 +78,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
               </span>
               {newLaunchProjIconSvg}
             </p>
-            <span className="text-[#148B16] text-[13px] lg:text-[20px] font-[700]">
+            <span className="text-[#0C5F0E] text-[13px] lg:text-[20px] font-[700]">
               New Launch {`Project${data?.newLaunch > 1 ? "s" : ""}`}
             </span>
           </Link>
@@ -89,7 +89,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
                 0
               </span>
             </div>
-            <p className="text-[#148B16] text-[13px] lg:text-[20px] font-[700]">
+            <p className="text-[#0C5F0E] text-[13px] lg:text-[20px] font-[700]">
               New Launch Projects
             </p>
           </div>
@@ -142,7 +142,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
               </span>
               {completedProjIconSvg}
             </p>
-            <span className="text-[#E3AC00] text-[13px] lg:text-[20px] font-[700]">
+            <span className="text-[#A07600] text-[13px] lg:text-[20px] font-[700]">
               Completed {`Project${data?.completed > 1 ? "s" : ""}`}
             </span>
           </Link>
@@ -153,7 +153,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
                 0
               </span>
             </div>
-            <p className="text-[#E3AC00] text-[13px] lg:text-[20px] font-[700]">
+            <p className="text-[#A07600] text-[13px] lg:text-[20px] font-[700]">
               Completed Projects
             </p>
           </div>

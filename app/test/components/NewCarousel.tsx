@@ -106,11 +106,11 @@ function NewCarousel<T>({
           <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             View More
           </h3>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-800">
             Explore all {type == "proj" ? "Projects" : "listings"}
           </p>
         </div>
-        <div className="flex items-center gap-2 text-gray-400">
+        <div className="flex items-center gap-2 text-gray-800">
           <span className="text-xs">Browse complete catalog</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +198,7 @@ function NewCarousel<T>({
             <button
               name="Next" title="Next"
               onClick={next}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-50"
+              className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-200"
               aria-label="Next"
             >
               <IoChevronForwardOutline className="w-6 h-6" />

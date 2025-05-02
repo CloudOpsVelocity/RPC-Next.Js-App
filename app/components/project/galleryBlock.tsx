@@ -114,7 +114,7 @@ export default function GalleryBlock({
                       media="(max-width: 800px)"
                       srcSet={selectedMedia.split(",")[2]}
                     />
-                    <Image
+                    {/* <Image
                       src={selectedMedia.split(",")[2]}
                       alt={
                         type === "prop" ? "Property Gallery" : "Project Gallery"
@@ -140,6 +140,16 @@ export default function GalleryBlock({
                       width={799}
                       height={400}
                       unoptimized
+                    /> */}
+
+                    <img
+                      alt={type === "prop" ? "Property Gallery" : "Project Gallery"}
+                      title={type === "prop" ? "Property Gallery" : "Project Gallery"}
+                      src={selectedMedia.split(",")[2]} // fallback image
+                      width={799}
+                      height={400}
+                      className="cursor-pointer object-contain"
+                      loading="lazy"
                     />
                   </picture>
                 </div>

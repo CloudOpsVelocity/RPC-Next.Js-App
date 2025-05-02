@@ -178,6 +178,7 @@ export default function Navigation({
           width={41}
           height={64}
           onClick={() => handleArrowClick("L")}
+          style={{ display: 'block' }} // Prevents small vertical shifts
         />
       )}
       <div
@@ -233,6 +234,7 @@ export default function Navigation({
         width={41}
         height={64}
         onClick={() => handleArrowClick("R")}
+        style={{ display: 'block' }} // Prevents small vertical shifts
       />
     </div>
   );

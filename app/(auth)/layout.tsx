@@ -71,6 +71,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   zIndex: "1000",
                 }}
                 position="bottom-center"
+                toastOptions={{
+                  style: {
+                    background: '#333', // dark background
+                    color: '#fff',      // light text
+                  },
+                }}
               />
             </div>
           </div>

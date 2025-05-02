@@ -1,5 +1,5 @@
 import { ShearIcon } from "@/app/images/commonSvgs";
-import Image from "next/image";
+// import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import Head from "next/head";
@@ -42,24 +42,54 @@ function FirstImagesBlock({ onSelect, data }: Props) {
       </>;
 
       return (
+        // <picture>
+        //   <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
+        //   <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
+        //   <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
+        //   {/* <Image
+        //     alt={data.projName || "Project Image"}
+        //     title={data.projName || "Project Image"}
+        //     src={getUrl(urls, 3)}
+        //     height={195}
+        //     width={900}
+        //     className={className}
+        //     // priority={index == 0 ? true : false}
+        //     unoptimized
+        //     // quality={80}
+        //   /> */}
+
+        //   <img
+        //     src={getUrl(urls, 3)} // fallback image
+        //     alt={data.projName || "Project Image"}
+        //     title={data.projName || "Project Image"}
+        //     className={`firstImage ${className} block`} // Ensure no default inline spacing
+        //     width={900}
+        //     height={195}
+        //     loading={index === 0 ? 'eager' : 'lazy'} // eager for first/LCP image
+        //     fetchPriority={index === 0 ? 'high' : undefined} // Boost LCP loading priority
+        //     decoding="async" // Helps reduce render-blocking
+        //   />
+        // </picture>
+
+
         <picture>
           <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
           <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
           <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
-          <Image
+          <img
+            src={getUrl(urls, 3)}
             alt={data.projName || "Project Image"}
             title={data.projName || "Project Image"}
-            src={getUrl(urls, 3)}
-            height={195}
+            className={`firstImage ${className} block`}
             width={900}
-            className={className}
-            // priority={index == 0 ? true : false}
-            unoptimized={true}
-            // quality={80}
+            height={195}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchPriority={index === 0 ? 'high' : undefined}
           />
         </picture>
       );
-    } else {
+    } else { 
       return "";
     }
   };
