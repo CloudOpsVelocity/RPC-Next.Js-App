@@ -1,15 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSection";
 import { useQueryState } from "nuqs";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
 import { useHydrateAtoms } from "jotai/utils";
 import { projSearchStore } from "../../store/projSearchStore";
-
-// import ListingSearchRightSection from "./listingSearchTabs/listingSearchRightSection";
-// const ListingSearchRightSection = dynamic(
-//   () => import("./listingSearchTabs/listingSearchRightSection")
-// );
+import { useSetAtom } from "jotai";
 type Props = {
   serverData: any;
   frontendFilters: any;
@@ -21,23 +17,25 @@ export default function ListingMainSection({
   serverData,
   preDefinedFilters,
 }: Props) {
-  useHydrateAtoms(
-    [
-      [
-        projSearchStore,
-        {
-          type: "update",
-          payload: {
-            ...frontendFilters,
-          },
-        },
-      ],
-    ]
-    // {
-    //   dangerouslyForceHydrate: true,
-    // }
-  );
   const [apiFilterQueryParams] = useQueryState("sf");
+  const shouldHydrate = apiFilterQueryParams !== preDefinedFilters;
+
+  const hydrationValues = shouldHydrate
+    ? [
+        [
+          projSearchStore,
+          {
+            type: "update",
+            payload: {
+              ...frontendFilters,
+            },
+          },
+        ],
+      ]
+    : [];
+
+  useHydrateAtoms(hydrationValues as any);
+
   const [isTrue, setIsTrue] = useState(
     apiFilterQueryParams !== preDefinedFilters
   );
@@ -58,3 +56,4 @@ export default function ListingMainSection({
     </>
   );
 }
+

@@ -124,7 +124,9 @@ export default function Page() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="mb-4">
-        <label htmlFor="widthInputFiled" className="mr-2">Width:</label>
+        <label htmlFor="widthInputFiled" className="mr-2">
+          Width:
+        </label>
         <input
           id="widthInputFiled"
           type="number"
@@ -132,9 +134,11 @@ export default function Page() {
           onChange={(e) => setIframeWidth(Number(e.target.value))}
           className="border border-gray-400 px-2 py-1 w-20 mr-4"
         />
-        <label htmlFor="heightInputFiled" className="mr-2">Height:</label>
+        <label htmlFor="heightInputFiled" className="mr-2">
+          Height:
+        </label>
         <input
-        id="heightInputFiled"
+          id="heightInputFiled"
           type="number"
           value={iframeHeight}
           onChange={(e) => setIframeHeight(Number(e.target.value))}
@@ -145,7 +149,7 @@ export default function Page() {
       <iframe
         width={iframeWidth}
         height={iframeHeight}
-        src="https://www.youtube.com/embed/HGk_ypEuS24?si=UHOWj73n5Ku_Htb-"
+        src="https://www.youtube.com/embed/ogjf7ORKfd8?si=7JKmtqJu20l82SRT"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
