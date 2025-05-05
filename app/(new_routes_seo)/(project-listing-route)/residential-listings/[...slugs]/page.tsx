@@ -7,7 +7,10 @@ import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSl
 import NewListingSearchpage from "@/app/(new_routes_seo)/search/listing/NewListingSearchpage";
 import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
-import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
+import {
+  extractListingParamsValues,
+  generateSlugs,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { getAmenties, getAuthorityNames } from "@/app/utils/api/project";
 import {
@@ -15,6 +18,7 @@ import {
   getProjectDetails,
   getReportConstData,
 } from "@/app/utils/api/property";
+import logger from "@/app/utils/logger";
 
 import { notFound } from "next/navigation";
 type Props = {
@@ -42,7 +46,6 @@ export default async function Page({ params, searchParams }: Props) {
     .filter(Boolean)
     .join("/");
 
-  // console.log(params);
   let isProjectListing = listing ? true : bhk_unit_type?.includes("listing");
 
   let serverData = null;
@@ -157,3 +160,20 @@ export default async function Page({ params, searchParams }: Props) {
     />
   );
 }
+
+// export async function generateStaticParams() {
+//   const slugs = generateSlugs("listing-search-seo", "project-listing");
+//   logger.info(slugs);
+//   return slugs;
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   // const res = await getPagesSlugs("listing-search-seo");
+//   // // Extract project names from the keys
+//   // const projectRes = Object.keys(res);
+//   // const slugs = projectRes.map((data) => {
+//   //   if (data.includes("/in/for-")) {
+//   //     const [emtypath, country, cg, city, lt, slug] = data.split("/");
+//   //     return { cg, city };
+//   //   }
+//   // });
+//   // return slugs;
+// }
