@@ -56,7 +56,16 @@ export default function Banner({
   return (
     <div className="bg-[#f0f9ff] scroll-mt-[90px]  px-8 py-12 mx-auto mb-[5%] ">
       <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center">
-        <Toaster position="top-right" reverseOrder={false} />
+        <Toaster 
+          position="top-right" 
+          reverseOrder={false} 
+          toastOptions={{
+            style: {
+              background: '#333', // dark background
+              color: '#fff',      // light text
+            },
+          }}
+        />
         <div>
           <h2 className="text-[#023993] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             PROJECT RATING FOR{" "}

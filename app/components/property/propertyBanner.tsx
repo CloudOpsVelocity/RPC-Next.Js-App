@@ -161,7 +161,7 @@ function PropertyBannerForMobile({
                 About {projectName}
               </h2>
               <p className="text-[#768AA9] text-base md:text-xl not-italic font-semibold leading-[normal] mb-2">
-                {availableProperties.join(", ")}
+                {availableProperties ? availableProperties.join(", ") : ""}
               </p>
               <p className="text-[#202020] text-base md:text-2xl not-italic font-normal leading-[normal]">
                 Posted By: <span className="font-semibold">Builder</span>{" "}

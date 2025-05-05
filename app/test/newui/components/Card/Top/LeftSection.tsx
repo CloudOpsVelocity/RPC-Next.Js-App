@@ -27,7 +27,7 @@ type Props = {
   projEncId: string;
   pageUrl: string;
   imageAlt: string;
-  index:number
+  index: number;
 };
 
 export default function LeftSection({
@@ -46,13 +46,13 @@ export default function LeftSection({
   data,
   pageUrl,
   imageAlt,
-  index
+  index,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
 
   return (
-    <div className="relative xl:min-w-[257px] min-h-[250px] max-h-[250px]">
+    <div className="relative xl:min-w-[257px] min-h-[150px] max-h-[250px]">
       {type !== "proj" && (
         <>
           {isUsed === "N" && (
@@ -66,9 +66,6 @@ export default function LeftSection({
           </p>
         </>
       )}
-
-
-
 
       <Link prefetch={false} href={pageUrl}>
         <div className="relative h-[162px] w-full xl:h-full xl:max-w-[257px]">
@@ -86,8 +83,6 @@ export default function LeftSection({
           />
         </div>
       </Link>
-
-   
 
       {/* <div>
         

@@ -64,40 +64,39 @@ export default function PropertyOverviewBanner({
   );
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40">
-      {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
-       */}
+    <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40 max-w-screen-m">
+      {/* <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />*/}
       
       <Image
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-mobile.webp`}
-              width={100}
-              height={120}
-              alt="price OverView"
-              className="w-[100px] sm:hidden h-[120px] sm:h-[169px] mt-2 sm:mt-0"
-              unoptimized
-              title="price OverView"
-            />
-            <Image
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-laptop.webp`}
-              width={151}
-              height={169}
-              alt="price OverView"
-              className=" sm:max-w-[151px] hidden sm:flex xl:hidden  sm:w-[151px]   sm:h-[169px] mt-2 sm:mt-0"
-              unoptimized
-              title="price OverView"
-            />
-            <Image
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
-              width={237}
-              height={263}
-              alt="price OverView"
-              className="   xl:max-w-[237px]  xl:w-[237px] xl:h-[263px] hidden xl:flex  mt-2 sm:mt-0"
-              unoptimized
-              title="price OverView"
-            />   
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-mobile.webp`}
+        width={100}
+        height={120}
+        alt="price OverView"
+        className="w-[100px] sm:hidden h-[120px] sm:h-[169px] mt-2 sm:mt-0"
+        unoptimized
+        title="price OverView"
+      />
+      <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag-laptop.webp`}
+        width={151}
+        height={169}
+        alt="price OverView"
+        className=" sm:max-w-[151px] hidden sm:flex xl:hidden  sm:w-[151px]   sm:h-[169px] mt-2 sm:mt-0"
+        unoptimized
+        title="price OverView"
+      />
+      <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/pricebag.webp`}
+        width={237}
+        height={263}
+        alt="price OverView"
+        className="   xl:max-w-[237px]  xl:w-[237px] xl:h-[263px] hidden xl:flex  mt-2 sm:mt-0"
+        unoptimized
+        title="price OverView"
+      />   
       <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
         <div className="flex  flex-col text-left">
-          <h4 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+          <h3 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
             {" Total "}
             {cg === "S" ? "Selling" : "Rent"} Price{" "}
             {otherPrice?.otherCharge && (
@@ -105,7 +104,7 @@ export default function PropertyOverviewBanner({
                 (Including Other Charges)
               </span>
             )}
-          </h4 >
+          </h3 >
           <p className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
             <span className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {cg === "S"

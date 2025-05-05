@@ -31,6 +31,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
+
     serverData = data;
     frontendFilters = parseApiFilterQueryParams(searchParams.sf);
   } else {
@@ -129,5 +130,5 @@ function cleanHeading(id: string[]) {
     .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
     .replace(/\s+/g, " ");
 }
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
+// export const dynamic = "force-dynamic";
+export const dynamicParams = false;

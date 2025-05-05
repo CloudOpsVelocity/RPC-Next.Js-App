@@ -191,6 +191,7 @@ export default function Navigation({
           className="rotate-180 cursor-pointer"
           width={40}
           height={40}
+          style={{ display: 'block' }} // Prevents small vertical shifts
           onClick={() => handleArrowClick("L")}
         />
       )}
@@ -257,6 +258,7 @@ export default function Navigation({
         width={40}
         height={40}
         onClick={() => handleArrowClick("R")}
+        style={{ display: 'block' }} // Prevents small vertical shifts
       />
     </div>
   );

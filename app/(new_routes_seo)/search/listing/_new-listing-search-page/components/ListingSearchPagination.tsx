@@ -10,9 +10,10 @@ export const dynamic = "force-dynamic";
 
 type Props = {
   totalCount: number;
+  currentPage:number;
 };
 
-export default function PaginationForListings({ totalCount }: Props) {
+export default function ListingSearchPagination({ totalCount, currentPage }: Props) {
   // const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -24,7 +25,7 @@ export default function PaginationForListings({ totalCount }: Props) {
       : Number.parseInt(pageParam)
     : 1;
   // eslint-disable-next-line no-unused-vars
-  const [currentPage, setCurrentPage] = useState(initialPage);
+/*   const [currentPage, setCurrentPage] = useState(initialPage); */
   //
   const itemsPerPage = 40;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
@@ -86,7 +87,9 @@ export default function PaginationForListings({ totalCount }: Props) {
 
     /*  window.scrollTo({ top: 25, behavior: "smooth" }) */
 
-    return `/residential-listings?page=${page + 1}`;
+  const fullQuery = searchParams.toString()
+
+    return `search/listing/page-${page}?${fullQuery}`;
   };
 
   return (

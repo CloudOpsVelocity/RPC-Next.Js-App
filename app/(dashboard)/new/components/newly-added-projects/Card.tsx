@@ -91,7 +91,7 @@ export default function Card({ item }: Props) {
 
           {/*  <p className="text-green-600">{item.rerastatus}</p> */}
 
-          <div className="absolute right-0 top-0 w-full sm:w-[503xpx] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
+          <div className="absolute right-0 top-0 w-full sm:w-[503xpx] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-    [#565d700a] text-right flex flex-col justify-end sm:justify-between">
             <div>
               <div className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
                 <div className="absolute  sm:static top-[10px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6 z-[3] ">
@@ -102,7 +102,13 @@ export default function Card({ item }: Props) {
 
                   <ShareBtn url={url} type="proj" />
                 </div>{" "}
-                <Link aria-label={`View details for ${item.projName}`} prefetch={false} href={url}>{item.projName}</Link>
+                <Link
+                aria-label={`Explore ${item.propTypes?.join(", ")} available at ${item.projName} in ${item.locality}, ${item.city}`}
+                prefetch={false}
+                href={url}
+                      >
+                      {item.projName}</Link>
+
               </div>
               <Link  aria-label={`View details for ${item.projName}`} prefetch={false} href={url}>
                 <span className=" block text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
@@ -146,8 +152,11 @@ export default function Card({ item }: Props) {
                 </p>
               </div>
               <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
-                <ViewAllButton name={item.name} url={url} />
+                <ViewAllButton 
+                aria-label={`View all details for ${item.projName}`}
+                name={item.name} url={url} />
                 <ReqBtn
+                 aria-label={`Request more information about ${item.projName}`}
                   builderName={item.postedByName}
                   projName={item.projName}
                   reqId={item.projIdEnc}

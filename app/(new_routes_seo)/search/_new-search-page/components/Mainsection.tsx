@@ -51,24 +51,21 @@ export default function Mainsection({
 
   return (
     <>
-     {!isMobile  && (
-          <>
-            <link
-              rel="preconnect"
-              href="https://media.getrightproperty.com"
-              crossOrigin="anonymous"
-            />
+      {/* {!isMobile && (
+        <>
+          <link
+            rel="preconnect"
+            href="https://media.getrightproperty.com"
+            crossOrigin="anonymous"
+          />
 
-            {/* Preload image with srcSet and sizes */}
-         
-              <link
-                rel="preload"
-                as="image"
-                href={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
-              />
-           
-          </>
-        )}
+          <link
+            rel="preload"
+            as="image"
+            href={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+          />
+        </>
+      )} */}
       <LeftSection
         serverData={serverData}
         frontendFilters={frontendFilters}
@@ -101,7 +98,9 @@ export default function Mainsection({
             />
 
             <button
-              aria-label="Click to View Location Details" name="Click to View Location Details" title="Click to View Location Details"
+              aria-label="Click to View Location Details"
+              name="Click to View Location Details"
+              title="Click to View Location Details"
               onClick={() => setIsMapLoaded(true)}
               className="absolute z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors "
             >

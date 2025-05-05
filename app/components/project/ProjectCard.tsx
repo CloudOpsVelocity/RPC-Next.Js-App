@@ -103,7 +103,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
     <div
       className={clsx(
         "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[400px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
-        type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
+        type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFFFF] pt-4"
       )}
     >
       {type == "proj" && (
@@ -125,16 +125,16 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
             cardData?.maxPrice != 0 &&
             cardData?.maxPrice != "" ? (
               <>
-                <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                <span className="text-[16px] sm:font-[700] text-[#0C5F0E]">
                   {formatCurrency(cardData.minPrice)}
                 </span>{" "}
                 -{" "}
-                <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                <span className="text-[16px] sm:font-[700] text-[#0C5F0E]">
                   {formatCurrency(cardData.maxPrice)}
                 </span>
               </>
             ) : (
-              <span className="text-[16px] sm:font-[700] text-[#148B16]">
+              <span className="text-[16px] sm:font-[700] text-[#0C5F0E]">
                 Price Not Available
               </span>
             )}
@@ -144,7 +144,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
 
       <div className="px-3 pb-3">
         {type != "proj" && (
-          <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
+          <p className="mb-[-30px] relative z-10 p-[2px] text-[#0C5F0E] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
             {cardData.availablityStatus == "R"
               ? "Ready to move"
               : "Under Construction"}
@@ -187,7 +187,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
               className={clsx(
                 "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
                 cardData.shortListed === "Y"
-                  ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                  ? "bg-[rgb(231,245,255)] text-[#0C5F0E] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
                   : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
               )}
               onClick={(e) => {
@@ -206,7 +206,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
               {cardData.bhkName} {cardData.propTypeName} for{" "}
               {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
               <br />
-              <span className="text-[18px] font-[700] text-[#148B16] ">
+              <span className="text-[18px] font-[700] text-[#0C5F0E] ">
                 {" "}
                 {formatCurrency(cardData.price)}
               </span>{" "}
@@ -265,7 +265,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
               <span className="text-black text-right text-[14px] xl:text-base not-italic font-medium leading-[normal]">
                 Project Status:{" "}
               </span>
-              <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
+              <span className="text-[#0C5F0E] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
                 {cardData.projectStatusName}
               </span>
             </div>
@@ -311,7 +311,7 @@ const ProjectCarousel = ({
             <strong>
               {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
               <span className="text-[#001F35]">{title}{" "}</span>
-              <span className="text-[#148B16]">{projName}</span>
+              <span className="text-[#0C5F0E]">{projName}</span>
             </strong>
           </h2>
           <p className="text-[13px]  sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] sm:mt-4">

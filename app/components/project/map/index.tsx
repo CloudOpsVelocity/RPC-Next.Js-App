@@ -138,13 +138,23 @@ const LeafMap: React.FC<{
                 srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
               />
 
-              <Image
+              {/* <Image
                 alt={projName}
                 title={projName}
                 src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
                 fill
                 className={`bg-gray-`}
                 unoptimized
+              /> */}
+
+              <img
+                alt={projName}
+                title={projName}
+                src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`} // fallback image
+                width={1820}
+                height={700}
+                className={`h-full bg-gray-`}
+                loading="lazy"
               />
             </picture>
           </div>

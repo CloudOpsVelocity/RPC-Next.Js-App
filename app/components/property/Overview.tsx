@@ -21,13 +21,16 @@ export default function PropertyOverView({
   data: Main;
   issueData: any;
 }) {
-    const path = usePathname();
-    const title = "Share Listing";
-    console.log(data)
+  const path = usePathname();
+  const title = "Share Listing";
   return (
+    // <div
+    //   className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 relative"
+    //   id="overview"
+    // >
     <div
-      className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 relative"
       id="overview"
+      className="pt-4 sm:scroll-mt-[150px] sm:w-[90%] min-h-[250px] rounded-[24px] shadow-md mt-4 bg-gradient-to-r from-[#F6F6F6]/0 via-[#FFF]/45 to-[#FEFFFF]/100 relative"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
@@ -43,16 +46,21 @@ export default function PropertyOverView({
 
               <strong>
                 <span className="lowercase">
-                  {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft" : ""}
+                  {data.propTypeName === "Plot"
+                    ? formatNumberWithSuffix(data.plotArea, false) + " sq.ft"
+                    : ""}
                 </span>{" "}
                 {data.bhkName} {data.propTypeName} For{" "}
-                {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName} <span className="lowercase">at</span> {data.propName}, {data.ctName}
+                {data.cg === "S" ? " Sale" : " Rent"}{" "}
+                <span className="lowercase">in</span> {data.ltName}{" "}
+                <span className="lowercase">at</span> {data.propName},{" "}
+                {data.ctName}
               </strong>
             </h1>
             {"  "}
             <button
               aria-label={title}
-              name={title} 
+              name={title}
               title={title}
               onClick={() => {
                 navigator.share({
@@ -68,13 +76,15 @@ export default function PropertyOverView({
             </button>
             {/* <SharePopup title="Share Listing" className="text-sm p-[2px] mt-[2px] sm:hidden " /> */}
           </div>
-          
+
           <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-bold leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${data.address}, ${data.ltName}, ${data.ctName}, ${data?.stateName}, ${data.pinCode}`}
           </p>
         </div>
         <div className="flex justify-center md:items-end flex-col">
-          <Link prefetch={false} rel="noopener noreferrer"
+          <Link
+            prefetch={false}
+            rel="noopener noreferrer"
             href={`tel:${8884440963}`}
             className="text-[13px] sm:text-[20px]  mt-3  text-[#0073C6] xl:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-1.5 xl:p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
           >
@@ -84,7 +94,11 @@ export default function PropertyOverView({
         </div>
       </div>
 
-      <div className="pl-[2%] pr-[2%] flex justify-start xl:justify-between items-start xl:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col xl:flex-row relative">
+      {/* <div className="pl-[2%] pr-[2%] flex justify-start xl:justify-between items-start xl:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col xl:flex-row relative"> */}
+      <div
+        className="pl-4 pr-4 flex justify-between items-start xl:items-end w-full min-h-[250px] mb-6 sm:mb-4 xl:mb-4 mt-6 sm:mt-4 xl:mt-4 flex-col xl:flex-row relative
+"
+      >
         <div className="flex justify-start items-start flex-wrap w-[100%] xl:w-[78%] ">
           {generatePropertyOverViewData(
             data,
@@ -100,8 +114,8 @@ export default function PropertyOverView({
               className="mr-[5%] pt-[2%] mb-[3%]  "
             />
           ))}
-            <ProjBasicDetails
-            Id={'projectApprovedBy'}
+          <ProjBasicDetails
+            Id={"projectApprovedBy"}
             key="ProjectApprovedBy"
             icon={<EndDate />}
             title="Approved By"

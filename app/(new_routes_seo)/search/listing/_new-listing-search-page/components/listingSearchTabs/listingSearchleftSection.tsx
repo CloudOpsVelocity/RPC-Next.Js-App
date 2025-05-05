@@ -20,6 +20,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
+import ListingSearchPagination from "../ListingSearchPagination";
+
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -227,6 +229,7 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
+     
       {hasNextPage && shouldFetchMore && (
         <div
           ref={loadMoreRef}
@@ -235,6 +238,9 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
+       {true && (
+      <ListingSearchPagination currentPage={12}    totalCount={100} />
+          )}
       <LoginPopup />
       <RequestCallBackModal />
 
