@@ -20,6 +20,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
+import ListingSearchPagination from "../../_new-listing-search-page/components/ListingSearchPagination";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -51,7 +52,7 @@ function LeftSection({
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
-
+console.log(JSON.stringify(frontendFilters))
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery({
       queryKey: [
@@ -236,6 +237,10 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
+   
+       {true && (
+            <ListingSearchPagination currentPage={frontendFilters.currentPage ? frontendFilters.currentPage : 1  }    totalCount={frontendFilters.totalCount ? frontendFilters.totalCount : 0  } />
+                )}
       <LoginPopup />
       <RequestCallBackModal />
 
