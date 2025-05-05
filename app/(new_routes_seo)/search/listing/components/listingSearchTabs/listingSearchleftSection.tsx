@@ -48,12 +48,11 @@ function LeftSection({
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [mainData, setMainData] = useState<any>(serverData || []);
-  const pathname = usePathname();
+  const [totalCount, setTotalCount] = useState(frontendFilters.totalCount);
   const isTrue = apiFilterQueryParams !== preDefinedFilters;
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
-console.log(JSON.stringify(frontendFilters))
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery({
       queryKey: [
@@ -64,7 +63,8 @@ console.log(JSON.stringify(frontendFilters))
           pageParam,
           apiFilterQueryParams ?? ""
         );
-        return response;
+        setTotalCount(response.totalCount);
+        return response.results;
       },
       getNextPageParam: (lastPage: any, allPages: any) => {
         const nextPage = allPages.length;
@@ -237,10 +237,21 @@ console.log(JSON.stringify(frontendFilters))
           <LoadingSpinner />
         </div>
       )}
-   
-       {true && (
-            <ListingSearchPagination currentPage={frontendFilters.currentPage ? frontendFilters.currentPage : 1  }    totalCount={frontendFilters.totalCount ? frontendFilters.totalCount : 0  } />
-                )}
+
+      {true && (
+        <ListingSearchPagination
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage : 1
+          }
+          totalCount={
+            isTrue
+              ? totalCount
+              : frontendFilters.totalCount
+              ? frontendFilters.totalCount
+              : 0
+          }
+        />
+      )}
       <LoginPopup />
       <RequestCallBackModal />
 
