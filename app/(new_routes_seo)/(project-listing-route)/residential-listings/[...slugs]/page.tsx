@@ -91,7 +91,7 @@ export default async function Page({ params, searchParams }: Props) {
         }),
         listedBy: null,
         currentPage: parseInt(filtersValues.PG),
-        totalPages: serverData.totalCount,
+        totalCount: apiResData.totalCount,
       };
     } else {
       const {
