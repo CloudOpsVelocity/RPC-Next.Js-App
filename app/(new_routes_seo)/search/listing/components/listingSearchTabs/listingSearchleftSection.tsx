@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo } from "react";
@@ -42,7 +43,7 @@ function LeftSection({
   frontendFilters,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [page, setPage] = useState(0);
+
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [mainData, setMainData] = useState<any>(serverData || []);
@@ -57,7 +58,7 @@ function LeftSection({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
-      queryFn: async ({ pageParam = frontendFilters.page }) => {
+      queryFn: async ({ pageParam = frontendFilters.page || 0 }) => {
         const response = await getListingSearchData(
           pageParam,
           apiFilterQueryParams ?? ""
@@ -107,7 +108,6 @@ function LeftSection({
         ) {
           setIsTrue(true);
           fetchNextPage();
-          setPage((prev) => prev + 1);
         }
       },
       {
