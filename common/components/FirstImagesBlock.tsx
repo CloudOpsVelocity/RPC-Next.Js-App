@@ -1,3 +1,8 @@
+/// conflixts fixing ,,,....//+++ //accept imcoming that it
+
+
+
+
 import { ShearIcon } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
