@@ -28,6 +28,7 @@ type Props = {
 
 export default async function Page({ params, searchParams }: Props) {
   const [cg, city, lt, project, phase, bhk_unit_type, listing] = params.slugs;
+
   const pathname = [
     BASE_PATH_PROJECT_LISTING,
     cg,
@@ -72,7 +73,8 @@ export default async function Page({ params, searchParams }: Props) {
       if (filtersValues.PG) queryParams.push(`page=${filtersValues.PG}`);
 
       const queryString = queryParams.join("&");
-      serverData = await getSearchData(queryString);
+      const apiResData = await getSearchData(queryString);
+      serverData = apiResData.results;
       frontendFilters = {
         ...(lt && { localities: [`${lt}+${filtersValues.LT}`] }),
         ...((bhk_unit_type || phase) && {
@@ -88,7 +90,8 @@ export default async function Page({ params, searchParams }: Props) {
           phaseId: [`${params.slugs[5]}+${filtersValues.PH}`],
         }),
         listedBy: null,
-        page: parseInt(filtersValues.PG),
+        currentPage: parseInt(filtersValues.PG),
+        totalPages: serverData.totalCount,
       };
     } else {
       const {

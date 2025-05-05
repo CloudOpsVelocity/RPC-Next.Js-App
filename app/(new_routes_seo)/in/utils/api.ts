@@ -87,7 +87,7 @@ export const getSearchData = async (filters?: string): Promise<any> => {
     }
 
     const data = await res.json();
-    return data.results;
+    return data;
   } catch (error) {
     console.error(error);
     return null;
