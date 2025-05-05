@@ -237,7 +237,7 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-
+    <noscript>
       {true && (
         <ListingSearchPagination
           currentPage={
@@ -252,6 +252,7 @@ function LeftSection({
           }
         />
       )}
+      </noscript>
       <LoginPopup />
       <RequestCallBackModal />
 
