@@ -57,7 +57,7 @@ function LeftSection({
       queryKey: [
         `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
       ],
-      queryFn: async ({ pageParam = 0 }) => {
+      queryFn: async ({ pageParam = frontendFilters.page }) => {
         const response = await getListingSearchData(
           pageParam,
           apiFilterQueryParams ?? ""

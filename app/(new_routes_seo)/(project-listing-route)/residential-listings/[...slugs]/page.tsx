@@ -88,6 +88,7 @@ export default async function Page({ params, searchParams }: Props) {
           phaseId: [`${params.slugs[5]}+${filtersValues.PH}`],
         }),
         listedBy: null,
+        page: parseInt(filtersValues.PG),
       };
     } else {
       const {
