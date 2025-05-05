@@ -251,7 +251,6 @@ function LeftSection({
           }
         />
       )}
-      </noscript>
       <LoginPopup />
       <RequestCallBackModal />
 
