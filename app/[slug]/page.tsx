@@ -130,5 +130,5 @@ function cleanHeading(id: string[]) {
     .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
     .replace(/\s+/g, " ");
 }
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const dynamicParams = false;
