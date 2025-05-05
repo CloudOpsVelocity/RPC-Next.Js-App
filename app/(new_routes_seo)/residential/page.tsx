@@ -29,7 +29,7 @@ export default async function page({ searchParams: { page } }: Props) {
 
   const { data } = await axios.get(url);
   let totalpages= Math.ceil(data?.totalCount / 40)
-  console.log(totalpages)
+  
   return (
     <>
 

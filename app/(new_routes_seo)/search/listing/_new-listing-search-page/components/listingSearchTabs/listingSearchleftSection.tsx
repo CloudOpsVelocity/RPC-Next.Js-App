@@ -238,9 +238,9 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-       {/* {true && (
+       {true && (
       <ListingSearchPagination currentPage={12}    totalCount={100} />
-          )} */}
+          )}
       <LoginPopup />
       <RequestCallBackModal />
 
