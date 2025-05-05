@@ -76,7 +76,12 @@ function LeftSection({
       ...(serverData && {
         initialData: {
           pages: [serverData],
-          pageParams: [0],
+          pageParams: isTrue
+            ? [0]
+            : Array.from(
+                { length: frontendFilters.currentPage - 1 },
+                (_, i) => i
+              ),
         },
       }),
       cacheTime: 300000,
@@ -229,7 +234,7 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
-      {hasNextPage && shouldFetchMore && (
+      {/* {hasNextPage && shouldFetchMore && (
         <div
           ref={loadMoreRef}
           className="w-full py-8 flex justify-center items-center text-gray-600"

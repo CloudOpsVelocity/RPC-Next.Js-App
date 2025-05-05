@@ -52,11 +52,15 @@ export default async function Page({ params, searchParams }: Props) {
     const apiFilters = parseApiFilterQueryParams(searchParams.sf);
     const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
     // eslint-disable-next-line no-unused-vars
-    serverData = isProj
+    const apiResData = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
-
-    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+    serverData = apiResData.results;
+    frontendFilters = {
+      ...parseProjectSearchQueryParams(searchParams.sf),
+      currentPage: 1,
+      totalCount: apiResData.totalCount,
+    };
   } else {
     if (!isProjectListing) {
       const values = await findPathForProjectListing(pathname);
