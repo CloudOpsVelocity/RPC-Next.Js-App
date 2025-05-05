@@ -1,5 +1,7 @@
+/// conflixts fixing ,,,....//+++ //accept imcoming that it
+
 import { ShearIcon } from "@/app/images/commonSvgs";
-// import Image from "next/image";
+import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import Head from "next/head";
@@ -22,69 +24,44 @@ function FirstImagesBlock({ onSelect, data }: Props) {
     if (data.images[index]) {
       const urls = data.images[index].split(",");
 
-      return (
-        <>
-          {/*         <Head>
-           */}{" "}
-          <link rel="preconnect" href="https://media.getrightproperty.com" />
+      <>
+        <Head>
+          {index == 0 && (
+            <link rel="preconnect" href="https://media.getrightproperty.com" />
+          )}
           <link
             rel="preload"
             as="image"
             href={getUrl(data.images, 3)}
-            imageSrcSet={`${getUrl(data.images, 1)} 460w, ${getUrl(
+            // @ts-ignore to skip type error
+            imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(
               data.images,
               2
             )} 768w, ${getUrl(data.images, 3)} 1200w`}
-            imageSizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
+            imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
           />
-          <picture>
-            <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
-            <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
-            <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
-            <img
-              src={getUrl(urls, 3)}
-              alt={data.projName || "Project Image"}
-              title={data.projName || "Project Image"}
-              className={`firstImage ${className} block`}
-              width={900}
-              height={195}
-              loading={index === 0 ? "eager" : "lazy"}
-              decoding="async"
-              fetchPriority={index === 0 ? "high" : undefined}
-            />
-          </picture>
-          {/*         </Head>
-           */}
-          {/* JSX for your component */}
-        </>
-        // <picture>
-        //   <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
-        //   <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
-        //   <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
-        //   {/* <Image
-        //     alt={data.projName || "Project Image"}
-        //     title={data.projName || "Project Image"}
-        //     src={getUrl(urls, 3)}
-        //     height={195}
-        //     width={900}
-        //     className={className}
-        //     // priority={index == 0 ? true : false}
-        //     unoptimized
-        //     // quality={80}
-        //   /> */}
+        </Head>
 
-        //   <img
-        //     src={getUrl(urls, 3)} // fallback image
-        //     alt={data.projName || "Project Image"}
-        //     title={data.projName || "Project Image"}
-        //     className={`firstImage ${className} block`} // Ensure no default inline spacing
-        //     width={900}
-        //     height={195}
-        //     loading={index === 0 ? 'eager' : 'lazy'} // eager for first/LCP image
-        //     fetchPriority={index === 0 ? 'high' : undefined} // Boost LCP loading priority
-        //     decoding="async" // Helps reduce render-blocking
-        //   />
-        // </picture>
+        {/* JSX for your component */}
+      </>;
+
+      return (
+        <picture>
+          <source media="(max-width: 660px)" srcSet={getUrl(urls, 1)} />
+          <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
+          <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
+          <Image
+            alt={data.projName || "Project Image"}
+            title={data.projName || "Project Image"}
+            src={getUrl(urls, 3)}
+            height={195}
+            width={900}
+            className={className}
+            // priority={index == 0 ? true : false}
+            unoptimized={true}
+            // quality={80}
+          />
+        </picture>
       );
     } else {
       return "";
