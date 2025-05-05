@@ -195,7 +195,6 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {JSON.stringify({ isFetching, isFetchingNextPage, isLoading })}
       {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
