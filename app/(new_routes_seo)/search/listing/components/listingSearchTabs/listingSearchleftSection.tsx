@@ -12,7 +12,6 @@ import {
   projSearchStore,
   searchPageMapToggle,
 } from "../../../store/projSearchStore";
-import { usePathname } from "next/navigation";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
@@ -67,28 +66,23 @@ function LeftSection({
         return response.results;
       },
       getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
+        const nextPage = frontendFilters.currentPage + allPages.length;
+        if (lastPage.length < 20) return;
         return nextPage;
       },
+
       ...(serverData && {
         initialData: {
           pages: [serverData],
-          pageParams: isTrue
-            ? [0]
-            : Array.from(
-                { length: frontendFilters.currentPage - 1 },
-                (_, i) => i
-              ),
+          pageParams: [0],
         },
       }),
       cacheTime: 300000,
       enabled: isTrue,
       onSuccess: (data: any) => {
-        const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
+        console.log({ data });
+        // const newData = data.pages[data.pageParams.length - 1];
+        // setMainData((prev: any) => [...prev, ...newData.results]);
       },
     });
 
@@ -234,7 +228,7 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
-      {/* {hasNextPage && shouldFetchMore && (
+      {hasNextPage && shouldFetchMore && (
         <div
           ref={loadMoreRef}
           className="w-full py-8 flex justify-center items-center text-gray-600"
@@ -242,8 +236,8 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-    <noscript>
-      {true && (
+
+      {typeof window === "undefined" && (
         <ListingSearchPagination
           currentPage={
             frontendFilters.currentPage ? frontendFilters.currentPage : 1
