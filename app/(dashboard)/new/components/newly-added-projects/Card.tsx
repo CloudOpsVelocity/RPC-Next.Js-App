@@ -106,7 +106,9 @@ export default function Card({ item }: Props) {
                 aria-label={`Explore ${item.propTypes?.join(", ")} available at ${item.projName} in ${item.locality}, ${item.city}`}
                 prefetch={false}
                 href={url}
-                      />
+                      >
+                      {item.projName}</Link>
+
               </div>
               <Link  aria-label={`View details for ${item.projName}`} prefetch={false} href={url}>
                 <span className=" block text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
