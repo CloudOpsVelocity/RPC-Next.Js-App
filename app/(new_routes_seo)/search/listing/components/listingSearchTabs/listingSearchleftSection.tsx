@@ -72,7 +72,9 @@ function LeftSection({
       return response.results;
     },
     getNextPageParam: (lastPage: any, allPages: any) => {
-      const nextPage = frontendFilters.currentPage + allPages.length;
+      const nextPage = !isTrue
+        ? frontendFilters.currentPage + allPages.length
+        : allPages.length;
       if (lastPage.length < 20) return;
       return nextPage;
     },
