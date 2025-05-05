@@ -61,14 +61,18 @@ export default async function Page({ params, searchParams }: Props) {
       const values = await findPathForProjectListing(pathname);
       if (!values) return notFound();
       filtersValues = extractListingParamsValues(values);
+      const queryParams = [];
 
-      serverData = await getSearchData(
-        `${filtersValues.BH ? `bhk=${filtersValues.BH}&` : ""}propType=${
-          filtersValues.PT
-        }&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${
-          filtersValues.PJ
-        }${filtersValues.PH ? `&phaseId=${filtersValues.PH}` : ""}`
-      );
+      if (filtersValues.BH) queryParams.push(`bhk=${filtersValues.BH}`);
+      if (filtersValues.PT) queryParams.push(`propType=${filtersValues.PT}`);
+      if (filtersValues.LT) queryParams.push(`localities=${filtersValues.LT}`);
+      if (filtersValues.CG) queryParams.push(`cg=${filtersValues.CG}`);
+      if (filtersValues.PJ) queryParams.push(`projIdEnc=${filtersValues.PJ}`);
+      if (filtersValues.PH) queryParams.push(`phaseId=${filtersValues.PH}`);
+      if (filtersValues.PG) queryParams.push(`page=${filtersValues.PG}`);
+
+      const queryString = queryParams.join("&");
+      serverData = await getSearchData(queryString);
       frontendFilters = {
         ...(lt && { localities: [`${lt}+${filtersValues.LT}`] }),
         ...((bhk_unit_type || phase) && {
