@@ -26,9 +26,7 @@ function FirstImagesBlock({ onSelect, data }: Props) {
 
       <>
         <Head>
-          {index == 0 && (
-            <link rel="preconnect" href="https://media.getrightproperty.com" />
-          )}
+          {/*     {index == 0 && <link rel="preconnect" href="https://media.getrightproperty.com" />} */}
           <link
             rel="preload"
             as="image"
