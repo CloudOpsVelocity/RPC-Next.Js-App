@@ -52,39 +52,46 @@ function LeftSection({
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        const response = await getListingSearchData(
-          pageParam,
-          apiFilterQueryParams ?? ""
-        );
-        return response.results;
-      },
-      getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
-        return nextPage;
-      },
-      ...(serverData &&
-        !isTrue && {
-          initialData: {
-            pages: [serverData],
-            pageParams: [0],
-          },
-        }),
-      cacheTime: 300000,
-      enabled: isTrue,
-      onSuccess: (data: any) => {
-        const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
-      },
-    });
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getListingSearchData(
+        pageParam,
+        apiFilterQueryParams ?? ""
+      );
+      return response.results;
+    },
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      const nextPage = allPages.length;
+      if (lastPage.length < 20) {
+        return;
+      }
+      return nextPage;
+    },
+    ...(serverData &&
+      !isTrue && {
+        initialData: {
+          pages: [serverData],
+          pageParams: [0],
+        },
+      }),
+    cacheTime: 300000,
+    enabled: isTrue,
+    onSuccess: (data: any) => {
+      const newData = data.pages[data.pageParams.length - 1];
+      setMainData((prev: any) => [...prev, ...newData]);
+    },
+  });
 
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -187,7 +194,7 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading || isFetching ? (
+      {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <>
@@ -237,7 +244,9 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-      {true && <ListingSearchPagination currentPage={12} totalCount={100} />}
+      {typeof window == "undefined" && (
+        <ListingSearchPagination currentPage={12} totalCount={100} />
+      )}
       <LoginPopup />
       <RequestCallBackModal />
 
