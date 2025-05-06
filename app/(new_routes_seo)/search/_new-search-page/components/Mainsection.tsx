@@ -30,22 +30,22 @@ export default function Mainsection({
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
   // const filtersData = Object.assign(frontendFilters, initialState);
-  useHydrateAtoms(
-    [
-      [
-        projSearchStore,
-        {
-          type: "update",
-          payload: {
-            ...frontendFilters,
-          },
-        },
-      ],
-    ],
-    {
-      dangerouslyForceHydrate: true,
-    }
-  );
+  // useHydrateAtoms(
+  //   [
+  //     [
+  //       projSearchStore,
+  //       {
+  //         type: "update",
+  //         payload: {
+  //           ...frontendFilters,
+  //         },
+  //       },
+  //     ],
+  //   ],
+  //   {
+  //     dangerouslyForceHydrate: true,
+  //   }
+  // );
 
   const [it, setIsTrue] = useState(apiFilterQueryParams !== preAppliedFilters);
 
@@ -71,6 +71,7 @@ export default function Mainsection({
         frontendFilters={frontendFilters}
         isTrue={it}
         setIsTrue={setIsTrue}
+        apiFilterQueryParams={apiFilterQueryParams}
         preAppliedFilters={preAppliedFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />

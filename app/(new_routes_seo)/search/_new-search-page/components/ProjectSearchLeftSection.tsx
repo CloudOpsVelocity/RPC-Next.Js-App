@@ -28,6 +28,7 @@ type Props = {
   isTrue: boolean;
   setIsTrue: any;
   preAppliedFilters: any;
+  apiFilterQueryParams: string | null;
 };
 
 function LeftSection({
@@ -37,6 +38,8 @@ function LeftSection({
   isTrue: it,
   setIsTrue,
   preAppliedFilters,
+  apiFilterQueryParams,
+  frontendFilters,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [page, setPage] = useState(0);
@@ -44,7 +47,6 @@ function LeftSection({
   const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
-  const [apiFilterQueryParams] = useQueryState("sf");
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -163,7 +165,8 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    pathname.includes("/search") || apiFilterQueryParams
+    apiFilterQueryParams !== preAppliedFilters ||
+    (data && data?.pageParams?.length > 0)
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
@@ -224,6 +227,7 @@ function LeftSection({
             refetch={refetch}
             mutate={mutate}
             state={state}
+            frontendFilters={frontendFilters}
           />
           {hasNextPage && shouldFetchMore && (
             <div

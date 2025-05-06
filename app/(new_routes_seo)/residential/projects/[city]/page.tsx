@@ -15,7 +15,7 @@ export default async function Page({ params: { city, lt } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
-  const serverData = await getSearchData();
+  const serverData = await (await getSearchData()).results;
   return (
     <NewSearchPage
       pageUrl={pathname}

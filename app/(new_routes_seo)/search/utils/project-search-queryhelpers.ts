@@ -7,8 +7,10 @@ export const getSearchData = async (page = 0, apiFilterQueryParams: string) => {
     url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}`;
   }
   let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
-  const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
-  return res.data;
+  const res = await fetch(`${url}${queryparams ? `&${queryparams}` : ""}`, {
+    cache: "no-store",
+  });
+  return await res.json();
 };
 export const getListingSearchData = async (
   page = 0,

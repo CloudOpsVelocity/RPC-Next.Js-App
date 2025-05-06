@@ -30,7 +30,13 @@ import PageTitle from "./PageTitle";
 // import { useRouter } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 
-const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
+const HeaderFilters = ({
+  isListing,
+  frontendFilters,
+}: {
+  isListing?: boolean;
+  frontendFilters: Record<string, any>;
+}) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchError, setSearchError] = useState("");
@@ -490,8 +496,8 @@ const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
           <PageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
-            {<ProjectSearchTabs />}
-            <SelectedFilters />
+            <ProjectSearchTabs frontendFilters={frontendFilters} />
+            <SelectedFilters frontendFilters={frontendFilters} />
           </div>
         </div>
       </div>

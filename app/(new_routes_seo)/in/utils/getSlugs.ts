@@ -53,7 +53,7 @@ export async function getNestedSlug(pathname: string, level?: number) {
 export async function findPathForProjectListing(inputUrl: string) {
   const builderJsonData = await redisService.getListingSlug(SlugsType.LISTING);
   for (const path in builderJsonData) {
-    if (path.startsWith(inputUrl)) {
+    if (path === inputUrl) {
       return builderJsonData[path];
     }
   }

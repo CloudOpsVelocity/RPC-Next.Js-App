@@ -5,19 +5,25 @@ import ProjSearchMainFilterSection from "./_new-search-page/components/filters/P
 import Mainsection from "./_new-search-page/components/Mainsection";
 import ProjectSearchBreadCrumbs from "./_new-search-page/components/ProjSearchBreadCrums";
 import {
-  getSearchData,
+  // getSearchData,
   parseApiFilterQueryParams,
 } from "./utils/project-search-queryhelpers";
+import parseProjectSearchQueryParams from "./utils/parse-project-searchqueryParams";
+import { getProjSearchData, getSearchData } from "../in/utils/api";
 
 export default async function Page(params: any) {
-  const isListing = false;
   const apiFilters = params.searchParams.sf
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
-  const data = await (await getSearchData(0, apiFilters ?? "")).results;
-  // const frontendFilters = parseProjectSearchQueryParams(
-  //   params.searchParams.sf ?? ""
-  // );
+  const frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
+  const isListing = apiFilters?.includes("listedBy") ? true : false;
+  const data = !isListing
+    ? await (
+        await getProjSearchData(apiFilters ?? "")
+      ).results
+    : await (
+        await getSearchData(apiFilters ?? "")
+      ).results;
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <meta name="robots" content="index, follow" />
@@ -26,11 +32,12 @@ export default async function Page(params: any) {
         <ProjSearchMainFilterSection
           isListing={isListing}
           key="newSearchFilter2"
+          frontendFilters={frontendFilters}
         />
       </div>
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[226px] ">
         <Mainsection
-          frontendFilters={{}}
+          frontendFilters={frontendFilters}
           serverData={data}
           preAppliedFilters={params.searchParams.sf}
         />
