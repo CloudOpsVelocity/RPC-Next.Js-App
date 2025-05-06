@@ -1,0 +1,299 @@
+.searchCradMainCon{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+    align-self: stretch; 
+    border-radius: 0.25rem; 
+    border-width: 2px; 
+    border-style: solid; 
+    max-width: 100%; 
+    height: auto; 
+    margin: 1%;
+    border-color: #A4B8D4;
+    width: 98%;
+}
+
+.searchCradTopSection{
+    display: flex;
+    gap: 10px;
+}
+
+.searchCradBottomSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.searchCradTopImageBox{
+    width: 16.063rem;
+    height: 15.625rem;
+    background-color: gray;
+    position: relative;
+}
+
+.searchCradTopRightBox{
+    position: relative;
+}
+
+.searchCradBottomLeftSection{
+    display: flex;
+}
+
+.searchCradBottomRightSection{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap:4px;
+}
+
+.listingTypeButton{
+    display: flex; 
+    padding: 4px; 
+    flex-direction: column; 
+    gap: 0.5rem; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    border-radius: 4px;  
+    cursor: pointer;
+    border:0.4px solid;
+    font-size: 12px;
+}
+
+.listingTypeButtonForOwner{
+    align-items: flex-start; 
+    border: 0.4px solid #FF7A00;  
+    background-color: #FFF6ED;
+    color: #D66700;
+}
+
+.listingTypeButtonForOthers{
+    background-color: #f0fff0;
+}
+
+.ifValueMoreThanZero{
+    align-items: flex-start; 
+    border: 0.4px solid #148B16;  
+    color: #148B16;
+}
+
+.ifValueLessThanZero{
+    align-items: flex-start; 
+    border: 0.4px solid #5e5f5e;  
+    background-color: #FFF6ED;
+    color: gray;
+    cursor: none;
+    opacity: 0.2;
+}
+
+.searchCardCompareBtn{
+    background-color: rgb(0 115 198);
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.searchCradImage{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    min-width: 16.063rem;
+}
+
+.searchCradReraImage{
+    position: absolute;
+    top:0;
+    left: 0;
+}
+
+.projStatusonImage{
+    position: absolute; 
+    bottom: 4px; 
+    right: 4px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 20px; 
+    color: #ffffff; 
+    background-color: #374151; 
+    font-size: 14px;
+}
+
+.searchCardPromName{
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 0.25rem; 
+    align-items: center; 
+    width: 100%; 
+    min-width: 0; 
+    font-weight: 700; 
+    white-space: normal; 
+    overflow-wrap: break-word; 
+    color: #001F35;
+}
+
+.searchCardPhaseName{
+    font-size: 14px;
+}
+
+.searchCardPromNameSpan{
+    display: block; 
+    position: relative; 
+    font-style: normal; 
+    font-weight: 700; 
+    color: #148B16;
+    font-size: 14px;
+    font-size: 1.25rem;
+    line-height: 1.75rem;     
+}
+
+.searchCardProjNameType{
+    width: 100%; 
+    font-weight: 700; 
+    color: #000000; 
+    font-size: 14px;
+    width: calc(100%-100px);
+}
+
+.searchCardSortedBhks{
+    margin-left: 0.25rem; 
+    text-decoration: underline; 
+    cursor: pointer; 
+    font-size: 14px;
+    color: rgb(0 115 198);
+}
+
+.searchCardAddress{
+    width: 100%; 
+    font-weight: 500; 
+    color: #000000; 
+    text-transform: capitalize; 
+    font-size: 14px;
+}
+
+.searchCardPostedBy{
+    font-weight: 400; 
+    color: #000000; 
+    font-size: 14px;
+}
+
+.searchCardLink{
+    font-weight: 700; 
+    text-decoration: underline; 
+    cursor: pointer; 
+}
+
+.searchCardApprovedNamesMainCon{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.downSectionCardMainCon{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-start; 
+    margin-right: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.downSectionCardIconSpan{
+    display: inline-flex; 
+    font-style: normal; 
+    font-weight: 500; 
+    text-decoration: underline; 
+    color: #001F35;
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+}
+
+.downSectionCardValue{
+    font-style: normal; 
+    font-weight: 600; 
+    color: #242424;
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+}
+
+.viewOtherChargesText{
+    cursor: pointer; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+}
+
+
+
+
+@media only screen and (min-width: 600px) and (max-width: 1600px) {
+    .searchCradMainCon{
+        width: 98%;
+    }
+
+    .searchCardPromName{
+        width: calc(100%-210px);
+    }
+    
+    .searchCardPromNameSpan{
+        font-size: 18px;    
+    }
+
+    .viewOtherChargesText,
+    .projStatusonImage,
+    .searchCardProjNameType{
+        font-size: 12px;
+    }
+
+    .downSectionCardValue,
+    .downSectionCardIconSpan,
+    .searchCardAddress{
+        font-size: 14px;
+    }
+
+    .searchCradTopSection{
+        flex-direction: column;
+    }
+
+    .searchCradTopImageBox{
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .searchCradMainCon{
+        width: 98%;
+    }
+
+    .searchCardPromNameSpan{
+        font-size: 14px;    
+    }
+
+    .searchCradTopSection{
+        flex-direction: column;
+    }
+
+    .searchCradTopImageBox{
+        width: 100%;
+        height: 10.125;
+    }
+
+    .viewOtherChargesText,
+    .projStatusonImage,
+    .downSectionCardValue,
+    .downSectionCardIconSpan,
+    .searchCardPostedBy,
+    .searchCardAddress,
+    .searchCardPhaseName,
+    .searchCardSortedBhks,
+    .searchCardProjNameType{
+        font-size: 12px;
+    }
+
+  
+
+
+}

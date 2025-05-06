@@ -1,6 +1,7 @@
 import { SearchFilter } from "@/app/types/search";
 import React, { useCallback, useMemo } from "react";
 import ProjectCard from "@/app/test/newui/components/Card";
+import SearchCard from "./searchCradComponents/SearchCard";
 
 type Props = {
   data: any;
@@ -33,8 +34,13 @@ export default function ListingServerCardData({
       : state.listedBy;
   }, [state, frontendFilters]);
 
-  return data.map((eachOne: any, index: number) => (
-    <ProjectCard
+  return(
+    <>
+    
+    {/* <SearchCard data={data[0]} index={0}  /> */}
+
+    {data.map((eachOne: any, index: number) => (
+    <SearchCard
       key={eachOne.projIdEnc + eachOne.propType + index.toString()}
       refetch={refetch}
       data={{
@@ -45,5 +51,6 @@ export default function ListingServerCardData({
       index={index}
       mutate={mutate}
     />
-  ));
-}
+    ))}
+  </>
+)}
