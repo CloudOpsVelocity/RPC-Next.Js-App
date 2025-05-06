@@ -89,7 +89,7 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
 
   const fullQuery = searchParams.toString()
 
-    return `/residential-listings/for-sale/page-${page}?${fullQuery}`;
+    return `/search/listing/page-${page}${fullQuery ? `?${fullQuery}` : ""}`
   };
 
   return (

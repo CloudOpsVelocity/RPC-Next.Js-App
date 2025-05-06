@@ -38,6 +38,9 @@ const getListingDetails = async (
     );
     const data = await response.json();
     if (!data || !data.status) {
+      console.log(
+        "status false from backend redirecting from next server 404."
+      );
       return notFound();
     }
     if (
@@ -57,6 +60,9 @@ const getListingDetails = async (
         projName: data.listing.projIdEnc ? data.listing.propName : null,
       });
       if (originalPath !== pathname) {
+        console.log(
+          "path not mached what come from front-end and backe-end redirecting from next server 404."
+        );
         throw new Error(originalPath);
       }
     }

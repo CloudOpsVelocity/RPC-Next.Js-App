@@ -18,13 +18,15 @@ export const getListingSearchData = async (
   if (apiFilterQueryParams.includes("listedBy=proj")) {
     url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}`;
     let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
-    const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
-    return res.data
+    const res = await axios.get(
+      `${url}${queryparams ? `&${queryparams}` : ""}`
+    );
+    return res.data;
   }
   let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
 
   const res = await axios.get(`${url}${queryparams ? `&${queryparams}` : ""}`);
-  return res.data.results;
+  return res.data;
 };
 
 export const parseApiFilterQueryParams = (
@@ -47,14 +49,14 @@ export const parseApiFilterQueryParams = (
     )
     .replace(
       /city=([^\s&]*)(\+(\d+))?/,
-      (_, baseCity, __, ) => `city=${baseCity.split("+")[1] ?? "9"}`
+      (_, baseCity, __) => `city=${baseCity.split("+")[1] ?? "9"}`
     )
     .replace(/listedBy=All/g, "") // Remove 'listedBy=All'
     .replace(/-/g, "&"); // Replace dashes with ampersands
   let updatedParams = apiFilterQueryParams.includes("cg=")
     ? transformedParams
     : `${transformedParams}&cg=S`;
-    console.log({updatedParams})
+  console.log({ updatedParams });
   return updatedParams.includes("city=")
     ? updatedParams
     : `${updatedParams}&city=9`;

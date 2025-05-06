@@ -12,6 +12,8 @@ import {
   getSearchData,
 } from "../(new_routes_seo)/in/utils/api";
 import { parseApiFilterQueryParams } from "../(new_routes_seo)/search/utils/project-search-queryhelpers";
+import redisService from "../utils/redis/redis.service";
+import { SlugsType } from "../common/constatns/slug.constants";
 
 type Props = {
   params: {
@@ -57,6 +59,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 
 export const generateStaticParams = async () => {
   const res = await getPagesSlugs("case-seo");
+  await redisService.saveSeoSlug(SlugsType.SEO, res);
   if (process.env.ENVIRONMENT === "production" && process.env.LAKH_URLS) {
     return res.map((slug: string) => ({ slug }));
   }

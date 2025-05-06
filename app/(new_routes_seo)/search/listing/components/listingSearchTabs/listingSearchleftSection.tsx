@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo } from "react";
@@ -11,7 +12,6 @@ import {
   projSearchStore,
   searchPageMapToggle,
 } from "../../../store/projSearchStore";
-import { usePathname } from "next/navigation";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
@@ -20,6 +20,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
+import ListingSearchPagination from "../../_new-listing-search-page/components/ListingSearchPagination";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -42,48 +43,55 @@ function LeftSection({
   frontendFilters,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [mainData, setMainData] = useState<any>(serverData || []);
-  const pathname = usePathname();
+  const [totalCount, setTotalCount] = useState(frontendFilters.totalCount);
   const isTrue = apiFilterQueryParams !== preDefinedFilters;
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = frontendFilters.page || 0 }) => {
+      const response = await getListingSearchData(
+        pageParam,
+        apiFilterQueryParams ?? ""
+      );
+      setTotalCount(response.totalCount);
+      return response.results;
+    },
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      const nextPage = !isTrue
+        ? frontendFilters.currentPage + allPages.length
+        : allPages.length;
+      if (lastPage.length < 20) return;
+      return nextPage;
+    },
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        const response = await getListingSearchData(
-          pageParam,
-          apiFilterQueryParams ?? ""
-        );
-        return response;
+    ...(serverData && {
+      initialData: {
+        pages: [serverData],
+        pageParams: [0],
       },
-      getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
-        return nextPage;
-      },
-      ...(serverData && {
-        initialData: {
-          pages: [serverData],
-          pageParams: [0],
-        },
-      }),
-      cacheTime: 300000,
-      enabled: isTrue,
-      onSuccess: (data: any) => {
-        const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
-      },
-    });
+    }),
+    cacheTime: 300000,
+    enabled: isTrue,
+    // onSuccess: (data: any) => {
+    //   const newData = data.pages[data.pageParams.length - 1];
+    //   setMainData((prev: any) => [...prev, ...newData.results]);
+    // },
+  });
 
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -107,7 +115,6 @@ function LeftSection({
         ) {
           setIsTrue(true);
           fetchNextPage();
-          setPage((prev) => prev + 1);
         }
       },
       {
@@ -124,7 +131,10 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
   const dataToUse =
-    apiFilterQueryParams !== preDefinedFilters ? data?.pages.flat() : mainData;
+    apiFilterQueryParams !== preDefinedFilters ||
+    (data && data?.pageParams?.length > 0)
+      ? data?.pages.flat()
+      : mainData;
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -186,7 +196,7 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading || isFetching ? (
+      {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <>
@@ -235,6 +245,21 @@ function LeftSection({
         >
           <LoadingSpinner />
         </div>
+      )}
+
+      {typeof window === "undefined" && (
+        <ListingSearchPagination
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage : 1
+          }
+          totalCount={
+            isTrue
+              ? totalCount
+              : frontendFilters.totalCount
+              ? frontendFilters.totalCount
+              : 0
+          }
+        />
       )}
       <LoginPopup />
       <RequestCallBackModal />

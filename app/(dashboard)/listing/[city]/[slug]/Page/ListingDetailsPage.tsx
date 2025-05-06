@@ -85,7 +85,7 @@ export default function ListingDetailsPage({
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName}${data?.projIdEnc ? `, ${data?.propName}` : ""}`;
 
-  console.log(title)
+  console.log(title);
 
   const newTitle = `${data?.bhkName ?? ""} ${data?.propTypeName} For
   ${data?.cg === "S" ? " Sale" : " Rent"} In
@@ -114,6 +114,7 @@ export default function ListingDetailsPage({
             title={title}
             pathname={pathname}
           />
+
           {/* Top Cover Image Card */}
           <PropertyFirstBlock
             projectDetails={data}

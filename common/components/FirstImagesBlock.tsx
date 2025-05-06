@@ -33,11 +33,16 @@ function FirstImagesBlock({ onSelect, data }: Props) {
             href={getUrl(data.images, 3)}
             // @ts-ignore to skip type error
             imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(
+            // @ts-ignore to skip type error
+            imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(
               data.images,
               2
             )} 768w, ${getUrl(data.images, 3)} 1200w`}
             imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
+            imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
           />
+        </Head>
+
         </Head>
 
         {/* JSX for your component */}

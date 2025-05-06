@@ -68,10 +68,15 @@
 // Function to get search data from the API
 export const getSearchData = async (filters?: string): Promise<any> => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0&city=9`;
+    let baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0&city=9`;
+    if (filters && filters.includes("page=")) {
+      baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?city=9`;
+    } else {
+      baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0&city=9`;
+    }
 
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
-
+    console.log(url);
     // console.log(url);
     const res = await fetch(url, {
       cache: "no-cache",
@@ -82,7 +87,7 @@ export const getSearchData = async (filters?: string): Promise<any> => {
     }
 
     const data = await res.json();
-    return data.results;
+    return data;
   } catch (error) {
     console.error(error);
     return null;

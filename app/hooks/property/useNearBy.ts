@@ -19,21 +19,21 @@ export default function useNearby({
   bhkId: number;
   propType: number;
 }) {
-  const { slug, bhk_unit_type } = useParams<{
-    slug: string;
-    bhk_unit_type: string;
+  const { slugs } = useParams<{
+    slugs: string[];
   }>();
+  let slug = slugs.at(-1);
   const queryClient = useQueryClient();
   const getData = async () => {
     const res = await axios.get(
       `${BACKEND_BASE_URL}/api/v1/fetch/nearbyProperties?lat=${lat}&lng=${lng}&bhkId=${bhkId}&propType=${propType}&cg=${cg.toLowerCase()}&propIdEnc=${
-        (slug || bhk_unit_type).split("-")[1]
+        slug?.split("-")[1]
       }${projId ? `&projIdEnc=${projId}` : ""}  `
     );
     return res.data;
   };
   const { isLoading, data } = useQuery({
-    queryKey: [`nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg],
+    queryKey: [`nearbyListing` + slug?.split("-")[1] + cg],
     queryFn: getData,
     ...RTK_CONFIG,
   });
@@ -44,13 +44,11 @@ export default function useNearby({
     // When mutate is called:
     onMutate: async ({ id, type }: { id: string; type: "other" | "proj" }) => {
       await queryClient.cancelQueries({
-        queryKey: [
-          `nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg,
-        ],
+        queryKey: [`nearbyListing` + slug?.split("-")[1] + cg],
       });
       const whichDataUpdate = type === "proj" ? "projListing" : "otherListing";
       const previousData: any = queryClient.getQueryData([
-        `nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg,
+        `nearbyListing` + slug?.split("-")[1] + cg,
       ]);
       const updatedData = previousData[whichDataUpdate].map((property: any) => {
         if (property.propIdEnc === id) {
@@ -58,13 +56,10 @@ export default function useNearby({
         }
         return property;
       });
-      queryClient.setQueryData(
-        [`nearbyListing` + (slug || bhk_unit_type).split("-")[1] + cg],
-        {
-          ...previousData,
-          [whichDataUpdate]: updatedData,
-        }
-      );
+      queryClient.setQueryData([`nearbyListing` + slug?.split("-")[1] + cg], {
+        ...previousData,
+        [whichDataUpdate]: updatedData,
+      });
       return { previousData };
     },
 
