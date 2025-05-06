@@ -179,15 +179,6 @@ export async function generateMetadata({
   const isListingPage =
     bhk_unit_type?.includes("listing") || listing?.includes("listing");
 
-  function formatSlug(slug?: string): string {
-    return slug
-      ? slug
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      : "";
-  }
-
   if (!isListingPage) {
     const formatText = (text?: string) =>
       text
@@ -196,37 +187,59 @@ export async function generateMetadata({
             .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ")
         : "";
-  
-    const categoryFormatted = formatText(cg);
-    const cityFormatted = city ? city.charAt(0).toUpperCase() + city.slice(1) : "";
+
+    const cityFormatted = city
+      ? city.charAt(0).toUpperCase() + city.slice(1)
+      : "";
     const localityFormatted = formatText(lt);
     const projectFormatted = formatText(project);
     const phaseFormatted = formatText(phase);
-  
+
     const isBHKType = /^\d[\s-]*bhk/i.test(phase || "");
-    const phaseDisplay = isBHKType ? `${phaseFormatted} Flats` : phaseFormatted ? `${phaseFormatted} Phase` : "";
-  
+    const phaseDisplay = isBHKType
+      ? `${phaseFormatted} Flats`
+      : phaseFormatted
+      ? `${phaseFormatted} Phase`
+      : "";
+
     // Property Types to include in SEO Title and Description
-    const propertyTypes = ["apartment", "flat", "villa", "villament",  "plot"];
-    const propertyTypeFormatted = propertyTypes.map(type => type.charAt(0).toUpperCase() + type.slice(1)).join(", ");
-  
+    // const propertyTypes = ["apartment", "flat", "villa", "villament", "plot"];
+    // const propertyTypeFormatted = propertyTypes
+    //   .map((type) => type.charAt(0).toUpperCase() + type.slice(1))
+    //   .join(", ");
+
     // Dynamic Title
     let title = "Buy Residential Properties in India - GRP";
     if (cityFormatted && !lt && !project && !phase) {
       title = `Residential Properties for Sale in ${cityFormatted} - GRP`;
     } else if (cityFormatted && localityFormatted && !project) {
       title = `Properties for Sale in ${localityFormatted}, ${cityFormatted} - GRP`;
-    } else if (projectFormatted && cityFormatted && localityFormatted && !phase) {
+    } else if (
+      projectFormatted &&
+      cityFormatted &&
+      localityFormatted &&
+      !phase
+    ) {
       title = `Flats for Sale in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} - GRP`;
-    } else if (phaseDisplay && projectFormatted && localityFormatted && cityFormatted) {
+    } else if (
+      phaseDisplay &&
+      projectFormatted &&
+      localityFormatted &&
+      cityFormatted
+    ) {
       title = `${phaseDisplay} in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} for Sale - GRP`;
     } else {
       title = `${projectFormatted} - Residential Properties for Sale in ${localityFormatted}, ${cityFormatted} - GRP`;
     }
-  
+
     // Dynamic Description
     let description = `Explore verified residential property listings in India. Find your dream property among apartments, flats, villas, villaments, builder floors, and plots.`;
-    if (phaseDisplay && projectFormatted && localityFormatted && cityFormatted) {
+    if (
+      phaseDisplay &&
+      projectFormatted &&
+      localityFormatted &&
+      cityFormatted
+    ) {
       description = `Explore ${phaseDisplay.toLowerCase()} for sale in ${projectFormatted}, located in ${localityFormatted}, ${cityFormatted}. Get verified listings of apartments, flats, villas, villaments, builder floors, and plots.`;
     } else if (projectFormatted && localityFormatted && cityFormatted) {
       description = `Browse flats, apartments, villas, and more for sale in ${projectFormatted}, ${localityFormatted}, ${cityFormatted}.`;
@@ -235,11 +248,11 @@ export async function generateMetadata({
     } else if (cityFormatted) {
       description = `Find the best residential properties for sale in ${cityFormatted}. Search verified flats, apartments, villas, and more.`;
     }
-  
+
     // Dynamic URL
     const urlParts = [cg, city, lt, project, phase].filter(Boolean).join("/");
     const url = `https://www.getrightproperty.com/residential-listings/${urlParts}`;
-  
+
     return {
       title,
       description,
