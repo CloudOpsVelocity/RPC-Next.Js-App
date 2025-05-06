@@ -57,7 +57,7 @@ export async function generateSlugs(
         data.split("/");
       const result = {
         slugs: [
-          cg,
+          ...(cg ? [cg] : []),
           ...(city ? [city] : []),
           ...(lt ? [lt] : []),
           ...(project ? [project] : []),
@@ -69,7 +69,7 @@ export async function generateSlugs(
       return result;
     }
   });
- 
+
   return slugs;
 }
 
