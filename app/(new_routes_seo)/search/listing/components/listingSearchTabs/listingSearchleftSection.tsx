@@ -88,9 +88,8 @@ function LeftSection({
     cacheTime: 300000,
     enabled: isTrue,
     onSuccess: (data: any) => {
-      console.log({ data });
-      // const newData = data.pages[data.pageParams.length - 1];
-      // setMainData((prev: any) => [...prev, ...newData.results]);
+      const newData = data.pages[data.pageParams.length - 1];
+      setMainData((prev: any) => [...prev, ...newData.results]);
     },
   });
 

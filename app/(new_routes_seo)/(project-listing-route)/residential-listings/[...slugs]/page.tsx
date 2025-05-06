@@ -19,6 +19,7 @@ import {
   getReportConstData,
 } from "@/app/utils/api/property";
 import logger from "@/app/utils/logger";
+import { Metadata, ResolvingMetadata } from "next";
 
 import { notFound } from "next/navigation";
 type Props = {
@@ -161,19 +162,117 @@ export default async function Page({ params, searchParams }: Props) {
   );
 }
 
-// export async function generateStaticParams() {
-//   const slugs = generateSlugs("listing-search-seo", "project-listing");
-//   logger.info(slugs);
-//   return slugs;
-//   // Get the data (mocked here, replace with your actual data fetching logic)
-//   // const res = await getPagesSlugs("listing-search-seo");
-//   // // Extract project names from the keys
-//   // const projectRes = Object.keys(res);
-//   // const slugs = projectRes.map((data) => {
-//   //   if (data.includes("/in/for-")) {
-//   //     const [emtypath, country, cg, city, lt, slug] = data.split("/");
-//   //     return { cg, city };
-//   //   }
-//   // });
-//   // return slugs;
-// }
+export async function generateStaticParams() {
+  const slugs = await generateSlugs("listing-search-seo", "project-listing");
+  return slugs;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    slugs: string[];
+  };
+}): Promise<Metadata> {
+  const [cg, city, lt, project, phase, bhk_unit_type, listing] = params.slugs;
+  if (!bhk_unit_type.includes("listing")) {
+    return {
+      title: `${bhk_unit_type.replace(/-/g, " ")} in ${lt.replace(
+        /-/g,
+        " "
+      )} for ${cg === "for-sale" ? "Sale" : "Rent"} in ${project.replace(
+        /-/g,
+        " "
+      )}, ${city.replace(/-/g, " ")} `,
+      description: `Looking for ${bhk_unit_type.replace(
+        /-/g,
+        " "
+      )} properties for ${
+        cg === "for-sale" ? "sale" : "rent"
+      } in ${project.replace(/-/g, " ")}, ${lt.replace(
+        /-/g,
+        " "
+      )}, ${city.replace(
+        /-/g,
+        " "
+      )}? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      openGraph: {
+        title: `${bhk_unit_type.replace(/-/g, " ")} in ${lt.replace(
+          /-/g,
+          " "
+        )} for ${cg === "S" ? "Sale" : "Rent"} in ${project.replace(
+          /-/g,
+          " "
+        )}, ${city.replace(/-/g, " ")}`,
+        description: `Looking for ${bhk_unit_type.replace(
+          /-/g,
+          " "
+        )} properties for ${cg === "S" ? "sale" : "rent"} in ${project.replace(
+          /-/g,
+          " "
+        )}, ${lt.replace(/-/g, " ")}, ${city.replace(
+          /-/g,
+          " "
+        )}? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      },
+    };
+  }
+
+  const id = (listing || bhk_unit_type).split("-")[1];
+  const { listing: data } = await getListingDetails(id as string);
+  const keywords = `${data.bhkName ?? ""}, ${data.propTypeName}, ${
+    data.ltName
+  }, ${data.ctName}, ${data.cg === "S" ? "Sale" : "Rent"}`;
+  return {
+    title: `${data.bhkName ?? ""} ${data.propTypeName} ${data.propName} for ${
+      data.cg === "S" ? " Sale" : " Rent"
+    } in ${data.ltName}`,
+    description: `Searching ${data.bhkName ?? ""} ${data.propTypeName} ${
+      data.propName
+    }, for ${data.cg === "S" ? " Sale" : " Rent"} in ${
+      data.ltName
+    }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
+    applicationName: "Getrightproperty",
+    keywords: keywords,
+    openGraph: {
+      title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${data.ltName} `,
+      description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${
+        data.ltName
+      }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
+      url: data.projMedia.coverImageUrl,
+      type: "website",
+      images: [
+        {
+          url: data.projMedia.coverImageUrl,
+          width: 800,
+          height: 600,
+          alt: `${data.bhkName ?? ""} ${data.propTypeName} for ${
+            data.cg === "S" ? " Sale" : " Rent"
+          } in ${data.ltName} `,
+        },
+      ],
+      locale: "en_US",
+      siteName: "Getrightproperty",
+      countryName: "India",
+      emails: ["rahulrpclan@gamil.com"],
+      phoneNumbers: ["+91-8884440963"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@Getrightproperty",
+      title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${data.ltName}`,
+      description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
+        data.cg === "S" ? " Sale" : " Rent"
+      } in ${
+        data.ltName
+      }, Bangalore. Get a verified search without any charges on Getrightproperty.`,
+      images: data.projMedia.coverImageUrl,
+    },
+  };
+}

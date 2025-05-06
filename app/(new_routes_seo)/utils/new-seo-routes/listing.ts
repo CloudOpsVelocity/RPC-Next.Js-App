@@ -5,6 +5,7 @@ import { getPagesSlugs } from "@/app/seo/api";
 // import fs from "fs";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
+import logger from "@/app/utils/logger";
 
 type SlugParams = {
   emptyPath?: string;
@@ -38,8 +39,7 @@ export async function generateSlugs(
 
   const slugs = keys.map((data) => {
     if (data.includes("/residential/listings") && type === "solo-listing") {
-      const [ cg, city, lt, bhk_unit_type, slug] =
-        data.split("/");
+      const [cg, city, lt, bhk_unit_type, slug] = data.split("/");
       const result: Partial<SlugParams> = {
         cg,
         city,
@@ -53,30 +53,23 @@ export async function generateSlugs(
       data.includes("/residential-listings") &&
       type === "project-listing"
     ) {
-      const [
-        ,
-        ,
-        cg,
-        city,
-        lt,
-        project,
-        phase,
-        bhk_unit_type,
-        slug,
-      ] = data.split("/");
-      const result: Partial<SlugParams> = {
-        cg,
-        city,
-        lt,
-        project,
-        phase,
-        bhk_unit_type,
-        ...(slug && { slug }),
+      const [, , cg, city, lt, project, phase, bhk_unit_type, slug] =
+        data.split("/");
+      const result = {
+        slugs: [
+          cg,
+          ...(city ? [city] : []),
+          ...(lt ? [lt] : []),
+          ...(project ? [project] : []),
+          ...(phase ? [phase] : []),
+          ...(bhk_unit_type ? [bhk_unit_type] : []),
+          ...(slug ? [slug] : []),
+        ],
       };
       return result;
     }
   });
-
+ 
   return slugs;
 }
 
