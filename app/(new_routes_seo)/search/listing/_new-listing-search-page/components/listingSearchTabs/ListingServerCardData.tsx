@@ -35,7 +35,7 @@ export default function ListingServerCardData({
   }, [state, frontendFilters]);
 
   return(
-    <>
+    <div>
     
     {/* <SearchCard data={data[0]} index={0}  /> */}
 
@@ -52,5 +52,5 @@ export default function ListingServerCardData({
       mutate={mutate}
     />
     ))}
-  </>
+  </div>
 )}
