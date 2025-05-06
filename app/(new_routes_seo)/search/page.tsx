@@ -4,19 +4,17 @@ import { Metadata } from "next";
 import ProjSearchMainFilterSection from "./_new-search-page/components/filters/ProjSearchMainFilterSection";
 import Mainsection from "./_new-search-page/components/Mainsection";
 import ProjectSearchBreadCrumbs from "./_new-search-page/components/ProjSearchBreadCrums";
-import {
-  // getSearchData,
-  parseApiFilterQueryParams,
-} from "./utils/project-search-queryhelpers";
+
 import parseProjectSearchQueryParams from "./utils/parse-project-searchqueryParams";
 import { getProjSearchData, getSearchData } from "../in/utils/api";
+import { parseApiFilterQueryParams } from "./utils/project-search-queryhelpers";
 
 export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
   const frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
-  const isListing = apiFilters?.includes("listedBy") ? true : false;
+  const isListing = frontendFilters.listedBy ? true : false;
   const data = !isListing
     ? await (
         await getProjSearchData(apiFilters ?? "")
