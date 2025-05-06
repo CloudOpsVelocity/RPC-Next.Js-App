@@ -25,8 +25,12 @@ export default async function Page(params: any) {
   const frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
   const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
   const data = isProj
-    ? await getProjSearchData(apiFilters ?? "")
-    : await getSearchData(apiFilters ?? "");
+    ? await (
+        await getProjSearchData(apiFilters ?? "")
+      ).results
+    : await (
+        await getSearchData(apiFilters ?? "")
+      ).results;
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative">
       <link

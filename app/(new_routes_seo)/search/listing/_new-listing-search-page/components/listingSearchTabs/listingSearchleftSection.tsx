@@ -22,7 +22,6 @@ import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
 import ListingSearchPagination from "../ListingSearchPagination";
 
-
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
   serverData?: any;
@@ -63,7 +62,7 @@ function LeftSection({
           pageParam,
           apiFilterQueryParams ?? ""
         );
-        return response;
+        return response.results;
       },
       getNextPageParam: (lastPage: any, allPages: any) => {
         const nextPage = allPages.length;
@@ -182,7 +181,7 @@ function LeftSection({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
- 
+
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
@@ -192,44 +191,44 @@ function LeftSection({
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <>
-        {/* Image use below */}
-        {isMobile && dataToUse[0].coverImage && (
-          <>
-            <link
-              rel="preconnect"
-              href="https://media.getrightproperty.com"
-              crossOrigin="anonymous"
-            />
-
-            {/* Preload image with srcSet and sizes */}
-            {dataToUse?.[0]?.coverImage?.includes(",") && (
+          {/* Image use below */}
+          {isMobile && dataToUse[0].coverImage && (
+            <>
               <link
-                rel="preload"
-                as="image"
-                href={
-                  dataToUse[0].coverImage.includes("+")
-                    ? dataToUse[0].coverImage
-                        .replace(/\+/g, "%2B")
-                        .split(",")[1]
-                    : dataToUse[0].coverImage.split(",")[1]
-                }
+                rel="preconnect"
+                href="https://media.getrightproperty.com"
+                crossOrigin="anonymous"
               />
-            )}
-          </>
-        )}
-        {/* Image Use above*/}
-        <ListingServerCardData
-          data={dataToUse}
-          refetch={refetch}
-          mutate={mutate}
-          state={state}
-          frontendFilters={frontendFilters}
-        />
+
+              {/* Preload image with srcSet and sizes */}
+              {dataToUse?.[0]?.coverImage?.includes(",") && (
+                <link
+                  rel="preload"
+                  as="image"
+                  href={
+                    dataToUse[0].coverImage.includes("+")
+                      ? dataToUse[0].coverImage
+                          .replace(/\+/g, "%2B")
+                          .split(",")[1]
+                      : dataToUse[0].coverImage.split(",")[1]
+                  }
+                />
+              )}
+            </>
+          )}
+          {/* Image Use above*/}
+          <ListingServerCardData
+            data={dataToUse}
+            refetch={refetch}
+            mutate={mutate}
+            state={state}
+            frontendFilters={frontendFilters}
+          />
         </>
       ) : (
         <EmptyState />
       )}
-     
+
       {hasNextPage && shouldFetchMore && (
         <div
           ref={loadMoreRef}
@@ -238,9 +237,7 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-       {true && (
-      <ListingSearchPagination currentPage={12}    totalCount={100} />
-          )}
+      {true && <ListingSearchPagination currentPage={12} totalCount={100} />}
       <LoginPopup />
       <RequestCallBackModal />
 
