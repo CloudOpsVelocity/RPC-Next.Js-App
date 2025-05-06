@@ -174,104 +174,131 @@ export async function generateMetadata({
     slugs: string[];
   };
 }): Promise<Metadata> {
-  const [cg, city, lt, project, phase, bhk_unit_type, listing] = params.slugs;
-  if (!bhk_unit_type.includes("listing")) {
+  const slugs = params.slugs;
+  const [cg, city, lt, project, phase, bhk_unit_type, listing] = slugs;
+  const isListingPage =
+    bhk_unit_type?.includes("listing") || listing?.includes("listing");
+
+  function formatSlug(slug?: string): string {
+    return slug
+      ? slug
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      : "";
+  }
+
+  if (!isListingPage) {
+    const formatText = (text?: string) =>
+      text
+        ? text
+            .split("-")
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+        : "";
+  
+    const categoryFormatted = formatText(cg);
+    const cityFormatted = city ? city.charAt(0).toUpperCase() + city.slice(1) : "";
+    const localityFormatted = formatText(lt);
+    const projectFormatted = formatText(project);
+    const phaseFormatted = formatText(phase);
+  
+    const isBHKType = /^\d[\s-]*bhk/i.test(phase || "");
+    const phaseDisplay = isBHKType ? `${phaseFormatted} Flats` : phaseFormatted ? `${phaseFormatted} Phase` : "";
+  
+    // Property Types to include in SEO Title and Description
+    const propertyTypes = ["apartment", "flat", "villa", "villament",  "plot"];
+    const propertyTypeFormatted = propertyTypes.map(type => type.charAt(0).toUpperCase() + type.slice(1)).join(", ");
+  
+    // Dynamic Title
+    let title = "Buy Residential Properties in India - GRP";
+    if (cityFormatted && !lt && !project && !phase) {
+      title = `Residential Properties for Sale in ${cityFormatted} - GRP`;
+    } else if (cityFormatted && localityFormatted && !project) {
+      title = `Properties for Sale in ${localityFormatted}, ${cityFormatted} - GRP`;
+    } else if (projectFormatted && cityFormatted && localityFormatted && !phase) {
+      title = `Flats for Sale in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} - GRP`;
+    } else if (phaseDisplay && projectFormatted && localityFormatted && cityFormatted) {
+      title = `${phaseDisplay} in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} for Sale - GRP`;
+    } else {
+      title = `${projectFormatted} - Residential Properties for Sale in ${localityFormatted}, ${cityFormatted} - GRP`;
+    }
+  
+    // Dynamic Description
+    let description = `Explore verified residential property listings in India. Find your dream property among apartments, flats, villas, villaments, builder floors, and plots.`;
+    if (phaseDisplay && projectFormatted && localityFormatted && cityFormatted) {
+      description = `Explore ${phaseDisplay.toLowerCase()} for sale in ${projectFormatted}, located in ${localityFormatted}, ${cityFormatted}. Get verified listings of apartments, flats, villas, villaments, builder floors, and plots.`;
+    } else if (projectFormatted && localityFormatted && cityFormatted) {
+      description = `Browse flats, apartments, villas, and more for sale in ${projectFormatted}, ${localityFormatted}, ${cityFormatted}.`;
+    } else if (localityFormatted && cityFormatted) {
+      description = `Discover residential properties for sale in ${localityFormatted}, ${cityFormatted}. Choose from apartments, flats, villas, builder floors, and plots.`;
+    } else if (cityFormatted) {
+      description = `Find the best residential properties for sale in ${cityFormatted}. Search verified flats, apartments, villas, and more.`;
+    }
+  
+    // Dynamic URL
+    const urlParts = [cg, city, lt, project, phase].filter(Boolean).join("/");
+    const url = `https://www.getrightproperty.com/residential-listings/${urlParts}`;
+  
     return {
-      title: `${bhk_unit_type.replace(/-/g, " ")} in ${lt.replace(
-        /-/g,
-        " "
-      )} for ${cg === "for-sale" ? "Sale" : "Rent"} in ${project.replace(
-        /-/g,
-        " "
-      )}, ${city.replace(/-/g, " ")} `,
-      description: `Looking for ${bhk_unit_type.replace(
-        /-/g,
-        " "
-      )} properties for ${
-        cg === "for-sale" ? "sale" : "rent"
-      } in ${project.replace(/-/g, " ")}, ${lt.replace(
-        /-/g,
-        " "
-      )}, ${city.replace(
-        /-/g,
-        " "
-      )}? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+      title,
+      description,
       openGraph: {
-        title: `${bhk_unit_type.replace(/-/g, " ")} in ${lt.replace(
-          /-/g,
-          " "
-        )} for ${cg === "S" ? "Sale" : "Rent"} in ${project.replace(
-          /-/g,
-          " "
-        )}, ${city.replace(/-/g, " ")}`,
-        description: `Looking for ${bhk_unit_type.replace(
-          /-/g,
-          " "
-        )} properties for ${cg === "S" ? "sale" : "rent"} in ${project.replace(
-          /-/g,
-          " "
-        )}, ${lt.replace(/-/g, " ")}, ${city.replace(
-          /-/g,
-          " "
-        )}? Find verified listings with detailed information about amenities, prices and more. Browse through our extensive collection of residential properties on Getrightproperty - Your trusted property search platform.`,
+        title,
+        description,
+        url,
+        siteName: "Get Right Property",
+        type: "website",
+        locale: "en_US",
       },
     };
   }
 
+  // Listing detail page logic
   const id = (listing || bhk_unit_type).split("-")[1];
-  const { listing: data } = await getListingDetails(id as string);
-  const keywords = `${data.bhkName ?? ""}, ${data.propTypeName}, ${
-    data.ltName
-  }, ${data.ctName}, ${data.cg === "S" ? "Sale" : "Rent"}`;
+  const { listing: data } = await getListingDetails(id);
+
   return {
     title: `${data.bhkName ?? ""} ${data.propTypeName} ${data.propName} for ${
-      data.cg === "S" ? " Sale" : " Rent"
+      data.cg === "S" ? "Sale" : "Rent"
     } in ${data.ltName}`,
     description: `Searching ${data.bhkName ?? ""} ${data.propTypeName} ${
       data.propName
-    }, for ${data.cg === "S" ? " Sale" : " Rent"} in ${
+    }, for ${data.cg === "S" ? "Sale" : "Rent"} in ${
       data.ltName
-    }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
-    applicationName: "Getrightproperty",
-    keywords: keywords,
+    }, Bangalore. Verified listings on Getrightproperty.`,
+    keywords: `${data.bhkName ?? ""}, ${data.propTypeName}, ${data.ltName}, ${
+      data.ctName
+    }, ${data.cg === "S" ? "Sale" : "Rent"}`,
     openGraph: {
       title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
-        data.cg === "S" ? " Sale" : " Rent"
-      } in ${data.ltName} `,
-      description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
-        data.cg === "S" ? " Sale" : " Rent"
-      } in ${
+        data.cg === "S" ? "Sale" : "Rent"
+      } in ${data.ltName}`,
+      description: `Find ${data.bhkName ?? ""} ${data.propTypeName} in ${
         data.ltName
-      }, Bangalore. Get a verified search on Get Right property. New Age Property Portal.`,
+      } on Getrightproperty.`,
       url: data.projMedia.coverImageUrl,
-      type: "website",
       images: [
         {
           url: data.projMedia.coverImageUrl,
           width: 800,
           height: 600,
           alt: `${data.bhkName ?? ""} ${data.propTypeName} for ${
-            data.cg === "S" ? " Sale" : " Rent"
-          } in ${data.ltName} `,
+            data.cg === "S" ? "Sale" : "Rent"
+          } in ${data.ltName}`,
         },
       ],
-      locale: "en_US",
-      siteName: "Getrightproperty",
-      countryName: "India",
-      emails: ["rahulrpclan@gamil.com"],
-      phoneNumbers: ["+91-8884440963"],
     },
     twitter: {
       card: "summary_large_image",
-      site: "@Getrightproperty",
       title: `${data.bhkName ?? ""} ${data.propTypeName} for ${
-        data.cg === "S" ? " Sale" : " Rent"
+        data.cg === "S" ? "Sale" : "Rent"
       } in ${data.ltName}`,
-      description: `Searching ${data.bhkName ?? ""} ${data.propTypeName}, for ${
-        data.cg === "S" ? " Sale" : " Rent"
-      } in ${
+      description: `Verified listing of ${data.bhkName ?? ""} ${
+        data.propTypeName
+      } for ${data.cg === "S" ? "Sale" : "Rent"} in ${
         data.ltName
-      }, Bangalore. Get a verified search without any charges on Getrightproperty.`,
+      }. Only on Getrightproperty.`,
       images: data.projMedia.coverImageUrl,
     },
   };
