@@ -8,6 +8,7 @@ type props = {
   type?: any;
   loading?: boolean;
   name?: string;
+  toolTip? :string;
 };
 
 const ButtonElement = ({
@@ -19,6 +20,7 @@ const ButtonElement = ({
   type,
   loading,
   name,
+  toolTip
 }: props) => {
   return (
     <div className={buttonConClass || ""}>
@@ -32,6 +34,7 @@ const ButtonElement = ({
         }}
         disabled={loading}
         style={{ cursor: loading ? "not-allowed" : "pointer" }}
+        title={toolTip ? toolTip : title }
       >
         {icon}
         {title}
