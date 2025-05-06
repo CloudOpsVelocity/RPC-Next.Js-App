@@ -14,7 +14,7 @@ export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
-  const data = await getSearchData(0, apiFilters ?? "");
+  const data = await (await getSearchData(0, apiFilters ?? "")).results;
   // const frontendFilters = parseProjectSearchQueryParams(
   //   params.searchParams.sf ?? ""
   // );
