@@ -38,7 +38,7 @@ export default function ServerDataSection({
       <ProjectCard
         key={eachOne.projIdEnc + eachOne.propType + index.toString()}
         refetch={refetch}
-        data={{ ...eachOne, type: "A", cg: cg }}
+        data={{ ...eachOne, type: "B", cg: cg }}
         index={index}
         mutate={mutate}
       />
