@@ -1,5 +1,3 @@
-/// conflixts fixing ,,,....//+++ //accept imcoming that it
-
 import { ShearIcon } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import styles from "@/app/styles/DetailsPageImages.module.css";
@@ -26,23 +24,20 @@ function FirstImagesBlock({ onSelect, data }: Props) {
 
       <>
         <Head>
-          {/*     {index == 0 && <link rel="preconnect" href="https://media.getrightproperty.com" />} */}
+          {index == 0 && (
+            <link rel="preconnect" href="https://media.getrightproperty.com" />
+          )}
           <link
             rel="preload"
             as="image"
             href={getUrl(data.images, 3)}
             // @ts-ignore to skip type error
             imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(
-            // @ts-ignore to skip type error
-            imagesrcset={`${getUrl(data.images, 1)} 460w, ${getUrl(
               data.images,
               2
             )} 768w, ${getUrl(data.images, 3)} 1200w`}
             imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
-            imagesizes="(max-width: 460px) 100vw, (max-width: 768px) 100vw, 900px"
           />
-        </Head>
-
         </Head>
 
         {/* JSX for your component */}
