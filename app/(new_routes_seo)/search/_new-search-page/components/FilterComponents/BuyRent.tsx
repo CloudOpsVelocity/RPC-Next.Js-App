@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import React from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { projSearchStore } from "../../../store/newSearchProjectStore";
-import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 type Props = {
   openDropdown: string | null;
