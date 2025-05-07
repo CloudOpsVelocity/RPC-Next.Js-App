@@ -35,12 +35,12 @@ function Individual() {
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const router = useRouter();
-  const { 
-    register, saveStep, 
+  const {
+    register,
+    saveStep,
     // login
   } = useAuth({ type: "register" });
   const [opened, { open, close }] = useDisclosure(false);
-
 
   const form = useForm({
     defaultValues: { name: "", email: "", password: "", mobile: undefined },

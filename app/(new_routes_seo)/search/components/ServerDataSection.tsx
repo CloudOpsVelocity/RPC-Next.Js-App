@@ -31,11 +31,12 @@ export default function ServerDataSection({
     return state.listedBy === frontendFilters.listedBy
       ? frontendFilters.listedBy
       : state.listedBy;
-  }, [state, frontendFilters]);
+  }, [state.listedBy, frontendFilters]);
+
   return data.map((eachOne: any, index: number) => {
     return (
       <ProjectCard
-        key={eachOne.projIdEnc + eachOne.propType + index.toString()}
+        key={eachOne.projIdEnc + (eachOne.propType ?? "") + index.toString()}
         refetch={refetch}
         data={{ ...eachOne, type: listedBy() ?? "proj", cg: cg }}
         index={index}

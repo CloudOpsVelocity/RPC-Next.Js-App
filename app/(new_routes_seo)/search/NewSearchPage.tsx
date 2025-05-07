@@ -24,12 +24,12 @@ export default function NewSearchPage({
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
-      {serverData &&
+      {/* {serverData &&
         (frontendFilters.listedBy == null ? (
           <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />
         ) : (
           <ListingSearchSchema properties={serverData} pageUrl={pageUrl} />
-        ))}
+        ))} */}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs key="newSearchPage1" pageUrl={pageUrl} />
         <ProjSearchMainFilterSection
