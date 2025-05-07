@@ -75,7 +75,7 @@ export default function NearByCarouselProperty({
         title={
           <Fragment>
             Nearby Similar {listingType} Listings of{" "}
-            <span className="text-[#148B16] ">{projName}</span>
+            <span className="text-green-800">{projName}</span>
           </Fragment>
         }
         content={`Check some similar nearby ${listingType.toLowerCase()} listings available`}
