@@ -44,7 +44,7 @@ export default function ProjectLoans({
         <PropertyHeading
           title={
             <Fragment>
-              Bank Approvals Of <span className="text-[#148B16]">{name}</span>
+              Bank Approvals Of <span className="text-green-800">{name}</span>
             </Fragment>
           }
           desc="Unlock Your Dream Home with Hassle-Free Bank Approval Loans"
