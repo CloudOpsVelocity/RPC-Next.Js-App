@@ -11,7 +11,10 @@ import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { Metadata, ResolvingMetadata } from "next";
 import logger from "@/app/utils/logger";
 import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
-import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData as getListingData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 
 type Props = {
@@ -34,12 +37,12 @@ export default async function Page({
   let frontendFilters = null;
   if (searchParams.sf) {
     const apiFilters = parseApiFilterQueryParams(searchParams.sf);
-    const isProj = searchParams.sf?.includes("listedBy") ? false : true;
+    const isProj = apiFilters?.includes("listedBy") ? false : true;
     // eslint-disable-next-line no-unused-vars
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
-      : await getSearchData(apiFilters ?? "");
-    serverData = data;
+      : await getListingData(apiFilters ?? "");
+    serverData = data.results;
 
     frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
   } else {

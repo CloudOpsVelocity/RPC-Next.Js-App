@@ -215,6 +215,7 @@ function LeftSection({
             refetch={refetch}
             mutate={mutate}
             state={state}
+            frontendFilters={frontendFilters}
           />
 
           {hasNextPage && shouldFetchMore && (

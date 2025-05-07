@@ -6,21 +6,53 @@ import { findPathForProjectDetails } from "@/app/(new_routes_seo)/utils/new-seo-
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
+import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
+import {
+  getProjSearchData,
+  getSearchData as getListingData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 
 type Props = {
   params: { city: string; lt: string };
+  searchParams: {
+    sf: string;
+  };
 };
 
-export default async function Page({ params: { city, lt } }: Props) {
+export default async function Page({
+  params: { city, lt },
+  searchParams,
+}: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
-  const serverData = await (await getSearchData()).results;
+  // const serverData = await (await getSearchData()).results;
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    const isProj = apiFilters?.includes("listedBy") ? false : true;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getListingData(apiFilters ?? "");
+    serverData = data.results;
+
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+  } else {
+    serverData = await (await getSearchData()).results;
+    frontendFilters = {
+      cg: value.CG,
+      listedBy: null,
+    };
+  }
   return (
     <NewSearchPage
       pageUrl={pathname}
-      frontendFilters={{}}
       serverData={serverData}
+      frontendFilters={frontendFilters}
+      preDefinedFilters={searchParams.sf}
     />
   );
 }

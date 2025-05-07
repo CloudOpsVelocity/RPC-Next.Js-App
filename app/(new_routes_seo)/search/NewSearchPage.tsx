@@ -34,6 +34,7 @@ export default function NewSearchPage({
         <ProjectSearchBreadCrumbs key="newSearchPage1" pageUrl={pageUrl} />
         <ProjSearchMainFilterSection
           isListing={isListing}
+          frontendFilters={frontendFilters}
           key="newSearchFilter1"
         />
       </div>

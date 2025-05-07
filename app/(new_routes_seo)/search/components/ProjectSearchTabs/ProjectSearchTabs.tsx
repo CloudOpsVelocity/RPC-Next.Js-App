@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom, useSetAtom } from "jotai";
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import {
   diffToProjFromListing,
   initialState,
@@ -19,7 +19,11 @@ const tabs = [
   { id: "All", label: "All Listings" },
 ];
 
-const ProjectSearchTabs = () => {
+const ProjectSearchTabs = ({
+  frontendFilters,
+}: {
+  frontendFilters: Record<string, any>;
+}) => {
   const [state, dispath] = useAtom(projSearchStore);
 
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
@@ -168,7 +172,14 @@ const ProjectSearchTabs = () => {
     }
     return "Newest First";
   };
-
+  const tabsSelected = useCallback(() => {
+    if (state.listedBy === undefined) {
+      return frontendFilters?.listedBy;
+    }
+    return state.listedBy === frontendFilters.listedBy
+      ? frontendFilters?.listedBy
+      : state.listedBy;
+  }, [state, frontendFilters]);
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap ">
       <div className=" w-full pb-[6px] pt-[10px] sm:px-[10px]">
@@ -185,7 +196,7 @@ const ProjectSearchTabs = () => {
                   title={`Click to view ${tab.label}`}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
-                    state.listedBy === tab.id
+                    tabsSelected() === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }
