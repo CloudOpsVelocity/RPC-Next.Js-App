@@ -1,7 +1,6 @@
 import React from 'react';
 import Styles from "@/app/styles/seach/searchCrad.module.css";
 import ButtonElement from '@/common/components/CustomButton';
-import { ApprovedNamesSectionData } from './searchData';
 
 type ButtonProps = {
     value?: number;
@@ -49,11 +48,13 @@ function SearchCradBottomSection({data}: Props) {
         </div>
         <div className={Styles.searchCradBottomRightSection}>
             <ButtonElement
+                data-action="compare"
                 title="Add to Compare" 
                 buttonClass={Styles.searchCardCompareBtn}
             />
 
             <ButtonElement
+                data-action="eequestCall"
                 title="Request Callback" 
                 buttonClass={Styles.searchCardCompareBtn}
             />

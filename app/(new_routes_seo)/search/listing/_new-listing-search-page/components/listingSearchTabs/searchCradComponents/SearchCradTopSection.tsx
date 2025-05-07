@@ -3,19 +3,23 @@ import Styles from "@/app/styles/seach/searchCrad.module.css";
 import Image from 'next/image';
 import { formatDateDDMMYYYY } from '@/app/utils/date';
 import { formatCurrency } from '@/app/utils/numbers';
-import { ApprovedNamesSectionData, TopLeftSectionData, TopRightSectionData } from './searchData';
+import { 
+  sanitizeApprovedNamesSectionData, sanitizetopCornerRightSectionData, topCornerRightSectionData, TopLeftSectionData, TopRightSectionData 
+
+} from './searchData';
 import Link from 'next/link';
 import { generateBuilderUrl } from '@/app/utils/linkRouters/Builder';
 import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
 import SearchCardApprovedNames from './SearchCardApprovedNames';
+import SearchCardTopCornerSection from './SearchCardTopCornerSection';
 
 interface SearchCardTopSectionLProps {
   data: TopLeftSectionData;
 }
 
 interface SearchCardTopSectionRProps {
-  data: TopRightSectionData;
-  approvedNamesData: ApprovedNamesSectionData;
+  // data: TopRightSectionData;
+  data:any
 }
 
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data }) => {
@@ -51,7 +55,8 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data }) => {
   )
 }
 
-export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, approvedNamesData }) => {
+export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) => {
+  
   const {
     projName, phaseName, phaseCount, minPrice, maxPrice, sortedBhks, propType, cg, 
     city, locality, postedByName, builderCity, cityName, projIdEnc, localityName, 
@@ -63,7 +68,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
     slug: postedByName,
     city: builderCity ? builderCity : cityName,
   });
-
+ 
   let projectUrl =
     projIdEnc &&
     createProjectLinkUrl({
@@ -74,17 +79,24 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
   });
 
   const aboutText = projectAbout && projectAbout.length !== 0 ? projectAbout : usp;
-  // console.log(aboutText)
   const readMoreThreshold = 200;
   const isReadMoreNeeded = aboutText?.length > readMoreThreshold;
+
+  const approvedNamesData = sanitizeApprovedNamesSectionData(data);
+  const topCornerRightData = sanitizetopCornerRightSectionData(data); 
+  
+  console.log(topCornerRightData);
+  
   return( 
     <div className={Styles.searchCradTopRightBox}>
+      <SearchCardTopCornerSection topCornerRightData={topCornerRightData}  />
+
       {type === "proj" ? 
         <>
           <h2>
               <span className={Styles.searchCardPromName}>
                 {projName}{" "}
-                {phaseName && phaseCount !== undefined && phaseCount > 1 && (
+                {phaseName && phaseCount !== undefined && phaseCount > 1 && ( 
                   <span className={Styles.searchCardPhaseName}>({phaseName})</span>
                 )}
               </span>
@@ -242,10 +254,8 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
               }}
             />
             {isReadMoreNeeded && (
-              <div className="absolute bottom-0 right-0 bg-white">
-                <span className="text-black">...</span>{" "}
                 <button
-                  className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer   "
+                  className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer absolute bottom-0 right-0 bg-white "
                   title="Click to Read More"
                   // onClick={(e) => {
                   //   e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
@@ -269,13 +279,9 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
                   // }}
                   data-action="readMore"
                 >
-                  Read More
+                  <span className="text-black">...</span>Read More
                 </button>
-              </div>
             )}
-
-<button data-action="share">shear</button>
-<button data-action="like">{" "}like</button>
           </div>
         )}
       </div>
@@ -285,3 +291,35 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
 }
 
 
+// {isReadMoreNeeded && (
+//   <div className="absolute bottom-0 right-0 bg-white">
+//     {/* <span className="text-black">...</span>{" "} */}
+//     <button
+//       className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer absolute bottom-0 right-0 bg-white "
+//       title="Click to Read More"
+//       // onClick={(e) => {
+//       //   e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
+//       //   // console.log("read more testing");
+//       //   dispatch({
+//       //     content: aboutText,
+//       //     // id: `${
+//       //     //   type === "proj" ? projIdEnc : propIdEnc
+//       //     // }+${propTypeId ?? propTypeName ?? ''}${
+//       //     //   type === "proj" && phaseId ? "+" + phaseId : ""
+//       //     // }`,
+//       //     id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+//       //       propTypeId ?? propTypeName ?? ""
+//       //     }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
+//       //     title:
+//       //       type === "proj" ? "About Project" : "About Property",
+//       //     type: "OPEN",
+//       //     conType: "readmore",
+//       //     pType: type,
+//       //   });
+//       // }}
+//       data-action="readMore"
+//     >
+//       Read More
+//     </button>
+//   </div>
+// )}

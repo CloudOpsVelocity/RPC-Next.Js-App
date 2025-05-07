@@ -446,6 +446,7 @@ export default function TopRightSection({
           </div>
         </>
       )}
+      
       {!isMobile && (
         <div>
           <div className="flex  flex-col justify-center  h-auto items-end">
