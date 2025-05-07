@@ -25,6 +25,8 @@ type Props = {
   frontendFilters?: any;
   isTrue: boolean;
   setIsTrue: any;
+  preDefinedFilters: string | null;
+  apiFilterQueryParams: string | null;
 };
 
 function LeftSection({
@@ -33,6 +35,8 @@ function LeftSection({
   frontendFilters,
   isTrue: it,
   setIsTrue,
+  apiFilterQueryParams,
+  preDefinedFilters,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [page, setPage] = useState(0);
@@ -40,12 +44,10 @@ function LeftSection({
   const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
-  const [apiFilterQueryParams] = useQueryState("sf");
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const isTrue =
-    it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
+  const isTrue = it || apiFilterQueryParams !== preDefinedFilters;
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery({
