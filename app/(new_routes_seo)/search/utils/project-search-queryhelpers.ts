@@ -34,6 +34,7 @@ export const getListingSearchData = async (
 export const parseApiFilterQueryParams = (
   apiFilterQueryParams: string
 ): string => {
+  console.log({ apiFilterQueryParams });
   // Directly process the input string in a single pass
 
   const transformedParams = apiFilterQueryParams
