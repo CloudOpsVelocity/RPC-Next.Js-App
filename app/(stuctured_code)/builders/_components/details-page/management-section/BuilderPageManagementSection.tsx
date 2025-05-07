@@ -54,7 +54,7 @@ export default function BuilderPageManagementSection({
       </div>
 
       <h1 className=" text-[#242424] mt-3 sm:mt-0 text-[16px] sm:text-[22px] xl:text-[28px] not-italic font-semibold  inline-flex items-center space-x-2">
-        <p>{HEADING_ICON}</p> <p> Company Vision</p>
+        <span>{HEADING_ICON}</span> <span> Company Vision</span>
       </h1>
       <About
         id="builder_vision"
