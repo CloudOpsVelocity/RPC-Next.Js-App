@@ -30,10 +30,6 @@ import PageTitle from "./PageTitle";
 // import { useRouter } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 
-const ListingSearchTabs = dynamic(
-  () => import("../../listing/components/ListingSearchTabs")
-);
-
 const HeaderFilters = ({ isListing }: { isListing?: boolean }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
