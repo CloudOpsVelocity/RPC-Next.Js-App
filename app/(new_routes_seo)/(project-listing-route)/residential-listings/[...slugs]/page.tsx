@@ -127,7 +127,7 @@ export default async function Page({ params, searchParams }: Props) {
         ? data.propName
         : `${data.bhkName ?? ""} ${data.propTypeName} For
       ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName}`;
-
+      console.log("listing Details Api caliing");
       serverData = {
         TITLE_OF_PROP,
         data,
@@ -321,5 +321,5 @@ export async function generateMetadata({
     },
   };
 }
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
+export const dynamic = "force-static";
+export const dynamicParams = false;

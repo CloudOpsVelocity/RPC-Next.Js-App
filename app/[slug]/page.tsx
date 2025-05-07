@@ -12,8 +12,8 @@ import {
   getSearchData,
 } from "../(new_routes_seo)/in/utils/api";
 import { parseApiFilterQueryParams } from "../(new_routes_seo)/search/utils/project-search-queryhelpers";
-import redisService from "../utils/redis/redis.service";
-import { SlugsType } from "../common/constatns/slug.constants";
+// import redisService from "../utils/redis/redis.service";
+// import { SlugsType } from "../common/constatns/slug.constants";
 
 type Props = {
   params: {
@@ -58,8 +58,35 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 }
 
 export const generateStaticParams = async () => {
-  const res = await getPagesSlugs("case-seo");
-  await redisService.saveSeoSlug(SlugsType.SEO, res);
+  // const res = await getPagesSlugs("case-seo");
+  // await redisService.saveSeoSlug(SlugsType.SEO, res);
+  const res = [
+    "3-bhk-plot-for-buy-sale-in-kalkere-bengaluru-45B-32P-SCG-320L-9C",
+    "5-bhk-with-servant-for-buy-sale-in-sultan-palya-bengaluru-684B-SCG-519L-9C",
+    "3.5-bhk-apartment-flat-for-rent-in-deepanjali-nagar-bengaluru-47B-35P-RCG-156L-9C",
+    "5-bhk-villa-for-buy-sale-in-yellupura-bengaluru-683B-31P-SCG-570L-9C",
+    "5-bhk-for-rent-in-sadduguntepalya-bengaluru-683B-RCG-482L-9C",
+    "3-bhk-row-house-for-rent-in-doddakallasandra-bengaluru-45B-33P-RCG-169L-9C",
+    "5-bhk-with-servant-villa-for-buy-sale-in-defence-colony-bengaluru-684B-31P-SCG-157L-9C",
+    "3-bhk-apartment-flat-for-buy-sale-in-yelahanka-bengaluru-45B-35P-SCG-568L-9C",
+    "2.5-bhk-villa-for-buy-sale-in-indira-nagar-1st-stage-bengaluru-44B-31P-SCG-262L-9C",
+    "1-bhk-apartment-flat-for-buy-sale-in-judicial-layout-bengaluru-41B-35P-SCG-308L-9C",
+    "2.5-bhk-villa-for-rent-in-nehru-nagar-bengaluru-44B-31P-RCG-435L-9C",
+    "5.5-bhk-with-servant-row-house-for-buy-sale-in-singapura-bengaluru-686B-33P-SCG-505L-9C",
+    "3-bhk-for-rent-in-hosakerehalli-bengaluru-45B-RCG-241L-9C",
+    "1-rk-villa-for-buy-sale-in-thubarahalli-bengaluru-40B-31P-SCG-532L-9C",
+    "5.5-bhk-for-buy-sale-in-itpl-bengaluru-685B-SCG-267L-9C",
+    "4-bhk-with-servant-villament-for-rent-in-vv-puram-bengaluru-680B-34P-RCG-561L-9C",
+    "1-bhk-plot-for-buy-sale-in-hombegowda-nagar-bengaluru-41B-32P-SCG-231L-9C",
+    "2.5-bhk-for-buy-sale-in-konanakunte-bengaluru-44B-SCG-352L-9C",
+    "3.5-bhk-apartment-flat-for-buy-sale-in-vijaya-bank-layout-bengaluru-47B-35P-SCG-550L-9C",
+    "mithuna-white-aspera-in-jakkur-for-rent-in-bengaluru-9C-RCG-8e8ffda354d12c2353d8671eadafbcafPJ",
+    "2-bhk-villa-for-rent-in-rmv-extension-bengaluru-43B-31P-RCG-472L-9C",
+    "5.5-bhk-with-servant-independent-house-building-for-rent-in-defence-colony-bengaluru-686B-36P-RCG-157L-9C",
+    "2.5-bhk-villa-for-buy-sale-in-jp-nagar-1st-phase-bengaluru-44B-31P-SCG-299L-9C",
+    "1-rk-for-rent-in-sonnenahalli-bengaluru-40B-RCG-511L-9C",
+    "1.5-bhk-apartment-flat-for-buy-sale-in-sunkadakatte-bengaluru-42B-35P-SCG-520L-9C",
+  ];
   if (process.env.ENVIRONMENT === "production" && process.env.LAKH_URLS) {
     return res.map((slug: string) => ({ slug }));
   }
@@ -133,5 +160,5 @@ function cleanHeading(id: string[]) {
     .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
     .replace(/\s+/g, " ");
 }
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 export const dynamicParams = false;
