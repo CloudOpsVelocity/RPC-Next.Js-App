@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
-import { useQueryState } from "nuqs";
+
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
