@@ -56,7 +56,7 @@ export default function Banner({
           <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
             <strong>
               <span className="text-[#001F35]">Project Rating For </span>
-              <span className="text-[#148B16] sm:text-[24px] xl:text-[28px] not-italic leading-[normal] tracking-[1.28px]">
+              <span className="text-green-800 sm:text-[24px] xl:text-[28px] not-italic leading-[normal] tracking-[1.28px]">
                 {projName}
               </span>
             </strong>

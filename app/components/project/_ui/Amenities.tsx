@@ -135,7 +135,8 @@ export default function AmenitiesDisplay({
                 {getAvailableSubCategories(category).map((subCategory) => (
                   <li
                     key={subCategory}
-                    className="text-btnPrimary font-medium text-sm list-disc hover:text-gray-900 transition"
+                   /*  className="text-btnPrimary font-medium text-sm list-disc hover:text-gray-900 transition" */
+                   className="text-gray-800 font-medium text-sm list-disc hover:text-gray-900 transition"
                   >
                     {subCategory}
                   </li>

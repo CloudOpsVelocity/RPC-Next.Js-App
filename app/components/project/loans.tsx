@@ -55,7 +55,7 @@ export default function ProjectLoans({
           <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[10px] xl:mb-[12px] capitalize">
             <strong>
               <span className="text-[#001F35]">Bank Approvals For </span>
-              <span className="text-[#148B16]">{name}</span>
+              <span className="text-green-800">{name}</span>
             </strong>
           </h2>
           <SubHeading

@@ -142,7 +142,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
               </span>
               {completedProjIconSvg}
             </p>
-            <span className="text-[#A07600] text-[13px] lg:text-[20px] font-[700]">
+            <span className="text-yellow-900 text-[13px] lg:text-[20px] font-[700]">
               Completed {`Project${data?.completed > 1 ? "s" : ""}`}
             </span>
           </Link>
@@ -153,7 +153,7 @@ export default function BuilderProjectsCount({ id, builderName }: Props) {
                 0
               </span>
             </div>
-            <p className="text-[#A07600] text-[13px] lg:text-[20px] font-[700]">
+            <p className="text-yellow-900 text-[13px] lg:text-[20px] font-[700]">
               Completed Projects
             </p>
           </div>

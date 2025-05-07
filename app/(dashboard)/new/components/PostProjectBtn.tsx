@@ -23,7 +23,8 @@ export default function PostProjectBtn({}: Props) {
       >
         Post Project{" "}
         <Image
-          src="/home/free.svg"
+        
+          src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/free.svg`}
           width={36}
           height={36}
           alt="post your Project"

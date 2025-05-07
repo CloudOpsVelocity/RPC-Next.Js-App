@@ -139,7 +139,7 @@ function BrocherContent({
             <span className="text-[#001F35]">
               Explore the Comprehensive Brochure of{" "}
             </span>
-            <span className="text-[#148B16]">{projName}</span>
+            <span className="text-green-800">{projName}</span>
           </strong>
         </h2>
         {!showMap ? (
@@ -339,7 +339,7 @@ function BrocherContent({
             <span className="text-[#001F35]">
               Explore the Comprehensive Brochures of{" "}
             </span>
-            <span className="text-[#148B16]">{projName} </span>
+            <span className="text-green-800">{projName} </span>
           </strong>
         </h2>
         <div className="mb-1 flex-wrap pl-3">
