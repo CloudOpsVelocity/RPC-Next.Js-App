@@ -266,7 +266,7 @@ const ProjectCarousel = ({
             <strong>
               {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
               <span className="text-[#001F35]">{title}</span>
-              <span className="text-[#0C5F0E] uppercase ml-4 ">{projName}</span>
+              <span className="text-green-800 uppercase ml-4 ">{projName}</span>
             </strong>
           </h3>
           <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">
