@@ -20,6 +20,8 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
+import ListingSearchPagination from "../../listing/_new-listing-search-page/components/ListingSearchPagination";
+import ProjectSearchPagination from "./ProjectSearchPagination";
 
 type Props = {
   mutate?: ({}: { type?: string; index?: number }) => void;
@@ -229,6 +231,7 @@ function LeftSection({
             state={state}
             frontendFilters={frontendFilters}
           />
+ 
           {hasNextPage && shouldFetchMore && (
             <div
               ref={loadMoreRef}
@@ -237,6 +240,30 @@ function LeftSection({
               Loading...
             </div>
           )}
+            {true   && (
+        <div
+        className={
+          typeof window !== "undefined"
+            ? "absolute left-[-9999px] w-px h-px overflow-hidden invisible"
+            : ""
+        }
+        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+      >
+        <ProjectSearchPagination
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage : 1
+          }
+          totalCount={
+            100
+            /* isTrue
+              ? totalCount
+              : frontendFilters.totalCount
+              ? frontendFilters.totalCount
+              : 0 */
+          }
+        />
+        </div>
+      )}
         </>
       ) : (
         <EmptyState />
