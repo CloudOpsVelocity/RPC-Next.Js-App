@@ -100,7 +100,7 @@ function SearchCardApprovedNames({approvedNamesData}: Props) {
         return authorityNames.join(", ");
     };
 
-    console.log(minPa, maxPa, minSba, maxSba);
+    // console.log(minPa, maxPa, minSba, maxSba);
 
     return (
       <div className={Styles.searchCardApprovedNamesMainCon}>

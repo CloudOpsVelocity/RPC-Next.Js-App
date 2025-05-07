@@ -1,6 +1,6 @@
 import { SearchFilter } from "@/app/types/search";
 import React, { useCallback, useMemo } from "react";
-import ProjectCard from "@/app/test/newui/components/Card";
+// import ProjectCard from "@/app/test/newui/components/Card";
 import SearchCard from "./searchCradComponents/SearchCard";
 
 type Props = {
@@ -34,23 +34,48 @@ export default function ListingServerCardData({
       : state.listedBy;
   }, [state, frontendFilters]);
 
-  return(
-    <div>
-    
-    {/* <SearchCard data={data[0]} index={0}  /> */}
+  const handleClick = (e: any) => {
+    const cardEl = e.target.closest('[data-type="card"]');
+    if (!cardEl) return;
+  
+    const cardId = cardEl.dataset.id;
+    const actionButton = e.target.closest('[data-action]');
+    const index = cardId ? cardId.split("_")[1] : 0;
+    const selectedItem = data[index];
+    console.log(index, selectedItem);
+    // if (cardId){ console.log('Clicked card ID:', cardId)}
+  
+    const action = actionButton?.dataset.action;
+  
+    if (action === 'readMore') {
+      // console.log('Read More card:', cardId);
+      
+    } else if (action === 'like') {
+      console.log('Like card:', cardId);
+    } else if (action === 'share') {
+      console.log('Share card:', cardId);
+    } 
+    else {
+      console.log('Card clicked:', cardId);
+    }
+  };
 
-    {data.map((eachOne: any, index: number) => (
-    <SearchCard
-      key={eachOne.projIdEnc + eachOne.propType + index.toString()}
-      refetch={refetch}
-      data={{
-        ...eachOne,
-        type: listedBy(),
-        cg: cg,
-      }}
-      index={index}
-      mutate={mutate}
-    />
-    ))}
-  </div>
+  return(
+    <div onClick={handleClick}>
+      {/* <SearchCard data={data[0]} index={0}  /> */}
+
+      {data.map((eachOne: any, index: number) => (
+      <SearchCard
+        key={eachOne.projIdEnc + eachOne.propType + index.toString()}
+        refetch={refetch}
+        data={{
+          ...eachOne,
+          type: listedBy(),
+          cg: cg,
+        }}
+        index={index}
+        mutate={mutate}
+      />
+      ))}
+    </div>
 )}

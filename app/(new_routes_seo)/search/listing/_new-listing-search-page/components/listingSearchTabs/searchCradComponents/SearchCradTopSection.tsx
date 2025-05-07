@@ -74,7 +74,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
   });
 
   const aboutText = projectAbout && projectAbout.length !== 0 ? projectAbout : usp;
-  console.log(aboutText)
+  // console.log(aboutText)
   const readMoreThreshold = 200;
   const isReadMoreNeeded = aboutText?.length > readMoreThreshold;
   return( 
@@ -212,8 +212,8 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
               }`}
               onClick={
                 postedBy === "Builder"
-                  ? (e) => {
-                      e.stopPropagation();
+                  ? () => {
+                      // e.stopPropagation();
                       window.open(urlBuilder, "_self", "noreferrer");
                     }
                   : undefined
@@ -229,9 +229,9 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
 
       <div
         className="text-[12px] sm:text-[14px] pr-2 line-clamp-2"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
+        // onClick={(e) => {
+        //   e.stopPropagation();
+        // }}
       >
         {aboutText && (
           <div className="line-clamp-2 relative">
@@ -267,11 +267,15 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
                   //     pType: type,
                   //   });
                   // }}
+                  data-action="readMore"
                 >
                   Read More
                 </button>
               </div>
             )}
+
+<button data-action="share">shear</button>
+<button data-action="like">{" "}like</button>
           </div>
         )}
       </div>
@@ -279,3 +283,5 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, app
     </div>
   )
 }
+
+

@@ -12,15 +12,15 @@ type Props = {
 }
 
 function SearchCard({
-  data, 
+  data, index = 0,
   // refetch, index, mutate
 }: Props) {
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   const topSectionRightData = sanitizeTopRightSectionData(data);
   const approvedNamesSectionData = sanitizeApprovedNamesSectionData(data);
-
+  console.log(data);
   return (
-    <div className={Styles.searchCradMainCon}>
+    <div className={Styles.searchCradMainCon} data-id={`searchCard_${index.toString()}`} data-type="card">
       {/* Top sectiom */}
       <div className={Styles.searchCradTopSection}>
         <ImageBlock data={topSectionLeftData} />
