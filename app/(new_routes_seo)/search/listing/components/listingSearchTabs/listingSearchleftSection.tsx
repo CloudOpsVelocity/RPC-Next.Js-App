@@ -44,7 +44,6 @@ function LeftSection({
 }: Props) {
 
   const containerRef = useRef<HTMLDivElement>(null);
-
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [mainData, setMainData] = useState<any>(serverData || []);
@@ -53,39 +52,47 @@ function LeftSection({
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = frontendFilters.page || 0 }) => {
-        const response = await getListingSearchData(
-          pageParam,
-          apiFilterQueryParams ?? ""
-        );
-        setTotalCount(response.totalCount);
-        return response.results;
-      },
-      getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = frontendFilters.currentPage + allPages.length;
-        if (lastPage.length < 20) return;
-        return nextPage;
-      },
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = frontendFilters.page || 0 }) => {
+      const response = await getListingSearchData(
+        pageParam,
+        apiFilterQueryParams ?? ""
+      );
+      setTotalCount(response.totalCount);
+      return response.results;
+    },
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      const nextPage = !isTrue
+        ? frontendFilters.currentPage + allPages.length
+        : allPages.length;
+      if (lastPage.length < 20) return;
+      return nextPage;
+    },
 
-      ...(serverData && {
-        initialData: {
-          pages: [serverData],
-          pageParams: [0],
-        },
-      }),
-      cacheTime: 300000,
-      enabled: isTrue,
-      onSuccess: (data: any) => {
-        console.log({ data });
-        // const newData = data.pages[data.pageParams.length - 1];
-        // setMainData((prev: any) => [...prev, ...newData.results]);
+    ...(serverData && {
+      initialData: {
+        pages: [serverData],
+        pageParams: [0],
       },
-    });
+    }),
+    cacheTime: 300000,
+    enabled: isTrue,
+    // onSuccess: (data: any) => {
+    //   const newData = data.pages[data.pageParams.length - 1];
+    //   setMainData((prev: any) => [...prev, ...newData.results]);
+    // },
+  });
 
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -125,7 +132,10 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
   const dataToUse =
-    apiFilterQueryParams !== preDefinedFilters ? data?.pages.flat() : mainData;
+    apiFilterQueryParams !== preDefinedFilters ||
+    (data && data?.pageParams?.length > 0)
+      ? data?.pages.flat()
+      : mainData;
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -187,7 +197,7 @@ function LeftSection({
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
-      {isLoading || isFetching ? (
+      {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length ? (
         <>
