@@ -78,7 +78,7 @@ const LeafMap: React.FC<{
             title={
               <Fragment>
                 Location Map Of{" "}
-                <span className="text-[#148B16]">{projName}</span>
+                <span className="text-green-800">{projName}</span>
               </Fragment>
             }
             desc="Explore nearby convenient amenities, entertainment, and essential services"

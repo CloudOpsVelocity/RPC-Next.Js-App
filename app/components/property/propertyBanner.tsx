@@ -144,7 +144,7 @@ function PropertyBannerForMobile({
       <div className="max-w-[100%] xl:mx-auto p-1  xl:p-5 mt-8 sm:mt-0 ">
         <h2 className="text-[#212C33] text-lg xl:text-2xl md:text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] pt-2 ml-0 md:ml-8 mb-4 md:mb-0">
           About{" "}
-          <span className="text-[#148B16] font-semibold">{projectName}</span>
+          <span className="text-green-800 font-semibold">{projectName}</span>
         </h2>
         <div className="flex flex-col md:flex-row justify-between md:items-center p-1 ">
           <div className="flex flex-col md:flex-row md:space-x-4 w-full md:w-auto">
@@ -160,7 +160,7 @@ function PropertyBannerForMobile({
               <h2 className="text-[#001F35] text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2">
                 About {projectName}
               </h2>
-              <p className="text-[#768AA9] text-base md:text-xl not-italic font-semibold leading-[normal] mb-2">
+              <p className="text-[#4B5C74] text-base md:text-xl not-italic font-semibold leading-[normal] mb-2">
                 {availableProperties ? availableProperties.join(", ") : ""}
               </p>
               <p className="text-[#202020] text-base md:text-2xl not-italic font-normal leading-[normal]">

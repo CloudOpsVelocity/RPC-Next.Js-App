@@ -40,7 +40,7 @@ export default function NearByCarouselProjProperty({
         title={
           <Fragment>
             Other Projects By{" "}
-            <span className="text-[#148B16]">
+            <span className="text-green-800">
               {builderData?.data?.userName}
             </span>
           </Fragment>
@@ -63,7 +63,7 @@ export default function NearByCarouselProjProperty({
         title={
           <Fragment>
             Nearby Projects of{" "}
-            <span className="text-[#148B16]">
+            <span className="text-green-800">
               {builderData?.data?.userName}
             </span>
           </Fragment>
