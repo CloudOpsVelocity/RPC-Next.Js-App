@@ -37,7 +37,7 @@ function Individual() {
   const router = useRouter();
   const { 
     register, saveStep, 
-    // login
+    login
   } = useAuth({ type: "register" });
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -76,10 +76,10 @@ function Individual() {
     close();
   };
   const OtpCallback = async () => {
-    // const data = await login({
-    //   password: values.password,
-    //   username: values.mobile as unknown as string,
-    // });
+    await login({
+      password: values.password,
+      username: values.mobile as unknown as string,
+    });
     form.reset();
     setStatus("success");
     saveStep(2);

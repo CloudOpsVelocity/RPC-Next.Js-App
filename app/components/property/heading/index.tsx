@@ -26,7 +26,7 @@ export default function PropertyHeading({
           <strong>
             <span className="text-[#001F35]">{title}</span>
             {projName && projName !== "" && (
-              <span className="text-[#148B16]">{projName} </span>
+              <span className="text-green-800">{projName} </span>
             )}
           </strong>
         </h2>{" "}
