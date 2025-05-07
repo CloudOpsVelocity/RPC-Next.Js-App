@@ -34,7 +34,7 @@ export default function ListingRentAvail({
       <h2 className="text-[20px] sm:text-[22px] xl:text-[28px] font-bold mb-[12px] sm:mb-[6px] xl:mb-[12px]">
         <strong>
           <span className="text-[#001F35]">Listings Available in </span>
-          <span className="text-[#148B16]">{projName}</span>{" "}
+          <span className="text-green-800">{projName}</span>{" "}
         </strong>
       </h2>
 

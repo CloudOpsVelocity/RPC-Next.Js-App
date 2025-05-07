@@ -89,7 +89,7 @@ export default function HeaderActions({
           <span className="text-[#001F35]">
             {type == "overview" ? "Price " : "Floor Plans "} For{" "}
           </span>
-          <span className="text-[#148B16]">{projName}</span>{" "}
+          <span className="text-green-800">{projName}</span>{" "}
         </strong>
       </h2>
       {/* <SubHeading text="See floor plans as per your selected property type" /> */}

@@ -55,7 +55,7 @@ export default function About({
             <strong>
               {heading && <span className="text-[#001F35] ">{heading} </span>}
               {projName && (
-                <span className={clsx(" text-[#148B16]  bg-white")}>
+                <span className={clsx(" text-green-800  bg-white")}>
                   {projName}{" "}
                 </span>
               )}

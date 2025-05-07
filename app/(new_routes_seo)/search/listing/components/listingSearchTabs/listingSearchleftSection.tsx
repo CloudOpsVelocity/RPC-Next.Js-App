@@ -42,6 +42,7 @@ function LeftSection({
   preDefinedFilters,
   frontendFilters,
 }: Props) {
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);

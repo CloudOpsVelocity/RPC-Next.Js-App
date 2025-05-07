@@ -37,7 +37,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
       <h2 className="text-h2 sm:text-[22px] xl:text-[28px] font-bold text-gray-800 mb-4">
         <strong>
           <span className="text-[#001F35]">Pricing Details of{" "}</span>
-          <span className="text-greenPrimary">{projName}</span>
+          <span className="text-green-800">{projName}</span>
         </strong>
       </h2>
       {phaseList?.length > 1 && (

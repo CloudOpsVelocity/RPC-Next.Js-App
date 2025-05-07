@@ -70,7 +70,7 @@ export default function GalleryBlock({
           >
             <strong>
               <span className="text-[#001F35]">Gallery of </span>
-              <span className="text-[#148B16] scroll-mt-[260px]" id="photos">
+              <span className="text-green-800 scroll-mt-[260px]" id="photos">
                 {projName}
               </span>{" "}
             </strong>

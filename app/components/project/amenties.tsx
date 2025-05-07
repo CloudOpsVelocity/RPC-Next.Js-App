@@ -33,7 +33,7 @@ export default function Amenties({
             <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words text-wrap w-[78%]">
               <strong>
                 <span className="text-[#001F35]">Amenities Of{" "}</span>
-                <span className="text-[#148B16]">{projName}</span>
+                <span className="text-green-800">{projName}</span>
               </strong>
             </h2>
             <SubHeading

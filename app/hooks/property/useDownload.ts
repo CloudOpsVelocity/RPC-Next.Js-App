@@ -22,7 +22,7 @@ export default function useDownload(name: string) {
     }
   };
   const handleDownload = async (imgUrl: string) => {
-    if (session) {
+    if (true) {
       handleImg(imgUrl);
     } else {
       LoginOpen(() => handleImg(imgUrl));
