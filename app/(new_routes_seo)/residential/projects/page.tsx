@@ -25,14 +25,13 @@ export default async function Page({
   let frontendFilters = null;
   if (searchParams.sf) {
     const apiFilters = parseApiFilterQueryParams(searchParams.sf);
-    const isProj = apiFilters?.includes("listedBy") ? false : true;
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+    const isProj = frontendFilters.listedBy ? false : true;
     // eslint-disable-next-line no-unused-vars
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
-
-    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
   } else {
     serverData = await (await getSearchData()).results;
     frontendFilters = {
