@@ -161,7 +161,8 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    pathname.includes("/search") || apiFilterQueryParams
+    apiFilterQueryParams !== preDefinedFilters ||
+    (data && data?.pageParams?.length > 0)
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
@@ -184,7 +185,7 @@ function LeftSection({
       </div>
     </div>
   );
-
+  console.log(dataToUse);
   return (
     <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
       {isFetching && isFetchingNextPage === false ? (
