@@ -42,11 +42,13 @@ export default async function Page({
     serverData = data.results;
   } else {
      const filterValues = extractProjectParamsValues(value);
-    serverData = await (await getSearchData(filterValues.PG ? `page=${filterValues.PG}` : "page=0", )).results;
+    const data = await (await getSearchData(filterValues.PG ? `page=${filterValues.PG}` : "page=0", ))
+    serverData = data.results;
     frontendFilters = {
       cg: filterValues.CG,
       listedBy: null,
-      page: filterValues.PG,
+      currentPage: filterValues.PG,
+      totalPage: data.totalPage,
     };
   }
   return (

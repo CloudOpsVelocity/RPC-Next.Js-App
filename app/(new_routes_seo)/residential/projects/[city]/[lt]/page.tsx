@@ -45,11 +45,14 @@ export default async function Page({
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
   } else {
-    serverData = await (await getSearchData(filterValues.PG ?  `&page=${filterValues.PG}` : `localities=${filterValues.LT}`)).results;
+    const data = await getSearchData(filterValues.PG ?  `&page=${filterValues.PG}` : `&localities=${filterValues.LT}`);
+    serverData = await data.results;
     frontendFilters = {
       localities: [`${lt}+${filterValues.LT}`],
       cg: filterValues.CG,
       listedBy: null,
+      currentPage: filterValues.PG,
+      totalPage: data.totalPage,
     };
   }
   return (

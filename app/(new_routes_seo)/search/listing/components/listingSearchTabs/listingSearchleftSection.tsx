@@ -263,11 +263,9 @@ function LeftSection({
               frontendFilters.currentPage ? frontendFilters.currentPage : 1
             }
             totalCount={
-              isTrue
-                ? totalCount
-                : frontendFilters.totalCount
-                ? frontendFilters.totalCount
-                : 0
+             
+                 frontendFilters.totalCount ?? 0
+            
             }
           />
         </div>
