@@ -79,7 +79,7 @@ export const getSearchData = async (filters?: string): Promise<any> => {
     console.log(url);
     // console.log(url);
     const res = await fetch(url, {
-      cache: "no-cache",
+      cache: "no-store",
     });
 
     if (!res.ok) {

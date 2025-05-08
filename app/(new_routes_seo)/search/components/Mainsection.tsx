@@ -20,61 +20,64 @@ const RightSection = dynamic(
 type Props = {
   serverData: any;
   frontendFilters: any;
+  preDefinedFilters: string | null;
 };
 
-export default function Mainsection({ frontendFilters, serverData }: Props) {
+export default function Mainsection({
+  frontendFilters,
+  serverData,
+  preDefinedFilters,
+}: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
-  // const filtersData = Object.assign(frontendFilters, initialState);
-  useHydrateAtoms(
-    [
-      [
-        projSearchStore,
-        {
-          type: "update",
-          payload: {
-            ...initialState,
-            ...frontendFilters,
-          },
-        },
-      ],
-    ],
-    {
-      dangerouslyForceHydrate: true,
-    }
-  );
 
-  const pathname = usePathname();
-  const [it, setIsTrue] = useState(
-    pathname.includes("search") ? true : apiFilterQueryParams !== null
-  );
+  // useHydrateAtoms(
+  //   [
+  //     [
+  //       projSearchStore,
+  //       {
+  //         type: "update",
+  //         payload: {
+  //           ...initialState,
+  //           ...frontendFilters,
+  //         },
+  //       },
+  //     ],
+  //   ],
+  //   {
+  //     dangerouslyForceHydrate: true,
+  //   }
+  // );
+
+  const [it, setIsTrue] = useState(apiFilterQueryParams !== preDefinedFilters);
 
   return (
     <>
-    {!isMobile  && (
-          <>
-            <link
-              rel="preconnect"
-              href="https://media.getrightproperty.com"
-              crossOrigin="anonymous"
-            />
+      {!isMobile && (
+        <>
+          <link
+            rel="preconnect"
+            href="https://media.getrightproperty.com"
+            crossOrigin="anonymous"
+          />
 
-            {/* Preload image with srcSet and sizes */}
-         
-              <link
-                rel="preload"
-                as="image"
-                href={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
-              />
-           
-          </>
-        )}
+          {/* Preload image with srcSet and sizes */}
+
+          <link
+            rel="preload"
+            as="image"
+            href={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+          />
+        </>
+      )}
       <LeftSection
         serverData={serverData}
         frontendFilters={frontendFilters}
         isTrue={it}
         setIsTrue={setIsTrue}
+        apiFilterQueryParams={apiFilterQueryParams}
+        preDefinedFilters={preDefinedFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
 
@@ -101,7 +104,9 @@ export default function Mainsection({ frontendFilters, serverData }: Props) {
             />
 
             <button
-              aria-label="Click to View Location Details" name="Click to View Location Details" title="Click to View Location Details"
+              aria-label="Click to View Location Details"
+              name="Click to View Location Details"
+              title="Click to View Location Details"
               onClick={() => setIsMapLoaded(true)}
               className="absolute z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors "
             >

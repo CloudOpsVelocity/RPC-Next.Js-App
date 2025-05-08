@@ -46,7 +46,7 @@ export default function Specifications({
     }
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
-
+// /* text-[#148B16] */  all heading of heading each section
   return (
     <div
       className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%] sm:mb-0 pt-screen-spacing"
@@ -56,7 +56,7 @@ export default function Specifications({
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-4 sm:p-8">
           <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize">
             Specifications of
-            <span className="!text-[#148B16] font-bold "> {projName}</span>
+            <span className="!text-green-800 font-bold "> {projName}</span>
           </h2>
           <p className="text-[14px] text-[#212C33] sm:text-[18px] xl:text-[24px] font-semibold leading-[normal] tracking-[0.88px]  mb-4 flex justify-start items-start ">
             <span>

@@ -35,12 +35,8 @@ function Individual() {
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const router = useRouter();
-  const { 
-    register, saveStep, 
-    // login
-  } = useAuth({ type: "register" });
+  const { register, saveStep, login } = useAuth({ type: "register" });
   const [opened, { open, close }] = useDisclosure(false);
-
 
   const form = useForm({
     defaultValues: { name: "", email: "", password: "", mobile: undefined },
@@ -76,10 +72,10 @@ function Individual() {
     close();
   };
   const OtpCallback = async () => {
-    // const data = await login({
-    //   password: values.password,
-    //   username: values.mobile as unknown as string,
-    // });
+    await login({
+      password: values.password,
+      username: values.mobile as unknown as string,
+    });
     form.reset();
     setStatus("success");
     saveStep(2);

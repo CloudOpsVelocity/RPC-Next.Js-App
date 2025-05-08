@@ -43,7 +43,7 @@ export default async function Page(params: any) {
     </section>
   );
 }
-
+// Hllo
 export const metadata: Metadata = {
   title: "Explore Projects for Sale & Rent in India | GetRightProperty",
   description:

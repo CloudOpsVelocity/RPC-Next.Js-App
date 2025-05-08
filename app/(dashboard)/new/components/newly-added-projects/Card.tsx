@@ -81,7 +81,7 @@ export default function Card({ item }: Props) {
             item.rerastatus === "Applied") && (
             <Image
              priority={true}
-              src={"/r.svg"}
+             src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/r.svg`}
               alt="rera"
               width={100}
               height={100}

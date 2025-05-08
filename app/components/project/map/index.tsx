@@ -78,7 +78,7 @@ const LeafMap: React.FC<{
             title={
               <Fragment>
                 Location Map Of{" "}
-                <span className="text-[#148B16]">{projName}</span>
+                <span className="text-green-800">{projName}</span>
               </Fragment>
             }
             desc="Explore nearby convenient amenities, entertainment, and essential services"
@@ -89,7 +89,7 @@ const LeafMap: React.FC<{
             <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words ">
               <strong>
                 <span className="text-[#001F35]">Location Map Of </span>
-                <span className="text-[#148B16]">{projName}</span>
+                <span className="text-green-800">{projName}</span>
               </strong>
             </h2>
             <SubHeading
@@ -258,7 +258,7 @@ const LeafMap: React.FC<{
               >
                 <strong>
                   <span className="text-[#001F35]">Nearby</span>{" "}
-                  <span className="text-[#148B16] ml-1">{projName} </span>
+                  <span className="text-green-800 ml-1">{projName} </span>
                 </strong>
               </h2>
               <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">

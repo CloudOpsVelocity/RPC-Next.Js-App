@@ -41,9 +41,9 @@ const HomeSearch = ({
     <div
     className="px-1 sm:px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-10 bg-white pt-[100px] sm:pt-[100px] xl:pb-4 xl:py-28 relative mt-[70px]"
   >
-    {/* ✅ Refactored background image for better LCP */}
+      {/* ✅ Refactored background image for better LCP */}
     <img
-      src="/home/clouds.svg"
+      src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/clouds.svg`}
       alt="Clouds background"
       fetchPriority="high"
       loading="eager"
@@ -57,9 +57,9 @@ const HomeSearch = ({
     <div className="items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
       <Image
         priority={true}
-          loading="eager"
-      decoding="async"
-        src="/home/home-search.svg"
+        loading="eager"
+        decoding="async"
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/home-search.svg`}
         alt="home-search"
         height={300}
         width={500}

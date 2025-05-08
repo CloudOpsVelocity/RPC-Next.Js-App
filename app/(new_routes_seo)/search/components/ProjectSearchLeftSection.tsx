@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
-import { useQueryState } from "nuqs";
+
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
@@ -25,6 +25,8 @@ type Props = {
   frontendFilters?: any;
   isTrue: boolean;
   setIsTrue: any;
+  preDefinedFilters: string | null;
+  apiFilterQueryParams: string | null;
 };
 
 function LeftSection({
@@ -33,6 +35,8 @@ function LeftSection({
   frontendFilters,
   isTrue: it,
   setIsTrue,
+  apiFilterQueryParams,
+  preDefinedFilters,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [page, setPage] = useState(0);
@@ -40,43 +44,48 @@ function LeftSection({
   const [mainData, setMainData] = useState<any>(serverData || []);
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
-  const [apiFilterQueryParams] = useQueryState("sf");
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const isTrue =
-    it || pathname.includes("search") ? true : apiFilterQueryParams !== null;
+  const isTrue = it || apiFilterQueryParams !== preDefinedFilters;
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        const response = await getSearchData(
-          pageParam,
-          apiFilterQueryParams ?? ""
-        );
-        return response.results;
-      },
-      getNextPageParam: (lastPage: any) => {
-        return lastPage?.length === 20 ? page + 1 : undefined;
-      },
-      initialData: serverData
-        ? {
-            pages: [serverData],
-            pageParams: [0],
-          }
-        : undefined,
-      cacheTime: 300000,
-      enabled: isTrue,
-      staleTime: 0,
-      refetchOnWindowFocus: false,
-      onSuccess: (data: any) => {
-        const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
-      },
-    });
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+    ],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await getSearchData(
+        pageParam,
+        apiFilterQueryParams ?? ""
+      );
+      return response.results;
+    },
+    getNextPageParam: (lastPage: any) => {
+      return lastPage?.length === 20 ? page + 1 : undefined;
+    },
+    initialData: serverData
+      ? {
+          pages: [serverData],
+          pageParams: [0],
+        }
+      : undefined,
+    cacheTime: 300000,
+    enabled: isTrue,
+    staleTime: 0,
+    refetchOnWindowFocus: false,
+    onSuccess: (data: any) => {
+      const newData = data.pages[data.pageParams.length - 1];
+      setMainData((prev: any) => [...prev, ...newData]);
+    },
+  });
 
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -152,7 +161,8 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    pathname.includes("/search") || apiFilterQueryParams
+    apiFilterQueryParams !== preDefinedFilters ||
+    (data && data?.pageParams?.length > 0)
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
@@ -175,10 +185,10 @@ function LeftSection({
       </div>
     </div>
   );
-
+  console.log(dataToUse);
   return (
     <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
-      {(isLoading && !dataToUse?.length) || isFetching ? (
+      {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length > 0 ? (
         <>
@@ -213,6 +223,7 @@ function LeftSection({
             refetch={refetch}
             mutate={mutate}
             state={state}
+            frontendFilters={frontendFilters}
           />
 
           {hasNextPage && shouldFetchMore && (

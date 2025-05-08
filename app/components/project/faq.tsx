@@ -53,7 +53,7 @@ export default function FaqWithBg({
                 <span className="text-[#001F35]">
                   Frequently Asked Questions of{" "}
                 </span>
-                <span className="text-[#148B16]">{projName}</span>{" "}
+                <span className="text-green-800">{projName}</span>{" "}
               </strong>
             </h2>
           </>

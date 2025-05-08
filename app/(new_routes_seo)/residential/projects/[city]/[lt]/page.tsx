@@ -10,27 +10,54 @@ import { notFound } from "next/navigation";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { Metadata, ResolvingMetadata } from "next";
 import logger from "@/app/utils/logger";
+import parseProjectSearchQueryParams from "@/app/(new_routes_seo)/search/utils/parse-project-searchqueryParams";
+import {
+  getProjSearchData,
+  getSearchData as getListingData,
+} from "@/app/(new_routes_seo)/in/utils/api";
+import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 
 type Props = {
   params: { city: string; lt: string; slug: string };
+  searchParams: {
+    sf: string;
+  };
 };
 export const dynamic = "force-dynamic";
-export default async function Page({ params: { city, lt } }: Props) {
+export default async function Page({
+  params: { city, lt },
+  searchParams,
+}: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
-  const serverData = await (
-    await getSearchData(filterValues.LT as string)
-  ).results;
 
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+    const isProj = frontendFilters.listedBy ? false : true;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getListingData(apiFilters ?? "");
+    serverData = data.results;
+  } else {
+    serverData = await (await getSearchData(filterValues.LT as string)).results;
+    frontendFilters = {
+      localities: [`${lt}+${filterValues.LT}`],
+      cg: filterValues.CG,
+      listedBy: null,
+    };
+  }
   return (
     <NewSearchPage
       pageUrl={pathname}
       serverData={serverData}
-      frontendFilters={{
-        localities: [`${lt}+${filterValues.LT}`],
-      }}
+      frontendFilters={frontendFilters}
+      preDefinedFilters={searchParams.sf}
     />
   );
 }

@@ -12,18 +12,20 @@ type Props = {
   serverData: any;
   frontendFilters: any;
   pageUrl: string;
+  preDefinedFilters: string | null;
 };
 export default function NewSearchPage({
   serverData,
   frontendFilters,
   pageUrl,
+  preDefinedFilters = null,
 }: Props) {
   const isListing = false;
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
       {serverData &&
-        (frontendFilters.listedBy == null ? (
+        (!frontendFilters.listedBy ? (
           <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />
         ) : (
           <ListingSearchSchema properties={serverData} pageUrl={pageUrl} />
@@ -32,6 +34,7 @@ export default function NewSearchPage({
         <ProjectSearchBreadCrumbs key="newSearchPage1" pageUrl={pageUrl} />
         <ProjSearchMainFilterSection
           isListing={isListing}
+          frontendFilters={frontendFilters}
           key="newSearchFilter1"
         />
       </div>
@@ -40,6 +43,7 @@ export default function NewSearchPage({
         <Mainsection
           frontendFilters={frontendFilters}
           serverData={serverData}
+          preDefinedFilters={preDefinedFilters}
         />
       </div>
     </section>

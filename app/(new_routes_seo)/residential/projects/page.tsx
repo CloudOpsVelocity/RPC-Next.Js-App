@@ -2,19 +2,48 @@ import React from "react";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { Metadata } from "next";
+import { parseApiFilterQueryParams } from "../../search/utils/project-search-queryhelpers";
+import {
+  getProjSearchData,
+  getSearchData as getListingData,
+} from "../../in/utils/api";
+import parseProjectSearchQueryParams from "../../search/utils/parse-project-searchqueryParams";
 type Props = {
   params: { city: string; lt: string };
+  searchParams: {
+    sf: string;
+  };
 };
 export const dynamic = "force-dynamic";
 // eslint-disable-next-line no-unused-vars
-export default async function Page({ params: { city, lt } }: Props) {
+export default async function Page({
+  params: { city, lt },
+  searchParams,
+}: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}`;
-  const serverData = await (await getSearchData()).results;
+  let serverData = null;
+  let frontendFilters = null;
+  if (searchParams.sf) {
+    const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+    frontendFilters = parseProjectSearchQueryParams(searchParams.sf);
+    const isProj = frontendFilters.listedBy ? false : true;
+    // eslint-disable-next-line no-unused-vars
+    const data = isProj
+      ? await getProjSearchData(apiFilters ?? "")
+      : await getListingData(apiFilters ?? "");
+    serverData = data.results;
+  } else {
+    serverData = await (await getSearchData()).results;
+    frontendFilters = {
+      listedBy: null,
+    };
+  }
   return (
     <NewSearchPage
       pageUrl={pathname}
-      frontendFilters={{}}
       serverData={serverData}
+      frontendFilters={frontendFilters}
+      preDefinedFilters={searchParams.sf}
     />
   );
 }

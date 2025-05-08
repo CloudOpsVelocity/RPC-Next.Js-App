@@ -17,9 +17,9 @@ export default function ListingMainSection({
   serverData,
   preDefinedFilters,
 }: Props) {
-  const setStore = useSetAtom(projSearchStore);
+  // const setStore = useSetAtom(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
-  const shouldHydrate = apiFilterQueryParams !== preDefinedFilters;
+  // const shouldHydrate = apiFilterQueryParams !== preDefinedFilters;
   // useHydrateAtoms(hydrationValues as any);
   // useEffect(() => {
   //   // if (shouldHydrate) {
@@ -58,8 +58,8 @@ export default function ListingMainSection({
         serverData={serverData}
         frontendFilters={frontendFilters}
         isTrue={isTrue}
-        apiFilterQueryParams={apiFilterQueryParams}
         setIsTrue={setIsTrue}
+        apiFilterQueryParams={apiFilterQueryParams}
         preDefinedFilters={preDefinedFilters}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
