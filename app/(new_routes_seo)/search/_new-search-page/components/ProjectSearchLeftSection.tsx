@@ -60,7 +60,6 @@ function LeftSection({
     hasNextPage,
     fetchNextPage,
     refetch,
-    isFetchedAfterMount,
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
