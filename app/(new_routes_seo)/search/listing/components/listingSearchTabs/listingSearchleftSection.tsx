@@ -136,7 +136,7 @@ function LeftSection({
   const dataToUse =
     apiFilterQueryParams === preDefinedFilters || typeof window === "undefined"
       ? mainData
-      : data && data?.pageParams?.length > 0
+      : data?.pages.flat()
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
