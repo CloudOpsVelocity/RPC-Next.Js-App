@@ -245,7 +245,7 @@ function LeftSection({
            <div
              className={
                typeof window !== "undefined"
-                 ? "absolute  overflow-hidden invisible"
+                 ? " invisible"
                  : ""
              }
              aria-hidden={typeof window !== "undefined" ? "true" : undefined}

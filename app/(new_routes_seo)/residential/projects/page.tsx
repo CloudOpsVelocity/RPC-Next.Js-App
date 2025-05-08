@@ -33,9 +33,12 @@ export default async function Page({
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
   } else {
-    serverData = await (await getSearchData()).results;
+    const data = await getSearchData();
+    serverData = await data.results;
     frontendFilters = {
       listedBy: null,
+      currentPage: 0,
+      totalCount: data.totalCount,
     };
   }
   return (
