@@ -120,7 +120,7 @@ function Footer() {
       title: "Our Pages",
       links: [
         "Home",
-        "Projects",
+        "Residential Projects",
         "Properties",
         session !== undefined &&
         session !== null &&
