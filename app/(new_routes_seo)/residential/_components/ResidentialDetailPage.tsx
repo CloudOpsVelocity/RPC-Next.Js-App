@@ -214,7 +214,7 @@ export default function ResidentialPage({
           Discover{" "}
           <Link
             href="https://www.getrightproperty.com/residential"
-            target="_blank"
+         
             rel="noopener noreferrer"
             className="text-blue-600 underline hover:text-blue-800 hover:cursor-pointer"
           >
@@ -227,7 +227,7 @@ export default function ResidentialPage({
         Explore a curated selection of{" "}
           <Link
             href="https://www.getrightproperty.com/residential"
-            target="_blank"
+         
             rel="noopener noreferrer"
             className="text-blue-600 underline hover:text-blue-800 hover:cursor-pointer"
           >
@@ -238,14 +238,14 @@ export default function ResidentialPage({
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
         Browse curated{" "}
-          <Link href="https://www.getrightproperty.com/residential-listings" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          <Link href="https://www.getrightproperty.com/residential-listings"  rel="noopener noreferrer" className="text-blue-600 underline">
           residential-listings
           </Link>{" "}
           featuring <strong>ready-to-move-in homes</strong>, <strong>under-construction apartments</strong>, and <strong>villas</strong> in top Indian cities.
         </p>
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
-          Find the best  <Link href="https://www.getrightproperty.com/residential-listings/for-sale" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          Find the best  <Link href="https://www.getrightproperty.com/residential-listings/for-sale"  rel="noopener noreferrer" className="text-blue-600 underline">
           residential listings for sale
           </Link>{" "}  including apartments, villas, and plots in top localities. Browse verified properties with transparent pricing, location insights, and easy inquiry options.
 
@@ -253,7 +253,7 @@ export default function ResidentialPage({
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
         Explore top {" "}
-          <Link href="https://www.getrightproperty.com/residential-listings/for-rent" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          <Link href="https://www.getrightproperty.com/residential-listings/for-rent"  rel="noopener noreferrer" className="text-blue-600 underline">
         residential listings for rent
           </Link>{" "}
           including <strong>flats</strong>, <strong>villas</strong>, and <strong>independent houses</strong> in major cities.
@@ -262,7 +262,7 @@ export default function ResidentialPage({
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
         Easily access your {" "}
-          <Link href="https://www.getrightproperty.com/your-profile/shortlisted" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          <Link href="https://www.getrightproperty.com/your-profile/shortlisted"  rel="noopener noreferrer" className="text-blue-600 underline">
           shortlisted properties
           </Link>{" "}
           to compare and review your saved homes in one place. Track your favorite listings, revisit project details, and make informed decisions faster
@@ -270,7 +270,7 @@ export default function ResidentialPage({
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
         Use the{" "}
-          <Link href="https://www.getrightproperty.com/your-profile/compare" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          <Link href="https://www.getrightproperty.com/your-profile/compare"  rel="noopener noreferrer" className="text-blue-600 underline">
           property comparison tool
           </Link>{" "}
           to evaluate multiple listings side by side. Compare pricing, amenities, location, builder reputation, and more to find the perfect home that meets your needs.
@@ -278,7 +278,7 @@ export default function ResidentialPage({
 
         <p className="text-base md:text-lg text-gray-600 mb-4">
           Get expert insights on property buying, selling, and renting through our {" "}
-          <Link href="https://www.getrightproperty.com/your-profile/question-and-answers" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          <Link href="https://www.getrightproperty.com/your-profile/question-and-answers"  rel="noopener noreferrer" className="text-blue-600 underline">
           question and answers
           </Link>{" "}section. Ask real estate queries, explore community discussions, and make informed decisions.
         </p>
