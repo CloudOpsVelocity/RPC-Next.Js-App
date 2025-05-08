@@ -26,7 +26,7 @@ export default function ServerDataSection({
 
   const listedBy = useCallback(() => {
     if (state.listedBy === undefined) {
-      return frontendFilters?.listedBy;
+      return frontendFilters?.listedBy; 
     }
     return state.listedBy === frontendFilters.listedBy
       ? frontendFilters.listedBy

@@ -82,7 +82,7 @@ export default function LeftSection({
             sizes="(max-width: 460px) 100vw, (max-width: 768px) 50vw, 257px"
           />
         </div>
-      </Link>
+      </Link> 
 
       {/* <div>
         

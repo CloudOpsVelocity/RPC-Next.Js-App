@@ -12,6 +12,7 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import PopupOverlay from "./searchCradComponents/PopupOverlay";
 
 type Props = {
   data: any;
@@ -30,6 +31,7 @@ export default function ListingServerCardData({
 }: Props) {
 
   const [selectedCard, setSelectedCard] = useState({compareAdded:"N", shortListed:"N"});
+  const [popupState, setPopupState] = useState({ isOpen: false, type: "", title:"", data: {}, content:"" });
 
   const [stateData, setStateData] = useState({
       compareAdded: selectedCard.compareAdded === "Y" ? true : false,
@@ -40,7 +42,7 @@ export default function ListingServerCardData({
   const setNearby = useSetAtom(selectedNearByAtom);
   const setSelected = useSetAtom(selectedSearchAtom);
   const { data: session } = useSession();
-  const { toggleShortlist, toggleCompare } = useShortlistAndCompare();
+  const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openLogin }] = usePopShortList();
 
   const newData = {
@@ -49,7 +51,7 @@ export default function ListingServerCardData({
     Sh: stateData.shortListed,
   };
 
-  console.log(newData)
+  // console.log(newData)
 
   const cg = useMemo(() => {
     if (state.cg === undefined) {
@@ -68,12 +70,13 @@ export default function ListingServerCardData({
   }, [state, frontendFilters]);
 
   const onAddingShortList = (selectedItem:any) => {
+    const {projIdEnc, propIdEnc, type} = selectedItem;
     if (session) {
       setStateData({ ...stateData, shortListed: !stateData.shortListed });
       toggleShortlist({
-        id: selectedItem.reqId,
+        id: type === "proj" ? projIdEnc : propIdEnc,
         status: stateData.shortListed ? "N" : "Y",
-        source: selectedItem.type,
+        source: type,
       });
     } else {
       openLogin(() => refetch());
@@ -145,25 +148,77 @@ export default function ListingServerCardData({
     });
   };
 
-    const [opened, { open, close }] = useReqCallPopup();
-  
+  const [,{ open }] = useReqCallPopup();
 
-  const handleOpen = () => {
+  const handleOpen = (data:any) => {
+    const {
+      type, propTypeName, builderName, postedBy, builderId, postedById, 
+      projName, bhkName, localityName, category, projIdEnc, propIdEnc,
+    } = data;
       preventBackButton();
       open({
         modal_type:
           type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
-        postedByName: type === "proj" ? data.builderName : data.postedBy,
-        postedId: type === "proj" ? data.builderId : data.postedById,
-        reqId: reqId,
+        postedByName: type === "proj" ? builderName : postedBy,
+        postedId: type === "proj" ? builderId : postedById,
+        reqId: type === "proj" ? projIdEnc : propIdEnc,
         source: type === "proj" ? "projCard" : "propCard",
         title:
           type === "proj"
             ? projName
             : `${bhkName ?? ""} ${propTypeName} for
-        ${data.category === "Rent" ? "Rent" : "Sale"} in ${localityName}`,
+        ${category === "Rent" ? "Rent" : "Sale"} in ${localityName}`,
       });
-    };
+  };
+
+  const handleAgentOwner = (projIdEnc:string, projName:string, type: "A" | "I" | "B") => {
+    window.open(
+      `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
+      "_self"
+    );
+  };
+
+  const onSetNearBy = (data:any) => {
+    const {lat, lang, type, propIdEnc, projIdEnc, propType, propTypeName, propName, projName, phaseId} = data;
+    setIsMapLoaded(true);
+    setNearby((prev: any) => ({
+      ...prev,
+      category: "",
+      data: {},
+      selectedNearbyItem: {},
+      id: "",
+      isOpen: false,
+      isLoader: true,
+    }));
+    setSelected({
+      lat,
+      lang,
+      type,
+      reqId: !propIdEnc ? projIdEnc : propIdEnc,
+      propType: !propIdEnc ? propType : propTypeName,
+      projOrPropName: propName ? propName : projName,
+      phaseId: phaseId ? phaseId : "",
+    });
+  };
+
+  const handleDownload = (data:any) => {
+    const {brochureUrl} = data;
+    if (session) {
+      brochureUrl &&
+        window.open(
+          `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
+          "_self"
+        );
+    } else {
+      openLogin(() => {
+        brochureUrl &&
+          window.open(
+            `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
+            "_self"
+          );
+      });
+    }
+  };
 
   const handleClick = (e: any) => {
     const cardEl = e.target.closest('[data-type="card"]');
@@ -172,47 +227,59 @@ export default function ListingServerCardData({
     const cardId = cardEl.dataset.id;
     const actionButton = e.target.closest('[data-action]');
     const index = cardId ? cardId.split("_")[1] : 0;
-    const selectedItem = data[index];
-    setSelectedCard(selectedItem);
-    // if (cardId){ console.log('Clicked card ID:', cardId)}
-  
+    const selectedItem:any = data[index];
+    setSelectedCard(selectedItem);  
     const action = actionButton?.dataset.action;
 
     console.log(selectedItem);
 
     switch(action){
-      case 'readMore':
-        console.log('Read More card: ', index);
-        break;
+      case 'readmore':
+        setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"Read More", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
+        break; 
       case 'like':
         onAddingShortList(selectedItem);
-        console.log('like card: ', index);
         break;
       case 'share':
         shearPropOrProj(selectedItem);
-        console.log('share card: ', index);
         break;
       case 'viewMap':
         onViewMap(selectedItem)
-        console.log('view Map card: ', index);
         break;
       case 'requestCall':
-        console.log('Read More card: ', index);
         handleOpen(selectedItem)
         break;
-
-
+      case 'brochure':
+        console.log('brochure card: ', index);
+        handleDownload(selectedItem);
+        break;
+      case 'nearby':
+        setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: selectedItem}));
+        // onSetNearBy(selectedItem);
+        break;
+      case 'amenities':
+        setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: selectedItem}));
+        break;
+      case 'listingType':
+        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, selectedItem.type);
+        break;
 
       default:
         console.log('Card clicked:', cardId);
+        window.open(selectedItem.pageUrl, "_self", "noreferrer");
     }
-  }
+  };
 
-  console.log(data)
+  const closePopup = () => {
+    setPopupState(prev => ({...prev, isOpen: false, type: '', title:"", data: {}}));
+  };
 
   return(
     <div onClick={handleClick}>
       {/* <SearchCard data={data[0]} index={0}  /> */}
+      {popupState.isOpen &&
+        <PopupOverlay popupState={popupState} closePopup={closePopup} />
+      }
 
       {data.map((eachOne: any, index: number) => (
       <SearchCard

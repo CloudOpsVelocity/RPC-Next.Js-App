@@ -7,6 +7,8 @@ export interface TopLeftSectionData {
     possassionDate: string;
     propStatus: string;
     propTypeName: string;
+    pageUrl: string;
+    rerastatus: string;
 } 
 
 // export interface TopRightSectionData {
@@ -100,6 +102,8 @@ type RawTopLeftData = Partial<TopLeftSectionData> & {
     possassionDate: rawData.possassionDate ?? "",
     propStatus: rawData.propStatus ?? "",
     propTypeName: rawData.propTypeName ?? "",
+    pageUrl: rawData.pageUrl ?? "",
+    rerastatus: rawData.rerastatus ?? "",
 });
 
 // export const sanitizeTopRightSectionData = (rawData: Partial<Record<keyof TopRightSectionData, any>>): TopRightSectionData => ({

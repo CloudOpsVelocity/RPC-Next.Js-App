@@ -5,11 +5,13 @@ import SearchCradBottomSection from './SearchCradBottomSection';
 import { sanitizeTopLeftSectionData, 
   // sanitizeTopRightSectionData, sanitizeApprovedNamesSectionData,
 } from './searchData';
+import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
+import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
 
 type Props = {
   data?:any; 
   refetch?:any; 
-  index?: number;
+  index: number;
   mutate?:any;
 }
 
@@ -19,22 +21,41 @@ function SearchCard({
 }: Props) {
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   // const topSectionRightData = sanitizeTopRightSectionData(data);
-  
+
+    let url =
+      data.type == "proj"
+        ? createProjectLinkUrl({
+            city: data.city,
+            locality: data.locality,
+            slug: data.projName,
+            projIdEnc: data.projIdEnc,
+          })
+        : generateListingLinkUrl({
+            city: data.cityName,
+            locality: data.localityName,
+            projName: data.projIdEnc ? data.propName : null,
+            category: data.category === "Sale" ? "for-sale" : "for-rent",
+            phase: data.phaseName,
+            propIdEnc: data.propIdEnc,
+            bhkUnitType: data.bhkName
+              ? `${data.bhkName + " " + data.propTypeName}`
+              : "" + " " + data.propTypeName,
+          });
 
   // console.log(data);
   return (
     <div className={Styles.searchCradMainCon} data-id={`searchCard_${index.toString()}`} data-type="card">
       {/* Top sectiom */}
       <div className={Styles.searchCradTopSection}>
-        <ImageBlock data={topSectionLeftData} />
+        <ImageBlock data={{ ...topSectionLeftData, pageUrl: url }}  />
         <RightSideBlock 
           // data={topSectionRightData} 
-          data={data}
+          data={{ ...data, pageUrl: url }}
         />
       </div>
 
       {/* Bottom section */}
-      <SearchCradBottomSection data={data}  />
+      <SearchCradBottomSection data={data} index={index.toString()}  />
     </div>
   )
 }

@@ -104,7 +104,7 @@ function getQueryConfig(
 async function getNearByLocations(
   id: string,
   type: string,
-  lat?: number,
+  lat?: number, 
   lang?: number
 ) {
   try {
@@ -122,7 +122,7 @@ async function getNearByLocations(
   }
 }
 
-async function getAmenties(id: string, type: string, propId?: string) {
+export async function getAmenties(id: string, type: string, propId?: string) {
   try {
     const res = await fetch(
       `${

@@ -40,7 +40,6 @@ const ListingDownSectionCard = ({
 function SearchCardTopCornerSection({topCornerRightData}: Props) {
     const {category, type, basePrice, sqftPrice, floorPlan, Sh, brochureUrl, amenCount, propTypeName, atFloor, facing, towerName} = topCornerRightData;
     const isMobile = useMediaQuery("(max-width: 1600px)");
-    console.log(topCornerRightData)
     return (
       <div className={Styles.searchCardTopCornerMainCon}>
 
@@ -181,6 +180,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                     {" "}
                     {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
                     <button
+                      data-action="brochure"
                       // onClick={handleDownload}
                       className={Styles.searchCardbroucherBtn}
                     >
@@ -188,6 +188,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                       Brochure
                     </button>
                     <button
+                      data-action="amenities"
                       title={`Click to view ${
                         amenCount === 1 ? "" : "all"
                       } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
@@ -206,6 +207,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                       {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
                     </button>
                     <button
+                      data-action="nearby"
                       className={Styles.nearByBtn}
                       title="Click to view all Near by Locations"
                       // onClick={() => {
@@ -385,6 +387,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                 <div className={Styles.broucherAndAmenityButton}>
                   {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
                   <button
+                    data-action="brochure"
                     // onClick={handleDownload}
                     className={Styles.searchCardbroucherBtn}
                   >
@@ -393,6 +396,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                   </button>
                   {amenCount && (
                     <button
+                      data-action="amenities"
                       className={Styles.amenityBtn}
                       title={`Click to view ${
                         amenCount === 1 ? "" : "all"
@@ -415,6 +419,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                   )}
         
                   <button
+                    data-action="nearby"
                     className={Styles.nearByBtn}
                     title="Click to view all Near by Locations"
                     // onClick={() => {

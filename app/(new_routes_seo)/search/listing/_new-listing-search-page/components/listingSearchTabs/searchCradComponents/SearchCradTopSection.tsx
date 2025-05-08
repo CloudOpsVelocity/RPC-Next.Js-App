@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { formatDateDDMMYYYY } from '@/app/utils/date';
 import { formatCurrency } from '@/app/utils/numbers';
 import { 
-  sanitizeApprovedNamesSectionData, sanitizetopCornerRightSectionData, topCornerRightSectionData, TopLeftSectionData, TopRightSectionData 
+  sanitizeApprovedNamesSectionData, sanitizetopCornerRightSectionData,  TopLeftSectionData, 
+  // TopRightSectionData, topCornerRightSectionData,
 
 } from './searchData';
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import { generateBuilderUrl } from '@/app/utils/linkRouters/Builder';
 import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
 import SearchCardApprovedNames from './SearchCardApprovedNames';
 import SearchCardTopCornerSection from './SearchCardTopCornerSection';
+import { isReraverified } from '@/app/utils/dyanamic/projects';
 
 interface SearchCardTopSectionLProps {
   data: TopLeftSectionData;
@@ -22,24 +24,32 @@ interface SearchCardTopSectionRProps {
   data:any
 }
 
+const Rera = () => {
+  return (
+    <Image 
+      className={Styles.searchCradReraImage} 
+      src={"/r.svg"} alt="rera" width={100} height={100} 
+    />
+  );
+};
+
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data }) => {
-  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName} = data
-    
+  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus} = data
+  const verified = isReraverified(rerastatus);
   return(
     <div className={Styles.searchCradTopImageBox}>
-        <Image
-          src={src.includes("+") ? src.replace(/\+/g, "%2B") : src}
-          width={300}
-          height={300}
-          alt={projName}
-          title={projName}
-          className={Styles.searchCradImage} 
-        />
+        <Link prefetch={false} href={pageUrl}>
+          <Image
+            src={src.includes("+") ? src.replace(/\+/g, "%2B") : src}
+            width={300}
+            height={300}
+            alt={projName}
+            title={projName}
+            className={Styles.searchCradImage}  
+          />
+        </Link>
 
-        <Image 
-          className={Styles.searchCradReraImage} 
-          src={"/r.svg"} alt="rera" width={100} height={100} 
-        />
+        {verified && <Rera />}
         
         {((projstatus || propTypeName)) && (
           <p style={{ bottom: "32px" }} className={Styles.projStatusonImage}>
@@ -60,7 +70,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
   const {
     projName, phaseName, phaseCount, minPrice, maxPrice, sortedBhks, propType, cg, 
     city, locality, postedByName, builderCity, cityName, projIdEnc, localityName, 
-    propName, address, postedBy, type, otherCharges, category, propTypeName, bhkName,
+    propName, address, postedBy, type, otherCharges, category, propTypeName, bhkName, pageUrl,
     price, usp, projectAbout,
   } = data;
 
@@ -85,7 +95,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
   const approvedNamesData = sanitizeApprovedNamesSectionData(data);
   const topCornerRightData = sanitizetopCornerRightSectionData(data); 
   
-  console.log(topCornerRightData);
+  // console.log(topCornerRightData);
   
   return( 
     <div className={Styles.searchCradTopRightBox}>
@@ -93,58 +103,60 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
 
       {type === "proj" ? 
         <>
-          <h2>
-              <span className={Styles.searchCardPromName}>
-                {projName}{" "}
-                {phaseName && phaseCount !== undefined && phaseCount > 1 && ( 
-                  <span className={Styles.searchCardPhaseName}>({phaseName})</span>
-                )}
-              </span>
-          
-              <span className={Styles.searchCardPromNameSpan}>
-                Price Range: {formatCurrency(Number(minPrice))} -{" "}
-                {formatCurrency(Number(maxPrice))} 
-              </span>
-          
-              <span
-                className={Styles.searchCardProjNameType}
-              >
-                <span>
-                  {sortedBhks && sortedBhks.length > 5
-                    ? sortedBhks
-                        .filter(
-                          (bhk:any) => !bhk.includes(".5") && !bhk.includes("Servant")
-                        )
-                        .slice(0, 5)
-                        .join(", ")
-                    : sortedBhks && sortedBhks.join(", ")}
+          <Link href={pageUrl} prefetch={false}>
+            <h2>
+                <span className={Styles.searchCardPromName}>
+                  {projName}{" "}
+                  {phaseName && phaseCount !== undefined && phaseCount > 1 && ( 
+                    <span className={Styles.searchCardPhaseName}>({phaseName})</span> 
+                  )}
                 </span>
-                {sortedBhks && sortedBhks.length > 5 && (
-                  <span
-                    className={Styles.searchCardSortedBhks}
-                    // onClick={(e) => {
-                    //   e.stopPropagation();
-                    //   dispatch({
-                    //     type: "OPEN",
-                    //     content: sortedBhks,
-                    //     title: "Unit Types",
-                    //     id: `${
-                    //       type === "proj" ? projIdEnc : propIdEnc
-                    //     }+${propTypeId}+${phaseId}`,
-                    //     conType: "bhk",
-                    //     pType: type,
-                    //   });
-                    //   // Add your logic here to show all BHK types (e.g., open a modal)
-                    // }}
-                  >
-                    +{sortedBhks.length - 5} more
+            
+                <span className={Styles.searchCardPromNameSpan}>
+                  Price Range: {formatCurrency(Number(minPrice))} -{" "}
+                  {formatCurrency(Number(maxPrice))} 
+                </span>
+            
+                <span
+                  className={Styles.searchCardProjNameType}
+                >
+                  <span>
+                    {sortedBhks && sortedBhks.length > 5
+                      ? sortedBhks
+                          .filter(
+                            (bhk:any) => !bhk.includes(".5") && !bhk.includes("Servant")
+                          )
+                          .slice(0, 5)
+                          .join(", ")
+                      : sortedBhks && sortedBhks.join(", ")}
                   </span>
-                )}
-                {` ${propType} For ${
-                  cg === "R" ? "Rent" : "Sale"
-                } in ${locality}, ${city}`}
-              </span>
-          </h2>
+                  {sortedBhks && sortedBhks.length > 5 && (
+                    <span
+                      className={Styles.searchCardSortedBhks}
+                      // onClick={(e) => {
+                      //   e.stopPropagation();
+                      //   dispatch({
+                      //     type: "OPEN",
+                      //     content: sortedBhks,
+                      //     title: "Unit Types",
+                      //     id: `${
+                      //       type === "proj" ? projIdEnc : propIdEnc
+                      //     }+${propTypeId}+${phaseId}`,
+                      //     conType: "bhk",
+                      //     pType: type,
+                      //   });
+                      //   // Add your logic here to show all BHK types (e.g., open a modal)
+                      // }}
+                    >
+                      +{sortedBhks.length - 5} more
+                    </span>
+                  )}
+                  {` ${propType} For ${
+                    cg === "R" ? "Rent" : "Sale"
+                  } in ${locality}, ${city}`}
+                </span>
+            </h2>
+          </Link>
           <p className={Styles.searchCardAddress}>
             Address: {address}
           </p>
@@ -167,11 +179,11 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
         </>
       :
       <>
-        {/* <Link href={pageUrl} prefetch={false}> */}
-          <h2 className={Styles.searchCardPromName}>
-            {bhkName} {propTypeName} for {category} in {localityName}
-          </h2>
-          {/* </Link> */}
+          <Link href={pageUrl} prefetch={false}>
+            <h2 className={Styles.searchCardPromName}>
+              {bhkName} {propTypeName} for {category} in {localityName}
+            </h2>
+          </Link>
           <p className={Styles.searchCardPromNameSpan}>
             {formatCurrency(Number(price))}{" "}
             {(otherCharges?.otherCharge ||
@@ -277,7 +289,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
                   //     pType: type,
                   //   });
                   // }}
-                  data-action="readMore"
+                  data-action="readmore"
                 >
                   <span className="text-black">...</span>Read More
                 </button>

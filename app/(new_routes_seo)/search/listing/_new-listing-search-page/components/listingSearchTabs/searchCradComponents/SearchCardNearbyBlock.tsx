@@ -1,19 +1,16 @@
 /* eslint-disable no-unused-vars */
 "use client";
-import React, { useState, useCallback, useMemo, Fragment } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { Coordinates } from "@/app/utils/maps";
 import { useMediaQuery } from "@mantine/hooks";
 import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import dynamic from "next/dynamic";
-import MapSkeleton from "../../maps/Skeleton";
-import PropertyHeading from "../../property/heading";
 import { useSetAtom } from "jotai";
-import { isScrollingAtom } from "../navigation";
-import CustomScrollArea from "./ScrollPanel";
-import { isScrollingAtom as propScrollingAtom } from "../../property/Navigation";
-import SubHeading from "../headings/SubHeading";
-import { areas } from "./data";
-import Image from "next/image";
+import { isScrollingAtom as propScrollingAtom } from "@/app/components/property/Navigation";
+import MapSkeleton from "@/app/components/maps/Skeleton";
+import { isScrollingAtom } from "@/app/components/project/navigation";
+import { areas } from "@/app/data/map";
+import CustomScrollArea from "@/app/components/project/map/ScrollPanel";
 
 export interface Area {
   name: string;
@@ -25,7 +22,7 @@ export interface Area {
   type?: "proj" | "prop";
 } 
 
-const LeafMap: React.FC<{
+const SearchCardNearbyBlock: React.FC<{
   lat: string;
   lang: string;
   projName: string;
@@ -33,7 +30,6 @@ const LeafMap: React.FC<{
   projId?: string;
   mapData: any;
 }> = ({ lat, lang, projName, type, mapData }) => {
-  //console.log(projName)
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps"), {
@@ -60,47 +56,8 @@ const LeafMap: React.FC<{
     },
     []
   );
-  const [showMap, setShowMap] = useState(false);
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
-
-  const LocationHeader = ({
-    projName,
-    type,
-  }: {
-    projName: string;
-    type?: "proj" | "prop";
-  }) => {
-    return (
-      <div>
-        {type === "prop" ? (
-          <PropertyHeading
-            title={
-              <Fragment>
-                Location Map Of{" "}
-                <span className="text-green-800">{projName}</span>
-              </Fragment>
-            }
-            desc="Explore nearby convenient amenities, entertainment, and essential services"
-            className="sm:mb-[18px]"
-          />
-        ) : (
-          <div>
-            <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words ">
-              <strong>
-                <span className="text-[#001F35]">Location Map Of </span>
-                <span className="text-green-800">{projName}</span>
-              </strong>
-            </h2>
-            <SubHeading
-              text="Explore nearby convenient amenities, entertainment, and essential services"
-              className="mt-2 mb-4 sm:mb-8"
-            />
-          </div>
-        )}
-      </div>
-    );
-  };
 
   const downData =
     mapData && mapData[selected] && mapData[selected].length > 0
@@ -111,69 +68,7 @@ const LeafMap: React.FC<{
       className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
       id="location-map"
     >
-      <div className="w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
-        <LocationHeader projName={projName} type={type} />
-      </div>
-
-      {!showMap ? (
-        <div
-          //id="location-map"
-          className="h-[291px] sm:h-[486px] xl:h-[700px] max-w-full w-full relative "
-        >
-          <div
-            //  onClick={() => setShowMap(true)}
-            className="absolute inset-0 cursor-pointer bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0"
-          >
-            <picture>
-              <source
-                media="(max-width: 460px)"
-                srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/phone-default-map.webp`}
-              />
-              <source
-                media="(max-width: 768px)"
-                srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/default-map-laptop.webp`}
-              />
-              <source
-                media="(min-width: 1200px)"
-                srcSet={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
-              />
-
-              {/* <Image
-                alt={projName}
-                title={projName}
-                src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`}
-                fill
-                className={`bg-gray-`}
-                unoptimized
-              /> */}
-
-              <img
-                alt={projName}
-                title={projName}
-                src={`https://media.getrightproperty.com/staticmedia-images-icons/project-detail/desktop-default-map.webp`} // fallback image
-                width={1820}
-                height={700}
-                className={`h-full bg-gray-`}
-                loading="lazy"
-              />
-            </picture>
-          </div>
-          <div
-            onClick={() => setShowMap(true)}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <button
-              aria-label="Click to View Location Details" name="Click to View Location Details" title="Click to View Location Details"
-              onClick={() => setShowMap(true)}
-              className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
-            >
-              <span className="text-lg font-semibold">
-                Click to View Location Details
-              </span>
-            </button>
-          </div>
-        </div>
-      ) : Object.keys(mapData).length > 0 ? (
+      {Object.keys(mapData).length > 0 ? (
         <div
           className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
           id="location-map"
@@ -283,23 +178,6 @@ const LeafMap: React.FC<{
           id="location-map"
           className="w-[95%] md:w-[90%] scroll-mt-[180px] sm:mt-[20px] xl:mt-[50px] justify-center"
         >
-          <div className="flex justify-between w-[90%]">
-            {type === "prop" ? (
-              <PropertyHeading
-                title=""
-                desc=""
-                className="mb-[40px]"
-                projName={`Location Map Of  ${projName}`}
-              />
-            ) : (
-              <div>
-                <h2 className="sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap">
-                  <span>Location Map Of Project </span>
-                  <span className="text-[#148B16] ">{projName} </span>
-                </h2>
-              </div>
-            )}
-          </div>
           <Map
             // key="leaflet3SearchPageMap"
             data={mapData && mapData[selected] ? mapData[selected] : []}
@@ -317,7 +195,7 @@ const LeafMap: React.FC<{
   );
 };
 
-export default LeafMap;
+export default SearchCardNearbyBlock;
 
 const MapCard = ({
   name,
@@ -328,6 +206,7 @@ const MapCard = ({
   time,
   type,
 }: any) => {
+
   const setIsScrolling = useSetAtom(
     type === "prop" ? propScrollingAtom : isScrollingAtom
   );
