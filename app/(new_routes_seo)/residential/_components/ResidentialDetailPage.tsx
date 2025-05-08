@@ -131,6 +131,9 @@ export default function ResidentialPage({
           makes it simple to own the home you deserve.
         </p>
       </section>
+
+
+
       {/*    <Banner heroSlides={data?.featured} data={data} /> */}
       <Filters />
       <ResidentialCardSection
@@ -204,6 +207,91 @@ export default function ResidentialPage({
               </div>
             </div>
           </section>
+     {/** seto nagaivations interlinks of pages -below*/}
+                  
+     <section className="px-4 md:px-12 py-8 max-w-screen-xl mx-auto">
+        <h2 className="text-2xl md:text-4xl font-bold mb-6 text-gray-800">
+          Discover{" "}
+          <Link
+            href="https://www.getrightproperty.com/residential"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800 hover:cursor-pointer"
+          >
+            <strong>Residential Projects</strong>
+          </Link>{" "}
+          Across Top Locations in India
+        </h2>
+
+        <p className="text-base md:text-lg text-gray-600 mb-4">
+        Explore a curated selection of{" "}
+          <Link
+            href="https://www.getrightproperty.com/residential"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800 hover:cursor-pointer"
+          >
+            residential properties in Bengaluru
+          </Link>{" "}, including premium apartments, luxurious villas, and affordable flats, tailored to meet diverse lifestyle and investment needs
+        
+        </p>
+
+        <p className="text-base md:text-lg text-gray-600 mb-4">
+        Browse curated{" "}
+          <Link href="https://www.getrightproperty.com/residential-listings" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          residential-listings
+          </Link>{" "}
+          featuring <strong>ready-to-move-in homes</strong>, <strong>under-construction apartments</strong>, and <strong>villas</strong> in top Indian cities.
+        </p>
+
+        <p className="text-base md:text-lg text-gray-600 mb-4">
+          Find the best  <Link href="https://www.getrightproperty.com/residential-listings/for-sale" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          residential listings for sale
+          </Link>{" "}  including apartments, villas, and plots in top localities. Browse verified properties with transparent pricing, location insights, and easy inquiry options.
+
+        </p>
+
+        <p className="text-base md:text-lg text-gray-600 mb-4">
+        Explore top {" "}
+          <Link href="https://www.getrightproperty.com/residential-listings/for-rent" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+        residential listings for rent
+          </Link>{" "}
+          including <strong>flats</strong>, <strong>villas</strong>, and <strong>independent houses</strong> in major cities.
+          Find rental homes with flexible lease terms, verified photos, and detailed locality information.
+        </p>
+
+        <p className="text-base md:text-lg text-gray-600 mb-4">
+        Easily access your {" "}
+          <Link href="https://www.getrightproperty.com/your-profile/shortlisted" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          shortlisted properties
+          </Link>{" "}
+          to compare and review your saved homes in one place. Track your favorite listings, revisit project details, and make informed decisions faster
+        </p>
+
+        <p className="text-base md:text-lg text-gray-600 mb-4">
+        Use the{" "}
+          <Link href="https://www.getrightproperty.com/your-profile/compare" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          property comparison tool
+          </Link>{" "}
+          to evaluate multiple listings side by side. Compare pricing, amenities, location, builder reputation, and more to find the perfect home that meets your needs.
+        </p>
+
+        <p className="text-base md:text-lg text-gray-600 mb-4">
+          Get expert insights on property buying, selling, and renting through our {" "}
+          <Link href="https://www.getrightproperty.com/your-profile/question-and-answers" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          question and answers
+          </Link>{" "}section. Ask real estate queries, explore community discussions, and make informed decisions.
+        </p>
+
+        <p className="text-base md:text-lg text-gray-600">
+          Quickly find your dream{" "}
+          <Link href="https://www.getrightproperty.com/search" rel="noopener noreferrer" className="text-blue-600 underline">
+          property-search
+          </Link>{" "}
+          tool. Filter by city, budget, property type, and more to discover listings that match your exact requirements.
+        </p>
+      </section>
+             {/** seto nagaivations interlinks of pages above */}
           <section className="py-20 bg-muted/30">
             <div className="container mx-auto">
               <h2 className="text-3xl font-bold text-center mb-16">
