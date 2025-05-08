@@ -50,7 +50,7 @@ export default async function Page({
 
 const getSearchData = async () => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&cg=S`;
 
     const url = `${baseUrl}`;
 

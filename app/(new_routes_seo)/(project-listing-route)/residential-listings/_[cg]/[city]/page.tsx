@@ -53,7 +53,7 @@ export default async function Page({
     frontendFilters = parseApiFilterQueryParams(searchParams.sf);
   } else {
     const slugValues = extractListingParamsValues(values);
-    serverData = await getSearchData(`cg=${slugValues.CG}`);
+    serverData = await getSearchData( `cg=${slugValues.CG}${slugValues.PG ? `&page=${slugValues.PG}` : ""}`);
     frontendFilters = {
       cg: slugValues.CG,
       listedBy: null,

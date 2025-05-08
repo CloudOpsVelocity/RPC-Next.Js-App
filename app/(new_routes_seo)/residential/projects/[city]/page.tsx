@@ -2,7 +2,7 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
-import { findPathForProjectDetails } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
+import { extractProjectParamsValues, findPathForProjectDetails } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
@@ -27,6 +27,7 @@ export default async function Page({
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
+
   // const serverData = await (await getSearchData()).results;
   let serverData = null;
   let frontendFilters = null;
@@ -40,10 +41,12 @@ export default async function Page({
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
   } else {
-    serverData = await (await getSearchData()).results;
+     const filterValues = extractProjectParamsValues(value);
+    serverData = await (await getSearchData(filterValues.PG ? `page=${filterValues.PG}` : "page=0", )).results;
     frontendFilters = {
-      cg: value.CG,
+      cg: filterValues.CG,
       listedBy: null,
+      page: filterValues.PG,
     };
   }
   return (
@@ -95,10 +98,10 @@ export async function generateStaticParams() {
   }
   return slugs;
 }
-const getSearchData = async () => {
+const getSearchData = async (filters?: string) => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&cg=S`;
-    const url = `${baseUrl}`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?city=9&cg=S`;
+    const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
     const res = await fetch(url, {
       cache: "no-store",
     });

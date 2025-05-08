@@ -13,6 +13,7 @@ export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
+    console.log({apiFilters})
   const frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
   const isListing = frontendFilters.listedBy ? true : false;
   const data = !isListing
