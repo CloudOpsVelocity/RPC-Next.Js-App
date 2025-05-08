@@ -254,22 +254,14 @@ function LeftSection({
 
       {params.slugs.length< 4 ? (
         <div
-          className={
-            typeof window !== "undefined"
-              ? "invisible"
-              : ""
-          }
+          className={typeof window !== "undefined" ? "invisible" : ""}
           aria-hidden={typeof window !== "undefined" ? "true" : undefined}
         >
           <ListingSearchPagination
             currentPage={
               frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
             }
-            totalCount={
-             
-                 frontendFilters.totalCount ?? 0
-            
-            }
+            totalCount={frontendFilters.totalCount ?? 0}
           />
         </div>
       ) : null}

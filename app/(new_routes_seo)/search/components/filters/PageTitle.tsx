@@ -114,7 +114,7 @@ function PageTitle({ serverFilterData }: Props) {
         <p className="text-base md:text-lg text-gray-600 mb-4">
           Explore a diverse range of{" "}
           <Link
-            href="https://www.getrightproperty.com/residential-listings/for-sale"
+            href="https://www.getrightproperty.com/residential-listings/for-sale/bengaluru"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline"
@@ -129,7 +129,7 @@ function PageTitle({ serverFilterData }: Props) {
         <p className="text-base md:text-lg text-gray-600 mb-4">
          Explore a curated selection of{" "}
           <Link
-            href="https://www.getrightproperty.com/residential-listings/for-rent"
+            href="https://www.getrightproperty.com/residential-listings/for-rent/bengaluru"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 underline"
