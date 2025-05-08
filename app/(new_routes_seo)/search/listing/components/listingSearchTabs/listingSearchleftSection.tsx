@@ -243,7 +243,7 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
-      {hasNextPage && shouldFetchMore && (
+      { hasNextPage && shouldFetchMore && (
         <div
           ref={loadMoreRef}
           className="w-full py-8 flex justify-center items-center text-gray-600"
