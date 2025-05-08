@@ -4,6 +4,7 @@ import { useAtomValue } from "jotai";
 import { useParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { projSearchStore } from "../../../store/newSearchProjectStore";
+import Link from "next/link";
 
 type Props = {
   serverFilterData?: Record<string, any>;
@@ -106,7 +107,12 @@ function PageTitle({ serverFilterData }: Props) {
     return () => window.removeEventListener("click", handlePopState);
   }, []);
 
-  return !hideHeading ? (
+  const getParagraph = () => {
+  
+  };
+  return (
+    <div>
+     { !hideHeading ? (
     <div className=" text-[16px] md:text-[18px] ml-[8px] xl:text-[20px] mb-[6px] capitalize flex flex-wrap ">
       <span className="mr-[6px]">Search Results for</span>
       <h1 className="font-bold text-[16px] md:text-[18px] xl:text-[20px] ">
@@ -117,6 +123,10 @@ function PageTitle({ serverFilterData }: Props) {
     <h1 className="font-bold text-[16px] md:text-[18px] xl:text-[20px] mb-[6px] ml-[8px] capitalize flex gap-[6px]  ">
       Find your dream home, where comfort meets convenience.
     </h1>
+  )}
+    
+{/*       {getParagraph()} */}
+    </div>
   );
 }
 
