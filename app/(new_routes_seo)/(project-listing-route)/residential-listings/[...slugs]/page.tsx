@@ -99,7 +99,7 @@ export default async function Page({ params, searchParams }: Props) {
           phaseId: [`${params.slugs[5]}+${filtersValues.PH}`],
         }),
         listedBy: null,
-        currentPage: parseInt(filtersValues.PG),
+        currentPage: filtersValues.PG ? parseInt(filtersValues.PG) : null,
         totalCount: apiResData.totalCount,
       };
     } else {

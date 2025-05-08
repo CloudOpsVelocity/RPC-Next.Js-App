@@ -21,6 +21,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
 import ListingSearchPagination from "../../_new-listing-search-page/components/ListingSearchPagination";
+import { useParams, useSearchParams } from "next/navigation";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -48,6 +49,7 @@ function LeftSection({
   const [mainData, setMainData] = useState<any>(serverData || []);
   const [totalCount, setTotalCount] = useState(frontendFilters.totalCount);
   const isTrue = apiFilterQueryParams !== preDefinedFilters;
+  const params = useParams();
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
@@ -193,6 +195,7 @@ function LeftSection({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
+ 
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
@@ -249,7 +252,7 @@ function LeftSection({
         </div>
       )}
 
-      {true && (
+      { frontendFilters.currentPage !== null ? (
         <div
           className={
             typeof window !== "undefined"
@@ -269,7 +272,7 @@ function LeftSection({
             }
           />
         </div>
-      )}
+      ) : null}
       <LoginPopup />
       <RequestCallBackModal />
 
