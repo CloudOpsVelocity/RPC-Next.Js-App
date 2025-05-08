@@ -97,7 +97,7 @@ export async function generateStaticParams() {
 }
 const getSearchData = async () => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&cg=S`;
     const url = `${baseUrl}`;
     const res = await fetch(url, {
       cache: "no-store",
@@ -107,7 +107,6 @@ const getSearchData = async () => {
       throw new Error(`Error fetching data: ${res.statusText}`);
     }
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -115,5 +114,5 @@ const getSearchData = async () => {
     return null;
   }
 };
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
+// export const dynamic = "force-dynamic";
+// export const fetchCache = "force-no-store";

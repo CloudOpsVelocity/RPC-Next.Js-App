@@ -161,10 +161,12 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    apiFilterQueryParams !== preDefinedFilters ||
-    (data && data?.pageParams?.length > 0)
+    apiFilterQueryParams === preDefinedFilters || typeof window === "undefined"
+      ? mainData
+      : data && data?.pageParams?.length > 0
       ? data?.pages.flat()
       : mainData;
+
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">

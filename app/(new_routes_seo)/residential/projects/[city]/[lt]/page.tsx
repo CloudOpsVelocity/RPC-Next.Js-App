@@ -129,4 +129,4 @@ const getSearchData = async (locality: string) => {
   }
 };
 
-export const fetchCache = "force-no-store";
+// export const fetchCache = "force-no-store";

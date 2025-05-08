@@ -42,7 +42,6 @@ function LeftSection({
   preDefinedFilters,
   frontendFilters,
 }: Props) {
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
@@ -94,7 +93,6 @@ function LeftSection({
     // },
   });
 
-
   //console.log(typeof window !== "undefined" )
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -134,8 +132,9 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
   const dataToUse =
-    apiFilterQueryParams !== preDefinedFilters ||
-    (data && data?.pageParams?.length > 0)
+    apiFilterQueryParams === preDefinedFilters || typeof window === "undefined"
+      ? mainData
+      : data && data?.pageParams?.length > 0
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
@@ -250,30 +249,27 @@ function LeftSection({
         </div>
       )}
 
-
-
-
-      {true   && (
+      {true && (
         <div
-        className={
-          typeof window !== "undefined"
-            ? "absolute left-[-9999px] w-px h-px overflow-hidden invisible"
-            : ""
-        }
-        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
-      >
-        <ListingSearchPagination
-          currentPage={
-            frontendFilters.currentPage ? frontendFilters.currentPage : 1
+          className={
+            typeof window !== "undefined"
+              ? "absolute left-[-9999px] w-px h-px overflow-hidden invisible"
+              : ""
           }
-          totalCount={
-            isTrue
-              ? totalCount
-              : frontendFilters.totalCount
-              ? frontendFilters.totalCount
-              : 0
-          }
-        />
+          aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+        >
+          <ListingSearchPagination
+            currentPage={
+              frontendFilters.currentPage ? frontendFilters.currentPage : 1
+            }
+            totalCount={
+              isTrue
+                ? totalCount
+                : frontendFilters.totalCount
+                ? frontendFilters.totalCount
+                : 0
+            }
+          />
         </div>
       )}
       <LoginPopup />

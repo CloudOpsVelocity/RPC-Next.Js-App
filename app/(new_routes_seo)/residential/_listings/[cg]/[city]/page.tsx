@@ -37,6 +37,7 @@ export default async function Page({ params: { cg, city } }: Props) {
         cg: slugValues.CG,
         listedBy: "All",
       }}
+      preDefinedFilters={""}
       pageUrl={pageUrl}
     />
   );

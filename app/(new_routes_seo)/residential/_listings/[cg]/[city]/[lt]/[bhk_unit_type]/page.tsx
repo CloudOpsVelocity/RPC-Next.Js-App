@@ -77,6 +77,7 @@ export default async function Page({
         propType: parseInt(PT as string),
         cg: CG,
       }}
+      preDefinedFilters={""}
     />
   );
 }
