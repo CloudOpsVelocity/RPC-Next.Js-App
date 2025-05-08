@@ -253,7 +253,7 @@ function LeftSection({
                <ListingSearchPagination
                searchQueryParmeter
                  currentPage={
-                   frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
+                   frontendFilters.currentPage ? frontendFilters.currentPage  : 1
                  }
                  totalCount={frontendFilters.totalCount ?? 0}
                />

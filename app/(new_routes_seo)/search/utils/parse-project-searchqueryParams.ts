@@ -85,7 +85,7 @@ export default function parseProjectSearchQueryParams(params: string) {
         
       }
       else if (key === "page") {
-        filters['currentPage'] = Number(value) -1 
+        filters['currentPage'] = Number(value) 
       }
       else {
         filters[key] = value;

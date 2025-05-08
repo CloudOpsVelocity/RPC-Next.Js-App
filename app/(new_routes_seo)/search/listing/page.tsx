@@ -29,12 +29,12 @@ export default async function Page(params: any) {
     : await getSearchData(apiFilters ?? "cs=S");
   const data = res.results;
   const totalCount = res.totalCount;
-  const currentPage = res.currentPage;
+  // const currentPage = res.currentPage;
 
   frontendFilters = {
     ...frontendFilters,
     totalCount,
-    currentPage,
+    // currentPage,
   };
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative">
