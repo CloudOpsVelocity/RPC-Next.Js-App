@@ -245,19 +245,20 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-      {typeof window == "undefined" && (
+   
       <div
-               className={typeof window !== "undefined" ? "invisible" : ""}
+               className={typeof window !== "undefined" ? "hidden" : ""}
                aria-hidden={typeof window !== "undefined" ? "true" : undefined}
              >
                <ListingSearchPagination
+               searchQueryParmeter
                  currentPage={
                    frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
                  }
                  totalCount={frontendFilters.totalCount ?? 0}
                />
              </div>
-      )}
+
       <LoginPopup />
       <RequestCallBackModal />
 

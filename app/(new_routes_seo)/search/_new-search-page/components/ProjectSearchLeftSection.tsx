@@ -246,10 +246,11 @@ function LeftSection({
       )}
            
          <div
-                    className={typeof window !== "undefined" ? "invisible" : ""}
-                    aria-hidden={typeof window !== "undefined" ? true : false}
+                    className={typeof window !== "undefined" ? "hidden" : "space"}
+                    aria-hidden={typeof window !== "undefined" ? "true" : undefined}
                   >
                     <ListingSearchPagination
+                    searchQueryParmeter
                       currentPage={
                         frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
                       }

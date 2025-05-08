@@ -77,11 +77,17 @@ export default function parseProjectSearchQueryParams(params: string) {
         key === "projStatus" ||
         key === "furnish" ||
         key === "pnb"
+     
       ) {
         filters[key] = Number(value);
       } else if (key === "bhk") {
         filters[key] = [Number(value)];
-      } else {
+        
+      }
+      else if (key === "page") {
+        filters['currentPage'] = Number(value) -1 
+      }
+      else {
         filters[key] = value;
       }
     }

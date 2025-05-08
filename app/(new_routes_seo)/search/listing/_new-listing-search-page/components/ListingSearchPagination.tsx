@@ -10,9 +10,10 @@ export const dynamic = "force-dynamic";
 type Props = {
   totalCount: number;
   currentPage: number; // 1-based index
+  searchQueryParmeter ?: boolean
 };
 
-export default function ListingSearchPagination({ totalCount, currentPage }: Props) {
+export default function ListingSearchPagination({ totalCount, currentPage,searchQueryParmeter = false }: Props) {
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const pathname = usePathname();
@@ -61,11 +62,19 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
   };
 
   const createPaginationLink = (page: number) => {
-    const query = searchParams.toString();
+   
+  
+    if (searchQueryParmeter) {
+
+      return `${pathname}?sf=${`page=${page}`}`;
+    }
+  
     const basePath = getCleanPath();
     const pathWithPage = page === 1 ? basePath : `${basePath}/page-${page}`;
-    return query ? `${pathWithPage}?${query}` : pathWithPage;
+    return  pathWithPage;
   };
+  
+  
 
   return (
     <section className="py-8 sm:py-14 container mx-auto px-4">
