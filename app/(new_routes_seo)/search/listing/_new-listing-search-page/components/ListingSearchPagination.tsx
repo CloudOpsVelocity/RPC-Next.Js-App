@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useMediaQuery } from "@mantine/hooks";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -9,12 +9,13 @@ export const dynamic = "force-dynamic";
 
 type Props = {
   totalCount: number;
-  currentPage: number; // This should now be 1-based, like page=1, page=2...
+  currentPage: number; // 1-based index
 };
 
 export default function ListingSearchPagination({ totalCount, currentPage }: Props) {
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const pathname = usePathname();
 
   const itemsPerPage = 20;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
@@ -31,14 +32,14 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
       pageNumbers.push(1);
 
       let startPage = Math.max(currentPage - 1, 2);
-      const endPage = Math.min(startPage + maxPagesToShow - 3, totalPages - 1);
+      let endPage = Math.min(startPage + maxPagesToShow - 3, totalPages - 1);
 
       if (endPage === totalPages - 1) {
         startPage = Math.max(endPage - (maxPagesToShow - 3), 2);
       }
 
       if (startPage > 2) {
-        pageNumbers.push(-1); // Ellipsis before the range
+        pageNumbers.push(-1); // Ellipsis before
       }
 
       for (let i = startPage; i <= endPage; i++) {
@@ -46,7 +47,7 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
       }
 
       if (endPage < totalPages - 1) {
-        pageNumbers.push(-2); // Ellipsis after the range
+        pageNumbers.push(-2); // Ellipsis after
       }
 
       pageNumbers.push(totalPages);
@@ -55,18 +56,23 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
     return pageNumbers;
   };
 
+  const getCleanPath = () => {
+    return pathname.replace(/\/page-\d+$/, ""); // remove trailing /page-*
+  };
+
   const createPaginationLink = (page: number) => {
-    const fullQuery = searchParams.toString();
-    // return `/residential-listings/for-sale/page-${page}${fullQuery ? `?${fullQuery}` : ""}`;
-    return `/residential-listings/for-sale/page-${page}`;
+    const query = searchParams.toString();
+    const basePath = getCleanPath();
+    const pathWithPage = page === 1 ? basePath : `${basePath}/page-${page}`;
+    return query ? `${pathWithPage}?${query}` : pathWithPage;
   };
 
   return (
     <section className="py-8 sm:py-14 container mx-auto px-4">
-      {totalPages > 1 && (
+      {totalPages > 0 && (
         <div className="mt-10 flex justify-center">
           <nav className="flex items-center gap-1">
-            {/* Previous Page */}
+            {/* Previous */}
             <Link
               target="_top"
               href={currentPage > 1 ? createPaginationLink(currentPage - 1) : "#"}
@@ -82,10 +88,7 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
             {/* Page Numbers */}
             {getPageNumbers().map((pageNum, index) =>
               pageNum < 0 ? (
-                <span
-                  key={`ellipsis-${index}`}
-                  className="px-3 py-2 text-gray-500"
-                >
+                <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-500">
                   ...
                 </span>
               ) : (
@@ -94,7 +97,7 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
                   key={`page-${pageNum}`}
                   href={pageNum !== currentPage ? createPaginationLink(pageNum) : "#"}
                   className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-sm font-medium transition-colors ${
-                    currentPage + 1 === pageNum
+                    currentPage === pageNum
                       ? "bg-blue-600 text-white"
                       : "border border-blue-500 bg-white text-blue-600 hover:bg-blue-50"
                   }`}
@@ -106,7 +109,7 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
               )
             )}
 
-            {/* Next Page */}
+            {/* Next */}
             <Link
               target="_top"
               href={currentPage < totalPages ? createPaginationLink(currentPage + 1) : "#"}
@@ -122,7 +125,7 @@ export default function ListingSearchPagination({ totalCount, currentPage }: Pro
         </div>
       )}
 
-      {/* Result Info */}
+      {/* Showing Results */}
       {totalCount > 0 && (
         <div className="mt-4 text-center text-sm text-gray-600">
           Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}

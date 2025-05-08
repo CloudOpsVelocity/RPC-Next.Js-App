@@ -47,8 +47,8 @@ export default async function Page({
     frontendFilters = {
       cg: filterValues.CG,
       listedBy: null,
-      currentPage: filterValues.PG,
-      totalPage: data.totalPage,
+      currentPage: filterValues.PG ? parseInt(filterValues.PG as string) : null,
+      totalCount: data.totalCount,
     };
   }
   return (

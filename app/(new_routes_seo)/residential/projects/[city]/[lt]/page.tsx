@@ -51,8 +51,8 @@ export default async function Page({
       localities: [`${lt}+${filterValues.LT}`],
       cg: filterValues.CG,
       listedBy: null,
-      currentPage: filterValues.PG,
-      totalPage: data.totalPage,
+      currentPage: filterValues.PG ? parseInt(filterValues.PG as string) : null,
+      totalCount: data.totalCount,
     };
   }
   return (

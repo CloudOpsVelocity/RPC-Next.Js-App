@@ -18,6 +18,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
 import SearchPagination from "./searchPagination";
+import ListingSearchPagination from "../listing/_new-listing-search-page/components/ListingSearchPagination";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -240,6 +241,27 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
+   {true ? (
+           <div
+             className={
+               typeof window !== "undefined"
+                 ? "absolute  overflow-hidden invisible"
+                 : ""
+             }
+             aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+           >
+             <ListingSearchPagination
+               currentPage={
+                 frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
+               }
+               totalCount={
+                
+                    frontendFilters.totalCount ?? 0
+               
+               }
+             />
+           </div>
+         ) : null}
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />

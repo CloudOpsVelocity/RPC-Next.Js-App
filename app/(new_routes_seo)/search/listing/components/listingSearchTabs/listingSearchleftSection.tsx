@@ -252,18 +252,18 @@ function LeftSection({
         </div>
       )}
 
-      { frontendFilters.currentPage !== null ? (
+      {params.slugs.length< 4 ? (
         <div
           className={
             typeof window !== "undefined"
-              ? "absolute left-[-9999px] w-px h-px overflow-hidden invisible"
+              ? "absolute  overflow-hidden invisible"
               : ""
           }
           aria-hidden={typeof window !== "undefined" ? "true" : undefined}
         >
           <ListingSearchPagination
             currentPage={
-              frontendFilters.currentPage ? frontendFilters.currentPage : 1
+              frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
             }
             totalCount={
              
