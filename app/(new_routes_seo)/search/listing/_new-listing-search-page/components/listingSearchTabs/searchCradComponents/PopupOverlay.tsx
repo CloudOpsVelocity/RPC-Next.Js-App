@@ -1,10 +1,10 @@
 import DrawerBox from '@/app/components/property/pricingbreakup/DrawerBox'
-import OtherCharges from '@/app/test/newui/components/modals/overly_items/OtherChargesListOverlay';
 import PropertyHighlights from '@/app/test/newui/components/modals/overly_items/PropertyHightilights';
 import React from 'react';
 import AmenitiesPopupBox from './AmenitiesPopupBox';
 import SearchCardNearbyBlock from './SearchCardNearbyBlock';
 import { useMediaQuery } from '@mantine/hooks';
+import OtherChargesPopupBox from './OtherChargesPopupBox';
 
 type Props = {
     popupState: any;
@@ -13,7 +13,7 @@ type Props = {
 
 function PopupOverlay({popupState, closePopup}: Props) {
     const { location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName} = popupState.data
-    const { content} = popupState;
+    const { content, data } = popupState;
     // const [{ selectedNearbyItem }, setNearby] = useAtom(selectedNearByAtom);
 
     
@@ -59,14 +59,14 @@ function PopupOverlay({popupState, closePopup}: Props) {
         //             >
         //               {item}
         //             </span>
-        //           ))
+        //           )) 
         //         ) : (
         //           <div>No BHK data available</div>
         //         )}
         //       </div>
         //     );
           case "otherCharges":
-            return <OtherCharges />;
+            return <OtherChargesPopupBox data={data} />
           case "hightlights":
             return <PropertyHighlights />;
           case "none":

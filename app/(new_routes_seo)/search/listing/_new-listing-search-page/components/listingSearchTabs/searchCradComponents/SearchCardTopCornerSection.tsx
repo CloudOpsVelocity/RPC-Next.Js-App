@@ -8,7 +8,7 @@ import { DownLoadIcon } from '@/app/images/commongsSvgs2';
 
 
 type Props = {
-  topCornerRightData: topCornerRightSectionData
+  topCornerRightData: topCornerRightSectionData;
 }
 
 const ListingDownSectionCard = ({
@@ -40,6 +40,7 @@ const ListingDownSectionCard = ({
 function SearchCardTopCornerSection({topCornerRightData}: Props) {
     const {category, type, basePrice, sqftPrice, floorPlan, Sh, brochureUrl, amenCount, propTypeName, atFloor, facing, towerName} = topCornerRightData;
     const isMobile = useMediaQuery("(max-width: 1600px)");
+ 
     return (
       <div className={Styles.searchCardTopCornerMainCon}>
 

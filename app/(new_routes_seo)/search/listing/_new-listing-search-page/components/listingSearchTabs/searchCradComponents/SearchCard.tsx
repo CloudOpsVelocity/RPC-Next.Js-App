@@ -11,13 +11,21 @@ import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
 type Props = {
   data?:any; 
   refetch?:any; 
-  index: number;
+  index: string;
   mutate?:any;
+  ref:any;
+
+  register: (id: string, fn: () => void) => void;
+
 }
 
 function SearchCard({
-  data, index = 0,
-  // refetch, index, mutate
+  data, 
+  index,
+  refetch, 
+  ref,
+  // mutate
+  register
 }: Props) {
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   // const topSectionRightData = sanitizeTopRightSectionData(data);
@@ -51,6 +59,10 @@ function SearchCard({
         <RightSideBlock 
           // data={topSectionRightData} 
           data={{ ...data, pageUrl: url }}
+          refetch={refetch}
+          ref={ref}
+          register={register}
+          index={index}
         />
       </div>
 

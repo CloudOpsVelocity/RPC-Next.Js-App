@@ -1,4 +1,6 @@
-import React from 'react';
+// import React, { useEffect, useState } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
+
 import Styles from "@/app/styles/seach/searchCrad.module.css";
 import Image from 'next/image';
 import { formatDateDDMMYYYY } from '@/app/utils/date';
@@ -14,14 +16,26 @@ import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
 import SearchCardApprovedNames from './SearchCardApprovedNames';
 import SearchCardTopCornerSection from './SearchCardTopCornerSection';
 import { isReraverified } from '@/app/utils/dyanamic/projects';
+import { useSession } from 'next-auth/react';
+import { useShortlistAndCompare } from '@/app/hooks/storage';
+import { usePopShortList } from '@/app/hooks/popups/useShortListCompare';
 
 interface SearchCardTopSectionLProps {
   data: TopLeftSectionData;
 }
 
+export type ChildRef = {
+  callMe: () => void;
+};
+
 interface SearchCardTopSectionRProps {
   // data: TopRightSectionData;
-  data:any
+  data:any;
+  refetch:any;
+  ref:any;
+
+  register: (id: string, fn: () => void) => void;
+  index:string;
 }
 
 const Rera = () => {
@@ -36,6 +50,8 @@ const Rera = () => {
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data }) => {
   const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus} = data
   const verified = isReraverified(rerastatus);
+
+
   return(
     <div className={Styles.searchCradTopImageBox}>
         <Link prefetch={false} href={pageUrl}>
@@ -65,14 +81,14 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data }) => {
   )
 }
 
-export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) => {
-  
+export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRProps>(({ data, refetch, register, index }, ref) => {  
   const {
     projName, phaseName, phaseCount, minPrice, maxPrice, sortedBhks, propType, cg, 
-    city, locality, postedByName, builderCity, cityName, projIdEnc, localityName, 
+    city, locality, postedByName, builderCity, cityName, projIdEnc, propIdEnc, localityName, 
     propName, address, postedBy, type, otherCharges, category, propTypeName, bhkName, pageUrl,
-    price, usp, projectAbout,
+    price, usp, projectAbout, shortListed
   } = data;
+  
 
   let urlBuilder = generateBuilderUrl({
     slug: postedByName,
@@ -93,13 +109,59 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
   const isReadMoreNeeded = aboutText?.length > readMoreThreshold;
 
   const approvedNamesData = sanitizeApprovedNamesSectionData(data);
-  const topCornerRightData = sanitizetopCornerRightSectionData(data); 
+
+
+  const { data: session } = useSession();
+  const { toggleShortlist } = useShortlistAndCompare();
+  const [, { open: openLogin }] = usePopShortList();
+
+
+  const [stateData, setStateData] = useState({
+      shortListed: shortListed === "Y" ? true : false,
+  });
+
+  const newData = {
+    ...data,
+    Sh: stateData.shortListed, 
+  };
+
+  const topCornerRightData = sanitizetopCornerRightSectionData(newData); 
+
+
+  // console.log(newData)
+
+  const onAddingShortList = () => {
+    console.log("working...")
+    if (session) {
+      setStateData({ ...stateData, shortListed: !stateData.shortListed });
+      toggleShortlist({
+        id: type === "proj" ? projIdEnc : propIdEnc,
+        status: stateData.shortListed ? "N" : "Y",
+        source: type,
+      });
+    } else {
+      openLogin(() => refetch());
+    }
+  };
+
+
+  useImperativeHandle(ref, () => ({
+    callMe: () => {
+      console.log(`Child function called`);
+    },
+  }));
+
+
+  useEffect(() => {
+    register(index, onAddingShortList);
+  }, [index]);
+
+
   
-  // console.log(topCornerRightData);
   
   return( 
     <div className={Styles.searchCradTopRightBox}>
-      <SearchCardTopCornerSection topCornerRightData={topCornerRightData}  />
+      <SearchCardTopCornerSection topCornerRightData={topCornerRightData}/>
 
       {type === "proj" ? 
         <>
@@ -188,8 +250,9 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
             {formatCurrency(Number(price))}{" "}
             {(otherCharges?.otherCharge ||
               (otherCharges && Object.keys(otherCharges).length > 2)) && (
-              <span
-                className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
+              <button
+                data-action="otherCharges"
+                className="text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
                 // onClick={(e) => {
                 //   e.stopPropagation();
                 //   dispatch({
@@ -208,7 +271,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
                 // }}
               >
                 View Other Charges
-              </span>
+              </button>
             )}
           </p>
 
@@ -269,26 +332,6 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
                 <button
                   className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer absolute bottom-0 right-0 bg-white "
                   title="Click to Read More"
-                  // onClick={(e) => {
-                  //   e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
-                  //   // console.log("read more testing");
-                  //   dispatch({
-                  //     content: aboutText,
-                  //     // id: `${
-                  //     //   type === "proj" ? projIdEnc : propIdEnc
-                  //     // }+${propTypeId ?? propTypeName ?? ''}${
-                  //     //   type === "proj" && phaseId ? "+" + phaseId : ""
-                  //     // }`,
-                  //     id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
-                  //       propTypeId ?? propTypeName ?? ""
-                  //     }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
-                  //     title:
-                  //       type === "proj" ? "About Project" : "About Property",
-                  //     type: "OPEN",
-                  //     conType: "readmore",
-                  //     pType: type,
-                  //   });
-                  // }}
                   data-action="readmore"
                 >
                   <span className="text-black">...</span>Read More
@@ -300,38 +343,5 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data }) =
 
     </div>
   )
-}
+})
 
-
-// {isReadMoreNeeded && (
-//   <div className="absolute bottom-0 right-0 bg-white">
-//     {/* <span className="text-black">...</span>{" "} */}
-//     <button
-//       className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer absolute bottom-0 right-0 bg-white "
-//       title="Click to Read More"
-//       // onClick={(e) => {
-//       //   e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
-//       //   // console.log("read more testing");
-//       //   dispatch({
-//       //     content: aboutText,
-//       //     // id: `${
-//       //     //   type === "proj" ? projIdEnc : propIdEnc
-//       //     // }+${propTypeId ?? propTypeName ?? ''}${
-//       //     //   type === "proj" && phaseId ? "+" + phaseId : ""
-//       //     // }`,
-//       //     id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
-//       //       propTypeId ?? propTypeName ?? ""
-//       //     }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
-//       //     title:
-//       //       type === "proj" ? "About Project" : "About Property",
-//       //     type: "OPEN",
-//       //     conType: "readmore",
-//       //     pType: type,
-//       //   });
-//       // }}
-//       data-action="readMore"
-//     >
-//       Read More
-//     </button>
-//   </div>
-// )}

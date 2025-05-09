@@ -1,5 +1,5 @@
 import { SearchFilter } from "@/app/types/search";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 // import ProjectCard from "@/app/test/newui/components/Card";
 import SearchCard from "./searchCradComponents/SearchCard";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
@@ -13,6 +13,7 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import PopupOverlay from "./searchCradComponents/PopupOverlay";
+import { ChildRef } from "./searchCradComponents/SearchCradTopSection";
 
 type Props = {
   data: any;
@@ -30,13 +31,7 @@ export default function ListingServerCardData({
   frontendFilters,
 }: Props) {
 
-  const [selectedCard, setSelectedCard] = useState({compareAdded:"N", shortListed:"N"});
   const [popupState, setPopupState] = useState({ isOpen: false, type: "", title:"", data: {}, content:"" });
-
-  const [stateData, setStateData] = useState({
-      compareAdded: selectedCard.compareAdded === "Y" ? true : false,
-      shortListed: selectedCard.shortListed === "Y" ? true : false,
-  });
 
   const setIsMapLoaded = useSetAtom(searchPageMapToggle);
   const setNearby = useSetAtom(selectedNearByAtom);
@@ -45,13 +40,7 @@ export default function ListingServerCardData({
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openLogin }] = usePopShortList();
 
-  const newData = {
-    ...selectedCard,
-    Com: stateData.compareAdded,
-    Sh: stateData.shortListed,
-  };
 
-  // console.log(newData)
 
   const cg = useMemo(() => {
     if (state.cg === undefined) {
@@ -69,19 +58,7 @@ export default function ListingServerCardData({
       : state.listedBy;
   }, [state, frontendFilters]);
 
-  const onAddingShortList = (selectedItem:any) => {
-    const {projIdEnc, propIdEnc, type} = selectedItem;
-    if (session) {
-      setStateData({ ...stateData, shortListed: !stateData.shortListed });
-      toggleShortlist({
-        id: type === "proj" ? projIdEnc : propIdEnc,
-        status: stateData.shortListed ? "N" : "Y",
-        source: type,
-      });
-    } else {
-      openLogin(() => refetch());
-    }
-  };
+
 
   const shearPropOrProj = (data:any) => {
     const {
@@ -197,6 +174,23 @@ export default function ListingServerCardData({
     }
   };
 
+  // Initialize ref array for each card
+  const childRefs = useRef<(ChildRef | null)[]>([]);
+
+  // Ensure each ref is correctly assigned
+  const setChildRef = (index: number) => (el: ChildRef | null) => {
+    childRefs.current[index] = el;
+  };
+
+  const handleCallAll = (index: number) => {
+  console.log("index: ", index)
+    const ref = childRefs.current[index];
+    if (ref) {
+      ref.callMe();  // Call 'callMe' only for the child at the specified index
+    }
+  };
+
+
   const handleClick = (e: any) => {
     const cardEl = e.target.closest('[data-type="card"]');
     if (!cardEl) return;
@@ -205,10 +199,16 @@ export default function ListingServerCardData({
     const actionButton = e.target.closest('[data-action]');
     const index = cardId ? cardId.split("_")[1] : 0;
     const selectedItem:any = data[index];
-    setSelectedCard(selectedItem);  
+    // setSelectedCard(selectedItem);  
     const action = actionButton?.dataset.action;
 
     console.log(selectedItem);
+
+
+  const handleParentAction = (index: number) => {
+    console.log("-call-")
+    cardFns[index]?.(); // e.g., call function from card-2
+  };
 
     switch(action){
       case 'readmore':
@@ -216,7 +216,10 @@ export default function ListingServerCardData({
         setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"Read More", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
         break; 
       case 'like':
-        onAddingShortList(selectedItem);
+        console.log("like")
+        handleCallAll(index);
+
+        handleParentAction(index)
         break;
       case 'share':
         shearPropOrProj(selectedItem);
@@ -226,6 +229,11 @@ export default function ListingServerCardData({
         break;
       case 'requestCall':
         handleOpen(selectedItem)
+        break;
+      case 'otherCharges':
+        // handleOpen(selectedItem)
+        console.log("otherCharges")
+        setPopupState(prev => ({...prev, isOpen: true, type: 'otherCharges', title:"Other Charges", data: selectedItem}));
         break;
       case 'brochure':
         console.log('brochure card: ', index);
@@ -255,6 +263,16 @@ export default function ListingServerCardData({
     setPopupState(prev => ({...prev, isOpen: false, type: '', title:"", data: {}}));
   };
 
+
+
+
+  const [cardFns, setCardFns] = useState<Record<string, () => void>>({});
+
+  const registerCard = (id: string, fn: () => void) => {
+    setCardFns(prev => ({ ...prev, [id]: fn }));
+  };
+
+
   return(
     <div onClick={handleClick}>
       {/* <SearchCard data={data[0]} index={0}  /> */}
@@ -273,6 +291,10 @@ export default function ListingServerCardData({
         }}
         index={index}
         mutate={mutate}
+        ref={setChildRef(index)} 
+
+        register={registerCard}
+
       />
       ))}
     </div>

@@ -73,7 +73,7 @@ export interface ApprovedNamesSectionData {
 export interface topCornerRightSectionData {    
     category: string; 
     type: string; 
-    basePrice: number; 
+    basePrice: number;  
     sqftPrice: number; 
     floorPlan: string; 
     Sh: string; 
