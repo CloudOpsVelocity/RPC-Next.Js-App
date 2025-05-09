@@ -55,6 +55,48 @@ function PageTitle({ serverFilterData }: Props) {
   // };
 
   const getTitle = (pageUrl: string) => {
+    if (pageUrl === "/residential/projects") {
+      return (
+        <>
+          Explore{" "}
+          <Link
+            href="https://www.getrightproperty.com/residential/projects/bengaluru"
+            // target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            Residential Projects in Bengaluru
+          </Link>
+        </>
+      );
+    } else if (pageUrl === "/residential-listings/for-sale") {
+      return (
+        <>
+          Explore{" "}
+          <Link
+            href="https://www.getrightproperty.com/residential-listings/for-sale/bengaluru"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            Residential Properties for sale in Bengaluru
+          </Link>
+        </>
+      );
+    } else if (path === "/residential-listings/for-rent") {
+      return (
+        <>
+          Explore{" "}
+          <Link
+            href="https://www.getrightproperty.com/residential-listings/for-rent/bengaluru"
+            // target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            Residential Properties for rent in Bengaluru,
+          </Link>
+        </>
+      );
+    }
     const isListing = path.includes("/residential-listings/");
     if (paramsData && Object.keys(paramsData).length > 0) {
       if (paramsData.slug) {
@@ -89,24 +131,11 @@ function PageTitle({ serverFilterData }: Props) {
       return "Search Results for";
     } else if (pageUrl === "/search/listing") {
       return "Search Results for";
-    } else if (pageUrl === "/residential-listings") {
-      return "Residential Projects";
-    } else if (pageUrl === "/residential/projects") {
-      // return "Search Results For 'Residential Projects In Bengaluru'";
-      <>
-       Explore a wide range of{" "}
-          <Link
-            href="https://www.getrightproperty.com/residential/projects/bengaluru"
-            // target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline"
-          >
-            residential projects in Bengaluru
-          </Link>
-          featuring top apartments, villas, and plots from leading
-          developers—perfect for homebuyers and investors.
-      </>
     }
+
+    // else if (pageUrl === "/residential-listings") {
+    //   return "Residential Projects";
+    // }
   };
 
   const [hideHeading, setHideHeading] = useState(false);
@@ -194,7 +223,7 @@ function PageTitle({ serverFilterData }: Props) {
     <div>
       {!hideHeading ? (
         <div className=" text-[16px] 2xl:text-xl  ml-[8px]   capitalize flex flex-wrap ">
-          <span className="mr-[6px]">Search Results for</span>
+          {/* <span className="mr-[6px]">Search Results for</span> */}
           <h1 className="font-bold text-[16px]  2xl:text-xl  ">
             {getTitle(path)}
           </h1>
@@ -205,7 +234,7 @@ function PageTitle({ serverFilterData }: Props) {
         </h1>
       )}
 
-      {getParagraph()}
+      {/* {getParagraph()} */}
     </div>
   );
 }
