@@ -195,7 +195,6 @@ function LeftSection({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
- 
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
@@ -243,7 +242,7 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
-      { hasNextPage && shouldFetchMore && (
+      {hasNextPage && shouldFetchMore && (
         <div
           ref={loadMoreRef}
           className="w-full py-8 flex justify-center items-center text-gray-600"
@@ -252,7 +251,7 @@ function LeftSection({
         </div>
       )}
 
-      {params.slugs.length< 4 ? (
+      {params.slugs && params.slugs.length < 4 ? (
         <div
           className={typeof window !== "undefined" ? "invisible" : ""}
           aria-hidden={typeof window !== "undefined" ? "true" : undefined}
