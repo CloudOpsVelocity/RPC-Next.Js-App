@@ -55,6 +55,54 @@ export default function TagsSections({ urls }: Props) {
     { title: "Privacy Policy", url: "/privacy-policy" },
     { title: "Terms of Service", url: "/terms-and-conditions" },
     { title: "Sitemap", url: "/sitemap.xml" },
+    {
+      title: "Post Property Listing | Sell or Rent Your Property",
+      url: "/post-your-listing",
+    },
+    {
+      title: "Your Dashboard | Manage Your Profile and Listings",
+      url: "/your-profile/dashboard",
+    },
+    {
+      title: "Post Your Project | Real Estate Project Submission",
+      url: "/post-your-project",
+    },
+    {
+      title: "Your Real Estate Projects | View and Manage Projects",
+      url: "/your-projects",
+    },
+    {
+      title: "Login | Access Your Real Estate Account",
+      url: "/login",
+    },
+    {
+      title: "Register | Create Your Real Estate Account",
+      url: "/register",
+    },
+    {
+      title: "Forgot Password | Reset Your Account Password",
+      url: "/forgot",
+    },
+    {
+      title: "Register as Individual | Create a Personal Account",
+      url: "/register/individual",
+    },
+    {
+      title: "Register as Agent | Join as Real Estate Agent",
+      url: "/register/agent",
+    },
+    {
+      title: "Register as Builder | Register Your Real Estate Business",
+      url: "/register/builder",
+    },
+    {
+      title: "Shortlisted Properties | View Your Saved Listings",
+      url: "/your-profile/shortlisted",
+    },
+    {
+      title: "Compare Properties | Compare Your Favorite Listings",
+      url: "/your-profile/compare",
+    },
   ];
 
   return (

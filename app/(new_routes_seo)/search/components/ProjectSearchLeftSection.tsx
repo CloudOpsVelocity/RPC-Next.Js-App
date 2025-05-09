@@ -80,7 +80,7 @@ function LeftSection({
       : undefined,
     cacheTime: 300000,
     enabled: isTrue,
-    staleTime: 0,
+    staleTime: 4000,
     refetchOnWindowFocus: false,
     onSuccess: (data: any) => {
       const newData = data.pages[data.pageParams.length - 1];
@@ -188,7 +188,7 @@ function LeftSection({
       </div>
     </div>
   );
-  console.log(dataToUse);
+
   return (
     <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
       {isFetching && isFetchingNextPage === false ? (
@@ -220,6 +220,7 @@ function LeftSection({
               )}
             </>
           )}
+          {JSON.stringify({ hasNextPage, shouldFetchMore })}
           {/* Image Use above*/}
           <ServerDataSection
             data={dataToUse}
@@ -241,27 +242,19 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
-   {true ? (
-           <div
-             className={
-               typeof window !== "undefined"
-                 ? " invisible"
-                 : ""
-             }
-             aria-hidden={typeof window !== "undefined" ? "true" : undefined}
-           >
-             <ListingSearchPagination
-               currentPage={
-                 frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
-               }
-               totalCount={
-                
-                    frontendFilters.totalCount ?? 0
-               
-               }
-             />
-           </div>
-         ) : null}
+      {true ? (
+        <div
+          className={typeof window !== "undefined" ? " invisible" : ""}
+          aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+        >
+          <ListingSearchPagination
+            currentPage={
+              frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
+            }
+            totalCount={frontendFilters.totalCount ?? 0}
+          />
+        </div>
+      ) : null}
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />

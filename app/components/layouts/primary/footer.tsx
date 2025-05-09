@@ -133,6 +133,8 @@ function Footer() {
         "Listing Search",
         "Project Search",
         "Residential Listings",
+        "Shortlisted",
+        "Compare",
       ],
       hrefs: [
         "/",
@@ -145,6 +147,8 @@ function Footer() {
         "/search/listing",
         "/search",
         "/residential-listings",
+        "/your-profile/shortlisted",
+        "/your-profile/compare",
       ],
       rel: "noopener noreferrer",
       target: "_self",
@@ -331,7 +335,12 @@ function Footer() {
           {/* Footer info section */}
           <div className="mt-2 sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
             <div className="flex space-x-6 md:order-2">
-              <button aria-label="Location" name="Location" title="Location" className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
+              <button
+                aria-label="Location"
+                name="Location"
+                title="Location"
+                className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
+              >
                 <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
               </button>
               <Link
