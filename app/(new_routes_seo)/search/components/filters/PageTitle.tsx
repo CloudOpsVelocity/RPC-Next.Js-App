@@ -92,7 +92,20 @@ function PageTitle({ serverFilterData }: Props) {
     } else if (pageUrl === "/residential-listings") {
       return "Residential Projects";
     } else if (pageUrl === "/residential/projects") {
-      return "Search Results For 'Residential Projects In Bengaluru'";
+      // return "Search Results For 'Residential Projects In Bengaluru'";
+      <>
+       Explore a wide range of{" "}
+          <Link
+            href="https://www.getrightproperty.com/residential/projects/bengaluru"
+            // target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            residential projects in Bengaluru
+          </Link>
+          featuring top apartments, villas, and plots from leading
+          developers—perfect for homebuyers and investors.
+      </>
     }
   };
 
