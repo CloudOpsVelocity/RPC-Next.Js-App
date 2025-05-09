@@ -34,6 +34,8 @@ const ListingSearchTabs = ({
     [showProjectTab]
   );
 
+  console.log(showProjectTab)
+
   const sortOptions = useMemo(
     () => [
       { id: null, type: null, value: "newest", label: "Newest First" },

@@ -101,7 +101,7 @@ function getQueryConfig(
   };
 }
 
-async function getNearByLocations(
+export async function getNearByLocations(
   id: string,
   type: string,
   lat?: number, 

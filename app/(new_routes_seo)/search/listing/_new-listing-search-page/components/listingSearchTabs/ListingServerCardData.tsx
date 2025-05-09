@@ -176,30 +176,7 @@ export default function ListingServerCardData({
       `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
       "_self"
     );
-  };
-
-  const onSetNearBy = (data:any) => {
-    const {lat, lang, type, propIdEnc, projIdEnc, propType, propTypeName, propName, projName, phaseId} = data;
-    setIsMapLoaded(true);
-    setNearby((prev: any) => ({
-      ...prev,
-      category: "",
-      data: {},
-      selectedNearbyItem: {},
-      id: "",
-      isOpen: false,
-      isLoader: true,
-    }));
-    setSelected({
-      lat,
-      lang,
-      type,
-      reqId: !propIdEnc ? projIdEnc : propIdEnc,
-      propType: !propIdEnc ? propType : propTypeName,
-      projOrPropName: propName ? propName : projName,
-      phaseId: phaseId ? phaseId : "",
-    });
-  };
+  }
 
   const handleDownload = (data:any) => {
     const {brochureUrl} = data;
@@ -235,6 +212,7 @@ export default function ListingServerCardData({
 
     switch(action){
       case 'readmore':
+        document.body.style.overflow = "hidden";
         setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"Read More", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
         break; 
       case 'like':
@@ -254,10 +232,12 @@ export default function ListingServerCardData({
         handleDownload(selectedItem);
         break;
       case 'nearby':
+        document.body.style.overflow = "hidden";
         setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: selectedItem}));
         // onSetNearBy(selectedItem);
         break;
       case 'amenities':
+        document.body.style.overflow = "hidden";
         setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: selectedItem}));
         break;
       case 'listingType':
@@ -271,6 +251,7 @@ export default function ListingServerCardData({
   };
 
   const closePopup = () => {
+    document.body.style.overflow = "unset";
     setPopupState(prev => ({...prev, isOpen: false, type: '', title:"", data: {}}));
   };
 

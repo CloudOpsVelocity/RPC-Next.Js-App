@@ -28,7 +28,7 @@ const CustomScrollArea: React.FC<{
   const hiddenCount = items.length - visibleItems.length;
 
   return (
-    <div className="flex flex-col px-2 relative w-full sm:w-[92%] m-auto">
+    <div className={`flex flex-col px-2 relative w-full sm:w-[92%] m-auto`}>
       <div
         className={clsx(
           "flex flex-wrap gap-2  overflow-hidden relative"
