@@ -62,7 +62,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 export const generateStaticParams = async () => {
   const res = await getPagesSlugs("case-seo");
   await redisService.saveSeoSlug(SlugsType.SEO, res);
-  
+
   if (process.env.ENVIRONMENT === "production" && process.env.LAKH_URLS) {
     return res.map((slug: string) => ({ slug }));
   }
@@ -137,5 +137,5 @@ function cleanHeading(id: string[]) {
     .replace(/\s+/g, " ");
 }
 // export const dynamic = "force-static";
-// export const dynamicParams = false;
+export const dynamicParams = true;
 export const dynamic = "force-dynamic";
