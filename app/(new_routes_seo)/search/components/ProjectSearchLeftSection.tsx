@@ -220,7 +220,7 @@ function LeftSection({
               )}
             </>
           )}
-          {JSON.stringify({ hasNextPage, shouldFetchMore })}
+          {/* {JSON.stringify({ hasNextPage, shouldFetchMore })} */}
           {/* Image Use above*/}
           <ServerDataSection
             data={dataToUse}
