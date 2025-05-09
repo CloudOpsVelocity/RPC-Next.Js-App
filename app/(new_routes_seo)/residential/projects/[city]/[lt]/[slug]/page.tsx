@@ -91,7 +91,6 @@ const ProjectGallery = dynamicImport(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );
 
-
 const ProjectBrouchersSection = dynamicImport(
   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
   {
@@ -112,6 +111,7 @@ import { isValidSlugId } from "@/common/utils/slugUtils";
 import FirstBlock from "@/app/components/project/firstBlock";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import Overview from "@/app/components/project/overview";
+import TagsSections from "@/app/components/sections/TagsSections";
 
 type Props = {
   params: Promise<{ city: string; lt: string; slug: string }>;
@@ -120,6 +120,9 @@ type Props = {
 export default async function page(props: Props) {
   const params = await props.params;
   const { city, lt, slug: name } = params;
+  const pathname = `/residential/projects${city ? `/${city}` : ""}${
+    lt ? `/${lt}` : ""
+  }${name ? `/${name}` : ""}`;
 
   const slug = name.split("-").at(-1);
   if (!slug || !isValidSlugId(slug)) {
@@ -160,7 +163,48 @@ export default async function page(props: Props) {
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const scrollId = undefined;
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
+  const getUrls = (pathname: string) => {
+    const routes = pathname.split("/").filter(Boolean);
 
+    // Remove last segment if it's a listing ID or slug
+    // routes.length = routes.length - 1;
+
+    const breadcrumbs: { title: string; url: string }[] = [];
+    let accumulatedUrl = "";
+
+    routes.forEach((segment, index) => {
+      accumulatedUrl += `/${segment}`;
+      let title = "";
+
+      if (index === 0) {
+        title = `Residential`;
+      } else if (index === 1) {
+        title = `Residential Projects`;
+      } else if (index === 2) {
+        title = `Residential Projects in ${capitalize(routes[2])}`;
+      } else if (index === 3) {
+        title = `Residential Projects In Bengaluru in ${capitalize(routes[3])}`;
+      } else if (index === 4) {
+        title = `${data.projectName}`;
+      }
+
+      if (title) {
+        breadcrumbs.push({ title, url: accumulatedUrl });
+      }
+    });
+
+    return breadcrumbs;
+  };
+
+  // Helpers
+  const capitalize = (str: string) =>
+    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+  const toTitleCase = (str: string) =>
+    str
+      .split("-")
+      .map((word) => capitalize(word))
+      .join(" ");
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />
@@ -324,6 +368,7 @@ export default async function page(props: Props) {
             postedById={data.builderId}
           />
         </div>
+        <TagsSections urls={getUrls(pathname)} />
         <NearByCarousel
           projName={data.projectName}
           lat={data.lat}

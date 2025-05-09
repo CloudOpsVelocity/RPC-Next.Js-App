@@ -32,6 +32,7 @@ const PropertyFirstBlock = dynamic(
 );
 import LeafMap from "@/app/components/project/map";
 import ListingSchema from "@/app/seo/listing/listing.schema";
+import TagsSections from "@/app/components/sections/TagsSections";
 const PropertyMap = dynamic(() => import("@/app/components/property/map"));
 const NearByCarouselProperty = dynamic(
   () => import("@/app/components/property/carousel")
@@ -84,13 +85,103 @@ export default function ListingDetailsPage({
   const title = `${data?.bhkName ?? ""} ${data?.propTypeName} For
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName}${data?.projIdEnc ? `, ${data?.propName}` : ""}`;
-
-  console.log(title);
-
   const newTitle = `${data?.bhkName ?? ""} ${data?.propTypeName} For
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName} at ${data.propName}`;
 
+  const newParams = {
+    "residential-listings": "residential-listings",
+    ...params,
+  };
+
+  const getUrls = (pathname: string) => {
+    const routes = pathname.split("/").filter(Boolean);
+
+    // Remove last segment if it's a listing ID or slug
+    if (routes[routes.length - 1]?.startsWith("listing-")) {
+      routes.pop();
+    }
+
+    const breadcrumbs: { title: string; url: string }[] = [];
+    let accumulatedUrl = "";
+
+    routes.forEach((segment, index) => {
+      accumulatedUrl += `/${segment}`;
+      let title = "";
+
+      if (index === 0 && segment === "residential-listings") {
+        title = "Residential Properties";
+      } else if (index === 1) {
+        title = `Residential Properties for ${
+          data.cg === "R" ? "Rent" : "Sale"
+        }`;
+      } else if (index === 2) {
+        title = `Properties for ${
+          data.cg === "R" ? "Rent" : "Sale"
+        } in ${capitalize(segment)}`;
+      } else if (index === 3) {
+        title = `Properties for ${
+          data.cg === "R" ? "Rent" : "Sale"
+        } in ${capitalize(segment)}, ${capitalize(routes[2])}`;
+      } else if (index === 4) {
+        title = `${toTitleCase(segment)} – Flats for ${
+          data.cg === "R" ? "Rent" : "Sale"
+        } in ${capitalize(routes[3])}, ${capitalize(routes[2])}`;
+      } else if (index === 5) {
+        title = `${segment.replace(/-/g, " ").toUpperCase()} in ${toTitleCase(
+          routes[4]
+        )}, ${capitalize(routes[3])}`;
+      }
+
+      if (title) {
+        breadcrumbs.push({ title, url: accumulatedUrl });
+      }
+    });
+
+    return breadcrumbs;
+  };
+
+  // Helpers
+  const capitalize = (str: string) =>
+    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+  const toTitleCase = (str: string) =>
+    str
+      .split("-")
+      .map((word) => capitalize(word))
+      .join(" ");
+
+  //   currentPath += `/${slugify(params[key])}`;
+  //   const isLast = index === allParams.length - 1;
+
+  //   return (
+  //     <React.Fragment key={`${key[index]}`}>
+  //       {!isLast ? (
+  //         <>
+  //           <Link
+  //             prefetch={false}
+  //             href={`${isProject ? "" : BASE_PATH_LISTING}${currentPath}`}
+  //             // target="_blank"
+  //             className="hover:underline cursor-pointer capitalize"
+  //           >
+  //             {/* <a onTouchStart={() => {}}></a> */}
+  //             {titleOfKeys[key as keyof typeof titleOfKeys] && (
+  //               <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
+  //             )}
+  //             <span>
+  //               {index === allParams.length - 2
+  //                 ? params[key].replace(/-/g, " ").replace(/bhk/i, "BHK")
+  //                 : params[key].replace(/-/g, " ")}
+  //             </span>
+  //           </Link>
+  //           {" > "}
+  //         </>
+  //       ) : (
+  //         <span className="capitalize">{title.replace("undefined ", "")}</span>
+  //       )}
+  //     </React.Fragment>
+  //   );
+  // });
   return (
     <div className="w-full">
       <ListingSchema
@@ -114,7 +205,6 @@ export default function ListingDetailsPage({
             title={title}
             pathname={pathname}
           />
-
           {/* Top Cover Image Card */}
           <PropertyFirstBlock
             projectDetails={data}
@@ -230,6 +320,7 @@ export default function ListingDetailsPage({
             {/* )} */}
           </>
         )}
+        <TagsSections urls={getUrls(pathname)} />
         {!data.projIdEnc && (
           <>
             <div id="location-map" className="mt-10 scroll-mt-[180px]" />
