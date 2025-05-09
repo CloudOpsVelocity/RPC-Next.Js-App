@@ -22,6 +22,7 @@ export default async function Page({ params: { cg, city } }: Props) {
       frontendFilters={{
         listedBy: "All",
       }}
+      preDefinedFilters={""}
     />
   );
 }

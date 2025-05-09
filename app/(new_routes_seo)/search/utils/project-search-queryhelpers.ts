@@ -59,8 +59,9 @@ export const parseApiFilterQueryParams = (
   let updatedParams = apiFilterQueryParams.includes("cg=")
     ? transformedParams
     : `${transformedParams}&cg=S`;
-  console.log({ updatedParams });
+
   return updatedParams.includes("city=")
     ? updatedParams
     : `${updatedParams}&city=9`;
+ 
 };

@@ -18,6 +18,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
 import SearchPagination from "./searchPagination";
+import ListingSearchPagination from "../listing/_new-listing-search-page/components/ListingSearchPagination";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -161,10 +162,12 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    apiFilterQueryParams !== preDefinedFilters ||
-    (data && data?.pageParams?.length > 0)
+    apiFilterQueryParams === preDefinedFilters || typeof window === "undefined"
+      ? mainData
+      : data && data?.pageParams?.length > 0
       ? data?.pages.flat()
       : mainData;
+
   const EmptyState = memo(function EmptyState() {
     return (
       <div className="flex w-full h-full justify-center items-center flex-col">
@@ -238,6 +241,27 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
+   {true ? (
+           <div
+             className={
+               typeof window !== "undefined"
+                 ? " invisible"
+                 : ""
+             }
+             aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+           >
+             <ListingSearchPagination
+               currentPage={
+                 frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
+               }
+               totalCount={
+                
+                    frontendFilters.totalCount ?? 0
+               
+               }
+             />
+           </div>
+         ) : null}
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />

@@ -33,9 +33,12 @@ export default async function Page({
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
   } else {
-    serverData = await (await getSearchData()).results;
+    const data = await getSearchData();
+    serverData = await data.results;
     frontendFilters = {
       listedBy: null,
+      currentPage: 0,
+      totalCount: data.totalCount,
     };
   }
   return (
@@ -50,7 +53,7 @@ export default async function Page({
 
 const getSearchData = async () => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&cg=S`;
 
     const url = `${baseUrl}`;
 

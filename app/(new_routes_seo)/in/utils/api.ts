@@ -95,7 +95,12 @@ export const getSearchData = async (filters?: string): Promise<any> => {
 };
 export const getProjSearchData = async (filters: string): Promise<any> => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+    let baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+    if (filters && filters.includes("page=")) {
+      baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?city=9`;
+    } else {
+      baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+    }
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
     const res = await fetch(url, {
       cache: "no-store",
@@ -115,7 +120,12 @@ export const getProjSearchData = async (filters: string): Promise<any> => {
 
 export const getNewProjSearchData = async (filters: string): Promise<any> => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0`;
+    let baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0`;
+    if (filters && filters.includes("page=")) {
+      baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search`;
+    } else {
+      baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0`;
+    }
     const url = `${baseUrl}${filters ? `${filters}` : ""}`;
     console.log(url);
     const res = await fetch(url, {

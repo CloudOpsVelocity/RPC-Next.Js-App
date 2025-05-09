@@ -21,6 +21,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
 import ListingSearchPagination from "../ListingSearchPagination";
+// import ListingSearchPagination from "../ListingSearchPagination";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -244,9 +245,20 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-      {typeof window == "undefined" && (
-        <ListingSearchPagination currentPage={12} totalCount={100} />
-      )}
+   
+      <div
+               className={typeof window !== "undefined" ? "hidden" : ""}
+               aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+             >
+               <ListingSearchPagination
+               searchQueryParmeter
+                 currentPage={
+                   frontendFilters.currentPage ? frontendFilters.currentPage  : 1
+                 }
+                 totalCount={frontendFilters.totalCount ?? 0}
+               />
+             </div>
+
       <LoginPopup />
       <RequestCallBackModal />
 

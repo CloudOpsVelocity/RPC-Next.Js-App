@@ -32,7 +32,7 @@ export default async function Page({
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
-
+  console.log(filterValues);
   let serverData = null;
   let frontendFilters = null;
   if (searchParams.sf) {
@@ -45,11 +45,14 @@ export default async function Page({
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
   } else {
-    serverData = await (await getSearchData(filterValues.LT as string)).results;
+    const data = await getSearchData(filterValues.PG ?  `&page=${filterValues.PG}` : `&localities=${filterValues.LT}`);
+    serverData = await data.results;
     frontendFilters = {
       localities: [`${lt}+${filterValues.LT}`],
       cg: filterValues.CG,
       listedBy: null,
+      currentPage: filterValues.PG ? parseInt(filterValues.PG as string) : null,
+      totalCount: data.totalCount,
     };
   }
   return (
@@ -107,11 +110,13 @@ export async function generateMetadata(
   };
 }
 
-const getSearchData = async (locality: string) => {
+const getSearchData = async (apiFilterQueryParams: string) => {
   try {
-    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9&localities=${locality}&cg=S`;
-    // console.log(baseUrl);
-    const url = `${baseUrl}`;
+    let baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?city=9&cg=S`;
+    if (!apiFilterQueryParams.includes("page=")) {
+      baseUrl += "&page=0";
+    }
+    const url = `${baseUrl}${apiFilterQueryParams}`;
     const res = await fetch(url, {
       cache: "no-store",
     });
@@ -129,4 +134,4 @@ const getSearchData = async (locality: string) => {
   }
 };
 
-export const fetchCache = "force-no-store";
+// export const fetchCache = "force-no-store";

@@ -99,7 +99,7 @@ export default async function Page({ params, searchParams }: Props) {
           phaseId: [`${params.slugs[5]}+${filtersValues.PH}`],
         }),
         listedBy: null,
-        currentPage: parseInt(filtersValues.PG),
+        currentPage: filtersValues.PG ? parseInt(filtersValues.PG) : null,
         totalCount: apiResData.totalCount,
       };
     } else {
@@ -234,7 +234,7 @@ export async function generateMetadata({
     ) {
       title = `${phaseDisplay} in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} for Sale - GRP`;
     } else {
-      title = `${projectFormatted} - Residential Properties for Sale in ${localityFormatted}, ${cityFormatted} - GRP`;
+    title = `${projectFormatted ? `${projectFormatted} -` : ""}  Residential Properties for Sale in ${localityFormatted ? localityFormatted + "," : "Bengaluru"} ${cityFormatted ?? "Bengaluru"} - GRP`;
     }
 
     // Dynamic Description

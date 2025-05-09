@@ -21,7 +21,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
 import ListingSearchPagination from "../../listing/_new-listing-search-page/components/ListingSearchPagination";
-import ProjectSearchPagination from "./ProjectSearchPagination";
+// import ProjectSearchPagination from "./ProjectSearchPagination";
 
 type Props = {
   mutate?: ({}: { type?: string; index?: number }) => void;
@@ -60,7 +60,6 @@ function LeftSection({
     hasNextPage,
     fetchNextPage,
     refetch,
-    isFetchedAfterMount,
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
@@ -240,34 +239,25 @@ function LeftSection({
               Loading...
             </div>
           )}
-            {true   && (
-        <div
-        className={
-          typeof window !== "undefined"
-            ? "absolute left-[-9999px] w-px h-px overflow-hidden invisible"
-            : ""
-        }
-        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
-      >
-        <ProjectSearchPagination
-          currentPage={
-            frontendFilters.currentPage ? frontendFilters.currentPage : 1
-          }
-          totalCount={
-            100
-            /* isTrue
-              ? totalCount
-              : frontendFilters.totalCount
-              ? frontendFilters.totalCount
-              : 0 */
-          }
-        />
-        </div>
-      )}
+     
         </>
       ) : (
         <EmptyState />
       )}
+           
+         <div
+                    className={typeof window !== "undefined" ? "hidden" : "space"}
+                    aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+                  >
+                    <ListingSearchPagination
+                    searchQueryParmeter
+                      currentPage={
+                        frontendFilters.currentPage ? frontendFilters.currentPage  : 1
+                      }
+                      totalCount={frontendFilters.totalCount ?? 0}
+                    />
+                  </div>
+      
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />

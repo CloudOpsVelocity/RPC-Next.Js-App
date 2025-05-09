@@ -1,6 +1,4 @@
-import {
-  findPathForProjectListing,
-} from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import { findPathForProjectListing } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
 import {
@@ -30,6 +28,7 @@ export default async function Page({ params: { cg } }: Props) {
         cg: slugValues.CG,
         listedBy: "All",
       }}
+      preDefinedFilters={""}
     />
   );
 }

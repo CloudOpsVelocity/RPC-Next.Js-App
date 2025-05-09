@@ -21,6 +21,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
 import ListingSearchPagination from "../../_new-listing-search-page/components/ListingSearchPagination";
+import { useParams, useSearchParams } from "next/navigation";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -42,13 +43,13 @@ function LeftSection({
   preDefinedFilters,
   frontendFilters,
 }: Props) {
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const state = useAtomValue(projSearchStore);
   const [mainData, setMainData] = useState<any>(serverData || []);
   const [totalCount, setTotalCount] = useState(frontendFilters.totalCount);
   const isTrue = apiFilterQueryParams !== preDefinedFilters;
+  const params = useParams();
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
@@ -94,7 +95,6 @@ function LeftSection({
     // },
   });
 
-
   //console.log(typeof window !== "undefined" )
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
@@ -134,8 +134,9 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage]);
   const dataToUse =
-    apiFilterQueryParams !== preDefinedFilters ||
-    (data && data?.pageParams?.length > 0)
+    apiFilterQueryParams === preDefinedFilters || typeof window === "undefined"
+      ? mainData
+      : data?.pages.flat()
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
@@ -194,6 +195,7 @@ function LeftSection({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
+ 
   return (
     <div
       className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
@@ -241,7 +243,7 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
-      {hasNextPage && shouldFetchMore && (
+      { hasNextPage && shouldFetchMore && (
         <div
           ref={loadMoreRef}
           className="w-full py-8 flex justify-center items-center text-gray-600"
@@ -250,32 +252,19 @@ function LeftSection({
         </div>
       )}
 
-
-
-
-      {true   && (
+      {params.slugs.length< 4 ? (
         <div
-        className={
-          typeof window !== "undefined"
-            ? "absolute left-[-9999px] w-px h-px overflow-hidden invisible"
-            : ""
-        }
-        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
-      >
-        <ListingSearchPagination
-          currentPage={
-            frontendFilters.currentPage ? frontendFilters.currentPage : 1
-          }
-          totalCount={
-            isTrue
-              ? totalCount
-              : frontendFilters.totalCount
-              ? frontendFilters.totalCount
-              : 0
-          }
-        />
+          className={typeof window !== "undefined" ? "invisible" : ""}
+          aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+        >
+          <ListingSearchPagination
+            currentPage={
+              frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
+            }
+            totalCount={frontendFilters.totalCount ?? 0}
+          />
         </div>
-      )}
+      ) : null}
       <LoginPopup />
       <RequestCallBackModal />
 

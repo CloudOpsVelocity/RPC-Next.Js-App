@@ -22,15 +22,20 @@ export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf
     ? parseApiFilterQueryParams(params.searchParams.sf)
     : null;
-  const frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
+  let frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
   const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
-  const data = isProj
-    ? await (
-        await getProjSearchData(apiFilters ?? "")
-      ).results
-    : await (
-        await getSearchData(apiFilters ?? "")
-      ).results;
+  const res = isProj
+    ? await getProjSearchData(apiFilters ?? "cg=S")
+    : await getSearchData(apiFilters ?? "cs=S");
+  const data = res.results;
+  const totalCount = res.totalCount;
+  // const currentPage = res.currentPage;
+
+  frontendFilters = {
+    ...frontendFilters,
+    totalCount,
+    // currentPage,
+  };
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative">
       <link
