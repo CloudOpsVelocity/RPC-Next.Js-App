@@ -20,10 +20,11 @@
     "staging": "cross-env ENVIRONMENT=staging  npm run build  && cross-env NODE_ENV=production next start -p 3000",
     "test-build": "cross-env NODE_ENV=test next build",
     "test-start": "cross-env NODE_ENV=test next start -p 3000",
-    "prod-build": "npm run build",
+    "prod-build": "cross-env NODE_OPTIONS=--max_old_space_size=3072 npm run build",
     "prod-start": "next start -p 3000",
     "postbuild": "next-sitemap",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "build-test": "cross-env NODE_OPTIONS=--max_old_space_size=3072 next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

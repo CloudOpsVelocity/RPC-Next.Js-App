@@ -327,5 +327,5 @@ export async function generateMetadata({
     },
   };
 }
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
+export const dynamic = "force-static";
+export const dynamicParams = false;
