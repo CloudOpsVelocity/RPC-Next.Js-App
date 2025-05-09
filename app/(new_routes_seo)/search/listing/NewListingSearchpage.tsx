@@ -44,7 +44,6 @@ export default function NewListingSearchpage({
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full">
         <ProjectSearchBreadCrumbs is2lakhUrls={is2lakhUrls} pageUrl={pageUrl} />
         <div className="flex flex-row items-start gap-2">
-          {JSON.stringify(frontendFilters)}
           <ListingHeaderFilters
             isListing={isListing}
             showProjectTab={showProjectTab}
