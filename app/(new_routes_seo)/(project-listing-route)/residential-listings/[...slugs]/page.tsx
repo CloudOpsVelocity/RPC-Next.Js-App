@@ -84,19 +84,20 @@ export default async function Page({ params, searchParams }: Props) {
       const queryString = queryParams.join("&");
       const apiResData = await getSearchData(queryString);
       serverData = apiResData.results;
+
       frontendFilters = {
         ...(lt && { localities: [`${lt}+${filtersValues.LT}`] }),
-        ...((bhk_unit_type || phase) && {
+        ...(filtersValues.BH && {
           bhk: [parseInt(filtersValues.BH as string)],
         }),
-        ...((bhk_unit_type || phase) && {
+        ...(filtersValues.PT && {
           propType: parseInt(filtersValues.PT as string),
         }),
         cg: filtersValues.CG,
         projName: project,
-        projIdEnc: filtersValues.PH,
+        projIdEnc: filtersValues.PJ,
         ...(filtersValues.PH && {
-          phaseId: [`${params.slugs[5]}+${filtersValues.PH}`],
+          phaseId: [`${params.slugs[4]}+${filtersValues.PH}`],
         }),
         listedBy: null,
         currentPage: filtersValues.PG ? parseInt(filtersValues.PG) : null,
@@ -139,6 +140,7 @@ export default async function Page({ params, searchParams }: Props) {
       };
     }
   }
+  console.log({ filtersValues });
   return !isProjectListing ? (
     <NewListingSearchpage
       pageUrl={pathname}
