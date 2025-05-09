@@ -234,7 +234,11 @@ export async function generateMetadata({
     ) {
       title = `${phaseDisplay} in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} for Sale - GRP`;
     } else {
-    title = `${projectFormatted ? `${projectFormatted} -` : ""}  Residential Properties for Sale in ${localityFormatted ? localityFormatted + "," : "Bengaluru"} ${cityFormatted ?? "Bengaluru"} - GRP`;
+      title = `${
+        projectFormatted ? `${projectFormatted} -` : ""
+      }  Residential Properties for Sale in ${
+        localityFormatted ? localityFormatted + "," : "Bengaluru"
+      } ${cityFormatted ?? "Bengaluru"} - GRP`;
     }
 
     // Dynamic Description
