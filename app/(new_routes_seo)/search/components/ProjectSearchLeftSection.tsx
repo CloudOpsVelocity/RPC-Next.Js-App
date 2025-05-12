@@ -78,9 +78,9 @@ function LeftSection({
           pageParams: [0],
         }
       : undefined,
-    cacheTime: 300000,
+    // cacheTime: 300000,
     enabled: isTrue,
-    staleTime: 4000,
+    // staleTime: 4000,
     refetchOnWindowFocus: false,
     onSuccess: (data: any) => {
       const newData = data.pages[data.pageParams.length - 1];
