@@ -22,7 +22,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
 import ListingSearchPagination from "../../_new-listing-search-page/components/ListingSearchPagination";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -51,7 +51,7 @@ function LeftSection({
   const [totalCount, setTotalCount] = useState(frontendFilters.totalCount);
   const isTrue = apiFilterQueryParams !== preDefinedFilters;
   const params = useParams();
-
+  const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
   const {
@@ -64,7 +64,11 @@ function LeftSection({
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [
-      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+      `searchQuery${
+        apiFilterQueryParams
+          ? `-${apiFilterQueryParams}-${pathname}`
+          : `${pathname}`
+      }`,
     ],
     queryFn: async ({ pageParam = frontendFilters.page || 0 }) => {
       const response = await getListingSearchData(
@@ -112,7 +116,6 @@ function LeftSection({
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
-   
   }, []);
 
   // Enhanced infinite scroll logic
@@ -263,8 +266,8 @@ function LeftSection({
 
       {params.slugs && params.slugs.length < 4 ? (
         <div
-      className={clsx({ invisible: isClient })}
-        aria-hidden={isClient ? 'true' : undefined}
+          className={clsx({ invisible: isClient })}
+          aria-hidden={isClient ? "true" : undefined}
         >
           <ListingSearchPagination
             currentPage={

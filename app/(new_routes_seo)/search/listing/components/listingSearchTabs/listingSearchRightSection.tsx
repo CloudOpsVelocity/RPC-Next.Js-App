@@ -14,6 +14,7 @@ import { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
 import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 import LocationCard from "@/app/test/newui/components/modals/overly_items/LocationList";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
+import { usePathname } from "next/navigation";
 
 const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
   const Map = useMemo(
@@ -34,7 +35,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
       ),
     []
   );
-
+  const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
   const dispatch = useSetAtom(overlayAtom);
@@ -48,7 +49,11 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
 
   const { data } = useInfiniteQuery({
     queryKey: [
-      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+      `searchQuery${
+        apiFilterQueryParams
+          ? `-${apiFilterQueryParams}-${pathname}`
+          : `${pathname}`
+      }`,
     ],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await getSearchData(
