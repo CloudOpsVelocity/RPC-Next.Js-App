@@ -1,9 +1,8 @@
 "use client";
 import { useHydrateAtoms } from "jotai/utils";
 import dynamic from "next/dynamic";
-import { usePathname } from "next/navigation";
 import { useQueryState } from "nuqs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   initialState,
   projSearchStore,
@@ -13,6 +12,7 @@ import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
 import LeftSection from "../components/ProjectSearchLeftSection";
+import { usePathname } from "next/navigation";
 const RightSection = dynamic(
   () => import("../components/ProjectSearchRightSection"),
   { ssr: false }
@@ -31,7 +31,19 @@ export default function Mainsection({
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const pathname = usePathname();
+  const [store, setStore] = useAtom(projSearchStore);
 
+  // Update the hydration payload only when the pathname changes
+  useEffect(() => {
+    setStore({
+      type: "update",
+      payload: {
+        ...initialState,
+        ...frontendFilters,
+      },
+    });
+  }, [frontendFilters]);
   // useHydrateAtoms(
   //   [
   //     [
