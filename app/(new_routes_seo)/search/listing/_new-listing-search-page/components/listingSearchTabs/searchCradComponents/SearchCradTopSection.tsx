@@ -115,9 +115,9 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
       });
   };
 
-  useEffect(() => {
-    register(index, onAddingShortList);
-  }, [index]);
+  // useEffect(() => {
+  //   register(index, onAddingShortList);
+  // }, [index]);
 
   const newData = {
     ...data,
@@ -128,7 +128,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
   return( 
     <div className={Styles.searchCradTopRightBox}>
-      <SearchCardTopCornerSection topCornerRightData={topCornerRightData}/>
+      <SearchCardTopCornerSection topCornerRightData={topCornerRightData} onAddingShortList={onAddingShortList}/>
 
       {type === "proj" ? 
         <>

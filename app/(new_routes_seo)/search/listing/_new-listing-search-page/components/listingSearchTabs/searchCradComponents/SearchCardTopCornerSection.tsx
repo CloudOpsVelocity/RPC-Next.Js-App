@@ -5,10 +5,12 @@ import { useMediaQuery } from '@mantine/hooks';
 import { topCornerRightSectionData } from './searchData';
 import Link from 'next/link';
 import { DownLoadIcon } from '@/app/images/commongsSvgs2';
+import HeartButton from '@/app/test/newui/components/Card/Top/Center/HeartButton';
 
 
 type Props = {
   topCornerRightData: topCornerRightSectionData;
+  onAddingShortList: any;
 }
 
 const ListingDownSectionCard = ({
@@ -37,7 +39,7 @@ const ListingDownSectionCard = ({
   );
 };
 
-function SearchCardTopCornerSection({topCornerRightData}: Props) {
+function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Props) {
     const {category, type, basePrice, sqftPrice, floorPlan, Sh, brochureUrl, amenCount, propTypeName, atFloor, facing, towerName} = topCornerRightData;
     const isMobile = useMediaQuery("(max-width: 1600px)");
     console.log(Sh)
@@ -62,8 +64,11 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                 <div className={Styles.likeAndShearCon}>
                   <div className={Styles.likeBtnCon}>
                     <button 
-                      data-action="like"
-                      //  onClick={onAddingShortList}
+                      // data-action="like"
+                      onClick={(e)=>{
+                        e.stopPropagation(); 
+                        onAddingShortList();
+                      }}
                     >
                       {Sh ? <p> ❤️ </p>: <p className={Styles.unLikeBtn}> 🤍 </p> }
                     </button>
@@ -296,11 +301,18 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
             <>
               <div className={Styles.cornerDetailsForDesktop}>
                 <div className="space-x-2 flex flex-row justify-center">
-                  {/* <HeartButton
+                  <HeartButton
                     shortListed={Sh}
-                    // onAddingShortList={onAddingShortList}
-                  /> */}
-                  <button data-action="like">{config.heartIcon}</button>
+                    onAddingShortList={(e)=>{
+                      e.stopPropagation(); 
+                      onAddingShortList();
+                    }}
+                  />
+                  {/* <button 
+                    // data-action="like"
+                  >
+                    {config.heartIcon}
+                  </button> */}
                   
                   <button
                     className="space-x-2 flex flex-row justify-center"

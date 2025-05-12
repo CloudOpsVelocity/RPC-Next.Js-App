@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   shortListed: string;
-  onAddingShortList: () => void;
+  onAddingShortList: (e:any) => void;
 };
 
 export default function HeartButton({ shortListed, onAddingShortList }: Props) {
