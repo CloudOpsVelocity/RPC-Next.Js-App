@@ -12,6 +12,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { modalPopup, selectedNearByAtom } from "@/app/store/search/map";
 import LocationCard from "@/app/test/newui/components/modals/overly_items/LocationList";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
+import { usePathname } from "next/navigation";
 // import { CustomLoading } from "@/app/images/commonSvgs";
 
 const RightSection = ({ serverData, isTrue }: any) => {
@@ -38,6 +39,7 @@ const RightSection = ({ serverData, isTrue }: any) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [mapPopup, setMapPopup] = useAtom(modalPopup);
   const dispatch = useSetAtom(overlayAtom);
+  const pathname = usePathname();
 
   const {
     data: nearByData,
@@ -45,32 +47,35 @@ const RightSection = ({ serverData, isTrue }: any) => {
     isLoader,
   } = useAtomValue(selectedNearByAtom);
 
-  const { data } =
-    useInfiniteQuery({
-      queryKey: [
-        `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
-      ],
-      queryFn: async ({ pageParam = 0 }) => {
-        if (!isTrue) {
-          return serverData;
-        }
-        const response = await getSearchData(
-          pageParam,
-          apiFilterQueryParams ? apiFilterQueryParams : ""
-        );
+  const { data } = useInfiniteQuery({
+    queryKey: [
+      `searchQuery${
+        apiFilterQueryParams
+          ? `-${apiFilterQueryParams}-${pathname}`
+          : `${pathname}`
+      }`,
+    ],
+    queryFn: async ({ pageParam = 0 }) => {
+      if (!isTrue) {
+        return serverData;
+      }
+      const response = await getSearchData(
+        pageParam,
+        apiFilterQueryParams ? apiFilterQueryParams : ""
+      );
 
-        return response;
-      },
-      getNextPageParam: (lastPage: any, allPages: any) => {
-        const nextPage = allPages.length;
-        if (lastPage.length < 20) {
-          return;
-        }
-        return nextPage;
-      },
-      ...RTK_CONFIG,
-      enabled: false,
-    });
+      return response;
+    },
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      const nextPage = allPages.length;
+      if (lastPage.length < 20) {
+        return;
+      }
+      return nextPage;
+    },
+    ...RTK_CONFIG,
+    enabled: false,
+  });
   const apidata = data?.pages?.flat() || [];
 
   return !isMobile ? (

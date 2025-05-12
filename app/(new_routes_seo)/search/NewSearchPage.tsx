@@ -33,6 +33,7 @@ export default function NewSearchPage({
 
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs key="newSearchPage1" pageUrl={pageUrl} />
+
         <ProjSearchMainFilterSection
           isListing={isListing}
           frontendFilters={frontendFilters}

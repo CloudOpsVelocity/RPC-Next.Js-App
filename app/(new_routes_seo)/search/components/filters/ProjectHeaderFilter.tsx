@@ -350,6 +350,7 @@ const HeaderFilters = ({
   return (
     <>
       <div className="w-full max-w-[100%] max-h-[60vh] bg-white border-b relative md:sticky top-0 z-auto md:z-[11]">
+        {JSON.stringify(state)}
         <div className=" px-1 ">
           <div
             ref={searchRef}
