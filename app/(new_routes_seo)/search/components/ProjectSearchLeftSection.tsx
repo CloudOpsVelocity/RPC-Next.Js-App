@@ -190,7 +190,7 @@ function LeftSection({
   );
   console.log(dataToUse);
   return (
-    <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
+    <div className="flex flex-col w-full md:max-w-[50%] relative overflow-auto">
       {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length > 0 ? (

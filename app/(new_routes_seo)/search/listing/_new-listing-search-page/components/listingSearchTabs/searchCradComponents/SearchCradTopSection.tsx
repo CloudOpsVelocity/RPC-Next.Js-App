@@ -1,3 +1,4 @@
+"use client";
 // import React, { useEffect, useState } from 'react';
 import React, { useState, useEffect } from 'react';
 
@@ -97,41 +98,33 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
   const aboutText = projectAbout && projectAbout.length !== 0 ? projectAbout : usp;
   const readMoreThreshold = 200;
-  const isReadMoreNeeded = aboutText?.length > readMoreThreshold;
+  const isReadMoreNeeded = aboutText?.length > readMoreThreshold; 
 
   const approvedNamesData = sanitizeApprovedNamesSectionData(data);
 
   const { toggleShortlist } = useShortlistAndCompare();
 
-  const [stateData, setStateData] = useState({
-      shortListed: shortListed === "Y" ? true : false,
-  });
-
-  const newData = {
-    ...data,
-    Sh: stateData.shortListed, 
-  };
-
-  const topCornerRightData = sanitizetopCornerRightSectionData(newData); 
+  const [stateData, setStateData] = useState(shortListed === "Y" ? true : false );
 
   const onAddingShortList = () => {
-    console.log("working...")
-    // if (session) {
-      setStateData({ ...stateData, shortListed: !stateData.shortListed });
+      setStateData(prev => (!prev));
       toggleShortlist({
         id: type === "proj" ? projIdEnc : propIdEnc,
-        status: stateData.shortListed ? "N" : "Y",
+        status: stateData ? "N" : "Y",
         source: type,
       });
-    // } 
-    // else {
-    //   openLogin(() => refetch());
-    // }
   };
 
   useEffect(() => {
     register(index, onAddingShortList);
   }, [index]);
+
+  const newData = {
+    ...data,
+    Sh: stateData, 
+  };
+
+  const topCornerRightData = sanitizetopCornerRightSectionData(newData);  
 
   return( 
     <div className={Styles.searchCradTopRightBox}>

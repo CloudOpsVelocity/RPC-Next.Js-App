@@ -95,11 +95,14 @@ export default function ListingServerCardData({
 
   const onViewMap = (data:any) => {
     const {
-        agentListing, ownerListing, projOrPropName, lat, lang, type, 
-        projIdEnc, propIdEnc, propType, propTypeName, phaseId
+        agentListing, ownerListing, type, projName, propName,
+        projIdEnc, propIdEnc, propType, propTypeName, phaseId, location
     } = data;
 
-    console.log(projOrPropName);
+    const projOrPropName:string = type === "proj" ? projName : propName;
+
+    const lat = location.split(",")[0];
+    const lang = location.split(",")[1];
 
     setIsMapLoaded(true);
     setNearby((prev: any) => ({
@@ -180,11 +183,15 @@ export default function ListingServerCardData({
   };
 
   const handleParentAction = (index: string) => {
-    const fn = cardFnsRef.current[index];
-    if (fn) {
-      fn();
+    if (session) {
+      const fn = cardFnsRef.current[index];
+      if (fn) {
+        fn();
+      } else {
+        console.warn(`No function registered for card: ${index}`);
+      }
     } else {
-      console.warn(`No function registered for card: ${index}`);
+      openLogin(() => refetch());
     }
   };
 
@@ -208,7 +215,6 @@ export default function ListingServerCardData({
         setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"Read More", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
         break; 
       case 'like':
-        console.log("like")
         handleParentAction(index.toString());
         break;
       case 'share':
@@ -231,7 +237,7 @@ export default function ListingServerCardData({
         break;
       case 'nearby':
         document.body.style.overflow = "hidden";
-        setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: selectedItem}));
+        setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: selectedItem}));fgvb 
         // onSetNearBy(selectedItem);
         break;
       case 'amenities':

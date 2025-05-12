@@ -40,6 +40,7 @@ const ListingDownSectionCard = ({
 function SearchCardTopCornerSection({topCornerRightData}: Props) {
     const {category, type, basePrice, sqftPrice, floorPlan, Sh, brochureUrl, amenCount, propTypeName, atFloor, facing, towerName} = topCornerRightData;
     const isMobile = useMediaQuery("(max-width: 1600px)");
+    console.log(Sh)
  
     return (
       <div className={Styles.searchCardTopCornerMainCon}>
@@ -100,7 +101,8 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                     )}
         
                     <button
-                      data-action="viewMap"
+                      // data-action="viewMap"
+                      data-action="nearby"
                       title="Click to view on Map"
                       className={Styles.searchCardViewMapBtn}
                       // className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none "
@@ -132,15 +134,16 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                         // className=" px-[4px] h-full w-full text-white transition-[300ms] rounded-md bg-transparent"
                         className={Styles.searchCardViewMapBtnSpan}
                       >
-                        View Map
+                        Map & Nearby
                       </span>
                     </button>
         
                   </div>
 
         
-                  <button
-                    data-action="viewMap"
+                  {/* <button
+                    // data-action="viewMap"
+                    data-action="nearby"
                     className={`${Styles.searchCardViewMapBtn} ${Styles.searchCardViewMapBtnForMobile}`}
                     title="Click to view on Map"
                     // onClick={() => {
@@ -170,9 +173,9 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                       // className="bg-white px-[6px] h-full w-full text-black group-hover:text-white transition-[300ms] rounded-md hover:bg-transparent"
                       className={Styles.searchCardViewMapBtnForMobileSpan}
                     >
-                      View on Map
+                      Map & Nearby
                     </span>
-                  </button>
+                  </button> */}
                 </div>
 
                 {/* tab and laptop */}
@@ -207,7 +210,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                     >
                       {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
                     </button>
-                    <button
+                    {/* <button
                       data-action="nearby"
                       className={Styles.nearByBtn}
                       title="Click to view all Near by Locations"
@@ -249,7 +252,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                       // }}
                     >
                       Nearby
-                    </button>
+                    </button> */}
                   </div>
                 )}
                 {(type === "proj" || type === null || category == "Sale") && (
@@ -317,7 +320,8 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                 </div>
         
                 <button
-                  data-action="viewMap"
+                  // data-action="viewMap"
+                  data-action="nearby"
                   className={Styles.searchCardViewMapBtn}
                   title="Click to view on Map"
                   // onClick={() => {
@@ -344,7 +348,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                   // }}
                 >
                   <span className={Styles.searchCardViewMapBtnSpan}>
-                    View on Map
+                    Map & Nearby
                   </span>
                 </button>
         
@@ -421,7 +425,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                     </button>
                   )}
         
-                  <button
+                  {/* <button
                     data-action="nearby"
                     className={Styles.nearByBtn}
                     title="Click to view all Near by Locations"
@@ -477,7 +481,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                     // }}
                   >
                     Nearby
-                  </button>
+                  </button> */}
                 </div>
               )}
             </>

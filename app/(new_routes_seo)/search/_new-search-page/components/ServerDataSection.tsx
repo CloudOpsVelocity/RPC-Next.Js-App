@@ -32,7 +32,7 @@ export default function ServerDataSection({
       ? frontendFilters.listedBy
       : state.listedBy;
   }, [state, frontendFilters]);
-  console.log({ lt: listedBy() });
+  // console.log({ lt: listedBy() });
   return data.map((eachOne: any, index: number) => {
     return (
       <ProjectCard

@@ -198,7 +198,7 @@ function LeftSection({
  
   return (
     <div
-      className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
+      className={`flex flex-col w-full md:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
       {isFetching && isFetchingNextPage === false ? (

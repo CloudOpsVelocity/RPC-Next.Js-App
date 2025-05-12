@@ -123,7 +123,7 @@ const ListingSearchRightSection = ({ serverData, isTrue }: any) => {
 
     return (
       <div
-        className="w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[60%] xl:w-[50%] scroll-mt-[150px] z-0"
+        className="w-full max-h-[70vh] sm:fixed right-0 flex justify-start items-start md:w-[50%] scroll-mt-[150px] z-0"
         id="mobileMap"
       >
         <Map
