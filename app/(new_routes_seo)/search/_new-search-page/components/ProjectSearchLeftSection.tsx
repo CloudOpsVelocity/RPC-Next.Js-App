@@ -76,12 +76,15 @@ function LeftSection({
     getNextPageParam: (lastPage: any) => {
       return lastPage?.length === 20 ? page + 1 : undefined;
     },
-    initialData: serverData
+    ...(serverData && apiFilterQueryParams === preAppliedFilters
       ? {
-          pages: [serverData],
-          pageParams: [0],
+          initialData: {
+            pages: [serverData],
+            pageParams: [0],
+          },
+          // initialPageParam: 0,
         }
-      : undefined,
+      : {}),
     cacheTime: 300000,
     enabled: isTrue,
     staleTime: 0,
