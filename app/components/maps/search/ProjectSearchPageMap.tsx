@@ -336,6 +336,7 @@ const MapContent = ({ data }: any): JSX.Element | null => {
           item.propTypeName ? item.propTypeName : item.propType
         }`;
 
+
         return (
           <Fragment key={itemId + "proijMarkerTag" + index.toString()}>
             <Marker

@@ -10,6 +10,7 @@ type Props = {
   containerClassStyle?: string;
   title?: string;
   hideHeader?: boolean;
+  childrenContainerClass?: string;
 };
 
 function DrawerBox({
@@ -19,6 +20,7 @@ function DrawerBox({
   containerClassStyle,
   title,
   hideHeader,
+  childrenContainerClass,
 }: Props) {
   const onMainConClick = (e: any) => {
     var baxEl = document.getElementById("modalDrawerPopupInnerCon");
@@ -80,8 +82,8 @@ function DrawerBox({
             </h3>
             <Close
               close={() => {
-                handleChange(false);
                 document.body.style.overflow = "unset";
+                handleChange(false);
                 // window.history.replaceState(null, "", window.location.href);
                 window.history.back();
               }}
@@ -90,7 +92,7 @@ function DrawerBox({
           </div>
         )}
 
-        <div className="w-full rounded-[4px]">{children}</div>
+        <div className={`w-full rounded-[4px] ${childrenContainerClass ? childrenContainerClass : ""}`}>{children}</div>
       </div>
     </div>
   );

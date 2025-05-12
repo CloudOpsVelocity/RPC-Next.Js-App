@@ -60,6 +60,7 @@ const Overlay: React.FC = () => {
           )
       );
   };
+  
   const renderContent = () => {
     switch (conType) {
       case "amenities":
