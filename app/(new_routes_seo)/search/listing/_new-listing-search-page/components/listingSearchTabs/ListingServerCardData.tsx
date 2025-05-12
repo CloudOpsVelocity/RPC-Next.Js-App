@@ -13,7 +13,7 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import PopupOverlay from "./searchCradComponents/PopupOverlay";
-import { ChildRef } from "./searchCradComponents/SearchCradTopSection";
+import { sortUnits } from "@/app/utils/unitparser";
 
 type Props = {
   data: any;
@@ -39,8 +39,6 @@ export default function ListingServerCardData({
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openLogin }] = usePopShortList();
-
-
 
   const cg = useMemo(() => {
     if (state.cg === undefined) {
@@ -174,19 +172,19 @@ export default function ListingServerCardData({
     }
   };
 
-  // Initialize ref array for each card
-  const childRefs = useRef<(ChildRef | null)[]>([]);
 
-  // Ensure each ref is correctly assigned
-  const setChildRef = (index: number) => (el: ChildRef | null) => {
-    childRefs.current[index] = el;
+  const cardFnsRef = useRef<Record<string, () => void>>({});
+
+  const registerCard = (id: string, fn: () => void) => {
+    cardFnsRef.current[id] = fn;
   };
 
-  const handleCallAll = (index: number) => {
-  console.log("index: ", index)
-    const ref = childRefs.current[index];
-    if (ref) {
-      ref.callMe();  // Call 'callMe' only for the child at the specified index
+  const handleParentAction = (index: string) => {
+    const fn = cardFnsRef.current[index];
+    if (fn) {
+      fn();
+    } else {
+      console.warn(`No function registered for card: ${index}`);
     }
   };
 
@@ -204,12 +202,6 @@ export default function ListingServerCardData({
 
     console.log(selectedItem);
 
-
-  const handleParentAction = (index: number) => {
-    console.log("-call-")
-    cardFns[index]?.(); // e.g., call function from card-2
-  };
-
     switch(action){
       case 'readmore':
         document.body.style.overflow = "hidden";
@@ -217,9 +209,7 @@ export default function ListingServerCardData({
         break; 
       case 'like':
         console.log("like")
-        handleCallAll(index);
-
-        handleParentAction(index)
+        handleParentAction(index.toString());
         break;
       case 'share':
         shearPropOrProj(selectedItem);
@@ -251,7 +241,11 @@ export default function ListingServerCardData({
       case 'listingType':
         handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, selectedItem.type);
         break;
-
+      case 'bhk':
+        const sortedBhks:any = sortUnits(selectedItem.bhkNames);
+        document.body.style.overflow = "hidden";
+        setPopupState(prev => ({...prev, isOpen: true, type: 'bhk', title:"Unit Types", content: sortedBhks, data: selectedItem}));
+        break;
       default:
         console.log('Card clicked:', cardId);
         window.open(selectedItem.pageUrl, "_self", "noreferrer");
@@ -263,16 +257,6 @@ export default function ListingServerCardData({
     setPopupState(prev => ({...prev, isOpen: false, type: '', title:"", data: {}}));
   };
 
-
-
-
-  const [cardFns, setCardFns] = useState<Record<string, () => void>>({});
-
-  const registerCard = (id: string, fn: () => void) => {
-    setCardFns(prev => ({ ...prev, [id]: fn }));
-  };
-
-
   return(
     <div onClick={handleClick}>
       {/* <SearchCard data={data[0]} index={0}  /> */}
@@ -280,22 +264,23 @@ export default function ListingServerCardData({
         <PopupOverlay popupState={popupState} closePopup={closePopup} />
       }
 
-      {data.map((eachOne: any, index: number) => (
-      <SearchCard
-        key={eachOne.projIdEnc + eachOne.propType + index.toString()}
-        refetch={refetch}
-        data={{
-          ...eachOne,
-          type: listedBy(),
-          cg: cg,
-        }}
-        index={index}
-        mutate={mutate}
-        ref={setChildRef(index)} 
+      {data.map((eachOne: any, index: number) => {
+        const sortedBhks:any = sortUnits(eachOne.bhkNames);
 
-        register={registerCard}
-
-      />
-      ))}
+        return(
+          <SearchCard
+            key={eachOne.projIdEnc + eachOne.propType + index.toString()}
+            refetch={refetch}
+            data={{
+              ...eachOne,
+              type: listedBy(),
+              cg: cg,
+              sortedBhks: sortedBhks,
+            }}
+            index={index.toString()}
+            mutate={mutate}
+            register={registerCard}
+          />
+      )})}
     </div>
 )}

@@ -98,6 +98,7 @@ type CountListProps = {
 
 function CountListing({type, value}: CountListProps) {
   return (
+    value > 0 && (
     <ButtonElement
         title={`${type} Listing : ${value}`}
         dataAction="listingType"
@@ -107,7 +108,7 @@ function CountListing({type, value}: CountListProps) {
             value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
         }`}
         toolTip={`Click to view ${type} Listing`}
-    />
+    />)
   )
 }
 

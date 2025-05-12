@@ -48,23 +48,23 @@ function PopupOverlay({popupState, closePopup}: Props) {
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             );
-        //   case "bhk":
-        //     return (
-        //       <div className="flex flex-wrap gap-2">
-        //         {Array.isArray(content) ? (
-        //           content.map((item) => (
-        //             <span
-        //               key={`bhk_${item}`}
-        //               className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
-        //             >
-        //               {item}
-        //             </span>
-        //           )) 
-        //         ) : (
-        //           <div>No BHK data available</div>
-        //         )}
-        //       </div>
-        //     );
+          case "bhk":
+            return (
+              <div className="flex flex-wrap gap-2">
+                {Array.isArray(content) ? (
+                  content.map((item) => (
+                    <span
+                      key={`bhk_${item}`}
+                      className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
+                    >
+                      {item}
+                    </span>
+                  )) 
+                ) : (
+                  <div>No BHK data available</div>
+                )}
+              </div>
+            );
           case "otherCharges":
             return <OtherChargesPopupBox data={data} />
           case "hightlights":

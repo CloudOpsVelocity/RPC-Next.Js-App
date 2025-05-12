@@ -387,6 +387,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
               {type === "proj" && (
                 <div className={Styles.broucherAndAmenityButton}>
                   {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
+                  {brochureUrl && 
                   <button
                     data-action="brochure"
                     // onClick={handleDownload}
@@ -395,6 +396,7 @@ function SearchCardTopCornerSection({topCornerRightData}: Props) {
                     <DownLoadIcon className={Styles.broucherIcon} />{" "}
                     Brochure
                   </button>
+                  }
                   {amenCount && (
                     <button
                       data-action="amenities"

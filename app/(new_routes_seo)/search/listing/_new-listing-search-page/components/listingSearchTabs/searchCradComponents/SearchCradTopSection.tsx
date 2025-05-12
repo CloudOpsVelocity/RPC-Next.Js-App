@@ -1,5 +1,5 @@
 // import React, { useEffect, useState } from 'react';
-import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Styles from "@/app/styles/seach/searchCrad.module.css";
 import Image from 'next/image';
@@ -16,24 +16,16 @@ import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
 import SearchCardApprovedNames from './SearchCardApprovedNames';
 import SearchCardTopCornerSection from './SearchCardTopCornerSection';
 import { isReraverified } from '@/app/utils/dyanamic/projects';
-import { useSession } from 'next-auth/react';
 import { useShortlistAndCompare } from '@/app/hooks/storage';
-import { usePopShortList } from '@/app/hooks/popups/useShortListCompare';
 
 interface SearchCardTopSectionLProps {
   data: TopLeftSectionData;
 }
 
-export type ChildRef = {
-  callMe: () => void;
-};
-
 interface SearchCardTopSectionRProps {
   // data: TopRightSectionData;
   data:any;
   refetch:any;
-  ref:any;
-
   register: (id: string, fn: () => void) => void;
   index:string;
 }
@@ -50,7 +42,6 @@ const Rera = () => {
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data }) => {
   const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus} = data
   const verified = isReraverified(rerastatus);
-
 
   return(
     <div className={Styles.searchCradTopImageBox}>
@@ -81,7 +72,7 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data }) => {
   )
 }
 
-export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRProps>(({ data, refetch, register, index }, ref) => {  
+export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, refetch, register, index }) => {  
   const {
     projName, phaseName, phaseCount, minPrice, maxPrice, sortedBhks, propType, cg, 
     city, locality, postedByName, builderCity, cityName, projIdEnc, propIdEnc, localityName, 
@@ -110,11 +101,7 @@ export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRPr
 
   const approvedNamesData = sanitizeApprovedNamesSectionData(data);
 
-
-  const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
-  const [, { open: openLogin }] = usePopShortList();
-
 
   const [stateData, setStateData] = useState({
       shortListed: shortListed === "Y" ? true : false,
@@ -127,38 +114,25 @@ export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRPr
 
   const topCornerRightData = sanitizetopCornerRightSectionData(newData); 
 
-
-  // console.log(newData)
-
   const onAddingShortList = () => {
     console.log("working...")
-    if (session) {
+    // if (session) {
       setStateData({ ...stateData, shortListed: !stateData.shortListed });
       toggleShortlist({
         id: type === "proj" ? projIdEnc : propIdEnc,
         status: stateData.shortListed ? "N" : "Y",
         source: type,
       });
-    } else {
-      openLogin(() => refetch());
-    }
+    // } 
+    // else {
+    //   openLogin(() => refetch());
+    // }
   };
-
-
-  useImperativeHandle(ref, () => ({
-    callMe: () => {
-      console.log(`Child function called`);
-    },
-  }));
-
 
   useEffect(() => {
     register(index, onAddingShortList);
   }, [index]);
 
-
-  
-  
   return( 
     <div className={Styles.searchCradTopRightBox}>
       <SearchCardTopCornerSection topCornerRightData={topCornerRightData}/>
@@ -166,7 +140,7 @@ export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRPr
       {type === "proj" ? 
         <>
           <Link href={pageUrl} prefetch={false}>
-            <h2>
+            <h2 style={{ width: "100%" }}>
                 <span className={Styles.searchCardPromName}>
                   {projName}{" "}
                   {phaseName && phaseCount !== undefined && phaseCount > 1 && ( 
@@ -179,9 +153,7 @@ export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRPr
                   {formatCurrency(Number(maxPrice))} 
                 </span>
             
-                <span
-                  className={Styles.searchCardProjNameType}
-                >
+                <span className={Styles.searchCardProjNameType}>
                   <span>
                     {sortedBhks && sortedBhks.length > 5
                       ? sortedBhks
@@ -193,25 +165,15 @@ export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRPr
                       : sortedBhks && sortedBhks.join(", ")}
                   </span>
                   {sortedBhks && sortedBhks.length > 5 && (
-                    <span
+                    <button
+                      data-action="bhk"
                       className={Styles.searchCardSortedBhks}
-                      // onClick={(e) => {
-                      //   e.stopPropagation();
-                      //   dispatch({
-                      //     type: "OPEN",
-                      //     content: sortedBhks,
-                      //     title: "Unit Types",
-                      //     id: `${
-                      //       type === "proj" ? projIdEnc : propIdEnc
-                      //     }+${propTypeId}+${phaseId}`,
-                      //     conType: "bhk",
-                      //     pType: type,
-                      //   });
-                      //   // Add your logic here to show all BHK types (e.g., open a modal)
-                      // }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
                     >
                       +{sortedBhks.length - 5} more
-                    </span>
+                    </button>
                   )}
                   {` ${propType} For ${
                     cg === "R" ? "Rent" : "Sale"
@@ -230,8 +192,8 @@ export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRPr
             href={urlBuilder}
             title="Click to view Builder"
             className={Styles.searchCardLink}
-            onClick={(e) => {
-              e.stopPropagation();
+            onClick={() => {
+              // e.stopPropagation();
               window.open(urlBuilder, "_self", "noreferrer");
             }}
           >
@@ -343,5 +305,5 @@ export const RightSideBlock = React.forwardRef<ChildRef, SearchCardTopSectionRPr
 
     </div>
   )
-})
+}
 

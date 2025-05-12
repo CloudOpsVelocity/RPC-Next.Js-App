@@ -152,7 +152,7 @@
 }
 
 .searchCardProjNameType{
-    width: 100%; 
+    /* width: 100%;  */
     font-weight: 700; 
     color: #000000; 
     font-size: 14px;
@@ -300,8 +300,8 @@
     display: flex; 
     position: absolute; 
     top: 0.75rem; 
-    right: 6rem; 
-    font-size: 12px;
+    right: 4rem; 
+    font-size: 14px;
     line-height: 1rem; 
     font-weight: 500; 
     color: #4f4f4f;
@@ -407,6 +407,7 @@
     color: #ffffff; 
     padding-left: 0.5rem;
     padding-right: 0.5rem; 
+    padding: 4px;
     background-color: #EA5806;
     white-space: nowrap;
 }
@@ -432,6 +433,7 @@
     background-color: #14b8a6;
     padding-left: 0.5rem;
     padding-right: 0.5rem; 
+    padding: 4px;
 }
 
 .nearByBtn:hover{
@@ -447,8 +449,12 @@
     height: auto; 
 }
 
-
-
+.broucherAndAmenityButton{
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem;
+    align-items: flex-end; 
+}
 
 @media only screen and (min-width: 600px) and (max-width: 1600px) {
     .searchCradMainCon{
@@ -504,15 +510,8 @@
 
     .searchCardAvgPriceText2{
         display: flex; 
-        font-size: 1rem;
+        font-size: 14px;
         line-height: 1.5rem; 
-    }
-
-    .broucherAndAmenityButton{
-        display: flex; 
-        flex-direction: column; 
-        gap: 0.5rem;
-        align-items: flex-end; 
     }
 
 
@@ -550,6 +549,7 @@
     }
 
     .searchCardAvgPriceText{
+        font-size: 12px;
         display: none; 
     }
   

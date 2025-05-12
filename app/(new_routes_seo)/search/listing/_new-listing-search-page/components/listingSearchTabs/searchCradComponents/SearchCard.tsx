@@ -13,19 +13,15 @@ type Props = {
   refetch?:any; 
   index: string;
   mutate?:any;
-  ref:any;
-
   register: (id: string, fn: () => void) => void;
-
 }
 
 function SearchCard({
   data, 
   index,
   refetch, 
-  ref,
   // mutate
-  register
+  register,
 }: Props) {
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   // const topSectionRightData = sanitizeTopRightSectionData(data);
@@ -60,7 +56,6 @@ function SearchCard({
           // data={topSectionRightData} 
           data={{ ...data, pageUrl: url }}
           refetch={refetch}
-          ref={ref}
           register={register}
           index={index}
         />

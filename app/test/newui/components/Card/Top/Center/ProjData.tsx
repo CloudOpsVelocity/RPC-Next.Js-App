@@ -93,7 +93,7 @@ export default function ProjData({
             <span>
               {sortedBhks && sortedBhks.length > 5
                 ? sortedBhks
-                    .filter(
+                    .filter( 
                       (bhk) => !bhk.includes(".5") && !bhk.includes("Servant")
                     )
                     .slice(0, 5)

@@ -125,7 +125,7 @@ export default function TopRightSection({
                   onAddingShortList={onAddingShortList}
                 /> */}
                  <button onClick={onAddingShortList}>
-      {       Sh ? <p> ❤️ </p>: <p className="text-sm text-gray-700"> 🤍 </p> }
+                {Sh ? <p> ❤️ </p>: <p className="text-sm text-gray-700"> 🤍 </p> } 
             </button>
                 <button
                 name="share Project"
