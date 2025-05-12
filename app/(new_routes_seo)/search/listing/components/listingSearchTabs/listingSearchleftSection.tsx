@@ -81,12 +81,15 @@ function LeftSection({
       return nextPage;
     },
 
-    ...(serverData && {
-      initialData: {
-        pages: [serverData],
-        pageParams: [0],
-      },
-    }),
+    ...(serverData && apiFilterQueryParams === preDefinedFilters
+      ? {
+          initialData: {
+            pages: [serverData],
+            pageParams: [0],
+          },
+          // initialPageParam: 0,
+        }
+      : {}),
     cacheTime: 300000,
     enabled: isTrue,
     // onSuccess: (data: any) => {
