@@ -182,18 +182,18 @@ export default function ListingServerCardData({
     cardFnsRef.current[id] = fn;
   };
 
-  const handleParentAction = (index: string) => {
-    if (session) {
-      const fn = cardFnsRef.current[index];
-      if (fn) {
-        fn();
-      } else {
-        console.warn(`No function registered for card: ${index}`);
-      }
-    } else {
-      openLogin(() => refetch());
-    }
-  };
+  // const handleParentAction = (index: string) => {
+  //   if (session) {
+  //     const fn = cardFnsRef.current[index];
+  //     if (fn) {
+  //       fn();
+  //     } else {
+  //       console.warn(`No function registered for card: ${index}`);
+  //     }
+  //   } else {
+  //     openLogin(() => refetch());
+  //   }
+  // };
 
 
   const handleClick = (e: any) => {
@@ -214,9 +214,9 @@ export default function ListingServerCardData({
         document.body.style.overflow = "hidden";
         setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"Read More", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
         break; 
-      case 'like':
-        handleParentAction(index.toString());
-        break;
+      // case 'like':
+      //   handleParentAction(index.toString());
+      //   break;
       case 'share':
         shearPropOrProj(selectedItem);
         break;
