@@ -51,7 +51,7 @@ export default function NewListingSearchpage({
           />
         </div>
       </div>
-      <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[260px]  ">
+      <div className="sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[226px]  ">
         <ListingMainSection
           frontendFilters={frontendFilters}
           serverData={serverData}

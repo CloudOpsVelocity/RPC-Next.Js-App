@@ -221,10 +221,10 @@ export default function ResidentialPage({
             <strong>Residential Projects</strong>
           </Link>{" "}
           Across Top Locations in India
-        </h2>
+         </h2>
 
-        <p className="text-base md:text-lg text-gray-600 mb-4">
-        Explore a curated selection of{" "}
+          <p className="text-base md:text-lg text-gray-600 mb-4">
+           Explore a curated selection of{" "}
           <Link
             href="https://www.getrightproperty.com/residential"
          
