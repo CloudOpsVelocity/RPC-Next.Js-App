@@ -6,6 +6,7 @@ import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
+import clsx from "clsx";
 import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
@@ -107,6 +108,12 @@ function LeftSection({
   });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
+  // this for hiddenin cilent of pagaintaiton
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+   
+  }, []);
 
   // Enhanced infinite scroll logic
   useEffect(() => {
@@ -256,8 +263,8 @@ function LeftSection({
 
       {params.slugs && params.slugs.length < 4 ? (
         <div
-          className={typeof window !== "undefined" ? "invisible" : ""}
-          aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+      className={clsx({ invisible: isClient })}
+        aria-hidden={isClient ? 'true' : undefined}
         >
           <ListingSearchPagination
             currentPage={

@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
-
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
@@ -18,6 +17,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
 import SearchPagination from "./searchPagination";
+import clsx from "clsx";
 import ListingSearchPagination from "../listing/_new-listing-search-page/components/ListingSearchPagination";
 
 type Props = {
@@ -142,6 +142,16 @@ function LeftSection({
     dispatch,
   ]);
 
+
+  // this for hiddenin cilent of pagaintaiton
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+   
+  }, []);
+
+
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -257,9 +267,10 @@ function LeftSection({
         <EmptyState />
       )}
       {true ? (
+        
         <div
-          className={typeof window !== "undefined" ? " invisible" : ""}
-          aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+        className={clsx({ invisible: isClient })}
+        aria-hidden={isClient ? 'true' : undefined}
         >
           <ListingSearchPagination
             currentPage={
@@ -268,6 +279,7 @@ function LeftSection({
             totalCount={frontendFilters.totalCount ?? 0}
           />
         </div>
+      
       ) : null}
       <LoginPopup />
       <RequestCallBackModal />
