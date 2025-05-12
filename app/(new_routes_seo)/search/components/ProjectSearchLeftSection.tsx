@@ -60,7 +60,11 @@ function LeftSection({
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [
-      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+      `searchQuery${
+        apiFilterQueryParams
+          ? `-${apiFilterQueryParams}-${pathname}`
+          : `${pathname}`
+      }`,
     ],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await getSearchData(
@@ -81,6 +85,7 @@ function LeftSection({
           // initialPageParam: 0,
         }
       : {}),
+
     //  initialData: serverData
     // ? {
     //     pages: [serverData],
