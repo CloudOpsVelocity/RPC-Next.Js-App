@@ -1,5 +1,6 @@
 import React from "react";
 import Line from "./Line";
+import Image from "next/image";
 
 type Props = {};
 
@@ -22,10 +23,24 @@ export default function HomeFeatures({}: Props) {
       </p>
       <div className=" shrink-0 m-auto flex justify-start sm:justify-center items-center mt-[10px] xl-[mt-0] xl:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
         <div className="hidden sm:block sm:min-w-[232px] sm:ml-[15%]">
-          {config.svg}
+         {/*  {config.svg} */}
+         <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/choose-desktop.svg`}
+        width={232}
+        height={150}
+        alt="Choose_Right_Property_des"
+        title="Choose_Right_Property_des"
+      />
         </div>
         <div className=" sm:hidden  sm:min-w-[232px]  sm:ml-[15%]">
-          {config.mobileSvg}
+         {/*  {config.mobileSvg} */}
+         <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/choose-mobile.svg`}
+        width={232}
+        height={150}
+        alt="Choose_Right_Property_des"
+        title="Choose_Right_Property_des"
+      />
         </div>
         <div className="space-y-1 gap-[10px] sm:space-y-0 ">
           {config.data.map((item) => (

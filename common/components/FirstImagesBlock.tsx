@@ -55,7 +55,7 @@ function FirstImagesBlock({ onSelect, data }: Props) {
             height={195}
             width={900}
             className={className}
-            // priority={index == 0 ? true : false}
+            priority={index == 0 ? true : false}
             unoptimized={true}
             // quality={80}
           />
