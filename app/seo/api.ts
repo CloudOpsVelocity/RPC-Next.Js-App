@@ -83,13 +83,11 @@ const getPagesSlugs = async (
     // if (pageType === "listing-search-seo") {
     //   result = data.status ? data.urlMap : {};
     // }
-
     if (pageType === "project-list") {
       result = data;
     } else {
       result = data;
     }
-
     // Cache the result
     pageTypeCache.set(pageType, result);
     return result;
