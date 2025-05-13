@@ -47,6 +47,9 @@ export default function ShowAllFiltersButton({
   onToggle,
   isListing,
 }: ShowAllFiltersButtonProps) {
+    
+
+
   const path = usePathname();
   const [expandedSections, setExpandedSections] = useState<{
     [key: string]: boolean;
@@ -137,6 +140,8 @@ export default function ShowAllFiltersButton({
       "pnb",
       "furnish",
     ];
+
+
 
     return (
       <div className="mb-6">
@@ -433,11 +438,11 @@ export default function ShowAllFiltersButton({
                 style={{ width: "80%" }}
                 defaultValue={[
                   state?.bugdetValue[0] ?? 500000,
-                  state?.bugdetValue[1] ?? 600000000,
+                  state?.bugdetValue[1] ?? 300000000,
                 ]}
                 value={state.bugdetValue}
                 min={0}
-                max={state.cg === "R" ? 100000 : 600000000}
+                max={state.cg === "R" ? 100000 : 300000000}
                 step={state.cg === "R" ? 1 : 100000}
                 label={(value) => toFormattedString(value)}
                 // size={isMobile ? "xs" : "md"}
