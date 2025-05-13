@@ -291,34 +291,48 @@ const HeaderFilters = ({
       );
       const data = await res.json();
       if (Object.hasOwn(data, "ids")) {
-        handleClearFilters("clearAll");
         let ids = extractApiValues(data.ids);
-        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+        if (ids.LT) {
           dispatch({
-            type: "update",
+            type: "pushToArray",
             payload: {
-              ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
-              ...(ids.PT && { propType: parseInt(ids.PT as string) }),
-              ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-              ...(ids.PJ && {
-                projIdEnc: ids.PJ as string,
-                projName: searchQuery,
-                listedBy: !isListing ? "All" : null,
-              }),
-              ...(ids.CG && {
-                cg: String(ids.CG) ?? "S",
-                ...(ids.CG == "R" && {
-                  listedBy: "All",
-                }),
-              }),
+              key: "localities",
+              value: `${searchQuery}+${ids.LT}`,
             },
           });
+          handleResetQuery();
+          handleApplyFilters();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+        } else {
+          handleClearFilters("clearAll");
+          if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+            dispatch({
+              type: "update",
+              payload: {
+                ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
+                ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+                ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
+                ...(ids.PJ && {
+                  projIdEnc: ids.PJ as string,
+                  projName: searchQuery,
+                  listedBy: !isListing ? "All" : null,
+                }),
+                ...(ids.CG && {
+                  cg: String(ids.CG) ?? "S",
+                  ...(ids.CG == "R" && {
+                    listedBy: "All",
+                  }),
+                }),
+              },
+            });
+          }
+          handleApplyFilters();
+          handleResetQuery();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+          return;
         }
-        handleApplyFilters();
-        handleResetQuery();
-        setIsSearchOpen(false);
-        setSearchQuery("");
-        return;
       }
     } else {
       handleDropdownToggle("allFilters");
