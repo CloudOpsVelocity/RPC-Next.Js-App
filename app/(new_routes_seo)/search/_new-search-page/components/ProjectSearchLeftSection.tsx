@@ -169,8 +169,9 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    apiFilterQueryParams !== preAppliedFilters ||
-    (data && data?.pageParams?.length > 0)
+    apiFilterQueryParams === preAppliedFilters || typeof window === "undefined"
+      ? mainData
+      : data && data?.pageParams?.length > 0
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
@@ -233,7 +234,7 @@ function LeftSection({
             state={state}
             frontendFilters={frontendFilters}
           />
- 
+
           {hasNextPage && shouldFetchMore && (
             <div
               ref={loadMoreRef}
@@ -242,25 +243,24 @@ function LeftSection({
               Loading...
             </div>
           )}
-     
         </>
       ) : (
         <EmptyState />
       )}
-           
-         <div
-                    className={typeof window !== "undefined" ? "hidden" : "space"}
-                    aria-hidden={typeof window !== "undefined" ? "true" : undefined}
-                  >
-                    <ListingSearchPagination
-                    searchQueryParmeter
-                      currentPage={
-                        frontendFilters.currentPage ? frontendFilters.currentPage  : 1
-                      }
-                      totalCount={frontendFilters.totalCount ?? 0}
-                    />
-                  </div>
-      
+
+      <div
+        className={typeof window !== "undefined" ? "hidden" : "space"}
+        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+      >
+        <ListingSearchPagination
+          searchQueryParmeter
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage : 1
+          }
+          totalCount={frontendFilters.totalCount ?? 0}
+        />
+      </div>
+
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />
