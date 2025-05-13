@@ -369,6 +369,7 @@ const HeaderFilters = ({
             ref={searchRef}
             className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 max-w-[820px]"
           >
+          
             <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent

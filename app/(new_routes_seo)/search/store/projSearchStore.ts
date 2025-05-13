@@ -69,18 +69,23 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
         ...newData,
       };
     case "pushToArray": {
-      const { key, value } = action.payload;
-      if (Array.isArray(state[key])) {
-        if ((state[key] as any[]).includes(value)) {
-          return state;
-        }
-        return {
-          ...state,
-          [key]: [...(state[key] as any[]), value],
-        };
+    const { key, value } = action.payload;
+    if (Array.isArray(state[key])) {
+      const normalizedValue = typeof value === "string" ? value.toLowerCase() : value;
+      const alreadyExists = (state[key] as any[]).some(item =>
+        typeof item === "string" ? item.toLowerCase() === normalizedValue : item === value
+      );
+      if (alreadyExists) {
+        return state;
       }
-      return state;
+      return {
+        ...state,
+        [key]: [...(state[key] as any[]), value],
+      };
     }
+    return state;
+  }
+
     case "removeFromArray": {
       const { key, value } = action.payload;
       if (Array.isArray(state[key])) {
