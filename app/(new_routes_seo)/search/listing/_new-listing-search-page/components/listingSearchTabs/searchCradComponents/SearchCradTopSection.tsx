@@ -20,6 +20,8 @@ import { isReraverified } from '@/app/utils/dyanamic/projects';
 import { useShortlistAndCompare } from '@/app/hooks/storage';
 import ButtonElement from '@/common/components/CustomButton';
 import { useMediaQuery } from '@mantine/hooks';
+import { useSession } from 'next-auth/react';
+import { usePopShortList } from '@/app/hooks/popups/useShortListCompare';
 
 interface SearchCardTopSectionLProps {
   data: TopLeftSectionData;
@@ -119,13 +121,35 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
   const [stateData, setStateData] = useState(shortListed === "Y" ? true : false );
 
+  const { data: session } = useSession();
+  const [, { open: openLogin }] = usePopShortList();
+  
+
+  // const handleParentAction = (index: string) => {
+  //   if (session) {
+  //     const fn = cardFnsRef.current[index];
+  //     if (fn) {
+  //       fn();
+  //     } else {
+  //       console.warn(`No function registered for card: ${index}`);
+  //     }
+  //   } else {
+  //     openLogin(() => refetch());
+  //   }
+  // };
+  
+
   const onAddingShortList = () => {
+    if (session) {
       setStateData(prev => (!prev));
       toggleShortlist({
         id: type === "proj" ? projIdEnc : propIdEnc,
         status: stateData ? "N" : "Y",
         source: type,
       });
+    } else {
+      openLogin(() => refetch());
+    }
   };
 
   // useEffect(() => {
