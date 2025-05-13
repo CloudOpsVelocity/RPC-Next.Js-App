@@ -125,9 +125,9 @@ const getListingSeoData = async () => {
   };
 
   logger.info(
-    `UNIQ:${Object.keys(unique.urlMap)}-PAGES-${Object.keys(
-      pages.urlMap
-    )}-TOTAL-${Object.keys(result)}`
+    `UNIQ:${Object.keys(unique.urlMap).length}-PAGES-${
+      Object.keys(pages.urlMap).length
+    }-TOTAL-${Object.keys(result).length}`
   );
   return result;
 };
