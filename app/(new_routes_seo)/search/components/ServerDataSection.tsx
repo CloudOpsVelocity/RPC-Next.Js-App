@@ -53,7 +53,6 @@ export default function ServerDataSection({
   const [, { open: openLogin }] = usePopShortList();
   const [,{ open }] = useReqCallPopup();
 
-  
   const cardFnsRef = useRef<Record<string, () => void>>({});
 
   const registerCard = (id: string, fn: () => void) => {
@@ -144,8 +143,6 @@ export default function ServerDataSection({
       // setSelectedCard(selectedItem);  
       const action = actionButton?.dataset.action;
   
-      console.log(selectedItem);
-  
       switch(action){
         case 'readmore':
           document.body.style.overflow = "hidden";
@@ -165,11 +162,9 @@ export default function ServerDataSection({
           break;
         case 'otherCharges':
           // handleOpen(selectedItem)
-          console.log("otherCharges")
           setPopupState(prev => ({...prev, isOpen: true, type: 'otherCharges', title:"Other Charges", data: selectedItem}));
           break;
         case 'brochure':
-          console.log('brochure card: ', index);
           handleDownload(selectedItem);
           break;
         case 'nearby':
@@ -181,8 +176,14 @@ export default function ServerDataSection({
           document.body.style.overflow = "hidden";
           setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: selectedItem}));
           break;
-        case 'listingType':
-          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, selectedItem.type);
+        case 'listingType_B':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
+          break;
+        case 'listingType_A':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
+          break; 
+        case 'listingType_O':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
           break;
         case 'bhk':
           const sortedBhks:any = sortUnits(selectedItem.bhkNames);
@@ -190,7 +191,6 @@ export default function ServerDataSection({
           setPopupState(prev => ({...prev, isOpen: true, type: 'bhk', title:"Unit Types", content: sortedBhks, data: selectedItem}));
           break;
         default:
-          console.log('Card clicked:', cardId);
           window.open(selectedItem.pageUrl, "_self", "noreferrer");
       }
   };

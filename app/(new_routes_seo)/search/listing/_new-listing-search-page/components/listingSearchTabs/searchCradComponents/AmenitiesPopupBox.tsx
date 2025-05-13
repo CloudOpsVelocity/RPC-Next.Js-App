@@ -27,8 +27,6 @@ function AmenitiesPopupBox({ id, type, projId, propId }: Props) {
     // enabled: true, // Manual fetch
   });
 
-  console.log(projId, propId)
-
   useEffect(() => {
     refetch(); // Trigger the query manually on mount or conditionally
   }, [refetch]);

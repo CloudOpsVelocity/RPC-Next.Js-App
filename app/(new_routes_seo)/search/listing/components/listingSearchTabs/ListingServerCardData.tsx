@@ -1,6 +1,6 @@
 import { SearchFilter } from "@/app/types/search";
 import React, { useMemo, useCallback, useState, useRef } from "react";
-import ProjectCard from "@/app/test/newui/components/Card";
+// import ProjectCard from "@/app/test/newui/components/Card";
 import SearchCard from "../../_new-listing-search-page/components/listingSearchTabs/searchCradComponents/SearchCard";
 import { sortUnits } from "@/app/utils/unitparser";
 import PopupOverlay from "../../_new-listing-search-page/components/listingSearchTabs/searchCradComponents/PopupOverlay";
@@ -142,11 +142,8 @@ export default function ListingServerCardData({
       const actionButton = e.target.closest('[data-action]');
       const index = cardId ? cardId.split("_")[1] : 0;
       const selectedItem:any = data[index];
-      // setSelectedCard(selectedItem);  
       const action = actionButton?.dataset.action;
-  
-      console.log(selectedItem);
-  
+    
       switch(action){
         case 'readmore':
           document.body.style.overflow = "hidden";
@@ -165,12 +162,9 @@ export default function ListingServerCardData({
           handleOpen(selectedItem)
           break;
         case 'otherCharges':
-          // handleOpen(selectedItem)
-          console.log("otherCharges")
           setPopupState(prev => ({...prev, isOpen: true, type: 'otherCharges', title:"Other Charges", data: selectedItem}));
           break;
         case 'brochure':
-          console.log('brochure card: ', index);
           handleDownload(selectedItem);
           break;
         case 'nearby':
@@ -182,8 +176,14 @@ export default function ListingServerCardData({
           document.body.style.overflow = "hidden";
           setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: selectedItem}));
           break;
-        case 'listingType':
-          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, selectedItem.type);
+        case 'listingType_B':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
+          break;
+        case 'listingType_A':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
+          break; 
+        case 'listingType_O':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
           break;
         case 'bhk':
           const sortedBhks:any = sortUnits(selectedItem.bhkNames);
@@ -191,7 +191,6 @@ export default function ListingServerCardData({
           setPopupState(prev => ({...prev, isOpen: true, type: 'bhk', title:"Unit Types", content: sortedBhks, data: selectedItem}));
           break;
         default:
-          console.log('Card clicked:', cardId);
           window.open(selectedItem.pageUrl, "_self", "noreferrer");
       }
   };

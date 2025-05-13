@@ -93,7 +93,6 @@ const SearchCardNearbyBlock: React.FC<{
     <div
       className="w-full scroll-mt-[170px] mb-[3%] sm:mb-0 pt-[10px] "
       id="location-map"
-      ref={sectionRef}
     >
       {Object.keys(mapData).length > 0 ? (
         <div
@@ -111,7 +110,6 @@ const SearchCardNearbyBlock: React.FC<{
           {/* md:h-[456px] xl:h-[620px] */}
           <div className="border border-[#92B2C8] flex flex-col-reverse rounded-xl overflow-hidden shadow-lg  w-full mx-auto">
             <section className="bg-white">
-              <div className="overflow-y-auto overflow-x-hidden scroll-smooth h-full max-h-[600px] md:max-h-[456px] xl:max-h-[600px]  ">
                 <div className="bg-blue-50 p-2 sm:px-3 sm:py-2 xl:px-5 xl:py-4 sticky top-0 left-0 w-full min-w-[385px] ">
                   <p className="text-[#001F35] text-[12px] xl:text-[14px] font-medium leading-[normal]  ">
                     Explore Your Surroundings, Everywhere Nearby!
@@ -155,10 +153,9 @@ const SearchCardNearbyBlock: React.FC<{
                     <p>No locations found.</p>
                   )}
                 </div>
-              </div>
             </section>
 
-            <section>
+            <section ref={sectionRef}>
               <Map
                 key="leaflet2SearchPageDrawerMap"
                 data={mapData && mapData[selected] ? mapData[selected] : []}
@@ -177,6 +174,7 @@ const SearchCardNearbyBlock: React.FC<{
       ) : (
         <div
           id="location-map"
+          ref={sectionRef}
           className="w-full scroll-mt-[180px] sm:mt-[20px] xl:mt-[50px] justify-center"
         >
           <Map
@@ -248,7 +246,7 @@ const LocationList: React.FC<{
     setTimeout(() => setIsScrolling(false), 3000);
   };
   const handleClick = () => {
-    sectionRef?.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    sectionRef?.current?.scrollIntoView({ top: 0, behavior: 'smooth' });
     console.log(sectionRef);
     showLocationOnMap({
       position: {
