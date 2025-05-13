@@ -8,12 +8,12 @@ import { useSetAtom } from "jotai";
 import { searchPageMapToggle } from "@/app/(new_routes_seo)/search/store/newSearchProjectStore";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useSession } from "next-auth/react";
-import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import PopupOverlay from "./searchCradComponents/PopupOverlay";
 import { sortUnits } from "@/app/utils/unitparser";
+import { handleAgentOwner, shearPropOrProj } from "./searchCradComponents/searchData";
 
 type Props = {
   data: any;
@@ -37,7 +37,6 @@ export default function ListingServerCardData({
   const setNearby = useSetAtom(selectedNearByAtom);
   const setSelected = useSetAtom(selectedSearchAtom);
   const { data: session } = useSession();
-  const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openLogin }] = usePopShortList();
 
   const cg = useMemo(() => {
@@ -55,43 +54,6 @@ export default function ListingServerCardData({
       ? frontendFilters.listedBy
       : state.listedBy;
   }, [state, frontendFilters]);
-
-
-
-  const shearPropOrProj = (data:any) => {
-    const {
-      type, projName, propName, cityName, city, localityName, locality, 
-      category, phaseName, propIdEnc, bhkName, propTypeName, projIdEnc, 
-    } = data;
-
-    const url =
-    type === "proj"
-      ? createProjectLinkUrl({
-          city: cityName ? cityName : city ? city : "",
-          locality: localityName ? localityName : locality ? locality : "",
-          slug: projName ? projName : projName,
-          projIdEnc: projIdEnc,
-        })
-      : generateListingLinkUrl({
-          city: cityName,
-          locality: localityName,
-          projName: projIdEnc ? propName : null,
-          category: category === "Sale" ? "for-sale" : "for-rent",
-          phase: phaseName,
-          propIdEnc: propIdEnc,
-          bhkUnitType: bhkName
-            ? `${bhkName + " " + propTypeName}`
-            : "" + " " + propTypeName,
-        });
-
-    navigator.share({
-      title: type === "proj" ? projName : propName,
-      text: `Check out this ${
-        type === "proj" ? "project" : "property"
-      }: ${type === "proj" ? projName : propName}`,
-      url: url,
-    });
-  };
 
   const onViewMap = (data:any) => {
     const {
@@ -149,13 +111,6 @@ export default function ListingServerCardData({
       });
   };
 
-  const handleAgentOwner = (projIdEnc:string, projName:string, type: "A" | "I" | "B") => {
-    window.open(
-      `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
-      "_self"
-    );
-  }
-
   const handleDownload = (data:any) => {
     const {brochureUrl} = data;
     if (session) {
@@ -175,26 +130,11 @@ export default function ListingServerCardData({
     }
   };
 
-
   const cardFnsRef = useRef<Record<string, () => void>>({});
 
   const registerCard = (id: string, fn: () => void) => {
     cardFnsRef.current[id] = fn;
   };
-
-  // const handleParentAction = (index: string) => {
-  //   if (session) {
-  //     const fn = cardFnsRef.current[index];
-  //     if (fn) {
-  //       fn();
-  //     } else {
-  //       console.warn(`No function registered for card: ${index}`);
-  //     }
-  //   } else {
-  //     openLogin(() => refetch());
-  //   }
-  // };
-
 
   const handleClick = (e: any) => {
     const cardEl = e.target.closest('[data-type="card"]');
@@ -237,7 +177,7 @@ export default function ListingServerCardData({
         break;
       case 'nearby':
         document.body.style.overflow = "hidden";
-        setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: selectedItem}));fgvb 
+        setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: selectedItem})); 
         // onSetNearBy(selectedItem);
         break;
       case 'amenities':
@@ -259,7 +199,7 @@ export default function ListingServerCardData({
   };
 
   const closePopup = () => {
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = "unset"; 
     setPopupState(prev => ({...prev, isOpen: false, type: '', title:"", data: {}}));
   };
 

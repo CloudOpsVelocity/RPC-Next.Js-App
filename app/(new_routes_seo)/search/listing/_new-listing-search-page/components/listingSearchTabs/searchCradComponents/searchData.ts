@@ -1,3 +1,6 @@
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+
 export interface TopLeftSectionData {
     src: string;
     projName: string;
@@ -180,3 +183,46 @@ export const sanitizetopCornerRightSectionData = (rawData: Partial<Record<keyof 
     facing: rawData.facing ?? "", 
     towerName: rawData.towerName ?? "",
 });
+
+
+export const shearPropOrProj = (data:any) => {
+  const {
+    type, projName, propName, cityName, city, localityName, locality, 
+    category, phaseName, propIdEnc, bhkName, propTypeName, projIdEnc, 
+  } = data;
+ 
+  const url =
+  type === "proj"
+    ? createProjectLinkUrl({
+        city: cityName ? cityName : city ? city : "",
+        locality: localityName ? localityName : locality ? locality : "",
+        slug: projName ? projName : projName,
+        projIdEnc: projIdEnc,
+      })
+    : generateListingLinkUrl({
+        city: cityName,
+        locality: localityName,
+        projName: projIdEnc ? propName : null,
+        category: category === "Sale" ? "for-sale" : "for-rent",
+        phase: phaseName,
+        propIdEnc: propIdEnc,
+        bhkUnitType: bhkName
+          ? `${bhkName + " " + propTypeName}`
+          : "" + " " + propTypeName,
+      });
+ 
+  navigator.share({
+    title: type === "proj" ? projName : propName,
+    text: `Check out this ${
+      type === "proj" ? "project" : "property"
+    }: ${type === "proj" ? projName : propName}`,
+    url: url,
+  });
+};
+
+export const handleAgentOwner = (projIdEnc:string, projName:string, type: "A" | "I" | "B") => {
+    window.open(
+      `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
+      "_self"
+    );
+}

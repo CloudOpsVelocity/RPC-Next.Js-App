@@ -248,19 +248,18 @@ function LeftSection({
         <EmptyState />
       )}
            
-         <div
-                    className={typeof window !== "undefined" ? "hidden" : "space"}
-                    aria-hidden={typeof window !== "undefined" ? "true" : undefined}
-                  >
-                    <ListingSearchPagination
-                    searchQueryParmeter
-                      currentPage={
-                        frontendFilters.currentPage ? frontendFilters.currentPage  : 1
-                      }
-                      totalCount={frontendFilters.totalCount ?? 0}
-                    />
-                  </div>
-      
+      <div
+        className={typeof window !== "undefined" ? "hidden" : "space"}
+        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+      >
+        <ListingSearchPagination
+        searchQueryParmeter
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage  : 1
+          }
+          totalCount={frontendFilters.totalCount ?? 0}
+        />
+      </div>
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />

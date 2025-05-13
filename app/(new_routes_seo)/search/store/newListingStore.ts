@@ -15,7 +15,7 @@ export const initialState: SearchFilter = {
   listedBy: undefined,
   reraVerified: [],
   areaValue: [0, 5000],
-  bugdetValue: [500000, 600000000],
+  bugdetValue: [500000, 300000000],
   builderIds: [],
   city: null,
   facing: [],
