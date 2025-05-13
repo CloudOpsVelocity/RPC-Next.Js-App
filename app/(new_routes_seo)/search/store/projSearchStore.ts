@@ -56,7 +56,7 @@ type Action =
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
   switch (action.type) {
     case "reset":
-      return initialState;
+      return { ...initialState, listedBy: null };
     case "update":
       var newData =
         action.payload.propType === projectprops.plot
