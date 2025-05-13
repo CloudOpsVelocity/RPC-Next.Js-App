@@ -1,17 +1,16 @@
-import React from 'react';
+import React from "react";
 import Styles from "@/app/styles/seach/searchCrad.module.css";
-import { formatNumberWithSuffix } from '@/app/utils/numbers';
-import { useMediaQuery } from '@mantine/hooks';
-import { topCornerRightSectionData } from './searchData';
-import Link from 'next/link';
-import { DownLoadIcon } from '@/app/images/commongsSvgs2';
-import HeartButton from '@/app/test/newui/components/Card/Top/Center/HeartButton';
-
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import { useMediaQuery } from "@mantine/hooks";
+import { topCornerRightSectionData } from "./searchData";
+import Link from "next/link";
+import { DownLoadIcon } from "@/app/images/commongsSvgs2";
+import HeartButton from "@/app/test/newui/components/Card/Top/Center/HeartButton";
 
 type Props = {
   topCornerRightData: topCornerRightSectionData;
   onAddingShortList: any;
-}
+};
 
 const ListingDownSectionCard = ({
   label,
@@ -39,78 +38,98 @@ const ListingDownSectionCard = ({
   );
 };
 
-function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Props) {
-    const {category, type, basePrice, sqftPrice, floorPlan, Sh, brochureUrl, amenCount, propTypeName, atFloor, facing, towerName} = topCornerRightData;
-    const isMobile = useMediaQuery("(max-width: 1600px)");
-    // console.log(Sh)
- 
-    return (
-      <div className={Styles.searchCardTopCornerMainCon}>
+function SearchCardTopCornerSection({
+  topCornerRightData,
+  onAddingShortList,
+}: Props) {
+  const {
+    category,
+    type,
+    basePrice,
+    sqftPrice,
+    floorPlan,
+    Sh,
+    brochureUrl,
+    amenCount,
+    propTypeName,
+    atFloor,
+    facing,
+    towerName,
+  } = topCornerRightData;
+  const isMobile = useMediaQuery("(max-width: 1600px)");
+  // console.log(Sh)
 
-          {category == "Sale" || type === "proj" ? (
-            <div className={Styles.searchCardAvgPriceText}>
-              Avg Price:{" "}
-              <span>
-                {" "}
-                ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
-              </span>
-            </div>
-          ) : null}
+  return (
+    <div className={Styles.searchCardTopCornerMainCon}>
+      {category == "Sale" || type === "proj" ? (
+        <div className={Styles.searchCardAvgPriceText}>
+          Avg Price:{" "}
+          <span>
+            {" "}
+            ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
+          </span>
+        </div>
+      ) : null}
 
-          {isMobile && (
-            <>
-              {/* <ProjData type={type} {...data} /> */}
-              <div className={Styles.mobileCornerCard}>
-                <div className={Styles.likeAndShearCon}>
-                  <div className={Styles.likeBtnCon}>
-                    <button 
-                      // data-action="like"
-                      onClick={(e)=>{
-                        e.stopPropagation(); 
-                        onAddingShortList();
-                      }}
+      {isMobile && (
+        <>
+          {/* <ProjData type={type} {...data} /> */}
+          <div className={Styles.mobileCornerCard}>
+            <div className={Styles.likeAndShearCon}>
+              <div className={Styles.likeBtnCon}>
+                <button
+                  // data-action="like"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddingShortList();
+                  }}
+                >
+                  {Sh ? <p> ❤️ </p> : <p className={Styles.unLikeBtn}> 🤍 </p>}
+                </button>
+                <button
+                  name="share Project"
+                  className={Styles.mobileShearBtn}
+                  data-action="share"
+                >
+                  🔗
+                </button>
+
+                {floorPlan && type !== "proj" && (
+                  <Link
+                    title="Click to view Floor Plan"
+                    className="w-[18px] h-[18px] "
+                    href={`/image?path=${
+                      floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
+                    }&type=F`}
+                  >
+                    <svg
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 15 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      {Sh ? <p> ❤️ </p>: <p className={Styles.unLikeBtn}> 🤍 </p> }
-                    </button>
-                    <button
-                      name="share Project"
-                      className={Styles.mobileShearBtn}
-                      data-action="share"
-                    >
-                      🔗
-                    </button>
+                      <path
+                        d="M10 0.5H14.5V14.5H0.5V0.5H4.5L7.5 2.5M6.5 14.5V7.5M4 7.5H9M12 7.5H14.5"
+                        stroke="#000000"
+                      />
+                    </svg>
+                  </Link>
+                )}
 
-                    {floorPlan && type !== "proj" && (
-                      <Link
-                        title="Click to view Floor Plan"
-                        className="w-[18px] h-[18px] "
-                        href={`/image?path=${
-                          floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
-                        }&type=F`}
-                      >
-                        <svg width="18px" height="18px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 0.5H14.5V14.5H0.5V0.5H4.5L7.5 2.5M6.5 14.5V7.5M4 7.5H9M12 7.5H14.5" stroke="#000000"/>
-                        </svg>
-                      </Link>
-                    )}
-        
-                    <button
-                      // data-action="viewMap"
-                      data-action="nearby"
-                      title="Click to view on Map"
-                      className={Styles.searchCardViewMapBtn}
-                    >
-                      <span 
-                        className={Styles.searchCardViewMapBtnSpan}
-                      >
-                        Map & Nearby
-                      </span>
-                    </button>
-        
-                  </div>
+                <button
+                  // data-action="viewMap"
+                  data-action="nearby"
+                  title="Click to view on Map"
+                  className={Styles.searchCardViewMapBtn}
+                >
+                  <span className={Styles.searchCardViewMapBtnSpan}>
+                    Map & Nearby
+                  </span>
+                </button>
+              </div>
 
-        
-                  {/* <button
+              {/* <button
                     // data-action="viewMap"
                     data-action="nearby"
                     className={`${Styles.searchCardViewMapBtn} ${Styles.searchCardViewMapBtnForMobile}`}
@@ -145,43 +164,42 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                       Map & Nearby
                     </span>
                   </button> */}
-                </div>
+            </div>
 
-                {/* tab and laptop */}
-                {type === "proj" && (
-                  <div className={Styles.brochureAndNearbyCon}>
-                    {" "}
-                    {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
-                    {brochureUrl && 
-                    <button
-                      data-action="brochure"
-                      // onClick={handleDownload}
-                      className={Styles.searchCardbroucherBtn}
-                    >
-                      <DownLoadIcon className={Styles.broucherIcon} />{" "}
-                      Brochure
-                    </button>
-                    }
-                    <button
-                      data-action="amenities"
-                      title={`Click to view ${
-                        amenCount === 1 ? "" : "all"
-                      } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
-                      className={Styles.amenityBtn}
-                        // onClick={() =>
-                        //   dispatch({
-                        //     type: "OPEN",
-                        //     content: [],
-                        //     id: `${projIdEnc}+${propTypeId}+${phaseId}`,
-                        //     title: "Amenities",
-                        //     conType: "amenities",
-                        //     pType: type,
-                        //   })
-                        // }
-                    >
-                      {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
-                    </button>
-                    {/* <button
+            {/* tab and laptop */}
+            {type === "proj" && (
+              <div className={Styles.brochureAndNearbyCon}>
+                {" "}
+                {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
+                {brochureUrl && (
+                  <button
+                    data-action="brochure"
+                    // onClick={handleDownload}
+                    className={Styles.searchCardbroucherBtn}
+                  >
+                    <DownLoadIcon className={Styles.broucherIcon} /> Brochure
+                  </button>
+                )}
+                <button
+                  data-action="amenities"
+                  title={`Click to view ${
+                    amenCount === 1 ? "" : "all"
+                  } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                  className={Styles.amenityBtn}
+                  // onClick={() =>
+                  //   dispatch({
+                  //     type: "OPEN",
+                  //     content: [],
+                  //     id: `${projIdEnc}+${propTypeId}+${phaseId}`,
+                  //     title: "Amenities",
+                  //     conType: "amenities",
+                  //     pType: type,
+                  //   })
+                  // }
+                >
+                  {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
+                </button>
+                {/* <button
                       data-action="nearby"
                       className={Styles.nearByBtn}
                       title="Click to view all Near by Locations"
@@ -224,154 +242,153 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                     >
                       Nearby
                     </button> */}
-                  </div>
-                )}
-                {(type === "proj" || type === null || category == "Sale") && (
-                  <div className={Styles.searchCardAvgPriceText2}>
-                    <p className="text-right text-[12px] md:text-[14px] text-nowrap ">
-                      Avg Price:
-                      <span style={{color: "#148B16"}}>
-                        ₹{" "}
-                        {formatNumberWithSuffix(
-                          type === "proj" ? basePrice : sqftPrice
-                        )}
-                      </span>
-                    </p>
-                    {/*  <p className="text-right text-[12px] text-nowrap">
+              </div>
+            )}
+            {(type === "proj" || type === null || category == "Sale") && (
+              <div className={Styles.searchCardAvgPriceText2}>
+                <p className="text-right text-[12px] md:text-[14px] text-nowrap ">
+                  Avg Price:
+                  <span style={{ color: "#148B16" }}>
+                    ₹{" "}
+                    {formatNumberWithSuffix(
+                      type === "proj" ? basePrice : sqftPrice
+                    )}
+                  </span>
+                </p>
+                {/*  <p className="text-right text-[12px] text-nowrap">
                         {towerData ? towerData : "N/A"}
                       </p> */}
-                  </div>
-                )}
-        
-                {type !== "proj" && (
-                  <>
-                    <ListingDownSectionCard label={"Tower"} value={towerName} />
-                    <ListingDownSectionCard label={"Facing"} value={facing} />
-   
-                    <ListingDownSectionCard
-                      label={
-                        propTypeName === "Row House" || propTypeName === "Villa"
-                          ? "Elevation"
-                          : "At Floor"
-                      }
-                      value={atFloor == 0 ? "G" : atFloor}
-                    />
-                  </>
-                )}
               </div>
-            </>
-          )}
+            )}
 
-          {!isMobile && (
-            <>
-              <div className={Styles.cornerDetailsForDesktop}>
-                <div className="space-x-2 flex flex-row justify-center">
-                  <HeartButton
-                    shortListed={Sh}
-                    onAddingShortList={(e)=>{
-                      e.stopPropagation(); 
-                      onAddingShortList();
-                    }}
-                  />
-                  {/* <button 
+            {type !== "proj" && (
+              <>
+                <ListingDownSectionCard label={"Tower"} value={towerName} />
+                <ListingDownSectionCard label={"Facing"} value={facing} />
+
+                <ListingDownSectionCard
+                  label={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? "Elevation"
+                      : "At Floor"
+                  }
+                  value={atFloor == 0 ? "G" : atFloor}
+                />
+              </>
+            )}
+          </div>
+        </>
+      )}
+
+      {!isMobile && (
+        <>
+          <div className={Styles.cornerDetailsForDesktop}>
+            <div className="space-x-2 flex flex-row justify-center">
+              <HeartButton
+                shortListed={Sh}
+                onAddingShortList={(e) => {
+                  e.stopPropagation();
+                  onAddingShortList();
+                }}
+              />
+              {/* <button 
                     // data-action="like"
                   >
                     {config.heartIcon}
                   </button> */}
-                  
-                  <button
-                    className="space-x-2 flex flex-row justify-center"
-                    data-action="share"
-                  >
-                    {config.shareIcon}
-                  </button>
-                </div>
-        
-                <button
-                  // data-action="viewMap"
-                  data-action="nearby"
-                  className={Styles.searchCardViewMapBtn}
-                  title="Click to view on Map"
-                >
-                  <span className={Styles.searchCardViewMapBtnSpan}>
-                    Map & Nearby
-                  </span>
-                </button>
-        
-                {type !== "proj" && (
-                  <>
-                    <ListingDownSectionCard label={"Tower"} value={towerName} />
-                    <ListingDownSectionCard label={"Facing"} value={facing} />
-                    {/* <ListingDownSectionCard
+
+              <button
+                className="space-x-2 flex flex-row justify-center"
+                data-action="share"
+              >
+                {config.shareIcon}
+              </button>
+            </div>
+
+            <button
+              // data-action="viewMap"
+              data-action="nearby"
+              className={Styles.searchCardViewMapBtn}
+              title="Click to view on Map"
+            >
+              <span className={Styles.searchCardViewMapBtnSpan}>
+                Map & Nearby
+              </span>
+            </button>
+
+            {type !== "proj" && (
+              <>
+                <ListingDownSectionCard label={"Tower"} value={towerName} />
+                <ListingDownSectionCard label={"Facing"} value={facing} />
+                {/* <ListingDownSectionCard
                       label={"Property Age"}
                       value={propertyAge}
                     /> */}
-                    <ListingDownSectionCard
-                      label={
-                        propTypeName === "Row House" || propTypeName === "Villa"
-                          ? "Elevation"
-                          : "At Floor"
-                      }
-                      value={
-                        propTypeName === "Row House" || propTypeName === "Villa"
-                          ? `G+${atFloor}`
-                          : atFloor == 0
-                          ? "G"
-                          : atFloor
-                      }
-                    />
-                    {floorPlan && (
-                      <Link
-                        title="Click to view Floor Plan"
-                        className="text-[14px]  text-btnPrimary  font-bold mt-2"
-                        href={`/image?path=${
-                          floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
-                        }&type=F`}
-                      >
-                        <span className="hidden sm:flex">View Floor Plan</span>
-                      </Link>
-                    )}
-                  </>
-                )}
-              </div>
-              {type === "proj" && (
-                <div className={Styles.broucherAndAmenityButton}>
-                  {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
-                  {brochureUrl && 
-                  <button
-                    data-action="brochure"
-                    // onClick={handleDownload}
-                    className={Styles.searchCardbroucherBtn}
-                  >
-                    <DownLoadIcon className={Styles.broucherIcon} />{" "}
-                    Brochure
-                  </button>
+                <ListingDownSectionCard
+                  label={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? "Elevation"
+                      : "At Floor"
                   }
-                  {amenCount && (
-                    <button
-                      data-action="amenities"
-                      className={Styles.amenityBtn}
-                      title={`Click to view ${
-                        amenCount === 1 ? "" : "all"
-                      } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
-                      // onClick={() =>
-                      //   dispatch({
-                      //     type: "OPEN",
-                      //     content: [],
-                      //     id: `${projIdEnc}+${propTypeId}${
-                      //       phaseId ? `+${phaseId}` : ""
-                      //     }`,
-                      //     title: "Amenities",
-                      //     conType: "amenities",
-                      //     pType: type,
-                      //   })
-                      // }
-                    >
-                      {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
-                    </button>
-                  )}
-        
-                  {/* <button
+                  value={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? `G+${atFloor}`
+                      : atFloor == 0
+                      ? "G"
+                      : atFloor
+                  }
+                />
+                {floorPlan && (
+                  <Link
+                    title="Click to view Floor Plan"
+                    className="text-[14px]  text-btnPrimary  font-bold mt-2"
+                    href={`/image?path=${
+                      floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
+                    }&type=F`}
+                  >
+                    <span className="hidden sm:flex">View Floor Plan</span>
+                  </Link>
+                )}
+              </>
+            )}
+          </div>
+          {type === "proj" && (
+            <div className={Styles.broucherAndAmenityButton}>
+              {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
+              {brochureUrl && (
+                <button
+                  data-action="brochure"
+                  // onClick={handleDownload}
+                  className={Styles.searchCardbroucherBtn}
+                >
+                  <DownLoadIcon className={Styles.broucherIcon} /> Brochure
+                </button>
+              )}
+              {amenCount && (
+                <button
+                  data-action="amenities"
+                  className={Styles.amenityBtn}
+                  title={`Click to view ${
+                    amenCount === 1 ? "" : "all"
+                  } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                  // onClick={() =>
+                  //   dispatch({
+                  //     type: "OPEN",
+                  //     content: [],
+                  //     id: `${projIdEnc}+${propTypeId}${
+                  //       phaseId ? `+${phaseId}` : ""
+                  //     }`,
+                  //     title: "Amenities",
+                  //     conType: "amenities",
+                  //     pType: type,
+                  //   })
+                  // }
+                >
+                  {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
+                </button>
+              )}
+
+              {/* <button
                     data-action="nearby"
                     className={Styles.nearByBtn}
                     title="Click to view all Near by Locations"
@@ -428,14 +445,13 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                   >
                     Nearby
                   </button> */}
-                </div>
-              )}
-            </>
+            </div>
           )}
-      </div>
-
-      
-)}
+        </>
+      )}
+    </div>
+  );
+}
 
 export default SearchCardTopCornerSection;
 
@@ -569,6 +585,3 @@ const config = {
     </svg>
   ),
 };
-
-
-

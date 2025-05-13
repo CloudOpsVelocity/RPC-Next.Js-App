@@ -16,7 +16,7 @@ import { toFormattedString } from "../../../_new-search-page/components/FilterCo
 
 import { useAtom, useAtomValue } from "jotai";
 import { projSearchStore } from "../../../store/newListingStore";
-import NewSearchinputListing from "./newSearchInputListing";
+import NewSearchinputListing from "./NewSearchInputListing";
 import useProjSearchAppliedFilters from "../hooks/useProjSearchAppliedFilters";
 import { useDebouncedState } from "@mantine/hooks";
 import { serverCityAtom } from "@/app/store/search/serverCity";
