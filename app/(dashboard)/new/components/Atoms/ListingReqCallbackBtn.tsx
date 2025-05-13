@@ -2,6 +2,7 @@ import Button from "@/app/components/atoms/buttons/variansts";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { CallIcon } from "@/app/images/commongsSvgs2";
+import Image from "next/image";
 import React from "react";
 
 type Props = {
@@ -37,7 +38,15 @@ export default function ListingReqBtn({
         className="flex justify-center right-1  items-center text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap sm:hidden max-h-[25px] mt-[12px] mb-[6px] pr-1" /* z-[1000] */
         onClick={handleOpen}
       >
-        <CallIcon className="w-[16px] h-[16px]" />
+        {/* <CallIcon className="w-[16px] h-[16px]" /> */}
+        
+         <Image
+                src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/call.svg`}
+                width={16}
+                height={16}
+                alt="not found"
+                title="not found"
+              />
         Contact
       </Button>
       <Button
