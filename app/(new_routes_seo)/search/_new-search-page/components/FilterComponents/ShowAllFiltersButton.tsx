@@ -43,7 +43,6 @@ interface Location {
 
 export default function ShowAllFiltersButton({
   isOpen,
-
   onToggle,
   isListing,
 }: ShowAllFiltersButtonProps) {

@@ -488,6 +488,7 @@ const HeaderFilters = ({
                 handleDropdownToggle={handleDropdownToggle}
               />
             </div>
+            {/* {JSON.stringify(state)} */}
             <div className="hidden md:flex items-center gap-2 order-2">
               <ShowAllFiltersButton
                 isListing={isListing}

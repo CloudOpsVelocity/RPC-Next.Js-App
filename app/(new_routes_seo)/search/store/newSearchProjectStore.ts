@@ -55,7 +55,7 @@ type Action =
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
   switch (action.type) {
     case "reset":
-      return initialState;
+      return { ...initialState, listedBy: null };
     case "update":
       var newData =
         action.payload.propType === projectprops.plot
@@ -256,9 +256,7 @@ export const ProjSearchAppliedFiltersStore = atom(
     return appliedFilters;
   }
 );
-
 export const searchPageMapToggle = atom(false);
-
 export const projSearchStore = atomWithReducer(initialState, mapReducer);
 
 projSearchStore.onMount = (setAtom) => {
