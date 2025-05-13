@@ -48,7 +48,7 @@ const ListingHeaderFilters = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
+  const { handleApplyFilters,  handleClearFilters } = useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
 
   const {
@@ -261,19 +261,40 @@ const ListingHeaderFilters = ({
       }`
     );
     const data = await res.json();
+
+    if(!data){
+      return;
+    }
     if (Object.hasOwn(data, "ids")) {
       let ids = extractApiValues(data.ids);
-      if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
-        dispatch({
-          type: "update",
-          payload: {
-            ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
-            ...(ids.PT && { propType: parseInt(ids.PT as string) }),
-            ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-            ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
-          },
-        });
-      }
+                 
+        if (ids.LT) {
+           console.log(JSON.stringify({state}))
+          dispatch({
+            type: "pushToArray",
+            payload: {
+              key: "localities",
+              value: `${searchQuery}+${ids.LT}`,
+            },
+          });
+          handleResetQuery();
+          handleApplyFilters();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+        } else {
+           handleClearFilters("clearAll");
+        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+          dispatch({
+            type: "update",
+            payload: {
+              ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
+              ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+              ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
+              ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
+            },
+          });
+        }
+    }
 
       handleApplyFilters();
       handleResetQuery();
@@ -307,6 +328,7 @@ const ListingHeaderFilters = ({
           >
             {" "}
             <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
+              {/*   { JSON.stringify({state})} */}
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
                   openDropdown={openDropdown}

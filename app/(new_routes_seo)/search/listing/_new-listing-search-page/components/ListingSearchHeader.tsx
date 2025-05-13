@@ -27,7 +27,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import BuyRent from "./BuyRent";
 // import ProjSearchCityDropDown from "../../../_new-search-page/components/FilterComponents/city/ProjectSearchCityDropdown";
 import ListingSearchCityDropDown from "./ListingSearchCityDropdown";
-import ShowAllFiltersButton from "../../../_new-search-page/components/FilterComponents/ShowAllFiltersButton";
+import ShowAllFiltersButton from "./showAllFiltersNewListing";
 import PageTitle from "../../../components/filters/PageTitle";
 import ListingSearchTabs from "./ListingSearchTabs";
 import ListingSelectedFilters from "./ListingSelectedFilters";
@@ -51,7 +51,7 @@ const ListingHeaderFilters = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const { handleApplyFilters } = useProjSearchAppliedFilters();
+  const { handleApplyFilters, handleClearFilters } = useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
 
   const {
@@ -266,8 +266,42 @@ const ListingHeaderFilters = ({
     const data = await res.json();
     if (Object.hasOwn(data, "ids")) {
       let ids = extractApiValues(data.ids);
-      if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+       console.log(JSON.stringify({state}))
+        if (ids.LT) {
+          dispatch({
+            type: "pushToArray",
+            payload: {
+              key: "localities",
+              value: `${searchQuery}+${ids.LT}`,
+            },
+          });
+          handleResetQuery();
+          handleApplyFilters();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+        } else {
+          handleClearFilters("clearAll");
+          if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
         dispatch({
+          type: "update",
+          payload: {
+            ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
+            ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+            ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
+            ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
+          },
+        });
+      }
+          handleApplyFilters();
+          handleResetQuery();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+          return;
+        }
+        
+        /*  
+        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+          dispatch({
           type: "update",
           payload: {
             ...(ids.LT && { locality: [`${searchQuery}+${ids.LT}`] }),
@@ -276,7 +310,7 @@ const ListingHeaderFilters = ({
             ...(ids.PJ && { projIdEnc: ids.PJ as string, listedBy: "All" }),
           },
         });
-      }
+      } */
 
       handleApplyFilters();
       handleResetQuery();
