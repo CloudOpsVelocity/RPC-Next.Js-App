@@ -89,7 +89,7 @@ export default function CardDownSection({
       </div>
 
       {/* right section */}
-      <div className=" right-1">
+      <div className="right-1">
         <Button
           onChange={handleOpen}
           title={`${
@@ -99,7 +99,7 @@ export default function CardDownSection({
                 : "Request Callback"
               : "Request Callback"
           }`}
-          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
+          buttonClass="flex justify-end right-1 self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
         />
       </div>
     </div>

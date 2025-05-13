@@ -79,9 +79,9 @@ export default function SearchCradBottomSection({
                 type === "proj"
                   ? isMobile
                     ? "Contact"
-                    : "Request Callback"
+                    : "Request Callback" 
                   : "Request Callback"
-              }`}
+              }`} 
               buttonClass={Styles.searchCardCompareBtn}
           />
         </div>

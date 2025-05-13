@@ -6,7 +6,7 @@ import {
   MapContainer,
   TileLayer,
   Marker,
-  Tooltip,
+  // Tooltip,
   useMap,
   Popup,
 } from "react-leaflet";
@@ -16,11 +16,11 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
-import { useAtom, useAtomValue } from "jotai";
-import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import { useAtom } from "jotai";
+import selectedSearchAtom from "@/app/store/search/map";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
-import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
+// import { createCustomIconReactLeafLet, icons } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 
 export const checkLatAndLang = (number: any) => {
@@ -37,8 +37,9 @@ export const checkLatAndLang = (number: any) => {
 
 const RecenterButton = ({}: { center?: any }) => {
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
-  const { allMarkerRefs } = useAtomValue(selectedNearByAtom);
+  // const { allMarkerRefs } = useAtomValue(selectedNearByAtom);
   const map = useMap();
+
   const handleRecenter = () => {
     if (!selected?.reqId) return;
     setSelectedValue((prev) => ({
@@ -54,13 +55,13 @@ const RecenterButton = ({}: { center?: any }) => {
 
     map.setView(position, 100);
 
-    if (!allMarkerRefs) return;
-    const refKey = `${selected?.reqId}-${selected?.phaseId}-${
-      selected?.propTypeName ? selected?.propTypeName : selected?.propType
-    }`;
+    // if (!allMarkerRefs) return;
+    // const refKey = `${selected?.reqId}-${selected?.phaseId}-${
+    //   selected?.propTypeName ? selected?.propTypeName : selected?.propType
+    // }`;
 
-    const marker = allMarkerRefs.current.get(refKey);
-    if (marker) marker.openPopup();
+    // const marker = allMarkerRefs.current.get(refKey);
+    // if (marker) marker.openPopup();
   };
 
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -125,15 +126,15 @@ const MapContent = ({ data }: any): JSX.Element | null => {
   });
 
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
-  const [
-    {
-      selectedNearbyItem,
-      allMarkerRefs,
-      data: nearbyData,
-      category,
-    },
-    setSelectedNearby,
-  ] = useAtom(selectedNearByAtom);
+  // const [
+  //   {
+  //     selectedNearbyItem,
+  //     allMarkerRefs,
+  //     data: nearbyData,
+  //     category,
+  //   },
+  //   setSelectedNearby,
+  // ] = useAtom(selectedNearByAtom);
 
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
@@ -141,9 +142,9 @@ const MapContent = ({ data }: any): JSX.Element | null => {
   // 🔹 Create unique refs for each marker
   const markerRefs = useRef(new window.Map());
 
-  if (allMarkerRefs === null) {
-    setSelectedNearby((prev: any) => ({ ...prev, allMarkerRefs: markerRefs }));
-  }
+  // if (allMarkerRefs === null) {
+  //   setSelectedNearby((prev: any) => ({ ...prev, allMarkerRefs: markerRefs }));
+  // }
 
   // 🔹 Event handlers for each marker
   const getEventHandlers = (itemId: string, item?: any) => ({
@@ -199,27 +200,40 @@ const MapContent = ({ data }: any): JSX.Element | null => {
     }
   }, [selected, map]);
 
-  useEffect(() => {
-    // for Recenter Nearby marker
-    if (
-      selectedNearbyItem &&
-      selectedNearbyItem.lat &&
-      selectedNearbyItem.lang
-    ) {
-      const position: any = [
-        parseFloat(checkLatAndLang(selectedNearbyItem.lat)),
-        parseFloat(checkLatAndLang(selectedNearbyItem.lang)),
-      ];
-      map.setView(position, 100);
-    }
-  }, [map, selectedNearbyItem]);
+  // useEffect(() => {
+  //   // for Recenter Nearby marker
+  //   if (
+  //     selectedNearbyItem &&
+  //     selectedNearbyItem.lat &&
+  //     selectedNearbyItem.lang
+  //   ) {
+  //     const position: any = [
+  //       parseFloat(checkLatAndLang(selectedNearbyItem.lat)),
+  //       parseFloat(checkLatAndLang(selectedNearbyItem.lang)),
+  //     ];
+  //     map.setView(position, 100);
+  //   }
+  // }, [map, selectedNearbyItem]);
+
+  // useEffect(() => {
+  //   if (
+  //     data &&
+  //     data?.length > 0 &&
+  //     nearbyData &&
+  //     Object.keys(nearbyData).length === 0 &&
+  //     selected === null
+  //   ) {
+  //     const bounds = L.latLngBounds(
+  //       data.map((item: any) => [parseFloat(item?.lat), parseFloat(item?.lang)])
+  //     );
+  //     map.fitBounds(bounds, { padding: [50, 50] });
+  //   }
+  // }, [map, data, selected, nearbyData]);
 
   useEffect(() => {
     if (
       data &&
       data?.length > 0 &&
-      nearbyData &&
-      Object.keys(nearbyData).length === 0 &&
       selected === null
     ) {
       const bounds = L.latLngBounds(
@@ -227,28 +241,28 @@ const MapContent = ({ data }: any): JSX.Element | null => {
       );
       map.fitBounds(bounds, { padding: [50, 50] });
     }
-  }, [map, data, selected, nearbyData]);
+  }, [map, data, selected]);
 
-  useEffect(() => {
-    if (
-      nearbyData &&
-      Object.keys(nearbyData).length > 0 &&
-      Object.keys(selectedNearbyItem).length === 0
-    ) {
-      const finalCateg =
-        category !== "" ? category : Object.keys(nearbyData)[0];
-      const nearByData = nearbyData[finalCateg];
-      const newData =
-        selected !== null ? [...nearByData, selected] : [...nearByData];
-      const bounds = L.latLngBounds(
-        newData.map((item: any) => [
-          parseFloat(checkLatAndLang(item.lat)),
-          parseFloat(checkLatAndLang(item.lang)),
-        ])
-      );
-      map.fitBounds(bounds, { padding: [50, 50] });
-    }
-  }, [map, nearbyData, category, selectedNearbyItem, selected]);
+  // useEffect(() => {
+  //   if (
+  //     nearbyData &&
+  //     Object.keys(nearbyData).length > 0 &&
+  //     Object.keys(selectedNearbyItem).length === 0
+  //   ) {
+  //     const finalCateg =
+  //       category !== "" ? category : Object.keys(nearbyData)[0];
+  //     const nearByData = nearbyData[finalCateg];
+  //     const newData =
+  //       selected !== null ? [...nearByData, selected] : [...nearByData];
+  //     const bounds = L.latLngBounds(
+  //       newData.map((item: any) => [
+  //         parseFloat(checkLatAndLang(item.lat)),
+  //         parseFloat(checkLatAndLang(item.lang)),
+  //       ])
+  //     );
+  //     map.fitBounds(bounds, { padding: [50, 50] });
+  //   }
+  // }, [map, nearbyData, category, selectedNearbyItem, selected]);
 
   // useEffect(() => {
   //   if (map) {
@@ -376,7 +390,7 @@ const MapContent = ({ data }: any): JSX.Element | null => {
                 )}
               </Popup>
             </Marker>
-            <NearbyMarkers />
+            {/* <NearbyMarkers /> */}
           </Fragment>
         );
       }
@@ -384,93 +398,92 @@ const MapContent = ({ data }: any): JSX.Element | null => {
   );
 };
 
-const NearbyMarkers = ({}) => {
-  const [{ category, data, selectedNearbyItem }, setSelectedLocation] =
-    useAtom(selectedNearByAtom);
+// const NearbyMarkers = ({}) => {
+//   const [{ category, data, selectedNearbyItem }, setSelectedLocation] = useAtom(selectedNearByAtom);
 
-  const isMobile = useMediaQuery("(max-width: 601px)");
-  // const map = useMap();
+//   const isMobile = useMediaQuery("(max-width: 601px)");
+//   // const map = useMap();
 
-  useEffect(() => {
-    if (Object.keys(selectedNearbyItem).length === 0) return;
-    const handleClickOutside = (event: any) => {
-      if (event.target.closest(".leaflet-container")) {
-        setSelectedLocation((prev: any) => ({
-          ...prev,
-          selectedNearbyItem: {},
-        }));
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [setSelectedLocation]);
+//   useEffect(() => {
+//     if (Object.keys(selectedNearbyItem).length === 0) return;
+//     const handleClickOutside = (event: any) => {
+//       if (event.target.closest(".leaflet-container")) {
+//         setSelectedLocation((prev: any) => ({
+//           ...prev,
+//           selectedNearbyItem: {},
+//         }));
+//       }
+//     };
+//     document.addEventListener("click", handleClickOutside);
+//     return () => document.removeEventListener("click", handleClickOutside);
+//   }, [setSelectedLocation]);
 
-  if (!data || Object.keys(data).length === 0) return;
-  const finalCategory = category !== "" ? category : Object.keys(data)[0];
-  const selectedNearByData: any = data ? data[finalCategory] : "";
-  const Icon: any = createCustomIconReactLeafLet(
-    finalCategory as keyof typeof icons
-  );
+//   if (!data || Object.keys(data).length === 0) return;
+//   const finalCategory = category !== "" ? category : Object.keys(data)[0];
+//   const selectedNearByData: any = data ? data[finalCategory] : "";
+//   const Icon: any = createCustomIconReactLeafLet(
+//     finalCategory as keyof typeof icons
+//   );
 
-  return (
-    selectedNearByData &&
-    selectedNearByData.length > 0 &&
-    selectedNearByData?.map((item: any, index: number) => {
-      return (
-        <Marker
-          key={item?.lat + "markerTag" + index.toString()}
-          position={[
-            parseFloat(checkLatAndLang(item?.lat)),
-            parseFloat(checkLatAndLang(item?.lang)),
-          ]}
-          title={item.name}
-          icon={Icon}
-          zIndexOffset={100}
-          eventHandlers={{
-            click: () =>
-              setSelectedLocation((prev: any) => ({
-                ...prev,
-                selectedNearbyItem: {
-                  lat: checkLatAndLang(item?.lat),
-                  lang: checkLatAndLang(item?.lang),
-                  name: item?.name,
-                },
-              })),
-          }}
-        >
-          {!isMobile && (
-            <Tooltip
-              key={item.lat + "tooltipTag" + index.toString()}
-              opacity={1}
-              direction="top"
-              permanent={selectedNearbyItem?.lat === item?.lat}
-              className="min-w-fit z-50"
-              offset={isMobile ? [6, -36] : [4, -36]}
-            >
-              <div className=" ">
-                <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
-                  {item.name}
-                </p>
-              </div>
-            </Tooltip>
-          )}
+//   return (
+//     selectedNearByData &&
+//     selectedNearByData.length > 0 &&
+//     selectedNearByData?.map((item: any, index: number) => {
+//       return (
+//         <Marker
+//           key={item?.lat + "markerTag" + index.toString()}
+//           position={[
+//             parseFloat(checkLatAndLang(item?.lat)),
+//             parseFloat(checkLatAndLang(item?.lang)),
+//           ]}
+//           title={item.name}
+//           icon={Icon}
+//           zIndexOffset={100}
+//           eventHandlers={{
+//             click: () =>
+//               setSelectedLocation((prev: any) => ({
+//                 ...prev,
+//                 selectedNearbyItem: {
+//                   lat: checkLatAndLang(item?.lat),
+//                   lang: checkLatAndLang(item?.lang),
+//                   name: item?.name,
+//                 },
+//               })),
+//           }}
+//         >
+//           {!isMobile && (
+//             <Tooltip
+//               key={item.lat + "tooltipTag" + index.toString()}
+//               opacity={1}
+//               direction="top"
+//               permanent={selectedNearbyItem?.lat === item?.lat}
+//               className="min-w-fit z-50"
+//               offset={isMobile ? [6, -36] : [4, -36]}
+//             >
+//               <div className=" ">
+//                 <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
+//                   {item.name}
+//                 </p>
+//               </div>
+//             </Tooltip>
+//           )}
 
-          {selectedNearbyItem?.lat === item?.lat && (
-            <Tooltip
-              opacity={1}
-              direction="top"
-              permanent={selectedNearbyItem?.lat === item?.lat}
-              key={item.lang + "tooltipTag2" + index.toString()}
-              offset={isMobile ? [-7, -40] : [4, -36]}
-              className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
-            >
-              <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal] text-center w-full ">
-                {item.name}
-              </p>
-            </Tooltip>
-          )}
-        </Marker>
-      );
-    })
-  );
-};
+//           {selectedNearbyItem?.lat === item?.lat && (
+//             <Tooltip
+//               opacity={1}
+//               direction="top"
+//               permanent={selectedNearbyItem?.lat === item?.lat}
+//               key={item.lang + "tooltipTag2" + index.toString()}
+//               offset={isMobile ? [-7, -40] : [4, -36]}
+//               className=" min-w-[300px] max-w-[300px] sm:max-w-full text-wrap md:text-n break-words "
+//             >
+//               <p className="text-[#00487C] text-[12px] md:text-lg not-italic font-semibold leading-[normal] text-center w-full ">
+//                 {item.name}
+//               </p>
+//             </Tooltip>
+//           )}
+//         </Marker>
+//       );
+//     })
+//   );
+// };

@@ -51,7 +51,7 @@ function SearchCard({
     <div className={Styles.searchCradMainCon} data-id={`searchCard_${index.toString()}`} data-type="card">
       {/* Top sectiom */}
       <div className={Styles.searchCradTopSection}>
-        <ImageBlock data={{ ...topSectionLeftData, pageUrl: url }}  />
+        <ImageBlock data={{ ...topSectionLeftData, pageUrl: url }} index={index.toString()} />
         <RightSideBlock 
           // data={topSectionRightData} 
           data={{ ...data, pageUrl: url }}

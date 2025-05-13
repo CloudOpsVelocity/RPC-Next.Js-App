@@ -23,9 +23,9 @@ const groceries = [
   "₹10 CR",
   "₹20 CR",
   "₹30 CR",
-  "₹40 CR",
-  "₹50 CR",
-  "₹60 CR",
+  // "₹40 CR",
+  // "₹50 CR",
+  // "₹60 CR",
 ];
 
 const pricesForRent = [
@@ -63,9 +63,9 @@ const map = new Map<string, { value: number }>([
   ["₹10 CR", { value: 1000 * MULTIPLIER }],
   ["₹20 CR", { value: 2000 * MULTIPLIER }],
   ["₹30 CR", { value: 3000 * MULTIPLIER }],
-  ["₹40 CR", { value: 4000 * MULTIPLIER }],
-  ["₹50 CR", { value: 5000 * MULTIPLIER }],
-  ["₹60 CR", { value: 6000 * MULTIPLIER }],
+  // ["₹40 CR", { value: 4000 * MULTIPLIER }],
+  // ["₹50 CR", { value: 5000 * MULTIPLIER }],
+  // ["₹60 CR", { value: 6000 * MULTIPLIER }],
 
   ["₹0", { value: 0 }],
   ["₹5,000", { value: 5 * THOUSANDMULTIPLIER }],
@@ -173,7 +173,7 @@ export function CustomBugdetSelect() {
   //   }
   // };
   const shouldShowBudget = !(
-    (f.bugdetValue[0] === 500000 && f.bugdetValue[1] === 600000000) ||
+    (f.bugdetValue[0] === 500000 && f.bugdetValue[1] === 300000000) ||
     (f.bugdetValue[0] === 0 && f.bugdetValue[1] === 100000) ||
     (!f.bugdetValue[0] && !f.bugdetValue[1])
   );
