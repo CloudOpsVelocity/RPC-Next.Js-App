@@ -22,7 +22,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
 import ListingSearchPagination from "../../_new-listing-search-page/components/ListingSearchPagination";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -103,7 +103,6 @@ function LeftSection({
     },
   });
 
-  //console.log(typeof window !== "undefined" )
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
     enabled: true,

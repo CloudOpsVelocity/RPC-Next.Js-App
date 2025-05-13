@@ -121,10 +121,7 @@ const OtherChargesPopupBox = ({data}:{data:any}) => {
         }
   }
 
-  // console.log(otherChargesList());
-    const content:any = otherChargesList();
-
-    console.log(content)
+  const content:any = otherChargesList();
 
   if(!content) return;
 

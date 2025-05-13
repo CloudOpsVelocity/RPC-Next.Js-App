@@ -1,10 +1,10 @@
-import ProjectCard from "@/app/test/newui/components/Card";
+// import ProjectCard from "@/app/test/newui/components/Card";
 import { SearchFilter } from "@/app/types/search";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import SearchCard from "../../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/SearchCard";
 import { sortUnits } from "@/app/utils/unitparser";
-import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
-import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+// import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+// import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { handleAgentOwner, shearPropOrProj } from "../../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/searchData";
 import { useSetAtom } from "jotai";
 import { useSession } from "next-auth/react";
@@ -45,8 +45,6 @@ export default function ServerDataSection({
       ? frontendFilters.listedBy
       : state.listedBy;
   }, [state, frontendFilters]);
-  // console.log({ lt: listedBy() });
-
 
 
   // methods for new search card with event delegation
@@ -148,9 +146,7 @@ export default function ServerDataSection({
       const selectedItem:any = data[index];
       // setSelectedCard(selectedItem);  
       const action = actionButton?.dataset.action;
-  
-      console.log(selectedItem);
-  
+    
       switch(action){
         case 'readmore':
           document.body.style.overflow = "hidden";
@@ -169,12 +165,9 @@ export default function ServerDataSection({
           handleOpen(selectedItem)
           break;
         case 'otherCharges':
-          // handleOpen(selectedItem)
-          console.log("otherCharges")
           setPopupState(prev => ({...prev, isOpen: true, type: 'otherCharges', title:"Other Charges", data: selectedItem}));
           break;
         case 'brochure':
-          console.log('brochure card: ', index);
           handleDownload(selectedItem);
           break;
         case 'nearby':
@@ -186,8 +179,14 @@ export default function ServerDataSection({
           document.body.style.overflow = "hidden";
           setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: selectedItem}));
           break;
-        case 'listingType':
-          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, selectedItem.type);
+        case 'listingType_B':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
+          break;
+        case 'listingType_A':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
+          break; 
+        case 'listingType_O':
+          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
           break;
         case 'bhk':
           const sortedBhks:any = sortUnits(selectedItem.bhkNames);
@@ -195,7 +194,6 @@ export default function ServerDataSection({
           setPopupState(prev => ({...prev, isOpen: true, type: 'bhk', title:"Unit Types", content: sortedBhks, data: selectedItem}));
           break;
         default:
-          console.log('Card clicked:', cardId);
           window.open(selectedItem.pageUrl, "_self", "noreferrer");
       }
   };
@@ -212,7 +210,6 @@ export default function ServerDataSection({
       }
 
       {data.map((eachOne: any, index: number) => {
-        console.log(eachOne)
         const sortedBhks:any = sortUnits(eachOne.bhkNames);
 
         // return (

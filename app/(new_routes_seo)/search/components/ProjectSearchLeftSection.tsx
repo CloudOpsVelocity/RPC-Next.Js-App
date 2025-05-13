@@ -16,7 +16,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
-import SearchPagination from "./searchPagination";
+// import SearchPagination from "./searchPagination";
 import clsx from "clsx";
 import ListingSearchPagination from "../listing/_new-listing-search-page/components/ListingSearchPagination";
 

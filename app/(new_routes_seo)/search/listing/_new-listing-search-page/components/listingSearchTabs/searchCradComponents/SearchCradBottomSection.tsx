@@ -90,7 +90,6 @@ export default function SearchCradBottomSection({
   );
 }
 
-
 type CountListProps = {
   value: number;
   type: "Agent" | "Owner" | "Builder";
@@ -101,9 +100,9 @@ function CountListing({type, value}: CountListProps) {
     value > 0 && (
     <ButtonElement
         title={`${type} Listing : ${value}`}
-        dataAction="listingType"
+        dataAction={`listingType_${type[0]}`}
         buttonConClass={`${
-            Styles.listingTypeButton} ${
+            Styles.listingTypeButton } ${
             type === "Owner" ? Styles.listingTypeButtonForOwner : Styles.listingTypeButtonForOthers} ${
             value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
         }`}
