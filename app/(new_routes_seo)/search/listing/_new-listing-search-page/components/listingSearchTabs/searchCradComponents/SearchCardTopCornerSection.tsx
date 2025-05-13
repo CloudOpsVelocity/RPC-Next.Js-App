@@ -42,7 +42,7 @@ const ListingDownSectionCard = ({
 function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Props) {
     const {category, type, basePrice, sqftPrice, floorPlan, Sh, brochureUrl, amenCount, propTypeName, atFloor, facing, towerName} = topCornerRightData;
     const isMobile = useMediaQuery("(max-width: 1600px)");
-    console.log(Sh)
+    // console.log(Sh)
  
     return (
       <div className={Styles.searchCardTopCornerMainCon}>
@@ -76,33 +76,22 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                       name="share Project"
                       className={Styles.mobileShearBtn}
                       data-action="share"
-                      // onClick={() => {
-                            //   navigator.share({
-                            //     title: type === "proj" ? projName : propName,
-                            //     text: `Check out this ${
-                            //       type === "proj" ? "project" : "property"
-                            //     }: ${type === "proj" ? projName : propName}`,
-                            //     url: url,
-                            //   });
-                      // }}
                     >
-                  🔗
+                      🔗
                     </button>
 
                     {floorPlan && type !== "proj" && (
-                      <div
-                        // onClick={() =>
-                        //   window.open(
-                        //     `/image?path=${
-                        //       floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
-                        //     }&type=F`,
-                        //     "_self"
-                        //   )
-                        // }
-                        className={Styles.floorplanSvgCon}
+                      <Link
+                        title="Click to view Floor Plan"
+                        className="w-[18px] h-[18px] "
+                        href={`/image?path=${
+                          floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
+                        }&type=F`}
                       >
-                        {/* floorplan svg */}
-                      </div>
+                        <svg width="20px" height="20px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10 0.5H14.5V14.5H0.5V0.5H4.5L7.5 2.5M6.5 14.5V7.5M4 7.5H9M12 7.5H14.5" stroke="#000000"/>
+                        </svg>
+                      </Link>
                     )}
         
                     <button
@@ -110,33 +99,8 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                       data-action="nearby"
                       title="Click to view on Map"
                       className={Styles.searchCardViewMapBtn}
-                      // className="group flex sm:hidden mb-[4px] items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border  justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold hover:outline-none active:outline-none "
-                      // onClick={() => {
-                            //   setIsMapLoaded(true);
-                            //   setNearby((prev: any) => ({
-                            //     ...prev,
-                            //     category: "",
-                            //     selectedNearbyItem: {},
-                            //     data: {},
-                            //     id: "",
-                            //     isOpen: false,
-                            //   }));
-                            //   setMapPopup((prev: any) => ({ ...prev, isOpen: true }));
-                            //   setSelected({
-                            //     agentListing,
-                            //     ownerListing,
-                            //     projOrPropName,
-                            //     lat,
-                            //     lang,
-                            //     type,
-                            //     reqId: type === "proj" ? projIdEnc : propIdEnc,
-                            //     propType: type === "proj" ? propType : propTypeName,
-                            //     phaseId: phaseId,
-                            //   });
-                      // }}
                     >
                       <span 
-                        // className=" px-[4px] h-full w-full text-white transition-[300ms] rounded-md bg-transparent"
                         className={Styles.searchCardViewMapBtnSpan}
                       >
                         Map & Nearby
@@ -188,6 +152,7 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                   <div className={Styles.brochureAndNearbyCon}>
                     {" "}
                     {/* {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />} */}
+                    {brochureUrl && 
                     <button
                       data-action="brochure"
                       // onClick={handleDownload}
@@ -196,6 +161,7 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                       <DownLoadIcon className={Styles.broucherIcon} />{" "}
                       Brochure
                     </button>
+                    }
                     <button
                       data-action="amenities"
                       title={`Click to view ${
@@ -290,7 +256,6 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                       }
                       value={atFloor == 0 ? "G" : atFloor}
                     />
-                  
                   </>
                 )}
               </div>
@@ -317,15 +282,6 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                   <button
                     className="space-x-2 flex flex-row justify-center"
                     data-action="share"
-                    // onClick={() =>
-                    //   navigator.share({
-                    //     title: type === "proj" ? projName : propName,
-                    //     text: `Check out this ${
-                    //       type === "proj" ? "project" : "property"
-                    //     }: ${type === "proj" ? projName : propName}`,
-                    //     url: url,
-                    //   })
-                    // }
                   >
                     {config.shareIcon}
                   </button>
@@ -336,28 +292,6 @@ function SearchCardTopCornerSection({topCornerRightData, onAddingShortList}: Pro
                   data-action="nearby"
                   className={Styles.searchCardViewMapBtn}
                   title="Click to view on Map"
-                  // onClick={() => {
-                  //   setIsMapLoaded(true);
-                  //   setNearby((prev: any) => ({
-                  //     ...prev,
-                  //     category: "",
-                  //     isOpen: false,
-                  //     selectedNearbyItem: {},
-                  //     data: {},
-                  //     id: "",
-                  //   }));
-                  //   setSelected({
-                  //     agentListing,
-                  //     ownerListing,
-                  //     projOrPropName,
-                  //     lat,
-                  //     lang,
-                  //     type,
-                  //     reqId: type === "proj" ? projIdEnc : propIdEnc,
-                  //     propType: type === "proj" ? propType : propTypeName,
-                  //     phaseId: phaseId,
-                  //   });
-                  // }}
                 >
                   <span className={Styles.searchCardViewMapBtnSpan}>
                     Map & Nearby

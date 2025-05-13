@@ -11,7 +11,7 @@ export const initialState: SearchFilter = {
   listedBy: null,
   reraVerified: [],
   areaValue: [0, 5000],
-  bugdetValue: [500000, 600000000],
+  bugdetValue: [500000, 300000000],
   builderIds: [],
   city: null,
   facing: [],
@@ -47,7 +47,7 @@ export default function parseProjectSearchQueryParams(params: string) {
     if (key === "cg" && value === "R" ) {
       filters.bugdetValue = [0, 1000000]
     }else if (key === "cg" && value === "S" ) {
-      filters.bugdetValue = [500000, 600000000]
+      filters.bugdetValue = [500000, 300000000]
     }
     const hasComma = value.indexOf(",") !== -1;
     if (
