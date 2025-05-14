@@ -169,48 +169,52 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
       {type === "proj" ? 
         <>
-          <Link href={pageUrl} passHref legacyBehavior prefetch={false}>
-            <a className={Styles.searchCardLink} title={`${projName} in ${locality}, ${city}`}>
-              <h2 style={{ width: "100%" }}>
-                <span className={Styles.searchCardPromName}>
-                  {projName}{" "}
-                  {phaseName && phaseCount !== undefined && phaseCount > 1 && ( 
-                    <span className={Styles.searchCardPhaseName}>({phaseName})</span> 
-                  )}
-                </span>
+          <Link
+            href={pageUrl}
+            prefetch={false}
+            className={Styles.searchCardLink}
+            title={`${projName} in ${locality}, ${city}`}
+          >
+            <h2 style={{ width: "100%" }}>
+              <span className={Styles.searchCardPromName}>
+                {projName}{" "}
+                {phaseName && phaseCount !== undefined && phaseCount > 1 && (
+                  <span className={Styles.searchCardPhaseName}>({phaseName})</span>
+                )}
+              </span>
 
-                <span className={Styles.searchCardPromNameSpan}>
-                  Price Range: {formatCurrency(Number(minPrice))} -{" "}
-                  {formatCurrency(Number(maxPrice))} 
-                </span>
+              <span className={Styles.searchCardPromNameSpan}>
+                Price Range: {formatCurrency(Number(minPrice))} -{" "}
+                {formatCurrency(Number(maxPrice))}
+              </span>
 
-                <span className={Styles.searchCardProjNameType}>
-                  <span>
-                    {sortedBhks && sortedBhks.length > 5
-                      ? sortedBhks
-                          .filter(
-                            (bhk:any) => !bhk.includes(".5") && !bhk.includes("Servant")
-                          )
-                          .slice(0, 5)
-                          .join(", ")
-                      : sortedBhks && sortedBhks.join(", ")}
-                  </span>
-                  {sortedBhks && sortedBhks.length > 5 && (
-                    <button
-                      data-action="bhk"
-                      className={Styles.searchCardSortedBhks}
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                    >
-                      +{sortedBhks.length - 5} more
-                    </button>
-                  )}
-                  {` ${propType} For ${cg === "R" ? "Rent" : "Sale"} in ${locality}, ${city}`}
+              <span className={Styles.searchCardProjNameType}>
+                <span>
+                  {sortedBhks && sortedBhks.length > 5
+                    ? sortedBhks
+                        .filter(
+                          (bhk: any) => !bhk.includes(".5") && !bhk.includes("Servant")
+                        )
+                        .slice(0, 5)
+                        .join(", ")
+                    : sortedBhks && sortedBhks.join(", ")}
                 </span>
-              </h2>
-            </a>
+                {sortedBhks && sortedBhks.length > 5 && (
+                  <button
+                    data-action="bhk"
+                    className={Styles.searchCardSortedBhks}
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent navigation when clicking this button
+                    }}
+                  >
+                    +{sortedBhks.length - 5} more
+                  </button>
+                )}
+                {` ${propType} For ${cg === "R" ? "Rent" : "Sale"} in ${locality}, ${city}`}
+              </span>
+            </h2>
           </Link>
+
 
 
           <p className={Styles.searchCardAddress}>
@@ -232,14 +236,16 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
         </>
       :
       <>
-          <Link href={pageUrl} prefetch={false} passHref legacyBehavior>
-            <a title={`View ${bhkName} ${propTypeName} for ${category} in ${localityName}`} className={Styles.searchCardLink}>
-              <h2 className={Styles.searchCardPromName}>
-                {bhkName} {propTypeName} for {category} in {localityName}
-              </h2>
-            </a>
+          <Link
+            href={pageUrl}
+            prefetch={false}
+            className={Styles.searchCardLink}
+            title={`View ${bhkName} ${propTypeName} for ${category} in ${localityName}`}
+          >
+            <h2 className={Styles.searchCardPromName}>
+              {bhkName} {propTypeName} for {category} in {localityName}
+            </h2>
           </Link>
-
 
           <p className={Styles.searchCardPromNameSpan}>
             {formatCurrency(Number(price))}{" "}
