@@ -106,21 +106,20 @@ function PopupOverlay({popupState, closePopup}: Props) {
             handleChange={closePopup}
             HeadingElemnt={
               <Link
-                 href={url}
-                 passHref
-                 legacyBehavior
+                href={url}
+                className="block cursor-pointer"
+                rel="noopener noreferrer"
+                title={`${title} of ${data.projName ?? data.propName}`}
+                aria-label={`${title} of ${data.projName ?? data.propName}`}
               >
-                <a 
-                  rel="noopener noreferrer" 
-                  className="block cursor-pointer" 
-                  title={`${title} of ${data.projName ?? data.propName}`}
-                  aria-label={`${title} of ${data.projName ?? data.propName}`}
-                >
-                  <h2 className="sm:text-[20px] xl:text-[24px] font-bold  capitalize break-words text-wrap font-[600]">
-                      <span className="text-[#001F35]">{title} <span className=' lowercase '>of </span> </span>
-                      <span className="text-green-800">{data.projName ?? data.propName}</span>
-                  </h2>
-                </a>
+                <h2 className="sm:text-[20px] xl:text-[24px] font-bold capitalize break-words text-wrap font-[600]">
+                  <span className="text-[#001F35]">
+                    {title} <span className="lowercase">of </span>
+                  </span>
+                  <span className="text-green-800">
+                    {data.projName ?? data.propName}
+                  </span>
+                </h2>
               </Link>
             }
             containerClassStyle={!isDesktop ? `!w-[50%]` : `!w-full`}

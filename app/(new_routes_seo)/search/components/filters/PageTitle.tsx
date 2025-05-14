@@ -2,7 +2,7 @@
 
 import { useAtomValue } from "jotai";
 import { useParams, usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { projSearchStore } from "../../store/projSearchStore";
 import Link from "next/link";
 
@@ -122,9 +122,33 @@ function PageTitle({ serverFilterData }: Props) {
 
         const isExtraTitleAvailable = Array.isArray(slugs) && slugs.length > 2;
 
+        // const links = isExtraTitleAvailable ? (
+        //   <nav aria-label="Breadcrumb">
+        //     <ol className="inline-flex items-center space-x-1">
+        //       {slugs.slice(2).map((slug, index) => {
+        //         const fullPath = `${basePath}/${slugs
+        //           .slice(0, 2 + index + 1)
+        //           .join("/")}`;
+        //         const linkText = slug.replaceAll("-", " ");
+
+        //         return (
+        //           <li key={fullPath}>
+        //             <Link
+        //               href={fullPath}
+        //               title={`View listings for ${linkText}`}
+        //               className="text-blue-600 hover:underline pl-1"
+        //             >
+        //               {linkText}
+        //             </Link>
+        //           </li>
+        //         );
+        //       })}
+        //     </ol>
+        //   </nav>
+        // ) : null;
+        
         const links = isExtraTitleAvailable ? (
-          <nav aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1">
+            <>
               {slugs.slice(2).map((slug, index) => {
                 const fullPath = `${basePath}/${slugs
                   .slice(0, 2 + index + 1)
@@ -132,25 +156,33 @@ function PageTitle({ serverFilterData }: Props) {
                 const linkText = slug.replaceAll("-", " ");
 
                 return (
-                  <li key={fullPath}>
+                  <Fragment key={fullPath}>
+                  /
+                  <span >
                     <Link
                       href={fullPath}
                       title={`View listings for ${linkText}`}
-                      className="text-blue-600 hover:underline pl-1"
+                      className="text-blue-600 hover:underline"
                     >
                       {linkText}
                     </Link>
-                  </li>
+                  </span>
+                  </Fragment>
                 );
               })}
-            </ol>
-          </nav>
+            </>
         ) : null;
-        return (
-          <div className="flex">
+        // return (
+        //   <div className="flex">
+        //     {pageTitle.replaceAll("-", " ")}
+        //     <div>{links}</div>
+        //   </div>
+        // );
+         return (
+          <>
             {pageTitle.replaceAll("-", " ")}
-            <div>{links}</div>
-          </div>
+            {links}
+          </>
         );
       }
     } else if (paramsData && Object.keys(paramsData).length === 0) {
@@ -257,7 +289,7 @@ function PageTitle({ serverFilterData }: Props) {
       {!hideHeading ? (
         <div className=" text-[16px] 2xl:text-xl  ml-[8px]   capitalize flex flex-wrap ">
           {/* <span className="mr-[6px]">Search Results for</span> */}
-          <h1 className="font-bold text-[16px]  2xl:text-xl  ">
+          <h1 className="font-bold text-[14px]  md:text-[16px] ">
             {getTitle(path)}
           </h1>
         </div>
@@ -274,3 +306,6 @@ function PageTitle({ serverFilterData }: Props) {
 
 export default PageTitle;
 // sd
+
+
+
