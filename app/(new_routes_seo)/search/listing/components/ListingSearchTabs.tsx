@@ -245,7 +245,7 @@ const ListingSearchTabs = ({
                   key={tab.id}
                   href={tab.id !== null ? `?sf=listedBy=${tab.id}` : pathname}
                   title={`Click to view  ${tab.label} in ${
-                    params.slugs.length > 2
+                    params?.slugs?.length > 2
                       ? capitalizeWords(
                           params.slugs.at(-1)?.replace("-", " ") ?? ""
                         )
