@@ -14,34 +14,48 @@ export default function SearchCradBottomSection({
   data,
   index
 }: BottomSectionProps) {
-  const {type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount, bhkName, category, localityName, projName, propName, pageUrl, locality, projIdEnc} = data;
+  const {
+    type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount, bhkName, phaseName,
+    category, localityName, projName, propName, pageUrl, locality, projIdEnc, sortedBhks, propType, cg, city,
+  } = data;
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
 
-  if(index === "0"){
+  // if(index === "0"){
     console.log(data)
-  }
+  // }
 
-  const textSlice = (word:string = "") => {
+
+  const textSlice = (word:string = "", url?:string) => {
     if(word === "") return;
+    const finalUrl = url ?? pageUrl;
     word = word.toLowerCase().replaceAll(" ", "-").replaceAll("+", "with");
-    const index = pageUrl.indexOf(word);
-    const slicedText = index !== -1 ? pageUrl.slice(0, index + word.length) : pageUrl;
+    const index = finalUrl.indexOf(word);
+    const slicedText = index !== -1 ? finalUrl.slice(0, index + word.length) : finalUrl;
     return slicedText;
   }
-
-  // console.log(textSlice(bhkName))
 
   const finalProjName = (bhkName !== undefined && propTypeName !== undefined) ? `${bhkName} ${propTypeName}` : ""
 
   const links = [
     {title: finalProjName, url: textSlice(finalProjName)},
-    // {title: propTypeName ?? "", url: textSlice(propTypeName)},
     {title: category ? `for ${category}` : "", url: textSlice(category)},
     {title: localityName ?? "", url: textSlice(localityName)},
-
-    {title: projName ?? propName, url: type !== "proj" ? textSlice(projName ?? propName) : textSlice(projIdEnc) },
+    {title: projName ?? propName, url: type !== "proj" ? textSlice(projName ?? propName) : textSlice(projIdEnc)},
     {title: locality ?? "", url: textSlice(locality)},
   ]
+
+  const getlListingUrl = (bhk:string) => {
+    const url = `/residential-listings/${cg === "R" ? "for-rent" : "for-sale"}/${city}/${locality}/${projName}${phaseName ? `/${phaseName}` : ""}/${bhk}-${propType}`;
+    return url.toLowerCase().replaceAll(" ", "-").replaceAll("+", "with");
+  }
+
+  const bhkLinks = sortedBhks && sortedBhks.length > 0 
+    ? sortedBhks.map((eachBhk: any) => (
+      { title: `${eachBhk} ${propType}`, url: textSlice(`${eachBhk} ${propType}`, getlListingUrl(`${eachBhk} ${propType}`))}
+    )) 
+    : [];
+
+    console.log(bhkLinks);
 
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
@@ -103,6 +117,22 @@ export default function SearchCradBottomSection({
               <Tag key={each.title} title={each.title} url={each.url} className='!text-[8px] !px-2 !py-[2px] text-nowrap ' />
             )}
           })}
+
+          {bhkLinks.length > 0 && bhkLinks.map((each:any)=>{
+            if(each.title !== ""){
+            return(
+              <Tag key={each.title} title={each.title} url={each.url} className='!text-[8px] !px-2 !py-[2px] text-nowrap ' />
+            )}
+          })}
+
+          {phaseName && 
+            <Tag 
+              key={phaseName} 
+              title={phaseName} 
+              url={`/residential-listings/${cg === "R" ? "for-rent" : "for-sale"}/${city}/${locality}/${projName}/${phaseName}`} 
+              className='!text-[8px] !px-2 !py-[2px] text-nowrap ' 
+            />
+          }
         </div>
 
       {/* right section */}
