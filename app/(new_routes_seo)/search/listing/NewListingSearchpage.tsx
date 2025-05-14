@@ -28,7 +28,7 @@ type Props = {
   preDefinedFilters: string | null;
 };
 
-export default function NewListingSearchpage({
+export default function NewListingSearchpage({ 
   serverData,
   frontendFilters,
   pageUrl,

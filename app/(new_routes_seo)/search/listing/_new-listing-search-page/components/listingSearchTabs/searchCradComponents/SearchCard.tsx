@@ -62,7 +62,7 @@ function SearchCard({
       </div>
 
       {/* Bottom section */}
-      <SearchCradBottomSection data={data} index={index.toString()}  />
+      <SearchCradBottomSection data={{...data, pageUrl: url }} index={index.toString()}  />
     </div>
   )
 }
