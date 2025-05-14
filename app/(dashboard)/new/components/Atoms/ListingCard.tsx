@@ -236,7 +236,7 @@ export default function ListingCard({ item, sl }: Props) {
               builderId={item.postedById}
               builderName={item.postedBy}
               projName={title}
-              reqId={item.propIdEnc}
+              reqId={item.propIdEnc} 
             />
           </div>
         </div>

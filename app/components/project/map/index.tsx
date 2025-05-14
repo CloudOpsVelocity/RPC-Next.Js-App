@@ -23,7 +23,7 @@ export interface Area {
   projName?: string;
   key?: string;
   type?: "proj" | "prop";
-}
+} 
 
 const LeafMap: React.FC<{
   lat: string;

@@ -140,7 +140,7 @@ export default async function Page({ params, searchParams }: Props) {
       };
     }
   }
-  console.log({ filtersValues });
+
   return !isProjectListing ? (
     <NewListingSearchpage
       pageUrl={pathname}
@@ -327,5 +327,7 @@ export async function generateMetadata({
     },
   };
 }
-export const dynamic = "force-static";
-export const dynamicParams = false;
+// export const dynamic = "force-static";
+// export const dynamicParams = false;
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;

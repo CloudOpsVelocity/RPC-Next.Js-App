@@ -1,6 +1,9 @@
 // // Cache map to store responses for each pageType
 // const pageTypeCache = new Map<string, any>();
 
+import { BACKEND_BASE_URL } from "../env";
+import logger from "../utils/logger";
+
 // const getPagesSlugs = async (
 //   pageType: "builder-list" | "project-list" | "case-seo" | "listing-search-seo"
 // ) => {
@@ -63,8 +66,13 @@ const getPagesSlugs = async (
     if (pageTypeCache.has(pageType)) {
       return pageTypeCache.get(pageType);
     }
-
+    if (pageType === "listing-search-seo") {
+      const result = await getListingSeoData();
+      pageTypeCache.set(pageType, result);
+      return result;
+    }
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/${pageType}`;
+
     const res = await fetch(url, {
       method: "POST",
       cache: "no-store",
@@ -72,14 +80,14 @@ const getPagesSlugs = async (
     const data = await res.json();
 
     let result;
-    if (pageType === "listing-search-seo") {
-      result = data.status ? data.urlMap : {};
-    } else if (pageType === "project-list") {
+    // if (pageType === "listing-search-seo") {
+    //   result = data.status ? data.urlMap : {};
+    // }
+    if (pageType === "project-list") {
       result = data;
     } else {
       result = data;
     }
-
     // Cache the result
     pageTypeCache.set(pageType, result);
     return result;
@@ -96,4 +104,29 @@ function extractID(url: string): string {
   // If no underscore, return the entire string
   return url;
 }
+const getListingSeoData = async () => {
+  const urls = [
+    `${BACKEND_BASE_URL}/common/listing-search-seo-uniqe`,
+    `${BACKEND_BASE_URL}/common/listing-search-seo`,
+  ];
+
+  const [unique, pages] = await Promise.all(
+    urls.map((url) =>
+      fetch(url, {
+        method: "POST",
+      }).then((res) => res.json())
+    )
+  );
+  const result = {
+    ...unique.urlMap,
+    ...pages.urlMap,
+  };
+
+  logger.info(
+    `UNIQ:${Object.keys(unique.urlMap).length}-PAGES-${
+      Object.keys(pages.urlMap).length
+    }-TOTAL-${Object.keys(result).length}`
+  );
+  return result;
+};
 export { getPagesSlugs, extractID };

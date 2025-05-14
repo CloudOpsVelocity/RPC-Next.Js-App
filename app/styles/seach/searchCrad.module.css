@@ -1,0 +1,655 @@
+.searchCradMainCon{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+    align-self: stretch; 
+    border-radius: 0.25rem; 
+    border-width: 2px; 
+    border-style: solid; 
+    max-width: 100%; 
+    height: auto; 
+    margin: 1%;
+    border-color: #A4B8D4;
+    width: 98%;
+}
+
+.searchCradTopSection{
+    display: flex;
+    gap: 10px;
+}
+
+.searchCradBottomSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.searchCradTopImageBox{
+    width: 16.063rem;
+    height: 15.625rem;
+    background-color: gray;
+    position: relative;
+}
+
+.searchCradTopRightBox{
+    position: relative;
+}
+
+.searchCradBottomLeftSection{
+    display: flex;
+}
+
+.searchCradBottomRightSection{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap:4px;
+}
+
+.listingTypeButton{
+    display: flex; 
+    padding: 4px; 
+    flex-direction: column; 
+    gap: 0.5rem; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    border-radius: 4px;  
+    cursor: pointer;
+    border:0.4px solid;
+    font-size: 12px;
+}
+
+.listingTypeButtonForOwner{
+    align-items: flex-start; 
+    border: 0.4px solid #FF7A00;  
+    background-color: #FFF6ED;
+    color: #D66700;
+}
+
+.listingTypeButtonForOthers{
+    background-color: #f0fff0;
+}
+
+.ifValueMoreThanZero{
+    align-items: flex-start; 
+    border: 0.4px solid #148B16;  
+    color: #148B16;
+}
+
+.ifValueLessThanZero{
+    align-items: flex-start; 
+    border: 0.4px solid #5e5f5e;  
+    background-color: #FFF6ED;
+    color: gray;
+    cursor: none;
+    opacity: 0.2;
+}
+
+.searchCardCompareBtn{
+    background-color: rgb(0 115 198);
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.searchCardContactBtn{
+    background-color: rgb(0 115 198);
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 2px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.searchCradImage{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    min-width: 16.063rem;
+}
+
+.searchCradReraImage{
+    position: absolute;
+    top:0;
+    left: 0;
+}
+
+.projStatusonImage{
+    position: absolute; 
+    bottom: 4px; 
+    right: 4px; 
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 20px; 
+    color: #ffffff; 
+    background-color: #374151; 
+    font-size: 14px;
+}
+
+.possessionDateOnImage{
+    bottom: 32px; 
+}
+
+.searchCardPromName{
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 0.25rem; 
+    align-items: center; 
+    width: 100%; 
+    min-width: 0; 
+    font-weight: 700; 
+    white-space: normal; 
+    overflow-wrap: break-word; 
+    color: #001F35;
+    max-width: calc(100% - 210px) ;
+}
+
+.searchCardPhaseName{
+    font-size: 14px;
+}
+
+.searchCardPromNameSpan{
+    display: block; 
+    position: relative; 
+    font-style: normal; 
+    font-weight: 700; 
+    color: #148B16;
+    font-size: 14px;
+    font-size: 1.25rem;
+    line-height: 1.75rem;     
+}
+
+.searchCardProjNameType{
+    /* width: 100%;  */
+    font-weight: 700; 
+    color: #000000; 
+    font-size: 14px;
+    width: calc(100% - 120px);
+    display: block;
+}
+
+.searchCardSortedBhks{
+    margin-left: 0.25rem; 
+    text-decoration: underline; 
+    cursor: pointer; 
+    font-size: 14px;
+    color: rgb(0 115 198);
+}
+
+.searchCardAddress{
+    width: 100%; 
+    font-weight: 500; 
+    color: #000000; 
+    text-transform: capitalize; 
+    font-size: 14px;
+    max-width: calc(100% - 136px);
+}
+
+.searchCardPostedBy{
+    font-weight: 400; 
+    color: #000000; 
+    font-size: 14px;
+}
+
+.searchCardLink{
+    font-weight: 700; 
+    /* text-decoration: underline;  */
+    cursor: pointer; 
+}
+
+.searchCardApprovedNamesMainCon{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.downSectionCardMainCon{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-start; 
+    margin-right: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.downSectionCardIconSpan{
+    display: inline-flex; 
+    font-style: normal; 
+    font-weight: 500; 
+    text-decoration: underline; 
+    color: #001F35;
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+}
+
+.downSectionCardValue{
+    font-style: normal; 
+    font-weight: 600; 
+    color: #242424;
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+}
+
+.viewOtherChargesText{
+    cursor: pointer; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+}
+
+.searchCardTopCornerMainCon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 6px;
+    padding-top: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+/* group md:mb-1 items-center bg-[linear-gradient(144deg,#00DDEB,#1b78f2_50%,#00DDEB)] shadow-[rgba(151,65,252,0.2)_0_15px_30px_-5px] box-border flex justify-center leading-normal no-underline select-none touch-manipulation whitespace-nowrap cursor-pointer p-[3px] rounded-lg border-0 text-[12px] font-semibold group-hover:outline-none active:outline-none */
+/* bg-white h-full w-full px-[6px] text-black group-hover:text-white transition-[300ms] rounded-md group-hover:bg-transparent */
+.searchCardViewMapBtn{
+    box-sizing: border-box; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 0.5rem; 
+    border-width: 0; 
+    font-weight: 600; 
+    line-height: 1.5; 
+    text-decoration: none; 
+    white-space: nowrap; 
+    touch-action: manipulation; 
+    user-select: none; 
+    background: linear-gradient(144deg,#00DDEB,#1b78f2 50%,#00DDEB);
+    padding: 3px;
+    font-size: 12px;
+    margin-bottom: 0.25rem; 
+    transition-duration: 0.5s;
+    cursor: pointer;
+    /* outline-style: none;  */
+    height: 24px;
+    z-index: 2;
+}
+
+.searchCardViewMapBtnForMobile{
+    display: none; 
+}
+
+.searchCardViewMapBtnForMobileSpan{
+    border-radius: 0.375rem; 
+    width: 100%; 
+    height: 100%; 
+    color: #000000; 
+    background-color: #ffffff; 
+}
+
+/* .searchCardViewMapBtnForMobileSpan:hover{
+    background-color: transparent; 
+} */
+
+/* .searchCardViewMapBtnForMobileSpan:hover, */
+.searchCardViewMapBtnSpan:hover,
+.searchCardViewMapBtn:hover .searchCardViewMapBtnSpan{
+    color: white;
+    background-color: transparent;
+}
+
+.searchCardAvgPriceText{
+    display: flex; 
+    position: absolute; 
+    top: 0.75rem; 
+    right: 5.5rem; 
+    font-size: 14px;
+    line-height: 1rem; 
+    font-weight: 500; 
+    color: #4f4f4f;
+    white-space: nowrap;
+}
+
+.searchCardAvgPriceText2{
+    display: none; 
+    justify-content: flex-end; 
+    align-items: flex-end; 
+    font-size: 0.75rem;
+    line-height: 1rem; 
+    font-weight: 600; 
+    color: #4f4f4f;
+    margin-top: 4px;
+}
+
+/* text-xs flex xl:hidden sm:text-base font-semibold text-[#4f4f4f] mt-[4px] justify-end items-end */
+
+.searchCardAvgPriceText span{
+    margin-left: 0.25rem; 
+    font-weight: 700; 
+}
+
+.mobileCornerCard{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.likeAndShearCon{
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.75rem; 
+    justify-content: flex-end; 
+}
+
+.likeBtnCon{
+    display: inline-flex; 
+    gap: 0.5rem; 
+    justify-content: flex-end; 
+}
+
+.unLikeBtn{
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+    color: #374151; 
+}
+
+.mobileShearBtn{
+    display: flex; 
+    flex-direction: row; 
+    gap: 0.25rem; 
+    align-items: center; 
+    vertical-align: middle; 
+}
+
+.floorplanSvgCon{
+    display: inline-flex; 
+    flex-direction: row; 
+    gap: 0.125rem; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 0.25rem; 
+    cursor: pointer;
+}
+
+.brochureAndNearbyCon{
+    display: flex; 
+    margin-top: 0.25rem; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    align-items: flex-end; 
+}
+
+.searchCardbroucherBtn{
+    display: flex; 
+    padding-left: 0.25rem;
+    padding-right: 0.25rem; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 0.25rem; 
+    max-width: fit-content; 
+    font-weight: 700; 
+    color: #ffffff; 
+    color: 12px;
+    margin-top:  0.125rem;
+}
+
+.broucherIcon{
+    width: 14px;
+    height: 14px;
+}
+
+.amenityBtn{
+    display: flex; 
+    border-radius: 0.25rem; 
+    max-width: fit-content; 
+    font-size: 0.75rem;
+    line-height: 1rem; 
+    font-weight: 700; 
+    text-align: right; 
+    color: #ffffff; 
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; 
+    padding: 4px;
+    background-color: #EA5806;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.amenityBtn:hover{
+    background-color: #fa5e03;
+}
+
+.nearByBtn{
+    border-radius: 0.25rem; 
+    max-width: fit-content; 
+    font-size: 0.75rem;
+    line-height: 1rem; 
+    font-weight: 700; 
+    text-align: right; 
+    color: #ffffff; 
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms; 
+    transition-duration: 300ms; 
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+    background-color: #14b8a6;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; 
+    padding: 4px;
+}
+
+.nearByBtn:hover{
+    background-color: #06f7da;
+}
+
+
+.cornerDetailsForDesktop{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-end; 
+    height: auto; 
+}
+
+.broucherAndAmenityButton{
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem;
+    align-items: flex-end; 
+}
+
+.searchCardViewMapBtnSpan{
+    border-radius: 0.375rem; 
+    width: 100%; 
+    height: 100%; 
+    color: #000000; 
+    background-color: #ffffff; 
+    padding-left: 6px;
+    padding-right: 6px;
+    /* pointer-events: none; */
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1600px) {
+    .searchCradMainCon{
+        width: 98%;
+    }
+
+    .searchCardPromName{
+        width: calc(100%-210px);
+    }
+    
+    .searchCardPromNameSpan{
+        font-size: 18px;  
+        max-width: calc(100% - 110px) ;  
+    }
+
+    .projStatusonImage{
+        font-size: 12px;
+        top: 44px;
+        bottom: auto;
+    }        
+
+    .possessionDateOnImage{
+        font-size: 12px;
+        top: 10px; 
+        bottom: auto;
+    }
+
+    .viewOtherChargesText,
+    .searchCardProjNameType{
+        font-size: 12px;
+    }
+
+    .downSectionCardValue,
+    .downSectionCardIconSpan{
+        font-size: 14px;
+    }
+
+     .searchCardAddress{
+        font-size: 14px;
+        max-width: calc(100% - 136px);
+    }
+
+
+    .searchCradTopSection{
+        flex-direction: column;
+    }
+
+    .searchCradTopImageBox{
+        width: 100%;
+    }
+
+    .searchCardAvgPriceText{
+        display: none; 
+    }
+
+    .likeAndShearCon{
+        gap: 0.25rem;
+        display: flex;
+        flex-direction: column; 
+    }
+
+    .floorplanSvgCon{
+        background: #F0F9FF;
+    }
+
+    .amenityBtn{
+        padding-left: 4px;
+        padding-right: 4px; 
+    }
+
+    .searchCardAvgPriceText2{
+        display: flex; 
+        font-size: 14px;
+        line-height: 1.5rem; 
+    }
+
+    .searchCradTopRightBox{
+        padding-left: 0.6rem;
+    }
+
+
+}
+
+
+@media only screen and (max-width: 600px) {
+    .searchCradMainCon{
+        width: 98%;
+    }
+
+    .searchCardPromNameSpan{
+        font-size: 14px;    
+    }
+
+    .searchCradTopSection{
+        flex-direction: column;
+    }
+
+    .searchCradTopImageBox{
+        width: 100%;
+        height: 10.125;
+    }
+
+      .projStatusonImage{
+        font-size: 12px;
+        top: 44px;
+        bottom: auto;
+    }        
+
+    .possessionDateOnImage{
+        font-size: 12px;
+        top: 10px; 
+        bottom: auto;
+    }
+
+    .viewOtherChargesText,
+    .downSectionCardValue,
+    .downSectionCardIconSpan,
+    .searchCardPostedBy,
+    .searchCardAddress,
+    .searchCardPhaseName,
+    .searchCardSortedBhks,
+    .searchCardProjNameType{
+        font-size: 12px;
+    }
+
+    .searchCardAvgPriceText{
+        font-size: 12px;
+        display: none; 
+    }
+  
+    .likeAndShearCon{
+        gap: 0.25rem; 
+        flex-direction: row; 
+    }
+
+    .likeBtnCon{
+        gap: 0.5rem; 
+    }
+
+    .mobileShearBtn{
+        gap: 0.5rem; 
+    }
+
+    .searchCardViewMapBtnForMobile{
+        display: flex; 
+    }
+
+    .searchCardbroucherBtn{
+        padding-top: 4px;
+        padding-bottom: 0.125rem; 
+        padding-left: 0.125rem;
+        padding-right: 0.125rem; 
+    }
+    
+    .broucherIcon{
+        width: 12px;
+        height: 12px;
+    }
+
+    .searchCardAvgPriceText2{
+        display: flex; 
+    }
+
+    .searchCradTopRightBox{
+        padding-left: 0.4rem;
+    }
+
+    .searchCardViewMapBtnSpan{
+        color: #ffffff; 
+        background-color: transparent; 
+
+    }
+
+}

@@ -149,7 +149,7 @@ export default function Page() {
       <iframe
         width={iframeWidth}
         height={iframeHeight}
-        src="https://www.youtube.com/embed/ogjf7ORKfd8?si=7JKmtqJu20l82SRT"
+        src="https://www.youtube.com/embed/8_tFfRj4NE0?si=L3EUctNPeMp8SZf3"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen

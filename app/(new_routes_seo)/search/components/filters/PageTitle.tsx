@@ -2,7 +2,7 @@
 
 import { useAtomValue } from "jotai";
 import { useParams, usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { projSearchStore } from "../../store/projSearchStore";
 import Link from "next/link";
 
@@ -116,16 +116,81 @@ function PageTitle({ serverFilterData }: Props) {
           serverFilterData?.cg === "R" || state.cg === "R" ? "Rent" : "Sale"
         } in ${paramsData.project ?? ""} ${paramsData.lt ?? ""} ${
           paramsData.city ?? "Bengaluru"
-        }`;
+        } `;
+        const basePath = "/residential-listings";
+        const slugs = paramsData.slugs || [];
 
-        return pageTitle.replaceAll("-", " ");
+        const isExtraTitleAvailable = Array.isArray(slugs) && slugs.length > 2;
+
+        // const links = isExtraTitleAvailable ? (
+        //   <nav aria-label="Breadcrumb">
+        //     <ol className="inline-flex items-center space-x-1">
+        //       {slugs.slice(2).map((slug, index) => {
+        //         const fullPath = `${basePath}/${slugs
+        //           .slice(0, 2 + index + 1)
+        //           .join("/")}`;
+        //         const linkText = slug.replaceAll("-", " ");
+
+        //         return (
+        //           <li key={fullPath}>
+        //             <Link
+        //               href={fullPath}
+        //               title={`View listings for ${linkText}`}
+        //               className="text-blue-600 hover:underline pl-1"
+        //             >
+        //               {linkText}
+        //             </Link>
+        //           </li>
+        //         );
+        //       })}
+        //     </ol>
+        //   </nav>
+        // ) : null;
+
+        const links = isExtraTitleAvailable ? (
+          <>
+            {slugs.slice(2).map((slug, index) => {
+              const fullPath = `${basePath}/${slugs
+                .slice(0, 2 + index + 1)
+                .join("/")}`;
+              const linkText = slug.replaceAll("-", " ");
+
+              return (
+                <Fragment key={fullPath}>
+                  {index === 0 ? "" : "/"}
+                  <span>
+                    <Link
+                      href={fullPath}
+                      title={`View listings for ${linkText}`}
+                      className="text-blue-600 hover:underline"
+                    >
+                      {linkText}
+                    </Link>
+                  </span>
+                </Fragment>
+              );
+            })}
+          </>
+        ) : null;
+        // return (
+        //   <div className="flex">
+        //     {pageTitle.replaceAll("-", " ")}
+        //     <div>{links}</div>
+        //   </div>
+        // );
+        return (
+          <>
+            {pageTitle.replaceAll("-", " ")}
+            {links}
+          </>
+        );
       }
     } else if (paramsData && Object.keys(paramsData).length === 0) {
       let firstString = `Residential ${isListing ? "Listings" : "Projects"}`;
 
       const pageTitle = `${firstString} For ${
         state.cg === "R" ? "Rent" : "Sale"
-      } in Bengaluru`;
+      } in Bengaluru `;
       return pageTitle;
     } else if (pageUrl === "/search") {
       return "Search Results for";
@@ -224,7 +289,7 @@ function PageTitle({ serverFilterData }: Props) {
       {!hideHeading ? (
         <div className=" text-[16px] 2xl:text-xl  ml-[8px]   capitalize flex flex-wrap ">
           {/* <span className="mr-[6px]">Search Results for</span> */}
-          <h1 className="font-bold text-[16px]  2xl:text-xl  ">
+          <h1 className="font-bold text-[14px]  md:text-[16px] ">
             {getTitle(path)}
           </h1>
         </div>
@@ -240,4 +305,3 @@ function PageTitle({ serverFilterData }: Props) {
 }
 
 export default PageTitle;
-// sd

@@ -19,12 +19,14 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
     if (state.listedBy === undefined) {
       return frontendFilters;
     }
-    return !Object.entries(state).some(
-      ([_, value]) =>
-        (Array.isArray(value) && value.length > 0) || value !== null
-    )
-      ? frontendFilters
-      : state;
+    return state;
+
+    // return !Object.entries(state).some(
+    //   ([_, value]) =>
+    //     (Array.isArray(value) && value.length > 0) || value !== null
+    // )
+    //   ? frontendFilters
+    //   : state;
     // typeof window === "undefined" || // SSR or JS disabled
     // !Object.entries(state).some(
     //   ([_, value]) =>
@@ -32,7 +34,7 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
     // )
     //   ? frontendFilters
     //   : state
-  }, [state, frontendFilters]);
+  }, [Object.values(state), frontendFilters]);
 
   const hasFilters = Object.entries(filtersSource).some(
     ([_, value]) => (Array.isArray(value) && value.length > 0) || value !== null
@@ -55,6 +57,8 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
             category !== "city" &&
             category !== "projIdEnc" &&
             category !== "lng" &&
+            category !== "totalCount" &&
+            category !== "currentPage" &&
             (Array.isArray(values) ? (
               values.map((value) => (
                 <div

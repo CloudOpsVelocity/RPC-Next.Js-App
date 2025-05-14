@@ -15,7 +15,7 @@ export const initialState: SearchFilter = {
   listedBy: undefined,
   reraVerified: [],
   areaValue: [0, 5000],
-  bugdetValue: [500000, 600000000],
+  bugdetValue: [500000, 300000000],
   builderIds: [],
   city: null,
   facing: [],
@@ -55,7 +55,7 @@ type Action =
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
   switch (action.type) {
     case "reset":
-      return initialState;
+      return { ...initialState, listedBy: null };
     case "update":
       var newData =
         action.payload.propType === projectprops.plot
@@ -67,19 +67,23 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
         ...state,
         ...newData,
       };
-    case "pushToArray": {
-      const { key, value } = action.payload;
-      if (Array.isArray(state[key])) {
-        if ((state[key] as any[]).includes(value)) {
-          return state;
-        }
-        return {
-          ...state,
-          [key]: [...(state[key] as any[]), value],
-        };
+  case "pushToArray": {
+    const { key, value } = action.payload;
+    if (Array.isArray(state[key])) {
+      const normalizedValue = typeof value === "string" ? value.toLowerCase() : value;
+      const alreadyExists = (state[key] as any[]).some(item =>
+        typeof item === "string" ? item.toLowerCase() === normalizedValue : item === value
+      );
+      if (alreadyExists) {
+        return state;
       }
-      return state;
+      return {
+        ...state,
+        [key]: [...(state[key] as any[]), value],
+      };
     }
+    return state;
+  }
     case "removeFromArray": {
       const { key, value } = action.payload;
       if (Array.isArray(state[key])) {
@@ -256,9 +260,7 @@ export const ProjSearchAppliedFiltersStore = atom(
     return appliedFilters;
   }
 );
-
 export const searchPageMapToggle = atom(false);
-
 export const projSearchStore = atomWithReducer(initialState, mapReducer);
 
 projSearchStore.onMount = (setAtom) => {

@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../utils/project-search-queryhelpers";
-
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { projSearchStore, searchPageMapToggle } from "../store/projSearchStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
@@ -17,7 +16,8 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
-import SearchPagination from "./searchPagination";
+// import SearchPagination from "./searchPagination";
+import clsx from "clsx";
 import ListingSearchPagination from "../listing/_new-listing-search-page/components/ListingSearchPagination";
 
 type Props = {
@@ -60,7 +60,11 @@ function LeftSection({
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [
-      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+      `searchQuery${
+        apiFilterQueryParams
+          ? `-${apiFilterQueryParams}-${pathname}`
+          : `${pathname}`
+      }`,
     ],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await getSearchData(
@@ -72,15 +76,25 @@ function LeftSection({
     getNextPageParam: (lastPage: any) => {
       return lastPage?.length === 20 ? page + 1 : undefined;
     },
-    initialData: serverData
+    ...(serverData && apiFilterQueryParams === preDefinedFilters
       ? {
-          pages: [serverData],
-          pageParams: [0],
+          initialData: {
+            pages: [serverData],
+            pageParams: [0],
+          },
+          // initialPageParam: 0,
         }
-      : undefined,
-    cacheTime: 300000,
+      : {}),
+
+    //  initialData: serverData
+    // ? {
+    //     pages: [serverData],
+    //     pageParams: [0],
+    //   }
+    // : undefined,
+    // cacheTime: 300000,
     enabled: isTrue,
-    staleTime: 4000,
+    // staleTime: 4000,
     refetchOnWindowFocus: false,
     onSuccess: (data: any) => {
       const newData = data.pages[data.pageParams.length - 1];
@@ -127,6 +141,16 @@ function LeftSection({
     setNearby,
     dispatch,
   ]);
+
+
+  // this for hiddenin cilent of pagaintaiton
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+   
+  }, []);
+
+
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -190,7 +214,7 @@ function LeftSection({
   );
 
   return (
-    <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
+    <div className="flex flex-col w-full md:max-w-[50%] relative overflow-auto">
       {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length > 0 ? (
@@ -243,9 +267,10 @@ function LeftSection({
         <EmptyState />
       )}
       {true ? (
+        
         <div
-          className={typeof window !== "undefined" ? " invisible" : ""}
-          aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+        className={clsx({ invisible: isClient })}
+        aria-hidden={isClient ? 'true' : undefined}
         >
           <ListingSearchPagination
             currentPage={
@@ -254,6 +279,7 @@ function LeftSection({
             totalCount={frontendFilters.totalCount ?? 0}
           />
         </div>
+      
       ) : null}
       <LoginPopup />
       <RequestCallBackModal />

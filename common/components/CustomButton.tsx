@@ -8,6 +8,8 @@ type props = {
   type?: any;
   loading?: boolean;
   name?: string;
+  toolTip? :string;
+  dataAction?:string;
 };
 
 const ButtonElement = ({
@@ -19,19 +21,23 @@ const ButtonElement = ({
   type,
   loading,
   name,
+  toolTip,
+  dataAction
 }: props) => {
   return (
     <div className={buttonConClass || ""}>
       <button
         name={name}
         className={buttonClass || ""}
-        type={type || ""}
+        type={type || "button"}
         onClick={(e) => {
-          e.stopPropagation();
+          // e.stopPropagation();
           onChange && onChange(e);
         }}
         disabled={loading}
         style={{ cursor: loading ? "not-allowed" : "pointer" }}
+        title={toolTip ? toolTip : title }
+        data-action={dataAction}
       >
         {icon}
         {title}

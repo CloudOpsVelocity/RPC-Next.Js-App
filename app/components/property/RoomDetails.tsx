@@ -40,6 +40,10 @@ import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { generatePropertyDetails } from "@/app/data/property";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import {  usePathname } from "next/navigation";
+
+import Link from "next/link";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 const style = {
   card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 md:mt-1 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
@@ -47,10 +51,47 @@ const style = {
     p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center sm:mb-[20px] xl:mb-[15px] text-[14px] sm:text-[20px] xl:text-[24px] font-[500] text-[#233333] break-words ",
   },
 };
-export default function RoomDetails({ data }: { data: Main }) {
-  const newTitle = `${data?.bhkName ?? ""} ${data?.propTypeName} For
-  ${data?.cg === "S" ? " Sale" : " Rent"} In
-  ${data?.ltName} at ${data.propName}`;
+
+export default function RoomDetails({ data }: { data: Main }) {    
+
+function sliceUrlByKeyword(url: string, keyword: string): string {
+  const index = url.indexOf(keyword.toLocaleLowerCase());
+  if (index === -1) return url; // keyword not found, return full url
+ 
+
+  return url.slice(0, index + keyword.length);
+}
+
+const paramsData1 = usePathname()
+   const url = createProjectLinkUrl({
+    city: data.ctName,
+    locality: data.ltName,
+    slug: data.propName,
+    projIdEnc: data.projIdEnc,
+  });
+
+const newTitle = (
+  <>
+    <Link
+    title={`View ${data?.bhkName ?? ""} ${data?.propTypeName}`}
+    href={sliceUrlByKeyword(paramsData1, data?.propTypeName)}>
+      {data?.bhkName ?? ""} {data?.propTypeName}
+    </Link>{" "}
+    For{" "}
+    <Link 
+     title={`${data?.cg === "S" ? "Properties for Sale" : "Properties for Rent"} in ${data?.ltName}`}
+    href={sliceUrlByKeyword(paramsData1, data?.ltName)}>
+      {data?.cg === "S" ? "Sale" : "Rent"}  In{" "}{data?.ltName}
+    </Link>{" "}
+   at{" "}
+    <Link 
+     title={`Explore Project ${data?.propName}`}
+    href={sliceUrlByKeyword(url, data?.propName)}>
+        {data?.propName}
+    </Link>
+  </>
+);
+
   return (
     <div
       className="scroll-mt-[220px] sm:mt-[50px] m-auto w-[95%] md:w-[90%]  sm:mb-5 sm:block"
@@ -58,7 +99,11 @@ export default function RoomDetails({ data }: { data: Main }) {
     >
       <PropertyHeading
         title="Listing details"
-        desc={`Check the details For ${newTitle}`}
+       desc={
+    <>
+      Check the details For {newTitle}
+    </>
+  }
         className="mb-[10px] xl:mb-[8px]"
       />
       <UnitBlock data={data} />
@@ -369,7 +414,7 @@ const UnitBlock = ({ data }: { data: Main }) => {
     data.cg,
     data.availablityStatus
   );
-
+console.log(dto)
   return (
     dto.length > 0 && (
       <div className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]">
@@ -383,6 +428,7 @@ const UnitBlock = ({ data }: { data: Main }) => {
 
         <div className="flex justify-start items-start flex-wrap   ">
           {dto.map(({ value, Icon, title }) => (
+         
             <RoomBasicDetails
               key={title}
               icon={<Icon />}

@@ -6,6 +6,7 @@ import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
+import clsx from "clsx";
 import { getListingSearchData } from "../../../utils/project-search-queryhelpers";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
@@ -21,7 +22,7 @@ import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ListingServerCardData from "./ListingServerCardData";
 import ListingSearchPagination from "../../_new-listing-search-page/components/ListingSearchPagination";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -50,7 +51,7 @@ function LeftSection({
   const [totalCount, setTotalCount] = useState(frontendFilters.totalCount);
   const isTrue = apiFilterQueryParams !== preDefinedFilters;
   const params = useParams();
-
+  const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
   const {
@@ -63,7 +64,11 @@ function LeftSection({
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [
-      `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
+      `searchQuery${
+        apiFilterQueryParams
+          ? `-${apiFilterQueryParams}-${pathname}`
+          : `${pathname}`
+      }`,
     ],
     queryFn: async ({ pageParam = frontendFilters.page || 0 }) => {
       const response = await getListingSearchData(
@@ -81,21 +86,23 @@ function LeftSection({
       return nextPage;
     },
 
-    ...(serverData && {
-      initialData: {
-        pages: [serverData],
-        pageParams: [0],
-      },
-    }),
+    ...(serverData && apiFilterQueryParams === preDefinedFilters
+      ? {
+          initialData: {
+            pages: [serverData],
+            pageParams: [0],
+          },
+          // initialPageParam: 0,
+        }
+      : {}),
     cacheTime: 300000,
     enabled: isTrue,
-    // onSuccess: (data: any) => {
-    //   const newData = data.pages[data.pageParams.length - 1];
-    //   setMainData((prev: any) => [...prev, ...newData.results]);
-    // },
+    onSuccess: (data: any) => {
+      const newData = data.pages[data.pageParams.length - 1];
+      setMainData((prev: any) => [...prev, ...newData]);
+    },
   });
 
-  //console.log(typeof window !== "undefined" )
   const { data: approvedData } = useQuery({
     queryKey: ["projAuth"],
     enabled: true,
@@ -104,6 +111,11 @@ function LeftSection({
   });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
+  // this for hiddenin cilent of pagaintaiton
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Enhanced infinite scroll logic
   useEffect(() => {
@@ -197,7 +209,7 @@ function LeftSection({
 
   return (
     <div
-      className={`flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto`}
+      className={`flex flex-col w-full md:max-w-[50%] relative overflow-auto`}
       ref={containerRef}
     >
       {isFetching && isFetchingNextPage === false ? (
@@ -252,9 +264,10 @@ function LeftSection({
       )}
 
       {params.slugs && params.slugs.length < 4 ? (
+        
         <div
-          className={typeof window !== "undefined" ? "invisible" : ""}
-          aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+          className={clsx({ invisible: isClient })}
+          aria-hidden={isClient ? "true" : undefined}
         >
           <ListingSearchPagination
             currentPage={

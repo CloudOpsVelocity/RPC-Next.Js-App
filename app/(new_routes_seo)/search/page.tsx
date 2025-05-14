@@ -8,6 +8,8 @@ import ProjectSearchBreadCrumbs from "./_new-search-page/components/ProjSearchBr
 import parseProjectSearchQueryParams from "./utils/parse-project-searchqueryParams";
 import { getProjSearchData, getSearchData } from "../in/utils/api";
 import { parseApiFilterQueryParams } from "./utils/project-search-queryhelpers";
+import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
+import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 
 export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf
@@ -17,29 +19,30 @@ export default async function Page(params: any) {
   let frontendFilters = parseProjectSearchQueryParams(params.searchParams.sf);
   const isListing = frontendFilters.listedBy ? true : false;
   const res = !isListing
-    ? await (
-        await getProjSearchData(apiFilters ?? "cg=S")
-      )
-    : await (
-        await getSearchData(apiFilters ?? "")
-      );
-     const data = res.results;
-     frontendFilters = {
-      ...frontendFilters,
-      totalCount: res.totalCount,
-     }
+    ? await await getProjSearchData(apiFilters ?? "cg=S")
+    : await await getSearchData(apiFilters ?? "");
+  const data = res.results;
+  frontendFilters = {
+    ...frontendFilters,
+    totalCount: res.totalCount,
+  };
 
-  return  (
+  return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <meta name="robots" content="index, follow" />
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
+        {data &&
+          (isListing ? (
+            <ListingSearchSchema properties={data} pageUrl={"/search"} />
+          ) : (
+            <ProjectSeachSchema properties={data} pageUrl={"/search"} />
+          ))}
         <ProjectSearchBreadCrumbs key="newSearchPage2" pageUrl={"/search"} />
         <ProjSearchMainFilterSection
           isListing={isListing}
           key="newSearchFilter2"
           frontendFilters={frontendFilters}
         />
-    
       </div>
       <div className=" sm:min-w-full xl:m-0 flex justify-between items-start flex-wrap-reverse sm:flex-nowrap relative md:pt-[184px] xl:pt-[226px] ">
         <Mainsection

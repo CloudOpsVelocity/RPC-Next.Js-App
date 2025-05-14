@@ -15,7 +15,7 @@ const initialState: SearchState = {
   locality: [],
   city: null,
   cg: "S",
-  bugdetValue: [500000, 600000000],
+  bugdetValue: [500000, 300000000],
   showFilter: false,
 };
 

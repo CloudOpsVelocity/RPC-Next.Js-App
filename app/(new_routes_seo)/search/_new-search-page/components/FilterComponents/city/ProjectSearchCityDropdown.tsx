@@ -16,7 +16,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useAtom } from "jotai";
 // import { serverCityAtom } from "@/app/store/search/serverCity";
 import { projSearchStore } from "../../../../store/newSearchProjectStore";
-import useProjSearchAppliedFilters from "../../../../hooks/useProjSearchAppliedFilters";
+import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
 // import { City } from "@/app/images/commonSvgs";
 
 interface ICity {

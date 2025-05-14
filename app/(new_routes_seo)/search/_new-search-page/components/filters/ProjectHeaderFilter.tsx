@@ -15,7 +15,7 @@ import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../../store/newSearchProjectStore";
 import { usePathname, useRouter } from "next/navigation";
-import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../../hooks/useProjSearchMatcher";
 // import SelectedFilters from "./SelectedFilters";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
@@ -291,9 +291,22 @@ const HeaderFilters = ({
       );
       const data = await res.json();
       if (Object.hasOwn(data, "ids")) {
-        handleClearFilters("clearAll");
         let ids = extractApiValues(data.ids);
-        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+
+        if (ids.LT) {
+          dispatch({
+            type: "pushToArray",
+            payload: {
+              key: "localities",
+              value: `${searchQuery}+${ids.LT}`,
+            },
+          });
+          handleResetQuery();
+          handleApplyFilters();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+        } else if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+          // handleClearFilters("clearAll");
           dispatch({
             type: "update",
             payload: {
@@ -475,6 +488,7 @@ const HeaderFilters = ({
                 handleDropdownToggle={handleDropdownToggle}
               />
             </div>
+            {/* {JSON.stringify(state)} */}
             <div className="hidden md:flex items-center gap-2 order-2">
               <ShowAllFiltersButton
                 isListing={isListing}

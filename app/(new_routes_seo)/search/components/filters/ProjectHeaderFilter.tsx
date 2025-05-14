@@ -26,9 +26,10 @@ import dynamic from "next/dynamic";
 const SelectedFilters = dynamic(() => import("./SelectedFilters"));
 // const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
 import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
-import PageTitle from "./PageTitle";
+
 // import { useRouter } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
+import ProjectPageTitle from "../../_new-search-page/components/ProjectPageTitle";
 
 const HeaderFilters = ({
   isListing,
@@ -277,7 +278,7 @@ const HeaderFilters = ({
     }
     setSearchQuery("");
   };
-  // crollyww
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -291,34 +292,48 @@ const HeaderFilters = ({
       );
       const data = await res.json();
       if (Object.hasOwn(data, "ids")) {
-        handleClearFilters("clearAll");
         let ids = extractApiValues(data.ids);
-        if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+        if (ids.LT) {
           dispatch({
-            type: "update",
+            type: "pushToArray",
             payload: {
-              ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
-              ...(ids.PT && { propType: parseInt(ids.PT as string) }),
-              ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
-              ...(ids.PJ && {
-                projIdEnc: ids.PJ as string,
-                projName: searchQuery,
-                listedBy: !isListing ? "All" : null,
-              }),
-              ...(ids.CG && {
-                cg: String(ids.CG) ?? "S",
-                ...(ids.CG == "R" && {
-                  listedBy: "All",
-                }),
-              }),
+              key: "localities",
+              value: `${searchQuery}+${ids.LT}`,
             },
           });
+          handleResetQuery();
+          handleApplyFilters();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+        } else {
+          handleClearFilters("clearAll");
+          if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
+            dispatch({
+              type: "update",
+              payload: {
+                ...(ids.LT && { localities: [`${searchQuery}+${ids.LT}`] }),
+                ...(ids.PT && { propType: parseInt(ids.PT as string) }),
+                ...(ids.BH && { bhk: [parseInt(ids.BH as string)] }),
+                ...(ids.PJ && {
+                  projIdEnc: ids.PJ as string,
+                  projName: searchQuery,
+                  listedBy: !isListing ? "All" : null,
+                }),
+                ...(ids.CG && {
+                  cg: String(ids.CG) ?? "S",
+                  ...(ids.CG == "R" && {
+                    listedBy: "All",
+                  }),
+                }),
+              },
+            });
+          }
+          handleApplyFilters();
+          handleResetQuery();
+          setIsSearchOpen(false);
+          setSearchQuery("");
+          return;
         }
-        handleApplyFilters();
-        handleResetQuery();
-        setIsSearchOpen(false);
-        setSearchQuery("");
-        return;
       }
     } else {
       handleDropdownToggle("allFilters");
@@ -493,7 +508,7 @@ const HeaderFilters = ({
               Filters
             </button>
           </div>
-          <PageTitle />
+          <ProjectPageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             <ProjectSearchTabs frontendFilters={frontendFilters} />

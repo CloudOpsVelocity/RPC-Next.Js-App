@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../../utils/project-search-queryhelpers";
-import { useQueryState } from "nuqs";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   projSearchStore,
@@ -76,12 +75,15 @@ function LeftSection({
     getNextPageParam: (lastPage: any) => {
       return lastPage?.length === 20 ? page + 1 : undefined;
     },
-    initialData: serverData
+    ...(serverData && apiFilterQueryParams === preAppliedFilters
       ? {
-          pages: [serverData],
-          pageParams: [0],
+          initialData: {
+            pages: [serverData],
+            pageParams: [0],
+          },
+          // initialPageParam: 0,
         }
-      : undefined,
+      : {}),
     cacheTime: 300000,
     enabled: isTrue,
     staleTime: 0,
@@ -166,8 +168,9 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    apiFilterQueryParams !== preAppliedFilters ||
-    (data && data?.pageParams?.length > 0)
+    apiFilterQueryParams === preAppliedFilters || typeof window === "undefined"
+      ? mainData
+      : data && data?.pageParams?.length > 0
       ? data?.pages.flat()
       : mainData;
   const EmptyState = memo(function EmptyState() {
@@ -192,7 +195,7 @@ function LeftSection({
   );
 
   return (
-    <div className="flex flex-col w-full md:max-w-[40%] xl:max-w-[50%] relative overflow-auto">
+    <div className="flex flex-col w-full md:max-w-[50%] relative overflow-auto">
       {isFetching && isFetchingNextPage === false ? (
         <LoadingBlock />
       ) : dataToUse?.length > 0 ? (
@@ -230,7 +233,7 @@ function LeftSection({
             state={state}
             frontendFilters={frontendFilters}
           />
- 
+
           {hasNextPage && shouldFetchMore && (
             <div
               ref={loadMoreRef}
@@ -239,25 +242,24 @@ function LeftSection({
               Loading...
             </div>
           )}
-     
         </>
       ) : (
         <EmptyState />
       )}
-           
-         <div
-                    className={typeof window !== "undefined" ? "hidden" : "space"}
-                    aria-hidden={typeof window !== "undefined" ? "true" : undefined}
-                  >
-                    <ListingSearchPagination
-                    searchQueryParmeter
-                      currentPage={
-                        frontendFilters.currentPage ? frontendFilters.currentPage  : 1
-                      }
-                      totalCount={frontendFilters.totalCount ?? 0}
-                    />
-                  </div>
-      
+
+      <div
+        className={typeof window !== "undefined" ? "hidden" : "space"}
+        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+      >
+        <ListingSearchPagination
+          searchQueryParmeter
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage : 1
+          }
+          totalCount={frontendFilters.totalCount ?? 0}
+        />
+      </div>
+
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />
