@@ -1,74 +1,51 @@
 "use client";
-import React, { useState, useCallback, memo } from "react";
+import React from "react";
 
-// Memoized LikeButton
-const LikeButton = memo(
-  ({ isLiked, onLike }: { isLiked: boolean; onLike: () => void }) => {
-    console.log("LikeButton rendered"); // Should appear only when props change
+const EventBubblingThreeContainers: React.FC = () => {
+  const handleWrapperClick = () => {
+    console.log("%cWrapper clicked", "color: purple; font-weight: bold");
+  };
 
-    return (
-      <button
-        onClick={onLike}
-        style={{
-          padding: "8px 12px",
-          fontSize: "16px",
-          background: isLiked ? "red" : "lightgray",
-          color: isLiked ? "white" : "black",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
-        {isLiked ? "❤️ Liked" : "🤍 Like"}
-      </button>
+  const handleContainerClick = (
+    containerId: number,
+    e: React.MouseEvent<HTMLDivElement>
+  ) => {
+    console.log(
+      `%cContainer ${containerId} clicked`,
+      "color: green; font-weight: bold"
     );
-  }
-);
+    // e.stopPropagation();
+  };
 
-// Card component with its own like state
-const Card = ({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleLike = useCallback(() => {
-    setIsLiked((prev) => !prev);
-  }, []);
+  const handleCardClick = (
+    cardId: number,
+    e: React.MouseEvent<HTMLDivElement>
+  ) => {
+    console.log(`%cCard ${cardId} clicked`, "color: blue; font-weight: bold");
+    // e.stopPropagation(); // Uncomment to stop bubbling at card level
+  };
 
   return (
     <div
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        padding: "16px",
-        maxWidth: "300px",
-        margin: "10px auto",
-      }}
+      onClickCapture={handleWrapperClick}
+      className="p-8 bg-purple-100 min-h-screen flex justify-center gap-8 pt-[10%]"
     >
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <LikeButton isLiked={isLiked} onLike={handleLike} />
+      {[1, 2, 3].map((id) => (
+        <div
+          key={id}
+          onClickCapture={(e) => handleContainerClick(id, e)}
+          className="p-6 bg-green-100 rounded-lg shadow-lg"
+        >
+          <div
+            onClick={(e) => handleCardClick(id, e)}
+            className="w-40 h-24 bg-blue-100 shadow-md rounded-md flex items-center justify-center cursor-pointer hover:bg-blue-200 transition"
+          >
+            Card {id}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-// App component rendering multiple cards
-export default function App() {
-  const cards = [
-    { id: 1, title: "Card 1", description: "Description for card 1" },
-    { id: 2, title: "Card 2", description: "Description for card 2" },
-    { id: 3, title: "Card 3", description: "Description for card 3" },
-  ];
-
-  return (
-    <div>
-      {cards.map((card) => (
-        <Card key={card.id} title={card.title} description={card.description} />
-      ))}
-    </div>
-  );
-}
+export default EventBubblingThreeContainers;
