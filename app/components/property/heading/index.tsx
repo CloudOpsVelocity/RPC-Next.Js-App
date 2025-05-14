@@ -9,7 +9,7 @@ export default function PropertyHeading({
 }: {
   className?: string;
   title: any;
-  desc: string;
+  desc: any;
   projName?: string;
 }) {
   return (

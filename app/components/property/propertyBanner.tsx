@@ -9,6 +9,7 @@ import { Svg } from "./heading";
 import ReadMore from "../atoms/readmore";
 // import Button from "../atoms/buttons/variansts";
 import Link from "../atoms/buttons/Link";
+import NextLink from "next/link";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 export default function PropertyBanner({
@@ -92,9 +93,9 @@ export default function PropertyBanner({
           </div>
 
           <div className="ml-5">
-            <h3 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
+            <NextLink title={`About the ${projectName}`} href={url} className=" sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center text-[#0073C6]">
               {projectName}
-            </h3>
+           </NextLink>
             <h4 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </h4>
@@ -121,6 +122,7 @@ export default function PropertyBanner({
           href={url}
           variant="blue"
           className="mt-5   text-[12px] sm:text-[18px] xl:text-[20px] font-[700] "
+          aria-label={`Explore more about ${projectName}`}
         >
           Explore Project
         </Link>
@@ -157,9 +159,12 @@ function PropertyBannerForMobile({
               // priority
             />
             <div className="md:mt-4">
-              <h2 className="text-[#001F35] text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2">
-                About {projectName}
-              </h2>
+             
+          {/*   About {projectName} */}
+        
+              <NextLink  title={`About the ${projectName}`} href={url}  className=" text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2 text-[#0073C6]">
+                 {projectName}
+             </NextLink>
               <p className="text-[#4B5C74] text-base md:text-xl not-italic font-semibold leading-[normal] mb-2">
                 {availableProperties ? availableProperties.join(", ") : ""}
               </p>
@@ -187,7 +192,9 @@ function PropertyBannerForMobile({
           />
           <ReadMore maxLines={2} text={about} title={"About"} />
         </div>
-        <Link href={url} variant="blue" className="mt-2">
+        <Link href={url} variant="blue"
+        aria-label={`Explore more about ${projectName}`}
+        className="mt-2">
           Explore Project
         </Link>
       </div>
