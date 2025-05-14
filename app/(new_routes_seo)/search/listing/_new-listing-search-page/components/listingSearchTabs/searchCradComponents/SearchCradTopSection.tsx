@@ -169,20 +169,21 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
       {type === "proj" ? 
         <>
-          <Link href={pageUrl} prefetch={false}>
-            <h2 style={{ width: "100%" }}>
+          <Link href={pageUrl} passHref legacyBehavior prefetch={false}>
+            <a className={Styles.searchCardLink} title={`${projName} in ${locality}, ${city}`}>
+              <h2 style={{ width: "100%" }}>
                 <span className={Styles.searchCardPromName}>
                   {projName}{" "}
                   {phaseName && phaseCount !== undefined && phaseCount > 1 && ( 
                     <span className={Styles.searchCardPhaseName}>({phaseName})</span> 
                   )}
                 </span>
-            
+
                 <span className={Styles.searchCardPromNameSpan}>
                   Price Range: {formatCurrency(Number(minPrice))} -{" "}
                   {formatCurrency(Number(maxPrice))} 
                 </span>
-            
+
                 <span className={Styles.searchCardProjNameType}>
                   <span>
                     {sortedBhks && sortedBhks.length > 5
@@ -205,12 +206,13 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
                       +{sortedBhks.length - 5} more
                     </button>
                   )}
-                  {` ${propType} For ${
-                    cg === "R" ? "Rent" : "Sale"
-                  } in ${locality}, ${city}`}
+                  {` ${propType} For ${cg === "R" ? "Rent" : "Sale"} in ${locality}, ${city}`}
                 </span>
-            </h2>
+              </h2>
+            </a>
           </Link>
+
+
           <p className={Styles.searchCardAddress}>
             Address: {address}
           </p>
@@ -218,14 +220,11 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
           <p className={Styles.searchCardPostedBy}>
           {postedBy ?? "Builder"}:{" "}
           <Link
-            prefetch={false}
+            prefetch={true}  // Enable prefetching unless you specifically need to disable it
             href={urlBuilder}
-            title="Click to view Builder"
-            className={Styles.searchCardLink}
-            onClick={() => {
-              // e.stopPropagation();
-              window.open(urlBuilder, "_self", "noreferrer");
-            }}
+            title={postedByName}
+            className={`${Styles.searchCardLink} underline `}
+            rel="noreferrer"
           >
             {postedByName}
           </Link>
@@ -233,11 +232,15 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
         </>
       :
       <>
-          <Link href={pageUrl} prefetch={false}>
-            <h2 className={Styles.searchCardPromName}>
-              {bhkName} {propTypeName} for {category} in {localityName}
-            </h2>
+          <Link href={pageUrl} prefetch={false} passHref>
+            <a title={`View ${bhkName} ${propTypeName} for ${category} in ${localityName}`} className={Styles.searchCardLink}>
+              <h2 className={Styles.searchCardPromName}>
+                {bhkName} {propTypeName} for {category} in {localityName}
+              </h2>
+            </a>
           </Link>
+
+
           <p className={Styles.searchCardPromNameSpan}>
             {formatCurrency(Number(price))}{" "}
             {(otherCharges?.otherCharge ||
@@ -269,10 +272,13 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
           <h3 className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
             {projIdEnc != undefined ? (
+
               <Link
-                prefetch={false}
-                className={`font-bold underline cursor-pointer`}
                 href={projectUrl}
+                prefetch={true} // Let Next.js handle prefetching unless you specifically need to disable it
+                className="font-bold underline cursor-pointer"
+                title={`View project: ${propName}`} // Added title for extra context
+                rel="noopener noreferrer" // Use this for external links; remove if it's internal
               >
                 {propName}{" "}
               </Link>

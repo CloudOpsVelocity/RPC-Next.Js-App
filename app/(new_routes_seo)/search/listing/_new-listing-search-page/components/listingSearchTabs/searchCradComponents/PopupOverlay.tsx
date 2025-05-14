@@ -5,6 +5,9 @@ import AmenitiesPopupBox from './AmenitiesPopupBox';
 import SearchCardNearbyBlock from './SearchCardNearbyBlock';
 import { useMediaQuery } from '@mantine/hooks';
 import OtherChargesPopupBox from './OtherChargesPopupBox';
+import Link from 'next/link';
+import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
+import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
 
 type Props = {
     popupState: any;
@@ -13,16 +16,14 @@ type Props = {
 
 function PopupOverlay({popupState, closePopup}: Props) {
     const { location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName} = popupState.data
-    const { content, data } = popupState;
-    // const [{ selectedNearbyItem }, setNearby] = useAtom(selectedNearByAtom);
+    const { content, data, title } = popupState;
 
-    
     const id = `${projIdEnc ?? ""}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ""}`
     const isProj = projIdEnc !== undefined;
 
     const lat = location.split(",")[0];
     const lang = location.split(",")[1];
-    const isDesktop = useMediaQuery("(max-width: 1600px)");
+    const isDesktop = useMediaQuery("(max-width: 1500px)");
     const renderContent = () => {
         switch (popupState.type) {
           case "amenities":
@@ -74,14 +75,56 @@ function PopupOverlay({popupState, closePopup}: Props) {
             return <div>{content}</div>;
         }
     };
+
+    let url =
+       data.type == "proj"
+         ? createProjectLinkUrl({
+             city: data.city,
+             locality: data.locality,
+             slug: data.projName,
+             projIdEnc: data.projIdEnc,
+           })
+         : generateListingLinkUrl({
+             city: data.cityName,
+             locality: data.localityName,
+             projName: data.projIdEnc ? data.propName : null,
+             category: data.category === "Sale" ? "for-sale" : "for-rent",
+             phase: data.phaseName,
+             propIdEnc: data.propIdEnc,
+             bhkUnitType: data.bhkName
+               ? `${data.bhkName + " " + data.propTypeName}`
+               : "" + " " + data.propTypeName,
+           });
+
+           console.log(url, data)
+
     return (
         <DrawerBox
             key="search page Drawer"
             isOpen={popupState.isOpen}
-            title={popupState.title}
+            // title={popupState.title} 
             handleChange={closePopup}
+            HeadingElemnt={
+              <Link
+                 href={url}
+                 passHref
+                 legacyBehavior
+              >
+                <a 
+                  rel="noopener noreferrer" 
+                  className="block cursor-pointer" 
+                  title={`${title} of ${data.projName ?? data.propName}`}
+                  aria-label={`${title} of ${data.projName ?? data.propName}`}
+                >
+                  <h2 className="sm:text-[20px] xl:text-[24px] font-bold  capitalize break-words text-wrap font-[600]">
+                      <span className="text-[#001F35]">{title} <span className=' lowercase '>of </span> </span>
+                      <span className="text-green-800">{data.projName ?? data.propName}</span>
+                  </h2>
+                </a>
+              </Link>
+            }
             containerClassStyle={!isDesktop ? `!w-[50%]` : `!w-full`}
-            childrenContainerClass="p-[10px] md:p-[20px] pt-[10px] max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden "
+            childrenContainerClass="p-[10px] md:p-[20px] pt-[10px] max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden"
         >
             {renderContent()}
         </DrawerBox>

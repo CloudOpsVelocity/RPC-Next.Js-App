@@ -175,7 +175,8 @@
     font-weight: 700; 
     color: #000000; 
     font-size: 14px;
-    width: calc(100% - 100px);
+    width: calc(100% - 120px);
+    display: block;
 }
 
 .searchCardSortedBhks{
@@ -192,7 +193,7 @@
     color: #000000; 
     text-transform: capitalize; 
     font-size: 14px;
-    max-width: calc(100% - 116px);
+    max-width: calc(100% - 136px);
 }
 
 .searchCardPostedBy{
@@ -203,7 +204,7 @@
 
 .searchCardLink{
     font-weight: 700; 
-    text-decoration: underline; 
+    /* text-decoration: underline;  */
     cursor: pointer; 
 }
 
@@ -408,7 +409,7 @@
 }
 
 .amenityBtn{
-    display: inline-flex; 
+    display: flex; 
     border-radius: 0.25rem; 
     max-width: fit-content; 
     font-size: 0.75rem;
@@ -421,6 +422,7 @@
     padding: 4px;
     background-color: #EA5806;
     white-space: nowrap;
+    z-index: 2;
 }
 
 .amenityBtn:hover{
@@ -488,7 +490,8 @@
     }
     
     .searchCardPromNameSpan{
-        font-size: 18px;    
+        font-size: 18px;  
+        max-width: calc(100% - 110px) ;  
     }
 
     .projStatusonImage{
@@ -509,10 +512,15 @@
     }
 
     .downSectionCardValue,
-    .downSectionCardIconSpan,
-    .searchCardAddress{
+    .downSectionCardIconSpan{
         font-size: 14px;
     }
+
+     .searchCardAddress{
+        font-size: 14px;
+        max-width: calc(100% - 136px);
+    }
+
 
     .searchCradTopSection{
         flex-direction: column;
