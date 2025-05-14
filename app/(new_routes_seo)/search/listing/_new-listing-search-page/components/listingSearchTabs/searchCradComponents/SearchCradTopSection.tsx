@@ -232,7 +232,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
         </>
       :
       <>
-          <Link href={pageUrl} prefetch={false} passHref>
+          <Link href={pageUrl} prefetch={false} passHref legacyBehavior>
             <a title={`View ${bhkName} ${propTypeName} for ${category} in ${localityName}`} className={Styles.searchCardLink}>
               <h2 className={Styles.searchCardPromName}>
                 {bhkName} {propTypeName} for {category} in {localityName}
