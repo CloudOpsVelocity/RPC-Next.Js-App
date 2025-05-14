@@ -3,6 +3,7 @@ import Styles from "@/app/styles/seach/searchCrad.module.css";
 import ButtonElement from '@/common/components/CustomButton';
 import { useMediaQuery } from "@mantine/hooks";
 import { WhitePetFreindly } from "@/app/images/commonSvgs";
+import Tag from '@/app/components/atoms/Tag';
 
 type BottomSectionProps = {
     index:string;
@@ -13,8 +14,34 @@ export default function SearchCradBottomSection({
   data,
   index
 }: BottomSectionProps) {
-  const {type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount} = data;
-  const isMobile = useMediaQuery("(max-width: 1600px)");
+  const {type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount, bhkName, category, localityName, projName, propName, pageUrl, locality, projIdEnc} = data;
+  const isMobile = useMediaQuery("(max-width: 1600px)"); 
+
+  if(index === "0"){
+    console.log(data)
+  }
+
+  const textSlice = (word:string = "") => {
+    if(word === "") return;
+    word = word.toLowerCase().replaceAll(" ", "-").replaceAll("+", "with");
+    const index = pageUrl.indexOf(word);
+    const slicedText = index !== -1 ? pageUrl.slice(0, index + word.length) : pageUrl;
+    return slicedText;
+  }
+
+  // console.log(textSlice(bhkName))
+
+  const finalProjName = (bhkName !== undefined && propTypeName !== undefined) ? `${bhkName} ${propTypeName}` : ""
+
+  const links = [
+    {title: finalProjName, url: textSlice(finalProjName)},
+    // {title: propTypeName ?? "", url: textSlice(propTypeName)},
+    {title: category ? `for ${category}` : "", url: textSlice(category)},
+    {title: localityName ?? "", url: textSlice(localityName)},
+
+    {title: projName ?? propName, url: type !== "proj" ? textSlice(projName ?? propName) : textSlice(projIdEnc) },
+    {title: locality ?? "", url: textSlice(locality)},
+  ]
 
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
@@ -68,6 +95,15 @@ export default function SearchCradBottomSection({
           </>
         )}
       </div>
+
+        <div className='flex flex-wrap gap-[4px]  '>
+          {links.map((each:any)=>{
+            if(each.title !== ""){
+            return(
+              <Tag key={each.title} title={each.title} url={each.url} className='!text-[8px] !px-2 !py-[2px] text-nowrap ' />
+            )}
+          })}
+        </div>
 
       {/* right section */}
       {!isMobile && (
