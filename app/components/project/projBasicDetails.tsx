@@ -40,7 +40,7 @@ export default function ProjBasicDetails({
           {title}
         </h2>
         
-        <div className="text-[#148B16] inline-flex  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold ">
+        <div className="text-[#148B16] inline-flex  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold  flex-wrap">
           {Array.isArray(value) &&
             value.map((item, index) => {
               const [text] = item.split("–").map((part) => part.trim());

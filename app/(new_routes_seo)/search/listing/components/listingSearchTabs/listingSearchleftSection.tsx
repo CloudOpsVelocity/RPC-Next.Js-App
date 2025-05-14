@@ -264,6 +264,7 @@ function LeftSection({
       )}
 
       {params.slugs && params.slugs.length < 4 ? (
+        
         <div
           className={clsx({ invisible: isClient })}
           aria-hidden={isClient ? "true" : undefined}
