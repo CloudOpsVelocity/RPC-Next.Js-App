@@ -97,6 +97,20 @@
     padding: 4px;
 }
 
+.searchCardContactBtn{
+    background-color: rgb(0 115 198);
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 2px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
 .searchCradImage{
     object-fit: cover;
     height: 100%;
@@ -114,12 +128,17 @@
     position: absolute; 
     bottom: 4px; 
     right: 4px; 
-    padding-left: 2px;
-    padding-right: 2px;
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
     border-radius: 20px; 
     color: #ffffff; 
     background-color: #374151; 
     font-size: 14px;
+}
+
+.possessionDateOnImage{
+    bottom: 32px; 
 }
 
 .searchCardPromName{
@@ -292,7 +311,7 @@
     display: flex; 
     position: absolute; 
     top: 0.75rem; 
-    right: 4rem; 
+    right: 5.5rem; 
     font-size: 14px;
     line-height: 1rem; 
     font-weight: 500; 
@@ -472,8 +491,19 @@
         font-size: 18px;    
     }
 
+    .projStatusonImage{
+        font-size: 12px;
+        top: 44px;
+        bottom: auto;
+    }        
+
+    .possessionDateOnImage{
+        font-size: 12px;
+        top: 10px; 
+        bottom: auto;
+    }
+
     .viewOtherChargesText,
-    .projStatusonImage,
     .searchCardProjNameType{
         font-size: 12px;
     }
@@ -543,8 +573,19 @@
         height: 10.125;
     }
 
+      .projStatusonImage{
+        font-size: 12px;
+        top: 44px;
+        bottom: auto;
+    }        
+
+    .possessionDateOnImage{
+        font-size: 12px;
+        top: 10px; 
+        bottom: auto;
+    }
+
     .viewOtherChargesText,
-    .projStatusonImage,
     .downSectionCardValue,
     .downSectionCardIconSpan,
     .searchCardPostedBy,

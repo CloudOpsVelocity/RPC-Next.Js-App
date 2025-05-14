@@ -44,6 +44,8 @@ export default function ListingServerCardData({
       : state.listedBy;
   }, [state, frontendFilters]);
 
+  const type = listedBy() ?? "proj";
+
 
     // methods for new search card with event delegation
   const [popupState, setPopupState] = useState({ isOpen: false, type: "", title:"", data: {}, content:"" });
@@ -63,7 +65,7 @@ export default function ListingServerCardData({
 
   const onViewMap = (data:any) => {
     const {
-        agentListing, ownerListing, type, projName, propName,
+        agentListing, ownerListing, projName, propName,
         projIdEnc, propIdEnc, propType, propTypeName, phaseId, location
     } = data;
 
@@ -114,24 +116,24 @@ export default function ListingServerCardData({
   };  
 
   const handleOpen = (data:any) => {
-      const {
-        type, propTypeName, builderName, postedBy, builderId, postedById, 
-        projName, bhkName, localityName, category, projIdEnc, propIdEnc,
-      } = data;
-        preventBackButton();
-        open({
-          modal_type:
-            type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
-          postedByName: type === "proj" ? builderName : postedBy,
-          postedId: type === "proj" ? builderId : postedById,
-          reqId: type === "proj" ? projIdEnc : propIdEnc,
-          source: type === "proj" ? "projCard" : "propCard",
-          title:
-            type === "proj"
-              ? projName
-              : `${bhkName ?? ""} ${propTypeName} for
-          ${category === "Rent" ? "Rent" : "Sale"} in ${localityName}`,
-        });
+        const {
+          propTypeName, postedByName, builderId, postedById, 
+          projName, bhkName, localityName, category, projIdEnc, propIdEnc,
+        } = data;
+          preventBackButton();
+          open({
+            modal_type:
+              type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
+            // postedByName: type === "proj" ? builderName : postedByName,
+            postedByName: postedByName,
+            postedId: type === "proj" ? builderId : postedById,
+            reqId: type === "proj" ? projIdEnc : propIdEnc,
+            source: type === "proj" ? "projCard" : "propCard",
+            title:
+              type === "proj"
+                ? projName
+                : `${bhkName ?? ""} ${propTypeName} for ${category === "Rent" ? "Rent" : "Sale"} in ${localityName}`,
+          });
   };
 
   const handleClick = (e: any) => {
@@ -216,7 +218,7 @@ export default function ListingServerCardData({
             refetch={refetch}
             data={{
               ...eachOne,
-              type: listedBy(),
+              type: type,
               cg: cg,
               sortedBhks: sortedBhks,
             }}

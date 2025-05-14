@@ -40,13 +40,13 @@ export default function ListingReqBtn({
       >
         {/* <CallIcon className="w-[16px] h-[16px]" /> */}
         
-         <Image
-                src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/call.svg`}
-                width={16}
-                height={16}
-                alt="not found"
-                title="not found"
-              />
+        <Image
+          src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/call.svg`}
+          width={16}
+          height={16}
+          alt="not found"
+          title="not found"
+        />
         Contact
       </Button>
       <Button
