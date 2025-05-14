@@ -63,5 +63,4 @@ export const parseApiFilterQueryParams = (
   return updatedParams.includes("city=")
     ? updatedParams
     : `${updatedParams}&city=9`;
- 
 };

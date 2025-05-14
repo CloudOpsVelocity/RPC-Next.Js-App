@@ -140,7 +140,7 @@ export default async function Page({ params, searchParams }: Props) {
       };
     }
   }
-  console.log({ filtersValues });
+
   return !isProjectListing ? (
     <NewListingSearchpage
       pageUrl={pathname}

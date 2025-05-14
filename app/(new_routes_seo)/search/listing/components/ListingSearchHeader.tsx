@@ -48,7 +48,8 @@ const ListingHeaderFilters = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const { handleApplyFilters,  handleClearFilters } = useProjSearchAppliedFilters();
+  const { handleApplyFilters, handleClearFilters } =
+    useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
 
   const {
@@ -262,27 +263,27 @@ const ListingHeaderFilters = ({
     );
     const data = await res.json();
 
-    if(!data){
+    if (!data) {
       return;
     }
     if (Object.hasOwn(data, "ids")) {
       let ids = extractApiValues(data.ids);
-                 
-        if (ids.LT) {
-           console.log(JSON.stringify({state}))
-          dispatch({
-            type: "pushToArray",
-            payload: {
-              key: "localities",
-              value: `${searchQuery}+${ids.LT}`,
-            },
-          });
-          handleResetQuery();
-          handleApplyFilters();
-          setIsSearchOpen(false);
-          setSearchQuery("");
-        } else {
-           handleClearFilters("clearAll");
+
+      if (ids.LT) {
+        console.log(JSON.stringify({ state }));
+        dispatch({
+          type: "pushToArray",
+          payload: {
+            key: "localities",
+            value: `${searchQuery}+${ids.LT}`,
+          },
+        });
+        handleResetQuery();
+        handleApplyFilters();
+        setIsSearchOpen(false);
+        setSearchQuery("");
+      } else {
+        handleClearFilters("clearAll");
         if (ids.LT || ids.CT || ids.PT || ids.BH || ids.PJ) {
           dispatch({
             type: "update",
@@ -294,7 +295,7 @@ const ListingHeaderFilters = ({
             },
           });
         }
-    }
+      }
 
       handleApplyFilters();
       handleResetQuery();

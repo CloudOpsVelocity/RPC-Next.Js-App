@@ -116,16 +116,49 @@ function PageTitle({ serverFilterData }: Props) {
           serverFilterData?.cg === "R" || state.cg === "R" ? "Rent" : "Sale"
         } in ${paramsData.project ?? ""} ${paramsData.lt ?? ""} ${
           paramsData.city ?? "Bengaluru"
-        }`;
+        } `;
+        const basePath = "/residential-listings";
+        const slugs = paramsData.slugs || [];
 
-        return pageTitle.replaceAll("-", " ");
+        const isExtraTitleAvailable = Array.isArray(slugs) && slugs.length > 2;
+
+        const links = isExtraTitleAvailable ? (
+          <nav aria-label="Breadcrumb">
+            <ol className="inline-flex items-center space-x-1">
+              {slugs.slice(2).map((slug, index) => {
+                const fullPath = `${basePath}/${slugs
+                  .slice(0, 2 + index + 1)
+                  .join("/")}`;
+                const linkText = slug.replaceAll("-", " ");
+
+                return (
+                  <li key={fullPath}>
+                    <Link
+                      href={fullPath}
+                      title={`View listings for ${linkText}`}
+                      className="text-blue-600 hover:underline pl-1"
+                    >
+                      {linkText}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+        ) : null;
+        return (
+          <div className="flex">
+            {pageTitle.replaceAll("-", " ")}
+            <div>{links}</div>
+          </div>
+        );
       }
     } else if (paramsData && Object.keys(paramsData).length === 0) {
       let firstString = `Residential ${isListing ? "Listings" : "Projects"}`;
 
       const pageTitle = `${firstString} For ${
         state.cg === "R" ? "Rent" : "Sale"
-      } in Bengaluru`;
+      } in Bengaluru `;
       return pageTitle;
     } else if (pageUrl === "/search") {
       return "Search Results for";

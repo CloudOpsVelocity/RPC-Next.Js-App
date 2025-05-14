@@ -69,22 +69,25 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
         ...newData,
       };
     case "pushToArray": {
-    const { key, value } = action.payload;
-    if (Array.isArray(state[key])) {
-      const normalizedValue = typeof value === "string" ? value.toLowerCase() : value;
-      const alreadyExists = (state[key] as any[]).some(item =>
-        typeof item === "string" ? item.toLowerCase() === normalizedValue : item === value
-      );
-      if (alreadyExists) {
-        return state;
+      const { key, value } = action.payload;
+      if (Array.isArray(state[key])) {
+        const normalizedValue =
+          typeof value === "string" ? value.toLowerCase() : value;
+        const alreadyExists = (state[key] as any[]).some((item) =>
+          typeof item === "string"
+            ? item.toLowerCase() === normalizedValue
+            : item === value
+        );
+        if (alreadyExists) {
+          return state;
+        }
+        return {
+          ...state,
+          [key]: [...(state[key] as any[]), value],
+        };
       }
-      return {
-        ...state,
-        [key]: [...(state[key] as any[]), value],
-      };
+      return state;
     }
-    return state;
-  }
 
     case "removeFromArray": {
       const { key, value } = action.payload;
@@ -178,6 +181,10 @@ export const ProjSearchAppliedFiltersStore = atom(
     let queryString: string | null = "";
     if (type === "add") {
       for (const [key, value] of Object.entries(appliedFilters)) {
+        let ingoreKeys = ["totalCount", "currentPage"];
+        if (ingoreKeys.includes(key)) {
+          continue;
+        }
         // Skip areaValue and bugdetValue if they match initial values
         if (
           ((key === "areaValue" || key === "bugdetValue") &&
@@ -194,6 +201,7 @@ export const ProjSearchAppliedFiltersStore = atom(
 
         if (Array.isArray(value)) {
           if (value.length > 0) {
+            console.log(`${key}=${value}`);
             queryString += `${queryString ? "-" : ""}${key}=${value}`;
           }
         } else if (value != null) {
