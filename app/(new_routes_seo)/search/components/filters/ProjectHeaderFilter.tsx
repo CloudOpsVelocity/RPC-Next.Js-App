@@ -26,9 +26,10 @@ import dynamic from "next/dynamic";
 const SelectedFilters = dynamic(() => import("./SelectedFilters"));
 // const ProjectSearchTabs = dynamic(() => import("../ProjectSearchTabs/ProjectSearchTabs"));
 import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
-import PageTitle from "./PageTitle";
+
 // import { useRouter } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
+import ProjectPageTitle from "../../_new-search-page/components/ProjectPageTitle";
 
 const HeaderFilters = ({
   isListing,
@@ -369,7 +370,6 @@ const HeaderFilters = ({
             ref={searchRef}
             className="flex flex-wrap items-center gap-2 py-[8px] xl:py-3 max-w-[820px]"
           >
-          
             <div className="flex-1 min-w-full sm:min-w-fit relative order-1">
               <div className="flex items-center border-2 border-[#0073C6] rounded-full">
                 <BuyRent
@@ -508,7 +508,7 @@ const HeaderFilters = ({
               Filters
             </button>
           </div>
-          <PageTitle />
+          <ProjectPageTitle />
 
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row items-start w-full">
             <ProjectSearchTabs frontendFilters={frontendFilters} />

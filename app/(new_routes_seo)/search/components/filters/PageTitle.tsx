@@ -146,19 +146,19 @@ function PageTitle({ serverFilterData }: Props) {
         //     </ol>
         //   </nav>
         // ) : null;
-        
-        const links = isExtraTitleAvailable ? (
-            <>
-              {slugs.slice(2).map((slug, index) => {
-                const fullPath = `${basePath}/${slugs
-                  .slice(0, 2 + index + 1)
-                  .join("/")}`;
-                const linkText = slug.replaceAll("-", " ");
 
-                return (
-                  <Fragment key={fullPath}>
+        const links = isExtraTitleAvailable ? (
+          <>
+            {slugs.slice(2).map((slug, index) => {
+              const fullPath = `${basePath}/${slugs
+                .slice(0, 2 + index + 1)
+                .join("/")}`;
+              const linkText = slug.replaceAll("-", " ");
+
+              return (
+                <Fragment key={fullPath}>
                   {index === 0 ? "" : "/"}
-                  <span >
+                  <span>
                     <Link
                       href={fullPath}
                       title={`View listings for ${linkText}`}
@@ -167,10 +167,10 @@ function PageTitle({ serverFilterData }: Props) {
                       {linkText}
                     </Link>
                   </span>
-                  </Fragment>
-                );
-              })}
-            </>
+                </Fragment>
+              );
+            })}
+          </>
         ) : null;
         // return (
         //   <div className="flex">
@@ -178,7 +178,7 @@ function PageTitle({ serverFilterData }: Props) {
         //     <div>{links}</div>
         //   </div>
         // );
-         return (
+        return (
           <>
             {pageTitle.replaceAll("-", " ")}
             {links}
@@ -305,6 +305,3 @@ function PageTitle({ serverFilterData }: Props) {
 }
 
 export default PageTitle;
-
-
-
