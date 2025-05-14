@@ -80,6 +80,7 @@ const SearchCardNearbyBlock: React.FC<{
   );
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const isDesktop = useMediaQuery("(max-width: 1600px)");
 
   // const downData =
   //   mapData && mapData[selected] && mapData[selected].length > 0
@@ -117,9 +118,11 @@ const SearchCardNearbyBlock: React.FC<{
                 </div>
                 <div
                   id="location-listing"
-                  className={`grid gap-2 px-[10px] pb-[${
+                  className={`flex px-[10px] pb-[${
                     isMobile ? 10 : 50
-                  }px] `}
+                  }px] ${
+                    !isDesktop ? "flex-col" : "flex-row flex-wrap gap-[10px] " 
+                  }`}
                 >
                   {mapData && mapData[selected] && mapData[selected].length > 0 ? (
                     mapData[selected]
@@ -175,7 +178,7 @@ const SearchCardNearbyBlock: React.FC<{
         <div
           id="location-map"
           ref={sectionRef}
-          className="w-full scroll-mt-[180px] sm:mt-[20px] xl:mt-[50px] justify-center"
+          className="w-full scroll-mt-[180px] sm:mt-[20px] xl:mt-[3.125rem] justify-center"
         >
           <Map
             key="leaflet2SearchPageDrawerMap"
@@ -228,7 +231,9 @@ const LocationList: React.FC<{
   isProj,
   isMobile,
   sectionRef
-}) => {
+}) => {  
+  const isDesktop = useMediaQuery("(max-width: 1600px)");
+
   const setIsScrolling = useSetAtom(
     isProj === "prop" ? propScrollingAtom : isScrollingAtom
   );
@@ -262,10 +267,10 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className="bg-gray-50 border rounded-lg cursor-pointer mt-[6px] py-2 xl:py-1 px-2"
+      className={`bg-gray-50 border rounded-lg cursor-pointer mt-[6px] py-2 xl:py-1 px-2`}
       onClick={handleClick}
     >
-      <div className="flex items-center justify-between sm:flex-wrap">
+      <div className={`flex items-center justify-between ${isDesktop ? " flex-nowrap gap-[1rem] " : "sm:flex-wrap" }`}>
         <h3 className="text-black text-[12px] not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
           {name}
         </h3>

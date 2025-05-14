@@ -1,16 +1,17 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 // import { MdClose } from 'react-icons/md';
 import Close from "../../project/button/close";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   isOpen?: boolean;
   handleChange?: any;
   containerClassStyle?: string;
   title?: string;
   hideHeader?: boolean;
   childrenContainerClass?: string;
+  HeadingElemnt?: ReactNode;
 };
 
 function DrawerBox({
@@ -21,6 +22,7 @@ function DrawerBox({
   title,
   hideHeader,
   childrenContainerClass,
+  HeadingElemnt
 }: Props) {
   const onMainConClick = (e: any) => {
     var baxEl = document.getElementById("modalDrawerPopupInnerCon");
@@ -77,9 +79,12 @@ function DrawerBox({
       >
         {hideHeader !== true && (
           <div className="flex justify-between items-center w-full px-[16px] mt-[16px] ">
+            {title &&
             <h3 className="text-[#001F35] sm:text-[20px] xl:text-[24px] font-[600]">
               {title}
             </h3>
+            }
+            {HeadingElemnt ? HeadingElemnt : ""}
             <Close
               close={() => {
                 document.body.style.overflow = "unset";

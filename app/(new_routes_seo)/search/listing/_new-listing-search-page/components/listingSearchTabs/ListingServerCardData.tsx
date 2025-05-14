@@ -55,7 +55,7 @@ export default function ListingServerCardData({
       : state.listedBy;
   }, [state, frontendFilters]);
 
-  const type = listedBy() ?? "proj";
+  const type = listedBy() ?? "";
 
   const onViewMap = (data:any) => {
     const {

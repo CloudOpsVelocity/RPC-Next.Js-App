@@ -151,7 +151,7 @@ export default function ServerDataSection({
       switch(action){
         case 'readmore':
           document.body.style.overflow = "hidden";
-          setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"Read More", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
+          setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"About Project", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
           break; 
         // case 'like':
         //   handleParentAction(index.toString());
@@ -166,19 +166,19 @@ export default function ServerDataSection({
           handleOpen(selectedItem)
           break;
         case 'otherCharges':
-          setPopupState(prev => ({...prev, isOpen: true, type: 'otherCharges', title:"Other Charges", data: selectedItem}));
+          setPopupState(prev => ({...prev, isOpen: true, type: 'otherCharges', title:"Other Charges", data: {...selectedItem, type: type}}));
           break;
         case 'brochure':
           handleDownload(selectedItem);
           break;
         case 'nearby':
           document.body.style.overflow = "hidden";
-          setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: selectedItem})); 
+          setPopupState(prev => ({...prev, isOpen: true, type: 'nearby', title:"Near By Locations", data: {...selectedItem, type: type}})); 
           // onSetNearBy(selectedItem);
           break;
         case 'amenities':
           document.body.style.overflow = "hidden";
-          setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: selectedItem}));
+          setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: {...selectedItem, type: type}}));
           break;
         case 'listingType_B':
           handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
@@ -192,7 +192,7 @@ export default function ServerDataSection({
         case 'bhk':
           const sortedBhks:any = sortUnits(selectedItem.bhkNames);
           document.body.style.overflow = "hidden";
-          setPopupState(prev => ({...prev, isOpen: true, type: 'bhk', title:"Unit Types", content: sortedBhks, data: selectedItem}));
+          setPopupState(prev => ({...prev, isOpen: true, type: 'bhk', title:"Unit Types", content: sortedBhks, data: {...selectedItem, type: type}}));
           break;
         default:
           window.open(selectedItem.pageUrl, "_self", "noreferrer");

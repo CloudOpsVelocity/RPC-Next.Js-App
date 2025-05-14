@@ -44,7 +44,7 @@ export default function ListingServerCardData({
       : state.listedBy;
   }, [state, frontendFilters]);
 
-  const type = listedBy() ?? "proj";
+  const type = listedBy() ?? "";
 
 
     // methods for new search card with event delegation
