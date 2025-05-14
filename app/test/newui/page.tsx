@@ -7,12 +7,12 @@ const EventBubblingThreeContainers: React.FC = () => {
   ) => {
     const target = e.target as HTMLElement;
     const card = target.closest("[data-id]");
-    const container = target.closest("[container-data-id]");
+    const container = target.closest("[card-data-id]");
     if (card) {
       const data_id = card.getAttribute("data-id");
       alert("clicked card id is " + data_id);
     } else if (container) {
-      const data_id = container.getAttribute("container-data-id");
+      const data_id = container.getAttribute("card-data-id");
       alert("clicked Container id is " + data_id);
     }
     console.log("%cWrapper clicked", "color: purple; font-weight: bold");
