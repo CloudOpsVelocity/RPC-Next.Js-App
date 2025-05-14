@@ -157,7 +157,7 @@ function PageTitle({ serverFilterData }: Props) {
 
                 return (
                   <Fragment key={fullPath}>
-                  /
+                  {index === 0 ? "" : "/"}
                   <span >
                     <Link
                       href={fullPath}
@@ -305,7 +305,6 @@ function PageTitle({ serverFilterData }: Props) {
 }
 
 export default PageTitle;
-// sd
 
 
 
