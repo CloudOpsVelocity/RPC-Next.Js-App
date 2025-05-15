@@ -9,7 +9,8 @@ import {
 } from "../../../store/newListingStore";
 import useProjSearchAppliedFilters from "./../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ListingSearchTabs = ({
   showProjectTab = false,
@@ -22,6 +23,7 @@ const ListingSearchTabs = ({
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   const tabs = useMemo(
     () => [
@@ -237,8 +239,10 @@ const ListingSearchTabs = ({
           >
             <div className="flex flex-wrap items-center sm:gap-1 sm:p-0 xl:gap-2 sm:min-w-max pb-[4px]">
               {tabs.map((tab) => (
-                <button
+                <Link
                   key={tab.id}
+                  href={tab.id !== null ? `?sf=listedBy=${tab.id}` : pathname}
+                  title={`Click to view  ${tab.label} in Bengaluru`}
                   onClick={() => handleTabsChange(tab.id)}
                   className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
                     tabsSelected() === tab.id
@@ -247,7 +251,7 @@ const ListingSearchTabs = ({
                   }`}
                 >
                   {tab.label}
-                </button>
+                </Link>
               ))}
               <SortDropdown isMobile />
             </div>
