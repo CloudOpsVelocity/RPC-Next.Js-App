@@ -52,13 +52,19 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
 
   return(
     <div className={Styles.searchCradTopImageBox}>
-        <Link prefetch={false} href={pageUrl}>
+        <Link 
+          prefetch={false} 
+          href={pageUrl}  
+          title={projOrPropName}
+          aria-label={projOrPropName} 
+        >
           <Image
             src={src.includes("+") ? src.replace(/\+/g, "%2B") : src}
             width={300}
             height={300}
-            alt={projName}
-            title={projName}
+            alt={projOrPropName}
+            title={projOrPropName}
+            aria-label={projOrPropName}
             className={Styles.searchCradImage}  
           />
         </Link>
