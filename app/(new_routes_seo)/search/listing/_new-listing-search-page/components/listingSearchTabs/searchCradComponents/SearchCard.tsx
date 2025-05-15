@@ -31,28 +31,27 @@ function SearchCard({
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   // const topSectionRightData = sanitizeTopRightSectionData(data);
 
-    let url =
-      type == "proj"
-        ? createProjectLinkUrl({
-            city: city,
-            locality: locality,
-            slug: projName,
-            projIdEnc: projIdEnc,
-          })
-        : generateListingLinkUrl({
-            city: cityName,
-            locality: localityName,
-            projName: projIdEnc ? propName : null,
-            category: category === "Sale" ? "for-sale" : "for-rent",
-            phase: phaseName,
-            propIdEnc: propIdEnc,
-            bhkUnitType: bhkName
-              ? `${bhkName + " " + propTypeName}`
-              : "" + " " + propTypeName,
-          });
+  let url =
+    type == "proj"
+      ? createProjectLinkUrl({
+          city: city,
+          locality: locality,
+          slug: projName,
+          projIdEnc: projIdEnc,
+        })
+      : generateListingLinkUrl({
+          city: cityName,
+          locality: localityName,
+          projName: projIdEnc ? propName : null,
+          category: category === "Sale" ? "for-sale" : "for-rent",
+          phase: phaseName,
+          propIdEnc: propIdEnc,
+          bhkUnitType: bhkName
+            ? `${bhkName + " " + propTypeName}`
+            : "" + " " + propTypeName,
+        });
 
   const projOrPropName = type === "proj" ? projName : `${bhkName} ${propTypeName} for ${category} in ${localityName}`;
-  console.log(projOrPropName);
 
   return (
     <div className={Styles.searchCradMainCon} data-id={`searchCard_${index.toString()}`} data-type="card">

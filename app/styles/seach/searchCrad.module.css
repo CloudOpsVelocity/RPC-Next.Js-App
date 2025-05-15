@@ -165,7 +165,7 @@
     font-style: normal; 
     font-weight: 700; 
     color: #148B16;
-    font-size: 14px;
+    font-size: 16px;
     font-size: 1.25rem;
     line-height: 1.75rem;     
 }
@@ -355,12 +355,26 @@
     display: inline-flex; 
     gap: 0.5rem; 
     justify-content: flex-end; 
+    
 }
 
 .unLikeBtn{
     font-size: 0.875rem;
     line-height: 1.25rem; 
     color: #374151; 
+    height: 24px;
+    width: 24px;
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+.textBorder{
+    text-shadow:
+    -0.5px -0.5px 0 black,
+     0.5px -0.5px 0 black,
+    -0.5px  0.5px 0 black,
+     0.5px  0.5px 0 black;
 }
 
 .mobileShearBtn{
@@ -492,7 +506,7 @@
     }
     
     .searchCardPromNameSpan{
-        font-size: 18px;  
+        font-size: 14px;  
         max-width: calc(100% - 110px) ;  
     }
 
@@ -571,7 +585,7 @@
     }
 
     .searchCardPromNameSpan{
-        font-size: 14px;    
+        font-size: 12px;    
     }
 
     .searchCradTopSection{
@@ -651,7 +665,14 @@
     .searchCardViewMapBtnSpan{
         color: #ffffff; 
         background-color: transparent; 
+    }
 
+    .searchCardPromName{
+        font-size: 12px;
+    }
+
+    .searchCardTopCornerMainCon{
+        padding-top: 0px;
     }
 
 }

@@ -20,9 +20,6 @@ export default function SearchCradBottomSection({
   } = data;
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
 
-  // if(index === "0"){
-    console.log(data)
-  // }
 
   const textSlice = (word:string = "", url?:string) => {
     if(word === "") return;
@@ -53,8 +50,6 @@ export default function SearchCradBottomSection({
       { title: `${eachBhk} ${propType}`, url: textSlice(`${eachBhk} ${propType}`, getlListingUrl(`${eachBhk} ${propType}`))}
     )) 
     : [];
-
-    console.log(bhkLinks);
 
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">

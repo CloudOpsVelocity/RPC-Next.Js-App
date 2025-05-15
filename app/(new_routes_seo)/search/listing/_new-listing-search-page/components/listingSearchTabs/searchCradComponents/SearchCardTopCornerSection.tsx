@@ -85,8 +85,9 @@ function SearchCardTopCornerSection({
                   }}
                   title={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   aria-label={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  className={`${Styles.unLikeBtn} ${!Sh ? Styles.textBorder : ""}`}
                 >
-                  {Sh ? <p> ❤️ </p> : <p className={Styles.unLikeBtn}> 🤍 </p>}
+                  {Sh ? "🧡" : "🤍" }
                 </button>
                 <button
                   name="share Project"
@@ -292,14 +293,13 @@ function SearchCardTopCornerSection({
                     e.stopPropagation();
                     onAddingShortList();
                   }}
-                  className="pr-[6px]"
+                  // className="pr-[6px]"
                   title={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   aria-label={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  className={`${Styles.unLikeBtn} ${!Sh ? Styles.textBorder : ""}`}
                 >
-                  {Sh ? <p> ❤️ </p> : <p className={Styles.unLikeBtn}> 🤍 </p>}
+                  {Sh ? "🧡" : "🤍" }
                 </button>
- 
-
               <button
                 className="space-x-2 flex flex-row justify-center"
                 data-action="share"
