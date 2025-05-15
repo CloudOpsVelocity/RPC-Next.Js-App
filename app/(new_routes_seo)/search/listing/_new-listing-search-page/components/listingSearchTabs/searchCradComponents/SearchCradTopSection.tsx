@@ -45,8 +45,10 @@ const Rera = () => {
   );
 };
 
+console.log("isUsed")
+
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }) => {
-  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus, projOrPropName} = data
+  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus, projOrPropName, isUsed, furnish} = data
   const verified = isReraverified(rerastatus);
   const isDesktop = useMediaQuery("(max-width: 1600px)");
 
@@ -70,19 +72,33 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
         </Link>
 
         {verified && <Rera />}
-        
-        {(((projstatus !== undefined && projstatus !== "") || (propTypeName !== undefined && propTypeName !== ""))) && (
-          <p className={Styles.projStatusonImage}>
-            {projstatus ? projstatus : propStatus}
+
+        {type !== "proj" && isUsed === "N" && (
+          <p className={Styles.isUsedText}>
+            Unused
           </p>
         )}
 
-        {(((availableFrom !== undefined && availableFrom !== "") || (possassionDate !== undefined && possassionDate !== ""))) && (
-          <p className={`${Styles.projStatusonImage} ${Styles.possessionDateOnImage}`}>
-            {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
-            {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
-          </p>
-        )}
+        <div className={Styles.projStatusOnImagesCon}>
+          {type !== "proj" && furnish !== "" && (
+            <p className={Styles.projStatusonImage}>
+              {furnish}
+            </p>
+          )}
+          
+          {(((projstatus !== undefined && projstatus !== "") || (propTypeName !== undefined && propTypeName !== ""))) && (
+            <p className={Styles.projStatusonImage}>
+              {projstatus ? projstatus : propStatus}
+            </p>
+          )}
+
+          {(((availableFrom !== undefined && availableFrom !== "") || (possassionDate !== undefined && possassionDate !== ""))) && (
+            <p className={Styles.projStatusonImage}>
+              {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
+              {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
+            </p>
+          )}
+        </div>
 
         {isDesktop &&
         <ButtonElement
@@ -104,7 +120,6 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
     propName, address, postedBy, type, otherCharges, category, propTypeName, bhkName, pageUrl,
     price, usp, projectAbout, shortListed, projOrPropName
   } = data;
-  
 
   let urlBuilder = generateBuilderUrl({
     slug: postedByName,
