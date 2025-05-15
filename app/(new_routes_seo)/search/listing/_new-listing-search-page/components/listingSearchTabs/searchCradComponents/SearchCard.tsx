@@ -23,38 +23,45 @@ function SearchCard({
   // mutate
   register,
 }: Props) {
+  const { 
+      propIdEnc, projIdEnc, propTypeName, propName, projName, bhkName, 
+      category, localityName, type, city, locality, cityName, phaseName
+  } = data;
+    
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   // const topSectionRightData = sanitizeTopRightSectionData(data);
 
     let url =
-      data.type == "proj"
+      type == "proj"
         ? createProjectLinkUrl({
-            city: data.city,
-            locality: data.locality,
-            slug: data.projName,
-            projIdEnc: data.projIdEnc,
+            city: city,
+            locality: locality,
+            slug: projName,
+            projIdEnc: projIdEnc,
           })
         : generateListingLinkUrl({
-            city: data.cityName,
-            locality: data.localityName,
-            projName: data.projIdEnc ? data.propName : null,
-            category: data.category === "Sale" ? "for-sale" : "for-rent",
-            phase: data.phaseName,
-            propIdEnc: data.propIdEnc,
-            bhkUnitType: data.bhkName
-              ? `${data.bhkName + " " + data.propTypeName}`
-              : "" + " " + data.propTypeName,
+            city: cityName,
+            locality: localityName,
+            projName: projIdEnc ? propName : null,
+            category: category === "Sale" ? "for-sale" : "for-rent",
+            phase: phaseName,
+            propIdEnc: propIdEnc,
+            bhkUnitType: bhkName
+              ? `${bhkName + " " + propTypeName}`
+              : "" + " " + propTypeName,
           });
 
-  // console.log(data);
+  const projOrPropName = type === "proj" ? projName : `${bhkName} ${propTypeName} for ${category} in ${localityName}`;
+  console.log(projOrPropName);
+
   return (
     <div className={Styles.searchCradMainCon} data-id={`searchCard_${index.toString()}`} data-type="card">
       {/* Top sectiom */}
       <div className={Styles.searchCradTopSection}>
-        <ImageBlock data={{ ...topSectionLeftData, pageUrl: url }} index={index.toString()} />
+        <ImageBlock data={{ ...topSectionLeftData, pageUrl: url, projOrPropName: projOrPropName }} index={index.toString()} />
         <RightSideBlock 
           // data={topSectionRightData} 
-          data={{ ...data, pageUrl: url }}
+          data={{ ...data, pageUrl: url, projOrPropName: projOrPropName }}
           refetch={refetch}
           register={register}
           index={index}
@@ -62,7 +69,7 @@ function SearchCard({
       </div>
 
       {/* Bottom section */}
-      <SearchCradBottomSection data={{...data, pageUrl: url }} index={index.toString()}  />
+      <SearchCradBottomSection data={{...data, pageUrl: url, projOrPropName: projOrPropName }} index={index.toString()}  />
     </div>
   )
 }
