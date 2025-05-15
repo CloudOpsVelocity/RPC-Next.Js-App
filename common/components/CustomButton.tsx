@@ -37,6 +37,7 @@ const ButtonElement = ({
         disabled={loading}
         style={{ cursor: loading ? "not-allowed" : "pointer" }}
         title={toolTip ? toolTip : title }
+        aria-label={toolTip ? toolTip : title }
         data-action={dataAction}
       >
         {icon}

@@ -46,19 +46,25 @@ const Rera = () => {
 };
 
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }) => {
-  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus} = data
+  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus, projOrPropName} = data
   const verified = isReraverified(rerastatus);
   const isDesktop = useMediaQuery("(max-width: 1600px)");
 
   return(
     <div className={Styles.searchCradTopImageBox}>
-        <Link prefetch={false} href={pageUrl}>
+        <Link 
+          prefetch={false} 
+          href={pageUrl}  
+          title={projOrPropName}
+          aria-label={projOrPropName} 
+        >
           <Image
             src={src.includes("+") ? src.replace(/\+/g, "%2B") : src}
             width={300}
             height={300}
-            alt={projName}
-            title={projName}
+            alt={projOrPropName}
+            title={projOrPropName}
+            aria-label={projOrPropName}
             className={Styles.searchCradImage}  
           />
         </Link>
@@ -71,10 +77,12 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
           </p>
         )}
 
-        <p className={`${Styles.projStatusonImage} ${Styles.possessionDateOnImage}`}>
-          {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
-          {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
-        </p>
+        {((availableFrom || possassionDate)) && (
+          <p className={`${Styles.projStatusonImage} ${Styles.possessionDateOnImage}`}>
+            {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
+            {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
+          </p>
+        )}
 
         {isDesktop &&
         <ButtonElement
@@ -82,6 +90,7 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
           dataAction="requestCall"
           title="Contact"
           buttonClass={Styles.searchCardContactBtn}
+          toolTip={`Click to Request a Callback for ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`} 
         /> 
         }
     </div>
@@ -93,7 +102,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
     projName, phaseName, phaseCount, minPrice, maxPrice, sortedBhks, propType, cg, 
     city, locality, postedByName, builderCity, cityName, projIdEnc, propIdEnc, localityName, 
     propName, address, postedBy, type, otherCharges, category, propTypeName, bhkName, pageUrl,
-    price, usp, projectAbout, shortListed
+    price, usp, projectAbout, shortListed, projOrPropName
   } = data;
   
 
@@ -335,7 +344,8 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
             {isReadMoreNeeded && (
                 <button
                   className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer absolute bottom-0 right-0 bg-white "
-                  title="Click to Read More"
+                  title={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  aria-label={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   data-action="readmore"
                 >
                   <span className="text-black">...</span>Read More

@@ -15,8 +15,11 @@ type Props = {
 }
 
 function PopupOverlay({popupState, closePopup}: Props) {
-    const { location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName} = popupState.data
     const { content, data, title } = popupState;
+    const { 
+      location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName, bhkName, 
+      category, localityName, type, city, locality, cityName, phaseName
+    } = data;
 
     const id = `${projIdEnc ?? ""}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ""}`
     const isProj = projIdEnc !== undefined;
@@ -77,47 +80,48 @@ function PopupOverlay({popupState, closePopup}: Props) {
     };
 
     let url =
-       data.type == "proj"
+       type == "proj"
          ? createProjectLinkUrl({
-             city: data.city,
-             locality: data.locality,
-             slug: data.projName,
-             projIdEnc: data.projIdEnc,
+             city: city,
+             locality: locality,
+             slug: projName,
+             projIdEnc: projIdEnc,
            })
          : generateListingLinkUrl({
-             city: data.cityName,
-             locality: data.localityName,
-             projName: data.projIdEnc ? data.propName : null,
-             category: data.category === "Sale" ? "for-sale" : "for-rent",
-             phase: data.phaseName,
-             propIdEnc: data.propIdEnc,
-             bhkUnitType: data.bhkName
-               ? `${data.bhkName + " " + data.propTypeName}`
-               : "" + " " + data.propTypeName,
+             city: cityName,
+             locality: localityName,
+             projName: projIdEnc ? propName : null,
+             category: category === "Sale" ? "for-sale" : "for-rent",
+             phase: phaseName,
+             propIdEnc: propIdEnc,
+             bhkUnitType: bhkName
+               ? `${bhkName + " " + propTypeName}`
+               : "" + " " + propTypeName,
            });
 
-           console.log(url, data)
+    console.log(url, data)
+          
+    const projOrPropName = type === "proj" ? projName : `${bhkName} ${propTypeName} for ${category} in ${localityName}`;
 
     return (
         <DrawerBox
             key="search page Drawer"
             isOpen={popupState.isOpen}
-            // title={popupState.title} 
             handleChange={closePopup}
             HeadingElemnt={
               <Link
                 href={url}
                 className="block cursor-pointer"
                 rel="noopener noreferrer"
-                title={`${title} of ${data.projName ?? data.propName}`}
-                aria-label={`${title} of ${data.projName ?? data.propName}`}
+                title={`${title} of ${projOrPropName}`}
+                aria-label={`${title} of ${projOrPropName}`}
               >
                 <h2 className="sm:text-[20px] xl:text-[24px] font-bold capitalize break-words text-wrap font-[600]">
                   <span className="text-[#001F35]">
                     {title} <span className="lowercase">of </span>
                   </span>
-                  <span className="text-green-800">
-                    {data.projName ?? data.propName}
+                  <span className="text-green-800 underline">
+                    {projOrPropName}
                   </span>
                 </h2>
               </Link>
