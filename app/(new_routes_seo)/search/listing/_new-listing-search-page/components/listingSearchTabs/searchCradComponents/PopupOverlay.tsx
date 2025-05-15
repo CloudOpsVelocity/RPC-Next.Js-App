@@ -127,7 +127,7 @@ function PopupOverlay({popupState, closePopup}: Props) {
               </Link>
             }
             containerClassStyle={!isDesktop ? `!w-[50%]` : `!w-full`}
-            childrenContainerClass="p-[10px] md:p-[20px] pt-[10px] max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden"
+            childrenContainerClass="p-[10px] md:p-[20px] pt-[10px] max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden   "
         >
             {renderContent()}
         </DrawerBox>

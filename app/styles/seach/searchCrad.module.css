@@ -496,6 +496,29 @@
     /* pointer-events: none; */
 }
 
+.readMoreTextCon{
+    padding-right: 0.5rem; 
+    color: 14px;
+}
+
+.readMoreText{
+    position: absolute; 
+    right: 0; 
+    bottom: 0; 
+    font-weight: 700; 
+    text-decoration: underline; 
+    background-color: #ffffff; 
+    cursor: pointer; 
+    font-size: 14px;
+}
+
+.propNameHeading{
+    font-style: normal; 
+    font-weight: 700; 
+    color: #001F35;
+    color: 16px;
+}
+
 @media only screen and (min-width: 600px) and (max-width: 1600px) {
     .searchCradMainCon{
         width: 98%;
@@ -584,10 +607,6 @@
         width: 98%;
     }
 
-    .searchCardPromNameSpan{
-        font-size: 12px;    
-    }
-
     .searchCradTopSection{
         flex-direction: column;
     }
@@ -609,6 +628,11 @@
         bottom: auto;
     }
 
+    .propNameHeading,
+    .searchCardPromNameSpan,
+    .readMoreText,
+    .readMoreTextCon,
+    .searchCardPromName,
     .viewOtherChargesText,
     .downSectionCardValue,
     .downSectionCardIconSpan,
@@ -667,12 +691,9 @@
         background-color: transparent; 
     }
 
-    .searchCardPromName{
-        font-size: 12px;
-    }
-
     .searchCardTopCornerMainCon{
         padding-top: 0px;
     }
+
 
 }
