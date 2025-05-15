@@ -18,7 +18,7 @@ import {
   getProjectDetails,
   getReportConstData,
 } from "@/app/utils/api/property";
-import logger from "@/app/utils/logger";
+// import logger from "@/app/utils/logger";
 
 import { Metadata, ResolvingMetadata } from "next";
 
@@ -327,7 +327,7 @@ export async function generateMetadata({
     },
   };
 }
-// export const dynamic = "force-static";
-// export const dynamicParams = false;
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+// export const dynamic = "force-dynamic";
+// export const dynamicParams = true;

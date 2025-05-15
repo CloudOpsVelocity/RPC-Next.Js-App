@@ -16,14 +16,13 @@ export default function SearchCradBottomSection({
 }: BottomSectionProps) {
   const {
     type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount, bhkName, phaseName,
-    category, localityName, projName, propName, pageUrl, locality, projIdEnc, sortedBhks, propType, cg, city,
+    category, localityName, projName, propName, pageUrl, locality, projIdEnc, sortedBhks, propType, cg, city, projOrPropName
   } = data;
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
 
   // if(index === "0"){
     console.log(data)
   // }
-
 
   const textSlice = (word:string = "", url?:string) => {
     if(word === "") return;
@@ -65,14 +64,17 @@ export default function SearchCradBottomSection({
             <CountListing
               type="Agent"
               value={agentListing}
+              projOrPropName={projOrPropName}
             />
             <CountListing
               type="Owner"
               value={ownerListing}
+              projOrPropName={projOrPropName}
             />
             <CountListing
               type="Builder"
               value={builderListing}
+              projOrPropName={projOrPropName}
             />
           </>
         ) : (
@@ -88,9 +90,8 @@ export default function SearchCradBottomSection({
               <button
                 className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
                 data-action="amenities"
-                title={`Click to view ${
-                  amenCount === 1 ? "" : "all"
-                } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                title={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
+                aria-label={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
               >
                 <span className="bg-white rounded-full text-black px-2">
                   {amenCount}
@@ -148,6 +149,7 @@ export default function SearchCradBottomSection({
                     : "Request Callback" 
                   : "Request Callback"
               }`} 
+              toolTip={`Click to Request a Callback for ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`} 
               buttonClass={Styles.searchCardCompareBtn}
           />
         </div>
@@ -159,9 +161,10 @@ export default function SearchCradBottomSection({
 type CountListProps = {
   value: number;
   type: "Agent" | "Owner" | "Builder";
+  projOrPropName: string;
 };
 
-function CountListing({type, value}: CountListProps) {
+function CountListing({type, value, projOrPropName}: CountListProps) {
   return (
     value > 0 && (
     <ButtonElement
@@ -172,7 +175,7 @@ function CountListing({type, value}: CountListProps) {
             type === "Owner" ? Styles.listingTypeButtonForOwner : Styles.listingTypeButtonForOthers} ${
             value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
         }`}
-        toolTip={`Click to view ${type} Listing`}
+        toolTip={`Explore the ${type} Listing for ${projOrPropName}`}
     />)
   )
 }

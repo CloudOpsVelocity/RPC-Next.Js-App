@@ -47,7 +47,7 @@ export default async function Page(params: any) {
         }`}
       />
       {data &&
-        (isListing ? (
+        (!isProj ? (
           <ListingSearchSchema properties={data} pageUrl={"/search/listing"} />
         ) : (
           <ProjectSeachSchema properties={data} pageUrl={"/search/listing"} />
