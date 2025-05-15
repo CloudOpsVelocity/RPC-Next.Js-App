@@ -18,7 +18,7 @@ import {
   getProjectDetails,
   getReportConstData,
 } from "@/app/utils/api/property";
-import logger from "@/app/utils/logger";
+// import logger from "@/app/utils/logger";
 
 import { Metadata, ResolvingMetadata } from "next";
 

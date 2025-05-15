@@ -239,14 +239,14 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="sm:mt-4 md:space-y-4">
+                    <ul className="space-y-2 sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
                           <Link
                             prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
-                            className="text-xs sm:text-base text-gray-300 hover:text-white"
+                            className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none"
                           >
                             {link}
                           </Link>
@@ -263,7 +263,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="sm:mt-4 md:space-y-4">
+                    <ul className="space-y-2 sm:mt-4  md:space-y-4">
                       {links.map((link, index) => {
                         return (
                           link && (
@@ -272,7 +272,7 @@ function Footer() {
                                 prefetch={false}
                                 href={hrefs[index]}
                                 rel={rel}
-                                className="text-xs sm:text-base text-gray-300 hover:text-white"
+                                className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none "
                               >
                                 {link}
                                 {link === "Home" || link === "Projects" ? (
@@ -296,14 +296,14 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="sm:mt-4 md:space-y-4">
+                    <ul className="space-y-2 sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
                           <Link
                             prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
-                            className="text-xs sm:text-base text-gray-300 hover:text-white"
+                            className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none"
                           >
                             {link}
                           </Link>
