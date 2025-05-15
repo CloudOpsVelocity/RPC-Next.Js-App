@@ -181,7 +181,7 @@ export const ProjSearchAppliedFiltersStore = atom(
     let queryString: string | null = "";
     if (type === "add") {
       for (const [key, value] of Object.entries(appliedFilters)) {
-        let ingoreKeys = ["totalCount", "currentPage"];
+        let ingoreKeys = ["currentPage"];
         if (ingoreKeys.includes(key)) {
           continue;
         }

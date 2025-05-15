@@ -71,13 +71,13 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
 
         {verified && <Rera />}
         
-        {((projstatus || propTypeName)) && (
+        {(((projstatus !== undefined && projstatus !== "") || (propTypeName !== undefined && propTypeName !== ""))) && (
           <p className={Styles.projStatusonImage}>
-            {projstatus ?? propStatus}
+            {projstatus ? projstatus : propStatus}
           </p>
         )}
 
-        {((availableFrom || possassionDate)) && (
+        {(((availableFrom !== undefined && availableFrom !== "") || (possassionDate !== undefined && possassionDate !== ""))) && (
           <p className={`${Styles.projStatusonImage} ${Styles.possessionDateOnImage}`}>
             {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
             {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
@@ -183,6 +183,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
             prefetch={false}
             className={Styles.searchCardLink}
             title={`${projName} in ${locality}, ${city}`}
+            aria-label={`${projName} in ${locality}, ${city}`}
           >
             <h2 style={{ width: "100%" }}>
               <span className={Styles.searchCardPromName}>
@@ -263,29 +264,13 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
               <button
                 data-action="otherCharges"
                 className="text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
-                // onClick={(e) => {
-                //   e.stopPropagation();
-                //   dispatch({
-                //     conType: "otherCharges",
-                //     content: {
-                //       charges: otherCharges,
-                //     },
-                //     // id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
-                //     id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
-                //       propTypeId ?? propTypeName ?? ""
-                //     }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
-                //     title: "Other Charges",
-                //     type: "OPEN",
-                //     pType: type,
-                //   })
-                // }}
               >
                 View Other Charges
               </button>
             )}
           </p>
 
-          <h3 className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
+          <h3 className={Styles.propNameHeading}>
             {projIdEnc != undefined ? (
 
               <Link
@@ -328,10 +313,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
       <SearchCardApprovedNames approvedNamesData={approvedNamesData} />
 
       <div
-        className="text-[12px] sm:text-[14px] pr-2 line-clamp-2"
-        // onClick={(e) => {
-        //   e.stopPropagation();
-        // }}
+        className={Styles.readMoreTextCon}
       >
         {aboutText && (
           <div className="line-clamp-2 relative">
@@ -343,7 +325,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
             />
             {isReadMoreNeeded && (
                 <button
-                  className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer absolute bottom-0 right-0 bg-white "
+                  className={Styles.readMoreText}
                   title={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   aria-label={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   data-action="readmore"

@@ -267,7 +267,7 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className={`bg-gray-50 border rounded-lg cursor-pointer mt-[6px] py-2 xl:py-1 px-2`}
+      className={`bg-gray-50 border rounded-lg cursor-pointer mt-[6px] py-1 md:py-2 xl:py-1 px-2`}
       onClick={handleClick}
     >
       <div className={`flex items-center justify-between ${isDesktop ? " flex-nowrap gap-[1rem] " : "sm:flex-wrap" }`}>

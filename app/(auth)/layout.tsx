@@ -50,9 +50,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative max-h-[100vh] overflow-y-auto ">
           <Link
             href={"/"}
-            className=" sm:hidden top-0 left-0 p-2 bg-[#ffffff7a]  absolute"
+            className=" sm:hidden top-0 left-0 p-2 bg-[#ffffff7a] absolute"
           >
-            <div className="flex  justify-center items-center gap-1 rounded underline  text-[#0C7ACA] text-[14px] not-italic font-bold flex-nowrap">
+            <div className="flex  justify-center items-center gap-1 rounded text-[#0C7ACA] text-[14px] not-italic font-bold flex-nowrap">
               {config.homeIcon}{" "}
               <p className="h-[17px] hover:underline cursor-pointer ">Home</p>
             </div>

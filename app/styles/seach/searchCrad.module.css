@@ -165,7 +165,7 @@
     font-style: normal; 
     font-weight: 700; 
     color: #148B16;
-    font-size: 14px;
+    font-size: 16px;
     font-size: 1.25rem;
     line-height: 1.75rem;     
 }
@@ -355,12 +355,26 @@
     display: inline-flex; 
     gap: 0.5rem; 
     justify-content: flex-end; 
+    
 }
 
 .unLikeBtn{
     font-size: 0.875rem;
     line-height: 1.25rem; 
     color: #374151; 
+    height: 24px;
+    width: 24px;
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+.textBorder{
+    text-shadow:
+    -0.5px -0.5px 0 black,
+     0.5px -0.5px 0 black,
+    -0.5px  0.5px 0 black,
+     0.5px  0.5px 0 black;
 }
 
 .mobileShearBtn{
@@ -482,6 +496,29 @@
     /* pointer-events: none; */
 }
 
+.readMoreTextCon{
+    padding-right: 0.5rem; 
+    color: 14px;
+}
+
+.readMoreText{
+    position: absolute; 
+    right: 0; 
+    bottom: 0; 
+    font-weight: 700; 
+    text-decoration: underline; 
+    background-color: #ffffff; 
+    cursor: pointer; 
+    font-size: 14px;
+}
+
+.propNameHeading{
+    font-style: normal; 
+    font-weight: 700; 
+    color: #001F35;
+    color: 16px;
+}
+
 @media only screen and (min-width: 600px) and (max-width: 1600px) {
     .searchCradMainCon{
         width: 98%;
@@ -492,7 +529,7 @@
     }
     
     .searchCardPromNameSpan{
-        font-size: 18px;  
+        font-size: 14px;  
         max-width: calc(100% - 110px) ;  
     }
 
@@ -570,10 +607,6 @@
         width: 98%;
     }
 
-    .searchCardPromNameSpan{
-        font-size: 14px;    
-    }
-
     .searchCradTopSection{
         flex-direction: column;
     }
@@ -595,6 +628,11 @@
         bottom: auto;
     }
 
+    .propNameHeading,
+    .searchCardPromNameSpan,
+    .readMoreText,
+    .readMoreTextCon,
+    .searchCardPromName,
     .viewOtherChargesText,
     .downSectionCardValue,
     .downSectionCardIconSpan,
@@ -651,7 +689,11 @@
     .searchCardViewMapBtnSpan{
         color: #ffffff; 
         background-color: transparent; 
-
     }
+
+    .searchCardTopCornerMainCon{
+        padding-top: 0px;
+    }
+
 
 }
