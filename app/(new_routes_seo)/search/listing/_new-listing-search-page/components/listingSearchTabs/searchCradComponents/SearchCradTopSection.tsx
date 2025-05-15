@@ -71,13 +71,13 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
 
         {verified && <Rera />}
         
-        {((projstatus || propTypeName)) && (
+        {(((projstatus !== undefined && projstatus !== "") || (propTypeName !== undefined && propTypeName !== ""))) && (
           <p className={Styles.projStatusonImage}>
-            {projstatus ?? propStatus}
+            {projstatus ? projstatus : propStatus}
           </p>
         )}
 
-        {((availableFrom || possassionDate)) && (
+        {(((availableFrom !== undefined && availableFrom !== "") || (possassionDate !== undefined && possassionDate !== ""))) && (
           <p className={`${Styles.projStatusonImage} ${Styles.possessionDateOnImage}`}>
             {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
             {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}

@@ -366,20 +366,15 @@
     width: 24px;
     font-size: 16px;
     box-sizing: border-box;
+
+}
+
+.textBorder{
     text-shadow:
     -0.5px -0.5px 0 black,
      0.5px -0.5px 0 black,
     -0.5px  0.5px 0 black,
      0.5px  0.5px 0 black;
-/* 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0.1px solid #A7C4DA;
-    background-color: #ECF0F3;
-        border-radius: 50%;
-    padding-left: 2px;
-    padding-top: 4px;  */
 }
 
 .mobileShearBtn{
@@ -674,6 +669,10 @@
 
     .searchCardPromName{
         font-size: 12px;
+    }
+
+    .searchCardTopCornerMainCon{
+        padding-top: 0px;
     }
 
 }

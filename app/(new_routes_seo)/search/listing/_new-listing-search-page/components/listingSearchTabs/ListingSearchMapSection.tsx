@@ -27,14 +27,13 @@ function ListingSearchMapSection({ serverData }: Props) {
 
             {/* Preload image with srcSet and sizes */}
          
-              <link
-                rel="preload"
-                as="image"
-                href={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
-              />
-           
+            <link
+              rel="preload"
+              as="image"
+              href={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+            />
           </>
-        )}
+      )}
       <Image
         priority
         height={630}

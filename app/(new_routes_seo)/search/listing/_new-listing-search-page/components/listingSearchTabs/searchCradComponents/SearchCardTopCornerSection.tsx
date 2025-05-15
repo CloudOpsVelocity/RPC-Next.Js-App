@@ -85,7 +85,7 @@ function SearchCardTopCornerSection({
                   }}
                   title={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   aria-label={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
-                  className={Styles.unLikeBtn}
+                  className={`${Styles.unLikeBtn} ${!Sh ? Styles.textBorder : ""}`}
                 >
                   {Sh ? "🧡" : "🤍" }
                 </button>
@@ -296,7 +296,7 @@ function SearchCardTopCornerSection({
                   // className="pr-[6px]"
                   title={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   aria-label={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
-                  className={Styles.unLikeBtn}
+                  className={`${Styles.unLikeBtn} ${!Sh ? Styles.textBorder : ""}`}
                 >
                   {Sh ? "🧡" : "🤍" }
                 </button>
