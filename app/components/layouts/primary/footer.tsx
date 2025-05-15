@@ -224,6 +224,8 @@ function Footer() {
                     href={link}
                     className="text-white hover:text-gray-300"
                     target="_blank"
+                    title={`Visit Get Right Property on ${name}`}
+                    aria-label={`Visit Get Right Property on ${name}`}
                   >
                     <span className="sr-only">{name}</span>
                     {icon}
@@ -247,6 +249,8 @@ function Footer() {
                             href={hrefs[index]}
                             rel={rel}
                             className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none"
+                            title={`Visit  ${link}`}
+                            aria-label={`Visit  ${link}`}
                           >
                             {link}
                           </Link>
@@ -273,7 +277,9 @@ function Footer() {
                                 href={hrefs[index]}
                                 rel={rel}
                                 className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none "
-                              >
+                                title={`Visit  ${link}`}
+                                aria-label={`Visit  ${link}`}
+                                >
                                 {link}
                                 {link === "Home" || link === "Projects" ? (
                                   <span className="hidden"> Page</span>
@@ -304,6 +310,8 @@ function Footer() {
                             href={hrefs[index]}
                             rel={rel}
                             className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none"
+                            title={`Visit  ${link}`}
+                            aria-label={`Visit  ${link}`}
                           >
                             {link}
                           </Link>
@@ -347,6 +355,8 @@ function Footer() {
                 prefetch={false}
                 rel="noopener noreferrer"
                 href={`tel:${8884440963}`}
+                title="Call GetRight Property"
+                aria-label="Call GetRight Property"
                 className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
               >
                 <FaPhoneAlt className="mr-1" /> +91-8884440963
@@ -360,7 +370,9 @@ function Footer() {
                   prefetch={false}
                   rel="noopener noreferrer"
                   href="https://rpclan.com/"
-                >
+                  title="Visit RPCLAN"
+                  aria-label="Visit RPCLAN"
+                    >
                   {" "}
                   RPCLAN SERVICES PVT.LTD{" "}
                 </Link>
