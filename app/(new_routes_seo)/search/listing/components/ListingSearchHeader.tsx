@@ -105,6 +105,7 @@ const ListingHeaderFilters = ({
 
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
+    document.body.style.overflow = "unset";
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
   };
@@ -472,7 +473,10 @@ const ListingHeaderFilters = ({
             </div>
             <button
               className="md:hidden flex text-[14px] items-center h-[38px] md:h-[42px] xl:h-auto gap-[4px] md:gap-2 px-[6px] py-[4px] md:px-4 md:py-2 border-2 border-[#0073C6] text-[#0073C6] rounded-full order-3"
-              onClick={() => setIsDrawerOpen(true)}
+              onClick={() => {
+                setIsDrawerOpen(true);
+                document.body.style.overflow = "hidden";
+              }}
             >
               <MdFilterList className="w-5 h-5" />
               Filters
@@ -499,7 +503,10 @@ const ListingHeaderFilters = ({
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-lg font-semibold">Filters</h2>
               <button
-                onClick={() => setIsDrawerOpen(false)}
+                onClick={() => {
+                  setIsDrawerOpen(false);
+                  document.body.style.overflow = "unset";
+                }}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >
                 <MdClose className="w-6 h-6" />

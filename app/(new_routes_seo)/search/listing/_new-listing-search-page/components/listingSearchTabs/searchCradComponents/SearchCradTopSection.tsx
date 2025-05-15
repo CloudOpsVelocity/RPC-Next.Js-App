@@ -183,6 +183,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
             prefetch={false}
             className={Styles.searchCardLink}
             title={`${projName} in ${locality}, ${city}`}
+            aria-label={`${projName} in ${locality}, ${city}`}
           >
             <h2 style={{ width: "100%" }}>
               <span className={Styles.searchCardPromName}>

@@ -202,7 +202,7 @@ const ProjectSearchTabs = ({
                     e.preventDefault();
                     handleTabsChange(tab.id);
                   }}
-                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
+                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[12px] xl:text-base font-medium transition-all ${
                     tabsSelected() === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
@@ -218,7 +218,7 @@ const ProjectSearchTabs = ({
                     e.stopPropagation();
                     setIsDropdownOpen(!isDropdownOpen);
                   }}
-                  className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[13px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
+                  className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[12px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
                 >
                   <svg
                     className="w-4 h-4"
