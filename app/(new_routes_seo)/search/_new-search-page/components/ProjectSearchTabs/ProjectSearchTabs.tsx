@@ -2,6 +2,7 @@
 "use client";
 
 import { useAtom, useSetAtom } from "jotai";
+import Styles from "@/app/styles/seach/searchCrad.module.css";
 import React, { memo, useCallback } from "react";
 import {
   diffToProjFromListing,
@@ -221,7 +222,9 @@ const ProjectSearchTabs = ({
                   }}
                   className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[12px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
                 >
-                  <p>↑ &nbsp;&nbsp; ↓</p>
+                  {/* <p>↑ &nbsp;&nbsp; ↓</p> */}
+                  <p className={Styles.sortIcon}></p>
+
 
                   <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                     {state.sortByfield != null && state.sortType != null

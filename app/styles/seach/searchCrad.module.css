@@ -547,6 +547,11 @@
     font-size: 12px;
 }
 
+.sortIcon::before {
+    content: "↑  ↓";
+  }
+  
+
 @media only screen and (min-width: 600px) and (max-width: 1600px) {
     .searchCradMainCon{
         width: 98%;
