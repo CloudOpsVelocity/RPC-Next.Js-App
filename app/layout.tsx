@@ -13,7 +13,7 @@ import { Montserrat } from "next/font/google";
 const font = Montserrat({
   preload: true,
   adjustFontFallback: false,
-  weight: ["400", "600", "300", "500", "700"], // or whatever weights you're using
+  weight: ["400", "600", "300", "500", "700", "800"], // or whatever weights you're using
   subsets: ["latin"], // ✅ add this line
   // subsets: ["latin"], // always include this for better performance
 });
