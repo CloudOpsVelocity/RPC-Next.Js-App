@@ -241,7 +241,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="mt-2 sm:mt-4 space-y-2 md:space-y-4">
+                    <ul className="space-y-3 px-3 py-2 sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
                           <Link
@@ -267,7 +267,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="mt-2 sm:mt-4 space-y-2 md:space-y-4">
+                    <ul className="space-y-3 px-3 py-2 sm:mt-4  md:space-y-4">
                       {links.map((link, index) => {
                         return (
                           link && (
@@ -302,7 +302,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="mt-2 sm:mt-4 space-y-2 md:space-y-4">
+                    <ul className="space-y-3 px-3 py-2  sm:mt-4 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
                           <Link
