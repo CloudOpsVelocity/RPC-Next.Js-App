@@ -27,7 +27,7 @@ import axios from "axios";
 import { Metadata } from "next";
 import NotFound from "@/app/not-found";
 import ResidentialListingsSchema from "@/app/seo/search/ResidentialListings.schema";
-import Head from "next/head";
+// import Head from "next/head";
 type Props = {
   searchParams: {
     page: number;
