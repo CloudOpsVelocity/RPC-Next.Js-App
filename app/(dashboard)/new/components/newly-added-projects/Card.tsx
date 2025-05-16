@@ -39,7 +39,7 @@ export default function Card({ item }: Props) {
       <div>
         <div>
           <div className="z-[100]">
-            <picture>
+            {/* <picture>
               <source
                 media="(min-width: 1200px)"
                 srcSet={item.coverUrl ? item.coverUrl.split(",")[3] : ""}
@@ -60,13 +60,19 @@ export default function Card({ item }: Props) {
                 height={276}
                 className="object-cover w-full h-full"
               />
-            </picture>
+            </picture> */}
 
             <Image
               src={item.coverUrl}
-              alt={item.projName}
+              alt={`Project ${item.projName} in ${item.locality}, ${item.city}`}
+              title={`Explore ${item.projName} in ${item.locality}, ${
+                item.city
+              } - ${item.propTypes?.join(", ")} available for ${
+                item.listingType === "rent" ? "Rent" : "Sale"
+              } on GetRightProperty`}
               fill
               className=" absolute top-0 left-0  z-0 "
+              fetchPriority="auto"
             />
           </div>
           {/*  {item.builderLogo && (
@@ -79,9 +85,10 @@ export default function Card({ item }: Props) {
           {(item.rerastatus === "Recieved" ||
             item.rerastatus === "Applied") && (
             <Image
-              priority={true}
+              fetchPriority="auto"
               src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/r.svg`}
-              alt="rera"
+              alt={`RERA Registered Project - ${item.projName} in ${item.locality}, ${item.city}`}
+              title={`This project (${item.projName}) in ${item.locality}, ${item.city} is registered under RERA`}
               width={100}
               height={100}
               className="absolute top-0 left-0 z-[10]"
