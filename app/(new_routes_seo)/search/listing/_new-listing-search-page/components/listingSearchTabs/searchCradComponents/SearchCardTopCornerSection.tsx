@@ -5,6 +5,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import { topCornerRightSectionData } from "./searchData";
 import Link from "next/link";
 import { DownLoadIcon } from "@/app/images/commongsSvgs2";
+import Image from "next/image";
+import { ShearIconUrl } from "@/app/images/commonImages";
 // import HeartButton from "@/app/test/newui/components/Card/Top/Center/HeartButton";
 
 type Props = {
@@ -307,7 +309,15 @@ function SearchCardTopCornerSection({
                 title={`Share this ${type === "proj" ? "project" : "property listing"} – ${projOrPropName}`}
                 aria-label={`Share this ${type === "proj" ? "project" : "property listing"} – ${projOrPropName}`}
               >
-                {config.shareIcon}
+                {/* {config.shareIcon} */}
+                <Image
+                   width={24}
+                   height={24}
+                   src={ShearIconUrl}
+                   className="w-[24px] h-[24px]"
+                   alt="Shear"
+                />
+
               </button>
             </div>
 

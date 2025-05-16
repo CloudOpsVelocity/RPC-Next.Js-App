@@ -62,9 +62,8 @@ export default function LeftSection({
           )}
 
           <p className="bg-gray-700 rounded-full absolute top-1 xl:top-1 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
-            {furnish} semi furnished
+            {furnish}
           </p>
-
         </>
       )}
 
