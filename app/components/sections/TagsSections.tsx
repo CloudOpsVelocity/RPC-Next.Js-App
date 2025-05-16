@@ -13,10 +13,7 @@ interface Props {
 export default function TagsSections({ urls }: Props) {
   const flatLinks = [
     ...urls,
-
     { title: "Bangalore", url: "/residential/projects/bengaluru" },
-
-    // Properties
     { title: "For Sale Listings", url: "/residential-listings/for-sale" },
     { title: "For Rent Listings", url: "/residential-listings/for-rent" },
     { title: "New Launch Projects", url: "/search?sf=projStatus=108" },
@@ -27,32 +24,24 @@ export default function TagsSections({ urls }: Props) {
       title: "Under Construction Listings",
       url: "/search/listing?sf=propStatus=U",
     },
-
-    // Resources
     { title: "Market Trends", url: "/market-trends/locality-insights" },
     { title: "Buying Guide", url: "/buying-guide" },
     { title: "Selling Tips", url: "/selling-tips" },
     { title: "Real Estate News", url: "/market-trends/news" },
-
-    // Our Pages
     { title: "Home", url: "/" },
     { title: "Residential Projects", url: "/residential" },
     { title: "Properties", url: "/residential-listings" },
-    { title: "Post Project", url: "/post-your-project" }, // optional
+    { title: "Post Project", url: "/post-your-project" },
     { title: "Post Property", url: "/post-your-listing" },
     { title: "Builders", url: "/builders" },
-    { title: "Login/Signup", url: "/login" }, // optional
+    { title: "Login/Signup", url: "/login" },
     { title: "Listing Search", url: "/search/listing" },
     { title: "Project Search", url: "/search" },
     { title: "Residential Listings", url: "/residential-listings" },
-
-    // Company
     { title: "About Us", url: "/about" },
     { title: "Our Team", url: "/team" },
     { title: "Careers", url: "/careers" },
     { title: "Contact", url: "/get-in-touch" },
-
-    // Legal
     { title: "Privacy Policy", url: "/privacy-policy" },
     { title: "Terms of Service", url: "/terms-and-conditions" },
     { title: "Sitemap", url: "/sitemap.xml" },
@@ -107,15 +96,15 @@ export default function TagsSections({ urls }: Props) {
   ];
 
   return (
-    <section className="my-6 mx-auto w-[90%]">
-      <h2 className="text-xl font-semibold mb-2">Tags:</h2>
-      <p className="text-sm text-gray-600 mb-4">
+    <section className="my-6 px-4 sm:px-6 md:px-8 w-[95%] ">
+      <h2 className="text-lg sm:text-xl font-semibold mb-2">Tags:</h2>
+      <p className="text-xs sm:text-sm text-gray-600 mb-4">
         Discover more residential rent and sale properties in popular areas and
         projects.
       </p>
-      <ul className="flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-x-2 ">
         {flatLinks.map((urlObj, index) => (
-          <li key={urlObj.url || index}>
+          <li key={urlObj.url || index} className="flex-shrink-0">
             <Tag {...urlObj} />
           </li>
         ))}
