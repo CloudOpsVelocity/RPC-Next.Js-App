@@ -39,7 +39,6 @@ export default function ListingReqBtn({
         onClick={handleOpen}
       >
         {/* <CallIcon className="w-[16px] h-[16px]" /> */}
-        
         <Image
           src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/call.svg`}
           width={16}
@@ -52,6 +51,8 @@ export default function ListingReqBtn({
       <Button
         className="hidden sm:inline-flex justify-center mt-2 items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal]  max-h-[38px] capitalize mt-[12px] mb-[6px] " /* z-[1000] */
         onClick={handleOpen}
+        aria-label={`Request a callback for more details about ${projName} property.`}
+        title={`Request a callback to get more information about ${projName} property.`}
       >
         Request Callback
       </Button>

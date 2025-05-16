@@ -7,9 +7,10 @@ import React from "react";
 type Props = {
   url: string;
   type: "prop" | "proj";
+  buttonTitle: string;
 };
 
-export default function ShareBtn({ url, type }: Props) {
+export default function ShareBtn({ url, type, buttonTitle }: Props) {
   // const [shareAtomData, setShareAtomData] = useAtom(searchShareAtom);
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -30,7 +31,12 @@ export default function ShareBtn({ url, type }: Props) {
     }); */
   };
   return (
-    <button aria-label="Share this property"  onClick={handleClick} className="cursor-pointer">
+    <button
+      aria-label={buttonTitle}
+      title={buttonTitle}
+      onClick={handleClick}
+      className="cursor-pointer"
+    >
       <ShareIcon
         className={"cursor-pointer w-[22px] h-[22px] xl:w-[26px] xl:h-[26px] "}
       />

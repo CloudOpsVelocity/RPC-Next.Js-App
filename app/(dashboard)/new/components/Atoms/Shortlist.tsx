@@ -11,15 +11,16 @@ import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCom
 type Props = {
   reqId: string;
   shortListed: string;
+  buttonTitle: string;
 };
-export default function Shortlist({ reqId, shortListed }: Props) {
+export default function Shortlist({ reqId, shortListed, buttonTitle }: Props) {
   const [state, setState] = useState(shortListed === "Y" ? true : false);
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
 
   const { mutate } = useOptimisticShortlistCompare();
- 
+
   const onAddingShortList = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -40,8 +41,10 @@ export default function Shortlist({ reqId, shortListed }: Props) {
 
   return (
     <button
-    aria-label={state ? "Remove from shortlist" : "Add to shortlist"}
-    onClick={onAddingShortList}>
+      aria-label={state ? `Remove ${buttonTitle}` : `Add ${buttonTitle}`}
+      title={state ? `Remove ${buttonTitle}` : `Add ${buttonTitle}`}
+      onClick={onAddingShortList}
+    >
       {state ? (
         config.trueIcon
       ) : (

@@ -8,6 +8,7 @@ type Props = {
   projName: string;
   reqId: string;
   builderId: number;
+  title: string;
 };
 
 export default function ReqBtn({
@@ -15,6 +16,7 @@ export default function ReqBtn({
   projName,
   reqId,
   builderId,
+  title,
 }: Props) {
   const [, { open }] = useReqCallPopup();
   const handleOpen = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -32,6 +34,8 @@ export default function ReqBtn({
   };
   return (
     <Button
+      title={title}
+      aria-label={title}
       className="!text-[12px] h-[24px] sm:h-auto xl:!text-[14px] !p-[4px] !sm:p-[6px] "
       onClick={handleOpen}
     >

@@ -10,8 +10,9 @@ import useOptimisticShortlistCompare from "../../hooks/useOptimisticShortlistCom
 type Props = {
   reqId: string;
   shortListed: string;
+  buttonTitle: string;
 };
-export default function Shortlist({ reqId, shortListed }: Props) {
+export default function Shortlist({ reqId, shortListed, buttonTitle }: Props) {
   const [state, setState] = useState(shortListed === "Y" ? true : false);
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
@@ -35,7 +36,11 @@ export default function Shortlist({ reqId, shortListed }: Props) {
     }
   };
   return (
-    <button aria-label="Shortlist this property"  onClick={(e) => onAddingShortList(e)}>
+    <button
+      aria-label={buttonTitle}
+      title={buttonTitle}
+      onClick={(e) => onAddingShortList(e)}
+    >
       {state ? (
         config.trueIcon
       ) : (

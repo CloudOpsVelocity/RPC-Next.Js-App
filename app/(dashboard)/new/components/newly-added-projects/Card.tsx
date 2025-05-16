@@ -30,11 +30,23 @@ export default function Card({ item }: Props) {
   //   e.stopPropagation();
   //   window.open(urlBuilder, "_blank", "noreferrer");
   // };
-
+  const title = `Explore ${item.projName} in ${item.locality}, ${
+    item.city
+  } - ${item.propTypes?.join(", ")} available for ${
+    item.listingType === "rent" ? "Rent" : "Sale"
+  } on GetRightProperty`;
+  const ImageTitle = `Cover Image Of ${item.projName} in ${item.locality}, ${
+    item.city
+  } - ${item.propTypes?.join(", ")} available for ${
+    item.listingType === "rent" ? "Rent" : "Sale"
+  } on GetRightProperty`;
   return (
     <div className="relative w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0">
-      <Link prefetch={false} href={url}>
-        <div className=" absolute top-0 left-0 h-full w-[170px] md:w-[40%] z-[2] ">{`${``}`}</div>
+      <Link prefetch={false} href={url} aria-label={title} title={title}>
+        <div className=" absolute top-0 left-0 h-full w-[170px] md:w-[40%] z-[2] ">
+          {" "}
+          <span className="sr-only">{`View ${item.projName} details`}</span>
+        </div>
       </Link>
       <div>
         <div>
@@ -64,12 +76,8 @@ export default function Card({ item }: Props) {
 
             <Image
               src={item.coverUrl}
-              alt={`Project ${item.projName} in ${item.locality}, ${item.city}`}
-              title={`Explore ${item.projName} in ${item.locality}, ${
-                item.city
-              } - ${item.propTypes?.join(", ")} available for ${
-                item.listingType === "rent" ? "Rent" : "Sale"
-              } on GetRightProperty`}
+              alt={ImageTitle}
+              title={ImageTitle}
               fill
               className=" absolute top-0 left-0  z-0 "
               fetchPriority="auto"
@@ -102,18 +110,20 @@ export default function Card({ item }: Props) {
               <div className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
                 <div className="absolute  sm:static top-[10px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6 z-[3] ">
                   <Shortlist
+                    buttonTitle={`Add ${item.projName} project to your shortlist for easy access`}
                     reqId={item.projIdEnc}
                     shortListed={item.shortListed}
                   />
 
-                  <ShareBtn url={url} type="proj" />
+                  <ShareBtn
+                    buttonTitle={`Share details of ${item.projName}`}
+                    url={url}
+                    type="proj"
+                  />
                 </div>{" "}
                 <Link
-                  aria-label={`Explore ${item.propTypes?.join(
-                    ", "
-                  )} available at ${item.projName} in ${item.locality}, ${
-                    item.city
-                  }`}
+                  aria-label={title}
+                  title={title}
                   prefetch={false}
                   href={url}
                 >
@@ -121,7 +131,8 @@ export default function Card({ item }: Props) {
                 </Link>
               </div>
               <Link
-                aria-label={`View details for ${item.projName}`}
+                aria-label={title}
+                title={title}
                 prefetch={false}
                 href={url}
               >
@@ -143,7 +154,8 @@ export default function Card({ item }: Props) {
               <div className="space-y-2">
                 <span className=" no-underline text-[#ffff]">Builder: </span>
                 <Link
-                  aria-label={`View details for ${item.postedByName}`}
+                  aria-label={`View builder details for ${item.postedByName}`}
+                  title={`View builder details for ${item.postedByName}`}
                   href={urlBuilder}
                   prefetch={false}
                   // onClick={(e) => builderiRedirect(e)}
@@ -166,13 +178,9 @@ export default function Card({ item }: Props) {
                 </p>
               </div>
               <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
-                <ViewAllButton
-                  aria-label={`View all details for ${item.projName}`}
-                  name={item.name}
-                  url={url}
-                />
+                <ViewAllButton name={title} url={url} />
                 <ReqBtn
-                  aria-label={`Request more information about ${item.projName}`}
+                  title={`Request more information about ${item.projName}`}
                   builderName={item.postedByName}
                   projName={item.projName}
                   reqId={item.projIdEnc}

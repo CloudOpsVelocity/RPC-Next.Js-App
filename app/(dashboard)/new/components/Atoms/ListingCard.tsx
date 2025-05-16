@@ -44,19 +44,30 @@ export default function ListingCard({ item, sl }: Props) {
       > */}
       <div className="h-[200px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
-          <Shortlist reqId={item.propIdEnc} shortListed={sl} />
-          <ShareBtn url={listingLink} type="prop" />
+          <Shortlist
+            buttonTitle={`${title} property to your shortlist`}
+            reqId={item.propIdEnc}
+            shortListed={sl}
+          />
+          <ShareBtn
+            buttonTitle={`Share details of ${title}`}
+            url={listingLink}
+            type="prop"
+          />
         </div>
 
         <Link
           prefetch={false}
           href={listingLink}
+          aria-label={`View details for ${title}`}
+          title={`View details for ${title}`}
           className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 " /* z-[1000] */
         >
           View Details
         </Link>
         <Link
           aria-label={`View details for ${title}`}
+          title={`View details for ${title}`}
           prefetch={false}
           href={listingLink}
         >
@@ -75,8 +86,8 @@ export default function ListingCard({ item, sl }: Props) {
             />
             <Image
               // priority={true}
-              alt={title}
-              title={title}
+              alt={`Cover Image Of ${title}`}
+              title={`Cover Image Of ${title}`}
               src={images[0] ? images[0].split(",")[0] : ""}
               width={490}
               height={276}
@@ -98,7 +109,13 @@ export default function ListingCard({ item, sl }: Props) {
 
       <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border border-gray-600 bg-white text-gray-800">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
-          <Link prefetch={false} href={listingLink} className="space-y-1  ">
+          <Link
+            prefetch={false}
+            href={listingLink}
+            className="space-y-1  "
+            aria-label={`View details for ${title}`}
+            title={`View details for ${title}`}
+          >
             <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
                 `${formatNumberWithSuffix(item.pa, false)} sq.ft`}{" "}
@@ -130,9 +147,17 @@ export default function ListingCard({ item, sl }: Props) {
             </p>
           </Link>
           <div className="hidden  justify-start items-start gap-[8px] ">
-            <Shortlist reqId={item.propIdEnc} shortListed={sl} />
+            <Shortlist
+              buttonTitle={`${title} property to your shortlist`}
+              reqId={item.propIdEnc}
+              shortListed={sl}
+            />
             {/* <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px]" /> */}
-            <ShareBtn url={listingLink} type="prop" />
+            <ShareBtn
+              buttonTitle={`Share details of ${title}`}
+              url={listingLink}
+              type="prop"
+            />
           </div>
         </div>
         {/* by default new sortBy */}
