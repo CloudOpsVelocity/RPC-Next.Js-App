@@ -398,6 +398,31 @@ export const villamentCardImg = `${BASE_URL}/staticmedia-images-icons/project-de
 export const plotCardImg = `${BASE_URL}/staticmedia-images-icons/project-detail/plot.webp`
 
 
+// svgs to urls 
+export const reraIconUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/rera-icon.svg`;
+
+export const IdIconUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/IdIcon.svg`;
+export const SecurityIconUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/SecurityIcon.svg`;
+export const PropertyAvailableUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/PropertyAvailable.svg`;
+export const LocalityUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/Locality.svg`;
+export const ProjectStatusUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/ProjectStatus.svg`;
+export const EndDateUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/EndDate.svg`;
+export const StartDateUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/StartDate.svg`;
+export const footerPhoneIconUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/footerPhoneIcon.svg`;
+export const imagesIconUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/imagesIcon.svg`;
+export const blueChevronUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/blueChevron.svg`;
+export const chevronUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/chevron.svg`;
+export const ShearIconUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/ShearIcon.svg`;
+
+export const TowerIconUrl = `${BASE_URL}`;
+export const ratingStarNullUrl = `${BASE_URL}`;
+export const ratingStarUrl = `${BASE_URL}`;
+
+export const facebookUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/FaFacebook.svg`
+export const instagramUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/FaInstagram.svg`
+export const linkedinUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/FaLinkedin.svg`
+export const twitterUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/FaTwitter.svg`
+export const youtubeUrl = `${BASE_URL}/staticmedia-images-icons/project-detail/FaYoutube.svg`
 
 
 

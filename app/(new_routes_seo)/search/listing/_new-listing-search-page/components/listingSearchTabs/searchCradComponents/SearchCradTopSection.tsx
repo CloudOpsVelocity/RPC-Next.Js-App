@@ -66,6 +66,9 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
             title={projOrPropName}
             aria-label={projOrPropName}
             className={Styles.searchCradImage}  
+
+            sizes="(max-width: 768px) 100vw, 300px"
+            loading="lazy"
           />
         </Link>
 
