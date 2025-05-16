@@ -241,7 +241,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="space-y-2 sm:mt-4 md:space-y-4">
+                    <ul className="mt-2 sm:mt-4 space-y-2 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
                           <Link
@@ -267,7 +267,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="space-y-2 sm:mt-4  md:space-y-4">
+                    <ul className="mt-2 sm:mt-4 space-y-2 md:space-y-4">
                       {links.map((link, index) => {
                         return (
                           link && (
@@ -279,7 +279,7 @@ function Footer() {
                                 className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none "
                                 title={`Visit  ${link}`}
                                 aria-label={`Visit  ${link}`}
-                                >
+                              >
                                 {link}
                                 {link === "Home" || link === "Projects" ? (
                                   <span className="hidden"> Page</span>
@@ -302,7 +302,7 @@ function Footer() {
                     <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                       {title}
                     </h3>
-                    <ul className="space-y-2 sm:mt-4 md:space-y-4">
+                    <ul className="mt-2 sm:mt-4 space-y-2 md:space-y-4">
                       {links.map((link, index) => (
                         <li key={link}>
                           <Link
@@ -372,7 +372,7 @@ function Footer() {
                   href="https://rpclan.com/"
                   title="Visit RPCLAN"
                   aria-label="Visit RPCLAN"
-                    >
+                >
                   {" "}
                   RPCLAN SERVICES PVT.LTD{" "}
                 </Link>
