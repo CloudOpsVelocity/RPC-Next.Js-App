@@ -231,7 +231,7 @@ export const generateAllSchemas = (property: any) => {
   return schemas;
 };
 
-export const ListingSearchSchema = ({ properties }: any) => {
+export const ListingSearchSchema = ({ properties, pageUrl }: any) => {
   if (!Array.isArray(properties)) return null;
   const results = properties
     .map((property: any) => {
@@ -348,6 +348,95 @@ export const ListingSearchSchema = ({ properties }: any) => {
                   "@type": "Answer",
                   text: "To check legal approval, verify the building plan approval, occupancy certificate, and NOCs from relevant authorities. Also ensure the property is free from any legal disputes or encumbrances.",
                 },
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        id="projSearchScript"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Dataset",
+            name: "Real Estate Properties Dataset",
+            description:
+              "A dataset containing various real estate properties available in Bangalore, including details such as price, location, and amenities.",
+            creator: {
+              "@type": "Organization",
+              name: "Getrightproperty",
+              url: "https://www.getrightproperty.com",
+            },
+            dateCreated: new Date().toISOString(),
+            distribution: {
+              "@type": "DataDownload",
+              contentUrl: pageUrl,
+              encodingFormat: "application/json",
+            },
+            includedInDataCatalog: {
+              "@type": "DataCatalog",
+              name: "Real Estate Listings Catalog",
+              url: "https://www.getrightproperty.com/catalog",
+            },
+            license: "https://creativecommons.org/licenses/by/4.0/",
+            variableMeasured: [
+              {
+                "@type": "PropertyValue",
+                name: "Location",
+                description: "Bengaluru",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Amenities",
+                description:
+                  "List of amenities available with the property, including Gym, Swimming Pool, Club House, Children’s Play Area, Security, Power Backup, Car Parking, and more.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Price Range",
+                description:
+                  "The price range of properties available, from ₹5 Lakhs to ₹60 Crores.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Floor Size",
+                description:
+                  "The floor size of properties ranges from Super Built-Up Area.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Number of Rooms",
+                description: "Properties available with 1 to 6 rooms.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Number of Bathrooms",
+                description: "Properties available with 1 to 6 bathrooms.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Parking Availability",
+                description:
+                  "Properties with parking space ranging from 0 to 6 vehicles.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Furnishing Status",
+                description:
+                  "Properties available as Unfurnished, Semi-Furnished, and Fully Furnished.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Property Status",
+                description:
+                  "Properties categorized as Under Construction or Ready to Move.",
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Property Type",
+                description:
+                  "Available property types include Apartment, Villa, Plot, and Independent House.",
               },
             ],
           }),

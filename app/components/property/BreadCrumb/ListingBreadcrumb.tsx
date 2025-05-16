@@ -103,7 +103,7 @@ export default function ListingBreadCrumbs({
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;
           const isLast = index === allParams.length - 1;
-
+          
           return (
             <React.Fragment key={`${key[index]}`}>
               {!isLast ? (
@@ -113,6 +113,8 @@ export default function ListingBreadCrumbs({
                     href={`${isProject ? "" : BASE_PATH_LISTING}${currentPath}`}
                     // target="_blank"
                     className="hover:underline cursor-pointer capitalize"
+                    title={`Go to ${params[key].replace(/-/g, " ")} page`}
+                    aria-label={`Breadcrumb link to ${params[key].replace(/-/g, " ")}`}
                   >
                     {/* <a onTouchStart={() => {}}></a> */}
                     {titleOfKeys[key as keyof typeof titleOfKeys] && (

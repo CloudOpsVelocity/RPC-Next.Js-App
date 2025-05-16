@@ -53,6 +53,10 @@ module.exports = {
         lastmod: new Date().toISOString(),
       },
       {
+        loc: `https://www.getrightproperty.com/residential-listings/for-sale/bengaluru`,
+        lastmod: new Date().toISOString(),
+      },
+      {
         loc: `https://www.getrightproperty.com/residential-listings/for-sale`,
         lastmod: new Date().toISOString(),
       },
@@ -68,6 +72,19 @@ module.exports = {
         loc: `https://www.getrightproperty.com/residential-listings`,
         lastmod: new Date().toISOString(),
       },
+      // {
+      //   loc: `https://www.getrightproperty.com/residential-listings/for-rent`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `https://www.getrightproperty.com/residential-listings/for-sale`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `https://www.getrightproperty.com/residential/projects/bengaluru`,
+      //   lastmod: new Date().toISOString(),
+      // },
+
       // {
       //   loc: `${config.siteUrl}/dyanmic-sitemaps.xml`,
       //   lastmod: new Date().toISOString(),

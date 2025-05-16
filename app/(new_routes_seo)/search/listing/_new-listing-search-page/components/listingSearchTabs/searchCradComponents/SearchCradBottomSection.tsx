@@ -3,6 +3,7 @@ import Styles from "@/app/styles/seach/searchCrad.module.css";
 import ButtonElement from '@/common/components/CustomButton';
 import { useMediaQuery } from "@mantine/hooks";
 import { WhitePetFreindly } from "@/app/images/commonSvgs";
+import Tag from '@/app/components/atoms/Tag';
 
 type BottomSectionProps = {
     index:string;
@@ -13,8 +14,42 @@ export default function SearchCradBottomSection({
   data,
   index
 }: BottomSectionProps) {
-  const {type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount} = data;
-  const isMobile = useMediaQuery("(max-width: 1600px)");
+  const {
+    type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount, bhkName, phaseName,
+    category, localityName, projName, propName, pageUrl, locality, projIdEnc, sortedBhks, propType, cg, city, projOrPropName
+  } = data;
+  const isMobile = useMediaQuery("(max-width: 1600px)"); 
+
+
+  const textSlice = (word:string = "", url?:string) => {
+    if(word === "") return;
+    const finalUrl = url ?? pageUrl;
+    word = word.toLowerCase().replaceAll(" ", "-").replaceAll("+", "with");
+    const index = finalUrl.indexOf(word);
+    const slicedText = index !== -1 ? finalUrl.slice(0, index + word.length) : finalUrl;
+    return slicedText;
+  }
+
+  const finalProjName = (bhkName !== undefined && propTypeName !== undefined) ? `${bhkName} ${propTypeName}` : ""
+
+  const links = [
+    {title: finalProjName, url: textSlice(finalProjName)},
+    {title: category ? `for ${category}` : "", url: textSlice(category)},
+    {title: localityName ?? "", url: textSlice(localityName)},
+    {title: projName ?? propName, url: type !== "proj" ? textSlice(projName ?? propName) : textSlice(projIdEnc)},
+    {title: locality ?? "", url: textSlice(locality)},
+  ]
+
+  const getlListingUrl = (bhk:string) => {
+    const url = `/residential-listings/${cg === "R" ? "for-rent" : "for-sale"}/${city}/${locality}/${projName}${phaseName ? `/${phaseName}` : ""}/${bhk}-${propType}`;
+    return url.toLowerCase().replaceAll(" ", "-").replaceAll("+", "with");
+  }
+
+  const bhkLinks = sortedBhks && sortedBhks.length > 0 
+    ? sortedBhks.map((eachBhk: any) => (
+      { title: `${eachBhk} ${propType}`, url: textSlice(`${eachBhk} ${propType}`, getlListingUrl(`${eachBhk} ${propType}`))}
+    )) 
+    : [];
 
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
@@ -24,14 +59,17 @@ export default function SearchCradBottomSection({
             <CountListing
               type="Agent"
               value={agentListing}
+              projOrPropName={projOrPropName}
             />
             <CountListing
               type="Owner"
               value={ownerListing}
+              projOrPropName={projOrPropName}
             />
             <CountListing
               type="Builder"
               value={builderListing}
+              projOrPropName={projOrPropName}
             />
           </>
         ) : (
@@ -47,9 +85,8 @@ export default function SearchCradBottomSection({
               <button
                 className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
                 data-action="amenities"
-                title={`Click to view ${
-                  amenCount === 1 ? "" : "all"
-                } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                title={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
+                aria-label={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
               >
                 <span className="bg-white rounded-full text-black px-2">
                   {amenCount}
@@ -69,6 +106,31 @@ export default function SearchCradBottomSection({
         )}
       </div>
 
+        <div className='flex flex-wrap gap-[4px]  '>
+          {links.map((each:any)=>{
+            if(each.title !== ""){
+            return(
+              <Tag key={each.title} title={each.title} url={each.url} className='!text-[8px] !px-2 !py-[2px] text-nowrap ' />
+            )}
+          })}
+
+          {bhkLinks.length > 0 && bhkLinks.map((each:any)=>{
+            if(each.title !== ""){
+            return(
+              <Tag key={each.title} title={each.title} url={each.url} className='!text-[8px] !px-2 !py-[2px] text-nowrap ' />
+            )}
+          })}
+
+          {phaseName && 
+            <Tag 
+              key={phaseName} 
+              title={phaseName} 
+              url={`/residential-listings/${cg === "R" ? "for-rent" : "for-sale"}/${city}/${locality}/${projName}/${phaseName}`} 
+              className='!text-[8px] !px-2 !py-[2px] text-nowrap ' 
+            />
+          }
+        </div>
+
       {/* right section */}
       {!isMobile && (
         <div className={Styles.searchCradBottomRightSection}>
@@ -82,6 +144,7 @@ export default function SearchCradBottomSection({
                     : "Request Callback" 
                   : "Request Callback"
               }`} 
+              toolTip={`Click to Request a Callback for ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`} 
               buttonClass={Styles.searchCardCompareBtn}
           />
         </div>
@@ -93,9 +156,10 @@ export default function SearchCradBottomSection({
 type CountListProps = {
   value: number;
   type: "Agent" | "Owner" | "Builder";
+  projOrPropName: string;
 };
 
-function CountListing({type, value}: CountListProps) {
+function CountListing({type, value, projOrPropName}: CountListProps) {
   return (
     value > 0 && (
     <ButtonElement
@@ -106,7 +170,7 @@ function CountListing({type, value}: CountListProps) {
             type === "Owner" ? Styles.listingTypeButtonForOwner : Styles.listingTypeButtonForOthers} ${
             value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
         }`}
-        toolTip={`Click to view ${type} Listing`}
+        toolTip={`Explore the ${type} Listing for ${projOrPropName}`}
     />)
   )
 }

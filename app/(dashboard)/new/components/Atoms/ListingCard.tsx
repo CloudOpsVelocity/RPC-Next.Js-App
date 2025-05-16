@@ -60,16 +60,6 @@ export default function ListingCard({ item, sl }: Props) {
           prefetch={false}
           href={listingLink}
         >
-          {/* <Image
-            priority={true}
-            alt={title}
-            title={title}
-            src={images[0]}
-            width={490}
-            height={276}
-            className="object-cover w-full h-full"
-            
-          /> */}
           <picture>
             <source
               media="(min-width: 1200px)"
@@ -84,7 +74,7 @@ export default function ListingCard({ item, sl }: Props) {
               srcSet={images[0] ? images[0].split(",")[1] : ""}
             />
             <Image
-              priority={true}
+              // priority={true}
               alt={title}
               title={title}
               src={images[0] ? images[0].split(",")[0] : ""}
@@ -131,7 +121,6 @@ export default function ListingCard({ item, sl }: Props) {
               )}
             </p>
 
-
             <p className="text-[#001F35] text-[12px] xl:text-[14px] not-italic font-semibold leading-[normal] capitalize">
               {item.propName}
             </p>
@@ -148,8 +137,8 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
         {/* by default new sortBy */}
         <div className="pl-3 mr-[14px] sm:mr-[4px] sm:ml-[0px] h-full gap-auto">
-        <div className="inline-flex flex-wrap items-center gap-1 self-stretch rounded border border-gray-400 bg-gray-100 p-1">
-        {item.propTypeName === "Plot" ? (
+          <div className="inline-flex flex-wrap items-center gap-1 self-stretch rounded border border-gray-400 bg-gray-100 p-1">
+            {item.propTypeName === "Plot" ? (
               <>
                 <DownSectionCard
                   label="Plot Area"
@@ -184,7 +173,7 @@ export default function ListingCard({ item, sl }: Props) {
                 <DownSectionCard
                   label={"Possesion Date"}
                   value={formatDate(item.possassionDate, true)}
-                    />
+                />
                 <hr className="border-r border-gray-400 h-[38px] w-[1px] mx-2" />
                 <DownSectionCard
                   label={"Available From"}
@@ -236,7 +225,7 @@ export default function ListingCard({ item, sl }: Props) {
               builderId={item.postedById}
               builderName={item.postedBy}
               projName={title}
-              reqId={item.propIdEnc} 
+              reqId={item.propIdEnc}
             />
           </div>
         </div>

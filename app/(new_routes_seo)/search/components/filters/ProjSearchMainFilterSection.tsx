@@ -9,7 +9,7 @@ type Props = {
 
 function ProjSearchMainFilterSection({ isListing, frontendFilters }: Props) {
   return (
-    <div className="flex flex-row items-start gap-2">
+    <div className="flex flex-row items-start gap-2 ">
       <ProjectFilters isListing={isListing} frontendFilters={frontendFilters} />
     </div>
   );

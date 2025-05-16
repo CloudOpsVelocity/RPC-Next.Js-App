@@ -124,10 +124,19 @@
     left: 0;
 }
 
-.projStatusonImage{
+.projStatusOnImagesCon{
     position: absolute; 
     bottom: 4px; 
     right: 4px; 
+    display: flex;
+    justify-items: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+    gap:6px;
+    padding-bottom: 6px;
+}
+
+.projStatusonImage{
     padding: 2px;
     padding-left: 4px;
     padding-right: 4px;
@@ -135,10 +144,6 @@
     color: #ffffff; 
     background-color: #374151; 
     font-size: 14px;
-}
-
-.possessionDateOnImage{
-    bottom: 32px; 
 }
 
 .searchCardPromName{
@@ -165,7 +170,7 @@
     font-style: normal; 
     font-weight: 700; 
     color: #148B16;
-    font-size: 14px;
+    font-size: 16px;
     font-size: 1.25rem;
     line-height: 1.75rem;     
 }
@@ -175,7 +180,8 @@
     font-weight: 700; 
     color: #000000; 
     font-size: 14px;
-    width: calc(100% - 100px);
+    width: calc(100% - 120px);
+    display: block;
 }
 
 .searchCardSortedBhks{
@@ -192,7 +198,7 @@
     color: #000000; 
     text-transform: capitalize; 
     font-size: 14px;
-    max-width: calc(100% - 116px);
+    max-width: calc(100% - 136px);
 }
 
 .searchCardPostedBy{
@@ -203,7 +209,7 @@
 
 .searchCardLink{
     font-weight: 700; 
-    text-decoration: underline; 
+    /* text-decoration: underline;  */
     cursor: pointer; 
 }
 
@@ -310,7 +316,7 @@
 .searchCardAvgPriceText{
     display: flex; 
     position: absolute; 
-    top: 0.75rem; 
+    top: 0.5rem; 
     right: 5.5rem; 
     font-size: 14px;
     line-height: 1rem; 
@@ -354,12 +360,26 @@
     display: inline-flex; 
     gap: 0.5rem; 
     justify-content: flex-end; 
+    
 }
 
 .unLikeBtn{
     font-size: 0.875rem;
     line-height: 1.25rem; 
     color: #374151; 
+    height: 24px;
+    width: 24px;
+    font-size: 16px;
+    box-sizing: border-box;
+
+}
+
+.textBorder{
+    text-shadow:
+    -0.5px -0.5px 0 black,
+     0.5px -0.5px 0 black,
+    -0.5px  0.5px 0 black,
+     0.5px  0.5px 0 black;
 }
 
 .mobileShearBtn{
@@ -368,6 +388,8 @@
     gap: 0.25rem; 
     align-items: center; 
     vertical-align: middle; 
+    height: 20px;
+    width: 20px;
 }
 
 .floorplanSvgCon{
@@ -408,7 +430,7 @@
 }
 
 .amenityBtn{
-    display: inline-flex; 
+    display: flex; 
     border-radius: 0.25rem; 
     max-width: fit-content; 
     font-size: 0.75rem;
@@ -421,6 +443,7 @@
     padding: 4px;
     background-color: #EA5806;
     white-space: nowrap;
+    z-index: 2;
 }
 
 .amenityBtn:hover{
@@ -478,6 +501,45 @@
     /* pointer-events: none; */
 }
 
+.readMoreTextCon{
+    padding-right: 0.5rem; 
+    color: 14px;
+}
+
+.readMoreText{
+    position: absolute; 
+    right: 0; 
+    bottom: 0; 
+    font-weight: 700; 
+    text-decoration: underline; 
+    background-color: #ffffff; 
+    cursor: pointer; 
+    font-size: 14px;
+}
+
+.propNameHeading{
+    font-style: normal; 
+    font-weight: 700; 
+    color: #001F35;
+    color: 16px;
+}
+
+.isUsedText{
+    position: absolute; 
+    top: 6px; 
+    margin-left: 6px;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem; 
+    border-radius: 9999px; 
+    font-size: 1rem;
+    line-height: 1.5rem; 
+    font-weight: 600; 
+    color: #000000; 
+    background-color: #FBBF24; 
+    left: 0.8px;
+    font-size: 12px;
+}
+
 @media only screen and (min-width: 600px) and (max-width: 1600px) {
     .searchCradMainCon{
         width: 98%;
@@ -488,20 +550,18 @@
     }
     
     .searchCardPromNameSpan{
-        font-size: 18px;    
+        font-size: 14px;  
+        max-width: calc(100% - 110px) ;  
+    }
+
+    .projStatusOnImagesCon{
+        top: 6px;
+        bottom: auto;
     }
 
     .projStatusonImage{
         font-size: 12px;
-        top: 44px;
-        bottom: auto;
     }        
-
-    .possessionDateOnImage{
-        font-size: 12px;
-        top: 10px; 
-        bottom: auto;
-    }
 
     .viewOtherChargesText,
     .searchCardProjNameType{
@@ -509,10 +569,15 @@
     }
 
     .downSectionCardValue,
-    .downSectionCardIconSpan,
-    .searchCardAddress{
+    .downSectionCardIconSpan{
         font-size: 14px;
     }
+
+     .searchCardAddress{
+        font-size: 14px;
+        max-width: calc(100% - 136px);
+    }
+
 
     .searchCradTopSection{
         flex-direction: column;
@@ -560,31 +625,29 @@
         width: 98%;
     }
 
-    .searchCardPromNameSpan{
-        font-size: 14px;    
-    }
-
     .searchCradTopSection{
         flex-direction: column;
     }
 
     .searchCradTopImageBox{
         width: 100%;
-        height: 10.125;
+        height: 10rem;
     }
 
-      .projStatusonImage{
-        font-size: 12px;
-        top: 44px;
+    .projStatusOnImagesCon{
+        top: 6px;
         bottom: auto;
+    }
+
+    .projStatusonImage{
+        font-size: 12px;
     }        
 
-    .possessionDateOnImage{
-        font-size: 12px;
-        top: 10px; 
-        bottom: auto;
-    }
-
+    .propNameHeading,
+    .searchCardPromNameSpan,
+    .readMoreText,
+    .readMoreTextCon,
+    .searchCardPromName,
     .viewOtherChargesText,
     .downSectionCardValue,
     .downSectionCardIconSpan,
@@ -641,7 +704,11 @@
     .searchCardViewMapBtnSpan{
         color: #ffffff; 
         background-color: transparent; 
-
     }
+
+    .searchCardTopCornerMainCon{
+        padding-top: 0px;
+    }
+
 
 }

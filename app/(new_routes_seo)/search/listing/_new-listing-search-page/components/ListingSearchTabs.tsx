@@ -9,7 +9,8 @@ import {
 } from "../../../store/newListingStore";
 import useProjSearchAppliedFilters from "./../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ListingSearchTabs = ({
   showProjectTab = false,
@@ -22,6 +23,7 @@ const ListingSearchTabs = ({
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   const tabs = useMemo(
     () => [
@@ -182,9 +184,7 @@ const ListingSearchTabs = ({
             isMobile ? "px-[6px] py-[4px]" : "md:px-[6px] md:py-[4px]"
           } xl:px-4 xl:py-2 text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors`}
         >
-        <p className="text-xl text-amber-800 font-bold">
-          ↑↓ 
-        </p>
+          <p className="text-xl text-amber-800 font-bold">↑↓</p>
           <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
             {currentSortLabel}
           </span>
@@ -215,7 +215,7 @@ const ListingSearchTabs = ({
     ),
     [isDropdownOpen, currentSortLabel, sortOptions, handleSortBy]
   );
- 
+
   const tabsSelected = useCallback(() => {
     if (state.listedBy === undefined) {
       return frontendFilters.listedBy;
@@ -227,7 +227,6 @@ const ListingSearchTabs = ({
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">
-      
       <div className="w-full pb-[6px] pt-[10px] sm:px-[10px]">
         <div className="flex flex-col gap-[10px] md:flex-row md:items-center md:justify-between">
           <div
@@ -237,17 +236,22 @@ const ListingSearchTabs = ({
           >
             <div className="flex flex-wrap items-center sm:gap-1 sm:p-0 xl:gap-2 sm:min-w-max pb-[4px]">
               {tabs.map((tab) => (
-                <button
+                <Link
                   key={tab.id}
-                  onClick={() => handleTabsChange(tab.id)}
-                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
+                  href={tab.id !== null ? `?sf=listedBy=${tab.id}` : pathname}
+                  title={`Click to view  ${tab.label} in Bengaluru`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTabsChange(tab.id);
+                  }}
+                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[12px] xl:text-base font-medium transition-all ${
                     tabsSelected() === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }`}
                 >
                   {tab.label}
-                </button>
+                </Link>
               ))}
               <SortDropdown isMobile />
             </div>

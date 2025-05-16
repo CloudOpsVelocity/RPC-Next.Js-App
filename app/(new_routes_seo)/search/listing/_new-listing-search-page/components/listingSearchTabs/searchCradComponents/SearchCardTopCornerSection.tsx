@@ -5,7 +5,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { topCornerRightSectionData } from "./searchData";
 import Link from "next/link";
 import { DownLoadIcon } from "@/app/images/commongsSvgs2";
-import HeartButton from "@/app/test/newui/components/Card/Top/Center/HeartButton";
+// import HeartButton from "@/app/test/newui/components/Card/Top/Center/HeartButton";
 
 type Props = {
   topCornerRightData: topCornerRightSectionData;
@@ -55,9 +55,9 @@ function SearchCardTopCornerSection({
     atFloor,
     facing,
     towerName,
+    projOrPropName
   } = topCornerRightData;
   const isMobile = useMediaQuery("(max-width: 1600px)");
-  // console.log(Sh)
 
   return (
     <div className={Styles.searchCardTopCornerMainCon}>
@@ -83,26 +83,32 @@ function SearchCardTopCornerSection({
                     e.stopPropagation();
                     onAddingShortList();
                   }}
+                  title={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  aria-label={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  className={`${Styles.unLikeBtn} ${!Sh ? Styles.textBorder : ""}`}
                 >
-                  {Sh ? <p> ❤️ </p> : <p className={Styles.unLikeBtn}> 🤍 </p>}
+                  {Sh ? "🧡" : "🤍" }
                 </button>
                 <button
                   name="share Project"
                   className={Styles.mobileShearBtn}
                   data-action="share"
+                  title={`Share this ${type === "proj" ? "project" : "property listing"} – ${projOrPropName}`}
+                  aria-label={`Share this ${type === "proj" ? "project" : "property listing"} – ${projOrPropName}`}
                 >
                   🔗
                 </button>
 
                 {floorPlan && type !== "proj" && (
                   <Link
-                    title="Click to view Floor Plan"
                     className="w-[18px] h-[18px] "
                     href={`/image?path=${
                       floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
                     }&type=F`}
+                    title={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                    aria-label={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   >
-                    <svg
+                     {/* <svg
                       width="18px"
                       height="18px"
                       viewBox="0 0 15 15"
@@ -113,14 +119,16 @@ function SearchCardTopCornerSection({
                         d="M10 0.5H14.5V14.5H0.5V0.5H4.5L7.5 2.5M6.5 14.5V7.5M4 7.5H9M12 7.5H14.5"
                         stroke="#000000"
                       />
-                    </svg>
+                    </svg> */}
+                    🗺️
                   </Link>
                 )}
 
                 <button
                   // data-action="viewMap"
                   data-action="nearby"
-                  title="Click to view on Map"
+                  title={`View map and nearby locations for ${projOrPropName}`}
+                  aria-label={`View map and nearby locations for ${projOrPropName}`}
                   className={Styles.searchCardViewMapBtn}
                 >
                   <span className={Styles.searchCardViewMapBtnSpan}>
@@ -182,20 +190,9 @@ function SearchCardTopCornerSection({
                 )}
                 <button
                   data-action="amenities"
-                  title={`Click to view ${
-                    amenCount === 1 ? "" : "all"
-                  } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
+                  title={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
+                  aria-label={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
                   className={Styles.amenityBtn}
-                  // onClick={() =>
-                  //   dispatch({
-                  //     type: "OPEN",
-                  //     content: [],
-                  //     id: `${projIdEnc}+${propTypeId}+${phaseId}`,
-                  //     title: "Amenities",
-                  //     conType: "amenities",
-                  //     pType: type,
-                  //   })
-                  // }
                 >
                   {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
                 </button>
@@ -284,22 +281,31 @@ function SearchCardTopCornerSection({
         <>
           <div className={Styles.cornerDetailsForDesktop}>
             <div className="space-x-2 flex flex-row justify-center">
-              <HeartButton
+              {/* <HeartButton
                 shortListed={Sh}
                 onAddingShortList={(e) => {
                   e.stopPropagation();
                   onAddingShortList();
                 }}
-              />
-              {/* <button 
-                    // data-action="like"
-                  >
-                    {config.heartIcon}
-                  </button> */}
+              /> */}
 
+              <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddingShortList();
+                  }}
+                  // className="pr-[6px]"
+                  title={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  aria-label={`${!Sh ? "Like" : "Unlike"} the ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  className={`${Styles.unLikeBtn} ${!Sh ? Styles.textBorder : ""}`}
+                >
+                  {Sh ? "🧡" : "🤍" }
+                </button>
               <button
                 className="space-x-2 flex flex-row justify-center"
                 data-action="share"
+                title={`Share this ${type === "proj" ? "project" : "property listing"} – ${projOrPropName}`}
+                aria-label={`Share this ${type === "proj" ? "project" : "property listing"} – ${projOrPropName}`}
               >
                 {config.shareIcon}
               </button>
@@ -309,7 +315,8 @@ function SearchCardTopCornerSection({
               // data-action="viewMap"
               data-action="nearby"
               className={Styles.searchCardViewMapBtn}
-              title="Click to view on Map"
+              title={`View map and nearby locations for ${projOrPropName}`}
+              aria-label={`View map and nearby locations for ${projOrPropName}`}
             >
               <span className={Styles.searchCardViewMapBtnSpan}>
                 Map & Nearby
@@ -340,7 +347,8 @@ function SearchCardTopCornerSection({
                 />
                 {floorPlan && (
                   <Link
-                    title="Click to view Floor Plan"
+                    title={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                    aria-label={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                     className="text-[14px]  text-btnPrimary  font-bold mt-2"
                     href={`/image?path=${
                       floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
@@ -368,21 +376,8 @@ function SearchCardTopCornerSection({
                 <button
                   data-action="amenities"
                   className={Styles.amenityBtn}
-                  title={`Click to view ${
-                    amenCount === 1 ? "" : "all"
-                  } ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"}`}
-                  // onClick={() =>
-                  //   dispatch({
-                  //     type: "OPEN",
-                  //     content: [],
-                  //     id: `${projIdEnc}+${propTypeId}${
-                  //       phaseId ? `+${phaseId}` : ""
-                  //     }`,
-                  //     title: "Amenities",
-                  //     conType: "amenities",
-                  //     pType: type,
-                  //   })
-                  // }
+                  title={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
+                  aria-label={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
                 >
                   {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
                 </button>

@@ -80,6 +80,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
                             : null,
                         },
                       });
+
                       handleApplyFilters();
                     }}
                     className="text-[#0073C6] hover:text-[#0073C6]/70"

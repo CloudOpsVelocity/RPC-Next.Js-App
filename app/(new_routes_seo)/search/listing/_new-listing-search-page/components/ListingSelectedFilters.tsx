@@ -58,6 +58,8 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
             category !== "city" &&
             category !== "projIdEnc" &&
             category !== "lng" &&
+            category !== "currentPage" &&
+            category !== "totalCount" &&
             (Array.isArray(values) ? (
               values.map((value) => (
                 <div

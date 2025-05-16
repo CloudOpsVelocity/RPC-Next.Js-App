@@ -8,6 +8,8 @@ import ProjectSearchBreadCrumbs from "./_new-search-page/components/ProjSearchBr
 import parseProjectSearchQueryParams from "./utils/parse-project-searchqueryParams";
 import { getProjSearchData, getSearchData } from "../in/utils/api";
 import { parseApiFilterQueryParams } from "./utils/project-search-queryhelpers";
+import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
+import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 
 export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf
@@ -29,6 +31,12 @@ export default async function Page(params: any) {
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
       <meta name="robots" content="index, follow" />
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
+        {data &&
+          (isListing ? (
+            <ListingSearchSchema properties={data} pageUrl={"/search"} />
+          ) : (
+            <ProjectSeachSchema properties={data} pageUrl={"/search"} />
+          ))}
         <ProjectSearchBreadCrumbs key="newSearchPage2" pageUrl={"/search"} />
         <ProjSearchMainFilterSection
           isListing={isListing}

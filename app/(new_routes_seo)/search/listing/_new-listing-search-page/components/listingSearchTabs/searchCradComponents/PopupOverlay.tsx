@@ -5,6 +5,9 @@ import AmenitiesPopupBox from './AmenitiesPopupBox';
 import SearchCardNearbyBlock from './SearchCardNearbyBlock';
 import { useMediaQuery } from '@mantine/hooks';
 import OtherChargesPopupBox from './OtherChargesPopupBox';
+import Link from 'next/link';
+import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
+import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
 
 type Props = {
     popupState: any;
@@ -12,17 +15,18 @@ type Props = {
 }
 
 function PopupOverlay({popupState, closePopup}: Props) {
-    const { location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName} = popupState.data
-    const { content, data } = popupState;
-    // const [{ selectedNearbyItem }, setNearby] = useAtom(selectedNearByAtom);
+    const { content, data, title } = popupState;
+    const { 
+      location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName, bhkName, 
+      category, localityName, type, city, locality, cityName, phaseName
+    } = data;
 
-    
     const id = `${projIdEnc ?? ""}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ""}`
     const isProj = projIdEnc !== undefined;
 
     const lat = location.split(",")[0];
     const lang = location.split(",")[1];
-    const isDesktop = useMediaQuery("(max-width: 1600px)");
+    const isDesktop = useMediaQuery("(max-width: 1500px)");
     const renderContent = () => {
         switch (popupState.type) {
           case "amenities":
@@ -74,14 +78,56 @@ function PopupOverlay({popupState, closePopup}: Props) {
             return <div>{content}</div>;
         }
     };
+
+    let url =
+       type == "proj"
+         ? createProjectLinkUrl({
+             city: city,
+             locality: locality,
+             slug: projName,
+             projIdEnc: projIdEnc,
+           })
+         : generateListingLinkUrl({
+             city: cityName,
+             locality: localityName,
+             projName: projIdEnc ? propName : null,
+             category: category === "Sale" ? "for-sale" : "for-rent",
+             phase: phaseName,
+             propIdEnc: propIdEnc,
+             bhkUnitType: bhkName
+               ? `${bhkName + " " + propTypeName}`
+               : "" + " " + propTypeName,
+           });
+
+    console.log(url, data)
+          
+    const projOrPropName = type === "proj" ? projName : `${bhkName} ${propTypeName} for ${category} in ${localityName}`;
+
     return (
         <DrawerBox
             key="search page Drawer"
             isOpen={popupState.isOpen}
-            title={popupState.title}
             handleChange={closePopup}
+            HeadingElemnt={
+              <Link
+                href={url}
+                className="block cursor-pointer"
+                rel="noopener noreferrer"
+                title={`${title} of ${projOrPropName}`}
+                aria-label={`${title} of ${projOrPropName}`}
+              >
+                <h2 className="sm:text-[20px] xl:text-[24px] font-bold capitalize break-words text-wrap font-[600]">
+                  <span className="text-[#001F35]">
+                    {title} <span className="lowercase">of </span>
+                  </span>
+                  <span className="text-green-800 underline">
+                    {projOrPropName}
+                  </span>
+                </h2>
+              </Link>
+            }
             containerClassStyle={!isDesktop ? `!w-[50%]` : `!w-full`}
-            childrenContainerClass="p-[10px] md:p-[20px] pt-[10px] max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden "
+            childrenContainerClass="p-[10px] md:p-[20px] pt-[10px] max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden   "
         >
             {renderContent()}
         </DrawerBox>

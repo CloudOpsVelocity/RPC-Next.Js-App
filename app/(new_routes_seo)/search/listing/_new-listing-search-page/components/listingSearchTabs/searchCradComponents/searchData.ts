@@ -12,6 +12,9 @@ export interface TopLeftSectionData {
     propTypeName: string;
     pageUrl: string;
     rerastatus: string;
+    projOrPropName: string;
+    furnish:string;
+    isUsed: string;
 } 
 
 // export interface TopRightSectionData {
@@ -86,6 +89,7 @@ export interface topCornerRightSectionData {
     atFloor: number; 
     facing: string; 
     towerName: string;
+    projOrPropName: string
 } 
 
 
@@ -107,6 +111,9 @@ type RawTopLeftData = Partial<TopLeftSectionData> & {
     propTypeName: rawData.propTypeName ?? "",
     pageUrl: rawData.pageUrl ?? "",
     rerastatus: rawData.rerastatus ?? "",
+    projOrPropName: rawData.projOrPropName ?? "",
+    furnish: rawData.furnish ?? "",
+    isUsed: rawData.isUsed ?? "",
 });
 
 // export const sanitizeTopRightSectionData = (rawData: Partial<Record<keyof TopRightSectionData, any>>): TopRightSectionData => ({
@@ -182,6 +189,7 @@ export const sanitizetopCornerRightSectionData = (rawData: Partial<Record<keyof 
     atFloor: rawData.atFloor ?? "",
     facing: rawData.facing ?? "", 
     towerName: rawData.towerName ?? "",
+    projOrPropName: rawData.projOrPropName ?? "",
 });
 
 

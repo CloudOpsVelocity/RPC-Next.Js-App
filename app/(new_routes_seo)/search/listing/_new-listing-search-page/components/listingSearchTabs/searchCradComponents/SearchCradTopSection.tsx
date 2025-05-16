@@ -45,36 +45,60 @@ const Rera = () => {
   );
 };
 
+console.log("isUsed")
+
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }) => {
-  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus} = data
+  const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus, projOrPropName, isUsed, furnish} = data
   const verified = isReraverified(rerastatus);
   const isDesktop = useMediaQuery("(max-width: 1600px)");
 
   return(
     <div className={Styles.searchCradTopImageBox}>
-        <Link prefetch={false} href={pageUrl}>
+        <Link 
+          prefetch={false} 
+          href={pageUrl}  
+          title={projOrPropName}
+          aria-label={projOrPropName} 
+        >
           <Image
             src={src.includes("+") ? src.replace(/\+/g, "%2B") : src}
             width={300}
             height={300}
-            alt={projName}
-            title={projName}
+            alt={projOrPropName}
+            title={projOrPropName}
+            aria-label={projOrPropName}
             className={Styles.searchCradImage}  
           />
         </Link>
 
         {verified && <Rera />}
-        
-        {((projstatus || propTypeName)) && (
-          <p className={Styles.projStatusonImage}>
-            {projstatus ?? propStatus}
+
+        {type !== "proj" && isUsed === "N" && (
+          <p className={Styles.isUsedText}>
+            Unused
           </p>
         )}
 
-        <p className={`${Styles.projStatusonImage} ${Styles.possessionDateOnImage}`}>
-          {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
-          {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
-        </p>
+        <div className={Styles.projStatusOnImagesCon}>
+          {type !== "proj" && furnish !== "" && (
+            <p className={Styles.projStatusonImage}>
+              {furnish}
+            </p>
+          )}
+          
+          {(((projstatus !== undefined && projstatus !== "") || (propTypeName !== undefined && propTypeName !== ""))) && (
+            <p className={Styles.projStatusonImage}>
+              {projstatus ? projstatus : propStatus}
+            </p>
+          )}
+
+          {(((availableFrom !== undefined && availableFrom !== "") || (possassionDate !== undefined && possassionDate !== ""))) && (
+            <p className={Styles.projStatusonImage}>
+              {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
+              {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
+            </p>
+          )}
+        </div>
 
         {isDesktop &&
         <ButtonElement
@@ -82,6 +106,7 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }
           dataAction="requestCall"
           title="Contact"
           buttonClass={Styles.searchCardContactBtn}
+          toolTip={`Click to Request a Callback for ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`} 
         /> 
         }
     </div>
@@ -93,9 +118,8 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
     projName, phaseName, phaseCount, minPrice, maxPrice, sortedBhks, propType, cg, 
     city, locality, postedByName, builderCity, cityName, projIdEnc, propIdEnc, localityName, 
     propName, address, postedBy, type, otherCharges, category, propTypeName, bhkName, pageUrl,
-    price, usp, projectAbout, shortListed
+    price, usp, projectAbout, shortListed, projOrPropName
   } = data;
-  
 
   let urlBuilder = generateBuilderUrl({
     slug: postedByName,
@@ -169,48 +193,55 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
       {type === "proj" ? 
         <>
-          <Link href={pageUrl} prefetch={false}>
+          <Link
+            href={pageUrl}
+            prefetch={false}
+            className={Styles.searchCardLink}
+            title={`${projName} in ${locality}, ${city}`}
+            aria-label={`${projName} in ${locality}, ${city}`}
+          >
             <h2 style={{ width: "100%" }}>
-                <span className={Styles.searchCardPromName}>
-                  {projName}{" "}
-                  {phaseName && phaseCount !== undefined && phaseCount > 1 && ( 
-                    <span className={Styles.searchCardPhaseName}>({phaseName})</span> 
-                  )}
+              <span className={Styles.searchCardPromName}>
+                {projName}{" "}
+                {phaseName && phaseCount !== undefined && phaseCount > 1 && (
+                  <span className={Styles.searchCardPhaseName}>({phaseName})</span>
+                )}
+              </span>
+
+              <span className={Styles.searchCardPromNameSpan}>
+                Price Range: {formatCurrency(Number(minPrice))} -{" "}
+                {formatCurrency(Number(maxPrice))}
+              </span>
+
+              <span className={Styles.searchCardProjNameType}>
+                <span>
+                  {sortedBhks && sortedBhks.length > 5
+                    ? sortedBhks
+                        .filter(
+                          (bhk: any) => !bhk.includes(".5") && !bhk.includes("Servant")
+                        )
+                        .slice(0, 5)
+                        .join(", ")
+                    : sortedBhks && sortedBhks.join(", ")}
                 </span>
-            
-                <span className={Styles.searchCardPromNameSpan}>
-                  Price Range: {formatCurrency(Number(minPrice))} -{" "}
-                  {formatCurrency(Number(maxPrice))} 
-                </span>
-            
-                <span className={Styles.searchCardProjNameType}>
-                  <span>
-                    {sortedBhks && sortedBhks.length > 5
-                      ? sortedBhks
-                          .filter(
-                            (bhk:any) => !bhk.includes(".5") && !bhk.includes("Servant")
-                          )
-                          .slice(0, 5)
-                          .join(", ")
-                      : sortedBhks && sortedBhks.join(", ")}
-                  </span>
-                  {sortedBhks && sortedBhks.length > 5 && (
-                    <button
-                      data-action="bhk"
-                      className={Styles.searchCardSortedBhks}
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                    >
-                      +{sortedBhks.length - 5} more
-                    </button>
-                  )}
-                  {` ${propType} For ${
-                    cg === "R" ? "Rent" : "Sale"
-                  } in ${locality}, ${city}`}
-                </span>
+                {sortedBhks && sortedBhks.length > 5 && (
+                  <button
+                    data-action="bhk"
+                    className={Styles.searchCardSortedBhks}
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent navigation when clicking this button
+                    }}
+                  >
+                    +{sortedBhks.length - 5} more
+                  </button>
+                )}
+                {` ${propType} For ${cg === "R" ? "Rent" : "Sale"} in ${locality}, ${city}`}
+              </span>
             </h2>
           </Link>
+
+
+
           <p className={Styles.searchCardAddress}>
             Address: {address}
           </p>
@@ -218,14 +249,11 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
           <p className={Styles.searchCardPostedBy}>
           {postedBy ?? "Builder"}:{" "}
           <Link
-            prefetch={false}
+            prefetch={true}  // Enable prefetching unless you specifically need to disable it
             href={urlBuilder}
-            title="Click to view Builder"
-            className={Styles.searchCardLink}
-            onClick={() => {
-              // e.stopPropagation();
-              window.open(urlBuilder, "_self", "noreferrer");
-            }}
+            title={postedByName}
+            className={`${Styles.searchCardLink} underline `}
+            rel="noreferrer"
           >
             {postedByName}
           </Link>
@@ -233,11 +261,17 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
         </>
       :
       <>
-          <Link href={pageUrl} prefetch={false}>
+          <Link
+            href={pageUrl}
+            prefetch={false}
+            className={Styles.searchCardLink}
+            title={`View ${bhkName} ${propTypeName} for ${category} in ${localityName}`}
+          >
             <h2 className={Styles.searchCardPromName}>
               {bhkName} {propTypeName} for {category} in {localityName}
             </h2>
           </Link>
+
           <p className={Styles.searchCardPromNameSpan}>
             {formatCurrency(Number(price))}{" "}
             {(otherCharges?.otherCharge ||
@@ -245,34 +279,21 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
               <button
                 data-action="otherCharges"
                 className="text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
-                // onClick={(e) => {
-                //   e.stopPropagation();
-                //   dispatch({
-                //     conType: "otherCharges",
-                //     content: {
-                //       charges: otherCharges,
-                //     },
-                //     // id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
-                //     id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
-                //       propTypeId ?? propTypeName ?? ""
-                //     }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
-                //     title: "Other Charges",
-                //     type: "OPEN",
-                //     pType: type,
-                //   })
-                // }}
               >
                 View Other Charges
               </button>
             )}
           </p>
 
-          <h3 className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
+          <h3 className={Styles.propNameHeading}>
             {projIdEnc != undefined ? (
+
               <Link
-                prefetch={false}
-                className={`font-bold underline cursor-pointer`}
                 href={projectUrl}
+                prefetch={true} // Let Next.js handle prefetching unless you specifically need to disable it
+                className="font-bold underline cursor-pointer"
+                title={`View project: ${propName}`} // Added title for extra context
+                rel="noopener noreferrer" // Use this for external links; remove if it's internal
               >
                 {propName}{" "}
               </Link>
@@ -307,10 +328,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
       <SearchCardApprovedNames approvedNamesData={approvedNamesData} />
 
       <div
-        className="text-[12px] sm:text-[14px] pr-2 line-clamp-2"
-        // onClick={(e) => {
-        //   e.stopPropagation();
-        // }}
+        className={Styles.readMoreTextCon}
       >
         {aboutText && (
           <div className="line-clamp-2 relative">
@@ -322,8 +340,9 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
             />
             {isReadMoreNeeded && (
                 <button
-                  className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer absolute bottom-0 right-0 bg-white "
-                  title="Click to Read More"
+                  className={Styles.readMoreText}
+                  title={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  aria-label={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   data-action="readmore"
                 >
                   <span className="text-black">...</span>Read More

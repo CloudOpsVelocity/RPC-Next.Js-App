@@ -11,6 +11,8 @@ import {
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const tabs = [
   { id: null, label: "Projects" },
@@ -30,6 +32,7 @@ const ProjectSearchTabs = ({
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
   const handleWheel = (e: React.WheelEvent) => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += e.deltaY;
@@ -192,11 +195,15 @@ const ProjectSearchTabs = ({
           >
             <div className="flex flex-wrap items-center  sm:gap-1 sm:p-0 xl:gap-2 sm:min-w-max pb-[4px] ">
               {tabs.map((tab) => (
-                <button
+                <Link
+                  href={tab.id !== null ? `?sf=listedBy=${tab.id}` : pathname}
                   key={tab.id}
-                  title={`Click to view ${tab.label}`}
-                  onClick={() => handleTabsChange(tab.id)}
-                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[13px] xl:text-base font-medium transition-all ${
+                  title={`Click to view ${tab.label} in Bengaluru`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleTabsChange(tab.id);
+                  }}
+                  className={`whitespace-nowrap rounded-full px-[6px] py-[4px] sm:text-sm xl:px-4 xl:py-2 text-[12px] xl:text-base font-medium transition-all ${
                     tabsSelected() === tab.id
                       ? "bg-[#0073C6] text-white shadow-md"
                       : "text-black hover:bg-[#0073C6] hover:text-white"
@@ -204,7 +211,7 @@ const ProjectSearchTabs = ({
                   `}
                 >
                   {tab.label}
-                </button>
+                </Link>
               ))}
               <div className=" relative flex md:hidden justify-end self-end  ml-auto">
                 <button
@@ -212,7 +219,7 @@ const ProjectSearchTabs = ({
                     e.stopPropagation();
                     setIsDropdownOpen(!isDropdownOpen);
                   }}
-                  className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[13px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
+                  className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[12px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
                 >
                   <p>↑ &nbsp;&nbsp; ↓</p>
 

@@ -3,6 +3,7 @@ import Tag from "../atoms/Tag";
 export interface TagData {
   title: string;
   url: string;
+  className?: string;
 }
 
 interface Props {
@@ -109,7 +110,7 @@ export default function TagsSections({ urls }: Props) {
     <section className="my-6 mx-auto w-[90%]">
       <h2 className="text-xl font-semibold mb-2">Tags:</h2>
       <p className="text-sm text-gray-600 mb-4">
-        Discover more rental and residential properties in popular areas and
+        Discover more residential rent and sale properties in popular areas and
         projects.
       </p>
       <ul className="flex flex-wrap gap-2">

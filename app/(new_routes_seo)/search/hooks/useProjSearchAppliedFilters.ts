@@ -7,7 +7,7 @@ import { useQueryState } from "nuqs";
 
 export default function useProjSearchAppliedFilters() {
   const setAppliedFilters = useSetAtom(ProjSearchAppliedFiltersStore);
-  const [ ,setName] = useQueryState("sf");
+  const [, setName] = useQueryState("sf");
   const handleApplyFilters = (callback?: () => void) => {
     setAppliedFilters(setName, "add");
     callback?.();

@@ -16,6 +16,8 @@ import {
 } from "@/app/(new_routes_seo)/in/utils/api";
 import { parseApiFilterQueryParams } from "../utils/project-search-queryhelpers";
 import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
+import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
+import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 
 export default async function Page(params: any) {
   const isListing = true;
@@ -44,6 +46,12 @@ export default async function Page(params: any) {
           apiFilters ? `?sf=${apiFilters}` : ""
         }`}
       />
+      {data &&
+        (!isProj ? (
+          <ListingSearchSchema properties={data} pageUrl={"/search/listing"} />
+        ) : (
+          <ProjectSeachSchema properties={data} pageUrl={"/search/listing"} />
+        ))}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full ">
         <ProjectSearchBreadCrumbs pageUrl={"/search/listing"} />
 

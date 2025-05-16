@@ -8,6 +8,7 @@ import Reqcallback from "./Reqcallback";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import Disclamer from "./disclamer/BuilderPageDisclamer";
 import dynamic from "next/dynamic";
+import TagsSections from "@/app/components/sections/TagsSections";
 
 const LoginPopup = dynamic(
   () => import("@/app/components/project/modals/LoginPop"),
@@ -20,7 +21,7 @@ type Props = { data: any; id: string };
 
 export default function BuilderDetailsPage({ data, id }: Props) {
   const refURls = data?.data?.sourceBuilderUrl?.split(",");
-  console.log(data)
+  console.log(data);
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       <link
@@ -34,6 +35,7 @@ export default function BuilderDetailsPage({ data, id }: Props) {
             <ProjectDetails {...data.data} id={id} />
             <ManagementBlock {...data.data} />
           </div>
+          <TagsSections urls={[]} />
           <div className="w-full m-auto sm:w-[95%]">
             <BuilderCarousel
               type="proj"

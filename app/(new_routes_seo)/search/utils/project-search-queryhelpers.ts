@@ -34,9 +34,6 @@ export const getListingSearchData = async (
 export const parseApiFilterQueryParams = (
   apiFilterQueryParams: string
 ): string => {
-  console.log({ apiFilterQueryParams });
-  // Directly process the input string in a single pass
-
   const transformedParams = apiFilterQueryParams
     .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern
     .replace(/budget=(\d+),(\d+)/, "minPrice=$1&maxPrice=$2") // Budget transformation
@@ -63,5 +60,89 @@ export const parseApiFilterQueryParams = (
   return updatedParams.includes("city=")
     ? updatedParams
     : `${updatedParams}&city=9`;
- 
 };
+// export const parseApiFilterQueryParams = (
+//   apiFilterQueryParams: string
+// ): string => {
+//   const keyValuePairs: Record<string, string> = {};
+
+//   // Step 1: Replace "-" with "&", split into key=value
+//   const rawParams = apiFilterQueryParams.replace(/-/g, "&").split("&");
+
+//   for (const pair of rawParams) {
+//     const [key, value] = pair.split("=");
+
+//     if (!key || !value) continue;
+
+//     keyValuePairs[key] = keyValuePairs[key]
+//       ? `${keyValuePairs[key]},${value}`
+//       : value;
+//   }
+
+//   // Step 2: Transformation logic using a config object
+//   const transformers: Record<
+//     string,
+//     (value: string) => string | string[] | null
+//   > = {
+//     bugdetValue: (value) => {
+//       const [min, max] = value.split(",");
+//       return [`minPrice=${min}`, `maxPrice=${max}`];
+//     },
+//     areaValue: (value) => {
+//       const [min, max] = value.split(",");
+//       return [`minArea=${min}`, `maxArea=${max}`];
+//     },
+//     localities: (value) => {
+//       const ids = value
+//         .split(",")
+//         .map((v) => v.split("+")[1])
+//         .filter(Boolean);
+//       return ids.length ? `localities=${ids.join(",")}` : null;
+//     },
+//     builderIds: (value) => {
+//       const ids = value
+//         .split(",")
+//         .map((v) => v.split("+")[1])
+//         .filter(Boolean);
+//       return ids.length ? `builderIds=${ids.join(",")}` : null;
+//     },
+//     phaseId: (value) => {
+//       console.log({ value });
+//       const ids = value
+//         .split(",")
+//         .map((v) => v.split("+").at(-1))
+//         .filter(Boolean);
+//       return ids.length ? `phaseId=${ids.join(",")}` : null;
+//     },
+//     city: (value) => {
+//       const cityId = value.split("+")[1] ?? "9";
+//       return `city=${cityId}`;
+//     },
+//     listedBy: (value) => {
+//       return value === "All" ? null : `listedBy=${value}`;
+//     },
+//   };
+
+//   const result: string[] = [];
+
+//   for (const [key, value] of Object.entries(keyValuePairs)) {
+//     const transformer = transformers[key];
+//     if (transformer) {
+//       const transformed = transformer(value);
+//       if (Array.isArray(transformed)) {
+//         result.push(...transformed);
+//       } else if (transformed) {
+//         result.push(transformed);
+//       }
+//     } else {
+//       result.push(`${key}=${value}`);
+//     }
+//   }
+
+//   // Ensure defaults
+//   if (!result.some((p) => p.startsWith("cg="))) result.push("cg=S");
+//   if (!result.some((p) => p.startsWith("city="))) result.push("city=9");
+//   console.log({ result });
+//   return "";
+//   return result.join("&");
+// };
