@@ -39,13 +39,15 @@ import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import Tooltip from "../atoms/Tooltip";
 // import { PropertyUnit } from "./newFloorPlan/types/floor-plan";
 import { modalStateAtom } from "@/app/store/new-floor-plan-state";
+import Link from "next/link";
 
 type Props = {
   cg: any;
   propertyType: string;
   phase: number;
   isPartialData: boolean;
-  slug: string;
+  slug: string,
+  projData:any;
 };
 export const getPropId = (key: string) => {
   switch (key) {
@@ -74,6 +76,7 @@ export default function PropertyTypeDetailsCrad({
   phase,
   isPartialData,
   slug,
+  projData
 }: Props) {
   // const [, { open }] = useFloorPlanPopup();
   const [, setModalState] = useAtom(modalStateAtom);
@@ -157,6 +160,15 @@ export default function PropertyTypeDetailsCrad({
         }
     }
   };
+
+function hyphenate(text:string) {
+  return text
+    .trim()
+    .split(' ')
+    .filter(Boolean)
+    .join('-');
+}
+
   const plotCounts =
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
   const getElevationString = (tower: any) => {
@@ -176,6 +188,18 @@ export default function PropertyTypeDetailsCrad({
 
     return str;
   };
+
+
+
+const phaseNameRetruner = () => {
+  const match = projData.phases.find((eachPhase: any) => eachPhase.phaseId === phase);
+  return match?.phaseName || '';
+};
+
+const rawPhaseName = phaseNameRetruner();
+const phaseName = rawPhaseName ? hyphenate(rawPhaseName.toLowerCase()) : '';
+console.log(phaseName)
+
 
   const getElevationTooltip = (tower: any) => {
     if (propertyType === "rowHouse" || propertyType === "villa") {
@@ -294,12 +318,22 @@ export default function PropertyTypeDetailsCrad({
         <div className="text-[14px] sm:text-[18px] xl:text-[22px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
-            <p
+            
+             <p
               className={clsx(
-                "text-[#242424] text-right text-[12px] sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[240px] inline-block w-[100%] line-clamp-1"
+                "text-[#242424] text-right text-[12px]  sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[240px] inline-block w-[100%] line-clamp-1"
               )}
-            >
-              {parseUnits(cg?.unitTypes, propertyType).join(", ")}
+             
+            >   {parseUnits(cg?.unitTypes, propertyType).map((bhk, index)=>{
+               let BHKLIST =parseUnits(cg?.unitTypes, propertyType)
+              const isLast = index === BHKLIST.length - 1;
+                return(
+               <Link key={index}  href={`/residential-listings/for-sale/bengaluru/${projData.localityName.toLowerCase()}/${hyphenate(projData.projectName).toLowerCase()}/${phaseName}/${hyphenate(bhk).toLowerCase()}-${propName(propertyType, "name")?.toLocaleLowerCase()}`}>
+                  {bhk}{ (isLast ? '' : ', ')}
+              </Link>
+                )
+              })}
+              
             </p>
           ) : (
             <>
