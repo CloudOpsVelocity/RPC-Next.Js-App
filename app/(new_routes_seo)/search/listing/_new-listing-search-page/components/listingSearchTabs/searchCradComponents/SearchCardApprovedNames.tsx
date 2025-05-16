@@ -19,12 +19,12 @@ const DownSectionCard = ({
   Icon?: React.JSX.Element;
 }) => {
   return value ? (
-    <h4 className={Styles.downSectionCardMainCon}>
+    <h3 className={Styles.downSectionCardMainCon}>
       <span className={Styles.downSectionCardIconSpan}>
         {Icon ?? ""} {label}:
       </span>
       <span className={Styles.downSectionCardValue}>{value}</span>
-    </h4>
+    </h3>
   ) : null;
 };
 
