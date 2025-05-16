@@ -10,10 +10,11 @@ import Layout from "@/app/components/layouts/primary";
 // import montserrat from "@/font";
 import { Montserrat } from "next/font/google";
 const font = Montserrat({
-  preload: false,
-  adjustFontFallback: false,
-  // weight: ["400", "700"], // or whatever weights you're using
-  // subsets: ["latin"], // ✅ add this line
+  preload: true,
+  // adjustFontFallback: false,
+  weight: ["400", "600", "300", "500", "700"], // or whatever weights you're using
+  subsets: ["latin"], // ✅ add this line
+  // subsets: ["latin"], // always include this for better performance
 });
 
 export const metadata: Metadata = {
