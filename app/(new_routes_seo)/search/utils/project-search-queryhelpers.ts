@@ -31,97 +31,129 @@ export const getListingSearchData = async (
   return res.data;
 };
 
-export const parseApiFilterQueryParams = (
-  apiFilterQueryParams: string
-): string => {
-  const transformedParams = apiFilterQueryParams
-    .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern
-    .replace(/budget=(\d+),(\d+)/, "minPrice=$1&maxPrice=$2") // Budget transformation
-    .replace(/areaValue=(\d+),(\d+)/, "minArea=$1&maxArea=$2")
-    .replace(
-      /(localities|builderIds|phaseId)=([^&]+)/g,
-      (_, key, value) =>
-        `${key}=${value
-          .split(",")
-          .map((part: any) => part.split("+")[1])
-          .filter(Boolean)
-          .join(",")}`
-    )
-    .replace(
-      /city=([^\s&]*)(\+(\d+))?/,
-      (_, baseCity, __) => `city=${baseCity.split("+")[1] ?? "9"}`
-    )
-    .replace(/listedBy=All/g, "") // Remove 'listedBy=All'
-    .replace(/-/g, "&"); // Replace dashes with ampersands
-  let updatedParams = apiFilterQueryParams.includes("cg=")
-    ? transformedParams
-    : `${transformedParams}&cg=S`;
-
-  return updatedParams.includes("city=")
-    ? updatedParams
-    : `${updatedParams}&city=9`;
-};
 // export const parseApiFilterQueryParams = (
 //   apiFilterQueryParams: string
 // ): string => {
-//   const keyValuePairs: Record<string, string> = {};
+//   const transformedParams = apiFilterQueryParams
+//     .replace(/bugdetValue/gi, "budget") // Replace keys using hardcoded pattern
+//     .replace(/budget=(\d+),(\d+)/, "minPrice=$1&maxPrice=$2") // Budget transformation
+//     .replace(/areaValue=(\d+),(\d+)/, "minArea=$1&maxArea=$2")
+//     .replace(
+//       /(localities|builderIds|phaseId)=([^&]+)/g,
+//       (_, key, value) =>
+//         `${key}=${value
+//           .split(",")
+//           .map((part: any) => part.split("+")[1])
+//           .filter(Boolean)
+//           .join(",")}`
+//     )
+//     .replace(
+//       /city=([^\s&]*)(\+(\d+))?/,
+//       (_, baseCity, __) => `city=${baseCity.split("+")[1] ?? "9"}`
+//     )
+//     .replace(/listedBy=All/g, "") // Remove 'listedBy=All'
+//     .replace(/-/g, "&"); // Replace dashes with ampersands
+//   let updatedParams = apiFilterQueryParams.includes("cg=")
+//     ? transformedParams
+//     : `${transformedParams}&cg=S`;
 
-//   // Step 1: Replace "-" with "&", split into key=value
-//   const rawParams = apiFilterQueryParams.replace(/-/g, "&").split("&");
+//   return updatedParams.includes("city=")
+//     ? updatedParams
+//     : `${updatedParams}&city=9`;
+// };
+export const parseApiFilterQueryParams = (
+  apiFilterQueryParams: string
+): string => {
+  const queryParts: string[] = [];
+  const rawParams = apiFilterQueryParams.split("-");
+  let hasCity = false;
+  let hasCg = false;
 
-//   for (const pair of rawParams) {
-//     const [key, value] = pair.split("=");
+  for (const pair of rawParams) {
+    const [key, value] = pair.split("=");
+    if (!key || !value) continue;
 
-//     if (!key || !value) continue;
+    switch (key) {
+      case "bugdetValue":
+        {
+          const [min, max] = value.split(",");
+          if (min) queryParts.push(`minPrice=${min}`);
+          if (max) queryParts.push(`maxPrice=${max}`);
+        }
+        break;
+      case "areaValue":
+        {
+          const [min, max] = value.split(",");
+          if (min) queryParts.push(`minArea=${min}`);
+          if (max) queryParts.push(`maxArea=${max}`);
+        }
+        break;
+      case "localities":
+        {
+          const ids = value
+            .split(",")
+            .map((v) => v.split("+")[1])
+            .filter(Boolean);
+          if (ids.length) queryParts.push(`localities=${ids.join(",")}`);
+        }
+        break;
+      case "builderIds":
+        {
+          const ids = value
+            .split(",")
+            .map((v) => v.split("+")[1])
+            .filter(Boolean);
+          if (ids.length) queryParts.push(`builderIds=${ids.join(",")}`);
+        }
+        break;
+      case "phaseId":
+        {
+          const ids = value
+            .split(",")
+            .map((v) => v.split("+").at(-1))
+            .filter(Boolean);
+          if (ids.length) queryParts.push(`phaseId=${ids.join(",")}`);
+        }
+        break;
+      case "city":
+        {
+          const cityId = value.split("+")[1] ?? "9";
+          queryParts.push(`city=${cityId}`);
+          hasCity = true;
+        }
+        break;
+      case "listedBy":
+        {
+          if (value !== "All") {
+            queryParts.push(`listedBy=${value}`);
+          }
+          // Do nothing if value is 'All'
+        }
+        break;
+      case "cg":
+        {
+          queryParts.push(`cg=${value}`);
+          hasCg = true;
+        }
+        break;
+      default: {
+        queryParts.push(`${key}=${value}`);
+      }
+    }
+  }
 
-//     keyValuePairs[key] = keyValuePairs[key]
-//       ? `${keyValuePairs[key]},${value}`
-//       : value;
-//   }
+  // Add missing 'cg=S' if not present
+  if (!hasCg) {
+    queryParts.push("cg=S");
+  }
 
-//   // Step 2: Transformation logic using a config object
-//   const transformers: Record<
-//     string,
-//     (value: string) => string | string[] | null
-//   > = {
-//     bugdetValue: (value) => {
-//       const [min, max] = value.split(",");
-//       return [`minPrice=${min}`, `maxPrice=${max}`];
-//     },
-//     areaValue: (value) => {
-//       const [min, max] = value.split(",");
-//       return [`minArea=${min}`, `maxArea=${max}`];
-//     },
-//     localities: (value) => {
-//       const ids = value
-//         .split(",")
-//         .map((v) => v.split("+")[1])
-//         .filter(Boolean);
-//       return ids.length ? `localities=${ids.join(",")}` : null;
-//     },
-//     builderIds: (value) => {
-//       const ids = value
-//         .split(",")
-//         .map((v) => v.split("+")[1])
-//         .filter(Boolean);
-//       return ids.length ? `builderIds=${ids.join(",")}` : null;
-//     },
-//     phaseId: (value) => {
-//       console.log({ value });
-//       const ids = value
-//         .split(",")
-//         .map((v) => v.split("+").at(-1))
-//         .filter(Boolean);
-//       return ids.length ? `phaseId=${ids.join(",")}` : null;
-//     },
-//     city: (value) => {
-//       const cityId = value.split("+")[1] ?? "9";
-//       return `city=${cityId}`;
-//     },
-//     listedBy: (value) => {
-//       return value === "All" ? null : `listedBy=${value}`;
-//     },
-//   };
+  // Add default city=9 if not present
+  if (!hasCity) {
+    queryParts.push("city=9");
+  }
+
+  return queryParts.join("&");
+};
 
 //   const result: string[] = [];
 

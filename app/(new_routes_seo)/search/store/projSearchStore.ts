@@ -201,11 +201,17 @@ export const ProjSearchAppliedFiltersStore = atom(
 
         if (Array.isArray(value)) {
           if (value.length > 0) {
-            console.log(`${key}=${value}`);
-            queryString += `${queryString ? "-" : ""}${key}=${value}`;
+            console.log(`${value}`);
+            queryString += `${queryString ? "-" : ""}${key}=${value.map(
+              (item) => {
+                return item.replace("-", " ");
+              }
+            )}`;
           }
         } else if (value != null) {
-          queryString += `${queryString ? "-" : ""}${key}=${value}`;
+          queryString += `${queryString ? "-" : ""}${key}=${
+            key === "projName" ? value.replace("-", " ") : value
+          }`;
         }
       }
     } else if (type === "clear") {
