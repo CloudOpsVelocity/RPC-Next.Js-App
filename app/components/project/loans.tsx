@@ -20,10 +20,13 @@ export default function ProjectLoans({
   // const isMobile = useMediaQuery(`(max-width: 601px)`);
 
   const [windowWidth, setWindowWidth] = useState(0);
-  const maxCradNumber = 5;
-  const [maxCards, setMaxCards] = useState(maxCradNumber);
   const isMobile = windowWidth <= 600;
-
+  const maxCradNumber =5;
+  const maxCardNUmberMobile= 15;
+  const [maxCards, setMaxCards] = useState(maxCradNumber);
+  const [maxCardsDes, setMaxCardsDes] = useState(maxCardNUmberMobile);
+  
+/* console.log(maxCards === maxCardNUmberMobile , maxCardNUmberMobile) */
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -166,8 +169,8 @@ export default function ProjectLoans({
         </div>
       ) : (
         <div className="mt-16 md:mt-1 flex justify-start items-center flex-wrap w-full gap-x-[3%] md:gap-y-[20px]">
-          {banks?.map((bank) => {
-            if (bank.bankid) {
+          {banks?.map((bank, index) => {
+            if (bank.bankid && index < maxCardNUmberMobile) {
               return (
                 <div
                   key={`loans_${bank.bankid}`}
@@ -192,6 +195,41 @@ export default function ProjectLoans({
               );
             }
           })}
+           {banks.length > maxCardNUmberMobile && (
+            <div
+              className=" flex justify-center items-center h-[150px] md:max-w-[220px] border border-solid border-[#CCCED1] rounded-[7px] flex-col cursor-pointer "
+              onClick={() =>
+                setMaxCardsDes(
+                  maxCardsDes === maxCardNUmberMobile ? banks.length : maxCardNUmberMobile
+                )
+              }
+            >
+              <div
+                className={`rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-3 animate-pulse pointer-events-none ${
+                  maxCardsDes === maxCardNUmberMobile ? "" : `rotate-180`
+                } `}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </div>
+
+              <p className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent pointer-events-none ">
+                {maxCardsDes === maxCardNUmberMobile ? "View More" : "View Less"}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

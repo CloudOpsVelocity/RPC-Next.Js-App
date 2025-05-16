@@ -9,7 +9,7 @@ import {
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import PropertyTypeDetailsCrad from "@/app/components/project/propertyTypeDetailsCrad";
-import React from "react";
+import React, { useEffect } from "react";
 import { PhaseList } from "@/app/validations/types/project";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
@@ -37,11 +37,12 @@ export default function ProjectDetailsP({
   PhaseOverview,
   data: phaseList,
   isPartialData,
+  projData,
   slug,
 }: Props) {
-  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]], {
+/*   useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]], {
     dangerouslyForceHydrate: true,
-  });
+  }); */
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
   const handlePhaseChange = (phaseId: number) => {
     setFloorPhase(phaseId);
@@ -49,6 +50,9 @@ export default function ProjectDetailsP({
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
+  useEffect(()=>{
+    setFloorPhase(PhaseOverview[0].phaseId)
+  },[PhaseOverview]);
   const propertyTypeOrder = ["apt", "rowHouse", "villa", "vlmt", "plot"];
   const orderedPropertyTypes =
     selectedPhase &&
@@ -212,6 +216,7 @@ export default function ProjectDetailsP({
                     cg={selectedPhase.propTypeOverview[propertyTypeKey]}
                     propertyType={propertyTypeKey}
                     isPartialData={isPartialData}
+                    projData={projData}
                     slug={slug}
                   />
                 )

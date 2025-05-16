@@ -117,7 +117,7 @@ export default function HeaderActions({
                         : each.phaseName
                     }
                     onChange={() => {
-                      if (currentPhase == each.phaseId) return;
+                     /*  if (currentPhase == each.phaseId) return; */
                       setCurrentPhase(each.phaseId);
                       setSelected(0);
                     }}
