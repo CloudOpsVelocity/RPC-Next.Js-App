@@ -4,7 +4,6 @@ const Amenties = dynamicImport(
   () => import("@/app/components/project/amenties")
 );
 const Loans = dynamicImport(() => import("@/app/components/project/loans"));
-
 const About = dynamicImport(() => import("@/app/components/project/about"));
 const Navigation = dynamicImport(
   () => import("@/app/components/project/navigation"),
@@ -368,7 +367,7 @@ export default async function page(props: Props) {
             postedById={data.builderId}
           />
         </div>
-        <TagsSections urls={getUrls(pathname)} />
+
         <NearByCarousel
           projName={data.projectName}
           lat={data.lat}
@@ -379,7 +378,7 @@ export default async function page(props: Props) {
           slug={slug}
         />
         {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
-
+        <TagsSections urls={getUrls(pathname)} />
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />
         <LoginPopup />

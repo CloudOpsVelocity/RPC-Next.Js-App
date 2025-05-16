@@ -320,7 +320,7 @@ export default function ListingDetailsPage({
             {/* )} */}
           </>
         )}
-        <TagsSections urls={getUrls(pathname)} />
+
         {!data.projIdEnc && (
           <>
             <div id="location-map" className="mt-10 scroll-mt-[180px]" />
@@ -360,6 +360,7 @@ export default function ListingDetailsPage({
             title: `Other Projects by ${data.postedByName}`,
           }}
         />
+        <TagsSections urls={getUrls(pathname)} />
         {/* )} */}
         <PriceBreakup
           otherPrice={data.otherPrice}

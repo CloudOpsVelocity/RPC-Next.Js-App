@@ -102,7 +102,7 @@ export default function TagsSections({ urls }: Props) {
         Discover more residential rent and sale properties in popular areas and
         projects.
       </p>
-      <ul className="flex flex-wrap gap-x-2 ">
+      <ul className="flex flex-wrap  ">
         {flatLinks.map((urlObj, index) => (
           <li key={urlObj.url || index} className="flex-shrink-0">
             <Tag {...urlObj} />

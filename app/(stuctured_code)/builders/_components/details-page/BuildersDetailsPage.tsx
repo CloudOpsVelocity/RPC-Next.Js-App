@@ -35,7 +35,6 @@ export default function BuilderDetailsPage({ data, id }: Props) {
             <ProjectDetails {...data.data} id={id} />
             <ManagementBlock {...data.data} />
           </div>
-          <TagsSections urls={[]} />
           <div className="w-full m-auto sm:w-[95%]">
             <BuilderCarousel
               type="proj"
@@ -55,6 +54,7 @@ export default function BuilderDetailsPage({ data, id }: Props) {
             />
             {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
           </div>
+          <TagsSections urls={[]} />
           {/* <Reqcallback builderName={data.data?.userName} /> */}
           <Reqcallback />
 
