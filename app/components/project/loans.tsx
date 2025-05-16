@@ -21,12 +21,12 @@ export default function ProjectLoans({
 
   const [windowWidth, setWindowWidth] = useState(0);
   const isMobile = windowWidth <= 600;
-  const maxCradNumber =5;
-  const maxCardNUmberMobile= 15;
+  const maxCradNumber = 5;
+  const maxCardNUmberMobile = 15;
   const [maxCards, setMaxCards] = useState(maxCradNumber);
   const [maxCardsDes, setMaxCardsDes] = useState(maxCardNUmberMobile);
-  
-/* console.log(maxCards === maxCardNUmberMobile , maxCardNUmberMobile) */
+
+  /* console.log(maxCards === maxCardNUmberMobile , maxCardNUmberMobile) */
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -121,6 +121,7 @@ export default function ProjectLoans({
                     width={140}
                     height={90}
                     className="max-w-[90px] sm:min-h-[70px] sm:w-[140px] aspect-video "
+                    fetchPriority="auto"
                     unoptimized
                   />
                   <p className="mt-3 text-[#242424] text-[13px] text-center not-italic font-semibold leading-[normal] capitalize ">
@@ -195,12 +196,14 @@ export default function ProjectLoans({
               );
             }
           })}
-           {banks.length > maxCardNUmberMobile && (
+          {banks.length > maxCardNUmberMobile && (
             <div
               className=" flex justify-center items-center h-[150px] md:max-w-[220px] border border-solid border-[#CCCED1] rounded-[7px] flex-col cursor-pointer "
               onClick={() =>
                 setMaxCardsDes(
-                  maxCardsDes === maxCardNUmberMobile ? banks.length : maxCardNUmberMobile
+                  maxCardsDes === maxCardNUmberMobile
+                    ? banks.length
+                    : maxCardNUmberMobile
                 )
               }
             >
@@ -226,7 +229,9 @@ export default function ProjectLoans({
               </div>
 
               <p className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent pointer-events-none ">
-                {maxCardsDes === maxCardNUmberMobile ? "View More" : "View Less"}
+                {maxCardsDes === maxCardNUmberMobile
+                  ? "View More"
+                  : "View Less"}
               </p>
             </div>
           )}
