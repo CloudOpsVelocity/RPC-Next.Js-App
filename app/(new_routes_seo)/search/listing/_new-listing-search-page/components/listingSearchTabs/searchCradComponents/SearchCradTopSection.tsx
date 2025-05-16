@@ -45,8 +45,6 @@ const Rera = () => {
   );
 };
 
-console.log("isUsed")
-
 export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({ data, index }) => {
   const {src, projName, projstatus, type, availableFrom, possassionDate, propStatus, propTypeName, pageUrl, rerastatus, projOrPropName, isUsed, furnish} = data
   const verified = isReraverified(rerastatus);
@@ -147,6 +145,13 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
+
+  function htmlToPlainText(htmlString:any) {
+    const temp = document.createElement("div");
+    temp.innerHTML = htmlString;
+    return temp.textContent || temp.innerText || "";
+  };
+  const plainText = htmlToPlainText(aboutText);
   
 
   // const handleParentAction = (index: string) => {
@@ -327,10 +332,9 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
 
       <SearchCardApprovedNames approvedNamesData={approvedNamesData} />
 
-      <div
-        className={Styles.readMoreTextCon}
-      >
-        {aboutText && (
+      {aboutText && (
+      <div className={Styles.readMoreTextCon}>
+        {/* {aboutText && (
           <div className="line-clamp-2 relative">
             <div
               className="line-clamp-2"
@@ -349,8 +353,24 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({ data, ref
                 </button>
             )}
           </div>
-        )}
+        )} */}
+
+        <p className="line-clamp-2" >
+          {plainText}
+          {isReadMoreNeeded && (
+            <button
+              className={Styles.readMoreText}
+              title={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+              aria-label={`Click to Read More about this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+              data-action="readmore"
+            >
+              ...Read More
+            </button>
+          )}
+        </p>
       </div>
+      )}
+
 
     </div>
   )

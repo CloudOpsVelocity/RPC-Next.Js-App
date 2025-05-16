@@ -503,7 +503,13 @@
 
 .readMoreTextCon{
     padding-right: 0.5rem; 
-    color: 14px;
+    font-size: 14px;
+
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;       /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .readMoreText{
@@ -511,10 +517,11 @@
     right: 0; 
     bottom: 0; 
     font-weight: 700; 
-    text-decoration: underline; 
+    /* text-decoration: underline;  */
     background-color: #ffffff; 
     cursor: pointer; 
     font-size: 14px;
+    margin-right: 6px;
 }
 
 .propNameHeading{
