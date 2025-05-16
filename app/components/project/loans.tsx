@@ -21,12 +21,11 @@ export default function ProjectLoans({
 
   const [windowWidth, setWindowWidth] = useState(0);
   const isMobile = windowWidth <= 600;
-  const maxCradNumber =5;
+  const maxCradNumber = 5;
   const maxCardNUmberMobile= 15;
   const [maxCards, setMaxCards] = useState(maxCradNumber);
   const [maxCardsDes, setMaxCardsDes] = useState(maxCardNUmberMobile);
   
-/* console.log(maxCards === maxCardNUmberMobile , maxCardNUmberMobile) */
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -170,7 +169,7 @@ export default function ProjectLoans({
       ) : (
         <div className="mt-16 md:mt-1 flex justify-start items-center flex-wrap w-full gap-x-[3%] md:gap-y-[20px]">
           {banks?.map((bank, index) => {
-            if (bank.bankid && index < maxCardNUmberMobile) {
+            if (bank.bankid && index < maxCardsDes) {
               return (
                 <div
                   key={`loans_${bank.bankid}`}
@@ -195,9 +194,10 @@ export default function ProjectLoans({
               );
             }
           })}
+
            {banks.length > maxCardNUmberMobile && (
             <div
-              className=" flex justify-center items-center h-[150px] md:max-w-[220px] border border-solid border-[#CCCED1] rounded-[7px] flex-col cursor-pointer "
+              className=" flex justify-center items-center min-h-[160px] mt-[16px] md:max-w-[220px] border border-solid border-[#CCCED1] rounded-[7px] flex-col cursor-pointer px-[10px] "
               onClick={() =>
                 setMaxCardsDes(
                   maxCardsDes === maxCardNUmberMobile ? banks.length : maxCardNUmberMobile

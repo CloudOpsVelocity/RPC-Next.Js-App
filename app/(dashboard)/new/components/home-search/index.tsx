@@ -23,9 +23,13 @@ const HomeSearch = ({
 {
   // count: number;
   cityData?: CityData;
+  
   // shortIds?: any;
 }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
+
+
+
   const [isOpen, setIsOpen] = useState(false);
   // const handleSearch = () => {
   //   if (!f.city) {

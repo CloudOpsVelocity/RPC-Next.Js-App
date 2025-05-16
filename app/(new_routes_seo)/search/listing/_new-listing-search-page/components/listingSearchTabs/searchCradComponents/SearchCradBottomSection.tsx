@@ -76,8 +76,8 @@ export default function SearchCradBottomSection({
           <>
             {isPetFriendly && propTypeName !== "Plot" ? (
               <div className="flex items-center space-x-1 bg-green-500 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
-                <WhitePetFreindly className="w-[20px] h-[20px] " />
-                <span>Pet Friendly</span>
+                {/* <WhitePetFreindly className="w-[20px] h-[20px] " /> */}
+                🐕 Pet Friendly
               </div>
             ) : null}
 
