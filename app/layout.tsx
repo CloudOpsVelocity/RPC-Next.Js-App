@@ -11,6 +11,8 @@ import Layout from "@/app/components/layouts/primary";
 import { Montserrat } from "next/font/google";
 const font = Montserrat({
   preload: false,
+  // weight: ["400", "700"], // or whatever weights you're using
+  // subsets: ["latin"], // ✅ add this line
 });
 
 export const metadata: Metadata = {
