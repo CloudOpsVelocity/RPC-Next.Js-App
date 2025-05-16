@@ -108,7 +108,7 @@ function SearchCardTopCornerSection({
                     title={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                     aria-label={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   >
-                    <svg
+                     {/* <svg
                       width="18px"
                       height="18px"
                       viewBox="0 0 15 15"
@@ -119,7 +119,8 @@ function SearchCardTopCornerSection({
                         d="M10 0.5H14.5V14.5H0.5V0.5H4.5L7.5 2.5M6.5 14.5V7.5M4 7.5H9M12 7.5H14.5"
                         stroke="#000000"
                       />
-                    </svg>
+                    </svg> */}
+                    🗺️
                   </Link>
                 )}
 

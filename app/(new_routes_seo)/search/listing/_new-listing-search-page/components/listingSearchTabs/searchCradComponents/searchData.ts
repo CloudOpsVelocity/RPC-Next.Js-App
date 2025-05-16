@@ -13,6 +13,8 @@ export interface TopLeftSectionData {
     pageUrl: string;
     rerastatus: string;
     projOrPropName: string;
+    furnish:string;
+    isUsed: string;
 } 
 
 // export interface TopRightSectionData {
@@ -110,6 +112,8 @@ type RawTopLeftData = Partial<TopLeftSectionData> & {
     pageUrl: rawData.pageUrl ?? "",
     rerastatus: rawData.rerastatus ?? "",
     projOrPropName: rawData.projOrPropName ?? "",
+    furnish: rawData.furnish ?? "",
+    isUsed: rawData.isUsed ?? "",
 });
 
 // export const sanitizeTopRightSectionData = (rawData: Partial<Record<keyof TopRightSectionData, any>>): TopRightSectionData => ({
