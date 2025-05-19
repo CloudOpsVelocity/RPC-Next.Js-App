@@ -42,6 +42,7 @@ const getListingSeoData = async () => {
     urls.map((url) =>
       fetch(url, {
         method: "POST",
+        cache: "no-store",
       }).then((res) => res.json())
     )
   );
