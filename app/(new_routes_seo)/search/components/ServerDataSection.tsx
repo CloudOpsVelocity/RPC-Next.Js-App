@@ -216,7 +216,7 @@ export default function ServerDataSection({
           isOpen: true,
           type: "nearby",
           title: "Near By Locations",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         // onSetNearBy(selectedItem);
         break;

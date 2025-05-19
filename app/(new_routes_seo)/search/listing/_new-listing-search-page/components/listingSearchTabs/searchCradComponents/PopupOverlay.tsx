@@ -15,10 +15,10 @@ type Props = {
 }
 
 function PopupOverlay({popupState, closePopup}: Props) {
-    const { content, data, title, type } = popupState;
+    const { content, data, title } = popupState;
     const { 
       location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName, bhkName, 
-      category, localityName, city, locality, cityName, phaseName
+      category, localityName, city, locality, cityName, phaseName, type
     } = data;
 
     const id = `${projIdEnc ?? ""}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ""}`
