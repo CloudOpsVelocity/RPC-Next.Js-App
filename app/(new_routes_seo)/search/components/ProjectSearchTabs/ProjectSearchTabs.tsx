@@ -276,7 +276,7 @@ const ProjectSearchTabs = ({
               }}
               className="flex items-center gap-2 md:px-[6px] md:py-[4px] xl:px-4 xl:py-2 text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
             >
-              <svg
+              {/* <svg
                 className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
@@ -288,7 +288,9 @@ const ProjectSearchTabs = ({
                   strokeWidth={2}
                   d="M7 16V4m0 0L3 8m4-4l4 4m-4 8v-4m10 4v-4m0 4l-4-4m4 4l4-4"
                 />
-              </svg>
+              </svg> */}
+
+              <span className="text-xl text-amber-800 font-bold">↑↓</span>
 
               <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                 {state.sortByfield != null && state.sortType != null

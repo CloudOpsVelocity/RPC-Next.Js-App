@@ -184,7 +184,7 @@ const ListingSearchTabs = ({
             isMobile ? "px-[6px] py-[4px]" : "md:px-[6px] md:py-[4px]"
           } xl:px-4 xl:py-2 text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors`}
         >
-          <p className="text-xl text-amber-800 font-bold">↑↓</p>
+          <span className="text-xl text-amber-800 font-bold">↑↓</span>
           <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
             {currentSortLabel}
           </span>
