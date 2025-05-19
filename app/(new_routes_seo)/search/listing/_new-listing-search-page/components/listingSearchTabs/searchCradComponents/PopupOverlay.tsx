@@ -15,10 +15,10 @@ type Props = {
 }
 
 function PopupOverlay({popupState, closePopup}: Props) {
-    const { content, data, title } = popupState;
+    const { content, data, title, type } = popupState;
     const { 
       location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName, bhkName, 
-      category, localityName, type, city, locality, cityName, phaseName
+      category, localityName, city, locality, cityName, phaseName
     } = data;
 
     const id = `${projIdEnc ?? ""}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ""}`
@@ -37,11 +37,11 @@ function PopupOverlay({popupState, closePopup}: Props) {
                     key={`search card new near by map`}
                     lat={lat}
                     lang={lang}
-                    projName={projName ?? propName}
+                    projName={projName ? projName : propName}
                     type={isProj ? "proj" : "prop"}
                     // mapData={{}}
-                    projId={projIdEnc}
-                    propId={propIdEnc}
+                    projId={projIdEnc ? projIdEnc : ""}
+                    propId={propIdEnc ? propIdEnc : ""}
                     id={id}
                 />
             )            
@@ -116,7 +116,7 @@ function PopupOverlay({popupState, closePopup}: Props) {
                 title={`${title} of ${projOrPropName}`}
                 aria-label={`${title} of ${projOrPropName}`}
               >
-                <h2 className="sm:text-[20px] xl:text-[24px] font-bold capitalize break-words text-wrap font-[600]">
+                <h2 className="sm:text-[20px] xl:text-[24px] capitalize break-words text-wrap font-[600]">
                   <span className="text-[#001F35]">
                     {title} <span className="lowercase">of </span>
                   </span>

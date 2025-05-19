@@ -395,7 +395,7 @@ const HeaderFilters = ({
                     title="Only letters, numbers, and spaces are allowed."
                   />
 
-                  <button type="submit" name="projectHeaderSearchIcon">
+                  <button type="submit" name="projectHeaderSearchIcon" aria-label="projSearchIcon">
                     <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                   </button>
                 </form>

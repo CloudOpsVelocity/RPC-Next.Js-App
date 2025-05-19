@@ -75,8 +75,8 @@
 
 .ifValueMoreThanZero{
     align-items: flex-start; 
-    border: 0.4px solid #148B16;  
-    color: #148B16;
+    border: 0.4px solid #0C5E0F;  
+    color: #0C5E0F;
 }
 
 .ifValueLessThanZero{
@@ -89,7 +89,7 @@
 }
 
 .searchCardCompareBtn{
-    background-color: rgb(0 115 198);
+    background-color: #005A9E;
     font-size: 12px;
     color: #FFFFFF;
     font-weight: 600;
@@ -98,7 +98,7 @@
 }
 
 .searchCardContactBtn{
-    background-color: rgb(0 115 198);
+    background-color: #005A9E;
     font-size: 12px;
     color: #FFFFFF;
     font-weight: 600;
@@ -169,7 +169,7 @@
     position: relative; 
     font-style: normal; 
     font-weight: 700; 
-    color: #148B16;
+    color: #0C5E0F;
     font-size: 16px;
     font-size: 1.25rem;
     line-height: 1.75rem;     
@@ -189,7 +189,7 @@
     text-decoration: underline; 
     cursor: pointer; 
     font-size: 14px;
-    color: rgb(0 115 198);
+    color: #005A9E;
 }
 
 .searchCardAddress{
@@ -441,13 +441,13 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem; 
     padding: 4px;
-    background-color: #EA5806;
+    background-color: #C04A05;
     white-space: nowrap;
     z-index: 2;
 }
 
 .amenityBtn:hover{
-    background-color: #fa5e03;
+    background-color: #8A3702;
 }
 
 .nearByBtn{
