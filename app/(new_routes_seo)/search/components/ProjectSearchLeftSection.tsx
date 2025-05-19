@@ -97,8 +97,10 @@ function LeftSection({
     // staleTime: 4000,
     refetchOnWindowFocus: false,
     onSuccess: (data: any) => {
-      const newData = data.pages[data.pageParams.length - 1];
-      setMainData((prev: any) => [...prev, ...newData]);
+      if (apiFilterQueryParams === preDefinedFilters) {
+        const newData = data.pages[data.pageParams.length - 1];
+        setMainData((prev: any) => [...prev, ...newData]);
+      }
     },
   });
 
