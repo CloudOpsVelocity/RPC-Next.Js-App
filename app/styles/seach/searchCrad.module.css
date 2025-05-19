@@ -97,7 +97,7 @@
     padding: 4px;
 }
 
-.searchCardContactBtn{
+/* .searchCardContactBtn{
     background-color: #005A9E;
     font-size: 12px;
     color: #FFFFFF;
@@ -109,7 +109,21 @@
     right: 10px;
     padding-left: 4px;
     padding-right: 4px;
+} */
+
+.searchCardContactBtn {
+    background-color: #005A9E;
+    font-size: 14px; /* Slightly larger text for readability */
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 10px 14px; /* Ensures at least 44x44 size */
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
 }
+
 
 .searchCradImage{
     object-fit: cover;

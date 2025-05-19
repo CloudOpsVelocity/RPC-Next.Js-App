@@ -79,7 +79,7 @@ export default function SearchCradBottomSection({
         ) : (
           <>
             {isPetFriendly && propTypeName !== "Plot" ? (
-              <div className="flex items-center space-x-1 bg-green-500 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
+              <div className="flex items-center space-x-1 bg-green-700 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
                 {/* <WhitePetFreindly className="w-[20px] h-[20px] " /> */}
                 🐕 Pet Friendly
               </div>
@@ -87,7 +87,7 @@ export default function SearchCradBottomSection({
 
             {amenCount > 0 && (
               <button
-                className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
+                className="bg-orange-700 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2 rounded shadow-md hover:bg-orange-800 transition duration-300 ease-in-out"
                 data-action="amenities"
                 title={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
                 aria-label={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
