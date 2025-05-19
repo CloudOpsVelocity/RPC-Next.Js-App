@@ -101,7 +101,7 @@ type RawTopLeftData = Partial<TopLeftSectionData> & {
   export const sanitizeTopLeftSectionData = (
     rawData: RawTopLeftData
   ): TopLeftSectionData => ({    
-    src: rawData.coverUrl ?? rawData.coverImage ?? "",
+    src: rawData.coverUrl ? rawData.coverUrl : rawData.coverImage ?? "",
     projName: rawData.projName ?? "",
     projstatus: rawData.projstatus ?? "",
     type: rawData.type ?? "",

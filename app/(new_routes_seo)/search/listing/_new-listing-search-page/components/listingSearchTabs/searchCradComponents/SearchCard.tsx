@@ -31,6 +31,8 @@ function SearchCard({
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   // const topSectionRightData = sanitizeTopRightSectionData(data);
 
+  console.log(topSectionLeftData)
+
   let url =
     type == "proj"
       ? createProjectLinkUrl({

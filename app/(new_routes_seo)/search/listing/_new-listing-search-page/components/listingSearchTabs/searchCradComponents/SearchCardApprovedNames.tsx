@@ -4,6 +4,7 @@ import { ApprovedNamesSectionData } from "./searchData";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { sqftToAcres } from "@/app/utils/landarea";
 import { useQuery } from "react-query";
+import { Boolean } from "schema-dts";
 
 type Props = {
   approvedNamesData: ApprovedNamesSectionData;
@@ -13,18 +14,29 @@ const DownSectionCard = ({
   label,
   value,
   Icon,
+  isProj
 }: {
   label: string;
   value: any;
   Icon?: React.JSX.Element;
+  isProj?: Boolean;
 }) => {
+
   return value ? (
+    isProj ?
     <h3 className={Styles.downSectionCardMainCon}>
       <span className={Styles.downSectionCardIconSpan}>
         {Icon ?? ""} {label}:
       </span>
       <span className={Styles.downSectionCardValue}>{value}</span>
     </h3>
+    :
+    <h4 className={Styles.downSectionCardMainCon}>
+      <span className={Styles.downSectionCardIconSpan}>
+        {Icon ?? ""} {label}:
+      </span>
+      <span className={Styles.downSectionCardValue}>{value}</span>
+    </h4>
   ) : null;
 };
 
@@ -115,6 +127,7 @@ function SearchCardApprovedNames({ approvedNamesData }: Props) {
       {type === "proj" ? (
         <>
           <DownSectionCard
+            isProj = {type === "proj"}
             label={isPlot ? "Plot Area" : "Super Builtup Area"}
             value={
               isPlot
