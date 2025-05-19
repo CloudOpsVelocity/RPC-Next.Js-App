@@ -96,12 +96,12 @@ function LeftSection({
     enabled: isTrue,
     // staleTime: 4000,
     refetchOnWindowFocus: false,
-    onSuccess: (data: any) => {
-      if (apiFilterQueryParams === preDefinedFilters) {
-        const newData = data.pages[data.pageParams.length - 1];
-        setMainData((prev: any) => [...prev, ...newData]);
-      }
-    },
+    // onSuccess: (data: any) => {
+    //   if (!isTrue) {
+    //     const newData = data.pages[data.pageParams.length - 1];
+    //     setMainData((prev: any) => [...prev, ...newData]);
+    //   }
+    // },
   });
 
   // const { data: approvedData } = useQuery({
@@ -184,7 +184,9 @@ function LeftSection({
     return () => observer.disconnect();
   }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    apiFilterQueryParams === preDefinedFilters || typeof window === "undefined"
+    (apiFilterQueryParams === preDefinedFilters ||
+      typeof window === "undefined") &&
+    (data?.pageParams?.length ?? 0) < 1
       ? mainData
       : data && data?.pageParams?.length > 0
       ? data?.pages.flat()
