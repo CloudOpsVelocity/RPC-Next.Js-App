@@ -94,12 +94,12 @@ function LeftSection({
     },
   });
 
-  const { data: approvedData } = useQuery({
-    queryKey: ["projAuth"],
-    enabled: true,
-    queryFn: () => getAllAuthorityNames(),
-    ...RTK_CONFIG,
-  });
+  // const { data: approvedData } = useQuery({
+  //   queryKey: ["projAuth"],
+  //   enabled: true,
+  //   queryFn: () => getAllAuthorityNames(),
+  //   ...RTK_CONFIG,
+  // });
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);

@@ -102,12 +102,12 @@ function LeftSection({
     },
   });
 
-  const { data: approvedData } = useQuery({
-    queryKey: ["projAuth"],
-    enabled: true,
-    queryFn: () => getAllAuthorityNames(),
-    ...RTK_CONFIG,
-  });
+  // const { data: approvedData } = useQuery({
+  //   queryKey: ["projAuth"],
+  //   enabled: true,
+  //   queryFn: () => getAllAuthorityNames(),
+  //   ...RTK_CONFIG,
+  // });
 
   const setSelected = useSetAtom(selectedSearchAtom);
   const [, dispatch] = useAtom(overlayAtom);
@@ -142,15 +142,11 @@ function LeftSection({
     dispatch,
   ]);
 
-
   // this for hiddenin cilent of pagaintaiton
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
-   
   }, []);
-
-
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -267,10 +263,9 @@ function LeftSection({
         <EmptyState />
       )}
       {true ? (
-        
         <div
-        className={clsx({ invisible: isClient })}
-        aria-hidden={isClient ? 'true' : undefined}
+          className={clsx({ invisible: isClient })}
+          aria-hidden={isClient ? "true" : undefined}
         >
           <ListingSearchPagination
             currentPage={
@@ -279,7 +274,6 @@ function LeftSection({
             totalCount={frontendFilters.totalCount ?? 0}
           />
         </div>
-      
       ) : null}
       <LoginPopup />
       <RequestCallBackModal />

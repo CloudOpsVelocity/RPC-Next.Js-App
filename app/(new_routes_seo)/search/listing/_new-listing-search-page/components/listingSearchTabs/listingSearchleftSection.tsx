@@ -94,12 +94,12 @@ function LeftSection({
     },
   });
 
-  const { data: approvedData } = useQuery({
-    queryKey: ["projAuth"],
-    enabled: true,
-    queryFn: () => getAllAuthorityNames(),
-    ...RTK_CONFIG,
-  });
+  // const { data: approvedData } = useQuery({
+  //   queryKey: ["projAuth"],
+  //   enabled: true,
+  //   queryFn: () => getAllAuthorityNames(),
+  //   ...RTK_CONFIG,
+  // });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -245,15 +245,15 @@ function LeftSection({
           <LoadingSpinner />
         </div>
       )}
-   
+
       <div
         className={typeof window !== "undefined" ? "hidden" : ""}
         aria-hidden={typeof window !== "undefined" ? "true" : undefined}
       >
         <ListingSearchPagination
-        searchQueryParmeter
+          searchQueryParmeter
           currentPage={
-            frontendFilters.currentPage ? frontendFilters.currentPage  : 1
+            frontendFilters.currentPage ? frontendFilters.currentPage : 1
           }
           totalCount={frontendFilters.totalCount ?? 0}
         />

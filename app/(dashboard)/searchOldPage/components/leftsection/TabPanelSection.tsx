@@ -36,11 +36,11 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         path.includes("/residential")
       ? serverData
       : data;
-  const res = useQuery({
-    queryKey: ["projAuth"],
-    queryFn: () => getAllAuthorityNames(),
-    ...RTK_CONFIG,
-  });
+  // const res = useQuery({
+  //   queryKey: ["projAuth"],
+  //   queryFn: () => getAllAuthorityNames(),
+  //   ...RTK_CONFIG,
+  // });
 
   const rowVirtualizer = useVirtualizer({
     count: serverClientData?.length || 0,

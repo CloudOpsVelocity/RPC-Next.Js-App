@@ -103,12 +103,12 @@ function LeftSection({
     },
   });
 
-  const { data: approvedData } = useQuery({
-    queryKey: ["projAuth"],
-    enabled: true,
-    queryFn: () => getAllAuthorityNames(),
-    ...RTK_CONFIG,
-  });
+  // const { data: approvedData } = useQuery({
+  //   queryKey: ["projAuth"],
+  //   enabled: true,
+  //   queryFn: () => getAllAuthorityNames(),
+  //   ...RTK_CONFIG,
+  // });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
   // this for hiddenin cilent of pagaintaiton
@@ -264,7 +264,6 @@ function LeftSection({
       )}
 
       {params.slugs && params.slugs.length < 4 ? (
-        
         <div
           className={clsx({ invisible: isClient })}
           aria-hidden={isClient ? "true" : undefined}
