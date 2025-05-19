@@ -2,8 +2,8 @@ import logger from "@/app/utils/logger";
 import { getServerSideSitemap } from "next-sitemap";
 // import path from "path";
 // import fs from "fs";
-import redisService from "@/app/utils/redis/redis.service";
-import { SlugsType } from "@/app/common/constatns/slug.constants";
+// import redisService from "@/app/utils/redis/redis.service";
+// import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { getPagesSlugs } from "@/app/seo/api";
 export async function GET() {
   // const filePath = path.join(process.cwd(), "static", `projectSlugs.json`);
@@ -31,3 +31,4 @@ export async function GET() {
   logger.info(`Project Details Sitemap: Generated Sitemap`);
   return getServerSideSitemap(generatedSitemap);
 }
+export const dynamic = "force-dynamic";

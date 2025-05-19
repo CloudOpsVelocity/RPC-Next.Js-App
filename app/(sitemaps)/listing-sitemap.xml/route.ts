@@ -8,7 +8,7 @@ import { BACKEND_BASE_URL } from "@/app/env";
 // import { NextResponse } from "next/server";
 export async function GET() {
   // const filePath = path.join(process.cwd(), "static", `listingSlugs.json`);
-  logger.info(`Listing Details Sitemap: Reading listingSlugs.json file`);
+  // logger.info(`Listing Details Sitemap: Reading listingSlugs.json file`);
   // const data = fs.readFileSync(filePath, "utf-8");
   // const  = JSON.parse(data);
   // const listingSlugs = await redisService.getProjectSlug(SlugsType.LISTING);
@@ -53,3 +53,4 @@ const getListingSeoData = async () => {
 
   return result;
 };
+export const dynamic = "force-dynamic";
