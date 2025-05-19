@@ -17,3 +17,4 @@ export async function GET() {
   logger.info(`Builder Details Sitemap: Generated Sitemap`);
   return getServerSideSitemap(generatedSitemap);
 }
+export const dynamic = "force-dynamic";
