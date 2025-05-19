@@ -7,11 +7,11 @@ import { SlugsType } from "@/app/common/constatns/slug.constants";
 import { getPagesSlugs } from "@/app/seo/api";
 export async function GET() {
   // const filePath = path.join(process.cwd(), "static", `projectSlugs.json`);
-  logger.info(`Project Details Sitemap: Reading projectSlugs.json file`);
+  // logger.info(`Project Details Sitemap: Reading projectSlugs.json file`);
   // const data = fs.readFileSync(filePath, "utf-8");
   // const projectSlugs = JSON.parse(data);
   // const projectSlugs = await redisService.getProjectSlug(SlugsType.PROJECT);
-  const projectSlugs = getPagesSlugs("project-list");
+  const projectSlugs = await getPagesSlugs("project-list");
   const slugs = Object.keys(projectSlugs);
   // const uniqueSlugs = Array.from(new Set(slugs)); // Ensure slugs are unique
   // const splitSlugs = uniqueSlugs.flatMap((slug) => {
