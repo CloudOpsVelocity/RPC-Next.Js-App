@@ -202,15 +202,17 @@ export const ProjSearchAppliedFiltersStore = atom(
         if (Array.isArray(value)) {
           if (value.length > 0) {
             console.log(`${value}`);
-            queryString += `${queryString ? "-" : ""}${key}=${value.map(
+            queryString += `${queryString ? "-" : ""}${key}=${value?.map(
               (item) => {
-                return item.replace("-", " ");
+                return typeof item === "string"
+                  ? item?.replace("-", " ")
+                  : item;
               }
             )}`;
           }
         } else if (value != null) {
           queryString += `${queryString ? "-" : ""}${key}=${
-            key === "projName" ? value.replace("-", " ") : value
+            key === "projName" ? value?.replace("-", " ") : value
           }`;
         }
       }
