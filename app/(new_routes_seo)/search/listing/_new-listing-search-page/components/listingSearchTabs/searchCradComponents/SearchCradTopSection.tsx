@@ -341,6 +341,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({
             prefetch={false}
             className={Styles.searchCardLink}
             title={`View ${bhkName} ${propTypeName} for ${category} in ${localityName}`}
+            aria-label={`View ${bhkName} ${propTypeName} for ${category} in ${localityName}`}
           >
             <h2 className={Styles.searchCardPromName}>
               {bhkName} {propTypeName} for {category} in {localityName}
@@ -376,9 +377,28 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({
             )}
           </h3>
           <p className={Styles.searchCardAddress}>Address: {address}</p>
+
           <p className={Styles.searchCardPostedBy}>
             {postedBy ?? "Builder"}:{" "}
-            <span
+
+            {postedBy === "Builder" ?
+            <Link
+              prefetch={true}
+              href={urlBuilder}
+              title={postedByName}
+              aria-label={postedByName}
+              className={`font-bold text-[#242424] cursor-pointer`}
+              rel="noreferrer"
+            >
+              {postedByName}
+            </Link>
+            :
+            <span className={`font-bold text-[#242424]`}>
+              {postedByName}
+            </span>
+            }
+
+            {/* <span
               className={`font-bold text-[#242424] ${
                 postedBy === "Builder" ? "underline cursor-pointer" : ""
               }`}
@@ -392,7 +412,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({
               }
             >
               {postedByName}
-            </span>
+            </span> */}
           </p>
         </>
       )}

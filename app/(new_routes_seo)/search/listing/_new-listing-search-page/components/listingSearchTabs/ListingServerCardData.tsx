@@ -14,7 +14,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import PopupOverlay from "./searchCradComponents/PopupOverlay";
 import { sortUnits } from "@/app/utils/unitparser";
 import {
-  handleAgentOwner,
+  // handleAgentOwner,
   shearPropOrProj,
 } from "./searchCradComponents/searchData";
 
@@ -231,15 +231,15 @@ export default function ListingServerCardData({
           data: selectedItem,
         }));
         break;
-      case "listingType_B":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
-        break;
-      case "listingType_A":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
-        break;
-      case "listingType_O":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
-        break;
+      // case "listingType_B":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
+      //   break;
+      // case "listingType_A":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
+      //   break;
+      // case "listingType_O":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
+      //   break;
       case "bhk":
         const sortedBhks: any = sortUnits(selectedItem.bhkNames);
         document.body.style.overflow = "hidden";
