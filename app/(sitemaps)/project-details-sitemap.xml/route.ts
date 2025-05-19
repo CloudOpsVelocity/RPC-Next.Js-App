@@ -2,10 +2,7 @@ import logger from "@/app/utils/logger";
 import { getServerSideSitemap } from "next-sitemap";
 import { BACKEND_BASE_URL } from "@/app/env";
 
-export async function GET({ searchParams }: { searchParams: Promise<any> }) {
-  const slug = await searchParams;
-  console.log(slug ?? "N/A");
-
+export async function GET() {
   const projectSlugs = await getProjectSlug();
   const slugs = Object.keys(projectSlugs);
 
@@ -28,4 +25,4 @@ const getProjectSlug = async () => {
 };
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-export const cache = "no-store";
+// export const cache = "no-store";
