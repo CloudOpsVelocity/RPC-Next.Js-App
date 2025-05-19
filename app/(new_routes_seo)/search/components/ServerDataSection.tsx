@@ -3,7 +3,7 @@ import { SearchFilter } from "@/app/types/search";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import SearchCard from "../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/SearchCard";
 import {
-  handleAgentOwner,
+  // handleAgentOwner,
   shearPropOrProj,
 } from "../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/searchData";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
@@ -230,15 +230,15 @@ export default function ServerDataSection({
           data: selectedItem,
         }));
         break;
-      case "listingType_B":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
-        break;
-      case "listingType_A":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
-        break;
-      case "listingType_O":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
-        break;
+      // case "listingType_B":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
+      //   break;
+      // case "listingType_A":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
+      //   break;
+      // case "listingType_O":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
+      //   break;
       case "bhk":
         const sortedBhks: any = sortUnits(selectedItem.bhkNames);
         document.body.style.overflow = "hidden";

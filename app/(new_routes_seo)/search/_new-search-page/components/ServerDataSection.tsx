@@ -5,7 +5,7 @@ import SearchCard from "../../listing/_new-listing-search-page/components/listin
 import { sortUnits } from "@/app/utils/unitparser";
 // import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 // import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
-import { handleAgentOwner, shearPropOrProj } from "../../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/searchData";
+import { shearPropOrProj } from "../../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/searchData";
 import { useSetAtom } from "jotai";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
@@ -180,15 +180,15 @@ export default function ServerDataSection({
           document.body.style.overflow = "hidden";
           setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: {...selectedItem, type: type}}));
           break;
-        case 'listingType_B':
-          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
-          break;
-        case 'listingType_A':
-          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
-          break; 
-        case 'listingType_O':
-          handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
-          break;
+        // case 'listingType_B':
+        //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
+        //   break;
+        // case 'listingType_A':
+        //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
+        //   break; 
+        // case 'listingType_O':
+        //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
+        //   break;
         case 'bhk':
           const sortedBhks:any = sortUnits(selectedItem.bhkNames);
           document.body.style.overflow = "hidden";

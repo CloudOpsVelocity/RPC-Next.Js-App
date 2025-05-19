@@ -3,6 +3,7 @@ import Styles from "@/app/styles/seach/searchCrad.module.css";
 import ButtonElement from '@/common/components/CustomButton';
 import { useMediaQuery } from "@mantine/hooks";
 import Tag from '@/app/components/atoms/Tag';
+import Link from 'next/link';
 
 type BottomSectionProps = {
     index:string;
@@ -57,19 +58,22 @@ export default function SearchCradBottomSection({
         {type === "proj" ? (
           <>
             <CountListing
-              type="Agent"
+              type="A"
               value={agentListing}
               projOrPropName={projOrPropName}
+              projIdEnc={projIdEnc}
             />
             <CountListing
-              type="Owner"
+              type="O"
               value={ownerListing}
               projOrPropName={projOrPropName}
+              projIdEnc={projIdEnc}
             />
             <CountListing
-              type="Builder"
+              type="B"
               value={builderListing}
               projOrPropName={projOrPropName}
+              projIdEnc={projIdEnc}
             />
           </>
         ) : (
@@ -155,24 +159,46 @@ export default function SearchCradBottomSection({
 
 type CountListProps = {
   value: number;
-  type: "Agent" | "Owner" | "Builder";
+  type: "A" | "O" | "B";
   projOrPropName: string;
+  projIdEnc:string;
 };
 
-function CountListing({type, value, projOrPropName}: CountListProps) {
+function CountListing({type, value, projOrPropName, projIdEnc}: CountListProps) {
+  const handleAgentOwnerUrl = () => {
+    return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projOrPropName}`
+  };
+
   return (
     value > 0 && (
-    <ButtonElement
+      <Link
+        href={handleAgentOwnerUrl()}
+        aria-label={`${type} Listing : ${value}`}
         title={`${type} Listing : ${value}`}
-        dataAction={`listingType_${type[0]}`}
-        buttonConClass={`${
-            Styles.listingTypeButton } ${
-            type === "Owner" ? Styles.listingTypeButtonForOwner : Styles.listingTypeButtonForOthers} ${
-            value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
-        }`}
-        toolTip={`Explore the ${type} Listing for ${projOrPropName}`}
-    />)
+        className={`${
+                    Styles.listingTypeButton } ${
+                    type === "O" ? Styles.listingTypeButtonForOwner : Styles.listingTypeButtonForOthers} ${
+                    value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
+                }`}
+        prefetch={false}
+      >
+        {`${type} Listing : ${value}`}
+      </Link>)
   )
+
+  // return (
+  //   value > 0 && (
+  //   <ButtonElement
+  //       title={`${type} Listing : ${value}`}
+  //       dataAction={`listingType_${type[0]}`}
+  //       buttonConClass={`${
+  //           Styles.listingTypeButton } ${
+  //           type === "Owner" ? Styles.listingTypeButtonForOwner : Styles.listingTypeButtonForOthers} ${
+  //           value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
+  //       }`}
+  //       toolTip={`Explore the ${type} Listing for ${projOrPropName}`}
+  //   />)
+  // )
 }
 
 

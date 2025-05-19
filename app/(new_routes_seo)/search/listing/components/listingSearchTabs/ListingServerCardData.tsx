@@ -12,7 +12,7 @@ import { searchPageMapToggle } from "../../../store/newSearchProjectStore";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import {
-  handleAgentOwner,
+  // handleAgentOwner,
   shearPropOrProj,
 } from "../../_new-listing-search-page/components/listingSearchTabs/searchCradComponents/searchData";
 
@@ -228,15 +228,15 @@ export default function ListingServerCardData({
           data: selectedItem,
         }));
         break;
-      case "listingType_B":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
-        break;
-      case "listingType_A":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
-        break;
-      case "listingType_O":
-        handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
-        break;
+      // case "listingType_B":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
+      //   break;
+      // case "listingType_A":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
+      //   break;
+      // case "listingType_O":
+      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
+      //   break;
       case "bhk":
         const sortedBhks: any = sortUnits(selectedItem.bhkNames);
         document.body.style.overflow = "hidden";
