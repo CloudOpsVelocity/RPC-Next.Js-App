@@ -48,18 +48,13 @@ function Footer() {
   const sections = [
     {
       title: "New Projects",
-      links: [
-        // "New Delhi",
-        "Bangalore",
-
-        // "Chennai", "Mumbai", "Hyderabad"
-      ],
+      links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
       hrefs: [
-        // "/search?sf=city=New+Delhi%2B683",
-        "/residential/projects/bengaluru",
-        // "/search?sf=city=Chennai%2B580",
-        // "/search?sf=city=Mumbai%2B577",
-        // "/search?sf=city=Hyderabad%2B582",
+        "/search?sf=city=New+Delhi%2B683",
+        "/search?sf=city=Bengaluru%2B9-cg=S",
+        "/search?sf=city=Chennai%2B580",
+        "/search?sf=city=Mumbai%2B577",
+        "/search?sf=city=Hyderabad%2B582",
       ],
       /*  rel="noopener noreferrer", */
       rel: "noopener noreferrer",
@@ -73,9 +68,6 @@ function Footer() {
         "New Launch Projects",
         "On-Going Projects",
         "Completed Projects",
-        "Ready to Move Listings",
-        "Under Construction Listings",
-
         /*  "Commercial",
         "Vacation Rentals",
         "Foreclosures", */
@@ -86,8 +78,6 @@ function Footer() {
         "/search?sf=projStatus=108",
         "/search?sf=projStatus=106",
         "/search?sf=projStatus=107",
-        "/search/listing?sf=propStatus=R",
-        "/search/listing?sf=propStatus=U",
         /* "/commercial",
         "/vacation-rentals",
         "/foreclosures", */
@@ -120,7 +110,7 @@ function Footer() {
       title: "Our Pages",
       links: [
         "Home",
-        "Residential Projects",
+        "Projects",
         "Properties",
         session !== undefined &&
         session !== null &&
@@ -133,8 +123,6 @@ function Footer() {
         "Listing Search",
         "Project Search",
         "Residential Listings",
-        "Shortlisted",
-        "Compare",
       ],
       hrefs: [
         "/",
@@ -147,8 +135,6 @@ function Footer() {
         "/search/listing",
         "/search",
         "/residential-listings",
-        "/your-profile/shortlisted",
-        "/your-profile/compare",
       ],
       rel: "noopener noreferrer",
       target: "_self",
@@ -224,8 +210,6 @@ function Footer() {
                     href={link}
                     className="text-white hover:text-gray-300"
                     target="_blank"
-                    title={`Visit Get Right Property on ${name}`}
-                    aria-label={`Visit Get Right Property on ${name}`}
                   >
                     <span className="sr-only">{name}</span>
                     {icon}
@@ -248,9 +232,7 @@ function Footer() {
                             prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
-                            className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none"
-                            title={`Visit  ${link}`}
-                            aria-label={`Visit  ${link}`}
+                            className="text-xs sm:text-base text-gray-300 hover:text-white"
                           >
                             {link}
                           </Link>
@@ -276,9 +258,7 @@ function Footer() {
                                 prefetch={false}
                                 href={hrefs[index]}
                                 rel={rel}
-                                className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none "
-                                title={`Visit  ${link}`}
-                                aria-label={`Visit  ${link}`}
+                                className="text-xs sm:text-base text-gray-300 hover:text-white"
                               >
                                 {link}
                                 {link === "Home" || link === "Projects" ? (
@@ -309,9 +289,7 @@ function Footer() {
                             prefetch={false}
                             href={hrefs[index]}
                             rel={rel}
-                            className="text-xs sm:text-base text-gray-300 hover:text-white block leading-none"
-                            title={`Visit  ${link}`}
-                            aria-label={`Visit  ${link}`}
+                            className="text-xs sm:text-base text-gray-300 hover:text-white"
                           >
                             {link}
                           </Link>
@@ -343,20 +321,13 @@ function Footer() {
           {/* Footer info section */}
           <div className="mt-2 sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
             <div className="flex space-x-6 md:order-2">
-              <button
-                aria-label="Location"
-                name="Location"
-                title="Location"
-                className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
-              >
+              <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
                 <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
               </button>
               <Link
                 prefetch={false}
                 rel="noopener noreferrer"
                 href={`tel:${8884440963}`}
-                title="Call GetRight Property"
-                aria-label="Call GetRight Property"
                 className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
               >
                 <FaPhoneAlt className="mr-1" /> +91-8884440963
@@ -370,8 +341,6 @@ function Footer() {
                   prefetch={false}
                   rel="noopener noreferrer"
                   href="https://rpclan.com/"
-                  title="Visit RPCLAN"
-                  aria-label="Visit RPCLAN"
                 >
                   {" "}
                   RPCLAN SERVICES PVT.LTD{" "}

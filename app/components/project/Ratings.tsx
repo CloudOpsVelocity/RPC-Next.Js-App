@@ -13,7 +13,7 @@ export default function Ratings({ slug }: { slug: string }) {
             data?.reviewOverviewData?.averageRating
               ? `${data?.reviewOverviewData?.averageRating}`
               : "No"
-          }` ?? "No"}{" "}
+          }`}{" "}
       Ratings
       <RatingStar
         fill="#FFD600"
