@@ -247,7 +247,7 @@ function SearchCardTopCornerSection({
               <div className={Styles.searchCardAvgPriceText2}>
                 <p className="text-right text-[12px] md:text-[14px] text-nowrap ">
                   Avg Price:
-                  <span style={{ color: "#148B16" }}>
+                  <span style={{ color: "#0C5E0F" }}>
                     ₹{" "}
                     {formatNumberWithSuffix(
                       type === "proj" ? basePrice : sqftPrice
