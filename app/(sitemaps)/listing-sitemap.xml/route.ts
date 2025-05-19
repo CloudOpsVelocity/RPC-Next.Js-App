@@ -55,3 +55,4 @@ const getListingSeoData = async () => {
 };
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+export const cache = "no-store";
