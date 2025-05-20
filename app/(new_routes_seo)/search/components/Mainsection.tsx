@@ -105,7 +105,7 @@ export default function Mainsection({
           <div
             className={`hidden md:flex relative w-full max-h-[70vh] sm:fixed right-0 flex justify-center items-center md:w-[50%] scroll-mt-[150px] z-0 border-[2px] border-black-500 border-solid h-[calc(100vh-65vh)] md:h-[calc(100vh-255px)] max-w-full`}
           >
-            <Image
+            {/* <Image
               priority
               height={630}
               width={1200}
@@ -113,7 +113,16 @@ export default function Mainsection({
               alt="search page map Image"
               className="h-full w-full"
               quality={80}
-            />
+            /> */}
+
+            <Image
+                          priority
+                          src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+                          alt="search page map Image"
+                          fill
+                          className="object-contain" // or "object-cover", depending on your layout needs
+                          quality={80}
+                        />
 
             <button
               aria-label="Click to View Location Details"
