@@ -37,7 +37,7 @@ const getListingDetails = async (
       }
     );
     const data = await response.json();
-    if (!data || !data.status) {
+    if (!data.listing.propIdEnc || !data.status) {
       console.log(
         "status false from backend redirecting from next server 404."
       );
