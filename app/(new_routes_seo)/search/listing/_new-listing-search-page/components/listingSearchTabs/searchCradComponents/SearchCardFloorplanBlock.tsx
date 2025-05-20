@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-// import { useSearchParams } from "next/navigation";
 type Props = { data: any, type:string };
 export default function SearchCardFloorplanBlock({data, type}: Props) {
   let floorplanUrl = data.floorPlan.split(",")[1]
@@ -56,10 +55,10 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
   return (
     <div className=" flex flex-col justify-center items-center gap-2">
         <button
-            className="inline-flex flex-col items-center justify-center gap-2.5 p-2 md:p-3 rounded-[10px] bg-[#0073C6] text-white text-[14px] md:text-lg not-italic font-bold leading-[normal] tracking-[0.96px] top-[10%] right-[7%] ml-auto absolute top-0 right-0"
+            className="flex flex-col items-center justify-center gap-2.5 md:p-2 xl:p-3 rounded-[10px] bg-[#0073C6] text-white text-[14px] md:text-[16px] md:text-lg not-italic font-bold leading-[normal] tracking-[0.96px] absolute top-[60px] right-[20px]  "
             onClick={(e) => {
             e.preventDefault();
-            handleDownload();
+                handleDownload();
             }}
         >
             Download {(types[type] as string) || "Image"}
@@ -70,7 +69,7 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
             height={650}
             width={700}
             alt="post"
-            className="h-full pt-[50px]"
+            className="h-full pt-[30px] md:pt-[52px]"
         />
     </div>
   );
