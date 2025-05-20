@@ -180,7 +180,7 @@ export default function ServerDataSection({
           isOpen: true,
           type: "readmore",
           title: "Read More",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
           content: selectedItem.projectAbout ?? selectedItem.usp,
         }));
         break;
@@ -203,7 +203,7 @@ export default function ServerDataSection({
           isOpen: true,
           type: "otherCharges",
           title: "Other Charges",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         break;
       case "brochure":
@@ -227,7 +227,7 @@ export default function ServerDataSection({
           isOpen: true,
           type: "amenities",
           title: "Amenities",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         break;
       // case "listingType_B":
@@ -248,7 +248,7 @@ export default function ServerDataSection({
           type: "bhk",
           title: "Unit Types",
           content: sortedBhks,
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         break;
       default:

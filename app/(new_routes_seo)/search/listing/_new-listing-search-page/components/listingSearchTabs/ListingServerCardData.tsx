@@ -182,7 +182,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "readmore",
           title: "Read More",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
           content: selectedItem.projectAbout ?? selectedItem.usp,
         }));
         break;
@@ -204,7 +204,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "otherCharges",
           title: "Other Charges",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         break;
       case "brochure":
@@ -217,7 +217,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "nearby",
           title: "Near By Locations",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         // onSetNearBy(selectedItem);
         break;
@@ -228,7 +228,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "amenities",
           title: "Amenities",
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         break;
       // case "listingType_B":
@@ -249,7 +249,7 @@ export default function ListingServerCardData({
           type: "bhk",
           title: "Unit Types",
           content: sortedBhks,
-          data: selectedItem,
+          data: {...selectedItem, type: type},
         }));
         break;
       default:
