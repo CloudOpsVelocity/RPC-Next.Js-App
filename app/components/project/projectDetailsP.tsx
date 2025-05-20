@@ -40,19 +40,19 @@ export default function ProjectDetailsP({
   projData,
   slug,
 }: Props) {
-/*   useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]], {
+  /*   useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]], {
     dangerouslyForceHydrate: true,
   }); */
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
   const handlePhaseChange = (phaseId: number) => {
     setFloorPhase(phaseId);
   };
-  const selectedPhase = PhaseOverview?.find(
-    (phase: any) => phase.phaseId === currentPhase
-  );
-  useEffect(()=>{
-    setFloorPhase(PhaseOverview[0].phaseId)
-  },[PhaseOverview]);
+  const selectedPhase =
+    PhaseOverview?.find((phase: any) => phase.phaseId === currentPhase) ??
+    PhaseOverview[0];
+  useEffect(() => {
+    setFloorPhase(PhaseOverview[0].phaseId);
+  }, [PhaseOverview]);
   const propertyTypeOrder = ["apt", "rowHouse", "villa", "vlmt", "plot"];
   const orderedPropertyTypes =
     selectedPhase &&

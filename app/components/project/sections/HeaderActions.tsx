@@ -62,7 +62,8 @@ export default function HeaderActions({
     }
     return iconComponent;
   };
-  const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
+  const [Cphase, setCurrentPhase] = useAtom(currentPhaseAtom);
+  const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
   const setSelected = useSetAtom(parital_unit_atom);
   const sortOrder = ["apartment", "rowhouse", "villa", "villament", "plot"];
 
@@ -117,7 +118,7 @@ export default function HeaderActions({
                         : each.phaseName
                     }
                     onChange={() => {
-                     /*  if (currentPhase == each.phaseId) return; */
+                      /*  if (currentPhase == each.phaseId) return; */
                       setCurrentPhase(each.phaseId);
                       setSelected(0);
                     }}
@@ -144,24 +145,26 @@ export default function HeaderActions({
           const keyName = whichPropToUse[each as keyof typeof whichPropToUse];
           let name =
             propertyDetailsTypes.get(keyName)?.[whichKeyname] !== undefined
-              ? propertyDetailsTypes.get(keyName)?.[whichKeyname] // Use whichKeyname to access the property
+              ? propertyDetailsTypes.get(keyName)?.[whichKeyname]
               : null;
           return (
-            <Button
-              key={keyName}
-              buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border capitalize ${
-                propCgId == keyName
-                  ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
-                  : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
-              } `}
-              onChange={() => {
-                if (propCgId !== keyName) {
-                  setPropCgId(keyName);
-                }
-              }}
-              title={name}
-              icon={getIcon(keyName)}
-            />
+            <>
+              <Button
+                key={keyName}
+                buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border capitalize ${
+                  propCgId == keyName
+                    ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                    : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
+                } `}
+                onChange={() => {
+                  if (propCgId !== keyName) {
+                    setPropCgId(keyName);
+                  }
+                }}
+                title={name}
+                icon={getIcon(keyName)}
+              />
+            </>
           );
         })}
       </div>

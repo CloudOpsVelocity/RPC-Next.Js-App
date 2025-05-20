@@ -25,7 +25,8 @@ export default function PartialUnitData({
   type,
   handlePricingFloorPlanClick,
 }: Props) {
-  const currentPhase = useAtomValue(currentPhaseAtom);
+  const Cphase = useAtomValue(currentPhaseAtom);
+  const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
   const isPropTypesAvailable =
     (partialUnitData &&
       partialUnitData[currentPhase] &&
@@ -46,7 +47,11 @@ export default function PartialUnitData({
       />
       {isPropTypesAvailable.length > 0 ? (
         <MainSection
-          partialUnitData={{ ...partialUnitData, handlePricingFloorPlanClick }}
+          partialUnitData={{
+            ...partialUnitData,
+            handlePricingFloorPlanClick,
+          }}
+          phaseList={phaseList}
           data={{ ...data, type }}
         />
       ) : (

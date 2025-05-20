@@ -199,11 +199,6 @@ export default async function page(props: Props) {
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-  const toTitleCase = (str: string) =>
-    str
-      .split("-")
-      .map((word) => capitalize(word))
-      .join(" ");
   return (
     <section className="w-full relative break-words ">
       <meta name="robots" content="index, follow" />

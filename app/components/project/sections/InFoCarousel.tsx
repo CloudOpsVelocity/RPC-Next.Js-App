@@ -9,11 +9,12 @@ import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 
 type Props = {
   partialUnitData: any;
+  phaseList: any;
 };
 
-export default function InFoCarousel({ partialUnitData }: Props) {
-  const currentPhase = useAtomValue(currentPhaseAtom);
-
+export default function InFoCarousel({ partialUnitData, phaseList }: Props) {
+  const Cphase = useAtomValue(currentPhaseAtom);
+  const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
   const propCgId = useAtomValue(propCgIdAtom);
   const whichKeyname = partialUnitData.type === "overview" ? "apiProp" : "name";
   const data =
@@ -172,7 +173,9 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                     border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
                   >
                     <button
-                      aria-label="View Floor Plan" name="View Floor Plan" title="View Floor Plan"
+                      aria-label="View Floor Plan"
+                      name="View Floor Plan"
+                      title="View Floor Plan"
                       className="text-[#0073C6] text-[12px] sm:text-[16px] font-semibold 
                       leading-normal font-Montserrat"
                       onClick={() => handleCardClick(units, item)}

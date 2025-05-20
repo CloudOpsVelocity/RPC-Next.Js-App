@@ -3,7 +3,7 @@ import { selectAtom } from "jotai/utils";
 import { PropertyUnit } from "../components/project/newFloorPlan/types/floor-plan";
 import { UNIT_DATA_KEYS } from "../components/project/newFloorPlan/utils/generateuniqueoptions";
 
-export const currentPhaseAtom = atom(554);
+export const currentPhaseAtom = atom(0);
 export const propCgIdAtom = atom(35);
 
 interface UnitFilters {

@@ -6,9 +6,14 @@ import PartialUnitModal from "./Modal/Modal";
 type Props = {
   partialUnitData: any;
   data: any;
+  phaseList: any;
 };
 
-export default function MainSection({ partialUnitData, data }: Props) {
+export default function MainSection({
+  partialUnitData,
+  data,
+  phaseList,
+}: Props) {
   return (
     <div className="mt-6">
       <InFoCarousel
@@ -17,6 +22,7 @@ export default function MainSection({ partialUnitData, data }: Props) {
           type: data.type,
           id: data.projIdEnc,
         }}
+        phaseList={phaseList}
       />
       {data.type !== "overview" && <PartialUnitModal data={data} />}
     </div>

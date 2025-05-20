@@ -16,7 +16,8 @@ import { sortUnits } from "@/app/utils/unitparser";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 const PricingSection = ({ unitData, projName, phaseList }: any) => {
-  const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
+  const [Cphase, setCurrentPhase] = useAtom(currentPhaseAtom);
+  const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom ?? 35);
   const sorted = ["Apartment", "Row House", "Villa", "Villament", "Plot"];
   const propTypes = Object.keys(
@@ -36,7 +37,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
     >
       <h2 className="text-h2 sm:text-[22px] xl:text-[28px] font-bold text-gray-800 mb-4">
         <strong>
-          <span className="text-[#001F35]">Pricing Details of{" "}</span>
+          <span className="text-[#001F35]">Pricing Details of </span>
           <span className="text-green-800">{projName}</span>
         </strong>
       </h2>
