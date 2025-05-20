@@ -97,6 +97,15 @@ export default function Mainsection({
               className="h-full w-full"
               quality={80}
             />
+{/* 
+            <Image
+              priority
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+              alt="search page map Image"
+              fill
+              className="object-contain" // or "object-cover", depending on your layout needs
+              // quality={80}
+            /> */}
 
             <button
               aria-label="Click to View Location Details"

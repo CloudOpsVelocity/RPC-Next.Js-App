@@ -1,4 +1,4 @@
-import ProjectCard from "@/app/test/newui/components/Card";
+// import ProjectCard from "@/app/test/newui/components/Card";
 import { SearchFilter } from "@/app/types/search";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import SearchCard from "../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/SearchCard";
@@ -9,9 +9,9 @@ import {
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { sortUnits } from "@/app/utils/unitparser";
 import PopupOverlay from "../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/PopupOverlay";
-import { searchPageMapToggle } from "../store/newSearchProjectStore";
-import { useSetAtom } from "jotai";
-import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
+// import { searchPageMapToggle } from "../store/newSearchProjectStore";
+// import { useSetAtom } from "jotai";
+// import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -57,9 +57,9 @@ export default function ServerDataSection({
     data: {},
     content: "",
   });
-  const setIsMapLoaded = useSetAtom(searchPageMapToggle);
-  const setNearby = useSetAtom(selectedNearByAtom);
-  const setSelected = useSetAtom(selectedSearchAtom);
+  // const setIsMapLoaded = useSetAtom(searchPageMapToggle);
+  // const setNearby = useSetAtom(selectedNearByAtom);
+  // const setSelected = useSetAtom(selectedSearchAtom);
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
   const [, { open }] = useReqCallPopup();
@@ -70,46 +70,46 @@ export default function ServerDataSection({
     cardFnsRef.current[id] = fn;
   };
 
-  const onViewMap = (data: any) => {
-    const {
-      agentListing,
-      ownerListing,
-      projName,
-      propName,
-      projIdEnc,
-      propIdEnc,
-      propType,
-      propTypeName,
-      phaseId,
-      location,
-    } = data;
+  // const onViewMap = (data: any) => {
+  //   const {
+  //     agentListing,
+  //     ownerListing,
+  //     projName,
+  //     propName,
+  //     projIdEnc,
+  //     propIdEnc,
+  //     propType,
+  //     propTypeName,
+  //     phaseId,
+  //     location,
+  //   } = data;
 
-    const projOrPropName: string = type === "proj" ? projName : propName;
+  //   const projOrPropName: string = type === "proj" ? projName : propName;
 
-    const lat = location.split(",")[0];
-    const lang = location.split(",")[1];
+  //   const lat = location.split(",")[0];
+  //   const lang = location.split(",")[1];
 
-    setIsMapLoaded(true);
-    setNearby((prev: any) => ({
-      ...prev,
-      category: "",
-      selectedNearbyItem: {},
-      data: {},
-      id: "",
-      isOpen: false,
-    }));
-    setSelected({
-      agentListing,
-      ownerListing,
-      projOrPropName,
-      lat,
-      lang,
-      type,
-      reqId: type === "proj" ? projIdEnc : propIdEnc,
-      propType: type === "proj" ? propType : propTypeName,
-      phaseId: phaseId,
-    });
-  };
+  //   setIsMapLoaded(true);
+  //   setNearby((prev: any) => ({
+  //     ...prev,
+  //     category: "",
+  //     selectedNearbyItem: {},
+  //     data: {},
+  //     id: "",
+  //     isOpen: false,
+  //   }));
+  //   setSelected({
+  //     agentListing,
+  //     ownerListing,
+  //     projOrPropName,
+  //     lat,
+  //     lang,
+  //     type,
+  //     reqId: type === "proj" ? projIdEnc : propIdEnc,
+  //     propType: type === "proj" ? propType : propTypeName,
+  //     phaseId: phaseId,
+  //   });
+  // };
 
   const handleDownload = (data: any) => {
     const { brochureUrl } = data;
@@ -190,11 +190,22 @@ export default function ServerDataSection({
       case "share":
         shearPropOrProj(selectedItem);
         break;
-      case "viewMap":
-        onViewMap(selectedItem);
-        break;
+      // case "viewMap":
+      //   onViewMap(selectedItem);
+      //   break;
       case "requestCall":
         handleOpen(selectedItem);
+        break;
+      case "floorplan":
+        document.body.style.overflow = "hidden";
+        setPopupState((prev) => ({
+          ...prev,
+          isOpen: true,
+          type: "floorplan",
+          title: "Floorplan",
+          data: {...selectedItem, type: type},
+          floorplanType:"F"
+        }));
         break;
       case "otherCharges":
         // handleOpen(selectedItem)

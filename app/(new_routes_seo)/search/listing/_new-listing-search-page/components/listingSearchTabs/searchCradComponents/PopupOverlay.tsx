@@ -8,6 +8,7 @@ import OtherChargesPopupBox from './OtherChargesPopupBox';
 import Link from 'next/link';
 import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
 import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
+import SearchCardFloorplanBlock from './SearchCardFloorplanBlock';
 
 type Props = {
     popupState: any;
@@ -15,7 +16,7 @@ type Props = {
 }
 
 function PopupOverlay({popupState, closePopup}: Props) {
-    const { content, data, title } = popupState;
+    const { content, data, title, floorplanType } = popupState;
     const { 
       location, propIdEnc, projIdEnc, propTypeId, propTypeName, propName, projName, bhkName, 
       category, localityName, city, locality, cityName, phaseName, type
@@ -69,6 +70,8 @@ function PopupOverlay({popupState, closePopup}: Props) {
                 )}
               </div>
             );
+          case "floorplan":
+            return <SearchCardFloorplanBlock data={data} type={floorplanType} />
           case "otherCharges":
             return <OtherChargesPopupBox data={data} />
           case "hightlights":

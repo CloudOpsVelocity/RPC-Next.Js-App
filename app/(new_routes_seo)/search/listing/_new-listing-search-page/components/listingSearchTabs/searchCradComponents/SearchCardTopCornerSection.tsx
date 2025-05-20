@@ -102,28 +102,37 @@ function SearchCardTopCornerSection({
                 </button>
 
                 {floorPlan && type !== "proj" && (
-                  <Link
-                    className="w-[18px] h-[18px] "
-                    href={`/image?path=${
-                      floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
-                    }&type=F`}
+                  // <Link
+                  //   className="w-[18px] h-[18px] "
+                  //   href={`/image?path=${
+                  //     floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
+                  //   }&type=F`}
+                  //   title={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  //   aria-label={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  // >
+                  //    {/* <svg
+                  //     width="18px"
+                  //     height="18px"
+                  //     viewBox="0 0 15 15"
+                  //     fill="none"
+                  //     xmlns="http://www.w3.org/2000/svg"
+                  //   >
+                  //     <path
+                  //       d="M10 0.5H14.5V14.5H0.5V0.5H4.5L7.5 2.5M6.5 14.5V7.5M4 7.5H9M12 7.5H14.5"
+                  //       stroke="#000000"
+                  //     />
+                  //   </svg> */}
+                  //   🗺️
+                  // </Link>
+
+                   <button
+                    data-action="floorplan"
+                    className="w-[18px] h-[18px]"
                     title={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                     aria-label={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
                   >
-                     {/* <svg
-                      width="18px"
-                      height="18px"
-                      viewBox="0 0 15 15"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10 0.5H14.5V14.5H0.5V0.5H4.5L7.5 2.5M6.5 14.5V7.5M4 7.5H9M12 7.5H14.5"
-                        stroke="#000000"
-                      />
-                    </svg> */}
-                    🗺️
-                  </Link>
+                    <span>🗺️</span>
+                  </button>
                 )}
 
                 <button
@@ -356,16 +365,26 @@ function SearchCardTopCornerSection({
                   }
                 />
                 {floorPlan && (
-                  <Link
-                    title={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
-                    aria-label={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  // <Link
+                  //   title={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  //   aria-label={`View Floor Plan for this ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`}
+                  //   className="text-[14px]  text-btnPrimary  font-bold mt-2"
+                  //   href={`/image?path=${
+                  //     floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
+                  //   }&type=F`}
+                  // >
+                  //   <span className="hidden sm:flex">View Floor Plan</span>
+                  // </Link>
+
+                  <button
+                    data-action="floorplan"
                     className="text-[14px]  text-btnPrimary  font-bold mt-2"
-                    href={`/image?path=${
-                      floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE ?? "")[1]
-                    }&type=F`}
+                    title={`Click to view Floorplan for ${projOrPropName}`}
+                    aria-label={`Click to view Floorplan for ${projOrPropName}`}
                   >
-                    <span className="hidden sm:flex">View Floor Plan</span>
-                  </Link>
+                    <span>View Floor Plan</span>
+                  </button>
+
                 )}
               </>
             )}
