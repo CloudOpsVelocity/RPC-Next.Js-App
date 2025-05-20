@@ -285,6 +285,7 @@ export default async function page(props: Props) {
             partialUnitData={data.partialUnitData}
             phaseOverview={phaseOverview}
             slug={slug}
+            data={data}
             postedById={data.builderId}
           />
         ) : (

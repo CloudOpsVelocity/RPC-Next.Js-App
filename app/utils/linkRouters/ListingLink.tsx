@@ -33,7 +33,7 @@ type ListingLinkProps = {
   children: ReactNode;
   className?: string;
 };
-const slugifyBHKUnitType = (bhkUnitType: string): string => {
+export const slugifyBHKUnitType = (bhkUnitType: string): string => {
   return bhkUnitType
     .toLowerCase() // Convert to lowercase
     .replace(/\+/g, "-with-") // Replace '+' with 'with'

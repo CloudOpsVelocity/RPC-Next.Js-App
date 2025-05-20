@@ -24,6 +24,7 @@ export default function MainSection({
           type: data.type,
           id: data.projIdEnc,
         }}
+        data={data}
         phaseList={phaseList}
         propCgId={propCgId}
       />

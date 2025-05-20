@@ -3,26 +3,35 @@ import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
-import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+import { slugify } from "@/app/utils/linkRouters/ProjectLink";
+import { slugifyBHKUnitType } from "@/app/utils/linkRouters/ListingLink";
+import Link from "next/link";
 
 type Props = {
   partialUnitData: any;
   phaseList: any;
   propCgId: number;
+  data: any;
 };
 
 export default function InFoCarousel({
   partialUnitData,
   phaseList,
   propCgId: PropertyId,
+  data: projectData,
 }: Props) {
   const Cphase = useAtomValue(currentPhaseAtom);
   const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
   const categoryId = useAtomValue(propCgIdAtom);
   const propCgId = categoryId ? categoryId : PropertyId;
+  const propName = propertyDetailsTypes.get(propCgId);
   const whichKeyname = partialUnitData.type === "overview" ? "apiProp" : "name";
+  const currentPhaseName = phaseList.find(
+    (item: any) => item.phaseId === currentPhase
+  )?.phaseName;
   const data =
     partialUnitData[currentPhase]?.[
       propertyDetailsTypes.get(propCgId)?.[whichKeyname] ?? ""
@@ -49,7 +58,7 @@ export default function InFoCarousel({
       )}`,
     });
   };
-
+  // let uniTypeUrl =
   return (
     <div className="justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto sm:min-h-[180px] max-h-[340px] xl:max-h-[340px] overflow-auto">
       <table className="min-w-full border-collapse mr-auto">
@@ -99,16 +108,62 @@ export default function InFoCarousel({
                   className="flex flex-row justify-start items-start !z-[1]"
                 >
                   <td
-                    className="bg-[#EEF7FF] shadow-gray-950 shadow-right mb:shadow-right-0 sticky left-0 
-                    w-[90px] sm:w-[220px] text-gray-900 text-[12px] sm:text-[16px] font-semibold 
-                    h-[50px] sm:h-[60px] flex justify-center text-center items-center 
-                    border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid 
-                    sm:shadow-lg md:shadow-none"
+                    className="w-[150px] sm:w-[220px] bg-[#EEF7FF] text-gray-900 text-[12px] sm:text-[16px] 
+  font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center gap-1
+  border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
                   >
-                    {partialUnitData.type === "overview" && propCgId === 32
-                      ? item.replace("_", " x ")
-                      : item}
+                    {item}{" "}
+                    <Link
+                      href={`/residential-listings/for-sale/bengaluru/${slugify(
+                        projectData.localityName || ""
+                      )}/${slugify(projectData.projectName || "")}${
+                        currentPhaseName
+                          ? `/${slugify(currentPhaseName || "")}`
+                          : ""
+                      }/${slugifyBHKUnitType(
+                        `${item}-${propName?.name || ""}`
+                      )}`}
+                      className="text-[#0073E6] underline hover:no-underline ml-1"
+                      aria-label={`View details for ${item} ${
+                        propName?.name
+                      } For Sale ${projectData.projectName}${
+                        currentPhaseName ? -`${currentPhaseName}` : ""
+                      } in ${projectData.localityName}, Bengaluru`}
+                      title={`View details for ${item} ${
+                        propName?.name
+                      } For Sale  ${projectData.projectName}${
+                        currentPhaseName ? -`${currentPhaseName}` : ""
+                      } in ${projectData.localityName}, Bengaluru`}
+                    >
+                      Sale
+                    </Link>{" "}
+                    |{" "}
+                    <Link
+                      href={`/residential-listings/for-rent/bengaluru/${slugify(
+                        projectData.localityName || ""
+                      )}/${slugify(projectData.projectName || "")}${
+                        currentPhaseName
+                          ? `/${slugify(currentPhaseName || "")}`
+                          : ""
+                      }/${slugifyBHKUnitType(
+                        `${item}-${propName?.name || ""}`
+                      )}`}
+                      className="text-[#0073E6] underline hover:no-underline"
+                      aria-label={`View details for ${item} ${
+                        propName?.name
+                      } For Rent ${projectData.projectName}${
+                        currentPhaseName ? -`${currentPhaseName}` : ""
+                      } in ${projectData.localityName}, Bengaluru`}
+                      title={`View details for ${item} ${
+                        propName?.name
+                      } For Rent  ${projectData.projectName}${
+                        currentPhaseName ? -`${currentPhaseName}` : ""
+                      } in ${projectData.localityName}, Bengaluru`}
+                    >
+                      Rent
+                    </Link>
                   </td>
+
                   <td
                     className="w-[150px] sm:w-[220px] bg-[#FFF] text-gray-900 text-[12px] sm:text-[16px] 
                     font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center 

@@ -41,6 +41,7 @@ interface FloorPlansProps {
   phaseOverview: any;
   slug: string;
   postedById: number;
+  data: any;
 }
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import PartialUnitData from "../sections";
@@ -57,6 +58,7 @@ export default function FloorPlans({
   phaseOverview,
   slug,
   postedById,
+  data,
 }: FloorPlansProps): JSX.Element {
   const [selectedPhase, setSelectedPhase] = useAtom(currentPhaseAtom);
   const propCgId = useAtomValue(propCgIdAtom);
@@ -348,7 +350,7 @@ export default function FloorPlans({
             partialUnitData={paritalUnitParser(phaseOverview)}
             projName={projName}
             phaseList={phases}
-            data={projectUnitsData}
+            data={data}
             type="overview"
             handlePricingFloorPlanClick={handlePricingFloorPlanClick}
           />
@@ -360,14 +362,16 @@ export default function FloorPlans({
         <h2
           className="text-[22px] xl:text-[28px] font-bold mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
           id="floorPlansdiv"
-        > 
+        >
           <strong>
-            <span className="text-[#001F35]">Floor Plans For{" "}</span>
+            <span className="text-[#001F35]">Floor Plans For </span>
             <span className="text-green-800 ">{projName}</span>{" "}
           </strong>
         </h2>
         {/* <SubHeading text="See floor plans as per your selected property type" /> */}
-        <p className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2">See floor plans as per your selected property type</p>
+        <p className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2">
+          See floor plans as per your selected property type
+        </p>
         <div className="space-y-6 flex flex-col items-start justify-start">
           <div
             className={`flex justify-start items-start md:items-center mb-[2%] flex-col md:flex-row ${
