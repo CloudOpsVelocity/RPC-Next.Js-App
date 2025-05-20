@@ -64,7 +64,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
               values.map((value) => (
                 <div
                   key={`${category}-${value}`}
-                  className="flex items-center text-nowrap gap-2 mb-[6px] mt-[6px] bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
+                  className="flex items-center text-nowrap gap-2 mb-1.5 mt-1.5 bg-[#E6F1FA] text-[#005A9C] px-3 py-1 rounded-full text-sm capitalize"
                 >
                   <span>
                     {category === "localities" ||
@@ -77,6 +77,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
                   </span>
                   {/* {typeof window !== "undefined" && ( */}
                     <button
+                      aria-label="Remove Item"
                       onClick={() => {
                         dispatch({
                           type: "update",
@@ -102,7 +103,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
             ) : (
               <div
                 key={`${category}-${values}`}
-                className="flex items-center text-nowrap gap-2 mb-[6px] mt-[6px] bg-[#0073C6]/10 text-[#0073C6] px-3 py-1 rounded-full text-sm capitalize"
+                className="flex items-center text-nowrap gap-2 mb-1.5 mt-1.5 bg-[#E6F1FA] text-[#005A9C] px-3 py-1 rounded-full text-sm capitalize"
               >
                 <span>
                   {values === "All"
@@ -123,6 +124,7 @@ const ListingSelectedFilters = ({ frontendFilters }: Props) => {
                 </span>
                 {/* {typeof window !== "undefined" && ( */}
                   <button
+                    aria-label="Remove Item"
                     onClick={() => {
                       dispatch({
                         type: "update",
