@@ -144,14 +144,18 @@ export default function ServerDataSection({
       const cardId = cardEl.dataset.id;
       const actionButton = e.target.closest('[data-action]');
       const index = cardId ? cardId.split("_")[1] : 0;
-      const selectedItem:any = data[index];
+      const selectedItem:any = data[index]; 
       // setSelectedCard(selectedItem);  
       const action = actionButton?.dataset.action;
     
       switch(action){
         case 'readmore':
           document.body.style.overflow = "hidden";
-          setPopupState(prev => ({...prev, isOpen: true, type: 'readmore', title:"About Project", data: selectedItem, content: selectedItem.projectAbout ?? selectedItem.usp}));
+          setPopupState(prev => (
+            {...prev, 
+              isOpen: true, type: 'readmore', title:"About Project", 
+              data: {...selectedItem, type: type},
+              content: selectedItem.projectAbout ?? selectedItem.usp}));
           break; 
         // case 'like':
         //   handleParentAction(index.toString());
