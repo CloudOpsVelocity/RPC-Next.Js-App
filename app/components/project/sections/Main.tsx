@@ -7,12 +7,14 @@ type Props = {
   partialUnitData: any;
   data: any;
   phaseList: any;
+  propCgId: number;
 };
 
 export default function MainSection({
   partialUnitData,
   data,
   phaseList,
+  propCgId,
 }: Props) {
   return (
     <div className="mt-6">
@@ -23,6 +25,7 @@ export default function MainSection({
           id: data.projIdEnc,
         }}
         phaseList={phaseList}
+        propCgId={propCgId}
       />
       {data.type !== "overview" && <PartialUnitModal data={data} />}
     </div>

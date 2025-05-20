@@ -4,7 +4,7 @@ import { PropertyUnit } from "../components/project/newFloorPlan/types/floor-pla
 import { UNIT_DATA_KEYS } from "../components/project/newFloorPlan/utils/generateuniqueoptions";
 
 export const currentPhaseAtom = atom(0);
-export const propCgIdAtom = atom(35);
+export const propCgIdAtom = atom(0);
 
 interface UnitFilters {
   unitNumber: string;

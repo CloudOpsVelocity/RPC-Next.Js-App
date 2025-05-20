@@ -10,12 +10,18 @@ import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 type Props = {
   partialUnitData: any;
   phaseList: any;
+  propCgId: number;
 };
 
-export default function InFoCarousel({ partialUnitData, phaseList }: Props) {
+export default function InFoCarousel({
+  partialUnitData,
+  phaseList,
+  propCgId: PropertyId,
+}: Props) {
   const Cphase = useAtomValue(currentPhaseAtom);
   const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
-  const propCgId = useAtomValue(propCgIdAtom);
+  const categoryId = useAtomValue(propCgIdAtom);
+  const propCgId = categoryId ? categoryId : PropertyId;
   const whichKeyname = partialUnitData.type === "overview" ? "apiProp" : "name";
   const data =
     partialUnitData[currentPhase]?.[

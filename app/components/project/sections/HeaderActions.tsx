@@ -26,18 +26,24 @@ import {
 import { parital_unit_atom } from "@/app/store/partialsUnits";
 
 type Props = {
-  partialUnitData: any;
   projName: string;
   phaseList: any;
   type?: "overview" | "partial";
+  whichPropToUse: Record<string, any>;
+  propCgId: number;
+  sortedPropTypes: string[];
+  whichKeyname: any;
 };
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 export default function HeaderActions({
-  partialUnitData,
   projName,
   phaseList,
   type,
+  whichPropToUse,
+  whichKeyname,
+  propCgId,
+  sortedPropTypes,
 }: Props) {
   const getIcon = (id: number) => {
     let iconComponent;
@@ -65,20 +71,7 @@ export default function HeaderActions({
   const [Cphase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
   const setSelected = useSetAtom(parital_unit_atom);
-  const sortOrder = ["apartment", "rowhouse", "villa", "villament", "plot"];
-
-  const sortedPropTypes = Object.keys(partialUnitData?.[currentPhase] || {})
-    .filter(
-      (key) => Object.keys(partialUnitData[currentPhase][key] || {}).length > 0
-    )
-    .sort(
-      (a, b) =>
-        sortOrder.indexOf(a.toLocaleLowerCase().replace(" ", "")) -
-        sortOrder.indexOf(b.toLocaleLowerCase().replace(" ", ""))
-    );
-
-  const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
-
+  const setPropCgId = useSetAtom(propCgIdAtom);
   return (
     <div>
       {" "}
@@ -139,13 +132,12 @@ export default function HeaderActions({
       </div>
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
         {sortedPropTypes?.map((each: string) => {
-          const whichPropToUse =
-            type == "overview" ? parseDataProjectProps : listingProps;
-          const whichKeyname = type === "overview" ? "apiProp" : "name";
           const keyName = whichPropToUse[each as keyof typeof whichPropToUse];
           let name =
+            // @ts-ignore
             propertyDetailsTypes.get(keyName)?.[whichKeyname] !== undefined
-              ? propertyDetailsTypes.get(keyName)?.[whichKeyname]
+              ? // @ts-ignore
+                propertyDetailsTypes.get(keyName)?.[whichKeyname]
               : null;
           return (
             <>

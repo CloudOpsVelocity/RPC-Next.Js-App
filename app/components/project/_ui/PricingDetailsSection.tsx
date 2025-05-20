@@ -18,11 +18,16 @@ import React, { useEffect } from "react";
 const PricingSection = ({ unitData, projName, phaseList }: any) => {
   const [Cphase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
-  const [propCgId, setPropCgId] = useAtom(propCgIdAtom ?? 35);
+  const [categoryId, setPropCgId] = useAtom(propCgIdAtom);
   const sorted = ["Apartment", "Row House", "Villa", "Villament", "Plot"];
   const propTypes = Object.keys(
     unitData && unitData[currentPhase] ? unitData[currentPhase] : {}
   ).sort((a, b) => sorted.indexOf(a) - sorted.indexOf(b));
+
+  const propCgId = categoryId
+    ? categoryId
+    : listingProps[propTypes[0] as keyof typeof listingProps];
+
   const filteredData =
     unitData[currentPhase]?.[propertyDetailsTypes.get(propCgId)?.name ?? ""];
   useEffect(() => {
