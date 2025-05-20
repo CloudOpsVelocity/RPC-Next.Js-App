@@ -46,8 +46,8 @@ type Props = {
   propertyType: string;
   phase: number;
   isPartialData: boolean;
-  slug: string,
-  projData:any;
+  slug: string;
+  projData: any;
 };
 export const getPropId = (key: string) => {
   switch (key) {
@@ -76,7 +76,7 @@ export default function PropertyTypeDetailsCrad({
   phase,
   isPartialData,
   slug,
-  projData
+  projData,
 }: Props) {
   // const [, { open }] = useFloorPlanPopup();
   const [, setModalState] = useAtom(modalStateAtom);
@@ -161,13 +161,9 @@ export default function PropertyTypeDetailsCrad({
     }
   };
 
-function hyphenate(text:string) {
-  return text
-    .trim()
-    .split(' ')
-    .filter(Boolean)
-    .join('-');
-}
+  function hyphenate(text: string) {
+    return text.trim().split(" ").filter(Boolean).join("-");
+  }
 
   const plotCounts =
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
@@ -189,17 +185,15 @@ function hyphenate(text:string) {
     return str;
   };
 
+  const phaseNameRetruner = () => {
+    const match = projData.phases.find(
+      (eachPhase: any) => eachPhase.phaseId === phase
+    );
+    return match?.phaseName || "";
+  };
 
-
-const phaseNameRetruner = () => {
-  const match = projData.phases.find((eachPhase: any) => eachPhase.phaseId === phase);
-  return match?.phaseName || '';
-};
-
-const rawPhaseName = phaseNameRetruner();
-const phaseName = rawPhaseName ? hyphenate(rawPhaseName.toLowerCase()) : '';
-console.log(phaseName)
-
+  const rawPhaseName = phaseNameRetruner();
+  const phaseName = rawPhaseName ? hyphenate(rawPhaseName.toLowerCase()) : "";
 
   const getElevationTooltip = (tower: any) => {
     if (propertyType === "rowHouse" || propertyType === "villa") {
@@ -296,7 +290,12 @@ console.log(phaseName)
             )}
           </div>
 
-          <button aria-label="View Floor Plans" name="View Floor Plans" title="View Floor Plans" className="text-[12px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6]  not-italic font-semibold leading-[normal]">
+          <button
+            aria-label="View Floor Plans"
+            name="View Floor Plans"
+            title="View Floor Plans"
+            className="text-[12px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6]  not-italic font-semibold leading-[normal]"
+          >
             View Floor Plans
           </button>
         </div>
@@ -318,22 +317,32 @@ console.log(phaseName)
         <div className="text-[14px] sm:text-[18px] xl:text-[22px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
-            
-             <p
+            <p
               className={clsx(
                 "text-[#242424] text-right text-[12px]  sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[240px] inline-block w-[100%] line-clamp-1"
               )}
-             
-            >   {parseUnits(cg?.unitTypes, propertyType).map((bhk, index)=>{
-               let BHKLIST =parseUnits(cg?.unitTypes, propertyType)
-              const isLast = index === BHKLIST.length - 1;
-                return(
-               <Link key={index}  href={`/residential-listings/for-sale/bengaluru/${projData.localityName.toLowerCase()}/${hyphenate(projData.projectName).toLowerCase()}/${phaseName}/${hyphenate(bhk).toLowerCase()}-${propName(propertyType, "name")?.toLocaleLowerCase()}`}>
-                  {bhk}{ (isLast ? '' : ', ')}
-              </Link>
-                )
+            >
+              {" "}
+              {parseUnits(cg?.unitTypes, propertyType).map((bhk, index) => {
+                let BHKLIST = parseUnits(cg?.unitTypes, propertyType);
+                const isLast = index === BHKLIST.length - 1;
+                return (
+                  <Link
+                    key={index}
+                    href={`/residential-listings/for-sale/bengaluru/${projData.localityName.toLowerCase()}/${hyphenate(
+                      projData.projectName
+                    ).toLowerCase()}/${phaseName}/${hyphenate(
+                      bhk
+                    ).toLowerCase()}-${propName(
+                      propertyType,
+                      "name"
+                    )?.toLocaleLowerCase()}`}
+                  >
+                    {bhk}
+                    {isLast ? "" : ", "}
+                  </Link>
+                );
               })}
-              
             </p>
           ) : (
             <>

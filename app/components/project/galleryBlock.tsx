@@ -104,7 +104,33 @@ export default function GalleryBlock({
                   playing
                 />
               ) : (
-                <div className="min-h-[220px] max-h-[250px] sm:max-h-[400px] xl:max-h-[450px]">
+                <div
+                  className="min-h-[220px] max-h-[250px] sm:max-h-[400px] xl:max-h-[450px]"
+                  onClick={(e) => {
+                    const isVideo =
+                      selectedMedia.includes(".mp4") ||
+                      selectedMedia.includes("youtube");
+                    dispatch({
+                      type: "OPEN",
+                      payload: {
+                        items: isVideo ? videos : images,
+                        mediaType: isVideo ? "video" : "image",
+                        title:
+                          type === "prop"
+                            ? isVideo
+                              ? "Property Video"
+                              : "Property Gallery"
+                            : isVideo
+                            ? "Project Video"
+                            : "Project Gallery",
+                        activeIndex: isVideo
+                          ? videos.indexOf(selectedMedia)
+                          : images.indexOf(selectedMedia),
+                      },
+                    });
+                    preventBackButton();
+                  }}
+                >
                   <picture>
                     <source
                       media="(max-width: 460px)"
@@ -143,8 +169,12 @@ export default function GalleryBlock({
                     /> */}
 
                     <img
-                      alt={type === "prop" ? "Property Gallery" : "Project Gallery"}
-                      title={type === "prop" ? "Property Gallery" : "Project Gallery"}
+                      alt={
+                        type === "prop" ? "Property Gallery" : "Project Gallery"
+                      }
+                      title={
+                        type === "prop" ? "Property Gallery" : "Project Gallery"
+                      }
                       src={selectedMedia.split(",")[2]} // fallback image
                       width={799}
                       height={400}
@@ -156,9 +186,11 @@ export default function GalleryBlock({
               )}
               <button
                 aria-label="Open Gallery"
-                name="Open Gallery" 
+                name="Open Gallery"
                 title="Open Gallery"
-                onClick={() => {
+                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[6]"
+                data-id="popup-opner"
+                onClick={(e) => {
                   const isVideo =
                     selectedMedia.includes(".mp4") ||
                     selectedMedia.includes("youtube");
@@ -182,7 +214,6 @@ export default function GalleryBlock({
                   });
                   preventBackButton();
                 }}
-                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[6]"
               >
                 <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px]" />
               </button>
