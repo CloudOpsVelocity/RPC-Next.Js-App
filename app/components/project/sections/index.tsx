@@ -65,6 +65,7 @@ export default function PartialUnitData({
         type={type}
         propCgId={propCgId}
         sortedPropTypes={sortedPropTypes}
+        data={data}
       />
       {isPropTypesAvailable.length > 0 ? (
         <MainSection

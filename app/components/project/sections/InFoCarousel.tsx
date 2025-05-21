@@ -241,7 +241,7 @@ export default function InFoCarousel({
                       leading-normal font-Montserrat"
                       onClick={() => handleCardClick(units, item)}
                     >
-                      <div className="flex flex-row gap-2">
+                      <span className="flex flex-row gap-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="23"
@@ -255,7 +255,7 @@ export default function InFoCarousel({
                           />
                         </svg>
                         <span>View Floor Plan</span>
-                      </div>
+                      </span>
                     </button>
                   </td>
                 </tr>

@@ -5018,7 +5018,7 @@ export const ApartmentIcon = ({
   sc?: any;
 }) => {
   return (
-    <div className={className}>
+    <span className={className}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={w}
@@ -5089,7 +5089,7 @@ export const ApartmentIcon = ({
           <path d="M18 16.1895H19.3333V17.5228H18V16.1895Z" fill={color} />
         </g>
         <defs>
-          <clipPath id="clip0_385_23216">
+          <clipPath>
             <rect
               width="24"
               height="24"
@@ -5099,7 +5099,7 @@ export const ApartmentIcon = ({
           </clipPath>
         </defs>
       </svg>
-    </div>
+    </span>
   );
 };
 

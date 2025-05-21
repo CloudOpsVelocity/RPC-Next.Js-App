@@ -33,6 +33,7 @@ type Props = {
   propCgId: number;
   sortedPropTypes: string[];
   whichKeyname: any;
+  data: any;
 };
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
