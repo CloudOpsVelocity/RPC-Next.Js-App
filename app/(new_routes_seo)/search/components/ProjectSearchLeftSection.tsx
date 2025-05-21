@@ -28,6 +28,7 @@ type Props = {
   setIsTrue: any;
   preDefinedFilters: string | null;
   apiFilterQueryParams: string | null;
+  serverFilterString: string;
 };
 
 function LeftSection({
@@ -38,6 +39,7 @@ function LeftSection({
   setIsTrue,
   apiFilterQueryParams,
   preDefinedFilters,
+  serverFilterString,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [page, setPage] = useState(0);
@@ -69,7 +71,8 @@ function LeftSection({
     queryFn: async ({ pageParam = 0 }) => {
       const response = await getSearchData(
         pageParam,
-        apiFilterQueryParams ?? ""
+        apiFilterQueryParams ?? "",
+        serverFilterString
       );
       return response.results;
     },

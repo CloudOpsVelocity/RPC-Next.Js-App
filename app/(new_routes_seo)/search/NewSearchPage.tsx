@@ -13,12 +13,14 @@ type Props = {
   frontendFilters: any;
   pageUrl: string;
   preDefinedFilters: string | null;
+  serverFilterString: string;
 };
 export default function NewSearchPage({
   serverData,
   frontendFilters,
   pageUrl,
   preDefinedFilters = null,
+  serverFilterString,
 }: Props) {
   const isListing = false;
   return (
@@ -46,6 +48,7 @@ export default function NewSearchPage({
           frontendFilters={frontendFilters}
           serverData={serverData}
           preDefinedFilters={preDefinedFilters}
+          serverFilterString={serverFilterString}
         />
       </div>
     </section>

@@ -32,7 +32,6 @@ export default async function Page({
   const value = await findPathForProjectDetails(pathname);
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
-  console.log(filterValues);
   let serverData = null;
   let frontendFilters = null;
   if (searchParams.sf) {
@@ -45,7 +44,11 @@ export default async function Page({
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
   } else {
-    const data = await getSearchData(filterValues.PG ?  `&page=${filterValues.PG}` : `&localities=${filterValues.LT}`);
+    const data = await getSearchData(
+      filterValues.PG
+        ? `&page=${filterValues.PG}`
+        : `&localities=${filterValues.LT}`
+    );
     serverData = await data.results;
     frontendFilters = {
       localities: [`${lt}+${filterValues.LT}`],
@@ -61,6 +64,7 @@ export default async function Page({
       serverData={serverData}
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
+      serverFilterString={`&localities=${filterValues.LT}`}
     />
   );
 }

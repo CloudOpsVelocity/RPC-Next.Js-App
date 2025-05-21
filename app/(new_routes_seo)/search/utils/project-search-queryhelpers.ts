@@ -1,12 +1,18 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 
-export const getSearchData = async (page = 0, apiFilterQueryParams: string) => {
+export const getSearchData = async (
+  page = 0,
+  apiFilterQueryParams: string,
+  serverFilterApplied?: string
+) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}`;
-  if (apiFilterQueryParams.includes("listedBy")) {
+  if (apiFilterQueryParams?.includes("listedBy")) {
     url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}`;
   }
-  let queryparams = parseApiFilterQueryParams(apiFilterQueryParams);
+  let queryparams = serverFilterApplied
+    ? serverFilterApplied
+    : parseApiFilterQueryParams(apiFilterQueryParams);
   const res = await fetch(`${url}${queryparams ? `&${queryparams}` : ""}`, {
     cache: "no-store",
   });

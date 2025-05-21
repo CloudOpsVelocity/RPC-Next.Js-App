@@ -21,12 +21,14 @@ type Props = {
   serverData: any;
   frontendFilters: any;
   preDefinedFilters: string | null;
+  serverFilterString: string;
 };
 
 export default function Mainsection({
   frontendFilters,
   serverData,
   preDefinedFilters,
+  serverFilterString,
 }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
@@ -90,6 +92,7 @@ export default function Mainsection({
         setIsTrue={setIsTrue}
         apiFilterQueryParams={apiFilterQueryParams}
         preDefinedFilters={preDefinedFilters}
+        serverFilterString={serverFilterString}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
 
