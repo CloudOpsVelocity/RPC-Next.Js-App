@@ -93,13 +93,14 @@ export default function BreadCrumbs({ params: routes }: { params: any }) {
                   className="hover:underline cursor-pointer capitalize"
                   title={`Go to ${newName} page`}
                   aria-label={`Breadcrumb link to ${newName}`}
+                  key={`bread_crumb_${index}`}
                 >
                   <span>{newName}</span>
                 </Link>
               ) : (
-                  <span className="capitalize">
-                    {newName.replace("undefined ", "")}
-                  </span>
+                <span className="capitalize">
+                  {newName.replace("undefined ", "")}
+                </span>
               )}
               {index < Object.keys(params).length - 1 && " > "}
             </React.Fragment>

@@ -18,8 +18,7 @@ import {
 } from "@/app/images/commonSvgs";
 import {
   // BACKEND_PROP_TYPES,
-  listingProps,
-  parseDataProjectProps,
+
   projectprops,
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
@@ -102,17 +101,16 @@ export default function HeaderActions({
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-              {phaseList?.map((each: any) => {
+              {phaseList?.map((each: any, index: number) => {
                 return (
                   <Button
-                    key={`phase_${each.phaseName}`}
+                    key={`header_actions_phase_${index}`}
                     title={
                       isSingleLetterOrNumber(each.phaseName)
                         ? `Phase: ${each.phaseName}`
                         : each.phaseName
                     }
                     onChange={() => {
-                      /*  if (currentPhase == each.phaseId) return; */
                       setCurrentPhase(each.phaseId);
                       setSelected(0);
                     }}
@@ -132,7 +130,7 @@ export default function HeaderActions({
         )}
       </div>
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
-        {sortedPropTypes?.map((each: string) => {
+        {sortedPropTypes?.map((each: string, index: number) => {
           const keyName = whichPropToUse[each as keyof typeof whichPropToUse];
           let name =
             // @ts-ignore
@@ -140,24 +138,23 @@ export default function HeaderActions({
               ? // @ts-ignore
                 propertyDetailsTypes.get(keyName)?.[whichKeyname]
               : null;
+
           return (
-            <>
-              <Button
-                key={keyName}
-                buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border capitalize ${
-                  propCgId == keyName
-                    ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
-                    : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
-                } `}
-                onChange={() => {
-                  if (propCgId !== keyName) {
-                    setPropCgId(keyName);
-                  }
-                }}
-                title={name}
-                icon={getIcon(keyName)}
-              />
-            </>
+            <Button
+              key={`header_actions_prop_${index}`}
+              buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border capitalize ${
+                propCgId == keyName
+                  ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                  : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
+              } `}
+              onChange={() => {
+                if (propCgId !== keyName) {
+                  setPropCgId(keyName);
+                }
+              }}
+              title={name}
+              icon={getIcon(keyName)}
+            />
           );
         })}
       </div>

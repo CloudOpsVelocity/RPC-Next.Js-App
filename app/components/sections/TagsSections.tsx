@@ -104,7 +104,7 @@ export default function TagsSections({ urls }: Props) {
       </p>
       <ul className="flex flex-wrap  ">
         {flatLinks.map((urlObj, index) => (
-          <li key={urlObj.url || index} className="flex-shrink-0">
+          <li key={`tags_sections__${index}`} className="flex-shrink-0">
             <Tag {...urlObj} />
           </li>
         ))}
