@@ -2,7 +2,10 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 import NewSearchPage from "@/app/(new_routes_seo)/search/NewSearchPage";
-import { extractProjectParamsValues, findPathForProjectDetails } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
+import {
+  extractProjectParamsValues,
+  findPathForProjectDetails,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
@@ -41,8 +44,10 @@ export default async function Page({
       : await getListingData(apiFilters ?? "");
     serverData = data.results;
   } else {
-     const filterValues = extractProjectParamsValues(value);
-    const data = await (await getSearchData(filterValues.PG ? `page=${filterValues.PG}` : "page=0", ))
+    const filterValues = extractProjectParamsValues(value);
+    const data = await await getSearchData(
+      filterValues.PG ? `page=${filterValues.PG}` : "page=0"
+    );
     serverData = data.results;
     frontendFilters = {
       cg: filterValues.CG,
@@ -57,6 +62,7 @@ export default async function Page({
       serverData={serverData}
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
+      serverFilterString=""
     />
   );
 }

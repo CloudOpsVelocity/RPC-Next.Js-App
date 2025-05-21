@@ -47,6 +47,7 @@ export default async function Page({
       serverData={serverData}
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
+      serverFilterString=""
     />
   );
 }

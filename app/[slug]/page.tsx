@@ -55,6 +55,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
       preDefinedFilters={searchParams.sf}
       is2lakhUrls
       showProjectTab
+      serverFiltersString=""
     />
   );
 }
