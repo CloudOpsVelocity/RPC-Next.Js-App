@@ -278,7 +278,7 @@ export default function PropertyTypeDetailsCrad({
               Units
             </p>
             {propertyType !== "plot" ? (
-              <Tooltip text={<p>{elevationTooltip}</p>}>
+              <Tooltip text={<span>{elevationTooltip}</span>}>
                 <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
                   <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
                   Elevation{" "}
