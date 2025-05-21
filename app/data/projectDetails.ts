@@ -117,7 +117,7 @@ export const parseDataProjectProps = {
   apartment: 35,
   independent: 36,
 };
-export const listingProps = {
+export const listingProps:any = {
   Apartment: 35,
   Villa: 31,
   Plot: 32,
