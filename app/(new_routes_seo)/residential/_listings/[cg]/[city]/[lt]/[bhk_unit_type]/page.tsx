@@ -65,6 +65,7 @@ export default async function Page({
         propType: parseInt(PT as string),
         cg: CG,
       }}
+      serverFiltersString=""
       preDefinedFilters={searchParams.sf}
     />
   ) : (
@@ -77,6 +78,7 @@ export default async function Page({
         propType: parseInt(PT as string),
         cg: CG,
       }}
+      serverFilterString=""
       preDefinedFilters={""}
     />
   );

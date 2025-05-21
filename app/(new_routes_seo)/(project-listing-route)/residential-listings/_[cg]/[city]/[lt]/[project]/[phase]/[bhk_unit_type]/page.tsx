@@ -42,6 +42,7 @@ export default async function Page({ params, searchParams }: Props) {
   let serverData = null;
   let filtersValues: any = {};
   let frontendFilters = null;
+  let serverFiltersString;
   if (searchParams.sf) {
     const apiFilters = parseApiFilterQueryParams(searchParams.sf);
     const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
@@ -118,6 +119,7 @@ export default async function Page({ params, searchParams }: Props) {
       serverData={serverData}
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
+      serverFiltersString={""}
     />
   ) : (
     <ListingDetailsPage params={params} {...serverData} pathname={pathname} />

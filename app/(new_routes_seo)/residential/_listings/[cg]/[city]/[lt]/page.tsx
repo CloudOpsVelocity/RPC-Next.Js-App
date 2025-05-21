@@ -46,6 +46,7 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
         localities: [`${lt}+${slugValues.LT}`],
         cg: slugValues.CG,
       }}
+      serverFiltersString=""
       preDefinedFilters={""}
     />
   ) : (
@@ -56,6 +57,7 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
         localities: [`${lt}+${slugValues.LT}`],
         cg: slugValues.CG,
       }}
+      serverFilterString=""
       preDefinedFilters={""}
     />
   );

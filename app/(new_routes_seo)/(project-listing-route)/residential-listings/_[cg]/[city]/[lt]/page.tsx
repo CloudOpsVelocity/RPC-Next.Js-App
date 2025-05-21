@@ -71,7 +71,7 @@ export default async function Page({
       listedBy: null,
     };
   }
- 
+
   return (
     <NewListingSearchpage
       serverData={serverData}
@@ -79,6 +79,7 @@ export default async function Page({
       pageUrl={pathname}
       preDefinedFilters={searchParams.sf}
       showProjectTab
+      serverFiltersString=""
     />
   );
 }

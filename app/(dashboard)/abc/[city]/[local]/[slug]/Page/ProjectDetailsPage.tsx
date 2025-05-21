@@ -156,7 +156,7 @@ export default async function ProjectsDetailsPage({
           />
         )}
 
-        {!data.partialUnitData ? (
+        {/* {!data.partialUnitData ? (
           <FloorPlans
             phases={data.phases}
             projName={data.projectName}
@@ -173,7 +173,7 @@ export default async function ProjectsDetailsPage({
             data={data}
             type="partial"
           />
-        )}
+        )} */}
         <GalleryBlock
           {...data.media}
           projName={data.projectName}

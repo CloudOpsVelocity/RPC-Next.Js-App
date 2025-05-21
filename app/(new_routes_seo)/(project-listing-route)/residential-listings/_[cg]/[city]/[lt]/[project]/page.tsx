@@ -68,6 +68,7 @@ export default async function Page({
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
       showProjectTab
+      serverFiltersString=""
     />
   );
 }

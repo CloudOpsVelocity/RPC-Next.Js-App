@@ -29,6 +29,7 @@ export default async function Page({ params: { cg } }: Props) {
         listedBy: "All",
       }}
       preDefinedFilters={""}
+      serverFilterString=""
     />
   );
 }

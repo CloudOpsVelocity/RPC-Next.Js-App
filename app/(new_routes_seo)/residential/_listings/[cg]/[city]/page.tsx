@@ -39,6 +39,7 @@ export default async function Page({ params: { cg, city } }: Props) {
       }}
       preDefinedFilters={""}
       pageUrl={pageUrl}
+      serverFilterString=""
     />
   );
 }

@@ -52,6 +52,7 @@ export default async function Page({ params: { cg }, searchParams }: Props) {
       showProjectTab
       pageUrl={pathname}
       preDefinedFilters={searchParams.sf}
+      serverFiltersString=""
     />
   );
 }
