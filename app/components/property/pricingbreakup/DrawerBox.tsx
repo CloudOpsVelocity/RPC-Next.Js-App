@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 // import { MdClose } from 'react-icons/md';
 import Close from "../../project/button/close";
 
@@ -64,10 +64,37 @@ function DrawerBox({
     }
   }, [isOpen, handleChange]);
 
+  // swipping
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e:any) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e:any) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    const threshold = 50;
+    if (touchEndX.current - touchStartX.current > threshold) {
+      console.log("Swiped Left to Right");
+      document.body.style.overflow = "unset";
+      window.history.back();
+      handleChange(false);
+      // yourFunction();
+    }
+  };
+
+
   return (
     <div
       className="fixed w-full min-h-[calc(100vh-70px)] flex justify-end items-end overflow-hidden z-[1000] right-0 top-[70px] bg-black/30 mb-[2rem]"
       onClick={(e) => onMainConClick(e)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <div
         id="modalDrawerPopupInnerCon"
