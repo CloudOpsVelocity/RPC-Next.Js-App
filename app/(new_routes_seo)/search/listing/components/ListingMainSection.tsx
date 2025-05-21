@@ -10,18 +10,19 @@ type Props = {
   serverData: any;
   frontendFilters: any;
   preDefinedFilters: string | null;
+  serverFiltersString: string;
 };
 
 export default function ListingMainSection({
-
   frontendFilters,
   serverData,
   preDefinedFilters,
+  serverFiltersString,
 }: Props) {
   // const setStore = useSetAtom(projSearchStore);
   const [apiFilterQueryParams] = useQueryState("sf");
   const [store, setStore] = useAtom(projSearchStore);
-  
+
   // const shouldHydrate = apiFilterQueryParams !== preDefinedFilters;
   // useHydrateAtoms(hydrationValues as any);
   // useEffect(() => {
@@ -72,6 +73,7 @@ export default function ListingMainSection({
         setIsTrue={setIsTrue}
         apiFilterQueryParams={apiFilterQueryParams}
         preDefinedFilters={preDefinedFilters}
+        serverFiltersString={serverFiltersString}
       />
       <div className="w-[100%] sm:w-[50%] -z-10" />
 

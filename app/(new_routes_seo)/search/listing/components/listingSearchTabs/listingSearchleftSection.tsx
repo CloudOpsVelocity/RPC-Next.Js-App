@@ -32,6 +32,7 @@ type Props = {
   setIsTrue: any;
   apiFilterQueryParams: string | null;
   preDefinedFilters: string | null;
+  serverFiltersString: string;
 };
 
 function LeftSection({
@@ -43,6 +44,7 @@ function LeftSection({
   apiFilterQueryParams,
   preDefinedFilters,
   frontendFilters,
+  serverFiltersString,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
@@ -54,6 +56,7 @@ function LeftSection({
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const setNearby = useSetAtom(selectedNearByAtom);
+
   const {
     data,
     isLoading,
@@ -70,10 +73,12 @@ function LeftSection({
           : `${pathname}`
       }`,
     ],
+
     queryFn: async ({ pageParam = frontendFilters.page || 0 }) => {
       const response = await getListingSearchData(
         pageParam,
-        apiFilterQueryParams ?? ""
+        apiFilterQueryParams ?? "",
+        apiFilterQueryParams ? undefined : serverFiltersString
       );
       setTotalCount(response.totalCount);
       return response.results;
@@ -241,6 +246,7 @@ function LeftSection({
               )}
             </>
           )}
+
           {/* Image Use above*/}
 
           <ListingServerCardData

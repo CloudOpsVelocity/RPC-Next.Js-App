@@ -53,8 +53,10 @@ export default async function Page({ params, searchParams }: Props) {
   let serverData = null;
   let filtersValues: any = {};
   let frontendFilters = null;
+  let serverFiltersString = "";
   if (searchParams.sf) {
     const apiFilters = parseApiFilterQueryParams(searchParams.sf);
+
     const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
     // eslint-disable-next-line no-unused-vars
     const apiResData = isProj
@@ -80,11 +82,10 @@ export default async function Page({ params, searchParams }: Props) {
       if (filtersValues.PJ) queryParams.push(`projIdEnc=${filtersValues.PJ}`);
       if (filtersValues.PH) queryParams.push(`phaseId=${filtersValues.PH}`);
       if (filtersValues.PG) queryParams.push(`page=${filtersValues.PG}`);
-
       const queryString = queryParams.join("&");
+      serverFiltersString = `${queryString}&city=9`;
       const apiResData = await getSearchData(queryString);
       serverData = apiResData.results;
-
       frontendFilters = {
         ...(lt && { localities: [`${lt}+${filtersValues.LT}`] }),
         ...(filtersValues.BH && {
@@ -147,6 +148,7 @@ export default async function Page({ params, searchParams }: Props) {
       serverData={serverData}
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
+      serverFiltersString={serverFiltersString}
     />
   ) : (
     <ListingDetailsPage
