@@ -85,17 +85,17 @@ export default function Mainsection({
       ) : (
         isMobile !== undefined &&
         isMobile === false && (
-               <div
-                className="hidden md:flex relative w-full md:w-[50%] max-w-full sm:fixed right-0 z-0 border-2 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full aspect-[831/690]"
-              >
+            <div
+                className="hidden md:flex relative w-full md:w-[50%] max-w-full sm:fixed right-0 z-0 border-1 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full w-full"
+            >
                 <Image
                   priority
                   src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
                   alt="Search page map Image"
-                  fill
+                  fill 
                   quality={80}
-                  className="object-contain"
-                  // className="h-full w-full"
+                  // className="object-contain"
+                  className="h-full w-full"
                 />
 
                 <button

@@ -74,6 +74,7 @@ const HeaderFilters = ({
         }
         setIsSearchOpen(false);
         setOpenDropdown(null);
+        document.body.style.overflow = "unset";
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -106,7 +107,7 @@ const HeaderFilters = ({
     }
   };
 
-  const handleDropdownToggle = (dropdownName: string) => {
+  const handleDropdownToggle = (dropdownName: string) => { // 2
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
@@ -389,6 +390,7 @@ const HeaderFilters = ({
                     onFocus={() => {
                       setIsSearchOpen(true);
                       setOpenDropdown(null);
+                      document.body.style.overflow = "unset";
                     }}
                     maxLength={50}
                     pattern="[a-zA-Z0-9\s]+"

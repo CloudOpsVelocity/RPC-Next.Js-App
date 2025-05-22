@@ -229,13 +229,14 @@ export default function ShowAllFiltersButton({
     );
   };
 
-  useEffect(() => {
+  useEffect(() => { // 1
     if (isOpen) {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+      // document.body.style.overflow = "hidden";
+    } 
+    // else {
+    //   document.body.style.overflow = "unset";
+    // }
   }, [isOpen]);
 
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
@@ -289,7 +290,9 @@ export default function ShowAllFiltersButton({
               Clear Filter
             </button>
             <button
-              onClick={() => handleApplyFilters(() => onToggle())}
+              onClick={() => {
+                handleApplyFilters(() => onToggle());
+              }}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >
               Apply Filter
