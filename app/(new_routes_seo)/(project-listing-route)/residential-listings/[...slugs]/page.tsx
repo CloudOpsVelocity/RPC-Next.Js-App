@@ -220,16 +220,22 @@ export async function generateMetadata({
     // Dynamic Title
     let title = "Buy Residential Properties in India - GRP";
     if (cityFormatted && !lt && !project && !phase) {
-      title = `Residential Properties for Sale in ${cityFormatted} - GRP`;
+      title = `Residential Properties for ${
+        cg === "for-rent" ? "Rent" : "Sale"
+      } in ${cityFormatted} - GRP`;
     } else if (cityFormatted && localityFormatted && !project) {
-      title = `Properties for Sale in ${localityFormatted}, ${cityFormatted} - GRP`;
+      title = `Properties for ${
+        cg === "for-rent" ? "Rent" : "Sale"
+      } in ${localityFormatted}, ${cityFormatted} - GRP`;
     } else if (
       projectFormatted &&
       cityFormatted &&
       localityFormatted &&
       !phase
     ) {
-      title = `Flats for Sale in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} - GRP`;
+      title = `Flats for ${
+        cg === "for-rent" ? "Rent" : "Sale"
+      } in ${projectFormatted}, ${localityFormatted}, ${cityFormatted} - GRP`;
     } else if (
       phaseDisplay &&
       projectFormatted &&
@@ -240,7 +246,7 @@ export async function generateMetadata({
     } else {
       title = `${
         projectFormatted ? `${projectFormatted} -` : ""
-      }  Residential Properties for Sale in ${
+      }  Residential Properties for ${cg === "for-rent" ? "Rent" : "Sale"} in ${
         localityFormatted ? localityFormatted + "," : "Bengaluru"
       } ${cityFormatted ?? "Bengaluru"} - GRP`;
     }
@@ -253,13 +259,21 @@ export async function generateMetadata({
       localityFormatted &&
       cityFormatted
     ) {
-      description = `Explore ${phaseDisplay.toLowerCase()} for sale in ${projectFormatted}, located in ${localityFormatted}, ${cityFormatted}. Get verified listings of apartments, flats, villas, villaments, builder floors, and plots.`;
+      description = `Explore ${phaseDisplay.toLowerCase()} for ${
+        cg === "for-rent" ? "Rent" : "Sale"
+      } in ${projectFormatted}, located in ${localityFormatted}, ${cityFormatted}. Get verified listings of apartments, flats, villas, villaments, builder floors, and plots.`;
     } else if (projectFormatted && localityFormatted && cityFormatted) {
-      description = `Browse flats, apartments, villas, and more for sale in ${projectFormatted}, ${localityFormatted}, ${cityFormatted}.`;
+      description = `Browse flats, apartments, villas, and more for ${
+        cg === "for-rent" ? "Rent" : "Sale"
+      } in ${projectFormatted}, ${localityFormatted}, ${cityFormatted}.`;
     } else if (localityFormatted && cityFormatted) {
-      description = `Discover residential properties for sale in ${localityFormatted}, ${cityFormatted}. Choose from apartments, flats, villas, builder floors, and plots.`;
+      description = `Discover residential properties for ${
+        cg === "for-rent" ? "Rent" : "Sale"
+      }in ${localityFormatted}, ${cityFormatted}. Choose from apartments, flats, villas, builder floors, and plots.`;
     } else if (cityFormatted) {
-      description = `Find the best residential properties for sale in ${cityFormatted}. Search verified flats, apartments, villas, and more.`;
+      description = `Find the best residential properties for ${
+        cg === "for-rent" ? "Rent" : "Sale"
+      } in ${cityFormatted}. Search verified flats, apartments, villas, and more.`;
     }
 
     // Dynamic URL
