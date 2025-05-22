@@ -107,7 +107,8 @@ const HeaderFilters = ({
     }
   };
 
-  const handleDropdownToggle = (dropdownName: string) => { // 2
+  const handleDropdownToggle = (dropdownName: string) => {
+    // 2
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
@@ -392,12 +393,16 @@ const HeaderFilters = ({
                       setOpenDropdown(null);
                       document.body.style.overflow = "unset";
                     }}
-                    maxLength={50}
+                    maxLength={90}
                     pattern="[a-zA-Z0-9\s]+"
                     title="Only letters, numbers, and spaces are allowed."
                   />
 
-                  <button type="submit" name="projectHeaderSearchIcon" aria-label="projSearchIcon">
+                  <button
+                    type="submit"
+                    name="projectHeaderSearchIcon"
+                    aria-label="projSearchIcon"
+                  >
                     <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
                   </button>
                 </form>

@@ -15,10 +15,7 @@ import { listingProps } from "@/app/data/projectDetails";
 
 export default function ShortList({ cg, propTypeName }: any) {
   const { data: session } = useSession();
-  const { slug, bhk_unit_type } = useParams<{
-    slug: string;
-    bhk_unit_type: string;
-  }>();
+  const { slugs } = useParams();
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
   const { data, mutate } = useDynamicProp({
@@ -29,8 +26,9 @@ export default function ShortList({ cg, propTypeName }: any) {
   const onAddingShortList = () => {
     if (session) {
       mutate(2);
+
       toggleShortlist({
-        id: (slug || bhk_unit_type).split("-")[1],
+        id: slugs?.at(-1)?.split("-")[1] ?? "",
         status: data?.shortListed ? "N" : "Y",
         source: "prop",
       });
@@ -41,7 +39,7 @@ export default function ShortList({ cg, propTypeName }: any) {
   return (
     <button
       aria-label={`${data?.shortListed ? "Remove from" : "Add to"} Shortlist}`}
-      name={`${data?.shortListed ? "Remove from" : "Add to"} Shortlist}`} 
+      name={`${data?.shortListed ? "Remove from" : "Add to"} Shortlist}`}
       title={`${data?.shortListed ? "Remove from" : "Add to"} Shortlist}`}
       onClick={() => onAddingShortList()}
       className={clsx(

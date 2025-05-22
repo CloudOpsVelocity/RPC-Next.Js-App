@@ -197,7 +197,7 @@ export default function NewSearchinputListing<T extends Record<string, any>>({
             aria-controls="search-list"
             role="combobox"
             autoComplete="off"
-            maxLength={50}
+            maxLength={90}
           />
           <svg
             className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 "

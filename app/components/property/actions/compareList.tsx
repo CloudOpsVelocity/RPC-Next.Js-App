@@ -16,13 +16,10 @@ import { useErrorListing } from "@/app/hooks/property/useError";
 
 export default function CompareList({ cg, propTypeName }: any) {
   const { data: session } = useSession();
-  const { slug, bhk_unit_type } = useParams<{
-    slug: string;
-    bhk_unit_type: string;
-  }>();
+  const { slugs } = useParams();
   const { toggleCompare } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const [, {  open: openSuccesPopup }] = useErrorListing();
+  const [, { open: openSuccesPopup }] = useErrorListing();
   const { data, mutate } = useDynamicProp({
     cg,
     propId: listingProps[propTypeName.trim() as keyof typeof listingProps],
@@ -35,7 +32,7 @@ export default function CompareList({ cg, propTypeName }: any) {
     if (session) {
       mutate(3);
       toggleCompare({
-        id: (slug || bhk_unit_type).split("-")[1],
+        id: slugs?.at(-1)?.split("-")[1] ?? "",
         status: data?.compareAdded ? "N" : "Y",
         source: "prop",
       });
@@ -46,9 +43,9 @@ export default function CompareList({ cg, propTypeName }: any) {
 
   return (
     <button
-    aria-label={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`}
-              name={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`} 
-              title={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`}
+      aria-label={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`}
+      name={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`}
+      title={`${data?.compareAdded ? "Remove From" : "Add to"} Compare}`}
       onClick={() => onAddingCompare()}
       className={clsx(
         "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] xl:mt-3 border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] sm:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] sm:tracking-[0.4px] xl:tracking-[0.96px] mt-0 text-[12px] text-nowrap mb-[10px] md:mb-0",
