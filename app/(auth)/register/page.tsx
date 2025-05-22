@@ -41,6 +41,7 @@ export default function Page({ searchParams }: any) {
           {data.map((each) => {
             return (
               <Link
+                prefetch={false}
                 href={{
                   pathname: each.href,
                   search: getQueryParam(searchParams),

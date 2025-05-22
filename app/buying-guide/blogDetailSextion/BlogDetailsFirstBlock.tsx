@@ -41,6 +41,7 @@ function BlogDetailsFirstBlock() {
     <div className="w-[94%] xl:w-[80%] flex flex-col md:flex-row justify-between items-center gap-[20px] mt-[5%] mb-[40px] md:mb-[5%] xl:mb-[160px] pt-[30px] md:pt-[50px] relative  ">
       {/* <a href={pathHref} target="_self"> */}
       <Link
+        prefetch={false}
         href={`${process.env.NEXT_PUBLIC_PROJECT_URL}/buying-guide`}
         className="text-[#202020] text-[16px] md:text-[18px] xl:text-[20px] not-italic font-medium leading-[normal] gap-[8px] absolute top-0 left-0 flex justify-center items-center self-start "
       >

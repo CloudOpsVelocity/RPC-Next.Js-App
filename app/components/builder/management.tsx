@@ -94,6 +94,7 @@ export default function ManagementBlock({
           <div className="flex justify-start items-start w-full flex-wrap gap-2 sm:gap-[3%] mb-[2%] mt-[1%]  md:space-y-0 md:gap-y-4">
             {keys?.map((item) => (
               <Link
+                prefetch={false}
                 rel="noopener noreferrer"
                 className="text-[#00487C] text-[13px] sm:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] underline "
                 key={`managment_${projectAvailableCities[item]}`}

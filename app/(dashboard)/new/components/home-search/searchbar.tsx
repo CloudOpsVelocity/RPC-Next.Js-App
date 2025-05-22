@@ -168,6 +168,7 @@ const Searchbar = () => {
 
           <div className="flex items-center">
             <Link
+              prefetch={false}
               rel="noopener noreferrer"
               href={`/search?${handleSearch()}`}
               className="bg-green-600  md:text-[24px] px-1 py-1

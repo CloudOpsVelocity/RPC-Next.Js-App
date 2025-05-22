@@ -80,7 +80,12 @@ const ForBuilders = () => {
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsHovered((prev) => !prev)}
       >
-        <button aria-label="For Builders" name="For Builders" title="For Builders" className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
+        <button
+          aria-label="For Builders"
+          name="For Builders"
+          title="For Builders"
+          className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center"
+        >
           For Builders {config.chevron}
         </button>
 
@@ -346,6 +351,7 @@ function Dropdown() {
                   session.user?.userType !== "B" &&
                   item.label === "Post Project" ? null : (
                     <Link
+                      prefetch={false}
                       key={`dataCrad_${item.label + (index + 1)}`}
                       className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
                       href={item.url}
@@ -380,6 +386,7 @@ function Dropdown() {
               <div className="w-full flex flex-col min-w-[172px] mt-[20px] bg-white items-start gap-2 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.1)] max-w-[180px] p-1 rounded-lg">
                 {unAuthorizedData.map((item) => (
                   <Link
+                    prefetch={false}
                     key={item.url}
                     className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
                     href={{
@@ -486,10 +493,11 @@ function MobileDropDown() {
     >
       <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
         {session ? (
-          <div onClick={() => setIsHovered((prev) => !prev)} className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
-            <button
-              className="inline-flex justify-center items-center gap-1 pointer-events-none "
-            >
+          <div
+            onClick={() => setIsHovered((prev) => !prev)}
+            className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white"
+          >
+            <button className="inline-flex justify-center items-center gap-1 pointer-events-none ">
               {config.getIcon(session.user.userType)}
             </button>
             {config.blueChevron}
@@ -541,6 +549,7 @@ function MobileDropDown() {
                   </button>
                 ) : (
                   <Link
+                    prefetch={false}
                     key={`dataCrad_${item.label[index]}`}
                     className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
                     href={item.url}
@@ -574,6 +583,7 @@ function MobileDropDown() {
             >
               {unAuthorizedData.map((item) => (
                 <Link
+                  prefetch={false}
                   key={item.url}
                   className="flex hover:text-green-500 transition-colors pl-[12px] text-[#505050] font-[400] text-[14px] md:text-[18px] w-full hover:bg-gray-100 "
                   href={{

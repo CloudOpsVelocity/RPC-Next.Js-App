@@ -44,6 +44,7 @@ export default function MainHeading({
         title != "Listings Posted By" &&
         title != "Latest Blogs" && (
           <Link
+            prefetch={false}
             title={`View More ${title}`}
             rel="noopener noreferrer"
             className="text-[#0073C6]  text-[14px] sm:text-[18px] xl:text-[20px]  not-italic font-bold leading-[normal]"

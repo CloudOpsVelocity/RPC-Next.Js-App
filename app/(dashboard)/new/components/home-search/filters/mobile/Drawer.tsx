@@ -63,6 +63,7 @@ function AppDrawer({ close, opened }: Props) {
               <div className="hidden sm:flex gap-2">
                 <Nearme />
                 <Link
+                  prefetch={false}
                   rel="noopener noreferrer"
                   href={`/search`}
                   className={`flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}
@@ -117,6 +118,7 @@ function AppDrawer({ close, opened }: Props) {
           <div className="sm:hidden mt-[10px] flex gap-2">
             <Nearme />
             <Link
+              prefetch={false}
               rel="noopener noreferrer"
               href={`/search`}
               className={`flex justify-center items-center gap-[4px] rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}

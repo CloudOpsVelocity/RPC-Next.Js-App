@@ -20,6 +20,7 @@ function ProjectPageTitle({ serverFilterData }: Props) {
         <>
           Explore{" "}
           <Link
+            prefetch={false}
             href="https://www.getrightproperty.com/residential/projects/bengaluru"
             // target="_blank"
             rel="noopener noreferrer"
@@ -42,6 +43,7 @@ function ProjectPageTitle({ serverFilterData }: Props) {
     return (
       <>
         <Link
+          prefetch={false}
           href="/residential"
           title="Residential Projects in Bengaluru | GetRightProperty"
           rel="noopener noreferrer"
@@ -49,6 +51,7 @@ function ProjectPageTitle({ serverFilterData }: Props) {
           Residential
         </Link>{" "}
         <Link
+          prefetch={false}
           href="/residential/projects"
           title="Residential Projects in Bengaluru | GetRightProperty"
           rel="noopener noreferrer"
@@ -59,6 +62,7 @@ function ProjectPageTitle({ serverFilterData }: Props) {
         {lt && (
           <>
             <Link
+              prefetch={false}
               href={`/residential/projects/${city}/${lt}`}
               title={` Residential Projects in ${formattedLt} ${formattedCity} | GetRightProperty`}
               rel="noopener noreferrer"
@@ -68,6 +72,7 @@ function ProjectPageTitle({ serverFilterData }: Props) {
           </>
         )}
         <Link
+          prefetch={false}
           href={`/residential/projects/${city}`}
           title={`${formattedCity} Residential Projects | GetRightProperty`}
           rel="noopener noreferrer"

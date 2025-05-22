@@ -114,6 +114,7 @@ export default function InFoCarousel({
                   >
                     {item}{" "}
                     <Link
+                      prefetch={false}
                       href={`/residential-listings/for-sale/bengaluru/${slugify(
                         projectData.localityName || ""
                       )}/${slugify(projectData.projectName || "")}${

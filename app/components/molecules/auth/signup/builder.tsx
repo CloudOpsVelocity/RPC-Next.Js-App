@@ -392,7 +392,7 @@ function Builder({ encriptedData }: any) {
             Log In
           </Link>
 
-          <Link
+          <Link      prefetch={false}
             href={{
               pathname: "/register",
               search: queryParam.query,
@@ -597,6 +597,7 @@ function Builder({ encriptedData }: any) {
                 <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
                   Account already exists. Kindly use{" "}
                   <Link
+                    prefetch={false}
                     href={{ pathname: "/login", search: queryParam.query }}
                     className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
                   >
@@ -1099,6 +1100,7 @@ function Builder({ encriptedData }: any) {
         {active === 0 && (
           <>
             <Link
+              prefetch={false}
               href={{ pathname: "/login", search: queryParam.query }}
               className="text-[#002749] font-semibold  sm:text-[14px] flex justify-center items-center gap-1 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap max-w-fit m-auto"
             >
@@ -1111,6 +1113,7 @@ function Builder({ encriptedData }: any) {
               <p className="text-center text-[#556477] text-[16px] not-italic xl:font-medium leading-[normal] mt-2 xl:mt-1 mb-[15px]">
                 Forgot Password?{" "}
                 <Link
+                  prefetch={false}
                   href={{ pathname: "/forgot", search: queryParam.query }}
                   className="text-[color:var(--Brand-green-primary,#148B16)] text-[16px] font-[600]   not-italic xl:font-medium leading-[normal] underline"
                 >
@@ -1119,6 +1122,7 @@ function Builder({ encriptedData }: any) {
               </p>
             )}
             <Link
+              prefetch={false}
               href={{ pathname: "/" }}
               className=" not-italic text-[#148B16] text-[14px]  font-semibold   leading-[normal]  sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center max-w-fit m-auto"
             >

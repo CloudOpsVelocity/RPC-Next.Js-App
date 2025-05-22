@@ -50,7 +50,12 @@ const ForBuilders = () => {
     !session && (
       <Menu>
         <Menu.Target>
-          <button aria-label="For Builders" name="For Builders" title="For Builders" className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
+          <button
+            aria-label="For Builders"
+            name="For Builders"
+            title="For Builders"
+            className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center"
+          >
             For Builders {config.chevron}For Builders
           </button>
         </Menu.Target>
@@ -75,7 +80,12 @@ const ForBuilders = () => {
                 Easy to post
               </li>
             </ul>
-            <button aria-label="Post Project" name="Post Project" title="Post Project" className="inline-flex justify-center items-center gap-2.5 rounded px-2.5 py-1 bg-[#0073C6] text-white text-xs not-italic font-bold mt-2">
+            <button
+              aria-label="Post Project"
+              name="Post Project"
+              title="Post Project"
+              className="inline-flex justify-center items-center gap-2.5 rounded px-2.5 py-1 bg-[#0073C6] text-white text-xs not-italic font-bold mt-2"
+            >
               Post Project
             </button>
           </div>
@@ -148,6 +158,7 @@ function Dropdown() {
           </div> */
           <div className="text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <Link
+              prefetch={false}
               aria-label="Go to the Register page"
               className=""
               href={{
@@ -156,7 +167,6 @@ function Dropdown() {
               }}
               onClick={(e) => {
                 e.stopPropagation();
-                
               }}
             >
               Login/ Sign up

@@ -93,9 +93,13 @@ export default function PropertyBanner({
           </div>
 
           <div className="ml-5">
-            <NextLink title={`About the ${projectName}`} href={url} className=" sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center text-[#0073C6]">
+            <NextLink
+              title={`About the ${projectName}`}
+              href={url}
+              className=" sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center text-[#0073C6]"
+            >
               {projectName}
-           </NextLink>
+            </NextLink>
             <h4 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </h4>
@@ -159,12 +163,15 @@ function PropertyBannerForMobile({
               // priority
             />
             <div className="md:mt-4">
-             
-          {/*   About {projectName} */}
-        
-              <NextLink  title={`About the ${projectName}`} href={url}  className=" text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2 text-[#0073C6]">
-                 {projectName}
-             </NextLink>
+              {/*   About {projectName} */}
+
+              <NextLink
+                title={`About the ${projectName}`}
+                href={url}
+                className=" text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2 text-[#0073C6]"
+              >
+                {projectName}
+              </NextLink>
               <p className="text-[#4B5C74] text-base md:text-xl not-italic font-semibold leading-[normal] mb-2">
                 {availableProperties ? availableProperties.join(", ") : ""}
               </p>
@@ -192,9 +199,12 @@ function PropertyBannerForMobile({
           />
           <ReadMore maxLines={2} text={about} title={"About"} />
         </div>
-        <Link href={url} variant="blue"
-        aria-label={`Explore more about ${projectName}`}
-        className="mt-2">
+        <Link
+          href={url}
+          variant="blue"
+          aria-label={`Explore more about ${projectName}`}
+          className="mt-2"
+        >
           Explore Project
         </Link>
       </div>

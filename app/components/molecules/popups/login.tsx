@@ -19,7 +19,7 @@ export default function LoginPopup({
   });
   return (
     <div
-      className={`flex justify-center m-1 items-start w-full pt-1 xl:pt-[10%] ${ 
+      className={`flex justify-center m-1 items-start w-full pt-1 xl:pt-[10%] ${
         type == "RATING" ? "md:pt-[8]%" : "md:pt-[0%]"
       }`}
     >
@@ -30,6 +30,7 @@ export default function LoginPopup({
           <div className="inline-flex items-center justify-center w-full">
             <div className="inline-flex items-center justify-center mx-auto border xl:pl-[3px] xl:py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
               <Link
+                prefetch={false}
                 className={
                   "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[28px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white xl:text-2xl not-italic font-bold leading-[normal] text-nowrap text-[16px] "
                 }
@@ -42,6 +43,7 @@ export default function LoginPopup({
                 Login
               </Link>
               <Link
+                prefetch={false}
                 href={{
                   pathname: "/register",
                   search: redirectQueryParam,
@@ -73,7 +75,7 @@ export default function LoginPopup({
           </div> */}
 
           <div className=" mt-0  xl:mt-3">
-            <LoginPopupForm closePopup={close && close} /> 
+            <LoginPopupForm closePopup={close && close} />
           </div>
         </div>
         <div className="relative" />
@@ -81,4 +83,3 @@ export default function LoginPopup({
     </div>
   );
 }
- 

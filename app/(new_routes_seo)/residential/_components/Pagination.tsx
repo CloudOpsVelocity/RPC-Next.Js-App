@@ -98,6 +98,7 @@ export default function Pagination({ totalCount }: Props) {
             <nav className="flex items-center gap-1">
               {/* Previous page */}
               <Link
+                prefetch={false}
                 target="_top"
                 href={
                   currentPage > 1 ? createPaginationLink(currentPage - 2) : "#"
@@ -132,6 +133,7 @@ export default function Pagination({ totalCount }: Props) {
 
                 return (
                   <Link
+                    prefetch={false}
                     target="_top"
                     key={`page-${pageNum}`}
                     href={
@@ -158,6 +160,7 @@ export default function Pagination({ totalCount }: Props) {
 
               {/* Next page */}
               <Link
+                prefetch={false}
                 target="_top"
                 href={
                   currentPage < totalPages - 1

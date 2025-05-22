@@ -328,6 +328,7 @@ export default function PropertyTypeDetailsCrad({
                 const isLast = index === BHKLIST.length - 1;
                 return (
                   <Link
+                    prefetch={false}
                     key={index}
                     href={`/residential-listings/for-sale/bengaluru/${projData.localityName.toLowerCase()}/${hyphenate(
                       projData.projectName

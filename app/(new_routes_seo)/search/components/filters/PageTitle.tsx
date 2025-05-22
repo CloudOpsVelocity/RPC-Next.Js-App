@@ -60,6 +60,7 @@ function PageTitle({ serverFilterData }: Props) {
         <>
           Explore{" "}
           <Link
+            prefetch={false}
             href="https://www.getrightproperty.com/residential/projects/bengaluru"
             // target="_blank"
             rel="noopener noreferrer"
@@ -74,6 +75,7 @@ function PageTitle({ serverFilterData }: Props) {
         <>
           Explore{" "}
           <Link
+            prefetch={false}
             href="https://www.getrightproperty.com/residential-listings/for-sale/bengaluru"
             rel="noopener noreferrer"
             className="text-blue-600 underline"
@@ -87,6 +89,7 @@ function PageTitle({ serverFilterData }: Props) {
         <>
           Explore{" "}
           <Link
+            prefetch={false}
             href="https://www.getrightproperty.com/residential-listings/for-rent/bengaluru"
             // target="_blank"
             rel="noopener noreferrer"
@@ -160,6 +163,7 @@ function PageTitle({ serverFilterData }: Props) {
                   {index === 0 ? "" : "/"}
                   <span>
                     <Link
+                      prefetch={false}
                       href={fullPath}
                       title={`View listings for ${linkText}`}
                       className="text-blue-600 hover:underline"
@@ -213,76 +217,6 @@ function PageTitle({ serverFilterData }: Props) {
     window.addEventListener("click", handlePopState);
     return () => window.removeEventListener("click", handlePopState);
   }, []);
-
-  const getParagraph = () => {
-    if (path === "/residential-listings/for-sale") {
-      return (
-        <p className="text-[13px] 2xl:text-sm text-gray-600 mb-4 line-clamp-1">
-          Explore a diverse range of{" "}
-          <Link
-            href="https://www.getrightproperty.com/residential-listings/for-sale/bengaluru"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline"
-          >
-            residential properties for sale in Bengaluru
-          </Link>
-          , including premium apartments, luxury villas, plots and affordable
-          flats, tailored to meet various lifestyle and investment needs.
-        </p>
-      );
-    } else if (path === "/residential-listings/for-rent") {
-      return (
-        <p className="text-[13px] 2xl:text-sm text-gray-600 mb-4 line-clamp-1">
-          Explore a curated selection of{" "}
-          <Link
-            href="https://www.getrightproperty.com/residential-listings/for-rent/bengaluru"
-            // target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline"
-          >
-            residential properties for rent in Bengaluru,
-          </Link>
-          featuring premium apartments, spacious villas, and affordable flats to
-          suit various lifestyles and budgets.
-        </p>
-      );
-    } else if (path === "residential-listings/for-sale/bengaluru") {
-      return (
-        <p className="text-[13px] 2xl:text-sm text-gray-600 mb-4 truncate line-clamp-1">
-          Browse the best{" "}
-          <Link
-            href="https://www.getrightproperty.com/residential-listings/for-sale/bengaluru"
-            // target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline"
-          >
-            residential listings for sale in Bengaluru
-          </Link>
-          featuring apartments, villas, and gated communities across top areas
-          like Whitefield, Sarjapur, and Electronic City. All listings are
-          verified with detailed pricing, amenities, and location insights to
-          help you find your ideal home.
-        </p>
-      );
-    } else if (path === "/residential/projects") {
-      return (
-        <p className="text-[13px] 2xl:text-sm  text-gray-600  line-clamp-1">
-          Explore a wide range of{" "}
-          <Link
-            href="https://www.getrightproperty.com/residential/projects/bengaluru"
-            // target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline"
-          >
-            residential projects in Bengaluru
-          </Link>
-          featuring top apartments, villas, and plots from leading
-          developers—perfect for homebuyers and investors.
-        </p>
-      );
-    }
-  };
 
   return (
     <div>

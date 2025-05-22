@@ -59,8 +59,7 @@ const SearchHeader = ({ city }: any) => {
 
   const [allFilterPopup, setAllFilterPopup] = useState(initialFilterObjState);
 
-  const [, { close }] =
-    useDisclosure(false);
+  const [, { close }] = useDisclosure(false);
   // const showpopUp = () => {
   //   setShowAllLocalities(true);
   //   open();
@@ -112,6 +111,7 @@ const SearchHeader = ({ city }: any) => {
         <span className="text-[#737579] font-[500] mt-3">
           {" "}
           <Link
+            prefetch={false}
             rel="noopener noreferrer"
             className="hover:underline"
             href={"/"}

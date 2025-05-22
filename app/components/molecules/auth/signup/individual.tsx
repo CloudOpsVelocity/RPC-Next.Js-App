@@ -236,6 +236,7 @@ function Individual() {
               <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
                 Account already exists. Kindly use{" "}
                 <Link
+                  prefetch={false}
                   href={{ pathname: "/login", search: queryParam.query }}
                   className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
                 >
@@ -264,6 +265,7 @@ function Individual() {
             </div>
 
             <Link
+              prefetch={false}
               href={{ pathname: "/login", search: queryParam.query }}
               className="text-[#002749] font-semibold  sm:text-[14px] flex gap-1 justify-center items-center  rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap max-w-fit m-auto"
             >
@@ -276,6 +278,7 @@ function Individual() {
               <p className="text-center text-[#556477] text-[16px] font-[600] xl:text-xl not-italic xl:font-medium leading-[normal] xl:mt-3 mb-[15px]">
                 Forgot Password?{" "}
                 <Link
+                  prefetch={false}
                   href={{ pathname: "/forgot", search: queryParam.query }}
                   className="text-[color:var(--Brand-green-primary,#148B16)] text-[16px] xl:text-xl not-italic font-[600] xl:font-medium leading-[normal] underline"
                 >
@@ -285,6 +288,7 @@ function Individual() {
             )}
 
             <Link
+              prefetch={false}
               href={{ pathname: "/" }}
               className=" not-italic text-[#148B16] text-[14px]  font-semibold   leading-[normal]  sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center max-w-fit m-auto"
             >

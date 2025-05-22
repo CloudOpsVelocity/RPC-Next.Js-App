@@ -5,7 +5,7 @@ import {
   emptyFilesIcon,
   LikeIcon,
   strikeIconIcon,
-  defaultCitySvg
+  defaultCitySvg,
 } from "@/app/images/commonSvgs";
 import { useSearchParams } from "next/navigation";
 
@@ -210,6 +210,7 @@ const PriceCard = ({
               {localityCheckList.map((each) => {
                 return (
                   <Link
+                    prefetch={false}
                     rel="noopener noreferrer"
                     key={each.name}
                     href={`/search?sf=city=${eachCity.cityName}%2B${cityId}-cg=${filters.cg}`}

@@ -10,10 +10,14 @@ export const dynamic = "force-dynamic";
 type Props = {
   totalCount: number;
   currentPage: number; // 1-based index
-  searchQueryParmeter ?: boolean
+  searchQueryParmeter?: boolean;
 };
 
-export default function ListingSearchPagination({ totalCount, currentPage,searchQueryParmeter = false }: Props) {
+export default function ListingSearchPagination({
+  totalCount,
+  currentPage,
+  searchQueryParmeter = false,
+}: Props) {
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const pathname = usePathname();
@@ -62,19 +66,14 @@ export default function ListingSearchPagination({ totalCount, currentPage,search
   };
 
   const createPaginationLink = (page: number) => {
-   
-  
     if (searchQueryParmeter) {
-
       return `${pathname}?sf=${`page=${page}`}`;
     }
-  
+
     const basePath = getCleanPath();
     const pathWithPage = page === 1 ? basePath : `${basePath}/page-${page}`;
-    return  pathWithPage;
+    return pathWithPage;
   };
-  
-  
 
   return (
     <section className="py-8 sm:py-14 container mx-auto px-4">
@@ -83,8 +82,11 @@ export default function ListingSearchPagination({ totalCount, currentPage,search
           <nav className="flex items-center gap-1">
             {/* Previous */}
             <Link
+              prefetch={false}
               target="_top"
-              href={currentPage > 1 ? createPaginationLink(currentPage - 1) : "#"}
+              href={
+                currentPage > 1 ? createPaginationLink(currentPage - 1) : "#"
+              }
               className={`inline-flex items-center justify-center h-10 w-10 rounded-md border border-blue-500 bg-white text-blue-600 text-sm font-medium shadow-sm transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 ${
                 currentPage === 1 ? "pointer-events-none opacity-50" : ""
               }`}
@@ -97,14 +99,22 @@ export default function ListingSearchPagination({ totalCount, currentPage,search
             {/* Page Numbers */}
             {getPageNumbers().map((pageNum, index) =>
               pageNum < 0 ? (
-                <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-500">
+                <span
+                  key={`ellipsis-${index}`}
+                  className="px-3 py-2 text-gray-500"
+                >
                   ...
                 </span>
               ) : (
                 <Link
+                  prefetch={false}
                   target="_top"
                   key={`page-${pageNum}`}
-                  href={pageNum !== currentPage ? createPaginationLink(pageNum) : "#"}
+                  href={
+                    pageNum !== currentPage
+                      ? createPaginationLink(pageNum)
+                      : "#"
+                  }
                   className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-sm font-medium transition-colors ${
                     currentPage === pageNum
                       ? "bg-blue-600 text-white"
@@ -120,10 +130,17 @@ export default function ListingSearchPagination({ totalCount, currentPage,search
 
             {/* Next */}
             <Link
+              prefetch={false}
               target="_top"
-              href={currentPage < totalPages ? createPaginationLink(currentPage + 1) : "#"}
+              href={
+                currentPage < totalPages
+                  ? createPaginationLink(currentPage + 1)
+                  : "#"
+              }
               className={`inline-flex items-center justify-center h-10 w-10 rounded-md border border-blue-500 bg-white text-blue-600 text-sm font-medium shadow-sm transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 ${
-                currentPage === totalPages ? "pointer-events-none opacity-50" : ""
+                currentPage === totalPages
+                  ? "pointer-events-none opacity-50"
+                  : ""
               }`}
               aria-label="Next page"
               tabIndex={currentPage === totalPages ? -1 : 0}
@@ -138,7 +155,8 @@ export default function ListingSearchPagination({ totalCount, currentPage,search
       {totalCount > 0 && (
         <div className="mt-4 text-center text-sm text-gray-600">
           Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
-          {Math.min(currentPage * itemsPerPage, totalCount)} of {totalCount} results
+          {Math.min(currentPage * itemsPerPage, totalCount)} of {totalCount}{" "}
+          results
         </div>
       )}
     </section>

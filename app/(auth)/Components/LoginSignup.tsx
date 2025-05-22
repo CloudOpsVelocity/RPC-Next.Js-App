@@ -26,7 +26,8 @@ export default function LoginSignupTabs({
   return (
     <div className="inline-flex items-center border   rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
       <Link
-      role="link"
+        prefetch={false}
+        role="link"
         className={state === "login" ? activeClassName : inactiveClassName}
         href={{
           pathname: "/login",
@@ -36,7 +37,8 @@ export default function LoginSignupTabs({
         Login
       </Link>
       <Link
-      role="link"
+        prefetch={false}
+        role="link"
         href={{
           pathname: "/register",
           search: getQueryParam(searchParams),

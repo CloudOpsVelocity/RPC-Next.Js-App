@@ -93,6 +93,7 @@ export default function ListingBreadCrumbs({
       />
       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
         <Link
+          prefetch={false}
           rel="noopener noreferrer"
           href={`/`}
           className="hover:underline cursor-pointer capitalize"
@@ -103,7 +104,7 @@ export default function ListingBreadCrumbs({
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;
           const isLast = index === allParams.length - 1;
-          
+
           return (
             <React.Fragment key={`${key[index]}`}>
               {!isLast ? (
@@ -114,7 +115,10 @@ export default function ListingBreadCrumbs({
                     // target="_blank"
                     className="hover:underline cursor-pointer capitalize"
                     title={`Go to ${params[key].replace(/-/g, " ")} page`}
-                    aria-label={`Breadcrumb link to ${params[key].replace(/-/g, " ")}`}
+                    aria-label={`Breadcrumb link to ${params[key].replace(
+                      /-/g,
+                      " "
+                    )}`}
                   >
                     {/* <a onTouchStart={() => {}}></a> */}
                     {titleOfKeys[key as keyof typeof titleOfKeys] && (

@@ -16,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <main className="w-full flex  sm:h-screen">
         <div className="relative flex-col hidden md:flex items-start sm:pl-[5%] lg:pl-[7%] justify-start sm:pt-[3%] xl:pt-[6%] bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
           <Link
+            prefetch={false}
             href={"/"}
             className=" top-[7%] left-[25%] p-2 bg-[#ffffff7a] sm:mb-[50px] xl:mb-[72px]"
           >
@@ -49,6 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative max-h-[100vh] overflow-y-auto ">
           <Link
+            prefetch={false}
             href={"/"}
             className=" sm:hidden top-0 left-0 p-2 bg-[#ffffff7a] absolute"
           >
@@ -73,8 +75,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 position="bottom-center"
                 toastOptions={{
                   style: {
-                    background: '#333', // dark background
-                    color: '#fff',      // light text
+                    background: "#333", // dark background
+                    color: "#fff", // light text
                   },
                 }}
               />

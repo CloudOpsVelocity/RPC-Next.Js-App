@@ -10,10 +10,13 @@ export const dynamic = "force-dynamic";
 
 type Props = {
   totalCount: number;
-  currentPage:number;
+  currentPage: number;
 };
 
-export default function ProjectSearchPagination({ totalCount, currentPage }: Props) {
+export default function ProjectSearchPagination({
+  totalCount,
+  currentPage,
+}: Props) {
   // const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 601px)");
@@ -25,7 +28,7 @@ export default function ProjectSearchPagination({ totalCount, currentPage }: Pro
       : Number.parseInt(pageParam)
     : 1;
   // eslint-disable-next-line no-unused-vars
-/*   const [currentPage, setCurrentPage] = useState(initialPage); */
+  /*   const [currentPage, setCurrentPage] = useState(initialPage); */
   //
   const itemsPerPage = 40;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
@@ -87,13 +90,12 @@ export default function ProjectSearchPagination({ totalCount, currentPage }: Pro
 
     /*  window.scrollTo({ top: 25, behavior: "smooth" }) */
 
-  const fullQuery = searchParams.toString()
+    const fullQuery = searchParams.toString();
 
     return `/search/page-${page}?${fullQuery}`;
   };
 
   return (
-  
     <>
       <section className="py-8 sm:py-14 container mx-auto px-4">
         {/*  <noscript> */}
@@ -102,6 +104,7 @@ export default function ProjectSearchPagination({ totalCount, currentPage }: Pro
             <nav className="flex items-center gap-1">
               {/* Previous page */}
               <Link
+                prefetch={false}
                 target="_top"
                 href={
                   currentPage > 1 ? createPaginationLink(currentPage - 2) : "#"
@@ -136,6 +139,7 @@ export default function ProjectSearchPagination({ totalCount, currentPage }: Pro
 
                 return (
                   <Link
+                    prefetch={false}
                     target="_top"
                     key={`page-${pageNum}`}
                     href={
@@ -162,6 +166,7 @@ export default function ProjectSearchPagination({ totalCount, currentPage }: Pro
 
               {/* Next page */}
               <Link
+                prefetch={false}
                 target="_top"
                 href={
                   currentPage < totalPages - 1

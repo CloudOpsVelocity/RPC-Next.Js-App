@@ -77,6 +77,7 @@ function MarketSections({ text }: Props) {
               : `${path}/${eachCity?.name.toLowerCase()}`;
             return (
               <Link
+                prefetch={false}
                 rel="noopener noreferrer"
                 key={eachCity.name}
                 href={pageUrl}

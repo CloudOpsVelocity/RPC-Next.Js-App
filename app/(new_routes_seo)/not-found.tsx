@@ -16,6 +16,7 @@ export default function NotFound() {
         </span>{" "}
       </h1>
       <Link
+        prefetch={false}
         href="/"
         className="justify-center items-center gap-2.5 px-5 py-[17px] flex bg-btnPrimary text-white text-center text-3xl    not-italic font-bold leading-[normal] "
       >

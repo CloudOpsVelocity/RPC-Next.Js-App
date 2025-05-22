@@ -9,6 +9,7 @@ type Props = {
 const ViewAllButton: React.FC<Props> = ({ url, name }) => {
   return (
     <Link
+      prefetch={false}
       aria-label={name}
       title={name}
       href={url}

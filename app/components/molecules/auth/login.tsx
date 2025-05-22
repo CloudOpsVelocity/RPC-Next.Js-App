@@ -135,6 +135,7 @@ function Login({ params }: any) {
         />
 
         <Link
+          prefetch={false}
           href={{ pathname: "/forgot", search: getQueryParam(params) }}
           className="text-[#0C7ACA] text-sm not-italic font-semibold mb-[1%] xl:mb-[2%]  w-full cursor-pointer "
         >
@@ -151,6 +152,7 @@ function Login({ params }: any) {
         </Button>
         <div className="text-center mt-6 ">
           <Link
+            prefetch={false}
             href={{ pathname: "/register", search: getQueryParam(params) }}
             className="text-[#282828]  flex justify-center items-center gap-1 rounded border p-2 border-solid border-[#B2B2B2] mb-[20px] text-nowrap text-[14px] font-[400]"
           >
@@ -160,6 +162,7 @@ function Login({ params }: any) {
             </span>
           </Link>
           <Link
+            prefetch={false}
             href={{ pathname: getCallPathServer(params) }}
             className="text-[14px] leading-[normal]    border rounded-sm p-2 border-solid border-[#148B16] text-[#148B16] not-italic "
           >

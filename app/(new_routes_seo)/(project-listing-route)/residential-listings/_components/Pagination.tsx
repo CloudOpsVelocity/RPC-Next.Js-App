@@ -90,7 +90,6 @@ export default function PaginationForListings({ totalCount }: Props) {
   };
 
   return (
-  
     <>
       <section className="py-8 sm:py-14 container mx-auto px-4">
         {/*  <noscript> */}
@@ -99,6 +98,7 @@ export default function PaginationForListings({ totalCount }: Props) {
             <nav className="flex items-center gap-1">
               {/* Previous page */}
               <Link
+                prefetch={false}
                 target="_top"
                 href={
                   currentPage > 1 ? createPaginationLink(currentPage - 2) : "#"
@@ -133,6 +133,7 @@ export default function PaginationForListings({ totalCount }: Props) {
 
                 return (
                   <Link
+                    prefetch={false}
                     target="_top"
                     key={`page-${pageNum}`}
                     href={
@@ -159,6 +160,7 @@ export default function PaginationForListings({ totalCount }: Props) {
 
               {/* Next page */}
               <Link
+                prefetch={false}
                 target="_top"
                 href={
                   currentPage < totalPages - 1
