@@ -366,7 +366,7 @@ const ListingHeaderFilters = ({
                       setOpenDropdown(null);
                     }}
                   />
-                  <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                  <MdSearch className="mr-4 text-[#0073C6] w-6 h-6 cursor-pointer" />
                 </form>
               </div>
               {isLoading ? (

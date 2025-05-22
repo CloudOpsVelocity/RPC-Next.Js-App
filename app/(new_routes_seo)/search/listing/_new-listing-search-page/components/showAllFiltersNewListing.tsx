@@ -245,6 +245,7 @@ export default function ShowAllFiltersButton({
     // }
   }, [isOpen]);
 
+
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
   const serverCity = useAtomValue(serverCityAtom);

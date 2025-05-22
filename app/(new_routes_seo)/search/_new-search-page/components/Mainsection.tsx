@@ -86,7 +86,7 @@ export default function Mainsection({
         isMobile !== undefined &&
         isMobile === false && (
             <div
-                className="hidden md:flex relative w-full md:w-[50%] max-w-full sm:fixed right-0 z-0 border-1 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full w-full"
+              className="hidden md:flex relative w-full md:w-[50%] max-w-full sm:fixed right-0 z-0 border-1 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full w-full"
             >
                 <Image
                   priority
