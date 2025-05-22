@@ -71,8 +71,6 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({
   const verified = isReraverified(rerastatus);
   const isDesktop = useMediaQuery("(max-width: 1600px)");
   const isMobile = useMediaQuery('(max-width: 768px)') 
-  
-
 
   return (
     <div className={Styles.searchCradTopImageBox}>
@@ -328,7 +326,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({
           <p className={Styles.searchCardPostedBy}>
             {postedBy ?? "Builder"}:{" "}
             <Link
-              prefetch={true} // Enable prefetching unless you specifically need to disable it
+              prefetch={false} // Enable prefetching unless you specifically need to disable it
               href={urlBuilder}
               title={postedByName}
               className={`${Styles.searchCardLink} underline `}
@@ -369,7 +367,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({
             {projIdEnc != undefined ? (
               <Link
                 href={projectUrl}
-                prefetch={true} // Let Next.js handle prefetching unless you specifically need to disable it
+                prefetch={false}
                 className="font-bold underline cursor-pointer"
                 title={`View project: ${propName}`} // Added title for extra context
                 rel="noopener noreferrer" // Use this for external links; remove if it's internal
@@ -387,7 +385,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({
 
             {postedBy === "Builder" ?
             <Link
-              prefetch={true}
+              prefetch={false}
               href={urlBuilder}
               title={postedByName}
               aria-label={postedByName}

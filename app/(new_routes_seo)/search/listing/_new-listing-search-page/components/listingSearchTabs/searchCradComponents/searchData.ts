@@ -233,4 +233,4 @@ export const handleAgentOwner = (projIdEnc:string, projName:string, type: "A" | 
       `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projName}`,
       "_self"
     );
-}
+};
