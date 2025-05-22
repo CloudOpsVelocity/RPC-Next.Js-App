@@ -197,7 +197,9 @@ const ProjectSearchTabs = ({
                 <Link
                   href={tab.id !== null ? `?sf=listedBy=${tab.id}` : pathname}
                   key={tab.id}
-                  title={`Click to view ${tab.label} in ${params.lt ?? ""} ${params.city ?? "Bengaluru"}`}
+                  title={`Click to view ${tab.label} in ${params.lt ?? ""} ${
+                    params.city ?? "Bengaluru"
+                  }`}
                   onClick={(e) => {
                     e.preventDefault();
                     handleTabsChange(tab.id);
@@ -208,6 +210,7 @@ const ProjectSearchTabs = ({
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }
                   `}
+                  prefetch={false}
                 >
                   {tab.label}
                 </Link>

@@ -209,6 +209,7 @@ const ProjectSearchTabs = ({
                       : "text-black hover:bg-[#0073C6] hover:text-white"
                   }
                   `}
+                  prefetch={false}
                 >
                   {tab.label}
                 </Link>
@@ -218,10 +219,10 @@ const ProjectSearchTabs = ({
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsDropdownOpen(!isDropdownOpen);
-                  }} 
+                  }}
                   className="flex items-center gap-2 px-[6px] py-[4px] xl:px-4 xl:py-2 text-[12px] sm:text-sm xl:text-base text-black hover:text-white hover:bg-[#0073C6] rounded-full transition-colors"
                 >
-                  <span className="text-xl text-amber-800 font-bold" >↑↓</span>
+                  <span className="text-xl text-amber-800 font-bold">↑↓</span>
 
                   <span className="max-w-[105px] overflow-hidden text-ellipsis whitespace-nowrap">
                     {state.sortByfield != null && state.sortType != null
