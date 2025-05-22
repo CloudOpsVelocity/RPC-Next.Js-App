@@ -191,7 +191,18 @@ export async function POST(request: Request) {
           logger.info(
             `Adding new slug "${slug}" with ID: ${newId}. Request: ${request.method} ${request.url}`
           );
-          parsedData[slug] = newId;
+          if (type === "project") {
+            const slugParts = slug.split("/");
+            let base = "/residential/projects";
+            let splitedId = newId.split("_");
+            for (let i = 3; i < slugParts.length; i++) {
+              base += `/${slugParts[i]}`;
+              let newId = splitedId.slice(0, i - 2).join("_");
+              parsedData[base] = newId;
+            }
+          } else {
+            parsedData[slug] = newId;
+          }
         }
 
         // Save updated data to Redis
