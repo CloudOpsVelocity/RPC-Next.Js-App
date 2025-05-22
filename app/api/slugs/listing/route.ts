@@ -41,13 +41,25 @@ export async function POST(request: Request) {
           return;
         }
         if (Object.prototype.hasOwnProperty.call(slugs, key)) {
-          const element = slugs[key];
+          const value = slugs[key];
           // Check if the key (slug) already exists in JSON data
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             logger.warn(`POST ${request.url}: Slug "${key}" already exists`);
             errors.push(`Slug "${key}" already exists`);
           } else {
-            data[key] = element;
+            const slugParts = key.split("/");
+            let base = "/residential-listings";
+            let splitedId = value.split("_");
+            let whichLengthTakeTwoIds = slugParts.length - 2;
+            for (let i = 2; i < slugParts.length; i++) {
+              base += `/${slugParts[i]}`;
+              let newId =
+                i >= whichLengthTakeTwoIds
+                  ? splitedId.slice(0, i).join("_")
+                  : splitedId.slice(0, i - 1).join("_");
+              data[base] = newId;
+            }
+            // data[key] = slug;
             revalidatePath(key);
           }
         }
@@ -104,8 +116,20 @@ export async function POST(request: Request) {
             { status: 400 }
           );
         }
+        const slugParts = slug.split("/");
+        let base = "/residential-listings";
+        let splitedId = newId.split("_");
+        let whichLengthTakeTwoIds = slugParts.length - 2;
+        for (let i = 2; i < slugParts.length; i++) {
+          base += `/${slugParts[i]}`;
+          let newId =
+            i >= whichLengthTakeTwoIds
+              ? splitedId.slice(0, i).join("_")
+              : splitedId.slice(0, i - 1).join("_");
+          data[base] = newId;
+        }
         // Add the new slug and its corresponding ID
-        data[slug] = newId;
+        // data[slug] = newId;
         logger.info(`POST ${request.url}: Added new slug: ${slug}`);
       });
       // Write updated data to the file
