@@ -62,7 +62,7 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
   return (
     <div className=" flex flex-col justify-center items-center gap-2">
         <button
-            className="flex flex-col items-center justify-center gap-2.5 p-2 xl:p-3 rounded-[10px] bg-[#0073C6] text-white text-[14px] md:text-[16px] md:text-lg not-italic font-bold leading-[normal] tracking-[0.96px] absolute top-[60px] right-[20px]  "
+            className="flex flex-col items-center justify-center gap-2.5 ml-auto p-2 rounded-[10px] bg-[#0073C6] text-white text-[12px] md:text-[14px] md:text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px]  "
             onClick={(e) => {
             e.preventDefault();
                 handleDownload();
@@ -70,15 +70,6 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
         >
             Download {(types[type] as string) || "Image"}
         </button>
-        <div className="max-h-[300px] md:max-h-[600px] xl:max-h-[650px] overflow-y-auto overflow-x-hidden ">
-        <Image
-            src={floorplanUrl}
-            height={650}
-            width={700}
-            alt="post"
-            className="h-full pt-[30px] md:pt-[52px]"
-        />
-        </div>
 
         <div className="flex w-full gap-[10px] flex-wrap pb-[20px]">
               {listingProps[propTypeName] !== projectprops.plot && (
@@ -358,6 +349,14 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
                 ]}
               />
         </div>
+
+        <Image
+            src={floorplanUrl}
+            height={650}
+            width={700}
+            alt="post"
+            className="h-auto w-full border border-solid border-1-black mb-[20px] "
+        />
     </div>
   );
 }

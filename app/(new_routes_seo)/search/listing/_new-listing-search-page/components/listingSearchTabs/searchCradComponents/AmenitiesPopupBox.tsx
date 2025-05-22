@@ -23,7 +23,11 @@ function AmenitiesPopupBox({ id, type, projId, propId }: Props) {
     isError,
   } = useQuery({
     queryKey: id,
-    queryFn: () => getAmenties(projId ? projId : propId, pType, type === "proj" ? projId : propId),
+    queryFn: () => getAmenties(
+      projId ? projId : propId, 
+      projId ? "proj" : "prop", 
+      projId ? projId : propId
+    ),
     // enabled: true, // Manual fetch
   });
 
@@ -38,10 +42,10 @@ function AmenitiesPopupBox({ id, type, projId, propId }: Props) {
     return amenitiesFromDB
       .toString()
       .split(',')
-      .map((item: string) =>
+      .map((item: string, index: number) =>
         item.trim() !== '' ? (
           <span
-            key={`amenity_${item}`}
+            key={`amenity_${item}_${index.toString()}`}
             className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
           >
             {item}

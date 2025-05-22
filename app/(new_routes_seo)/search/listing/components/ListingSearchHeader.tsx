@@ -71,6 +71,7 @@ const ListingHeaderFilters = ({
         }
         setIsSearchOpen(false);
         setOpenDropdown(null);
+        document.body.style.overflow = "unset";
       }
     }
     document.addEventListener("mousedown", handleClickOutside);

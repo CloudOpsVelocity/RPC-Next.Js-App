@@ -84,7 +84,6 @@ function DrawerBox({
       document.body.style.overflow = "unset";
       window.history.back();
       handleChange(false);
-      // yourFunction();
     }
   };
 

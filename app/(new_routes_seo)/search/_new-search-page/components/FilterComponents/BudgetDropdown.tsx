@@ -76,13 +76,19 @@ export default function BudgetDropdown({
         <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border z-50">
           <div className="flex items-center justify-between gap-4 pb-4 border-b">
             <button
-              onClick={() => handleClearFilters("budget")}
+              onClick={() => {
+                document.body.style.overflow = "unset";
+                handleClearFilters("budget");
+              }}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
               Clear Filter
             </button>
             <button
-              onClick={() => handleApplyFilters(() => onToggle())}
+              onClick={() => {
+                document.body.style.overflow = "unset";
+                handleApplyFilters(() => onToggle());
+              }}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >
               Apply Filter

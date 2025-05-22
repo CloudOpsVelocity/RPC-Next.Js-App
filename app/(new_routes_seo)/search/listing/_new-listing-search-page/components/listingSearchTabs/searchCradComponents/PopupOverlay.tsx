@@ -101,10 +101,8 @@ function PopupOverlay({popupState, closePopup}: Props) {
                ? `${bhkName + " " + propTypeName}`
                : "" + " " + propTypeName,
            });
-
-    console.log(url, data)
           
-    const projOrPropName = type === "proj" ? projName : `${bhkName} ${propTypeName} for ${category} in ${localityName}`;
+    const projOrPropName = type === "proj" ? projName : `${bhkName ? bhkName : ""} ${propTypeName ? propTypeName : ""} for ${category ? category : ""} in ${localityName ? localityName : ""}`;
 
     return (
         <DrawerBox

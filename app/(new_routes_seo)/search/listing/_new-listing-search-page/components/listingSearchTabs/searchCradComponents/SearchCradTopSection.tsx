@@ -70,6 +70,9 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({
   } = data;
   const verified = isReraverified(rerastatus);
   const isDesktop = useMediaQuery("(max-width: 1600px)");
+  const isMobile = useMediaQuery('(max-width: 768px)') 
+  
+
 
   return (
     <div className={Styles.searchCradTopImageBox}>
@@ -81,14 +84,15 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({
       >
         <Image
           src={src.includes("+") ? src.replace(/\+/g, "%2B") : src}
+          priority={isMobile && index === "0" ? true : false}
           width={300}
           height={300}
           alt={projOrPropName}
           title={projOrPropName}
           aria-label={projOrPropName}
-          className={Styles.searchCradImage}
+          className={Styles.searchCradImage} 
           sizes="(max-width: 768px) 100vw, 300px"
-          loading="lazy"
+          loading={isMobile && index === "0" ? "eager" : "lazy"}
         />
       </Link>
 
