@@ -80,12 +80,15 @@ export async function POST(request: Request) {
           } else {
             if (type === "project") {
               const slugParts = slug.split("/");
-              let base = "/residential/projects/";
+              let base = "/residential/projects";
+              let splitedId = id.split("_");
               for (let i = 3; i < slugParts.length; i++) {
-                base += slugParts[i] + (slugParts.length - 1 == i ? "" : "/");
-                if (!parsedData[base]) {
-                  parsedData[base] = id;
-                }
+                base += `/${slugParts[i]}`;
+                // base += slugParts[i];
+                // if (!parsedData[base]) {
+                let newId = splitedId.slice(0, i - 2).join("_");
+                parsedData[base] = newId;
+                // }
               }
             } else {
               parsedData[slug] = id;
