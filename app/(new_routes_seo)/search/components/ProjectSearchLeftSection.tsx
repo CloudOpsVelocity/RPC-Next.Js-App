@@ -72,7 +72,7 @@ function LeftSection({
       const response = await getSearchData(
         pageParam,
         apiFilterQueryParams ?? "",
-        serverFilterString
+        isTrue ? undefined : serverFilterString
       );
       return response.results;
     },
