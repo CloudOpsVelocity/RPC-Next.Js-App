@@ -233,6 +233,9 @@ export default function ListingServerCardData({
         // onSetNearBy(selectedItem);
         break;
       case "amenities":
+        // const amenitiesList = selectedItem?.amenCount?.split(",") ?? [];
+        // console.log(amenitiesList);
+
         document.body.style.overflow = "hidden";
         setPopupState((prev) => ({
           ...prev,
@@ -240,6 +243,7 @@ export default function ListingServerCardData({
           type: "amenities",
           title: "Amenities",
           data: {...selectedItem, type: type},
+          // content
         }));
         break;
       // case "listingType_B":

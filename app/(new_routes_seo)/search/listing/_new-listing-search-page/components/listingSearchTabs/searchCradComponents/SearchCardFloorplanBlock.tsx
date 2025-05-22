@@ -8,70 +8,36 @@ import { formatNumberWithSuffix } from "@/app/utils/numbers";
 type Props = { data: any, type:string };
 export default function SearchCardFloorplanBlock({data, type}: Props) {
   let floorplanUrl = data.floorPlan.split(",")[1]
-  const types:any = {
-    M: "Master Plan",
-    F: "Floor Plan",
-    _image: {
-      M: "master_plan",
-      F: "floor_plan",
-    },
-  };
-
-  let isDownloading = false;
-  const handleDownload = async () => {
-    if (isDownloading) {
-      console.log("Download in progress, please wait.");
-      return;
-    }
-
-    isDownloading = true;
-
-    try {
-        const response = await fetch(floorplanUrl);
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch image. Status: ${response.status}`);
-        }
-
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-
-        const downloadLink = document.createElement("a");
-        downloadLink.href = url;
-
-        // Handle file name and extension
-        const filename = `${types?._image?.[type] || "image"}.webp`;
-        downloadLink.download = filename;
-
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-
-        URL.revokeObjectURL(url);
-    } catch (error) {
-        console.error("Error downloading image:", error);
-    } finally {
-        isDownloading = false;
-    }
-  };
-
-  const {propTypeName} = data;
-
-  console.log(data);
 
   return (
     <div className=" flex flex-col justify-center items-center gap-2">
-        <button
-            className="flex flex-col items-center justify-center gap-2.5 ml-auto p-2 rounded-[10px] bg-[#0073C6] text-white text-[12px] md:text-[14px] md:text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px]  "
+        {/* <button
+            className="flex flex-col items-center justify-center gap-2.5 ml-auto p-1 rounded-[10px] bg-[#0073C6] text-white text-[12px] md:text-[14px] md:text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px]  "
             onClick={(e) => {
-            e.preventDefault();
-                handleDownload();
+              e.preventDefault();
+              handleDownload();
             }}
-        >
-            Download {(types[type] as string) || "Image"}
-        </button>
+        >{downLoadIcon}</button> */}
 
-        <div className="flex w-full gap-[10px] flex-wrap pb-[20px]">
+        <DetailsSection data={data} />
+
+        <Image
+            src={floorplanUrl}
+            height={650}
+            width={700}
+            alt="post"
+            className="h-auto w-full border border-solid border-1-black mb-[20px] "
+        />
+    </div>
+  );
+};
+
+
+const DetailsSection = ({data}:{data: any}) => {
+  const {propTypeName} = data;
+
+  return(
+    <div className="flex w-full gap-[10px] flex-wrap pb-[20px]">
               {listingProps[propTypeName] !== projectprops.plot && (
                 <DetailCard
                   icon={propertyDetailsSvgs.unitType}
@@ -349,17 +315,9 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
                 ]}
               />
         </div>
-
-        <Image
-            src={floorplanUrl}
-            height={650}
-            width={700}
-            alt="post"
-            className="h-auto w-full border border-solid border-1-black mb-[20px] "
-        />
-    </div>
-  );
+  )
 }
+
 
 interface DetailCardProps {
   icon: JSX.Element;

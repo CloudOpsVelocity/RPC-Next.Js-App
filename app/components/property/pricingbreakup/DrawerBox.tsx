@@ -12,6 +12,7 @@ type Props = {
   hideHeader?: boolean;
   childrenContainerClass?: string;
   HeadingElemnt?: ReactNode;
+  iconBox?:any;
 };
 
 function DrawerBox({
@@ -22,7 +23,8 @@ function DrawerBox({
   title,
   hideHeader,
   childrenContainerClass,
-  HeadingElemnt
+  HeadingElemnt,
+  iconBox
 }: Props) {
   const onMainConClick = (e: any) => {
     var baxEl = document.getElementById("modalDrawerPopupInnerCon");
@@ -111,6 +113,7 @@ function DrawerBox({
             </h3>
             }
             {HeadingElemnt ? HeadingElemnt : ""}
+            {iconBox ? iconBox : ""}
             <Close
               close={() => {
                 document.body.style.overflow = "unset";

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
 import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
 import SearchCardFloorplanBlock from './SearchCardFloorplanBlock';
+import { downLoadIcon } from '@/app/images/commonSvgs';
 
 type Props = {
     popupState: any;
@@ -28,6 +29,57 @@ function PopupOverlay({popupState, closePopup}: Props) {
     const lat = location.split(",")[0];
     const lang = location.split(",")[1];
     const isDesktop = useMediaQuery("(max-width: 1500px)");
+
+      const types:any = {
+        M: "Master Plan",
+        F: "Floor Plan",
+        _image: {
+          M: "master_plan",
+          F: "floor_plan",
+        },
+      };
+
+
+      let isDownloading = false;
+      const handleDownload = async () => {
+        let floorplanUrl = data?.floorPlan?.split(",")[1] ?? "";
+
+        if (isDownloading) {
+          console.log("Download in progress, please wait.");
+          return;
+        }
+    
+        isDownloading = true;
+    
+        try {
+            const response = await fetch(floorplanUrl);
+    
+            if (!response.ok) {
+                throw new Error(`Failed to fetch image. Status: ${response.status}`);
+            }
+    
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+    
+            const downloadLink = document.createElement("a");
+            downloadLink.href = url;
+    
+            // Handle file name and extension
+            const filename = `${types?._image?.[type] || "image"}.webp`;
+            downloadLink.download = filename;
+    
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+    
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Error downloading image:", error);
+        } finally {
+            isDownloading = false;
+        }
+      };
+
     const renderContent = () => {
         switch (popupState.type) {
           case "amenities":
@@ -71,7 +123,7 @@ function PopupOverlay({popupState, closePopup}: Props) {
               </div>
             );
           case "floorplan":
-            return <SearchCardFloorplanBlock data={data} type={floorplanType} />
+            return <SearchCardFloorplanBlock data={data} type={floorplanType}/>
           case "otherCharges":
             return <OtherChargesPopupBox data={data} />
           case "hightlights":
@@ -129,6 +181,15 @@ function PopupOverlay({popupState, closePopup}: Props) {
             }
             containerClassStyle={!isDesktop ? `!w-[50%]` : `!w-full`}
             childrenContainerClass="p-[10px] md:p-[20px] pt-[10px] max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden   "
+            iconBox={
+              popupState.type === "floorplan" && 
+              <button
+                        className="flex flex-col items-center justify-center gap-2.5 ml-auto mr-[4px] p-1 rounded-[10px] bg-[#0073C6] text-white text-[12px] md:text-[14px] md:text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px]  "
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDownload();
+                        }}
+              >{downLoadIcon}</button>}
         >
             {renderContent()}
         </DrawerBox>
