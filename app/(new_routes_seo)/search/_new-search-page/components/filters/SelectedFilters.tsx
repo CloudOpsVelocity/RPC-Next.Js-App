@@ -4,7 +4,7 @@ import React, { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { projSearchStore } from "../../../store/newSearchProjectStore";
 import { SEARCH_FILTER_DATA, SelectedFiltersMap } from "@/app/data/search";
-import useProjSearchAppliedFilters from "../../../hooks/useProjSearchAppliedFilters";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 type Props = {
   frontendFilters: Record<string, any>;
@@ -132,9 +132,7 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
                           lng: null,
                         },
                       });
-                      setTimeout(() => {
-                        handleApplyFilters();
-                      }, 0);
+                      handleApplyFilters();
                       return;
                     }
                     dispatch({
