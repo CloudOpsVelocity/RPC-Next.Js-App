@@ -242,6 +242,12 @@ function CountListing({
     return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projOrPropName}`;
   };
 
+  const userTypes = {
+    A: "Agent",
+    B: "Builder",
+    O: "Owner",
+  };
+
   return (
     value > 0 && (
       <Link
@@ -257,7 +263,7 @@ function CountListing({
         }`}
         prefetch={false}
       >
-        {`${type} Listing : ${value}`}
+        {`${userTypes[type]} Listing : ${value}`}
       </Link>
     )
   );

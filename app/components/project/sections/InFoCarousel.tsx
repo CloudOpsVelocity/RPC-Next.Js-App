@@ -3,12 +3,12 @@ import React from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
-import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
+import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
-import { slugify } from "@/app/utils/linkRouters/ProjectLink";
-import { slugifyBHKUnitType } from "@/app/utils/linkRouters/ListingLink";
-import Link from "next/link";
+// import { slugify } from "@/app/utils/linkRouters/ProjectLink";
+// import { slugifyBHKUnitType } from "@/app/utils/linkRouters/ListingLink";
+// import Link from "next/link";
 
 type Props = {
   partialUnitData: any;
@@ -27,17 +27,17 @@ export default function InFoCarousel({
   const currentPhase = Cphase ? Cphase : phaseList[0].phaseId;
   const categoryId = useAtomValue(propCgIdAtom);
   const propCgId = categoryId ? categoryId : PropertyId;
-  const propName = propertyDetailsTypes.get(propCgId);
+  // const propName = propertyDetailsTypes.get(propCgId);
   const whichKeyname = partialUnitData.type === "overview" ? "apiProp" : "name";
-  const currentPhaseName = phaseList.find(
-    (item: any) => item.phaseId === currentPhase
-  )?.phaseName;
+  // const currentPhaseName = phaseList.find(
+  //   (item: any) => item.phaseId === currentPhase
+  // )?.phaseName;
   const data =
     partialUnitData[currentPhase]?.[
       propertyDetailsTypes.get(propCgId)?.[whichKeyname] ?? ""
     ];
   const setData = useSetAtom(selectedPartialUnitAtom);
-  const { rentListing, saleListing } = projectData;
+  // const { rentListing, saleListing } = projectData;
 
   const handleCardClick = (units: any, item: any) => {
     // console.log(units, item)
@@ -50,8 +50,6 @@ export default function InFoCarousel({
         });
       return;
     }
-
-    console.log(data)
 
     setData({
       main: 0,
@@ -117,7 +115,7 @@ export default function InFoCarousel({
                   >
                     {item}{" "}
 
-                    {saleListing  !== undefined && saleListing !== "0" &&
+                    {/* {saleListing  !== undefined && saleListing !== "0" &&
                     <Link
                       prefetch={false}
                       href={`/residential-listings/for-sale/bengaluru/${slugify( 
@@ -169,7 +167,7 @@ export default function InFoCarousel({
                       } in ${projectData.localityName}, Bengaluru`}
                     >
                       Rent
-                    </Link>}
+                    </Link>} */}
                   </td>
 
                   <td
