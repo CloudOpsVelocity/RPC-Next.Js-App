@@ -28,7 +28,9 @@ export default function NearByCarouselProjProperty({
     y: "N",
     type: "proj",
   });
-  const builderQueryNameAndId = encodeURIComponent(`${builderData?.data?.userName }+${builderId}`);
+  const builderQueryNameAndId = encodeURIComponent(
+    `${builderData?.data?.userName}+${builderId}`
+  );
 
   return (
     <div
@@ -62,7 +64,7 @@ export default function NearByCarouselProjProperty({
         type="proj"
         title={
           <Fragment>
-            Nearby Projects of{" "}
+            Projects Nearby{" "}
             <span className="text-green-800">
               {builderData?.data?.userName}
             </span>
