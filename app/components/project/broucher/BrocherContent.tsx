@@ -235,7 +235,7 @@ function BrocherContent({
         document.body.removeChild(link);
 
         // Delay the revoke
-        setTimeout(() => URL.revokeObjectURL(objectURL), 1000);
+        URL.revokeObjectURL(objectURL);
       })
       .catch(console.error);
   }
@@ -438,7 +438,9 @@ function BrocherContent({
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <button
-                aria-label="Click to download Brochure" name="Click to download Brochure" title="Click to download Brochure"
+                aria-label="Click to download Brochure"
+                name="Click to download Brochure"
+                title="Click to download Brochure"
                 onClick={(e) => {
                   e.preventDefault();
                   if (singleBrocher) handleDownload(singleBrocher);

@@ -117,14 +117,23 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
                     ? values
                     : category === "lat"
                     ? "Near By"
-                    : category == "lng"
-                    ? "Near By"
                     : SelectedFiltersMap.get(values) ?? ""}
                 </span>
                 {/* {typeof window !== "undefined" && ( */}
                 <button
+                  id={category}
                   aria-label="Remove Item"
                   onClick={() => {
+                    if (category === "lat") {
+                      dispatch({
+                        type: "update",
+                        payload: {
+                          lat: null,
+                          lng: null,
+                        },
+                      });
+                      return;
+                    }
                     dispatch({
                       type: "update",
                       payload: {

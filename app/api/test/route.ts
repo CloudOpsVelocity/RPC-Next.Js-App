@@ -1,16 +1,31 @@
-// import axios from "axios";
-import { NextResponse } from "next/server";
-// import path from "path";
-// import fs from "fs";
-// import redis from "@/app/utils/redis/redis.connection";
-// import redisService from "@/app/utils/redis/redis.service";
+// app/api/download-brochure/route.ts
+import { NextRequest } from "next/server";
+import axios from "axios";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const url =
+    "https://media.getrightproperty.com/residential-projects/bengaluru/1098/sattva-bhumi-devanahalli-brochure.pdf?v=1741851402569";
+
   try {
-    // const data = await redisService.getSeoSlug("case-seo");
-    return NextResponse.json({});
-  } catch (error) {
-    console.error(error);
-    return Response.json({ ok: false, error: "Error reading file" });
+    const axiosResponse = await axios.get(url, {
+      responseType: "stream",
+    });
+
+    const stream = axiosResponse.data;
+
+    const headers = new Headers();
+    headers.set("Content-Type", "application/pdf");
+    headers.set(
+      "Content-Disposition",
+      'attachment; filename="sattva-bhumi-brochure.pdf"'
+    );
+
+    return new Response(stream as any, {
+      status: 200,
+      headers,
+    });
+  } catch (error: any) {
+    console.error("Download error:", error.message);
+    return new Response("Failed to download PDF", { status: 500 });
   }
 }
