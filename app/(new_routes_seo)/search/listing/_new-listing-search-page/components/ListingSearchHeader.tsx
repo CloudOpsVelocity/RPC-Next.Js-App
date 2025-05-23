@@ -61,7 +61,7 @@ const ListingHeaderFilters = ({
     onSearchChange,
     name,
   } = useProjSearchMatcher();
-
+ 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -73,7 +73,7 @@ const ListingHeaderFilters = ({
         }
         setIsSearchOpen(false);
         setOpenDropdown(null);
-        document.body.style.overflow = "unset";
+        // document.body.style.overflow = "unset";
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -108,9 +108,18 @@ const ListingHeaderFilters = ({
 
   const handleDropdownToggle = (dropdownName: string) => {
     setIsDrawerOpen(false);
-    document.body.style.overflow = "unset";
+    // document.body.style.overflow = "unset"; 
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
+    
+    if (dropdownName == "allFilters") {
+      if (document.body.style.overflow === "hidden")
+        document.body.style.overflow = "unset";
+      else {
+        document.body.style.overflow = "hidden";
+      }
+    }
+
   };
   const handleSearchChange = (e: any) => {
     const value = e.target.value;

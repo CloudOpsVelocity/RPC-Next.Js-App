@@ -240,9 +240,9 @@ export default function ShowAllFiltersButton({
       window.scrollTo({ top: 0, behavior: "smooth" });
       // document.body.style.overflow = "hidden";
     } 
-    // else {
-    //   document.body.style.overflow = "unset";
-    // }
+    else {
+      document.body.style.overflow = "unset";
+    }
   }, [isOpen]);
 
 
@@ -270,6 +270,7 @@ export default function ShowAllFiltersButton({
   //     : !isListing;
   const isproject =  state.listedBy == "proj"
 
+
   return (
     <div className="  relative  ">
       <button
@@ -292,6 +293,7 @@ export default function ShowAllFiltersButton({
               onClick={() => {
                 handleClearFilters(isproject ? "clearAll" : "listing");
                 onToggle();
+                document.body.style.overflow = "unset";
               }}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
@@ -300,6 +302,7 @@ export default function ShowAllFiltersButton({
             <button
               onClick={() => {
                 handleApplyFilters(() => onToggle());
+                document.body.style.overflow = "unset";
               }}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >

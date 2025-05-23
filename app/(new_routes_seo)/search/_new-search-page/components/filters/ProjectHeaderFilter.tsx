@@ -389,7 +389,6 @@ const HeaderFilters = ({
                     onFocus={() => {
                       setIsSearchOpen(true);
                       setOpenDropdown(null);
-                      // document.body.style.overflow = "unset";
                     }}
                     maxLength={90}
                     pattern="[a-zA-Z0-9\s]+"
