@@ -33,7 +33,9 @@ export default function NearByCarousel({
     type: "proj",
   });
 
-  const builderQueryNameAndId = encodeURIComponent(`${builderData?.data?.userName }+${builderId}`);
+  const builderQueryNameAndId = encodeURIComponent(
+    `${builderData?.data?.userName}+${builderId}`
+  );
   /* const cityIdmaking=cityID.trim()
   const cityQueryNameAndID=encodeURIComponent(`${location}+${cityIdmaking}`); */
   return (
@@ -61,7 +63,7 @@ export default function NearByCarousel({
       <ProjectCarousel
         type="proj"
         builderLinkActive
-        title={nearBy?.title ?? "Near By Projects Of"}
+        title={nearBy?.title ?? "Projects Near"}
         projName={projName}
         content="See what other customers also viewed"
         data={

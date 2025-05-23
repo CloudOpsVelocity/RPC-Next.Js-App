@@ -20,6 +20,7 @@ import { useMediaQuery } from "@mantine/hooks";
 // import { useSession } from "next-auth/react";
 // import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Image from "next/image";
+import axios from "axios";
 // import SubHeading from "../headings/SubHeading";
 // import PropertyHeading from "../../property/heading";
 
@@ -222,27 +223,19 @@ function BrocherContent({
   //     });
   // };
 
-  function downloadPDF(url: string, filename: string) {
-    fetch(url)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const link = document.createElement("a");
-        const objectURL = URL.createObjectURL(blob);
-        link.href = objectURL;
-        link.download = filename || "download.pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Delay the revoke
-        URL.revokeObjectURL(objectURL);
-      })
-      .catch(console.error);
+  async function downloadPDF(url: string, filename: string) {
+    const link = document.createElement("a");
+    link.href = `/api/stream?url=${url}&filename=${filename}`;
+    // link.download = `${filename}.pdf`;
+    // document.body.appendChild(link);
+    link.click();
+    link.remove();
+    // await axios.get(`/api/stream?url=${url}`);
   }
 
   // Example usage:
 
-  const handleDownload = (url: string) => {
+  const handleDownload = async (url: string) => {
     const brocherPageUrl = `/pdf/${encodeURIComponent(
       url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
     )}`;
@@ -259,7 +252,7 @@ function BrocherContent({
         );
         return;
       } */
-      downloadPDF(url, `${projName}.pdf`);
+      await downloadPDF(url, `${projName}.pdf`);
       // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
     }

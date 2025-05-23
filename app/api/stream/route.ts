@@ -3,23 +3,24 @@ import { NextRequest } from "next/server";
 import axios from "axios";
 
 export async function GET(req: NextRequest) {
-  // const data = await req.json();
-  const url = "https://d24ksaw8earfo7.cloudfront.net/brochure-sample.pdf";
+  const { searchParams } = new URL(req.url);
+  const url = searchParams.get("url");
+  const filename = searchParams.get("filename");
+  if (!url) return new Response("Missing URL", { status: 400 });
 
   try {
     const axiosResponse = await axios.get(url, {
       responseType: "stream",
     });
 
-    const stream = axiosResponse.data;
-
     const headers = new Headers();
     headers.set("Content-Type", "application/pdf");
     headers.set(
       "Content-Disposition",
-      'attachment; filename="sattva-bhumi-brochure.pdf"'
+      `attachment; filename="${filename}.pdf"`
     );
-    return new Response(stream as any, {
+
+    return new Response(axiosResponse.data as any, {
       status: 200,
       headers,
     });

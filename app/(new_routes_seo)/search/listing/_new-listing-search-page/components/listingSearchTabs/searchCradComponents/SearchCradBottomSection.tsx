@@ -1,56 +1,101 @@
-import React from 'react';
+import React from "react";
 import Styles from "@/app/styles/seach/searchCrad.module.css";
-import ButtonElement from '@/common/components/CustomButton';
+import ButtonElement from "@/common/components/CustomButton";
 import { useMediaQuery } from "@mantine/hooks";
-import Tag from '@/app/components/atoms/Tag';
-import Link from 'next/link';
+import Tag from "@/app/components/atoms/Tag";
+import Link from "next/link";
 
 type BottomSectionProps = {
-    index:string;
-    data: any;
-}
+  index: string;
+  data: any;
+};
 
 export default function SearchCradBottomSection({
   data,
-  index
+  index,
 }: BottomSectionProps) {
   const {
-    type, agentListing, ownerListing, builderListing, isPetFriendly, propTypeName, amenCount, bhkName, phaseName,
-    category, localityName, projName, propName, pageUrl, locality, projIdEnc, sortedBhks, propType, cg, city, projOrPropName, cityName
+    type,
+    agentListing,
+    ownerListing,
+    builderListing,
+    isPetFriendly,
+    propTypeName,
+    amenCount,
+    bhkName,
+    phaseName,
+    category,
+    localityName,
+    projName,
+    propName,
+    pageUrl,
+    locality,
+    projIdEnc,
+    sortedBhks,
+    propType,
+    cg,
+    city,
+    projOrPropName,
+    cityName,
   } = data;
-  const isMobile = useMediaQuery("(max-width: 1600px)"); 
+  const isMobile = useMediaQuery("(max-width: 1600px)");
 
-  const textSlice = (word:string = "", url?:string) => {
-    if(word === "") return;
+  const textSlice = (word: string = "", url?: string) => {
+    if (word === "") return;
     const finalUrl = url ?? pageUrl;
     word = word.toLowerCase().replaceAll(" ", "-").replaceAll("+", "with");
     const index = finalUrl.indexOf(word);
-    const slicedText = index !== -1 ? finalUrl.slice(0, index + word.length) : finalUrl;
+    const slicedText =
+      index !== -1 ? finalUrl.slice(0, index + word.length) : finalUrl;
     return slicedText;
-  }
+  };
 
-  const finalProjName = (bhkName !== undefined && propTypeName !== undefined) ? `${bhkName} ${propTypeName}` : ""
+  const finalProjName =
+    bhkName !== undefined && propTypeName !== undefined
+      ? `${bhkName} ${propTypeName}`
+      : "";
 
   const links = [
-    {title: finalProjName, url: textSlice(finalProjName)},
-    {title: category ? `for ${category}` : "", url: textSlice(category)},
-    {title: localityName ?? "", url: textSlice(localityName)},
-    {title: projName ?? propName, url: type !== "proj" ? textSlice(projName ?? propName) : textSlice(projIdEnc)},
-    {title: locality ?? "", url: textSlice(locality)},
-  ]
+    { title: finalProjName, url: textSlice(finalProjName) },
+    { title: category ? `for ${category}` : "", url: textSlice(category) },
+    { title: localityName ?? "", url: textSlice(localityName) },
+    {
+      title: projName ?? propName,
+      url:
+        type !== "proj"
+          ? textSlice(projName ?? propName)
+          : textSlice(projIdEnc),
+    },
+    { title: locality ?? "", url: textSlice(locality) },
+  ];
 
-  const getlListingUrl = (bhk:string) => {
-    const url = `/residential-listings/${cg === "R" ? "for-rent" : "for-sale"}/${city}/${locality}/${projName}${phaseName ? `/${phaseName}` : ""}/${bhk}-${propType}`;
+  const getlListingUrl = (bhk: string) => {
+    const url = `/residential-listings/${
+      cg === "R" ? "for-rent" : "for-sale"
+    }/${city}/${locality}/${projName}${
+      phaseName ? `/${phaseName}` : ""
+    }/${bhk}-${propType}`;
     return url.toLowerCase().replaceAll(" ", "-").replaceAll("+", "with");
-  }
+  };
 
-  const bhkLinks = sortedBhks && sortedBhks.length > 0 
-    ? sortedBhks.map((eachBhk: any) => (
-      { title: `${eachBhk} ${propType}`, url: textSlice(`${eachBhk} ${propType}`, getlListingUrl(`${eachBhk} ${propType}`))}
-    )) 
-    : [];
+  const bhkLinks =
+    sortedBhks && sortedBhks.length > 0
+      ? sortedBhks.map((eachBhk: any) => ({
+          title: `${eachBhk} ${propType}`,
+          url: textSlice(
+            `${eachBhk} ${propType}`,
+            getlListingUrl(`${eachBhk} ${propType}`)
+          ),
+        }))
+      : [];
 
-  const phaseUrl = (`/residential-listings/${cg === "R" ? "for-rent" : "for-sale"}/${city ?? cityName}/${locality ?? localityName}/${projName ?? propName}/${phaseName}`).replaceAll(" ", "-").toLowerCase();
+  const phaseUrl = `/residential-listings/${
+    cg === "R" ? "for-rent" : "for-sale"
+  }/${city ?? cityName}/${locality ?? localityName}/${
+    projName ?? propName
+  }/${phaseName}`
+    .replaceAll(" ", "-")
+    .toLowerCase();
 
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
@@ -89,8 +134,16 @@ export default function SearchCradBottomSection({
               <button
                 className="bg-orange-700 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2 rounded shadow-md hover:bg-orange-800 transition duration-300 ease-in-out"
                 data-action="amenities"
-                title={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
-                aria-label={`Click to view ${amenCount === 1 ? "the" : "all"} ${amenCount} ${amenCount === 1 ? "Amenity" : "Amenities"} for ${projOrPropName}`}
+                title={`Click to view ${
+                  amenCount === 1 ? "the" : "all"
+                } ${amenCount} ${
+                  amenCount === 1 ? "Amenity" : "Amenities"
+                } for ${projOrPropName}`}
+                aria-label={`Click to view ${
+                  amenCount === 1 ? "the" : "all"
+                } ${amenCount} ${
+                  amenCount === 1 ? "Amenity" : "Amenities"
+                } for ${projOrPropName}`}
               >
                 <span className="bg-white rounded-full text-black px-2">
                   {amenCount}
@@ -110,46 +163,61 @@ export default function SearchCradBottomSection({
         )}
       </div>
 
-        <div className='flex flex-wrap gap-[4px]  '>
-          {links.map((each:any)=>{
-            if(each.title !== "" && each.url !== ""){
-            return(
-              <Tag key={each.title} title={each.title} url={each.url} className='!text-[8px] !px-2 !py-[2px] text-nowrap ' />
-            )}
-          })}
-
-          {bhkLinks.length > 0 && bhkLinks.map((each:any)=>{
-            if(each.title !== "" && each.url !== ""){
-            return(
-              <Tag key={each.title} title={each.title} url={each.url} className='!text-[8px] !px-2 !py-[2px] text-nowrap ' />
-            )}
-          })}
-
-          {phaseName && 
-            <Tag 
-              key={phaseName} 
-              title={phaseName} 
-              url={phaseUrl} 
-              className='!text-[8px] !px-2 !py-[2px] text-nowrap ' 
-            />
+      <div className="flex flex-wrap gap-[4px]  ">
+        {links.map((each: any) => {
+          if (each.title !== "" && each.url !== "") {
+            return (
+              <Tag
+                key={each.title}
+                title={each.title}
+                url={each.url}
+                className="!text-[8px] !px-2 !py-[2px] text-nowrap "
+              />
+            );
           }
-        </div>
+        })}
+
+        {bhkLinks.length > 0 &&
+          bhkLinks.map((each: any) => {
+            if (each.title !== "" && each.url !== "") {
+              return (
+                <Tag
+                  key={each.title}
+                  title={each.title}
+                  url={each.url}
+                  className="!text-[8px] !px-2 !py-[2px] text-nowrap "
+                />
+              );
+            }
+          })}
+
+        {phaseName && (
+          <Tag
+            key={phaseName}
+            title={phaseName}
+            url={phaseUrl}
+            className="!text-[8px] !px-2 !py-[2px] text-nowrap "
+          />
+        )}
+      </div>
 
       {/* right section */}
       {!isMobile && (
         <div className={Styles.searchCradBottomRightSection}>
           <ButtonElement
-              key={`searchCard_requestCall_${index}`}
-              dataAction="requestCall"
-              title={`${
-                type === "proj"
-                  ? isMobile
-                    ? "Contact"
-                    : "Request Callback" 
+            key={`searchCard_requestCall_${index}`}
+            dataAction="requestCall"
+            title={`${
+              type === "proj"
+                ? isMobile
+                  ? "Contact"
                   : "Request Callback"
-              }`} 
-              toolTip={`Click to Request a Callback for ${type === "proj" ? "Project" : "Property Listing"} – ${projOrPropName}`} 
-              buttonClass={Styles.searchCardCompareBtn}
+                : "Request Callback"
+            }`}
+            toolTip={`Click to Request a Callback for ${
+              type === "proj" ? "Project" : "Property Listing"
+            } – ${projOrPropName}`}
+            buttonClass={Styles.searchCardCompareBtn}
           />
         </div>
       )}
@@ -161,12 +229,17 @@ type CountListProps = {
   value: number;
   type: "A" | "O" | "B";
   projOrPropName: string;
-  projIdEnc:string;
+  projIdEnc: string;
 };
 
-function CountListing({type, value, projOrPropName, projIdEnc}: CountListProps) {
+function CountListing({
+  type,
+  value,
+  projOrPropName,
+  projIdEnc,
+}: CountListProps) {
   const handleAgentOwnerUrl = () => {
-    return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projOrPropName}`
+    return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projOrPropName}`;
   };
 
   return (
@@ -175,16 +248,19 @@ function CountListing({type, value, projOrPropName, projIdEnc}: CountListProps) 
         href={handleAgentOwnerUrl()}
         aria-label={`${type} Listing : ${value}`}
         title={`${type} Listing : ${value}`}
-        className={`${
-                    Styles.listingTypeButton } ${
-                    type === "O" ? Styles.listingTypeButtonForOwner : Styles.listingTypeButtonForOthers} ${
-                    value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
-                }`}
+        className={`${Styles.listingTypeButton} ${
+          type === "O"
+            ? Styles.listingTypeButtonForOwner
+            : Styles.listingTypeButtonForOthers
+        } ${
+          value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
+        }`}
         prefetch={false}
       >
         {`${type} Listing : ${value}`}
-      </Link>)
-  )
+      </Link>
+    )
+  );
 
   // return (
   //   value > 0 && (
@@ -200,7 +276,6 @@ function CountListing({type, value, projOrPropName, projIdEnc}: CountListProps) 
   //   />)
   // )
 }
-
 
 // const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
 //   const handleAgentOwner = (type: "A" | "I" | "B") => {
