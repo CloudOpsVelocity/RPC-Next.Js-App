@@ -132,7 +132,7 @@ function BrocherContent({
   const [showMap, setShowMap] = useState(false);
 
   // If RAM is less than 4GB, render iframe instead
-  if (ram && ram <= 4) {
+  if (ram && ram <= 8) {
     return (
       <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
         <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words pl-3 pt-2">
