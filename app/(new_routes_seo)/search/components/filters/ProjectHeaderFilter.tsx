@@ -74,7 +74,7 @@ const HeaderFilters = ({
         }
         setIsSearchOpen(false);
         setOpenDropdown(null);
-        document.body.style.overflow = "unset";
+        // document.body.style.overflow = "unset";
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -112,7 +112,7 @@ const HeaderFilters = ({
     setIsDrawerOpen(false);
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
-    if (dropdownName == "allFiltersdes") {
+    if (dropdownName == "allFiltersdes") { 
       if (document.body.style.overflow === "hidden")
         document.body.style.overflow = "unset";
       else {

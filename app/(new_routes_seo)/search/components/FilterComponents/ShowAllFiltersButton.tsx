@@ -198,7 +198,7 @@ export default function ShowAllFiltersButton({
               {category === "propType" &&
                 propertyiconss[item as keyof typeof propertyiconss]?.icon}
               <span>
-                {propertyiconss[item as keyof typeof propertyiconss]?.name ||
+                {propertyiconss[item as keyof typeof propertyiconss]?.name || 
                   item.Label ||
                   item.title ||
                   item.constDesc}
@@ -230,12 +230,12 @@ export default function ShowAllFiltersButton({
 
   useEffect(() => { // 2
     if (isOpen) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" }); 
       // document.body.style.overflow = "hidden";
     } 
-    // else {
-    //   document.body.style.overflow = "unset";
-    // }
+    else {
+      document.body.style.overflow = "unset";
+    }
   }, [isOpen]);
 
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
@@ -256,10 +256,12 @@ export default function ShowAllFiltersButton({
   const handleLocationChange = (selected: Location[]) => {
     console.log("Selected locations:", selected);
   };
-  const isproject =
-    path !== "/search/listing" && path.includes("search")
-      ? state.listedBy == null
-      : !isListing;
+  // const isproject =
+  //   path !== "/search/listing" && path.includes("search")
+  //     ? state.listedBy == null
+  //     : !isListing;
+
+  const isproject = state.listedBy == null
 
   return (
     <div className="  relative  ">
@@ -283,6 +285,7 @@ export default function ShowAllFiltersButton({
               onClick={() => {
                 handleClearFilters(isproject ? "clearAll" : "listing");
                 onToggle();
+                document.body.style.overflow = "unset";
               }}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
@@ -291,6 +294,7 @@ export default function ShowAllFiltersButton({
             <button
               onClick={() => {
                 handleApplyFilters(() => onToggle());
+                document.body.style.overflow = "unset";
               }}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >
