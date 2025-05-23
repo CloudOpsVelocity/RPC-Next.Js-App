@@ -68,7 +68,7 @@ export default function InFoCarousel({
         <thead className="sticky top-0 z-[1]">
           <tr className="flex flex-row justify-start items-center">
             <th
-              className="w-[90px] sm:w-[220px] sticky left-0 top-0 flex bg-[#00487C] justify-center text-center items-start 
+              className="w-[150px] sm:w-[220px] sticky left-0 top-0 flex bg-[#00487C] justify-center text-center items-start 
               px-2 py-1 sm:px-2.5 sm:py-2 text-white text-[12px] sm:text-[16px] font-bold leading-normal border-r"
             >
               Unit Type
@@ -111,9 +111,9 @@ export default function InFoCarousel({
                   className="flex flex-row justify-start items-start !z-[1]"
                 >
                   <td
-                    className="w-[150px] sm:w-[220px] bg-[#EEF7FF] text-gray-900 text-[12px] sm:text-[16px] 
-  font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center gap-1
-  border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
+                    className={`w-[150px] sm:w-[220px] bg-[#EEF7FF] text-gray-900 text-[12px] sm:text-[16px] sticky left-0 top-0
+                                font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center gap-1
+                                border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid`}
                   >
                     {item}{" "}
 
