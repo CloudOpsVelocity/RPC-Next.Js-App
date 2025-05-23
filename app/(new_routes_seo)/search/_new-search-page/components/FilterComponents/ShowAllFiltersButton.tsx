@@ -232,11 +232,11 @@ export default function ShowAllFiltersButton({
   useEffect(() => { // 1
     if (isOpen) {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      // document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     } 
-    // else {
-    //   document.body.style.overflow = "unset";
-    // }
+    else {
+      document.body.style.overflow = "unset";
+    }
   }, [isOpen]);
 
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);

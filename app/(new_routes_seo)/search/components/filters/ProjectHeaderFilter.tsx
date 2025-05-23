@@ -391,7 +391,7 @@ const HeaderFilters = ({
                     onFocus={() => {
                       setIsSearchOpen(true);
                       setOpenDropdown(null);
-                      document.body.style.overflow = "unset";
+                      // document.body.style.overflow = "unset";
                     }}
                     maxLength={90}
                     pattern="[a-zA-Z0-9\s]+"
@@ -403,7 +403,7 @@ const HeaderFilters = ({
                     name="projectHeaderSearchIcon"
                     aria-label="projSearchIcon"
                   >
-                    <MdSearch className="mr-4 text-[#0073C6] w-6 h-6" />
+                    <MdSearch className="mr-4 text-[#0073C6] w-6 h-6 cursor-pointer" />
                   </button>
                 </form>
               </div>
