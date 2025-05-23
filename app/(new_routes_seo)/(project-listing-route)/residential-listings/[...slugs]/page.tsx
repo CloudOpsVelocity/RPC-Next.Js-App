@@ -98,7 +98,9 @@ export default async function Page({ params, searchParams }: Props) {
         projName: project,
         projIdEnc: filtersValues.PJ,
         ...(filtersValues.PH && {
-          phaseId: [`${params.slugs[4]}+${filtersValues.PH}`],
+          phaseId: [
+            `${params.slugs[4]?.replace(/-/g, " ")}+${filtersValues.PH}`,
+          ],
         }),
         listedBy: null,
         currentPage: filtersValues.PG ? parseInt(filtersValues.PG) : null,
