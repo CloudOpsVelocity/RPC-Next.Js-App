@@ -110,7 +110,7 @@ const HeaderFilters = ({
   const handleDropdownToggle = (dropdownName: string) => {
     // 2
     setIsDrawerOpen(false);
-    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName); 
     setIsSearchOpen(false);
     if (dropdownName == "allFiltersdes") { 
       if (document.body.style.overflow === "hidden")
@@ -391,7 +391,6 @@ const HeaderFilters = ({
                     onFocus={() => {
                       setIsSearchOpen(true);
                       setOpenDropdown(null);
-                      // document.body.style.overflow = "unset";
                     }}
                     maxLength={90}
                     pattern="[a-zA-Z0-9\s]+"
@@ -533,8 +532,6 @@ const HeaderFilters = ({
                 onClick={() => {
                   setIsDrawerOpen(false);
                   document.body.style.overflow = "unset";
-                  console.log("close");
-                  // isMobile ? window.history.back() : "";
                   isMobile ? router.back() : "";
                 }}
                 className="p-2 hover:bg-gray-100 rounded-full"
