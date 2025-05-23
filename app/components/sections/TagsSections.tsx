@@ -96,19 +96,19 @@ export default function TagsSections({ urls }: Props) {
   ];
 
   return (
-    <section className="my-6 px-4 sm:px-6 md:px-8 w-[95%] ">
+    <section className="relative my-6 px-4 sm:px-6 md:px-8 w-[95%] ">
       <h2 className="text-lg sm:text-xl font-semibold mb-2">Tags:</h2>
       <p className="text-xs sm:text-sm text-gray-600 mb-4">
         Discover more residential rent and sale properties in popular areas and
         projects.
       </p>
-      <ul className="flex flex-wrap  ">
+      {/* <ul className="flex flex-wrap  "> */}
         {flatLinks.map((urlObj, index) => (
-          <li key={`tags_sections__${index}`} className="flex-shrink-0">
-            <Tag {...urlObj} />
-          </li>
+          // <li key={`tags_sections__${index}`} className="flex-shrink-0">
+            <Tag key={`tags_sections__${index}`} {...urlObj} className="mr-[6px] mb-[4px] " />
+          // </li>
         ))}
-      </ul>
+      {/* </ul> */}
     </section>
   );
 }

@@ -12,7 +12,8 @@ export default function Tag({ title, url, className }: TagData) {
              prefetch={false}
     >
       <span
-        className={`bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors duration-200 text-xs font-medium  rounded-full shadow-sm border border-blue-200 !text-[8px] !px-2 !py-[2px] text-nowrap  sm:text-sm sm:px-4 sm:py-2 sm:mr-2 sm:mb-2 ${className}`}
+        className={`inline-block bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors duration-200 text-xs font-medium rounded-full shadow-sm border border-blue-200
+          !text-[8px] !px-2 !py-[2px] break-words whitespace-normal sm:text-sm sm:px-4 sm:py-2 sm:mr-2 sm:mb-2 ${className}`}
       >
         {title}
       </span>
