@@ -59,7 +59,7 @@ function NewsDetailsPage({}: Props) {
     (each: any) => each?.name === currentBlog
   )[0];
   if (!data) return;
-  const {  title, desc, url } = data;
+  const { title, desc, url } = data;
 
   return (
     <div className=" flex flex-col  w-[96%] md:w-[80%] xl:w-[50%] py-[30px] ">
@@ -92,7 +92,7 @@ function NewsDetailsPage({}: Props) {
               key={name}
               href={link}
               className="text-white hover:text-gray-300 !m-0"
-              target="_blank"
+              // target="_blank"
             >
               <span className="sr-only">{name}</span>
               {icon}

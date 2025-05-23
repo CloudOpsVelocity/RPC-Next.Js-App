@@ -124,7 +124,7 @@ function BlogDetailsFirstBlock() {
               prefetch={false}
               rel="noreferrer"
               href={facebookRedirectLink}
-              target="_blank"
+              // target="_blank"
             >
               <Facebook className={"w-[24px] h-[24px]"} />
             </Link>
@@ -132,7 +132,7 @@ function BlogDetailsFirstBlock() {
               prefetch={false}
               rel="noreferrer"
               href={whatsappRedirectLink}
-              target="_blank"
+              // target="_blank"
             >
               <WhatsApp className={"w-[24px] h-[24px]"} />
             </Link>
