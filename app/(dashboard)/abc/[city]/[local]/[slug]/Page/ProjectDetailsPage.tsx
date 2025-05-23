@@ -114,7 +114,7 @@ export default async function ProjectsDetailsPage({
                   item.phaseBrochureUrl
               )
             }
-            detailsData={{ ...data, nearByLocations }}
+            detailsData={{ ...data, nearByLocations }} 
             slug={slug}
             scrollId={scrollId}
           />

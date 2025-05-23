@@ -37,6 +37,7 @@ export default function InFoCarousel({
       propertyDetailsTypes.get(propCgId)?.[whichKeyname] ?? ""
     ];
   const setData = useSetAtom(selectedPartialUnitAtom);
+  const { rentListing, saleListing } = projectData;
 
   const handleCardClick = (units: any, item: any) => {
     // console.log(units, item)
@@ -49,6 +50,8 @@ export default function InFoCarousel({
         });
       return;
     }
+
+    console.log(data)
 
     setData({
       main: 0,
@@ -113,9 +116,11 @@ export default function InFoCarousel({
   border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
                   >
                     {item}{" "}
+
+                    {saleListing  !== undefined && saleListing !== "0" &&
                     <Link
                       prefetch={false}
-                      href={`/residential-listings/for-sale/bengaluru/${slugify(
+                      href={`/residential-listings/for-sale/bengaluru/${slugify( 
                         projectData.localityName || ""
                       )}/${slugify(projectData.projectName || "")}${
                         currentPhaseName
@@ -137,8 +142,10 @@ export default function InFoCarousel({
                       } in ${projectData.localityName}, Bengaluru`}
                     >
                       Sale
-                    </Link>{" "}
-                    |{" "}
+                    </Link>}{" "}
+                    {(rentListing  !== undefined && rentListing !== "0") && (saleListing  !== undefined && saleListing !== "0") && `| `}
+
+                    {rentListing  !== undefined && rentListing !== "0" &&
                     <Link
                       href={`/residential-listings/for-rent/bengaluru/${slugify(
                         projectData.localityName || ""
@@ -162,7 +169,7 @@ export default function InFoCarousel({
                       } in ${projectData.localityName}, Bengaluru`}
                     >
                       Rent
-                    </Link>
+                    </Link>}
                   </td>
 
                   <td
