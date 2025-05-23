@@ -14,6 +14,7 @@ import {
 import { parseApiFilterQueryParams } from "../(new_routes_seo)/search/utils/project-search-queryhelpers";
 import redisService from "../utils/redis/redis.service";
 import { SlugsType } from "../common/constatns/slug.constants";
+import parseProjectSearchQueryParams from "../(new_routes_seo)/search/utils/parse-project-searchqueryParams";
 // import redisService from "../utils/redis/redis.service";
 // import { SlugsType } from "../common/constatns/slug.constants";
 
@@ -36,8 +37,12 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
 
-    serverData = data;
-    frontendFilters = parseApiFilterQueryParams(searchParams.sf);
+    serverData = data.results;
+    frontendFilters = {
+      ...parseProjectSearchQueryParams(searchParams.sf),
+      currentPage: 1,
+      totalCount: data?.totalCount,
+    };
   } else {
     const { frontEndFilter, severData } = await CaseSeoSearchService(slug, {
       sf: !!searchParams.sf,
