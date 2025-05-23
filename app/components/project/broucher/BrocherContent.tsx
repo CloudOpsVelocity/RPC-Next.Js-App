@@ -132,65 +132,65 @@ function BrocherContent({
   const [showMap, setShowMap] = useState(false);
 
   // If RAM is less than 4GB, render iframe instead
-  if (ram && ram <= 8) {
-    return (
-      <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
-        <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words pl-3 pt-2">
-          <strong>
-            <span className="text-[#001F35]">
-              Explore the Comprehensive Brochure of{" "}
-            </span>
-            <span className="text-green-800">{projName}</span>
-          </strong>
-        </h2>
-        {!showMap ? (
-          <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
-            <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
-              <picture>
-                <source
-                  media="(max-width: 460px)"
-                  srcSet={broucherImage?.split(",")[0]}
-                />
-                <source
-                  media="(max-width: 768px)"
-                  srcSet={broucherImage?.split(",")[1]}
-                />
-                <source
-                  media="(min-width: 1200px)"
-                  srcSet={broucherImage?.split(",")[2]}
-                />
-                <Image
-                  alt={`${projName} Brochure`}
-                  title={`${projName} Brochure`}
-                  src={broucherImage?.split(",")[3]}
-                  fill
-                  unoptimized
-                  priority
-                />
-              </picture>
-            </div>
-            <div
-              onClick={() => setShowMap(true)}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <button
-                onClick={() => setShowMap(true)}
-                className="z-8 px-6 py-3 mx-2 text-left  sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
-              >
-                <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Brochure ${projName}`}</span>
-              </button>
-            </div>
-          </div>
-        ) : (
-          <iframe
-            src={singleBrocher || phaseOverviewData[0]?.phaseBrochureUrl || ""}
-            className="w-full h-[400px] border-0"
-            title={`${projName} Brochure`}
-          />
-        )}
-      </div>
-    );
-  }
+  // if (ram && ram <= 24) {
+  //   return (
+  //     <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
+  //       <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words pl-3 pt-2">
+  //         <strong>
+  //           <span className="text-[#001F35]">
+  //             Explore the Comprehensive Brochure of{" "}
+  //           </span>
+  //           <span className="text-green-800">{projName}</span>
+  //         </strong>
+  //       </h2>
+  //       {!showMap ? (
+  //         <div className="h-[291px] sm:h-[486px] xl:h-[700px] w-full relative scroll-mt-[125px]">
+  //           <div className="absolute inset-0 bg-gray-100 opacity-80 w-[95%] sm:w-[90%] mx-auto rounded-lg mb-2 sm-mb-0">
+  //             <picture>
+  //               <source
+  //                 media="(max-width: 460px)"
+  //                 srcSet={broucherImage?.split(",")[0]}
+  //               />
+  //               <source
+  //                 media="(max-width: 768px)"
+  //                 srcSet={broucherImage?.split(",")[1]}
+  //               />
+  //               <source
+  //                 media="(min-width: 1200px)"
+  //                 srcSet={broucherImage?.split(",")[2]}
+  //               />
+  //               <Image
+  //                 alt={`${projName} Brochure`}
+  //                 title={`${projName} Brochure`}
+  //                 src={broucherImage?.split(",")[3]}
+  //                 fill
+  //                 unoptimized
+  //                 priority
+  //               />
+  //             </picture>
+  //           </div>
+  //           <div
+  //             onClick={() => setShowMap(true)}
+  //             className="absolute inset-0 flex items-center justify-center"
+  //           >
+  //             <button
+  //               onClick={() => setShowMap(true)}
+  //               className="z-8 px-6 py-3 mx-2 text-left  sm:mx-0 sm:text-center text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
+  //             >
+  //               <span className="text-sm md:text-base font-semibold line-clamp-1">{`Click to View  Brochure ${projName}`}</span>
+  //             </button>
+  //           </div>
+  //         </div>
+  //       ) : (
+  //         <iframe
+  //           src={singleBrocher || phaseOverviewData[0]?.phaseBrochureUrl || ""}
+  //           className="w-full h-[400px] border-0"
+  //           title={`${projName} Brochure`}
+  //         />
+  //       )}
+  //     </div>
+  //   );
+  // }
 
   const changePage = (offset: number) => {
     setState((prev) => ({ ...prev, pageNumber: prev.pageNumber + offset }));
