@@ -531,8 +531,6 @@ const HeaderFilters = ({
                 onClick={() => {
                   setIsDrawerOpen(false);
                   document.body.style.overflow = "unset";
-                  console.log("close");
-
                   isMobile ? router.back() : "";
                 }}
                 className="p-2 hover:bg-gray-100 rounded-full"

@@ -51,8 +51,14 @@ export default function ShowAllFiltersButton({
   }>({});
   const { handleClearFilters, handleApplyFilters } =
     useProjSearchAppliedFilters();
+    
+  console.log(path);
+
+  path.includes("residential-listings")
 
   const [state, dispatch] = useAtom(projSearchStore);
+  const isproject = state.listedBy == null ? path.includes("residential-listings") ? false : true : "";
+
   const propertyiconss = {
     apt: {
       id: 35,
@@ -231,10 +237,13 @@ export default function ShowAllFiltersButton({
   useEffect(() => { // 2
     if (isOpen) {
       window.scrollTo({ top: 0, behavior: "smooth" }); 
+      if(isproject){
+        document.body.style.overflow = "hidden";
+      }
       // document.body.style.overflow = "hidden";
     } 
     else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "unset"; 
     }
   }, [isOpen]);
 
@@ -261,10 +270,12 @@ export default function ShowAllFiltersButton({
   //     ? state.listedBy == null
   //     : !isListing;
 
-  const isproject = state.listedBy == null
+
+        console.log("222") 
+
 
   return (
-    <div className="  relative  ">
+    <div className="relative">
       <button
         onClick={onToggle}
         className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-[#0073C6] rounded-full hover:bg-gray-50"
@@ -285,7 +296,7 @@ export default function ShowAllFiltersButton({
               onClick={() => {
                 handleClearFilters(isproject ? "clearAll" : "listing");
                 onToggle();
-                document.body.style.overflow = "unset";
+                if(!isproject){document.body.style.overflow = "unset";}
               }}
               className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
             >
@@ -294,7 +305,7 @@ export default function ShowAllFiltersButton({
             <button
               onClick={() => {
                 handleApplyFilters(() => onToggle());
-                document.body.style.overflow = "unset";
+                if(!isproject){document.body.style.overflow = "unset";}
               }}
               className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
             >
