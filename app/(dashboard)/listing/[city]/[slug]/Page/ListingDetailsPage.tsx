@@ -124,9 +124,11 @@ export default function ListingDetailsPage({
           data.cg === "R" ? "Rent" : "Sale"
         } in ${capitalize(segment)}, ${capitalize(routes[2])}`;
       } else if (index === 4) {
-        title = `${toTitleCase(segment)} – Flats for ${
+        title = `Propertiles For ${
           data.cg === "R" ? "Rent" : "Sale"
-        } in ${capitalize(routes[3])}, ${capitalize(routes[2])}`;
+        } in ${toTitleCase(segment)} ,${capitalize(routes[3])}, ${capitalize(
+          routes[2]
+        )}`;
       } else if (index === 5) {
         title = `${segment.replace(/-/g, " ").toUpperCase()} in ${toTitleCase(
           routes[4]

@@ -219,7 +219,7 @@ DynamicSearchProps<T>) {
           <ul
             id="search-list"
             ref={listRef}
-            className="absolute z-10 w-[90%] mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto"
+            className="absolute z-[30] w-[90%] mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto"
             role="listbox"
           >
             {error ? (
