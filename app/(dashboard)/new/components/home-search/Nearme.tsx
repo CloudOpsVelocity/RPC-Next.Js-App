@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import { setCookie } from "cookies-next";
 // import crpto from "crypto"
 import { encryptData } from "@/app/utils/auth/nodeCrypto";
+import { useRouter } from "next/navigation";
 type Props = {};
 
 export default function Nearme({}: Props) {
+  const router = useRouter();
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState<string | null>(null);
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
@@ -17,10 +19,8 @@ export default function Nearme({}: Props) {
         (position) => {
           let lat = position.coords.latitude;
           let lng = position.coords.longitude;
-          window.open(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=lat=${lat}-lng=${lng}`,
-            "_self",
-            "noreferrer"
+          router.push(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=lat=${lat}-lng=${lng}`
           );
           const encryptedObject = encryptData(
             JSON.stringify({
@@ -42,8 +42,6 @@ export default function Nearme({}: Props) {
     }
   };
   return (
- 
-
     <button
       aria-label="Near Me"
       className="flex items-center gap-1 rounded p-1 bg-[#f0ffdc] text-[#006400] text-[12px] not-italic font-medium cursor-pointer text-nowrap "
