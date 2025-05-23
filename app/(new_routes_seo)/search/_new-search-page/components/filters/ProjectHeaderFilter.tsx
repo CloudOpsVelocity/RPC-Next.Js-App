@@ -16,7 +16,7 @@ import { useAtom } from "jotai";
 import { projSearchStore } from "../../../store/newSearchProjectStore";
 import { usePathname, useRouter } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
-import useProjSearchMatcher from "../../../hooks/useProjSearchMatcher";
+import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
 // import SelectedFilters from "./SelectedFilters";
 import ProjSearchCityDropDown from "../FilterComponents/city/ProjectSearchCityDropdown";
 // import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";

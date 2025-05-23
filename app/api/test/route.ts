@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
       "Content-Disposition",
       'attachment; filename="sattva-bhumi-brochure.pdf"'
     );
-
     return new Response(stream as any, {
       status: 200,
       headers,

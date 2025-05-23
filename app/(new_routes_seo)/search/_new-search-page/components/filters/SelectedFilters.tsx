@@ -132,6 +132,9 @@ const SelectedFilters = ({ frontendFilters }: Props) => {
                           lng: null,
                         },
                       });
+                      setTimeout(() => {
+                        handleApplyFilters();
+                      }, 0);
                       return;
                     }
                     dispatch({
