@@ -16,7 +16,6 @@ export default function MainSection({
   phaseList,
   propCgId,
 }: Props) {
-  console.log(data)
   return (
     <div className="mt-6">
       <InFoCarousel
