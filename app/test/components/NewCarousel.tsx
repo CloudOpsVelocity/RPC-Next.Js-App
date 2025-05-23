@@ -79,9 +79,9 @@ function NewCarousel<T>({
 
   const DefaultViewMore = () => (
     <Link
-    prefetch={false}
+      prefetch={false}
       href={url ?? "/"}
-      target="_blank"
+      // target="_blank"
       // onClick={() => (url ? window.open(url, "_self", "noreferrer") : "")}
       className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600  hover:shadow-xl cursor-pointer transition-all duration-300 "
     >
@@ -196,7 +196,8 @@ function NewCarousel<T>({
           )} */}
           {canGoNext && (
             <button
-              name="Next" title="Next"
+              name="Next"
+              title="Next"
               onClick={next}
               className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gray-200"
               aria-label="Next"
