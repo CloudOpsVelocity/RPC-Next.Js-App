@@ -2,7 +2,8 @@
 import { NextRequest } from "next/server";
 import axios from "axios";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
+  const data = await req.json();
   const url =
     "https://media.getrightproperty.com/residential-projects/bengaluru/1098/sattva-bhumi-devanahalli-brochure.pdf?v=1741851402569";
 
