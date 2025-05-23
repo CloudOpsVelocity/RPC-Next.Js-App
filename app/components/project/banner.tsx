@@ -53,7 +53,7 @@ export default function Banner({
       />
       <div className="w-[95%] sm:w-[95%] xl:w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
+          <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words w-[78%]">
             <strong>
               <span className="text-[#001F35]">Project Rating For </span>
               <span className="text-green-800 sm:text-[24px] xl:text-[28px] not-italic leading-[normal] tracking-[1.28px]">
