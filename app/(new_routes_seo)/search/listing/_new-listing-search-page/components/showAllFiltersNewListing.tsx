@@ -264,10 +264,11 @@ export default function ShowAllFiltersButton({
   const handleLocationChange = (selected: Location[]) => {
     console.log("Selected locations:", selected);
   };
-  const isproject =
-    path !== "/search/listing" && path.includes("search")
-      ? state.listedBy == null
-      : !isListing;
+  // const isproject =
+  //   path !== "/search/listing" && path.includes("search")
+  //     ? state.listedBy == null
+  //     : !isListing;
+  const isproject =  state.listedBy == "proj"
 
   return (
     <div className="  relative  ">

@@ -171,7 +171,7 @@ export default function SearchCradBottomSection({
                 key={each.title}
                 title={each.title}
                 url={each.url}
-                className="!text-[8px] !px-2 !py-[2px] text-nowrap "
+                className="!text-[8px] !px-2 !py-[2px] md:text-nowrap "
               />
             );
           }
@@ -185,7 +185,7 @@ export default function SearchCradBottomSection({
                   key={each.title}
                   title={each.title}
                   url={each.url}
-                  className="!text-[8px] !px-2 !py-[2px] text-nowrap "
+                  className="!text-[8px] !px-2 !py-[2px] md:text-nowrap "
                 />
               );
             }
@@ -196,7 +196,7 @@ export default function SearchCradBottomSection({
             key={phaseName}
             title={phaseName}
             url={phaseUrl}
-            className="!text-[8px] !px-2 !py-[2px] text-nowrap "
+            className="!text-[8px] !px-2 !py-[2px] md:text-nowrap "
           />
         )}
       </div>

@@ -329,7 +329,7 @@ export default function ShowAllFiltersButton({
                 renderFilterSection("Phases", phaseObjList, "phaseId")}
               {!isproject &&
                 renderFilterSection(
-                  "Property Status",
+                  "Property Status", 
                   SEARCH_FILTER_DATA.listingStatus,
                   "propStatus"
                 )}

@@ -416,7 +416,6 @@ const UnitBlock = ({ data }: { data: Main }) => {
     data.cg,
     data.availablityStatus
   );
-  console.log(dto);
   return (
     dto.length > 0 && (
       <div className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]">

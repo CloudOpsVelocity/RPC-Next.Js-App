@@ -16,12 +16,15 @@ type Props = {
 };
 
 export default function Card({ Icon, title, type, data, otherPrice }: Props) {
+
   const dynamicCompo = (() => {
+    console.log(data)
     switch (type) {
       case "price":
+        const price = data.match(/\d+/)[0]; // Extracting only number and ignoring other cherecters
         return (
           <h4 className="text-[#242424] ml-4 xl:ml-0  xl:text-2xl not-italic font-bold leading-[normal]">
-            {formatCurrency(data)}
+            {formatCurrency(price)}
           </h4>
         );
       case "applicableprice":

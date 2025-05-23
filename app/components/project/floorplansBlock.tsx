@@ -333,12 +333,12 @@ Props) {
         {/* <SubHeading text="See floor plans as per your selected property type" /> */}
         <p className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2">See floor plans as per your selected property type</p>
 
+        {phaseList?.length > 1 && (
         <div
           className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
             phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
           }`}
         >
-          {phaseList?.length > 1 && (
             <>
               <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
                 Select one of the phase to see Floor Plans
@@ -346,6 +346,7 @@ Props) {
               <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
                 {phaseList?.map((each: any) => {
                   return (
+                    each.phaseId && each.phaseName &&
                     <Button
                       key={each.phaseId}
                       title={
@@ -373,8 +374,9 @@ Props) {
                 })}
               </div>
             </>
-          )}
         </div>
+        )}
+
         {projectUnitsData?.length == 0 ? (
           <NoProperties
             phase={
