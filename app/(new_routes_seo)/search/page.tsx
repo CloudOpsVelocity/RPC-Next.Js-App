@@ -21,10 +21,10 @@ export default async function Page(params: any) {
   const res = !isListing
     ? await await getProjSearchData(apiFilters ?? "cg=S")
     : await await getSearchData(apiFilters ?? "");
-  const data = res.results;
+  const data = res?.results;
   frontendFilters = {
     ...frontendFilters,
-    totalCount: res.totalCount,
+    totalCount: res?.totalCount,
   };
 
   return (

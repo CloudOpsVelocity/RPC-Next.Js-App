@@ -57,10 +57,7 @@ export default function TagsSections({ urls }: Props) {
       title: "Post Your Project | Real Estate Project Submission",
       url: "/post-your-project",
     },
-    {
-      title: "Your Real Estate Projects | View and Manage Projects",
-      url: "/your-projects",
-    },
+
     {
       title: "Login | Access Your Real Estate Account",
       url: "/login",
@@ -103,11 +100,15 @@ export default function TagsSections({ urls }: Props) {
         projects.
       </p>
       {/* <ul className="flex flex-wrap  "> */}
-        {flatLinks.map((urlObj, index) => (
-          // <li key={`tags_sections__${index}`} className="flex-shrink-0">
-            <Tag key={`tags_sections__${index}`} {...urlObj} className="mr-[6px] mb-[4px] " />
-          // </li>
-        ))}
+      {flatLinks.map((urlObj, index) => (
+        // <li key={`tags_sections__${index}`} className="flex-shrink-0">
+        <Tag
+          key={`tags_sections__${index}`}
+          {...urlObj}
+          className="mr-[6px] mb-[4px] "
+        />
+        // </li>
+      ))}
       {/* </ul> */}
     </section>
   );

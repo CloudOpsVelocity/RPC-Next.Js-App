@@ -16,10 +16,7 @@ export async function GET() {
       loc: `${process.env.NEXT_PUBLIC_URL}/post-your-project`,
       lastmod: new Date().toISOString(),
     },
-    {
-      loc: `${process.env.NEXT_PUBLIC_URL}/your-projects`,
-      lastmod: new Date().toISOString(),
-    },
+
     {
       loc: `${process.env.NEXT_PUBLIC_URL}/login`,
       lastmod: new Date().toISOString(),

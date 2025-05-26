@@ -72,6 +72,18 @@ module.exports = {
         loc: `https://www.getrightproperty.com/residential-listings`,
         lastmod: new Date().toISOString(),
       },
+      {
+        loc: `https://www.getrightproperty.com/project-details-sitemap.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/listing-sitemap.xml`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/builder-sitemap.xml`,
+        lastmod: new Date().toISOString(),
+      },
       // {
       //   loc: `https://www.getrightproperty.com/residential-listings/for-rent`,
       //   lastmod: new Date().toISOString(),
