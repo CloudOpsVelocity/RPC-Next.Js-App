@@ -5,7 +5,6 @@ import { getPagesSlugs } from "@/app/seo/api";
 // import fs from "fs";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
-import logger from "@/app/utils/logger";
 
 type SlugParams = {
   emptyPath?: string;

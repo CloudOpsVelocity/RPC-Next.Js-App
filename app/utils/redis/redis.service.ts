@@ -139,13 +139,12 @@ class RedisService {
     const fullKey = `${type}:slug:${key}`;
     const value = await this.getKey(fullKey);
     if (!value) {
-      console.log(type);
       switch (key) {
         case SlugsType.BUILDER:
           var res = await getPagesSlugs("builder-list");
           this.saveSlug(type, key, res);
           return res;
-          // break;
+        // break;
         case SlugsType.LISTING: {
           var resp = await getPagesSlugs("listing-search-seo");
           this.saveSlug(type, key, resp);
@@ -189,7 +188,6 @@ class RedisService {
       console.log(`case-seo saved in redis succesfully`);
       await this.saveSlug(SlugsType.STATIC, key, value, ttl);
     }
-
   }
 
   // Get SEO slug
