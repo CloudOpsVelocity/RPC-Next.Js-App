@@ -125,7 +125,7 @@ export default function SearchCradBottomSection({
         ) : (
           <>
             {isPetFriendly && propTypeName !== "Plot" ? (
-              <div className="flex items-center space-x-1 bg-green-700 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
+              <div className="flex items-center space-x-1 bg-green-700 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md text-nowrap ">
                 {/* <WhitePetFreindly className="w-[20px] h-[20px] " /> */}
                 🐕 Pet Friendly
               </div>
@@ -133,7 +133,7 @@ export default function SearchCradBottomSection({
 
             {amenCount > 0 && (
               <button
-                className="bg-orange-700 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2 rounded shadow-md hover:bg-orange-800 transition duration-300 ease-in-out"
+                className="bg-orange-700 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2 rounded shadow-md hover:bg-orange-800 transition duration-300 ease-in-out text-nowrap"
                 data-action="amenities"
                 title={`Click to view ${
                   amenCount === 1 ? "the" : "all"
@@ -172,7 +172,7 @@ export default function SearchCradBottomSection({
                 key={each.title}
                 title={each.title}
                 url={each.url}
-                className="!text-[8px] !px-2 !py-[2px] md:text-nowrap "
+                className="!text-[8px] !px-[6px] !py-[4px] md:text-nowrap mb-[4px] md:mb-[6px] "
               />
             );
           }
@@ -186,7 +186,7 @@ export default function SearchCradBottomSection({
                   key={each.title}
                   title={each.title}
                   url={each.url}
-                  className="!text-[8px] !px-2 !py-[2px] md:text-nowrap "
+                  className="!text-[8px] !px-[6px] !py-[4px] md:text-nowrap mb-[4px] md:mb-[6px]"
                 />
               );
             }
@@ -197,7 +197,7 @@ export default function SearchCradBottomSection({
             key={phaseName}
             title={phaseName}
             url={phaseUrl}
-            className="!text-[8px] !px-2 !py-[2px] md:text-nowrap "
+            className="!text-[8px] !px-[6px] !py-[4px] md:text-nowrap mb-[4px] md:mb-[6px]"
           />
         )}
       </div>

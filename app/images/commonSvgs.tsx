@@ -4731,8 +4731,8 @@ export const WhatsAppButton = ({ name, type }: Props) => {
       prefetch={false}
       aria-label="whatsappLink"
       title="whatsappLink"
-      rel="noreferrer"
-      target="_blank"
+      rel="noreferrer noopener "
+      target="_self"
       href={whatsappLink}
     >
       <span className="hidden">WhatsApp</span>

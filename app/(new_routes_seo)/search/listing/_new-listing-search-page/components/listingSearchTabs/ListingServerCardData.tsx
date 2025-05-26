@@ -21,6 +21,7 @@ import selectedSearchAtom from "@/app/store/search/map";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
 import { diffToProjFromListing, initialState, projSearchStore } from "@/app/(new_routes_seo)/search/store/newListingStore"; // serach/listing
+import { useRouter } from "next/navigation";
 
 // import { diffToProjFromListing as diffToProjFromListing_p, initialState as initialState_p, projSearchStore as projSearchStore_p } from "@/app/(new_routes_seo)/search/store/newSearchProjectStore"; // /search
 // import { diffToProjFromListing as diffToProjFromListing_l, initialState as initialState_l, projSearchStore as projSearchStore_l } from "@/app/(new_routes_seo)/search/store/newListingStore"; // /search/listing
@@ -57,7 +58,7 @@ export default function ListingServerCardData({
   const [, { open: openLogin }] = usePopShortList();
   const [, dispath] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
-  
+  const router = useRouter();
 
   const cg = useMemo(() => {
     if (state.cg === undefined) {
@@ -155,16 +156,14 @@ export default function ListingServerCardData({
     const { brochureUrl } = data;
     if (session) {
       brochureUrl &&
-        window.open(
+        router.push(
           `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-          "_self"
         );
     } else {
       openLogin(() => {
         brochureUrl &&
-          window.open(
+          router.push(
             `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-            "_self"
           );
       });
     }
@@ -333,7 +332,7 @@ export default function ListingServerCardData({
         }));
         break;
       default:
-        window.open(selectedItem.pageUrl, "_self", "noreferrer");
+        router.push(selectedItem.pageUrl);
     }
   };
 

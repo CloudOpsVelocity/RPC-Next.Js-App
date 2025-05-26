@@ -96,6 +96,7 @@
     font-weight: 600;
     border-radius: 4px;
     padding: 4px;
+    white-space: nowrap;
 }
 
 /* .searchCardContactBtn{
@@ -664,7 +665,11 @@
 
     .projStatusonImage{
         font-size: 12px;
-    }        
+    }   
+    
+    .propNameHeading{
+        width: calc(100%-110px);
+    }
 
     .propNameHeading,
     .searchCardPromNameSpan,

@@ -14,7 +14,7 @@ import Btn from "@/app/(dashboard)/new/components/post-your-listing/Btn";
 import PostProjectBtn from "@/app/(dashboard)/new/components/PostProjectBtn";
 import MenuBtn from "@/app/(dashboard)/new/components/home-search/header/Menu";
 import { GrpLogoSvg } from "@/app/images/getrightLogo";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { homePageSvgsMap } from "@/app/images/commongsSvgs2";
 
 type Props = {};
@@ -72,6 +72,7 @@ const ForBuilders = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { data: session } = useSession();
   const pathName = usePathname();
+  const router = useRouter();
   return (
     !session && (
       <div
@@ -82,7 +83,7 @@ const ForBuilders = () => {
       >
         <button
           aria-label="For Builders"
-          name="For Builders"
+          name="For Builders" 
           title="For Builders"
           className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center"
         >
@@ -96,7 +97,7 @@ const ForBuilders = () => {
             className="!p-0 cursor-pointer w-full absolute min-w-[387px] "
             onClick={() =>
               typeof window !== "undefined"
-                ? window.open(`/login?cc=${encryptUrl(pathName)}`)
+                ? router.push(`/login?cc=${encryptUrl(pathName)}`)
                 : ""
             }
           >
@@ -484,6 +485,7 @@ function MobileDropDown() {
   const { data: session } = useSession();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter();
 
   return (
     <div
@@ -525,10 +527,8 @@ function MobileDropDown() {
                   <button
                     onClick={() =>
                       typeof window !== "undefined"
-                        ? window.open(
+                        ? router.push(
                             `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile/dashboard`,
-                            "_self",
-                            "noreferrer"
                           )
                         : ""
                     }
