@@ -206,7 +206,7 @@ console.log( isData, selectedOne)
       type: "OPEN",
       payload: {
         items:[  decodeURIComponent(
-                        selectedOne?.floorPlan?.split(",")[3]
+                        selectedOne?.floorPlan
                       ) ?? ImgNotAvail],
         mediaType: "image",
         title: "Floor Plans ",
