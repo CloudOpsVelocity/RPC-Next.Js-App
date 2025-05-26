@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import React, { memo, useCallback, useMemo } from "react";
+import React, { memo, useCallback, useEffect, useMemo } from "react";
 import {
   diffToProjFromListing,
   initialState,
@@ -225,7 +225,12 @@ const ListingSearchTabs = ({
       : state.listedBy;
   }, [state, frontendFilters]);
 
-    console.log("3333");
+  console.log("3333");
+  console.log(tabsSelected());
+
+  // useEffect(()=>{
+  //     console.log(state.listedBy);
+  // }, [state.listedBy])
 
 
   return (

@@ -130,6 +130,9 @@ export default function ListingServerCardData({
     }
   };
 
+    console.log("tab-3")
+
+
   const handleOpen = (data: any) => {
     const {
       propTypeName,
@@ -160,6 +163,9 @@ export default function ListingServerCardData({
             } in ${localityName}`,
     });
   };
+
+  console.log("tab-4")
+
 
   const handleClick = (e: any) => {
     const cardEl = e.target.closest('[data-type="card"]');

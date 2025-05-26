@@ -60,6 +60,7 @@
     cursor: pointer;
     border:0.4px solid;
     font-size: 12px;
+    white-space: nowrap;
 }
 
 .listingTypeButtonForOwner{
