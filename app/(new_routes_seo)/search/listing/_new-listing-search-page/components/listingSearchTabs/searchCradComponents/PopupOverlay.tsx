@@ -34,6 +34,7 @@ function PopupOverlay({ popupState, closePopup }: Props) {
     cityName,
     phaseName,
     type,
+    amenCounts
   } = data;
 
   const id = `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
@@ -99,10 +100,7 @@ function PopupOverlay({ popupState, closePopup }: Props) {
       case "amenities":
         return (
           <AmenitiesPopupBox
-            id={id}
-            type={isProj ? "proj" : "prop"}
-            projId={projIdEnc}
-            propId={propIdEnc}
+            amenitiesList={amenCounts}
           />
         );
       case "nearby":
