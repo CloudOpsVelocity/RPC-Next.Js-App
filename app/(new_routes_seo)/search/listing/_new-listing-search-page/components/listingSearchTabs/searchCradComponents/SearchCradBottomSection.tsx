@@ -4,6 +4,7 @@ import ButtonElement from "@/common/components/CustomButton";
 import { useMediaQuery } from "@mantine/hooks";
 import Tag from "@/app/components/atoms/Tag";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type BottomSectionProps = {
   index: string;
@@ -248,6 +249,8 @@ function CountListing({
     O: "Owner",
   };
 
+  const pathname = usePathname();  
+
   return (
     value > 0 && (
       <Link
@@ -262,6 +265,13 @@ function CountListing({
           value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
         }`}
         prefetch={false}
+        // onClick={(e)=>{
+        //   if(pathname === "/search/listing"){
+        //     e.preventDefault();
+        //     console.log("blocked")
+
+        //   }
+        // }}
       >
         {`${userTypes[type]} Listing : ${value}`}
       </Link>
