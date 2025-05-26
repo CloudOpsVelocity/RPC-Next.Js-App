@@ -91,7 +91,7 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
   compiler: {
-    removeConsole: process.env.ENVIRONMENT === "production",
+    removeConsole: true,
   },
 };
 
