@@ -94,8 +94,6 @@ function DrawerBox({
     <div
       className="fixed w-full min-h-[calc(100vh-70px)] flex justify-end items-end overflow-hidden z-[1000] right-0 top-[70px] bg-black/30 mb-[2rem]"
       onClick={(e) => onMainConClick(e)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
     >
       <div
         id="modalDrawerPopupInnerCon"
@@ -104,6 +102,8 @@ function DrawerBox({
         } ${` top-0 right-0 h-full shadow-lg transition-transform duration-500 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}`}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {hideHeader !== true && (
           <div className="flex justify-between items-center w-full px-[16px] mt-[16px] ">
