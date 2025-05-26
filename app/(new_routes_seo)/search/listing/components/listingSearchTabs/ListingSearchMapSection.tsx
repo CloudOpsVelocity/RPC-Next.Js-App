@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useAtom } from "jotai";
-import { searchPageMapToggle } from "../../../store/projSearchStore";
+import { searchPageMapToggle } from "../../../store/routeListingSore";
 import Image from "next/image";
 import ListingSearchRightSection from "../../components/listingSearchTabs/listingSearchRightSection";
 import { useMediaQuery } from "@mantine/hooks";

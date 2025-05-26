@@ -24,6 +24,6 @@ export interface SearchFilter {
   lat: number | null;
   lng: number | null;
   projName?: string | null;
-  isUsed? :string | null;
-  phaseId?:number[];
+  isUsed?: string | null;
+  phaseId?: number[];
 }
