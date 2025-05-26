@@ -1,4 +1,5 @@
 import { SearchFilter } from "@/app/types/search";
+
 import { atom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
 import parseProjectSearchQueryParams from "../utils/parse-project-searchqueryParams";
@@ -15,7 +16,7 @@ export const initialState: SearchFilter = {
   listedBy: undefined,
   reraVerified: [],
   areaValue: [0, 5000],
-  bugdetValue: [500000, 600000000],
+  bugdetValue: [500000, 300000000],
   builderIds: [],
   city: null,
   facing: [],
@@ -55,7 +56,7 @@ type Action =
 const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
   switch (action.type) {
     case "reset":
-      return initialState;
+      return { ...initialState, listedBy: null };
     case "update":
       var newData =
         action.payload.propType === projectprops.plot
@@ -70,7 +71,14 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
     case "pushToArray": {
       const { key, value } = action.payload;
       if (Array.isArray(state[key])) {
-        if ((state[key] as any[]).includes(value)) {
+        const normalizedValue =
+          typeof value === "string" ? value.toLowerCase() : value;
+        const alreadyExists = (state[key] as any[]).some((item) =>
+          typeof item === "string"
+            ? item.toLowerCase() === normalizedValue
+            : item === value
+        );
+        if (alreadyExists) {
           return state;
         }
         return {
@@ -80,6 +88,7 @@ const mapReducer = (state: SearchFilter, action: Action): SearchFilter => {
       }
       return state;
     }
+
     case "removeFromArray": {
       const { key, value } = action.payload;
       if (Array.isArray(state[key])) {
@@ -172,6 +181,10 @@ export const ProjSearchAppliedFiltersStore = atom(
     let queryString: string | null = "";
     if (type === "add") {
       for (const [key, value] of Object.entries(appliedFilters)) {
+        let ingoreKeys = ["currentPage"];
+        if (ingoreKeys.includes(key)) {
+          continue;
+        }
         // Skip areaValue and bugdetValue if they match initial values
         if (
           ((key === "areaValue" || key === "bugdetValue") &&
@@ -188,10 +201,19 @@ export const ProjSearchAppliedFiltersStore = atom(
 
         if (Array.isArray(value)) {
           if (value.length > 0) {
-            queryString += `${queryString ? "-" : ""}${key}=${value}`;
+            console.log(`${value}`);
+            queryString += `${queryString ? "-" : ""}${key}=${value?.map(
+              (item) => {
+                return typeof item === "string"
+                  ? item?.replace("-", " ")
+                  : item;
+              }
+            )}`;
           }
         } else if (value != null) {
-          queryString += `${queryString ? "-" : ""}${key}=${value}`;
+          queryString += `${queryString ? "-" : ""}${key}=${
+            key === "projName" ? value?.replace("-", " ") : value
+          }`;
         }
       }
     } else if (type === "clear") {
@@ -293,3 +315,4 @@ export const diffToProjFromListing = {
     "sortType",
   ],
 };
+// ?sf=localities=gunjur%2B204-cg=S-projIdEnc=ab19ea76f51b06d56b0acaa0a800744f-phaseId=one-phase%2B994

@@ -53,10 +53,6 @@ export default function ShowAllFiltersButton({
   const { handleClearFilters, handleApplyFilters } =
     useProjSearchAppliedFilters();
 
-  console.log(path);
-
-  path.includes("residential-listings");
-
   const [state, dispatch] = useAtom(projSearchStore);
   const isproject =
     state.listedBy == null
