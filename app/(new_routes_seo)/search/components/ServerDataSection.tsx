@@ -15,6 +15,7 @@ import PopupOverlay from "../listing/_new-listing-search-page/components/listing
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { useRouter } from "next/navigation";
 
 type Props = {
   data: any;
@@ -111,20 +112,20 @@ export default function ServerDataSection({
   //   });
   // };
 
+  const router = useRouter();
+  
   const handleDownload = (data: any) => {
     const { brochureUrl } = data;
     if (session) {
       brochureUrl &&
-        window.open(
+        router.push(
           `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-          "_self"
         );
     } else {
       openLogin(() => {
         brochureUrl &&
-          window.open(
+          router.push(
             `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-            "_self"
           );
       });
     }
@@ -265,7 +266,7 @@ export default function ServerDataSection({
         }));
         break;
       default:
-        window.open(selectedItem.pageUrl, "_self", "noreferrer");
+        router.push(selectedItem.pageUrl);
     }
   };
 

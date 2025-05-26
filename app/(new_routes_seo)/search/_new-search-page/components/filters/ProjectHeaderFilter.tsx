@@ -148,6 +148,7 @@ const HeaderFilters = ({
     ["ProjectOwnerListing", "I"],
     ["ProjectBuilderListing", "B"],
   ]);
+  
   const handlePush = async (type: string, data: any) => {
     switch (type) {
       case "loc":
@@ -163,7 +164,8 @@ const HeaderFilters = ({
         break;
       case "projects":
         if (data.type === "Project") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
+          // typeof window !== "undefined" ? router.push(data.stringUrl) : "";
+          typeof window !== "undefined" ? router.push(data.stringUrl) : "";
         } else {
           if (isListingSearch) {
             dispatch({
@@ -176,8 +178,8 @@ const HeaderFilters = ({
             });
           } else {
             typeof window !== "undefined"
-              ? window.open(
-                  `/search/listing?sf=projIdEnc=${
+              ? router.push(
+                  `/search/listing?sf=projIdEnc=${ 
                     data.stringId.split("_")[0]
                   }-phaseId=${data.stringId.split("_")[1]}-projName=${
                     data.name
@@ -238,7 +240,7 @@ const HeaderFilters = ({
                     .trim()}`
                 : ""
             }`;
-            typeof window !== "undefined" ? window.open(url) : "";
+            typeof window !== "undefined" ? router.push(url) : "";
           }
         }
         break;
@@ -251,20 +253,20 @@ const HeaderFilters = ({
             data.type
           )}-projName=${projectName}`;
           typeof window !== "undefined"
-            ? window.open("/search/listing?sf=" + url)
+            ? router.push("/search/listing?sf=" + url)
             : "";
         }
         break;
       case "builders":
         if (data.type === "BuilderDetail") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
+          typeof window !== "undefined" ? router.push(data.stringUrl) : "";
         } else {
           const url =
             encodeURIComponent(data.name) +
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
           typeof window !== "undefined"
-            ? window.open(
+            ? router.push(
                 `/search?sf=builderIds=${url}${
                   data.type !== "BuilderProject"
                     ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`

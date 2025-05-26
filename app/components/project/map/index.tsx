@@ -72,8 +72,7 @@ const LeafMap: React.FC<{
     type?: "proj" | "prop";
   }) => {
     return (
-      <div>
-        {type === "prop" ? (
+      type === "prop" ? (
           <PropertyHeading
             title={
               <Fragment>
@@ -85,7 +84,7 @@ const LeafMap: React.FC<{
             className="sm:mb-[18px]"
           />
         ) : (
-          <div>
+          <>
             <h2 className="sm:text-[22px] xl:text-[28px] font-bold mb-[12px] capitalize break-words ">
               <strong>
                 <span className="text-[#001F35]">Location Map Of </span>
@@ -96,10 +95,9 @@ const LeafMap: React.FC<{
               text="Explore nearby convenient amenities, entertainment, and essential services"
               className="mt-2 mb-4 sm:mb-8"
             />
-          </div>
-        )}
-      </div>
-    );
+          </>
+        )
+    )
   };
 
   const downData =
@@ -281,7 +279,7 @@ const LeafMap: React.FC<{
       ) : (
         <div
           id="location-map"
-          className="w-[95%] md:w-[90%] scroll-mt-[180px] sm:mt-[20px] xl:mt-[50px] justify-center"
+          className="w-[95%] md:w-[90%] scroll-mt-[180px] sm:mt-[20px] xl:mt-[50px] justify-center mx-auto"
         >
           <div className="flex justify-between w-[90%]">
             {type === "prop" ? (
@@ -293,7 +291,7 @@ const LeafMap: React.FC<{
               />
             ) : (
               <div>
-                <h2 className="sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap">
+                <h2 className="sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words">
                   <span>Location Map Of Project </span>
                   <span className="text-[#148B16] ">{projName} </span>
                 </h2>

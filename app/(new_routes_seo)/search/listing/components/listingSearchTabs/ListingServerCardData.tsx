@@ -15,6 +15,7 @@ import {
   // handleAgentOwner,
   shearPropOrProj,
 } from "../../_new-listing-search-page/components/listingSearchTabs/searchCradComponents/searchData";
+import { useRouter } from "next/navigation";
 
 type Props = {
   data: any;
@@ -65,7 +66,7 @@ export default function ListingServerCardData({
   const [, { open }] = useReqCallPopup();
 
   const cardFnsRef = useRef<Record<string, () => void>>({});
-
+  const router = useRouter();
   const registerCard = (id: string, fn: () => void) => {
     cardFnsRef.current[id] = fn;
   };
@@ -115,22 +116,20 @@ export default function ListingServerCardData({
     const { brochureUrl } = data;
     if (session) {
       brochureUrl &&
-        window.open(
+        router.push(
           `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-          "_self"
         );
     } else {
       openLogin(() => {
         brochureUrl &&
-          window.open(
+          router.push(
             `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-            "_self"
           );
       });
     }
   };
 
-    console.log("tab-3")
+  console.log("tab-3")
 
 
   const handleOpen = (data: any) => {
@@ -267,7 +266,7 @@ export default function ListingServerCardData({
         }));
         break;
       default:
-        window.open(selectedItem.pageUrl, "_self", "noreferrer");
+        router.push(selectedItem.pageUrl);
     }
   };
 

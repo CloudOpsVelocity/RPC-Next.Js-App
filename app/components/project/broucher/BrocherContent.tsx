@@ -21,6 +21,7 @@ import { useMediaQuery } from "@mantine/hooks";
 // import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Image from "next/image";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 // import SubHeading from "../headings/SubHeading";
 // import PropertyHeading from "../../property/heading";
 
@@ -234,6 +235,7 @@ function BrocherContent({
   }
 
   // Example usage:
+  const router = useRouter();
 
   const handleDownload = async (url: string) => {
     const brocherPageUrl = `/pdf/${encodeURIComponent(
@@ -252,7 +254,7 @@ function BrocherContent({
         );
         return;
       } */
-      await downloadPDF(url, `${projName}.pdf`);
+      await downloadPDF(url, `${projName}.pdf`); 
       // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
     }
@@ -268,7 +270,7 @@ function BrocherContent({
       );
       return;
     } */
-    window.open(brocherPageUrl, "_blank", "noreferrer");
+    router.push(brocherPageUrl);
   };
 
   const loadPDF = async (phase: ProjectPhase) => {
@@ -386,7 +388,7 @@ function BrocherContent({
   if (singleBrocher) {
     return (
       <div
-        className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
+        className="w-full scroll-mt-[170px] mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
         id="brochure"
       >
         <div className="w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">

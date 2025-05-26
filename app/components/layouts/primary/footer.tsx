@@ -205,11 +205,11 @@ function Footer() {
                 {socialIcons.map(({ name, icon, link }) => (
                   <Link
                     prefetch={false}
-                    rel="noreferrer"
+                    rel="noreferrer noopener"
                     key={name}
                     href={link}
                     className="text-white hover:text-gray-300"
-                    target="_blank"
+                    target="_self"
                   >
                     <span className="sr-only">{name}</span>
                     {icon}
