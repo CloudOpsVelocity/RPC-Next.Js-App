@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-boolean-value */
 import React, { useState, useEffect } from "react";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 // import { projectReqDataAtom } from "@/app/store/project/project.req";
@@ -29,6 +29,7 @@ import { propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 // import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
+import { galleryStateAtom } from "@/app/store/project/gallery";
 // import { useMediaQuery } from "@mantine/hooks";
 
 const Modal = ({
@@ -72,6 +73,7 @@ const Modal = ({
 };
 
 export default function PartialUnitModal({ data }: any) {
+  const dispatch = useSetAtom(galleryStateAtom);
   const isData = useAtomValue(selectedPartialUnitAtom);
   // console.log(isData);
   const propId = useAtomValue(propCgIdAtom);
@@ -196,6 +198,23 @@ export default function PartialUnitModal({ data }: any) {
     return null;
   }
 
+
+console.log( isData, selectedOne)
+ 
+  const onSelect = () => {
+    dispatch({
+      type: "OPEN",
+      payload: {
+        items:[  decodeURIComponent(
+                        selectedOne?.floorPlan?.split(",")[3]
+                      ) ?? ImgNotAvail],
+        mediaType: "image",
+        title: "Floor Plans ",
+       activeIndex: active},
+    });
+  };
+  
+
   return (
     <Modal isOpen={opened} onClose={handleReset}>
       <div className="flex flex-col h-full ">
@@ -308,7 +327,12 @@ export default function PartialUnitModal({ data }: any) {
                   position: "relative",
                 }}
               >
-                <div className="flex items-center justify-center w-full h-full max-h-[calc(100vh-550px)] sm:max-h-[calc(100vh-250px)] lg:max-h-full">
+               <div
+              onClick={()=>onSelect()}
+              className="flex items-center justify-center w-full h-full 
+                        max-h-[calc(100vh-550px)] sm:max-h-[calc(100vh-250px)] 
+                        lg:max-h-full cursor-pointer"
+>
                   <Image
                     width={800}
                     height={600}
@@ -323,7 +347,7 @@ export default function PartialUnitModal({ data }: any) {
                   />
                 </div>
               </TransformComponent>
-              <ZoomInOut className="bottom-4 right-4" />
+              <ZoomInOut   className="bottom-4 right-4" />
             </TransformWrapper>
           </div>
 
