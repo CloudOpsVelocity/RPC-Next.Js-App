@@ -58,7 +58,7 @@ export default function GalleryModalContent({}: Props) {
     setIsPlaying(false);
   };
 
-  const currentItem = items[currentIndex];
+  const currentItem = items[currentIndex].split(",")[0];
 
   const handleShare = () => {
     navigator.share({
