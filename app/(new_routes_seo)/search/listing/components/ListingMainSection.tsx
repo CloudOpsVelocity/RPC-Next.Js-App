@@ -4,7 +4,7 @@ import ListingSearchleftSection from "./listingSearchTabs/listingSearchleftSecti
 import { useQueryState } from "nuqs";
 import ListingSearchMapSection from "./listingSearchTabs/ListingSearchMapSection";
 import { useHydrateAtoms } from "jotai/utils";
-import { initialState, projSearchStore } from "../../store/projSearchStore";
+import { initialState, projSearchStore } from "../../store/newListingStore";
 import { useAtom, useSetAtom } from "jotai";
 type Props = {
   serverData: any;

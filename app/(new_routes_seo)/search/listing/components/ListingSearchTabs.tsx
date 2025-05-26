@@ -7,8 +7,8 @@ import {
   diffToProjFromListing,
   initialState,
   projSearchStore,
-} from "../../store/projSearchStore";
-import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+} from "../../store/routeListingSore";
+import useProjSearchAppliedFilters from "../hooks/useProjSearchAppliedFilters";
 import { SearchFilter } from "@/app/types/search";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
@@ -230,8 +230,7 @@ const ListingSearchTabs = ({
       : state.listedBy;
   }, [state, frontendFilters]);
 
-    console.log("4444");
-
+  console.log("4444");
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">
