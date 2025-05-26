@@ -410,34 +410,32 @@ export default function PartialUnitModal({ data }: any) {
           </div>
         </div>
 
-        {isData && isData.others && isData.others?.length > 0 && (
-          <div className={`w-[95%] m-auto  inline-flex mb-4 `}>
-            {isData.others.map((item: any, index: number) => {
-              const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
-              console.log(imageUrl);
-              console.log(encodeURIComponent(imageUrl));
-              return (
-                <div
-                  key={`floorplan-${index.toString()}`}
-                  onClick={() => setActive(index)}
-                  className={`relative min-w-[80px] h-[60px] rounded-lg border-2 transition-colors ${
-                    active === index ? "border-[#0073C6]" : "border-transparent"
-                  }`}
-                >
-                  <Image
-                    width={80}
-                    height={60}
-                    // src={encodeURIComponent(imageUrl)}
-                    src={imageUrl}
-                    alt={`Floor Plan ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    unoptimized
-                  />
-                </div>
-              );
-            })}
-          </div>
-        )}
+       {isData && isData.others && isData.others?.length > 0 && (
+  <div className="w-[95%] mx-auto flex flex-wrap gap-2 justify-start items-center mb-4">
+    {isData.others.map((item: any, index: number) => {
+      const imageUrl = item?.floorPlan?.split(",")[3] || ImgNotAvail;
+      return (
+        <div
+          key={`floorplan-${index}`}
+          onClick={() => setActive(index)}
+          className={`relative w-[80px] h-[60px] rounded-lg border-2 overflow-hidden shrink-0 transition-colors ${
+            active === index ? "border-[#0073C6]" : "border-transparent"
+          }`}
+        >
+          <Image
+            src={imageUrl}
+            alt={`Floor Plan ${index + 1}`}
+            width={80}
+            height={60}
+            className="w-full h-full object-cover"
+            unoptimized
+          />
+        </div>
+      );
+    })}
+  </div>
+)}
+
       </div>
     </Modal>
   );

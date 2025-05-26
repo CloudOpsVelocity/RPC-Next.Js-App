@@ -13,9 +13,20 @@ type Props = {
     url: string;
   };
 };
+function urlToSeoTitle(url: string): string {
+  return url
+    .replace(/^\/+|\/+$/g, '') // Remove leading/trailing slashes
+    .split('/')                // Split by slash
+    .filter(part => !/^listing-[a-f0-9]+$/i.test(part)) // Remove 'listing-ID' part
+    .join(' ')                 // Join parts with space
+    .replace(/-/g, ' ')        // Replace hyphens with spaces
+    .replace(/\s+/g, ' ')      // Collapse multiple spaces
+    .trim()                    // Trim whitespace
+    .replace(/\b\w/g, c => c.toUpperCase()); // Capitalize each word
+}
 
 function FirstImagesBlock({ onSelect, data }: Props) {
-  /* console.log(data) */
+  console.log(data)
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
   const getImage = (index: number, className: string) => {
@@ -49,8 +60,8 @@ function FirstImagesBlock({ onSelect, data }: Props) {
           <source media="(max-width: 768px)" srcSet={getUrl(urls, 2)} />
           <source media="(min-width: 1200px)" srcSet={getUrl(urls, 3)} />
           <Image
-            alt={data.projName || "Project Image"}
-            title={data.projName || "Project Image"}
+            alt={`${ index == 0 ? "Cover image" : index == 1 ? "Floor Plan" : " Image"} of ${urlToSeoTitle(data.url)}`}
+            title={`${ index == 0 ? "Cover image" : index == 1 ? "Floor Plan" : " Image"} of ${urlToSeoTitle(data.url)}`}
             src={getUrl(urls, 3)}
             height={195}
             width={900}
@@ -68,7 +79,7 @@ function FirstImagesBlock({ onSelect, data }: Props) {
   };
 
   const title = data.type === "proj" ? "Share Project" : "Share Listing";
-
+  const   arialabel= data.type === "proj" ? `Share Project ${urlToSeoTitle(data.url)}` : `Share ${urlToSeoTitle(data.url)}}`;
   return (
     <div
       className={styles.DetailsPageImagesMainCon}
@@ -90,9 +101,9 @@ function FirstImagesBlock({ onSelect, data }: Props) {
             </span>{" "}
           </p>
           <button
-            aria-label={title}
-            name={title}
-            title={title}
+            aria-label={arialabel}
+            name={arialabel}
+            title={arialabel}
             onClick={(e) => {
               e.stopPropagation();
               navigator.share({ title: title, url: data.url });
