@@ -3,9 +3,9 @@ import Link from "next/link";
 import React from "react";
 export const slugify = (name: string): string => {
   return name
-    .toLowerCase()
-    .replace(/[^a-z0-9.]+/g, "-") // Allow dots by including . in the character set
-    .replace(/(^-|-$)+/g, ""); // Remove leading and trailing hyphens
+    ?.toLowerCase()
+    ?.replace(/[^a-z0-9.]+/g, "-") // Allow dots by including . in the character set
+    ?.replace(/(^-|-$)+/g, ""); // Remove leading and trailing hyphens
 };
 
 export default function ListingBreadCrumbs({

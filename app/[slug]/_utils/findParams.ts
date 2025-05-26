@@ -23,9 +23,9 @@ export function extractCaseSeoParams(values: string) {
 
   const parts = values.split("-");
 
-  const inIndex = parts.findIndex((p) => p.toLowerCase() === "in");
+  const inIndex = parts.findIndex((p) => p?.toLowerCase() === "in");
   const bengaluruIndex = parts.findIndex(
-    (p) => p.toLowerCase() === "bengaluru"
+    (p) => p?.toLowerCase() === "bengaluru"
   );
 
   if (inIndex !== -1 && bengaluruIndex !== -1 && inIndex < bengaluruIndex) {

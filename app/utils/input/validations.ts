@@ -40,8 +40,8 @@ export const handleTrimAndReplaceReactHookForm = (
         // Remove all special characters except &, keep alphanumeric, spaces, and &
         const validBuilderName = value
           .trim()
-          .replace(/[^\w\s&]/g, "") 
-          .replace(/[\s_]+/g, " "); 
+          .replace(/[^\w\s&]/g, "")
+          .replace(/[\s_]+/g, " ");
         form(fieldName, validBuilderName);
 
         // Pass true if special characters (other than &) were found, otherwise false
@@ -65,12 +65,12 @@ export const handleTrimAllSpaces = (
       // Remove invalid parts of the email before the '@' symbol
       {
         const validEmail = value
-          .trim()
-          .replace(/\s+/g, "") // Remove all spaces
-          .toLowerCase() // Convert to lowercase
-          .replace(/\.{2,}/g, ".") // Replace consecutive dots with a single dot
-          .replace(/^\.|\.$/g, "") // Remove leading or trailing dots
-          .replace(/(\.+)@/, "@") // Remove dots directly before the '@'
+          ?.trim()
+          ?.replace(/\s+/g, "") // Remove all spaces
+          ?.toLowerCase() // Convert to lowercase
+          ?.replace(/\.{2,}/g, ".") // Replace consecutive dots with a single dot
+          ?.replace(/^\.|\.$/g, "") // Remove leading or trailing dots
+          ?.replace(/(\.+)@/, "@") // Remove dots directly before the '@'
           // .replace(/^[^@]*[.]/, "") // Remove everything before the first dot if there is any dot before '@'
           .replace(/@[^.]+$/, (match) => match.replace(/^\.+/, "")); // Remove leading dots in the domain part if any
 

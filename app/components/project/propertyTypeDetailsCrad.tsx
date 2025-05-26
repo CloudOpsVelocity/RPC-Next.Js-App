@@ -193,7 +193,7 @@ export default function PropertyTypeDetailsCrad({
   };
 
   const rawPhaseName = phaseNameRetruner();
-  const phaseName = rawPhaseName ? hyphenate(rawPhaseName.toLowerCase()) : "";
+  const phaseName = rawPhaseName ? hyphenate(rawPhaseName?.toLowerCase()) : "";
 
   const getElevationTooltip = (tower: any) => {
     if (propertyType === "rowHouse" || propertyType === "villa") {
@@ -330,11 +330,11 @@ export default function PropertyTypeDetailsCrad({
                   <Link
                     prefetch={false}
                     key={index}
-                    href={`/residential-listings/for-sale/bengaluru/${projData.localityName.toLowerCase()}/${hyphenate(
+                    href={`/residential-listings/for-sale/bengaluru/${projData.localityName?.toLowerCase()}/${hyphenate(
                       projData.projectName
-                    ).toLowerCase()}/${phaseName}/${hyphenate(
+                    )?.toLowerCase()}/${phaseName}/${hyphenate(
                       bhk
-                    ).toLowerCase()}-${propName(
+                    )?.toLowerCase()}-${propName(
                       propertyType,
                       "name"
                     )?.toLocaleLowerCase()}`}

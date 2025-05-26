@@ -124,7 +124,7 @@ export const useFloorPlanStore = () => {
       return Object.keys(selectedFilters).every(
         (key) =>
           !selectedFilters[key] ||
-          String(item[key]).toLowerCase() ===
+          String(item[key])?.toLowerCase() ===
             selectedFilters[key]?.toLowerCase()
       );
     });

@@ -261,7 +261,7 @@ export async function generateMetadata({
       localityFormatted &&
       cityFormatted
     ) {
-      description = `Explore ${phaseDisplay.toLowerCase()} for ${
+      description = `Explore ${phaseDisplay?.toLowerCase()} for ${
         cg === "for-rent" ? "Rent" : "Sale"
       } in ${projectFormatted}, located in ${localityFormatted}, ${cityFormatted}. Get verified listings of apartments, flats, villas, villaments, builder floors, and plots.`;
     } else if (projectFormatted && localityFormatted && cityFormatted) {

@@ -15,7 +15,7 @@ function capitalizeWords(str: string): string {
       result += str[i].toUpperCase();
       capitalizeNext = false;
     } else {
-      result += str[i].toLowerCase();
+      result += str[i]?.toLowerCase();
     }
   }
 

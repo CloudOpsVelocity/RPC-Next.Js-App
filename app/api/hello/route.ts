@@ -29,7 +29,7 @@ export async function GET(req: Request) {
     mall: "malls",
   };
 
-  const keyword = typeMappings[type.toLowerCase()];
+  const keyword = typeMappings[type?.toLowerCase()];
 
   if (!keyword) {
     // Handle the case where an invalid type is provided

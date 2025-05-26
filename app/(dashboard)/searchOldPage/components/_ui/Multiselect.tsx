@@ -80,7 +80,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
           const paramsObject = extractApiValues(data.stringId);
 
           let url;
-          let localityName = data.name.split(" in ")[1].toLowerCase().trim();
+          let localityName = data.name.split(" in ")[1]?.toLowerCase().trim();
           url =
             `propType=${paramsObject.PT}${
               paramsObject.BH ? `-bhk=${paramsObject.BH}` : ""

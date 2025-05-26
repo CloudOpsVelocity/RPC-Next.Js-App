@@ -134,17 +134,17 @@ export default async function page(props: Props) {
   ]);
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const localitySlug = projResponse.basicData.localityName
-    .toLowerCase()
-    .replaceAll(" ", "-");
+    ?.toLowerCase()
+    ?.replaceAll(" ", "-");
   const projectSlug = name.split("-").slice(0, -1).join("-");
   const projectNameSlug = projResponse.basicData.projectName
-    .toLowerCase()
-    .replaceAll(" ", "-");
+    ?.toLowerCase()
+    ?.replaceAll(" ", "-");
 
   if (
     localitySlug !== lt ||
     projectSlug !== projectNameSlug ||
-    city !== projResponse.basicData.cityName.toLowerCase()
+    city !== projResponse?.basicData?.cityName?.toLowerCase()
   ) {
     return notFound();
   }
@@ -197,7 +197,7 @@ export default async function page(props: Props) {
 
   // Helpers
   const capitalize = (str: string) =>
-    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    str.charAt(0).toUpperCase() + str?.slice(1)?.toLowerCase();
 
   return (
     <section className="w-full relative break-words ">

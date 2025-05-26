@@ -5,9 +5,9 @@ import React, { ReactNode, useMemo } from "react";
 // Simple slugify function
 const slugify = (name: string): string => {
   return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
+    ?.toLowerCase()
+    ?.replace(/[^a-z0-9]+/g, "-")
+    ?.replace(/(^-|-$)+/g, "");
 };
 
 // Function to generate the URL based on routeParams

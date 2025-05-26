@@ -117,7 +117,7 @@ function NewsSections({ cityName }: Props) {
   const [{ inputSearch }] = useAtom(trendsFilterData);
   const currentCities = allData?.filter(
     (city: any) =>
-      inputSearch === "" || city.title.toLowerCase().includes(inputSearch)
+      inputSearch === "" || city?.title?.toLowerCase().includes(inputSearch)
   );
 
   return (

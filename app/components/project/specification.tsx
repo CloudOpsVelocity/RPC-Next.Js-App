@@ -20,7 +20,7 @@ export default function Specifications({
   };
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (index: number) => {
-    const selectedSpecId = data[index]?.specName.toLowerCase();
+    const selectedSpecId = data[index]?.specName?.toLowerCase();
     const selectedElement = document.getElementById(selectedSpecId);
     const container = viewport.current;
 
@@ -42,11 +42,15 @@ export default function Specifications({
         behavior: "smooth",
       });
 
-      selectedElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: "center" });
+      selectedElement.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "center",
+      });
     }
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
-// /* text-[#148B16] */  all heading of heading each section
+  // /* text-[#148B16] */  all heading of heading each section
   return (
     <div
       className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%] sm:mb-0 pt-screen-spacing"
@@ -71,7 +75,9 @@ export default function Specifications({
 
               return (
                 <button
-                aria-label={spec.specName} name={spec.specName} title={spec.specName}
+                  aria-label={spec.specName}
+                  name={spec.specName}
+                  title={spec.specName}
                   key={spec.specName}
                   className={clsx(
                     `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[15px] xl:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
@@ -168,16 +174,16 @@ export default function Specifications({
                 <span className="">{spec.specName}</span>
               </span>
               {/* <div> */}
-                <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
-                  {spec.values.map(
-                    (value) =>
-                      value && (
-                        <li className="break-words max-w-full" key={value}>
-                          {value}
-                        </li>
-                      )
-                  )}
-                </ul>
+              <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
+                {spec.values.map(
+                  (value) =>
+                    value && (
+                      <li className="break-words max-w-full" key={value}>
+                        {value}
+                      </li>
+                    )
+                )}
+              </ul>
               {/* </div> */}
             </div>
           ))}

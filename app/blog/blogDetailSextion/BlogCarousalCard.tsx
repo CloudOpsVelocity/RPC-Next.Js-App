@@ -13,7 +13,7 @@ type Props = {
 function BlogCard({ data }: Props) {
   const path = usePathname();
   const title = data && data.heading ? data.heading : "";
-  const pathName = title.toLowerCase().replaceAll(" ", "-");
+  const pathName = title?.toLowerCase()?.replaceAll(" ", "-");
 
   return (
     <Link

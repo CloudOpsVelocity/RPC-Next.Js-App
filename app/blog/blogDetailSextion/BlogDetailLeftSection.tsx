@@ -12,7 +12,9 @@ function BlogDetailLeftSection() {
     (each) => each.heading === selectedBlog.heading
   )[0];
   const pathName =
-    data && data.heading ? data.heading.toLowerCase().replaceAll(" ", "-") : "";
+    data && data.heading
+      ? data.heading?.toLowerCase().replaceAll(" ", "-")
+      : "";
   const path = usePathname();
 
   return (

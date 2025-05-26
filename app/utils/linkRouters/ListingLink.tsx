@@ -12,9 +12,9 @@ const slugify = (name: string): string => {
     return "";
   } else {
     return name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)+/g, "");
+      ?.toLowerCase()
+      ?.replace(/[^a-z0-9]+/g, "-")
+      ?.replace(/(^-|-$)+/g, "");
   }
 };
 
@@ -35,12 +35,12 @@ type ListingLinkProps = {
 };
 export const slugifyBHKUnitType = (bhkUnitType: string): string => {
   return bhkUnitType
-    .toLowerCase() // Convert to lowercase
-    .replace(/\+/g, "-with-") // Replace '+' with 'with'
-    .replace(/\//g, "-or-") // Replace '/' with 'or'
-    .replace(/[^a-z0-9.]+/g, "-") // Replace non-alphanumeric characters, but keep decimals
-    .replace(/-+/g, "-") // Merge multiple hyphens into one
-    .replace(/(^-|-$)/g, ""); // Remove leading or trailing hyphens
+    ?.toLowerCase() // Convert to lowercase
+    ?.replace(/\+/g, "-with-") // Replace '+' with 'with'
+    ?.replace(/\//g, "-or-") // Replace '/' with 'or'
+    ?.replace(/[^a-z0-9.]+/g, "-") // Replace non-alphanumeric characters, but keep decimals
+    ?.replace(/-+/g, "-") // Merge multiple hyphens into one
+    ?.replace(/(^-|-$)/g, ""); // Remove leading or trailing hyphens
 };
 
 // Function to create URL externally

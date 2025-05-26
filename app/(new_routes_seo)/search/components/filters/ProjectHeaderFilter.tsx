@@ -110,9 +110,9 @@ const HeaderFilters = ({
   const handleDropdownToggle = (dropdownName: string) => {
     // 2
     setIsDrawerOpen(false);
-    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName); 
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
     setIsSearchOpen(false);
-    if (dropdownName == "allFiltersdes") { 
+    if (dropdownName == "allFiltersdes") {
       if (document.body.style.overflow === "hidden")
         document.body.style.overflow = "unset";
       else {
@@ -199,8 +199,8 @@ const HeaderFilters = ({
                 ? "-"
                 : "in"
             )[1]
-            .toLowerCase()
-            .trim();
+            ?.toLowerCase()
+            ?.trim();
 
           if (isListingSearch) {
             dispatch({

@@ -8,7 +8,7 @@ type Props = {
 
 export default function Card({ data }: Props) {
   const title = data && data.heading ? data.heading : "";
-  const pathName = title.toLowerCase().replaceAll(" ", "-");
+  const pathName = title?.toLowerCase()?.replaceAll(" ", "-");
 
   return (
     <Link

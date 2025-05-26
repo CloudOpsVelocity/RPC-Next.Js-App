@@ -59,7 +59,10 @@ export default function Box({ item }: Props) {
         {
           const data = extractApiValues(apiData.stringId);
 
-          let localityName = apiData.name.split(" in ")[1].toLowerCase().trim();
+          let localityName = apiData.name
+            .split(" in ")[1]
+            ?.toLowerCase()
+            .trim();
 
           // let url;
           // url =
@@ -133,7 +136,7 @@ export default function Box({ item }: Props) {
 
   return (
     <Tooltip text={item.name}>
-     <div
+      <div
         onClick={() => handlePush(item.ct, item, item)}
         className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-blue-800 text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200"
       >

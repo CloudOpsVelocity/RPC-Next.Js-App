@@ -524,7 +524,7 @@ function CityTrendSection({ cityName }: Props) {
   const filteredLocalities = AllLocalities?.data?.filter(
     (city: any) =>
       inputSearch === "" ||
-      city.localityName.toLowerCase().includes(inputSearch)
+      city.localityName?.toLowerCase().includes(inputSearch)
   );
 
   if (AllLocalities.isLoading)

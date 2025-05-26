@@ -50,7 +50,7 @@ export const options: NextAuthOptions = {
               ).toString();
               // resume_signup_token
               cookies().set(
-                `resume_signup_token${res.data.userType.toLowerCase()}`,
+                `resume_signup_token${res.data.userType?.toLowerCase()}`,
                 encryptedValue,
                 {
                   maxAge: 10 * 60,

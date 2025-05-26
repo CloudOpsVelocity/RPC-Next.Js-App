@@ -198,8 +198,8 @@ const HeaderFilters = ({
                 ? "-"
                 : "in"
             )[1]
-            .toLowerCase()
-            .trim();
+            ?.toLowerCase()
+            ?.trim();
 
           if (isListingSearch) {
             dispatch({

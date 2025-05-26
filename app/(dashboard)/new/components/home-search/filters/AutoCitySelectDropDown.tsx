@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "react-query";
-import {
-  FaSearch,
-  FaCheck,
-} from "react-icons/fa";
+import { FaSearch, FaCheck } from "react-icons/fa";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { FaChevronDown, FaLocationDot, FaSpinner } from "react-icons/fa6";
@@ -103,7 +100,7 @@ export default function AutoCitySelectDropdown({
   const filteredCities =
     AllCities?.filter(
       (city) =>
-        city.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        city.name.toLowerCase().includes(searchTerm?.toLowerCase()) &&
         city.id !== selectedCity?.id
     ) || [];
   const handleCloseDropdown = useCallback(() => {
