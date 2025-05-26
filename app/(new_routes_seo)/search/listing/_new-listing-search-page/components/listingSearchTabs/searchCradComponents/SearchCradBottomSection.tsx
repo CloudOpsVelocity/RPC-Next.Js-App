@@ -250,6 +250,7 @@ function CountListing({
   };
 
   const pathname = usePathname();  
+  const isSameRoute = pathname === "/search/listing";
 
   return (
     value > 0 && (
@@ -265,13 +266,12 @@ function CountListing({
           value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
         }`}
         prefetch={false}
-        // onClick={(e)=>{
-        //   if(pathname === "/search/listing"){
-        //     e.preventDefault();
-        //     console.log("blocked")
-
-        //   }
-        // }}
+        onClick={(e)=>{
+          if(isSameRoute){
+            e.preventDefault();
+          }
+        }}
+        {...(isSameRoute ? { 'data-action': `listingType_${type[0]}` } : {})}
       >
         {`${userTypes[type]} Listing : ${value}`}
       </Link>

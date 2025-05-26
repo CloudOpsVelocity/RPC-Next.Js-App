@@ -14,6 +14,10 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import PopupOverlay from "../../listing/_new-listing-search-page/components/listingSearchTabs/searchCradComponents/PopupOverlay";
+import { useAtom, useSetAtom } from "jotai";
+import selectedSearchAtom from "@/app/store/search/map";
+import { diffToProjFromListing, initialState, projSearchStore } from "../../store/newSearchProjectStore";
+import useProjSearchAppliedFilters from "../hooks/useProjSearchAppliedFilters";
 
 type Props = {
   data: any;
@@ -52,11 +56,15 @@ export default function ServerDataSection({
   const [popupState, setPopupState] = useState({ isOpen: false, type: "", title:"", data: {}, content:"" });
   // const setIsMapLoaded = useSetAtom(searchPageMapToggle);
   // const setNearby = useSetAtom(selectedNearByAtom);
-  // const setSelected = useSetAtom(selectedSearchAtom);
+  const setSelected = useSetAtom(selectedSearchAtom);
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
   const [,{ open }] = useReqCallPopup();
 
+  const [, dispath] = useAtom(projSearchStore);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
+
+  
   
   const cardFnsRef = useRef<Record<string, () => void>>({});
 
@@ -137,6 +145,59 @@ export default function ServerDataSection({
         });
   };
 
+  const handleTabsChange = (value: string | null) => {
+      typeof window !== "undefined"
+        ? window.scrollTo({ top: 0, behavior: "smooth" })
+        : "";
+      setSelected(null);
+  
+      const updatedFilters =
+        value === null
+          ? {
+              ...state,
+              listedBy: null,
+              sortByfield: null,
+              sortType: null,
+              facings: null,
+              ...(state.propStatus && {
+                projStatus: state.propStatus === "R" ? 107 : 106,
+                propStatus: null,
+              }),
+            }
+          : {
+              ...state,
+              ...Object.fromEntries(
+                (
+                  diffToProjFromListing[
+                    value as keyof typeof diffToProjFromListing
+                  ] ?? []
+                ).map((key: any) => [
+                  key,
+                  initialState[key as keyof SearchFilter] ?? null,
+                ])
+              ),
+              listedBy: value,
+              ...(state.projStatus && {
+                propStatus:
+                  state.projStatus !== 108
+                    ? state.projStatus == 106
+                      ? "U"
+                      : "R"
+                    : null,
+                projStatus: null,
+              }),
+            };
+  
+      dispath({
+        type: "update",
+        payload: updatedFilters,
+      });
+  
+      handleApplyFilters();
+  }; 
+
+  console.log("tab-1")
+
   const handleClick = (e: any) => {
       const cardEl = e.target.closest('[data-type="card"]');
       if (!cardEl) return;
@@ -169,6 +230,9 @@ export default function ServerDataSection({
         case 'requestCall':
           handleOpen(selectedItem)
           break;
+        case 'requestCall':
+          handleOpen(selectedItem)
+          break;
         case "floorplan":
           document.body.style.overflow = "hidden";
           setPopupState((prev) => ({
@@ -195,15 +259,15 @@ export default function ServerDataSection({
           document.body.style.overflow = "hidden";
           setPopupState(prev => ({...prev, isOpen: true, type: 'amenities', title:"Amenities", data: {...selectedItem, type: type}}));
           break;
-        // case 'listingType_B':
-        //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
-        //   break;
-        // case 'listingType_A':
-        //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
-        //   break; 
-        // case 'listingType_O':
-        //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
-        //   break;
+        case 'listingType_B':
+          handleTabsChange("B");
+          break;
+        case 'listingType_A':
+          handleTabsChange("A");
+          break; 
+        case 'listingType_O':
+          handleTabsChange("I");
+          break;
         case 'bhk':
           const sortedBhks:any = sortUnits(selectedItem.bhkNames);
           document.body.style.overflow = "hidden";

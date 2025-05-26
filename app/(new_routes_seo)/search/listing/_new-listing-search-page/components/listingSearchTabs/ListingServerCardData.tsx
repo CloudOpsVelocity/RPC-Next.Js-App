@@ -5,7 +5,6 @@ import SearchCard from "./searchCradComponents/SearchCard";
 // import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 // import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 // import { useSetAtom } from "jotai";
-// import { searchPageMapToggle } from "@/app/(new_routes_seo)/search/store/newSearchProjectStore";
 // import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
@@ -17,6 +16,16 @@ import {
   // handleAgentOwner,
   shearPropOrProj,
 } from "./searchCradComponents/searchData";
+import { useAtom, useSetAtom } from "jotai";
+import selectedSearchAtom from "@/app/store/search/map";
+import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+
+import { diffToProjFromListing, initialState, projSearchStore } from "@/app/(new_routes_seo)/search/store/newListingStore"; // serach/listing
+
+// import { diffToProjFromListing as diffToProjFromListing_p, initialState as initialState_p, projSearchStore as projSearchStore_p } from "@/app/(new_routes_seo)/search/store/newSearchProjectStore"; // /search
+// import { diffToProjFromListing as diffToProjFromListing_l, initialState as initialState_l, projSearchStore as projSearchStore_l } from "@/app/(new_routes_seo)/search/store/newListingStore"; // /search/listing
+// import { diffToProjFromListing as diffToProjFromListing_rp, initialState as initialState_rp, projSearchStore as projSearchStore_rp } from "@/app/(new_routes_seo)/search/store/projSearchStore"; // /residential/projects
+// import { diffToProjFromListing as diffToProjFromListing_rl, initialState as initialState_rl, projSearchStore as projSearchStore_rl } from "@/app/(new_routes_seo)/search/store/routeListingSore"; // /residential-listings
 
 type Props = {
   data: any;
@@ -43,9 +52,12 @@ export default function ListingServerCardData({
 
   // const setIsMapLoaded = useSetAtom(searchPageMapToggle);
   // const setNearby = useSetAtom(selectedNearByAtom);
-  // const setSelected = useSetAtom(selectedSearchAtom);
+  const setSelected = useSetAtom(selectedSearchAtom);
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
+  const [, dispath] = useAtom(projSearchStore);
+  const { handleApplyFilters } = useProjSearchAppliedFilters();
+  
 
   const cg = useMemo(() => {
     if (state.cg === undefined) {
@@ -164,6 +176,59 @@ export default function ListingServerCardData({
     cardFnsRef.current[id] = fn;
   };
 
+   const handleTabsChange = (value: string | null) => {
+        typeof window !== "undefined"
+          ? window.scrollTo({ top: 0, behavior: "smooth" })
+          : "";
+        setSelected(null);
+    
+        const updatedFilters =
+          value === null
+            ? {
+                ...state,
+                listedBy: null,
+                sortByfield: null,
+                sortType: null,
+                facings: null,
+                ...(state.propStatus && {
+                  projStatus: state.propStatus === "R" ? 107 : 106,
+                  propStatus: null,
+                }),
+              }
+            : {
+                ...state,
+                ...Object.fromEntries(
+                  (
+                    diffToProjFromListing[
+                      value as keyof typeof diffToProjFromListing
+                    ] ?? []
+                  ).map((key: any) => [
+                    key,
+                    initialState[key as keyof SearchFilter] ?? null,
+                  ])
+                ),
+                listedBy: value,
+                ...(state.projStatus && {
+                  propStatus:
+                    state.projStatus !== 108
+                      ? state.projStatus == 106
+                        ? "U"
+                        : "R"
+                      : null,
+                  projStatus: null,
+                }),
+              };
+    
+        dispath({
+          type: "update",
+          payload: updatedFilters,
+        });
+    
+        handleApplyFilters();
+  }; 
+
+  console.log("tab-3")
+
   const handleClick = (e: any) => {
     const cardEl = e.target.closest('[data-type="card"]');
     if (!cardEl) return;
@@ -246,15 +311,15 @@ export default function ListingServerCardData({
           // content
         }));
         break;
-      // case "listingType_B":
-      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "B");
-      //   break;
-      // case "listingType_A":
-      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "A");
-      //   break;
-      // case "listingType_O":
-      //   handleAgentOwner(selectedItem.projIdEnc, selectedItem.projName, "I");
-      //   break;
+      case 'listingType_B':
+          handleTabsChange("B");
+          break;
+      case 'listingType_A':
+          handleTabsChange("A");
+          break; 
+      case 'listingType_O':
+          handleTabsChange("I");
+          break;
       case "bhk":
         const sortedBhks: any = sortUnits(selectedItem.bhkNames);
         document.body.style.overflow = "hidden";
