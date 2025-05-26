@@ -271,9 +271,6 @@ export default function ShowAllFiltersButton({
   //     : !isListing;
 
 
-        console.log("222") 
-
-
   return (
     <div className="relative">
       <button

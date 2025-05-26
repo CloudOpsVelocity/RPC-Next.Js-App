@@ -195,9 +195,9 @@ function PropertyBannerForMobile({
         <div className="mt-2 ml-[4px]">
           <div
             className="prose-no-break text-[12px] font-[500] text-[#233333] break-words"
-            dangerouslySetInnerHTML={{ __html: about.slice(0, 200) }}
+            dangerouslySetInnerHTML={{ __html: about ? about.slice(0, 200) : "" }}
           />
-          <ReadMore maxLines={2} text={about} title={"About"} />
+          <ReadMore maxLines={2} text={about ? about : ""} title={"About"} />
         </div>
         <Link
           href={url}

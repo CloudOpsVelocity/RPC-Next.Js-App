@@ -262,8 +262,6 @@ export default function ShowAllFiltersButton({
       ? state.listedBy == null
       : !isListing;
 
-      console.log("111")
-
   return (
     <div className="  relative  ">
       <button
