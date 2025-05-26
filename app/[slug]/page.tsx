@@ -29,9 +29,10 @@ type Props = {
 export default async function Page({ params: { slug }, searchParams }: Props) {
   let serverData = null;
   let frontendFilters = null;
+  let isProj;
   if (searchParams.sf) {
     const apiFilters = parseApiFilterQueryParams(searchParams.sf);
-    const isProj = apiFilters?.includes("listedBy=proj") ? true : false;
+    isProj = apiFilters?.includes("listedBy=proj") ? true : false;
     // eslint-disable-next-line no-unused-vars
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
@@ -61,6 +62,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
       is2lakhUrls
       showProjectTab
       serverFiltersString=""
+      isProj={isProj}
     />
   );
 }
@@ -68,7 +70,6 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
 export const generateStaticParams = async () => {
   const res = await getPagesSlugs("case-seo");
   await redisService.saveSeoSlug(SlugsType.SEO, res);
-
   if (process.env.ENVIRONMENT === "production" && process.env.LAKH_URLS) {
     return res.map((slug: string) => ({ slug }));
   }

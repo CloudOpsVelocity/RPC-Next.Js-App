@@ -13,6 +13,7 @@ const ProjectSearchBreadCrumbs = dynamic(
 
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 import ListingMainSection from "./components/ListingMainSection";
+import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
 // import ListingHeaderFilters from "./components/ListingSearchHeader";
 
 const ListingHeaderFilters = dynamic(
@@ -27,6 +28,7 @@ type Props = {
   is2lakhUrls?: boolean;
   preDefinedFilters: string | null;
   serverFiltersString: string;
+  isProj?: boolean;
 };
 
 export default function NewListingSearchpage({
@@ -37,14 +39,18 @@ export default function NewListingSearchpage({
   is2lakhUrls = false,
   preDefinedFilters = null,
   serverFiltersString,
+  isProj = false,
 }: Props) {
   const isListing = true;
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative">
       <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
-      {serverData && (
-        <ListingSearchSchema properties={serverData} pageUrl={pageUrl} />
-      )}
+      {serverData &&
+        (isProj ? (
+          <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />
+        ) : (
+          <ListingSearchSchema properties={serverData} pageUrl={pageUrl} />
+        ))}
       <div className="relative md:fixed top-0 md:top-[70px] z-auto md:z-10 w-full">
         <ProjectSearchBreadCrumbs is2lakhUrls={is2lakhUrls} pageUrl={pageUrl} />
         <div className="flex flex-row items-start gap-2">
