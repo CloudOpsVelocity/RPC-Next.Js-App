@@ -240,7 +240,7 @@ function CountListing({
   projIdEnc,
 }: CountListProps) {
   const handleAgentOwnerUrl = () => {
-    return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${projOrPropName}`;
+    return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${encodeURIComponent(projOrPropName)}`;
   };
 
   const userTypes = {
@@ -255,7 +255,7 @@ function CountListing({
   return (
     value > 0 && (
       <Link
-        href={handleAgentOwnerUrl()}
+        href={handleAgentOwnerUrl()} 
         aria-label={`${type} Listing : ${value}`}
         title={`${type} Listing : ${value}`}
         className={`${Styles.listingTypeButton} ${

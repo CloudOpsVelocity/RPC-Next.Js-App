@@ -238,7 +238,7 @@ export const RightSideBlock: React.FC<SearchCardTopSectionRProps> = ({
 
   const onAddingShortList = () => {
     if (session) {
-      setStateData((prev) => !prev);
+      setStateData((prev) => !prev); 
       toggleShortlist({
         id: type === "proj" ? projIdEnc : propIdEnc,
         status: stateData ? "N" : "Y",
