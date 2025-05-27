@@ -58,7 +58,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
           projIdEnc: item.id,
           type: 2,
           isactive: item.status,
-          source: item.source || "proj",
+          source: item.source !== undefined ? item.source : "proj",
         })
       ),
     toggleCompare: (item: Item) =>
@@ -67,7 +67,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
           projIdEnc: item.id,
           isactive: item.status,
           type: 3,
-          source: item.source || "proj",
+          source: item.source !== undefined ? item.source : "proj",
         })
       ),
     pushToRequestCallbacks,
