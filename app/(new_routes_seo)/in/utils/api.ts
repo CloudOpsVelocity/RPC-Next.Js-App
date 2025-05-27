@@ -79,9 +79,6 @@ export const getSearchData = async (filters?: string): Promise<any> => {
     }
 
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
-    console.log(url);
-    // console.log(url);
-
     const session = await getServerSession(options);
     const res = await fetch(url, {
       cache: "no-store", // disables caching for fresh data
