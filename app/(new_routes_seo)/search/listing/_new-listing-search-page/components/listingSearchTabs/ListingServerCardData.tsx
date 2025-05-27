@@ -334,9 +334,7 @@ export default function ListingServerCardData({
         }));
         break;
       default:
-        {
           router.push(selectedItem.pageUrl);
-        }
         break;
     }
   };
