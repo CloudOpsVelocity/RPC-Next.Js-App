@@ -1,33 +1,45 @@
-import React from 'react';
+import React from "react";
 import Styles from "@/app/styles/seach/searchCrad.module.css";
-import { ImageBlock, RightSideBlock } from './SearchCradTopSection';
-import SearchCradBottomSection from './SearchCradBottomSection';
-import { sanitizeTopLeftSectionData, 
+import { ImageBlock, RightSideBlock } from "./SearchCradTopSection";
+import SearchCradBottomSection from "./SearchCradBottomSection";
+import {
+  sanitizeTopLeftSectionData,
   // sanitizeTopRightSectionData, sanitizeApprovedNamesSectionData,
-} from './searchData';
-import { createProjectLinkUrl } from '@/app/utils/linkRouters/ProjectLink';
-import { generateListingLinkUrl } from '@/app/utils/linkRouters/ListingLink';
+} from "./searchData";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 
 type Props = {
-  data?:any; 
-  refetch?:any; 
+  data?: any;
+  refetch?: any;
   index: string;
-  mutate?:any;
+  mutate?: any;
   register: (id: string, fn: () => void) => void;
-}
+};
 
 function SearchCard({
-  data, 
+  data,
   index,
-  refetch, 
+  refetch,
   // mutate
   register,
 }: Props) {
-  const { 
-      propIdEnc, projIdEnc, propTypeName, propName, projName, bhkName, 
-      category, localityName, type, city, locality, cityName, phaseName
+  const {
+    propIdEnc,
+    projIdEnc,
+    propTypeName,
+    propName,
+    projName,
+    bhkName,
+    category,
+    localityName,
+    type,
+    city,
+    locality,
+    cityName,
+    phaseName,
   } = data;
-    
+
   const topSectionLeftData = sanitizeTopLeftSectionData(data);
   // const topSectionRightData = sanitizeTopRightSectionData(data);
 
@@ -53,15 +65,31 @@ function SearchCard({
             : "" + " " + propTypeName,
         });
 
-  const projOrPropName = type === "proj" ? projName : `${bhkName ? bhkName : ""} ${propTypeName ? propTypeName : ""} for ${category ? category : ""} in ${localityName ? localityName : ""}`;
+  const projOrPropName =
+    type === "proj"
+      ? projName
+      : `${bhkName ? bhkName : ""} ${propTypeName ? propTypeName : ""} for ${
+          category ? category : ""
+        } in ${localityName ? localityName : ""}`;
 
   return (
-    <div className={Styles.searchCradMainCon} data-id={`searchCard_${index.toString()}`} data-type="card">
+    <div
+      className={Styles.searchCradMainCon}
+      data-id={`searchCard_${index.toString()}`}
+      data-type="card"
+    >
       {/* Top sectiom */}
       <div className={Styles.searchCradTopSection}>
-        <ImageBlock data={{ ...topSectionLeftData, pageUrl: url, projOrPropName: projOrPropName }} index={index.toString()} />
-        <RightSideBlock 
-          // data={topSectionRightData} 
+        <ImageBlock
+          data={{
+            ...topSectionLeftData,
+            pageUrl: url,
+            projOrPropName: projOrPropName,
+          }}
+          index={index.toString()}
+        />
+        <RightSideBlock
+          // data={topSectionRightData}
           data={{ ...data, pageUrl: url, projOrPropName: projOrPropName }}
           refetch={refetch}
           register={register}
@@ -70,9 +98,12 @@ function SearchCard({
       </div>
 
       {/* Bottom section */}
-      <SearchCradBottomSection data={{...data, pageUrl: url, projOrPropName: projOrPropName }} index={index.toString()}  />
+      <SearchCradBottomSection
+        data={{ ...data, pageUrl: url, projOrPropName: projOrPropName }}
+        index={index.toString()}
+      />
     </div>
-  )
+  );
 }
 
-export default SearchCard; 
+export default SearchCard;

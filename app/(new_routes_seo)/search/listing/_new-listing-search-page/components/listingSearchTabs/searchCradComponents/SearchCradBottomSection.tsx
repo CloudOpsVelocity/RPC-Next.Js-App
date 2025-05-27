@@ -60,13 +60,17 @@ export default function SearchCradBottomSection({
     { title: finalProjName, url: textSlice(finalProjName) },
     { title: category ? `for ${category}` : "", url: textSlice(category) },
     { title: localityName ?? "", url: textSlice(localityName) },
-    {
-      title: projName ?? propName,
-      url:
-        type !== "proj"
-          ? textSlice(projName ?? propName)
-          : textSlice(projIdEnc),
-    },
+    ...(projName || propName
+      ? [
+          {
+            title: projName ?? propName,
+            url:
+              type !== "proj"
+                ? textSlice(projName ?? propName)
+                : textSlice(projIdEnc),
+          },
+        ]
+      : []),
     { title: locality ?? "", url: textSlice(locality) },
   ];
 
@@ -240,7 +244,9 @@ function CountListing({
   projIdEnc,
 }: CountListProps) {
   const handleAgentOwnerUrl = () => {
-    return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${encodeURIComponent(projOrPropName)}`;
+    return `/search/listing?sf=projIdEnc=${projIdEnc}-listedBy=${type}-projName=${encodeURIComponent(
+      projOrPropName
+    )}`;
   };
 
   const userTypes = {
@@ -249,13 +255,13 @@ function CountListing({
     O: "Owner",
   };
 
-  const pathname = usePathname();  
+  const pathname = usePathname();
   const isSameRoute = pathname === "/search/listing";
 
   return (
     value > 0 && (
       <Link
-        href={handleAgentOwnerUrl()} 
+        href={handleAgentOwnerUrl()}
         aria-label={`${type} Listing : ${value}`}
         title={`${type} Listing : ${value}`}
         className={`${Styles.listingTypeButton} ${
@@ -266,12 +272,12 @@ function CountListing({
           value > 0 ? Styles.ifValueMoreThanZero : Styles.ifValueLessThanZero
         }`}
         prefetch={false}
-        onClick={(e)=>{
-          if(isSameRoute){
+        onClick={(e) => {
+          if (isSameRoute) {
             e.preventDefault();
           }
         }}
-        {...(isSameRoute ? { 'data-action': `listingType_${type[0]}` } : {})}
+        {...(isSameRoute ? { "data-action": `listingType_${type[0]}` } : {})}
       >
         {`${userTypes[type]} Listing : ${value}`}
       </Link>
