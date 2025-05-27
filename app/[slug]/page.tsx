@@ -38,7 +38,7 @@ export default async function Page({ params: { slug }, searchParams }: Props) {
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
 
-    serverData = data.results;
+    serverData = data?.results;
     frontendFilters = {
       ...parseProjectSearchQueryParams(searchParams.sf),
       currentPage: 1,

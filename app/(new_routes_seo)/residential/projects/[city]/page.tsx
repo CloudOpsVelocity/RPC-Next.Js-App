@@ -42,13 +42,13 @@ export default async function Page({
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getListingData(apiFilters ?? "");
-    serverData = data.results;
+    serverData = data?.results;
   } else {
     const filterValues = extractProjectParamsValues(value);
     const data = await await getSearchData(
       filterValues.PG ? `page=${filterValues.PG}` : "page=0"
     );
-    serverData = data.results;
+    serverData = data?.results;
     frontendFilters = {
       cg: filterValues.CG,
       listedBy: null,

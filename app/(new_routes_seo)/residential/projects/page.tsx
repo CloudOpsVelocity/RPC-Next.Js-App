@@ -31,10 +31,10 @@ export default async function Page({
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getListingData(apiFilters ?? "");
-    serverData = data.results;
+    serverData = data?.results;
   } else {
     const data = await getSearchData();
-    serverData = await data.results;
+    serverData = await data?.results;
     frontendFilters = {
       listedBy: null,
       currentPage: 0,

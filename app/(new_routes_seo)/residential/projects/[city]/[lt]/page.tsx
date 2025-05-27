@@ -42,14 +42,14 @@ export default async function Page({
     const data = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getListingData(apiFilters ?? "");
-    serverData = data.results;
+    serverData = data?.results;
   } else {
     const data = await getSearchData(
       filterValues.PG
         ? `&page=${filterValues.PG}`
         : `&localities=${filterValues.LT}`
     );
-    serverData = await data.results;
+    serverData = await data?.results;
     frontendFilters = {
       localities: [`${lt}+${filterValues.LT}`],
       cg: filterValues.CG,
