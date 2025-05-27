@@ -521,11 +521,12 @@ function CityTrendSection({ cityName }: Props) {
     fetchData();
   }, [cityId, filters.cg, filters.propType]);
 
-  const filteredLocalities = AllLocalities?.data?.filter(
-    (city: any) =>
-      inputSearch === "" ||
-      city.localityName?.toLowerCase().includes(inputSearch)
-  );
+  const filteredLocalities = 
+    (AllLocalities && AllLocalities.data && AllLocalities.data.length > 0) ?
+       AllLocalities?.data?.filter((city: any) =>
+          inputSearch === "" ||
+          city.localityName?.toLowerCase().includes(inputSearch)
+      ) : [];
 
   if (AllLocalities.isLoading)
     return (

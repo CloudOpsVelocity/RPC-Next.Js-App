@@ -164,9 +164,7 @@ export default function ListingServerCardData({
     } else {
       openLogin(() => {
         brochureUrl && router &&
-          router.push(
-            `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`
-          );
+          router.push(`/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`);
       });
     }
   };

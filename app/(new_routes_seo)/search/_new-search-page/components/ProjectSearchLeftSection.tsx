@@ -248,6 +248,7 @@ function LeftSection({
         <EmptyState />
       )}
 
+      {/* {typeof window === "undefined" && */}
       <div
         className={typeof window !== "undefined" ? "hidden" : "space"}
         aria-hidden={typeof window !== "undefined" ? "true" : undefined}
@@ -260,6 +261,7 @@ function LeftSection({
           totalCount={frontendFilters.totalCount ?? 0}
         />
       </div>
+    
 
       <LoginPopup />
       <RequestCallBackModal />

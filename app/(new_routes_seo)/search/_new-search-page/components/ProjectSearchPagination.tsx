@@ -94,6 +94,7 @@ export default function ProjectSearchPagination({
  
     return `/search/page-${page}?${fullQuery}`;
   };
+  console.log("p-5")
 
   return (
     <>
