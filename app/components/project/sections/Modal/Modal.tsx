@@ -103,8 +103,8 @@ export default function PartialUnitModal({ data }: any) {
     if (touchEndX.current - touchStartX.current > threshold) {
       console.log("Swiped Left to Right");
       document.body.style.overflow = "unset";
-      window.history.back();
-   /*    handleChange(false); */
+    /*   window.history.back(); */
+    handleReset()
     }
   };
 
