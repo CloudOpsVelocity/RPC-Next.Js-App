@@ -159,11 +159,11 @@ export default function ListingServerCardData({
   const handleDownload = (data: any) => {
     const { brochureUrl } = data;
     if (session) {
-      brochureUrl &&
+      brochureUrl && router &&
         router.push(`/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`);
     } else {
       openLogin(() => {
-        brochureUrl &&
+        brochureUrl && router &&
           router.push(
             `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`
           );
@@ -334,7 +334,7 @@ export default function ListingServerCardData({
         }));
         break;
       default:
-          router.push(selectedItem.pageUrl);
+          if(selectedItem.pageUrl) router.push(selectedItem.pageUrl);
         break;
     }
   };
