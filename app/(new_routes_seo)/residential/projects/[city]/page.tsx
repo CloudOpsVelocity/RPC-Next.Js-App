@@ -15,6 +15,8 @@ import {
   getProjSearchData,
   getSearchData as getListingData,
 } from "@/app/(new_routes_seo)/in/utils/api";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/options";
 
 type Props = {
   params: { city: string; lt: string };
@@ -110,8 +112,12 @@ const getSearchData = async (filters?: string) => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?city=9&cg=S`;
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
+    const session = await getServerSession(options);
     const res = await fetch(url, {
-      cache: "no-store",
+      cache: "no-store", // disables caching for fresh data
+      headers: {
+        Authorization: session?.user?.token || "", // fallback to empty string if no token
+      },
     });
     if (!res.ok) {
       console.log(res.statusText);

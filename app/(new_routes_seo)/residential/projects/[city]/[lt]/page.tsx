@@ -16,6 +16,8 @@ import {
   getSearchData as getListingData,
 } from "@/app/(new_routes_seo)/in/utils/api";
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/options";
 
 type Props = {
   params: { city: string; lt: string; slug: string };
@@ -121,8 +123,12 @@ const getSearchData = async (apiFilterQueryParams: string) => {
       baseUrl += "&page=0";
     }
     const url = `${baseUrl}${apiFilterQueryParams}`;
+    const session = await getServerSession(options);
     const res = await fetch(url, {
-      cache: "no-store",
+      cache: "no-store", // disables caching for fresh data
+      headers: {
+        Authorization: session?.user?.token || "", // fallback to empty string if no token
+      },
     });
     if (!res.ok) {
       logger.error("data not fetched successfuly" + res.statusText);
