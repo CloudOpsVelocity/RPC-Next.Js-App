@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-boolean-value */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
@@ -12,7 +12,7 @@ import {
   // FloorPlanNotAvail,
   ImgNotAvail,
 } from "@/app/data/project";
-import { propertyDetailsSvgs, ShearIcon } from "@/app/images/commonSvgs";
+import { propertyDetailsSvgs, ShearIcon, newIcons } from "@/app/images/commonSvgs";
 import { useQuery } from "react-query";
 import ZoomInOut from "../../actions/ZoomInOut";
 import useDownload from "@/app/hooks/property/useDownload";
@@ -30,6 +30,7 @@ import { propertyDetailsTypes } from "@/app/data/projectDetails";
 // import ModalBox from "@/app/test/newui/components/Card/Top/Right/ModalBox";
 import { preventBackButton } from "@/app/components/molecules/popups/req";
 import { galleryStateAtom } from "@/app/store/project/gallery";
+import clsx from "clsx";
 // import { useMediaQuery } from "@mantine/hooks";
 
 const Modal = ({
@@ -82,6 +83,29 @@ export default function PartialUnitModal({ data }: any) {
   const handleReset = () => {
     setActive(0);
     reset();
+  };
+
+   // swipping
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e:any) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e:any) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    const threshold = 50;
+    if (touchEndX.current - touchStartX.current > threshold) {
+      console.log("Swiped Left to Right");
+      document.body.style.overflow = "unset";
+      window.history.back();
+   /*    handleChange(false); */
+    }
   };
 
   const opened = isData.main === 0 ? true : isData.main;
@@ -199,7 +223,7 @@ export default function PartialUnitModal({ data }: any) {
   }
 
 
-console.log( isData, selectedOne)
+/* console.log( isData, selectedOne) */
  
   const onSelect = () => {
     dispatch({
@@ -215,11 +239,16 @@ console.log( isData, selectedOne)
   };
   
 
+
   return (
     <Modal isOpen={opened} onClose={handleReset}>
-      <div className="flex flex-col h-full ">
+      <div     onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd} className="flex flex-col h-full ">
         {/* Header */}
-        <div className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
+        <div 
+        
+       
+        className="flex items-center justify-between p-2 sm:p-4 border-b bg-white">
           <h3 className="text-lg sm:text-xl font-semibold text-[#0073C6]">
             {selectedOne
               ? `${selectedOne.unitType ?? ""} ${
@@ -347,7 +376,16 @@ console.log( isData, selectedOne)
                   />
                 </div>
               </TransformComponent>
-              <ZoomInOut   className="bottom-4 right-4" />
+          {/*     <ZoomInOut   className="bottom-4 right-4" /> */}
+          <div 
+            onClick={()=>onSelect()}
+          className={
+
+                  " cursor-pointer  flex justify-center items-center gap-4 absolute bottom-5 right-14"
+                }>
+                   {newIcons.get("resetIcon")}
+          </div>
+             
             </TransformWrapper>
           </div>
 

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { MdClose } from "react-icons/md";
 
 type Props = {
@@ -80,12 +80,36 @@ function ModalBox({
     }
   }, [isOpen]);
 
+ // swipping
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e:any) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e:any) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    const threshold = 50;
+    if (touchEndX.current - touchStartX.current > threshold) {
+      console.log("Swiped Left to Right");
+      document.body.style.overflow = "unset";
+      window.history.back();
+      handleChange(false);
+    }
+  };
   return (
     <div
       className="fixed w-full min-h-[calc(100vh-70px)] flex justify-center items-center overflow-hidden left-0 top-[66px] bg-black/30 !z-[1000]"
       onClick={(e) => onMainConClick(e)}
     >
       <div
+         onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         id="modalPopupInnerCon"
         className={`relative bg-white flex flex-col overflow-y-auto shrink-0 z-[3] overflow-x-hidden max-h-[80%] h-full w-[94%] p-[2%] pt-[32px] rounded-[4px] justify-center items-center ${
           containerClassStyle ? containerClassStyle : ""
