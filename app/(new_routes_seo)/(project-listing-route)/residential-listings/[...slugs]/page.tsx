@@ -33,6 +33,7 @@ type Props = {
 };
 
 export default async function Page({ params, searchParams }: Props) {
+  console.log(params.slugs);
   const [cg, city, lt, project, phase, bhk_unit_type, listing] = params.slugs;
 
   const pathname = [
@@ -48,7 +49,9 @@ export default async function Page({ params, searchParams }: Props) {
     .filter(Boolean)
     .join("/");
 
-  let isProjectListing = listing ? true : bhk_unit_type?.includes("listing");
+  let isProjectListing = listing
+    ? true
+    : bhk_unit_type?.includes("listing") || phase.includes("listing");
 
   let serverData = null;
   let filtersValues: any = {};
@@ -114,7 +117,7 @@ export default async function Page({ params, searchParams }: Props) {
       } = await getListingDetails(
         (listing
           ? listing.split("-")[1]
-          : (bhk_unit_type.split("-").at(-1) as string)) ?? "",
+          : ((bhk_unit_type || phase)?.split("-").at(-1) as string)) ?? "",
         pathname
       );
 
@@ -160,7 +163,8 @@ export default async function Page({ params, searchParams }: Props) {
         lt,
         project,
         phase,
-        bhk_unit_type,
+        ...(bhk_unit_type && { bhk_unit_type }),
+
         ...(listing && { slug: listing }),
       }}
       {...serverData}
