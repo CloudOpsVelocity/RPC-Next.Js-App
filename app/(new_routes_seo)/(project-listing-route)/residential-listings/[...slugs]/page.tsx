@@ -51,7 +51,7 @@ export default async function Page({ params, searchParams }: Props) {
 
   let isProjectListing = listing
     ? true
-    : bhk_unit_type?.includes("listing") || phase.includes("listing");
+    : bhk_unit_type?.includes("listing") || phase?.includes("listing");
 
   let serverData = null;
   let filtersValues: any = {};
