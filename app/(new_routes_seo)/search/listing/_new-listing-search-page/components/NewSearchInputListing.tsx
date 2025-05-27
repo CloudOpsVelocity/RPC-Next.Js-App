@@ -91,6 +91,7 @@ export default function NewSearchinputListing<T extends Record<string, any>>({
       setFocusedIndex(-1);
       inputRef.current?.focus();
     } else {
+      document.body.style.overflow = "unset";
       router.push(item.value);
     }
   };

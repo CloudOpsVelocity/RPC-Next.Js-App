@@ -53,9 +53,7 @@ function SearchCard({
             : "" + " " + propTypeName,
         });
 
-  const projOrPropName = type === "proj" ? projName : `${bhkName} ${propTypeName} for ${category} in ${localityName}`;
-
-  // console.log(data);
+  const projOrPropName = type === "proj" ? projName : `${bhkName ? bhkName : ""} ${propTypeName ? propTypeName : ""} for ${category ? category : ""} in ${localityName ? localityName : ""}`;
 
   return (
     <div className={Styles.searchCradMainCon} data-id={`searchCard_${index.toString()}`} data-type="card">

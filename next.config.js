@@ -90,9 +90,9 @@ const nextConfig = {
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
-  compiler: {
-    removeConsole: true,
-  },
+  // compiler: {
+  //   removeConsole: true,
+  // },
 };
 
 // module.exports = withBundleAnalyzer(withMDX(nextConfig));

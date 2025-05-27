@@ -12,7 +12,7 @@ import {
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { projSearchStore } from "../../../store/newListingStore";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useProjSearchAppliedFilters from "../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../hooks/useProjSearchMatcher";
 
@@ -31,6 +31,7 @@ import ShowAllFiltersButton from "./showAllFiltersNewListing";
 import PageTitle from "../../../components/filters/PageTitle";
 import ListingSearchTabs from "./ListingSearchTabs";
 import ListingSelectedFilters from "./ListingSelectedFilters";
+
 
 const ListingHeaderFilters = ({
   isListing,
@@ -53,6 +54,7 @@ const ListingHeaderFilters = ({
   const searchRef = useRef<HTMLDivElement>(null);
   const { handleApplyFilters, handleClearFilters } = useProjSearchAppliedFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const router = useRouter();
 
   const {
     data: searchData,
@@ -150,7 +152,7 @@ const ListingHeaderFilters = ({
         break;
       case "projects":
         if (data.type === "Project") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
+          typeof window !== "undefined" ? router.push(data.stringUrl) : "";
         } else {
           if (isListingSearch) {
             dispatch({
@@ -163,7 +165,7 @@ const ListingHeaderFilters = ({
             });
           } else {
             typeof window !== "undefined"
-              ? window.open(
+              ? router.push(
                   `/search/listing?sf=projIdEnc=${
                     data.stringId.split("_")[0]
                   }-phaseId=${data.stringId.split("_")[1]}-projName=${
@@ -225,7 +227,7 @@ const ListingHeaderFilters = ({
                     .trim()}`
                 : ""
             }`;
-            typeof window !== "undefined" ? window.open(url) : "";
+            typeof window !== "undefined" ? router.push(url) : "";
           }
         }
         break;
@@ -238,20 +240,20 @@ const ListingHeaderFilters = ({
             data.type
           )}-projName=${projectName}`;
           typeof window !== "undefined"
-            ? window.open("/search/listing?sf=" + url)
+            ? router.push("/search/listing?sf=" + url)
             : "";
         }
         break;
       case "builders":
         if (data.type === "BuilderDetail") {
-          typeof window !== "undefined" ? window.open(data.stringUrl) : "";
+          typeof window !== "undefined" ? router.push(data.stringUrl) : "";
         } else {
           const url =
             encodeURIComponent(data.name) +
             "%2B" +
             encodeURIComponent(data.stringId.split("_")[1]);
           typeof window !== "undefined"
-            ? window.open(
+            ? router.push(
                 `/search?sf=builderIds=${url}${
                   data.type !== "BuilderProject"
                     ? `-listedBy=${AgentOwnerBuilderMap.get(data.type)}`
