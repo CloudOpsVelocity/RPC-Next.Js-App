@@ -87,7 +87,7 @@ export default function ResidentialCardSection({
       items.forEach((item) => observer.unobserve(item));
     };
   }, [listItemsCount, properties, fetchMoreItems]);
-
+ 
   const LoadingSpinner = memo(function LoadingSpinner() {
     return (
       <div className="flex items-center gap-2">

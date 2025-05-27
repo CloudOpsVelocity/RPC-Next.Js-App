@@ -91,7 +91,7 @@ export default function ProjectSearchPagination({
     /*  window.scrollTo({ top: 25, behavior: "smooth" }) */
 
     const fullQuery = searchParams.toString();
-
+ 
     return `/search/page-${page}?${fullQuery}`;
   };
 
