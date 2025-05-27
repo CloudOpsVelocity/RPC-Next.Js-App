@@ -149,13 +149,40 @@ export default function GalleryModalContent({}: Props) {
       modalRef.current?.removeEventListener("touchmove", handleTouchMove);
     };
   }, [isMobile]);
+
+
+   // swipping
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e:any) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e:any) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    const threshold = 50;
+    if (touchEndX.current - touchStartX.current > threshold) {
+      console.log("Swiped Left to Right");
+      document.body.style.overflow = "unset";
+      window.history.back();
+      //handleChange(false);
+    }
+  };
   return (
     <div className="fixed inset-0 z-[100] bg-black" ref={modalRef}>
       {/* Header */}
       <div className="absolute top-0 left-0 z-[100] right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
         <h2 className="text-xl font-bold">{title}</h2>
 
-        <div className="flex items-center space-x-2">
+        <div 
+           onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="flex items-center space-x-2">
           <button
             onClick={handleShare}
             className="p-2 hover:bg-gray-800 rounded-full transition-colors"
