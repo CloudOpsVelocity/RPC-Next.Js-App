@@ -1,4 +1,3 @@
-"use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -74,6 +73,8 @@ export default function ListingSearchPagination({
     const pathWithPage = page === 1 ? basePath : `${basePath}/page-${page}`;
     return pathWithPage;
   };
+
+  console.log("p-7")
  
   return (
     <section className="py-8 sm:py-14 container mx-auto px-4">

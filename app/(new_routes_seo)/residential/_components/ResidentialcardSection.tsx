@@ -99,6 +99,7 @@ export default function ResidentialCardSection({
   const type = "proj";
 
   /*Tested jios test */
+  console.log("p-4")
 
   return (
     <>
