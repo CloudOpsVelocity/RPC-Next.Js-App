@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import React, { useState, useRef, useEffect } from "react";
 import { projSearchStore } from "../../../store/routeListingSore";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
+import { useRouter } from "next/navigation";
 
 interface DynamicSearchProps<T> {
   data: T[];
@@ -41,6 +42,7 @@ export default function DynamicSearch<T extends Record<string, any>>({
   const [state, dispatch] = useAtom(projSearchStore);
   const [error, setError] = useState("");
   const { handleApplyFilters } = useProjSearchAppliedFilters();
+  const router = useRouter();
   const filteredItems = loading
     ? []
     : data.filter(
@@ -89,7 +91,8 @@ export default function DynamicSearch<T extends Record<string, any>>({
       setFocusedIndex(-1);
       inputRef.current?.focus();
     } else {
-      window.open(item.value, "_blank");
+      document.body.style.overflow = "unset";
+      router.push(item.value);
     }
   };
 

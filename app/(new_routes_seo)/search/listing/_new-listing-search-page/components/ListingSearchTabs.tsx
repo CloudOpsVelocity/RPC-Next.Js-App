@@ -217,16 +217,16 @@ const ListingSearchTabs = ({
   );
 
   const tabsSelected = useCallback(() => {
-    if (state.listedBy === undefined) {
-      return frontendFilters.listedBy;
-    }
-    return state.listedBy === frontendFilters.listedBy
-      ? frontendFilters.listedBy
-      : state.listedBy;
-  }, [state, frontendFilters]);
+      const value = state.listedBy === "All" ? null : state.listedBy;
+      if (value === undefined) {
+        return frontendFilters?.listedBy;
+      }
+      return value === frontendFilters.listedBy
+        ? frontendFilters?.listedBy 
+        : value;
+    }, [state, frontendFilters]);
 
   console.log("3333");
-  console.log(tabsSelected());
 
   // useEffect(()=>{
   //     console.log(state.listedBy);

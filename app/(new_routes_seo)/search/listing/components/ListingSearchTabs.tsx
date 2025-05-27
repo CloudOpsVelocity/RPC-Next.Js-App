@@ -220,15 +220,16 @@ const ListingSearchTabs = ({
   );
 
   const tabsSelected = useCallback(() => {
-    if (state.listedBy === undefined) {
+    const value = state.listedBy === "All" ? null : state.listedBy;
+    if (value === undefined) {
       return frontendFilters?.listedBy;
     }
-    return state.listedBy === frontendFilters.listedBy
-      ? frontendFilters?.listedBy
-      : state.listedBy;
+    return value === frontendFilters.listedBy
+      ? frontendFilters?.listedBy 
+      : value;
   }, [state, frontendFilters]);
 
-  console.log("4444");
+  console.log(4444);
 
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap">

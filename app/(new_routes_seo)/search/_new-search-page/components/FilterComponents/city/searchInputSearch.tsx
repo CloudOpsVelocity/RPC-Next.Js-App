@@ -91,6 +91,7 @@ DynamicSearchProps<T>) {
       setFocusedIndex(-1);
       inputRef.current?.focus();
     } else {
+      document.body.style.overflow = "unset";
       router.push(item.value);
     }
   };
