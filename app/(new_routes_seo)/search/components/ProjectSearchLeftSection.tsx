@@ -269,19 +269,19 @@ function LeftSection({
       ) : (
         <EmptyState />
       )}
-      {true ? (
-        <div
-          className={clsx({ invisible: isClient })}
-          aria-hidden={isClient ? "true" : undefined}
-        >
+
+      <section 
+        className={isClient ? "space" : "hidden"}
+        aria-hidden={!isClient ? "true" : undefined}
+      >
           <ListingSearchPagination
             currentPage={
               frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
             }
             totalCount={frontendFilters.totalCount ?? 0}
           />
-        </div>
-      ) : null}
+      </section>
+
       <LoginPopup />
       <RequestCallBackModal />
       <FloatingArrowIcon />

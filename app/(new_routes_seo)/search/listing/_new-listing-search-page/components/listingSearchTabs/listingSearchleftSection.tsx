@@ -190,6 +190,12 @@ function LeftSection({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true); 
+  }, []);
+
   return (
     <div
       className={`flex flex-col w-full md:max-w-[50%] relative overflow-auto`}
@@ -239,16 +245,16 @@ function LeftSection({
 
       {hasNextPage && shouldFetchMore && (
         <div
-          ref={loadMoreRef}
+          ref={loadMoreRef} 
           className="w-full py-8 flex justify-center items-center text-gray-600"
         >
           <LoadingSpinner />
         </div>
       )}
 
-      <div
-        className={typeof window !== "undefined" ? "hidden" : ""}
-        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+      <section 
+        className={isClient ? "space" : "hidden"}
+        aria-hidden={!isClient ? "true" : undefined}
       >
         <ListingSearchPagination
           searchQueryParmeter
@@ -257,7 +263,7 @@ function LeftSection({
           }
           totalCount={frontendFilters.totalCount ?? 0}
         />
-      </div>
+      </section>
 
       <LoginPopup />
       <RequestCallBackModal />

@@ -196,8 +196,6 @@ export default function ServerDataSection({
       handleApplyFilters();
   }; 
 
-  console.log("tab-1")
-
   const handleClick = (e: any) => {
       const cardEl = e.target.closest('[data-type="card"]');
       if (!cardEl) return;

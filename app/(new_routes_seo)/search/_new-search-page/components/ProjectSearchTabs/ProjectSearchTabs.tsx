@@ -184,7 +184,6 @@ const ProjectSearchTabs = ({
       ? frontendFilters.listedBy
       : state.listedBy;
   }, [state, frontendFilters]);
-  console.log("1111");
   return (
     <div className="bg-slate-50 shadow-md w-full md:w-[60%] xl:w-[50%] flex-nowrap ">
       <div className=" w-full pb-[6px] pt-[10px] sm:px-[10px]">
