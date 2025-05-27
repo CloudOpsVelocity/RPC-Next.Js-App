@@ -511,7 +511,7 @@ function CityTrendSection({ cityName }: Props) {
           filters.cg,
           `cg=${filters.cg}&propType=${listingProps[propertyType]}`
         );
-        setAllLocalities({ data: data, isLoading: false });
+        setAllLocalities({ data: data.results, isLoading: false });
       } catch (error) {
         console.error("Error fetching data:", error);
         setAllLocalities((prev) => ({ ...prev, isLoading: false }));

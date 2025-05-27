@@ -194,6 +194,8 @@ function LeftSection({
     </div>
   );
 
+  console.log(typeof window)
+
   return (
     <div className="flex flex-col w-full md:max-w-[50%] relative overflow-auto">
       {isFetching && isFetchingNextPage === false ? (
@@ -248,8 +250,8 @@ function LeftSection({
         <EmptyState />
       )}
 
-      {/* {typeof window === "undefined" && */}
       <div
+        // style={{ display: typeof window === "undefined" ? "none" : "block" }}
         className={typeof window !== "undefined" ? "hidden" : "space"}
         aria-hidden={typeof window !== "undefined" ? "true" : undefined}
       >
@@ -261,7 +263,6 @@ function LeftSection({
           totalCount={frontendFilters.totalCount ?? 0}
         />
       </div>
-    
 
       <LoginPopup />
       <RequestCallBackModal />
