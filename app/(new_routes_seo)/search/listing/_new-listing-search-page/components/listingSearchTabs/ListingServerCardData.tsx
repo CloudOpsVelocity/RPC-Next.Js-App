@@ -20,7 +20,11 @@ import { useAtom, useSetAtom } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 
-import { diffToProjFromListing, initialState, projSearchStore } from "@/app/(new_routes_seo)/search/store/newListingStore"; // serach/listing
+import {
+  diffToProjFromListing,
+  initialState,
+  projSearchStore,
+} from "@/app/(new_routes_seo)/search/store/newListingStore"; // serach/listing
 import { useRouter } from "next/navigation";
 
 // import { diffToProjFromListing as diffToProjFromListing_p, initialState as initialState_p, projSearchStore as projSearchStore_p } from "@/app/(new_routes_seo)/search/store/newSearchProjectStore"; // /search
@@ -156,14 +160,12 @@ export default function ListingServerCardData({
     const { brochureUrl } = data;
     if (session) {
       brochureUrl &&
-        router.push(
-          `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-        );
+        router.push(`/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`);
     } else {
       openLogin(() => {
         brochureUrl &&
           router.push(
-            `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
+            `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`
           );
       });
     }
@@ -175,58 +177,58 @@ export default function ListingServerCardData({
     cardFnsRef.current[id] = fn;
   };
 
-   const handleTabsChange = (value: string | null) => {
-        typeof window !== "undefined"
-          ? window.scrollTo({ top: 0, behavior: "smooth" })
-          : "";
-        setSelected(null);
-    
-        const updatedFilters =
-          value === null
-            ? {
-                ...state,
-                listedBy: null,
-                sortByfield: null,
-                sortType: null,
-                facings: null,
-                ...(state.propStatus && {
-                  projStatus: state.propStatus === "R" ? 107 : 106,
-                  propStatus: null,
-                }),
-              }
-            : {
-                ...state,
-                ...Object.fromEntries(
-                  (
-                    diffToProjFromListing[
-                      value as keyof typeof diffToProjFromListing
-                    ] ?? []
-                  ).map((key: any) => [
-                    key,
-                    initialState[key as keyof SearchFilter] ?? null,
-                  ])
-                ),
-                listedBy: value,
-                ...(state.projStatus && {
-                  propStatus:
-                    state.projStatus !== 108
-                      ? state.projStatus == 106
-                        ? "U"
-                        : "R"
-                      : null,
-                  projStatus: null,
-                }),
-              };
-    
-        dispath({
-          type: "update",
-          payload: updatedFilters,
-        });
-    
-        handleApplyFilters();
-  }; 
+  const handleTabsChange = (value: string | null) => {
+    typeof window !== "undefined"
+      ? window.scrollTo({ top: 0, behavior: "smooth" })
+      : "";
+    setSelected(null);
 
-  console.log("tab-3")
+    const updatedFilters =
+      value === null
+        ? {
+            ...state,
+            listedBy: null,
+            sortByfield: null,
+            sortType: null,
+            facings: null,
+            ...(state.propStatus && {
+              projStatus: state.propStatus === "R" ? 107 : 106,
+              propStatus: null,
+            }),
+          }
+        : {
+            ...state,
+            ...Object.fromEntries(
+              (
+                diffToProjFromListing[
+                  value as keyof typeof diffToProjFromListing
+                ] ?? []
+              ).map((key: any) => [
+                key,
+                initialState[key as keyof SearchFilter] ?? null,
+              ])
+            ),
+            listedBy: value,
+            ...(state.projStatus && {
+              propStatus:
+                state.projStatus !== 108
+                  ? state.projStatus == 106
+                    ? "U"
+                    : "R"
+                  : null,
+              projStatus: null,
+            }),
+          };
+
+    dispath({
+      type: "update",
+      payload: updatedFilters,
+    });
+
+    handleApplyFilters();
+  };
+
+  console.log("tab-3");
 
   const handleClick = (e: any) => {
     const cardEl = e.target.closest('[data-type="card"]');
@@ -246,7 +248,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "readmore",
           title: "Read More",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
           content: selectedItem.projectAbout ?? selectedItem.usp,
         }));
         break;
@@ -269,8 +271,8 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "floorplan",
           title: "Floorplan",
-          data: {...selectedItem, type: type},
-          floorplanType:"F"
+          data: { ...selectedItem, type: type },
+          floorplanType: "F",
         }));
         break;
       case "otherCharges":
@@ -279,7 +281,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "otherCharges",
           title: "Other Charges",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
         }));
         break;
       case "brochure":
@@ -292,7 +294,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "nearby",
           title: "Near By Locations",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
         }));
         // onSetNearBy(selectedItem);
         break;
@@ -306,19 +308,19 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "amenities",
           title: "Amenities",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
           // content
         }));
         break;
-      case 'listingType_B':
-          handleTabsChange("B");
-          break;
-      case 'listingType_A':
-          handleTabsChange("A");
-          break; 
-      case 'listingType_O':
-          handleTabsChange("I");
-          break;
+      case "listingType_B":
+        handleTabsChange("B");
+        break;
+      case "listingType_A":
+        handleTabsChange("A");
+        break;
+      case "listingType_O":
+        handleTabsChange("I");
+        break;
       case "bhk":
         const sortedBhks: any = sortUnits(selectedItem.bhkNames);
         document.body.style.overflow = "hidden";
@@ -328,11 +330,14 @@ export default function ListingServerCardData({
           type: "bhk",
           title: "Unit Types",
           content: sortedBhks,
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
         }));
         break;
       default:
-        router.push(selectedItem.pageUrl);
+        {
+          router.push(selectedItem.pageUrl);
+        }
+        break;
     }
   };
 
