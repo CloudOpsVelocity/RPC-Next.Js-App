@@ -13,7 +13,7 @@ import {
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { getAllAuthorityNames } from "@/app/utils/api/project";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
@@ -225,6 +225,7 @@ function LeftSection({
               )}
             </>
           )}
+
           {/* Image Use above*/}
           <ServerDataSection
             data={dataToUse}

@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
 import LeftSection from "../components/ProjectSearchLeftSection";
+import { useRouter } from "next/navigation";
 const RightSection = dynamic(
   () => import("../components/ProjectSearchRightSection"),
   { ssr: false }
@@ -66,6 +67,7 @@ export default function Mainsection({
           />
         </>
       )} */}
+
       <LeftSection
         serverData={serverData}
         frontendFilters={frontendFilters}
@@ -85,30 +87,28 @@ export default function Mainsection({
       ) : (
         isMobile !== undefined &&
         isMobile === false && (
-            <div
-              className="hidden md:flex relative w-full md:w-[50%] max-w-full sm:fixed right-0 z-0 border-1 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full w-full"
+          <div className="hidden md:flex relative w-full md:w-[50%] max-w-full sm:fixed right-0 z-0 border-1 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full w-full">
+            <Image
+              priority
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
+              alt="Search page map Image"
+              fill
+              quality={80}
+              // className="object-contain"
+              className="h-full w-full"
+            />
+
+            <button
+              aria-label="Click to View Location Details"
+              title="Click to View Location Details"
+              onClick={() => setIsMapLoaded(true)}
+              className="absolute z-10 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
             >
-                <Image
-                  priority
-                  src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}
-                  alt="Search page map Image"
-                  fill 
-                  quality={80}
-                  // className="object-contain"
-                  className="h-full w-full"
-                />
-
-                <button
-                  aria-label="Click to View Location Details"
-                  title="Click to View Location Details"
-                  onClick={() => setIsMapLoaded(true)}
-                  className="absolute z-10 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
-                >
-                  <span className="text-lg font-semibold">Click to View Location Details</span>
-                </button>
-              </div>
-
-
+              <span className="text-lg font-semibold">
+                Click to View Location Details
+              </span>
+            </button>
+          </div>
 
           // <div
           //   className={`hidden md:flex relative w-full !max-h-[70vh] sm:fixed right-0 flex justify-center items-center md:w-[50%] scroll-mt-[150px] z-0 border-[2px] border-black-500 border-solid h-[calc(100vh-65vh)] md:h-[calc(100vh-255px)] max-w-full`}

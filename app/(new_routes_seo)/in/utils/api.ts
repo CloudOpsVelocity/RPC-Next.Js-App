@@ -6,6 +6,9 @@
 //   ["P", "propType"], //propTypes
 // ]);
 
+import { options } from "@/app/options";
+import { getServerSession } from "next-auth";
+
 // const FrontEndFilters = new Map<string, string>([
 //   ["B", "unitTypes"],
 //   ["L", "localities"],
@@ -78,8 +81,13 @@ export const getSearchData = async (filters?: string): Promise<any> => {
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
     console.log(url);
     // console.log(url);
+
+    const session = await getServerSession(options);
     const res = await fetch(url, {
-      cache: "no-store",
+      cache: "no-store", // disables caching for fresh data
+      headers: {
+        Authorization: session?.user?.token || "", // fallback to empty string if no token
+      },
     });
 
     if (!res.ok) {
@@ -102,10 +110,14 @@ export const getProjSearchData = async (filters: string): Promise<any> => {
       baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
     }
     const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
-    const res = await fetch(url, {
-      cache: "no-store",
-    });
 
+    const session = await getServerSession(options);
+    const res = await fetch(url, {
+      cache: "no-store", // disables caching for fresh data
+      headers: {
+        Authorization: session?.user?.token || "", // fallback to empty string if no token
+      },
+    });
     if (!res.ok) {
       throw new Error(`Error fetching data: ${res.statusText}`);
     }

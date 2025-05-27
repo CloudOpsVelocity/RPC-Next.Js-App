@@ -10,6 +10,9 @@ import { getProjSearchData, getSearchData } from "../in/utils/api";
 import { parseApiFilterQueryParams } from "./utils/project-search-queryhelpers";
 import { ListingSearchSchema } from "@/app/seo/search/listing-search.schema";
 import { ProjectSeachSchema } from "@/app/seo/search/Project-search-schema";
+import { options } from "@/app/options";
+import { getServerSession } from "next-auth";
+import { useRouter } from "next/navigation";
 
 export default async function Page(params: any) {
   const apiFilters = params.searchParams.sf

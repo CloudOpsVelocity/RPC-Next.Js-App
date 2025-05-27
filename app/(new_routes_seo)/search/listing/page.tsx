@@ -29,8 +29,8 @@ export default async function Page(params: any) {
   const res = isProj
     ? await getProjSearchData(apiFilters ?? "cg=S")
     : await getSearchData(apiFilters ?? "cs=S");
-  const data = res.results;
-  const totalCount = res.totalCount;
+  const data = res?.results;
+  const totalCount = res?.totalCount;
   // const currentPage = res.currentPage;
 
   frontendFilters = {
