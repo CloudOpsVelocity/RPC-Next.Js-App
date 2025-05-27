@@ -88,7 +88,7 @@ export default function PaginationForListings({ totalCount }: Props) {
 
     return `/residential-listings?page=${page + 1}`;
   };
-
+ 
   return (
     <>
       <section className="py-8 sm:py-14 container mx-auto px-4">

@@ -95,7 +95,7 @@ export default function ListingSearchPagination({
     return `/search/listing/page-${page}${fullQuery ? `?${fullQuery}` : ""}`;
   };
 
-  return (
+  return ( 
     <>
       <section className="py-8 sm:py-14 container mx-auto px-4">
         {/*  <noscript> */}

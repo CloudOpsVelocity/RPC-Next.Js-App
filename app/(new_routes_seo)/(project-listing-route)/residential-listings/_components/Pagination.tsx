@@ -42,6 +42,7 @@ export default function PaginationForListings({ totalCount }: Props) {
   // };
 
   // Generate page numbers with ellipses when necessary
+  console.log("p-1")
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxPagesToShow = isMobile ? 5 : 9;
@@ -78,13 +79,13 @@ export default function PaginationForListings({ totalCount }: Props) {
     return pageNumbers;
   };
 
-  // Build the pagination URL for a given page number
+  // Build the pagination URL for a given page number 
   const createPaginationLink = (page: number) => {
     /*   const updatedParams = new URLSearchParams(searchParams.toString())
     updatedParams.set("page", page.toString())
     return `?${updatedParams.toString()}` */
 
-    /*  window.scrollTo({ top: 25, behavior: "smooth" }) */
+    /*  window.scrollTo({ top: 25, behavior: "smooth" }) */ 
 
     return `/residential-listings?page=${page + 1}`;
   };

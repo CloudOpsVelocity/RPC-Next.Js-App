@@ -75,7 +75,7 @@ export default function Pagination({ totalCount }: Props) {
       pageNumbers.push(totalPages - 1);
     }
 
-    return pageNumbers;
+    return pageNumbers; 
   };
 
   // Build the pagination URL for a given page number
@@ -88,6 +88,9 @@ export default function Pagination({ totalCount }: Props) {
 
     return `/residential?page=${page + 1}`;
   };
+
+    console.log("p-3")
+
 
   return (
     <>

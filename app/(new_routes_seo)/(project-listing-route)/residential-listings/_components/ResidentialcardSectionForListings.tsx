@@ -82,7 +82,7 @@ export default function ResidentialCardSectionForListings({
       threshold: 0.1,
     });
 
-    items.forEach((item) => observer.observe(item));
+    items.forEach((item) => observer.observe(item)); 
 
     return () => {
       items.forEach((item) => observer.unobserve(item));
@@ -100,6 +100,8 @@ export default function ResidentialCardSectionForListings({
   const type = "proj";
 
   /*Tested jios test */
+    console.log("p-2")
+
 
   return (
     <>
