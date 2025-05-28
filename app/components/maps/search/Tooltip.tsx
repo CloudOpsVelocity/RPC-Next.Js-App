@@ -38,38 +38,8 @@ type TooltipProjProps = {
 //   }).format(amount);
 // }
 
-// export const onClickRedirect = (data: any) => {
-//   // console.log(data)
-//   let url;
-//   if (data.type == "proj") {
-//     url = createProjectLinkUrl({
-//       city: data.city,
-//       locality: data.locality,
-//       slug: data.projName,
-//       projIdEnc: data.reqId,
-//     });
-//     router.push(url);
-//   } else {
-//     url = generateListingLinkUrl({
-//       city: data.cityName,
-//       locality: data.localityName,
-//       projName: data.projIdEnc ? data.propName : null,
-//       category: data.category === "Sale" ? "for-sale" : "for-rent",
-//       phase: data.phaseName,
-//       propIdEnc: data.reqId,
-//       bhkUnitType: data.bhkName
-//         ? `${data.bhkName + " " + data.propTypeName}`
-//         : "" + " " + data.propTypeName,
-//     });
-
-//     router.push(url);
-//   }
-// };
-
-export default function TooltipProj({ data }: { data: TooltipProjProps }) {
-  const router = useRouter();
-  const { projName, city, locality, phases, postedByName, coverUrl } = data;
-  const onClickRedirect = (data: any) => {
+export const onClickRedirect = (data: any) => {
+  // console.log(data)
   let url;
   if (data.type == "proj") {
     url = createProjectLinkUrl({
@@ -78,7 +48,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
       slug: data.projName,
       projIdEnc: data.reqId,
     });
-    router.push(url);
+    window.open(url);
   } else {
     url = generateListingLinkUrl({
       city: data.cityName,
@@ -92,8 +62,38 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
         : "" + " " + data.propTypeName,
     });
 
-    router.push(url);
+    window.open(url);
   }
+};
+
+export default function TooltipProj({ data }: { data: TooltipProjProps }) {
+  const router = useRouter();
+  const { projName, city, locality, phases, postedByName, coverUrl } = data;
+  const onClickRedirect = (data: any) => {
+    let url;
+    if (data.type == "proj") {
+      url = createProjectLinkUrl({
+        city: data.city,
+        locality: data.locality,
+        slug: data.projName,
+        projIdEnc: data.reqId,
+      });
+      router.push(url);
+    } else {
+      url = generateListingLinkUrl({
+        city: data.cityName,
+        locality: data.localityName,
+        projName: data.projIdEnc ? data.propName : null,
+        category: data.category === "Sale" ? "for-sale" : "for-rent",
+        phase: data.phaseName,
+        propIdEnc: data.reqId,
+        bhkUnitType: data.bhkName
+          ? `${data.bhkName + " " + data.propTypeName}`
+          : "" + " " + data.propTypeName,
+      });
+
+      router.push(url);
+    }
   };
   return (
     <div

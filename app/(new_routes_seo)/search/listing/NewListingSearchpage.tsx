@@ -44,7 +44,12 @@ export default function NewListingSearchpage({
   const isListing = true;
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative">
-      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
+      <link
+        rel="canonical"
+        href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}${
+          preDefinedFilters ? `?sf=${preDefinedFilters}` : ""
+        }`}
+      />
       {serverData &&
         (isProj ? (
           <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />
