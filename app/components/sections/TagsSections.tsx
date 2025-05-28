@@ -105,7 +105,7 @@ export default function TagsSections({ urls }: Props) {
         <Tag
           key={`tags_sections__${index}`}
           {...urlObj}
-          className="mr-[6px] mb-[4px] "
+          className="mr-[6px] mb-[4px] text-wrap whitespace-wrap "
         />
         // </li>
       ))}

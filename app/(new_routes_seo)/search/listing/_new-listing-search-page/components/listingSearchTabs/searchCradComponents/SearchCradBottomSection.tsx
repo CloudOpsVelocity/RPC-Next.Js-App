@@ -103,7 +103,7 @@ export default function SearchCradBottomSection({
     .toLowerCase();
 
   return (
-    <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
+    <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap xl:flex-nowrap">
       <div className="flex gap-[9px]">
         {type === "proj" ? (
           <>

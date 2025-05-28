@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import PFloorPlanModal from "./modals/Floor";
 import PropertyHeading from "./heading";
-import { Main } from "@/app/validations/property";
+import { Main } from "@/app/validations/property"; 
 import { useSetAtom } from "jotai";
 import { listingProps } from "@/app/data/projectDetails";
 import { selectedFloorAtom } from "@/app/store/floor";
@@ -68,7 +68,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
   // const pushHistory = useHistoryBackHandler(onClosePopup);
   return (
     <>
-      <PFloorPlanModal data={data} opened={opened} setOpened={setOpened} />
+      {opened && <PFloorPlanModal data={data} opened={opened} setOpened={setOpened} />}
       <div
         className="w-[95%] md:w-[90%]  mt-[50px] relative scroll-mt-[220px]"
         id="floorPlans"

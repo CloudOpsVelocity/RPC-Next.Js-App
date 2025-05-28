@@ -226,8 +226,6 @@ export default function ListingServerCardData({
     handleApplyFilters();
   };
 
-  console.log("tab-3");
-
   const handleClick = (e: any) => {
     const cardEl = e.target.closest('[data-type="card"]');
     if (!cardEl) return;

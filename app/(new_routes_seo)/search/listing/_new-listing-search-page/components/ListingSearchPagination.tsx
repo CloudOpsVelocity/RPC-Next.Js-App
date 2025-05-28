@@ -1,4 +1,3 @@
-
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useMediaQuery } from "@mantine/hooks";
@@ -77,7 +76,9 @@ export default function ListingSearchPagination({
   console.log("p-7")
  
   return (
-    <section className="py-8 sm:py-14 container mx-auto px-4">
+    <section 
+      className={`py-8 sm:py-14 container mx-auto px-4`}
+    >
       {totalPages > 0 && (
         <div className="mt-10 flex justify-center">
           <nav className="flex items-center gap-1">

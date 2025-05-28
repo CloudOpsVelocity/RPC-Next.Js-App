@@ -2,8 +2,8 @@
 "use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
-import RTK_CONFIG from "@/app/config/rtk";
+import { useInfiniteQuery } from "react-query";
+// import RTK_CONFIG from "@/app/config/rtk";
 import { getSearchData } from "../../utils/project-search-queryhelpers";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
@@ -12,14 +12,15 @@ import {
 } from "../../store/newSearchProjectStore";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import { getAllAuthorityNames } from "@/app/utils/api/project";
-import { usePathname, useRouter } from "next/navigation";
+// import { getAllAuthorityNames } from "@/app/utils/api/project";
+import { usePathname } from "next/navigation";
 import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import ServerDataSection from "./ServerDataSection";
 import ListingSearchPagination from "../../listing/_new-listing-search-page/components/ListingSearchPagination";
+
 // import ProjectSearchPagination from "./ProjectSearchPagination";
 
 type Props = {
@@ -194,7 +195,11 @@ function LeftSection({
     </div>
   );
 
-  console.log(typeof window)
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); 
+  }, []);
 
   return (
     <div className="flex flex-col w-full md:max-w-[50%] relative overflow-auto">
@@ -250,19 +255,18 @@ function LeftSection({
         <EmptyState />
       )}
 
-      <div
-        // style={{ display: typeof window === "undefined" ? "none" : "block" }}
-        className={typeof window !== "undefined" ? "hidden" : "space"}
-        aria-hidden={typeof window !== "undefined" ? "true" : undefined}
+      <section 
+        className={isClient ? "space" : "hidden"}
+        aria-hidden={!isClient ? "true" : undefined}
       >
         <ListingSearchPagination
-          searchQueryParmeter
-          currentPage={
-            frontendFilters.currentPage ? frontendFilters.currentPage : 1
-          }
-          totalCount={frontendFilters.totalCount ?? 0}
+            searchQueryParmeter
+            currentPage={
+              frontendFilters.currentPage ? frontendFilters.currentPage : 1
+            }
+            totalCount={frontendFilters.totalCount ?? 0}
         />
-      </div>
+      </section>
 
       <LoginPopup />
       <RequestCallBackModal />

@@ -117,10 +117,6 @@ function LeftSection({
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
   // this for hiddenin cilent of pagaintaiton
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   // Enhanced infinite scroll logic
   useEffect(() => {
@@ -212,6 +208,12 @@ function LeftSection({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile]);
 
+  const [isClient, setIsClient] = useState(false);
+    
+  useEffect(() => {
+    setIsClient(true); 
+  }, []);
+
   return (
     <div
       className={`flex flex-col w-full md:max-w-[50%] relative overflow-auto`}
@@ -269,19 +271,19 @@ function LeftSection({
         </div>
       )}
 
-      {params.slugs && params.slugs.length < 4 ? (
-        <div
-          className={clsx({ invisible: isClient })}
-          aria-hidden={isClient ? "true" : undefined}
-        >
+      {(params.slugs && params.slugs.length < 4 ) && (
+       <section 
+        className={isClient ? "space" : "hidden"}
+        aria-hidden={!isClient ? "true" : undefined}
+      >
           <ListingSearchPagination
             currentPage={
               frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
             }
             totalCount={frontendFilters.totalCount ?? 0}
           />
-        </div>
-      ) : null}
+        </section>
+      )}
       <LoginPopup />
       <RequestCallBackModal />
 
