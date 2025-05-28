@@ -26,7 +26,7 @@ const ProjectSearchBreadCrumbs: React.FC<BreadcrumbProps> = ({
     return index !== -1 ? str.substring(0, index + word.length) : str;
   }
 
-  let newParams: string[] = is2lakhUrls ? ["Home", "Residentail Listings"] : [];
+  let newParams: string[] = is2lakhUrls ? ["Home", "Residential Listings"] : [];
   if (pageUrl === "/search") {
     newParams = ["Home", "Project Search"];
   } else if (pageUrl === "/search/listing") {

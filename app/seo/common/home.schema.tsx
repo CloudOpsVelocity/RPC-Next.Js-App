@@ -98,7 +98,7 @@ let homeLinksData = [
   },
   {
     url: "https://www.getrightproperty.com/residential-listings",
-    name: "Residentail Listings",
+    name: "Residential Listings",
   },
   {
     url: "https://www.getrightproperty.com/residential",
