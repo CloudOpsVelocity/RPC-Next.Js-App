@@ -1,13 +1,9 @@
-"use client"
-
 import Tag from "../atoms/Tag";
-
 export interface TagData {
   title: string;
   url: string;
   className?: string;
 }
-
 interface Props {
   urls: TagData[];
 }

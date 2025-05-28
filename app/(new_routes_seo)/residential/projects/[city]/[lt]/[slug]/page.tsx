@@ -169,7 +169,7 @@ export default async function page(props: Props) {
   // myhna-maple-in-varthur-for-rent-in-bengaluru-9C-RCG-683963c00f58d097af3134ae674a62b6PJ
   const rentAndSaleTagUrls = [
     ...(data.saleListing != "0" ? [{
-      title: "-Listing for Sale-",
+      title: "Listing for Sale",
       url: 
       `/${
         data.projectName.toLowerCase().replaceAll(" ", "-")
@@ -177,11 +177,11 @@ export default async function page(props: Props) {
         data.localityName.toLowerCase().replaceAll(" ", "-")
       }-for-buy-sale-in-${
         data.cityName.toLowerCase().replaceAll(" ", "-")
-      }-${data.cityId}C-SCG-${data.projIdEnc}`
+      }-${data.cityId}C-SCG-${data.projIdEnc}PJ`
     }] : []),
 
     ...(data.rentListing != "0" ? [{
-      title: "-Listing for Rent-",
+      title: "Listing for Rent",
       url: 
       `/${
         data.projectName.toLowerCase().replaceAll(" ", "-")
@@ -189,7 +189,7 @@ export default async function page(props: Props) {
         data.localityName.toLowerCase().replaceAll(" ", "-")
       }-for-rent-in-${
         data.cityName.toLowerCase().replaceAll(" ", "-")
-      }-${data.cityId}C-RCG-${data.projIdEnc}`
+      }-${data.cityId}C-RCG-${data.projIdEnc}PJ`
     }] : []),
   ];
 
