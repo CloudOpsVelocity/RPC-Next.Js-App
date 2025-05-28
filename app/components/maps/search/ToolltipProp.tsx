@@ -1,7 +1,9 @@
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { formatCurrency } from "@/app/utils/numbers";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
-import { onClickRedirect } from "./Tooltip";
 
 type Props = {
   data: any;
@@ -19,6 +21,33 @@ export default function TooltipProp({ data }: Props) {
     cityName,
     coverImage,
   } = data;
+  const router = useRouter();
+  const onClickRedirect = (data: any) => {
+      let url;
+      if (data.type == "proj") {
+        url = createProjectLinkUrl({
+          city: data.city, 
+          locality: data.locality,
+          slug: data.projName,
+          projIdEnc: data.reqId,
+        });
+        router.push(url);
+      } else {
+        url = generateListingLinkUrl({
+          city: data.cityName,
+          locality: data.localityName,
+          projName: data.projIdEnc ? data.propName : null,
+          category: data.category === "Sale" ? "for-sale" : "for-rent",
+          phase: data.phaseName,
+          propIdEnc: data.reqId,
+          bhkUnitType: data.bhkName
+            ? `${data.bhkName + " " + data.propTypeName}`
+            : "" + " " + data.propTypeName,
+        });
+  
+        router.push(url);
+      }
+  };
   return (
     <div
       className="p-[4px] md:p-[10px] !rounded-2xl cursor-pointer"

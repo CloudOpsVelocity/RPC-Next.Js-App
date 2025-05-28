@@ -1,3 +1,5 @@
+"use client"
+
 import Tag from "../atoms/Tag";
 
 export interface TagData {
@@ -8,9 +10,11 @@ export interface TagData {
 
 interface Props {
   urls: TagData[];
+  otherUrls?: any;
 }
 
-export default function TagsSections({ urls }: Props) {
+export default function TagsSections({ urls, otherUrls }: Props) {
+  console.log(otherUrls)
   const flatLinks = [
     ...urls,
     { title: "Bangalore", url: "/residential/projects/bengaluru" },
@@ -90,6 +94,7 @@ export default function TagsSections({ urls }: Props) {
       title: "Compare Properties | Compare Your Favorite Listings",
       url: "/your-profile/compare",
     },
+    ...otherUrls,
   ];
 
   return (
@@ -99,17 +104,16 @@ export default function TagsSections({ urls }: Props) {
         Discover more residential rent and sale properties in popular areas and
         projects.
       </p>
-      {/* <ul className="flex flex-wrap  "> */}
       {flatLinks.map((urlObj, index) => (
-        // <li key={`tags_sections__${index}`} className="flex-shrink-0">
         <Tag
           key={`tags_sections__${index}`}
           {...urlObj}
           className="mr-[6px] mb-[4px] text-wrap whitespace-wrap "
         />
-        // </li>
       ))}
-      {/* </ul> */}
+
+
+      
     </section>
   );
 }

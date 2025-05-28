@@ -38,33 +38,6 @@ type TooltipProjProps = {
 //   }).format(amount);
 // }
 
-export const onClickRedirect = (data: any) => {
-  // console.log(data)
-  let url;
-  if (data.type == "proj") {
-    url = createProjectLinkUrl({
-      city: data.city,
-      locality: data.locality,
-      slug: data.projName,
-      projIdEnc: data.reqId,
-    });
-    window.open(url);
-  } else {
-    url = generateListingLinkUrl({
-      city: data.cityName,
-      locality: data.localityName,
-      projName: data.projIdEnc ? data.propName : null,
-      category: data.category === "Sale" ? "for-sale" : "for-rent",
-      phase: data.phaseName,
-      propIdEnc: data.reqId,
-      bhkUnitType: data.bhkName
-        ? `${data.bhkName + " " + data.propTypeName}`
-        : "" + " " + data.propTypeName,
-    });
-
-    window.open(url);
-  }
-};
 
 export default function TooltipProj({ data }: { data: TooltipProjProps }) {
   const router = useRouter();
@@ -73,7 +46,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
     let url;
     if (data.type == "proj") {
       url = createProjectLinkUrl({
-        city: data.city,
+        city: data.city, 
         locality: data.locality,
         slug: data.projName,
         projIdEnc: data.reqId,
