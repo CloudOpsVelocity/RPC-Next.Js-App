@@ -136,27 +136,29 @@ function capitalizeEachWord(str: string) {
   // console.log(wordsToIgnore)
   return str
     .split(" ")
-    .map((word:string) => {
-      if(!wordsToIgnore.includes(str)){
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-      }else{
-        return word.charAt(0) + word.slice(1).toLowerCase()
+    .map((word: string) => {
+      if (!wordsToIgnore.includes(str)) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      } else {
+        return word.charAt(0) + word.slice(1).toLowerCase();
       }
     })
     .join(" ");
-};
+}
 
 function cleanHeading(id: string[]) {
   const sanitizedName = id.map((part) => {
     if (part.includes("PJ")) {
       return;
     }
-    return capitalizeEachWord(part);
+    return part;
   });
-  return sanitizedName
-    .join(" ")
-    .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
-    .replace(/\s+/g, " ");
+  return capitalizeEachWord(
+    sanitizedName
+      .join(" ")
+      .replace(/\b\d*(B|C|G|L|P|CG|SCG|RCG|PJ)\b/g, "")
+      .replace(/\s+/g, " ")
+  );
 }
 // export const dynamic = "force-static";
 export const dynamicParams = true;
