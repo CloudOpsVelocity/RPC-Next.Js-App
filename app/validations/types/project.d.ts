@@ -46,6 +46,7 @@ export interface Main {
   projAuthorityId?:string
   projAuthorityNames?:string[]
   sourceBuilderUrl?:string
+  cityId?:string;
 }
 
 export interface AmenityList {

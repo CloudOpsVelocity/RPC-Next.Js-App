@@ -90,9 +90,11 @@ export default function ListingDetailsPage({
   ${data?.ltName} at ${data.propName}`;
 
   const newParams = {
-    "residential-listings": "residential-listings",
+    "residential-listings": "residential-listings", 
     ...params,
   };
+
+  
 
   const getUrls = (pathname: string) => {
     const routes = pathname.split("/").filter(Boolean);

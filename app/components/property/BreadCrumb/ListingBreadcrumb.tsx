@@ -1,3 +1,5 @@
+"use client";
+
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import Link from "next/link";
 import React from "react";
@@ -29,6 +31,7 @@ export default function ListingBreadCrumbs({
     city: " ",
     lt: `${isIndependent ? "Independent Listings" : ""} `,
   };
+  console.log("bread-crum")
   let currentPath = "";
   let breadcrumbPath = "";
   const breadcrumbSchema = {
