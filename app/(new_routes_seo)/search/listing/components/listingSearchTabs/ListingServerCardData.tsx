@@ -116,14 +116,12 @@ export default function ListingServerCardData({
     const { brochureUrl } = data;
     if (session) {
       brochureUrl &&
-        router.push(
-          `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-        );
+        router.push(`/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`);
     } else {
       openLogin(() => {
         brochureUrl &&
           router.push(
-            `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
+            `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`
           );
       });
     }
@@ -178,7 +176,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "readmore",
           title: "Read More",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
           content: selectedItem.projectAbout ?? selectedItem.usp,
         }));
         break;
@@ -201,8 +199,8 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "floorplan",
           title: "Floorplan",
-          data: {...selectedItem, type: type},
-          floorplanType:"F"
+          data: { ...selectedItem, type: type },
+          floorplanType: "F",
         }));
         break;
       case "otherCharges":
@@ -211,7 +209,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "otherCharges",
           title: "Other Charges",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
         }));
         break;
       case "brochure":
@@ -224,7 +222,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "nearby",
           title: "Near By Locations",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
         }));
         // onSetNearBy(selectedItem);
         break;
@@ -235,7 +233,7 @@ export default function ListingServerCardData({
           isOpen: true,
           type: "amenities",
           title: "Amenities",
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
         }));
         break;
       // case "listingType_B":
@@ -256,11 +254,11 @@ export default function ListingServerCardData({
           type: "bhk",
           title: "Unit Types",
           content: sortedBhks,
-          data: {...selectedItem, type: type},
+          data: { ...selectedItem, type: type },
         }));
         break;
       default:
-        router.push(selectedItem.pageUrl);
+        selectedItem.pageUrl && router.push(selectedItem.pageUrl);
     }
   };
 
