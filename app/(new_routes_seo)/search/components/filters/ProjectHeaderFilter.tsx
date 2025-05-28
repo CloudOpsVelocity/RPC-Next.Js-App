@@ -13,7 +13,7 @@ import ShowAllFiltersButton from "../FilterComponents/ShowAllFiltersButton";
 import BuyRent from "../FilterComponents/BuyRent";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
-import { projSearchStore } from "../../store/projSearchStore";
+import { initialState, projSearchStore } from "../../store/projSearchStore";
 import { usePathname, useRouter } from "next/navigation";
 import useProjSearchAppliedFilters from "../../hooks/useProjSearchAppliedFilters";
 import useProjSearchMatcher from "../../hooks/useProjSearchMatcher";
@@ -30,6 +30,7 @@ import ProjectSearchTabs from "../ProjectSearchTabs/ProjectSearchTabs";
 // import { useRouter } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import ProjectPageTitle from "../../_new-search-page/components/ProjectPageTitle";
+import { generateSearchQuery } from "@/app/(new_routes_seo)/utils/new-seo-routes/search.frontend-filters-obj-to-query-converter";
 
 const HeaderFilters = ({
   isListing,

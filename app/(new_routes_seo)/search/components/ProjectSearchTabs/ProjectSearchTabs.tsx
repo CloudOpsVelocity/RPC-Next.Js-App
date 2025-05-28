@@ -12,6 +12,7 @@ import { SearchFilter } from "@/app/types/search";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { generateSearchQuery } from "@/app/(new_routes_seo)/utils/new-seo-routes/search.frontend-filters-obj-to-query-converter";
 
 const tabs = [
   { id: null, label: "Projects" },
@@ -64,6 +65,11 @@ const ProjectSearchTabs = ({
       label: "Price / sqft: High to Low",
     },
   ];
+  const tabUrl = generateSearchQuery({
+    appliedFilters: frontendFilters,
+    initialState: initialState,
+    otherIgnoreKeys: ["listedBy"],
+  });
   React.useEffect(() => {
     const handleClickOutside = () => {
       if (isDropdownOpen) {
@@ -196,7 +202,11 @@ const ProjectSearchTabs = ({
             <div className="flex flex-wrap items-center  sm:gap-1 sm:p-0 xl:gap-2 sm:min-w-max pb-[4px] ">
               {tabs.map((tab) => (
                 <Link
-                  href={tab.id !== null ? `?sf=listedBy=${tab.id}` : pathname}
+                  href={
+                    tab.id !== null
+                      ? `?sf=${tabUrl}-listedBy=${tab.id}`
+                      : pathname
+                  }
                   key={tab.id}
                   title={`Click to view ${tab.label} in ${params.lt ?? ""} ${
                     params.city ?? "Bengaluru"
