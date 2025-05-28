@@ -28,7 +28,7 @@ export default function NewSearchPage({
       <link
         rel="canonical"
         href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}${
-          preDefinedFilters ? `?sf${preDefinedFilters}` : ""
+          preDefinedFilters ? `?sf=${preDefinedFilters}` : ""
         }`}
       />
       {serverData &&
