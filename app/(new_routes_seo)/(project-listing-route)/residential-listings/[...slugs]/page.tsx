@@ -98,7 +98,9 @@ export default async function Page({ params, searchParams }: Props) {
           propType: parseInt(filtersValues.PT as string),
         }),
         cg: filtersValues.CG,
-        projName: project,
+        ...(filtersValues.PT != 36 && {
+          projName: project,
+        }),
         projIdEnc: filtersValues.PJ,
         ...(filtersValues.PH && {
           phaseId: [
