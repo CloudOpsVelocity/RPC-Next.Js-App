@@ -163,8 +163,6 @@ export default async function page(props: Props) {
   const scrollId = undefined;
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
   
-  console.log(data)
-
   // `myhna-maple-in-varthur-for-buy-sale-in-bengaluru-9C-SCG-683963c00f58d097af3134ae674a62b6PJ`
   // myhna-maple-in-varthur-for-rent-in-bengaluru-9C-RCG-683963c00f58d097af3134ae674a62b6PJ
   const rentAndSaleTagUrls = [
