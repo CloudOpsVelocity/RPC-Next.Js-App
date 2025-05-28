@@ -10,11 +10,9 @@ export interface TagData {
 
 interface Props {
   urls: TagData[];
-  otherUrls?: any;
 }
 
-export default function TagsSections({ urls, otherUrls }: Props) {
-  console.log(otherUrls)
+export default function TagsSections({ urls }: Props) {
   const flatLinks = [
     ...urls,
     { title: "Bangalore", url: "/residential/projects/bengaluru" },
@@ -94,7 +92,6 @@ export default function TagsSections({ urls, otherUrls }: Props) {
       title: "Compare Properties | Compare Your Favorite Listings",
       url: "/your-profile/compare",
     },
-    ...otherUrls,
   ];
 
   return (
@@ -104,16 +101,17 @@ export default function TagsSections({ urls, otherUrls }: Props) {
         Discover more residential rent and sale properties in popular areas and
         projects.
       </p>
-      {flatLinks.map((urlObj, index) => (
+      {flatLinks.map(({title, url}, index) => {
+        console.log(url)
+        return(
         <Tag
-          key={`tags_sections__${index}`}
-          {...urlObj}
+          key={`tags_sections__${index.toString()}`}
+          // {...urlObj}
+          title={title}
+          url={url}
           className="mr-[6px] mb-[4px] text-wrap whitespace-wrap "
         />
-      ))}
-
-
-      
+      )})}
     </section>
   );
 }

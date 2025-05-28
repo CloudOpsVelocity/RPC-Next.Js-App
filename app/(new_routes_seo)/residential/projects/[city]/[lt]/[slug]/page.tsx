@@ -169,9 +169,9 @@ export default async function page(props: Props) {
   // myhna-maple-in-varthur-for-rent-in-bengaluru-9C-RCG-683963c00f58d097af3134ae674a62b6PJ
   const rentAndSaleTagUrls = [
     ...(data.saleListing != "0" ? [{
-      title: "Listing for Sale",
+      title: "-Listing for Sale-",
       url: 
-      `${
+      `/${
         data.projectName.toLowerCase().replaceAll(" ", "-")
       }-in-${
         data.localityName.toLowerCase().replaceAll(" ", "-")
@@ -181,9 +181,9 @@ export default async function page(props: Props) {
     }] : []),
 
     ...(data.rentListing != "0" ? [{
-      title: "Listing for Rent",
+      title: "-Listing for Rent-",
       url: 
-      `${
+      `/${
         data.projectName.toLowerCase().replaceAll(" ", "-")
       }-in-${
         data.localityName.toLowerCase().replaceAll(" ", "-")
@@ -406,7 +406,7 @@ export default async function page(props: Props) {
           slug={slug}
         />
         {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
-        <TagsSections urls={getUrls(pathname)} otherUrls={rentAndSaleTagUrls} />
+        <TagsSections urls={[...getUrls(pathname), ...rentAndSaleTagUrls]} />
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />
         <LoginPopup />
