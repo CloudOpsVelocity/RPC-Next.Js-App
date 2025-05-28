@@ -184,6 +184,7 @@ export default function ListingDetailsPage({
   //     </React.Fragment>
   //   );
   // });
+  console.log(data);
   return (
     <div className="w-full">
       <ListingSchema

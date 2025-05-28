@@ -26,7 +26,6 @@ function urlToSeoTitle(url: string): string {
 }
 
 function FirstImagesBlock({ onSelect, data }: Props) {
-  console.log(data)
   const getUrl = (urls: any, i: number) =>
     urls[i]?.includes("+") ? urls[i].replace(/\+/g, "%2B") : urls[i] || "";
   const getImage = (index: number, className: string) => {
