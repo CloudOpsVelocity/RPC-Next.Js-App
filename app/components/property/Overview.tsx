@@ -21,6 +21,7 @@ export default function PropertyOverView({
   data: Main;
   issueData: any;
 }) {
+
   const path = usePathname();
   const title = "Share Listing";
   return (

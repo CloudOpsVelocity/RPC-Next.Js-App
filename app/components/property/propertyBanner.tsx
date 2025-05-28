@@ -96,7 +96,7 @@ export default function PropertyBanner({
             <NextLink
               title={`About the ${projectName}`}
               href={url}
-              className=" sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center text-[#0073C6]"
+              className=" sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center text-[#0073C6] underline"
             >
               {projectName}
             </NextLink>
@@ -168,7 +168,7 @@ function PropertyBannerForMobile({
               <NextLink
                 title={`About the ${projectName}`}
                 href={url}
-                className=" text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2 text-[#0073C6]"
+                className=" text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2 text-[#0073C6] underline"
               >
                 {projectName}
               </NextLink>

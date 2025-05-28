@@ -23,6 +23,7 @@ export function generatePropertyOverViewData(
   cg: string,
   availablityStatus: string
 ): PropertyDetail[] {
+  console.log(data, "when we are whe it filing gthe dertails")
   let propertyDetails: PropertyDetail[] = [];
   switch (propertyType?.trim()) {
     case "Apartment":
@@ -59,6 +60,11 @@ export function generatePropertyOverViewData(
           title: "Furnishing",
           value: `${data.furnshName}`,
           Icon: Furnishing,
+        },
+         {
+          title: "posted By",
+          value: `${data.furnshName}`,
+          Icon: OwnerShip,
         },
       ];
 
