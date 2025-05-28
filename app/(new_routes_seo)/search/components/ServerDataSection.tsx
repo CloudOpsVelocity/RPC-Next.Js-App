@@ -264,7 +264,7 @@ export default function ServerDataSection({
         }));
         break;
       default:
-        router.push(selectedItem.pageUrl);
+        if(selectedItem.pageUrl) router.push(selectedItem.pageUrl);
     }
   };
 

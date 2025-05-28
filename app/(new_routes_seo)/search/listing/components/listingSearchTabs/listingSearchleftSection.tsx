@@ -273,8 +273,8 @@ function LeftSection({
 
       {(params.slugs && params.slugs.length < 4 ) && (
        <section 
-        className={isClient ? "space" : "hidden"}
-        aria-hidden={!isClient ? "true" : undefined}
+        className={!isClient ? "space" : "hidden"}
+        aria-hidden={isClient ? "true" : undefined}
       >
           <ListingSearchPagination
             currentPage={

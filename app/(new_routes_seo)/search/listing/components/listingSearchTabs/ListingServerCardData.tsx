@@ -260,7 +260,7 @@ export default function ListingServerCardData({
         }));
         break;
       default:
-        router.push(selectedItem.pageUrl);
+        if(selectedItem.pageUrl) router.push(selectedItem.pageUrl); 
     }
   };
 

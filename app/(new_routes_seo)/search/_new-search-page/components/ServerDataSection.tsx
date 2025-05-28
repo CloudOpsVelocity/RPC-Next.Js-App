@@ -18,6 +18,7 @@ import { useAtom, useSetAtom } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
 import { diffToProjFromListing, initialState, projSearchStore } from "../../store/newSearchProjectStore";
 import useProjSearchAppliedFilters from "../hooks/useProjSearchAppliedFilters";
+import { useRouter } from "next/navigation";
 
 type Props = {
   data: any;
@@ -64,7 +65,7 @@ export default function ServerDataSection({
   const [, dispath] = useAtom(projSearchStore);
   const { handleApplyFilters } = useProjSearchAppliedFilters();
 
-  
+  const router = useRouter();
   
   const cardFnsRef = useRef<Record<string, () => void>>({});
 
@@ -109,16 +110,14 @@ export default function ServerDataSection({
     const {brochureUrl} = data;
     if (session) {
       brochureUrl &&
-        window.open(
+        router.push(
           `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-          "_self"
         );
     } else {
       openLogin(() => {
         brochureUrl &&
-          window.open(
+          router.push(
             `/pdf/${encodeURIComponent(brochureUrl.split(".net")[1])}`,
-            "_self"
           );
       });
     }
@@ -272,7 +271,7 @@ export default function ServerDataSection({
           setPopupState(prev => ({...prev, isOpen: true, type: 'bhk', title:"Unit Types", content: sortedBhks, data: {...selectedItem, type: type}}));
           break;
         default:
-          window.open(selectedItem.pageUrl, "_self", "noreferrer");
+          if(selectedItem.pageUrl) router.push(selectedItem.pageUrl); 
       }
   };
 
