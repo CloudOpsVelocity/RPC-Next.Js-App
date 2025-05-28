@@ -13,6 +13,7 @@ import { SearchFilter } from "@/app/types/search";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { capitalizeWords } from "@/app/utils/letters";
+import { generateSearchQuery } from "@/app/(new_routes_seo)/utils/new-seo-routes/search.frontend-filters-obj-to-query-converter";
 
 const ListingSearchTabs = ({
   showProjectTab = false,
@@ -39,6 +40,11 @@ const ListingSearchTabs = ({
     [showProjectTab]
   );
 
+  const tabUrl = generateSearchQuery({
+    appliedFilters: frontendFilters,
+    initialState,
+    otherIgnoreKeys: ["listedBy"],
+  });
   const sortOptions = useMemo(
     () => [
       { id: null, type: null, value: "newest", label: "Newest First" },
@@ -225,7 +231,7 @@ const ListingSearchTabs = ({
       return frontendFilters?.listedBy;
     }
     return value === frontendFilters.listedBy
-      ? frontendFilters?.listedBy 
+      ? frontendFilters?.listedBy
       : value;
   }, [state, frontendFilters]);
 
@@ -242,7 +248,11 @@ const ListingSearchTabs = ({
               {tabs.map((tab) => (
                 <Link
                   key={tab.id}
-                  href={tab.id !== null ? `?sf=listedBy=${tab.id}` : pathname}
+                  href={
+                    tab.id !== null
+                      ? `?sf=${tabUrl}-listedBy=${tab.id}`
+                      : pathname
+                  }
                   title={`Click to view  ${tab.label} in ${
                     params?.slugs?.length > 2
                       ? capitalizeWords(
