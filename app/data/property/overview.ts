@@ -23,8 +23,11 @@ export function generatePropertyOverViewData(
   cg: string,
   availablityStatus: string
 ): PropertyDetail[] {
-  console.log(data, "when we are whe it filing gthe dertails")
+  //console.log(data, "when we are whe it filing gthe dertails")
   let propertyDetails: PropertyDetail[] = [];
+  const postedByTypeString=(prop:any)=>{
+    return prop == "B" ? "BUilder" : prop == "A" ? "Agent" : prop == "I" ? "individual":"";
+  };
   switch (propertyType?.trim()) {
     case "Apartment":
       propertyDetails = [
@@ -62,8 +65,8 @@ export function generatePropertyOverViewData(
           Icon: Furnishing,
         },
          {
-          title: "posted By",
-          value: `${data.furnshName}`,
+          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          value: `${data.postedByName}`,
           Icon: OwnerShip,
         },
       ];
@@ -124,6 +127,11 @@ export function generatePropertyOverViewData(
           title: "Furnishing",
           value: `${data.furnshName}`,
           Icon: Furnishing,
+        },
+        {
+          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          value: `${data.postedByName}`,
+          Icon: OwnerShip,
         },
       ];
 
@@ -187,6 +195,11 @@ export function generatePropertyOverViewData(
           value: `${data.furnshName}`,
           Icon: Furnishing,
         },
+        {
+          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          value: `${data.postedByName}`,
+          Icon: OwnerShip,
+        },
       ];
 
       if (cg === "R") {
@@ -235,6 +248,11 @@ export function generatePropertyOverViewData(
           title: "Breadth of Plot",
           value: `${data.width} ft.`,
           Icon: TotalLandArea,
+        },
+        {
+          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          value: `${data.postedByName}`,
+          Icon: OwnerShip,
         },
       ];
 
@@ -297,6 +315,11 @@ export function generatePropertyOverViewData(
           title: "Furnishing",
           value: `${data.furnshName}`,
           Icon: Furnishing,
+        },
+        {
+          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          value: `${data.postedByName}`,
+          Icon: OwnerShip,
         },
       ];
       if (cg === "R") {
@@ -363,6 +386,11 @@ export function generatePropertyOverViewData(
           title: "Furnishing",
           value: `${data.furnshName}`,
           Icon: Furnishing,
+        },
+        {
+          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          value: `${data.postedByName}`,
+          Icon: OwnerShip,
         },
       ];
 
