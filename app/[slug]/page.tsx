@@ -131,12 +131,27 @@ export async function generateMetadata(
   };
 }
 
+function capitalizeEachWord(str: string) {
+  const wordsToIgnore = ["in", "of", "for", "at"];
+  // console.log(wordsToIgnore)
+  return str
+    .split(" ")
+    .map((word:string) => {
+      if(!wordsToIgnore.includes(str)){
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      }else{
+        return word.charAt(0) + word.slice(1).toLowerCase()
+      }
+    })
+    .join(" ");
+};
+
 function cleanHeading(id: string[]) {
   const sanitizedName = id.map((part) => {
     if (part.includes("PJ")) {
       return;
     }
-    return part;
+    return capitalizeEachWord(part);
   });
   return sanitizedName
     .join(" ")

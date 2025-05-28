@@ -271,8 +271,8 @@ function LeftSection({
       )}
 
       <section 
-        className={isClient ? "space" : "hidden"}
-        aria-hidden={!isClient ? "true" : undefined}
+        className={!isClient ? "space" : "hidden"}
+        aria-hidden={isClient ? "true" : undefined}
       >
           <ListingSearchPagination
             currentPage={
