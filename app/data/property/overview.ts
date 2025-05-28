@@ -26,7 +26,7 @@ export function generatePropertyOverViewData(
   //console.log(data, "when we are whe it filing gthe dertails")
   let propertyDetails: PropertyDetail[] = [];
   const postedByTypeString=(prop:any)=>{
-    return prop == "B" ? "BUilder" : prop == "A" ? "Agent" : prop == "I" ? "individual":"";
+    return prop == "B" ? "Builder" : prop == "A" ? "Agent" : prop == "I" ? "Individual":"";
   };
   switch (propertyType?.trim()) {
     case "Apartment":
@@ -65,7 +65,7 @@ export function generatePropertyOverViewData(
           Icon: Furnishing,
         },
          {
-          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          title: `Posted By  ${postedByTypeString(data.postedByType)} `,
           value: `${data.postedByName}`,
           Icon: OwnerShip,
         },
@@ -129,7 +129,7 @@ export function generatePropertyOverViewData(
           Icon: Furnishing,
         },
         {
-          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          title: `Posted By  ${postedByTypeString(data.postedByType)} `,
           value: `${data.postedByName}`,
           Icon: OwnerShip,
         },
@@ -196,7 +196,7 @@ export function generatePropertyOverViewData(
           Icon: Furnishing,
         },
         {
-          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          title: `Posted By  ${postedByTypeString(data.postedByType)} `,
           value: `${data.postedByName}`,
           Icon: OwnerShip,
         },
@@ -250,7 +250,7 @@ export function generatePropertyOverViewData(
           Icon: TotalLandArea,
         },
         {
-          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          title: `Posted By  ${postedByTypeString(data.postedByType)} `,
           value: `${data.postedByName}`,
           Icon: OwnerShip,
         },
@@ -317,7 +317,7 @@ export function generatePropertyOverViewData(
           Icon: Furnishing,
         },
         {
-          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          title: `Posted By  ${postedByTypeString(data.postedByType)} `,
           value: `${data.postedByName}`,
           Icon: OwnerShip,
         },
@@ -388,7 +388,7 @@ export function generatePropertyOverViewData(
           Icon: Furnishing,
         },
         {
-          title: `posted By  ${postedByTypeString(data.postedByType)} `,
+          title: `Posted By  ${postedByTypeString(data.postedByType)} `,
           value: `${data.postedByName}`,
           Icon: OwnerShip,
         },
