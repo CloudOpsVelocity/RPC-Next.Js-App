@@ -43,7 +43,13 @@ export default function ListingBreadCrumbs({
       },
       ...allParams.map((key, index) => {
         const isLast = index === allParams.length - 1;
+
         breadcrumbPath += `/${slugify(params[key])}`;
+
+        if(isIndependent) {
+          breadcrumbPath = breadcrumbPath.replace("/residential-listings", "");
+        } 
+
         return {
           "@type": "ListItem",
           position: index + 2,
@@ -56,8 +62,11 @@ export default function ListingBreadCrumbs({
     ],
   };
 
+  // isIndependent ? breadcrumbPath.replace("/residential-listings", "") : breadcrumbPath
+          
+
   const siteNavSchema = {
-    "@context": "https://schema.org",
+    "@context": "https://schema.org", 
     "@type": "SiteNavigationElement",
     name: "Breadcrumb Navigation",
     url: pathname,
@@ -74,6 +83,7 @@ export default function ListingBreadCrumbs({
       })),
     ],
   };
+
 
   return (
     <>
@@ -104,7 +114,9 @@ export default function ListingBreadCrumbs({
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;
           const isLast = index === allParams.length - 1;
-
+          if(isIndependent) {
+            currentPath = currentPath.replace("/residential-listings", "");
+          } 
           return (
             <React.Fragment key={`${key[index]}`}>
               {!isLast ? (
