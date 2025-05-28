@@ -187,7 +187,7 @@ export default async function page(props: Props) {
         data.projectName.toLowerCase().replaceAll(" ", "-")
       }-in-${
         data.localityName.toLowerCase().replaceAll(" ", "-")
-      }-for-buy-sale-in-${
+      }-for-rent-in-${
         data.cityName.toLowerCase().replaceAll(" ", "-")
       }-${data.cityId}C-RCG-${data.projIdEnc}`
     }] : []),
