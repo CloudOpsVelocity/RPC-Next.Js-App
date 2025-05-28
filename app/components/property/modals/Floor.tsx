@@ -62,7 +62,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
         <div className="sticky top-0 flex items-center justify-between flex-row p-2 md:p-4 border-b bg-white shadow-sm">
           <h3 className="text-base md:text-xl font-semibold text-[#0073C6]">
             {floorData.bhkName || data.propTypeName}{" "}
-            {floorData.unitNumber && `- Unit ${floorData.unitNumber}`}
+           {/*  {floorData.unitNumber && `- Unit ${floorData.unitNumber}`} */}
           </h3>
           <div className="flex items-center max-w-fit justify-end gap-2 md:gap-4 mt-2 md:mt-0">
             {data?.projMedia?.floorPlanUrl && (
@@ -185,7 +185,7 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
                   title="Unit Information"
                   items={[
                     { label: "Unit Type", value: floorData.bhkName ?? "" },
-                    { label: "Unit Number", value: floorData.unitNumber ?? "" },
+                   /*  { label: "Unit Number", value: floorData.unitNumber ?? "" }, */
                     ...(floorData.aptTypeName &&
                     (type === projectprops.apartment ||
                       type === projectprops.villament)
