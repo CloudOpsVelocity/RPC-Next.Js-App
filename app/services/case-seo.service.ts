@@ -72,7 +72,10 @@ const CaseSeoSearchService = async (
     ...(slugValues.PJ
       ? {
           projIdEnc: slugValues.PJ,
-          projName: slug.split("in")[0].split("-").join(" "),
+          projName: slug
+            .split("-in-")[0]
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase()),
         }
       : {}),
   };
