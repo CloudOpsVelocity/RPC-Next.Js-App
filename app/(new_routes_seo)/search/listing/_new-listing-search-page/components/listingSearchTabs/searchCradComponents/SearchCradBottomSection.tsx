@@ -175,7 +175,7 @@ export default function SearchCradBottomSection({
               <Tag
                 key={each.title}
                 title={each.title}
-                url={each.url}
+                url={each.url ?? ""}
                 className="!text-[8px] !px-[6px] !py-[4px] md:text-nowrap mb-[4px] md:mb-[6px] "
               />
             );
