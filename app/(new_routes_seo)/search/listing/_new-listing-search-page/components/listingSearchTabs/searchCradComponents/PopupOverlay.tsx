@@ -193,6 +193,7 @@ function PopupOverlay({ popupState, closePopup }: Props) {
           rel="noopener noreferrer"
           title={`${title} of ${projOrPropName}`}
           aria-label={`${title} of ${projOrPropName}`}
+          onClick={()=> document.body.style.overflow = "unset"}
         >
           <h2 className="sm:text-[20px] xl:text-[24px] capitalize break-words text-wrap font-[600]">
             <span className="text-[#001F35]">

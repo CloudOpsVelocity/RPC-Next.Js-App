@@ -160,7 +160,7 @@ function PageTitle({ serverFilterData }: Props) {
 
               return (
                 <Fragment key={fullPath}>
-                  {index === 0 ? "" : "/"}
+                  {index === 0 ? "" : " + "}
                   <span>
                     <Link
                       prefetch={false}

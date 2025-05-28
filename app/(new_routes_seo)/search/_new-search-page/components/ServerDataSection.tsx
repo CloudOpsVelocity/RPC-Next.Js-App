@@ -289,15 +289,6 @@ export default function ServerDataSection({
       {data.map((eachOne: any, index: number) => {
         const sortedBhks:any = sortUnits(eachOne.bhkNames);
 
-        // return (
-        //   <ProjectCard
-        //     key={eachOne.projIdEnc + eachOne.propType + index.toString()}
-        //     refetch={refetch}
-        //     data={{ ...eachOne, type: listedBy() ?? "proj", cg: cg }}
-        //     index={index}
-        //     mutate={mutate}
-        //   />
-        // )
         return(
           <SearchCard
             key={eachOne.projIdEnc + eachOne.propType + index.toString()}

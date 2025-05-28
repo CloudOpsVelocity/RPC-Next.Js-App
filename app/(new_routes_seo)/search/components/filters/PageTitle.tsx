@@ -155,7 +155,7 @@ function PageTitle({ serverFilterData }: Props) {
             {slugs.slice(2).map((slug, index) => {
               const fullPath = `${basePath}/${slugs
                 .slice(0, 2 + index + 1)
-                .join("/")}`;
+                .join(" + ")}`;
               const linkText = slug.replaceAll("-", " ");
 
               return (
