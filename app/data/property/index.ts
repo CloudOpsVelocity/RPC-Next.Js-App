@@ -33,7 +33,7 @@ export function generatePropertyDetails(
           Icon: Marble,
         },
         { title: "Block", value: data.block, Icon: Block },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+      /*   { title: "Unit Number", value: data.unitNumber, Icon: Marble }, */
         { title: "Facing", value: data.facingName, Icon: Marble },
         {
           title: "Super built-up Area",
@@ -76,7 +76,7 @@ export function generatePropertyDetails(
           value: `${data.isBasement === "Y" ? "B+" : ""}G+${data.atFloor}`,
           Icon: TowerIcon,
         },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+       /*  { title: "Unit Number", value: data.unitNumber, Icon: Marble }, */
         { title: "Facing", value: data.facingName, Icon: Marble },
 
         {
@@ -146,7 +146,7 @@ export function generatePropertyDetails(
             data.plotArea && `${formatNumberWithSuffix(data.plotArea, false)} sq.ft`,
           Icon: TotalLandArea,
         },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+       /*  { title: "Unit Number", value: data.unitNumber, Icon: Marble }, */
         { title: "Facing", value: data.facingName, Icon: Marble },
 
         {
@@ -211,7 +211,7 @@ export function generatePropertyDetails(
       propertyDetails = [
         // { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+        /* { title: "Unit Number", value: data.unitNumber, Icon: Marble }, */
         { title: "Facing", value: data.facingName, Icon: Marble },
         {
           title: "Plot Area",
@@ -260,7 +260,7 @@ export function generatePropertyDetails(
           value: `${data.isBasement === "Y" ? "B+" : ""}G+${data.atFloor}`,
           Icon: TowerIcon,
         },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+       /*  { title: "Unit Number", value: data.unitNumber, Icon: Marble }, */
         { title: "Facing", value: data.facingName, Icon: Marble },
         {
           title: "Plot Area",
