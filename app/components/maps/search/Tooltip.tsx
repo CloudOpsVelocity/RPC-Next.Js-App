@@ -2,6 +2,7 @@ import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import { formatCurrency } from "@/app/utils/numbers";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BiSolidBuildings, BiSolidMapPin, BiSolidUser } from "react-icons/bi";
 
@@ -37,8 +38,38 @@ type TooltipProjProps = {
 //   }).format(amount);
 // }
 
-export const onClickRedirect = (data: any) => {
-  // console.log(data)
+// export const onClickRedirect = (data: any) => {
+//   // console.log(data)
+//   let url;
+//   if (data.type == "proj") {
+//     url = createProjectLinkUrl({
+//       city: data.city,
+//       locality: data.locality,
+//       slug: data.projName,
+//       projIdEnc: data.reqId,
+//     });
+//     router.push(url);
+//   } else {
+//     url = generateListingLinkUrl({
+//       city: data.cityName,
+//       locality: data.localityName,
+//       projName: data.projIdEnc ? data.propName : null,
+//       category: data.category === "Sale" ? "for-sale" : "for-rent",
+//       phase: data.phaseName,
+//       propIdEnc: data.reqId,
+//       bhkUnitType: data.bhkName
+//         ? `${data.bhkName + " " + data.propTypeName}`
+//         : "" + " " + data.propTypeName,
+//     });
+
+//     router.push(url);
+//   }
+// };
+
+export default function TooltipProj({ data }: { data: TooltipProjProps }) {
+  const router = useRouter();
+  const { projName, city, locality, phases, postedByName, coverUrl } = data;
+  const onClickRedirect = (data: any) => {
   let url;
   if (data.type == "proj") {
     url = createProjectLinkUrl({
@@ -47,7 +78,7 @@ export const onClickRedirect = (data: any) => {
       slug: data.projName,
       projIdEnc: data.reqId,
     });
-    window.open(url, "_self");
+    router.push(url);
   } else {
     url = generateListingLinkUrl({
       city: data.cityName,
@@ -61,12 +92,9 @@ export const onClickRedirect = (data: any) => {
         : "" + " " + data.propTypeName,
     });
 
-    window.open(url, "_self");
+    router.push(url);
   }
-};
-
-export default function TooltipProj({ data }: { data: TooltipProjProps }) {
-  const { projName, city, locality, phases, postedByName, coverUrl } = data;
+  };
   return (
     <div
       className="bg-white text-xs cursor-pointer rounded-lg overflow-hidden w-full max-w-[100%] "

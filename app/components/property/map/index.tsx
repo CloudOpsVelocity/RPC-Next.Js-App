@@ -3,14 +3,6 @@
 "use client";
 import React, { useState, useCallback, useMemo, Fragment } from "react";
 // import { LuTrain, LuSearch } from "react-icons/lu";
-import {
-  // Text,
-  Tabs,
-  // TextInput,
-  // Loader,
-  ScrollArea,
-  // Skeleton,
-} from "@mantine/core";
 
 import {
   Coordinates,
@@ -132,22 +124,33 @@ const LeafMap: React.FC<{
         />
       </div>
 
+      {/* h-[291px] sm:h-[456px] xl:h-[600px] w-full z-[1] relative leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom */}
+
       <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:max-h-[620px] w-[95%] sm:w-[90%] mx-auto">
         <section className="bg-white">
           <div id="tabs">
-            <Tabs defaultValue="public">
+            {/* <Tabs defaultValue="public"> */}
               <div className="bg-blue-50 px-5 py-4">
                 <p className="text-[#001F35] sm:text-[22px] font-medium leading-[normal]">
                   Explore Your Surroundings, Everywhere Nearby!
                 </p>
               </div>
-            </Tabs>
+            {/* </Tabs> */}
             <div id="location-listing" className="grid gap-2">
-              <ScrollArea
+              {/* <ScrollArea
                 max-h={isMobile ? "400" : "auto"}
                 h={isMobile ? "auto" : 600}
                 pb={isMobile ? 10 : 50}
                 px={10}
+              > */}
+              <div
+                // ref={viewport}
+                className="px-[10px] overflow-y-auto overflow-x-hidden max-h-[291px] md:max-h-[380px] xl:max-h-[540px] pb-[20px] "
+                style={{
+                  // maxHeight: isMobile ? "400px" : "auto",
+                  // height: isMobile ? "auto" : "600px",
+                  // paddingBottom: isMobile ? "10px" : "50px"
+                }}
               >
                 {mapData[selected] && mapData[selected].length > 0 ? (
                   mapData[selected]
@@ -179,7 +182,8 @@ const LeafMap: React.FC<{
                 ) : (
                   <p>No locations found.</p>
                 )}
-              </ScrollArea>
+              </div>
+              {/* </ScrollArea> */}
             </div>
           </div>
         </section>
