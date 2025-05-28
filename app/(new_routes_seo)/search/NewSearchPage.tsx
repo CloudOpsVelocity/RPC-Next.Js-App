@@ -25,7 +25,12 @@ export default function NewSearchPage({
   const isListing = false;
   return (
     <section className="pt-[70px] min-h-[calc(100vh)] relative ">
-      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}`} />
+      <link
+        rel="canonical"
+        href={`${process.env.NEXT_PUBLIC_URL}${pageUrl}${
+          preDefinedFilters ? `?sf${preDefinedFilters}` : ""
+        }`}
+      />
       {serverData &&
         (!frontendFilters.listedBy ? (
           <ProjectSeachSchema properties={serverData} pageUrl={pageUrl} />
