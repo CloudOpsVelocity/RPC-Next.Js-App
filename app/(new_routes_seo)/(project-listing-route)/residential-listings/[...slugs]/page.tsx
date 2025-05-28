@@ -192,7 +192,9 @@ export async function generateMetadata({
   const slugs = params.slugs;
   const [cg, city, lt, project, phase, bhk_unit_type, listing] = slugs;
   const isListingPage =
-    bhk_unit_type?.includes("listing") || listing?.includes("listing");
+    bhk_unit_type?.includes("listing") ||
+    phase?.includes("listing") ||
+    listing?.includes("listing");
 
   if (!isListingPage) {
     const formatText = (text?: string) =>
@@ -301,7 +303,7 @@ export async function generateMetadata({
   }
 
   // Listing detail page logic
-  const id = (listing || bhk_unit_type).split("-")[1];
+  const id = (listing || bhk_unit_type || phase).split("-")[1];
   const { listing: data } = await getListingDetails(id);
 
   return {
