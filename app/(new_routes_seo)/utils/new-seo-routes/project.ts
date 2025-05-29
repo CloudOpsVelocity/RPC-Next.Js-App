@@ -56,9 +56,15 @@ export const extractProjectParamsValues = (input: string) => {
 export async function findPathForProjectDetails(inputUrl: string) {
   console.time("findPathForProjectDetails");
   const projectJsonData = await redisService.getProjectSlug(SlugsType.PROJECT);
+  let allData = {
+    ...projectJsonData,
+    "/residential/projects/bengaluru/new-launch": "9*CT_108*PS",
+    "/residential/projects/bengaluru/ready-to-move": "9*CT_107*PS",
+    "/residential/projects/bengaluru/on-going": "9*CT_106*PS",
+  };
   console.timeEnd("findPathForProjectDetails");
-  if (projectJsonData[inputUrl]) {
-    return projectJsonData[inputUrl];
+  if (allData[inputUrl]) {
+    return allData[inputUrl];
   }
   notFound();
 }

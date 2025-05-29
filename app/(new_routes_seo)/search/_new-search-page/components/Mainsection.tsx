@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useQueryState } from "nuqs";
 import React, { useEffect, useState } from "react";
 import {
-  initialState,
+  // initialState,
   projSearchStore,
   // projSearchStore,
   searchPageMapToggle,
@@ -13,7 +13,7 @@ import Image from "next/image";
 import { useAtom, useSetAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
 import LeftSection from "../components/ProjectSearchLeftSection";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 const RightSection = dynamic(
   () => import("../components/ProjectSearchRightSection"),
   { ssr: false }
@@ -30,17 +30,17 @@ export default function Mainsection({
   preAppliedFilters = null,
 }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
-  const setStore = useSetAtom(projSearchStore);
+  // const setStore = useSetAtom(projSearchStore);
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
-  useEffect(() => {
-    setStore({
-      type: "update",
-      payload: {
-        ...initialState,
-        ...frontendFilters,
-      },
-    });
-  }, [frontendFilters]);
+  // useEffect(() => {
+  //   setStore({
+  //     type: "update",
+  //     payload: {
+  //       ...initialState,
+  //       ...frontendFilters,
+  //     },
+  //   });
+  // }, [frontendFilters]);
   const isMobile = useMediaQuery("(max-width: 601px)");
   // const filtersData = Object.assign(frontendFilters, initialState);
   // useHydrateAtoms(
@@ -99,7 +99,7 @@ export default function Mainsection({
       ) : (
         isMobile !== undefined &&
         isMobile === false && (
-          <div className="hidden md:flex relative w-full md:w-[50%] max-w-full sm:fixed right-0 z-0 border-1 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full w-full">
+          <div className="hidden md:flex relative  md:w-[50%] max-w-full sm:fixed right-0 z-0 border-1 border-black border-solid justify-center items-center overflow-hidden max-h-[70vh] h-full w-full">
             <Image
               priority
               src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/search-page/default-search-page-map.webp`}

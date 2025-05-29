@@ -32,6 +32,7 @@ export default async function Page({
 }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}`;
   const value = await findPathForProjectDetails(pathname);
+  console.log({ value });
   if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
   let serverData = null;
@@ -49,7 +50,11 @@ export default async function Page({
     const data = await getSearchData(
       filterValues.PG
         ? `&page=${filterValues.PG}`
-        : `&localities=${filterValues.LT}`
+        : `${
+            filterValues.LT
+              ? `&localities=${filterValues.LT}`
+              : `&projStatus=${filterValues.PS}`
+          }`
     );
     serverData = await data?.results;
     frontendFilters = {

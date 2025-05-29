@@ -26,15 +26,15 @@ module.exports = {
   generateRobotsTxt: false,
 
   additionalPaths: async (config) => {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/case-seo-page?size=30000`
-    );
-    const totalPages = res.data.totalPages;
+    // const res = await axios.post(
+    //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/case-seo-page?size=30000`
+    // );
+    // const totalPages = res.data.totalPages;
 
-    const sitemap = Array.from({ length: totalPages }).map((_, index) => ({
-      loc: `${process.env.NEXT_PUBLIC_URL}/dynamic-sitemap/${index + 1}.xml`,
-      lastmod: new Date().toISOString(),
-    }));
+    // const sitemap = Array.from({ length: totalPages }).map((_, index) => ({
+    //   loc: `${process.env.NEXT_PUBLIC_URL}/dynamic-sitemap/${index + 1}.xml`,
+    //   lastmod: new Date().toISOString(),
+    // }));
     return [
       {
         loc: `https://www.getrightproperty.com/residential/projects/bengaluru`,
@@ -101,7 +101,7 @@ module.exports = {
       //   loc: `${config.siteUrl}/dyanmic-sitemaps.xml`,
       //   lastmod: new Date().toISOString(),
       // },
-      ...sitemap,
+      // ...sitemap,
       // {
       //   loc: `${config.siteUrl}/dyanmic-sitemap/1.xml`,
       //   lastmod: new Date().toISOString(),

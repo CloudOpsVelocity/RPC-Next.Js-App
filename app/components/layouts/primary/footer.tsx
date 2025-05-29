@@ -77,15 +77,9 @@ function Footer() {
       hrefs: [
         "/residential-listings/for-sale",
         "/residential-listings/for-rent",
-        `/search?sf=projStatus=108${
-          pathname === "/search" ? "&client=true" : " "
-        }`,
-        `/search?sf=projStatus=106${
-          pathname === "/search" ? "&client=true" : " "
-        }`,
-        `/search?sf=projStatus=107${
-          pathname === "/search" ? "&client=true" : " "
-        }`,
+        `/residential/projects/bengaluru/new-lanch`,
+        `/search?sf=projStatus=106`,
+        `/search?sf=projStatus=107`,
         /* "/commercial",
         "/vacation-rentals",
         "/foreclosures", */
