@@ -72,8 +72,6 @@ export default function ListingSearchPagination({
     const pathWithPage = page === 1 ? basePath : `${basePath}/page-${page}`;
     return pathWithPage;
   };
-
-  console.log("p-7")
  
   return (
     <section 

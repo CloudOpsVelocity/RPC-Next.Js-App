@@ -88,8 +88,6 @@ export default function PaginationForListings({ totalCount }: Props) {
 
     return `/residential-listings?page=${page + 1}`;
   };
-
-  console.log("p-6")
  
   return (
     <>

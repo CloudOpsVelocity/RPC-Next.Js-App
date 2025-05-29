@@ -94,7 +94,7 @@ export default function ListingDetailsPage({
     ...params,
   };
 
-  console.log(data)
+  // console.log(data)
 
   // "5-bhk-villa-for-buy-sale-in-yellupura-bengaluru-683B-31P-SCG-570L-9C",
   const rentAndSaleTagUrls = [

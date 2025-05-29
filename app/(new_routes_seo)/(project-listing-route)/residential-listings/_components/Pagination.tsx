@@ -42,7 +42,6 @@ export default function PaginationForListings({ totalCount }: Props) {
   // };
 
   // Generate page numbers with ellipses when necessary
-  console.log("p-1")
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxPagesToShow = isMobile ? 5 : 9;

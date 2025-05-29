@@ -98,9 +98,6 @@ export default function ResidentialCardSection({
   });
   const type = "proj";
 
-  /*Tested jios test */
-  console.log("p-4")
-
   return (
     <>
       <section className="py-8 sm:py-14 container mx-auto px-4">

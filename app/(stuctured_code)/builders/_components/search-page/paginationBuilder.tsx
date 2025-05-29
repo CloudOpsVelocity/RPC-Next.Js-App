@@ -90,9 +90,6 @@ export default function PaginationForBuilder({  totalCount,
     return pageNumbers;
   };
 
-  console.log("p-9")
-
-
   return ( 
   
     <>

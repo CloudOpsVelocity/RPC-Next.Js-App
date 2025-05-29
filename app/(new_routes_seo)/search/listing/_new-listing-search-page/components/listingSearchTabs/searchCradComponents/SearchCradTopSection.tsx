@@ -85,7 +85,7 @@ export const ImageBlock: React.FC<SearchCardTopSectionLProps> = ({
           priority={isMobile && index === "0" ? true : false}
           width={300}
           height={300}
-          alt={projOrPropName}
+          alt={projOrPropName ? projOrPropName : "Project Cover image"}
           title={projOrPropName}
           aria-label={projOrPropName}
           className={Styles.searchCradImage} 

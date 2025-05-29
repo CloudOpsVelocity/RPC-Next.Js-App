@@ -38,8 +38,13 @@ export default function SearchCradBottomSection({
     city,
     projOrPropName,
     cityName,
+    // saleListing,
+    // rentListing
   } = data;
   const isMobile = useMediaQuery("(max-width: 1600px)");
+  const loca = locality ?? localityName;
+  const pName = projName ?? propName;
+  const cName = city ?? cityName;
 
   const textSlice = (word: string = "", url?: string) => {
     if (word === "") return;
@@ -63,16 +68,73 @@ export default function SearchCradBottomSection({
     ...(projName || propName
       ? [
           {
-            title: projName ?? propName,
+            title: pName,
             url:
               type !== "proj"
-                ? textSlice(projName ?? propName)
+                ? textSlice(pName)
                 : textSlice(projIdEnc),
           },
         ]
       : []),
     { title: locality ?? "", url: textSlice(locality) },
   ];
+
+  // const projTagUrls = [
+  //   ...(saleListing != "0" ? [{
+  //     title: "Listing for Sale",
+  //     url: 
+  //     `/${
+  //       pName.toLowerCase().replaceAll(" ", "-")
+  //     }-in-${
+  //       loca.toLowerCase().replaceAll(" ", "-")
+  //     }-for-buy-sale-in-${
+  //       cName.toLowerCase().replaceAll(" ", "-")
+  //     }-${data.cityId}C-SCG-${data.projIdEnc}PJ`
+  //   }] : []),
+
+  //   ...(rentListing != "0" ? [{
+  //     title: "Listing for Rent",
+  //     url: 
+  //     `/${
+  //       pName.toLowerCase().replaceAll(" ", "-")
+  //     }-in-${
+  //       loca.toLowerCase().replaceAll(" ", "-")
+  //     }-for-rent-in-${
+  //       cName.toLowerCase().replaceAll(" ", "-")
+  //     }-${data.cityId}C-RCG-${data.projIdEnc}PJ`
+  //   }] : []),
+  // ];
+
+  // const propTagUrls = [
+  //   {
+  //     title: data?.bhkName && data.propTypeName ? `${data?.bhkName} ${data.propTypeName} for ${data.cg == "R" ? "rent" : "sale"}` : "",
+  //     url: 
+  //       `/${
+  //         data.bhkName.toLowerCase().replaceAll(" ", "-")
+  //       }-${
+  //         data.propTypeName.toLowerCase().replaceAll(" ", "-")
+  //       }-for-${
+  //         data.cg == "R" ? "rent" : "buy-sale"
+  //       }-in-${
+  //         data.ltName.toLowerCase().replaceAll(" ", "-")
+  //       }-${
+  //         data.ctName.toLowerCase().replaceAll(" ", "-")
+  //       }-${data.bhkId}B-${data.propTypeId}P-${data.cg}CG-${data.localityId}L-${data.cityId}C`
+  //   },
+  //   {
+  //     title: data?.bhkName ? `${data?.bhkName} for ${data.cg == "R" ? "rent" : "sale"}` : "",
+  //     url: 
+  //       `/${
+  //         data.bhkName.toLowerCase().replaceAll(" ", "-")
+  //       }-for-${
+  //         data.cg == "R" ? "rent" : "buy-sale"
+  //       }-in-${
+  //         data.ltName.toLowerCase().replaceAll(" ", "-")
+  //       }-${
+  //         data.ctName.toLowerCase().replaceAll(" ", "-")
+  //       }-${data.bhkId}B-${data.cg}CG-${data.localityId}L-${data.cityId}C`
+  //   },
+  // ];
 
   const getlListingUrl = (bhk: string) => {
     const url = `/residential-listings/${
@@ -96,9 +158,7 @@ export default function SearchCradBottomSection({
 
   const phaseUrl = `/residential-listings/${
     cg === "R" ? "for-rent" : "for-sale"
-  }/${city ?? cityName}/${locality ?? localityName}/${
-    projName ?? propName
-  }/${phaseName}`
+  }/${cName}/${loca}/${pName}/${phaseName}`
     .replaceAll(" ", "-")
     .toLowerCase();
 

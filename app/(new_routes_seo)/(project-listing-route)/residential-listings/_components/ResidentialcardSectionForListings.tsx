@@ -100,7 +100,6 @@ export default function ResidentialCardSectionForListings({
   const type = "proj";
 
   /*Tested jios test */
-    console.log("p-2")
 
 
   return (

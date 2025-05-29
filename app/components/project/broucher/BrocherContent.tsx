@@ -224,15 +224,31 @@ function BrocherContent({
   //     });
   // };
 
-  async function downloadPDF(url: string, filename: string) {
+  // async function downloadPDF(url: string, filename: string) {
+  //   const link = document.createElement("a");
+  //   link.href = `/api/stream?url=${url}&filename=${filename}`;
+  //   // link.download = `${filename}.pdf`;
+  //   // document.body.appendChild(link);
+  //   link.click();
+  //   link.remove();
+  //   // await axios.get(`/api/stream?url=${url}`);
+  // }
+
+  function downloadPDF(url: string, filename: string) {
     const link = document.createElement("a");
-    link.href = `/api/stream?url=${url}&filename=${filename}`;
-    // link.download = `${filename}.pdf`;
-    // document.body.appendChild(link);
-    link.click();
-    link.remove();
-    // await axios.get(`/api/stream?url=${url}`);
+    link.href = `/api/stream?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}`;
+    link.download = filename;
+    link.style.display = "none";
+    document.body.appendChild(link);
+
+    // Use setTimeout to avoid possible duplicate click in some cases
+    setTimeout(() => {
+      link.click();
+      document.body.removeChild(link);
+    }, 100);
   }
+
+
 
   // Example usage:
   const router = useRouter();
@@ -254,7 +270,8 @@ function BrocherContent({
         );
         return;
       } */
-      await downloadPDF(url, `${projName}.pdf`); 
+      // await downloadPDF(url, `${projName}.pdf`); 
+      await downloadPDF("https://files.testfile.org/PDF/200MB-TESTFILE.ORG.pdf", `${projName}.pdf`);
       // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
     }
@@ -270,7 +287,7 @@ function BrocherContent({
       );
       return;
     } */
-    router.push(brocherPageUrl);
+    // router.push(brocherPageUrl);
   };
 
   const loadPDF = async (phase: ProjectPhase) => {
@@ -436,10 +453,10 @@ function BrocherContent({
                 aria-label="Click to download Brochure"
                 name="Click to download Brochure"
                 title="Click to download Brochure"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (singleBrocher) handleDownload(singleBrocher);
-                }}
+                // onClick={(e) => {
+                //   e.preventDefault();
+                //   if (singleBrocher) handleDownload(singleBrocher);
+                // }}
                 className="z-8 px-6 py-3 text-white rounded-lg bg-btnPrimary shadow-lg hover:bg-btnPrimary transition-colors"
               >
                 <span className="hidden sm:flex text-sm md:text-base font-semibold">
