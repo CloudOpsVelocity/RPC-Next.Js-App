@@ -51,7 +51,11 @@ function LeftSection({
   const state = useAtomValue(projSearchStore);
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
   const loadMoreRef = useRef<HTMLDivElement>(null);
-
+  /*
+1. BUG IS IDENTIFIED PROPERLY. ON SAME ROUTE CLICK ON FOOTER IT'S COMING SAME SO API IS NOT CALLING AGAIN.
+2. HOW TO FIX IT THAT I NEED TO FIND IT. 
+  
+  */
   const isTrue = it || apiFilterQueryParams !== preAppliedFilters;
 
   const {
@@ -140,34 +144,34 @@ function LeftSection({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const target = entries[0];
-        if (
-          target.isIntersecting &&
-          hasNextPage &&
-          shouldFetchMore &&
-          !isLoading
-        ) {
-          setIsTrue(true);
-          fetchNextPage();
-          setPage((prev) => prev + 1);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "100px",
-        threshold: 0.1,
-      }
-    );
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       const target = entries[0];
+  //       if (
+  //         target.isIntersecting &&
+  //         hasNextPage &&
+  //         shouldFetchMore &&
+  //         !isLoading
+  //       ) {
+  //         setIsTrue(true);
+  //         fetchNextPage();
+  //         setPage((prev) => prev + 1);
+  //       }
+  //     },
+  //     {
+  //       root: null,
+  //       rootMargin: "100px",
+  //       threshold: 0.1,
+  //     }
+  //   );
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
-    }
+  //   if (loadMoreRef.current) {
+  //     observer.observe(loadMoreRef.current);
+  //   }
 
-    return () => observer.disconnect();
-  }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
+  //   return () => observer.disconnect();
+  // }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
     apiFilterQueryParams === preAppliedFilters || typeof window === "undefined"
       ? mainData
@@ -198,7 +202,7 @@ function LeftSection({
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); 
+    setIsClient(true);
   }, []);
 
   return (
@@ -255,16 +259,16 @@ function LeftSection({
         <EmptyState />
       )}
 
-      <section 
+      <section
         className={!isClient ? "space" : "hidden"}
         aria-hidden={isClient ? "true" : undefined}
       >
         <ListingSearchPagination
-            searchQueryParmeter
-            currentPage={
-              frontendFilters.currentPage ? frontendFilters.currentPage : 1
-            }
-            totalCount={frontendFilters.totalCount ?? 0}
+          searchQueryParmeter
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage : 1
+          }
+          totalCount={frontendFilters.totalCount ?? 0}
         />
       </section>
 
