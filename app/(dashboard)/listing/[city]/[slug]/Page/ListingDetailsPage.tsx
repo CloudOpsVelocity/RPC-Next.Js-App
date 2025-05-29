@@ -100,14 +100,10 @@ export default function ListingDetailsPage({
   const rentAndSaleTagUrls = [
     {
       title:  data?.bhkName && data.propTypeName
-      ? `${data.bhkName} ${data.propTypeName} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
+      ? `${data.bhkName ?? ''} ${data.propTypeName} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
       : "",
       url: 
-        `/${
-          data.bhkName.toLowerCase().replaceAll(" ", "-")
-        }-${
-          data.propTypeName.toLowerCase().replaceAll(" ", "-")
-        }-for-${
+        `/${data.bhkName ? `${data.bhkName.toLowerCase().replaceAll(" ", "-")}-` : ""}${data.propTypeName.toLowerCase().replaceAll(" ", "-")}-for-${
           data.cg == "R" ? "rent" : "buy-sale"
         }-in-${
           data.ltName.toLowerCase().replaceAll(" ", "-")
@@ -117,12 +113,12 @@ export default function ListingDetailsPage({
     },
     {
       title: data?.bhkName
-      ? `${data.bhkName} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
+      ? `${data.bhkName ?? ''} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
       : "",
       url: 
         `/${
-          data.bhkName.toLowerCase().replaceAll(" ", "-")
-        }-for-${
+          data.bhkName ? `${data.bhkName.toLowerCase().replaceAll(" ", "-")}-` : ""
+        }for-${
           data.cg == "R" ? "rent" : "buy-sale"
         }-in-${
           data.ltName.toLowerCase().replaceAll(" ", "-")
