@@ -11,7 +11,7 @@ export default function Ratings({ slug }: { slug: string }) {
         ? "..."
         : `${
             data?.reviewOverviewData?.averageRating
-              ? `${data?.reviewOverviewData?.averageRating}`
+              ? `${(data?.reviewOverviewData?.averageRating.toFixed(1)) }`
               : "No"
           }`}{" "}
       Ratings
