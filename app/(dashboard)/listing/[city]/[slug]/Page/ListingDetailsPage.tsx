@@ -97,19 +97,38 @@ export default function ListingDetailsPage({
   console.log(data)
 
   // "5-bhk-villa-for-buy-sale-in-yellupura-bengaluru-683B-31P-SCG-570L-9C",
-  // const rentAndSaleTagUrls = [
-  //   {
-  //     title: data?.bhkName ?? "",
-  //     url: 
-  //       `/${
-  //         data.projectName.toLowerCase().replaceAll(" ", "-")
-  //       }-in-${
-  //         data.localityName.toLowerCase().replaceAll(" ", "-")
-  //       }-for-buy-sale-in-${
-  //         data.cityName.toLowerCase().replaceAll(" ", "-")
-  //       }-${data.cityId}C-SCG-${data.projIdEnc}PJ`
-  //   },
-  // ];
+  const rentAndSaleTagUrls = [
+    {
+      title: data?.bhkName && data.propTypeName ? `${data?.bhkName} ${data.propTypeName} for ${data.cg == "R" ? "rent" : "sale"}` : "",
+      url: 
+        `/${
+          data.bhkName.toLowerCase().replaceAll(" ", "-")
+        }-${
+          data.propTypeName.toLowerCase().replaceAll(" ", "-")
+        }-for-${
+          data.cg == "R" ? "rent" : "buy-sale"
+        }-in-${
+          data.ltName.toLowerCase().replaceAll(" ", "-")
+        }-${
+          data.ctName.toLowerCase().replaceAll(" ", "-")
+        }-${data.bhkId}B-${data.propTypeId}P-${data.cg}CG-${data.localityId}L-${data.cityId}C`
+    },
+    {
+      title: data?.bhkName ? `${data?.bhkName} for ${data.cg == "R" ? "rent" : "sale"}` : "",
+      url: 
+        `/${
+          data.bhkName.toLowerCase().replaceAll(" ", "-")
+        }-for-${
+          data.cg == "R" ? "rent" : "buy-sale"
+        }-in-${
+          data.ltName.toLowerCase().replaceAll(" ", "-")
+        }-${
+          data.ctName.toLowerCase().replaceAll(" ", "-")
+        }-${data.bhkId}B-${data.cg}CG-${data.localityId}L-${data.cityId}C`
+    },
+  ];
+
+  // -in-
 
   const getUrls = (pathname: string) => {
     const routes = pathname.split("/").filter(Boolean);
@@ -380,7 +399,7 @@ export default function ListingDetailsPage({
             title: `Other Projects by ${data.postedByName}`,
           }}
         />
-        <TagsSections urls={getUrls(pathname)} />
+        <TagsSections urls={[...getUrls(pathname), ...rentAndSaleTagUrls]} />
         {/* )} */}
         <PriceBreakup
           otherPrice={data.otherPrice}
