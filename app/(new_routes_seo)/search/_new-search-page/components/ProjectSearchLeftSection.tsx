@@ -13,7 +13,7 @@ import {
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 // import { getAllAuthorityNames } from "@/app/utils/api/project";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import FloatingArrowIcon from "./ProjectSearchTabs/FloatingArrowIcon";
 import selectedSearchAtom, { selectedNearByAtom } from "@/app/store/search/map";
 import { useMediaQuery } from "@mantine/hooks";
@@ -47,16 +47,18 @@ function LeftSection({
   const [page, setPage] = useState(0);
   const [shouldFetchMore, setShouldFetchMore] = useState(true);
   const [mainData, setMainData] = useState<any>(serverData || []);
+  const paramGetter = useSearchParams();
   const pathname = usePathname();
   const state = useAtomValue(projSearchStore);
   const [{ allMarkerRefs }, setNearby] = useAtom(selectedNearByAtom);
   const loadMoreRef = useRef<HTMLDivElement>(null);
+  const client = !!paramGetter.get("client");
   /*
 1. BUG IS IDENTIFIED PROPERLY. ON SAME ROUTE CLICK ON FOOTER IT'S COMING SAME SO API IS NOT CALLING AGAIN.
 2. HOW TO FIX IT THAT I NEED TO FIND IT. 
   
   */
-  const isTrue = it || apiFilterQueryParams !== preAppliedFilters;
+  const isTrue = it || apiFilterQueryParams !== preAppliedFilters || client;
 
   const {
     data,
@@ -173,7 +175,8 @@ function LeftSection({
   //   return () => observer.disconnect();
   // }, [hasNextPage, shouldFetchMore, isLoading, fetchNextPage, setIsTrue]);
   const dataToUse =
-    apiFilterQueryParams === preAppliedFilters || typeof window === "undefined"
+    (apiFilterQueryParams === preAppliedFilters && !client) ||
+    typeof window === "undefined"
       ? mainData
       : data && data?.pageParams?.length > 0
       ? data?.pages.flat()

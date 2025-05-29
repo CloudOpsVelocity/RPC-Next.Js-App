@@ -45,6 +45,8 @@ function Footer() {
       link: "https://www.linkedin.com/company/get-right-property/",
     },
   ];
+
+  const pathname = usePathname();
   const sections = [
     {
       title: "New Projects",
@@ -75,9 +77,15 @@ function Footer() {
       hrefs: [
         "/residential-listings/for-sale",
         "/residential-listings/for-rent",
-        "/search?sf=projStatus=108",
-        "/search?sf=projStatus=106",
-        "/search?sf=projStatus=107",
+        `/search?sf=projStatus=108${
+          pathname === "/search" ? "&client=true" : " "
+        }`,
+        `/search?sf=projStatus=106${
+          pathname === "/search" ? "&client=true" : " "
+        }`,
+        `/search?sf=projStatus=107${
+          pathname === "/search" ? "&client=true" : " "
+        }`,
         /* "/commercial",
         "/vacation-rentals",
         "/foreclosures", */
@@ -182,7 +190,6 @@ function Footer() {
       target: "_self",
     },
   ];
-  const pathname = usePathname();
   return (
     ![
       "/login",

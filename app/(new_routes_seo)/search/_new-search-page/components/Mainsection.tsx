@@ -2,13 +2,15 @@
 // import { useHydrateAtoms } from "jotai/utils";
 import dynamic from "next/dynamic";
 import { useQueryState } from "nuqs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  initialState,
+  projSearchStore,
   // projSearchStore,
   searchPageMapToggle,
 } from "../../store/newSearchProjectStore";
 import Image from "next/image";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { useMediaQuery } from "@mantine/hooks";
 import LeftSection from "../components/ProjectSearchLeftSection";
 import { useRouter } from "next/navigation";
@@ -28,7 +30,17 @@ export default function Mainsection({
   preAppliedFilters = null,
 }: Props) {
   const [apiFilterQueryParams] = useQueryState("sf");
+  const setStore = useSetAtom(projSearchStore);
   const [isMapLoaded, setIsMapLoaded] = useAtom(searchPageMapToggle);
+  useEffect(() => {
+    setStore({
+      type: "update",
+      payload: {
+        ...initialState,
+        ...frontendFilters,
+      },
+    });
+  }, [frontendFilters]);
   const isMobile = useMediaQuery("(max-width: 601px)");
   // const filtersData = Object.assign(frontendFilters, initialState);
   // useHydrateAtoms(
