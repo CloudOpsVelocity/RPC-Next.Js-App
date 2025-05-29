@@ -3,6 +3,8 @@ import Image from "next/image";
 export default function NotFound() {
   return (
     <div className=" h-screen flex justify-center items-center flex-col pb-10 ">
+      <meta name="robots" content="noindex, nofollow" />
+
       <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/page-not-found/pagenotfound.png`}
         width={800}
