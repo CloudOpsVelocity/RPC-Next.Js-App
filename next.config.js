@@ -93,7 +93,7 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? true : false,
   },
-  productionBrowserSourceMaps: true,
+  // productionBrowserSourceMaps: true,
 };
 
 // module.exports = withBundleAnalyzer(withMDX(nextConfig));

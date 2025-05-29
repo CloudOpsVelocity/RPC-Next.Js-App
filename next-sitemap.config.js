@@ -84,6 +84,19 @@ module.exports = {
         loc: `https://www.getrightproperty.com/builder-sitemap.xml`,
         lastmod: new Date().toISOString(),
       },
+      {
+        loc: `https://www.getrightproperty.com/residential/projects/bengaluru/new-launch`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential/projects/bengaluru/ready-to-move`,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        loc: `https://www.getrightproperty.com/residential/projects/bengaluru/on-going`,
+        lastmod: new Date().toISOString(),
+      },
+
       // {
       //   loc: `https://www.getrightproperty.com/residential-listings/for-rent`,
       //   lastmod: new Date().toISOString(),

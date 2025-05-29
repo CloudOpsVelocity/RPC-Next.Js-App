@@ -162,35 +162,40 @@ export default async function page(props: Props) {
   const imageUrl = data?.media?.coverImageUrl?.split(",")[1];
   const scrollId = undefined;
   const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
-  
+
   // `myhna-maple-in-varthur-for-buy-sale-in-bengaluru-9C-SCG-683963c00f58d097af3134ae674a62b6PJ`
   // myhna-maple-in-varthur-for-rent-in-bengaluru-9C-RCG-683963c00f58d097af3134ae674a62b6PJ
   const rentAndSaleTagUrls = [
-    ...(data.saleListing != "0" ? [{
-      title: "Listing for Sale",
-      url: 
-      `/${
-        data.projectName.toLowerCase().replaceAll(" ", "-")
-      }-in-${
-        data.localityName.toLowerCase().replaceAll(" ", "-")
-      }-for-buy-sale-in-${
-        data.cityName.toLowerCase().replaceAll(" ", "-")
-      }-${data.cityId}C-SCG-${data.projIdEnc}PJ`
-    }] : []),
+    ...(data.saleListing != "0"
+      ? [
+          {
+            title: `${data.projectName} in ${data.localityName}, ${data.cityName} - For Sale`,
+            url: `/${data.projectName
+              .toLowerCase()
+              .replaceAll(" ", "-")}-in-${data.localityName
+              .toLowerCase()
+              .replaceAll(" ", "-")}-for-buy-sale-in-${data.cityName
+              .toLowerCase()
+              .replaceAll(" ", "-")}-${data.cityId}C-SCG-${data.projIdEnc}PJ`,
+          },
+        ]
+      : []),
 
-    ...(data.rentListing != "0" ? [{
-      title: "Listing for Rent",
-      url: 
-      `/${
-        data.projectName.toLowerCase().replaceAll(" ", "-")
-      }-in-${
-        data.localityName.toLowerCase().replaceAll(" ", "-")
-      }-for-rent-in-${
-        data.cityName.toLowerCase().replaceAll(" ", "-")
-      }-${data.cityId}C-RCG-${data.projIdEnc}PJ`
-    }] : []),
+    ...(data.rentListing != "0"
+      ? [
+          {
+            title: `${data.projectName} in ${data.localityName}, ${data.cityName} - For Rent`,
+            url: `/${data.projectName
+              .toLowerCase()
+              .replaceAll(" ", "-")}-in-${data.localityName
+              .toLowerCase()
+              .replaceAll(" ", "-")}-for-rent-in-${data.cityName
+              .toLowerCase()
+              .replaceAll(" ", "-")}-${data.cityId}C-RCG-${data.projIdEnc}PJ`,
+          },
+        ]
+      : []),
   ];
-
 
   const getUrls = (pathname: string) => {
     const routes = pathname.split("/").filter(Boolean);

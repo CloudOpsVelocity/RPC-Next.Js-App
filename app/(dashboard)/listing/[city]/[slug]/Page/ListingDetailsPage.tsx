@@ -99,7 +99,9 @@ export default function ListingDetailsPage({
   // "5-bhk-villa-for-buy-sale-in-yellupura-bengaluru-683B-31P-SCG-570L-9C",
   const rentAndSaleTagUrls = [
     {
-      title: data?.bhkName && data.propTypeName ? `${data?.bhkName} ${data.propTypeName} for ${data.cg == "R" ? "rent" : "sale"}` : "",
+      title:  data?.bhkName && data.propTypeName
+      ? `${data.bhkName} ${data.propTypeName} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
+      : "",
       url: 
         `/${
           data.bhkName.toLowerCase().replaceAll(" ", "-")
@@ -114,7 +116,9 @@ export default function ListingDetailsPage({
         }-${data.bhkId}B-${data.propTypeId}P-${data.cg}CG-${data.localityId}L-${data.cityId}C`
     },
     {
-      title: data?.bhkName ? `${data?.bhkName} for ${data.cg == "R" ? "rent" : "sale"}` : "",
+      title: data?.bhkName
+      ? `${data.bhkName} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
+      : "",
       url: 
         `/${
           data.bhkName.toLowerCase().replaceAll(" ", "-")
