@@ -99,21 +99,21 @@ export default function ListingDetailsPage({
   // "5-bhk-villa-for-buy-sale-in-yellupura-bengaluru-683B-31P-SCG-570L-9C",
   const rentAndSaleTagUrls = [
     {
-      title:  data?.bhkName && data.propTypeName
+      title:   data.propTypeName
       ? `${data.bhkName ?? ''} ${data.propTypeName} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
       : "",
       url: 
-        `/${data.bhkName ? `${data.bhkName.toLowerCase().replaceAll(" ", "-")}-` : ""}${data.propTypeName.toLowerCase().replaceAll(" ", "-")}-for-${
+        `/${data.bhkName ? `${data.bhkName.toLowerCase().replaceAll(" ", "-")}-` : ""}${data.propTypeName.toLowerCase().replaceAll(" ", "-") ?? ''}-for-${
           data.cg == "R" ? "rent" : "buy-sale"
         }-in-${
           data.ltName.toLowerCase().replaceAll(" ", "-")
         }-${
           data.ctName.toLowerCase().replaceAll(" ", "-")
-        }-${data.bhkId}B-${data.propTypeId}P-${data.cg}CG-${data.localityId}L-${data.cityId}C`
+        }-${data.bhkId ? `${data.bhkId}B-` : ''}${data.propTypeId ? `${data.propTypeId}P-` : ''}${data.cg}CG-${data.localityId}L-${data.cityId}C`
     },
-    {
+...(data.bhkName ? [{
       title: data?.bhkName
-      ? `${data.bhkName ?? ''} in ${data.ltName}, ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
+      ? `${data.bhkName ?? ''} in ${data.ltName},  ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
       : "",
       url: 
         `/${
@@ -124,8 +124,8 @@ export default function ListingDetailsPage({
           data.ltName.toLowerCase().replaceAll(" ", "-")
         }-${
           data.ctName.toLowerCase().replaceAll(" ", "-")
-        }-${data.bhkId}B-${data.cg}CG-${data.localityId}L-${data.cityId}C`
-    },
+        }-${data.bhkId ? `${data.bhkId}B-` : ''}${data.propTypeId ? `${data.propTypeId}P-` : ''}${data.cg}CG-${data.localityId ? `${data.localityId}L-` : ''}-${data.cityId}C`
+    }] : [] )
   ];
 
   // -in-
