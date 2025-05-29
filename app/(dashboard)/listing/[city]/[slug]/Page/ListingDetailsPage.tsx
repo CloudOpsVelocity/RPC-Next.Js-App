@@ -109,8 +109,8 @@ export default function ListingDetailsPage({
           data.ltName.toLowerCase().replaceAll(" ", "-")
         }-${
           data.ctName.toLowerCase().replaceAll(" ", "-")
-        }-${data.bhkId ? `${data.bhkId}B-` : ''}${data.propTypeId ? `${data.propTypeId}P-` : ''}${data.cg}CG-${data.localityId}L-${data.cityId}C`
-    },
+        }-${data.bhkId ? `${data.bhkId}B-` : ''}${data.propTypeId ? `${data.propTypeId}P-` : ''}${data.cg}CG-${data.localityId ? `${data.localityId}L` : ''}-${data.cityId}C`
+    },  
 ...(data.bhkName ? [{
       title: data?.bhkName
       ? `${data.bhkName ?? ''} in ${data.ltName},  ${data.ctName} for ${data.cg === "R" ? "Rent" : "Sale"}`
@@ -124,7 +124,7 @@ export default function ListingDetailsPage({
           data.ltName.toLowerCase().replaceAll(" ", "-")
         }-${
           data.ctName.toLowerCase().replaceAll(" ", "-")
-        }-${data.bhkId ? `${data.bhkId}B-` : ''}${data.propTypeId ? `${data.propTypeId}P-` : ''}${data.cg}CG-${data.localityId ? `${data.localityId}L-` : ''}-${data.cityId}C`
+        }-${data.bhkId ? `${data.bhkId}B-` : ''}${data.cg}CG-${data.localityId ? `${data.localityId}L` : ''}-${data.cityId}C`
     }] : [] )
   ];
 
