@@ -58,7 +58,9 @@ export default async function Page({
     );
     serverData = await data?.results;
     frontendFilters = {
-      localities: [`${lt}+${filterValues.LT}`],
+      ...(filterValues.LT
+        ? { localities: [`${lt}+${filterValues.LT}`] }
+        : { projStatus: parseInt(filterValues.PS as string) }),
       cg: filterValues.CG,
       listedBy: null,
       currentPage: filterValues.PG ? parseInt(filterValues.PG as string) : null,
@@ -71,7 +73,7 @@ export default async function Page({
       serverData={serverData}
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
-      serverFilterString={`&localities=${filterValues.LT}`}
+      serverFilterString={ filterValues.LT ? `&localities=${filterValues.LT}` : `&projStatus=${filterValues.PS}`}
     />
   );
 }
