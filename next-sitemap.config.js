@@ -143,18 +143,18 @@ module.exports = {
       //   loc: `${config.siteUrl}/dyanmic-sitemap/7.xml`,
       //   lastmod: new Date().toISOString(),
       // },
-      {
-        loc: `${config.siteUrl}/search?sf=projStatus=106`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/search?sf=projStatus=107`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/search?sf=projStatus=108`,
-        lastmod: new Date().toISOString(),
-      },
+      // {
+      //   loc: `${config.siteUrl}/search?sf=projStatus=106`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/search?sf=projStatus=107`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/search?sf=projStatus=108`,
+      //   lastmod: new Date().toISOString(),
+      // },
     ];
   },
 };
