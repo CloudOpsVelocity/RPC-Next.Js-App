@@ -78,8 +78,8 @@ function Footer() {
         "/residential-listings/for-sale",
         "/residential-listings/for-rent",
         `/residential/projects/bengaluru/new-lanch`,
-        `/search?sf=projStatus=106`,
-        `/search?sf=projStatus=107`,
+        `/residential/projects/bengaluru/on-going`,
+        `/residential/projects/bengaluru/ready-to-move`,
         /* "/commercial",
         "/vacation-rentals",
         "/foreclosures", */
