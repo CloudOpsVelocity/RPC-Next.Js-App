@@ -4,11 +4,13 @@ import styles from "@/app/styles/Rating.module.css";
 interface StarRatingProps {
   onChange?: (rating: number) => void;
   initialRating?: number;
+  className?: string;
 }
 
 const RatingStars: React.FC<StarRatingProps> = ({
   onChange,
   initialRating = 0,
+  className
 }) => {
   const [rating, setRating] = useState(initialRating);
 
@@ -29,7 +31,7 @@ const RatingStars: React.FC<StarRatingProps> = ({
             checked={rating === star}
             onChange={() => handleChange(star)}
           />
-          <label htmlFor={`star${star}`}>&#9733;</label>
+          <label className={className} htmlFor={`star${star}`}>&#9733;</label>
         </Fragment>
       ))}
     </div>

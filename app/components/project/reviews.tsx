@@ -1,18 +1,157 @@
 "use client";
-import "@mantine/carousel/styles.css";
-import { Carousel } from "@mantine/carousel";
+// import { Carousel } from "@mantine/carousel";
 import React from "react";
 import {
-  NextCarouselButton,
-  PrevCarouselButton,
+  // NextCarouselButton,
+  // PrevCarouselButton,
   quotesIcon,
 } from "@/app/images/commonSvgs";
-import { Rating, em } from "@mantine/core";
 import useRatings from "@/app/hooks/useRatings";
 import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import S from "@/app/styles/Rating.module.css";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
+import RatingStars from "@/common/components/RatingStars";
+import CardsCarousal from "@/common/components/CardsCarousal";
+
+const reviewsData = [
+  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},
+  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},  {
+    "reviewDate": "2025-05-29T10:22:07.000+00:00",
+    "userRating": 4,
+    "userName": "Rajyashree Builder",
+    "userReview": "brigade el dorado",
+    "postedDays": "0"
+},
+
+]
+
 export default function Reviews({
   projName,
   projIdEnc,
@@ -22,8 +161,9 @@ export default function Reviews({
 }) {
   const [, { open }] = usePopUpRatings();
   const { data } = useRatings(projIdEnc);
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
   const { data: rData } = useDynamicProj(projIdEnc);
+  console.log("review: 1")
   return (
     data?.status &&
     data?.reviewDataList?.filter((item: any) => item.userReview).length !==
@@ -52,7 +192,7 @@ export default function Reviews({
             )}
           </div>
           <div className="relative w-[96%] mx-auto px-6">
-            <Carousel
+            {/* <Carousel
               nextControlIcon={<NextCarouselButton />}
               previousControlIcon={<PrevCarouselButton />}
               slideGap={"md"}
@@ -79,7 +219,18 @@ export default function Reviews({
                     <Review {...eachData} />
                   </Carousel.Slide>
                 ))}
-            </Carousel>
+            </Carousel> */}
+            <CardsCarousal
+                key="handPickedProjectsCon"
+                allCards={reviewsData
+                ?.filter((item: any) => item.userReview).map((eachData: any) => (
+                    <Review {...eachData} />
+                ))}
+                dataLength={data?.reviewDataList.length}
+                // scrollSize={isTab ? 503 : 631}
+                gap={20}
+                containerClass={`w-full h-[300px] md:h-[250px] px-0 md:px-[20px] xl:px-[30px]   `}
+            />
           </div>
         </div>
       </div>
@@ -89,27 +240,28 @@ export default function Reviews({
 
 const Review = ({ userRating, userName, userReview, postedDays }: any) => {
   return (
-    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] md:max-w-lg mx-auto mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
+    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] min-w-[335px] md:max-w-lg mt-[20px] bg-[#fff] p-4 relative min-h-[160px] md:min-h-[200px] border rounded-[10px] border-solid border-[#DCE6ED]">
       <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
-      <div className="flex items-center space-x-2 mt-8">
+      <div className="flex items-center space-x-2 mt-4 md:mt-8">
         <div className="flex-1">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center gap-[20px] ">
             <div>
-              <p className="text-black text-lg not-italic font-medium leading-[normal]">
+              <p className="text-black text-[16px] md:text-[18px] not-italic font-medium leading-[normal]">
                 {userName ?? "GRP USER"}
               </p>
-              <p className="text-[#0073C6] text-base not-italic font-medium leading-[normal]">
+              <p className="text-[#0073C6]  text-[16px] md:text-[18px] not-italic font-medium leading-[normal]">
                 Grp User
               </p>
             </div>
-            <div className="text-right">
-              <Rating size={"sm"} value={userRating} readOnly />
-              <span className="text-xs text-gray-500">
-                {postedDays} days ago
+            <div className="text-right flex flex-col align-right ">
+              {/* <Rating size={"sm"} value={userRating} readOnly /> */}
+              <RatingStars initialRating={userRating} className="text-[20px]" />
+              <span className=" text-[12px] md:text-[14px] text-gray-500">
+                {postedDays == "0" ? "Today" : `${postedDays} days ago`} 
               </span>
             </div>
           </div>
-          <p className="mt-2 text-[#3E3E3E] text-base not-italic font-normal leading-[normal] tracking-[0.56px]">
+          <p className="mt-2 text-[#3E3E3E]  text-[16px] md:text-[18px] not-italic font-normal leading-[normal] tracking-[0.56px]">
             {userReview}
           </p>
         </div>

@@ -1,18 +1,17 @@
 "use client";
 import "@mantine/carousel/styles.css";
-import { Carousel } from "@mantine/carousel";
 import React from "react";
 import {
-  NextCarouselButton,
-  PrevCarouselButton,
+  // NextCarouselButton,
+  // PrevCarouselButton,
   quotesIcon,
 } from "@/app/images/commonSvgs";
-import { Rating } from "@mantine/core";
-// import { useParams } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
-import S from "@/app/styles/Rating.module.css";
+// import S from "@/app/styles/Rating.module.css";
 import usePropRatings from "@/app/hooks/property/useRating";
+import RatingStars from "@/common/components/RatingStars";
+import CardsCarousal from "@/common/components/CardsCarousal";
 export default function Reviews({
   projName,
   slug,
@@ -23,6 +22,8 @@ export default function Reviews({
   const [, { open }] = usePopUpRatings();
   const { data } = usePropRatings({ slug });
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  console.log("review: 2")
+
   return (
     data?.status && (
       <div id="ratings" className="bg-[#FFF] scroll-mt-[100px] py-12 w-full ">
@@ -47,7 +48,7 @@ export default function Reviews({
             </div>
           </div>
           <div className="relative sm:w-[96%] mx-auto px-2 sm:px-6">
-            <Carousel
+            {/* <Carousel
               nextControlIcon={<NextCarouselButton />}
               previousControlIcon={<PrevCarouselButton />}
               slideGap={"md"}
@@ -75,7 +76,18 @@ export default function Reviews({
                   <Review {...eachData} />
                 </Carousel.Slide>
               ))}
-            </Carousel>
+            </Carousel> */}
+            <CardsCarousal
+                key="handPickedProjectsCon"
+                allCards={data?.reviewDataList
+                  ?.filter((item: any) => item.userReview).map((eachData: any) => (
+                      <Review {...eachData} />
+                  ))}
+                dataLength={data?.reviewDataList.length}
+                // scrollSize={isTab ? 503 : 631}
+                gap={20}
+                containerClass="w-full px-[30px]  "
+            />
           </div>
         </div>
       </div>
@@ -85,7 +97,7 @@ export default function Reviews({
 
 const Review = ({ rating, review, name, days }: any) => {
   return (
-    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] max-w-lg mx-auto mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
+    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] max-w-lg mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
       <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
       <div className="flex items-center space-x-2 mt-8">
         <div className="flex-1">
@@ -97,7 +109,8 @@ const Review = ({ rating, review, name, days }: any) => {
               <p className="text-[14px] text-[#212C33] font-[500]">Grp User</p>
             </div>
             <div className="text-right">
-              <Rating size={"sm"} value={rating} readOnly />
+              {/* <Rating size={"sm"} value={rating} readOnly /> */}
+              <RatingStars initialRating={rating} />
               <span className="text-xs text-gray-500">{days} days ago</span>
             </div>
           </div>

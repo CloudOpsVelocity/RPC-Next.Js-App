@@ -270,8 +270,7 @@ function BrocherContent({
         );
         return;
       } */
-      // await downloadPDF(url, `${projName}.pdf`); 
-      await downloadPDF("https://files.testfile.org/PDF/200MB-TESTFILE.ORG.pdf", `${projName}.pdf`);
+      await downloadPDF(url, `${projName}.pdf`); 
       // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
     }
