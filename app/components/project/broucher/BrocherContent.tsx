@@ -20,7 +20,7 @@ import { useMediaQuery } from "@mantine/hooks";
 // import { useSession } from "next-auth/react";
 // import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Image from "next/image";
-import axios from "axios";
+// import axios from "axios";
 import { useRouter } from "next/navigation";
 // import SubHeading from "../headings/SubHeading";
 // import PropertyHeading from "../../property/heading";
