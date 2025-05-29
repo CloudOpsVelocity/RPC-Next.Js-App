@@ -77,7 +77,7 @@ function Footer() {
       hrefs: [
         "/residential-listings/for-sale",
         "/residential-listings/for-rent",
-        `/residential/projects/bengaluru/new-lanch`,
+        `/residential/projects/bengaluru/new-launch`,
         `/residential/projects/bengaluru/on-going`,
         `/residential/projects/bengaluru/ready-to-move`,
         /* "/commercial",
