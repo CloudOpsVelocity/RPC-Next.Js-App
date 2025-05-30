@@ -19,7 +19,7 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
             }}
         >{downLoadIcon}</button> */}
 
-        <DetailsSection data={data} />
+        <DetailsSection data={data} /> 
 
         <Image
             src={floorplanUrl}
