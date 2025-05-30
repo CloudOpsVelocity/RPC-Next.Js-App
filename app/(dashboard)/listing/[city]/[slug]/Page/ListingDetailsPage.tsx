@@ -252,30 +252,49 @@ export default function ListingDetailsPage({
       faqQuestion: `2. Is ${data?.propName} a good option to ${
         data?.cg === "S" ? "buy" : "rent"
       } a home in ${data?.ltName}, ${data?.ctName}?`,
-      faqAnswer: `${data?.propName} offers a ${data?.bhkName?.toLowerCase()} ${
-        data?.propTypeName
-      } that is ${data?.furnshName?.toLowerCase()}. It's located in ${
-        data?.ltName
-      }, a rapidly developing area in ${data?.ctName}. ${
-        data?.ageofBuilding
-          ? `The property is ${data?.ageofBuilding} old and ${
-              data?.availablityStatus === "R"
-                ? "ready for possession"
-                : "currently under construction"
-            }.`
-          : ""
-      }`,
+      faqAnswer:
+        data?.propTypeName?.toLowerCase() === "plot"
+          ? `${data?.propName} is a ${
+              data?.isCornerPlot ? "corner plot" : "plot"
+            } of area ${data?.plotArea ?? "unspecified"} sqft located in ${
+              data?.ltName
+            }, ${data?.ctName}. It has ${
+              data?.noOfOpenSide ?? "an unspecified number of"
+            } open sides and ${
+              data?.boundryWallEnclose
+                ? "is enclosed with a boundary wall."
+                : "no boundary wall."
+            }`
+          : `${data?.propName} offers a ${data?.bhkName?.toLowerCase()} ${
+              data?.propTypeName
+            } that is ${data?.furnshName?.toLowerCase()}. It's located in ${
+              data?.ltName
+            }, a rapidly developing area in ${data?.ctName}. ${
+              data?.ageofBuilding
+                ? `The property is ${data?.ageofBuilding} old and ${
+                    data?.availablityStatus === "R"
+                      ? "ready for possession"
+                      : "currently under construction"
+                  }.`
+                : ""
+            }`,
     },
+
     {
       qnaId: null,
       faqQuestion: `3. What amenities are available at ${data?.propName}?`,
-      faqAnswer: `This ${data?.bhkName} ${
-        data?.propTypeName
-      } includes features such as ${
-        data?.amenities?.length > 0
-          ? `over ${data?.amenities?.length} modern amenities including clubhouse, security, lifts, and more.`
-          : `basic facilities and a comfortable living environment.`
-      }`,
+      faqAnswer:
+        data?.propTypeName?.toLowerCase() === "plot"
+          ? data?.amenities?.length > 0
+            ? `This plot includes ${data?.amenities.join(", ")}.` // list whatever amenities exist for plot
+            : `This plot is an open land with basic facilities.`
+          : `This ${data?.bhkName} ${
+              data?.propTypeName
+            } includes features such as ${
+              data?.amenities?.length > 0
+                ? `over ${data?.amenities.length} modern amenities including clubhouse, security, lifts, and more.`
+                : `basic facilities and a comfortable living environment.`
+            }`,
     },
     {
       qnaId: null,
@@ -285,7 +304,23 @@ export default function ListingDetailsPage({
     {
       qnaId: null,
       faqQuestion: `5. Who is the owner of ${newTitle}?`,
-      faqAnswer: `This property is listed by ${data?.postedByName}, who is an individual owner. Direct owner listings ensure better transparency and price negotiation.`,
+      faqAnswer: `This property is listed by ${data?.postedByName}, who is ${
+        data?.postedByType === "I"
+          ? "an individual owner"
+          : data?.postedByType === "A"
+          ? "an agent"
+          : data?.postedByType === "B"
+          ? "the builder"
+          : "a verified seller"
+      }. ${
+        data?.postedByType === "I"
+          ? "Direct owner listings ensure better transparency and price negotiation."
+          : data?.postedByType === "A"
+          ? "You can contact the agent for assistance and negotiations."
+          : data?.postedByType === "B"
+          ? "Buy directly from the builder with assured quality and compliance."
+          : ""
+      }`,
     },
     {
       qnaId: null,
@@ -309,16 +344,62 @@ export default function ListingDetailsPage({
     },
     {
       qnaId: null,
-      faqQuestion: `8. What is the carpet and super built-up area of ${newTitle}?`,
-      faqAnswer: `${data?.propName} offers a carpet area of ${data?.ca} sqft and a super built-up area of ${data?.sba} sqft. The apartment is west-facing and located on floor ${data?.atFloor} of ${data?.totalFloor}.`,
+      faqQuestion:
+        data?.propTypeName?.toLowerCase() === "plot"
+          ? `9. What is the plot area and construction details of ${data?.propName}?`
+          : `9. How is the furnishing and flooring in ${data?.propName}?`,
+      faqAnswer:
+        data?.propTypeName?.toLowerCase() === "plot"
+          ? `${data?.propName} is a plot with an area of ${
+              data?.plotArea ? data.plotArea + " sqft" : "unspecified size"
+            }.${
+              data?.boundryWallEnclose
+                ? " It has a boundary wall enclosed."
+                : ""
+            }${data?.isCornerPlot ? " It is a corner plot." : ""}${
+              data?.noOfOpenSide
+                ? ` The plot is open on ${data.noOfOpenSide} side${
+                    data.noOfOpenSide > 1 ? "s" : ""
+                  }.`
+                : ""
+            }`
+          : `${data?.propName} offers a carpet area of ${
+              data?.ca ?? "unspecified"
+            } sqft and a super built-up area of ${
+              data?.sba ?? "unspecified"
+            } sqft. The apartment is ${
+              data?.facingName ?? "unspecified facing"
+            } facing and located on floor ${
+              data?.atFloor === 0 ? "Ground" : data?.atFloor ?? "unspecified"
+            } of ${data?.totalFloor ?? "unspecified floors"}.`,
     },
     {
       qnaId: null,
-      faqQuestion: `9. How is the furnishing and flooring in ${data?.propName}?`,
-      faqAnswer: `This apartment is ${data?.furnshName?.toLowerCase()} with ${
-        data?.flooringType
-      } flooring, ensuring comfort and aesthetic appeal.`,
+      faqQuestion:
+        data?.propTypeName?.toLowerCase() === "plot"
+          ? `9. What is the construction status and type of ${data?.propName}?`
+          : `9. How is the furnishing and flooring in ${data?.propName}?`,
+      faqAnswer:
+        data?.propTypeName?.toLowerCase() === "plot"
+          ? `This plot ${
+              data?.cunstructionStatus
+                ? "has construction status as " +
+                  (data?.cunstructionStatus === 1
+                    ? "constructed"
+                    : "not constructed")
+                : "has no construction details available"
+            }${
+              data?.cunstructionType
+                ? " with construction type: " + data.cunstructionType
+                : ""
+            }.`
+          : `This apartment is ${
+              data?.furnshName?.toLowerCase() ?? "not furnished"
+            } with ${
+              data?.flooringType ?? "unspecified"
+            } flooring, ensuring comfort and aesthetic appeal.`,
     },
+
     {
       qnaId: null,
       faqQuestion: `10. What type of ownership and facing is offered in ${newTitle}?`,
