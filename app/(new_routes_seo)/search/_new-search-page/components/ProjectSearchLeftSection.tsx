@@ -65,6 +65,7 @@ function LeftSection({
     queryKey: [
       `searchQuery${apiFilterQueryParams ? `-${apiFilterQueryParams}` : ""}`,
     ],
+
     queryFn: async ({ pageParam = 0 }) => {
       const response = await getSearchData(
         pageParam,
@@ -89,8 +90,10 @@ function LeftSection({
     staleTime: 0,
     refetchOnWindowFocus: false,
     onSuccess: (data: any) => {
-      const newData = data.pages[data.pageParams.length - 1];
-      setMainData((prev: any) => [...prev, ...newData]);
+      if (apiFilterQueryParams === preAppliedFilters) {
+        const newData = data.pages[data.pageParams.length - 1];
+        setMainData((prev: any) => [...prev, ...newData]);
+      }
     },
   });
 
