@@ -153,11 +153,8 @@ export default function Navigation({
     { condtion: projData, key: "projectDetails" },
     { condtion: projData, key: "about-builder" },
     {
-      condtion:
-        projData &&
-        detailsData.postedById === relateProjData.builderId &&
-        relateProjData.faqs.length > 0,
-      key: "faq",
+      condtion: true,
+      key: "frequently-asked-questions",
     },
     { condtion: SimilatListingAvl, key: "similarListing" },
     { condtion: projectReqData.isNearby, key: "similar-projects" },
@@ -178,7 +175,7 @@ export default function Navigation({
           width={41}
           height={64}
           onClick={() => handleArrowClick("L")}
-          style={{ display: 'block' }} // Prevents small vertical shifts
+          style={{ display: "block" }} // Prevents small vertical shifts
         />
       )}
       <div
@@ -234,7 +231,7 @@ export default function Navigation({
         width={41}
         height={64}
         onClick={() => handleArrowClick("R")}
-        style={{ display: 'block' }} // Prevents small vertical shifts
+        style={{ display: "block" }} // Prevents small vertical shifts
       />
     </div>
   );

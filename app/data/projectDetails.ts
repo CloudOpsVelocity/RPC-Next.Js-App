@@ -87,7 +87,7 @@ export const Propertytopics = [
   { label: "Bank Approvals", id: "loans" },
   { label: "Builder Details", id: "about-builder" },
   { label: "Customer Reviews", id: "ratings" },
-  { label: "FAQ?", id: "faq" },
+  { label: "FAQ?", id: "frequently-asked-questions" },
   { label: "Similar Listings", id: "similarListing" },
   { label: "Similar Projects", id: "similar-projects" },
 ];
@@ -117,7 +117,7 @@ export const parseDataProjectProps = {
   apartment: 35,
   independent: 36,
 };
-export const listingProps:any = {
+export const listingProps: any = {
   Apartment: 35,
   Villa: 31,
   Plot: 32,
