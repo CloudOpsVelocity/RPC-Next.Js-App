@@ -18,6 +18,7 @@ import {
 import { parseApiFilterQueryParams } from "@/app/(new_routes_seo)/search/utils/project-search-queryhelpers";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/options";
+import { projectStatusMap } from "@/app/common/constatns/projectStatusPathMap";
 
 type Props = {
   params: { city: string; lt: string; slug: string };
@@ -73,7 +74,11 @@ export default async function Page({
       serverData={serverData}
       frontendFilters={frontendFilters}
       preDefinedFilters={searchParams.sf}
-      serverFilterString={ filterValues.LT ? `&localities=${filterValues.LT}` : `&projStatus=${filterValues.PS}`}
+      serverFilterString={
+        filterValues.LT
+          ? `&localities=${filterValues.LT}`
+          : `&projStatus=${filterValues.PS}`
+      }
     />
   );
 }
@@ -92,26 +97,34 @@ export async function generateStaticParams() {
 }
 export async function generateMetadata(
   { params }: { params: { city: string; lt: string } },
-  // eslint-disable-next-line no-unused-vars
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { city, lt } = params;
-
   const cityFormatted = city.charAt(0).toUpperCase() + city.slice(1);
-  const localityFormatted = lt
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
 
-  const title = `Residential Projects Available in ${localityFormatted}, ${cityFormatted} - GRP`;
-  const description = `Find the best residential projects in ${localityFormatted}, ${cityFormatted}. Explore apartments, Flats, villas, villaments, plots and builder floors. Get verified details.`;
+  let title: string;
+  let description: string;
+
+  if (projectStatusMap.has(lt)) {
+    const formattedStatus = projectStatusMap.get(lt)?.title || "Residential";
+
+    title = `${formattedStatus} Residential Projects in ${cityFormatted} - Buy Apartments, Villas & Plots | GetRightProperty`;
+
+    description = `Discover ${formattedStatus.toLowerCase()} residential projects in ${cityFormatted}. Browse verified listings of apartments, villas, plots, and builder floors from trusted developers. Find your perfect home today on GetRightProperty.`;
+  } else {
+    const localityFormatted = lt
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    title = `Residential Projects Available in ${localityFormatted}, ${cityFormatted} - GetRightProperty`;
+    description = `Find the best residential projects in ${localityFormatted}, ${cityFormatted}. Explore apartments, flats, villas, villaments, plots and builder floors. Get verified details.`;
+  }
 
   const url = `https://www.getrightproperty.com/residential/projects/${city}/${lt}`;
 
   return {
     title,
     description,
-
     openGraph: {
       title,
       description,

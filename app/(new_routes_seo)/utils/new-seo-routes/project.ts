@@ -3,6 +3,7 @@
 import { notFound } from "next/navigation";
 import redisService from "@/app/utils/redis/redis.service";
 import { SlugsType } from "@/app/common/constatns/slug.constants";
+import { STATIC_PROJECT_PATH_MAPPINGS } from "@/app/common/constatns/projectStatusPathMap";
 export const extractProjectParamsValues = (input: string) => {
   const result: { [key: string]: string | number } = {};
 
@@ -58,10 +59,9 @@ export async function findPathForProjectDetails(inputUrl: string) {
   const projectJsonData = await redisService.getProjectSlug(SlugsType.PROJECT);
   let allData = {
     ...projectJsonData,
-    "/residential/projects/bengaluru/new-launch": "9*CT_108*PS",
-    "/residential/projects/bengaluru/ready-to-move": "9*CT_107*PS",
-    "/residential/projects/bengaluru/on-going": "9*CT_106*PS",
+    ...STATIC_PROJECT_PATH_MAPPINGS,
   };
+
   console.timeEnd("findPathForProjectDetails");
   if (allData[inputUrl]) {
     return allData[inputUrl];

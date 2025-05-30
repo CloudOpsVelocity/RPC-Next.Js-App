@@ -1,4 +1,5 @@
 import { options } from "@/app/options";
+import logger from "@/app/utils/logger";
 import { getServerSession } from "next-auth";
 
 export const getData = async (city?: number | string, coordinates?: any) => {
@@ -13,7 +14,17 @@ export const getData = async (city?: number | string, coordinates?: any) => {
       revalidate: 3600,
     },
   });
+  if (!res.ok ) {
+    logger.error(
+      `data not fetched successfuly ${res.statusText}, url: ${url} , status: ${res.status} , data: ${await res.text()}`
+    );
+  }
   const data = await res.json();
+  if (!data.status) {
+    logger.error(
+      `data fetched successfully but it's status is false ${res.statusText}, url: ${url} , status: ${res.status} , data: ${await res.text()}`
+    );
+  }
   return data;
 };
 
