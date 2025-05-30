@@ -104,7 +104,6 @@ export default function TagsSections({ urls }: Props) {
         projects.
       </p>
       {flatLinks.map(({ title, url }, index) => {
-        console.log(url);
         return (
           <Tag
             key={`tags_sections__${index.toString()}`}
