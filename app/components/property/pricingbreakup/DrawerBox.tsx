@@ -29,6 +29,7 @@ function DrawerBox({
   const cardRef = useRef<HTMLDivElement>(null);
   
   const onMainConClick = (e: any) => {
+
     if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
       document.body.style.overflow = "unset";
       window.history.back();

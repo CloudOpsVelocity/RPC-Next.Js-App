@@ -76,7 +76,7 @@ export default function HeaderActions({
     <div>
       {" "}
       <h2
-        className="sm:text-[22px] lg:text-[28px] mt-[3%] xl:mt-[100px] font-bold mb-[12px] scroll-mt-[280px]"
+        className="sm:text-[22px] lg:text-[28px] font-bold mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
         <strong>

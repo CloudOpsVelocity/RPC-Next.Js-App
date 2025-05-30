@@ -162,7 +162,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                 <span className="text-[#0073C6] text-[12px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
                   Click on image to open floor plan
                 </span>
-                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]" />
               </span>{" "}
             </button>
           </div>

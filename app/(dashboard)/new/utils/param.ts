@@ -5,7 +5,7 @@ const keyConversionMap: { [oldKey: string]: string } = {
   city: "city",
   bugdetValue: "bugdet",
 };
-const DEFAULT_BUGDET_VALUE: [number, number] = [500000, 600000000];
+const DEFAULT_BUGDET_VALUE: [number, number] = [500000, 300000000];
 const DEFAULT_BUGDET_VALUE_RENT: [number, number] = [0, 100000];
 
 type QueryParams = { [key: string]: any };

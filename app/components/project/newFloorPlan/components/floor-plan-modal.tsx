@@ -3,7 +3,7 @@
 "use client";
 
 import { ImgNotAvail } from "@/app/data/project";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaTimes,
   FaCompass,
@@ -208,9 +208,40 @@ export function FloorPlanModal({
     ? filteredUnits.slice(startIndex, startIndex + getItemsPerPage())
     : [];
 
+        // swipping 
+        const touchStartX = useRef(0);
+        const touchEndX = useRef(0);
+      
+        const handleTouchStart = (e:any) => {
+          touchStartX.current = e.changedTouches[0].screenX;
+        };
+      
+        const handleTouchEnd = (e:any, identifier?: string) => {
+          if(identifier === "skip") return;
+          touchEndX.current = e.changedTouches[0].screenX;
+          handleSwipe();
+        };
+      
+        const handleSwipe = () => {
+          const threshold = 50;
+          if (touchEndX.current - touchStartX.current > threshold) {
+            console.log("Swiped Left to Right");
+            onClose();
+            document.body.style.overflow = "unset";
+            // window.history.back();
+          }
+        };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div 
+        className="absolute inset-0 bg-black/50" 
+        onClick={onClose} 
+      />
       <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex items-start md:items-center justify-between flex-col md:flex-row p-2 border-b bg-white relative">

@@ -119,7 +119,7 @@ export default function FullScreenMasterPlanModal({
   }, [isOpen]);
 
   return (
-    <div>
+    <>
       <div className="relative max-h-[300px] min-h-[300px] sm:max-h-[600px]: sm:min-h-[600px]">
         <picture>
           <source media="(max-width: 460px)" srcSet={imageUrl.split(",")[1]} />
@@ -245,6 +245,6 @@ export default function FullScreenMasterPlanModal({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

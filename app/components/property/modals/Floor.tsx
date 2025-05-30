@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { propertyDetailsSvgs, ShearIcon } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/property";
 import { selectedFloorAtom } from "@/app/store/floor";
@@ -51,13 +51,41 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
 
   if (!opened) return null;
 
+    // swipping
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
+  
+    const handleTouchStart = (e:any) => {
+      touchStartX.current = e.changedTouches[0].screenX;
+    };
+  
+    const handleTouchEnd = (e:any, identifier?: string) => {
+      if(identifier === "skip") return;
+      touchEndX.current = e.changedTouches[0].screenX;
+      handleSwipe();
+    };
+  
+    const handleSwipe = () => {
+      const threshold = 50;
+      if (touchEndX.current - touchStartX.current > threshold) {
+        console.log("Swiped Left to Right");
+        setOpened(false);
+        document.body.style.overflow = "unset";
+        window.history.back();
+      }
+    };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div
+      <div 
         className="absolute inset-0 bg-black/50"
         onClick={() => setOpened(false)}
       />
-      <div className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col">
+      <div 
+        className="relative z-10 w-full h-full bg-white overflow-hidden flex flex-col"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         {/* Header */}
         <div className="sticky top-0 flex items-center justify-between flex-row p-2 md:p-4 border-b bg-white shadow-sm">
           <h3 className="text-base md:text-xl font-semibold text-[#0073C6]">
@@ -148,7 +176,10 @@ function FloorPlanModal({ data, opened, setOpened }: FloorPlanModalProps) {
         {/* Main Content */}
         <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto">
           {/* Left - Floor Plan Image */}
-          <div className="flex-1 p-[10px] md:p-6 flex items-center justify-center relative bg-[#F8FBFF]">
+          <div 
+            className="flex-1 p-[10px] md:p-6 flex items-center justify-center relative bg-[#F8FBFF]"
+            onTouchEnd={(e)=>e.stopPropagation()}
+          >
             <TransformWrapper>
               <TransformComponent
                 wrapperStyle={{

@@ -33,6 +33,7 @@ export default function Header({}: Props) {
     ].includes(pathname) && (
       <div
         className={`flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[50] `}
+        onClick={()=> document.body.style.overflow = "unset" }
       >
         <Link
           prefetch={false}
@@ -40,8 +41,7 @@ export default function Header({}: Props) {
           title="Home"
           aria-label="Home"
           className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
-          onClick={()=> document.body.style.overflow = "unset" }
-        >
+        > 
           <span className="hidden">Home Logo</span>
 
           <GrpLogoSvg className="h-[54px] w-[160px" />
@@ -53,11 +53,14 @@ export default function Header({}: Props) {
           </div>
         ) : (
           <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
-            <a href={"/blog"} target="_self" rel="noopener noreferrer">
-              <p className="text-[#242424] text-xl not-italic font-medium cursor-pointer">
-                Blogs
-              </p>
-            </a>
+            <Link
+              prefetch={false}
+              href={"/blog"}
+              className="text-[#242424] text-xl not-italic font-medium cursor-pointer"
+              rel="noopener noreferrer"
+            >
+              Blogs
+            </Link>
             <ForBuilders />
             <PostProjectBtn />
             <Btn />
