@@ -32,7 +32,7 @@ function Footer() {
     {
       name: "twitter",
       icon: <FaTwitter size={24} />,
-      link: "https://x.com/getrightproperty",
+      link: " https://x.com/grp_rpclan",
     },
     {
       name: "youtube",
