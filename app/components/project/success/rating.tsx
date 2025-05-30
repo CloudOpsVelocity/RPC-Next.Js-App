@@ -45,6 +45,7 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
             }
           /> */}
           <RatingStars
+            key={`ratingDetailsStar1`}
             initialRating={form.values.rating || isSubmitted?.rating}
           />
         </div>
@@ -104,6 +105,7 @@ export const RatingForm = ({
           /> */}
 
           <RatingStars
+            key={`ratingDetailsStar2`}
             initialRating={form.values.rating}
             onChange={(value) => form.setFieldValue("rating", value)}
           />

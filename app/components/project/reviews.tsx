@@ -1,18 +1,15 @@
 "use client";
-// import { Carousel } from "@mantine/carousel";
 import React from "react";
 import {
-  // NextCarouselButton,
-  // PrevCarouselButton,
   quotesIcon,
 } from "@/app/images/commonSvgs";
 import useRatings from "@/app/hooks/useRatings";
-import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
-import S from "@/app/styles/Rating.module.css";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 import RatingStars from "@/common/components/RatingStars";
 import CardsCarousal from "@/common/components/CardsCarousal";
+import ReviewJsonScript from "@/app/seo/search/ratings.schema";
+
 
 export default function Reviews({
   projName,
@@ -23,9 +20,10 @@ export default function Reviews({
 }) {
   const [, { open }] = usePopUpRatings();
   const { data } = useRatings(projIdEnc);
-  const isMobile = useMediaQuery(`(max-width: 750px)`);
   const { data: rData } = useDynamicProj(projIdEnc);
-  console.log("review: 1")
+
+  console.log(data);
+
   return (
     data?.status &&
     data?.reviewDataList?.filter((item: any) => item.userReview).length !==
@@ -35,7 +33,7 @@ export default function Reviews({
           <div className="w-[90%] mx-auto ">
             <h2 className="text-[#001F35] text-[20px] md:text-[32px] not-italic font-semibold leading-[normal] ">
               Customer Reviews For{" "}
-              <span className="text-[#148B16]  not-italic font-bold leading-[normal] capitalize">
+              <span className="text-green-800 not-italic font-bold leading-[normal] capitalize">
                 {projName}
               </span>
             </h2>
@@ -85,13 +83,22 @@ export default function Reviews({
             <CardsCarousal
                 key="handPickedProjectsCon"
                 allCards={data?.reviewDataList
-                ?.filter((item: any) => item.userReview).map((eachData: any) => (
-                    <Review {...eachData} />
+                ?.filter((item: any) => item.userReview).map((eachData: any, index:number) => (
+                    <Review 
+                      key={`projDetailsReview_${index.toString()}`} 
+                      data={{
+                        ...eachData, 
+                        index: index.toString(),
+                        avgRating: data.reviewOverviewData.averageRating,
+                        totalRating: data.reviewOverviewData.averageTotalRating,
+                        countTotalReview: data.reviewOverviewData.countTotalReview
+                      }}
+                    />
                 ))}
                 dataLength={data?.reviewDataList.length}
                 // scrollSize={isTab ? 503 : 631}
                 gap={20}
-                containerClass={`w-full h-[300px] md:h-[250px] px-0 md:px-[20px] xl:px-[30px]   `}
+                containerClass={`w-full h-[300px] md:h-[250px] px-0 md:px-[20px] xl:px-[30px]`}
             />
           </div>
         </div>
@@ -100,7 +107,24 @@ export default function Reviews({
   );
 }
 
-const Review = ({ userRating, userName, userReview, postedDays }: any) => {
+const ViewStars = ({rating}:any) => {
+  return(
+    <p>
+      {new Array(rating).fill(null).map((_, index) => (
+        <span key={index}>
+          {index < rating ? '⭐' : '☆'}
+        </span>
+      ))}
+    </p>
+  )
+}
+
+const Review = ({ data }: any) => {
+  const { userRating, userName, userReview, postedDays, index } = data;
+  <ReviewJsonScript 
+    key={`projDetailsStarSchema_${index}`} 
+    data={data} 
+  />
   return (
     <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] min-w-[335px] md:max-w-lg mt-[20px] bg-[#fff] p-4 relative min-h-[160px] md:min-h-[200px] border rounded-[10px] border-solid border-[#DCE6ED]">
       <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
@@ -117,7 +141,8 @@ const Review = ({ userRating, userName, userReview, postedDays }: any) => {
             </div>
             <div className="text-right flex flex-col align-right ">
               {/* <Rating size={"sm"} value={userRating} readOnly /> */}
-              <RatingStars initialRating={userRating} className="text-[20px]" />
+              {/* <RatingStars key={`projDetailsStar_${index}`} initialRating={userRating} className="text-[20px]" readOnly={true} /> */}
+              <ViewStars rating={userRating} />
               <span className=" text-[12px] md:text-[14px] text-gray-500">
                 {postedDays == "0" ? "Today" : `${postedDays} days ago`} 
               </span>

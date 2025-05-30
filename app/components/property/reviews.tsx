@@ -12,6 +12,7 @@ import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import usePropRatings from "@/app/hooks/property/useRating";
 import RatingStars from "@/common/components/RatingStars";
 import CardsCarousal from "@/common/components/CardsCarousal";
+import index from "@/app/utils/linkRouters";
 export default function Reviews({
   projName,
   slug,
@@ -80,8 +81,8 @@ export default function Reviews({
             <CardsCarousal
                 key="handPickedProjectsCon"
                 allCards={data?.reviewDataList
-                  ?.filter((item: any) => item.userReview).map((eachData: any) => (
-                      <Review {...eachData} />
+                  ?.filter((item: any) => item.userReview).map((eachData: any, index:number) => (
+                      <Review key={`propDetailsReview_${index.toString()}`} {...eachData} index={index.toString()} />
                   ))}
                 dataLength={data?.reviewDataList.length}
                 // scrollSize={isTab ? 503 : 631}
@@ -95,7 +96,7 @@ export default function Reviews({
   );
 }
 
-const Review = ({ rating, review, name, days }: any) => {
+const Review = ({ rating, review, name, days, index }: any) => {
   return (
     <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] max-w-lg mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
       <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
@@ -110,7 +111,7 @@ const Review = ({ rating, review, name, days }: any) => {
             </div>
             <div className="text-right">
               {/* <Rating size={"sm"} value={rating} readOnly /> */}
-              <RatingStars initialRating={rating} />
+              <RatingStars key={`propDetailsStar_${index}`} initialRating={rating} readOnly={true} />
               <span className="text-xs text-gray-500">{days} days ago</span>
             </div>
           </div>

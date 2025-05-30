@@ -273,6 +273,8 @@ function BrocherContent({
       await downloadPDF(url, `${projName}.pdf`); 
       // window.open(brocherPageUrl, "_blank", "noreferrer");
       return;
+    }else{
+      window.open(brocherPageUrl, "_blank", "noreferrer");
     }
     /* if (!session) {
       LoginOpen(
