@@ -12,7 +12,7 @@ export default function MasterPlan({
 }) {
   return (
     <div
-      className="w-[95%] sm:max-h-[678px] pb-[14px] xl:max-h-[689px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[150px] sm:pt-[30px] "
+      className="w-[95%] pb-[14px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[150px] sm:pt-[30px] "
       id="master-plan"
     >
       <div

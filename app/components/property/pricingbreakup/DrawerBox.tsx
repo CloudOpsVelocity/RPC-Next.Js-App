@@ -89,7 +89,6 @@ function DrawerBox({
     }
   };
 
-
   return (
     <div
       className="fixed w-full min-h-[calc(100vh-70px)] flex justify-end items-end overflow-hidden z-[1000] right-0 top-[70px] bg-black/30 mb-[2rem]"
