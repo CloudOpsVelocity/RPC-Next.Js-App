@@ -21,10 +21,10 @@ export default function HandPickedProjects({ data, shortIds, cityId }: Props) {
 
   const url =
     active == 0
-      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=projStatus=108`
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/residential/projects/bengaluru/new-launch`
       : active == 1
-      ? ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=projStatus=106`
-      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?sf=projStatus=107`;
+      ? ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/residential/projects/bengaluru/on-going`
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/residential/projects/bengaluru/ready-to-move`;
 
   const globalState = useAtomValue(homeSearchFiltersAtom);
   const isEnabled =

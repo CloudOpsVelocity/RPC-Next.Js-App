@@ -14,8 +14,14 @@ export default function TagsSections({ urls }: Props) {
     { title: "Bangalore", url: "/residential/projects/bengaluru" },
     { title: "For Sale Listings", url: "/residential-listings/for-sale" },
     { title: "For Rent Listings", url: "/residential-listings/for-rent" },
-    { title: "New Launch Projects", url: "/search?sf=projStatus=108" },
-    { title: "On-Going Projects", url: "/search?sf=projStatus=106" },
+    {
+      title: "New Launch Projects",
+      url: "/residential/projects/bengaluru/new-launch",
+    },
+    {
+      title: "On-Going Projects",
+      url: "/residential/projects/bengaluru/ready-to-move",
+    },
     { title: "Completed Projects", url: "/search?sf=projStatus=107" },
     { title: "Ready to Move Listings", url: "/search/listing?sf=propStatus=R" },
     {
@@ -97,17 +103,18 @@ export default function TagsSections({ urls }: Props) {
         Discover more residential rent and sale properties in popular areas and
         projects.
       </p>
-      {flatLinks.map(({title, url}, index) => {
-        console.log(url)
-        return(
-        <Tag
-          key={`tags_sections__${index.toString()}`}
-          // {...urlObj}
-          title={title}
-          url={url}
-          className="mr-[6px] mb-[4px] text-wrap whitespace-wrap "
-        />
-      )})}
+      {flatLinks.map(({ title, url }, index) => {
+        console.log(url);
+        return (
+          <Tag
+            key={`tags_sections__${index.toString()}`}
+            // {...urlObj}
+            title={title}
+            url={url}
+            className="mr-[6px] mb-[4px] text-wrap whitespace-wrap "
+          />
+        );
+      })}
     </section>
   );
 }

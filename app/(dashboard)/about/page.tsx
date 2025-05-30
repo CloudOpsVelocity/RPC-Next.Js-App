@@ -266,7 +266,7 @@ export default function page({}: Props) {
             <Link
               rel="noopener noreferrer"
               prefetch={false}
-              href="https://www.getrightproperty.com/search?sf=projStatus=106"
+              href="https://www.getrightproperty.com/residential/projects/bengaluru/on-going"
               className="cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[10px] py-[6px] md:px-[16px] md:py-[11px] justify-center items-center "
             >
               Explore Now
