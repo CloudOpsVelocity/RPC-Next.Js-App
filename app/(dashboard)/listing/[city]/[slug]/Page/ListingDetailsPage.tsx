@@ -369,7 +369,7 @@ export default function ListingDetailsPage({
                     postedById={projData.builderId}
                   />
                 </div>
-              )}{" "}
+              )}
             </>
 
             {/* )} */}
