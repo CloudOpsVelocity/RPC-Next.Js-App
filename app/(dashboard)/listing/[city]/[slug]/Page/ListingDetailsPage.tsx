@@ -33,6 +33,7 @@ const PropertyFirstBlock = dynamic(
 import LeafMap from "@/app/components/project/map";
 import ListingSchema from "@/app/seo/listing/listing.schema";
 import TagsSections from "@/app/components/sections/TagsSections";
+import { formatDateDDMMYYYY } from "@/app/utils/date";
 const PropertyMap = dynamic(() => import("@/app/components/property/map"));
 const NearByCarouselProperty = dynamic(
   () => import("@/app/components/property/carousel")
@@ -236,14 +237,104 @@ export default function ListingDetailsPage({
   //     </React.Fragment>
   //   );
   // });
-  console.log(data);
+  const faqList = [
+    {
+      qnaId: null,
+      faqQuestion: `1. What is the price of ${newTitle}?`,
+      faqAnswer: `The price of ${newTitle} in ${data?.ltName}, ${
+        data?.ctName
+      } is ₹${data?.price?.toLocaleString(
+        "en-IN"
+      )}*. The final cost may vary based on furnishings, negotiation, and market conditions.`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `2. Is ${data?.propName} a good option to ${
+        data?.cg === "S" ? "buy" : "rent"
+      } a home in ${data?.ltName}, ${data?.ctName}?`,
+      faqAnswer: `${data?.propName} offers a ${data?.bhkName?.toLowerCase()} ${
+        data?.propTypeName
+      } that is ${data?.furnshName?.toLowerCase()}. It's located in ${
+        data?.ltName
+      }, a rapidly developing area in ${data?.ctName}. ${
+        data?.ageofBuilding
+          ? `The property is ${data?.ageofBuilding} old and ${
+              data?.availablityStatus === "R"
+                ? "ready for possession"
+                : "currently under construction"
+            }.`
+          : ""
+      }`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `3. What amenities are available at ${data?.propName}?`,
+      faqAnswer: `This ${data?.bhkName} ${
+        data?.propTypeName
+      } includes features such as ${
+        data?.amenities?.length > 0
+          ? `over ${data?.amenities?.length} modern amenities including clubhouse, security, lifts, and more.`
+          : `basic facilities and a comfortable living environment.`
+      }`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `4. What is the exact location of ${newTitle}?`,
+      faqAnswer: `${data?.propName} is located at ${data?.address}, ${data?.ltName}, ${data?.ctName}, ${data?.stateName} - ${data?.pinCode}. This location provides good connectivity to schools, hospitals, and tech hubs in Bengaluru.`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `5. Who is the owner of ${newTitle}?`,
+      faqAnswer: `This property is listed by ${data?.postedByName}, who is an individual owner. Direct owner listings ensure better transparency and price negotiation.`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `6. Is ${data?.propName} pet-friendly and broker-friendly?`,
+      faqAnswer: `${data?.propName} is ${
+        data?.ispetFriendly ? "pet-friendly" : "not pet-friendly"
+      } and ${
+        data?.isOkWithBrokerContact
+          ? "open to broker communication"
+          : "not accepting broker contacts"
+      }.`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `7. Is ${data?.propName} ready to move or under construction?`,
+      faqAnswer: `This property is ${
+        data?.availablityStatus === "R"
+          ? "ready to move in"
+          : "under construction"
+      }. Available from ${formatDateDDMMYYYY(data?.availableFrom)}.`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `8. What is the carpet and super built-up area of ${newTitle}?`,
+      faqAnswer: `${data?.propName} offers a carpet area of ${data?.ca} sqft and a super built-up area of ${data?.sba} sqft. The apartment is west-facing and located on floor ${data?.atFloor} of ${data?.totalFloor}.`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `9. How is the furnishing and flooring in ${data?.propName}?`,
+      faqAnswer: `This apartment is ${data?.furnshName?.toLowerCase()} with ${
+        data?.flooringType
+      } flooring, ensuring comfort and aesthetic appeal.`,
+    },
+    {
+      qnaId: null,
+      faqQuestion: `10. What type of ownership and facing is offered in ${newTitle}?`,
+      faqAnswer: `The property is ${data?.ownershipName?.toLowerCase()} owned and faces ${
+        data?.facingName
+      }, which is ideal for natural lighting and ventilation.`,
+    },
+  ];
+
   return (
     <div className="w-full">
       <ListingSchema
         listingData={{
           listing: data,
           nearByLocations: nearByLocations,
-          faqData: projData?.faqs,
+          faqData: faqList,
           title: title,
           url: pathname,
         }}
@@ -357,7 +448,7 @@ export default function ListingDetailsPage({
                 )}
               {/* About Builder */}
               <AboutBuilder type="proj" id={projData.builderId} />
-              {data.postedById === projData.builderId && (
+              {/* {data.postedById === projData.builderId && (
                 <div
                   id="faq"
                   className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
@@ -369,13 +460,19 @@ export default function ListingDetailsPage({
                     postedById={projData.builderId}
                   />
                 </div>
-              )}
+              )} */}
             </>
 
             {/* )} */}
           </>
         )}
-
+        <FaqWithBg
+          data={faqList}
+          projName={data.propName}
+          slug={data.projIdEnc}
+          postedById={projData.builderId}
+          qnaShow={false}
+        />
         {!data.projIdEnc && (
           <>
             <div id="location-map" className="mt-10 scroll-mt-[180px]" />

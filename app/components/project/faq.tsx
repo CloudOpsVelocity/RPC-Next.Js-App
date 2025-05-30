@@ -31,6 +31,7 @@ type FaqWithBgProps = {
   projName: string;
   slug: string;
   postedById: number;
+  qnaShow?: boolean;
 };
 
 export default function FaqWithBg({
@@ -38,6 +39,7 @@ export default function FaqWithBg({
   projName,
   slug,
   postedById,
+  qnaShow = true,
 }: FaqWithBgProps) {
   return (
     <div
@@ -74,7 +76,9 @@ export default function FaqWithBg({
           );
         })}
       </div>
-      <AddQnaForm projName={projName} slug={slug} postedById={postedById} />
+      {qnaShow && (
+        <AddQnaForm projName={projName} slug={slug} postedById={postedById} />
+      )}
     </div>
   );
 }
@@ -88,21 +92,19 @@ const MainCard = ({
   data: FAQ[];
 }) => {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
-  return (
-      isMobile ? (
-        <MobileFaqCard
-          faqQuestion={faq.faqQuestion}
-          faqAnswer={faq.faqAnswer}
-          last={index === data.length - 1}
-        />
-      ) : (
-        <FaqCard
-          faqQuestion={faq.faqQuestion}
-          faqAnswer={faq.faqAnswer}
-          key={faq.faqAnswer}
-          last={index === data.length - 1}
-        />
-      )
+  return isMobile ? (
+    <MobileFaqCard
+      faqQuestion={faq.faqQuestion}
+      faqAnswer={faq.faqAnswer}
+      last={index === data.length - 1}
+    />
+  ) : (
+    <FaqCard
+      faqQuestion={faq.faqQuestion}
+      faqAnswer={faq.faqAnswer}
+      key={faq.faqAnswer}
+      last={index === data.length - 1}
+    />
   );
 };
 const AddQnaForm = ({
@@ -239,7 +241,9 @@ const AddQnaForm = ({
           )}
         </div>
         <button
-        aria-label="Submit Question" name="Submit Question" title="Submit Question"
+          aria-label="Submit Question"
+          name="Submit Question"
+          title="Submit Question"
           type="submit"
           // loading={status === "pending"}
           // size={isMobile ? "xs" : "md"}
