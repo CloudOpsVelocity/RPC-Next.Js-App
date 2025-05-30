@@ -286,8 +286,8 @@ export default function ListingDetailsPage({
       faqAnswer:
         data?.propTypeName?.toLowerCase() === "plot"
           ? data?.amenities?.length > 0
-            ? `This plot includes ${data?.amenities.join(", ")}.` // list whatever amenities exist for plot
-            : `This plot is an open land with basic facilities.`
+            ? `This plot includes ${data?.amenities.length} essential amenities. This plot is a spacious open land with basic facilities like road access and water supply, ideal for custom construction or investment purposes. `
+            : `This plot is a spacious open land with basic facilities like road access and water supply, ideal for custom construction or investment purposes.`
           : `This ${data?.bhkName} ${
               data?.propTypeName
             } includes features such as ${
