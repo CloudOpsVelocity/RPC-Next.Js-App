@@ -84,7 +84,7 @@ export default function ShowAllFiltersButton({
       icon: <MdLandscape className="w-5 h-5 text-green-700" />,
     },
     ...(("/search/listing" === path ||
-      ("/search" === path && state.listedBy !== null)) && {
+      (state.listedBy !== null)) && {
       indp: {
         id: 36,
         name: "Independent",
