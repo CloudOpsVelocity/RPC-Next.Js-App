@@ -147,6 +147,7 @@ export default function ShowAllFiltersButton({
     return (
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-3">{title}</h3>
+
         <div className="flex flex-row flex-wrap gap-2 items-center">
           {displayData.map((item: any, index: number) => (
             <label key={item.cid || index} className="flex items-center gap-2">
