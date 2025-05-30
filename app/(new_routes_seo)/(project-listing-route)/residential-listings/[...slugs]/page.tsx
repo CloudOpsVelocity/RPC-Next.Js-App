@@ -65,11 +65,11 @@ export default async function Page({ params, searchParams }: Props) {
     const apiResData = isProj
       ? await getProjSearchData(apiFilters ?? "")
       : await getSearchData(apiFilters ?? "");
-    serverData = apiResData.results;
+    serverData = apiResData?.results;
     frontendFilters = {
       ...parseProjectSearchQueryParams(searchParams.sf),
       currentPage: 1,
-      totalCount: apiResData.totalCount,
+      totalCount: apiResData?.totalCount,
     };
   } else {
     if (!isProjectListing) {

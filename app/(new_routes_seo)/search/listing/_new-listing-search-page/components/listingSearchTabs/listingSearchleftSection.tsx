@@ -70,7 +70,7 @@ function LeftSection({
         pageParam,
         apiFilterQueryParams ?? ""
       );
-      return response.results;
+      return response?.results;
     },
     getNextPageParam: (lastPage: any, allPages: any) => {
       const nextPage = allPages.length;
@@ -191,9 +191,9 @@ function LeftSection({
   }, [isMobile]);
 
   const [isClient, setIsClient] = useState(false);
-  
+
   useEffect(() => {
-    setIsClient(true); 
+    setIsClient(true);
   }, []);
 
   return (
@@ -245,14 +245,14 @@ function LeftSection({
 
       {hasNextPage && shouldFetchMore && (
         <div
-          ref={loadMoreRef} 
+          ref={loadMoreRef}
           className="w-full py-8 flex justify-center items-center text-gray-600"
         >
           <LoadingSpinner />
         </div>
       )}
 
-      <section 
+      <section
         className={!isClient ? "space" : "hidden"}
         aria-hidden={isClient ? "true" : undefined}
       >

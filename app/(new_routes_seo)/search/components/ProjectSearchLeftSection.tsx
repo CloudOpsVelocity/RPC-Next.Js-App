@@ -74,7 +74,7 @@ function LeftSection({
         apiFilterQueryParams ?? "",
         isTrue ? undefined : serverFilterString
       );
-      return response.results;
+      return response?.results;
     },
     getNextPageParam: (lastPage: any) => {
       return lastPage?.length === 20 ? page + 1 : undefined;
@@ -270,16 +270,16 @@ function LeftSection({
         <EmptyState />
       )}
 
-      <section 
+      <section
         className={!isClient ? "space" : "hidden"}
         aria-hidden={isClient ? "true" : undefined}
       >
-          <ListingSearchPagination
-            currentPage={
-              frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
-            }
-            totalCount={frontendFilters.totalCount ?? 0}
-          />
+        <ListingSearchPagination
+          currentPage={
+            frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1
+          }
+          totalCount={frontendFilters.totalCount ?? 0}
+        />
       </section>
 
       <LoginPopup />

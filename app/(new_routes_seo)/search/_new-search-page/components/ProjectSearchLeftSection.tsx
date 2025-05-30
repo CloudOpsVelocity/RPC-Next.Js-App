@@ -71,7 +71,7 @@ function LeftSection({
         pageParam,
         apiFilterQueryParams ?? ""
       );
-      return response.results;
+      return response?.results;
     },
     getNextPageParam: (lastPage: any) => {
       return lastPage?.length === 20 ? page + 1 : undefined;

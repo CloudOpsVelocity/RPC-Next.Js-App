@@ -511,7 +511,7 @@ function CityTrendSection({ cityName }: Props) {
           filters.cg,
           `cg=${filters.cg}&propType=${listingProps[propertyType]}`
         );
-        setAllLocalities({ data: data.results, isLoading: false });
+        setAllLocalities({ data: data?.results, isLoading: false });
       } catch (error) {
         console.error("Error fetching data:", error);
         setAllLocalities((prev) => ({ ...prev, isLoading: false }));
@@ -521,12 +521,14 @@ function CityTrendSection({ cityName }: Props) {
     fetchData();
   }, [cityId, filters.cg, filters.propType]);
 
-  const filteredLocalities = 
-    (AllLocalities && AllLocalities.data && AllLocalities.data.length > 0) ?
-       AllLocalities?.data?.filter((city: any) =>
-          inputSearch === "" ||
-          city.localityName?.toLowerCase().includes(inputSearch)
-      ) : [];
+  const filteredLocalities =
+    AllLocalities && AllLocalities.data && AllLocalities.data.length > 0
+      ? AllLocalities?.data?.filter(
+          (city: any) =>
+            inputSearch === "" ||
+            city.localityName?.toLowerCase().includes(inputSearch)
+        )
+      : [];
 
   if (AllLocalities.isLoading)
     return (

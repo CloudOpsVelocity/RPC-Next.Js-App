@@ -71,7 +71,7 @@ const nextConfig = {
   env: {
     APP_ENV: process.env.APP_ENV || process.env.NODE_ENV || "development",
   },
-  staticPageGenerationTimeout: 180,
+  // staticPageGenerationTimeout: 180,
   logging: {
     fetches: {
       fullUrl: true,
