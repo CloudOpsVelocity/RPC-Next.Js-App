@@ -89,7 +89,7 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  poweredByHeader: false,
+  // poweredByHeader: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? true : false,
   },
