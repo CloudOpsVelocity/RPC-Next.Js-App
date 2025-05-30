@@ -26,21 +26,21 @@ export default function ProjBasicDetails({
         {/* <h4 className=" text-[#001F35] text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
           {title}
         </h4> */}
-        <h2 className="text-[#001F35] text-[13.5px] sm:text-[16px] xl:text-2xl not-italic whitespace-nowrap font-semibold">
+        <h2 className="text-[#001F35]   text-[13.5px] sm:text-[16px] xl:text-2xl not-italic whitespace-nowrap font-semibold">
         {title}
       </h2>
-        <p className="text-[#148B16]  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold ">
+        <p className="text-green-800 text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold ">
           {value}
         </p>
       </div>
     ) : (
-      <div className={`${className} scroll-mt-[450px]`} {...(Id && { id: Id })}>
+      <div className={`${className} scroll-mt-[450px]`} {...(Id && { id: Id })}> 
         {icon}
         <h2 className=" text-[#001F35] text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
           {title}
         </h2>
         
-        <div className="text-[#148B16] inline-flex  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold  flex-wrap">
+        <div className="text-green-800 inline-flex  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold  flex-wrap">
           {Array.isArray(value) &&
             value.map((item, index) => {
               const [text] = item.split("–").map((part) => part.trim());

@@ -26,11 +26,11 @@ function DrawerBox({
   HeadingElemnt,
   iconBox
 }: Props) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
   const onMainConClick = (e: any) => {
-    var baxEl = document.getElementById("modalDrawerPopupInnerCon");
-    if (baxEl && !baxEl.contains(e.target)) {
+    if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
       document.body.style.overflow = "unset";
-      // window.history.replaceState(null, "", window.location.href);
       window.history.back();
       handleChange(false);
     }
@@ -97,6 +97,7 @@ function DrawerBox({
     >
       <div
         id="modalDrawerPopupInnerCon"
+        ref={cardRef}
         className={`relative bg-white flex flex-col overflow-y-auto shrink-0 z-[3] overflow-x-hidden min-h-[calc(100vh-70px)] h-full w-full md:w-[400px] xl:w-[560px] ${
           containerClassStyle ? containerClassStyle : ""
         } ${` top-0 right-0 h-full shadow-lg transition-transform duration-500 ${

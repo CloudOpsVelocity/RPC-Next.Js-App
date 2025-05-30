@@ -19,7 +19,7 @@ export default function SearchCardFloorplanBlock({data, type}: Props) {
             }}
         >{downLoadIcon}</button> */}
 
-        <DetailsSection data={data} />
+        <DetailsSection data={data} /> 
 
         <Image
             src={floorplanUrl}
@@ -44,7 +44,7 @@ const DetailsSection = ({data}:{data: any}) => {
                   title="Unit Information"
                   items={[
                     { label: "Unit Type", value: data.bhkName ?? "" },
-                    { label: "Unit on Floor", value: data.atFloor ?? "" },
+                    { label: "At Floor", value: data.atFloor !== undefined ? data.atFloor == 0 ? "G" : data.atFloor : "" },
                     { label: "Unit Number", value: data.unitNumber ?? "" },
 
                     ...(data.aptTypeName &&
