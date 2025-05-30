@@ -62,10 +62,13 @@
   transition: color 0.3s;
 }
 
-.starRating input:checked ~ label,
-.starRating label:hover,
-.starRating label:hover ~ label {
-  color: #ffd700; /* Gold color */
+.starRating input:checked ~ label{
+  color: #ffd700;
+}
+
+.unblockStarRating label:hover,
+.unblockStarRating label:hover ~ label {
+  color: #ffd700;
 }
 
 @media screen and (max-width: 1600px) {
