@@ -208,7 +208,7 @@ function PopupOverlay({ popupState, closePopup }: Props) {
       iconBox={
         popupState.type === "floorplan" && (
           <button
-            className="flex flex-col items-center justify-center gap-2.5 ml-auto mr-[4px] p-1 rounded-[10px] bg-[#0073C6] text-white text-[12px] md:text-[14px] md:text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px]  "
+            className="flex flex-col items-center justify-center gap-2.5 ml-auto mr-[4px] p-1 rounded-[10px] bg-[#0073C6] text-white text-[12px] md:text-[14px] md:text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[32px] "
             onClick={(e) => {
               e.preventDefault();
               handleDownload();

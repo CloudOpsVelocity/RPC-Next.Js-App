@@ -22,8 +22,6 @@ export default function Reviews({
   const { data } = useRatings(projIdEnc);
   const { data: rData } = useDynamicProj(projIdEnc);
 
-  console.log(data);
-
   return (
     data?.status &&
     data?.reviewDataList?.filter((item: any) => item.userReview).length !==

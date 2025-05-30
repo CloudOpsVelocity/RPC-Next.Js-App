@@ -304,7 +304,7 @@ export default function PropertyTypeDetailsCrad({
         <h3 className="text-[#242424] text-[14px]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
           {propName(propertyType, "name")}
         </h3>
-        <h4 className="text-[14px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+        <h4 className="text-[14px] text-right lg:text-[22px] text-green-800 not-italic font-bold leading-[normal] mt-2">
           {cg.minPrice && cg.maxPrice
             ? `${formatCurrency(cg?.minPrice)} - ${formatCurrency(
                 cg?.maxPrice

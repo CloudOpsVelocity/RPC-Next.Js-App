@@ -8,7 +8,7 @@ import Results from "./Result";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
-import { toQueryParams } from "../../utils/param";
+import { toQueryParams } from "../../utils/param"; 
 // import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import Nearme from "./Nearme";
@@ -53,6 +53,13 @@ export default function SearchSec({}: Props) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if(name === "" || name === null){
+      setSearchQuery("");
+    }
+  }, [name]);
+
 
   const handleFieldClick = (e: React.MouseEvent) => {
     e.stopPropagation();
