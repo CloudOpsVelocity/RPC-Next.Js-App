@@ -40,6 +40,7 @@ export default function Header({}: Props) {
           title="Home"
           aria-label="Home"
           className={` ${pathname === "/" ? "pointer-events-none" : ""}`}
+          onClick={()=> document.body.style.overflow = "unset" }
         >
           <span className="hidden">Home Logo</span>
 

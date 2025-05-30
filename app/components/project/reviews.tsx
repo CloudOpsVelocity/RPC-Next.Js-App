@@ -121,38 +121,41 @@ const ViewStars = ({rating}:any) => {
 
 const Review = ({ data }: any) => {
   const { userRating, userName, userReview, postedDays, index } = data;
-  <ReviewJsonScript 
-    key={`projDetailsStarSchema_${index}`} 
-    data={data} 
-  />
+
   return (
-    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] min-w-[335px] md:max-w-lg mt-[20px] bg-[#fff] p-4 relative min-h-[160px] md:min-h-[200px] border rounded-[10px] border-solid border-[#DCE6ED]">
-      <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
-      <div className="flex items-center space-x-2 mt-4 md:mt-8">
-        <div className="flex-1">
-          <div className="flex justify-between items-center gap-[20px] ">
-            <div>
-              <p className="text-black text-[16px] md:text-[18px] not-italic font-medium leading-[normal]">
-                {userName ?? "GRP USER"}
-              </p>
-              <p className="text-[#0073C6]  text-[16px] md:text-[18px] not-italic font-medium leading-[normal]">
-                Grp User
-              </p>
+    <>
+      <ReviewJsonScript 
+        key={`projDetailsStarSchema_${index}`} 
+        data={data} 
+      />
+      <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] min-w-[335px] md:max-w-lg mt-[20px] bg-[#fff] p-4 relative min-h-[160px] md:min-h-[200px] border rounded-[10px] border-solid border-[#DCE6ED]">
+        <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
+        <div className="flex items-center space-x-2 mt-4 md:mt-8">
+          <div className="flex-1">
+            <div className="flex justify-between items-center gap-[20px] ">
+              <div>
+                <p className="text-black text-[16px] md:text-[18px] not-italic font-medium leading-[normal]">
+                  {userName ?? "GRP USER"}
+                </p>
+                <p className="text-[#0073C6]  text-[16px] md:text-[18px] not-italic font-medium leading-[normal]">
+                  Grp User
+                </p>
+              </div>
+              <div className="text-right flex flex-col align-right ">
+                {/* <Rating size={"sm"} value={userRating} readOnly /> */}
+                {/* <RatingStars key={`projDetailsStar_${index}`} initialRating={userRating} className="text-[20px]" readOnly={true} /> */}
+                <ViewStars rating={userRating} />
+                <span className=" text-[12px] md:text-[14px] text-gray-500">
+                  {postedDays == "0" ? "Today" : `${postedDays} days ago`} 
+                </span>
+              </div>
             </div>
-            <div className="text-right flex flex-col align-right ">
-              {/* <Rating size={"sm"} value={userRating} readOnly /> */}
-              {/* <RatingStars key={`projDetailsStar_${index}`} initialRating={userRating} className="text-[20px]" readOnly={true} /> */}
-              <ViewStars rating={userRating} />
-              <span className=" text-[12px] md:text-[14px] text-gray-500">
-                {postedDays == "0" ? "Today" : `${postedDays} days ago`} 
-              </span>
-            </div>
+            <p className="mt-2 text-[#3E3E3E]  text-[16px] md:text-[18px] not-italic font-normal leading-[normal] tracking-[0.56px]">
+              {userReview}
+            </p>
           </div>
-          <p className="mt-2 text-[#3E3E3E]  text-[16px] md:text-[18px] not-italic font-normal leading-[normal] tracking-[0.56px]">
-            {userReview}
-          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };

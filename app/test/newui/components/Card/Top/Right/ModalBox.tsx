@@ -18,6 +18,8 @@ function ModalBox({
   containerClassStyle,
   hideCrossIcon,
 }: Props) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
   const onClosePopup = () => {
     document.body.style.overflow = "unset";
     handleChange(false);
@@ -25,10 +27,9 @@ function ModalBox({
   };
 
   const onMainConClick = (e: any) => {
-    var baxEl = document.getElementById("modalPopupInnerCon");
-    if (baxEl && !baxEl.contains(e.target)) {
-      onClosePopup();
-    }
+     if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        onClosePopup();
+      }
   };
 
   // useEffect(()=>{
@@ -108,9 +109,10 @@ function ModalBox({
       onClick={(e) => onMainConClick(e)}
     >
       <div
-         onTouchStart={handleTouchStart}
+        onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         id="modalPopupInnerCon"
+        ref={cardRef}
         className={`relative bg-white flex flex-col overflow-y-auto shrink-0 z-[3] overflow-x-hidden max-h-[80%] h-full w-[94%] p-[2%] pt-[32px] rounded-[4px] justify-center items-center ${
           containerClassStyle ? containerClassStyle : ""
         }`}
