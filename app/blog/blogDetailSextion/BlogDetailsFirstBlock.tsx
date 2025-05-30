@@ -25,16 +25,16 @@ function BlogDetailsFirstBlock() {
 
   const currentBlog = path.split("/")[2].replaceAll("-", " ");
 
-  const data: any = allBlogData.filter(
+  const data: any = allBlogData?.filter(
     (each) => each?.heading?.toLowerCase() === currentBlog?.toLowerCase()
   )[0];
 
-  const { date, text, heading, coverImage } = data;
+  const { date = "", text, heading, coverImage } = data;
 
   useEffect(() => {
     setBlogDetails((prev) => ({ ...prev, selectedBlog: data }));
   }, [data]);
-  console.log(path, "where is consoleing get the details");
+
   // const getParams = useSearchParams();
   // let listedBy = getParams.get("pp");
   // const pathHref = listedBy === "B" ? "/blog" : listedBy === "G" ? "/buying-guide" : "/";
@@ -107,7 +107,7 @@ function BlogDetailsFirstBlock() {
           <p
             className={`text-[#627A9E] italic font-medium leading-[normal] text-[16px]`}
           >
-            {date}
+            {date ?? ""}
           </p>
           <div className="gap-[12px] flex justify-center items-center h-[24px] ">
             {/* <FacebookShareButton /> */}

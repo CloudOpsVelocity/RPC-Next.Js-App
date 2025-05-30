@@ -24,8 +24,8 @@ function BlogDetailsFirstBlock() {
   const path = usePathname();
   const currentBlog = path.split("/")[2].replaceAll("-", " ");
 
-  const data: any = allBlogData.filter(
-    (each) => each.heading.toLowerCase() === currentBlog.toLowerCase()
+  const data: any = allBlogData?.filter(
+    (each) => each?.heading?.toLowerCase() === currentBlog?.toLowerCase()
   )[0];
   const { date, text, heading, coverImage } = data;
 
