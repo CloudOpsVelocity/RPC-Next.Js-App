@@ -1,8 +1,10 @@
 import Image from "next/image";
 
+// staticmedia-images-icons/grp-logo/grp-logo-tm.webp // old url
+
 export const GrpLogoSvg = ({ className }: { className: string }) => (
   <Image
-    src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/grp-logo-tm.webp`}
+    src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/grp-logo-tm.jpg`}
     width={160}
     height={54}
     alt="getright logo"

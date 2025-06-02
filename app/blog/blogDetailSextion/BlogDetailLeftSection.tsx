@@ -11,14 +11,14 @@ function BlogDetailLeftSection() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
   // const data = allBlogData.filter((each) => each.heading === selectedBlog.heading)[0];
   const data = allBlogData.filter((each:any) => each.id == selectedBlog.id)[0];
-  const pathName =
-    data && data.heading
-      ? data.heading?.toLowerCase().replaceAll(" ", "-")
-      : "";
+  
+  const pathName = data && data.heading ? data.heading.toLowerCase().replaceAll(" ", "-") : "";
   const path = usePathname();
+  
+
+  console.log(data);
 
   return (
-    
       <div className="max-w-[617px] w-full ">
         <Link
           rel="noopener noreferrer"

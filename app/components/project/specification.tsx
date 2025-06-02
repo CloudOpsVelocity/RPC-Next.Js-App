@@ -19,36 +19,60 @@ export default function Specifications({
     scrollWhereIsSelected(index);
   };
   const viewport = useRef<HTMLDivElement>(null);
+  // const scrollWhereIsSelected = (index: number) => {
+  //   const selectedSpecId = data[index]?.specName?.toLowerCase();
+  //   const selectedElement = document.getElementById(selectedSpecId);
+  //   const container = viewport.current;
+
+  //   if (selectedElement && container) {
+  //     const titleElement = selectedElement.querySelector("h3");
+  //     const titleHeight = titleElement?.offsetHeight || 0;
+  //     const position = selectedElement.offsetTop - titleHeight;
+  //     container.scrollTo({
+  //       top: position - 20,
+  //       behavior: "smooth",
+  //     });
+
+  //     // const offset = selectedElement.offsetTop - container.offsetTop;
+  //     // const scroll =
+  //     //   offset - container.clientHeight / 2 + selectedElement.clientHeight / 2;
+
+  //     // container.scrollTo({
+  //     //   top: scroll,
+  //     //   behavior: "smooth",
+  //     // });
+
+  //     // selectedElement.scrollIntoView({
+  //     //   behavior: "smooth",
+  //     //   inline: "center",
+  //     //   block: "center",
+  //     // });
+  //   }
+  // };
+  
   const scrollWhereIsSelected = (index: number) => {
     const selectedSpecId = data[index]?.specName?.toLowerCase();
     const selectedElement = document.getElementById(selectedSpecId);
     const container = viewport.current;
 
     if (selectedElement && container) {
-      // const titleElement = selectedElement.querySelector("h2");
-      // const titleHeight = titleElement?.offsetHeight || 0;
-      // const position = selectedElement.offsetTop - titleHeight;
-      // viewport.current!.scrollTo({
-      //   top: position - 20,
-      //   behavior: "smooth",
-      // });
+      const titleElement = selectedElement.querySelector("h3");
+      const titleHeight = titleElement?.offsetHeight || 0;
 
-      const offset = selectedElement.offsetTop - container.offsetTop;
-      const scroll =
-        offset - container.clientHeight / 2 + selectedElement.clientHeight / 2;
+      const containerTop = container.getBoundingClientRect().top;
+      const elementTop = selectedElement.getBoundingClientRect().top;
+
+      const position =
+        elementTop - containerTop + container.scrollTop - titleHeight - 20;
 
       container.scrollTo({
-        top: scroll,
+        top: position,
         behavior: "smooth",
-      });
-
-      selectedElement.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "center",
       });
     }
   };
+
+  
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   // /* text-[#148B16] */  all heading of heading each section
   return (
@@ -163,7 +187,7 @@ export default function Specifications({
               id={spec.specName.toLowerCase()}
               className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
             >
-              <span
+              <h3
                 className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[18px] xl:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
                   selectedSpecIndex == index
                     ? "specification"
@@ -172,7 +196,7 @@ export default function Specifications({
               >
                 {specificationsList?.get(spec?.specId)?.url}{" "}
                 <span className="">{spec.specName}</span>
-              </span>
+              </h3>
               {/* <div> */}
               <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
                 {spec.values.map(
