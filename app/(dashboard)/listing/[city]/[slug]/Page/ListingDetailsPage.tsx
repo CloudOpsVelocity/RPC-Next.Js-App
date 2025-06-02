@@ -402,10 +402,31 @@ export default function ListingDetailsPage({
 
     {
       qnaId: null,
-      faqQuestion: `10. What type of ownership and facing is offered in ${newTitle}?`,
-      faqAnswer: `The property is ${data?.ownershipName?.toLowerCase()} owned and faces ${
-        data?.facingName
-      }, which is ideal for natural lighting and ventilation.`,
+      faqQuestion: `10. What type of ${
+        data?.cg === "R"
+          ? "facing, furnishing, and floor details"
+          : "ownership, facing, and floor details"
+      } are offered in ${newTitle}?`,
+      faqAnswer:
+        data?.cg === "R"
+          ? `This rental property faces ${
+              data?.facingName || "a suitable direction"
+            }, is ${
+              data?.furnshName?.toLowerCase() || "semi-furnished"
+            }, and is located on floor ${
+              data?.atFloor === 0 ? "Ground" : data?.atFloor || "N/A"
+            } of ${
+              data?.totalFloor || "N/A"
+            } floors, ensuring convenience and natural light.`
+          : `The property is ${
+              data?.ownershipName?.toLowerCase() || "standard"
+            } owned, faces ${
+              data?.facingName || "a preferred direction"
+            }, and is situated on floor ${
+              data?.atFloor === 0 ? "Ground" : data?.atFloor || "N/A"
+            } of ${
+              data?.totalFloor || "N/A"
+            } floors, providing both ownership assurance and great ventilation.`,
     },
   ];
 
