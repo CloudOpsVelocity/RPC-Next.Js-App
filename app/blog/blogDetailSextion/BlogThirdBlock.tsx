@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import ContentBox from "./ContentBox";
 import { useAtom } from "jotai";

@@ -1,3 +1,4 @@
+"use client";
 import { blogDetails } from "@/app/hooks/blog";
 import { playIcon } from "@/app/images/commonSvgs";
 import { useAtom } from "jotai";
