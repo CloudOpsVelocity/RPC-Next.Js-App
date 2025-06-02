@@ -210,7 +210,7 @@ function Footer() {
                     key={name}
                     href={link}
                     className="text-white hover:text-gray-300"
-                    target="_self"
+                    target="_blank"
                   >
                     <span className="sr-only">{name}</span>
                     {icon}
