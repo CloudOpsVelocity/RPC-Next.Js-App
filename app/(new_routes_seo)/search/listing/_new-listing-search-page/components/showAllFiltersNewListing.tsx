@@ -84,8 +84,7 @@ export default function ShowAllFiltersButton({
       name: "Plot",
       icon: <MdLandscape className="w-5 h-5 text-green-700" />,
     },
-    ...(("/search/listing" === path ||
-      ("/search" === path && state.listedBy !== null)) && {
+    ...((("/search/listing" === path && state.listedBy !== "proj") || ("/search" === path && state.listedBy !== null)) && {
       indp: {
         id: 36,
         name: "Independent",
@@ -140,8 +139,6 @@ export default function ShowAllFiltersButton({
       "pnb",
       "furnish",
     ];
-
-
 
     return (
       <div className="mb-6">
