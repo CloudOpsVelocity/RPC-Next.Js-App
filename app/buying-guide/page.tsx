@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import BlogDetailsBox from "./blogDetailSextion/BlogDetailsBox";
 import BlogThirdBlock from "./blogDetailSextion/BlogThirdBlock";

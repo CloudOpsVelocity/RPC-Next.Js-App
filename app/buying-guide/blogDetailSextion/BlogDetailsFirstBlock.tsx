@@ -64,17 +64,17 @@ function BlogDetailsFirstBlock() {
           number={2}
         />
         <TringleIcons
-          key="TringleIcon2"
+          key="TringleIcon3"
           className="absolute top-[20%] right-[-60px] z-10 xl:w-[167px] xl:h-[170px] w-[67px] h-[70px]"
           number={3}
         />
         <TringleIcons
-          key="TringleIcon2"
+          key="TringleIcon4"
           className="absolute top-[24%] right-[0] md:right-[-120px] z-10 xl:w-[105px] xl:h-[110px] w-[65px] h-[60px]"
           number={4}
         />
         <TringleIcons
-          key="TringleIcon2"
+          key="TringleIcon5"
           className="absolute top-[-50px] right-[-10px] z-10 xl:w-[61px] xl:h-[64px]"
           number={5}
         />
