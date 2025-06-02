@@ -18,20 +18,23 @@ function BlogDetailLeftSection() {
   const path = usePathname();
 
   return (
-    <Link
-      rel="noopener noreferrer"
-      href={`${path}/${pathName}`}
-      prefetch={false}
-    >
+    
       <div className="max-w-[617px] w-full ">
-        <Image
-          src={data?.coverImage}
-          alt="blog Image" /* width={100} height={269}  */
-          quality={80}
-          height={630}
-          width={1200}
-          className="rounded-[10px] w-full xl:max-h-[269px] md:max-h-[200px] max-h-[210px] first-letter: border-[0.5px] border-gray border-solid mb-[16px] "
-        />
+        <Link
+          rel="noopener noreferrer"
+          href={`${path}/${pathName}`}
+          prefetch={false}
+        >
+          <Image
+            src={data?.coverImage}
+            alt="blog Image" /* width={100} height={269}  */
+            quality={80}
+            height={630}
+            width={1200}
+            className="rounded-[10px] w-full xl:max-h-[269px] md:max-h-[200px] max-h-[210px] first-letter: border-[0.5px] border-gray border-solid mb-[16px] "
+          />
+        </Link>
+
         <ContentBox
           key="BlogDetailLeftSectionContant"
           heading={data && data.heading ? data.heading : ""}
@@ -42,7 +45,6 @@ function BlogDetailLeftSection() {
           href={pathName}
         />
       </div>
-    </Link>
   );
 }
 

@@ -367,4 +367,5 @@ const initailBlogData = {
     allBlogData: initialAllBlogsData,
 }
 
+
 export const blogDetails = atom(initailBlogData);
