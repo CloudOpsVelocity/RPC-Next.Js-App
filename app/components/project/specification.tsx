@@ -51,7 +51,7 @@ export default function Specifications({
   // };
   
   const scrollWhereIsSelected = (index: number) => {
-    const selectedSpecId = data[index]?.specName?.toLowerCase();
+    const selectedSpecId = data[index]?.specName?.toLowerCase().replaceAll(" ", "_");
     const selectedElement = document.getElementById(selectedSpecId);
     const container = viewport.current;
 
@@ -184,7 +184,7 @@ export default function Specifications({
             <div
               key={spec.specName}
               // @ts-ignore
-              id={spec.specName.toLowerCase()}
+              id={spec.specName.toLowerCase().replaceAll(" ", "_")}
               className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
             >
               <h3

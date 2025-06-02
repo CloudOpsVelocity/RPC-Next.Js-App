@@ -15,9 +15,6 @@ function BlogDetailLeftSection() {
   const pathName = data && data.heading ? data.heading.toLowerCase().replaceAll(" ", "-") : "";
   const path = usePathname();
   
-
-  console.log(data);
-
   return (
       <div className="max-w-[617px] w-full ">
         <Link
