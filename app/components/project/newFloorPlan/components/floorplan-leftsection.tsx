@@ -92,7 +92,7 @@ export default function FloorplanLeftsection({
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <button
+                <div
                   onClick={() => onSelectCard(unit)}
                   className="w-full rounded-lg sm:rounded-xl border border-gray-200 sm:border-2 p-2 sm:p-4 transition-all hover:border-[#0073C6] hover:shadow-xl group from-[#F8FAFC] to-white"
                 >
@@ -285,7 +285,7 @@ export default function FloorplanLeftsection({
                       <FaArrowRight className="ml-1 xs:ml-1 sm:ml-2 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
-                </button>
+                </div>
               </div>
             );
           })}
