@@ -8,9 +8,8 @@ import Link from "next/link";
 
 function BlogDetailLeftSection() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
-  const data = allBlogData.filter(
-    (each) => each.heading === selectedBlog.heading
-  )[0];
+  // const data = allBlogData.filter((each) => each.heading === selectedBlog.heading)[0];
+  const data = allBlogData.filter((each:any) => each.id == selectedBlog.id)[0];
   const pathName =
     data && data.heading
       ? data.heading?.toLowerCase().replaceAll(" ", "-")

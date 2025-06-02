@@ -365,8 +365,6 @@ const initialAllBlogsData = [
 const initailBlogData = {
     selectedBlog: initialAllBlogsData[0],
     allBlogData: initialAllBlogsData,
-    blogPageData: null,
-    isBlogPageOpen: false,
 }
 
 export const blogDetails = atom(initailBlogData);
