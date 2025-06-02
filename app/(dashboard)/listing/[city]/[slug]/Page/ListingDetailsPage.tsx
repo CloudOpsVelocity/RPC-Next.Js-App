@@ -422,11 +422,7 @@ export default function ListingDetailsPage({
               data?.ownershipName?.toLowerCase() || "standard"
             } owned, faces ${
               data?.facingName || "a preferred direction"
-            }, and is situated on floor ${
-              data?.atFloor === 0 ? "Ground" : data?.atFloor || "N/A"
-            } of ${
-              data?.totalFloor || "N/A"
-            } floors, providing both ownership assurance and great ventilation.`,
+            },  providing both ownership assurance and great ventilation.`,
     },
   ];
 

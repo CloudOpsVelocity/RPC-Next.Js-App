@@ -31,7 +31,7 @@ export default function ListingBreadCrumbs({
     city: " ",
     lt: `${isIndependent ? "Independent Listings" : ""} `,
   };
-  console.log("bread-crum")
+
   let currentPath = "";
   let breadcrumbPath = "";
   const breadcrumbSchema = {
@@ -49,9 +49,9 @@ export default function ListingBreadCrumbs({
 
         breadcrumbPath += `/${slugify(params[key])}`;
 
-        if(isIndependent) {
+        if (isIndependent) {
           breadcrumbPath = breadcrumbPath.replace("/residential-listings", "");
-        } 
+        }
 
         return {
           "@type": "ListItem",
@@ -66,10 +66,9 @@ export default function ListingBreadCrumbs({
   };
 
   // isIndependent ? breadcrumbPath.replace("/residential-listings", "") : breadcrumbPath
-          
 
   const siteNavSchema = {
-    "@context": "https://schema.org", 
+    "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
     name: "Breadcrumb Navigation",
     url: pathname,
@@ -86,7 +85,6 @@ export default function ListingBreadCrumbs({
       })),
     ],
   };
-
 
   return (
     <>
@@ -110,6 +108,7 @@ export default function ListingBreadCrumbs({
           rel="noopener noreferrer"
           href={`/`}
           className="hover:underline cursor-pointer capitalize"
+          key={"home-breadcrumb"}
         >
           Home
         </Link>
@@ -117,11 +116,11 @@ export default function ListingBreadCrumbs({
         {allParams.map((key, index) => {
           currentPath += `/${slugify(params[key])}`;
           const isLast = index === allParams.length - 1;
-          if(isIndependent) {
+          if (isIndependent) {
             currentPath = currentPath.replace("/residential-listings", "");
-          } 
+          }
           return (
-            <React.Fragment key={`${key[index]}`}>
+            <React.Fragment key={`breadcrumb-${key}-${index}`}>
               {!isLast ? (
                 <>
                   <Link
