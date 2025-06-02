@@ -15,7 +15,7 @@ export default function Tabs({}: Props) {
     if (tab == "R") {
       dispatch({ type: "SET_BUGDET_VALUE", payload: [0, 100000] });
     } else {
-      dispatch({ type: "SET_BUGDET_VALUE", payload: [500000, 600000000] });
+      dispatch({ type: "SET_BUGDET_VALUE", payload: [500000, 300000000] });
     }
     dispatch({ type: "SET_CG", payload: tab });
   };
