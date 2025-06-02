@@ -73,8 +73,8 @@ function LeftSection({
       );
       return response?.results;
     },
-    getNextPageParam: (lastPage: any) => {
-      return lastPage?.length === 20 ? page + 1 : undefined;
+    getNextPageParam: (lastPage: any, allPages: any) => {
+      return lastPage?.length === 20 ? allPages.length : undefined;
     },
     ...(serverData && apiFilterQueryParams === preAppliedFilters
       ? {
