@@ -8,7 +8,7 @@ const viewActionConfigs = [
   },
   {
     title: "Ready to Move Sale Listings",
-    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=s-propStatus=R`,
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=S-propStatus=R`,
   },
   {
     title: "Ready to Move Rent Listings",

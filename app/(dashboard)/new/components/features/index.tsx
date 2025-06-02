@@ -8,11 +8,9 @@ export default function HomeFeatures({}: Props) {
   return (
     <div className="w-full pb-[10px] pl-[4%] m-auto pt-[10px] sm:mt-0 sm:pb-16 md:pt-8  bg-[#EEF4F9] ">
       <div className=" text-[#202020] text-left md:text-center  text-[14px] md:text-[20px] xl:text-[24px] not-italic font-bold m-0 ">
-       
         <h1 className=" text-green-700 text-[14px] md:text-[20px] xl:text-[24px] not-italic font-bold">
-        Why Choose Get Right Property ?
+          Why Choose Get Right Property ?
         </h1>
-       
       </div>
       <p className=" text-black text-left md:text-center text-sm md:text-base font-medium">
         Choose us for real estate because we offer expert guidance, a vast
@@ -23,24 +21,25 @@ export default function HomeFeatures({}: Props) {
       </p>
       <div className=" shrink-0 m-auto flex justify-start sm:justify-center items-center mt-[10px] xl-[mt-0] xl:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
         <div className="hidden sm:block sm:min-w-[232px] sm:ml-[15%]">
-         {/*  {config.svg} */}
-         <Image
-        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/choose-desktop.svg`}
-        width={232}
-        height={150}
-        alt="Choose_Right_Property_des"
-        title="Choose_Right_Property_des"
-      />
+          {/*  {config.svg} */}
+          <Image
+            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/choose-desktop.svg`}
+            width={232}
+            height={150}
+            alt="Choose_Right_Property_des"
+            title="Choose_Right_Property_des"
+          />
         </div>
         <div className=" sm:hidden  sm:min-w-[232px]  sm:ml-[15%]">
-         {/*  {config.mobileSvg} */}
-         <Image
-        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/choose-mobile.svg`}
-        width={232}
-        height={150}
-        alt="Choose_Right_Property_des"
-        title="Choose_Right_Property_des"
-      />
+          {/*  {config.mobileSvg} */}
+          <Image
+            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/choose-mobile.svg`}
+            width={232}
+            height={150}
+            alt="Choose_Right_Property_des"
+            title="Choose_Right_Property_des"
+            priority={true}
+          />
         </div>
         <div className="space-y-1 gap-[10px] sm:space-y-0 ">
           {config.data.map((item) => (

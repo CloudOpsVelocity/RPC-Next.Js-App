@@ -42,7 +42,7 @@ export default function DynamicListing({
     title === "Featured Projects"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search`
       : title === "Ready to Move Sale Listings"
-      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=s-propStatus=R`
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=S-propStatus=R`
       : title === "Ready to Move Rent Listings"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?sf=cg=R-propStatus=R`
       : title === "Featured Plot Listings"

@@ -36,8 +36,6 @@ export default function Box({ content, image, link, title }: Props) {
           width={126}
           height={126}
           className="absolute h-[64px] w-[64px] sm:h-[99px] sm:w-[99px] xl:h-[126px] xl:w-[126px] left-0 sm:left-[-60px] bottom-[114px] sm:bottom-0"
-          priority={true}
-          fetchPriority="high"
         />
         <p className="text-gray-800 text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-bold">
           {title}

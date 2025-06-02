@@ -80,7 +80,6 @@ export default function Card({ item }: Props) {
               title={ImageTitle}
               fill
               className=" absolute top-0 left-0  z-0 "
-              fetchPriority="auto"
             />
           </div>
           {/*  {item.builderLogo && (
