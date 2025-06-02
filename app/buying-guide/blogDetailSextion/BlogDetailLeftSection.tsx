@@ -4,22 +4,31 @@ import Image from "next/image";
 import { useAtom } from "jotai";
 import { blogDetails } from "@/app/hooks/blog";
 import ContentBox from "@/app/blog/blogDetailSextion/ContentBox";
-// import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 function BlogDetailLeftSection() {
   const [{ selectedBlog, allBlogData }] = useAtom(blogDetails);
   const data = allBlogData.filter((each) => each.id === selectedBlog.id)[0];
   const pathName = data && data.heading ? data.heading.toLowerCase() : "";
+  const path = usePathname();
+  
   return (
     <div className="max-w-[617px] w-full ">
-      <Image
-        src={data?.coverImage}
-        alt="blog Image" /*  width={100} height={269}  */
-        quality={80}
-        height={630}
-        width={1200}
-        className="rounded-[10px] w-full xl:max-h-[269px] md:max-h-[200px] max-h-[210px] first-letter: border-[0.5px] border-gray border-solid mb-[16px] "
-      />
+      <Link
+        rel="noopener noreferrer"
+        href={`${path}/${pathName}`}
+        prefetch={false}
+      >
+        <Image
+          src={data?.coverImage}
+          alt="blog Image" /*  width={100} height={269}  */
+          quality={80}
+          height={630}
+          width={1200}
+          className="rounded-[10px] w-full xl:max-h-[269px] md:max-h-[200px] max-h-[210px] first-letter: border-[0.5px] border-gray border-solid mb-[16px] "
+        />
+      </Link>
       <ContentBox
         key="BlogDetailLeftSectionContant"
         heading={data && data.heading ? data.heading : ""}
