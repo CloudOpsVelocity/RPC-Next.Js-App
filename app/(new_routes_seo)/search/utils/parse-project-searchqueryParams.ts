@@ -41,14 +41,13 @@ export default function parseProjectSearchQueryParams(params: string) {
     // Check for special cases first to avoid multiple string operations
     if (key === "areaValue" || key === "bugdetValue") {
       const [min, max] = value.split(",");
-
       filters[key] = [+min, +max];
       continue;
     }
-    if (key === "cg" && value === "R") {
-      filters.bugdetValue = [0, 1000000];
-    } else if (key === "cg" && value === "S") {
-      filters.bugdetValue = [500000, 300000000];
+    if (key === "cg" && value === "R" ) {
+      filters.bugdetValue = [0, 1000000]
+    }else if (key === "cg" && value === "S" ) {
+      filters.bugdetValue = [500000, 300000000]
     }
     const hasComma = value.indexOf(",") !== -1;
     if (
@@ -78,13 +77,17 @@ export default function parseProjectSearchQueryParams(params: string) {
         key === "projStatus" ||
         key === "furnish" ||
         key === "pnb"
+     
       ) {
         filters[key] = Number(value);
       } else if (key === "bhk") {
         filters[key] = [Number(value)];
-      } else if (key === "page") {
-        filters["currentPage"] = Number(value);
-      } else {
+        
+      }
+      else if (key === "page") {
+        filters['currentPage'] = Number(value) 
+      }
+      else {
         filters[key] = value;
       }
     }

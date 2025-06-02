@@ -209,9 +209,9 @@ function LeftSection({
   }, [isMobile]);
 
   const [isClient, setIsClient] = useState(false);
-
+    
   useEffect(() => {
-    setIsClient(true);
+    setIsClient(true); 
   }, []);
 
   return (
@@ -248,7 +248,7 @@ function LeftSection({
               )}
             </>
           )}
-          {JSON.stringify(frontendFilters)}
+
           {/* Image Use above*/}
 
           <ListingServerCardData
@@ -271,11 +271,11 @@ function LeftSection({
         </div>
       )}
 
-      {params.slugs && params.slugs.length < 4 && (
-        <section
-          className={!isClient ? "space" : "hidden"}
-          aria-hidden={isClient ? "true" : undefined}
-        >
+      {(params.slugs && params.slugs.length < 4 ) && (
+       <section 
+        className={!isClient ? "space" : "hidden"}
+        aria-hidden={isClient ? "true" : undefined}
+      >
           <ListingSearchPagination
             currentPage={
               frontendFilters.currentPage ? frontendFilters.currentPage + 1 : 1

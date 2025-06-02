@@ -51,15 +51,15 @@ export default function ListingMainSection({
   //   : [];
 
   // useHydrateAtoms(hydrationValues as any);
-  // useEffect(() => {
-  //   setStore({
-  //     type: "update",
-  //     payload: {
-  //       ...initialState,
-  //       ...frontendFilters,
-  //     },
-  //   });
-  // }, []);
+  useEffect(() => {
+    setStore({
+      type: "update",
+      payload: {
+        ...initialState,
+        ...frontendFilters,
+      },
+    });
+  }, []);
   const [isTrue, setIsTrue] = useState(
     apiFilterQueryParams !== preDefinedFilters
   );
