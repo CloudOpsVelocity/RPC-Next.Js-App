@@ -40,7 +40,7 @@ export const initialState: SearchFilterOld = {
   listedBy: null,
   reraVerified: [],
   areaValue: [0, 5000],
-  bugdetValue: [500000, 600000000],
+  bugdetValue: [500000, 300000000],
   builderIds: [],
   city: null,
   facings: [],

@@ -20,13 +20,13 @@ export default function BuyRent() {
         ...prev,
         bugdetValue: [0, 100000],
         cg: "R",
-        listedBy:"ALL"
+        listedBy: "ALL",
       }));
       handleAppliedFilters();
     } else {
       setFilters((prev) => ({
         ...prev,
-        bugdetValue: [500000, 600000000],
+        bugdetValue: [500000, 300000000],
         cg: "S",
       }));
       handleAppliedFilters();

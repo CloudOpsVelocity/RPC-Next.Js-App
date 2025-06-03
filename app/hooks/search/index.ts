@@ -134,7 +134,7 @@ export default function useSearchFilters(
     count += furnish ? 1 : 0;
     count += propStatus?.length || 0;
     count += areaValue[0] !== 0 || areaValue[1] !== 5000 ? 1 : 0;
-    count += bugdetValue[0] !== 500000 || bugdetValue[1] !== 600000000 ? 1 : 0;
+    count += bugdetValue[0] !== 500000 || bugdetValue[1] !== 300000000 ? 1 : 0;
     count += amenities?.length || 0;
     count += bathRooms.length || 0;
     count += builderIds.length || 0;
@@ -177,7 +177,7 @@ export default function useSearchFilters(
       case "Area":
         return areaValue[0] !== 0 || areaValue[1] !== 5000;
       case "Budget":
-        return bugdetValue[0] !== 500000 || bugdetValue[1] !== 600000000;
+        return bugdetValue[0] !== 500000 || bugdetValue[1] !== 300000000;
       case "Bath":
         return !!bathRooms.length;
       case "Amenities":
@@ -246,7 +246,7 @@ export default function useSearchFilters(
       case "price":
         setFilters((prev) => ({
           ...prev,
-          bugdetValue: [500000, 600000000],
+          bugdetValue: [500000, 300000000],
         }));
         setParams({ minPrice: null, maxPrice: null });
         break;

@@ -38,7 +38,7 @@ export default function BudgetDropdown({
     useProjSearchAppliedFilters();
 
   const shouldShowBudget = !(
-    (state.bugdetValue[0] === 500000 && state.bugdetValue[1] === 600000000) ||
+    (state.bugdetValue[0] === 500000 && state.bugdetValue[1] === 300000000) ||
     (state.bugdetValue[0] === 0 && state.bugdetValue[1] === 100000)
   );
 

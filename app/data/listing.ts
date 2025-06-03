@@ -47,7 +47,7 @@ const fakeData = [
     projIdEnc: "5",
     projectName: "Sobha Silicon Oasis",
     minPrice: 3500000,
-    maxPrice: 6000000,
+    maxPrice: 3000000,
     cityName: "Bengaluru",
     pinCode: "560005",
     startDate: "2023-06-01",
@@ -79,7 +79,7 @@ const fakeData = [
   {
     projIdEnc: "8",
     projectName: "Brigade Gateway",
-    minPrice: 6000000,
+    minPrice: 3000000,
     maxPrice: 9500000,
     cityName: "Bengaluru",
     pinCode: "560008",

@@ -67,10 +67,10 @@ const FilterSection = ({ open, close }: any) => {
           style={{ width: "100%" }}
           defaultValue={[
             filters?.bugdetValue[0] ?? 500000,
-            filters?.bugdetValue[1] ?? 600000000,
+            filters?.bugdetValue[1] ?? 300000000,
           ]}
           min={0}
-          max={600000000}
+          max={300000000}
           step={100000}
           label={(value) => toFormattedString(value)}
         />

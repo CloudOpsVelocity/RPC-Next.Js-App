@@ -90,7 +90,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
 
   const shouldShowBudget = !(
     (filters.bugdetValue[0] === 500000 &&
-      filters.bugdetValue[1] === 600000000) ||
+      filters.bugdetValue[1] === 300000000) ||
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
 

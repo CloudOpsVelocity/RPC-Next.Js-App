@@ -340,11 +340,11 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             style={{ width: "80%" }}
             defaultValue={[
               filters?.bugdetValue[0] ?? 500000,
-              filters?.bugdetValue[1] ?? 600000000,
+              filters?.bugdetValue[1] ?? 300000000,
             ]}
             value={filters.bugdetValue}
             min={0}
-            max={filters.cg === "R" ? 100000 : 600000000}
+            max={filters.cg === "R" ? 100000 : 300000000}
             step={filters.cg === "R" ? 1 : 100000}
             label={(value) => toFormattedString(value)}
           />

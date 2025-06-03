@@ -92,7 +92,7 @@ export const filterParser = (data: SearchFilterOld) => {
       (Array.isArray(value) && value[0] === 0 && value[1] === 5000) ||
       (Array.isArray(value) &&
         (value[0] === 500000 || value[0] === 0) &&
-        (value[1] === 600000000 || value[1] === 100000)) ||
+        (value[1] === 300000000 || value[1] === 100000)) ||
       value === null;
 
     // If it's a default value, assign null to the parsed key
