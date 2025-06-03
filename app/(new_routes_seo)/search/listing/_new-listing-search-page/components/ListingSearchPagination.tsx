@@ -74,9 +74,7 @@ export default function ListingSearchPagination({
   };
  
   return (
-    <section 
-      className={`py-8 sm:py-14 container mx-auto px-4`}
-    >
+    <>
       <h5 className="sr-only">Browse More Pages of Real Estate Projects</h5>
 
       {totalPages > 0 && (
@@ -161,6 +159,6 @@ export default function ListingSearchPagination({
           results
         </div>
       )}
-    </section>
+    </>
   );
 }

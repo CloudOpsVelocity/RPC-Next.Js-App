@@ -273,7 +273,7 @@ function LeftSection({
 
       {(params.slugs && params.slugs.length < 4 ) && (
        <section 
-        className={!isClient ? "space" : "hidden"}
+        className={!isClient ? "py-8 sm:py-14 container mx-auto px-4" : "hidden"}
         aria-hidden={isClient ? "true" : undefined}
       >
           <ListingSearchPagination
